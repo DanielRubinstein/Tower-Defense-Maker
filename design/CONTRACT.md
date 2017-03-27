@@ -1,0 +1,3 @@
+Team Contract
+
+Prompt: *Write your Team Contract in a single file, CONTRACT.md, that describes your team work goals and responsibilities. Start by defining a Team Contract, like the one given for the previous projects, that negotiates the communication goals, identifies the quality of work everyone wishes to achieve, and the level of group participation and individual accountability everyone feels comfortable with (here are some guidelines). Each member of the team must sign the completed Team Contract written in this document.*	
