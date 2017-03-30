@@ -29,8 +29,10 @@ Design at a high level:
 |---|---|---|
 | Controller  | Holds single instance of: (State, Rules, Data, Environment, Engine, Skeleton)   |  Pass state to Engine and Environment so that they can edit as needed. Have rules set (and possibly changed) by Environment. Give unmodifiable rules to Engine . When Data is needed (save/load), Controller will call methods to pass relevant data from everything to Data |
 | Environment  | Contains (Mode, Structure Bank) |   |
-| Engine  |  Game Loop. Goes through structures and updates their properties via the state |   |
+| Engine Controller |  Game Loop. Goes through structures and updates their properties via the state |  The engine controller controller contains a list of Component object (each element on the screen is a Component). Each component has it's attributes (a list of key-value pairs) and Behavior objects (objects that tell how the Component's attributes are modified when it executes that behavior). Engine controller also contains the actual Engine. Engine looks at our grid (from State) and loops through it to launch possible behaviors (such as move, attack..) on each object (for this purpose, we use multiple sub-engines within Engine). After these behaviors have been launched, the objects' attributes are changed. Engine gets these updated attributes from each element on the grid and interprets them to update the grid accordingly.|
 | Skeleton  | The common visual components and methods from all games (Menu Bar, View, HUD)  |  Can switch the mode (in Environment). Grabs status from State to display HUD. Triggers new/save/load. Play and pause buttons that start and stop update loop in engine |
+
+![Overview](Overview.jpg)
 
 
 #User Interface
