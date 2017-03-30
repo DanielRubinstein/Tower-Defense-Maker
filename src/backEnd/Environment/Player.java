@@ -2,17 +2,7 @@ package backEnd.Environment;
 
 public class Player extends Mode {
 
-	@Override
-	public void addStruct() {
-		// TODO Auto-generated method stub
-		
-	}
 
-	@Override
-	public void removeStruct() {
-		// TODO Auto-generated method stub
-		
-	}
 
 	@Override
 	public void moveStruct() {
@@ -34,6 +24,24 @@ public class Player extends Mode {
 
 	@Override
 	public void setGameRule() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void addStruct(Structure struct) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void removeStruct(Structure struct) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void onStructClick() {
 		// TODO Auto-generated method stub
 		
 	}
