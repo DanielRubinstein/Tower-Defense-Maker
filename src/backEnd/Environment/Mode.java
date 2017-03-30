@@ -6,9 +6,15 @@ public abstract class Mode {
 		// TODO Auto-generated constructor stub
 	}
 	
-	public abstract void addStruct();
+	/**
+	 * adds structure to StructureGrid
+	 */
+	public abstract void addStruct(Structure struct);
 	
-	public abstract void removeStruct();
+	/**
+	 * removes structure from StructureGrid
+	 */
+	public abstract void removeStruct(Structure struct);
 	
 	public abstract void moveStruct();
 	
@@ -18,6 +24,7 @@ public abstract class Mode {
 	
 	public abstract void setGameRule();
 	
+	public abstract void onStructClick();
 	
 
 }
