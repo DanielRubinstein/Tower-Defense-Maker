@@ -19,9 +19,9 @@ Juan- Mode/Stage Progression
 
 
 View/Skeleton Team:
-Miguel-
+Miguel - Sidebars, status indicators, mode indicator
 
-Tim-
+Tim - settings menu, game over presentation, play button, pause button
 
 
 High-Level Completion Plan:
