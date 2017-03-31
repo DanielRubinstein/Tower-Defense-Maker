@@ -27,7 +27,7 @@ public class Author extends Mode{
 	}
 
 	@Override
-	public void addStruct(Structure struct) {
+	public void addStruct(Structure struct, int[] location) {
 		// TODO Auto-generated method stub
 		
 	}
