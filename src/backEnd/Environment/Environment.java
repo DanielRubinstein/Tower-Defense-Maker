@@ -15,10 +15,12 @@ public interface Environment {
 	 */
 	public void setState();
 	
-	/**
+
+	/**	
 	 * sets Mode to new Mode
+	 * @param newMode
 	 */
-	public void setMode();
+	public void setMode(Mode newMode);
 	
 	/**
 	 * @param struct 
