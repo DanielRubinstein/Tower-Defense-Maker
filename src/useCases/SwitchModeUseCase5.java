@@ -32,13 +32,12 @@ public class SwitchModeUseCase5 implements UserInteractor{
 	 * After this class's instance of Mode has been switched, the Environment's Mode is set to this Mode
 	 */
 	private void handleToggleMode(){
-		//userMode.switchMode() ???
+		userMode = myEnvironment.changeMode();
 		myEnvironment.setMode(userMode);
 	}
 
 	@Override
 	public Mode getCurrentMode() {
-		// TODO Auto-generated method stub
 		return userMode;
 	}
 
@@ -60,13 +59,20 @@ public class SwitchModeUseCase5 implements UserInteractor{
 		public void setMode(Mode newMode) {
 			myMode = newMode;
 		}
+		/*
+		 * Implementation not provided
+		 * @see backEnd.Environment.Environment#changeMode()
+		 */
+		@Override
+		public Mode changeMode() {
+			// TODO Auto-generated method stub
+			return myMode;
+		}
 		@Override
 		public StructureBank getStructureBank() {
 			// TODO Auto-generated method stub
 			return null;
 		}
-
-
 
 		@Override
 		public List<Behavior> getStructBehaviorList(Structure struct) {
@@ -96,6 +102,7 @@ public class SwitchModeUseCase5 implements UserInteractor{
 			// TODO Auto-generated method stub
 			
 		}
+
 		
 	}
 

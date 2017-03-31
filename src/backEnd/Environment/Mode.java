@@ -26,5 +26,6 @@ public abstract class Mode {
 	
 	public abstract void onStructClick();
 	
+	
 
 }

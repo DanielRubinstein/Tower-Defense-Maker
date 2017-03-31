@@ -50,4 +50,9 @@ public interface Environment {
 	 */
 	public void setTileAttributeList(List<TileAttribute> newList);
 
+	/**
+	 * Changes from the current Mode to another concrete implementation of Mode (e.g. going from God Mode to Player Mode)
+	 * @return
+	 */
+	public Mode changeMode();
 }
