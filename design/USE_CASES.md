@@ -124,4 +124,58 @@ Use Case 10: User runs out of health and loses the game.
 25. User clicks structure in Author Mode
 * User clicks the structure, the View class calls Mode.onStructClick() which returns a list of potential behaviors that the Structure can have (for the Author Mode). The menu that comes up will display all of these potential behaviors and offer a field to edit the value for that given field (i.e. health = 100, deathBehavior = “spawn child”)
 
+# Engine Use Cases
+
+#Use Cases
+Use case #26: 
+* Collision is detected between a projectile and an enemy.
+* Collision handler calls `updateCollisions()` sends message to the collision engine. 
+* Collision engine iterates through list of collision behaviors and calls `execute()` from behavior.
+* Behavior then handles the collision appropriately and the attached listener sends update to the GUI.
+Use case #27:
+* Enemy runs out of health.
+* Death behavior `execute()` is called.
+* Behavior then updates the appropriate fields (ex. score, money).
+* GUI is notified to remove the image through the listener.
+Use case #28:
+* Enemy runs into to turret (In PvZ type game).
+* Collision handler calls `updateCollisions()`
+* Enemy's `collisionBehavior` calls `execute()`
+* Enemy runs turret collision behavior.
+* Enemy stops and begins to damage turret.
+* Turret's `collisionBehavior` calls `execute()`
+* GUI is notified that enemy is attacking.
+Use case #29:
+* Enemy is on path and progresses.
+* Move engine iterates through all components to invoke the move behavior `execute()` methods.
+* Internal position attribute of component is updated by `execute`.
+* Listeners attached to position in GUI update automatically.
+Use case #30:
+* Enemy moves in turret range.
+* Range detector `execute()` behavior is run.
+* Turret runs shoot behavior's `execute()` on enemy in range
+* Projectile spawns and is added to the GUI through the shoot behavior
+Use case #31:
+* User adds an Attribute to a tower
+* A new class implementing `Attribute` is constructed in `GameProcessController` and added to the List of attributes in the `Component`
+* SetValue is called on the `Attribute` to fill in its value (HP, etc.)
+Use case #32:
+* User adds a `Behavior` to a tower
+* A new class implementing `Behavior's execute()` in the desired fashion is constructed in `GameProcessController` and added to the `List` of behaviors in the `Component`
+* The attributes that this `Behavior` will act on are added to this behavior's List of attributes
+Use case #33:
+The user sells a tower
+* The GameProcessController tells the `sellEngine` to call the 'Sell' `Behavior` contained in the chosen tower 
+* The Sell behavior calls `setGold()` to give the player the refund amount
+* The Sell behavior removes the tower from the `State` by setting itself to null
+Use case #34:
+The level is cleared
+* Controller directs `winConditionEngine` to perform its check, and it sees that its winCondition is met (balloon queue is empty, for example)
+* winConditionEngine returns `True` to the Controller's `isLevelComplete()`, which then calls the level progression chain, clearing the `State` and replacing it with the next `State` in the Level queue
+Use case #35:
+A balloon reaches a base tile
+* The collisionEngine detects that two Components occupy the same tile
+* The collisionEngine calls collison behavior's execute() on each of the two Components
+* The balloon's collision behavior's execute says to destroy the balloon
+* The base's collision behavior's execute says to lose one HP
 
