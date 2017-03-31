@@ -8,7 +8,7 @@ import backEnd.Environment.Environment;
 import backEnd.Environment.Mode;
 import backEnd.Environment.Player;
 import backEnd.Environment.Structure;
-import frontEnd.UserInteractor;
+import frontEnd.Skeleton.UserInteractor;
 
 /**
  * This file is an example of how the process of "placing a structure" would work in the game. The "PlaceStruct_UseCase11" class
