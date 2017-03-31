@@ -1,4 +1,4 @@
-package frontEnd;
+package frontEnd.Skeleton;
 
 import backEnd.Environment.Mode;
 /**

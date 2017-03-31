@@ -10,7 +10,7 @@ import backEnd.Environment.Structure;
 import backEnd.Environment.StructureBank;
 import backEnd.Environment.Tile;
 import backEnd.Environment.TileAttribute;
-import frontEnd.UserInteractor;
+import frontEnd.Skeleton.UserInteractor;
 /**
  * @author Tim
  * This class represents a procedural implementation of use case 5, where the use toggles to switch from God mode to 

@@ -3,19 +3,14 @@ package main;
 import backEnd.GameData;
 import backEnd.Environment.Environment;
 import backEnd.GameEngine.Engine;
-import frontEnd.Skeleton;
+import frontEnd.Menus.MainMenu;
 import javafx.stage.Stage;
 
 public class Controller implements ControllerInterface{
 	
 	public void start(Stage stage){
-		Skeleton skeleton = new Skeleton();
-		
-		GameData gameData = skeleton.getGameData();
-		
-		initializeGame(gameData);
-		
-		
+		MainMenu mainMenu = new MainMenu();
+		initializeGame(mainMenu.getGameData());
 	}
 
 	private void initializeGame(GameData gameData) {
