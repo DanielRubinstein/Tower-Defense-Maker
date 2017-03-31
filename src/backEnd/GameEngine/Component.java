@@ -1,8 +1,22 @@
 package backEnd.GameEngine;
 
-public interface Component {
+import java.util.List;
 
-	public Behavior getBehavior(String behaviorType);
+public abstract class Component {
+	List<Attribute<?>> myAttributes;
+	List<Behavior> myBehaviors;
+
+	/**
+	 * When the engines call behaviors (for the behavior to be executed), it does so in Component via this method.
+	 * @param behaviorType
+	 * @return
+	 */
+	public abstract Behavior getBehavior(String behaviorType);
 	
-	public Attribute getAttribute(String attributeType);
+	/**
+	 * Get the attribute that the behavior modifies.
+	 * @param attributeType
+	 * @return
+	 */
+	public abstract Attribute<?> getAttribute(String attributeType);
 }
