@@ -3,7 +3,7 @@ package frontEnd;
 import backEnd.Environment.Mode;
 /**
  * This interface is part of our API and allows other modules (i.e. the environment) to interact with our module.
- * In this way, another module is able to 
+ * This defines methods that will be part of the front end that anyone can access.
  * @author Tim
  *
  */
