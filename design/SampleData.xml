@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Game type = "Bloons">
+	<WinConditions>
+		<bloonsLeft>0</bloonsLeft>
+	</WinConditions>
+	<GameConfiguration>
+		<gameSpeed>10</gameSpeed>
+	</GameConfiguration>
+	<GameParameters>
+		<Tower1Dmg>4</Tower1Dmg>
+	</GameParameters>
+	<InitialGrid>
+		<Row>1 2 2 2 2 2 1</Row>
+		<Row>1 2 2 2 2 2 1</Row>
+		<Row>1 3 3 2 2 2 1</Row>
+	</InitialGrid>
+</Game>
