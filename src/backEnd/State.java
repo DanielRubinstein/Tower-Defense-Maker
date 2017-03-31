@@ -10,7 +10,7 @@ public interface State {
 	
 	public void getTileGrid();
 	
-	public void getStructureGrid();
+	public Grid getStructureGrid();
 
 
 }
