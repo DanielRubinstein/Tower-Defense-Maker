@@ -178,19 +178,25 @@ A balloon reaches a base tile
 * The collisionEngine calls collison behavior's execute() on each of the two Components
 * The balloon's collision behavior's execute says to destroy the balloon
 * The base's collision behavior's execute says to lose one HP
+
+
 * User case #36
 Object dies and creates a new object next to it
 Engine's gameLoop() runs and runs the DeathEngine(). Death Engine check's the Component's health attribute, and if it is equal to 0, it detects that the object has died. It then checks the Component's onDeath attribute, which is this case is equal to SPAWN_SPRITE_NEXT. DeathEngine has a switch case that has a different action for each possible onDeath attribute.  
+
 *Use case #37
 Object is upgraded
 UpgradeEngine() is run in the gameLoop(). If Component's upgradeAttribute==true, then the Component's UpgradeBehavior modifies the object's relevant attributes.
+
 *Use case #38
 Tower fires a projectile
 FireEngine detects that a component needs to fire at another component by looking at the component's FireAt attribute which tells us which types of components that component fires at and then looping through the surrounding cells of the grid to see if there are any objects that that object should fire at.
 If so, FireEngine sets a bullet on the grid next to the firing object in a way that points towards the object fired at. We then treat the bullet hitting the object like a Collision (using CollisionEngine).
+
 *Use case #39
 update the score
 Everytime the DeathEngine causes a component to die, we check the Objects onDeathPoints Attribute and add that to the score (contained in engine).
+
 *Use case #40
 drag an object in the middle of a game and drop it in a new location
 Front-end updates the state object in the main Controller. The GameProcessController observes that State (using observer/ observables), so when it changes, the Engine will automatically have access to State (and therefore the latest grid).
