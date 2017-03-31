@@ -19,4 +19,9 @@ public abstract class Component {
 	 * @return
 	 */
 	public abstract Attribute<?> getAttribute(String attributeType);
+	
+	/**
+	 * adds an attribute to the List of Attributes
+	 */
+	public abstract void addAttribute(Attribute toAdd);
 }
