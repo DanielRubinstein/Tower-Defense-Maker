@@ -47,7 +47,7 @@ public interface Structure {
 	/**
 	 * sets location of structure
 	 */
-	public void setLocation();
+	public void setLocation(int i, int j);
 	
 	
 	/**
