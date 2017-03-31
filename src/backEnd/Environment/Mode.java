@@ -9,7 +9,7 @@ public abstract class Mode {
 	/**
 	 * adds structure to StructureGrid
 	 */
-	public abstract void addStruct(Structure struct);
+	public abstract void addStruct(Structure struct, int[] location);
 	
 	/**
 	 * removes structure from StructureGrid
