@@ -17,8 +17,10 @@ public interface Environment {
 	 */
 	public void setState(State state);
 	
-	/**
+
+	/**	
 	 * sets Mode to new Mode
+	 * @param newMode
 	 */
 	public void setMode(Mode mode);
 	
@@ -48,4 +50,9 @@ public interface Environment {
 	 */
 	public void setTileAttributeList(List<TileAttribute> newList);
 
+	/**
+	 * Changes from the current Mode to another concrete implementation of Mode (e.g. going from God Mode to Player Mode)
+	 * @return
+	 */
+	public Mode changeMode();
 }
