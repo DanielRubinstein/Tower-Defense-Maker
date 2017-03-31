@@ -1,16 +1,21 @@
 package backEnd;
 
+import java.util.List;
+
+import backEnd.Environment.Structure;
+import backEnd.Environment.Tile;
+
 public interface State {
 	
 	// not sure what return type for these should be
 	// so void for now to compile
-	public void getUnmodifiableTileGrid();
+	public Tile[][] getUnmodifiableTileGrid();
 	
-	public void getUnmodifiableStructureGrid();
+	public List<Structure>[][] getUnmodifiableStructureGrid();
 	
-	public void getTileGrid();
+	public Tile[][] getTileGrid();
 	
-	public void getStructureGrid();
+	public List<Structure>[][] getStructureGrid();
 
 
 }
