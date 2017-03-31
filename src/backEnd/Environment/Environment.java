@@ -2,6 +2,8 @@ package backEnd.Environment;
 
 import java.util.List;
 
+import backEnd.State;
+
 public interface Environment {
 
 	
@@ -13,14 +15,14 @@ public interface Environment {
 	/**
 	 * sets state of Environment for access by author or player mode
 	 */
-	public void setState();
+	public void setState(State state);
 	
 
 	/**	
 	 * sets Mode to new Mode
 	 * @param newMode
 	 */
-	public void setMode(Mode newMode);
+	public void setMode(Mode mode);
 	
 	/**
 	 * @param struct 

@@ -2,6 +2,7 @@ package useCases;
 
 import java.util.List;
 
+import backEnd.State;
 import backEnd.Environment.Behavior;
 import backEnd.Environment.Environment;
 import backEnd.Environment.Mode;
@@ -65,11 +66,6 @@ public class SwitchModeUseCase5 implements UserInteractor{
 			return null;
 		}
 
-		@Override
-		public void setState() {
-			// TODO Auto-generated method stub
-			
-		}
 
 
 		@Override
@@ -92,6 +88,11 @@ public class SwitchModeUseCase5 implements UserInteractor{
 
 		@Override
 		public void setTileAttributeList(List<TileAttribute> newList) {
+			// TODO Auto-generated method stub
+			
+		}
+		@Override
+		public void setState(State state) {
 			// TODO Auto-generated method stub
 			
 		}
