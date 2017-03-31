@@ -1,5 +1,6 @@
 package useCases;
 
+import backEnd.Grid;
 import backEnd.State;
 import backEnd.Environment.Behavior;
 import backEnd.Environment.Environment;
@@ -40,9 +41,9 @@ public class AddAttributeUseCase implements Attribute{
 				
 			}
 			@Override
-			public void getStructureGrid() {
+			public Grid getStructureGrid() {
 				// TODO Auto-generated method stub
-				
+				return new Grid();
 			}
 		}
 		this.oldState = new thisState();
