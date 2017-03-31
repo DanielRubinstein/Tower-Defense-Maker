@@ -9,6 +9,7 @@ import backEnd.Environment.Structure;
 import backEnd.Environment.StructureBank;
 import backEnd.Environment.Tile;
 import backEnd.Environment.TileAttribute;
+import frontEnd.UserInteractor;
 /**
  * @author Tim
  * This class represents a procedural implementation of use case 5, where the use toggles to switch from God mode to 
@@ -17,7 +18,7 @@ import backEnd.Environment.TileAttribute;
  * the Mode and what changes on the display are implementation details.
  *
  */
-public class SwitchModeUseCase5 {
+public class SwitchModeUseCase5 implements UserInteractor{
 	private Mode userMode;
 	private Environment myEnvironment;
 	
@@ -33,9 +34,15 @@ public class SwitchModeUseCase5 {
 		//userMode.switchMode() ???
 		myEnvironment.setMode(userMode);
 	}
+
+	@Override
+	public Mode getCurrentMode() {
+		// TODO Auto-generated method stub
+		return userMode;
+	}
+
 	
 	/**
-	 * 
 	 * @author Tim
 	 * This class is used as an inner class in order to procedurally understand each step and how the interfaces interact 
 	 * with each other. This class is an implementation of Environment. Only the required method is implemented.
