@@ -4,7 +4,7 @@ import backEnd.GameDataInterface;
 import backEnd.Grid;
 import backEnd.Rules;
 import backEnd.State;
-import backEnd.Data.GameWriterInterface;
+import backEnd.Data.XMLWriterInterface;
 
 /**
  * This class represents the process after a user hits Save in the Environment. 
@@ -16,7 +16,7 @@ public class Save implements GameDataInterface{
 	
 
 	private GameDataInterface currentGame;
-	private GameWriterInterface myXML;
+	private XMLWriterInterface myXML;
 	private String myFilePath;
 	
 	public Save(){
@@ -36,7 +36,7 @@ public class Save implements GameDataInterface{
 		}
 		currentGame = new GameInterface();
 		
-		class XMLSave implements GameWriterInterface{
+		class XMLSave implements XMLWriterInterface{
 
 			@Override
 			public void Save(GameDataInterface gameData, String filePath) {

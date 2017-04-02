@@ -2,7 +2,7 @@ package backEnd.Data;
 
 import backEnd.GameDataInterface;
 
-public interface GameWriterInterface {
+public interface XMLWriterInterface {
 	
 	public void Save(GameDataInterface gameData, String filePath);
 

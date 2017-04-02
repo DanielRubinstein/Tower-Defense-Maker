@@ -1,5 +1,6 @@
 package frontEnd.Menus;
 
+import java.io.File;
 import java.util.Arrays;
 import java.util.List;
 import java.util.function.Consumer;
@@ -12,7 +13,7 @@ import javafx.stage.Stage;
 /**
  * The main menu which allows the use to
  * 	1) Create a new game (via GameMaker)
- *  2) Open a predefined Game Template
+ *  2) Open a Game Template
  *  3) Load a saved game
  * @author Miguel Anderson
  *
@@ -23,8 +24,7 @@ public class MainMenu {
 	public static final double MENU_HEIGHT = 500d;
 	public static final double MENU_WIDTH = 600d;
 	
-	private List<String> predefinedGameTitleList = Arrays.asList(new String[] { "Bloons Tower Defense", "Plants vs. Zombies", "Desktop Tower Defense" });;
-	
+
 	public void setGameDataListener(Consumer<GameData> action){
 		this.gameDataConsumer = action;
 	}
@@ -48,7 +48,7 @@ public class MainMenu {
 		ButtonMenu primaryMenu = new ButtonMenu();
    	 	primaryMenu.setText("Please Pick one");
    	 	primaryMenu.addButton("Create a New Game", event -> new GameMaker(stage, gameDataConsumer));
-   	 	primaryMenu.addButton("Start a Predefined Game", event -> showPredefinedMenu(stage));
+   	 	primaryMenu.addButton("Load a Template Game", event -> showTemplateMenu(stage));
    	 	primaryMenu.addButton("Load a Saved Game", event -> loadGame());
    	 	primaryMenu.create(MENU_WIDTH, MENU_HEIGHT);
 		stage.setScene(primaryMenu.getScene());
@@ -61,19 +61,20 @@ public class MainMenu {
 		gameDataConsumer.accept(loadedGameData);
 	}
 
-	private void showPredefinedMenu(Stage stage) {
+	private void showTemplateMenu(Stage stage) {
 		GameLoader gameLoader = new GameLoader();
 		
-		ButtonMenu predefinedGames = new ButtonMenu();
-   	 	predefinedGames.setText("Which game?");
-   	 	for(String predefinedGame : predefinedGameTitleList){
-   	 		predefinedGames.addButton(predefinedGame, event -> gameDataConsumer.accept(gameLoader.loadPredefinedGame(predefinedGame)));
+		ButtonMenu templateGames = new ButtonMenu();
+   	 	templateGames.setText("Which game?");
+   	 	//for(String templateGame : gameLoader.getTemplateTitleList()){
+   	 	for(String templateGame : gameLoader.getTemplateTitleListStupid()){
+   	 		templateGames.addButton(templateGame, event -> gameDataConsumer.accept(gameLoader.loadTemplateGame(templateGame)));
    	 	}
-   	 	predefinedGames.create(MENU_WIDTH, MENU_HEIGHT);
-		stage.setScene(predefinedGames.getScene());
+   	 	templateGames.create(MENU_WIDTH, MENU_HEIGHT);
+		stage.setScene(templateGames.getScene());
 		stage.show();
 	}
-	
-	
+
+
 
 }

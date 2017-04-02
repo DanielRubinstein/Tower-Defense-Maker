@@ -5,7 +5,7 @@ import java.io.File;
 import backEnd.GameData;
 import backEnd.GameDataInterface;
 
-public class GameReader implements GameReaderInterface {
+public class XMLReader implements XMLReaderInterface {
 
 	@Override
 	public GameData Load(File file) {
