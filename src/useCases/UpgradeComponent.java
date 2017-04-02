@@ -14,7 +14,7 @@ import main.Controller;
  * This class shows how we will upgrade a component on the screen (ex: upgrade a tower's defensive abilities).
  */
 
-
+/*
 
 public class UpgradeComponent {
 	Controller myController=new Controller();
@@ -38,3 +38,4 @@ public class UpgradeComponent {
 		
 	}
 }
+*/
