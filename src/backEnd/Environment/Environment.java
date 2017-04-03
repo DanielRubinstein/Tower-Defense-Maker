@@ -1,61 +1,59 @@
 package backEnd.Environment;
 
-import java.util.List;
+public class Environment implements EnvironmentInterface
+{
+	ComponentBank componentBank;
+	TileBank tileBank;
+	ComponentBehaviorBank behaviorBank;
+	TileAttributeBank attributeBank;
+	
+	@Override
+	public ComponentBank getComponentBank()
+	{
+		return componentBank;
+	}
 
-import backEnd.State;
 
-import backEnd.GameEngine.Behavior;
+	@Override
+	public void setComponentBank(ComponentBank bank)
+	{
+		componentBank = bank;
+	}
 
-import backEnd.GameEngine.Component;
-public interface Environment {
+	@Override
+	public TileBank getTileBank()
+	{
+		return tileBank;
+	}
 
-	
-	/**
-	 * @return StructureBank of all available structures
-	 */
-	public ComponentBank getStructureBank();
-	
-	/**
-	 * sets state of Environment for access by author or player mode
-	 */
-	public void setState(State state);
-	
+	@Override
+	public void setTileBank(TileBank bank)
+	{
+		tileBank = bank;
+	}
 
-	/**	
-	 * sets Mode to new Mode
-	 * @param newMode
-	 */
-	public void setMode(Mode mode);
-	
-	/**
-	 * @param struct 
-	 * @return List<Behavior> that contains potential available behaviors for struct
-	 */
-	public List<Behavior> getComponentBehaviorList(Component component);
-	
-	/**
-	 * sets list of potential available structure behaviors to newList
-	 * 
-	 * @param newList
-	 */
-	public void setComponentBehaviorList(List<Behavior> newList);
-	
-	/**
-	 * @param tile
-	 * @return List<TileAttribute> that contains potential available attributes for tile
-	 */
-	public List<TileAttribute> getTileAttributeList(Tile tile);
-	
-	/**
-	 * sets list of potential available tile attributes to newList
-	 * 
-	 * @param newList
-	 */
-	public void setTileAttributeList(List<TileAttribute> newList);
+	@Override
+	public ComponentBehaviorBank getBehaviorBank()
+	{
+		return behaviorBank;
+	}
 
-	/**
-	 * Changes from the current Mode to another concrete implementation of Mode (e.g. going from God Mode to Player Mode)
-	 * @return
-	 */
-	public Mode changeMode();
+	@Override
+	public void setBehaviorBank(ComponentBehaviorBank bank)
+	{
+		behaviorBank = bank;
+	}
+
+	@Override
+	public TileAttributeBank getAttributeBank()
+	{
+		return attributeBank;
+	}
+
+	@Override
+	public void setTileAttributeBank(TileAttributeBank bank)
+	{
+		attributeBank = bank;
+	}
+
 }
