@@ -13,6 +13,7 @@ public class Environment implements EnvironmentInterface
 		return componentBank;
 	}
 
+
 	@Override
 	public void setComponentBank(ComponentBank bank)
 	{
