@@ -4,8 +4,10 @@ import backEnd.GameEngine.Component;
 
 public abstract class Mode {
 
-	public Mode() {
-		// TODO Auto-generated constructor stub
+	
+	protected Model myModel;
+	public Mode(Model myModel) {
+		this.myModel = myModel;
 	}
 	
 	/**
