@@ -4,8 +4,7 @@ import java.util.List;
 
 import backEnd.State;
 import backEnd.Environment.Behavior;
-import backEnd.Environment.Environment;
-import backEnd.Environment.Structure;
+import backEnd.Environment.EnvironmentInterface;
 import backEnd.GameEngine.Attribute;
 import backEnd.GameEngine.Component;
 import main.Controller;
