@@ -3,6 +3,7 @@ package backEnd.Environment;
 import java.util.List;
 
 import backEnd.State;
+import backEnd.GameEngine.Behavior;
 
 public interface Environment {
 
