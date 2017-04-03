@@ -1,14 +1,9 @@
 package frontEnd.Menus;
 
-import java.io.File;
-import java.util.Arrays;
-import java.util.List;
 import java.util.function.Consumer;
 
 import backEnd.GameData;
 import backEnd.Data.GameFileException;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.stage.Stage;
 
 /**
