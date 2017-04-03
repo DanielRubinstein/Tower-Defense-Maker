@@ -5,6 +5,8 @@ import java.util.List;
 public abstract class Component {
 	List<Attribute<?>> myAttributes;
 	List<Behavior> myBehaviors;
+	
+	
 
 	/**
 	 * When the engines call behaviors (for the behavior to be executed), it does so in Component via this method.
@@ -24,4 +26,10 @@ public abstract class Component {
 	 * adds an attribute to the List of Attributes
 	 */
 	public abstract void addAttribute(Attribute toAdd);
+	
+	 /**
+     * Change the shape of the cell
+     * @param cellShape new cell shape
+     */
+	
 }
