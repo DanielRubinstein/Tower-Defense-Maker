@@ -1,5 +1,7 @@
 package frontEnd.Skeleton.View;
 
-public class BottomBar {
+import javafx.scene.layout.VBox;
+
+public class BottomBar extends VBox{
 
 }

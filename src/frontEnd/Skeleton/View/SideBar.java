@@ -1,5 +1,7 @@
 package frontEnd.Skeleton.View;
 
-public class SideBar {
+import javafx.scene.layout.HBox;
+
+public class SideBar extends HBox{
 
 }
