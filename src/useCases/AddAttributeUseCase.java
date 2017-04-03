@@ -1,6 +1,6 @@
 package useCases;
 
-import backEnd.Grid;
+import backEnd.TileGrid;
 import backEnd.State;
 import backEnd.Environment.Behavior;
 import backEnd.Environment.Environment;

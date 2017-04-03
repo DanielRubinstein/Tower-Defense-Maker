@@ -1,7 +1,7 @@
 package useCases;
 
 import backEnd.GameDataInterface;
-import backEnd.Grid;
+import backEnd.TileGrid;
 import backEnd.Rules;
 import backEnd.State;
 import backEnd.Data.XMLWriterInterface;
