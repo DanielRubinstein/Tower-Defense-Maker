@@ -12,7 +12,6 @@ import javafx.scene.text.TextAlignment;
 public class ButtonMenu {
 	private VBox myRoot;
 	private Scene myScene;
-	private EventHandler<ActionEvent> event;
 	
 	public ButtonMenu(){
 		myRoot = new VBox();
@@ -39,6 +38,11 @@ public class ButtonMenu {
 	
 	public Scene getScene(){
 		return myScene;
+	}
+
+	public void addBackButton(EventHandler<ActionEvent> event) {
+		this.addButton("Back", event);
+		
 	}
 	
 }

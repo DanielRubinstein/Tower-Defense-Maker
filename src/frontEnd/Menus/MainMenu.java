@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.function.Consumer;
 
 import backEnd.GameData;
+import backEnd.Data.GameFileException;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.stage.Stage;
@@ -43,13 +44,12 @@ public class MainMenu {
 	}
 
 	private void showPrimaryMenu(Stage stage) {
-		
-		
 		ButtonMenu primaryMenu = new ButtonMenu();
    	 	primaryMenu.setText("Please Pick one");
    	 	primaryMenu.addButton("Create a New Game", event -> new GameMaker(stage, gameDataConsumer));
    	 	primaryMenu.addButton("Load a Template Game", event -> showTemplateMenu(stage));
    	 	primaryMenu.addButton("Load a Saved Game", event -> loadGame());
+   	 	primaryMenu.addBackButton(event -> splashScreen(stage));
    	 	primaryMenu.create(MENU_WIDTH, MENU_HEIGHT);
 		stage.setScene(primaryMenu.getScene());
 		stage.show();
@@ -57,8 +57,14 @@ public class MainMenu {
 
 	private void loadGame() {
 		GameLoader gameLoader = new GameLoader();
-		GameData loadedGameData = gameLoader.loadGame();
-		gameDataConsumer.accept(loadedGameData);
+		try {
+			GameData loadedGameData = gameLoader.loadGame();
+			gameDataConsumer.accept(loadedGameData);
+		} catch (GameFileException e) {
+			ErrorDialog errDia = new ErrorDialog();
+			errDia.create("Cannot Load Game", e.getMessage());
+		}
+		
 	}
 
 	private void showTemplateMenu(Stage stage) {
@@ -70,10 +76,12 @@ public class MainMenu {
    	 	for(String templateGame : gameLoader.getTemplateTitleListStupid()){
    	 		templateGames.addButton(templateGame, event -> gameDataConsumer.accept(gameLoader.loadTemplateGame(templateGame)));
    	 	}
+   	 	templateGames.addBackButton(event -> showPrimaryMenu(stage));
    	 	templateGames.create(MENU_WIDTH, MENU_HEIGHT);
 		stage.setScene(templateGames.getScene());
 		stage.show();
 	}
+
 
 
 
