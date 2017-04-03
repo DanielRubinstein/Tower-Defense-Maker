@@ -1,12 +1,31 @@
 package backEnd.Environment;
-/**
- * This class represents the mode that the user is currently in. This can either be God/Authoring mode or Player mode
- *
- */
-public class Mode {
+
+public abstract class Mode {
 
 	public Mode() {
 		// TODO Auto-generated constructor stub
 	}
+	
+	/**
+	 * adds structure to StructureGrid
+	 */
+	public abstract void addStruct(Structure struct, int[] location);
+	
+	/**
+	 * removes structure from StructureGrid
+	 */
+	public abstract void removeStruct(Structure struct);
+	
+	public abstract void moveStruct();
+	
+	public abstract void changeTile();
+	
+	public abstract void setStructBehavior();
+	
+	public abstract void setGameRule();
+	
+	public abstract void onStructClick();
+	
+	
 
 }
