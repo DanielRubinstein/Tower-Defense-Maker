@@ -7,7 +7,7 @@ import backEnd.Environment.Behavior;
 import backEnd.Environment.Environment;
 import backEnd.Environment.Mode;
 import backEnd.Environment.Structure;
-import backEnd.Environment.StructureBank;
+import backEnd.Environment.ComponentBank;
 import backEnd.Environment.Tile;
 import backEnd.Environment.TileAttribute;
 import frontEnd.Skeleton.UserInteractor;
@@ -69,7 +69,7 @@ public class SwitchModeUseCase5 implements UserInteractor{
 			return myMode;
 		}
 		@Override
-		public StructureBank getStructureBank() {
+		public ComponentBank getStructureBank() {
 			// TODO Auto-generated method stub
 			return null;
 		}

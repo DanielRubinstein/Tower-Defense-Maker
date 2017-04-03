@@ -2,8 +2,8 @@ package backEnd;
 
 import java.util.List;
 
-import backEnd.Environment.Structure;
 import backEnd.Environment.Tile;
+import backEnd.GameEngine.Component;
 
 public interface State {
 	
@@ -11,11 +11,11 @@ public interface State {
 	// so void for now to compile
 	public Tile[][] getUnmodifiableTileGrid();
 	
-	public List<Structure>[][] getUnmodifiableStructureGrid();
+	public List<Component>[][] getUnmodifiableComponentGrid();
 	
 	public Tile[][] getTileGrid();
 	
-	public List<Structure>[][] getStructureGrid();
+	public List<Component>[][] getComponentGrid();
 
 
 }

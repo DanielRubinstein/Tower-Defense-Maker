@@ -6,6 +6,11 @@ public abstract class Component {
 	List<Attribute<?>> myAttributes;
 	List<Behavior> myBehaviors;
 
+	
+	public abstract void addAttribute(Attribute<?> toAdd);
+	
+	public abstract void replaceAttributes(List<Attribute<?>> newAttributes);
+	
 	/**
 	 * When the engines call behaviors (for the behavior to be executed), it does so in Component via this method.
 	 * @param behaviorType
@@ -22,6 +27,8 @@ public abstract class Component {
 	
 	/**
 	 * adds an attribute to the List of Attributes
+	 * @return 
 	 */
-	public abstract void addAttribute(Attribute toAdd);
+
+	
 }

@@ -3,15 +3,17 @@ package backEnd.Environment;
 import java.util.List;
 
 import backEnd.State;
+
 import backEnd.GameEngine.Behavior;
 
+import backEnd.GameEngine.Component;
 public interface Environment {
 
 	
 	/**
 	 * @return StructureBank of all available structures
 	 */
-	public StructureBank getStructureBank();
+	public ComponentBank getStructureBank();
 	
 	/**
 	 * sets state of Environment for access by author or player mode
@@ -29,14 +31,14 @@ public interface Environment {
 	 * @param struct 
 	 * @return List<Behavior> that contains potential available behaviors for struct
 	 */
-	public List<Behavior> getStructBehaviorList(Structure struct);
+	public List<Behavior> getComponentBehaviorList(Component component);
 	
 	/**
 	 * sets list of potential available structure behaviors to newList
 	 * 
 	 * @param newList
 	 */
-	public void setStructBehaviorList(List<Behavior> newList);
+	public void setComponentBehaviorList(List<Behavior> newList);
 	
 	/**
 	 * @param tile
