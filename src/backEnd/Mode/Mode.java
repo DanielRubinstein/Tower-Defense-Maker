@@ -1,7 +1,15 @@
-package backEnd.Environment;
+package backEnd.Mode;
 
 import backEnd.GameEngine.Component;
 
+/**
+ * This class provides functionality for how user interacts with the Front end
+ * 
+ * Essentially a container for all the possible interactions from the user
+ * 
+ * @author Derek
+ *
+ */
 public abstract class Mode {
 
 	

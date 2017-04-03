@@ -1,5 +1,7 @@
-package backEnd.Environment;
+package backEnd.Mode;
 
+import backEnd.Environment.Tile;
+import backEnd.Environment.TileAttribute;
 import backEnd.GameEngine.Component;
 
 public class Author extends Mode{
