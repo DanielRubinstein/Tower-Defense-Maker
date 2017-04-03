@@ -6,7 +6,7 @@ import backEnd.Environment.Behavior;
 import backEnd.Environment.Environment;
 import backEnd.Environment.Mode;
 import backEnd.Environment.Structure;
-import backEnd.Environment.StructureBank;
+import backEnd.Environment.ComponentBank;
 import backEnd.Environment.Tile;
 import backEnd.Environment.TileAttribute;
 import backEnd.GameEngine.Attribute;
