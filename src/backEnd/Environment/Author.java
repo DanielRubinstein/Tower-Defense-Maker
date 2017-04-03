@@ -1,5 +1,7 @@
 package backEnd.Environment;
 
+import backEnd.GameEngine.Component;
+
 public class Author extends Mode{
 
 	@Override
@@ -27,13 +29,13 @@ public class Author extends Mode{
 	}
 
 	@Override
-	public void addStruct(Structure struct, int[] location) {
+	public void addStruct (Component struct, int[] location) {
 		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
-	public void removeStruct(Structure struct) {
+	public void removeStruct(Component struct) {
 		// TODO Auto-generated method stub
 		
 	}
