@@ -1,5 +1,7 @@
 package backEnd.Environment;
 
+import backEnd.GameEngine.Component;
+
 public abstract class Mode {
 
 	public Mode() {
@@ -9,22 +11,22 @@ public abstract class Mode {
 	/**
 	 * adds structure to StructureGrid
 	 */
-	public abstract void addStruct(Structure struct, int[] location);
+	public abstract void addComponent(Component component, int[] location);
 	
 	/**
 	 * removes structure from StructureGrid
 	 */
-	public abstract void removeStruct(Structure struct);
+	public abstract void removeComponent(Component component);
 	
-	public abstract void moveStruct();
+	public abstract void moveComponent();
 	
 	public abstract void changeTile();
 	
-	public abstract void setStructBehavior();
+	public abstract void setComponentBehavior();
 	
 	public abstract void setGameRule();
 	
-	public abstract void onStructClick();
+	public abstract void onComponentClick();
 	
 	
 
