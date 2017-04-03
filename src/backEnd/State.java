@@ -11,11 +11,11 @@ public interface State {
 	// so void for now to compile
 	public Tile[][] getUnmodifiableTileGrid();
 	
-	public List<Component>[][] getUnmodifiableStructureGrid();
+	public List<Component>[][] getUnmodifiableComponentGrid();
 	
 	public Tile[][] getTileGrid();
 	
-	public List<Component>[][] getStructureGrid();
+	public List<Component>[][] getComponentGrid();
 
 
 }

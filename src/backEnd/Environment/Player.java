@@ -7,7 +7,7 @@ public class Player extends Mode {
 
 
 	@Override
-	public void moveStruct() {
+	public void moveComponent() {
 		// TODO Auto-generated method stub
 		
 	}
@@ -19,7 +19,7 @@ public class Player extends Mode {
 	}
 
 	@Override
-	public void setStructBehavior() {
+	public void setComponentBehavior() {
 		// TODO Auto-generated method stub
 		
 	}
@@ -31,19 +31,19 @@ public class Player extends Mode {
 	}
 
 	@Override
-	public void addStruct(Component struct, int[] location) {
+	public void addComponent(Component component, int[] location) {
 		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
-	public void removeStruct(Component struct) {
+	public void removeComponent(Component component) {
 		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
-	public void onStructClick() {
+	public void onComponentClick() {
 		// TODO Auto-generated method stub
 		
 	}

@@ -112,4 +112,3 @@ public class SwitchModeUseCase5 implements UserInteractor{
 		}
 
 		*/
-
