@@ -11,6 +11,7 @@ public class Controller implements ControllerInterface{
 	public void start(Stage stage){
 		setupModelViewBridge();
 		myView.start(stage);
+
 	}
 	
 
