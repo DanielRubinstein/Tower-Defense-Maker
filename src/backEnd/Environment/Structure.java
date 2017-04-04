@@ -1,5 +1,9 @@
 package backEnd.Environment;
 
+import java.util.List;
+
+import backEnd.GameEngine.Attribute;
+
 public interface Structure {
 
 	
@@ -13,6 +17,7 @@ public interface Structure {
 	/**
 	 * @return health
 	 */
+	
 	public double getHealth();
 	
 	
@@ -55,5 +60,10 @@ public interface Structure {
 	 * return type is void for now since not sure what it should be
 	 */
 	public void getLocation();
+
+
+	public void replaceAttributes(List<Attribute<?>> newAttributes);
+
+
 
 }
