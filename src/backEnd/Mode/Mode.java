@@ -1,6 +1,7 @@
 package backEnd.Mode;
 
 import backEnd.GameEngine.Component;
+import backEnd.Model.Model;
 
 /**
  * This class provides functionality for how user interacts with the Front end
