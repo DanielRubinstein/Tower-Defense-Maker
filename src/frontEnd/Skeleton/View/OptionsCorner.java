@@ -35,7 +35,8 @@ public class OptionsCorner {
 		settingsImage.setPreserveRatio(true);
 		settingsImage.setFitHeight(50);
 		settings.setGraphic(settingsImage); 
-		settings.setOnAction(e -> settingsDisplay.launchSettings());
+		System.out.println();
+		settings.setOnAction(e -> settingsDisplay.launchSettings(400,400));
 		myRoot.getChildren().add(settings);
 
 	}

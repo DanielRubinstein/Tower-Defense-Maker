@@ -7,14 +7,14 @@ import javafx.scene.control.Separator;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 
-public class View {
+public class Skeleton {
 	
 	private BorderPane myRoot;
 	private Scene myScene;
 	public static final double MENU_HEIGHT = 500d;
 	public static final double MENU_WIDTH = 500d;
 	
-	public View(){
+	public Skeleton(){
 		myRoot = new BorderPane();
 		SideBar sideBar = new SideBar();
 		BottomRoot bottomRoot = new BottomRoot();
@@ -24,7 +24,6 @@ public class View {
 		myRoot.setBottom(bottomRoot.getRoot());
 		myRoot.setCenter(canvas.getRoot());
 		
-
 	}
 	private void align(Double size1, Double size2){
 		myRoot.setMinWidth(size1);
