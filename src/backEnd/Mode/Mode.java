@@ -1,11 +1,22 @@
-package backEnd.Environment;
+package backEnd.Mode;
 
 import backEnd.GameEngine.Component;
+import backEnd.Model.Model;
 
+/**
+ * This class provides functionality for how user interacts with the Front end
+ * 
+ * Essentially a container for all the possible interactions from the user
+ * 
+ * @author Derek
+ *
+ */
 public abstract class Mode {
 
-	public Mode() {
-		// TODO Auto-generated constructor stub
+	
+	protected Model myModel;
+	public Mode(Model myModel) {
+		this.myModel = myModel;
 	}
 	
 	/**
