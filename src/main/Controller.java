@@ -27,4 +27,10 @@ public class Controller implements ControllerInterface{
 		
 	}
 
+	public void updateBackendAndFrontend() {
+		// TODO Auto-generated method stub
+		
+	}
+	
+
 }
