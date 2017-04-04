@@ -1,5 +1,7 @@
-package frontEnd.Skeleton.View;
+package frontEnd.Skeleton;
 
+import frontEnd.Skeleton.UserTools.BottomRoot;
+import frontEnd.Skeleton.UserTools.SideBar;
 import javafx.geometry.HPos;
 import javafx.geometry.Orientation;
 import javafx.scene.Scene;

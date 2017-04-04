@@ -2,7 +2,7 @@ package main;
 
 import backEnd.Model.Model;
 import frontEnd.View;
-import frontEnd.Skeleton.View.Skeleton;
+import frontEnd.Skeleton.Skeleton;
 import javafx.stage.Stage;
 
 public class Controller implements ControllerInterface{

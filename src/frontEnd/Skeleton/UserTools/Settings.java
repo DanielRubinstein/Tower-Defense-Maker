@@ -1,4 +1,4 @@
-package frontEnd.Skeleton.View;
+package frontEnd.Skeleton.UserTools;
 
 import frontEnd.Menus.ButtonMenu;
 import javafx.stage.Stage;

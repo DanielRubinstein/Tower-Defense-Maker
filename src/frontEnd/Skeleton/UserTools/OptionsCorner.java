@@ -1,5 +1,6 @@
-package frontEnd.Skeleton.View;
+package frontEnd.Skeleton.UserTools;
 
+import backEnd.Environment.TileImpl;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
@@ -14,12 +15,26 @@ public class OptionsCorner {
 	private SettingsView settingsDisplay;
 	public OptionsCorner() {
 		myRoot = new VBox();
+		addModeIndicator();
 		//change this
 		settingsDisplay = new SettingsViewImpl();
 		addSettingsButton();
 		addPauseButton();
+		addTileCCButton();
+		
 	}
 	
+	private void addModeIndicator() {
+		ModeIndicator mI = new ModeIndicator();
+		myRoot.getChildren().add(mI.getIndicator());
+	}
+
+	private void addTileCCButton() {
+		Button tileCC = new Button("Tile Command Center Test");
+		tileCC.setOnAction(event -> new TileCommandCenter(new TileImpl(null, null)));
+		myRoot.getChildren().add(tileCC);
+	}
+
 	public Node getRoot(){
 		return myRoot;
 	}

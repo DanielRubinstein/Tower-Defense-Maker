@@ -4,7 +4,8 @@ import java.util.function.Consumer;
 
 import backEnd.GameData;
 import backEnd.Data.GameFileException;
-import frontEnd.Skeleton.View.Skeleton;
+
+import frontEnd.Skeleton.Skeleton;
 import javafx.stage.Stage;
 
 /**

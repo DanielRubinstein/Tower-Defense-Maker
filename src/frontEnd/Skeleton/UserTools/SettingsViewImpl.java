@@ -1,4 +1,4 @@
-package frontEnd.Skeleton.View;
+package frontEnd.Skeleton.UserTools;
 
 import backEnd.Mode.Mode;
 import backEnd.Mode.Player;
