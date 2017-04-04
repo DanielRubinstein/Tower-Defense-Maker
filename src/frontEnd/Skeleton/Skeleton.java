@@ -2,6 +2,7 @@ package frontEnd.Skeleton;
 
 import frontEnd.Skeleton.UserTools.BottomRoot;
 import frontEnd.Skeleton.UserTools.SideBar;
+import frontEnd.Skeleton.UserTools.UserTools;
 import javafx.geometry.HPos;
 import javafx.geometry.Orientation;
 import javafx.scene.Scene;
@@ -18,13 +19,16 @@ public class Skeleton {
 	
 	public Skeleton(){
 		myRoot = new BorderPane();
-		SideBar sideBar = new SideBar();
-		BottomRoot bottomRoot = new BottomRoot();
+		
 		Canvas canvas = new Canvas();
-		bottomRoot.setBottomBarHeight(MENU_HEIGHT*0.2);
-		myRoot.setRight(sideBar.getRoot());
-		myRoot.setBottom(bottomRoot.getRoot());
+		canvas.setSize(300, 400);
 		myRoot.setCenter(canvas.getRoot());
+		
+		UserTools userTools = new UserTools();
+		userTools.setPaneThickness(100);
+		myRoot.setRight(userTools.getSidePane());
+		myRoot.setBottom(userTools.getBottomPane());
+		
 		
 	}
 	private void align(Double size1, Double size2){

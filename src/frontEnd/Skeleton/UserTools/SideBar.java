@@ -14,4 +14,9 @@ public class SideBar{
 	public Node getRoot(){
 		return myRoot;
 	}
+
+	public void setWidth(double in) {
+		myRoot.setPrefWidth(in);
+		myRoot.setMaxWidth(in);
+	}
 }

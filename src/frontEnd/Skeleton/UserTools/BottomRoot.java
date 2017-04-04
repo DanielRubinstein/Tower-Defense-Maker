@@ -22,7 +22,7 @@ public class BottomRoot {
 	}
 	
 	
-	public void setBottomBarHeight(double height){
+	public void setHeight(double height){
 		System.out.println("setting bottom height to " + height);
 		myRoot.setPrefHeight(height);
 		myRoot.setMaxHeight(height);

@@ -21,5 +21,10 @@ public class Canvas {
 		return root;
 	}
 	
+	public void setSize(double height, double width){
+		this.background.setHeight(height);
+		this.background.setWidth(width);
+	}
+	
 
 }
