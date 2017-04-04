@@ -1,6 +1,6 @@
 package frontEnd.Skeleton;
 
-import backEnd.Environment.Mode;
+import backEnd.Mode.Mode;
 /**
  * 
  * @author Tim

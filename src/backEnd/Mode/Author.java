@@ -1,18 +1,20 @@
-package backEnd.Environment;
+package backEnd.Mode;
 
+import backEnd.Environment.Tile;
+import backEnd.Environment.TileAttribute;
 import backEnd.GameEngine.Component;
 
 public class Author extends Mode{
 
 	@Override
-	public void moveComponent() {
-		// TODO Auto-generated method stub
+	public void moveComponent(Component myComponent) {
+		//myModel.getComponentGrid.moveComponent()
 		
 	}
 
 	@Override
-	public void changeTile() {
-		// TODO Auto-generated method stub
+	public void addTileAttribute(Tile myTile, TileAttribute newAttribute) {
+		//myTile.addAttribute(newAttribute);
 		
 	}
 
@@ -23,8 +25,8 @@ public class Author extends Mode{
 	}
 
 	@Override
-	public void setGameRule() {
-		// TODO Auto-generated method stub
+	public void setGameRule(String gameRule) {
+		Rule newRule = globalGameRules.get(gameRule)
 		
 	}
 

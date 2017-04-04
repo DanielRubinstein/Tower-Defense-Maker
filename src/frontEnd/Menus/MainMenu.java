@@ -4,6 +4,7 @@ import java.util.function.Consumer;
 
 import backEnd.GameData;
 import backEnd.Data.GameFileException;
+import frontEnd.Skeleton.View.View;
 import javafx.stage.Stage;
 
 /**
@@ -33,6 +34,10 @@ public class MainMenu {
    	 	ButtonMenu splash = new ButtonMenu();
    	 	splash.setText("WELCOME");
    	 	splash.addButton("START", event -> showPrimaryMenu(stage));
+   	 	splash.addButton("Quick start (for development purposes)", event -> {
+   	 		View view = new View();
+   	 		view.display(stage);
+   	 	});
    	 	splash.create(MENU_WIDTH, MENU_HEIGHT);
 		stage.setScene(splash.getScene());
 		stage.show();
