@@ -36,9 +36,9 @@ public class ButtonMenu {
 
 	}
 	private void doSpacing(){
-		sizeOfAllChildren();
+		//sizeOfAllChildren();
 		double space = myRoot.getChildren().size()==0? 50:myRoot.getHeight() / (myRoot.getChildren().size()*2);
-		System.out.println("diong space"+space + "because "+myRoot.getHeight());
+		//System.out.println("diong space"+space + "because "+myRoot.getHeight());
 		myRoot.setSpacing(space);
 	}
 	private void sizeOfAllChildren(){
