@@ -21,22 +21,31 @@ import javafx.stage.Stage;
 public class SettingsViewImpl implements SettingsView{
 
 	private VBox myRoot;
-	private VBox authorRoot;
 	private StartMenu myStartMenu;
 	private Mode myMode;
+	private Stage myStage;
+	private Scene myScene;
+	
+	
 	public SettingsViewImpl() {
 		myRoot = new VBox();
 		myStartMenu= new MainMenu();
 	}
 	
 	public void launchSettings(double width, double height){
-		myRoot.setMinWidth(width);
-		myRoot.setMinHeight(height);
-		Scene scene = new Scene(myRoot, 400, 400);
-		Stage stage = new Stage();
-		stage.setScene(scene);
-		addButtons(stage);
-		stage.show();
+		if(myScene != null){
+			myStage.show();
+			System.out.println("already have a scene");
+		}else{
+			myRoot.setMinWidth(width);
+			myRoot.setMinHeight(height);
+			myScene = new Scene(myRoot, 400, 400);
+			myStage = new Stage();
+			myStage.setScene(myScene);
+			addButtons(myStage);
+			myStage.show();
+		}
+
 	}
 
 	/*
@@ -49,9 +58,8 @@ public class SettingsViewImpl implements SettingsView{
 	 */
 	private void addButtons(Stage stage){
 		ButtonMenu menu = new ButtonMenu();
-		myStartMenu.makeGameSelectionButtons(menu, stage);
+		myStartMenu.makeGameSelectionButtons(menu, stage);		
 		menu.addButton("Save", e -> save());
-		//menu.addTwoButtons("View Rules", e -> viewRules(), "Edit Rules", e -> editRules());
 		HBox rules = new HBox();
 		Button viewRules = new Button("View Rules");
 		viewRules.setOnAction(e -> viewRules());
@@ -62,7 +70,6 @@ public class SettingsViewImpl implements SettingsView{
 		editRules.disableProperty().bind(authorMode.not());
 		//editRules.disabledProperty().addListener(new ChangeListener());
 		rules.getChildren().addAll(viewRules,editRules);
-		
 		menu.addNodeButton(rules);
 		
 		//adding player/godmode switch
@@ -72,10 +79,9 @@ public class SettingsViewImpl implements SettingsView{
 		toggleAuthor.setOnAction(e->toggleAuthorMode());
 		HBox modeButton = new HBox();
 		modeButton.getChildren().addAll(togglePlayer,toggleAuthor);
-		
 		menu.addNodeButton(modeButton);
-
-		menu.create(400.0, 400.0);
+		
+		menu.create(myScene.getWidth(), myScene.getHeight());
 		stage.setScene(menu.getScene());
 		stage.show();
 	}
@@ -94,7 +100,6 @@ public class SettingsViewImpl implements SettingsView{
 	private void toggleAuthorMode(){
 		System.out.println("toggling author mode");
 	}
-	//fix this, dont use instanceof
 	private void isPlayerMode(){
 			
 		

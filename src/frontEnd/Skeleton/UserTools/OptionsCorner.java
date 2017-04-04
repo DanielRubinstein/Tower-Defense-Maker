@@ -6,15 +6,16 @@ import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 
 public class OptionsCorner {
 
-	private VBox myRoot;
+	private HBox myRoot;
 	private static final String SETTINGS_IMAGE = "images/Settings.jpg";
 	private SettingsView settingsDisplay;
 	public OptionsCorner() {
-		myRoot = new VBox();
+		myRoot = new HBox();
 		addModeIndicator();
 		//change this
 		settingsDisplay = new SettingsViewImpl();
