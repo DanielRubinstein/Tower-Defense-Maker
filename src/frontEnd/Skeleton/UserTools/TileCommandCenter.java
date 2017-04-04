@@ -1,4 +1,4 @@
-package frontEnd.Skeleton.View;
+package frontEnd.Skeleton.UserTools;
 
 import backEnd.Environment.Tile;
 import backEnd.GameEngine.Component;

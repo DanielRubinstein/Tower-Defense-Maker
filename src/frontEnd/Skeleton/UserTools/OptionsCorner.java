@@ -1,4 +1,4 @@
-package frontEnd.Skeleton.View;
+package frontEnd.Skeleton.UserTools;
 
 import backEnd.Environment.TileImpl;
 import javafx.geometry.Pos;

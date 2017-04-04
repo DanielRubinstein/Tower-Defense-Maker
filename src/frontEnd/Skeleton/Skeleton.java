@@ -1,5 +1,6 @@
-package frontEnd.Skeleton.View;
+package frontEnd.Skeleton;
 
+import frontEnd.Skeleton.UserTools.UserTools;
 import javafx.geometry.HPos;
 import javafx.geometry.Orientation;
 import javafx.scene.Scene;
@@ -7,22 +8,22 @@ import javafx.scene.control.Separator;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 
-public class View {
+public class Skeleton {
 	
 	private BorderPane myRoot;
 	private Scene myScene;
 	public static final double MENU_HEIGHT = 500d;
 	public static final double MENU_WIDTH = 500d;
 	
-	public View(){
+	public Skeleton(){
 		myRoot = new BorderPane();
-		SideBar sideBar = new SideBar();
-		BottomRoot bottomRoot = new BottomRoot();
+		
 		Canvas canvas = new Canvas();
-		bottomRoot.setBottomBarHeight(MENU_HEIGHT*0.2);
-		myRoot.setRight(sideBar.getRoot());
-		myRoot.setBottom(bottomRoot.getRoot());
 		myRoot.setCenter(canvas.getRoot());
+		
+		UserTools userTools = new UserTools();
+		userTools.addToBorderPane(myRoot);
+		userTools.setBottomPaneHeight(MENU_HEIGHT * 0.2);
 		
 
 	}
