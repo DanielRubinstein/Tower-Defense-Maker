@@ -16,5 +16,8 @@ public class BottomBar{
 	public Node getRoot(){
 		return myRoot;
 	}
+	public void setMaxHeight(double height){
+		myRoot.setMaxHeight(height);
+	}
 
 }
