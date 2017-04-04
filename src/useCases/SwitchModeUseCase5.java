@@ -2,13 +2,13 @@ package useCases;
 
 import java.util.List;
 
-import backEnd.State;
 import backEnd.Environment.Behavior;
 import backEnd.Environment.EnvironmentInterface;
 import backEnd.Environment.Mode;
 import backEnd.Environment.ComponentBank;
 import backEnd.Environment.Tile;
 import backEnd.Environment.TileAttribute;
+import backEnd.State.State;
 import frontEnd.Skeleton.UserInteractor;
 /**
  * @author Tim

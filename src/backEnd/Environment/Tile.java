@@ -1,15 +1,36 @@
 package backEnd.Environment;
 
+import java.util.List;
+
+/**
+ * A tile is a position in the grid that can have properties (TileAttributes). GameEngine will have to access the TileAttributes
+ * to check how the components can interact with it. Mode will have to be able to access its TileAttributes.
+ * @author Riley Nisbet
+ */
+
 public interface Tile {
 	
 	/**
-	 * sets Traversable attribute of Tile
+	 * @param attrType
+	 * @return Attribute that corresponds to the String attrType
 	 */
-	public void setTraversable();
+	TileAttribute<?> getTileAttribute(String attrType);
 	
 	/**
-	 * sets Buildable attribute of Tile
+	 * Add a TileAttribute to the Tile
+	 * @param newAttr
 	 */
-	public void setBuildable();
-
+	void addTileAttribute(TileAttribute<?> newAttr);
+	
+	/**
+	 * @return List of TileAttributes
+	 */
+	List<TileAttribute<?>> getTileAttributeList();
+	
+	/**
+	 * Replace the current TileAttribute list with newAttrList
+	 * @param newAttrList
+	 */
+	void setTileAttributeList(List<TileAttribute<?>> newAttrList);
+	
 }

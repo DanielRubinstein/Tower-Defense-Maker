@@ -3,11 +3,11 @@ package useCases;
 import java.util.List;
 import java.util.Map;
 
-import backEnd.State;
 import backEnd.Environment.EnvironmentInterface;
 import backEnd.Environment.Mode;
 import backEnd.Environment.Player;
 import backEnd.GameEngine.Component;
+import backEnd.State.State;
 import frontEnd.Skeleton.UserInteractor;
 
 /**
