@@ -2,5 +2,5 @@ package frontEnd.Skeleton.UserTools;
 
 public interface SettingsView {
 
-	public void launchSettings();
+	public void launchSettings(double width, double height);
 }

@@ -2,6 +2,7 @@ package main;
 
 import backEnd.Model.Model;
 import frontEnd.View;
+import frontEnd.Skeleton.Skeleton;
 import javafx.stage.Stage;
 
 public class Controller implements ControllerInterface{
@@ -9,8 +10,10 @@ public class Controller implements ControllerInterface{
 	private View myView;
 	
 	public void start(Stage stage){
-		setupModelViewBridge();
-		myView.start(stage);
+		Skeleton skeleton = new Skeleton();
+		skeleton.display(stage);
+		//setupModelViewBridge();
+		//myView.start(stage);
 
 	}
 	

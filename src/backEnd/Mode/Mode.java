@@ -2,6 +2,7 @@ package backEnd.Mode;
 
 import backEnd.GameEngine.Component;
 import backEnd.Model.Model;
+import javafx.beans.property.BooleanProperty;
 
 /**
  * This class provides functionality for how user interacts with the Front end
@@ -38,6 +39,8 @@ public abstract class Mode {
 	public abstract void setGameRule();
 	
 	public abstract void onComponentClick();
+	
+	public abstract BooleanProperty authorModeProperty();
 	
 	
 

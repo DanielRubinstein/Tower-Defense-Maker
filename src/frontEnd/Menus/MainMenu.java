@@ -4,6 +4,7 @@ import java.util.function.Consumer;
 
 import backEnd.GameData;
 import backEnd.Data.GameFileException;
+
 import frontEnd.Skeleton.Skeleton;
 import javafx.stage.Stage;
 
@@ -16,7 +17,7 @@ import javafx.stage.Stage;
  *
  */
 
-public class MainMenu {
+public class MainMenu implements StartMenu{
 	private Consumer<GameData> gameDataConsumer;
 	public static final double MENU_HEIGHT = 500d;
 	public static final double MENU_WIDTH = 600d;
@@ -45,15 +46,21 @@ public class MainMenu {
 
 	private void showPrimaryMenu(Stage stage) {
 		ButtonMenu primaryMenu = new ButtonMenu();
-   	 	primaryMenu.setText("Please Pick one");
-   	 	primaryMenu.addButton("Create a New Game", event -> new GameMaker(stage, gameDataConsumer));
-   	 	primaryMenu.addButton("Load a Template Game", event -> showTemplateMenu(stage));
-   	 	primaryMenu.addButton("Load a Saved Game", event -> loadGame());
+   	 	makeGameSelectionButtons(primaryMenu,stage);
    	 	primaryMenu.addBackButton(event -> splashScreen(stage));
    	 	primaryMenu.create(MENU_WIDTH, MENU_HEIGHT);
 		stage.setScene(primaryMenu.getScene());
 		stage.show();
 	}
+	public void makeGameSelectionButtons(ButtonMenu menu,Stage stage){
+		menu.setText("Please Pick one");
+   	 	menu.addButton("Create a New Game", event -> new GameMaker(stage, gameDataConsumer));
+   	 	menu.addButton("Load a Template Game", event -> showTemplateMenu(stage));
+   	 	menu.addButton("Load a Saved Game", event -> loadGame());
+		
+		
+	}
+	
 
 	private void loadGame() {
 		GameLoader gameLoader = new GameLoader();
