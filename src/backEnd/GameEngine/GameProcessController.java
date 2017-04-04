@@ -2,9 +2,18 @@ package backEnd.GameEngine;
 
 import java.util.List;
 
-public class GameProcessController {
-	//controller that contains the component and engine
-	List<Engine> myEngines; //all the engines that we run each time are stored here
+import backEnd.Rules;
+import backEnd.State;
 
+public class GameProcessController {
+
+	private List<Engine> myEngines; 
+	private State myCurrentState; 
+	private Rules myRules;
+	
+	
+	public GameProcessController(State currentState, Rules gameRules){
+		
+	}
 	
 }
