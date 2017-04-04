@@ -12,11 +12,18 @@ public class OptionsCorner {
 	
 	public OptionsCorner() {
 		myRoot = new VBox();
+		addModeIndicator();
 		addSettingsButton();
 		addPauseButton();
 		addTileCCButton();
+		
 	}
 	
+	private void addModeIndicator() {
+		ModeIndicator mI = new ModeIndicator();
+		myRoot.getChildren().add(mI.getIndicator());
+	}
+
 	private void addTileCCButton() {
 		Button tileCC = new Button("Tile Command Center Test");
 		tileCC.setOnAction(event -> new TileCommandCenter(new TileImpl(null, null)));

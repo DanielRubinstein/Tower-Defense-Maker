@@ -17,6 +17,7 @@ public class TileCommandCenter {
 		
 		Stage stage = new Stage();
 		stage.setScene(new Scene(tabPane, 150, 300));
+		stage.setTitle("Tile Command Center");
 		stage.show();
 		
 	}
