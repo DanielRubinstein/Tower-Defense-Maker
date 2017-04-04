@@ -18,13 +18,17 @@ public class BottomRoot {
 		myRoot.setHgrow(myBottomBar.getRoot(), Priority.ALWAYS);
 		myRoot.getChildren().add(myBottomBar.getRoot());
 		myRoot.getChildren().add(myOptions.getRoot());
-		
 		myRoot.setStyle("-fx-padding: 10;" + "-fx-border-style: solid inside;" + "-fx-border-width: 2;" + "-fx-border-insets: 5;" + "-fx-border-radius: 5;" + "-fx-border-color: blue;");
 	}
 	
 	
 	public void setBottomBarHeight(double height){
+		System.out.println("setting bottom height to " + height);
 		myRoot.setPrefHeight(height);
+		myRoot.setMaxHeight(height);
+		myOptions.setMaxHeight(height);
+		myBottomBar.setMaxHeight(height);
+		System.out.println(myBottomBar.getRoot().maxHeight(0));
 		
 		
 	}

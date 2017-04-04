@@ -2,7 +2,6 @@ package useCases;
 
 import java.util.List;
 
-import backEnd.Environment.Behavior;
 import backEnd.Environment.EnvironmentInterface;
 import backEnd.GameEngine.Attribute;
 import backEnd.GameEngine.Component;

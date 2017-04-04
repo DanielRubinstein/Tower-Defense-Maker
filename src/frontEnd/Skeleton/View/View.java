@@ -24,7 +24,6 @@ public class View {
 		myRoot.setBottom(bottomRoot.getRoot());
 		myRoot.setCenter(canvas.getRoot());
 		
-		
 
 	}
 	private void align(Double size1, Double size2){

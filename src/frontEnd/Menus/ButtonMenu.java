@@ -23,7 +23,7 @@ public class ButtonMenu {
 		//title.setFont(font);
 		myRoot.getChildren().add(title);
 	}
-
+	
 	public void create(Double size1, Double size2) {
    	 	myRoot.setSpacing(50);
    	 	myRoot.setAlignment(Pos.CENTER);
