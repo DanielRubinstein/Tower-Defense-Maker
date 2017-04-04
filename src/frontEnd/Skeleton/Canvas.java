@@ -1,4 +1,4 @@
-package frontEnd.Skeleton.View;
+package frontEnd.Skeleton;
 
 import javafx.scene.Group;
 import javafx.scene.Node;

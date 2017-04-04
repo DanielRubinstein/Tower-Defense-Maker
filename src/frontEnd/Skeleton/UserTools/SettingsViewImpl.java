@@ -1,4 +1,4 @@
-package frontEnd.Skeleton.View;
+package frontEnd.Skeleton.UserTools;
 
 import javafx.scene.Scene;
 import javafx.scene.layout.VBox;
