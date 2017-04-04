@@ -8,6 +8,11 @@ public abstract class Component {
 	
 	
 
+	
+	public abstract void addAttribute(Attribute<?> toAdd);
+	
+	public abstract void replaceAttributes(List<Attribute<?>> newAttributes);
+	
 	/**
 	 * When the engines call behaviors (for the behavior to be executed), it does so in Component via this method.
 	 * @param behaviorType
@@ -24,12 +29,14 @@ public abstract class Component {
 	
 	/**
 	 * adds an attribute to the List of Attributes
+	 * @return 
 	 */
-	public abstract void addAttribute(Attribute toAdd);
+	//public abstract void addAttribute(Attribute toAdd);
 	
 	 /**
      * Change the shape of the cell
      * @param cellShape new cell shape
      */
+	
 	
 }

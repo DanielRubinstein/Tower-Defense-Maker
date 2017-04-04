@@ -110,13 +110,13 @@ public class Grid {
 
         if(this.contains(cellLocation)){
 
-            for(Location xLocation : this.getCell(cellLocation).getCellShape().getNeighborLocations(cellLocation)){
-
-                if(this.contains(xLocation)){
-                    neighborCells.put(xLocation, this.getCell(xLocation));
-                }
-
-            }
+//            for(Location xLocation : this.getCell(cellLocation).getCellShape().getNeighborLocations(cellLocation)){
+//
+//                if(this.contains(xLocation)){
+//                    neighborCells.put(xLocation, this.getCell(xLocation));
+//                }
+//
+//            }
 
         }
 
@@ -145,10 +145,10 @@ public class Grid {
 
     public void renderCells() {
 
-        for(Location xLocation : this.getGridLocations()){
-            Component xCell = this.getComponent(xLocation);
-            xCell.setLocation(xLocation);
-        }
+//        for(Location xLocation : this.getGridLocations()){
+//            Component xCell = this.getComponent(xLocation);
+//            xCell.setLocation(xLocation);
+//        }
 
     }
 

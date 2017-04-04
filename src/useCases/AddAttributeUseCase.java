@@ -6,7 +6,7 @@ import backEnd.Environment.Behavior;
 import backEnd.Environment.Environment;
 import backEnd.Environment.Mode;
 import backEnd.Environment.Structure;
-import backEnd.Environment.StructureBank;
+import backEnd.Environment.ComponentBank;
 import backEnd.Environment.Tile;
 import backEnd.Environment.TileAttribute;
 import backEnd.GameEngine.Attribute;
@@ -18,6 +18,7 @@ import backEnd.GameEngine.Engine;
  * This class represents an implementation of use case 31, where the user decides to
  * add a predefined attribute to a tower structure. 
  */
+/*
 public class AddAttributeUseCase implements Attribute{
 
 	public State oldState; //the Master State held by the super controller, accessible to GameProcessController
@@ -55,11 +56,13 @@ public class AddAttributeUseCase implements Attribute{
 		return ans;
 	}
 	
+	*/
 	/**
 	 * 
 	 * @param addTo the Component to be modified
 	 * @param addedAttribute the desired attribute to be added to a Component
 	 */
+/*
 	public void addAttribute(Component addTo, Attribute addedAttribute){
 		addTo.addAttribute(addedAttribute);
 	}
@@ -78,4 +81,7 @@ public class AddAttributeUseCase implements Attribute{
 	
 	
 	
+	
 }
+
+*/
