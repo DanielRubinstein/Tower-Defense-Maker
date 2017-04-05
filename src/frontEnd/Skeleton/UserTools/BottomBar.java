@@ -2,6 +2,7 @@ package frontEnd.Skeleton.UserTools;
 
 import javafx.scene.Node;
 import javafx.scene.control.Button;
+import javafx.scene.control.Tooltip;
 import javafx.scene.layout.HBox;
 
 public class BottomBar{
@@ -10,7 +11,9 @@ public class BottomBar{
 	
 	public BottomBar(){
 		myRoot = new HBox();
-		myRoot.getChildren().add(new Button("test"));
+		Button b = new Button("test");
+		b.setTooltip(new Tooltip("test"));
+		myRoot.getChildren().add(b);
 	}
 	
 	public Node getRoot(){
