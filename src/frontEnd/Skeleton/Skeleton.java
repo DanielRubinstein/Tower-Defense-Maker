@@ -19,9 +19,9 @@ public class Skeleton {
 	public Skeleton(){
 		myRoot = new BorderPane();
 		SideBar sideBar = new SideBar();
-		BottomRoot bottomRoot = new BottomRoot();
+		BottomRoot bottomRoot = new BottomRoot(MENU_HEIGHT*0.2);
 		Canvas canvas = new Canvas();
-		bottomRoot.setBottomBarHeight(MENU_HEIGHT*0.2);
+		sideBar.setSideBarWeidth(MENU_WIDTH*0.2);
 		myRoot.setRight(sideBar.getRoot());
 		myRoot.setBottom(bottomRoot.getRoot());
 		myRoot.setCenter(canvas.getRoot());
