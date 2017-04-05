@@ -3,35 +3,12 @@ package backEnd.Mode;
 import backEnd.Environment.Tile;
 import backEnd.Environment.TileAttribute;
 import backEnd.GameEngine.Component;
+import javafx.geometry.Point2D;
 
 public class Author extends Mode{
 
 	@Override
-	public void moveComponent(Component myComponent) {
-		//myModel.getComponentGrid.moveComponent()
-		
-	}
-
-	@Override
-	public void addTileAttribute(Tile myTile, TileAttribute newAttribute) {
-		//myTile.addAttribute(newAttribute);
-		
-	}
-
-	@Override
-	public void setComponentBehavior() {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void setGameRule(String gameRule) {
-		Rule newRule = globalGameRules.get(gameRule)
-		
-	}
-
-	@Override
-	public void addComponent(Component component, int[] location) {
+	public void addComponent(Component component, Point2D location) {
 		// TODO Auto-generated method stub
 		
 	}
@@ -43,9 +20,46 @@ public class Author extends Mode{
 	}
 
 	@Override
-	public void onComponentClick() {
+	public void addTile() {
 		// TODO Auto-generated method stub
 		
 	}
 
+	@Override
+	public void addTileAttribute() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void removeTileAttribute() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void moveTile() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void editRules() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void play() throws ModeException {
+		throw new ModeException("Cannot play in author mode");
+		
+	}
+
+	@Override
+	public void pause() {
+		myModel.getEngine.pause();
+		
+	}
+
+	
 }
