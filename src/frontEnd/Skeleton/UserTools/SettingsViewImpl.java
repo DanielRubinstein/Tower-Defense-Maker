@@ -26,41 +26,48 @@ import javax.swing.event.ChangeEvent;
  *
  */
 public class SettingsViewImpl implements SettingsView{
-
-	private VBox myRoot;
-	private StartMenu myStartMenu;
 	private Stage myStage;
-	private Scene myScene;
 	private SettingsBinding myBinding;
-	private ButtonMenu myButtonMenu;
 	
 	
 	public SettingsViewImpl() {
-		myRoot = new VBox();
-		myStartMenu= new MainMenu();
+		myStage = new Stage();
 		myBinding = new SettingsBinding();
-		myButtonMenu = new ButtonMenu();
 		addButtons(myStage);
 	}
 	
 	public void launchSettings(){
 		myStage.show();
-
 	}
-
+	/*
+	 * Buttons to add:
+	 * New
+	 * Load
+	 * Save
+	 * Rules
+	 * Author/Player toggle
+	 */
 	private void addButtons(Stage stage){
-
-		myStartMenu.makeGameSelectionButtons(myButtonMenu, stage);		
-		myButtonMenu.addSimpleButton("Save", e -> save());
+		ButtonMenu menu = new ButtonMenu();
 		
-		addSideBySideButtons("View Rules",e -> viewRules(),"Edit Rules",e->editRules(),null,Bindings.or(myBinding.valueProperty(), myBinding.valueProperty()).not());
-		addSideBySideButtons("Player",e->togglePlayerMode(),"Author",e->toggleAuthorMode(),null,null);
+		menu.setText("Settings");
 		
+		// add New and Load
 		
-		myButtonMenu.create(myScene.getWidth(), myScene.getHeight());
-		stage.setScene(myButtonMenu.getScene());
-		stage.show();
-	} 
+		menu.addSimpleButton("Save", e -> save());
+		
+		HBox ruleButtons = createRulesButtons("View Rules",e -> viewRules(),"Edit Rules",e->editRules(),null,Bindings.or(myBinding.valueProperty(), myBinding.valueProperty()).not());
+		
+		menu.addNode(ruleButtons);
+	
+		
+		//adding player/godmode switch
+		ToggleSwitch modeToggle = new ToggleSwitch("Player", e-> togglePlayerMode(), "Author", e -> toggleAuthorMode());
+		menu.addNode(modeToggle.getRoot());
+		
+		menu.create();
+		stage.setScene(menu.getScene());
+	}
 
 	
 	/**
@@ -71,9 +78,9 @@ public class SettingsViewImpl implements SettingsView{
 	 * @param event2
 	 * @param b1
 	 * @param b2
+	 * @return 
 	 */
-	private void addSideBySideButtons(String text1, EventHandler<ActionEvent> event1, 
-			String text2, EventHandler<ActionEvent> event2, ObservableValue<? extends Boolean> b1, ObservableValue<? extends Boolean> b2){
+	private HBox createRulesButtons(String text1, EventHandler<ActionEvent> event1, String text2, EventHandler<ActionEvent> event2, ObservableValue<? extends Boolean> b1, ObservableValue<? extends Boolean> b2){
 	
 		HBox bothButtons = new HBox();
 		Button button1 = new Button(text1);
@@ -88,7 +95,7 @@ public class SettingsViewImpl implements SettingsView{
 			button2.disableProperty().bind(b2);
 		
 		bothButtons.getChildren().addAll(button1,button2);
-		myButtonMenu.addNodeButton(bothButtons);
+		return bothButtons;
 			
 	}
 	
