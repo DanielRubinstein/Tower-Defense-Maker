@@ -5,12 +5,18 @@ import backEnd.Mode.Mode;
 import backEnd.Mode.Player;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
+import javafx.scene.layout.VBox;
 
 public class ModeIndicator {
-	private Label myIndicator;
+	private Label pausedIndicator;
+	private Label modeIndicator;
+	private VBox indicatorHolder;
 	
 	public ModeIndicator(){
-		myIndicator = new Label("No Mode Set");
+		pausedIndicator = new Label("Game is paused");
+		modeIndicator = new Label("random mode");
+		indicatorHolder = new VBox();
+		indicatorHolder.getChildren().addAll(pausedIndicator,modeIndicator);
 	}
 	
 	public void setMode(Mode mode){
@@ -22,10 +28,10 @@ public class ModeIndicator {
 	}
 	
 	public Node getIndicator(){
-		return this.myIndicator;
+		return indicatorHolder;
 	}
 	
 	private void setMode(String newMode){
-		myIndicator.setText("Current Mode: " + newMode);
+		//myIndicator.setText("Current Mode: " + newMode);
 	}
 }

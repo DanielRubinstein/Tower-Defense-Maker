@@ -7,22 +7,28 @@ import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.Priority;
+import javafx.scene.layout.TilePane;
 import javafx.scene.layout.VBox;
 
 public class OptionsCorner {
 
-	private HBox myRoot;
-	private static final String SETTINGS_IMAGE = "images/Settings.jpg";
+	private VBox myRoot;
 	private SettingsView settingsDisplay;
-	public OptionsCorner() {
-		myRoot = new HBox();
-		addModeIndicator();
-		//change this
+	private OptionsSelection userOptions;
+	public OptionsCorner(double width, double height) {
+		myRoot = new VBox();
+		myRoot.setPrefSize(width, height);
+
 		settingsDisplay = new SettingsViewImpl();
-		addSettingsButton();
-		addPauseButton();
-		addTileCCButton();
+		addModeIndicator();
+		setUserOptions(width,height*0.3);
 		
+	}
+	private void setUserOptions(double width,double height){
+		userOptions = new OptionsSelection(settingsDisplay, width, height);
+		userOptions.setAlignment(Pos.BOTTOM_CENTER,Priority.ALWAYS);
+		myRoot.getChildren().add(userOptions.getNode());
 	}
 	
 	private void addModeIndicator() {
@@ -31,7 +37,7 @@ public class OptionsCorner {
 	}
 
 	private void addTileCCButton() {
-		Button tileCC = new Button("Tile Command Center Test");
+		Button tileCC = new Button("Tile Command");
 		tileCC.setOnAction(event -> new TileCommandCenter(new TileImpl(null, null)));
 		myRoot.getChildren().add(tileCC);
 	}
@@ -43,23 +49,5 @@ public class OptionsCorner {
 		myRoot.setMaxHeight(height);
 	}
 	
-	private void addSettingsButton(){
-		Image image = new Image(getClass().getClassLoader().getResourceAsStream(SETTINGS_IMAGE));
-		ImageView settingsImage = new ImageView(image);
-
-		Button settings = new Button();
-		settingsImage.setPreserveRatio(true);
-		settingsImage.setFitHeight(50);
-		settings.setGraphic(settingsImage); 
-		System.out.println();
-		settings.setOnAction(e -> settingsDisplay.launchSettings(400,400));
-		myRoot.getChildren().add(settings);
-
-	}
-	private void addPauseButton(){
-		Button pause = new Button("Pause");
-		myRoot.getChildren().add(pause);
-		//myRoot.getChildren().add(new Button("test"));
-	}
 
 }
