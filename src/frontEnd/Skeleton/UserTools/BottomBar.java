@@ -17,7 +17,7 @@ public class BottomBar{
 		
 		Tile t = new TileImpl(null,null);
 		TileCommandCenter tileTest = new TileCommandCenter(t);
-		b.setOnAction(e -> tileTest.launch());
+		b.setOnMouseClicked(e-> tileTest.launch(e.getScreenX(),e.getScreenY()));
 		myRoot.getChildren().add(b);
 		//myRoot.getChildren().add(tileTest.getNode());
 	}
