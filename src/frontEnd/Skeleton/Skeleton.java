@@ -45,7 +45,6 @@ public class Skeleton {
 		align(MENU_WIDTH,MENU_HEIGHT);
 		stage.setScene(myScene);
 		stage.show();
-		
 	}
 
 
