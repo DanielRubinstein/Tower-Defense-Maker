@@ -13,8 +13,6 @@ import javafx.stage.Stage;
  */
 
 public class MainMenu{
-	public static final double MENU_HEIGHT = 500d;
-	public static final double MENU_WIDTH = 600d;
 	
 	private GameSelection gameSelection;
 
@@ -26,7 +24,7 @@ public class MainMenu{
    	 	ButtonMenu splash = new ButtonMenu();
    	 	splash.setText("WELCOME");
    	 	splash.addSimpleButton("START", event -> showPrimaryMenu(stage));
-   	 	splash.create(MENU_WIDTH, MENU_HEIGHT);
+   	 	splash.create();
 		stage.setScene(splash.getScene());
 		stage.show();
 	}
@@ -37,7 +35,7 @@ public class MainMenu{
    	 		primaryMenu.addButton(button);
    	 	}
    	 	primaryMenu.addBackButton(event -> splashScreen(stage));
-   	 	primaryMenu.create(MENU_WIDTH, MENU_HEIGHT);
+   	 	primaryMenu.create();
 		stage.setScene(primaryMenu.getScene());
 		stage.show();
 	}
