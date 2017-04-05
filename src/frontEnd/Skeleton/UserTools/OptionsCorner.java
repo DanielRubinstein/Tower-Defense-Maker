@@ -16,17 +16,17 @@ public class OptionsCorner {
 	private VBox myRoot;
 	private SettingsView settingsDisplay;
 	private OptionsSelection userOptions;
-	public OptionsCorner(double size) {
+	public OptionsCorner(double width, double height) {
 		myRoot = new VBox();
-		myRoot.setPrefSize(size, size);
+		myRoot.setPrefSize(width, height);
 
 		settingsDisplay = new SettingsViewImpl();
 		addModeIndicator();
-		setUserOptions(size);
+		setUserOptions(width,height*0.3);
 		
 	}
-	private void setUserOptions(double size){
-		userOptions = new OptionsSelection(settingsDisplay, size, size*0.3);
+	private void setUserOptions(double width,double height){
+		userOptions = new OptionsSelection(settingsDisplay, width, height);
 		userOptions.setAlignment(Pos.BOTTOM_CENTER,Priority.ALWAYS);
 		myRoot.getChildren().add(userOptions.getNode());
 	}

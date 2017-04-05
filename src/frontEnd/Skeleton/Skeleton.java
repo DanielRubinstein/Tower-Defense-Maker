@@ -13,20 +13,28 @@ public class Skeleton {
 	
 	private BorderPane myRoot;
 	private Scene myScene;
+	private SideBar mySideBar;
+	private BottomRoot myBottom;
 	public static final double MENU_HEIGHT = 500d;
 	public static final double MENU_WIDTH = 500d;
 	
 	public Skeleton(){
 		myRoot = new BorderPane();
-		SideBar sideBar = new SideBar();
-		BottomRoot bottomRoot = new BottomRoot(MENU_HEIGHT*0.2);
 		Canvas canvas = new Canvas();
-		sideBar.setSideBarWeidth(MENU_WIDTH*0.2);
-		myRoot.setRight(sideBar.getRoot());
-		myRoot.setBottom(bottomRoot.getRoot());
+		initializeSide();
+		initializeBottom();
 		myRoot.setCenter(canvas.getRoot());
-		
 	}
+	private void initializeSide(){
+		mySideBar = new SideBar();
+		mySideBar.setSideBarWeidth(MENU_WIDTH*0.2);
+		myRoot.setRight(mySideBar.getRoot());
+	}
+	private void initializeBottom(){
+		myBottom = new BottomRoot(MENU_WIDTH*0.2,MENU_HEIGHT*0.2);
+		myRoot.setBottom(myBottom.getRoot());
+	}
+	
 	private void align(Double size1, Double size2){
 		myRoot.setMinWidth(size1);
 		myRoot.setMinHeight(size2);
@@ -36,19 +44,9 @@ public class Skeleton {
 	public void display(Stage stage) {
 		align(MENU_WIDTH,MENU_HEIGHT);
 		stage.setScene(myScene);
-		//createBars(stage);
 		stage.show();
 		
 	}
-	private void createSeparator(){
 
-		Separator separator = new Separator();
-		separator.setOrientation(Orientation.VERTICAL);
-		//separator.setMaxHeight(bottomBar.getHeight());
-		separator.setHalignment(HPos.RIGHT);
-
-		
-		
-	}
 
 }

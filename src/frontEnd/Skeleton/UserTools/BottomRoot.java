@@ -17,10 +17,10 @@ public class BottomRoot {
 	private OptionsCorner myOptions;
 	private HBox myRoot;
 	private SideBar mySideBar;
-	public BottomRoot(double height) {
+	public BottomRoot(double cornerWidth, double height) {
 		initializeRoot(height);
 		initializeBar(height);
-		initializeCorner(height);
+		initializeCorner(cornerWidth,height);
 	}
 	
 	private void initializeRoot(double height){
@@ -33,8 +33,8 @@ public class BottomRoot {
 		HBox.setHgrow(myBottomBar.getRoot(), Priority.ALWAYS);
 		myRoot.getChildren().add(myBottomBar.getRoot());
 	}
-	private void initializeCorner(double size){
-		myOptions = new OptionsCorner(size);
+	private void initializeCorner(double width,double height){
+		myOptions = new OptionsCorner(width,height);
 		myRoot.getChildren().add(myOptions.getRoot());
 	}
 
