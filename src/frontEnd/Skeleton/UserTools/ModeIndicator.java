@@ -16,7 +16,7 @@ public class ModeIndicator {
 		pausedIndicator = new Label("Game is paused");
 		modeIndicator = new Label("random mode");
 		indicatorHolder = new VBox();
-		indicatorHolder.getChildren().addAll(pausedIndicator,modeIndicator);
+		indicatorHolder.getChildren().addAll(pausedIndicator, modeIndicator);
 	}
 	
 	public void setMode(Mode mode){

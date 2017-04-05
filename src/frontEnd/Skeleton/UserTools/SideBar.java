@@ -11,11 +11,15 @@ import javafx.scene.paint.Color;
 public class SideBar{
 	
 	private VBox myRoot;
+	private StatusView myStatusView;
 	
 	public SideBar(){
 		myRoot = new VBox();
 		myRoot.setBackground(new Background (new BackgroundFill(Color.CHOCOLATE, CornerRadii.EMPTY, Insets.EMPTY)));
 		System.out.println("set sidebar bakcground");
+		
+		myStatusView = new StatusView();
+		myRoot.getChildren().add(myStatusView.getRoot());
 	}
 	
 	public Node getRoot(){
