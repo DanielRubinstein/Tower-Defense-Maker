@@ -1,34 +1,66 @@
 package backEnd.GameEngine;
 
 import java.util.List;
+import java.util.Map;
+import java.util.ResourceBundle;
 
-public abstract class Component {
-	List<Attribute<?>> myAttributes;
-	List<Behavior> myBehaviors;
 
+public class Component {
+	private final static String DEFAULT_ATTRIBUTE_PATH = "resources/componentDefaults";
+	private final static ResourceBundle myResources = ResourceBundle.getBundle(DEFAULT_ATTRIBUTE_PATH);
+	private Map<String,Attribute<?>> myAttributes;
+	private Map<String, Behavior> myBehaviors;
 	
-	public abstract void addAttribute(Attribute<?> toAdd);
 	
-	public abstract void replaceAttributes(List<Attribute<?>> newAttributes);
+	
+	public Component(){
+		AttributeFactory af=new AttributeFactory();
+		BehaviorFactory bf=new BehaviorFactory();
+		for (String key: myResources.keySet()){
+			String value=myResources.getString(key);
+			Attribute<?> myAttribute= af.getAttribute(key, value);
+			myAttributes.put(key, myAttribute);
+			myBehaviors.put(key, bf.getBehavior(key));
+			}
+	}
+		
+	
+	public void addAttribute(String key, Attribute<?> toAdd){
+		myAttributes.put(key, toAdd);
+	}
+	
+	public void replaceAttributes(Map<String,Attribute<?>> newAttributes){
+		myAttributes=newAttributes;
+	}
 	
 	/**
 	 * When the engines call behaviors (for the behavior to be executed), it does so in Component via this method.
 	 * @param behaviorType
 	 * @return
 	 */
-	public abstract Behavior getBehavior(String behaviorType);
+	public Behavior getBehavior(String behaviorType){
+		return myBehaviors.get(behaviorType);
+	}
 	
 	/**
 	 * Get the attribute that the behavior modifies.
 	 * @param attributeType
 	 * @return
 	 */
-	public abstract Attribute<?> getAttribute(String attributeType);
+	public Attribute<?> getAttribute(String attributeType){
+		return myAttributes.get(attributeType);
+	}
 	
 	/**
 	 * adds an attribute to the List of Attributes
 	 * @return 
 	 */
-
+	//public abstract void addAttribute(Attribute toAdd);
+	
+	 /**
+     * Change the shape of the cell
+     * @param cellShape new cell shape
+     */
+	
 	
 }

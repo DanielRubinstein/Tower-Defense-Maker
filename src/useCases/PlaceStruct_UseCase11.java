@@ -3,11 +3,11 @@ package useCases;
 import java.util.List;
 import java.util.Map;
 
-import backEnd.State;
-import backEnd.Environment.Environment;
+import backEnd.Environment.EnvironmentInterface;
 import backEnd.Environment.Mode;
 import backEnd.Environment.Player;
-import backEnd.Environment.Structure;
+import backEnd.GameEngine.Component;
+import backEnd.State.State;
 import frontEnd.Skeleton.UserInteractor;
 
 /**
@@ -22,9 +22,9 @@ import frontEnd.Skeleton.UserInteractor;
 
 public class PlaceStruct_UseCase11 implements UserInteractor{
 	private Mode userMode;
-	private Environment myEnvironment;
+	private EnvironmentInterface myEnvironment;
 	
-	public PlaceStruct_UseCase11(Mode defaultMode, Environment e) {
+	public PlaceStruct_UseCase11(Mode defaultMode, EnvironmentInterface e) {
 		userMode= defaultMode;
 		myEnvironment= e;
 	}
@@ -33,7 +33,7 @@ public class PlaceStruct_UseCase11 implements UserInteractor{
 		return null;
 	}
 	
-	private void handleStructDropped(Structure struct, int[] location){
+	private void handleStructDropped(Component struct, int[] location){
 		userMode.addStruct(struct, location);
 	}
 	
@@ -46,8 +46,8 @@ public class PlaceStruct_UseCase11 implements UserInteractor{
 		private State state;
 		
 		@Override
-		public void addStruct(Structure struct, int[] location){
-			List<Structure>[][] structGrid = state.getStructureGrid();
+		public void addStruct(Component struct, int[] location){
+			List<Component>[][] structGrid = state.getStructureGrid();
 			structGrid[location[0]][location[1]].add(struct);
 		}
 	}

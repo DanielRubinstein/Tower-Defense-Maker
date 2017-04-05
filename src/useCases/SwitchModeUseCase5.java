@@ -2,14 +2,13 @@ package useCases;
 
 import java.util.List;
 
-import backEnd.State;
 import backEnd.Environment.Behavior;
-import backEnd.Environment.Environment;
+import backEnd.Environment.EnvironmentInterface;
 import backEnd.Environment.Mode;
-import backEnd.Environment.Structure;
-import backEnd.Environment.StructureBank;
+import backEnd.Environment.ComponentBank;
 import backEnd.Environment.Tile;
 import backEnd.Environment.TileAttribute;
+import backEnd.State.State;
 import frontEnd.Skeleton.UserInteractor;
 /**
  * @author Tim
@@ -21,9 +20,9 @@ import frontEnd.Skeleton.UserInteractor;
  */
 public class SwitchModeUseCase5 implements UserInteractor{
 	private Mode userMode;
-	private Environment myEnvironment;
+	private EnvironmentInterface myEnvironment;
 	
-	public SwitchModeUseCase5(Mode defaultMode, Environment e) {
+	public SwitchModeUseCase5(Mode defaultMode, EnvironmentInterface e) {
 		userMode= defaultMode;
 		myEnvironment= e;
 	}
@@ -31,10 +30,10 @@ public class SwitchModeUseCase5 implements UserInteractor{
 	 * When the user pressed the ToggleMode button, the following method is called to switch to the appropriate Mode.
 	 * After this class's instance of Mode has been switched, the Environment's Mode is set to this Mode
 	 */
-	private void handleToggleMode(){
-		userMode = myEnvironment.changeMode();
+	/*private void handleToggleMode(){
+		//userMode = myEnvironment.changeMode();
 		myEnvironment.setMode(userMode);
-	}
+	}*/
 
 	@Override
 	public Mode getCurrentMode() {
@@ -47,35 +46,32 @@ public class SwitchModeUseCase5 implements UserInteractor{
 	 * This class is used as an inner class in order to procedurally understand each step and how the interfaces interact 
 	 * with each other. This class is an implementation of Environment. Only the required method is implemented.
 	 */
-	private class EnvironmentImpl implements Environment{
-		private Mode myMode;
+	/*private class EnvironmentImpl implements EnvironmentInterface{
+		private Mode myMode;*/
 
 		/* (non-Javadoc)
 		 * For this use case, this is the only method that needs to be called.
 		 * This class's instance of Mode is set to the parameter newMode. 
 		 * @see backEnd.Environment.Environment#setMode(backEnd.Environment.Mode)
 		 */
+		/**
 		@Override
 		public void setMode(Mode newMode) {
 			myMode = newMode;
 		}
+		*/
 		/*
 		 * Implementation not provided
 		 * @see backEnd.Environment.Environment#changeMode()
-		 */
+		 
 		@Override
 		public Mode changeMode() {
 			// TODO Auto-generated method stub
 			return myMode;
 		}
-		@Override
-		public StructureBank getStructureBank() {
-			// TODO Auto-generated method stub
-			return null;
-		}
 
 		@Override
-		public List<Behavior> getStructBehaviorList(Structure struct) {
+		public List<Behavior> getStructBehaviorList(Component struct) {
 			// TODO Auto-generated method stub
 			return null;
 		}
@@ -91,19 +87,28 @@ public class SwitchModeUseCase5 implements UserInteractor{
 			// TODO Auto-generated method stub
 			return null;
 		}
-
+		*/
+/*
 		@Override
 		public void setTileAttributeList(List<TileAttribute> newList) {
 			// TODO Auto-generated method stub
-			
+	*/		
 		}
+	/*
 		@Override
 		public void setState(State state) {
 			// TODO Auto-generated method stub
 			
 		}
+		@Override
+		public ComponentBank getComponentBank() {
+			// TODO Auto-generated method stub
+			return null;
+		}
+		@Override
+		public Mode getMode() {
+			// TODO Auto-generated method stub
+			return null;
+		}
 
-		
-	}
-
-}
+		*/

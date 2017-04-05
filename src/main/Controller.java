@@ -1,7 +1,7 @@
 package main;
 
 import backEnd.GameData;
-import backEnd.Environment.Environment;
+import backEnd.Environment.EnvironmentInterface;
 import backEnd.GameEngine.Engine;
 import frontEnd.Menus.MainMenu;
 import javafx.stage.Stage;
@@ -9,8 +9,13 @@ import javafx.stage.Stage;
 public class Controller implements ControllerInterface{
 	
 	public void start(Stage stage){
+		openingScreens(stage);
+	}
+
+	private void openingScreens(Stage stage) {
 		MainMenu mainMenu = new MainMenu();
-		initializeGame(mainMenu.getGameData());
+		mainMenu.setGameDataListener(this::initializeGame);
+		mainMenu.showMenus(stage);
 	}
 
 	private void initializeGame(GameData gameData) {

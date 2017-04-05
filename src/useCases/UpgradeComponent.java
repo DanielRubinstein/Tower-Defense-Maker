@@ -2,19 +2,18 @@ package useCases;
 
 import java.util.List;
 
-import backEnd.State;
 import backEnd.Environment.Behavior;
-import backEnd.Environment.Environment;
-import backEnd.Environment.Structure;
+import backEnd.Environment.EnvironmentInterface;
 import backEnd.GameEngine.Attribute;
 import backEnd.GameEngine.Component;
+import backEnd.State.State;
 import main.Controller;
 
 /**
  * This class shows how we will upgrade a component on the screen (ex: upgrade a tower's defensive abilities).
  */
 
-
+/*
 
 public class UpgradeComponent {
 	Controller myController=new Controller();
@@ -38,3 +37,4 @@ public class UpgradeComponent {
 		
 	}
 }
+*/

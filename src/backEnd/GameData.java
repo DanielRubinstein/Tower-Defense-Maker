@@ -1,5 +1,7 @@
 package backEnd;
 
+import backEnd.State.State;
+
 public class GameData implements GameDataInterface{
 	private State myState;
 	private Rules myRules;

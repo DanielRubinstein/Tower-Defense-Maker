@@ -1,5 +1,5 @@
 package backEnd.Environment;
 
-public class StructureBank {
+public class ComponentBank {
 
 }
