@@ -12,6 +12,7 @@ import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Bounds;
+import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.SplitPane;
@@ -55,12 +56,9 @@ public class SettingsViewImpl implements SettingsView{
 		ButtonMenu myMenu = new ButtonMenu();
 		
 		myMenu.setText("Settings");
-		
-		// add New and Load
-
 		myMenu.addSimpleButton("Save", e -> save());
 		
-		HBox ruleButtons = createRulesButtons();
+		Node ruleButtons = createRulesButtons();
 		myMenu.addNode(ruleButtons);
 		
 		//adding player/godmode switch
@@ -76,7 +74,7 @@ public class SettingsViewImpl implements SettingsView{
 	 * Adds two side by side buttons to the button menu. If a button is meant to always be enabled, simply pass null as b1/b2
 	 * Wraps each button to allow for the tooltip to be shown even when a button is disabled. Both buttons are wrapped for consistency
 	 */
-	private HBox createRulesButtons(){
+	private Node createRulesButtons(){
 	
 		HBox bothButtons = new HBox();
 		Button button1 = new Button("View Rules");

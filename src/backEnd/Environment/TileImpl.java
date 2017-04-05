@@ -14,7 +14,7 @@ public class TileImpl implements Tile{
 	}
 	
 	public TileAttribute<?> getTileAttribute(String attrType){
-		//TODO: How do I access a particular Attribute type?
+		//TODO:- How do I access a particular Attribute type?
 		return null;
 	}
 	
