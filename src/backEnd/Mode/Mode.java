@@ -42,6 +42,8 @@ public abstract class Mode {
 	
 	public abstract BooleanProperty authorModeProperty();
 	
+	public abstract boolean isAuthor();
+	
 	
 
 }
