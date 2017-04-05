@@ -26,7 +26,6 @@ public class OptionsSelection {
 	private List<Button> myButtons;
 	
 	public OptionsSelection(SettingsView settings) {
-		System.out.println("ehy");
 		myRoot = new TilePane(Orientation.HORIZONTAL,0, 0);
 		mySettings=settings;
 	}
