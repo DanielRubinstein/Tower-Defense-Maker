@@ -1,6 +1,9 @@
 package frontEnd.Skeleton.UserTools;
 
-import javafx.scene.layout.BorderPane;
+import java.util.function.Consumer;
+
+import backEnd.GameData;
+import javafx.scene.Node;
 
 public class UserTools {
 	private SideBar sideBar;
@@ -12,13 +15,20 @@ public class UserTools {
 		
 	}
 	
-	public void addToBorderPane(BorderPane root){
-		root.setRight(sideBar.getRoot());
-		root.setBottom(bottomRoot.getRoot());
+	public Node getSidePane(){
+		return this.sideBar.getRoot();
 	}
 	
-	public void setBottomPaneHeight(double in){
-		bottomRoot.setBottomBarHeight(in);
+	public Node getBottomPane(){
+		return this.bottomRoot.getRoot();
 	}
+	
+	public void setPaneThickness(double in){
+		bottomRoot.setHeight(in);
+		sideBar.setWidth(in);
+		
+	}
+
+
 
 }

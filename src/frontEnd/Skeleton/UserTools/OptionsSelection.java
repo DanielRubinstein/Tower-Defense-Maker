@@ -25,26 +25,26 @@ public class OptionsSelection {
 	private SettingsView mySettings;
 	private List<Button> myButtons;
 	
-	public OptionsSelection(SettingsView settings, double width, double height) {
+	public OptionsSelection(SettingsView settings) {
 		myRoot = new TilePane(Orientation.HORIZONTAL,0, 0);
-		formatRoot(width,height);
 		mySettings=settings;
-		myButtons = new ArrayList<Button>();
-		setUpOptions(width/4);
-		myRoot.getChildren().addAll(myButtons);
 	}
+	
 	public Node getNode(){
 		return myRoot;
 	}
 	public void setAlignment(Pos position,Priority priority){
 		myRoot.setAlignment(Pos.BOTTOM_RIGHT);
 	}
-	private void formatRoot(double width, double height){
+	public void setSize(double width, double height){
 		myRoot.setPrefWidth(width);
 		myRoot.setPrefHeight(height);
+		setUpOptions(width/4);
 	}
 	private void setUpOptions(double buttonWidth){
+		myButtons = new ArrayList<Button>();
 		addButtons(buttonWidth);
+		myRoot.getChildren().addAll(myButtons);
 	}
 
 	
@@ -52,7 +52,7 @@ public class OptionsSelection {
 		addButtonImage(PLAY_IMAGE, e-> System.out.println("play"),size);
 		addButtonImage(PAUSE_IMAGE, e-> System.out.println("pausing"),size);
 		addButtonImage(FASTFWD_IMAGE, e-> System.out.println("fast forwarding"),size);
-		addButtonImage(SETTINGS_IMAGE, e-> mySettings.launchSettings(400, 400),size);
+		addButtonImage(SETTINGS_IMAGE, e-> mySettings.launchSettings(),size);
 	}
 	
 	
@@ -67,6 +67,7 @@ public class OptionsSelection {
 		b.setPadding(Insets.EMPTY);
 		myButtons.add(b);
 	}
+
 
 
 }

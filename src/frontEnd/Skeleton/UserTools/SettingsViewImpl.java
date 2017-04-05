@@ -1,7 +1,5 @@
 package frontEnd.Skeleton.UserTools;
 
-import backEnd.Mode.Mode;
-import backEnd.Mode.Player;
 import frontEnd.Menus.ButtonMenu;
 import frontEnd.Menus.MainMenu;
 import frontEnd.Menus.StartMenu;
@@ -42,28 +40,18 @@ public class SettingsViewImpl implements SettingsView{
 		myStartMenu= new MainMenu();
 		myBinding = new SettingsBinding();
 		myButtonMenu = new ButtonMenu();
-		
+		addButtons(myStage);
 	}
 	
-	public void launchSettings(double width, double height){
-		if(myScene != null){
-			myStage.show();
-			System.out.println("already have a scene");
-		}else{
-			myRoot.setMinWidth(width);
-			myRoot.setMinHeight(height);
-			myScene = new Scene(myRoot, 400, 400);
-			myStage = new Stage();
-			myStage.setScene(myScene);
-			addButtons(myStage);
-			myStage.show();
-		}
+	public void launchSettings(){
+		myStage.show();
 
 	}
 
 	private void addButtons(Stage stage){
+
 		myStartMenu.makeGameSelectionButtons(myButtonMenu, stage);		
-		myButtonMenu.addButton("Save", e -> save());
+		myButtonMenu.addSimpleButton("Save", e -> save());
 		
 		addSideBySideButtons("View Rules",e -> viewRules(),"Edit Rules",e->editRules(),null,Bindings.or(myBinding.valueProperty(), myBinding.valueProperty()).not());
 		addSideBySideButtons("Player",e->togglePlayerMode(),"Author",e->toggleAuthorMode(),null,null);
@@ -73,6 +61,7 @@ public class SettingsViewImpl implements SettingsView{
 		stage.setScene(myButtonMenu.getScene());
 		stage.show();
 	} 
+
 	
 	/**
 	 * Adds two side by side buttons to the button menu. If a button is meant to always be enabled, simply pass null as b1/b2
