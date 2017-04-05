@@ -15,8 +15,7 @@ import javafx.geometry.Point2D;
  */
 public class MoveBehavior implements Behavior{
 	
-	public MoveBehavior(){
-		
+	public MoveBehavior(){		
 	}
 	
 	@Override
