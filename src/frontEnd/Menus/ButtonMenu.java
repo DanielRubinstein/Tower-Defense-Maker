@@ -6,9 +6,9 @@ import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
-import javafx.scene.shape.Box;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextAlignment;
 
@@ -29,64 +29,58 @@ public class ButtonMenu {
 		myRoot.getChildren().add(title);
 	}
 	
-	public void create(Double size1, Double size2) {
-   	 	myRoot.setAlignment(Pos.CENTER);
-   	 	myScene = new Scene(myRoot, size1, size2);
-   	 	doSpacing();
-
-	}
-	private void doSpacing(){
-		//sizeOfAllChildren();
-		double space = myRoot.getChildren().size()==0? 50:myRoot.getHeight() / (myRoot.getChildren().size()*2);
-		//System.out.println("diong space"+space + "because "+myRoot.getHeight());
-		myRoot.setSpacing(space);
-	}
-	private void sizeOfAllChildren(){
-		for(int i=0;i<myRoot.getChildren().size();i++){
-			System.out.println("child has height " + myRoot.getChildren().get(i).getBoundsInParent().getHeight());
-		}
-	}
-	
-	public void addButton(String text, EventHandler<ActionEvent> event){
+	public void addSimpleButton(String text, EventHandler<ActionEvent> event){
    	 	Button myButton = new Button(text);
 		myButton.setOnAction(event);
 		myRoot.getChildren().add(myButton);
-
-		//myRoot.setSpacing(myRoot.getHeight()/myRoot.getChildren().size());
 	}
-	public void addTwoButtons(String text1, EventHandler<ActionEvent> event1,String text2, EventHandler<ActionEvent> event2){
+	
+	public void addButton(Button newButton){
+		myRoot.getChildren().add(newButton);
+	}
+	
+	public void addButtonRow(String rowTitle, Button... buttons){
 		HBox box = new HBox();
-		Button button1 = new Button(text1);
-		button1.setOnAction(event1);
-		box.getChildren().add(button1);
-		Button button2 = new Button(text2);
-		button2.setOnAction(event2);
-		box.getChildren().add(button2);
-		
-		
+		Label rowLabel = new Label(rowTitle);
+		box.getChildren().add(rowLabel);
+		box.getChildren().addAll(buttons);
+		box.setAlignment(Pos.CENTER);
 		myRoot.getChildren().add(box);
-		
-		//System.out.println("setting spacing of buttonmenu to " +myRoot.getHeight()/myRoot.getChildren().size());
-		//myRoot.setSpacing(myRoot.getHeight()/myRoot.getChildren().size());
 	}
-	public void addButton(Button b){
-		myRoot.getChildren().add(b);
-	}
-	public void addNodeButton(HBox n){
-		System.out.println("adding node to butotnmenu" + myScene);
-		n.setAlignment(Pos.CENTER);
+	
+	public void addNode(Node n){
 		myRoot.getChildren().add(n);
-		//myRoot.setSpacing(30);
+	}
+	
+	public void addBackButton(EventHandler<ActionEvent> event) {
+		this.addSimpleButton("Go Back", event);
+		
+	}
+	
+	public void create(Double size1, Double size2) {
+   	 	myRoot.setAlignment(Pos.CENTER);
+   	 	myScene = new Scene(myRoot, size1, size2);
+   	 	setSpacing(size1);
 
 	}
+	private void setSpacing(Double size1){
+		
+		double spacing = myRoot.getChildren().size()==0 ? 50 : size1 / (myRoot.getChildren().size()*2);
+		
+		myRoot.setSpacing(spacing);
+	}
+	
 	
 	public Scene getScene(){
 		return myScene;
 	}
 
-	public void addBackButton(EventHandler<ActionEvent> event) {
-		this.addButton("Back", event);
-		
+
+	public void create() {
+		myRoot.setAlignment(Pos.CENTER);
+   	 	myScene = new Scene(myRoot);
 	}
+
+
 	
 }

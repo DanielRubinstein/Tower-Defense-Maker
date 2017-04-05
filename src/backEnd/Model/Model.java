@@ -15,8 +15,12 @@ public class Model extends Observable{
 	private Environment environment;
 	private Mode mode;
 	
-	public void initializeGame(GameData gameData){
+	public Model(GameData gameData) {
 		this.gameData = gameData;
+		initializeGame(gameData);
+	}
+
+	private void initializeGame(GameData gameData){
 		engine = new GameProcessController(gameData.getState(), gameData.getRules());
 		environment = new Environment();
 		mode = new Author();

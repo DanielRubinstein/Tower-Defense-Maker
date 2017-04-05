@@ -16,7 +16,7 @@ public class Settings extends ButtonMenu{
 		
 		//this.addButton("Toggle Mode", event ->);
 		
-		this.addButton("Restart Application", event -> {
+		this.addSimpleButton("Restart Application", event -> {
 			// prompt if ok
 			
 			Controller controller = new Controller();

@@ -4,8 +4,6 @@ import javafx.geometry.Insets;
 import javafx.scene.Node;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
-import javafx.scene.layout.Border;
-import javafx.scene.layout.BorderStroke;
 import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
@@ -17,24 +15,27 @@ public class BottomRoot {
 	private OptionsCorner myOptions;
 	private HBox myRoot;
 	private SideBar mySideBar;
-	public BottomRoot(double cornerWidth, double height) {
-		initializeRoot(height);
-		initializeBar(height);
-		initializeCorner(cornerWidth,height);
+	public BottomRoot() {
+		myRoot = new HBox();
+		initializeBar();
+		initializeCorner();
 	}
 	
-	private void initializeRoot(double height){
-		myRoot = new HBox();
+
+	public void setHeight(double height){
 		myRoot.setPrefHeight(height);
 		myRoot.setBackground( new Background(new BackgroundFill(Color.BLANCHEDALMOND, CornerRadii.EMPTY, Insets.EMPTY)));
+		
+		myBottomBar.setHeight(height);
+		myOptions.setSideLength(height);
 	}
-	private void initializeBar(double height){
-		myBottomBar = new BottomBar(height);
+	private void initializeBar(){
+		myBottomBar = new BottomBar();
 		HBox.setHgrow(myBottomBar.getRoot(), Priority.ALWAYS);
 		myRoot.getChildren().add(myBottomBar.getRoot());
 	}
-	private void initializeCorner(double width,double height){
-		myOptions = new OptionsCorner(width,height);
+	private void initializeCorner(){
+		myOptions = new OptionsCorner();
 		myRoot.getChildren().add(myOptions.getRoot());
 	}
 
