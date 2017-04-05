@@ -1,11 +1,6 @@
 package frontEnd.Menus;
 
-import java.util.function.Consumer;
-
-import backEnd.GameData;
-import backEnd.Data.GameFileException;
-
-import frontEnd.Skeleton.Skeleton;
+import javafx.scene.control.Button;
 import javafx.stage.Stage;
 
 /**
@@ -17,15 +12,11 @@ import javafx.stage.Stage;
  *
  */
 
-public class MainMenu implements StartMenu{
-	private Consumer<GameData> gameDataConsumer;
+public class MainMenu{
 	public static final double MENU_HEIGHT = 500d;
 	public static final double MENU_WIDTH = 600d;
 	
-
-	public void setGameDataListener(Consumer<GameData> action){
-		this.gameDataConsumer = action;
-	}
+	private GameSelection gameSelection;
 
 	public void showMenus(Stage stage) {
 		splashScreen(stage);
@@ -34,11 +25,7 @@ public class MainMenu implements StartMenu{
 	private void splashScreen(Stage stage) {
    	 	ButtonMenu splash = new ButtonMenu();
    	 	splash.setText("WELCOME");
-   	 	splash.addButton("START", event -> showPrimaryMenu(stage));
-   	 	splash.addButton("Quick start (for development purposes)", event -> {
-   	 		Skeleton view = new Skeleton();
-   	 		view.display(stage);
-   	 	});
+   	 	splash.addSimpleButton("START", event -> showPrimaryMenu(stage));
    	 	splash.create(MENU_WIDTH, MENU_HEIGHT);
 		stage.setScene(splash.getScene());
 		stage.show();
@@ -46,50 +33,18 @@ public class MainMenu implements StartMenu{
 
 	private void showPrimaryMenu(Stage stage) {
 		ButtonMenu primaryMenu = new ButtonMenu();
-   	 	makeGameSelectionButtons(primaryMenu,stage);
+   	 	for( Button button : gameSelection.getButtons()){
+   	 		primaryMenu.addButton(button);
+   	 	}
    	 	primaryMenu.addBackButton(event -> splashScreen(stage));
    	 	primaryMenu.create(MENU_WIDTH, MENU_HEIGHT);
 		stage.setScene(primaryMenu.getScene());
 		stage.show();
 	}
-	public void makeGameSelectionButtons(ButtonMenu menu,Stage stage){
-		menu.setText("Please Pick one");
-   	 	menu.addButton("Create a New Game", event -> new GameMaker(stage, gameDataConsumer));
-   	 	menu.addButton("Load a Template Game", event -> showTemplateMenu(stage));
-   	 	menu.addButton("Load a Saved Game", event -> loadGame());
-		
+
+	public void setGameSelection(GameSelection gameSelection) {
+		this.gameSelection = gameSelection;
 		
 	}
-	
-
-	private void loadGame() {
-		GameLoader gameLoader = new GameLoader();
-		try {
-			GameData loadedGameData = gameLoader.loadGame();
-			gameDataConsumer.accept(loadedGameData);
-		} catch (GameFileException e) {
-			ErrorDialog errDia = new ErrorDialog();
-			errDia.create("Cannot Load Game", e.getMessage());
-		}
-		
-	}
-
-	private void showTemplateMenu(Stage stage) {
-		GameLoader gameLoader = new GameLoader();
-		
-		ButtonMenu templateGames = new ButtonMenu();
-   	 	templateGames.setText("Which game?");
-   	 	//for(String templateGame : gameLoader.getTemplateTitleList()){
-   	 	for(String templateGame : gameLoader.getTemplateTitleListStupid()){
-   	 		templateGames.addButton(templateGame, event -> gameDataConsumer.accept(gameLoader.loadTemplateGame(templateGame)));
-   	 	}
-   	 	templateGames.addBackButton(event -> showPrimaryMenu(stage));
-   	 	templateGames.create(MENU_WIDTH, MENU_HEIGHT);
-		stage.setScene(templateGames.getScene());
-		stage.show();
-	}
-
-
-
 
 }

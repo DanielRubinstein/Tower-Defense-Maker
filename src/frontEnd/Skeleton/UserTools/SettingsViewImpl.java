@@ -1,5 +1,8 @@
 package frontEnd.Skeleton.UserTools;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import backEnd.Mode.Mode;
 import backEnd.Mode.Player;
 import frontEnd.Menus.ButtonMenu;
@@ -19,32 +22,16 @@ import javafx.stage.Stage;
  *
  */
 public class SettingsViewImpl implements SettingsView{
-
-	private VBox myRoot;
-	private StartMenu myStartMenu;
-	private Mode myMode;
 	private Stage myStage;
-	private Scene myScene;
 	
 	
 	public SettingsViewImpl() {
-		myRoot = new VBox();
-		myStartMenu= new MainMenu();
+		myStage = new Stage();
+		addButtons(myStage);
 	}
 	
-	public void launchSettings(double width, double height){
-		if(myScene != null){
-			myStage.show();
-			System.out.println("already have a scene");
-		}else{
-			myRoot.setMinWidth(width);
-			myRoot.setMinHeight(height);
-			myScene = new Scene(myRoot, 400, 400);
-			myStage = new Stage();
-			myStage.setScene(myScene);
-			addButtons(myStage);
-			myStage.show();
-		}
+	public void launchSettings(){
+		myStage.show();
 
 	}
 
@@ -58,9 +45,14 @@ public class SettingsViewImpl implements SettingsView{
 	 */
 	private void addButtons(Stage stage){
 		ButtonMenu menu = new ButtonMenu();
-		myStartMenu.makeGameSelectionButtons(menu, stage);		
-		menu.addButton("Save", e -> save());
-		HBox rules = new HBox();
+		
+		menu.setText("Settings");
+		
+		// add New and Load
+		
+		menu.addSimpleButton("Save", e -> save());
+		
+		
 		Button viewRules = new Button("View Rules");
 		viewRules.setOnAction(e -> viewRules());
 		Button editRules = new Button("Edit Rules");
@@ -69,22 +61,19 @@ public class SettingsViewImpl implements SettingsView{
 				//myMode.authorModeProperty());
 		editRules.disableProperty().bind(authorMode.not());
 		//editRules.disabledProperty().addListener(new ChangeListener());
-		rules.getChildren().addAll(viewRules,editRules);
-		menu.addNodeButton(rules);
+		menu.addButtonRow("Rules", viewRules, editRules);
+	
 		
 		//adding player/godmode switch
-		Button togglePlayer = new Button("Player");
-		togglePlayer.setOnAction(e->togglePlayerMode());
-		Button toggleAuthor = new Button("Author");
-		toggleAuthor.setOnAction(e->toggleAuthorMode());
-		HBox modeButton = new HBox();
-		modeButton.getChildren().addAll(togglePlayer,toggleAuthor);
-		menu.addNodeButton(modeButton);
+		ModeToggle modeToggle = new ModeToggle("Player", e-> togglePlayerMode(), "Author", e -> toggleAuthorMode());
+		menu.addNode(modeToggle.getRoot());
 		
-		menu.create(myScene.getWidth(), myScene.getHeight());
+		menu.create();
 		stage.setScene(menu.getScene());
-		stage.show();
 	}
+	
+	
+	
 	private void save(){
 		System.out.println("Saving in SettingsViewImpl");
 	}

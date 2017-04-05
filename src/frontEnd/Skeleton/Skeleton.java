@@ -1,7 +1,8 @@
 package frontEnd.Skeleton;
 
-import frontEnd.Skeleton.UserTools.BottomRoot;
-import frontEnd.Skeleton.UserTools.SideBar;
+import java.util.function.Consumer;
+
+import backEnd.GameData;
 import frontEnd.Skeleton.UserTools.UserTools;
 import javafx.geometry.HPos;
 import javafx.geometry.Orientation;
@@ -14,6 +15,7 @@ public class Skeleton {
 	
 	private BorderPane myRoot;
 	private Scene myScene;
+	private UserTools userTools;
 	public static final double MENU_HEIGHT = 500d;
 	public static final double MENU_WIDTH = 500d;
 	
@@ -24,7 +26,7 @@ public class Skeleton {
 		canvas.setSize(300, 400);
 		myRoot.setCenter(canvas.getRoot());
 		
-		UserTools userTools = new UserTools();
+		userTools = new UserTools();
 		userTools.setPaneThickness(100);
 		myRoot.setRight(userTools.getSidePane());
 		myRoot.setBottom(userTools.getBottomPane());
@@ -44,15 +46,7 @@ public class Skeleton {
 		stage.show();
 		
 	}
-	private void createSeparator(){
 
-		Separator separator = new Separator();
-		separator.setOrientation(Orientation.VERTICAL);
-		//separator.setMaxHeight(bottomBar.getHeight());
-		separator.setHalignment(HPos.RIGHT);
 
-		
-		
-	}
 
 }

@@ -13,12 +13,10 @@ public class OptionsCorner {
 
 	private HBox myRoot;
 	private static final String SETTINGS_IMAGE = "images/Settings.jpg";
-	private SettingsView settingsDisplay;
+	private SettingsView settingsView;
 	public OptionsCorner() {
 		myRoot = new HBox();
 		addModeIndicator();
-		//change this
-		settingsDisplay = new SettingsViewImpl();
 		addSettingsButton();
 		addPauseButton();
 		addTileCCButton();
@@ -44,6 +42,7 @@ public class OptionsCorner {
 	}
 	
 	private void addSettingsButton(){
+		settingsView = new SettingsViewImpl();
 		Image image = new Image(getClass().getClassLoader().getResourceAsStream(SETTINGS_IMAGE));
 		ImageView settingsImage = new ImageView(image);
 
@@ -52,7 +51,7 @@ public class OptionsCorner {
 		settingsImage.setFitHeight(50);
 		settings.setGraphic(settingsImage); 
 		System.out.println();
-		settings.setOnAction(e -> settingsDisplay.launchSettings(400,400));
+		settings.setOnAction(e -> settingsView.launchSettings());
 		myRoot.getChildren().add(settings);
 
 	}

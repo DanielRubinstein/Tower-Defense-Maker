@@ -1,5 +1,8 @@
 package frontEnd.Skeleton.UserTools;
 
+import java.util.function.Consumer;
+
+import backEnd.GameData;
 import javafx.scene.Node;
 
 public class UserTools {
@@ -25,5 +28,7 @@ public class UserTools {
 		sideBar.setWidth(in);
 		
 	}
+
+
 
 }
