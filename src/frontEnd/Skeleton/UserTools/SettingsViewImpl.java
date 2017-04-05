@@ -1,19 +1,9 @@
 package frontEnd.Skeleton.UserTools;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import backEnd.Mode.Mode;
-import backEnd.Mode.Player;
 import frontEnd.Menus.ButtonMenu;
-import frontEnd.Menus.MainMenu;
-import frontEnd.Menus.StartMenu;
 import javafx.beans.binding.Bindings;
 import javafx.beans.binding.BooleanBinding;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 /**

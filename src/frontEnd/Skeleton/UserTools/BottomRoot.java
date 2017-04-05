@@ -1,38 +1,44 @@
 package frontEnd.Skeleton.UserTools;
 
+import javafx.geometry.Insets;
 import javafx.scene.Node;
-import javafx.scene.layout.Border;
-import javafx.scene.layout.BorderStroke;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundFill;
+import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
+import javafx.scene.paint.Color;
 
 public class BottomRoot {
 
 	private BottomBar myBottomBar;
 	private OptionsCorner myOptions;
 	private HBox myRoot;
+	private SideBar mySideBar;
 	public BottomRoot() {
 		myRoot = new HBox();
-		myBottomBar = new BottomBar();
-		myOptions = new OptionsCorner();
-		myRoot.setHgrow(myBottomBar.getRoot(), Priority.ALWAYS);
-		myRoot.getChildren().add(myBottomBar.getRoot());
-		myRoot.getChildren().add(myOptions.getRoot());
-		myRoot.setStyle("-fx-padding: 10;" + "-fx-border-style: solid inside;" + "-fx-border-width: 2;" + "-fx-border-insets: 5;" + "-fx-border-radius: 5;" + "-fx-border-color: blue;");
+		initializeBar();
+		initializeCorner();
 	}
 	
-	
+
 	public void setHeight(double height){
-		System.out.println("setting bottom height to " + height);
 		myRoot.setPrefHeight(height);
-		myRoot.setMaxHeight(height);
-		myOptions.setMaxHeight(height);
-		myBottomBar.setMaxHeight(height);
-		System.out.println(myBottomBar.getRoot().maxHeight(0));
+		myRoot.setBackground( new Background(new BackgroundFill(Color.BLANCHEDALMOND, CornerRadii.EMPTY, Insets.EMPTY)));
 		
-		
+		myBottomBar.setHeight(height);
+		myOptions.setSideLength(height);
 	}
-	
+	private void initializeBar(){
+		myBottomBar = new BottomBar();
+		HBox.setHgrow(myBottomBar.getRoot(), Priority.ALWAYS);
+		myRoot.getChildren().add(myBottomBar.getRoot());
+	}
+	private void initializeCorner(){
+		myOptions = new OptionsCorner();
+		myRoot.getChildren().add(myOptions.getRoot());
+	}
+
 	public Node getRoot(){
 		return myRoot;
 	}

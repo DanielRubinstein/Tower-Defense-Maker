@@ -2,6 +2,7 @@ package frontEnd.Skeleton.UserTools;
 
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.layout.HBox;
@@ -15,6 +16,7 @@ public class ModeToggle {
 		Button toggle2 = new Button(title2);
 		toggle2.setOnAction(opt2);
 		toggle = new HBox();
+		toggle.setAlignment(Pos.CENTER);
 		toggle.getChildren().addAll(toggle1,toggle2);
 	}
 	
