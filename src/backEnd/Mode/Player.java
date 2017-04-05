@@ -1,4 +1,4 @@
-package backEnd.Environment;
+package backEnd.Mode;
 
 import backEnd.GameEngine.Component;
 

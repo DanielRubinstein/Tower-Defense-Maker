@@ -14,14 +14,9 @@ import javafx.geometry.Point2D;
  *
  */
 public class MoveBehavior implements Behavior{
-
-	private Map<String,Attribute<?>> myAttributes;
 	
-	public MoveBehavior(int x, int y){
-		myAttributes = new HashMap<String, Attribute<?>>();
-		Attribute<Point2D> coord = new Attribute<Point2D>();
-		coord.setValue(new Point2D(x,y));
-		myAttributes.put("Point",coord);
+	public MoveBehavior(){
+		
 	}
 	
 	@Override
