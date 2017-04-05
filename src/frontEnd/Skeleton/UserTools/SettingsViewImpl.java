@@ -55,7 +55,7 @@ public class SettingsViewImpl implements SettingsView{
 	
 		
 		//adding player/godmode switch
-		ModeToggle modeToggle = new ModeToggle("Player", e-> togglePlayerMode(), "Author", e -> toggleAuthorMode());
+		ToggleSwitch modeToggle = new ToggleSwitch("Player", e-> togglePlayerMode(), "Author", e -> toggleAuthorMode());
 		menu.addNode(modeToggle.getRoot());
 		
 		menu.create();
