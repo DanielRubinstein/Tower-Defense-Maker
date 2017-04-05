@@ -85,6 +85,9 @@ public class SettingsViewImpl implements SettingsView{
 		stage.setScene(menu.getScene());
 		stage.show();
 	}
+	
+	
+	
 	private void save(){
 		System.out.println("Saving in SettingsViewImpl");
 	}
