@@ -2,6 +2,7 @@
 1. What about your API/design is intended to be flexible?
 
 * As we are working on the front end and Game Player, our API/design is intended to be flexible in terms of adding another component or feature either 1) in the front end (like adding a new way for the user to interact with our program: e.g. a restart button) 2) in the back end and being able to display this in the front end. 
+
 2. How is your API/design encapsulating your implementation decisions?
 
 * So far, I think we’ve done a good job of encapsulating our implementation decisions. Instead of having a few master classes to organize the front end, we split it up into several components that work together. For instance, the bottom pane of our view (we use a borderpane) comes from a class called BottomRoot, which represents this entire region. BottomRoot contains an OptionsCorner, which contains various buttons and indicators for the user) and a BottomBar, which contains other information and ways for the user to interact. BottomRoot knows nothing about how these two parts are implemented, so we can add a new feature in OptionsCorner (which we did by adding a fast forward button) without anything changing in other classes. 
