@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Observable;
 
 import javafx.geometry.Point2D;
 
@@ -14,11 +15,9 @@ import javafx.geometry.Point2D;
  *
  */
 public class MoveBehavior implements Behavior {
-	private ComponentListener myListener;
-	private Map<String,Attribute<?>> myAttributes;
+	private AttributeData myAttributes;
 	
-	public MoveBehavior(Map<String,Attribute<?>> initialAttributes){
-		myAttributes=initialAttributes;
+	public MoveBehavior(){
 	}
 	
 	@Override
@@ -40,8 +39,10 @@ public class MoveBehavior implements Behavior {
 		
 	}
 
-	public void updateAttributes(Map<String,Attribute<?>> updatedAttributes) {
-		myAttributes=updatedAttributes;
+	
+	@Override
+	public void update(Observable newData, Object arg) {
+		myAttributes = (AttributeData) newData;
 	}
 
 	

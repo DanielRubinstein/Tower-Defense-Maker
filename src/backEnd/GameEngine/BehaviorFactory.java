@@ -3,7 +3,7 @@ package backEnd.GameEngine;
 import com.sun.javafx.geom.Point2D;
 
 public class BehaviorFactory {
-	public Behavior getBehavior(String key){
+	public Behavior getBehavior(String key, Component myComponent){ //use Salas' version when merging
 		switch (key) {
 		case "MoveBehavior":
 			return new MoveBehavior();

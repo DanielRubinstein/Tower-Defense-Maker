@@ -1,7 +1,9 @@
 package backEnd.GameEngine;
+import java.util.Observer;
+
 import backEnd.State.State;
 
-public interface Engine {
+public interface Engine{
 	
 	/**
 	 * takes in the currently active State from Environment and modifies it based
