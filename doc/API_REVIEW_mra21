@@ -1,0 +1,21 @@
+VOOGASalad : API Review Questions
+===================
+
+
+Miguel Anderson (netId: mra21) working with Mina Mungekar (netId: mem94)
+
+----------
+
+
+What I got out of the discussion
+-------------
+
+I learned a lot from this discussion. Mina's team used Interfaces in a way that I thought was much better than our team. Each class that was more fundamental to the program had three classes. One for the class, one for the internal API and one for the external API. This was a great decision but then also the naming convention was simple:
+
+- AuthoringEnvironmnet
+- AuthoringInternalAPI
+- AuthoringExternalAPI
+
+This was clear and concise and I wish my team had a similar naming convention. 
+
+Design-wise they had a solution to the issue I've been having of how elements of the front end can access the backend. Their solution is to pass their highest hierarchical frontend class (Workspace.java) to each element. This class has access to the backend and therefore can ask to do things like (add an entity or change the status of the game). This may be the way our team approaches it.
