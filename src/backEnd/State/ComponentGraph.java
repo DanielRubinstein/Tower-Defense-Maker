@@ -1,4 +1,4 @@
-package backEnd;
+package backEnd.State;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,11 +19,19 @@ import backEnd.GameEngine.Component;
 public class ComponentGraph {
 	private int gridWidth;
 	private int gridHeight;
-	private Map<Point2D,List<Component>> componentGraph;
+	private Map<Point2D,List<Component>> componentMap;
 	
 	public ComponentGraph(int width, int height){
 		gridWidth = width;
 		gridHeight = height;
+	}
+	
+	public int getGridWidth(){
+		return gridWidth;
+	}
+	
+	public int getGridHeight(){
+		return gridHeight;
 	}
 	
 	/**
@@ -32,7 +40,7 @@ public class ComponentGraph {
 	 * @return Tile at the given location
 	 */
 	public List<Component> getComponentsByLocation(Point2D location){
-		return componentGraph.get(location);
+		return componentMap.get(location);
 	}
 	
 	/**
@@ -41,9 +49,9 @@ public class ComponentGraph {
 	 * @param location
 	 */
 	public void addComponentToGrid(Component newComponent, Point2D location){
-		List<Component> currList = componentGraph.get(location);
+		List<Component> currList = componentMap.get(location);
 		currList.add(newComponent);
-		componentGraph.put(location, currList);
+		componentMap.put(location, currList);
 	}
 	
 	/**
@@ -53,9 +61,9 @@ public class ComponentGraph {
 	public void removeComponent(Component toRemove){
 		Attribute<?> posAttribute= toRemove.getAttribute("Position");
 		Point2D location = (Point2D) posAttribute.getValue();
-		List<Component> currList = componentGraph.get(location);
+		List<Component> currList = componentMap.get(location);
 		currList.remove(toRemove);
-		componentGraph.put(location, currList);
+		componentMap.put(location, currList);
 	}
 	
 	/**
@@ -67,12 +75,29 @@ public class ComponentGraph {
 	public List<Component> getComponentsWithinRadius(Component centerComp, float radius){
 		Point2D centerLoc = (Point2D) centerComp.getAttribute("Position").getValue();
 		ArrayList<Component> componentsWithinRadius = new ArrayList<Component>();
-		for (Point2D loc : componentGraph.keySet()){
+		for (Point2D loc : componentMap.keySet()){
 			double distance = Math.sqrt(Math.pow(centerLoc.x - loc.x, 2) + Math.pow(centerLoc.y - loc.y, 2));
 			if (distance < radius){
-				componentsWithinRadius.addAll(componentGraph.get(loc));
+				componentsWithinRadius.addAll(componentMap.get(loc));
 			}
 		}
+		return componentsWithinRadius;
+	}
+	
+	/**
+	 * Returns list of components that lie at the nearest location (although if two locations are equidistant from the component,
+	 * it arbitrarily chooses one).
+	 * @param centerComp
+	 * @return List of components at the nearest location
+	 */
+	public List<Component> getNearestComponents(Component centerComp){
+		List<Point2D> locations = new ArrayList<Point2D>(componentMap.keySet());
+		Point2D centerLoc = (Point2D) centerComp.getAttribute("Position").getValue();
+		SortComponents_Distance sorter = new SortComponents_Distance();
+		List<Point2D> sortedLocations = sorter.nearToFar(centerLoc, locations);
+		return componentMap.get(sortedLocations.get(0));
 	}
 
 }
+
+
