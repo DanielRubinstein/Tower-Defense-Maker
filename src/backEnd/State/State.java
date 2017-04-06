@@ -1,6 +1,6 @@
 package backEnd.State;
 
-import backEnd.ComponentGraph;
+import backEnd.State.ComponentGraph;
 import backEnd.GameEngine.Attribute;
 
 /**
