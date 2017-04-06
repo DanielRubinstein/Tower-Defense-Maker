@@ -38,10 +38,15 @@ public class GameLoader {
 		xmlChooser.setTitle("Choose File");
 		xmlChooser.setInitialDirectory(new File(searchDirectory));
 		File file = xmlChooser.showOpenDialog(new Stage());
-		if (file != null && isProperGameFile(file)) {
-			return file;
+		if (file != null){
+			if(isProperGameFile(file)) {
+				return file;
+			} else {
+				throw new GameFileException(file);
+			}
 		}
-		throw new GameFileException(file);
+		throw new GameFileException();
+		
 	}
 
 	private Boolean isProperGameFile(File file) {

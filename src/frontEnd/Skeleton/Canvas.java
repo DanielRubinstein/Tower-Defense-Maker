@@ -1,4 +1,4 @@
-package frontEnd.Skeleton.View;
+package frontEnd.Skeleton;
 
 import javafx.scene.Group;
 import javafx.scene.Node;
@@ -19,6 +19,11 @@ public class Canvas {
 
 	public Node getRoot() {
 		return root;
+	}
+	
+	public void setSize(double height, double width){
+		this.background.setHeight(height);
+		this.background.setWidth(width);
 	}
 	
 
