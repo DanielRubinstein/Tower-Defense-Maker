@@ -1,8 +1,7 @@
 package useCases;
 
-import backEnd.Environment.Behavior;
+
 import backEnd.Environment.EnvironmentInterface;
-import backEnd.Environment.Mode;
 import backEnd.Environment.ComponentBank;
 import backEnd.Environment.Tile;
 import backEnd.Environment.TileAttribute;

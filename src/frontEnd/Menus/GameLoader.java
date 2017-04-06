@@ -7,12 +7,12 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Iterator;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import backEnd.GameData;
+import backEnd.Data.GameFileException;
 import backEnd.Data.XMLReader;
 import backEnd.Data.XMLReaderInterface;
 import javafx.stage.FileChooser;
@@ -28,20 +28,25 @@ public class GameLoader {
 		gameReader = new XMLReader();
 	}
 
-	public GameData loadGame() {
+	public GameData loadGame() throws GameFileException {
 		return gameReader.Load(loadGameFile(SAVED_GAMES_DIRECTORY));
 
 	}
 
-	private File loadGameFile(String searchDirectory) {
+	private File loadGameFile(String searchDirectory) throws GameFileException {
 		FileChooser xmlChooser = new FileChooser();
 		xmlChooser.setTitle("Choose File");
 		xmlChooser.setInitialDirectory(new File(searchDirectory));
 		File file = xmlChooser.showOpenDialog(new Stage());
-		if (file != null && isProperGameFile(file)) {
-			return file;
+		if (file != null){
+			if(isProperGameFile(file)) {
+				return file;
+			} else {
+				throw new GameFileException(file);
+			}
 		}
-		return null;
+		throw new GameFileException();
+		
 	}
 
 	private Boolean isProperGameFile(File file) {
