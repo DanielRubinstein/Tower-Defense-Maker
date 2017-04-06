@@ -13,9 +13,12 @@ import javafx.geometry.Point2D;
  * @author alex salas
  *
  */
-public class MoveBehavior implements Behavior{
+public class MoveBehavior implements Behavior {
+	private ComponentListener myListener;
+	private Map<String,Attribute<?>> myAttributes;
 	
-	public MoveBehavior(){		
+	public MoveBehavior(Map<String,Attribute<?>> initialAttributes){
+		myAttributes=initialAttributes;
 	}
 	
 	@Override
@@ -24,7 +27,7 @@ public class MoveBehavior implements Behavior{
 		coord.setValue(new Point2D(0,0));
 		myAttributes.put("Point",coord);
 		
-		switch (key) {
+		switch (myAttributes.get("MoveDirection")) {
 		case "LEFT":
 			myAttributes.put("Point", (myAttributes.get("Point")[0]-1, myAttributes.get("Point")[1]));
 		case "RIGHT":
@@ -37,4 +40,9 @@ public class MoveBehavior implements Behavior{
 		
 	}
 
+	public void updateAttributes(Map<String,Attribute<?>> updatedAttributes) {
+		myAttributes=updatedAttributes;
+	}
+
+	
 }

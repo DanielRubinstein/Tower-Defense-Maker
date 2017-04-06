@@ -6,6 +6,8 @@ import java.util.ResourceBundle;
 
 
 public class Component {
+	
+	private ComponentListener myListener;
 	private final static String DEFAULT_ATTRIBUTE_PATH = "resources/componentDefaults";
 	private final static ResourceBundle myResources = ResourceBundle.getBundle(DEFAULT_ATTRIBUTE_PATH);
 	private Map<String,Attribute<?>> myAttributes;
@@ -27,10 +29,12 @@ public class Component {
 	
 	public void addAttribute(String key, Attribute<?> toAdd){
 		myAttributes.put(key, toAdd);
+		myListener.updateAttributes(myAttributes);
 	}
 	
 	public void replaceAttributes(Map<String,Attribute<?>> newAttributes){
 		myAttributes=newAttributes;
+		myListener.updateAttributes(myAttributes);
 	}
 	
 	/**
