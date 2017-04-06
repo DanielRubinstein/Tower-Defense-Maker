@@ -24,6 +24,16 @@ public class MoveBehavior implements Behavior{
 		coord.setValue(new Point2D(0,0));
 		myAttributes.put("Point",coord);
 		
+		switch (key) {
+		case "LEFT":
+			myAttributes.put("Point", (myAttributes.get("Point")[0]-1, myAttributes.get("Point")[1]));
+		case "RIGHT":
+		case "UP":
+		case "DOWN":
+			
+		default: throw new IllegalArgumentException(); //FIX THIS	
+		}
+		
 		
 	}
 
