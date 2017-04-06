@@ -8,20 +8,23 @@ import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
 import javafx.scene.paint.Color;
-
-public class BottomRoot {
+/**
+ * This class represents everyone that is shown and supported in the bottom pane of the border pane.
+ * This class is split up into two subcomponents: the bottomBar and the OptionsCorner.
+ * @author Tim
+ *
+ */
+public class BottomRoot implements BottomRootI{
 
 	private BottomBar myBottomBar;
 	private OptionsCorner myOptions;
 	private HBox myRoot;
-	private SideBar mySideBar;
 	public BottomRoot() {
 		myRoot = new HBox();
 		initializeBar();
 		initializeCorner();
 	}
 	
-
 	public void setHeight(double height){
 		myRoot.setPrefHeight(height);
 		myRoot.setBackground( new Background(new BackgroundFill(Color.BLANCHEDALMOND, CornerRadii.EMPTY, Insets.EMPTY)));

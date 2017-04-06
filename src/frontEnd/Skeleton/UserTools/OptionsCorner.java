@@ -6,7 +6,12 @@ import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
-
+/**
+ * This class represents the right corner of the bottomRoot (and the bottom right corner of the display). This class provides
+ * functionality for the buttons the user can select and a ModeIndicator.
+ * @author Tim
+ *
+ */
 public class OptionsCorner {
 
 
@@ -32,11 +37,6 @@ public class OptionsCorner {
 		myRoot.getChildren().add(mI.getIndicator());
 	}
 
-	private void addTileCCButton() {
-		Button tileCC = new Button("Tile Command");
-		tileCC.setOnAction(event -> new TileCommandCenter(new TileImpl(null, null)));
-		myRoot.getChildren().add(tileCC);
-	}
 
 	public Node getRoot(){
 		return myRoot;
