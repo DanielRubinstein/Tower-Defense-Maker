@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import javafx.geometry.Point2D;
+
 import backEnd.GameEngine.Attribute;
 import backEnd.GameEngine.Component;
 import javafx.geometry.Point2D;
@@ -110,5 +112,3 @@ public class ComponentGraph {
 	}
 
 }
-
-
