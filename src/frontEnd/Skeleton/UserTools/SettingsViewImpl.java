@@ -1,6 +1,6 @@
 package frontEnd.Skeleton.UserTools;
 
-import frontEnd.Menus.ButtonMenu;
+import frontEnd.Menus.ButtonMenuImpl;
 import frontEnd.Menus.MainMenu;
 import frontEnd.Menus.StartMenu;
 import javafx.beans.binding.Bindings;
@@ -53,7 +53,7 @@ public class SettingsViewImpl implements SettingsView{
 	 * Author/Player toggle
 	 */
 	private void addButtons(Stage stage){
-		ButtonMenu myMenu = new ButtonMenu();
+		ButtonMenuImpl myMenu = new ButtonMenuImpl();
 		
 		myMenu.setText("Settings");
 		myMenu.addSimpleButton("Save", e -> save());
