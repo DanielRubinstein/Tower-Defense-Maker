@@ -10,8 +10,8 @@ public class UserTools {
 	private BottomRoot bottomRoot;
 	
 	public UserTools(){
-		sideBar = new SideBar();
-		bottomRoot = new BottomRoot();
+		sideBar = new SideBarImpl();
+		bottomRoot = new BottomRootImpl();
 		
 	}
 	

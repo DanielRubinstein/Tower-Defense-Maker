@@ -4,5 +4,5 @@ import javafx.stage.Stage;
 
 public interface StartMenu {
 
-	public void makeGameSelectionButtons(ButtonMenu menu,Stage stage);
+	public void makeGameSelectionButtons(ButtonMenuImpl menu,Stage stage);
 }

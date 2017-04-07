@@ -1,6 +1,6 @@
 package frontEnd.Skeleton.UserTools;
 
-import frontEnd.Menus.ButtonMenu;
+import frontEnd.Menus.ButtonMenuImpl;
 import frontEnd.Menus.MainMenu;
 import frontEnd.Menus.StartMenu;
 import javafx.beans.binding.Bindings;
@@ -11,8 +11,13 @@ import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.geometry.Bounds;
+import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.SplitPane;
+import javafx.scene.control.Tooltip;
+import javafx.scene.control.Tooltip.*;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
@@ -48,57 +53,52 @@ public class SettingsViewImpl implements SettingsView{
 	 * Author/Player toggle
 	 */
 	private void addButtons(Stage stage){
-		ButtonMenu menu = new ButtonMenu();
+		ButtonMenuImpl myMenu = new ButtonMenuImpl();
 		
-		menu.setText("Settings");
+		myMenu.setText("Settings");
+		myMenu.addSimpleButton("Save", e -> save());
 		
-		// add New and Load
-		
-		menu.addSimpleButton("Save", e -> save());
-		
-		HBox ruleButtons = createRulesButtons("View Rules",e -> viewRules(),"Edit Rules",e->editRules(),null,Bindings.or(myBinding.valueProperty(), myBinding.valueProperty()).not());
-		
-		menu.addNode(ruleButtons);
-	
+		Node ruleButtons = createRulesButtons();
+		myMenu.addNode(ruleButtons);
 		
 		//adding player/godmode switch
 		ToggleSwitch modeToggle = new ToggleSwitch("Player", e-> togglePlayerMode(), "Author", e -> toggleAuthorMode());
-		menu.addNode(modeToggle.getRoot());
+		myMenu.addNode(modeToggle.getRoot());
 		
-		menu.create();
-		stage.setScene(menu.getScene());
+		myMenu.create();
+		stage.setScene(myMenu.getScene());
 	}
 
 	
 	/**
 	 * Adds two side by side buttons to the button menu. If a button is meant to always be enabled, simply pass null as b1/b2
-	 * @param text1
-	 * @param event1
-	 * @param text2
-	 * @param event2
-	 * @param b1
-	 * @param b2
-	 * @return 
+	 * Wraps each button to allow for the tooltip to be shown even when a button is disabled. Both buttons are wrapped for consistency
 	 */
-	private HBox createRulesButtons(String text1, EventHandler<ActionEvent> event1, String text2, EventHandler<ActionEvent> event2, ObservableValue<? extends Boolean> b1, ObservableValue<? extends Boolean> b2){
+	private Node createRulesButtons(){
 	
 		HBox bothButtons = new HBox();
-		Button button1 = new Button(text1);
-		button1.setOnAction(event1);
-		Button button2 = new Button(text2);
-		button2.setOnAction(event2);
+		Button button1 = new Button("View Rules");
+		button1.setOnAction(e -> viewRules());
+		Button button2 = new Button("Edit Rules");
+		button2.setOnAction(e -> editRules());
+		button2.disableProperty().bind(Bindings.or(myBinding.valueProperty(), myBinding.valueProperty()).not());
 		
-		if(b1!=null)
-			button1.disableProperty().bind(b1);
-		
-		if(b2!=null)
-			button2.disableProperty().bind(b2);
-		
-		bothButtons.getChildren().addAll(button1,button2);
+		SplitPane wrapper1 = new SplitPane(button1);
+		Tooltip t = new Tooltip("Only possible in Author mode");
+		SplitPane wrapper2 = new SplitPane(button2);
+		wrapper2.setTooltip(t);
+		wrapper2.hoverProperty().addListener((a,b,c)->{
+			if(wrapper2.isHover()&&button2.isDisabled()){
+				Bounds scenePos= wrapper2.localToScreen(wrapper2.getBoundsInLocal());
+				t.show(wrapper2, scenePos.getMaxX(), scenePos.getMinY()-scenePos.getHeight());
+			}else{
+				t.hide();
+			}
+		});
+		bothButtons.getChildren().addAll(wrapper1,wrapper2);	
 		return bothButtons;
-			
 	}
-	
+
 	
 	private void save(){
 		System.out.println("Saving in SettingsViewImpl");

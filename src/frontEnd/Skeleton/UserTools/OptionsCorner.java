@@ -1,5 +1,6 @@
 package frontEnd.Skeleton.UserTools;
 
+<<<<<<< HEAD
 import backEnd.State.TileImpl;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
@@ -13,39 +14,20 @@ public class OptionsCorner {
 	private VBox myRoot;
 	private SettingsView settingsDisplay;
 	private OptionsSelection userOptions;
+=======
+/**
+ * Add implementation later.
+ * This interface defines the options corner to be displayed on the right side of the BottomRoot
+ * @author Tim
+ *
+ */
+public interface OptionsCorner extends SkeletonObject{
+>>>>>>> 2658b55a1c7768b5bed8c8e83980357a5d9cbe74
 	
-	public OptionsCorner() {
-		myRoot = new VBox();
-		settingsDisplay = new SettingsViewImpl();
-		addModeIndicator();
-		setUserOptions();
-		
-	}
-	private void setUserOptions(){
-		userOptions = new OptionsSelection(settingsDisplay);
-		userOptions.setAlignment(Pos.BOTTOM_CENTER,Priority.ALWAYS);
-		myRoot.getChildren().add(userOptions.getNode());
-	}
+	 /**
+	  * Sets the sideLength to the parameter height
+	  * @param height
+	  */
+	public void setSideLength(double height);
 	
-	private void addModeIndicator() {
-		ModeIndicator mI = new ModeIndicator();
-		myRoot.getChildren().add(mI.getIndicator());
-	}
-
-	private void addTileCCButton() {
-		Button tileCC = new Button("Tile Command");
-		tileCC.setOnAction(event -> new TileCommandCenter(new TileImpl(null, null)));
-		myRoot.getChildren().add(tileCC);
-	}
-
-	public Node getRoot(){
-		return myRoot;
-	}
-	public void setSideLength(double height){
-		myRoot.setPrefSize(height, height);
-		myRoot.setMaxHeight(height);
-		userOptions.setSize(height, height * 0.3);
-	}
-
-
 }
