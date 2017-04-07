@@ -1,7 +1,7 @@
 package frontEnd.Skeleton.UserTools;
 
-import backEnd.Environment.Tile;
 import backEnd.GameEngine.Component;
+import backEnd.State.Tile;
 import javafx.scene.Scene;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;

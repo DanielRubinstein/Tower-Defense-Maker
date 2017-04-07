@@ -1,9 +1,7 @@
 package backEnd.State;
 
-import com.sun.javafx.geom.Point2D;
-
-import backEnd.Environment.Tile;
 import backEnd.GameEngine.Attribute;
+import javafx.geometry.Point2D;
 
 /**
  * This is the Grid class that contains the Tile Grid and all of the relevant getters/setters for other modules to use to access
@@ -28,7 +26,7 @@ public class TileGrid {
 	 * @return Tile at the given location
 	 */
 	public Tile getTileByLocation(Point2D location){
-		return tileGrid[(int) location.y][(int) location.x];
+		return tileGrid[(int) location.getY()][(int) location.getX()];
 	}
 	
 	/**
@@ -37,7 +35,7 @@ public class TileGrid {
 	 * @param location
 	 */
 	public void setTile(Tile newTile, Point2D location){
-		tileGrid[(int) location.y][(int) location.x] = newTile;
+		tileGrid[(int) location.getY()][(int) location.getX()] = newTile;
 	}
 
 }
