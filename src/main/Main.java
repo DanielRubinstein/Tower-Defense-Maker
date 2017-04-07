@@ -18,7 +18,7 @@ public class Main extends Application {
 	 */
 	@Override
 	public void start(Stage primaryStage) {
-		Controller controller = new Controller();
+		Controller controller = new ControllerImpl();
 		controller.start(primaryStage);
 	}
 
