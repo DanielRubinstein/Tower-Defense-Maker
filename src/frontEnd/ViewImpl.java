@@ -54,4 +54,28 @@ public class ViewImpl implements Observer, ViewEditor{
 		return null;
 	}
 
+	@Override
+	public String getRunStatus() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Object save() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Object viewRules() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Object editRules() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }

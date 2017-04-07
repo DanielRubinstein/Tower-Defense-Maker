@@ -22,9 +22,7 @@ public class OptionsCornerImpl implements OptionsCorner{
 	
 	public OptionsCornerImpl(ViewEditor view) {
 		myRoot = new VBox();
-		settingsDisplay = new SettingsViewImpl(view);
-		addModeIndicator(view);
-		setUserOptions();	
+		setUserOptions(view);	
 	}
 
 	public Node getRoot(){
@@ -35,16 +33,13 @@ public class OptionsCornerImpl implements OptionsCorner{
 		myRoot.setMaxHeight(height);
 		userOptions.setSize(height, height * 0.3);
 	}
-	private void setUserOptions(){
-		userOptions = new OptionsSelection(settingsDisplay);
+	private void setUserOptions(ViewEditor view){
+		userOptions = new OptionsSelection(view);
 		userOptions.setAlignment(Pos.BOTTOM_CENTER,Priority.ALWAYS);
 		myRoot.getChildren().add(userOptions.getNode());
 	}
 	
-	private void addModeIndicator(ViewReader view) {
-		ModeIndicator mI = new ModeIndicator(view);
-		myRoot.getChildren().add(mI.getIndicator());
-	}
+	
 
 
 

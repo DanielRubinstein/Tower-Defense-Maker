@@ -14,11 +14,9 @@ public class SkeletonImpl implements Skeleton{
 
 	public static final double MENU_HEIGHT = 500d;
 	public static final double MENU_WIDTH = 500d;
-	private ViewEditor myView;
 	
 	public SkeletonImpl(ViewEditor view){
 		myRoot = new BorderPane();
-		myView=view;
 		Canvas canvas = new Canvas(view);
 		canvas.setSize(300, 400);
 		myRoot.setCenter(canvas.getRoot());
