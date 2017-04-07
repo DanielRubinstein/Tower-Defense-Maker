@@ -1,17 +1,15 @@
 package backEnd.Data;
 
-import java.io.File;
-
-import backEnd.GameData;
 import backEnd.GameDataInterface;
+import backEnd.Rules;
+import backEnd.Environment.BankController;
+import backEnd.State.StateImpl;
+import javafx.util.Pair;
 
-public class XMLReader implements XMLReaderInterface {
-
-	@Override
-	public GameData Load(File file) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
+public interface XMLReader {
+	
+	Pair<StateImpl,Rules> loadGameStateData(GameDataInterface gameData, String filePath, String gameName);
+	
+	BankController loadUniversalGameData(GameDataInterface gameData, String filePath);
 
 }

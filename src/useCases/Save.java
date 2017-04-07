@@ -2,7 +2,7 @@ package useCases;
 
 import backEnd.GameDataInterface;
 import backEnd.Rules;
-import backEnd.Data.XMLWriterInterface;
+import backEnd.Data.XMLWriter;
 import backEnd.State.State;
 import backEnd.State.TileGrid;
 
@@ -16,7 +16,7 @@ public class Save implements GameDataInterface{
 	
 
 	private GameDataInterface currentGame;
-	private XMLWriterInterface myXML;
+	private XMLWriter myXML;
 	private String myFilePath;
 	
 	public Save(){
@@ -36,7 +36,7 @@ public class Save implements GameDataInterface{
 		}
 		currentGame = new GameInterface();
 		
-		class XMLSave implements XMLWriterInterface{
+		class XMLSave implements XMLWriter{
 
 			@Override
 			public void Save(GameDataInterface gameData, String filePath) {

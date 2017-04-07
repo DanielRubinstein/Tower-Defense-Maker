@@ -18,6 +18,7 @@ public class Controller implements ControllerInterface{
 	private EnvironmentInterface myEnvironment;
 	private State myState;
 	private GameProcessController myEngineController;
+	private GameData myGameData;
 	
 	public void start(Stage stage){
 		//myView = new View();
@@ -29,7 +30,7 @@ public class Controller implements ControllerInterface{
 		myEnvironment = new Environment();
 		myState = new StateImpl(20,20);
 		myEngineController = new GameProcessController(myState, null); //this should get Rules, not null
-		
+		myGameData = new GameData();
 	}
 	
 	public void setupModelViewBridge(GameData gameData) {
