@@ -25,9 +25,9 @@ public class ControllerImpl implements Controller{
 		
 		SkeletonImpl skeleton = new SkeletonImpl();
 		skeleton.display(stage);
-		myEnvironment = new Environment();
-		myState = new StateImpl(20,20);
-		myEngineController = new GameProcessController(myState, null); //this should get Rules, not null
+		//myEnvironment = new Environment();
+		//myState = new StateImpl(20,20);
+		//myEngineController = new GameProcessController(myState, null); //this should get Rules, not null
 		
 	}
 	
