@@ -1,8 +1,8 @@
 package main;
 
+import ModificationFromUser.ModificationFromUser;
 import backEnd.Environment.Environment;
 import backEnd.GameEngine.Engine;
-import backEnd.Interaction.UserInteraction;
 import backEnd.Mode.ModeEnum;
 import backEnd.State.State;
 
@@ -29,8 +29,8 @@ public class InteractivityController {
 		
 	}
 	
-	public void executeInteraction(UserInteraction myInteraction){
-		
+	public void executeInteraction(ModificationFromUser myInteraction){
+		myInteraction.invoke(currentMode);
 	}
 	
 }
