@@ -8,8 +8,10 @@ import java.util.ResourceBundle;
 public class Component {
 	
 	private final static String DEFAULT_ATTRIBUTE_PATH = "resources/componentDefaults";
-	private final static ResourceBundle myResources = ResourceBundle.getBundle(DEFAULT_ATTRIBUTE_PATH);
-	private AttributeData myAttributes;
+	private final static String BEHAVIOR_PATH = "resources/behaviorNames";
+	private final static ResourceBundle behaviorResources = ResourceBundle.getBundle(BEHAVIOR_PATH);
+	private final static ResourceBundle attributeResources = ResourceBundle.getBundle(DEFAULT_ATTRIBUTE_PATH);
+	private Map<String,Attribute<?>> myAttributes;
 	private Map<String, Behavior> myBehaviors;
 	
 	
@@ -51,9 +53,4 @@ public class Component {
 	 */
 	//public abstract void addAttribute(Attribute toAdd);
 	
-	 /**
-     * Change the shape of the cell
-     * @param cellShape new cell shape
-     */
-	
-}
+}
