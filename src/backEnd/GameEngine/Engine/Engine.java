@@ -1,4 +1,4 @@
-package backEnd.GameEngine;
+package backEnd.GameEngine.Engine;
 import backEnd.State.State;
 
 public interface Engine {

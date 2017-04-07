@@ -8,7 +8,7 @@ import backEnd.Environment.Tile;
 import backEnd.Environment.TileAttribute;
 import backEnd.GameEngine.Attribute;
 import backEnd.GameEngine.Component;
-import backEnd.GameEngine.Engine;
+import backEnd.GameEngine.Engine.Engine;
 /**
  * 
  * @author christianmartindale
