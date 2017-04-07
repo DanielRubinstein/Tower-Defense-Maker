@@ -1,4 +1,4 @@
-package backEnd.Environment;
+package backEnd.State;
 
 import java.util.List;
 
@@ -14,7 +14,7 @@ public interface Tile {
 	 * @param attrType
 	 * @return Attribute that corresponds to the String attrType
 	 */
-	TileAttribute<?> getTileAttribute(String attrType);
+	TileAttribute<?> getAttribute(TileAttributeType type);
 	
 	/**
 	 * Add a TileAttribute to the Tile
@@ -32,5 +32,11 @@ public interface Tile {
 	 * @param newAttrList
 	 */
 	void setTileAttributeList(List<TileAttribute<?>> newAttrList);
+	
+	boolean hasTileAttributeType(TileAttributeType type);
+	
+	void addAccessPermission(AccessParty newParty);
+	
+	boolean permitsAccess(AccessParty party);
 	
 }

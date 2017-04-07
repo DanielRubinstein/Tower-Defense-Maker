@@ -1,37 +1,12 @@
 package backEnd.Mode;
 
 import backEnd.GameEngine.Component;
+import javafx.geometry.Point2D;
 
 public class Player extends Mode {
 
-
-
 	@Override
-	public void moveComponent() {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void changeTile() {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void setComponentBehavior() {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void setGameRule() {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void addComponent(Component component, int[] location) {
+	public void addComponent(Component component, Point2D location) {
 		// TODO Auto-generated method stub
 		
 	}
@@ -43,9 +18,46 @@ public class Player extends Mode {
 	}
 
 	@Override
-	public void onComponentClick() {
-		// TODO Auto-generated method stub
+	public void addTile() throws ModeException {
+		throw new ModeException("Cannot add tiles in player mode");
 		
 	}
+
+	@Override
+	public void addTileAttribute() throws ModeException {
+		throw new ModeException("Cannot edit tiles in player mode");
+		
+	}
+
+	@Override
+	public void removeTileAttribute() throws ModeException {
+		throw new ModeException("Cannot edit tiles in player mode");
+		
+	}
+
+	@Override
+	public void moveTile() throws ModeException {
+		throw new ModeException("Cannot edit tiles in player mode");
+		
+	}
+
+	@Override
+	public void editRules() throws ModeException {
+		throw new ModeException("Cannot edit rules in player mode");
+		
+	}
+
+	@Override
+	public void play() {
+		myModel.getEngine.gameLoop(myModel.getState());
+		
+	}
+
+	@Override
+	public void pause() {
+		myModel.getEngine.pause();
+		
+	}
+
 
 }

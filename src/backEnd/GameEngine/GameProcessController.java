@@ -3,7 +3,10 @@ package backEnd.GameEngine;
 import java.util.List;
 
 import backEnd.Rules;
+<<<<<<< HEAD
 import backEnd.GameEngine.Engine.Engine;
+=======
+>>>>>>> master
 import backEnd.State.State;
 
 public class GameProcessController {

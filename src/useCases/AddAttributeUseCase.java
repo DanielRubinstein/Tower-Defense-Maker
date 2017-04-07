@@ -59,7 +59,7 @@ public class AddAttributeUseCase implements Attribute{
 	 * @param addTo the Component to be modified
 	 * @param addedAttribute the desired attribute to be added to a Component
 	 */
-/*
+/**
 	public void addAttribute(Component addTo, Attribute addedAttribute){
 		addTo.addAttribute(addedAttribute);
 	}
@@ -80,7 +80,4 @@ public class AddAttributeUseCase implements Attribute{
 	
 	
 }
-
-*/
-import backEnd.State.State;
-import backEnd.State.TileGrid;
+**/

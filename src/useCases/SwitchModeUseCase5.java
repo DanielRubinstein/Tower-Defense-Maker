@@ -1,7 +1,7 @@
 package useCases;
 
 import java.util.List;
-
+/*
 import backEnd.Environment.Behavior;
 import backEnd.Environment.EnvironmentInterface;
 import backEnd.Environment.Mode;
@@ -18,6 +18,7 @@ import frontEnd.Skeleton.UserInteractor;
  * the Mode and what changes on the display are implementation details.
  *
  */
+/*
 public class SwitchModeUseCase5 implements UserInteractor{
 	private Mode userMode;
 	private EnvironmentInterface myEnvironment;
@@ -34,7 +35,7 @@ public class SwitchModeUseCase5 implements UserInteractor{
 		//userMode = myEnvironment.changeMode();
 		myEnvironment.setMode(userMode);
 	}*/
-
+/*
 	@Override
 	public Mode getCurrentMode() {
 		return userMode;
@@ -93,7 +94,7 @@ public class SwitchModeUseCase5 implements UserInteractor{
 		public void setTileAttributeList(List<TileAttribute> newList) {
 			// TODO Auto-generated method stub
 	*/		
-		}
+		//}
 	/*
 		@Override
 		public void setState(State state) {
