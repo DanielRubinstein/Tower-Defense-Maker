@@ -6,9 +6,10 @@ import java.util.ResourceBundle;
 
 
 public class Component {
+	
 	private final static String DEFAULT_ATTRIBUTE_PATH = "resources/componentDefaults";
 	private final static ResourceBundle myResources = ResourceBundle.getBundle(DEFAULT_ATTRIBUTE_PATH);
-	private Map<String,Attribute<?>> myAttributes;
+	private AttributeData myAttributes;
 	private Map<String, Behavior> myBehaviors;
 	
 	
@@ -18,19 +19,20 @@ public class Component {
 		BehaviorFactory bf=new BehaviorFactory();
 		for (String key: myResources.keySet()){
 			String value=myResources.getString(key);
-			Attribute<?> myAttribute= af.getAttribute(key, value);
-			myAttributes.put(key, myAttribute);
+			Attribute<?> myAttribute= af.getAttribute(key, value); //FIX THIS- HOW DOES OUR FACTORY GENERATE ATTRIBUTES?
+			myAttributes.addAttribute(key, myAttribute);
 			myBehaviors.put(key, bf.getBehavior(key));
 			}
+		setupBehaviorObserving();
 	}
 		
-	
-	public void addAttribute(String key, Attribute<?> toAdd){
-		myAttributes.put(key, toAdd);
-	}
-	
-	public void replaceAttributes(Map<String,Attribute<?>> newAttributes){
-		myAttributes=newAttributes;
+
+	public void setupBehaviorObserving(){
+		for (String b: myBehaviors.keySet()){
+			Behavior currentBehavior=myBehaviors.get(b);
+			myAttributes.addObserver(currentBehavior);
+		}
+		
 	}
 	
 	/**
@@ -42,15 +44,7 @@ public class Component {
 		return myBehaviors.get(behaviorType);
 	}
 	
-	/**
-	 * Get the attribute that the behavior modifies.
-	 * @param attributeType
-	 * @return
-	 */
-	public Attribute<?> getAttribute(String attributeType){
-		return myAttributes.get(attributeType);
-	}
-	
+
 	/**
 	 * adds an attribute to the List of Attributes
 	 * @return 
@@ -61,6 +55,5 @@ public class Component {
      * Change the shape of the cell
      * @param cellShape new cell shape
      */
-	
 	
 }
