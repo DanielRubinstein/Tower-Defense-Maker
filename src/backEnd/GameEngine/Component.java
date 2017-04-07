@@ -16,10 +16,11 @@ public class Component {
 	
 	public Component(){
 		AttributeFactory af=new AttributeFactory();
-		BehaviorFactory bf=new BehaviorFactory();
+		BehaviorFactory bf=new BehaviorFactory(this);
 		for (String key: myResources.keySet()){
 			String value=myResources.getString(key);
-			Attribute<?> myAttribute= af.getAttribute(key, value); //FIX THIS- HOW DOES OUR FACTORY GENERATE ATTRIBUTES?
+			Attribute<?> myAttribute= af.getAttribute(key);
+			//TODO : we need to add the value before adding it to myAttributes
 			myAttributes.addAttribute(key, myAttribute);
 			myBehaviors.put(key, bf.getBehavior(key));
 			}
