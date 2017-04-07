@@ -7,8 +7,7 @@ import backEnd.GameEngine.GameProcessController;
 import backEnd.Model.Model;
 import backEnd.State.State;
 import backEnd.State.StateImpl;
-import frontEnd.View;
-import frontEnd.Skeleton.Skeleton;
+import frontEnd.ViewImpl;
 import frontEnd.Skeleton.SkeletonImpl;
 import javafx.stage.Stage;
 
