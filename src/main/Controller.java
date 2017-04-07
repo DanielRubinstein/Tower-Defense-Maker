@@ -8,7 +8,7 @@ import backEnd.GameEngine.GameProcessController;
 import backEnd.Model.Model;
 import backEnd.State.State;
 import backEnd.State.StateImpl;
-import frontEnd.View;
+import frontEnd.ViewImpl;
 import frontEnd.Skeleton.Skeleton;
 import javafx.stage.Stage;
 
@@ -33,9 +33,5 @@ public class Controller implements ControllerInterface{
 		myGameData = new GameData();
 	}
 	
-	public void setupModelViewBridge(GameData gameData) {
-		myModel = new Model(gameData);
-		myModel.addObserver(myView);
-		myView.setModel(myModel);
-	}
+	public void setupModelViewBridge(GameData gameData);
 }

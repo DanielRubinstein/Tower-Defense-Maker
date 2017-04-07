@@ -1,5 +1,6 @@
 package frontEnd.Skeleton.UserTools;
 
+import frontEnd.ViewEditor;
 import frontEnd.Menus.ButtonMenuImpl;
 import frontEnd.Menus.MainMenu;
 import frontEnd.Menus.StartMenu;
@@ -33,9 +34,10 @@ import javax.swing.event.ChangeEvent;
 public class SettingsViewImpl implements SettingsView{
 	private Stage myStage;
 	private SettingsBinding myBinding;
+	private ViewEditor myView;
 	
-	
-	public SettingsViewImpl() {
+	public SettingsViewImpl(ViewEditor view) {
+		myView = view;
 		myStage = new Stage();
 		myBinding = new SettingsBinding();
 		addButtons(myStage);
@@ -56,13 +58,15 @@ public class SettingsViewImpl implements SettingsView{
 		ButtonMenuImpl myMenu = new ButtonMenuImpl();
 		
 		myMenu.setText("Settings");
-		myMenu.addSimpleButton("Save", e -> save());
+		myMenu.addSimpleButton("Save", e -> myView.save());
+		
+		// TODO Gameselection stuff
 		
 		Node ruleButtons = createRulesButtons();
 		myMenu.addNode(ruleButtons);
 		
 		//adding player/godmode switch
-		ToggleSwitch modeToggle = new ToggleSwitch("Player", e-> togglePlayerMode(), "Author", e -> toggleAuthorMode());
+		ToggleSwitch modeToggle = new ToggleSwitch(myView,"Player", "Author");
 		myMenu.addNode(modeToggle.getRoot());
 		
 		myMenu.create();
@@ -78,10 +82,12 @@ public class SettingsViewImpl implements SettingsView{
 	
 		HBox bothButtons = new HBox();
 		Button button1 = new Button("View Rules");
-		button1.setOnAction(e -> viewRules());
+		button1.setOnAction(e -> myView.viewRules());
 		Button button2 = new Button("Edit Rules");
-		button2.setOnAction(e -> editRules());
+		button2.setOnAction(e -> myView.editRules());
 		button2.disableProperty().bind(Bindings.or(myBinding.valueProperty(), myBinding.valueProperty()).not());
+		
+		// TODO bind to mode
 		
 		SplitPane wrapper1 = new SplitPane(button1);
 		Tooltip t = new Tooltip("Only possible in Author mode");
@@ -97,27 +103,6 @@ public class SettingsViewImpl implements SettingsView{
 		});
 		bothButtons.getChildren().addAll(wrapper1,wrapper2);	
 		return bothButtons;
-	}
-
-	
-	private void save(){
-		System.out.println("Saving in SettingsViewImpl");
-	}
-	private void viewRules(){
-		System.out.println("viewing rules in SettingsViewImpl");
-		myBinding.addOne();
-
-	}
-	private void editRules(){
-		System.out.println("editing rules in SettingsViewImpl");
-		myBinding.addOne();
-		System.out.println(myBinding.valueProperty());
-	}
-	private void togglePlayerMode(){
-		System.out.print("toggling player mode");
-	}
-	private void toggleAuthorMode(){
-		System.out.println("toggling author mode");
 	}
 
 }

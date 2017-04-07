@@ -1,5 +1,6 @@
 package frontEnd.Skeleton.UserTools;
 
+import frontEnd.ViewReader;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.layout.VBox;
@@ -14,7 +15,9 @@ public class StatusView {
 	private Double totalKills;
 	private Double levelCompletion;
 
-	public StatusView(){
+	public StatusView(ViewReader view){
+		
+		// TODO read SHIT
 		
 		myRoot = new VBox();
 		

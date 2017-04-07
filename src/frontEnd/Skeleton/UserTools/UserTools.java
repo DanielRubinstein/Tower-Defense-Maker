@@ -3,15 +3,16 @@ package frontEnd.Skeleton.UserTools;
 import java.util.function.Consumer;
 
 import backEnd.GameData;
+import frontEnd.ViewEditor;
 import javafx.scene.Node;
 
 public class UserTools {
 	private SideBar sideBar;
 	private BottomRoot bottomRoot;
 	
-	public UserTools(){
-		sideBar = new SideBarImpl();
-		bottomRoot = new BottomRootImpl();
+	public UserTools(ViewEditor view){
+		sideBar = new SideBarImpl(view);
+		bottomRoot = new BottomRootImpl(view);
 		
 	}
 	
