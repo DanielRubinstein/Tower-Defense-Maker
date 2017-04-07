@@ -15,7 +15,6 @@ public class Canvas {
 		background = new Rectangle();
 		background.setFill(Color.BLACK);
 		root.getChildren().add(background);
-		
 	}
 
 	public Node getRoot() {

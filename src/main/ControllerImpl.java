@@ -22,13 +22,11 @@ public class ControllerImpl implements Controller{
 		//myView = new View();
 		//myView.setGameDataListener(this::setupModelViewBridge);
 		//myView.start(stage);
-		
 		SkeletonImpl skeleton = new SkeletonImpl(new ViewImpl());
 		skeleton.display(stage);
 		//myEnvironment = new Environment();
 		//myState = new StateImpl(20,20);
 		//myEngineController = new GameProcessController(myState, null); //this should get Rules, not null
-		
 	}
 	
 	public void setupModelViewBridge(GameData gameData) {

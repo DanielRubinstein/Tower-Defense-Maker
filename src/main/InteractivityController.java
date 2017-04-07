@@ -26,7 +26,6 @@ public class InteractivityController {
 		ModeEnum tempMode = currentMode;
 		currentMode = nextMode;
 		nextMode = tempMode;
-		
 	}
 	
 	public void executeInteraction(ModificationFromUser myInteraction){

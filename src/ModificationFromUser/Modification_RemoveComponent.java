@@ -13,7 +13,6 @@ public class Modification_RemoveComponent implements ModificationFromUser {
 	public Modification_RemoveComponent(State myState, Component removeComp){
 		this.myState = myState;
 		this.removeComp = removeComp;
-		
 	}
 	
 	@Override
