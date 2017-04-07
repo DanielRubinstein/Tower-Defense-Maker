@@ -3,7 +3,7 @@ package ModificationFromUser;
 import backEnd.Mode.ModeEnum;
 
 /**
- * Invokable classes that the front end calls when the user wants to modify the state.
+ * Invokable classes that the front end creates when the user wants to modify the state.
  * 
  * 
  * @author Derek

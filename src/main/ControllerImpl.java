@@ -11,24 +11,25 @@ import frontEnd.ViewImpl;
 import frontEnd.Skeleton.SkeletonImpl;
 import javafx.stage.Stage;
 
-public class ControllerImpl implements Controller{
+public class ControllerImpl implements Controller {
 	private Model myModel;
-	private ViewImpl myView;
+	private View myView;
 	private EnvironmentInterface myEnvironment;
 	private State myState;
 	private GameProcessController myEngineController;
+	private GameData myGameData;
 	
 	public void start(Stage stage){
 		//myView = new View();
 		//myView.setGameDataListener(this::setupModelViewBridge);
 		//myView.start(stage);
 		
-		SkeletonImpl skeleton = new SkeletonImpl(new ViewImpl());
+		Skeleton skeleton = new Skeleton();
 		skeleton.display(stage);
-		//myEnvironment = new Environment();
-		//myState = new StateImpl(20,20);
-		//myEngineController = new GameProcessController(myState, null); //this should get Rules, not null
-		
+		myEnvironment = new Environment();
+		myState = new StateImpl(20,20);
+		myEngineController = new GameProcessController(myState, null); //this should get Rules, not null
+		myGameData = new GameData();
 	}
 	
 	public void setupModelViewBridge(GameData gameData) {
@@ -36,6 +37,4 @@ public class ControllerImpl implements Controller{
 		myModel.addObserver(myView);
 		myView.setModel(myModel);
 	}
-
-
 }
