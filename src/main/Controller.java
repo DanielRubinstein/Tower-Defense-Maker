@@ -1,21 +1,30 @@
 package main;
 
 import backEnd.GameData;
-import backEnd.Environment.Environment;
 import backEnd.Environment.EnvironmentInterface;
-import backEnd.GameEngine.Engine;
-import backEnd.GameEngine.GameProcessController;
-import backEnd.Model.Model;
-import backEnd.State.State;
-import backEnd.State.StateImpl;
-import frontEnd.ViewImpl;
-import frontEnd.Skeleton.Skeleton;
+import backEnd.GameEngine.Engine.Engine;
+import frontEnd.Menus.MainMenu;
 import javafx.stage.Stage;
 
-public interface Controller{
+public class Controller implements ControllerInterface{
 	
-	void start(Stage stage);
-	
-	void setupModelViewBridge(GameData gameData);
-	
+	public void start(Stage stage){
+		openingScreens(stage);
+	}
+
+	private void openingScreens(Stage stage) {
+		MainMenu mainMenu = new MainMenu();
+		mainMenu.setGameDataListener(this::initializeGame);
+		mainMenu.showMenus(stage);
+	}
+
+	private void initializeGame(GameData gameData) {
+		//Engine engine = new Engine();
+		//engine.setRules(gameData.getRules());
+		//Environment environment = new Environment();
+		//environment.setState(gameData.getState());
+		
+		
+	}
+
 }
