@@ -1,5 +1,7 @@
 package frontEnd.Skeleton.UserTools;
 
+import backEnd.Mode.ModeEditor;
+import frontEnd.ViewEditor;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -19,6 +21,7 @@ public class ToggleSwitch {
 	private HBox toggle;
 	private Label label;
 	private Button button;
+	private ModeEditor myMode;
 
 	private SimpleBooleanProperty switchedOn;
 
@@ -26,13 +29,14 @@ public class ToggleSwitch {
 		return switchedOn;
 	}
 
-	public ToggleSwitch(String title1, EventHandler<ActionEvent> opt1, String title2, EventHandler<ActionEvent> opt2) {
+	public ToggleSwitch(ViewEditor view, String title1, String title2) {
+		myMode = view.getMode();
 		toggle = new HBox();
 		label = new Label();
 		button = new Button();
 		switchedOn = new SimpleBooleanProperty(false);
 
-		init(title1, opt1, title2, opt2);
+		init(title1, title2);
 
 		switchedOn.addListener((a, oldValue, newValue) -> {
 			if (newValue) {
@@ -47,15 +51,20 @@ public class ToggleSwitch {
 		});
 	}
 
-	private void init(String title1, EventHandler<ActionEvent> opt1, String title2, EventHandler<ActionEvent> opt2) {
+	private void init(String title1, String title2) {
 
 		label.setText(title1);
 
 		toggle.getChildren().addAll(label, button);
+		
+		
+		
 		button.setOnAction((e) -> {
+			myMode.toggleMode();
 			switchedOn.set(!switchedOn.get());
 		});
 		label.setOnMouseClicked((e) -> {
+			myMode.toggleMode();
 			switchedOn.set(!switchedOn.get());
 		});
 		setStyle();

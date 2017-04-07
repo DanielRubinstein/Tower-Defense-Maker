@@ -7,13 +7,13 @@ import backEnd.GameEngine.GameProcessController;
 import backEnd.Model.Model;
 import backEnd.State.State;
 import backEnd.State.StateImpl;
-import frontEnd.View;
+import frontEnd.ViewImpl;
 import frontEnd.Skeleton.SkeletonImpl;
 import javafx.stage.Stage;
 
 public class ControllerImpl implements Controller{
 	private Model myModel;
-	private View myView;
+	private ViewImpl myView;
 	private EnvironmentInterface myEnvironment;
 	private State myState;
 	private GameProcessController myEngineController;
@@ -23,7 +23,7 @@ public class ControllerImpl implements Controller{
 		//myView.setGameDataListener(this::setupModelViewBridge);
 		//myView.start(stage);
 		
-		SkeletonImpl skeleton = new SkeletonImpl();
+		SkeletonImpl skeleton = new SkeletonImpl(new ViewImpl());
 		skeleton.display(stage);
 		//myEnvironment = new Environment();
 		//myState = new StateImpl(20,20);

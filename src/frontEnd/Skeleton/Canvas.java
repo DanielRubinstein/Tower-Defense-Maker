@@ -1,5 +1,6 @@
 package frontEnd.Skeleton;
 
+import frontEnd.ViewEditor;
 import javafx.scene.Group;
 import javafx.scene.Node;
 import javafx.scene.paint.Color;
@@ -9,7 +10,7 @@ public class Canvas {
 	private Group root;
 	private Rectangle background;
 	
-	public Canvas(){
+	public Canvas(ViewEditor view){
 		root = new Group();
 		background = new Rectangle();
 		background.setFill(Color.BLACK);
