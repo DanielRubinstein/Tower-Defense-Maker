@@ -61,7 +61,7 @@ public class GameSelection {
 	private void showTemplateMenu(Stage stage) {
 		GameLoader gameLoader = new GameLoader();
 		
-		ButtonMenu templateGames = new ButtonMenu();
+		ButtonMenuImpl templateGames = new ButtonMenuImpl();
    	 	templateGames.setText("Which game?");
    	 	//for(String templateGame : gameLoader.getTemplateTitleList()){
    	 	for(String templateGame : gameLoader.getTemplateTitleListStupid()){

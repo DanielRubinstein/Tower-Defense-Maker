@@ -21,7 +21,7 @@ public class MainMenu{
 	}
 	
 	private void splashScreen(Stage stage) {
-   	 	ButtonMenu splash = new ButtonMenu();
+   	 	ButtonMenuImpl splash = new ButtonMenuImpl();
    	 	splash.setText("WELCOME");
    	 	splash.addSimpleButton("START", event -> showPrimaryMenu(stage));
    	 	splash.create();
@@ -30,7 +30,7 @@ public class MainMenu{
 	}
 
 	private void showPrimaryMenu(Stage stage) {
-		ButtonMenu primaryMenu = new ButtonMenu();
+		ButtonMenuImpl primaryMenu = new ButtonMenuImpl();
    	 	for( Button button : gameSelection.getButtons()){
    	 		primaryMenu.addButton(button);
    	 	}

@@ -1,10 +1,10 @@
 package frontEnd.Skeleton.UserTools;
 
-import frontEnd.Menus.ButtonMenu;
+import frontEnd.Menus.ButtonMenuImpl;
 import javafx.stage.Stage;
-import main.Controller;
+import main.ControllerImpl;
 
-public class Settings extends ButtonMenu{
+public class Settings extends ButtonMenuImpl{
 	
 	public Settings(){
 		this.setText("Settings");
@@ -19,7 +19,7 @@ public class Settings extends ButtonMenu{
 		this.addSimpleButton("Restart Application", event -> {
 			// prompt if ok
 			
-			Controller controller = new Controller();
+			ControllerImpl controller = new ControllerImpl();
 			controller.start(new Stage());
 		});
 	}

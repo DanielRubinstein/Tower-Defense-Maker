@@ -8,12 +8,12 @@ import backEnd.GameData;
 import backEnd.Model.Model;
 import frontEnd.Menus.GameSelection;
 import frontEnd.Menus.MainMenu;
-import frontEnd.Skeleton.Skeleton;
+import frontEnd.Skeleton.SkeletonImpl;
 import javafx.stage.Stage;
 
 public class View implements Observer{
 	private Model myModel;
-	private Skeleton mySkeleton;
+	private SkeletonImpl mySkeleton;
 	private Consumer<GameData> gameDataConsumer;
 	
 	public void setGameDataListener(Consumer<GameData> gameDataConsumer) {
@@ -45,7 +45,7 @@ public class View implements Observer{
 	}
 
 	private void createNewSkeleton() {
-		mySkeleton = new Skeleton();
+		mySkeleton = new SkeletonImpl();
 		
 		
 	}

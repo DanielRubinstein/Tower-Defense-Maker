@@ -37,6 +37,4 @@ public class Controller implements ControllerInterface{
 		myModel.addObserver(myView);
 		myView.setModel(myModel);
 	}
-
-
 }
