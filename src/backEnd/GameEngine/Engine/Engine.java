@@ -1,6 +1,5 @@
-package backEnd.GameEngine;
+package backEnd.GameEngine.Engine;
 import java.util.Observer;
-
 import backEnd.State.State;
 
 public interface Engine{

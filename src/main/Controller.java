@@ -2,7 +2,7 @@ package main;
 
 import backEnd.GameData;
 import backEnd.Environment.EnvironmentInterface;
-import backEnd.GameEngine.Engine;
+import backEnd.GameEngine.Engine.Engine;
 import frontEnd.Menus.MainMenu;
 import javafx.stage.Stage;
 

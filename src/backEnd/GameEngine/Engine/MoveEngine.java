@@ -1,8 +1,7 @@
-package backEnd.GameEngine;
-
-import java.util.Observable;
-
+package backEnd.GameEngine.Engine;
+import backEnd.GameEngine.AttributeData;
 import backEnd.State.State;
+import java.util.Observable;
 
 public class MoveEngine implements Engine{
 	private AttributeData myAttributes;
