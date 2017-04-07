@@ -36,6 +36,18 @@ public class ComponentGraph {
 	}
 	
 	/**
+	 * Returns list of all components on the grid
+	 * @return list of components
+	 */
+	public List<Component> getComponentList(){
+		List<Component> componentList = new ArrayList<Component>();
+		for (List<Component> n : componentMap.values()){
+			componentList.addAll(n);
+		}
+		return componentList;
+	}
+	
+	/**
 	 * Get the list of components at a given location
 	 * @param location
 	 * @return Tile at the given location
