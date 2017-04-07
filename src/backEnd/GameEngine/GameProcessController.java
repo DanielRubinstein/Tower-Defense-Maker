@@ -17,7 +17,10 @@ public class GameProcessController {
 	
 	
 	public GameProcessController(State currentState, Rules gameRules){
+		myCurrentState = currentState;
+		myRules = gameRules;
 		
+		//TODO get all possible engines from where? and put into myEngines
 	}
 	
 }
