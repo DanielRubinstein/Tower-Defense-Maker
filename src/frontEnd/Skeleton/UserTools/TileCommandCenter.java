@@ -1,5 +1,9 @@
 package frontEnd.Skeleton.UserTools;
 
+<<<<<<< HEAD
+import backEnd.GameEngine.Component;
+import backEnd.State.Tile;
+=======
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -9,6 +13,7 @@ import backEnd.GameEngine.Component;
 import javafx.geometry.Bounds;
 import javafx.geometry.Insets;
 import javafx.scene.Node;
+>>>>>>> 2658b55a1c7768b5bed8c8e83980357a5d9cbe74
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;

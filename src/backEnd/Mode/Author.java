@@ -1,8 +1,8 @@
 package backEnd.Mode;
 
-import backEnd.Environment.Tile;
-import backEnd.Environment.TileAttribute;
 import backEnd.GameEngine.Component;
+import backEnd.State.Tile;
+import backEnd.State.TileAttribute;
 import javafx.geometry.Point2D;
 
 public class Author extends Mode{

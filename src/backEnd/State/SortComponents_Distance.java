@@ -4,7 +4,7 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
-import com.sun.javafx.geom.Point2D;
+import javafx.geometry.Point2D;
 
 public class SortComponents_Distance {
 	private Point2D centerLocation;
