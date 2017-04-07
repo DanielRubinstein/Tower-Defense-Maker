@@ -4,10 +4,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-import com.sun.javafx.geom.Point2D;
-
 import backEnd.GameEngine.Attribute;
 import backEnd.GameEngine.Component;
+import javafx.geometry.Point2D;
 
 /**
  * This is the Grid class that contains the Component Grid and all of the relevant getters/setters for other modules to use to access
@@ -76,7 +75,7 @@ public class ComponentGraph {
 		Point2D centerLoc = (Point2D) centerComp.getAttribute("Position").getValue();
 		ArrayList<Component> componentsWithinRadius = new ArrayList<Component>();
 		for (Point2D loc : componentMap.keySet()){
-			double distance = Math.sqrt(Math.pow(centerLoc.x - loc.x, 2) + Math.pow(centerLoc.y - loc.y, 2));
+			double distance = Math.sqrt(Math.pow(centerLoc.getX() - loc.getX(), 2) + Math.pow(centerLoc.getY() - loc.getY(), 2));
 			if (distance < radius){
 				componentsWithinRadius.addAll(componentMap.get(loc));
 			}

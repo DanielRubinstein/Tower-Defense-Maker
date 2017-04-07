@@ -1,6 +1,6 @@
 package frontEnd.Skeleton.UserTools;
 
-import backEnd.Environment.TileImpl;
+import backEnd.State.TileImpl;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.Button;

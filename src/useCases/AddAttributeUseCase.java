@@ -1,10 +1,8 @@
 package useCases;
 
 
-import backEnd.Environment.EnvironmentInterface;
 import backEnd.Environment.ComponentBank;
-import backEnd.Environment.Tile;
-import backEnd.Environment.TileAttribute;
+import backEnd.Environment.EnvironmentInterface;
 import backEnd.GameEngine.Attribute;
 import backEnd.GameEngine.Component;
 import backEnd.GameEngine.Engine;
@@ -82,4 +80,6 @@ public class AddAttributeUseCase implements Attribute{
 
 */
 import backEnd.State.State;
+import backEnd.State.Tile;
+import backEnd.State.TileAttribute;
 import backEnd.State.TileGrid;
