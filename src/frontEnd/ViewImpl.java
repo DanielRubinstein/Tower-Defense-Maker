@@ -5,13 +5,14 @@ import java.util.Observer;
 import java.util.function.Consumer;
 
 import backEnd.GameData;
+import backEnd.Mode.ModeEditor;
 import backEnd.Model.Model;
 import frontEnd.Menus.GameSelection;
 import frontEnd.Menus.MainMenu;
 import frontEnd.Skeleton.SkeletonImpl;
 import javafx.stage.Stage;
 
-public class View implements Observer{
+public class ViewImpl implements Observer, ViewEditor{
 	private Model myModel;
 	private SkeletonImpl mySkeleton;
 	private Consumer<GameData> gameDataConsumer;
@@ -26,8 +27,6 @@ public class View implements Observer{
 		mainMenu.setGameSelection(gS);
 		mainMenu.showMenus(stage);
 	}
-	
-	
 	
 	public void setModel(Model model) {
 		this.myModel = model;
@@ -45,9 +44,14 @@ public class View implements Observer{
 	}
 
 	private void createNewSkeleton() {
-		mySkeleton = new SkeletonImpl();
+		mySkeleton = new SkeletonImpl(this);
 		
 		
+	}
+	@Override
+	public ModeEditor getMode() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

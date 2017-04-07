@@ -1,5 +1,6 @@
 package frontEnd.Skeleton.UserTools;
 
+import frontEnd.ViewEditor;
 import frontEnd.Menus.ButtonMenuImpl;
 import frontEnd.Menus.MainMenu;
 import frontEnd.Menus.StartMenu;
@@ -33,9 +34,10 @@ import javax.swing.event.ChangeEvent;
 public class SettingsViewImpl implements SettingsView{
 	private Stage myStage;
 	private SettingsBinding myBinding;
+	private ViewEditor myView;
 	
-	
-	public SettingsViewImpl() {
+	public SettingsViewImpl(ViewEditor view) {
+		myView = view;
 		myStage = new Stage();
 		myBinding = new SettingsBinding();
 		addButtons(myStage);
@@ -62,7 +64,7 @@ public class SettingsViewImpl implements SettingsView{
 		myMenu.addNode(ruleButtons);
 		
 		//adding player/godmode switch
-		ToggleSwitch modeToggle = new ToggleSwitch("Player", e-> togglePlayerMode(), "Author", e -> toggleAuthorMode());
+		ToggleSwitch modeToggle = new ToggleSwitch(myView,"Player", e-> togglePlayerMode(), "Author", e -> toggleAuthorMode());
 		myMenu.addNode(modeToggle.getRoot());
 		
 		myMenu.create();

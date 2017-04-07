@@ -1,5 +1,6 @@
 package frontEnd.Skeleton.UserTools;
 
+import frontEnd.ViewEditor;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -19,6 +20,7 @@ public class ToggleSwitch {
 	private HBox toggle;
 	private Label label;
 	private Button button;
+	private ViewEditor myView;
 
 	private SimpleBooleanProperty switchedOn;
 
@@ -26,7 +28,7 @@ public class ToggleSwitch {
 		return switchedOn;
 	}
 
-	public ToggleSwitch(String title1, EventHandler<ActionEvent> opt1, String title2, EventHandler<ActionEvent> opt2) {
+	public ToggleSwitch(ViewEditor myView, String title1, EventHandler<ActionEvent> opt1, String title2, EventHandler<ActionEvent> opt2) {
 		toggle = new HBox();
 		label = new Label();
 		button = new Button();

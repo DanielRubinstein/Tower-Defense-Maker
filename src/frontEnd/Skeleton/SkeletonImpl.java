@@ -1,5 +1,6 @@
 package frontEnd.Skeleton;
 
+import frontEnd.ViewEditor;
 import frontEnd.Skeleton.UserTools.UserTools;
 import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
@@ -13,15 +14,16 @@ public class SkeletonImpl implements Skeleton{
 
 	public static final double MENU_HEIGHT = 500d;
 	public static final double MENU_WIDTH = 500d;
+	private ViewEditor myView;
 	
-	public SkeletonImpl(){
+	public SkeletonImpl(ViewEditor view){
 		myRoot = new BorderPane();
-		
-		Canvas canvas = new Canvas();
+		myView=view;
+		Canvas canvas = new Canvas(view);
 		canvas.setSize(300, 400);
 		myRoot.setCenter(canvas.getRoot());
 		
-		userTools = new UserTools();
+		userTools = new UserTools(view);
 		userTools.setPaneThickness(MENU_WIDTH*0.2);
 		myRoot.setRight(userTools.getSidePane());
 		myRoot.setBottom(userTools.getBottomPane());	

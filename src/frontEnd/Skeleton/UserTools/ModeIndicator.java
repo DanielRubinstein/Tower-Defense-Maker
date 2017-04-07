@@ -3,6 +3,7 @@ package frontEnd.Skeleton.UserTools;
 import backEnd.Mode.Author;
 import backEnd.Mode.Mode;
 import backEnd.Mode.Player;
+import frontEnd.ViewReader;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.layout.VBox;
@@ -11,8 +12,10 @@ public class ModeIndicator {
 	private Label pausedIndicator;
 	private Label modeIndicator;
 	private VBox indicatorHolder;
+	private ViewReader myView;
 	
-	public ModeIndicator(){
+	public ModeIndicator(ViewReader view){
+		myView=view;
 		pausedIndicator = new Label("Game is paused");
 		modeIndicator = new Label("random mode");
 		indicatorHolder = new VBox();

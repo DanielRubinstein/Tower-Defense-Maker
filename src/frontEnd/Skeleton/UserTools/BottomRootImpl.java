@@ -1,5 +1,7 @@
 package frontEnd.Skeleton.UserTools;
 
+import frontEnd.ViewEditor;
+import frontEnd.ViewReader;
 import javafx.geometry.Insets;
 import javafx.scene.Node;
 import javafx.scene.layout.Background;
@@ -19,10 +21,11 @@ public class BottomRootImpl implements BottomRoot{
 	private BottomBar myBottomBar;
 	private OptionsCorner myOptions;
 	private HBox myRoot;
-	public BottomRootImpl() {
+	
+	public BottomRootImpl(ViewEditor view) {
 		myRoot = new HBox();
-		initializeBar();
-		initializeCorner();
+		initializeBar(view);
+		initializeCorner(view);
 	}
 	
 	public void setHeight(double height){
@@ -32,13 +35,13 @@ public class BottomRootImpl implements BottomRoot{
 		myBottomBar.setHeight(height);
 		myOptions.setSideLength(height);
 	}
-	private void initializeBar(){
+	private void initializeBar(ViewReader view){
 		myBottomBar = new BottomBarImpl();
 		HBox.setHgrow(myBottomBar.getRoot(), Priority.ALWAYS);
 		myRoot.getChildren().add(myBottomBar.getRoot());
 	}
-	private void initializeCorner(){
-		myOptions = new OptionsCornerImpl();
+	private void initializeCorner(ViewEditor view){
+		myOptions = new OptionsCornerImpl(view);
 		myRoot.getChildren().add(myOptions.getRoot());
 	}
 

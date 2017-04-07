@@ -1,5 +1,6 @@
 package frontEnd.Skeleton.UserTools;
 
+import frontEnd.ViewEditor;
 import javafx.geometry.Insets;
 import javafx.scene.Node;
 import javafx.scene.layout.Background;
@@ -13,7 +14,8 @@ public class SideBarImpl implements SideBar{
 	private VBox myRoot;
 	private StatusView myStatusView;
 	
-	public SideBarImpl(){
+	//takes ViewEditor for now
+	public SideBarImpl(ViewEditor view){
 		myRoot = new VBox();
 		myRoot.setBackground(new Background (new BackgroundFill(Color.CHOCOLATE, CornerRadii.EMPTY, Insets.EMPTY)));
 		System.out.println("set sidebar bakcground");

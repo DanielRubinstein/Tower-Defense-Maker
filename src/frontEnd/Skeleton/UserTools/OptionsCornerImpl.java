@@ -1,6 +1,8 @@
 package frontEnd.Skeleton.UserTools;
 
 import backEnd.Environment.TileImpl;
+import frontEnd.ViewEditor;
+import frontEnd.ViewReader;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
@@ -18,10 +20,10 @@ public class OptionsCornerImpl implements OptionsCorner{
 	private SettingsView settingsDisplay;
 	private OptionsSelection userOptions;
 	
-	public OptionsCornerImpl() {
+	public OptionsCornerImpl(ViewEditor view) {
 		myRoot = new VBox();
-		settingsDisplay = new SettingsViewImpl();
-		addModeIndicator();
+		settingsDisplay = new SettingsViewImpl(view);
+		addModeIndicator(view);
 		setUserOptions();	
 	}
 
@@ -39,8 +41,8 @@ public class OptionsCornerImpl implements OptionsCorner{
 		myRoot.getChildren().add(userOptions.getNode());
 	}
 	
-	private void addModeIndicator() {
-		ModeIndicator mI = new ModeIndicator();
+	private void addModeIndicator(ViewReader view) {
+		ModeIndicator mI = new ModeIndicator(view);
 		myRoot.getChildren().add(mI.getIndicator());
 	}
 
