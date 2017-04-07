@@ -1,6 +1,5 @@
 package frontEnd.Skeleton.UserTools;
 
-import frontEnd.ViewEditor;
 import frontEnd.ViewReader;
 import javafx.geometry.Insets;
 import javafx.scene.Node;
@@ -16,11 +15,11 @@ public class SideBarImpl implements SideBar{
 	private StatusView myStatusView;
 	
 	//takes ViewEditor for now
-	public SideBarImpl(ViewEditor view){
+	public SideBarImpl(ViewReader view){
 		myRoot = new VBox();
 		myRoot.setBackground(new Background (new BackgroundFill(Color.CHOCOLATE, CornerRadii.EMPTY, Insets.EMPTY)));
 		
-		myStatusView = new StatusView((ViewReader) view);
+		myStatusView = new StatusView(view);
 		myRoot.getChildren().add(myStatusView.getRoot());
 		
 		addModeIndicator(view);
@@ -38,6 +37,6 @@ public class SideBarImpl implements SideBar{
 	
 	private void addModeIndicator(ViewReader view) {
 		ModeIndicator mI = new ModeIndicator(view);
-		myRoot.getChildren().add(mI.getIndicator());
+		myRoot.getChildren().add(mI.getRoot());
 	}
 }

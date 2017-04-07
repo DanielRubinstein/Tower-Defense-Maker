@@ -1,11 +1,14 @@
 package useCases;
 
-
-import backEnd.Environment.ComponentBank;
+import backEnd.Environment.Behavior;
 import backEnd.Environment.EnvironmentInterface;
+import backEnd.Environment.Mode;
+import backEnd.Environment.ComponentBank;
+import backEnd.Environment.Tile;
+import backEnd.Environment.TileAttribute;
 import backEnd.GameEngine.Attribute;
 import backEnd.GameEngine.Component;
-import backEnd.GameEngine.Engine;
+import backEnd.GameEngine.Engine.Engine;
 /**
  * 
  * @author christianmartindale
@@ -56,7 +59,7 @@ public class AddAttributeUseCase implements Attribute{
 	 * @param addTo the Component to be modified
 	 * @param addedAttribute the desired attribute to be added to a Component
 	 */
-/*
+/**
 	public void addAttribute(Component addTo, Attribute addedAttribute){
 		addTo.addAttribute(addedAttribute);
 	}
@@ -77,9 +80,4 @@ public class AddAttributeUseCase implements Attribute{
 	
 	
 }
-
-*/
-import backEnd.State.State;
-import backEnd.State.Tile;
-import backEnd.State.TileAttribute;
-import backEnd.State.TileGrid;
+**/

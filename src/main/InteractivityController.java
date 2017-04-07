@@ -6,6 +6,15 @@ import backEnd.GameEngine.Engine;
 import backEnd.Mode.ModeEnum;
 import backEnd.State.State;
 
+/**
+ * Controller the front end calls when it detects a state modification from the user,
+ * 
+ * Front end creates instance of the appropriate ModificationFromUser class and passes it as a parameter to the 
+ * executeInteraction() method
+ * 
+ * @author Derek
+ *
+ */
 public class InteractivityController {
 
 	private ModeEnum currentMode;

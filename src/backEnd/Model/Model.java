@@ -10,6 +10,7 @@ import backEnd.Mode.Author;
 import backEnd.Mode.Mode;
 import backEnd.State.State;
 import backEnd.State.StateImpl;
+import frontEnd.ViewEditor;
 
 public class Model extends Observable{
 	private GameData gameData;
