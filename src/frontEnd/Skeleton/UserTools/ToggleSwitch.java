@@ -29,8 +29,8 @@ public class ToggleSwitch {
 		return switchedOn;
 	}
 
-	public ToggleSwitch(ViewEditor view, String title1, String title2) {
-		myMode = view.getMode();
+	public ToggleSwitch(ModeEditor mode, String title1, String title2) {
+		myMode = mode;
 		toggle = new HBox();
 		label = new Label();
 		button = new Button();

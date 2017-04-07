@@ -5,7 +5,7 @@ import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.layout.VBox;
 
-public class ModeIndicator {
+public class ModeIndicator implements SkeletonObject{
 	private Label pausedIndicator;
 	private Label modeIndicator;
 	private VBox indicatorHolder;
@@ -25,7 +25,7 @@ public class ModeIndicator {
 	
 
 	
-	public Node getIndicator(){
+	public Node getRoot(){
 		return indicatorHolder;
 	}
 	
