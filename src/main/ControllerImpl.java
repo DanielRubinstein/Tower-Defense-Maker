@@ -1,37 +1,56 @@
 package main;
 
-import backEnd.Bank.BankController;
+import ModificationFromUser.ModificationFromUser;
+import backEnd.Model;
 import backEnd.Data.DataController;
 import backEnd.GameData.GameData;
-import backEnd.GameData.State.State;
-import backEnd.GameData.State.StateImpl;
-import backEnd.GameEngine.GameProcessController;
 import backEnd.Mode.Mode;
 import backEnd.Mode.UserModeType;
 import frontEnd.ViewImpl;
-import frontEnd.Skeleton.Skeleton;
 import frontEnd.Skeleton.SkeletonImpl;
 import javafx.stage.Stage;
 
-public class ControllerImpl implements Controller
-{
+public class ControllerImpl implements Controller {
 	private ViewImpl myView;
-	private BankController myBankController;
-	private GameData myGameData;
-	private GameProcessController myEngineController;
+	private Model myModel;
 	private Mode myMode;
+	private GameData myGameData;
 	private DataController myDataController;
-	
-	public void start(Stage stage){
+
+	public void start(Stage stage) {
+		//developerTestingSkeleton(stage);
+
 		
-		myView = new ViewImpl();
 		myMode = new Mode(null, UserModeType.AUTHOR);
+		
+		/*
+		myDataController = new DataController();
+		myGameData = myDataController.getGameData("");
+		
+		myModel = new Model(myGameData, myMode, myDataController);
+		*/
+		
+		myView = new ViewImpl(myMode, 
+				(ModificationFromUser m) -> {
+					executeInteraction(m);
+					System.out.println("Modification from user sent to back end");
+				});
+		
+	}
+
+	/**
+	 * The skeleton should be instantiated within View. This is here just for
+	 * testing purposes
+	 * 
+	 * @param stage
+	 */
+	private void developerTestingSkeleton(Stage stage) {
 		SkeletonImpl skeleton = new SkeletonImpl(myView);
 		skeleton.display(stage);
-		//myDataController = new DataController();
-		
-		//myGameData = myDataController.getGameData();
-		//myBankController = new BankController(myDataController.getComponents(), myDataController.getTiles());
+
+	}
 	
+	private void executeInteraction(ModificationFromUser myInteraction){
+		myInteraction.invoke(myModel);
 	}
 }

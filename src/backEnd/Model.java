@@ -1,10 +1,11 @@
 package backEnd;
 
-import ModificationFromUser.ModificationFromUser;
 import backEnd.Bank.BankController;
+import backEnd.Data.DataController;
+import backEnd.GameData.GameData;
 import backEnd.GameData.State.State;
 import backEnd.GameEngine.GameProcessController;
-import backEnd.Mode.ModeEnum;
+import backEnd.Mode.Mode;
 
 /**
  * Controller the front end calls when it detects a backend modification from the user,
@@ -16,32 +17,25 @@ import backEnd.Mode.ModeEnum;
  *
  */
 public class Model {
-
-	private ModeEnum currentMode;
-	private ModeEnum nextMode;
+	private GameData myGameData;
+	private Mode myMode;
 	private BankController myBankController;
-	private State myState;
 	private GameProcessController myEngine;
 	
-	public Model(ModeEnum startingMode, State myState, BankController myBankController, GameProcessController myEngine){
-		currentMode = startingMode;
-		nextMode = ModeEnum.getNextMode(currentMode);
-		this.myState = myState;
-		this.myBankController = myBankController;
-		this.myEngine = myEngine;
-	}
-	
-	public void changeMode(){
-		ModeEnum tempMode = currentMode;
-		currentMode = nextMode;
-		nextMode = tempMode;
-	}
-	
-	public void executeInteraction(ModificationFromUser myInteraction){
-		myInteraction.invoke(currentMode, this);
+	public Model(GameData gameData, Mode startingMode, DataController dataController){
+		myGameData = gameData;
+		myMode = startingMode;
+		myEngine = new GameProcessController(myGameData.getState(), myGameData.getRules());
+		
+		// FIXME what are the parameters to BankController
+		myBankController = new BankController(dataController.getTileMap(), dataController.getComponentsMap());
 	}
 	
 	public State getState(){
-		return myState;
+		return myGameData.getState();
+	}
+	
+	public Mode getMode(){
+		return myMode;
 	}
 }
