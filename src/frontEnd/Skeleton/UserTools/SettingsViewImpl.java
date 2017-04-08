@@ -66,7 +66,7 @@ public class SettingsViewImpl implements SettingsView{
 		myMenu.addNode(ruleButtons);
 		
 		//adding player/godmode switch
-		ToggleSwitch modeToggle = new ToggleSwitch(myView.getMode(),"Player", "Author");
+		ToggleSwitch modeToggle = new ToggleSwitch(myView,"Player", "Author");
 		myMenu.addNode(modeToggle.getRoot());
 		
 		myMenu.create();

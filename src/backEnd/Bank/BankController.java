@@ -1,7 +1,8 @@
 package backEnd.Bank;
 
-import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+
 import backEnd.GameEngine.Attribute;
 import backEnd.GameEngine.Behavior;
 import backEnd.GameEngine.Component;
@@ -10,14 +11,14 @@ import backEnd.GameData.State.Tile;
 
 public class BankController
 {
-	private HashMap<String, Tile> tileBank;
-	private HashMap<String, Component> componentBank;
+	private Map<String, Tile> tileBank;
+	private Map<String, Component> componentBank;
 	private BehaviorBank behaviorBank;
 	private RuleBank ruleBank;
 	private AttributeBank attributeBank;
 	
 
-	public BankController(HashMap<String, Tile> tileBank, HashMap<String, Component> componentBank)
+	public BankController(Map<String, Tile> tileBank, Map<String, Component> componentBank)
 	{
 		this.tileBank = tileBank;
 		this.componentBank = componentBank;
@@ -37,7 +38,7 @@ public class BankController
 		tileBank.remove(name);
 	}
 	
-	public HashMap<String, Tile> getTileMap()
+	public Map<String, Tile> getTileMap()
 	{
 		return tileBank;
 	}
@@ -52,7 +53,7 @@ public class BankController
 		componentBank.remove(name);
 	}
 	
-	public HashMap<String, Component> getComponentMap()
+	public Map<String, Component> getComponentMap()
 	{
 		return componentBank;
 	}

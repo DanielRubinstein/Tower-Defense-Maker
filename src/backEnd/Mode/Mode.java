@@ -7,7 +7,7 @@ package backEnd.Mode;
  * @author Riley
  *
  */
-public class Mode{
+public class Mode implements ModeReader{
 	private UserModeType currUserMode;
 	private GameModeType currGameMode;
 	
@@ -24,6 +24,7 @@ public class Mode{
 		return currUserMode;
 	}
 	
+	@Override
 	public String getUserModeString(){
 		return currUserMode.toString();
 	}
@@ -36,8 +37,14 @@ public class Mode{
 		return currGameMode;
 	}
 	
+	@Override
 	public String getGameModeString(){
 		return currGameMode.toString();
+	}
+	
+	public void switchMode(){
+		System.out.println("MODE CHANGE");
+		currUserMode = UserModeType.getNextMode(currUserMode);
 	}
 	
 }

@@ -4,7 +4,9 @@ public interface ModeReader {
 	
 	
 	// "Player" or "Author"
-	public String getName();
+	public String getUserModeString();
+	
+	public String getGameModeString();
 
 	
 	
