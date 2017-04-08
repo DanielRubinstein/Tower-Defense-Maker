@@ -35,4 +35,8 @@ public interface Tile {
 	
 	boolean hasTileAttributeType(TileAttributeType type);
 	
+	void addAccessPermission(AccessParty newParty);
+	
+	boolean permitsAccess(AccessParty party);
+	
 }

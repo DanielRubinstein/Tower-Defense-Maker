@@ -4,21 +4,20 @@ import backEnd.GameEngine.Component;
 import backEnd.Mode.ModeEnum;
 import backEnd.State.State;
 import javafx.geometry.Point2D;
+import main.InteractivityController;
 
 public class Modification_RemoveComponent implements ModificationFromUser {
 	
 	private Component removeComp;
-	private State myState;
 
-	public Modification_RemoveComponent(State myState, Component removeComp){
-		this.myState = myState;
+	public Modification_RemoveComponent(Component removeComp){
 		this.removeComp = removeComp;
 		
 	}
 	
 	@Override
-	public void invoke(ModeEnum currentMode) {
-		myState.getComponentGraph().removeComponent(removeComp);
+	public void invoke(ModeEnum currentMode, InteractivityController myController) {
+		myController.getState().getComponentGraph().removeComponent(removeComp);
 		
 	}
 

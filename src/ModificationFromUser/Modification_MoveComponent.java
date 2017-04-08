@@ -6,13 +6,12 @@ import backEnd.Mode.ModeEnum;
 import backEnd.Mode.ModeException;
 import main.InteractivityController;
 
-public class Modification_AddComponentBehavior implements ModificationFromUser {
+public class Modification_MoveComponent implements ModificationFromUser {
 
 	private Component myComp;
 	private Behavior myBehavior;
-	public static final String ERROR_MESSAGE = "You cannot add behaviors in Player mode!";
 	
-	public Modification_AddComponentBehavior(Component myComp, Behavior newBehavior) {
+	public Modification_MoveComponent(Component myComp, Behavior newBehavior) {
 		this.myComp = myComp;
 		this.myBehavior = newBehavior;
 
@@ -20,12 +19,7 @@ public class Modification_AddComponentBehavior implements ModificationFromUser {
 
 	@Override
 	public void invoke(ModeEnum currentMode, InteractivityController myController) {
-		switch (currentMode) {
-		case AUTHOR:
-			myComp.addBehavior(myBehavior);
-		case PLAYER:
-			 throw new ModeException(ERROR_MESSAGE);
-		}
+		
 
 	}
 

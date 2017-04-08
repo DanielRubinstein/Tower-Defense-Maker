@@ -14,6 +14,17 @@ public class TileImpl implements Tile{
 		myLocation = location;
 		myPermissionAccessList = permissionAccessList;
 	}
+	
+	public void addAccessPermission(AccessParty newParty){
+		myPermissionAccessList.add(newParty);
+	}
+	
+	public boolean permitsAccess(AccessParty party){
+		if (myPermissionAccessList.contains(party)){
+			return true;
+		}
+		return false;
+	}
 
 	public void addTileAttribute(TileAttribute<?> newAttr){
 		if (hasTileAttributeType(newAttr.getType())){

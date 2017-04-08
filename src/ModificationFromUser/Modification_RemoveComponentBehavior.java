@@ -6,27 +6,29 @@ import backEnd.Mode.ModeEnum;
 import backEnd.Mode.ModeException;
 import main.InteractivityController;
 
-public class Modification_AddComponentBehavior implements ModificationFromUser {
+public class Modification_RemoveComponentBehavior implements ModificationFromUser {
 
 	private Component myComp;
 	private Behavior myBehavior;
-	public static final String ERROR_MESSAGE = "You cannot add behaviors in Player mode!";
+	public static final String ERROR_MESSAGE = "You cannot remove behaviors in Player mode!";
 	
-	public Modification_AddComponentBehavior(Component myComp, Behavior newBehavior) {
+	public Modification_RemoveComponentBehavior(Component myComp, Behavior removeBehavior) {
 		this.myComp = myComp;
-		this.myBehavior = newBehavior;
+		this.myBehavior = removeBehavior;
 
 	}
-
+	
+	
 	@Override
 	public void invoke(ModeEnum currentMode, InteractivityController myController) {
 		switch (currentMode) {
 		case AUTHOR:
-			myComp.addBehavior(myBehavior);
+			myComp.removeBehavior(myBehavior);
 		case PLAYER:
 			 throw new ModeException(ERROR_MESSAGE);
 		}
 
+		
 	}
 
 }
