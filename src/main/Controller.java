@@ -14,8 +14,7 @@ import javafx.stage.Stage;
 
 public interface Controller{
 	
-	void start(Stage stage);
+	public void start(Stage stage);
 	
-	void setupModelViewBridge(GameData gameData);
-	
+	public void setupModelViewBridge(GameData gameData);
 }

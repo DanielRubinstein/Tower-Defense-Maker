@@ -7,7 +7,7 @@ import backEnd.Mode.ModeEnum;
 import backEnd.State.State;
 
 /**
- * Controller the front end calls when it detects a state modification from the user,
+ * Controller the front end calls when it detects a backend modification from the user,
  * 
  * Front end creates instance of the appropriate ModificationFromUser class and passes it as a parameter to the 
  * executeInteraction() method
@@ -38,7 +38,10 @@ public class InteractivityController {
 	}
 	
 	public void executeInteraction(ModificationFromUser myInteraction){
-		myInteraction.invoke(currentMode);
+		myInteraction.invoke(currentMode, this);
 	}
 	
+	public State getState(){
+		return myState;
+	}
 }
