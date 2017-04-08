@@ -4,6 +4,7 @@ import backEnd.Mode.ModeEnum;
 import backEnd.Mode.ModeException;
 import backEnd.State.Tile;
 import backEnd.State.TileAttribute;
+import main.InteractivityController;
 
 public class Modification_RemoveTileAttribute implements ModificationFromUser {
 
@@ -18,7 +19,7 @@ public class Modification_RemoveTileAttribute implements ModificationFromUser {
 	}
 
 	@Override
-	public void invoke(ModeEnum currentMode) {
+	public void invoke(ModeEnum currentMode, InteractivityController myController) {
 		switch (currentMode) {
 		case AUTHOR:
 			myTile.removeTileAttribute(myAttr);

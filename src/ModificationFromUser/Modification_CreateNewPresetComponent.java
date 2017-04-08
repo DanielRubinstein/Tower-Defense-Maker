@@ -5,6 +5,7 @@ import backEnd.Mode.ModeEnum;
 import backEnd.Mode.ModeException;
 import backEnd.State.State;
 import javafx.geometry.Point2D;
+import main.InteractivityController;
 
 public class Modification_CreateNewPresetComponent implements ModificationFromUser {
 
@@ -18,7 +19,7 @@ public class Modification_CreateNewPresetComponent implements ModificationFromUs
 
 	
 	@Override
-	public void invoke(ModeEnum currentMode) {
+	public void invoke(ModeEnum currentMode, InteractivityController myController) {
 		switch (currentMode) {
 		case AUTHOR:
 			componentBank.addPreset(newComp);
