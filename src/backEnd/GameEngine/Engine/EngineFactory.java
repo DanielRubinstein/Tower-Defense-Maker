@@ -1,15 +1,14 @@
-package backEnd.GameEngine;
+package backEnd.GameEngine.Engine;
 
 import java.util.ResourceBundle;
+
+import backEnd.GameEngine.Behavior;
 
 public class EngineFactory {
 	
 	private final static String RESOURCES_PATH = "resources/engineNames";
 	private final static ResourceBundle myResources = ResourceBundle.getBundle(RESOURCES_PATH);
 	
-	public EngineFactory(){
-		
-	}
 	public Engine getEngine(Behavior behavior){
 		String simpleName = behavior.getClass().getSimpleName();
 		String fullName = behavior.getClass().getName();
