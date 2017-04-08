@@ -3,6 +3,8 @@ package frontEnd.Skeleton.UserTools;
 import java.util.ArrayList;
 import java.util.List;
 
+import backEnd.Mode.ModeEditor;
+import frontEnd.ViewEditor;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
@@ -24,10 +26,12 @@ public class OptionsSelection {
 	private TilePane myRoot;
 	private SettingsView mySettings;
 	private List<Button> myButtons;
+	private ModeEditor myMode;
 	
-	public OptionsSelection(SettingsView settings) {
+	public OptionsSelection(ViewEditor view) {
 		myRoot = new TilePane(Orientation.HORIZONTAL,0, 0);
-		mySettings=settings;
+		myMode = view.getMode();
+		mySettings= new SettingsViewImpl(view);
 	}
 	
 	public Node getNode(){
@@ -49,9 +53,9 @@ public class OptionsSelection {
 
 	
 	private void addButtons(double size){
-		addButtonImage(PLAY_IMAGE, e-> System.out.println("play"),size);
-		addButtonImage(PAUSE_IMAGE, e-> System.out.println("pausing"),size);
-		addButtonImage(FASTFWD_IMAGE, e-> System.out.println("fast forwarding"),size);
+		addButtonImage(PLAY_IMAGE, e-> myMode.play() ,size);
+		addButtonImage(PAUSE_IMAGE, e-> myMode.pause() ,size);
+		addButtonImage(FASTFWD_IMAGE, e-> myMode.fastForward() ,size);
 		addButtonImage(SETTINGS_IMAGE, e-> mySettings.launchSettings(),size);
 	}
 	
