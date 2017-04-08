@@ -1,10 +1,10 @@
 package ModificationFromUser;
 
+import backEnd.Model;
 import backEnd.GameEngine.Behavior;
 import backEnd.GameEngine.Component;
 import backEnd.Mode.ModeEnum;
 import backEnd.Mode.ModeException;
-import main.InteractivityController;
 
 public class Modification_AddComponentBehavior implements ModificationFromUser {
 
@@ -19,7 +19,7 @@ public class Modification_AddComponentBehavior implements ModificationFromUser {
 	}
 
 	@Override
-	public void invoke(ModeEnum currentMode, InteractivityController myController) {
+	public void invoke(ModeEnum currentMode, Model myController) {
 		switch (currentMode) {
 		case AUTHOR:
 			myComp.addBehavior(myBehavior);

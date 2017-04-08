@@ -2,8 +2,8 @@ package backEnd.Data;
 
 import java.util.List;
 
-import backEnd.GameDataInterface;
-import backEnd.Environment.BankController;
+import backEnd.Bank.BankController;
+import backEnd.GameData.GameDataInterface;
 
 public interface XMLWriter {
 	

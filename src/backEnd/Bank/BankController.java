@@ -1,4 +1,4 @@
-package backEnd.Environment;
+package backEnd.Bank;
 
 public class BankController {
 	//this essentially holds all the banks and has getters/setters for them

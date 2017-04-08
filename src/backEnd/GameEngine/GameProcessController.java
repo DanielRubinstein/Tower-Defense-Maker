@@ -2,9 +2,9 @@ package backEnd.GameEngine;
 
 import java.util.List;
 
-import backEnd.Rules;
+import backEnd.GameData.Rules;
+import backEnd.GameData.State.State;
 import backEnd.GameEngine.Engine.Engine;
-import backEnd.State.State;
 
 public class GameProcessController {
 

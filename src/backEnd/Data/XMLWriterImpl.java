@@ -5,9 +5,9 @@ import java.io.FileOutputStream;
 import com.thoughtworks.xstream.XStream;
 import com.thoughtworks.xstream.io.xml.StaxDriver;
 
-import backEnd.GameData;
-import backEnd.GameDataInterface;
-import backEnd.Environment.BankController;
+import backEnd.Bank.BankController;
+import backEnd.GameData.GameData;
+import backEnd.GameData.GameDataInterface;
 
 public class XMLWriterImpl implements XMLWriter{
 	private XStream xStream;

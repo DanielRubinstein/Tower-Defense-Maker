@@ -1,7 +1,7 @@
 package frontEnd.Skeleton.UserTools;
 
-import backEnd.State.TileImpl;
-import backEnd.State.Tile;
+import backEnd.GameData.State.Tile;
+import backEnd.GameData.State.TileImpl;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.layout.HBox;

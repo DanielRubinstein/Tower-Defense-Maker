@@ -1,4 +1,4 @@
-package backEnd.Environment;
+package backEnd.Bank;
 
 public class TileAttributeBank {
 

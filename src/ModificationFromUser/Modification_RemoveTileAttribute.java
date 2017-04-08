@@ -1,10 +1,10 @@
 package ModificationFromUser;
 
+import backEnd.Model;
+import backEnd.GameData.State.Tile;
+import backEnd.GameData.State.TileAttribute;
 import backEnd.Mode.ModeEnum;
 import backEnd.Mode.ModeException;
-import backEnd.State.Tile;
-import backEnd.State.TileAttribute;
-import main.InteractivityController;
 
 public class Modification_RemoveTileAttribute implements ModificationFromUser {
 
@@ -19,7 +19,7 @@ public class Modification_RemoveTileAttribute implements ModificationFromUser {
 	}
 
 	@Override
-	public void invoke(ModeEnum currentMode, InteractivityController myController) {
+	public void invoke(ModeEnum currentMode, Model myController) {
 		switch (currentMode) {
 		case AUTHOR:
 			myTile.removeTileAttribute(myAttr);
