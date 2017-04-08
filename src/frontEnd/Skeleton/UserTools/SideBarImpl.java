@@ -17,8 +17,8 @@ public class SideBarImpl implements SideBar{
 	//takes ViewEditor for now
 	public SideBarImpl(ViewReader view){
 		myRoot = new VBox();
-		myRoot.setBackground(new Background (new BackgroundFill(Color.CHOCOLATE, CornerRadii.EMPTY, Insets.EMPTY)));
-		
+		//myRoot.setBackground(new Background (new BackgroundFill(Color.CHOCOLATE, CornerRadii.EMPTY, Insets.EMPTY)));
+		myRoot.getStyleClass().add("side-bar");
 		myStatusView = new StatusView(view);
 		myRoot.getChildren().add(myStatusView.getRoot());
 		

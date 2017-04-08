@@ -2,6 +2,7 @@ package frontEnd.Skeleton;
 
 import backEnd.State.State;
 import backEnd.State.StateImpl;
+import backEnd.State.TileGrid;
 import frontEnd.ViewEditor;
 import frontEnd.Skeleton.UserTools.UserTools;
 import javafx.scene.Scene;
@@ -18,16 +19,21 @@ public class SkeletonImpl implements Skeleton{
 	public static final double MENU_WIDTH = 500d;
 	private static final double CANVAS_HEIGHT_FACTOR = 0.8;
 	private static final double CANVAS_WIDTH_FACTOR = 0.8;
-
 	private static final double BOTTOM_HEIGHT_FACTOR = 0.2;
 	private static final double SIDE_WIDTH_FACTOR = 0.2;
+	
+
+	private static final String DEFAULT_CSS = "/resources/css/vooga.css";
+	
 	
 	
 	public SkeletonImpl(ViewEditor view){
 		myRoot = new BorderPane();
-		State myState = new StateImpl((int)(MENU_WIDTH*CANVAS_WIDTH_FACTOR),(int)(MENU_WIDTH*CANVAS_WIDTH_FACTOR));
+		align(MENU_WIDTH,MENU_HEIGHT);
+		State myState = new StateImpl((int)(MENU_WIDTH*CANVAS_WIDTH_FACTOR),(int)(MENU_WIDTH*CANVAS_WIDTH_FACTOR),4,4);
 		Canvas canvas = new Canvas(view,myState);
 		canvas.setSize(MENU_WIDTH*CANVAS_HEIGHT_FACTOR, MENU_WIDTH*CANVAS_WIDTH_FACTOR);
+		TileGrid t = myState.getTileGrid();
 		myRoot.setCenter(canvas.getRoot());
 		
 		userTools = new UserTools(view);
@@ -40,7 +46,7 @@ public class SkeletonImpl implements Skeleton{
 	
 
 	public void display(Stage stage) {
-		align(MENU_WIDTH,MENU_HEIGHT);
+
 		stage.setScene(myScene);
 		stage.show();
 	}
@@ -48,6 +54,7 @@ public class SkeletonImpl implements Skeleton{
 		myRoot.setMinWidth(size1);
 		myRoot.setMinHeight(size2);
    	 	myScene = new Scene(myRoot, size1, size2);
+   	 	myScene.getStylesheets().add(DEFAULT_CSS);
 	}
 
 

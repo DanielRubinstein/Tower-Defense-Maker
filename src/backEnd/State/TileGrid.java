@@ -18,6 +18,7 @@ public class TileGrid {
 	public TileGrid(int width, int height){
 		gridWidth = width;
 		gridHeight = height;
+		tileGrid = new Tile[width][height];
 	}
 	
 	/**

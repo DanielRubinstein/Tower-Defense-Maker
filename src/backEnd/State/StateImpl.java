@@ -23,7 +23,7 @@ public class StateImpl implements State{
 		imageMap = new HashMap<Attribute<String>, String>();
 	}
 
-	private void setDefaultTileGrid(int gridWidth, int gridHeight) {
+	private void setDefaultTileGrid(int gridWidth, int gridHeight, int pointResolution_Width, int pointResolution_Height) {
 		tileGrid = new TileGrid(gridWidth, gridHeight);
 		for (int i = 0; i < gridWidth; i++){
 			for (int j = 0; j < gridWidth; j++){
