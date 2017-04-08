@@ -1,6 +1,5 @@
 package frontEnd.Skeleton.UserTools;
 
-import backEnd.Environment.TileImpl;
 import frontEnd.ViewEditor;
 import frontEnd.ViewReader;
 import javafx.geometry.Pos;

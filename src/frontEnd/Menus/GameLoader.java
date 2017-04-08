@@ -11,9 +11,9 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-import backEnd.GameData;
 import backEnd.Data.GameFileException;
 import backEnd.Data.XMLReaderImpl;
+import backEnd.GameData.GameData;
 import backEnd.Data.XMLReader;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;

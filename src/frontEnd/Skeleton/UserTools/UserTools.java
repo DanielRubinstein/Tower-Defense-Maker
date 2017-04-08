@@ -2,7 +2,7 @@ package frontEnd.Skeleton.UserTools;
 
 import java.util.function.Consumer;
 
-import backEnd.GameData;
+import backEnd.GameData.GameData;
 import frontEnd.ViewEditor;
 import javafx.scene.Node;
 

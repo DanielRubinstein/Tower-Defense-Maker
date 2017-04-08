@@ -1,4 +1,4 @@
-package backEnd.State;
+package backEnd.GameData.State;
 
 public enum AccessParty {
 	//Modes: 

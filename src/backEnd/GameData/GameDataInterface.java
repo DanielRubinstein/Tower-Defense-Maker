@@ -1,6 +1,6 @@
-package backEnd;
+package backEnd.GameData;
 
-import backEnd.State.State;
+import backEnd.GameData.State.State;
 
 public interface GameDataInterface {
 	

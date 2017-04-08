@@ -1,10 +1,10 @@
-package main;
+package backEnd;
 
 import ModificationFromUser.ModificationFromUser;
-import backEnd.Environment.Environment;
-import backEnd.GameEngine.Engine;
+import backEnd.Bank.Environment;
+import backEnd.GameData.State.State;
+import backEnd.GameEngine.GameProcessController;
 import backEnd.Mode.ModeEnum;
-import backEnd.State.State;
 
 /**
  * Controller the front end calls when it detects a backend modification from the user,
@@ -15,15 +15,15 @@ import backEnd.State.State;
  * @author Derek
  *
  */
-public class InteractivityController {
+public class Model {
 
 	private ModeEnum currentMode;
 	private ModeEnum nextMode;
 	private Environment myEnvironment;
 	private State myState;
-	private Engine myEngine;
+	private GameProcessController myEngine;
 	
-	public InteractivityController(ModeEnum startingMode, State myState, Environment myEnv, Engine myEngine){
+	public Model(ModeEnum startingMode, State myState, Environment myEnv, GameProcessController myEngine){
 		currentMode = startingMode;
 		nextMode = ModeEnum.getNextMode(currentMode);
 		this.myState = myState;

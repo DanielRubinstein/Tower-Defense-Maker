@@ -6,9 +6,9 @@ import java.util.function.DoubleToLongFunction;
 
 import com.sun.javafx.geom.Point2D;
 
+import backEnd.GameData.State.State;
 import backEnd.GameEngine.Attribute;
 import backEnd.GameEngine.Component;
-import backEnd.State.State;
 
 public class CollisionEngine implements Engine{
 

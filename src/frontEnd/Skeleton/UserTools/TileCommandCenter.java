@@ -4,9 +4,9 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
+import backEnd.GameData.State.Tile;
 import backEnd.GameEngine.Attribute;
 import backEnd.GameEngine.Component;
-import backEnd.State.Tile;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
