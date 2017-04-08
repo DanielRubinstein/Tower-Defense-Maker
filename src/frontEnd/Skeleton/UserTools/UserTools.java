@@ -1,8 +1,6 @@
 package frontEnd.Skeleton.UserTools;
 
-import java.util.function.Consumer;
 
-import backEnd.GameData.GameData;
 import frontEnd.ViewEditor;
 import javafx.scene.Node;
 
@@ -23,11 +21,16 @@ public class UserTools {
 	public Node getBottomPane(){
 		return this.bottomRoot.getRoot();
 	}
+	public void setBottomHeight(double height){
+		this.bottomRoot.setHeight(height);
+	}
+	public void setSideWidth(double width){
+		sideBar.setWidth(width);
+	}
 	
 	public void setPaneThickness(double in){
 		bottomRoot.setHeight(in);
 		sideBar.setWidth(in);
-		
 	}
 
 

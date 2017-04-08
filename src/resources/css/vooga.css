@@ -1,0 +1,269 @@
+.button {
+    -fx-background-color: 
+        #000000,
+        linear-gradient(#7ebcea, #2f4b8f),
+        linear-gradient(#426ab7, #263e75),
+        linear-gradient(#395cab, #223768);
+    -fx-background-insets: 0,1,2,3;
+    -fx-background-radius: 3,2,2,2;
+    -fx-text-fill: white;
+    -fx-font-size: 12px;
+    -fx-font-weight: bold;
+}
+
+
+#titleTextBox {
+  -fx-alignment: center-left;
+  -fx-padding: 0 0 0 40;
+  -fx-spacing: 10;
+}
+
+#popup {
+    -fx-background-color: #00bbff;
+    -fx-background-insets: 0,1,2,3;
+    -fx-background-radius: 3,2,2,2;
+    -fx-text-fill: white;
+    -fx-font-size: 12px;
+    -fx-font-weight: bold;
+    -fx-spacing: 10;
+    -fx-padding: 10;
+}
+
+#commandButton {
+  -fx-background-color: #00bbff;
+  -fx-text-fill: black;
+  -fx-font-size: 12px;
+}
+
+#varView {
+  -fx-background-color: #00bbff;
+  -fx-padding: 1;
+}
+
+#funcViewButtons {
+  -fx-background-color: #00bbff;
+  -fx-padding: 1;
+}
+
+#funcView {
+  -fx-background-color: #00bbff;
+  -fx-padding: 1;
+}
+
+#funcViewSP {
+  -fx-background-color: #00bbff;
+}
+
+.titled-pane  {
+    -fx-background-color: white;
+    -fx-text-fill: white;
+}
+
+.menu-bar {
+  -fx-background-color: #3c3c3c;
+}
+
+.menu-bar .label {
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+}
+
+#visualPane {
+  -fx-hgap: 10;
+  -fx-padding: 0 0 10 5;
+}
+
+.context-menu {
+    -fx-skin: "com.sun.javafx.scene.control.skin.ContextMenuSkin";
+    -fx-background-color: white;
+    -fx-background-insets: 0, 1, 2;
+    -fx-background-radius: 0 6 6 6, 0 5 5 5, 0 4 4 4;
+/*    -fx-padding: 0.666667em 0.083333em 0.666667em 0.083333em;  8 1 8 1 */
+    -fx-padding: 0.333333em 0.083333em 0.666667em 0.083333em; /* 4 1 8 1 */
+}
+
+.context-menu .label {
+  -fx-text-fill: black;
+}
+
+.titled-pane > .title > .arrow-button .arrow 
+{
+-fx-background-color: white;
+}
+
+.titled-pane .title{
+    -fx-background-color: 
+        #000000,
+        linear-gradient(#7ebcea, #2f4b8f),
+        linear-gradient(#426ab7, #263e75),
+        linear-gradient(#395cab, #223768);
+}
+.titled-pane .title:hover {
+    -fx-background-color: #3c3c3c;
+}
+
+.combo-box-base {
+    -fx-text-base-color: #FFFFFF;
+    -fx-background-color: 
+        #000000,
+        linear-gradient(#7ebcea, #2f4b8f),
+        linear-gradient(#426ab7, #263e75),
+        linear-gradient(#395cab, #223768);
+    -fx-border-radius: 20;
+    -fx-background-radius: 20;
+    -fx-font-family: Futura;
+    -fx-alignment: center;
+}
+.combo-box-base:hover {
+    -fx-background-color: #3a3a3a;
+}
+
+.color-picker{
+  -fx-color-label-visible: false;
+}
+
+.scroll-pane{
+  -fx-hbar-policy: never;
+  -fx-vbar-policy: never;
+}
+
+#buttonBox {
+  -fx-background-color: #ADD8E6;
+  -fx-background-insets: 0px;
+  -fx-alignment: center;
+  -fx-spacing: 10px;
+  -fx-font-family: Futura;
+  -fx-font-size: 10pt; 
+}
+
+#titleBox {
+  -fx-background-image: url("picture1.png");
+  -fx-alignment: center-left;
+  -fx-spacing: -180;
+
+}
+
+#titletext {
+
+  -fx-font-family: Futura;
+  -fx-font-size: 35pt;
+  -fx-fill: #FFFFFF;
+}
+
+#disableOption {
+  -fx-spacing: 8px;
+  -fx-alignment: center;
+}
+
+#animationButtons {
+  -fx-spacing: 5px;
+  -fx-alignment: center;
+}
+
+#animationSettings {
+  -fx-spacing: 8px;
+  -fx-alignment:center;
+}
+
+#names {
+  -fx-spacing: 20px;
+  -fx-padding: 4, 5, 0, 0;
+}
+
+.separator {
+  -fx-orientation: vertical;
+}
+
+#visualSettings {
+  -fx-alignment: center;
+}
+
+#formatter {
+  -fx-alignment: center;
+}
+
+#authortext {
+
+  -fx-font-family: Futura;
+  -fx-font-size: 10pt;
+  -fx-fill: #FFFFFF;
+}
+
+.titled-pane {
+  -fx-alignment: baseline-center;
+}
+
+#headerTextBox {
+  -fx-font-family: Futura;
+  -fx-font-size: 10pt;
+}
+
+
+#turtleWorld {
+  -fx-background-color: #ADD8E6;
+}
+.side-bar{
+  -fx-background-color: #DAA520;
+}
+#bottomRoot{
+  -fx-background-color: #DAA520;
+
+}
+
+
+#menu {
+  -fx-font-size: 12px;
+  -fx-font-weight: bold;
+}
+
+#joystick {
+  -fx-alignment: center;
+}
+
+#listView {
+  -fx-background-color: 
+        #000000,
+        linear-gradient(#7ebcea, #2f4b8f),
+        linear-gradient(#426ab7, #263e75),
+        linear-gradient(#395cab, #223768);
+  -fx-text-fill: white;
+  -fx-font-size: 12px;
+  -fx-font-family: Futura;
+  -fx-vgap: 5;
+
+}
+
+.tab-pane .tab-header-area .tab-header-background {
+    -fx-opacity: 0;
+}
+
+.tab-pane
+{
+    -fx-tab-min-width:47px;
+}
+
+.tab{
+    -fx-background-insets: 0 1 0 1,0,0;
+}
+.tab-pane .tab
+{
+    -fx-background-color: #e6e6e6;
+
+}
+
+.tab-pane .tab:selected
+{
+    -fx-background-color: #3c3c3c;
+}
+
+.tab .tab-label { 
+    -fx-alignment: CENTER;
+    -fx-text-fill: #828282;
+    -fx-font-size: 9px;
+    -fx-font-weight: bold;
+}
+
+.tab:selected .tab-label { 
+    -fx-alignment: CENTER;
+    -fx-text-fill: #FFFFFF;
+}

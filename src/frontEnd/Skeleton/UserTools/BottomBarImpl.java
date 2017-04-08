@@ -17,12 +17,6 @@ public class BottomBarImpl implements BottomBar{
 	
 	public BottomBarImpl(){
 		myRoot = new HBox();
-		System.out.println("butotn made");
-		Button b = new Button("tile");
-		Tile t = new TileImpl(null, null, null);
-		TileCommandCenter tileTest = new TileCommandCenter(t);
-		b.setOnMouseClicked(e-> tileTest.launch(e.getScreenX(),e.getScreenY()));
-		myRoot.getChildren().add(b);
 	}
 	
 	public Node getRoot(){

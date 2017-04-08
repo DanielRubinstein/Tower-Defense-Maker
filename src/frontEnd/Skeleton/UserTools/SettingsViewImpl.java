@@ -66,7 +66,7 @@ public class SettingsViewImpl implements SettingsView{
 		myMenu.addNode(ruleButtons);
 		
 		//adding player/godmode switch
-		ToggleSwitch modeToggle = new ToggleSwitch(myView,"Player", "Author");
+		ToggleSwitch modeToggle = new ToggleSwitch(myView.getMode(),"Player", "Author");
 		myMenu.addNode(modeToggle.getRoot());
 		
 		myMenu.create();
@@ -86,8 +86,6 @@ public class SettingsViewImpl implements SettingsView{
 		Button button2 = new Button("Edit Rules");
 		button2.setOnAction(e -> myView.editRules());
 		button2.disableProperty().bind(Bindings.or(myBinding.valueProperty(), myBinding.valueProperty()).not());
-		
-		// TODO bind to mode
 		
 		SplitPane wrapper1 = new SplitPane(button1);
 		Tooltip t = new Tooltip("Only possible in Author mode");
