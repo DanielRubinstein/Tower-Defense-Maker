@@ -4,8 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Consumer;
 
-import backEnd.GameData;
 import backEnd.Data.GameFileException;
+import backEnd.GameData.GameData;
 import javafx.scene.control.Button;
 import javafx.stage.Stage;
 

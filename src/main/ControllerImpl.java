@@ -1,41 +1,37 @@
 package main;
 
-import backEnd.GameData;
-import backEnd.Environment.Environment;
-import backEnd.Environment.EnvironmentInterface;
+import backEnd.Bank.BankController;
+import backEnd.Data.DataController;
+import backEnd.GameData.GameData;
+import backEnd.GameData.State.State;
+import backEnd.GameData.State.StateImpl;
 import backEnd.GameEngine.GameProcessController;
-import backEnd.Model.Model;
-import backEnd.State.State;
-import backEnd.State.StateImpl;
+import backEnd.Mode.Mode;
+import backEnd.Mode.UserModeType;
 import frontEnd.ViewImpl;
+import frontEnd.Skeleton.Skeleton;
 import frontEnd.Skeleton.SkeletonImpl;
 import javafx.stage.Stage;
 
-public class ControllerImpl implements Controller{
-	private Model myModel;
+public class ControllerImpl implements Controller
+{
 	private ViewImpl myView;
-	private EnvironmentInterface myEnvironment;
-	private State myState;
+	private BankController myBankController;
+	private GameData myGameData;
 	private GameProcessController myEngineController;
+	private Mode myMode;
+	private DataController myDataController;
 	
 	public void start(Stage stage){
-		//myView = new View();
-		//myView.setGameDataListener(this::setupModelViewBridge);
-		//myView.start(stage);
 		
-		SkeletonImpl skeleton = new SkeletonImpl(new ViewImpl());
+		myView = new ViewImpl();
+		myMode = new Mode(null, UserModeType.AUTHOR);
+		SkeletonImpl skeleton = new SkeletonImpl(myView);
 		skeleton.display(stage);
-		//myEnvironment = new Environment();
-		//myState = new StateImpl(20,20);
-		//myEngineController = new GameProcessController(myState, null); //this should get Rules, not null
+		myDataController = new DataController();
 		
-	}
+		//myGameData = myDataController.getGameData();
+		//myBankController = new BankController(myDataController.getComponents(), myDataController.getTiles());
 	
-	public void setupModelViewBridge(GameData gameData) {
-		myModel = new Model(gameData);
-		myModel.addObserver(myView);
-		myView.setModel(myModel);
 	}
-
-
 }

@@ -1,10 +1,10 @@
 package useCases;
 
-import backEnd.GameDataInterface;
-import backEnd.Rules;
 import backEnd.Data.XMLWriter;
-import backEnd.State.State;
-import backEnd.State.TileGrid;
+import backEnd.GameData.GameDataInterface;
+import backEnd.GameData.Rules;
+import backEnd.GameData.State.State;
+import backEnd.GameData.State.TileGrid;
 
 /**
  * This class represents the process after a user hits Save in the Environment. 
