@@ -1,7 +1,7 @@
 package ModificationFromUser;
 
+import backEnd.Model;
 import backEnd.Mode.ModeEnum;
-import main.InteractivityController;
 
 /**
  * Invokable classes that the front end creates when the user wants to modify the state.
@@ -13,5 +13,5 @@ import main.InteractivityController;
 public interface ModificationFromUser {
 
 	
-	public void invoke(ModeEnum currentMode, InteractivityController myController);
+	public void invoke(ModeEnum currentMode, Model myController);
 }

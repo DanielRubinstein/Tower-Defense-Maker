@@ -1,11 +1,11 @@
 package ModificationFromUser;
 
+import backEnd.Model;
 import backEnd.GameEngine.Attribute;
 import backEnd.GameEngine.Behavior;
 import backEnd.GameEngine.Component;
 import backEnd.Mode.ModeEnum;
 import backEnd.Mode.ModeException;
-import main.InteractivityController;
 
 public class Modification_AddComponentAttribute implements ModificationFromUser {
 
@@ -21,7 +21,7 @@ public class Modification_AddComponentAttribute implements ModificationFromUser 
 
 	
 	@Override
-	public void invoke(ModeEnum currentMode, InteractivityController myController) {
+	public void invoke(ModeEnum currentMode, Model myController) {
 		switch (currentMode) {
 		case AUTHOR:
 			myComp.getAttributeData().addAttribute(myAttribute);

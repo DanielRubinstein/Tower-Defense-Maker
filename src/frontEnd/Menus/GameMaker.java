@@ -2,7 +2,7 @@ package frontEnd.Menus;
 
 import java.util.function.Consumer;
 
-import backEnd.GameData;
+import backEnd.GameData.GameData;
 import javafx.stage.Stage;
 
 /**

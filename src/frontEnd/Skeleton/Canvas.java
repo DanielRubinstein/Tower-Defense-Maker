@@ -1,7 +1,7 @@
 package frontEnd.Skeleton;
 
-import backEnd.State.State;
-import backEnd.State.StateImpl;
+
+import backEnd.GameData.State.State;
 import frontEnd.ViewEditor;
 import javafx.scene.Group;
 import javafx.scene.Node;

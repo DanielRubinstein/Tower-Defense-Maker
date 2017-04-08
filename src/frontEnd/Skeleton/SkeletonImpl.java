@@ -1,8 +1,8 @@
 package frontEnd.Skeleton;
 
-import backEnd.State.State;
-import backEnd.State.StateImpl;
-import backEnd.State.TileGrid;
+import backEnd.GameData.State.State;
+import backEnd.GameData.State.StateImpl;
+import backEnd.GameData.State.TileGrid;
 import frontEnd.ViewEditor;
 import frontEnd.Skeleton.UserTools.UserTools;
 import javafx.scene.Scene;

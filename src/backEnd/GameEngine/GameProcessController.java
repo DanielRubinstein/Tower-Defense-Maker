@@ -2,8 +2,9 @@ package backEnd.GameEngine;
 
 import java.util.List;
 
-import backEnd.Rules;
-import backEnd.State.State;
+import backEnd.GameData.Rules;
+import backEnd.GameData.State.State;
+import backEnd.GameEngine.Engine.Engine;
 
 public class GameProcessController {
 
@@ -13,7 +14,10 @@ public class GameProcessController {
 	
 	
 	public GameProcessController(State currentState, Rules gameRules){
+		myCurrentState = currentState;
+		myRules = gameRules;
 		
+		//TODO get all possible engines from where? and put into myEngines
 	}
 	
 }

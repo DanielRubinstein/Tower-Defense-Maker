@@ -1,7 +1,8 @@
 package frontEnd.Skeleton.UserTools;
 
-import backEnd.State.TileImpl;
-import backEnd.State.Tile;
+
+import backEnd.GameData.State.Tile;
+import backEnd.GameData.State.TileImpl;
 import frontEnd.ViewEditor;
 import frontEnd.ViewReader;
 import javafx.geometry.Pos;
