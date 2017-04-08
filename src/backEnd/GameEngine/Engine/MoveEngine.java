@@ -1,7 +1,6 @@
 package backEnd.GameEngine.Engine;
 
-import backEnd.State.State;
-import backEnd.State.TileGrid;
+import backEnd.GameData.State.State;
 
 public class MoveEngine implements Engine{
 
