@@ -5,6 +5,7 @@ import backEnd.GameEngine.Behavior;
 import backEnd.GameEngine.Component;
 import backEnd.Mode.ModeEnum;
 import backEnd.Mode.ModeException;
+import main.InteractivityController;
 
 public class Modification_AddComponentAttribute implements ModificationFromUser {
 
@@ -20,14 +21,20 @@ public class Modification_AddComponentAttribute implements ModificationFromUser 
 
 	
 	@Override
-	public void invoke(ModeEnum currentMode) {
+	public void invoke(ModeEnum currentMode, InteractivityController myController) {
 		switch (currentMode) {
 		case AUTHOR:
-			myComp.addAttribute(myAttribute);
+			myComp.getAttributeData().addAttribute(myAttribute);
 		case PLAYER:
 			 throw new ModeException(ERROR_MESSAGE);
 		}
 
 	}
+	
 
+}
+
+
+public enum MoveDirection{
+	RIGHT, LEFT, UP, DOWN
 }

@@ -4,6 +4,7 @@ import backEnd.GameEngine.Behavior;
 import backEnd.GameEngine.Component;
 import backEnd.Mode.ModeEnum;
 import backEnd.Mode.ModeException;
+import main.InteractivityController;
 
 public class Modification_RemoveComponentBehavior implements ModificationFromUser {
 
@@ -19,7 +20,7 @@ public class Modification_RemoveComponentBehavior implements ModificationFromUse
 	
 	
 	@Override
-	public void invoke(ModeEnum currentMode) {
+	public void invoke(ModeEnum currentMode, InteractivityController myController) {
 		switch (currentMode) {
 		case AUTHOR:
 			myComp.removeBehavior(myBehavior);

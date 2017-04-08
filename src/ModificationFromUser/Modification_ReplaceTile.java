@@ -7,6 +7,7 @@ import backEnd.Mode.ModeException;
 import backEnd.State.State;
 import backEnd.State.Tile;
 import javafx.geometry.Point2D;
+import main.InteractivityController;
 
 public class Modification_ReplaceTile implements ModificationFromUser {
 
@@ -24,7 +25,7 @@ public class Modification_ReplaceTile implements ModificationFromUser {
 	}
 
 	@Override
-	public void invoke(ModeEnum currentMode) {
+	public void invoke(ModeEnum currentMode, InteractivityController myController) {
 		switch (currentMode) {
 		case AUTHOR:
 			myState.getTileGrid().setTile(newTile, location);
