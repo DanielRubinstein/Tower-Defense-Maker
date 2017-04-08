@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.List;
 
 import backEnd.GameEngine.Attribute;
+import backEnd.Mode.GameModeType;
 import javafx.geometry.Point2D;
 
 public class StateImpl implements State{
@@ -30,8 +31,8 @@ public class StateImpl implements State{
 				Point2D loc = new Point2D(i,j);
 				List<TileAttribute<?>> attrList = new ArrayList<TileAttribute<?>>();
 				attrList.add(new TileAttribute<String>(TileAttributeType.IMAGEFILE, "idk where tf it is"));
-				List<AccessParty> approvedAccessPartyList = new ArrayList<AccessParty>();
-				approvedAccessPartyList.add(AccessParty.AUTHOR_MODE);
+				List<GameModeType> approvedAccessPartyList = new ArrayList<GameModeType>();
+				approvedAccessPartyList.add(GameModeType.AUTHOR_MODE);
 				Tile newTile = new TileImpl(attrList, approvedAccessPartyList, loc);
 				tileGrid.setTile(newTile, loc);
 			}

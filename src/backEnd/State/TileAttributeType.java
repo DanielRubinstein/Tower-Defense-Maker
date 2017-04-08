@@ -1,5 +1,5 @@
 package backEnd.State;
 
 public enum TileAttributeType {
-	IMAGEFILE, TRAVERSABLE, BUILDABLE;
+	IMAGEFILE, TRAVERSABLE, MOVEMENT_DIRECTION;
 }
