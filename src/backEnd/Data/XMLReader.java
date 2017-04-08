@@ -1,6 +1,8 @@
 package backEnd.Data;
 
 import java.io.File;
+import java.util.List;
+import java.util.Map;
 
 import backEnd.Bank.BankController;
 import backEnd.GameData.GameData;
@@ -11,10 +13,8 @@ import javafx.util.Pair;
 
 public interface XMLReader {
 	
-	Pair<StateImpl,Rules> loadGameStateData(GameDataInterface gameData, String filePath, String gameName);
+	GameData loadGameStateData(String filePath, String gameName);
 	
-	BankController loadUniversalGameData(GameDataInterface gameData, String filePath);
-
-	GameData Load(File loadGameFile);
+	List<Map<String,?>> loadUniversalGameData(String filePath);
 
 }

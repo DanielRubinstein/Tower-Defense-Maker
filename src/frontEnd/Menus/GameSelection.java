@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Consumer;
 
-import backEnd.Data.GameFileException;
+import backEnd.Data.XMLReadingException;
 import backEnd.GameData.GameData;
 import javafx.scene.control.Button;
 import javafx.stage.Stage;
@@ -51,7 +51,7 @@ public class GameSelection {
 		try {
 			GameData loadedGameData = gameLoader.loadGame();
 			gameDataConsumer.accept(loadedGameData);
-		} catch (GameFileException e) {
+		} catch (XMLReadingException e) {
 			ErrorDialog errDia = new ErrorDialog();
 			errDia.create("Cannot Load Game", e.getMessage());
 		}
