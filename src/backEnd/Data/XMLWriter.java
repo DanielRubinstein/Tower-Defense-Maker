@@ -11,6 +11,4 @@ public interface XMLWriter {
 	
 	void saveUniversalGameData(BankController bankController, String filePath);
 	
-	
-
 }
