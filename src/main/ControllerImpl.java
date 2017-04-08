@@ -28,7 +28,7 @@ public class ControllerImpl implements Controller
 		myMode = new Mode(null, UserModeType.AUTHOR);
 		SkeletonImpl skeleton = new SkeletonImpl(myView);
 		skeleton.display(stage);
-		myDataController = new DataController();
+		//myDataController = new DataController();
 		
 		//myGameData = myDataController.getGameData();
 		//myBankController = new BankController(myDataController.getComponents(), myDataController.getTiles());
