@@ -8,7 +8,5 @@ public class DataController {
 		myXMLReader = new XMLReaderImpl();
 		myXMLWriter = new XMLWriterImpl();
 	}
-	
-	
 
 }

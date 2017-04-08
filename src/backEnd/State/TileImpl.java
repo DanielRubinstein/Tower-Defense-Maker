@@ -2,25 +2,24 @@ package backEnd.State;
 
 import java.util.List;
 
-import backEnd.Mode.GameModeType;
 import javafx.geometry.Point2D;
 
 public class TileImpl implements Tile{
 	private List<TileAttribute<?>> myAttributes;
-	private List<GameModeType> myPermissionAccessList;
+	private List<AccessParty> myPermissionAccessList;
 	private Point2D myLocation;
 	
-	public TileImpl(List<TileAttribute<?>> attrList, List<GameModeType> permissionAccessList, Point2D location){
+	public TileImpl(List<TileAttribute<?>> attrList, List<AccessParty> permissionAccessList, Point2D location){
 		myAttributes = attrList;
 		myLocation = location;
 		myPermissionAccessList = permissionAccessList;
 	}
 	
-	public void addAccessPermission(GameModeType newParty){
+	public void addAccessPermission(AccessParty newParty){
 		myPermissionAccessList.add(newParty);
 	}
 	
-	public boolean permitsAccess(GameModeType party){
+	public boolean permitsAccess(AccessParty party){
 		if (myPermissionAccessList.contains(party)){
 			return true;
 		}
