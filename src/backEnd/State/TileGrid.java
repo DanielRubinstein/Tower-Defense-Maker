@@ -1,7 +1,5 @@
 package backEnd.State;
 
-import java.util.List;
-
 import backEnd.GameEngine.Attribute;
 import javafx.geometry.Point2D;
 
@@ -17,9 +15,9 @@ public class TileGrid {
 	private int gridHeight;
 	private Tile[][] tileGrid;
 	
-	public TileGrid(int gridWidth, int gridHeight, int pointResolution_Width, int pointResolution_Height){
-		this.gridWidth = gridWidth;
-		this.gridHeight = gridHeight;
+	public TileGrid(int width, int height){
+		gridWidth = width;
+		gridHeight = height;
 	}
 	
 	/**
@@ -38,23 +36,6 @@ public class TileGrid {
 	 */
 	public void setTile(Tile newTile, Point2D location){
 		tileGrid[(int) location.getY()][(int) location.getX()] = newTile;
-	}
-	
-	/**
-	 * 
-	 * @param point
-	 * @return
-	 */
-	public List<TileAttribute<?>> getTileAttributeAtPoint(Point2D point){
-		Point2D tileLocation = getTileLocationFromPoint(point);
-		return getTileByLocation(tileLocation).getTileAttributeList();
-	}
-	
-	public Point2D getTileLocationFromPoint(Point2D point){
-		double tileX = Math.ceil(point.getX()/gridWidth);
-		double tileY = Math.ceil(point.getY()/gridHeight);
-		return new Point2D(tileX,tileY);
-		
 	}
 
 }

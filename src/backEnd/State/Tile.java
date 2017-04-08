@@ -2,8 +2,6 @@ package backEnd.State;
 
 import java.util.List;
 
-import backEnd.Mode.GameModeType;
-
 /**
  * A tile is a position in the grid that can have properties (TileAttributes). GameEngine will have to access the TileAttributes
  * to check how the components can interact with it. Mode will have to be able to access its TileAttributes.
@@ -37,8 +35,8 @@ public interface Tile {
 	
 	boolean hasTileAttributeType(TileAttributeType type);
 	
-	void addAccessPermission(GameModeType newParty);
+	void addAccessPermission(AccessParty newParty);
 	
-	boolean permitsAccess(GameModeType party);
+	boolean permitsAccess(AccessParty party);
 	
 }

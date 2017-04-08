@@ -1,43 +1,83 @@
 package backEnd.Mode;
 
+import backEnd.GameEngine.Attribute;
+import backEnd.GameEngine.Behavior;
+import backEnd.GameEngine.Component;
+import javafx.geometry.Point2D;
+import backEnd.Model.Model;
+import javafx.beans.property.BooleanProperty;
 
 /**
- * This class contains the current mode and has getters/setters for people to access the mode
+ * This class provides functionality for how user interacts with the Front end
  * 
- * @author Riley
+ * @author Derek
  *
  */
-public class Mode{
-	private UserModeType currUserMode;
-	private GameModeType currGameMode;
-	
-	public Mode(GameModeType gameMode, UserModeType userMode){
-		this.currGameMode = gameMode;
-		this.currUserMode = userMode;
+public abstract class Mode {
+
+	protected Model myModel;
+
+	public Mode(Model myModel) {
+		this.myModel = myModel;
 	}
 
-	public void setUserMode(UserModeType newUserMode){
-		currUserMode = newUserMode;
+	public abstract void addComponent(Component component, Point2D location);
+
+	public abstract void removeComponent(Component component);
+
+	public void addComponentBehavior(Component component, Behavior newBehavior){
+		component.addBehavior(newBehavior);
 	}
-	
-	public UserModeType getUserMode(){
-		return currUserMode;
+
+	public void removeComponentBehavior(Component component, Behavior behavior){
+		component.removeBehavior(behavior);
 	}
-	
-	public String getUserModeString(){
-		return currUserMode.toString();
+
+	public void addComponentAttribute(Component component, Attribute newAttribute){
+		component.addAttribute(newAttribute);
 	}
-	
-	public void setGameMode(GameModeType newGameMode){
-		currGameMode = newGameMode;
+
+	public void removeComponentAttribute(Component component, Attribute attribute){
+		component.removeAttribute(attribute);
 	}
-	
-	public GameModeType getGameMode(){
-		return currGameMode;
+
+	public abstract void addTile() throws ModeException;
+
+	public abstract void addTileAttribute() throws ModeException;
+
+	public abstract void removeTileAttribute() throws ModeException;
+
+	public void moveComponent(Component component, Point2D newLoc){
+		myModel.getState().getComponentGraph().moveComponent(component, newLoc);
 	}
-	
-	public String getGameModeString(){
-		return currGameMode.toString();
+
+	public abstract void moveTile() throws ModeException;
+
+	public abstract void editRules() throws ModeException;
+
+	public Collection<Rules> viewRules(){
+		return myModel.getRules();
 	}
+
+	public abstract void play() throws ModeException;
 	
+	public abstract void pause();
+	
+	public abstract void moveComponent();
+	
+	public abstract void changeTile();
+	
+	public abstract void setComponentBehavior();
+	
+	public abstract void setGameRule();
+	
+	public abstract void onComponentClick();
+	
+	public abstract BooleanProperty authorModeProperty();
+	
+	public abstract boolean isAuthor();
+	
+	public void changeMode(){
+		myModel.changeMode();
+	}
 }
