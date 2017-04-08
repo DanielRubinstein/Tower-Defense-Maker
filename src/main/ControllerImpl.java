@@ -1,40 +1,56 @@
 package main;
 
-import backEnd.GameData;
-import backEnd.Environment.Environment;
-import backEnd.Environment.EnvironmentInterface;
-import backEnd.GameEngine.GameProcessController;
-import backEnd.Model.Model;
-import backEnd.State.State;
-import backEnd.State.StateImpl;
+import ModificationFromUser.ModificationFromUser;
+import backEnd.Model;
+import backEnd.Data.DataController;
+import backEnd.GameData.GameData;
+import backEnd.Mode.Mode;
+import backEnd.Mode.UserModeType;
 import frontEnd.ViewImpl;
 import frontEnd.Skeleton.SkeletonImpl;
 import javafx.stage.Stage;
 
 public class ControllerImpl implements Controller {
+	private ViewImpl myView;
 	private Model myModel;
-	private View myView;
-	private EnvironmentInterface myEnvironment;
-	private State myState;
-	private GameProcessController myEngineController;
+	private Mode myMode;
 	private GameData myGameData;
-	
-	public void start(Stage stage){
-		//myView = new View();
-		//myView.setGameDataListener(this::setupModelViewBridge);
-		//myView.start(stage);
+	private DataController myDataController;
+
+	public void start(Stage stage) {
+		//developerTestingSkeleton(stage);
+
 		
-		Skeleton skeleton = new Skeleton();
+		myMode = new Mode(null, UserModeType.AUTHOR);
+		
+		/*
+		myDataController = new DataController();
+		myGameData = myDataController.getGameData("");
+		
+		myModel = new Model(myGameData, myMode, myDataController);
+		*/
+		
+		myView = new ViewImpl(myMode, 
+				(ModificationFromUser m) -> {
+					executeInteraction(m);
+					System.out.println("Modification from user sent to back end");
+				});
+		
+	}
+
+	/**
+	 * The skeleton should be instantiated within View. This is here just for
+	 * testing purposes
+	 * 
+	 * @param stage
+	 */
+	private void developerTestingSkeleton(Stage stage) {
+		SkeletonImpl skeleton = new SkeletonImpl(myView);
 		skeleton.display(stage);
-		myEnvironment = new Environment();
-		myState = new StateImpl(20,20);
-		myEngineController = new GameProcessController(myState, null); //this should get Rules, not null
-		myGameData = new GameData();
+
 	}
 	
-	public void setupModelViewBridge(GameData gameData) {
-		myModel = new Model(gameData);
-		myModel.addObserver(myView);
-		myView.setModel(myModel);
+	private void executeInteraction(ModificationFromUser myInteraction){
+		myInteraction.invoke(myModel);
 	}
 }

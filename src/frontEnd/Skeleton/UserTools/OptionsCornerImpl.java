@@ -1,6 +1,8 @@
 package frontEnd.Skeleton.UserTools;
 
-import backEnd.Environment.TileImpl;
+
+import backEnd.GameData.State.Tile;
+import backEnd.GameData.State.TileImpl;
 import frontEnd.ViewEditor;
 import frontEnd.ViewReader;
 import javafx.geometry.Pos;
@@ -23,6 +25,7 @@ public class OptionsCornerImpl implements OptionsCorner{
 	public OptionsCornerImpl(ViewEditor view) {
 		myRoot = new VBox();
 		setUserOptions(view);	
+		testTileButton(view);
 	}
 
 	public Node getRoot(){
@@ -39,9 +42,12 @@ public class OptionsCornerImpl implements OptionsCorner{
 		myRoot.getChildren().add(userOptions.getNode());
 	}
 	
-	
-
-
-
+	private void testTileButton(ViewEditor view){
+		Button b = new Button("tile");
+		Tile t = new TileImpl(null, null, null);
+		TileCommandCenter tileTest = new TileCommandCenter(view, t);
+		b.setOnMouseClicked(e-> tileTest.launch(e.getScreenX(),e.getScreenY()));
+		myRoot.getChildren().add(b);
+	}
 
 }

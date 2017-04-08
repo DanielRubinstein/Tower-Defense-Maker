@@ -1,10 +1,8 @@
 package frontEnd;
 
-import backEnd.Mode.ModeEditor;
+import ModificationFromUser.ModificationFromUser;
 
 public interface ViewEditor extends ViewReader{
-	
-	public ModeEditor getMode();
 
 	public Object save();
 
@@ -12,6 +10,6 @@ public interface ViewEditor extends ViewReader{
 
 	public Object editRules();
 	
-	
+	public void sendUserModification(ModificationFromUser mod);
 
 }

@@ -1,15 +1,20 @@
 package backEnd.Data;
 
-import backEnd.GameDataInterface;
-import backEnd.Rules;
-import backEnd.Environment.BankController;
-import backEnd.State.StateImpl;
+import java.io.File;
+import java.util.List;
+import java.util.Map;
+
+import backEnd.Bank.BankController;
+import backEnd.GameData.GameData;
+import backEnd.GameData.GameDataInterface;
+import backEnd.GameData.Rules;
+import backEnd.GameData.State.StateImpl;
 import javafx.util.Pair;
 
 public interface XMLReader {
 	
-	Pair<StateImpl,Rules> loadGameStateData(GameDataInterface gameData, String filePath, String gameName);
+	GameData loadGameStateData(String filePath, String gameName);
 	
-	BankController loadUniversalGameData(GameDataInterface gameData, String filePath);
+	List<Map<String,?>> loadUniversalGameData(String filePath);
 
 }

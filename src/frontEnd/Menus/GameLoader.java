@@ -11,9 +11,9 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-import backEnd.GameData;
-import backEnd.Data.GameFileException;
+import backEnd.Data.XMLReadingException;
 import backEnd.Data.XMLReaderImpl;
+import backEnd.GameData.GameData;
 import backEnd.Data.XMLReader;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
@@ -28,12 +28,12 @@ public class GameLoader {
 		gameReader = new XMLReaderImpl();
 	}
 
-	public GameData loadGame() throws GameFileException {
+	public GameData loadGame() throws XMLReadingException {
 		return gameReader.Load(loadGameFile(SAVED_GAMES_DIRECTORY));
 
 	}
 
-	private File loadGameFile(String searchDirectory) throws GameFileException {
+	private File loadGameFile(String searchDirectory) throws XMLReadingException {
 		FileChooser xmlChooser = new FileChooser();
 		xmlChooser.setTitle("Choose File");
 		xmlChooser.setInitialDirectory(new File(searchDirectory));
@@ -42,10 +42,10 @@ public class GameLoader {
 			if(isProperGameFile(file)) {
 				return file;
 			} else {
-				throw new GameFileException(file);
+				throw new XMLReadingException(file);
 			}
 		}
-		throw new GameFileException();
+		throw new XMLReadingException();
 		
 	}
 

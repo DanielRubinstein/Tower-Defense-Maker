@@ -87,8 +87,6 @@ public class SettingsViewImpl implements SettingsView{
 		button2.setOnAction(e -> myView.editRules());
 		button2.disableProperty().bind(Bindings.or(myBinding.valueProperty(), myBinding.valueProperty()).not());
 		
-		// TODO bind to mode
-		
 		SplitPane wrapper1 = new SplitPane(button1);
 		Tooltip t = new Tooltip("Only possible in Author mode");
 		SplitPane wrapper2 = new SplitPane(button2);

@@ -1,11 +1,11 @@
 package ModificationFromUser;
 
+import backEnd.Model;
+import backEnd.GameData.State.State;
 import backEnd.GameEngine.Component;
 import backEnd.Mode.ModeEnum;
 import backEnd.Mode.ModeException;
-import backEnd.State.State;
 import javafx.geometry.Point2D;
-import main.InteractivityController;
 
 public class Modification_CreateNewPresetComponent implements ModificationFromUser {
 
@@ -19,7 +19,7 @@ public class Modification_CreateNewPresetComponent implements ModificationFromUs
 
 	
 	@Override
-	public void invoke(ModeEnum currentMode, InteractivityController myController) {
+	public void invoke(ModeEnum currentMode, Model myController) {
 		switch (currentMode) {
 		case AUTHOR:
 			componentBank.addPreset(newComp);

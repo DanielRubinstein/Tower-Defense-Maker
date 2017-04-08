@@ -2,10 +2,10 @@ package useCases;
 
 import java.util.List;
 
-import backEnd.Environment.EnvironmentInterface;
+import backEnd.Bank.EnvironmentInterface;
+import backEnd.GameData.State.State;
 import backEnd.GameEngine.Attribute;
 import backEnd.GameEngine.Component;
-import backEnd.State.State;
 import main.ControllerImpl;
 
 /**

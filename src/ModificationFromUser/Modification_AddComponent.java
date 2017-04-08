@@ -1,9 +1,9 @@
 package ModificationFromUser;
 
 import backEnd.Mode.ModeEnum;
-import backEnd.State.State;
 import javafx.geometry.Point2D;
-import main.InteractivityController;
+import backEnd.Model;
+import backEnd.GameData.State.State;
 import backEnd.GameEngine.*;
 
 public class Modification_AddComponent implements ModificationFromUser{
@@ -19,7 +19,7 @@ public class Modification_AddComponent implements ModificationFromUser{
 	}
 
 	@Override
-	public void invoke(ModeEnum currentMode, InteractivityController myController) {
+	public void invoke(ModeEnum currentMode, Model myController) {
 		myState.getComponentGraph().addComponentToGrid(newComp, location);
 		
 	}
