@@ -1,5 +1,7 @@
 package frontEnd.Skeleton;
 
+import backEnd.State.State;
+import backEnd.State.StateImpl;
 import frontEnd.ViewEditor;
 import javafx.scene.Group;
 import javafx.scene.Node;
@@ -9,8 +11,10 @@ import javafx.scene.shape.Rectangle;
 public class Canvas {
 	private Group root;
 	private Rectangle background;
+	private State myState;
 	
-	public Canvas(ViewEditor view){
+	public Canvas(ViewEditor view, State state){
+		myState=state;
 		root = new Group();
 		background = new Rectangle();
 		background.setFill(Color.BLACK);

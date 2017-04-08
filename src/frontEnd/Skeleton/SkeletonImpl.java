@@ -1,5 +1,7 @@
 package frontEnd.Skeleton;
 
+import backEnd.State.State;
+import backEnd.State.StateImpl;
 import frontEnd.ViewEditor;
 import frontEnd.Skeleton.UserTools.UserTools;
 import javafx.scene.Scene;
@@ -14,15 +16,24 @@ public class SkeletonImpl implements Skeleton{
 
 	public static final double MENU_HEIGHT = 500d;
 	public static final double MENU_WIDTH = 500d;
+	private static final double CANVAS_HEIGHT_FACTOR = 0.8;
+	private static final double CANVAS_WIDTH_FACTOR = 0.8;
+
+	private static final double BOTTOM_HEIGHT_FACTOR = 0.2;
+	private static final double SIDE_WIDTH_FACTOR = 0.2;
+	
 	
 	public SkeletonImpl(ViewEditor view){
 		myRoot = new BorderPane();
-		Canvas canvas = new Canvas(view);
-		canvas.setSize(300, 400);
+		State myState = new StateImpl((int)(MENU_WIDTH*CANVAS_WIDTH_FACTOR),(int)(MENU_WIDTH*CANVAS_WIDTH_FACTOR));
+		Canvas canvas = new Canvas(view,myState);
+		canvas.setSize(MENU_WIDTH*CANVAS_HEIGHT_FACTOR, MENU_WIDTH*CANVAS_WIDTH_FACTOR);
 		myRoot.setCenter(canvas.getRoot());
 		
 		userTools = new UserTools(view);
-		userTools.setPaneThickness(MENU_WIDTH*0.2);
+		userTools.setBottomHeight(MENU_WIDTH*BOTTOM_HEIGHT_FACTOR);
+		userTools.setSideWidth(MENU_WIDTH*SIDE_WIDTH_FACTOR);
+		//userTools.setPaneThickness(MENU_WIDTH*BOTTOM_HEIGHT_FACTOR);
 		myRoot.setRight(userTools.getSidePane());
 		myRoot.setBottom(userTools.getBottomPane());	
 	}

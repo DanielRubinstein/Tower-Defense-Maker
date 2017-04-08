@@ -22,6 +22,7 @@ public class ControllerImpl implements Controller {
 	private GameData myGameData;
 	
 	public void start(Stage stage){
+		
 		//myView = new View();
 		//myView.setGameDataListener(this::setupModelViewBridge);
 		//myView.start(stage);
@@ -36,7 +37,7 @@ public class ControllerImpl implements Controller {
 	
 	public void setupModelViewBridge(GameData gameData) {
 		myModel = new Model(gameData);
-		myModel.addObserver(myView);
-		myView.setModel(myModel);
+		//myModel.addObserver(myView);
+		//myView.setModel(myModel);
 	}
 }

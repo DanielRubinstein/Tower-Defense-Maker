@@ -20,11 +20,16 @@ public class UserTools {
 	public Node getBottomPane(){
 		return this.bottomRoot.getRoot();
 	}
+	public void setBottomHeight(double height){
+		this.bottomRoot.setHeight(height);
+	}
+	public void setSideWidth(double width){
+		sideBar.setWidth(width);
+	}
 	
 	public void setPaneThickness(double in){
 		bottomRoot.setHeight(in);
 		sideBar.setWidth(in);
-		
 	}
 
 
