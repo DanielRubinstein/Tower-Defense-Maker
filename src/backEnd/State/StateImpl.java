@@ -15,10 +15,10 @@ public class StateImpl implements State{
 	private ComponentGraph componentGraph;
 	private HashMap<Attribute<String>, String> imageMap; //attribute is name of component, mapping to imagefile path
 	
-	public StateImpl(int gridWidth, int gridHeight){
+	public StateImpl(int gridWidth, int gridHeight, int pointResolution_Width, int pointResolution_Height){
 		this.gridWidth = gridWidth;
 		this.gridHeight = gridHeight;
-		setDefaultTileGrid(gridWidth, gridHeight);
+		setDefaultTileGrid(gridWidth, gridHeight, pointResolution_Width, pointResolution_Height);
 		componentGraph = new ComponentGraph(gridWidth, gridHeight);
 		imageMap = new HashMap<Attribute<String>, String>();
 	}
