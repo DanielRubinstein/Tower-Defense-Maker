@@ -86,8 +86,12 @@ public class Canvas {
 	}
 
 	private void setTileInteraction(Node n, Tile t){
-		TileCommandCenter tileInteractor = new TileCommandCenter(myView, t);
-		n.setOnMouseClicked(e-> tileInteractor.launch(e.getScreenX(),e.getScreenY()));
+		
+		n.setOnMouseClicked(e-> {
+			TileCommandCenter tileInteractor = new TileCommandCenter(myView, new Point2D(e.getScreenX(),e.getScreenY()));
+			tileInteractor.launch(e.getScreenX(),e.getScreenY());
+			
+			});
 	}
 	
 
