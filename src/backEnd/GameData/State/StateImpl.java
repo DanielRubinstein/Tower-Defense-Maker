@@ -25,7 +25,7 @@ public class StateImpl implements State{
 
 	private void setDefaultTileGrid(int gridWidth, int gridHeight, int pointResolution_Width, int pointResolution_Height) {
 		tileGrid = new TileGrid(gridWidth, gridHeight);
-		for (int i = 0; i < gridWidth; i++){
+		for (int i = 0; i < gridHeight; i++){
 			for (int j = 0; j < gridWidth; j++){
 				Point2D loc = new Point2D(i,j);
 				List<TileAttribute<?>> attrList = new ArrayList<TileAttribute<?>>();

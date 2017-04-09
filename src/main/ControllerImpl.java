@@ -19,7 +19,7 @@ public class ControllerImpl implements Controller {
 
 	public void start(Stage stage) {
 		//developerTestingSkeleton(stage);
-
+		System.out.println("tst");
 		
 		myMode = new Mode(null, UserModeType.AUTHOR);
 		
@@ -29,7 +29,6 @@ public class ControllerImpl implements Controller {
 		
 		myModel = new Model(myGameData, myMode, myDataController);
 		*/
-		
 		myView = new ViewImpl(myMode, 
 				(ModificationFromUser m) -> {
 					try {

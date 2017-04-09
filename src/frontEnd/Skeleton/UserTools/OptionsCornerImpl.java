@@ -25,7 +25,6 @@ public class OptionsCornerImpl implements OptionsCorner{
 	public OptionsCornerImpl(ViewEditor view) {
 		myRoot = new VBox();
 		setUserOptions(view);	
-		testTileButton(view);
 	}
 
 	public Node getRoot(){
@@ -41,13 +40,6 @@ public class OptionsCornerImpl implements OptionsCorner{
 		userOptions.setAlignment(Pos.BOTTOM_CENTER,Priority.ALWAYS);
 		myRoot.getChildren().add(userOptions.getNode());
 	}
-	
-	private void testTileButton(ViewEditor view){
-		Button b = new Button("tile");
-		Tile t = new TileImpl(null, null, null);
-		TileCommandCenter tileTest = new TileCommandCenter(view, t);
-		b.setOnMouseClicked(e-> tileTest.launch(e.getScreenX(),e.getScreenY()));
-		myRoot.getChildren().add(b);
-	}
+
 
 }
