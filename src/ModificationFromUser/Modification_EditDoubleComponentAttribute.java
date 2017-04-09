@@ -21,11 +21,12 @@ public class Modification_EditDoubleComponentAttribute implements ModificationFr
 	}
 	
 	@Override
+	@SuppressWarnings("unchecked")
 	public void invoke(Model myModel) throws Exception {
 		switch(myModel.getMode().getUserMode()){
 		case AUTHOR:
 			//FIXME not sure how to solve this error
-			Attribute<Double> attrToEdit = myComp.getAttribute(attributeType);
+			Attribute<Double> attrToEdit = (Attribute<Double>) myComp.getAttribute(attributeType);
 			attrToEdit.setValue(newVal);
 		case PLAYER:
 			throw new ModeException(myModel.getMode(),DESCRIPTION);

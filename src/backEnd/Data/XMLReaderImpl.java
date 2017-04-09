@@ -1,7 +1,6 @@
 package backEnd.Data;
 
 import java.io.File;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
@@ -9,14 +8,9 @@ import java.util.Map;
 import com.thoughtworks.xstream.XStream;
 import com.thoughtworks.xstream.io.xml.DomDriver;
 
-import backEnd.Bank.BankController;
 import backEnd.GameData.GameData;
-import backEnd.GameData.GameDataInterface;
-import backEnd.GameData.Rules;
-import backEnd.GameData.State.StateImpl;
 import backEnd.GameData.State.Tile;
 import backEnd.GameEngine.Component;
-import javafx.util.Pair;
 
 public class XMLReaderImpl implements XMLReader {
 	private XStream xStream;
@@ -26,9 +20,14 @@ public class XMLReaderImpl implements XMLReader {
 	}
 
 	public GameData loadGameStateData(String filePath, String gameName){
+		File xmlFile = new File(filePath + gameName + ".xml");
+		return loadGameStateData(xmlFile);
+	}
+	
+	public GameData loadGameStateData(File gameFile){
 		GameData loadedGameData = null;
+		File xmlFile = gameFile;
 		try{
-	        File xmlFile = new File(filePath + gameName + ".xml");
 	        loadedGameData = (GameData) xStream.fromXML(xmlFile);       
 	    }catch(Exception e){
 	        throw new XMLReadingException();

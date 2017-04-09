@@ -2,7 +2,7 @@ package backEnd.GameEngine.Engine;
 
 import java.util.ResourceBundle;
 
-import backEnd.GameEngine.Behavior;
+import backEnd.GameEngine.Behaviors.Behavior;
 
 public class EngineFactory {
 	

@@ -17,8 +17,9 @@ public class Modification_AddComponent implements ModificationFromUser {
 
 	@Override
 	public void invoke(Model myModel) throws Exception {
-		// FIXME should parameter be newComp.clone()?
 		myModel.getState().getComponentGraph().addComponentToGrid(newComp, location);
-
+		/**
+		 * FIXME should parameter be newComp.clone() ?
+		 */
 	}
 }
