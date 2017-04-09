@@ -1,17 +1,17 @@
 package backEnd.Data;
 
 import java.io.File;
+import java.util.List;
+import java.util.Map;
 
-import backEnd.GameData;
-import backEnd.GameDataInterface;
+import backEnd.GameData.GameData;
 
-public class XMLReader implements XMLReaderInterface {
-
-	@Override
-	public GameData Load(File file) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
+public interface XMLReader {
+	
+	GameData loadGameStateData(String filePath, String gameName);
+	
+	GameData loadGameStateData(File gameFile);
+	
+	List<Map<String,?>> loadUniversalGameData(String filePath);
 
 }

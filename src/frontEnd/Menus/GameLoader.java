@@ -11,10 +11,10 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-import backEnd.GameData;
-import backEnd.Data.GameFileException;
+import backEnd.Data.XMLReadingException;
+import backEnd.Data.XMLReaderImpl;
+import backEnd.GameData.GameData;
 import backEnd.Data.XMLReader;
-import backEnd.Data.XMLReaderInterface;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
@@ -22,26 +22,31 @@ public class GameLoader {
 	public static final String SAVED_GAMES_DIRECTORY = "./data/SavedGames";
 	public static final String TEMPLATE_GAMES_DIRECTORY = "./data/Templates";
 	public static final String GAME_FILE_EXTENSION = ".xml";
-	private XMLReaderInterface gameReader;
+	private XMLReader gameReader;
 
 	public GameLoader() {
-		gameReader = new XMLReader();
+		gameReader = new XMLReaderImpl();
 	}
 
-	public GameData loadGame() throws GameFileException {
+	public GameData loadGame() throws XMLReadingException {
 		return gameReader.Load(loadGameFile(SAVED_GAMES_DIRECTORY));
 
 	}
 
-	private File loadGameFile(String searchDirectory) throws GameFileException {
+	private File loadGameFile(String searchDirectory) throws XMLReadingException {
 		FileChooser xmlChooser = new FileChooser();
 		xmlChooser.setTitle("Choose File");
 		xmlChooser.setInitialDirectory(new File(searchDirectory));
 		File file = xmlChooser.showOpenDialog(new Stage());
-		if (file != null && isProperGameFile(file)) {
-			return file;
+		if (file != null){
+			if(isProperGameFile(file)) {
+				return file;
+			} else {
+				throw new XMLReadingException(file);
+			}
 		}
-		throw new GameFileException(file);
+		throw new XMLReadingException();
+		
 	}
 
 	private Boolean isProperGameFile(File file) {

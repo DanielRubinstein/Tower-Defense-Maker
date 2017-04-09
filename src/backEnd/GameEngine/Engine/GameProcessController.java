@@ -4,8 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 
-import backEnd.Rules;
-import backEnd.State.State;
+import backEnd.GameData.Rules;
+import backEnd.GameData.State.State;
 
 public class GameProcessController {
 

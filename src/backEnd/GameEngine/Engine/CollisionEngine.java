@@ -6,14 +6,12 @@
 //
 //import com.sun.javafx.geom.Point2D;
 //
+//import backEnd.GameData.State.State;
 //import backEnd.GameEngine.Attribute;
 //import backEnd.GameEngine.Component;
-//import backEnd.State.State;
 //
 //public class CollisionEngine implements Engine{
 //
-//	private String myBehaviorType = "";//myResources TODO
-//	
 //	@Override
 //	public void gameLoop(State currentState) {
 //		currentState.getComponentGraph();
@@ -21,8 +19,7 @@
 //		for(Component component1: myList){
 //			for(Component component2: myList){
 //				if(collideObjects(component1, component2)){
-//					component1.getBehavior(myBehaviorType).execute(); //TODO
-//					component2.getBehavior(myBehaviorType).execute();
+//					
 //				}
 //			}
 //		}

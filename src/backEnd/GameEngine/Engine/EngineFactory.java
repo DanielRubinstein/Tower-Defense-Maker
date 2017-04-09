@@ -2,8 +2,6 @@ package backEnd.GameEngine.Engine;
 
 import java.util.ResourceBundle;
 
-import backEnd.GameEngine.Behavior;
-
 public class EngineFactory {
 	
 	private final static String RESOURCES_PATH = "resources/engineNames";
