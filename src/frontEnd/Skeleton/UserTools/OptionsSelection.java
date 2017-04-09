@@ -33,7 +33,6 @@ public class OptionsSelection {
 		myRoot = new TilePane(Orientation.HORIZONTAL,0, 0);
 		mySettings= new SettingsViewImpl(view);
 	}
-	
 	public Node getNode(){
 		return myRoot;
 	}
@@ -50,7 +49,6 @@ public class OptionsSelection {
 		addButtons(buttonWidth);
 		myRoot.getChildren().addAll(myButtons);
 	}
-
 	
 	private void addButtons(double size){
 		// TODO replace with correct Modification classes
