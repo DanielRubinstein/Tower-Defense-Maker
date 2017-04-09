@@ -5,7 +5,7 @@ import backEnd.Data.DataController;
 import backEnd.GameData.GameData;
 import backEnd.GameData.State.State;
 import backEnd.GameEngine.GameProcessController;
-import backEnd.Mode.Mode;
+import backEnd.Mode.ModeImpl;
 
 /**
  * Controller the front end calls when it detects a backend modification from the user,
@@ -18,11 +18,11 @@ import backEnd.Mode.Mode;
  */
 public class Model {
 	private GameData myGameData;
-	private Mode myMode;
+	private ModeImpl myMode;
 	private BankController myBankController;
 	private GameProcessController myEngine;
 	
-	public Model(GameData gameData, Mode startingMode, DataController dataController){
+	public Model(GameData gameData, ModeImpl startingMode, DataController dataController){
 		myGameData = gameData;
 		myMode = startingMode;
 		myEngine = new GameProcessController(myGameData.getState(), myGameData.getRules());
@@ -35,7 +35,7 @@ public class Model {
 		return myGameData.getState();
 	}
 	
-	public Mode getMode(){
+	public ModeImpl getMode(){
 		return myMode;
 	}
 }

@@ -8,7 +8,7 @@ public class Modification_Play implements ModificationFromUser {
 	public void invoke(Model myModel) throws Exception {
 		switch(myModel.getMode().getUserMode()){
 		case AUTHOR:
-			myModel.getMode().switchMode();
+			myModel.getMode().toggleUserMode();
 			playGame(myModel);
 		case PLAYER:
 			playGame(myModel);

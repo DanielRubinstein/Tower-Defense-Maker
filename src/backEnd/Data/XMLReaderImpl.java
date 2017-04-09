@@ -26,9 +26,14 @@ public class XMLReaderImpl implements XMLReader {
 	}
 
 	public GameData loadGameStateData(String filePath, String gameName){
+		File xmlFile = new File(filePath + gameName + ".xml");
+		return loadGameStateData(xmlFile);
+	}
+	
+	public GameData loadGameStateData(File gameFile){
 		GameData loadedGameData = null;
+		File xmlFile = gameFile;
 		try{
-	        File xmlFile = new File(filePath + gameName + ".xml");
 	        loadedGameData = (GameData) xStream.fromXML(xmlFile);       
 	    }catch(Exception e){
 	        throw new XMLReadingException();

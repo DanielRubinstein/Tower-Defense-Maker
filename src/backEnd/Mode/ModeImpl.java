@@ -7,19 +7,26 @@ package backEnd.Mode;
  * @author Riley
  *
  */
-public class Mode implements ModeReader{
+public class ModeImpl implements ModeReader{
 	private UserModeType currUserMode;
 	private GameModeType currGameMode;
 	
-	public Mode(GameModeType gameMode, UserModeType userMode){
+	public ModeImpl(){
+		this.currGameMode = GameModeType.DEFAULT;
+		this.currUserMode = UserModeType.AUTHOR;
+	}
+	
+	public ModeImpl(GameModeType gameMode, UserModeType userMode){
 		this.currGameMode = gameMode;
 		this.currUserMode = userMode;
 	}
 
+	@Override
 	public void setUserMode(UserModeType newUserMode){
 		currUserMode = newUserMode;
 	}
 	
+	@Override
 	public UserModeType getUserMode(){
 		return currUserMode;
 	}
@@ -29,10 +36,12 @@ public class Mode implements ModeReader{
 		return currUserMode.toString();
 	}
 	
+	@Override
 	public void setGameMode(GameModeType newGameMode){
 		currGameMode = newGameMode;
 	}
 	
+	@Override
 	public GameModeType getGameMode(){
 		return currGameMode;
 	}
@@ -42,7 +51,8 @@ public class Mode implements ModeReader{
 		return currGameMode.toString();
 	}
 	
-	public void switchMode(){
+	@Override
+	public void toggleUserMode(){
 		System.out.println("MODE CHANGE");
 		currUserMode = UserModeType.getNextMode(currUserMode);
 	}
