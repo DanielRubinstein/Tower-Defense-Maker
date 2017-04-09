@@ -3,6 +3,8 @@ package frontEnd;
 import java.util.function.Consumer;
 
 import ModificationFromUser.ModificationFromUser;
+import backEnd.GameData.State.ComponentGraph;
+import backEnd.GameData.State.TileGrid;
 import backEnd.Mode.ModeReader;
 import frontEnd.Skeleton.SkeletonImpl;
 import javafx.stage.Stage;
@@ -71,6 +73,18 @@ public class ViewImpl implements ViewEditor{
 
 	@Override
 	public Object newGame() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public TileGrid getTileGrid() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public ComponentGraph getComponentGraph() {
 		// TODO Auto-generated method stub
 		return null;
 	}

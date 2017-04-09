@@ -14,6 +14,7 @@ import frontEnd.ViewEditor;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
+import javafx.geometry.Point2D;
 import javafx.geometry.VPos;
 import javafx.scene.Node;
 import javafx.scene.Scene;
@@ -75,7 +76,7 @@ public class TileCommandCenter implements SkeletonObject {
 		List<Tab> componentTabs = new ArrayList<Tab>();
 		for (Component c : myComponents) {
 			// add component tab
-			componentTabs.add(createComponentTab(c, "Component X"));
+			componentTabs.add(createComponentTab(c)); 
 		}
 		return componentTabs;
 	}
@@ -90,15 +91,11 @@ public class TileCommandCenter implements SkeletonObject {
 		return createSingleTab("Tile", contents);
 	}
 
-	private Tab createComponentTab(Component c, String string) {
+	private Tab createComponentTab(Component c) {
 		GridPane contents = createGrid();
+		contents.add(new Button("DELETE / SELL THIS COMPONENT"), 1, 5,3, 1);
 
-		ListView<String> behaviorView = createBehaviorView();
-		createSubContent(contents, "Active Behaviors", 3, 0, behaviorView, null, null);
-
-		contents.add(new Button("DELETE / SELL THIS COMPONENT"), 1, 5, 4, 1);
-
-		return createSingleTab(string, contents);
+		return createSingleTab("Component X", contents); // TODO get component names
 	}
 
 	private GridPane createGrid() {
@@ -106,14 +103,22 @@ public class TileCommandCenter implements SkeletonObject {
 		contents.setHgap(10);
 		contents.setVgap(10);
 		contents.setPadding(new Insets(10));
+		
+		// TODO get position of tile or component to present
+		contents.add(new Label(String.format("Location: (%.0f, %.0f)", 20d , 20d)), 0, 0, 3, 1);
 
 		TableView<String> attributeView = createAttributeView();
-		createSubContent(contents, "Attributes", 1, 0, attributeView, null, null);
+		createSubContent(contents, "Attributes", 1, 1, attributeView, null, null);
 
 		return contents;
 	}
 
 	private ListView<String> createBehaviorView() {
+		/*
+		ListView<String> behaviorView = createBehaviorView();
+		createSubContent(contents, "Active Behaviors", 3, 0, behaviorView, null, null);
+		
+		*/
 		ListView<String> myListView = new ListView<String>();
 
 		// extract list as observablelist
@@ -158,9 +163,9 @@ public class TileCommandCenter implements SkeletonObject {
 		remove.setOnAction(removeEvent);
 
 		gridPane.add(new Label(title), firstColumn, firstRow, 2, 1);
-		gridPane.add(viewer, firstColumn, 1, 2, 3);
-		gridPane.add(add, firstColumn, 4, 1, 1);
-		gridPane.add(remove, firstColumn + 1, 4, 1, 1);
+		gridPane.add(viewer, firstColumn, firstRow + 1, 2, 3);
+		gridPane.add(add, firstColumn, firstRow + 4, 1, 1);
+		gridPane.add(remove, firstColumn + 1, firstRow + 4, 1, 1);
 
 	}
 
