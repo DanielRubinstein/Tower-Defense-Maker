@@ -3,7 +3,7 @@ package frontEnd.Skeleton.UserTools;
 import java.util.ArrayList;
 import java.util.List;
 
-import ModificationFromUser.Modification_ChangeMode;
+import ModificationFromUser.Modification_GameRemote;
 import frontEnd.ViewEditor;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -51,10 +51,9 @@ public class OptionsSelection {
 	}
 	
 	private void addButtons(double size){
-		// TODO replace with correct Modification classes
-		addButtonImage(PLAY_IMAGE, e-> myView.sendUserModification(new Modification_ChangeMode()) ,size);
-		addButtonImage(PAUSE_IMAGE, e-> myView.sendUserModification(new Modification_ChangeMode()) ,size);
-		addButtonImage(FASTFWD_IMAGE, e-> myView.sendUserModification(new Modification_ChangeMode()) ,size);
+		addButtonImage(PLAY_IMAGE, e-> myView.sendUserModification(Modification_GameRemote.PLAY) ,size);
+		addButtonImage(PAUSE_IMAGE, e-> myView.sendUserModification(Modification_GameRemote.PAUSE) ,size);
+		addButtonImage(FASTFWD_IMAGE, e-> myView.sendUserModification(Modification_GameRemote.FASTFORWARD) ,size);
 		
 		addButtonImage(SETTINGS_IMAGE, e-> mySettings.launchSettings(),size);
 	}

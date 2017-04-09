@@ -5,11 +5,11 @@ import java.util.List;
 import javafx.geometry.Point2D;
 
 public class TileImpl implements Tile{
-	private List<TileAttribute<?>> myAttributes;
+	private List<TileAttributeImpl<?>> myAttributes;
 	private Point2D myLocation;
 	private AccessPermissions myAccessPerm;
 	
-	public TileImpl(List<TileAttribute<?>> attrList, AccessPermissionsImpl AccessPerm, Point2D location){
+	public TileImpl(List<TileAttributeImpl<?>> attrList, AccessPermissionsImpl AccessPerm, Point2D location){
 		this.myAttributes = attrList;
 		this.myLocation = location;
 		this.myAccessPerm = AccessPerm;
@@ -21,7 +21,7 @@ public class TileImpl implements Tile{
 	}
 
 	@Override
-	public void addTileAttribute(TileAttribute<?> newAttr){
+	public void addTileAttribute(TileAttributeImpl<?> newAttr){
 		if (hasTileAttributeType(newAttr.getType())){
 			myAttributes.remove(getAttribute(newAttr.getType()));
 		}
@@ -29,12 +29,12 @@ public class TileImpl implements Tile{
 	}
 	
 	@Override
-	public List<TileAttribute<?>> getTileAttributeList(){
+	public List<TileAttributeImpl<?>> getTileAttributeList(){
 		return myAttributes;
 	}
 	
 	@Override
-	public void setTileAttributeList(List<TileAttribute<?>> newAttrList){
+	public void setTileAttributeList(List<TileAttributeImpl<?>> newAttrList){
 		myAttributes = newAttrList;
 	}
 	

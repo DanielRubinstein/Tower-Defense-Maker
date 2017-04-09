@@ -26,7 +26,7 @@ public interface TileGrid {
 	 * @param y
 	 * @return
 	 */
-	Tile getTileByCoord(int x, int y);
+	Tile getTileByCoord(Double x, Double y);
 	
 	/**
 	 * @return grid width

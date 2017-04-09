@@ -34,8 +34,8 @@ public class StateImpl implements State{
 		for (int i = 0; i < gridHeight; i++){
 			for (int j = 0; j < gridWidth; j++){
 				Point2D loc = new Point2D(i,j);
-				List<TileAttribute<?>> attrList = new ArrayList<TileAttribute<?>>();
-				attrList.add(new TileAttribute<String>(TileAttributeType.IMAGEFILE, "idk where tf it is"));
+				List<TileAttributeImpl<?>> attrList = new ArrayList<TileAttributeImpl<?>>();
+				attrList.add(new TileAttributeImpl<String>(TileAttributeType.IMAGEFILE, "idk where tf it is"));
 				Tile newTile = new TileImpl(attrList, new AccessPermissionsImpl(Arrays.asList(), Arrays.asList(UserModeType.AUTHOR)), loc);
 				tileGrid.setTile(newTile, loc);
 			}

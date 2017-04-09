@@ -36,7 +36,7 @@ public class TileGridImpl implements TileGrid {
 	}
 
 	@Override
-	public Tile getTileByCoord(int x, int y) {
+	public Tile getTileByCoord(Double x, Double y) {
 		return getTileByLocation(new Point2D(x,y));
 	}
 
