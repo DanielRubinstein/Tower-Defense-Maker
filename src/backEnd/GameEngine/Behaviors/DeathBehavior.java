@@ -29,7 +29,7 @@ public class DeathBehavior implements Behavior {
 	}
 
 	@Override
-	public void execute(Map<String, Attribute<?>> myAttributes) {
+	public void execute() {
 		isDead();
 	}
 	

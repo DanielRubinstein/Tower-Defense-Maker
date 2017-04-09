@@ -7,6 +7,7 @@ import java.util.Observable;
 import java.util.Observer;
 
 import backEnd.GameEngine.Attribute;
+import backEnd.GameEngine.Component;
 
 
 public interface Behavior extends Observer {
@@ -14,7 +15,7 @@ public interface Behavior extends Observer {
 	/**
 	 * when the engine decides to run a behavior on a component, that component's corresponding behavior is executed
 	 */
-	public void execute(Map<String, Attribute<?>> myAttributes);
+	public void execute(Component toModify);
 
 
 }

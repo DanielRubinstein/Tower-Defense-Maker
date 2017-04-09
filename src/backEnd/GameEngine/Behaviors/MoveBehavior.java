@@ -5,6 +5,7 @@ import java.util.Observable;
 
 import backEnd.GameEngine.Attribute;
 import backEnd.GameEngine.AttributeData;
+import backEnd.GameEngine.Component;
 import javafx.geometry.Point2D;
 import resources.Constants;
 import backEnd.GameEngine.myAttributes;
@@ -24,7 +25,7 @@ public class MoveBehavior implements Behavior {
 	private myAttributes MA; //we won't use this later
 	
 	@SuppressWarnings("unchecked")
-	public MoveBehavior(Map<String, Attribute<?>> myAttributes){
+	public MoveBehavior(Component myComponent){
 		MA=new myAttributes(); //use this until we figure out how we get attributes from frontend
 		currentAttribute=(Attribute<Point2D>) MA.getAttribute("LOCATION");
 		currentPoint=(Point2D) currentAttribute.getValue();
@@ -39,7 +40,7 @@ public class MoveBehavior implements Behavior {
 	}
 	
 	@Override
-	public void execute(Map<String, Attribute<?>> myAttributes) {
+	public void execute() {
 		switch (moveDirection) {
 		case "LEFT":
 			newPoint=new Point2D(currentPoint.getX()-Constants.moveAmount, currentPoint.getY());

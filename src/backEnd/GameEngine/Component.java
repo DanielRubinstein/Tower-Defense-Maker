@@ -52,6 +52,11 @@ public class Component {
 	public Attribute<?> getAttribute(String attributeType){
 		return myAttributes.get(attributeType);
 	}
+	
+	
+	public AttributeData getMyAttributes(){
+		return myAttributes;
+	}
 
 	/**
 	 * adds an attribute to the List of Attributes
