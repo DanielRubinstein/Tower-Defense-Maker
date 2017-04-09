@@ -3,17 +3,17 @@ package ModificationFromUser;
 import backEnd.Model;
 import backEnd.GameData.State.Tile;
 import backEnd.GameData.State.TileAttribute;
-import backEnd.GameEngine.Behavior;
 import backEnd.GameEngine.Component;
+import backEnd.GameEngine.Behaviors.Behavior;
 import backEnd.Mode.ModeException;
 
-public class Modification_AddTileAttribute implements ModificationFromUser {
+public class Modification_AddTileAttribute<T> implements ModificationFromUser {
 
 	private Tile myTile;
-	private TileAttribute myAttr;
+	private TileAttribute<T> myAttr;
 	public static final String DESCRIPTION = "Add Tile Attribute";
 	
-	public Modification_AddTileAttribute(Tile myTile, TileAttribute newAttr) {
+	public Modification_AddTileAttribute(Tile myTile, TileAttribute<T> newAttr) {
 		this.myTile = myTile;
 		this.myAttr = newAttr;
 
