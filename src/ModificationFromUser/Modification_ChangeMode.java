@@ -6,7 +6,7 @@ public class Modification_ChangeMode implements ModificationFromUser {
 
 	@Override
 	public void invoke(Model myModel) {
-		myModel.getMode().switchMode();
+		myModel.getMode().toggleUserMode();
 	}
 	
 	

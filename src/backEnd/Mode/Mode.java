@@ -1,50 +1,42 @@
 package backEnd.Mode;
 
+public interface Mode {
 
-/**
- * This class contains the current mode and has getters/setters for people to access the mode
- * 
- * @author Riley
- *
- */
-public class Mode implements ModeReader{
-	private UserModeType currUserMode;
-	private GameModeType currGameMode;
-	
-	public Mode(GameModeType gameMode, UserModeType userMode){
-		this.currGameMode = gameMode;
-		this.currUserMode = userMode;
-	}
+	/**
+	 * Choose User Mode
+	 * @param newUserMode
+	 */
+	void setUserMode(UserModeType newUserMode);
 
-	public void setUserMode(UserModeType newUserMode){
-		currUserMode = newUserMode;
-	}
-	
-	public UserModeType getUserMode(){
-		return currUserMode;
-	}
-	
-	@Override
-	public String getUserModeString(){
-		return currUserMode.toString();
-	}
-	
-	public void setGameMode(GameModeType newGameMode){
-		currGameMode = newGameMode;
-	}
-	
-	public GameModeType getGameMode(){
-		return currGameMode;
-	}
-	
-	@Override
-	public String getGameModeString(){
-		return currGameMode.toString();
-	}
-	
-	public void switchMode(){
-		System.out.println("MODE CHANGE");
-		currUserMode = UserModeType.getNextMode(currUserMode);
-	}
-	
+	/**
+	 * @return current User Mode
+	 */
+	UserModeType getUserMode();
+
+	/**
+	 * @return current User Mode as string
+	 */
+	String getUserModeString();
+
+	/**
+	 * Choose Game Mode
+	 * @param newGameMode
+	 */
+	void setGameMode(GameModeType newGameMode);
+
+	/**
+	 * @return current Game Mode
+	 */
+	GameModeType getGameMode();
+
+	/**
+	 * @return current Game Mode as string
+	 */
+	String getGameModeString();
+
+	/**
+	 * Change User Mode (Author to Player or Player to Author)
+	 */
+	void toggleUserMode();
+
 }
