@@ -68,7 +68,6 @@ public class TileCommandCenter implements SkeletonObject {
 
 	private Collection<Tab> createComponentTabs(Tile tile) {
 		List<Tab> componentTabs = new ArrayList<Tab>();
-
 		for (Component c : myComponents) {
 			// add component tab
 			componentTabs.add(createComponentTab(c, "Component X"));

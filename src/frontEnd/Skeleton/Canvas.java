@@ -49,8 +49,8 @@ public class Canvas {
 		myComponentGraph= myState.getComponentGraph();
 		myGridWidth=myComponentGraph.getGridWidth();
 		myGridHeight=myComponentGraph.getGridHeight();
-		myGrid = new GridPane()
-;		myGrid.setMinWidth(myGridWidth);
+		myGrid = new GridPane();	
+		myGrid.setMinWidth(myGridWidth);
 		myGrid.setMinHeight(myGridHeight);
 		setTileGrid();
 		root.getChildren().add(myGrid);
