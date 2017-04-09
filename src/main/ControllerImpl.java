@@ -32,8 +32,13 @@ public class ControllerImpl implements Controller {
 		
 		myView = new ViewImpl(myMode, 
 				(ModificationFromUser m) -> {
-					executeInteraction(m);
-					System.out.println("Modification from user sent to back end");
+					try {
+						executeInteraction(m);
+						System.out.println("Modification from user sent to back end");
+					} catch (Exception e) {
+						System.out.println("Error in Modification sent");
+					}
+					
 				});
 		
 	}
@@ -50,7 +55,7 @@ public class ControllerImpl implements Controller {
 
 	}
 	
-	private void executeInteraction(ModificationFromUser myInteraction){
+	private void executeInteraction(ModificationFromUser myInteraction) throws Exception{
 		myInteraction.invoke(myModel);
 	}
 }
