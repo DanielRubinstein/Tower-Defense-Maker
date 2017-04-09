@@ -1,6 +1,7 @@
 package backEnd.GameData.State;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -25,6 +26,7 @@ public class ComponentGraph {
 	public ComponentGraph(int width, int height){
 		gridWidth = width;
 		gridHeight = height;
+		componentMap = new HashMap<>();
 	}
 	
 	public int getGridWidth(){
@@ -44,6 +46,7 @@ public class ComponentGraph {
 		for (List<Component> n : componentMap.values()){
 			componentList.addAll(n);
 		}
+		System.out.println("getting component list in component graph "+componentList);
 		return componentList;
 	}
 	
