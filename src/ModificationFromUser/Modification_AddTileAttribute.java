@@ -3,19 +3,17 @@ package ModificationFromUser;
 import backEnd.Model;
 import backEnd.GameData.State.Tile;
 import backEnd.GameData.State.TileAttribute;
-import backEnd.GameEngine.Behavior;
-import backEnd.GameEngine.Component;
 import backEnd.Mode.ModeException;
 
-public class Modification_AddTileAttribute implements ModificationFromUser {
+public class Modification_AddTileAttribute<T> implements ModificationFromUser {
 
 	private Tile myTile;
-	private TileAttribute myAttr;
+	private T myAttrVal;
 	public static final String DESCRIPTION = "Add Tile Attribute";
 	
-	public Modification_AddTileAttribute(Tile myTile, TileAttribute newAttr) {
+	public Modification_AddTileAttribute(Tile myTile, T newAttrVal) {
 		this.myTile = myTile;
-		this.myAttr = newAttr;
+		this.myAttrVal = newAttrVal;
 
 	}
 
@@ -23,7 +21,7 @@ public class Modification_AddTileAttribute implements ModificationFromUser {
 	public void invoke(Model myModel) {
 		switch (myModel.getMode().getUserMode()) {
 		case AUTHOR:
-			myTile.addTileAttribute(myAttr);
+			myTile.addTileAttribute(new TileAttribute<T>(myAttrVal));
 		case PLAYER:
 			 throw new ModeException(myModel.getMode(), DESCRIPTION);
 		}
