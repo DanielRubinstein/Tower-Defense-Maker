@@ -15,8 +15,8 @@ public class SkeletonImpl implements Skeleton{
 	private Scene myScene;
 	private UserTools userTools;
 
-	public static final double MENU_HEIGHT = 600d;
-	public static final double MENU_WIDTH = 900d;
+	public static final double MENU_HEIGHT = 500d;
+	public static final double MENU_WIDTH = 500d;
 	private static final double CANVAS_HEIGHT_FACTOR = 0.8;
 	private static final double CANVAS_WIDTH_FACTOR = 0.8;
 	private static final double BOTTOM_HEIGHT_FACTOR = 0.2;
@@ -35,14 +35,12 @@ public class SkeletonImpl implements Skeleton{
 		myRoot = new BorderPane();
 		align(MENU_WIDTH,MENU_HEIGHT);
 		State myState = new StateImpl(GRID_WIDTH,GRID_HEIGHT,TILE_WIDTH,TILE_HEIGHT);
-
 		Canvas canvas = new Canvas(view,myState, GRID_WIDTH,GRID_HEIGHT);
 		canvas.setSize(CANVAS_WIDTH, CANVAS_HEIGHT);
-		System.out.println(canvas);
 
 		myRoot.setCenter(canvas.getRoot());
 		userTools = new UserTools(view);
-		userTools.setBottomHeight(MENU_WIDTH*BOTTOM_HEIGHT_FACTOR);
+		userTools.setBottomHeight(MENU_HEIGHT*BOTTOM_HEIGHT_FACTOR);
 		userTools.setSideWidth(MENU_WIDTH*SIDE_WIDTH_FACTOR);
 		//userTools.setPaneThickness(MENU_WIDTH*BOTTOM_HEIGHT_FACTOR);
 		myRoot.setRight(userTools.getSidePane());

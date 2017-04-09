@@ -49,7 +49,9 @@ public class Canvas {
 		getImages();
 		myGrid = new GridPane();
 		myGrid.setMinWidth(gridWidth);
+		
 		myGrid.setMinHeight(gridHeight);
+		System.out.println("grid w "+gridWidth +" h"+gridHeight);
 		setTileGrid();
 		root.getChildren().add(myGrid);
 	}
@@ -66,11 +68,13 @@ public class Canvas {
 	public void setSize(double width, double height){
 		myGrid.setPrefWidth(width);
 		myGrid.setPrefHeight(height);
+		System.out.println("canvas width " +width + "and height "+height);
 	}
 	
 	private void setTileGrid(){
-		for(int i=0;i<myGridWidth;i++){
-			for(int j=0;j<myGridHeight;j++){
+		for(int i=0;i<myGridHeight;i++){
+			for(int j=0;j<myGridWidth;j++){
+				System.out.println("adding a tile at " +i + " and j  "+j);
 				Image image = new Image(getClass().getClassLoader().getResourceAsStream(TILE_GRASS));
 				ImageView tileView = new ImageView(image);
 				tileView.setPreserveRatio(true);

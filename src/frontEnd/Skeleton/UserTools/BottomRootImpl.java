@@ -29,6 +29,7 @@ public class BottomRootImpl implements BottomRoot{
 	}
 	
 	public void setHeight(double height){
+		System.out.println("setting bootm root height to "+height);
 		myRoot.setPrefHeight(height);
 		//myRoot.setBackground( new Background(new BackgroundFill(Color.BLANCHEDALMOND, CornerRadii.EMPTY, Insets.EMPTY)));
 		

@@ -18,6 +18,7 @@ public class TileGrid {
 	public TileGrid(int width, int height){
 		gridWidth = width;
 		gridHeight = height;
+		System.out.println("using width "+width + "and height " +height);
 		tileGrid = new Tile[width][height];
 	}
 	
