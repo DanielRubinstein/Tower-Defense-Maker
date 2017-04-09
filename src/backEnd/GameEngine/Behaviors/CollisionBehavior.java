@@ -1,7 +1,9 @@
-package backEnd.GameEngine;
+package backEnd.GameEngine.Behaviors;
 
 import java.util.Map;
 import java.util.Observable;
+
+import backEnd.GameEngine.Attribute;
 
 public class CollisionBehavior implements Behavior {
 		

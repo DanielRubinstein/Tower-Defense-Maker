@@ -3,8 +3,8 @@ package ModificationFromUser;
 import backEnd.Model;
 import backEnd.GameData.State.Tile;
 import backEnd.GameData.State.TileAttribute;
-import backEnd.GameEngine.Behavior;
 import backEnd.GameEngine.Component;
+import backEnd.GameEngine.Behaviors.Behavior;
 import backEnd.Mode.ModeException;
 
 public class Modification_AddTileAttribute implements ModificationFromUser {

@@ -1,7 +1,10 @@
-package backEnd.GameEngine;
+package backEnd.GameEngine.Behaviors;
 
 import java.util.Map;
 import java.util.Observable;
+
+import backEnd.GameEngine.Attribute;
+import backEnd.GameEngine.AttributeData;
 
 public class DeathBehavior implements Behavior {
 	private AttributeData myAttributes;

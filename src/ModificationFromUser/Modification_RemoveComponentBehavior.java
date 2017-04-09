@@ -1,8 +1,8 @@
 package ModificationFromUser;
 
 import backEnd.Model;
-import backEnd.GameEngine.Behavior;
 import backEnd.GameEngine.Component;
+import backEnd.GameEngine.Behaviors.Behavior;
 import backEnd.Mode.ModeEnum;
 import backEnd.Mode.ModeException;
 
