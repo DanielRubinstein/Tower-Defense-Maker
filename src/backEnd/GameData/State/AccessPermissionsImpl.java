@@ -16,7 +16,6 @@ public class AccessPermissionsImpl implements AccessPermissions {
 		//if (!gameModePermissions.contains(GameModeType.DEFAULT)) gameModePermissions.add(GameModeType.DEFAULT);
 		this.gameModePermissions = gameModePermissions;
 		this.userModePermissions = userModePermissions;
-		*/
 	}
 	
 	
