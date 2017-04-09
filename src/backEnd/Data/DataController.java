@@ -33,7 +33,4 @@ public class DataController {
 	public Map<String, Tile> getTileMap(){
 		return tileMap;
 	}
-	
-	
-
 }
