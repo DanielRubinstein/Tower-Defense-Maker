@@ -11,6 +11,8 @@ public class StateImpl implements State{
 	
 	private int gridWidth;
 	private int gridHeight;
+	private int pointResWidth;
+	private int pointResHeight;
 	private TileGrid tileGrid;
 	private ComponentGraph componentGraph;
 	private HashMap<Attribute<String>, String> imageMap; //attribute is name of component, mapping to imagefile path
@@ -18,8 +20,10 @@ public class StateImpl implements State{
 	public StateImpl(int gridWidth, int gridHeight, int pointResolution_Width, int pointResolution_Height){
 		this.gridWidth = gridWidth;
 		this.gridHeight = gridHeight;
+		this.pointResWidth = pointResolution_Width;
+		this.pointResHeight = pointResolution_Height;
 		setDefaultTileGrid(gridWidth, gridHeight, pointResolution_Width, pointResolution_Height);
-		componentGraph = new ComponentGraph(gridWidth, gridHeight);
+		componentGraph = new ComponentGraph(gridWidth, gridHeight, pointResolution_Height, pointResolution_Height);
 		imageMap = new HashMap<Attribute<String>, String>();
 	}
 

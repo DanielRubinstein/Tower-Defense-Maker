@@ -20,11 +20,15 @@ import javafx.geometry.Point2D;
 public class ComponentGraph {
 	private int gridWidth;
 	private int gridHeight;
+	private int pointResWidth;
+	private int pointResHeight;
 	private Map<Point2D,List<Component>> componentMap;
 	
-	public ComponentGraph(int width, int height){
-		gridWidth = width;
-		gridHeight = height;
+	public ComponentGraph(int width, int height, int pointResWidth, int pointResHeight){
+		this.gridWidth = width;
+		this.gridHeight = height;
+		this.pointResWidth = pointResWidth;
+		this.pointResHeight = pointResHeight;
 	}
 	
 	public int getGridWidth(){
@@ -50,10 +54,29 @@ public class ComponentGraph {
 	/**
 	 * Get the list of components at a given location
 	 * @param location
-	 * @return Tile at the given location
+	 * @return Component at the given location
 	 */
 	public List<Component> getComponentsByLocation(Point2D location){
 		return componentMap.get(location);
+	}
+	
+	/**
+	 * Get the list of components at a given Tile location
+	 * @param Tile location
+	 * @return Component at the given location
+	 */
+	public List<Component> getComponentsByTileLocation(Point2D tileLocation){
+		double leftXPoint = Math.floor(tileLocation.getX()/gridWidth * pointResWidth);
+		double rightXPoint = Math.floor(tileLocation.getX()/gridWidth * pointResWidth) + gridWidth/pointResWidth;
+		double topYPoint = Math.floor(tileLocation.getY()/gridHeight * pointResHeight);
+		double botYPoint = Math.floor(tileLocation.getY()/gridHeight * pointResHeight) + gridHeight/pointResHeight;
+		List<Component> componentsAtLocation = new ArrayList<Component>();
+		for (Point2D n : componentMap.keySet()){
+			if (n.getX() >= leftXPoint & n.getX() <= rightXPoint & n.getY() > topYPoint & n.getY() < botYPoint){
+				componentsAtLocation.addAll(componentMap.get(n));
+			}
+		}
+		return componentsAtLocation;
 	}
 	
 	/**
