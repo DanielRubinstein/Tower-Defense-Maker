@@ -1,6 +1,6 @@
 package frontEnd.Skeleton;
 
-import backEnd.Mode.ModeImpl;
+import backEnd.Mode.Mode;
 /**
  * 
  * @author Tim
@@ -11,6 +11,6 @@ public interface UserInteractor {
 	* Returns the current mode the user is in
 	* Possible Modes: God, Player
 	*/
-	public ModeImpl getCurrentMode();
+	public Mode getCurrentMode();
 
 }
