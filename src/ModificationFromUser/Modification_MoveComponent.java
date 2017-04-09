@@ -1,26 +1,26 @@
 package ModificationFromUser;
 
 import backEnd.Model;
-import backEnd.GameEngine.Behavior;
 import backEnd.GameEngine.Component;
-import backEnd.Mode.ModeEnum;
-import backEnd.Mode.ModeException;
+import javafx.geometry.Point2D;
 
 public class Modification_MoveComponent implements ModificationFromUser {
 
 	private Component myComp;
-	private Behavior myBehavior;
+	private Point2D newLoc;
 	
-	public Modification_MoveComponent(Component myComp, Behavior newBehavior) {
+	public Modification_MoveComponent(Component myComp, Point2D newLocation) {
 		this.myComp = myComp;
-		this.myBehavior = newBehavior;
+		this.newLoc = newLocation;
 
 	}
 
 	@Override
-	public void invoke(ModeEnum currentMode, Model myController) {
-		
-
+	public void invoke(Model myModel) throws Exception {
+		//FIXME does myComp's location attribute need to be updated here?
+		myModel.getState().getComponentGraph().removeComponent(myComp);
+		myModel.getState().getComponentGraph().addComponentToGrid(myComp, newLoc);		
 	}
 
+	
 }
