@@ -1,7 +1,5 @@
 package frontEnd.Menus;
 
-import com.sun.prism.paint.Color;
-
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
@@ -10,17 +8,13 @@ import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.control.Tooltip;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
-import javafx.scene.paint.Paint;
-import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
-import javafx.scene.text.Text;
-import javafx.scene.text.TextAlignment;
 
 public class ButtonMenuImpl {
+	public static final String DEFAULT_CSS = "/resources/css/Flatter.css";
 	private GridPane myGrid;
 	private VBox myButtonRoot;
 	private Scene myScene;
@@ -86,6 +80,7 @@ public class ButtonMenuImpl {
 	
 	
 	public Scene getScene(){
+		myScene.getStylesheets().add(DEFAULT_CSS);
 		return myScene;
 	}
 

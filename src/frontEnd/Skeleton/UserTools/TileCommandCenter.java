@@ -32,6 +32,7 @@ import javafx.stage.Stage;
 import javafx.util.converter.DoubleStringConverter;
 
 public class TileCommandCenter implements SkeletonObject {
+	public static final String DEFAULT_CSS = "/resources/css/Flatter.css";
 	private ViewEditor myView;
 	private TabPane tabPane;
 	private Stage myStage;
@@ -49,7 +50,9 @@ public class TileCommandCenter implements SkeletonObject {
 		tabPane.getTabs().addAll(createComponentTabs(tile));
 
 		myStage = new Stage();
-		myStage.setScene(new Scene(tabPane));
+		Scene myScene = new Scene(tabPane);
+		myScene.getStylesheets().add(DEFAULT_CSS);
+		myStage.setScene(myScene);
 		myStage.setTitle("Tile Command Center");
 	}
 
