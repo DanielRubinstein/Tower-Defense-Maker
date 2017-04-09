@@ -1,41 +1,37 @@
 package frontEnd;
 
-import java.util.Observable;
-import java.util.Observer;
 import java.util.function.Consumer;
 
-import backEnd.GameData.GameData;
-import backEnd.Mode.ModeEditor;
-import frontEnd.Menus.GameSelection;
-import frontEnd.Menus.MainMenu;
+import ModificationFromUser.ModificationFromUser;
+import backEnd.Mode.ModeReader;
 import frontEnd.Skeleton.SkeletonImpl;
 import javafx.stage.Stage;
 
 public class ViewImpl implements ViewEditor{
+	private Consumer<ModificationFromUser> myModConsumer;
+	private ModeReader myMode;
 	private SkeletonImpl mySkeleton;
-	private Consumer<GameData> gameDataConsumer;
 	
-	public void setGameDataListener(Consumer<GameData> gameDataConsumer) {
-		this.gameDataConsumer = gameDataConsumer;
-	}
-
-	public void start(Stage stage) {
-		GameSelection gS = new GameSelection(gameDataConsumer);
-		MainMenu mainMenu = new MainMenu();
-		mainMenu.setGameSelection(gS);
-		mainMenu.showMenus(stage);
-	}
-
-	private void createNewSkeleton() {
+	public ViewImpl(ModeReader mode, Consumer<ModificationFromUser> inputConsumer) {
+		myMode = mode;
+		myModConsumer = inputConsumer;
+		System.out.println("seting up view impl");
 		mySkeleton = new SkeletonImpl(this);
-		
-		
+		mySkeleton.display(new Stage());
 	}
+	
 	@Override
-	public ModeEditor getMode() {
-		// TODO Auto-generated method stub
-		return null;
+	public void sendUserModification(ModificationFromUser mod){
+		myModConsumer.accept(mod);
 	}
+	
+
+	@Override
+	public ModeReader getMode() {
+		return myMode;
+	}
+
+
 
 	@Override
 	public String getRunStatus() {
@@ -57,6 +53,24 @@ public class ViewImpl implements ViewEditor{
 
 	@Override
 	public Object editRules() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	
+	
+
+
+
+	@Override
+	public Object load() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
+
+	@Override
+	public Object newGame() {
 		// TODO Auto-generated method stub
 		return null;
 	}

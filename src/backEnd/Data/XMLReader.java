@@ -15,6 +15,8 @@ public interface XMLReader {
 	
 	GameData loadGameStateData(String filePath, String gameName);
 	
+	GameData loadGameStateData(File gameFile);
+	
 	List<Map<String,?>> loadUniversalGameData(String filePath);
 
 }

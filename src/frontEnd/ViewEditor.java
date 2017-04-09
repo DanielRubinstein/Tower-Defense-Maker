@@ -1,17 +1,19 @@
 package frontEnd;
 
-import backEnd.Mode.ModeEditor;
+import ModificationFromUser.ModificationFromUser;
 
 public interface ViewEditor extends ViewReader{
-	
-	public ModeEditor getMode();
 
 	public Object save();
+	
+	public Object load();
+	
+	public Object newGame();
 
 	public Object viewRules();
 
 	public Object editRules();
 	
-	
+	public void sendUserModification(ModificationFromUser mod);
 
 }

@@ -3,7 +3,7 @@ package frontEnd.Skeleton.UserTools;
 import java.util.ArrayList;
 import java.util.List;
 
-import backEnd.Mode.ModeEditor;
+import ModificationFromUser.Modification_ChangeMode;
 import frontEnd.ViewEditor;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -26,14 +26,13 @@ public class OptionsSelection {
 	private TilePane myRoot;
 	private SettingsView mySettings;
 	private List<Button> myButtons;
-	private ModeEditor myMode;
+	private ViewEditor myView;
 	
 	public OptionsSelection(ViewEditor view) {
+		myView = view;
 		myRoot = new TilePane(Orientation.HORIZONTAL,0, 0);
-		myMode = view.getMode();
 		mySettings= new SettingsViewImpl(view);
 	}
-	
 	public Node getNode(){
 		return myRoot;
 	}
@@ -50,12 +49,13 @@ public class OptionsSelection {
 		addButtons(buttonWidth);
 		myRoot.getChildren().addAll(myButtons);
 	}
-
 	
 	private void addButtons(double size){
-		addButtonImage(PLAY_IMAGE, e-> myMode.play() ,size);
-		addButtonImage(PAUSE_IMAGE, e-> myMode.pause() ,size);
-		addButtonImage(FASTFWD_IMAGE, e-> myMode.fastForward() ,size);
+		// TODO replace with correct Modification classes
+		addButtonImage(PLAY_IMAGE, e-> myView.sendUserModification(new Modification_ChangeMode()) ,size);
+		addButtonImage(PAUSE_IMAGE, e-> myView.sendUserModification(new Modification_ChangeMode()) ,size);
+		addButtonImage(FASTFWD_IMAGE, e-> myView.sendUserModification(new Modification_ChangeMode()) ,size);
+		
 		addButtonImage(SETTINGS_IMAGE, e-> mySettings.launchSettings(),size);
 	}
 	
@@ -69,6 +69,7 @@ public class OptionsSelection {
 		b.setOnAction(event);
 		b.setGraphic(viewImage);
 		b.setPadding(Insets.EMPTY);
+		b.getStyleClass().clear();
 		myButtons.add(b);
 	}
 

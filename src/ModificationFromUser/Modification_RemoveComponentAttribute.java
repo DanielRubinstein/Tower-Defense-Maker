@@ -3,7 +3,6 @@ package ModificationFromUser;
 import backEnd.Model;
 import backEnd.GameEngine.Attribute;
 import backEnd.GameEngine.Component;
-import backEnd.Mode.ModeEnum;
 import backEnd.Mode.ModeException;
 
 public class Modification_RemoveComponentAttribute implements ModificationFromUser {
@@ -11,7 +10,7 @@ public class Modification_RemoveComponentAttribute implements ModificationFromUs
 
 	private Component myComp;
 	private Attribute myAttribute;
-	public static final String ERROR_MESSAGE = "You cannot remove attributes in Player mode!";
+	public static final String DESCRIPTION = "Remove Component Attribute";
 	
 	public Modification_RemoveComponentAttribute(Component myComp, Attribute removeAttr) {
 		this.myComp = myComp;
@@ -19,16 +18,15 @@ public class Modification_RemoveComponentAttribute implements ModificationFromUs
 
 	}
 
-	
 	@Override
-	public void invoke(ModeEnum currentMode, Model myController) {
-		switch (currentMode) {
+	public void invoke(Model myModel) throws Exception {
+		switch (myModel.getMode().getUserMode()) {
 		case AUTHOR:
-			myComp.removeAttribute(myAttribute);
+			//FIXME Component needs appropriate methods
+			myComp.getAttributeData().removeAttribute(myAttribute);
 		case PLAYER:
-			 throw new ModeException(ERROR_MESSAGE);
-		}
-
+			 throw new ModeException(myModel.getMode(), DESCRIPTION);
+		}		
 	}
 
 
