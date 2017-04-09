@@ -1,5 +1,6 @@
 package backEnd.GameData.State;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import backEnd.Mode.GameModeType;
@@ -7,15 +8,17 @@ import backEnd.Mode.UserModeType;
 
 public class AccessPermissionsImpl implements AccessPermissions {
 
-	private List<GameModeType> gameModePermissions;
-	private List<UserModeType> userModePermissions;
+	private ArrayList<GameModeType> gameModePermissions;
+	private ArrayList<UserModeType> userModePermissions;
 	
 	
 	
 	public AccessPermissionsImpl(List<GameModeType> gameModePermissions, List<UserModeType> userModePermissions){
-		//if (!gameModePermissions.contains(GameModeType.DEFAULT)) gameModePermissions.add(GameModeType.DEFAULT);
-		this.gameModePermissions = gameModePermissions;
-		this.userModePermissions = userModePermissions;
+		this.gameModePermissions = new ArrayList<GameModeType>(gameModePermissions);
+		if (!this.gameModePermissions.contains(GameModeType.DEFAULT)) {
+			this.gameModePermissions.add(GameModeType.DEFAULT);
+		}
+		this.userModePermissions = new ArrayList<UserModeType>(userModePermissions);
 	}
 	
 	
