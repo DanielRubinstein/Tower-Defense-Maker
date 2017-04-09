@@ -77,7 +77,7 @@ public class SettingsViewImpl implements SettingsView{
 
 	
 	/**
-	 * Adds two side by side buttons to the button menu. If a button is meant to always be enabled, simply pass null as b1/b2
+	 * Adds two side by side buttons to the button menu. 
 	 * Wraps each button to allow for the tooltip to be shown even when a button is disabled. Both buttons are wrapped for consistency
 	 */
 	private Node createRulesButtons(){
