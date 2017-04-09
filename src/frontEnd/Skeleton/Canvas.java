@@ -3,21 +3,18 @@ package frontEnd.Skeleton;
 
 import java.util.ResourceBundle;
 
+import backEnd.GameData.State.ComponentGraph;
 import backEnd.GameData.State.State;
 import backEnd.GameData.State.Tile;
 import backEnd.GameData.State.TileGrid;
 import frontEnd.ViewEditor;
 import frontEnd.Skeleton.UserTools.TileCommandCenter;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.geometry.Point2D;
 import javafx.scene.Group;
 import javafx.scene.Node;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
-import javafx.scene.paint.Color;
-import javafx.scene.shape.Rectangle;
 
 /**
  * This class is used to represent the actual game.
@@ -28,37 +25,39 @@ import javafx.scene.shape.Rectangle;
 public class Canvas {
 	private Group root;
 	private State myState;
+	private ComponentGraph myComponentGraph;
 	private GridPane myGrid;
 	private int myGridWidth;
 	private int myGridHeight;
 	private static final int TILE_WIDTH = 40;
 	private static final int TILE_HEIGHT = 40;
-	private static  String IMAGE_RESOURCES = "resources/images";
+	private static final String IMAGE_RESOURCES = "resources/images";
 	private ResourceBundle myImages;
 	private static String TILE_GRASS;
 	private TileGrid myTileGrid;
 	private ViewEditor myView;
 	
-	public Canvas(ViewEditor view, State state, int gridWidth, int gridHeight){
+	public Canvas(ViewEditor view, State state){
 		myState=state;
 		myView = view;
 		myTileGrid=state.getTileGrid();
 		root = new Group();
-		myGridWidth=gridWidth;
-		myGridHeight=gridHeight;
 		getImages();
-		myGrid = new GridPane();
-		myGrid.setMinWidth(gridWidth);
-		
-		myGrid.setMinHeight(gridHeight);
-		System.out.println("grid w "+gridWidth +" h"+gridHeight);
+		setUpGrid();
+	}
+	private void setUpGrid(){
+		myComponentGraph= myState.getComponentGraph();
+		myGridWidth=myComponentGraph.getGridWidth();
+		myGridHeight=myComponentGraph.getGridHeight();
+		myGrid = new GridPane()
+;		myGrid.setMinWidth(myGridWidth);
+		myGrid.setMinHeight(myGridHeight);
 		setTileGrid();
 		root.getChildren().add(myGrid);
 	}
 	private void getImages(){
 		myImages = ResourceBundle.getBundle(IMAGE_RESOURCES);
 		TILE_GRASS = myImages.getString("grass");
-		System.out.println(TILE_GRASS);
 	}
 
 	public Node getRoot() {
@@ -68,13 +67,11 @@ public class Canvas {
 	public void setSize(double width, double height){
 		myGrid.setPrefWidth(width);
 		myGrid.setPrefHeight(height);
-		System.out.println("canvas width " +width + "and height "+height);
 	}
 	
 	private void setTileGrid(){
 		for(int i=0;i<myGridHeight;i++){
 			for(int j=0;j<myGridWidth;j++){
-				System.out.println("adding a tile at " +i + " and j  "+j);
 				Image image = new Image(getClass().getClassLoader().getResourceAsStream(TILE_GRASS));
 				ImageView tileView = new ImageView(image);
 				tileView.setPreserveRatio(true);

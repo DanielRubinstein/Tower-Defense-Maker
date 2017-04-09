@@ -2,7 +2,6 @@ package frontEnd.Skeleton;
 
 import backEnd.GameData.State.State;
 import backEnd.GameData.State.StateImpl;
-import backEnd.GameData.State.TileGrid;
 import frontEnd.ViewEditor;
 import frontEnd.Skeleton.UserTools.UserTools;
 import javafx.scene.Scene;
@@ -35,7 +34,7 @@ public class SkeletonImpl implements Skeleton{
 		myRoot = new BorderPane();
 		align(MENU_WIDTH,MENU_HEIGHT);
 		State myState = new StateImpl(GRID_WIDTH,GRID_HEIGHT,TILE_WIDTH,TILE_HEIGHT);
-		Canvas canvas = new Canvas(view,myState, GRID_WIDTH,GRID_HEIGHT);
+		Canvas canvas = new Canvas(view,myState);
 		canvas.setSize(CANVAS_WIDTH, CANVAS_HEIGHT);
 
 		myRoot.setCenter(canvas.getRoot());
