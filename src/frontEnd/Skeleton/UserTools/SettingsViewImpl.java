@@ -60,7 +60,9 @@ public class SettingsViewImpl implements SettingsView{
 		myMenu.setText("Settings");
 		myMenu.addSimpleButton("Save", e -> myView.save());
 		
-		// TODO Gameselection stuff
+		myMenu.addSimpleButton("Load", e -> myView.load());
+		
+		myMenu.addSimpleButton("New Game", e -> myView.newGame());
 		
 		Node ruleButtons = createRulesButtons();
 		myMenu.addNode(ruleButtons);

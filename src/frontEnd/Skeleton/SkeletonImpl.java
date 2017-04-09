@@ -15,8 +15,8 @@ public class SkeletonImpl implements Skeleton{
 	private Scene myScene;
 	private UserTools userTools;
 
-	public static final double MENU_HEIGHT = 500d;
-	public static final double MENU_WIDTH = 500d;
+	public static final double MENU_HEIGHT = 600d;
+	public static final double MENU_WIDTH = 900d;
 	private static final double CANVAS_HEIGHT_FACTOR = 0.8;
 	private static final double CANVAS_WIDTH_FACTOR = 0.8;
 	private static final double BOTTOM_HEIGHT_FACTOR = 0.2;
@@ -28,7 +28,8 @@ public class SkeletonImpl implements Skeleton{
 	private static final int GRID_WIDTH= (int) (CANVAS_WIDTH/TILE_WIDTH);
 	private static final int GRID_HEIGHT= (int) (CANVAS_HEIGHT/TILE_HEIGHT);
 	
-	private static final String DEFAULT_CSS = "/resources/css/vooga.css";
+	//public static final String DEFAULT_CSS = "/resources/css/vooga.css";
+	public static final String DEFAULT_CSS = "/resources/css/Flatter.css";
 	
 	public SkeletonImpl(ViewEditor view){
 		myRoot = new BorderPane();
@@ -38,8 +39,8 @@ public class SkeletonImpl implements Skeleton{
 		Canvas canvas = new Canvas(view,myState, GRID_WIDTH,GRID_HEIGHT);
 		canvas.setSize(CANVAS_WIDTH, CANVAS_HEIGHT);
 		System.out.println(canvas);
+
 		myRoot.setCenter(canvas.getRoot());
-		
 		userTools = new UserTools(view);
 		userTools.setBottomHeight(MENU_WIDTH*BOTTOM_HEIGHT_FACTOR);
 		userTools.setSideWidth(MENU_WIDTH*SIDE_WIDTH_FACTOR);
@@ -50,10 +51,12 @@ public class SkeletonImpl implements Skeleton{
 	
 
 	public void display(Stage stage) {
-
 		stage.setScene(myScene);
+		stage.setMinWidth(MENU_WIDTH);
+		stage.setMinHeight(MENU_HEIGHT);
 		stage.show();
 	}
+	
 	private void align(Double size1, Double size2){
 		myRoot.setMinWidth(size1);
 		myRoot.setMinHeight(size2);

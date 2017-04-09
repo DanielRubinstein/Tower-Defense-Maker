@@ -19,6 +19,17 @@ public class ViewImpl implements ViewEditor{
 		mySkeleton = new SkeletonImpl(this);
 		mySkeleton.display(new Stage());
 	}
+	
+	@Override
+	public void sendUserModification(ModificationFromUser mod){
+		myModConsumer.accept(mod);
+	}
+	
+
+	@Override
+	public ModeReader getMode() {
+		return myMode;
+	}
 
 
 
@@ -46,15 +57,22 @@ public class ViewImpl implements ViewEditor{
 		return null;
 	}
 	
-	@Override
-	public void sendUserModification(ModificationFromUser mod){
-		myModConsumer.accept(mod);
-	}
 	
 
+
+
 	@Override
-	public ModeReader getMode() {
-		return myMode;
+	public Object load() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
+
+	@Override
+	public Object newGame() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }
