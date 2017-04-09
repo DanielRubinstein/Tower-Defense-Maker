@@ -4,7 +4,10 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
+import backEnd.GameData.State.ComponentGraph;
+import backEnd.GameData.State.State;
 import backEnd.GameData.State.Tile;
+import backEnd.GameData.State.TileAttribute;
 import backEnd.GameEngine.Attribute;
 import backEnd.GameEngine.Component;
 import frontEnd.ViewEditor;
@@ -38,22 +41,20 @@ public class TileCommandCenter implements SkeletonObject {
 	private TabPane tabPane;
 	private Stage myStage;
 	private Collection<Component> myComponents;
-	private Tile myTile;
+	private Collection<TileAttribute<?>> myTileAttributes;
 
-	public TileCommandCenter(ViewEditor view, Point2D location) {
+	public TileCommandCenter(ViewEditor view, Tile tile, State state) {
+		ComponentGraph myComponentGraph = state.getComponentGraph();
+		myComponents = myComponentGraph.getComponentList();
+		myTileAttributes = tile.getTileAttributeList();
 		myView = view;
-		try{
-			myTile = myView.getTileGrid().getTileByCoord(location.getX(), location.getY());
-			myComponents = myView.getComponentGraph().getComponentsByLocation(location);
-		} catch (NullPointerException e){
-			myTile = null;
-			myComponents = new ArrayList<Component>();
-		}
+		createTabsAndStage(tile);
 		
+	}
+	private void createTabsAndStage(Tile tile){
 		tabPane = new TabPane();
-		tabPane.getTabs().addAll(createComponentTabs(myTile));
-		tabPane.getTabs().add(createTileTab(myTile));
-
+		tabPane.getTabs().add(createTileTab(tile));
+		tabPane.getTabs().addAll(createComponentTabs(tile));
 		myStage = new Stage();
 		Scene myScene = new Scene(tabPane);
 		myScene.getStylesheets().add(DEFAULT_CSS);
@@ -73,7 +74,6 @@ public class TileCommandCenter implements SkeletonObject {
 
 	private Collection<Tab> createComponentTabs(Tile tile) {
 		List<Tab> componentTabs = new ArrayList<Tab>();
-
 		for (Component c : myComponents) {
 			// add component tab
 			componentTabs.add(createComponentTab(c)); 
@@ -83,6 +83,11 @@ public class TileCommandCenter implements SkeletonObject {
 
 	private Tab createTileTab(Tile tile) {
 		GridPane contents = createGrid();
+		for(TileAttribute<?> att : myTileAttributes){
+			HBox attEditor = new HBox();
+			Label attLabel = new Label(att.getType().toString());
+			//add edit option
+		}
 		return createSingleTab("Tile", contents);
 	}
 
