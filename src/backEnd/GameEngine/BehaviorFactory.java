@@ -3,6 +3,8 @@ package backEnd.GameEngine;
 import java.lang.reflect.InvocationTargetException;
 import java.util.ResourceBundle;
 
+import backEnd.GameEngine.Behaviors.Behavior;
+
 public class BehaviorFactory {
 
 	private final static String RESOURCES_PATH = "resources/BehaviorFactory";

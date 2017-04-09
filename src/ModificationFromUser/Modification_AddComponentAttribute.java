@@ -5,12 +5,14 @@ import backEnd.GameEngine.Attribute;
 import backEnd.GameEngine.Component;
 import backEnd.Mode.ModeException;
 
-public class Modification_AddComponentAttribute implements ModificationFromUser {
+
+public class Modification_AddComponentAttribute<T> implements ModificationFromUser {
 
 	private Component myComp;
-	private Attribute myAttribute;
+	private Attribute<T> myAttribute;
 	public static final String DESCRIPTION = "Add Component Attribute";
 	
+	@SuppressWarnings("unchecked")
 	public Modification_AddComponentAttribute(Component myComp, Attribute newAttr) {
 		this.myComp = myComp;
 		this.myAttribute = newAttr;
@@ -35,6 +37,3 @@ public class Modification_AddComponentAttribute implements ModificationFromUser 
 }
 
 
-public enum MoveDirection{
-	RIGHT, LEFT, UP, DOWN
-}

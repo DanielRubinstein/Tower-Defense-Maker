@@ -2,7 +2,7 @@ package backEnd.Bank;
 
 import java.util.List;
 
-import backEnd.GameEngine.Behavior;
+import backEnd.GameEngine.Behaviors.Behavior;
 
 public class BehaviorBank {
 
