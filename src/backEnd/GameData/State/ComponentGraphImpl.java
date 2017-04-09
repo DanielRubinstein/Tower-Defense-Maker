@@ -1,6 +1,7 @@
 package backEnd.GameData.State;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -28,6 +29,7 @@ public class ComponentGraphImpl implements ComponentGraph {
 		this.gridHeight = height;
 		this.pointResWidth = pointResWidth;
 		this.pointResHeight = pointResHeight;
+		componentMap = new HashMap<>();
 	}
 	
 	@Override
