@@ -8,6 +8,7 @@ import backEnd.GameData.State.ComponentGraph;
 import backEnd.GameData.State.State;
 import backEnd.GameData.State.Tile;
 import backEnd.GameData.State.TileAttribute;
+import backEnd.GameData.State.TileAttributeImpl;
 import backEnd.GameEngine.Attribute;
 import backEnd.GameEngine.Component;
 import frontEnd.ViewEditor;
@@ -41,7 +42,7 @@ public class TileCommandCenter implements SkeletonObject {
 	private TabPane tabPane;
 	private Stage myStage;
 	private Collection<Component> myComponents;
-	private Collection<TileAttribute<?>> myTileAttributes;
+	private Collection<TileAttributeImpl<?>> myTileAttributes;
 
 	public TileCommandCenter(ViewEditor view, Tile tile, State state) {
 		ComponentGraph myComponentGraph = state.getComponentGraph();
