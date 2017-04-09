@@ -2,16 +2,14 @@ package ModificationFromUser;
 
 import backEnd.Model;
 import backEnd.GameEngine.Attribute;
-import backEnd.GameEngine.Behavior;
 import backEnd.GameEngine.Component;
-import backEnd.Mode.ModeEnum;
 import backEnd.Mode.ModeException;
 
 public class Modification_AddComponentAttribute implements ModificationFromUser {
 
 	private Component myComp;
 	private Attribute myAttribute;
-	public static final String ERROR_MESSAGE = "You cannot add attributes in Player mode!";
+	public static final String DESCRIPTION = "Add Component Attribute";
 	
 	public Modification_AddComponentAttribute(Component myComp, Attribute newAttr) {
 		this.myComp = myComp;
@@ -19,16 +17,18 @@ public class Modification_AddComponentAttribute implements ModificationFromUser 
 
 	}
 
-	
+
+
 	@Override
-	public void invoke(ModeEnum currentMode, Model myController) {
-		switch (currentMode) {
+	public void invoke(Model myModel) throws Exception {
+		switch (myModel.getMode().getUserMode()) {
 		case AUTHOR:
+			//FIXME Component needs appropriate methods
 			myComp.getAttributeData().addAttribute(myAttribute);
 		case PLAYER:
-			 throw new ModeException(ERROR_MESSAGE);
+			 throw new ModeException(myModel.getMode(), DESCRIPTION);
 		}
-
+		
 	}
 	
 
