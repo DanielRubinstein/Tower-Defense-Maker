@@ -4,7 +4,7 @@ import ModificationFromUser.ModificationFromUser;
 import backEnd.Model;
 import backEnd.Data.DataController;
 import backEnd.GameData.GameData;
-import backEnd.Mode.Mode;
+import backEnd.Mode.ModeImpl;
 import backEnd.Mode.UserModeType;
 import frontEnd.ViewImpl;
 import frontEnd.Skeleton.SkeletonImpl;
@@ -13,7 +13,7 @@ import javafx.stage.Stage;
 public class ControllerImpl implements Controller {
 	private ViewImpl myView;
 	private Model myModel;
-	private Mode myMode;
+	private ModeImpl myMode;
 	private GameData myGameData;
 	private DataController myDataController;
 
@@ -21,7 +21,7 @@ public class ControllerImpl implements Controller {
 		//developerTestingSkeleton(stage);
 		System.out.println("tst");
 		
-		myMode = new Mode(null, UserModeType.AUTHOR);
+		myMode = new ModeImpl(null, UserModeType.AUTHOR);
 		
 		/*
 		myDataController = new DataController();
