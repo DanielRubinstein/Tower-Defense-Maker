@@ -54,7 +54,7 @@ public class TileCommandCenter implements SkeletonObject {
 	private void createTabsAndStage(Tile tile){
 		tabPane = new TabPane();
 		tabPane.getTabs().add(createTileTab(tile));
-		tabPane.getTabs().addAll(createComponentTabs(tile));
+		tabPane.getTabs().addAll(createComponentTabs());
 		myStage = new Stage();
 		Scene myScene = new Scene(tabPane);
 		myScene.getStylesheets().add(DEFAULT_CSS);
@@ -72,7 +72,7 @@ public class TileCommandCenter implements SkeletonObject {
 		return tabPane;
 	}
 
-	private Collection<Tab> createComponentTabs(Tile tile) {
+	private Collection<Tab> createComponentTabs() {
 		List<Tab> componentTabs = new ArrayList<Tab>();
 		for (Component c : myComponents) {
 			// add component tab
@@ -82,23 +82,26 @@ public class TileCommandCenter implements SkeletonObject {
 	}
 
 	private Tab createTileTab(Tile tile) {
-		GridPane contents = createGrid();
 		for(TileAttribute<?> att : myTileAttributes){
 			HBox attEditor = new HBox();
 			Label attLabel = new Label(att.getType().toString());
 			//add edit option
 		}
+		
+		
+		GridPane contents = createGrid(createAttributeView());
+		
 		return createSingleTab("Tile", contents);
 	}
 
 	private Tab createComponentTab(Component c) {
-		GridPane contents = createGrid();
+		GridPane contents = createGrid(createAttributeView());
 		contents.add(new Button("DELETE / SELL THIS COMPONENT"), 1, 5,3, 1);
 
 		return createSingleTab("Component X", contents); // TODO get component names
 	}
 
-	private GridPane createGrid() {
+	private GridPane createGrid(TableView<String> attributeView) {
 		GridPane contents = new GridPane();
 		contents.setHgap(10);
 		contents.setVgap(10);
@@ -106,8 +109,6 @@ public class TileCommandCenter implements SkeletonObject {
 		
 		// TODO get position of tile or component to present
 		contents.add(new Label(String.format("Location: (%.0f, %.0f)", 20d , 20d)), 0, 0, 3, 1);
-
-		TableView<String> attributeView = createAttributeView();
 		createSubContent(contents, "Attributes", 1, 1, attributeView, null, null);
 
 		return contents;
