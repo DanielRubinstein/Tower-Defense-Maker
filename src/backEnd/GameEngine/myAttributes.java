@@ -22,14 +22,20 @@ public class myAttributes {
 	private Attribute<Point2D> myLocation;
 	private Attribute<Integer> moveAmount;
 	private Map<String,Attribute<?>> myAttributes;
+	private Attribute<Boolean> spawnsOnDeath;
+	private Attribute<Component> componentSpawnedOnDeath;
 	
 	public myAttributes(){
 		myHealth.setValue(Constants.defaultHealth);
 		myLocation.setValue(Constants.defaultLocation);
 		moveAmount.setValue(Constants.moveAmount);
+		spawnsOnDeath.setValue(true);
+		componentSpawnedOnDeath.setValue(new Component()); //need to get correct thing from bank somehow
 		myAttributes.put("HEALTH", myHealth);
 		myAttributes.put("LOCATION", myLocation);
 		myAttributes.put("MOVE_AMOUNT", moveAmount);
+		myAttributes.put("SPAWNS_ON_DEATH", spawnsOnDeath);
+		myAttributes.put("COMPONENT_SPAWNED_ON_DEATH", componentSpawnedOnDeath);
 	}
 	
 	public Attribute<?> getAttribute(String type){

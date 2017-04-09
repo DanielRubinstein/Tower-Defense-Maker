@@ -20,18 +20,28 @@ public class MoveBehavior implements Behavior {
 	private Attribute<Point2D> currentAttribute;
 	private Point2D currentPoint;
 	private Point2D newPoint;
+	private String moveDirection="";
+	private myAttributes MA; //we won't use this later
 	
-	public MoveBehavior(Map<String, Attribute<?>> myAttributes){	
-	}
 	@SuppressWarnings("unchecked")
-	@Override
-	public void execute(Map<String, Attribute<?>> myAttributes) {
-		myAttributes MA=new myAttributes(); //use this until we figure out how we get attributes from frontend
+	public MoveBehavior(Map<String, Attribute<?>> myAttributes){
+		MA=new myAttributes(); //use this until we figure out how we get attributes from frontend
 		currentAttribute=(Attribute<Point2D>) MA.getAttribute("LOCATION");
 		currentPoint=(Point2D) currentAttribute.getValue();
-		switch (MA.getAttribute("LOCATION").getValue().toString()) {
+	}
+	
+	public void setMoveDirection(String currentDirection){ 
+		/**
+		 * Engine will need to call this when it moves components. Only way to keep component's attributes
+		 * up to date since engines shouldn't have access to attributes (only behaviors should).
+		 */
+		moveDirection=currentDirection;
+	}
+	
+	@Override
+	public void execute(Map<String, Attribute<?>> myAttributes) {
+		switch (moveDirection) {
 		case "LEFT":
-
 			newPoint=new Point2D(currentPoint.getX()-Constants.moveAmount, currentPoint.getY());
 			currentAttribute.setValue(newPoint);
 			MA.addAttribute("LOCATION", currentAttribute);
@@ -58,6 +68,4 @@ public class MoveBehavior implements Behavior {
 	public void update(Observable newData, Object arg) {
 		myAttributes = (AttributeData) newData;
 	}
-
-	
 }
