@@ -71,10 +71,10 @@ public class ToggleSwitch {
 		bindSizeProperties();
 	}
 
-	private void setStyle() {
+	private void setStyle() {		
 		// Default Width
-		toggle.setPrefWidth(80);
-		toggle.setMaxWidth(80);
+		//toggle.setPrefWidth(80);
+		//toggle.setMaxWidth(80);
 		label.setAlignment(Pos.CENTER);
 		toggle.setStyle("-fx-background-color: grey; -fx-text-fill:black; -fx-background-radius: 4;");
 		toggle.setAlignment(Pos.CENTER_LEFT);
