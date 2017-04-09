@@ -17,6 +17,7 @@ public class Component {
 	public Component(){
 		AttributeFactory af=new AttributeFactory();
 		BehaviorFactory bf=new BehaviorFactory();
+		
 		for (String key: myResources.keySet()){
 			String value=myResources.getString(key);
 			Attribute<?> myAttribute= af.getAttribute(key, value); //FIX THIS- HOW DOES OUR FACTORY GENERATE ATTRIBUTES?
