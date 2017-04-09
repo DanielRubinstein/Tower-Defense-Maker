@@ -1,6 +1,5 @@
 package backEnd.GameData.State;
 
-import backEnd.GameEngine.Attribute;
 import javafx.geometry.Point2D;
 
 /**
@@ -30,6 +29,21 @@ public class TileGridImpl implements TileGrid {
 	@Override
 	public void setTile(Tile newTile, Point2D location){
 		tileGrid[(int) location.getY()][(int) location.getX()] = newTile;
+	}
+
+	@Override
+	public Tile getTileByCoord(int x, int y) {
+		return getTileByLocation(new Point2D(x,y));
+	}
+
+	@Override
+	public int getMyWidth() {
+		return gridWidth;
+	}
+
+	@Override
+	public int getMyHeight() {
+		return gridHeight;
 	}
 
 }
