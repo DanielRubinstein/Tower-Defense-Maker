@@ -7,7 +7,7 @@ package backEnd.Mode;
  * @author Riley
  *
  */
-public class ModeImpl implements ModeReader{
+public class ModeImpl implements ModeReader, Mode{
 	private UserModeType currUserMode;
 	private GameModeType currGameMode;
 	
