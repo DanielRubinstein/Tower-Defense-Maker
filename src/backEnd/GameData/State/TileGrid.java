@@ -17,5 +17,23 @@ public interface TileGrid {
 	 * @param location
 	 */
 	void setTile(Tile newTile, Point2D location);
+	
+	/**
+	 * Get Tile by x and y coordinates
+	 * @param x
+	 * @param y
+	 * @return
+	 */
+	Tile getTileByCoord(int x, int y);
+	
+	/**
+	 * @return grid width
+	 */
+	int getMyWidth();
+	
+	/**
+	 * @return grid height
+	 */
+	int getMyHeight();
 
 }
