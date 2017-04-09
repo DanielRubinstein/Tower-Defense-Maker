@@ -1,5 +1,8 @@
 package backEnd.GameData.State;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javafx.geometry.Point2D;
 
 /**
@@ -13,6 +16,7 @@ public class TileGridImpl implements TileGrid {
 	private int gridWidth;
 	private int gridHeight;
 	private Tile[][] tileGrid;
+	private List<Tile> tileList;
 	
 	public TileGridImpl(int width, int height){
 		gridWidth = width;
@@ -44,6 +48,16 @@ public class TileGridImpl implements TileGrid {
 	@Override
 	public int getMyHeight() {
 		return gridHeight;
+	}
+	
+	public List<Tile> getAllTiles(){
+		tileList=new ArrayList<Tile>();
+		for (int i=0; i<tileGrid.length; i++){
+			for (int j=0; j<tileGrid[i].length; j++){
+				tileList.add(tileGrid[i][j]);
+			}
+		}
+		return tileList;
 	}
 
 }
