@@ -21,11 +21,12 @@ public class Modification_EditStringComponentAttribute implements ModificationFr
 	}
 	
 	@Override
+	@SuppressWarnings("unchecked")
 	public void invoke(Model myModel) throws Exception {
 		switch(myModel.getMode().getUserMode()){
 		case AUTHOR:
 			//FIXME not sure how to solve this error
-			Attribute<String> attrToEdit = myComp.getAttribute(attributeType);
+			Attribute<String> attrToEdit = (Attribute<String>) myComp.getAttribute(attributeType);
 			attrToEdit.setValue(newVal);
 		case PLAYER:
 			throw new ModeException(myModel.getMode(),DESCRIPTION);

@@ -4,6 +4,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.ResourceBundle;
 
+import backEnd.GameEngine.Behaviors.Behavior;
+
 
 public class Component {
 	
@@ -11,17 +13,18 @@ public class Component {
 	private final static String BEHAVIOR_PATH = "resources/behaviorNames";
 	private final static ResourceBundle behaviorResources = ResourceBundle.getBundle(BEHAVIOR_PATH);
 	private final static ResourceBundle attributeResources = ResourceBundle.getBundle(DEFAULT_ATTRIBUTE_PATH);
-	private Map<String,Attribute<?>> myAttributes;
+	private AttributeData myAttributes;
 	private Map<String, Behavior> myBehaviors;
 	
 	
 	
 	public Component(){
+		Component dummyComponent=new Component();
 		AttributeFactory af=new AttributeFactory();
-		BehaviorFactory bf=new BehaviorFactory(COMPONENT HERE);
-		for (String key: myResources.keySet()){
-			String value=myResources.getString(key);
-			Attribute<?> myAttribute= af.getAttribute(key, value); //FIX THIS- HOW DOES OUR FACTORY GENERATE ATTRIBUTES?
+		BehaviorFactory bf=new BehaviorFactory(dummyComponent); //add a real component
+		for (String key: behaviorResources.keySet()){
+			String value=behaviorResources.getString(key);
+			Attribute<?> myAttribute= af.getAttribute(key); //FIX THIS- HOW DOES OUR FACTORY GENERATE ATTRIBUTES?
 			myAttributes.addAttribute(key, myAttribute);
 			myBehaviors.put(key, bf.getBehavior(key));
 			}
@@ -48,6 +51,11 @@ public class Component {
 	
 	public Attribute<?> getAttribute(String attributeType){
 		return myAttributes.get(attributeType);
+	}
+	
+	
+	public AttributeData getMyAttributes(){
+		return myAttributes;
 	}
 
 	/**
