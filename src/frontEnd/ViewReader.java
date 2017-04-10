@@ -9,8 +9,6 @@ import backEnd.Mode.ModeReader;
 import javafx.beans.property.SimpleBooleanProperty;
 
 public interface ViewReader {
-	
-	public ModeReader getMode();
 
 	// play, pause, fast forward
 	public String getRunStatus();

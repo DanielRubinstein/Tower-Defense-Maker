@@ -22,9 +22,8 @@ public class ViewImpl implements ViewEditor{
 	private SimpleBooleanProperty authorProperty;
 	
 	public ViewImpl(ModeReader mode, Consumer<ModificationFromUser> inputConsumer) {
-		myMode = mode;
 		myModConsumer = inputConsumer;
-		authorProperty = new SimpleBooleanProperty(this.getMode().getUserModeString().equals("AUTHOR"));
+		authorProperty = new SimpleBooleanProperty(mode.getUserModeString().equals("AUTHOR"));
 		System.out.println("seting up view impl");
 		mySkeleton = new SkeletonImpl(this);
 		mySkeleton.display(new Stage());
@@ -38,14 +37,6 @@ public class ViewImpl implements ViewEditor{
 	public void sendUserModification(ModificationFromUser mod){
 		myModConsumer.accept(mod);
 	}
-	
-
-	@Override
-	public ModeReader getMode() {
-		return myMode;
-	}
-
-
 
 	@Override
 	public String getRunStatus() {
