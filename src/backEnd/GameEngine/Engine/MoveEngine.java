@@ -1,27 +1,32 @@
 package backEnd.GameEngine.Engine;
+import java.util.ArrayList;
 import java.util.LinkedList;
+import java.util.List;
 import java.util.Queue;
 import backEnd.Coord;
 import backEnd.GameEngine.Component;
 import backEnd.GameEngine.Behaviors.*;
 import backEnd.GameData.State.*;
+
 public class MoveEngine implements Engine{
 	@Override
 	public void gameLoop(State currentState) {
 		
 		//might need to be in State, not here
-		for(int i=0; i<currentState.getGridWidth(); i++){ //find the start position
-			for(int j=0; j<currentState.getGridHeight(); j++){
-				if(currentState.getTileGrid().getTilebyCoord(i,j).getComponent == STARTPOS){
-					formShortestPath(currentState.getTileGrid(), i, j);
+		for(int i=0; i<currentState.getTileGrid().getMyWidth(); i++){ //find the start position
+			for(int j=0; j<currentState.getTileGrid().getMyHeight(); j++){ //actually O(n^2), don't be fooled!
+				for(TileAttribute<?> myTileQual : currentState.getTileGrid().getTileByCoord(i,j).getTileAttributeList()){
+					if(myTileQual.getType() == TileAttributeType.START_TILE){
+						formShortestPath(currentState.getTileGrid(), i, j);
+					}
 				}
 			}
 		}
 		//^^^^^^^^
 		
-		for(Component struct: currentState.getTileGrid().getComponentGraph.getAllComponents()){
+		for(Component struct: currentState.getTileGrid().getAllComponents()){
 			if(struct.getAttribute("Movable").getValue() == "True"){ //only move stuff that are movable
-				Behavior myMovementInstructions = new MoveBehavior(struct); //can we avoid this?
+				Behavior myMovementInstructions = new MoveBehavior(struct); 
 				myMovementInstructions.execute(struct);
 				
 			}
@@ -53,8 +58,7 @@ public class MoveEngine implements Engine{
 				return cur;
 			}
 			
-			
-			
+	
 		}
 	}
 	
@@ -66,7 +70,7 @@ public class MoveEngine implements Engine{
 	 */
 	private boolean isPassable(TileGrid stateGrid, int xPos, int yPos){
 		if((xPos>=0 && xPos<stateGrid.getMyWidth()) && (yPos >=0 && yPos<stateGrid.getMyWidth())){
-			if(!stateGrid.getTileByCoord(x, y).containsComponent(IMPASSABLELABEL)){
+			if(!stateGrid.getTileByCoord(xPos, yPos).){
 				return true;
 			}
 		}
