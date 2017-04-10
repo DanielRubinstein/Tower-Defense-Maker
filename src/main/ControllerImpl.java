@@ -7,7 +7,6 @@ import backEnd.ModelImpl;
 import backEnd.Data.DataController;
 import backEnd.Data.XMLReadingException;
 import backEnd.GameData.GameData;
-import backEnd.Mode.ModeImpl;
 import frontEnd.ViewImpl;
 import frontEnd.Menus.ErrorDialog;
 import frontEnd.Skeleton.SkeletonImpl;
@@ -17,7 +16,6 @@ import javafx.stage.Stage;
 public class ControllerImpl implements Controller {
 	private ViewImpl myView;
 	private ModelImpl myModel;
-	private ModeImpl myMode;
 	private GameData myGameData;
 	private DataController myDataController;
 
@@ -44,7 +42,8 @@ public class ControllerImpl implements Controller {
 				
 		Consumer<Object> setGameData = o -> {
 			try {
-				myModel = new ModelImpl(myDataController.generateGameData(o));
+				myGameData = myDataController.generateGameData(o);
+				myModel = new ModelImpl(myDataController, myGameData);
 				myView = new ViewImpl(myModel, viewMod);
 			} catch (XMLReadingException e) {
 				ErrorDialog errDia = new ErrorDialog();

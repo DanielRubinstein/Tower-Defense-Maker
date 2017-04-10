@@ -12,9 +12,7 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import backEnd.Data.XMLReadingException;
-import backEnd.Data.XMLReaderImpl;
 import backEnd.GameData.GameData;
-import backEnd.Data.XMLReader;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
@@ -31,6 +29,7 @@ public class GameLoader {
 		FileChooser xmlChooser = new FileChooser();
 		xmlChooser.setTitle("Choose File");
 		xmlChooser.setInitialDirectory(new File(searchDirectory));
+		xmlChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("Sup3rS1ckT34m1337 GameData File", "*.xml"));
 		File file = xmlChooser.showOpenDialog(new Stage());
 		if (file != null){
 			if(isProperGameFile(file)) {

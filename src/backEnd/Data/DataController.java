@@ -31,16 +31,12 @@ public class DataController {
 		myXMLWriter = new XMLWriterImpl();
 	}
 	
-	public DataController (BankController bankController){
-		super();
-		this.bankController = bankController;
-	}
-	
 	@SuppressWarnings("unchecked")
-	public void generateUniversalMaps() throws XMLReadingException{
+	public BankController generateBanks() throws XMLReadingException{
 		List<Map<String,?>> objectMaps = myXMLReader.loadUniversalGameData(UNIV_GAME_DATA_PATH);
 		componentMap = (Map<String,Component>) objectMaps.get(0);
 		tileMap = (Map<String,Tile>) objectMaps.get(1);
+		return new BankController(tileMap, componentMap);
 	}
 	
 	public GameData generateGameData(Object o) throws XMLReadingException{
@@ -51,9 +47,7 @@ public class DataController {
 		} else if (o instanceof StartingInput){
 			return createGameData((StartingInput) o);
 		} else {
-			return null;
-			// TODO handle this
-			// throws new IllegalArgumentException();
+			throw new XMLReadingException();
 		}
 	}
 	

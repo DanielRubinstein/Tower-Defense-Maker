@@ -1,18 +1,14 @@
 package backEnd;
 
-import java.io.File;
-
 import backEnd.Bank.BankController;
 import backEnd.Data.DataController;
+import backEnd.Data.XMLReadingException;
 import backEnd.GameData.GameData;
 import backEnd.GameData.State.State;
-import backEnd.GameData.State.StateImpl;
 import backEnd.GameEngine.Engine.GameProcessController;
 import backEnd.Mode.Mode;
 import backEnd.Mode.ModeImpl;
 import backEnd.Mode.ModeReader;
-import backEnd.Mode.UserModeType;
-import frontEnd.Splash.StartingInput;
 
 /**
  * Controller the front end calls when it detects a backend modification from the user,
@@ -29,18 +25,11 @@ public class ModelImpl implements Model{
 	private BankController myBankController;
 	private GameProcessController myEngine;
 	
-	public ModelImpl(GameData gameData, Mode startingMode, DataController dataController){
+	public ModelImpl(DataController dataController, GameData gameData) throws XMLReadingException {
 		myGameData = gameData;
-		myMode = startingMode;
-		myEngine = new GameProcessController(myGameData.getState(), myGameData.getRules());
-		
-		// FIXME what are the parameters to BankController
-		myBankController = new BankController(dataController.getTileMap(), dataController.getComponentsMap());
-	}
-	
-	public ModelImpl(GameData gameData) {
-		myGameData = gameData;
-		myMode = new ModeImpl(null, UserModeType.AUTHOR);
+		myMode = new ModeImpl();
+		//myEngine = new GameProcessController(myGameData.getState(), myGameData.getRules());
+		//myBankController = dataController.generateBanks();
 	}
 
 	public State getState(){
