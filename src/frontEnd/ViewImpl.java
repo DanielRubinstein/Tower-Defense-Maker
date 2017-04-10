@@ -6,6 +6,7 @@ import java.util.Collections;
 import java.util.function.Consumer;
 
 import ModificationFromUser.ModificationFromUser;
+import backEnd.Model;
 import backEnd.GameData.UserAttribute;
 import backEnd.GameData.UserAttributeImpl;
 import backEnd.GameData.State.ComponentGraph;
@@ -17,15 +18,14 @@ import javafx.stage.Stage;
 
 public class ViewImpl implements ViewEditor{
 	private Consumer<ModificationFromUser> myModConsumer;
-	private ModeReader myMode;
 	private SkeletonImpl mySkeleton;
 	private SimpleBooleanProperty authorProperty;
 	
-	public ViewImpl(ModeReader mode, Consumer<ModificationFromUser> inputConsumer) {
+	public ViewImpl(Model model,Consumer<ModificationFromUser> inputConsumer) {
 		myModConsumer = inputConsumer;
+		ModeReader mode = model.getMode();
 		authorProperty = new SimpleBooleanProperty(mode.getUserModeString().equals("AUTHOR"));
-		System.out.println("seting up view impl");
-		mySkeleton = new SkeletonImpl(this);
+		mySkeleton = new SkeletonImpl(this,model);
 		mySkeleton.display(new Stage());
 	}
 	

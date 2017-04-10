@@ -1,6 +1,6 @@
 package ModificationFromUser;
 
-import backEnd.Model;
+import backEnd.ModelImpl;
 /**
  * Invokable classes that the front end creates when the user wants to modify the state.
  * 
@@ -11,5 +11,5 @@ import backEnd.Model;
 public interface ModificationFromUser {
 
 	
-	public void invoke(Model myModel) throws Exception;
+	public void invoke(ModelImpl myModel) throws Exception;
 }

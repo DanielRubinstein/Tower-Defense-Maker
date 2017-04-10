@@ -1,5 +1,6 @@
 package frontEnd.Skeleton;
 
+import backEnd.Model;
 import backEnd.GameData.State.State;
 import backEnd.GameData.State.StateImpl;
 import frontEnd.ViewEditor;
@@ -15,7 +16,7 @@ public class SkeletonImpl implements Skeleton{
 	private UserTools userTools;
 
 	public static final double MENU_HEIGHT = 500d;
-	public static final double MENU_WIDTH = 600d;
+	public static final double MENU_WIDTH = 500d;
 	private static final double CANVAS_HEIGHT_FACTOR = 0.8;
 	private static final double CANVAS_WIDTH_FACTOR = 0.8;
 	private static final double BOTTOM_HEIGHT_FACTOR = 0.2;
@@ -30,16 +31,15 @@ public class SkeletonImpl implements Skeleton{
 	//public static final String DEFAULT_CSS = "/resources/css/vooga.css";
 	public static final String DEFAULT_CSS = "/resources/css/Flatter.css";
 	
-	public SkeletonImpl(ViewEditor view){
+	public SkeletonImpl(ViewEditor view, Model model){
 		myRoot = new BorderPane();
 		align(MENU_WIDTH,MENU_HEIGHT);
-		State myState = new StateImpl(GRID_WIDTH,GRID_HEIGHT,(int)CANVAS_WIDTH,(int)CANVAS_HEIGHT);
+		State myState = model.getState();//new StateImpl(GRID_WIDTH,GRID_HEIGHT,(int)CANVAS_WIDTH,(int)CANVAS_HEIGHT);
 		Canvas canvas = new Canvas(view,myState);
 		canvas.setSize(CANVAS_WIDTH, CANVAS_HEIGHT);
 
 		myRoot.setCenter(canvas.getRoot());
 		userTools = new UserTools(view);
-		System.out.println("width " +MENU_WIDTH*SIDE_WIDTH_FACTOR + "height  "+MENU_HEIGHT*BOTTOM_HEIGHT_FACTOR);
 		userTools.setBottomAndSideDimensions(MENU_WIDTH*SIDE_WIDTH_FACTOR,MENU_HEIGHT*BOTTOM_HEIGHT_FACTOR);
 		myRoot.setRight(userTools.getSidePane());
 		myRoot.setBottom(userTools.getBottomPane());	

@@ -2,8 +2,8 @@ package frontEnd.Skeleton.UserTools;
 
 import frontEnd.ViewEditor;
 import frontEnd.Menus.ButtonMenuImpl;
-import frontEnd.Menus.MainMenu;
 import frontEnd.Menus.StartMenu;
+import frontEnd.Splash.MainMenu;
 import javafx.beans.binding.Bindings;
 import javafx.beans.binding.BooleanBinding;
 import javafx.beans.property.BooleanProperty;
@@ -55,9 +55,7 @@ public class SettingsViewImpl implements SettingsView{
 	 * Author/Player toggle
 	 */
 	private void addButtons(Stage stage){
-		ButtonMenuImpl myMenu = new ButtonMenuImpl();
-		
-		myMenu.setText("Settings");
+		ButtonMenuImpl myMenu = new ButtonMenuImpl("Settings");
 		myMenu.addSimpleButton("Save", e -> myView.save());
 		
 		myMenu.addSimpleButton("Load", e -> myView.load());
