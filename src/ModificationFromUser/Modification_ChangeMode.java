@@ -1,11 +1,11 @@
 package ModificationFromUser;
 
-import backEnd.Model;
+import backEnd.ModelImpl;
 
 public class Modification_ChangeMode implements ModificationFromUser {
 
 	@Override
-	public void invoke(Model myModel) {
+	public void invoke(ModelImpl myModel) {
 		myModel.getMode().toggleUserMode();
 	}
 	

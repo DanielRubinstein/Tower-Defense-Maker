@@ -1,6 +1,6 @@
 package ModificationFromUser;
 
-import backEnd.Model;
+import backEnd.ModelImpl;
 import backEnd.GameEngine.Component;
 import javafx.geometry.Point2D;
 
@@ -16,7 +16,7 @@ public class Modification_AddComponent implements ModificationFromUser {
 	}
 
 	@Override
-	public void invoke(Model myModel) throws Exception {
+	public void invoke(ModelImpl myModel) throws Exception {
 		myModel.getState().getComponentGraph().addComponentToGrid(newComp, location);
 		/**
 		 * FIXME should parameter be newComp.clone() ?

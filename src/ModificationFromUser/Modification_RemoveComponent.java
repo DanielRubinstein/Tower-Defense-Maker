@@ -1,6 +1,6 @@
 package ModificationFromUser;
 
-import backEnd.Model;
+import backEnd.ModelImpl;
 import backEnd.GameEngine.Component;
 
 public class Modification_RemoveComponent implements ModificationFromUser {
@@ -12,7 +12,7 @@ public class Modification_RemoveComponent implements ModificationFromUser {
 	}
 
 	@Override
-	public void invoke(Model myModel) throws Exception {
+	public void invoke(ModelImpl myModel) throws Exception {
 		myModel.getState().getComponentGraph().removeComponent(toRemove);
 		
 	}

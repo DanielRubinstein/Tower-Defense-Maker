@@ -24,11 +24,11 @@ public class ViewImpl implements ViewEditor{
 	private SkeletonImpl mySkeleton;
 	private SimpleBooleanProperty authorProperty;
 	
-	public ViewImpl(ModeReader mode, Consumer<ModificationFromUser> inputConsumer) {
+	public ViewImpl(Model model,Consumer<ModificationFromUser> inputConsumer) {
 		myModConsumer = inputConsumer;
+		ModeReader mode = model.getMode();
 		authorProperty = new SimpleBooleanProperty(mode.getUserModeString().equals("AUTHOR"));
-		System.out.println("seting up view impl");
-		mySkeleton = new SkeletonImpl(this);
+		mySkeleton = new SkeletonImpl(this,model);
 		mySkeleton.display(new Stage());
 	}
 

@@ -20,10 +20,10 @@ public class ButtonMenuImpl {
 	private Scene myScene;
 	private Label titleLbl;
 	
-	public ButtonMenuImpl(){
-		
+	public ButtonMenuImpl(String text){
 		initializeGrid();
 		myButtonRoot = new VBox();
+		setText(text);
 	}
 	
 
