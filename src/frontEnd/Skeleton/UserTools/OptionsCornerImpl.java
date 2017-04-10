@@ -24,15 +24,19 @@ public class OptionsCornerImpl implements OptionsCorner{
 	public Node getRoot(){
 		return myRoot;
 	}
-	public void setSideLength(double height){
-		myRoot.setPrefSize(height, height);
-		myRoot.setMaxHeight(height);
-		userOptions.setSize(height, height * 0.3);
-	}
+
 	private void setUserOptions(ViewEditor view){
 		userOptions = new OptionsSelection(view);
-		userOptions.setAlignment(Pos.BOTTOM_CENTER,Priority.ALWAYS);
+		userOptions.setAlignment(Pos.TOP_LEFT,Priority.ALWAYS);
 		myRoot.getChildren().add(userOptions.getNode());
+	}
+
+	@Override
+	public void setSideDimensions(double width, double height) {
+		myRoot.setPrefSize(width, height);
+		///myRoot.setMaxHeight(height);
+		myRoot.setPrefHeight(height);
+		userOptions.setSize(width, height);
 	}
 
 

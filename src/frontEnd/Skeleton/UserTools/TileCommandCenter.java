@@ -8,6 +8,7 @@ import backEnd.GameData.State.ComponentGraph;
 import backEnd.GameData.State.State;
 import backEnd.GameData.State.Tile;
 import backEnd.GameData.State.TileAttribute;
+import backEnd.GameData.State.TileAttribute;
 import backEnd.GameEngine.Attribute;
 import backEnd.GameEngine.Component;
 import frontEnd.ViewEditor;

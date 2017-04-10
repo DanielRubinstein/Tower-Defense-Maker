@@ -19,8 +19,6 @@ public class ControllerImpl implements Controller {
 
 	public void start(Stage stage) {
 		//developerTestingSkeleton(stage);
-		System.out.println("tst");
-		
 		myMode = new ModeImpl(null, UserModeType.AUTHOR);
 		
 		/*
