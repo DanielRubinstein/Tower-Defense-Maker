@@ -12,6 +12,12 @@ import backEnd.GameData.GameData;
 import backEnd.GameData.State.Tile;
 import backEnd.GameEngine.Component;
 
+/**
+ * This class handles loading both game state data and universal game data
+ * @author Riley Nisbet
+ *
+ */
+
 public class XMLReaderImpl implements XMLReader {
 	private XStream xStream;
 	
