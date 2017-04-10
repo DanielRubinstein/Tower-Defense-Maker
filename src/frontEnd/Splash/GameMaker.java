@@ -25,10 +25,10 @@ public class GameMaker {
 	private ButtonMenuImpl allSelections;
 	private Slider myTilesWide;
 	private Slider myTilesHigh;
-	private Consumer<StartingInput> onSubmit;
+	private Consumer<Object> onSubmit;
 	private Stage myStage;
 	
-	public GameMaker(Stage stage, Consumer<StartingInput> gameDataConsumer) {
+	public GameMaker(Stage stage, Consumer<Object> gameDataConsumer) {
 		allSelections = new ButtonMenuImpl("Starting Values!");
 		onSubmit = gameDataConsumer;
 		setInputFields();

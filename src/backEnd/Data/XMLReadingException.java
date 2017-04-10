@@ -3,7 +3,7 @@ package backEnd.Data;
 import java.io.File;
 
 @SuppressWarnings("serial")
-public class XMLReadingException extends RuntimeException {
+public class XMLReadingException extends Exception {
 	public XMLReadingException() {
 		super("Please Select A Valid Game File (Extension: .xml)");
 	}

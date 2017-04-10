@@ -43,17 +43,6 @@ public class ModelImpl implements Model{
 		myMode = new ModeImpl(null, UserModeType.AUTHOR);
 	}
 
-	public ModelImpl(StartingInput dim) {
-		this(createGameData(dim));
-	}
-
-	private static GameData createGameData(StartingInput dim) {
-		StateImpl state = new StateImpl(dim.getTilesWide(), dim.getTilesHigh(), 400, 400);
-		GameData gameData = new GameData(state, null);
-		return gameData;
-		
-	}
-
 	public State getState(){
 		return myGameData.getState();
 	}

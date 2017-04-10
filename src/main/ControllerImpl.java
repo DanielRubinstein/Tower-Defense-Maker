@@ -1,17 +1,17 @@
 package main;
 
-import java.io.File;
 import java.util.function.Consumer;
 
 import ModificationFromUser.ModificationFromUser;
 import backEnd.ModelImpl;
 import backEnd.Data.DataController;
+import backEnd.Data.XMLReadingException;
 import backEnd.GameData.GameData;
 import backEnd.Mode.ModeImpl;
 import frontEnd.ViewImpl;
+import frontEnd.Menus.ErrorDialog;
 import frontEnd.Skeleton.SkeletonImpl;
 import frontEnd.Splash.MainMenu;
-import frontEnd.Splash.StartingInput;
 import javafx.stage.Stage;
 
 public class ControllerImpl implements Controller {
@@ -26,7 +26,7 @@ public class ControllerImpl implements Controller {
 		//myMode = new ModeImpl(null, UserModeType.AUTHOR);
 		
 		
-		//myDataController = new DataController();
+		myDataController = new DataController();
 		
 		Consumer<ModificationFromUser> viewMod = 
 				(ModificationFromUser m) -> {
@@ -42,17 +42,20 @@ public class ControllerImpl implements Controller {
 				};
 				
 				
-		Consumer<File> setGameData = (File file) -> {
-			myModel = new ModelImpl(myDataController.getGameDataFromFile(file));
-			myView = new ViewImpl(myModel, viewMod);
-		};
-		Consumer<StartingInput> setDimensions = (StartingInput input) -> {
-			myModel = new ModelImpl(input);
-			myView = new ViewImpl(myModel, viewMod);
+		Consumer<Object> setGameData = o -> {
+			try {
+				myModel = new ModelImpl(myDataController.generateGameData(o));
+				myView = new ViewImpl(myModel, viewMod);
+			} catch (XMLReadingException e) {
+				ErrorDialog errDia = new ErrorDialog();
+				errDia.create("Cannot Load Game", e.getMessage());
+				
+			}
+			
 		};
 					
 		
-		MainMenu myMenu = new MainMenu(setGameData,setDimensions);
+		MainMenu myMenu = new MainMenu(setGameData);
 		myMenu.showMenus(stage);
 	}
 

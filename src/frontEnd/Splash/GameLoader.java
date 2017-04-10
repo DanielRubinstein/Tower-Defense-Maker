@@ -22,16 +22,9 @@ public class GameLoader {
 	public static final String SAVED_GAMES_DIRECTORY = "./data/SavedGames";
 	public static final String TEMPLATE_GAMES_DIRECTORY = "./data/Templates";
 	public static final String GAME_FILE_EXTENSION = ".xml";
-	private XMLReader gameReader;
 
-	public GameLoader() {
-		gameReader = new XMLReaderImpl();
-	}
-
-	public GameData loadGame() throws XMLReadingException {
-		//return gameReader.Load(loadGameFile(SAVED_GAMES_DIRECTORY));
-		return null;
-
+	public File loadGame() throws XMLReadingException {
+		return loadGameFile(SAVED_GAMES_DIRECTORY);
 	}
 
 	private File loadGameFile(String searchDirectory) throws XMLReadingException {
