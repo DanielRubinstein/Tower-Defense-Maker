@@ -12,6 +12,7 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
+import javafx.stage.Stage;
 
 public class ButtonMenuImpl {
 	public static final String DEFAULT_CSS = "/resources/css/Flatter.css";
@@ -79,20 +80,22 @@ public class ButtonMenuImpl {
 	}
 	
 	
-	public Scene getScene(){
+	public void display(Stage stage){
+		create();
 		myScene.getStylesheets().add(DEFAULT_CSS);
-		return myScene;
+		stage.setScene(myScene);
+		stage.show();
 	}
 
 
-	public void create() {
+	private void create() {
 		
 		setSpacing(200d);
 		
 		myGrid.add(titleLbl, 0, 0, 2, 1);
 		myGrid.add(myButtonRoot, 0, 1);
 		myGrid.add(new Label("Hopefully will be a description\nof the button moused over"), 1, 1);
-		myGrid.add(new Label("Here the bottom will serve as something, not sure what yet"), 0, 2, 2, 1);
+		myGrid.add(new Label("voogasalad_sup3rs1ckt34m1337 aka Miguel's bitches"), 0, 2, 2, 1);
 		//myButtonRoot.setAlignment(Pos.CENTER);
    	 	myScene = new Scene(myGrid);
 	}

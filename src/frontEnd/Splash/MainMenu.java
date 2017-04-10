@@ -35,9 +35,7 @@ public class MainMenu{
 	private void splashScreen(Stage stage) {
    	 	ButtonMenuImpl splash = new ButtonMenuImpl("Welcome");
    	 	splash.addSimpleButton("START", event -> showPrimaryMenu(stage));
-   	 	splash.create();
-		stage.setScene(splash.getScene());
-		stage.show();
+		splash.display(stage);
 	}
 
 	private void showPrimaryMenu(Stage stage) {
@@ -47,9 +45,7 @@ public class MainMenu{
    	 	primaryMenu.addSimpleButton("Load Template Game", e -> showTemplateMenu(new Stage()));
    	 	primaryMenu.addSimpleButton("Load Saved Game", e-> loadGame());
    	 	primaryMenu.addBackButton(event -> splashScreen(stage));
-   	 	primaryMenu.create();
-		stage.setScene(primaryMenu.getScene());
-		stage.show();
+		primaryMenu.display(stage);
 	}
 
 	
@@ -77,9 +73,7 @@ public class MainMenu{
    	 			
    	 		});
    	 	}
-   	 	templateGames.create();
-		stage.setScene(templateGames.getScene());
-		stage.show();
+		templateGames.display(stage);
 	}
 
 }

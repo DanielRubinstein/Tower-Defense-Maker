@@ -60,7 +60,16 @@ public class ModelImpl implements Model{
 	/**
 	 * Miguel likes the cast
 	 */
-	public ModeReader getMode(){
+	public ModeReader getModeReader(){
 		return (ModeReader) myMode;
+	}
+	
+	public Mode getMode(){
+		return this.myMode;
+	}
+	
+	@Override
+	public BankController getBankController(){
+		return this.myBankController;
 	}
 }
