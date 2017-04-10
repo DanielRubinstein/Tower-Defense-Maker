@@ -1,64 +1,47 @@
-package backEnd.State;
-import com.sun.javafx.geom.Point2D;
-import backEnd.Environment.Tile;
-import backEnd.GameEngine.Attribute;
-/**
- * This is the Grid class that contains the Tile Grid and all of the relevant getters/setters for other modules to use to access
- * the Grid
- * @author Riley Nisbet
- *
- */
-public class TileGrid {
-	private int gridWidth;
-	private int gridHeight;
-	private Tile[][] tileGrid;
-	
-	public TileGrid(int width, int height){
-		gridWidth = width;
-		gridHeight = height;
-	}
-	
+package backEnd.GameData.State;
+
+import java.util.List;
+
+import javafx.geometry.Point2D;
+
+public interface TileGrid {
+
 	/**
 	 * Get the tile at a given location
 	 * @param location
 	 * @return Tile at the given location
 	 */
-	public Tile getTileByLocation(Point2D location){
-		return tileGrid[(int) location.y][(int) location.x];
-	}
-	
-	/**
-	 * Get the tile at a given location
-	 * @param x the xCoord
-	 * @param y the yCoord
-	 * @return Tile at the given location
-	 */
-	public Tile getTileByCoord(int x, int y){
-		return tileGrid[x][y];
-	}
-	
+	Tile getTileByLocation(Point2D location);
+
 	/**
 	 * Set the tile at a given location
 	 * @param newTile
 	 * @param location
 	 */
-	public void setTile(Tile newTile, Point2D location){
-		tileGrid[(int) location.y][(int) location.x] = newTile;
-	}
+	void setTile(Tile newTile, Point2D location);
 	
 	/**
-	 * 
-	 * @return the number of Tiles in the TileGrid
+	 * Get Tile by x and y coordinates
+	 * @param x
+	 * @param y
+	 * @return
 	 */
-	public int getMyWidth(){
-		return gridWidth;
-	}
+	Tile getTileByCoord(Double x, Double y);
 	
 	/**
-	 * 
-	 * @return the number of Tiles in the TileGrid
+	 * @return grid width
 	 */
-	public int getMyHeight(){
-		return gridHeight;
-	}
+	int getMyWidth();
+	
+	/**
+	 * @return grid height
+	 */
+	int getMyHeight();
+	
+	/*
+	 * return all tiles
+	 */
+	List<Tile> getAllTiles();
+
+
 }

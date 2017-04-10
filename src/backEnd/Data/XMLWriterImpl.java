@@ -14,6 +14,11 @@ import backEnd.GameData.GameDataInterface;
 import backEnd.GameData.State.Tile;
 import backEnd.GameEngine.Component;
 
+/**
+ * This class handles saving both game state data and universal game data
+ * @author Riley Nisbet
+ *
+ */
 public class XMLWriterImpl implements XMLWriter{
 	private XStream xStream;
 	

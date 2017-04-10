@@ -1,6 +1,9 @@
 package backEnd.GameData.State;
 
-import java.util.List;
+import backEnd.GameEngine.Attribute;
+import backEnd.GameEngine.AttributeData;
+import javafx.geometry.Point2D;
+
 
 /**
  * A tile is a position in the grid that can have properties (TileAttributes). GameEngine will have to access the TileAttributes
@@ -14,29 +17,34 @@ public interface Tile {
 	 * @param attrType
 	 * @return Attribute that corresponds to the String attrType
 	 */
-	TileAttribute<?> getAttribute(TileAttributeType type);
+	Attribute<?> getAttribute(String attrType);
 	
 	/**
-	 * Add a TileAttribute to the Tile
+	 * Add a Attributes to the Tile of type attrType. String attrType has to be a Key from the tilDefaults properties file
+	 * @param attrType
 	 * @param newAttr
 	 */
-	void addTileAttribute(TileAttribute<?> newAttr);
+	void addAttribute(String attrType, Attribute<?> newAttr);
 	
 	/**
-	 * @return List of TileAttributes
+	 * @return List of Attributes
 	 */
-	List<TileAttribute<?>> getTileAttributeList();
+	AttributeData getMyAttributes();
 	
 	/**
-	 * Replace the current TileAttribute list with newAttrList
+	 * Replace the current AttributeData with newAttrData
 	 * @param newAttrList
 	 */
-	void setTileAttributeList(List<TileAttribute<?>> newAttrList);
+	void setAttributeData(AttributeData newAttrData);
 	
-	boolean hasTileAttributeType(TileAttributeType type);
+	/**
+	 * @return AccessPermissions object for this Tile
+	 */
+	AccessPermissions getAccessPermissions();
 	
-	void addAccessPermission(AccessParty newParty);
-	
-	boolean permitsAccess(AccessParty party);
+	/**
+	 * @return Tile location
+	 */
+	public Point2D getLocation();
 	
 }

@@ -22,9 +22,10 @@ public class MoveEngine implements Engine{
 				}
 			}
 		}
-		//^^^^^^^^
 		
+
 		for(Component struct: currentState.getTileGrid().getAllComponents()){
+
 			if(struct.getAttribute("Movable").getValue() == "True"){ //only move stuff that are movable
 				Behavior myMovementInstructions = new MoveBehavior(struct); 
 				myMovementInstructions.execute(struct);
