@@ -1,6 +1,6 @@
 package ModificationFromUser;
 
-import backEnd.Model;
+import backEnd.ModelImpl;
 import backEnd.GameEngine.Attribute;
 import backEnd.GameEngine.Component;
 import backEnd.Mode.ModeException;
@@ -22,7 +22,7 @@ public class Modification_AddComponentAttribute<T> implements ModificationFromUs
 
 
 	@Override
-	public void invoke(Model myModel) throws Exception {
+	public void invoke(ModelImpl myModel) throws Exception {
 		switch (myModel.getMode().getUserMode()) {
 		case AUTHOR:
 			//FIXME Component needs appropriate methods
