@@ -3,6 +3,8 @@ package backEnd.GameEngine.Behaviors;
 import java.util.Map;
 import java.util.Observable;
 
+import backEnd.GameData.State.Tile;
+import backEnd.GameData.State.TileAttributeType;
 import backEnd.GameEngine.Attribute;
 import backEnd.GameEngine.AttributeData;
 import backEnd.GameEngine.Component;
@@ -21,7 +23,6 @@ public class MoveBehavior implements Behavior {
 	private Attribute<Point2D> currentAttribute;
 	private Point2D currentPoint;
 	private Point2D newPoint;
-	private String moveDirection="";
 	private myAttributes MA; //we won't use this later
 	
 	@SuppressWarnings("unchecked")
@@ -31,17 +32,10 @@ public class MoveBehavior implements Behavior {
 		currentPoint=(Point2D) currentAttribute.getValue();
 	}
 	
-	public void setMoveDirection(String currentDirection){ 
-		/**
-		 * Engine will need to call this when it moves components. Only way to keep component's attributes
-		 * up to date since engines shouldn't have access to attributes (only behaviors should).
-		 */
-		moveDirection=currentDirection;
-	}
-	
 	@Override
-	public void execute() {
-		switch (moveDirection) {
+	public <T> void execute(T tile) {//pass in a tile //TODO error checking
+		Tile myTile=(Tile) tile;
+		switch (myTile.getAttribute((TileAttributeType) myTile.getAttribute(TileAttributeType.MOVE_DIRECTION).getValue()).toString()) {
 		case "LEFT":
 			newPoint=new Point2D(currentPoint.getX()-Constants.moveAmount, currentPoint.getY());
 			currentAttribute.setValue(newPoint);

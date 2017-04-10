@@ -3,8 +3,6 @@ package frontEnd.Skeleton.UserTools;
 import ModificationFromUser.Modification_ChangeMode;
 import frontEnd.ViewEditor;
 import javafx.beans.property.SimpleBooleanProperty;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
@@ -29,12 +27,12 @@ public class ToggleSwitch {
 		return switchedOn;
 	}
 
-	public ToggleSwitch(ViewEditor view, String title1, String title2) {
+	public ToggleSwitch(ViewEditor view, String title1, String title2, SimpleBooleanProperty authorProperty) {
 		myView = view;
 		toggle = new HBox();
 		label = new Label();
 		button = new Button();
-		switchedOn = new SimpleBooleanProperty(false);
+		switchedOn = authorProperty;
 
 		init(title1, title2);
 

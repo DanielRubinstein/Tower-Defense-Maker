@@ -33,6 +33,10 @@ public class AttributeData extends Observable {
 		return myAttributes.get(key);
 	}
 	
+	public Map<String, Attribute<?>> getAttributeMap(){
+		return myAttributes;
+	}
+	
 	/**
 	 * Part of the observable interface
 	 */
