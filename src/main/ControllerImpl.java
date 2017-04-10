@@ -49,7 +49,6 @@ public class ControllerImpl implements Controller {
 			} catch (XMLReadingException e) {
 				ErrorDialog errDia = new ErrorDialog();
 				errDia.create("Cannot Load Game", e.getMessage());
-				
 			}
 			
 		};

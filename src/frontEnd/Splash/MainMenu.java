@@ -39,7 +39,7 @@ public class MainMenu{
 	private void showPrimaryMenu(Stage stage) {
 		ButtonMenuImpl primaryMenu = new ButtonMenuImpl("Games");
    	 	primaryMenu.addSimpleButtonWithHover("New Game", e -> new GameMaker(stage, consumerLoadData), "Create A New Game after selecting the size of the screen");
-   	 	primaryMenu.addSimpleButtonWithHover("Load Template Game", e -> showTemplateMenu(new Stage()), "Load a game from a list of preapproved, ready-to-play templates");
+   	 	primaryMenu.addSimpleButtonWithHover("Load Template Game", e -> showTemplateMenu(stage), "Load a game from a list of preapproved, ready-to-play templates");
    	 	primaryMenu.addSimpleButtonWithHover("Load Saved Game", e-> loadGame(), "Continue your progress by loading a user-saved game");
    	 	primaryMenu.addSimpleButtonWithHover("Go Back", event -> splashScreen(stage), "Return to previous screen");
 		primaryMenu.display(stage);
@@ -69,7 +69,8 @@ public class MainMenu{
    	 			consumerLoadData.accept(templateGame);
    	 		});
    	 	}
-		templateGames.display(stage);
+   	 	templateGames.addSimpleButtonWithHover("Go Back", event -> showPrimaryMenu(stage), "Return to previous screen");
+   	 	templateGames.display(stage);
 	}
 
 }
