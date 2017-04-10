@@ -26,6 +26,7 @@ import javafx.scene.layout.StackPane;
 public class Canvas {
 	private StackPane root;
 	private State myState;
+	private Group allComponents;
 	private ComponentGraph myComponentGraph;
 	private GridPane myGrid;
 	private int myGridWidth;
@@ -35,7 +36,6 @@ public class Canvas {
 	private static final String IMAGE_RESOURCES = "resources/images";
 	private ResourceBundle myImages;
 	private static String DEFAULT_TILE;
-	//private StackPane 
 	private TileGrid myTileGrid;
 	private ViewEditor myView;
 	
@@ -44,6 +44,7 @@ public class Canvas {
 		myView = view;
 		myTileGrid=state.getTileGrid();
 		root = new StackPane();
+		allComponents = new Group();
 		getImages();
 		setUpGrid();
 	}
