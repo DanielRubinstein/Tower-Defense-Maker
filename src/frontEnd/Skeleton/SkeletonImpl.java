@@ -33,7 +33,7 @@ public class SkeletonImpl implements Skeleton{
 	public SkeletonImpl(ViewEditor view){
 		myRoot = new BorderPane();
 		align(MENU_WIDTH,MENU_HEIGHT);
-		State myState = new StateImpl(GRID_WIDTH,GRID_HEIGHT,TILE_WIDTH*10,TILE_HEIGHT*10);
+		State myState = new StateImpl(GRID_WIDTH,GRID_HEIGHT,(int)CANVAS_WIDTH,(int)CANVAS_HEIGHT);
 		Canvas canvas = new Canvas(view,myState);
 		canvas.setSize(CANVAS_WIDTH, CANVAS_HEIGHT);
 
@@ -45,12 +45,19 @@ public class SkeletonImpl implements Skeleton{
 		myRoot.setRight(userTools.getSidePane());
 		myRoot.setBottom(userTools.getBottomPane());	
 	}
+	public SkeletonImpl(ViewEditor view, double numTilesWide, double numTilesHigh, double canvasWidth, double cavasHeight){
+		
+		
+		
+		
+	}
 	
 
 	public void display(Stage stage) {
 		stage.setScene(myScene);
 		stage.setMinWidth(MENU_WIDTH);
 		stage.setMinHeight(MENU_HEIGHT);
+		
 		stage.show();
 	}
 	

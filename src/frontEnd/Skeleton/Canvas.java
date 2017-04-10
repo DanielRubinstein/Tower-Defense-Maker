@@ -14,8 +14,11 @@ import javafx.scene.Group;
 import javafx.scene.Node;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.RowConstraints;
 import javafx.scene.layout.StackPane;
+import javafx.stage.Stage;
 
 /**
  * This class is used to represent the actual game.
@@ -57,6 +60,7 @@ public class Canvas {
 		myGrid.setMinHeight(myGridHeight);
 		setTileGrid();
 		root.getChildren().add(myGrid);
+		System.out.println(root.isResizable() + " " +myGrid.isResizable());
 		myGrid.toBack();
 	}
 	private void getImages(){
@@ -78,15 +82,19 @@ public class Canvas {
 			for(int j=0;j<myGridWidth;j++){
 				Image image = new Image(getClass().getClassLoader().getResourceAsStream(DEFAULT_TILE));
 				ImageView tileView = new ImageView(image);
-				tileView.setPreserveRatio(true);
-				tileView.setFitWidth(TILE_WIDTH);
-				tileView.setFitHeight(TILE_HEIGHT);
+				organizeImageView(tileView);
 				Tile t = myTileGrid.getTileByLocation(new Point2D(i,j));
 				setTileInteraction(tileView,t);
 				myGrid.add(tileView, j, i);
 			}
-		}
-		
+		}		
+	}
+	private void organizeImageView(ImageView tileView){
+		tileView.setPreserveRatio(false);
+		tileView.setFitWidth(TILE_WIDTH);
+		tileView.setFitHeight(TILE_HEIGHT);
+		tileView.fitWidthProperty().bind(myGrid.widthProperty().divide(myGridWidth));
+		tileView.fitHeightProperty().bind(myGrid.heightProperty().divide(myGridHeight));
 	}
 	
 	private void setUpComponents(){
