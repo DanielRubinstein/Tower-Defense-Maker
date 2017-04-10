@@ -4,7 +4,7 @@ import backEnd.Bank.BankController;
 import backEnd.Data.DataController;
 import backEnd.GameData.GameData;
 import backEnd.GameData.State.State;
-import backEnd.GameEngine.GameProcessController;
+import backEnd.GameEngine.Engine.GameProcessController;
 import backEnd.Mode.Mode;
 
 /**

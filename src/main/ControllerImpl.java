@@ -21,7 +21,7 @@ public class ControllerImpl implements Controller {
 		//developerTestingSkeleton(stage);
 		System.out.println("tst");
 		
-		myMode = new ModeImpl(null, UserModeType.AUTHOR);
+		myMode = new ModeImpl(null, UserModeType.PLAYER);
 		
 		/*
 		myDataController = new DataController();
