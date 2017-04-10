@@ -17,7 +17,6 @@ public class ViewImpl implements ViewEditor{
 	public ViewImpl(ModeReader mode, Consumer<ModificationFromUser> inputConsumer) {
 		myMode = mode;
 		myModConsumer = inputConsumer;
-		System.out.println("seting up view impl");
 		mySkeleton = new SkeletonImpl(this);
 		mySkeleton.display(new Stage());
 	}

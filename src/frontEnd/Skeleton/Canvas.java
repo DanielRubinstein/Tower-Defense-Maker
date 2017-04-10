@@ -60,7 +60,6 @@ public class Canvas {
 		myGrid.setMinHeight(myGridHeight);
 		setTileGrid();
 		root.getChildren().add(myGrid);
-		System.out.println(root.isResizable() + " " +myGrid.isResizable());
 		myGrid.toBack();
 	}
 	private void getImages(){
