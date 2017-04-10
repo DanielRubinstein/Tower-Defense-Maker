@@ -2,7 +2,7 @@ package frontEnd.Skeleton.UserTools;
 
 import backEnd.GameData.State.Tile;
 import backEnd.GameEngine.Component;
-import frontEnd.ViewReader;
+import frontEnd.ViewEditor;
 import javafx.geometry.Side;
 import javafx.scene.Node;
 import javafx.scene.control.ScrollPane;
@@ -10,10 +10,10 @@ import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
 
 public class PalettePane implements SkeletonObject {
-	private ViewReader myView;
+	private ViewEditor myView;
 	private TabPane palette;
 	
-	public PalettePane(ViewReader view){
+	public PalettePane(ViewEditor view){
 		this.myView = view;
 		initializePalette();
 	}
@@ -37,9 +37,9 @@ public class PalettePane implements SkeletonObject {
 		
 		Palette<?> palette = null;
 		if (string.equals("Tiles")){
-			palette = new PaletteImpl<Tile>(myView.getTilePresets());
+			palette = new Palette<Tile>(myView, myView.getTilePresets());
 		} else if (string.equals("Components")){
-			palette = new PaletteImpl<Component>(myView.getComponentPresets());
+			palette = new Palette<Component>(myView, myView.getComponentPresets());
 		}
 		
 		
