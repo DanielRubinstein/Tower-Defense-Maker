@@ -4,6 +4,7 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
+import javafx.stage.Stage;
 
 public interface ButtonMenu {
 
@@ -15,5 +16,5 @@ public interface ButtonMenu {
 	
 	public void addNode(Node n);
 	
-	public void create();
+	public void display(Stage stage);
 }
