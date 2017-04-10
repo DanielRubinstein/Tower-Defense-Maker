@@ -1,5 +1,7 @@
 package backEnd.GameData.State;
 
+import java.util.List;
+
 import javafx.geometry.Point2D;
 
 public interface TileGrid {
@@ -24,7 +26,7 @@ public interface TileGrid {
 	 * @param y
 	 * @return
 	 */
-	Tile getTileByCoord(int x, int y);
+	Tile getTileByCoord(Double x, Double y);
 	
 	/**
 	 * @return grid width
@@ -35,5 +37,11 @@ public interface TileGrid {
 	 * @return grid height
 	 */
 	int getMyHeight();
+	
+	/*
+	 * return all tiles
+	 */
+	List<Tile> getAllTiles();
+
 
 }

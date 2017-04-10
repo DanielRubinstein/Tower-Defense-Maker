@@ -8,12 +8,14 @@ import backEnd.GameData.State.ComponentGraph;
 import backEnd.GameData.State.State;
 import backEnd.GameData.State.Tile;
 import backEnd.GameData.State.TileAttribute;
+import backEnd.GameData.State.TileAttributeImpl;
 import backEnd.GameEngine.Attribute;
 import backEnd.GameEngine.Component;
 import frontEnd.ViewEditor;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
+import javafx.geometry.Point2D;
 import javafx.geometry.VPos;
 import javafx.scene.Node;
 import javafx.scene.Scene;
@@ -40,7 +42,7 @@ public class TileCommandCenter implements SkeletonObject {
 	private TabPane tabPane;
 	private Stage myStage;
 	private Collection<Component> myComponents;
-	private Collection<TileAttribute<?>> myTileAttributes;
+	private Collection<TileAttributeImpl<?>> myTileAttributes;
 
 	public TileCommandCenter(ViewEditor view, Tile tile, State state) {
 		ComponentGraph myComponentGraph = state.getComponentGraph();
@@ -53,7 +55,7 @@ public class TileCommandCenter implements SkeletonObject {
 	private void createTabsAndStage(Tile tile){
 		tabPane = new TabPane();
 		tabPane.getTabs().add(createTileTab(tile));
-		tabPane.getTabs().addAll(createComponentTabs(tile));
+		tabPane.getTabs().addAll(createComponentTabs());
 		myStage = new Stage();
 		Scene myScene = new Scene(tabPane);
 		myScene.getStylesheets().add(DEFAULT_CSS);
@@ -71,49 +73,54 @@ public class TileCommandCenter implements SkeletonObject {
 		return tabPane;
 	}
 
-	private Collection<Tab> createComponentTabs(Tile tile) {
+	private Collection<Tab> createComponentTabs() {
 		List<Tab> componentTabs = new ArrayList<Tab>();
 		for (Component c : myComponents) {
 			// add component tab
-			componentTabs.add(createComponentTab(c, "Component X"));
+			componentTabs.add(createComponentTab(c)); 
 		}
 		return componentTabs;
 	}
 
 	private Tab createTileTab(Tile tile) {
-		GridPane contents = createGrid();
 		for(TileAttribute<?> att : myTileAttributes){
 			HBox attEditor = new HBox();
 			Label attLabel = new Label(att.getType().toString());
 			//add edit option
 		}
+		
+		
+		GridPane contents = createGrid(createAttributeView());
+		
 		return createSingleTab("Tile", contents);
 	}
 
-	private Tab createComponentTab(Component c, String string) {
-		GridPane contents = createGrid();
+	private Tab createComponentTab(Component c) {
+		GridPane contents = createGrid(createAttributeView());
+		contents.add(new Button("DELETE / SELL THIS COMPONENT"), 1, 5,3, 1);
 
-		ListView<String> behaviorView = createBehaviorView();
-		createSubContent(contents, "Active Behaviors", 3, 0, behaviorView, null, null);
-
-		contents.add(new Button("DELETE / SELL THIS COMPONENT"), 1, 5, 4, 1);
-
-		return createSingleTab(string, contents);
+		return createSingleTab("Component X", contents); // TODO get component names
 	}
 
-	private GridPane createGrid() {
+	private GridPane createGrid(TableView<String> attributeView) {
 		GridPane contents = new GridPane();
 		contents.setHgap(10);
 		contents.setVgap(10);
 		contents.setPadding(new Insets(10));
-
-		TableView<String> attributeView = createAttributeView();
-		createSubContent(contents, "Attributes", 1, 0, attributeView, null, null);
+		
+		// TODO get position of tile or component to present
+		contents.add(new Label(String.format("Location: (%.0f, %.0f)", 20d , 20d)), 0, 0, 3, 1);
+		createSubContent(contents, "Attributes", 1, 1, attributeView, null, null);
 
 		return contents;
 	}
 
 	private ListView<String> createBehaviorView() {
+		/*
+		ListView<String> behaviorView = createBehaviorView();
+		createSubContent(contents, "Active Behaviors", 3, 0, behaviorView, null, null);
+		
+		*/
 		ListView<String> myListView = new ListView<String>();
 
 		// extract list as observablelist
@@ -158,9 +165,9 @@ public class TileCommandCenter implements SkeletonObject {
 		remove.setOnAction(removeEvent);
 
 		gridPane.add(new Label(title), firstColumn, firstRow, 2, 1);
-		gridPane.add(viewer, firstColumn, 1, 2, 3);
-		gridPane.add(add, firstColumn, 4, 1, 1);
-		gridPane.add(remove, firstColumn + 1, 4, 1, 1);
+		gridPane.add(viewer, firstColumn, firstRow + 1, 2, 3);
+		gridPane.add(add, firstColumn, firstRow + 4, 1, 1);
+		gridPane.add(remove, firstColumn + 1, firstRow + 4, 1, 1);
 
 	}
 

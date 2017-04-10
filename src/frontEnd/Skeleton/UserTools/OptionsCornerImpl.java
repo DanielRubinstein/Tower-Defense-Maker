@@ -1,13 +1,8 @@
 package frontEnd.Skeleton.UserTools;
 
-
-import backEnd.GameData.State.Tile;
-import backEnd.GameData.State.TileImpl;
 import frontEnd.ViewEditor;
-import frontEnd.ViewReader;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
-import javafx.scene.control.Button;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
 /**
@@ -19,7 +14,6 @@ import javafx.scene.layout.VBox;
 public class OptionsCornerImpl implements OptionsCorner{
 
 	private VBox myRoot;
-	private SettingsView settingsDisplay;
 	private OptionsSelection userOptions;
 	
 	public OptionsCornerImpl(ViewEditor view) {
