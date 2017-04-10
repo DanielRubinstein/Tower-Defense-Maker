@@ -14,12 +14,12 @@ public class SkeletonImpl implements Skeleton{
 	private Scene myScene;
 	private UserTools userTools;
 
-	public static final double MENU_HEIGHT = 500d;
-	public static final double MENU_WIDTH = 600d;
-	private static final double CANVAS_HEIGHT_FACTOR = 0.8;
-	private static final double CANVAS_WIDTH_FACTOR = 0.8;
-	private static final double BOTTOM_HEIGHT_FACTOR = 0.2;
-	private static final double SIDE_WIDTH_FACTOR = 0.2;
+	public static final double MENU_HEIGHT = 700d;
+	public static final double MENU_WIDTH = 700d;
+	private static final double CANVAS_HEIGHT_FACTOR = 0.6;
+	private static final double CANVAS_WIDTH_FACTOR = 0.6;
+	private static final double BOTTOM_HEIGHT_FACTOR = 0.4;
+	private static final double SIDE_WIDTH_FACTOR = 0.4;
 	private static final int TILE_WIDTH = 40;
 	private static final int TILE_HEIGHT = 40;
 	private static final double CANVAS_WIDTH=MENU_WIDTH * CANVAS_WIDTH_FACTOR;

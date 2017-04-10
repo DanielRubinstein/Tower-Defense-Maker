@@ -38,4 +38,9 @@ public class Model {
 	public Mode getMode(){
 		return myMode;
 	}
+	
+	public BankController getMyBankController() {
+		return myBankController;
+	}
+
 }

@@ -39,7 +39,7 @@ public class SettingsViewImpl implements SettingsView{
 	public SettingsViewImpl(ViewEditor view) {
 		myView = view;
 		myStage = new Stage();
-		authorProperty = myView.getAuth();
+		authorProperty = myView.getBooleanAuthorModeProperty();
 		addButtons(myStage);
 	}
 	

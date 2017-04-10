@@ -27,7 +27,7 @@ public class ControllerImpl implements Controller {
 		
 		myModel = new Model(myGameData, myMode, myDataController);
 		*/
-		myView = new ViewImpl(myMode, 
+		myView = new ViewImpl(myMode, myModel,
 				(ModificationFromUser m) -> {
 					try {
 						executeInteraction(m);
