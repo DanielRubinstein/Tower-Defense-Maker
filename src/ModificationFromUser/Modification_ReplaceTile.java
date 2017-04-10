@@ -1,6 +1,6 @@
 package ModificationFromUser;
 
-import backEnd.Model;
+import backEnd.ModelImpl;
 import backEnd.GameData.State.Tile;
 import backEnd.Mode.ModeException;
 import javafx.geometry.Point2D;
@@ -19,7 +19,7 @@ public class Modification_ReplaceTile implements ModificationFromUser {
 	}
 
 	@Override
-	public void invoke(Model myModel) throws Exception {
+	public void invoke(ModelImpl myModel) throws Exception {
 		switch (myModel.getMode().getUserMode()) {
 		case AUTHOR:
 			myModel.getState().getTileGrid().setTile(newTile, location);

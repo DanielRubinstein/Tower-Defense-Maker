@@ -2,7 +2,7 @@ package ModificationFromUser;
 
 import java.util.function.Consumer;
 
-import backEnd.Model;
+import backEnd.ModelImpl;
 
 public enum Modification_GameRemote implements ModificationFromUser {
 	PLAY (model -> {
@@ -26,14 +26,14 @@ public enum Modification_GameRemote implements ModificationFromUser {
 		//model.getGameProcessController().play();
 		});
 
-	private Consumer<Model> myConsumer;
+	private Consumer<ModelImpl> myConsumer;
 	
-	Modification_GameRemote(Consumer<Model> consumer){
+	Modification_GameRemote(Consumer<ModelImpl> consumer){
 		myConsumer = consumer;
 	}
 
 	@Override
-	public void invoke(Model myModel) throws Exception {
+	public void invoke(ModelImpl myModel) throws Exception {
 		switch (this) {
 		case PLAY:
 			myConsumer.accept(myModel);

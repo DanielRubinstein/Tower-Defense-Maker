@@ -1,4 +1,4 @@
-package frontEnd.Menus;
+package frontEnd.Splash;
 
 import java.io.File;
 import java.io.IOException;

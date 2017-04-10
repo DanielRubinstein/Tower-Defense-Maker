@@ -18,6 +18,8 @@ public class AttributeFactory {
 			case "Integer":
 				Attribute<Integer> myHealthAttribute=new Attribute<Integer>();
 				return myHealthAttribute;
+			case "Boolean":
+				return new Attribute<Boolean>();
 			default: throw new IllegalArgumentException();
 		}
 	}

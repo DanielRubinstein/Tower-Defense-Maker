@@ -6,30 +6,34 @@ import java.util.Collections;
 import java.util.function.Consumer;
 
 import ModificationFromUser.ModificationFromUser;
+import backEnd.Model;
 import backEnd.GameData.UserAttribute;
 import backEnd.GameData.UserAttributeImpl;
 import backEnd.GameData.State.ComponentGraph;
+import backEnd.GameData.State.Tile;
 import backEnd.GameData.State.TileGrid;
+import backEnd.GameEngine.Component;
 import backEnd.Mode.ModeReader;
 import frontEnd.Skeleton.SkeletonImpl;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.stage.Stage;
 
 public class ViewImpl implements ViewEditor{
+	private Model myModel;
 	private Consumer<ModificationFromUser> myModConsumer;
-	private ModeReader myMode;
 	private SkeletonImpl mySkeleton;
 	private SimpleBooleanProperty authorProperty;
 	
-	public ViewImpl(ModeReader mode, Consumer<ModificationFromUser> inputConsumer) {
+	public ViewImpl(Model model,Consumer<ModificationFromUser> inputConsumer) {
+		myModel = model;
 		myModConsumer = inputConsumer;
+		ModeReader mode = model.getModeReader();
 		authorProperty = new SimpleBooleanProperty(mode.getUserModeString().equals("AUTHOR"));
-		System.out.println("seting up view impl");
-		mySkeleton = new SkeletonImpl(this);
+		mySkeleton = new SkeletonImpl(this,model);
 		mySkeleton.display(new Stage());
 	}
-	
-	public SimpleBooleanProperty getAuth(){
+
+	public SimpleBooleanProperty getBooleanAuthorModeProperty(){
 		return this.authorProperty;
 	}
 	
@@ -96,6 +100,16 @@ public class ViewImpl implements ViewEditor{
 		m.add(new UserAttributeImpl("Score", 3000d));
 		m.add(new UserAttributeImpl("Level", 17d));
 		return Collections.unmodifiableCollection(m);
+	}
+
+	@Override
+	public Collection<Tile> getTilePresets() {
+		return myModel.getBankController().getTileMap().values();
+	}
+
+	@Override
+	public Collection<Component> getComponentPresets() {
+		return myModel.getBankController().getComponentMap().values();
 	}
 
 }
