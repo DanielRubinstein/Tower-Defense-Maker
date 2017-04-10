@@ -2,29 +2,14 @@ package frontEnd.Skeleton.UserTools;
 
 import frontEnd.ViewEditor;
 import frontEnd.Menus.ButtonMenuImpl;
-import frontEnd.Menus.StartMenu;
-import frontEnd.Splash.MainMenu;
-import javafx.beans.binding.Bindings;
-import javafx.beans.binding.BooleanBinding;
-import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.SimpleBooleanProperty;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.geometry.Bounds;
 import javafx.scene.Node;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.SplitPane;
 import javafx.scene.control.Tooltip;
-import javafx.scene.control.Tooltip.*;
 import javafx.scene.layout.HBox;
-import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
-import java.util.List;
-
-import javax.swing.event.ChangeEvent;
 
 /**
  * This class represents the screen that the user sees when the settings button is pressed

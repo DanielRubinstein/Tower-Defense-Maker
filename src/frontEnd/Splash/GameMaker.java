@@ -1,8 +1,6 @@
 package frontEnd.Splash;
 
 import java.util.function.Consumer;
-
-import backEnd.GameData.GameData;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -20,11 +18,11 @@ import javafx.stage.Stage;
  */
 public class GameMaker {
 
-	private Scene myScene;
 	private VBox allSelections;
 	private Slider myTilesWide;
 	private Slider myTilesHigh;
 	private Consumer<StartingInput> onSubmit;
+	private Stage myStage;
 	
 	public GameMaker(Stage stage, Consumer<StartingInput> gameDataConsumer) {
 		allSelections = new VBox();
@@ -32,8 +30,9 @@ public class GameMaker {
 		allSelections.setPrefHeight(stage.getHeight());
 		onSubmit = gameDataConsumer;
 		setInputFields();
-		stage.setScene(new Scene(allSelections));
-		stage.show();
+		myStage = stage;
+		myStage.setScene(new Scene(allSelections));
+		myStage.show();
 	}
 
 	private void setInputFields() {
@@ -48,6 +47,7 @@ public class GameMaker {
 			allValues.setTilesWide((int)myTilesWide.getValue());
 			allValues.setTilesHigh((int)myTilesHigh.getValue());
 			onSubmit.accept(allValues);
+			myStage.close();
 		});
 		
 		allSelections.getChildren().add(submit);

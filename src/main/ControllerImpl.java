@@ -8,7 +8,6 @@ import backEnd.ModelImpl;
 import backEnd.Data.DataController;
 import backEnd.GameData.GameData;
 import backEnd.Mode.ModeImpl;
-import backEnd.Mode.UserModeType;
 import frontEnd.ViewImpl;
 import frontEnd.Skeleton.SkeletonImpl;
 import frontEnd.Splash.MainMenu;
