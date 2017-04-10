@@ -17,9 +17,8 @@ public class MoveEngine implements Engine{
 				}
 			}
 		}
-		//^^^^^^^^
 		
-		for(Component struct: currentState.getTileGrid().getComponentGraph.getAllComponents()){
+		for(Component struct: currentState.getTileGrid().getAllTiles() ){
 			if(struct.getAttribute("Movable").getValue() == "True"){ //only move stuff that are movable
 				Behavior myMovementInstructions = new MoveBehavior(struct); //can we avoid this?
 				myMovementInstructions.execute(struct);

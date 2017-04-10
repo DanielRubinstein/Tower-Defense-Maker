@@ -32,14 +32,6 @@ public class MoveBehavior implements Behavior {
 		currentPoint=(Point2D) currentAttribute.getValue();
 	}
 	
-	public void setMoveDirection(String currentDirection){ 
-		/**
-		 * Engine will need to call this when it moves components. Only way to keep component's attributes
-		 * up to date since engines shouldn't have access to attributes (only behaviors should).
-		 */
-		moveDirection=currentDirection;
-	}
-	
 	@Override
 	public <T> void execute(T tile) {//pass in a tile //TODO error checking
 		Tile myTile=(Tile) tile;

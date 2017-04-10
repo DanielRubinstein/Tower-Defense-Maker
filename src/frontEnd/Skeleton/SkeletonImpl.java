@@ -15,7 +15,7 @@ public class SkeletonImpl implements Skeleton{
 	private UserTools userTools;
 
 	public static final double MENU_HEIGHT = 500d;
-	public static final double MENU_WIDTH = 500d;
+	public static final double MENU_WIDTH = 600d;
 	private static final double CANVAS_HEIGHT_FACTOR = 0.8;
 	private static final double CANVAS_WIDTH_FACTOR = 0.8;
 	private static final double BOTTOM_HEIGHT_FACTOR = 0.2;
@@ -33,17 +33,22 @@ public class SkeletonImpl implements Skeleton{
 	public SkeletonImpl(ViewEditor view){
 		myRoot = new BorderPane();
 		align(MENU_WIDTH,MENU_HEIGHT);
-		State myState = new StateImpl(GRID_WIDTH,GRID_HEIGHT,TILE_WIDTH*10,TILE_HEIGHT*10);
+		State myState = new StateImpl(GRID_WIDTH,GRID_HEIGHT,(int)CANVAS_WIDTH,(int)CANVAS_HEIGHT);
 		Canvas canvas = new Canvas(view,myState);
 		canvas.setSize(CANVAS_WIDTH, CANVAS_HEIGHT);
 
 		myRoot.setCenter(canvas.getRoot());
 		userTools = new UserTools(view);
-		userTools.setBottomHeight(MENU_HEIGHT*BOTTOM_HEIGHT_FACTOR);
-		userTools.setSideWidth(MENU_WIDTH*SIDE_WIDTH_FACTOR);
-		//userTools.setPaneThickness(MENU_WIDTH*BOTTOM_HEIGHT_FACTOR);
+		System.out.println("width " +MENU_WIDTH*SIDE_WIDTH_FACTOR + "height  "+MENU_HEIGHT*BOTTOM_HEIGHT_FACTOR);
+		userTools.setBottomAndSideDimensions(MENU_WIDTH*SIDE_WIDTH_FACTOR,MENU_HEIGHT*BOTTOM_HEIGHT_FACTOR);
 		myRoot.setRight(userTools.getSidePane());
 		myRoot.setBottom(userTools.getBottomPane());	
+	}
+	public SkeletonImpl(ViewEditor view, double numTilesWide, double numTilesHigh){
+		
+		
+		
+		
 	}
 	
 
@@ -51,6 +56,7 @@ public class SkeletonImpl implements Skeleton{
 		stage.setScene(myScene);
 		stage.setMinWidth(MENU_WIDTH);
 		stage.setMinHeight(MENU_HEIGHT);
+		
 		stage.show();
 	}
 	

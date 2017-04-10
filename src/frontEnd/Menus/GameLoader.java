@@ -29,7 +29,8 @@ public class GameLoader {
 	}
 
 	public GameData loadGame() throws XMLReadingException {
-		return gameReader.Load(loadGameFile(SAVED_GAMES_DIRECTORY));
+		//return gameReader.Load(loadGameFile(SAVED_GAMES_DIRECTORY));
+		return null;
 
 	}
 
@@ -58,7 +59,8 @@ public class GameLoader {
 	public GameData loadTemplateGame(String templateGame) {
 		for(File template : getFileList(TEMPLATE_GAMES_DIRECTORY)){
 			if(extractGameTitle(template).equals(templateGame)){
-				return gameReader.Load(template);
+				//return gameReader.Load(template);
+				return null;
 			}
 		}
 		return null; // TODO maybe add exception
