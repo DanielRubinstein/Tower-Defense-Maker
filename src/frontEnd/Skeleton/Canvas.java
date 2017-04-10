@@ -14,8 +14,11 @@ import javafx.scene.Group;
 import javafx.scene.Node;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.RowConstraints;
 import javafx.scene.layout.StackPane;
+import javafx.stage.Stage;
 
 /**
  * This class is used to represent the actual game.
@@ -26,6 +29,7 @@ import javafx.scene.layout.StackPane;
 public class Canvas {
 	private StackPane root;
 	private State myState;
+	private Group allComponents;
 	private ComponentGraph myComponentGraph;
 	private GridPane myGrid;
 	private int myGridWidth;
@@ -35,7 +39,6 @@ public class Canvas {
 	private static final String IMAGE_RESOURCES = "resources/images";
 	private ResourceBundle myImages;
 	private static String DEFAULT_TILE;
-	//private StackPane 
 	private TileGrid myTileGrid;
 	private ViewEditor myView;
 	
@@ -44,6 +47,7 @@ public class Canvas {
 		myView = view;
 		myTileGrid=state.getTileGrid();
 		root = new StackPane();
+		allComponents = new Group();
 		getImages();
 		setUpGrid();
 	}
@@ -77,15 +81,19 @@ public class Canvas {
 			for(int j=0;j<myGridWidth;j++){
 				Image image = new Image(getClass().getClassLoader().getResourceAsStream(DEFAULT_TILE));
 				ImageView tileView = new ImageView(image);
-				tileView.setPreserveRatio(true);
-				tileView.setFitWidth(TILE_WIDTH);
-				tileView.setFitHeight(TILE_HEIGHT);
+				organizeImageView(tileView);
 				Tile t = myTileGrid.getTileByLocation(new Point2D(i,j));
 				setTileInteraction(tileView,t);
 				myGrid.add(tileView, j, i);
 			}
-		}
-		
+		}		
+	}
+	private void organizeImageView(ImageView tileView){
+		tileView.setPreserveRatio(false);
+		tileView.setFitWidth(TILE_WIDTH);
+		tileView.setFitHeight(TILE_HEIGHT);
+		tileView.fitWidthProperty().bind(myGrid.widthProperty().divide(myGridWidth));
+		tileView.fitHeightProperty().bind(myGrid.heightProperty().divide(myGridHeight));
 	}
 	
 	private void setUpComponents(){

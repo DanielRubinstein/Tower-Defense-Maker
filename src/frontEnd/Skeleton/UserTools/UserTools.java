@@ -9,8 +9,8 @@ public class UserTools {
 	private BottomRoot bottomRoot;
 	
 	public UserTools(ViewEditor view){
-		sideBar = new SideBarImpl(view);
-		bottomRoot = new BottomRootImpl(view);
+		this.sideBar = new SideBarImpl(view);
+		this.bottomRoot = new BottomRootImpl(view);
 		
 	}
 	
@@ -21,16 +21,16 @@ public class UserTools {
 	public Node getBottomPane(){
 		return this.bottomRoot.getRoot();
 	}
-	public void setBottomHeight(double height){
-		this.bottomRoot.setHeight(height);
-	}
-	public void setSideWidth(double width){
-		sideBar.setWidth(width);
-	}
-	
-	public void setPaneThickness(double in){
-		bottomRoot.setHeight(in);
-		sideBar.setWidth(in);
+
+	/**
+	 * Sets the width of the side and height of the bottom
+	 * @param width of the side pane
+	 * @param height of the bottom pane
+	 */
+	public void setBottomAndSideDimensions(double width, double height){
+		this.bottomRoot.setDimensions(width, height);
+		this.sideBar.setWidth(width);
+		
 	}
 
 
