@@ -11,7 +11,11 @@ public class AccessPermissionsImpl implements AccessPermissions {
 	private ArrayList<GameModeType> gameModePermissions;
 	private ArrayList<UserModeType> userModePermissions;
 	
-	
+	public AccessPermissionsImpl(){
+		this.gameModePermissions = new ArrayList<GameModeType>();
+		this.gameModePermissions.add(GameModeType.DEFAULT);
+		this.userModePermissions = new ArrayList<UserModeType>();
+	}
 	
 	public AccessPermissionsImpl(List<GameModeType> gameModePermissions, List<UserModeType> userModePermissions){
 		this.gameModePermissions = new ArrayList<GameModeType>(gameModePermissions);
