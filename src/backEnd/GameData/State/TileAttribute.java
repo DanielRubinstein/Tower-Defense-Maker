@@ -1,27 +1,42 @@
 package backEnd.GameData.State;
 
-public interface TileAttribute<T> {
-
+public class TileAttribute <T>{
+	
+	private TileAttributeType type;
+	private T value;
+	
+	public TileAttribute(TileAttributeType type, T value){
+		this.type = type;
+		this.value = value;
+	}
+	
 	/**
 	 * Set new value to the attribute
 	 * @param newVal
 	 */
-	void setValue(T newVal);
-
+	public void setValue(T newVal){
+		value = newVal;
+	}
+	
 	/**
 	 * Get the current attribute value
 	 */
-	T getValue();
-
+	public T getValue(){
+		return value;
+	}
+	
 	/**
 	 * Set new type to the attribute
 	 * @param type
 	 */
-	void setType(TileAttributeType type);
-
+	public void setType(TileAttributeType type){
+		this.type = type;
+	}
+	
 	/**
 	 * Get the attribute type
 	 */
-	TileAttributeType getType();
-
+	public TileAttributeType getType(){
+		return type;
+	}
 }
