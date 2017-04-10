@@ -34,17 +34,16 @@ public class MainMenu{
 	
 	private void splashScreen(Stage stage) {
    	 	ButtonMenuImpl splash = new ButtonMenuImpl("Welcome");
-   	 	splash.addSimpleButton("START", event -> showPrimaryMenu(stage));
+   	 	splash.addSimpleButtonWithHover("START", event -> showPrimaryMenu(stage), "Click to start the game!");
 		splash.display(stage);
 	}
 
 	private void showPrimaryMenu(Stage stage) {
 		ButtonMenuImpl primaryMenu = new ButtonMenuImpl("Games");
-		primaryMenu.setText("Yo");
-   	 	primaryMenu.addSimpleButton("New Game", e -> new GameMaker(stage, consumerEnterData));
-   	 	primaryMenu.addSimpleButton("Load Template Game", e -> showTemplateMenu(new Stage()));
-   	 	primaryMenu.addSimpleButton("Load Saved Game", e-> loadGame());
-   	 	primaryMenu.addBackButton(event -> splashScreen(stage));
+   	 	primaryMenu.addSimpleButtonWithHover("New Game", e -> new GameMaker(stage, consumerEnterData), "Create A New Game after selecting the size of the screen");
+   	 	primaryMenu.addSimpleButtonWithHover("Load Template Game", e -> showTemplateMenu(new Stage()), "Load a game from a list of preapproved, ready-to-play templates");
+   	 	primaryMenu.addSimpleButtonWithHover("Load Saved Game", e-> loadGame(), "Continue your progress by loading a user-saved game");
+   	 	primaryMenu.addSimpleButtonWithHover("Go Back", event -> splashScreen(stage), "Return to previous screen");
 		primaryMenu.display(stage);
 	}
 
