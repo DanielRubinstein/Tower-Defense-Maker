@@ -44,12 +44,6 @@ public class SkeletonImpl implements Skeleton{
 		myRoot.setRight(userTools.getSidePane());
 		myRoot.setBottom(userTools.getBottomPane());	
 	}
-	public SkeletonImpl(ViewEditor view, double numTilesWide, double numTilesHigh){
-		
-		
-		
-		
-	}
 	
 
 	public void display(Stage stage) {

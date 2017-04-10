@@ -20,6 +20,7 @@ public class SettingsViewImpl implements SettingsView{
 	private Stage myStage;
 	private SimpleBooleanProperty authorProperty;
 	private ViewEditor myView;
+	private ButtonMenuImpl myMenu;
 	
 	public SettingsViewImpl(ViewEditor view) {
 		myView = view;
@@ -29,7 +30,7 @@ public class SettingsViewImpl implements SettingsView{
 	}
 	
 	public void launchSettings(){
-		myStage.show();
+		myMenu.display(myStage);
 	}
 	/*
 	 * Buttons to add:
@@ -40,7 +41,7 @@ public class SettingsViewImpl implements SettingsView{
 	 * Author/Player toggle
 	 */
 	private void addButtons(Stage stage){
-		ButtonMenuImpl myMenu = new ButtonMenuImpl("Settings");
+		myMenu = new ButtonMenuImpl("Settings");
 		myMenu.addSimpleButton("Save", e -> myView.save());
 		
 		myMenu.addSimpleButton("Load", e -> myView.load());
@@ -53,9 +54,6 @@ public class SettingsViewImpl implements SettingsView{
 		//adding player/godmode switch
 		ToggleSwitch modeToggle = new ToggleSwitch(myView,"Player", "Author", authorProperty);
 		myMenu.addNode(modeToggle.getRoot());
-		
-		myMenu.create();
-		stage.setScene(myMenu.getScene());
 	}
 
 	

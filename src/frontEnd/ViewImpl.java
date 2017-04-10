@@ -13,20 +13,21 @@ import backEnd.GameData.State.ComponentGraph;
 import backEnd.GameData.State.Tile;
 import backEnd.GameData.State.TileGrid;
 import backEnd.GameEngine.Component;
-import backEnd.Mode.ModeImpl;
 import backEnd.Mode.ModeReader;
 import frontEnd.Skeleton.SkeletonImpl;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.stage.Stage;
 
 public class ViewImpl implements ViewEditor{
+	private Model myModel;
 	private Consumer<ModificationFromUser> myModConsumer;
 	private SkeletonImpl mySkeleton;
 	private SimpleBooleanProperty authorProperty;
 	
 	public ViewImpl(Model model,Consumer<ModificationFromUser> inputConsumer) {
+		myModel = model;
 		myModConsumer = inputConsumer;
-		ModeReader mode = model.getMode();
+		ModeReader mode = model.getModeReader();
 		authorProperty = new SimpleBooleanProperty(mode.getUserModeString().equals("AUTHOR"));
 		mySkeleton = new SkeletonImpl(this,model);
 		mySkeleton.display(new Stage());
@@ -103,14 +104,12 @@ public class ViewImpl implements ViewEditor{
 
 	@Override
 	public Collection<Tile> getTilePresets() {
-		// TODO Auto-generated method stub
-		return null;
+		return myModel.getBankController().getTileMap().values();
 	}
 
 	@Override
 	public Collection<Component> getComponentPresets() {
-		// TODO Auto-generated method stub
-		return null;
+		return myModel.getBankController().getComponentMap().values();
 	}
 
 }

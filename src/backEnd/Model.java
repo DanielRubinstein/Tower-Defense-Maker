@@ -1,5 +1,6 @@
 package backEnd;
 
+import backEnd.Bank.BankController;
 import backEnd.GameData.State.State;
 import backEnd.Mode.ModeReader;
 
@@ -15,10 +16,13 @@ public interface Model {
 	 * @return current State
 	 */
 	public State getState();
+	
 	/**
 	 * 
 	 * @return mode of the user
 	 */
-	public ModeReader getMode();
+	public ModeReader getModeReader();
+	
+	public BankController getBankController();
 	
 }

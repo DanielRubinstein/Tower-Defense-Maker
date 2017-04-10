@@ -1,6 +1,10 @@
 package frontEnd.Splash;
 
 import java.util.function.Consumer;
+
+import frontEnd.Menus.ButtonMenu;
+import frontEnd.Menus.ButtonMenuImpl;
+import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -17,22 +21,19 @@ import javafx.stage.Stage;
  *
  */
 public class GameMaker {
-
-	private VBox allSelections;
+	
+	private ButtonMenuImpl allSelections;
 	private Slider myTilesWide;
 	private Slider myTilesHigh;
 	private Consumer<StartingInput> onSubmit;
 	private Stage myStage;
 	
 	public GameMaker(Stage stage, Consumer<StartingInput> gameDataConsumer) {
-		allSelections = new VBox();
-		allSelections.setPrefWidth(stage.getWidth());
-		allSelections.setPrefHeight(stage.getHeight());
+		allSelections = new ButtonMenuImpl("Starting Values!");
 		onSubmit = gameDataConsumer;
 		setInputFields();
 		myStage = stage;
-		myStage.setScene(new Scene(allSelections));
-		myStage.show();
+		allSelections.display(myStage);
 	}
 
 	private void setInputFields() {
@@ -41,16 +42,13 @@ public class GameMaker {
 		setSubmit();
 	}
 	private void setSubmit() {
-		Button submit = new Button("Submit");
-		submit.setOnAction(e ->  {
+		allSelections.addSimpleButton("Submit", e ->  {
 			StartingInput allValues = new StartingInput();
 			allValues.setTilesWide((int)myTilesWide.getValue());
 			allValues.setTilesHigh((int)myTilesHigh.getValue());
 			onSubmit.accept(allValues);
 			myStage.close();
 		});
-		
-		allSelections.getChildren().add(submit);
 	}
 
 	private Slider setInputSliderFields(String text, int min, int start, int max){
@@ -60,7 +58,7 @@ public class GameMaker {
 		Label currentVal = new Label(String.format("Current value: %d", start));
 		slide.valueProperty().addListener( (observable, oldValue, newValue)->currentVal.setText(String.format("Current value: %d", newValue.intValue())));
 		tileWidth.getChildren().addAll(name,slide,currentVal);
-		allSelections.getChildren().add(tileWidth);
+		allSelections.addNode(tileWidth);
 		return slide;
 	}
 	

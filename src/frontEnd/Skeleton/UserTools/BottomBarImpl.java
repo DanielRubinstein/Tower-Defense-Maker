@@ -15,8 +15,8 @@ public class BottomBarImpl implements BottomBar{
 	
 	public BottomBarImpl(ViewReader view){
 		myRoot = new HBox();
-		PalettePane pp = new PalettePane(view);
-		myRoot.getChildren().add(pp.getRoot());
+		//PalettePane pp = new PalettePane(view);
+		//myRoot.getChildren().add(pp.getRoot());
 	}
 	
 	public Node getRoot(){
