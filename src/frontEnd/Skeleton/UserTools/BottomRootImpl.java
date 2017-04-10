@@ -38,7 +38,7 @@ public class BottomRootImpl implements BottomRoot{
 		myOptions.setSideDimensions(width, height);
 	}
 	private void initializeBar(ViewReader view){
-		myBottomBar = new BottomBarImpl();
+		myBottomBar = new BottomBarImpl(view);
 		HBox.setHgrow(myBottomBar.getRoot(), Priority.ALWAYS);
 		myRoot.getChildren().add(myBottomBar.getRoot());
 	}

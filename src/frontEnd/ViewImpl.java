@@ -10,7 +10,10 @@ import backEnd.Model;
 import backEnd.GameData.UserAttribute;
 import backEnd.GameData.UserAttributeImpl;
 import backEnd.GameData.State.ComponentGraph;
+import backEnd.GameData.State.Tile;
 import backEnd.GameData.State.TileGrid;
+import backEnd.GameEngine.Component;
+import backEnd.Mode.ModeImpl;
 import backEnd.Mode.ModeReader;
 import frontEnd.Skeleton.SkeletonImpl;
 import javafx.beans.property.SimpleBooleanProperty;
@@ -28,8 +31,8 @@ public class ViewImpl implements ViewEditor{
 		mySkeleton = new SkeletonImpl(this,model);
 		mySkeleton.display(new Stage());
 	}
-	
-	public SimpleBooleanProperty getAuth(){
+
+	public SimpleBooleanProperty getBooleanAuthorModeProperty(){
 		return this.authorProperty;
 	}
 	
@@ -96,6 +99,18 @@ public class ViewImpl implements ViewEditor{
 		m.add(new UserAttributeImpl("Score", 3000d));
 		m.add(new UserAttributeImpl("Level", 17d));
 		return Collections.unmodifiableCollection(m);
+	}
+
+	@Override
+	public Collection<Tile> getTilePresets() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Collection<Component> getComponentPresets() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }
