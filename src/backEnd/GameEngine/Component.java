@@ -1,9 +1,10 @@
 package backEnd.GameEngine;
 
-import java.util.List;
 import java.util.Map;
 import java.util.ResourceBundle;
 
+import backEnd.GameData.State.AccessPermissions;
+import backEnd.GameData.State.AccessPermissionsImpl;
 import backEnd.GameEngine.Behaviors.Behavior;
 
 
@@ -15,10 +16,13 @@ public class Component {
 	private final static ResourceBundle attributeResources = ResourceBundle.getBundle(DEFAULT_ATTRIBUTE_PATH);
 	private AttributeData myAttributes;
 	private Map<String, Behavior> myBehaviors;
-	
-	
+	private AccessPermissions myAccessPermissions;
 	
 	public Component(){
+		this(new AccessPermissionsImpl());
+	}
+	
+	public Component(AccessPermissions accessPermissions){
 		Component dummyComponent=new Component();
 		AttributeFactory af=new AttributeFactory();
 		BehaviorFactory bf=new BehaviorFactory(dummyComponent); //add a real component
@@ -29,8 +33,12 @@ public class Component {
 			myBehaviors.put(key, bf.getBehavior(key));
 			}
 		setupBehaviorObserving();
+		this.myAccessPermissions = accessPermissions;
 	}
-		
+	
+	public AccessPermissions getAccessPermissions(){
+		return myAccessPermissions;
+	}
 
 	public void setupBehaviorObserving(){
 		for (String b: myBehaviors.keySet()){

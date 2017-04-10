@@ -21,18 +21,18 @@ public interface Tile {
 	 * Add a TileAttribute to the Tile
 	 * @param newAttr
 	 */
-	void addTileAttribute(TileAttributeImpl<?> newAttr);
+	void addTileAttribute(TileAttribute<?> newAttr);
 	
 	/**
 	 * @return List of TileAttributes
 	 */
-	List<TileAttributeImpl<?>> getTileAttributeList();
+	List<TileAttribute<?>> getTileAttributeList();
 	
 	/**
 	 * Replace the current TileAttribute list with newAttrList
 	 * @param newAttrList
 	 */
-	void setTileAttributeList(List<TileAttributeImpl<?>> newAttrList);
+	void setTileAttributeList(List<TileAttribute<?>> newAttrList);
 	
 	/**
 	 * @param type
