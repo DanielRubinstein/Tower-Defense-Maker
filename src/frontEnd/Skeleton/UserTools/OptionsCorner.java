@@ -9,9 +9,10 @@ package frontEnd.Skeleton.UserTools;
 public interface OptionsCorner extends SkeletonObject{
 	
 	 /**
-	  * Sets the sideLength to the parameter height
+	  * Sets the height and width to the given parameters
 	  * @param height
+	  * @param width
 	  */
-	public void setSideLength(double height);
+	public void setSideDimensions(double width, double height);
 	
 }

@@ -27,14 +27,15 @@ public class BottomRootImpl implements BottomRoot{
 		initializeBar(view);
 		initializeCorner(view);
 	}
-	
-	public void setHeight(double height){
-		System.out.println("setting bootm root height to "+height);
-		myRoot.setPrefHeight(height);
-		//myRoot.setBackground( new Background(new BackgroundFill(Color.BLANCHEDALMOND, CornerRadii.EMPTY, Insets.EMPTY)));
-		
+	/**
+	 * 
+	 * @param width
+	 * @param height
+	 */
+	public void setDimensions(double width, double height){
+		//myRoot.setPrefHeight(height);		
 		myBottomBar.setHeight(height);
-		myOptions.setSideLength(height);
+		myOptions.setSideDimensions(width, height);
 	}
 	private void initializeBar(ViewReader view){
 		myBottomBar = new BottomBarImpl();

@@ -37,12 +37,12 @@ public class OptionsSelection {
 		return myRoot;
 	}
 	public void setAlignment(Pos position,Priority priority){
-		myRoot.setAlignment(Pos.BOTTOM_RIGHT);
+		myRoot.setAlignment(Pos.TOP_RIGHT);
 	}
 	public void setSize(double width, double height){
 		myRoot.setPrefWidth(width);
 		myRoot.setPrefHeight(height);
-		setUpOptions(width/4);
+		setUpOptions(width/4);//hard coded
 	}
 	private void setUpOptions(double buttonWidth){
 		myButtons = new ArrayList<Button>();
@@ -54,7 +54,6 @@ public class OptionsSelection {
 		addButtonImage(PLAY_IMAGE, e-> myView.sendUserModification(Modification_GameRemote.PLAY) ,size);
 		addButtonImage(PAUSE_IMAGE, e-> myView.sendUserModification(Modification_GameRemote.PAUSE) ,size);
 		addButtonImage(FASTFWD_IMAGE, e-> myView.sendUserModification(Modification_GameRemote.FASTFORWARD) ,size);
-		
 		addButtonImage(SETTINGS_IMAGE, e-> mySettings.launchSettings(),size);
 	}
 	
@@ -62,8 +61,9 @@ public class OptionsSelection {
 	private void addButtonImage(String imageName, EventHandler<ActionEvent> event, double size){
 		Image image = new Image(getClass().getClassLoader().getResourceAsStream(imageName));
 		ImageView viewImage = new ImageView(image);
+		viewImage.setPreserveRatio(false);
 		viewImage.setFitWidth(size);
-		viewImage.setPreserveRatio(true);
+		viewImage.setFitHeight(size);
 		Button b = new Button();
 		b.setOnAction(event);
 		b.setGraphic(viewImage);
