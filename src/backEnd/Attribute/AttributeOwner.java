@@ -1,6 +1,8 @@
 package backEnd.Attribute;
 
-import java.util.Collection;
+import java.util.Map;
+
+import backEnd.GameEngine.Attribute;
 
 public interface AttributeOwner {
 	
@@ -8,9 +10,7 @@ public interface AttributeOwner {
 	
 	public Attribute<?> getAttribute(String name);
 	
-	public Collection<Attribute<?>> getAttributeList();
-	
-	public void setAttributeList(Collection<Attribute<?>> newAttri);
+	public Map<String, Attribute<?>> getAttributeMap();
 	
 	public boolean hasAttribute(String name);
 
