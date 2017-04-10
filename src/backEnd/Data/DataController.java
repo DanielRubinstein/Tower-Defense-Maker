@@ -1,5 +1,6 @@
 package backEnd.Data;
 
+import java.io.File;
 import java.util.List;
 import java.util.Map;
 
@@ -26,8 +27,8 @@ public class DataController {
 		return componentMap;
 	}
 	
-	public GameData getGameData(String gameName){
-		return myXMLReader.loadGameStateData("data/GameStateData/", gameName);
+	public GameData getGameData(File file){
+		return myXMLReader.loadGameStateData("data/GameStateData/", file);
 	}
 	
 	public Map<String, Tile> getTileMap(){

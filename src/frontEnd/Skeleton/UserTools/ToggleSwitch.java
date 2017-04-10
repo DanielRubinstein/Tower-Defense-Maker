@@ -3,8 +3,6 @@ package frontEnd.Skeleton.UserTools;
 import ModificationFromUser.Modification_ChangeMode;
 import frontEnd.ViewEditor;
 import javafx.beans.property.SimpleBooleanProperty;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.Button;

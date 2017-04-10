@@ -2,29 +2,14 @@ package frontEnd.Skeleton.UserTools;
 
 import frontEnd.ViewEditor;
 import frontEnd.Menus.ButtonMenuImpl;
-import frontEnd.Menus.MainMenu;
-import frontEnd.Menus.StartMenu;
-import javafx.beans.binding.Bindings;
-import javafx.beans.binding.BooleanBinding;
-import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.SimpleBooleanProperty;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.geometry.Bounds;
 import javafx.scene.Node;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.SplitPane;
 import javafx.scene.control.Tooltip;
-import javafx.scene.control.Tooltip.*;
 import javafx.scene.layout.HBox;
-import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
-import java.util.List;
-
-import javax.swing.event.ChangeEvent;
 
 /**
  * This class represents the screen that the user sees when the settings button is pressed
@@ -35,16 +20,17 @@ public class SettingsViewImpl implements SettingsView{
 	private Stage myStage;
 	private SimpleBooleanProperty authorProperty;
 	private ViewEditor myView;
+	private ButtonMenuImpl myMenu;
 	
 	public SettingsViewImpl(ViewEditor view) {
 		myView = view;
 		myStage = new Stage();
-		authorProperty = myView.getAuth();
+		authorProperty = myView.getBooleanAuthorModeProperty();
 		addButtons(myStage);
 	}
 	
 	public void launchSettings(){
-		myStage.show();
+		myMenu.display(myStage);
 	}
 	/*
 	 * Buttons to add:
@@ -55,9 +41,7 @@ public class SettingsViewImpl implements SettingsView{
 	 * Author/Player toggle
 	 */
 	private void addButtons(Stage stage){
-		ButtonMenuImpl myMenu = new ButtonMenuImpl();
-		
-		myMenu.setText("Settings");
+		myMenu = new ButtonMenuImpl("Settings");
 		myMenu.addSimpleButton("Save", e -> myView.save());
 		
 		myMenu.addSimpleButton("Load", e -> myView.load());
@@ -70,9 +54,6 @@ public class SettingsViewImpl implements SettingsView{
 		//adding player/godmode switch
 		ToggleSwitch modeToggle = new ToggleSwitch(myView,"Player", "Author", authorProperty);
 		myMenu.addNode(modeToggle.getRoot());
-		
-		myMenu.create();
-		stage.setScene(myMenu.getScene());
 	}
 
 	

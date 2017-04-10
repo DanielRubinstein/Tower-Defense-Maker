@@ -1,33 +1,34 @@
 package main;
 
+import java.io.File;
+import java.util.function.Consumer;
+
 import ModificationFromUser.ModificationFromUser;
-import backEnd.Model;
+import backEnd.ModelImpl;
 import backEnd.Data.DataController;
 import backEnd.GameData.GameData;
 import backEnd.Mode.ModeImpl;
-import backEnd.Mode.UserModeType;
 import frontEnd.ViewImpl;
 import frontEnd.Skeleton.SkeletonImpl;
+import frontEnd.Splash.MainMenu;
+import frontEnd.Splash.StartingInput;
 import javafx.stage.Stage;
 
 public class ControllerImpl implements Controller {
 	private ViewImpl myView;
-	private Model myModel;
+	private ModelImpl myModel;
 	private ModeImpl myMode;
 	private GameData myGameData;
 	private DataController myDataController;
 
 	public void start(Stage stage) {
 		//developerTestingSkeleton(stage);
-		myMode = new ModeImpl(null, UserModeType.AUTHOR);
+		//myMode = new ModeImpl(null, UserModeType.AUTHOR);
 		
-		/*
-		myDataController = new DataController();
-		myGameData = myDataController.getGameData("");
 		
-		myModel = new Model(myGameData, myMode, myDataController);
-		*/
-		myView = new ViewImpl(myMode, 
+		//myDataController = new DataController();
+		
+		Consumer<ModificationFromUser> viewMod = 
 				(ModificationFromUser m) -> {
 					try {
 						executeInteraction(m);
@@ -38,9 +39,21 @@ public class ControllerImpl implements Controller {
 							System.out.println("   No model created");
 						}
 					}
+				};
+				
+				
+		Consumer<File> setGameData = (File file) -> {
+			myModel = new ModelImpl(myDataController.getGameData(file));
+			myView = new ViewImpl(myModel, viewMod);
+		};
+		Consumer<StartingInput> setDimensions = (StartingInput input) -> {
+			myModel = new ModelImpl(input);
+			myView = new ViewImpl(myModel, viewMod);
+		};
 					
-				});
 		
+		MainMenu myMenu = new MainMenu(setGameData,setDimensions);
+		myMenu.showMenus(stage);
 	}
 
 	/**
@@ -50,7 +63,7 @@ public class ControllerImpl implements Controller {
 	 * @param stage
 	 */
 	private void developerTestingSkeleton(Stage stage) {
-		SkeletonImpl skeleton = new SkeletonImpl(myView);
+		SkeletonImpl skeleton = new SkeletonImpl(myView, myModel);
 		skeleton.display(stage);
 
 	}

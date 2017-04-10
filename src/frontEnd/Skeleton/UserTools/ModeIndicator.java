@@ -15,7 +15,7 @@ public class ModeIndicator implements SkeletonObject{
 	
 	public ModeIndicator(ViewReader view){
 		myView=view;
-		authorProperty = myView.getAuth();
+		authorProperty = myView.getBooleanAuthorModeProperty();
 		modeIndicator = new Label("No mode");
 		authorProperty.addListener((ob, oldV, newV) -> {
 			if(newV){
