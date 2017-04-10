@@ -33,13 +33,13 @@ import javax.swing.event.ChangeEvent;
  */
 public class SettingsViewImpl implements SettingsView{
 	private Stage myStage;
-	private SettingsBinding myBinding;
+	private SimpleBooleanProperty authorProperty;
 	private ViewEditor myView;
 	
 	public SettingsViewImpl(ViewEditor view) {
 		myView = view;
 		myStage = new Stage();
-		myBinding = new SettingsBinding();
+		authorProperty = myView.getAuth();
 		addButtons(myStage);
 	}
 	
@@ -68,7 +68,7 @@ public class SettingsViewImpl implements SettingsView{
 		myMenu.addNode(ruleButtons);
 		
 		//adding player/godmode switch
-		ToggleSwitch modeToggle = new ToggleSwitch(myView,"Player", "Author");
+		ToggleSwitch modeToggle = new ToggleSwitch(myView,"Player", "Author", authorProperty);
 		myMenu.addNode(modeToggle.getRoot());
 		
 		myMenu.create();
@@ -87,7 +87,8 @@ public class SettingsViewImpl implements SettingsView{
 		button1.setOnAction(e -> myView.viewRules());
 		Button button2 = new Button("Edit Rules");
 		button2.setOnAction(e -> myView.editRules());
-		button2.disableProperty().bind(Bindings.or(myBinding.valueProperty(), myBinding.valueProperty()).not());
+		
+		button2.disableProperty().bind(authorProperty.not());
 		
 		SplitPane wrapper1 = new SplitPane(button1);
 		Tooltip t = new Tooltip("Only possible in Author mode");
