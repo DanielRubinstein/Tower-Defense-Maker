@@ -106,9 +106,10 @@ public class ButtonMenuImpl implements ButtonMenu {
 	
 	
 	public void display(Stage stage){
-		create();
-		myScene.getStylesheets().add(DEFAULT_CSS);
-		description.setMaxWidth(200d);
+		if(myScene == null){
+			create();
+		}
+		
 		stage.setScene(myScene);
 		stage.show();
 	}
@@ -124,6 +125,8 @@ public class ButtonMenuImpl implements ButtonMenu {
 		myGrid.add(new Label("voogasalad_sup3rs1ckt34m1337 aka Miguel's bitches"), 0, 2, 2, 1);
 		//myButtonRoot.setAlignment(Pos.CENTER);
    	 	myScene = new Scene(myGrid);
+   	 	myScene.getStylesheets().add(DEFAULT_CSS);
+		description.setMaxWidth(200d);
 	}
 
 
