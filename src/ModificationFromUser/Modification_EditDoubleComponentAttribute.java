@@ -1,7 +1,7 @@
 package ModificationFromUser;
 
 import backEnd.ModelImpl;
-import backEnd.GameEngine.Attribute;
+import backEnd.Attribute.AttributeImpl;
 import backEnd.GameEngine.Component;
 import backEnd.Mode.ModeException;
 
@@ -26,7 +26,7 @@ public class Modification_EditDoubleComponentAttribute implements ModificationFr
 		switch(myModel.getMode().getUserMode()){
 		case AUTHOR:
 			//FIXME not sure how to solve this error
-			Attribute<Double> attrToEdit = (Attribute<Double>) myComp.getAttribute(attributeType);
+			AttributeImpl<Double> attrToEdit = (AttributeImpl<Double>) myComp.getAttribute(attributeType);
 			attrToEdit.setValue(newVal);
 		case PLAYER:
 			throw new ModeException(myModel.getMode(),DESCRIPTION);

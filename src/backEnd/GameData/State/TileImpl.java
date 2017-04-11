@@ -5,15 +5,15 @@ import java.util.List;
 import java.util.Map;
 import java.util.ResourceBundle;
 
+import backEnd.Attribute.Attribute;
 import backEnd.Attribute.AttributeOwner;
-import backEnd.GameEngine.Attribute;
 import backEnd.GameEngine.AttributeData;
 import backEnd.GameEngine.AttributeFactory;
 import backEnd.Mode.GameModeType;
 import backEnd.Mode.UserModeType;
 import javafx.geometry.Point2D;
 
-public class TileImpl implements Tile, AttributeOwner{
+public class TileImpl implements Tile{
 	private final static String DEFAULT_ATTRIBUTE_PATH = "resources/tileDefaults";
 	private final static ResourceBundle attributeResources = ResourceBundle.getBundle(DEFAULT_ATTRIBUTE_PATH);
 	private Point2D myLocation;
@@ -64,8 +64,9 @@ public class TileImpl implements Tile, AttributeOwner{
 	}
 
 	@Override
-	public Map<String, Attribute<?>> getAttributeMap() {
-		return myAttrData.getAttributeMap();
+	public boolean hasAttribute(String name) {
+		// TODO Auto-generated method stub
+		return false;
 	}
 
 	/*

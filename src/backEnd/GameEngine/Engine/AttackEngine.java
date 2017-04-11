@@ -49,11 +49,11 @@ public class AttackEngine implements Engine{
 		//I'll figure out a cleaner way of doing this later
 		Attribute<Boolean> cur=(Attribute<Boolean>) af.getAttribute(myResources.getString("Movable"));
 		cur.setValue(true);
-		ad.addAttribute(myResources.getString("Movable"), (backEnd.GameEngine.Attribute<?>) cur);
+		ad.addAttribute(myResources.getString("Movable"), (backEnd.Attribute.AttributeImpl<?>) cur);
 		
 		Attribute<String> cur2=(Attribute<String>) af.getAttribute(myResources.getString("ImageFile"));
 		cur2.setValue(Constants.BULLET_IMAGE_FILE);
-		ad.addAttribute(myResources.getString("ImageFile"), (backEnd.GameEngine.Attribute<?>) cur2);
+		ad.addAttribute(myResources.getString("ImageFile"), (backEnd.Attribute.AttributeImpl<?>) cur2);
 		
 		currentState.getComponentGraph().addComponentToGrid(bullet, (Point2D) attacker.getAttribute("Position").getValue());
 	}

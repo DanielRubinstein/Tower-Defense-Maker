@@ -3,12 +3,15 @@ package backEnd.GameEngine;
 import java.util.Map;
 import java.util.ResourceBundle;
 
+import backEnd.Attribute.Attribute;
+import backEnd.Attribute.AttributeImpl;
+import backEnd.Attribute.AttributeOwner;
 import backEnd.GameData.State.AccessPermissions;
 import backEnd.GameData.State.AccessPermissionsImpl;
 import backEnd.GameEngine.Behaviors.Behavior;
 
 
-public class Component {
+public class Component implements AttributeOwner {
 	/**
 	 * Any object on the grid is a component.
 	 * @author Daniel
@@ -78,6 +81,12 @@ public class Component {
 	
 	public void addAttributeData(AttributeData attributes){
 		myAttributes=attributes;
+	}
+
+	@Override
+	public void addAttribute(String attrType, Attribute<?> newAttr) {
+		// TODO Auto-generated method stub
+		
 	}
 
 	/**

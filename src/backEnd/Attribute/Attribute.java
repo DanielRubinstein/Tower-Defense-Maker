@@ -13,12 +13,4 @@ public interface Attribute<T>{
 	 */
 	public T getValue();
 
-
-	public void setName(String name);
-
-	/**
-	 * Get the attribute type
-	 */
-	public String getName();
-
 }
