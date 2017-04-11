@@ -1,7 +1,7 @@
 package ModificationFromUser;
 
 import backEnd.ModelImpl;
-import backEnd.GameEngine.Attribute;
+import backEnd.Attribute.AttributeImpl;
 import backEnd.GameEngine.Component;
 import backEnd.Mode.ModeException;
 
@@ -9,10 +9,10 @@ public class Modification_RemoveComponentAttribute implements ModificationFromUs
 
 
 	private Component myComp;
-	private Attribute myAttribute;
+	private AttributeImpl myAttribute;
 	public static final String DESCRIPTION = "Remove Component Attribute";
 	
-	public Modification_RemoveComponentAttribute(Component myComp, Attribute removeAttr) {
+	public Modification_RemoveComponentAttribute(Component myComp, AttributeImpl removeAttr) {
 		this.myComp = myComp;
 		this.myAttribute = removeAttr;
 

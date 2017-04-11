@@ -5,6 +5,8 @@ import java.util.Map;
 
 import com.sun.javafx.geom.Point2D;
 
+import backEnd.Attribute.Attribute;
+import backEnd.Attribute.AttributeImpl;
 import resources.Constants;
 
 /**
@@ -18,12 +20,12 @@ import resources.Constants;
 //TODO: DELETE myAttributes class when frontend is tied in
 
 public class myAttributes {
-	private Attribute<Integer> myHealth;
-	private Attribute<Point2D> myLocation;
-	private Attribute<Integer> moveAmount;
-	private Map<String,Attribute<?>> myAttributes;
-	private Attribute<Boolean> spawnsOnDeath;
-	private Attribute<Component> componentSpawnedOnDeath;
+	private AttributeImpl<Integer> myHealth;
+	private AttributeImpl<Point2D> myLocation;
+	private AttributeImpl<Integer> moveAmount;
+	private Map<String,AttributeImpl<?>> myAttributes;
+	private AttributeImpl<Boolean> spawnsOnDeath;
+	private AttributeImpl<Component> componentSpawnedOnDeath;
 	
 	public myAttributes(){
 		myHealth.setValue(Constants.defaultHealth);
@@ -47,7 +49,7 @@ public class myAttributes {
 	}
 	}
 		
-		public void addAttribute(String key, Attribute<?> toAdd){
+		public void addAttribute(String key, AttributeImpl<?> toAdd){
 			myAttributes.put(key, toAdd);
 		}
 

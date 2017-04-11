@@ -15,8 +15,8 @@ public class SkeletonImpl implements Skeleton{
 	private Scene myScene;
 	private UserTools userTools;
 
-	public static final double MENU_HEIGHT = 500d;
-	public static final double MENU_WIDTH = 500d;
+	public static final double MENU_HEIGHT = 650d;
+	public static final double MENU_WIDTH = 750d;
 	private static final double CANVAS_HEIGHT_FACTOR = 0.8;
 	private static final double CANVAS_WIDTH_FACTOR = 0.8;
 	private static final double BOTTOM_HEIGHT_FACTOR = 0.2;

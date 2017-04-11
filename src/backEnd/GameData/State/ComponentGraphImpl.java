@@ -7,8 +7,8 @@ import java.util.List;
 import java.util.Map;
 
 import javafx.geometry.Point2D;
-
-import backEnd.GameEngine.Attribute;
+import backEnd.Attribute.Attribute;
+import backEnd.Attribute.AttributeImpl;
 import backEnd.GameEngine.Component;
 
 /**
