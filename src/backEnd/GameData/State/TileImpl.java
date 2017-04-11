@@ -23,12 +23,13 @@ public class TileImpl implements Tile, AttributeOwner{
 	public TileImpl(List<GameModeType> gameModeAccessPermissions, List<UserModeType> userModeAccessPermissions , Point2D location){
 		this.myLocation = location;
 		this.myAccessPerm = new AccessPermissionsImpl(gameModeAccessPermissions, userModeAccessPermissions);
+		this.myAttrData = new AttributeData(new HashMap<String,Attribute<?>>());
 		AttributeFactory attrFact = new AttributeFactory();
 		for (String key : attributeResources.keySet()){
 			Attribute<?> myAttribute= attrFact.getAttribute(key);
 			addAttribute(key, myAttribute);
 		}
-		this.myAttrData = new AttributeData(new HashMap<String,Attribute<?>>());
+		
 	}
 	
 	@Override
