@@ -9,6 +9,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.SplitPane;
 import javafx.scene.control.Tooltip;
 import javafx.scene.layout.HBox;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 /**
@@ -28,8 +29,12 @@ public class SettingsViewImpl implements SettingsView{
 		addButtons();
 	}
 	
-	public void launchSettings(){
-		myMenu.display(new Stage());
+	public void launchSettings(Stage parentStage){
+		// http://stackoverflow.com/questions/29514248/javafx-how-to-focus-on-one-stage
+		Stage myStage = new Stage();
+		myStage.initOwner(parentStage);
+		myStage.initModality(Modality.WINDOW_MODAL);
+		myMenu.display(myStage);
 	}
 	/*
 	 * Buttons to add:
