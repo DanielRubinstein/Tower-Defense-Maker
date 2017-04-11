@@ -40,7 +40,7 @@ public class TileCommandCenter implements SkeletonObject {
 		ComponentGraph myComponentGraph = state.getComponentGraph();
 		myComponents = myComponentGraph.getComponentList();
 		myView = view;
-		createTabsAndStage(tile);
+		
 	}
 
 	private void createTabsAndStage(Tile tile) {
@@ -55,6 +55,7 @@ public class TileCommandCenter implements SkeletonObject {
 	}
 
 	public void launch(double x, double y) {
+		createTabsAndStage(myTile);
 		myStage.setX(x);
 		myStage.setY(y);
 		myStage.show();
@@ -77,18 +78,19 @@ public class TileCommandCenter implements SkeletonObject {
 		VBox contents = new VBox();
 
 		contents.getChildren().add(createLocationLabel());
-
 		for (Map.Entry<String, Attribute<?>> entry : obj.getMyAttributes().getAttributeMap().entrySet()) {
 			HBox singleAttEditor = new HBox();
 			Label attLabel = new Label(entry.getKey());
 			singleAttEditor.getChildren().add(attLabel);
 			Node right;
-			if (myView.getBooleanAuthorModeProperty().getValue()) {
+			
+			if (myView.getBooleanAuthorModeProperty().get()) {
 				// Author Mode
 				right = createEditor(entry);
 			} else {
 				// Player Mode
-				right = new Label(entry.getValue().getValue().toString());
+				right = new Label(entry.getValue().toString()); 
+				// FIXME another getValue needed
 			}
 			singleAttEditor.getChildren().add(new Label("    "));
 			singleAttEditor.getChildren().add(right);
@@ -96,7 +98,7 @@ public class TileCommandCenter implements SkeletonObject {
 			contents.getChildren().add(singleAttEditor);
 		}
 
-		if (myView.getBooleanAuthorModeProperty().getValue()) {
+		if (myView.getBooleanAuthorModeProperty().get()) {
 			contents.getChildren().add(new Label("* Will be editable in Author Mode"));
 			contents.getChildren().add(getAuthorButtons(null, null));
 		}
@@ -125,6 +127,7 @@ public class TileCommandCenter implements SkeletonObject {
 	}
 
 	private Node createEditor(Entry<String, Attribute<?>> entry) {
+		// TODO get the type and edit method (e.g. slider, dropdown)
 		return new Label(entry.getValue().toString() + "*");
 	}
 

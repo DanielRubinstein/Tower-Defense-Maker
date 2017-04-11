@@ -23,10 +23,6 @@ public class ToggleSwitch {
 
 	private SimpleBooleanProperty switchedOn;
 
-	public SimpleBooleanProperty getSwitchOnProperty() {
-		return switchedOn;
-	}
-
 	public ToggleSwitch(ViewEditor view, String title1, String title2, SimpleBooleanProperty authorProperty) {
 		myView = view;
 		toggle = new HBox();
@@ -37,16 +33,22 @@ public class ToggleSwitch {
 		init(title1, title2);
 
 		switchedOn.addListener((a, oldValue, newValue) -> {
-			if (newValue) {
-				label.setText(title2);
-				toggle.setStyle("-fx-background-color: green;");
-				label.toFront();
-			} else {
-				label.setText(title1);
-				toggle.setStyle("-fx-background-color: grey;");
-				button.toFront();
-			}
+			bringCorrespondingOptionToFront(title1, title2, newValue);
 		});
+		
+		bringCorrespondingOptionToFront(title1, title2, switchedOn.get());
+	}
+
+	private void bringCorrespondingOptionToFront(String title1, String title2, Boolean newValue) {
+		if (newValue) {
+			label.setText(title2);
+			toggle.setStyle("-fx-background-color: green;");
+			label.toFront();
+		} else {
+			label.setText(title1);
+			toggle.setStyle("-fx-background-color: grey;");
+			button.toFront();
+		}
 	}
 
 	private void init(String title1, String title2) {
@@ -54,8 +56,6 @@ public class ToggleSwitch {
 		label.setText(title1);
 
 		toggle.getChildren().addAll(label, button);
-		
-		
 		
 		button.setOnAction((e) -> {
 			myView.sendUserModification(new Modification_ChangeMode());
