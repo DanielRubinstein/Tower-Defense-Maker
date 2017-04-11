@@ -3,6 +3,7 @@ package backEnd.GameEngine;
 /**
  * Note: we have different attributes in GameEngine.Attributes package. Ex: position attribute, health attribute...
  * 	each of these will have a different type for its value so we use generics in the interface
+ * @author Christian Martindale, Daniel
  */
 public class Attribute<T>{
 

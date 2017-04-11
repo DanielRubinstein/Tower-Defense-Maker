@@ -4,6 +4,11 @@ import java.util.List;
 
 import javafx.geometry.Point2D;
 
+/**
+ * 
+ * @author Riley Nisbet, Christian Martindale
+ *
+ */
 public interface TileGrid {
 
 	/**
@@ -26,7 +31,7 @@ public interface TileGrid {
 	 * @param y
 	 * @return
 	 */
-	Tile getTileByCoord(Double x, Double y);
+	Tile getTileByCoord(int x, int y);
 	
 	/**
 	 * @return grid width
@@ -38,8 +43,8 @@ public interface TileGrid {
 	 */
 	int getMyHeight();
 	
-	/*
-	 * return all tiles
+	/**
+	 * return a List of all tiles in the Grid
 	 */
 	List<Tile> getAllTiles();
 

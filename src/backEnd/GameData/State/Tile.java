@@ -45,6 +45,12 @@ public interface Tile {
 	/**
 	 * @return Tile location
 	 */
-	public Point2D getLocation();
+	Point2D getLocation();
+	/**
+	 * 
+	 * @param name the name of the desired Attribute
+	 * @return true if the Tile has the given Attribute, false otherwise
+	 */
+	boolean hasAttribute(String name);
 	
 }
