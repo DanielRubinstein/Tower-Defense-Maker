@@ -20,11 +20,9 @@ import javafx.stage.Stage;
  */
 
 public class MainMenu{
-	private Consumer<StartingInput> consumerEnterData;
-	private Consumer<File> consumerLoadData;
+	private Consumer<Object> consumerLoadData;
 	
-	public MainMenu(Consumer<File> loadData,Consumer<StartingInput> enterData){
-		consumerEnterData = enterData;
+	public MainMenu(Consumer<Object> loadData){
 		consumerLoadData = loadData;
 	}
 
@@ -34,17 +32,16 @@ public class MainMenu{
 	
 	private void splashScreen(Stage stage) {
    	 	ButtonMenuImpl splash = new ButtonMenuImpl("Welcome");
-   	 	splash.addSimpleButton("START", event -> showPrimaryMenu(stage));
+   	 	splash.addSimpleButtonWithHover("START", event -> showPrimaryMenu(stage), "Click to start the game!");
 		splash.display(stage);
 	}
 
 	private void showPrimaryMenu(Stage stage) {
 		ButtonMenuImpl primaryMenu = new ButtonMenuImpl("Games");
-		primaryMenu.setText("Yo");
-   	 	primaryMenu.addSimpleButton("New Game", e -> new GameMaker(stage, consumerEnterData));
-   	 	primaryMenu.addSimpleButton("Load Template Game", e -> showTemplateMenu(new Stage()));
-   	 	primaryMenu.addSimpleButton("Load Saved Game", e-> loadGame());
-   	 	primaryMenu.addBackButton(event -> splashScreen(stage));
+   	 	primaryMenu.addSimpleButtonWithHover("New Game", e -> new GameMaker(stage, consumerLoadData), "Create A New Game after selecting the size of the screen");
+   	 	primaryMenu.addSimpleButtonWithHover("Load Template Game", e -> showTemplateMenu(stage), "Load a game from a list of preapproved, ready-to-play templates");
+   	 	primaryMenu.addSimpleButtonWithHover("Load Saved Game", e-> loadGame(), "Continue your progress by loading a user-saved game");
+   	 	primaryMenu.addSimpleButtonWithHover("Go Back", event -> splashScreen(stage), "Return to previous screen");
 		primaryMenu.display(stage);
 	}
 
@@ -52,8 +49,8 @@ public class MainMenu{
 	private void loadGame() {
 		GameLoader gameLoader = new GameLoader();
 		try {
-			GameData loadedGameData = gameLoader.loadGame();
-			//gameDataConsumer.accept(loadedGameData);
+			File loadedGame = gameLoader.loadGame();
+			consumerLoadData.accept(loadedGame);
 		} catch (XMLReadingException e) {
 			ErrorDialog errDia = new ErrorDialog();
 			errDia.create("Cannot Load Game", e.getMessage());
@@ -69,11 +66,11 @@ public class MainMenu{
    	 	//for(String templateGame : gameLoader.getTemplateTitleList()){
    	 	for(String templateGame : gameLoader.getTemplateTitleListStupid()){
    	 		templateGames.addSimpleButton(templateGame, event -> {
-   	 			//gameDataConsumer.accept(gameLoader.loadTemplateGame(templateGame));
-   	 			
+   	 			consumerLoadData.accept(templateGame);
    	 		});
    	 	}
-		templateGames.display(stage);
+   	 	templateGames.addSimpleButtonWithHover("Go Back", event -> showPrimaryMenu(stage), "Return to previous screen");
+   	 	templateGames.display(stage);
 	}
 
 }
