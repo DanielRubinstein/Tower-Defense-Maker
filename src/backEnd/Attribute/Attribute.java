@@ -1,5 +1,7 @@
 package backEnd.Attribute;
 
+import java.util.Collection;
+
 public interface Attribute<T>{
 
 	/**
@@ -12,5 +14,10 @@ public interface Attribute<T>{
 	 * Get the current attribute value
 	 */
 	public T getValue();
+	
+	
+	public String getValueAsString();
+	
+	public Collection<String> getPossibleValues();
 
 }

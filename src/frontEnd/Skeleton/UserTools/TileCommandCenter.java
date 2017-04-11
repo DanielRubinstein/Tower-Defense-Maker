@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
+import ModificationFromUser.Modification_EditAttribute;
 import backEnd.Attribute.Attribute;
 import backEnd.Attribute.AttributeImpl;
 import backEnd.Attribute.AttributeOwner;
@@ -14,12 +15,15 @@ import backEnd.GameData.State.State;
 import backEnd.GameData.State.Tile;
 import backEnd.GameEngine.Component;
 import frontEnd.ViewEditor;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
@@ -86,11 +90,15 @@ public class TileCommandCenter implements SkeletonObject {
 			
 			if (myView.getBooleanAuthorModeProperty().get()) {
 				// Author Mode
-				right = createEditor(entry);
+				right = createEditor(obj, entry);
 			} else {
 				// Player Mode
-				right = new Label(entry.getValue().toString()); 
-				// FIXME another getValue needed
+				try{
+					right = new Label(entry.getValue().getValueAsString());
+				} catch (NullPointerException e){
+					right = new Label("No Attribute Value Stored");
+				}
+				// FIXME get it right
 			}
 			singleAttEditor.getChildren().add(new Label("    "));
 			singleAttEditor.getChildren().add(right);
@@ -99,10 +107,10 @@ public class TileCommandCenter implements SkeletonObject {
 		}
 
 		if (myView.getBooleanAuthorModeProperty().get()) {
-			contents.getChildren().add(new Label("* Will be editable in Author Mode"));
 			contents.getChildren().add(getAuthorButtons(null, null));
 		}
 		
+		contents.setSpacing(20);
 		//contents.setAlignment(Pos.TOP_CENTER);
 
 		return createSingleTab("Tile", contents);
@@ -126,9 +134,25 @@ public class TileCommandCenter implements SkeletonObject {
 		return new Label(String.format("Location: (%.0f, %.0f)", myTile.getLocation().getX(), myTile.getLocation().getY()));
 	}
 
-	private Node createEditor(Entry<String, Attribute<?>> entry) {
+	private Node createEditor(AttributeOwner obj, Entry<String, Attribute<?>> entry) {
 		// TODO get the type and edit method (e.g. slider, dropdown)
-		return new Label(entry.getValue().toString() + "*");
+		ObservableList<String> options = FXCollections.observableArrayList( entry.getValue().getPossibleValues());
+		ComboBox<String> optionsBox = new ComboBox<String>(options);
+		try{
+			optionsBox.getSelectionModel().select(entry.getValue().getValueAsString());
+		} catch (NullPointerException e){
+			// do nothing
+		}
+		optionsBox.valueProperty().addListener((o, oldValue, newValue) -> {
+			// where the actual modification gets sent
+			System.out.println("editting attribute");
+			myView.sendUserModification(new Modification_EditAttribute(obj, entry.getValue(), newValue));
+		});
+		
+		
+		return optionsBox;
+		
+		//return new Label(entry.getValue().toString() + "*");
 	}
 
 	private Tab createSingleTab(String name, Node contents) {
