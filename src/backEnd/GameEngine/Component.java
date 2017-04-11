@@ -41,7 +41,7 @@ public class Component implements AttributeOwner {
 		BehaviorFactory bf=new BehaviorFactory(dummyComponent); //add a real component
 		for (String key: behaviorResources.keySet()){
 			String value=behaviorResources.getString(key);
-			AttributeImpl<?> myAttribute= af.getAttribute(key); //FIX THIS- HOW DOES OUR FACTORY GENERATE ATTRIBUTES?
+			Attribute<?> myAttribute= af.getAttribute(key); //FIX THIS- HOW DOES OUR FACTORY GENERATE ATTRIBUTES?
 			myAttributes.addAttribute(key, myAttribute);
 			myBehaviors.put(key, bf.getBehavior(key));
 			}

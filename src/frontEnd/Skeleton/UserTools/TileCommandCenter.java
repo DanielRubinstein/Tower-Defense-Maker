@@ -16,6 +16,7 @@ import backEnd.GameEngine.Component;
 import frontEnd.ViewEditor;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -32,8 +33,10 @@ public class TileCommandCenter implements SkeletonObject {
 	private TabPane tabPane;
 	private Stage myStage;
 	private Collection<Component> myComponents;
+	private Tile myTile;
 
 	public TileCommandCenter(ViewEditor view, Tile tile, State state) {
+		myTile = tile;
 		ComponentGraph myComponentGraph = state.getComponentGraph();
 		myComponents = myComponentGraph.getComponentList();
 		myView = view;
@@ -85,15 +88,20 @@ public class TileCommandCenter implements SkeletonObject {
 				right = createEditor(entry);
 			} else {
 				// Player Mode
-				right = new Label(entry.getValue().toString());
+				right = new Label(entry.getValue().getValue().toString());
 			}
+			singleAttEditor.getChildren().add(new Label("    "));
 			singleAttEditor.getChildren().add(right);
+			singleAttEditor.setAlignment(Pos.CENTER);
 			contents.getChildren().add(singleAttEditor);
 		}
 
 		if (myView.getBooleanAuthorModeProperty().getValue()) {
+			contents.getChildren().add(new Label("* Will be editable in Author Mode"));
 			contents.getChildren().add(getAuthorButtons(null, null));
 		}
+		
+		//contents.setAlignment(Pos.TOP_CENTER);
 
 		return createSingleTab("Tile", contents);
 	}
@@ -113,11 +121,11 @@ public class TileCommandCenter implements SkeletonObject {
 
 	private Label createLocationLabel() {
 		// TODO maybe add sell feature here
-		return new Label(String.format("Location: (%.0f, %.0f)", 20d, 20d));
+		return new Label(String.format("Location: (%.0f, %.0f)", myTile.getLocation().getX(), myTile.getLocation().getY()));
 	}
 
 	private Node createEditor(Entry<String, Attribute<?>> entry) {
-		return new Label("Will be way to edit value : " + entry.getValue().toString());
+		return new Label(entry.getValue().toString() + "*");
 	}
 
 	private Tab createSingleTab(String name, Node contents) {
