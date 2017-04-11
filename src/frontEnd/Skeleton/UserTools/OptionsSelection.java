@@ -54,7 +54,7 @@ public class OptionsSelection {
 		addButtonImage(PLAY_IMAGE, e-> myView.sendUserModification(Modification_GameRemote.PLAY) ,size);
 		addButtonImage(PAUSE_IMAGE, e-> myView.sendUserModification(Modification_GameRemote.PAUSE) ,size);
 		addButtonImage(FASTFWD_IMAGE, e-> myView.sendUserModification(Modification_GameRemote.FASTFORWARD) ,size);
-		addButtonImage(SETTINGS_IMAGE, e-> mySettings.launchSettings(),size);
+		addButtonImage(SETTINGS_IMAGE, e-> mySettings.launchSettings(myView.getAppStage()),size);
 	}
 	
 	

@@ -135,10 +135,11 @@ public class TileCommandCenter implements SkeletonObject {
 	}
 
 	private Node createEditor(AttributeOwner obj, Entry<String, Attribute<?>> entry) {
-		// TODO get the type and edit method (e.g. slider, dropdown)
+		// TODO if doubles then make a slider not a combobox (this will be the only separate case)
 		ObservableList<String> options = FXCollections.observableArrayList( entry.getValue().getPossibleValues());
 		ComboBox<String> optionsBox = new ComboBox<String>(options);
 		try{
+			// TODO this will work as long as there is an attribute there
 			optionsBox.getSelectionModel().select(entry.getValue().getValueAsString());
 		} catch (NullPointerException e){
 			// do nothing
