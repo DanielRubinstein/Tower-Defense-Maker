@@ -19,6 +19,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.Scene;
@@ -32,6 +33,7 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 public class TileCommandCenter implements SkeletonObject {
+	private static final int STANDARD_SPACING = 10;
 	public static final String DEFAULT_CSS = "/resources/css/Flatter.css";
 	private ViewEditor myView;
 	private TabPane tabPane;
@@ -80,40 +82,65 @@ public class TileCommandCenter implements SkeletonObject {
 
 	private Tab createAttributeOwnerTab(AttributeOwner obj) {
 		VBox contents = new VBox();
-
+		contents.setPadding(new Insets(STANDARD_SPACING, STANDARD_SPACING, STANDARD_SPACING, STANDARD_SPACING));
 		contents.getChildren().add(createLocationLabel());
-		for (Map.Entry<String, Attribute<?>> entry : obj.getMyAttributes().getAttributeMap().entrySet()) {
-			HBox singleAttEditor = new HBox();
-			Label attLabel = new Label(entry.getKey());
-			singleAttEditor.getChildren().add(attLabel);
-			Node right;
-			
-			if (myView.getBooleanAuthorModeProperty().get()) {
-				// Author Mode
-				right = createEditor(obj, entry);
-			} else {
-				// Player Mode
-				try{
-					right = new Label(entry.getValue().getValueAsString());
-				} catch (NullPointerException e){
-					right = new Label("No Attribute Value Stored");
-				}
-				// FIXME get it right
-			}
-			singleAttEditor.getChildren().add(new Label("    "));
-			singleAttEditor.getChildren().add(right);
-			singleAttEditor.setAlignment(Pos.CENTER);
-			contents.getChildren().add(singleAttEditor);
-		}
+		
+		HBox contents_Att = createAttributeView(obj);
+		
+		contents.getChildren().add(contents_Att);
 
 		if (myView.getBooleanAuthorModeProperty().get()) {
 			contents.getChildren().add(getAuthorButtons(null, null));
 		}
 		
-		contents.setSpacing(20);
+		contents.setSpacing(STANDARD_SPACING);
 		//contents.setAlignment(Pos.TOP_CENTER);
 
 		return createSingleTab("Tile", contents);
+	}
+
+	private HBox createAttributeView(AttributeOwner obj) {
+		HBox contents_Att = new HBox();
+		VBox contentRow = null;
+		int count = 0;
+		for (Map.Entry<String, Attribute<?>> entry : obj.getMyAttributes().getAttributeMap().entrySet()) {
+			if (count % 3 == 0){
+				contentRow = new VBox();
+			}
+			HBox singleAttEditor = createAttributeValuePair(obj, entry);
+			contentRow.getChildren().add(singleAttEditor);
+			if (count % 3 == 2){
+				contentRow.setSpacing(STANDARD_SPACING);
+				contents_Att.getChildren().add(contentRow);
+			}
+			count++;
+		}
+		contents_Att.setSpacing(STANDARD_SPACING);
+		return contents_Att;
+	}
+
+	private HBox createAttributeValuePair(AttributeOwner obj, Map.Entry<String, Attribute<?>> entry) {
+		HBox singleAttEditor = new HBox();
+		Label attLabel = new Label(entry.getKey());
+		singleAttEditor.getChildren().add(attLabel);
+		Node right;
+		
+		if (myView.getBooleanAuthorModeProperty().get()) {
+			// Author Mode
+			right = createEditor(obj, entry);
+		} else {
+			// Player Mode
+			try{
+				right = new Label(entry.getValue().getValueAsString());
+			} catch (NullPointerException e){
+				right = new Label("No Attribute Value Stored");
+			}
+			// FIXME get it right
+		}
+		singleAttEditor.getChildren().add(new Label("    "));
+		singleAttEditor.getChildren().add(right);
+		singleAttEditor.setAlignment(Pos.CENTER_RIGHT);
+		return singleAttEditor;
 	}
 
 	private Node getAuthorButtons(EventHandler<ActionEvent> addEvent, EventHandler<ActionEvent> removeEvent) {
