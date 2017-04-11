@@ -68,11 +68,10 @@ public class TileImpl implements Tile, AttributeOwner{
 		return myAttrData.getAttributeMap();
 	}
 
-	/*
 	@Override
 	public boolean hasAttribute(String name) {
 		return myAttrData.getAttributeMap().containsKey(attributeResources.getString(name));
 	}
-	*/
+	
 
 }

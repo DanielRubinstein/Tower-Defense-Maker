@@ -43,17 +43,7 @@ public class MoveEngine implements Engine{
 	 * @param yStart the starting y-coordinate
 	 */
 	private Coord formShortestPath(TileGrid stateGrid, int xStart, int yStart){
-		Queue <Coord> path = new LinkedList<Coord>();
 		
-		path.add(new Coord(xStart, yStart, null));
-		
-		while(!path.isEmpty()){
-			Coord cur = path.remove();
-			
-			if(stateGrid[cur.x][cur.y].containsComponent(ENDGOALTILE)){
-				return cur;
-			}
-			
 	
 		}
 	}

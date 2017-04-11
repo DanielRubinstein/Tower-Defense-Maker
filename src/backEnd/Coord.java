@@ -1,7 +1,7 @@
 package backEnd;
 /**
  * Helper class for BFS in pathfinding algorithm
- * @author Christian Martindale (with online resource input)
+ * @author Christian Martindale
  *
  */
 public class Coord {
