@@ -2,7 +2,8 @@ package backEnd.GameEngine.Behaviors;
 
 import java.util.Map;
 import java.util.Observable;
-import backEnd.GameEngine.Attribute;
+
+import backEnd.Attribute.AttributeImpl;
 import backEnd.GameEngine.AttributeData;
 import backEnd.GameEngine.Component;
 import backEnd.GameEngine.myAttributes;

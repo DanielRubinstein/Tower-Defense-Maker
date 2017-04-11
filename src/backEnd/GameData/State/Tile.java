@@ -1,6 +1,9 @@
 package backEnd.GameData.State;
 
-import java.util.List;
+import backEnd.Attribute.AttributeImpl;
+import backEnd.Attribute.AttributeOwner;
+import backEnd.GameEngine.AttributeData;
+import javafx.geometry.Point2D;
 
 
 /**
@@ -9,40 +12,26 @@ import java.util.List;
  * @author Riley Nisbet
  */
 
-public interface Tile {
+public interface Tile extends AttributeOwner {
+
 	
 	/**
-	 * @param attrType
-	 * @return Attribute that corresponds to the String attrType
-	 */
-	TileAttribute<?> getAttribute(TileAttributeType type);
-	
-	/**
-	 * Add a TileAttribute to the Tile
-	 * @param newAttr
-	 */
-	void addTileAttribute(TileAttributeImpl<?> newAttr);
-	
-	/**
-	 * @return List of TileAttributes
-	 */
-	List<TileAttributeImpl<?>> getTileAttributeList();
-	
-	/**
-	 * Replace the current TileAttribute list with newAttrList
+	 * Replace the current AttributeData with newAttrData
 	 * @param newAttrList
 	 */
-	void setTileAttributeList(List<TileAttributeImpl<?>> newAttrList);
+	void setAttributeData(AttributeData newAttrData);
+	
+	
 	
 	/**
-	 * @param type
-	 * @return boolean whether or not the Tile has attribute type
+	 * @return Tile location
 	 */
-	boolean hasTileAttributeType(TileAttributeType type);
-	
+	Point2D getLocation();
 	/**
-	 * @return AccessPermissions object for this Tile
+	 * 
+	 * @param name the name of the desired Attribute
+	 * @return true if the Tile has the given Attribute, false otherwise
 	 */
-	AccessPermissions getAccessPermissions();
+	boolean hasAttribute(String name);
 	
 }

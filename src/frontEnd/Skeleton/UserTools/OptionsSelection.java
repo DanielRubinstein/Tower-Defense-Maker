@@ -42,7 +42,7 @@ public class OptionsSelection {
 	public void setSize(double width, double height){
 		myRoot.setPrefWidth(width);
 		myRoot.setPrefHeight(height);
-		setUpOptions(width/4);//hard coded
+		setUpOptions(width/4); //FIXME hard coded
 	}
 	private void setUpOptions(double buttonWidth){
 		myButtons = new ArrayList<Button>();
@@ -54,7 +54,7 @@ public class OptionsSelection {
 		addButtonImage(PLAY_IMAGE, e-> myView.sendUserModification(Modification_GameRemote.PLAY) ,size);
 		addButtonImage(PAUSE_IMAGE, e-> myView.sendUserModification(Modification_GameRemote.PAUSE) ,size);
 		addButtonImage(FASTFWD_IMAGE, e-> myView.sendUserModification(Modification_GameRemote.FASTFORWARD) ,size);
-		addButtonImage(SETTINGS_IMAGE, e-> mySettings.launchSettings(),size);
+		addButtonImage(SETTINGS_IMAGE, e-> mySettings.launchSettings(myView.getAppStage()),size);
 	}
 	
 	

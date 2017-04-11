@@ -3,9 +3,11 @@ package backEnd.GameEngine.Behaviors;
 import java.util.Map;
 import java.util.Observable;
 
+import backEnd.Attribute.AttributeImpl;
 import backEnd.GameData.State.Tile;
+
 import backEnd.GameData.State.TileAttributeType;
-import backEnd.GameEngine.Attribute;
+import backEnd.GameData.State.TileImpl;
 import backEnd.GameEngine.AttributeData;
 import backEnd.GameEngine.Component;
 import javafx.geometry.Point2D;
@@ -20,7 +22,7 @@ import backEnd.GameEngine.myAttributes;
  */
 public class MoveBehavior implements Behavior {
 	private AttributeData myAttributes; //we're not using this now, but we will once we figure out how frontend passes attributes
-	private Attribute<Point2D> currentAttribute;
+	private AttributeImpl<Point2D> currentAttribute;
 	private Point2D currentPoint;
 	private Point2D newPoint;
 	private myAttributes MA; //we won't use this later
@@ -28,7 +30,7 @@ public class MoveBehavior implements Behavior {
 	@SuppressWarnings("unchecked")
 	public MoveBehavior(Component myComponent){
 		MA=new myAttributes(); //use this until we figure out how we get attributes from frontend
-		currentAttribute=(Attribute<Point2D>) MA.getAttribute("LOCATION");
+		currentAttribute=(AttributeImpl<Point2D>) MA.getAttribute("LOCATION");
 		currentPoint=(Point2D) currentAttribute.getValue();
 	}
 	

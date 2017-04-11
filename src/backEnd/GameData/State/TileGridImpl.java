@@ -27,17 +27,12 @@ public class TileGridImpl implements TileGrid {
 	
 	@Override
 	public Tile getTileByLocation(Point2D location){
-		return tileGrid[(int) location.getY()][(int) location.getX()];
+		return getTileByCoord((int) location.getX(),(int) location.getY()); //Potentially wrong flipped x/y
 	}
 	
 	@Override
 	public void setTile(Tile newTile, Point2D location){
-		tileGrid[(int) location.getY()][(int) location.getX()] = newTile;
-	}
-
-	@Override
-	public Tile getTileByCoord(Double x, Double y) {
-		return getTileByLocation(new Point2D(x,y));
+		tileGrid[(int) location.getX()][(int) location.getY()] = newTile; //Potentially wrong flipped x/y?
 	}
 
 	@Override
@@ -58,6 +53,15 @@ public class TileGridImpl implements TileGrid {
 			}
 		}
 		return tileList;
+	}
+
+	@Override
+	public Tile getTileByCoord(int x, int y) {
+		if(x >= getMyWidth()  || x < 0 ||
+		   y >= getMyHeight() || y < 0){
+			return null;
+		}
+		return tileGrid[x][y];
 	}
 
 }
