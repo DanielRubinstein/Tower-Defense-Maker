@@ -18,7 +18,7 @@ import frontEnd.Skeleton.SkeletonImpl;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.stage.Stage;
 
-public class ViewImpl implements ViewEditor{
+public class ViewImpl implements View{
 	private Model myModel;
 	private Consumer<ModificationFromUser> myModConsumer;
 	private SkeletonImpl mySkeleton;
