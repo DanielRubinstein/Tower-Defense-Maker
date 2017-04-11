@@ -1,12 +1,14 @@
 package backEnd.GameData.State;
 
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import javafx.geometry.Point2D;
-
-import backEnd.GameEngine.Attribute;
+import backEnd.Attribute.Attribute;
+import backEnd.Attribute.AttributeImpl;
 import backEnd.GameEngine.Component;
 
 /**
@@ -21,19 +23,32 @@ public class ComponentGraphImpl implements ComponentGraph {
 	private int gridHeight;
 	private int pointResWidth;
 	private int pointResHeight;
-	private Map<Point2D,List<Component>> componentMap;
+	private Map<Point2D, List<Component>> componentMap;
+	private List<Component> myComponents;
 	
 	public ComponentGraphImpl(int width, int height, int pointResWidth, int pointResHeight){
 		this.gridWidth = width;
 		this.gridHeight = height;
 		this.pointResWidth = pointResWidth;
 		this.pointResHeight = pointResHeight;
+		componentMap = new HashMap<>();
 	}
 	
 	@Override
 	public int getGridWidth(){
 		return gridWidth;
 	}
+	
+	public List<Component> getAllComponents(){
+		myComponents=new ArrayList<Component>();
+		for (Point2D myKey: componentMap.keySet()){
+			for (Component myComponent: componentMap.get(myKey)){
+				myComponents.add(myComponent);
+			}
+		}
+		return myComponents;
+	}
+
 	
 	@Override
 	public int getGridHeight(){

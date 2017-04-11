@@ -1,41 +1,28 @@
 package backEnd;
 
 import backEnd.Bank.BankController;
-import backEnd.Data.DataController;
-import backEnd.GameData.GameData;
 import backEnd.GameData.State.State;
-import backEnd.GameEngine.GameProcessController;
-import backEnd.Mode.Mode;
+import backEnd.Mode.ModeReader;
 
 /**
- * Controller the front end calls when it detects a backend modification from the user,
- * 
- * Front end creates instance of the appropriate ModificationFromUser class and passes it as a parameter to the 
- * executeInteraction() method
- * 
- * @author Derek
+ * Interface to define methods that the front end needs.
+ * @author Tim
  *
  */
-public class Model {
-	private GameData myGameData;
-	private Mode myMode;
-	private BankController myBankController;
-	private GameProcessController myEngine;
+public interface Model {
+
+	/**
+	 * 
+	 * @return current State
+	 */
+	public State getState();
 	
-	public Model(GameData gameData, Mode startingMode, DataController dataController){
-		myGameData = gameData;
-		myMode = startingMode;
-		myEngine = new GameProcessController(myGameData.getState(), myGameData.getRules());
-		
-		// FIXME what are the parameters to BankController
-		myBankController = new BankController(dataController.getTileMap(), dataController.getComponentsMap());
-	}
+	/**
+	 * 
+	 * @return mode of the user
+	 */
+	public ModeReader getModeReader();
 	
-	public State getState(){
-		return myGameData.getState();
-	}
+	public BankController getBankController();
 	
-	public Mode getMode(){
-		return myMode;
-	}
 }

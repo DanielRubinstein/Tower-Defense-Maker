@@ -3,38 +3,43 @@ package backEnd.GameEngine.Behaviors;
 import java.util.Map;
 import java.util.Observable;
 
-import backEnd.GameEngine.Attribute;
+import backEnd.Attribute.AttributeImpl;
 import backEnd.GameEngine.AttributeData;
 import backEnd.GameEngine.Component;
 import backEnd.GameEngine.myAttributes;
 import javafx.geometry.Point2D;
 
 public class DeathBehavior implements Behavior {
-	private AttributeData myAttributes;
+	//use the following 2 when we remove dummy attributes
+	private Component myComponent;	//
 	private myAttributes MA; //we won't use this later
 	private boolean spawnsOnDeath;
 	private Component componentSpawnedOnDeath;
-	public DeathBehavior(){
-		MA=new myAttributes(); //use this until we figure out how we get attributes from frontend
-		spawnsOnDeath=(boolean) MA.getAttribute("SPAWNS_ON_DEATH").getValue();
-		if (spawnsOnDeath){
-			componentSpawnedOnDeath=(Component) MA.getAttribute("COMPONENT_SPAWNED_ON_DEATH").getValue();
-		}
-	}
+	private AttributeData myAttributes;
 
+	@Override
+	public <T> void execute(T componentToUse) { //pass in a component
+		myComponent=(Component) componentToUse;
+		spawnsOnDeath=(boolean) myComponent.getAttribute("SPAWNS_ON_DEATH").getValue();
+		if (spawnsOnDeath){
+			componentSpawnedOnDeath=(Component) myComponent.getAttribute("COMPONENT_SPAWNED_ON_DEATH").getValue();
+		}
+
+	}
 	
 	@Override
-	public void update(Observable newData, Object arg) {
+	public void update(Observable newData, Object arg) { //TODO figure out how we are using AttributeData with
+		//this. Then we can figure out how observables work.
 		myAttributes = (AttributeData) newData;
 	}
 
-	@Override
-	public void execute() {
-		isDead();
+
+	public boolean spawnsOnDeath(){
+		return spawnsOnDeath;
 	}
 	
 	public boolean isDead(){
-		int currentHealth=(int) MA.getAttribute("HEALTH").getValue();
+		int currentHealth=(int) myComponent.getAttribute("HEALTH").getValue();
 		return currentHealth>0;
 	}
 	

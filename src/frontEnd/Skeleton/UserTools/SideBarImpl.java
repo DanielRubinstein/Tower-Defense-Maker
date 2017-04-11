@@ -1,13 +1,8 @@
 package frontEnd.Skeleton.UserTools;
 
 import frontEnd.ViewReader;
-import javafx.geometry.Insets;
 import javafx.scene.Node;
-import javafx.scene.layout.Background;
-import javafx.scene.layout.BackgroundFill;
-import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.VBox;
-import javafx.scene.paint.Color;
 
 public class SideBarImpl implements SideBar{
 	
@@ -32,6 +27,7 @@ public class SideBarImpl implements SideBar{
 	public void setWidth(double in) {
 		myRoot.setPrefWidth(in);
 		myRoot.setMaxWidth(in);
+		myStatusView.setWidth(in);
 
 	}
 	

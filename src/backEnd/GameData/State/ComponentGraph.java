@@ -1,5 +1,6 @@
 package backEnd.GameData.State;
 
+import java.util.Collection;
 import java.util.List;
 
 import backEnd.GameEngine.Component;
@@ -11,11 +12,13 @@ public interface ComponentGraph {
 
 	int getGridHeight();
 
+
 	/**
 	 * Returns list of all components on the grid
 	 * @return list of components
 	 */
 	List<Component> getComponentList();
+
 
 	/**
 	 * Get the list of components at a given location
@@ -31,6 +34,12 @@ public interface ComponentGraph {
 	 */
 	List<Component> getComponentsByTileLocation(Point2D tileLocation);
 
+	/**
+	 * Gets the List of all Components in the ComponentGraph
+	 * @return a List of Components
+	 */
+	List<Component> getAllComponents();
+	
 	/**
 	 * Add a component to the list of components at a given location
 	 * @param newComponent

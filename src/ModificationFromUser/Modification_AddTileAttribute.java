@@ -1,6 +1,6 @@
 package ModificationFromUser;
 
-import backEnd.Model;
+import backEnd.ModelImpl;
 import backEnd.GameData.State.Tile;
 import backEnd.GameData.State.TileAttribute;
 import backEnd.GameEngine.Component;
@@ -20,7 +20,7 @@ public class Modification_AddTileAttribute<T> implements ModificationFromUser {
 	}
 
 	@Override
-	public void invoke(Model myModel) {
+	public void invoke(ModelImpl myModel) {
 		switch (myModel.getMode().getUserMode()) {
 		case AUTHOR:
 			myTile.addTileAttribute(myAttr);

@@ -1,7 +1,14 @@
 package backEnd.GameData.State;
 
+import java.util.List;
+
 import javafx.geometry.Point2D;
 
+/**
+ * 
+ * @author Riley Nisbet, Christian Martindale
+ *
+ */
 public interface TileGrid {
 
 	/**
@@ -35,5 +42,11 @@ public interface TileGrid {
 	 * @return grid height
 	 */
 	int getMyHeight();
+	
+	/**
+	 * return a List of all tiles in the Grid
+	 */
+	List<Tile> getAllTiles();
+
 
 }

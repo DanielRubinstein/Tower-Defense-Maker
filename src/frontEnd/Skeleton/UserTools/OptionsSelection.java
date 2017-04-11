@@ -3,7 +3,7 @@ package frontEnd.Skeleton.UserTools;
 import java.util.ArrayList;
 import java.util.List;
 
-import ModificationFromUser.Modification_ChangeMode;
+import ModificationFromUser.Modification_GameRemote;
 import frontEnd.ViewEditor;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -37,12 +37,12 @@ public class OptionsSelection {
 		return myRoot;
 	}
 	public void setAlignment(Pos position,Priority priority){
-		myRoot.setAlignment(Pos.BOTTOM_RIGHT);
+		myRoot.setAlignment(Pos.TOP_RIGHT);
 	}
 	public void setSize(double width, double height){
 		myRoot.setPrefWidth(width);
 		myRoot.setPrefHeight(height);
-		setUpOptions(width/4);
+		setUpOptions(width/4); //FIXME hard coded
 	}
 	private void setUpOptions(double buttonWidth){
 		myButtons = new ArrayList<Button>();
@@ -51,20 +51,19 @@ public class OptionsSelection {
 	}
 	
 	private void addButtons(double size){
-		// TODO replace with correct Modification classes
-		addButtonImage(PLAY_IMAGE, e-> myView.sendUserModification(new Modification_ChangeMode()) ,size);
-		addButtonImage(PAUSE_IMAGE, e-> myView.sendUserModification(new Modification_ChangeMode()) ,size);
-		addButtonImage(FASTFWD_IMAGE, e-> myView.sendUserModification(new Modification_ChangeMode()) ,size);
-		
-		addButtonImage(SETTINGS_IMAGE, e-> mySettings.launchSettings(),size);
+		addButtonImage(PLAY_IMAGE, e-> myView.sendUserModification(Modification_GameRemote.PLAY) ,size);
+		addButtonImage(PAUSE_IMAGE, e-> myView.sendUserModification(Modification_GameRemote.PAUSE) ,size);
+		addButtonImage(FASTFWD_IMAGE, e-> myView.sendUserModification(Modification_GameRemote.FASTFORWARD) ,size);
+		addButtonImage(SETTINGS_IMAGE, e-> mySettings.launchSettings(myView.getAppStage()),size);
 	}
 	
 	
 	private void addButtonImage(String imageName, EventHandler<ActionEvent> event, double size){
 		Image image = new Image(getClass().getClassLoader().getResourceAsStream(imageName));
 		ImageView viewImage = new ImageView(image);
+		viewImage.setPreserveRatio(false);
 		viewImage.setFitWidth(size);
-		viewImage.setPreserveRatio(true);
+		viewImage.setFitHeight(size);
 		Button b = new Button();
 		b.setOnAction(event);
 		b.setGraphic(viewImage);
