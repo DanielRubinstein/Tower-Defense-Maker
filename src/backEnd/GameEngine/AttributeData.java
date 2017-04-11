@@ -15,7 +15,7 @@ public class AttributeData extends Observable {
 	private Map<String,Attribute<?>> myAttributes;
 	
 	public AttributeData(Map<String,Attribute<?>> initialAttributes){
-		
+		this.myAttributes = initialAttributes;
 	}
 
 	

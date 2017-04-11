@@ -6,8 +6,10 @@ import java.util.Map;
 
 import backEnd.Bank.BankController;
 import backEnd.GameData.GameData;
+import backEnd.GameData.State.StateImpl;
 import backEnd.GameData.State.Tile;
 import backEnd.GameEngine.Component;
+import frontEnd.Splash.StartingInput;
 
 /**
  * This Class handles saving and loading data in this program
@@ -24,26 +26,40 @@ public class DataController {
 	private Map<String,Tile >tileMap;
 	private BankController bankController;
 	
-	@SuppressWarnings("unchecked")
-	public DataController (BankController bankController){
-		this.bankController = bankController;
+	public DataController(){
 		myXMLReader = new XMLReaderImpl();
 		myXMLWriter = new XMLWriterImpl();
+	}
+	
+	@SuppressWarnings("unchecked")
+	public BankController generateBanks() throws XMLReadingException{
 		List<Map<String,?>> objectMaps = myXMLReader.loadUniversalGameData(UNIV_GAME_DATA_PATH);
 		componentMap = (Map<String,Component>) objectMaps.get(0);
 		tileMap = (Map<String,Tile>) objectMaps.get(1);
+		return new BankController(tileMap, componentMap);
+	}
+	
+	public GameData generateGameData(Object o) throws XMLReadingException{
+		if (o instanceof String){
+			return myXMLReader.loadGameStateData(GAME_STATE_DATA_PATH, (String) o);
+		} else if (o instanceof File) {
+			return myXMLReader.loadGameStateData((File) o);
+		} else if (o instanceof StartingInput){
+			return createGameData((StartingInput) o);
+		} else {
+			throw new XMLReadingException();
+		}
+	}
+	
+	private GameData createGameData(StartingInput dim) {
+		StateImpl state = new StateImpl(dim.getTilesWide(), dim.getTilesHigh(), 400, 400);
+		GameData gameData = new GameData(state, null);
+		return gameData;
+		
 	}
 	
 	public Map<String, Component> getComponentsMap(){
 		return componentMap;
-	}
-	
-	public GameData getGameDataFromName(String gameName){
-		return myXMLReader.loadGameStateData(GAME_STATE_DATA_PATH, gameName);
-	}
-	
-	public GameData getGameDataFromFile(File file){
-		return myXMLReader.loadGameStateData(file);
 	}
 	
 	public Map<String, Tile> getTileMap(){
