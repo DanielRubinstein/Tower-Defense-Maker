@@ -189,9 +189,11 @@
  * ComboBox                                                                    *
  *                                                                             *
  ******************************************************************************/
+ /*
 .combo-box-base {
     -fx-skin: "com.guigarage.flatterfx.skin.FlatterComboBoxSkin";
 }
+*/
 
 .popup-overlay {
     -fx-background-color: -flatter-red;

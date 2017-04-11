@@ -1,8 +1,11 @@
 package backEnd.GameEngine;
 
+import java.util.HashMap;
 import java.util.Map;
 import java.util.Observable;
 import java.util.Observer;
+
+import backEnd.Attribute.Attribute;
 
 /**
  * 
@@ -12,7 +15,12 @@ import java.util.Observer;
 
 public class AttributeData extends Observable {
 	
+	
 	private Map<String,Attribute<?>> myAttributes;
+	
+	public AttributeData(){ //create an empty AttributeData
+		myAttributes=new HashMap<String, Attribute<?>>();
+	}
 	
 	public AttributeData(Map<String,Attribute<?>> initialAttributes){
 		this.myAttributes = initialAttributes;

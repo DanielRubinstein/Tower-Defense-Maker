@@ -4,6 +4,8 @@ import java.util.ResourceBundle;
 
 import com.sun.javafx.geom.Point2D;
 
+import backEnd.Attribute.Attribute;
+import backEnd.Attribute.AttributeImpl;
 import backEnd.GameData.State.MoveDirections;
 
 public class AttributeFactory {
@@ -14,16 +16,15 @@ public class AttributeFactory {
 	public Attribute<?> getAttribute(String variableName){
 		switch (myResources.getString(variableName)) {
 			case "Point2D":
-				return new Attribute<Point2D>();
+				return new AttributeImpl<Point2D>();
 			case "String":
-				return new Attribute<String>();
+				return new AttributeImpl<String>();
 			case "Integer":
-				Attribute<Integer> myHealthAttribute=new Attribute<Integer>();
-				return myHealthAttribute;
+				return new AttributeImpl<Integer>();
 			case "Boolean":
-				return new Attribute<Boolean>();
+				return new AttributeImpl<Boolean>();
 			case "MoveDirections":
-				return new Attribute<MoveDirections>();
+				return new AttributeImpl<MoveDirections>();
 			default: throw new IllegalArgumentException();
 		}
 	}

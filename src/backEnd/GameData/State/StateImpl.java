@@ -12,7 +12,7 @@ import java.util.Set;
 import java.util.Stack;
 
 import backEnd.Coord;
-import backEnd.GameEngine.Attribute;
+import backEnd.Attribute.AttributeImpl;
 import backEnd.Mode.UserModeType;
 import javafx.geometry.Point2D;
 
@@ -127,7 +127,7 @@ public class StateImpl implements State {
 				if(currentPathCoords.getYCoord()-nextPathCoords.getYCoord()!= 1){
 					pathDirection = MoveDirections.UP;
 				}
-				((Attribute<MoveDirections>) currentPathTile.getAttribute("MoveDirection")).setValue(pathDirection);
+				((AttributeImpl<MoveDirections>) currentPathTile.getAttribute("MoveDirection")).setValue(pathDirection);
 			}
 		}
 	}
