@@ -14,7 +14,11 @@ import javafx.scene.Group;
 import javafx.scene.Node;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.RowConstraints;
+import javafx.scene.layout.StackPane;
+import javafx.stage.Stage;
 
 /**
  * This class is used to represent the actual game.
@@ -23,8 +27,9 @@ import javafx.scene.layout.GridPane;
  *
  */
 public class Canvas {
-	private Group root;
+	private StackPane root;
 	private State myState;
+	private Group allComponents;
 	private ComponentGraph myComponentGraph;
 	private GridPane myGrid;
 	private int myGridWidth;
@@ -33,7 +38,7 @@ public class Canvas {
 	private static final int TILE_HEIGHT = 40;
 	private static final String IMAGE_RESOURCES = "resources/images";
 	private ResourceBundle myImages;
-	private static String TILE_GRASS;
+	private static String DEFAULT_TILE;
 	private TileGrid myTileGrid;
 	private ViewEditor myView;
 	
@@ -41,7 +46,8 @@ public class Canvas {
 		myState=state;
 		myView = view;
 		myTileGrid=state.getTileGrid();
-		root = new Group();
+		root = new StackPane();
+		allComponents = new Group();
 		getImages();
 		setUpGrid();
 	}
@@ -49,15 +55,16 @@ public class Canvas {
 		myComponentGraph= myState.getComponentGraph();
 		myGridWidth=myComponentGraph.getGridWidth();
 		myGridHeight=myComponentGraph.getGridHeight();
-		myGrid = new GridPane()
-;		myGrid.setMinWidth(myGridWidth);
+		myGrid = new GridPane();	
+		myGrid.setMinWidth(myGridWidth);
 		myGrid.setMinHeight(myGridHeight);
 		setTileGrid();
 		root.getChildren().add(myGrid);
+		myGrid.toBack();
 	}
 	private void getImages(){
 		myImages = ResourceBundle.getBundle(IMAGE_RESOURCES);
-		TILE_GRASS = myImages.getString("grass");
+		DEFAULT_TILE = myImages.getString("default_tile");
 	}
 
 	public Node getRoot() {
@@ -72,21 +79,29 @@ public class Canvas {
 	private void setTileGrid(){
 		for(int i=0;i<myGridHeight;i++){
 			for(int j=0;j<myGridWidth;j++){
-				Image image = new Image(getClass().getClassLoader().getResourceAsStream(TILE_GRASS));
+				Image image = new Image(getClass().getClassLoader().getResourceAsStream(DEFAULT_TILE));
 				ImageView tileView = new ImageView(image);
-				tileView.setPreserveRatio(true);
-				tileView.setFitWidth(TILE_WIDTH);
-				tileView.setFitHeight(TILE_HEIGHT);
+				organizeImageView(tileView);
 				Tile t = myTileGrid.getTileByLocation(new Point2D(i,j));
 				setTileInteraction(tileView,t);
 				myGrid.add(tileView, j, i);
 			}
-		}
+		}		
+	}
+	private void organizeImageView(ImageView tileView){
+		tileView.setPreserveRatio(false);
+		tileView.setFitWidth(TILE_WIDTH);
+		tileView.setFitHeight(TILE_HEIGHT);
+		tileView.fitWidthProperty().bind(myGrid.widthProperty().divide(myGridWidth));
+		tileView.fitHeightProperty().bind(myGrid.heightProperty().divide(myGridHeight));
+	}
+	
+	private void setUpComponents(){
 		
 	}
 
 	private void setTileInteraction(Node n, Tile t){
-		TileCommandCenter tileInteractor = new TileCommandCenter(myView, t);
+		TileCommandCenter tileInteractor = new TileCommandCenter(myView, t, myState);
 		n.setOnMouseClicked(e-> tileInteractor.launch(e.getScreenX(),e.getScreenY()));
 	}
 	

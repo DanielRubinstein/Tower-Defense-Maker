@@ -1,45 +1,60 @@
 package main;
 
+import java.util.function.Consumer;
+
 import ModificationFromUser.ModificationFromUser;
-import backEnd.Model;
+import backEnd.ModelImpl;
 import backEnd.Data.DataController;
+import backEnd.Data.XMLReadingException;
 import backEnd.GameData.GameData;
-import backEnd.Mode.Mode;
-import backEnd.Mode.UserModeType;
 import frontEnd.ViewImpl;
+import frontEnd.Menus.ErrorDialog;
 import frontEnd.Skeleton.SkeletonImpl;
+import frontEnd.Splash.MainMenu;
 import javafx.stage.Stage;
 
 public class ControllerImpl implements Controller {
 	private ViewImpl myView;
-	private Model myModel;
-	private Mode myMode;
+	private ModelImpl myModel;
 	private GameData myGameData;
 	private DataController myDataController;
 
 	public void start(Stage stage) {
 		//developerTestingSkeleton(stage);
-		System.out.println("tst");
+		//myMode = new ModeImpl(null, UserModeType.AUTHOR);
 		
-		myMode = new Mode(null, UserModeType.AUTHOR);
 		
-		/*
 		myDataController = new DataController();
-		myGameData = myDataController.getGameData("");
 		
-		myModel = new Model(myGameData, myMode, myDataController);
-		*/
-		myView = new ViewImpl(myMode, 
+		Consumer<ModificationFromUser> viewMod = 
 				(ModificationFromUser m) -> {
 					try {
 						executeInteraction(m);
 						System.out.println("Modification from user sent to back end");
 					} catch (Exception e) {
 						System.out.println("Error in Modification sent");
+						if (myModel == null){
+							System.out.println("   No model created");
+						}
 					}
+				};
+				
+				
+		Consumer<Object> setGameData = o -> {
+			try {
+				myGameData = myDataController.generateGameData(o);
+				myModel = new ModelImpl(myDataController, myGameData);
+				myView = new ViewImpl(myModel, viewMod);
+			} catch (XMLReadingException e) {
+				ErrorDialog errDia = new ErrorDialog();
+				errDia.create("Cannot Load Game", e.getMessage());
+			}
+			
+		};
 					
-				});
 		
+		MainMenu myMenu = new MainMenu(setGameData);
+		myMenu.showMenus(stage);
 	}
 
 	/**
@@ -49,7 +64,7 @@ public class ControllerImpl implements Controller {
 	 * @param stage
 	 */
 	private void developerTestingSkeleton(Stage stage) {
-		SkeletonImpl skeleton = new SkeletonImpl(myView);
+		SkeletonImpl skeleton = new SkeletonImpl(myView, myModel);
 		skeleton.display(stage);
 
 	}

@@ -1,33 +1,57 @@
 package backEnd.GameEngine;
 
-import java.util.List;
 import java.util.Map;
 import java.util.ResourceBundle;
 
+import backEnd.Attribute.Attribute;
+import backEnd.Attribute.AttributeImpl;
+import backEnd.Attribute.AttributeOwner;
+import backEnd.GameData.State.AccessPermissions;
+import backEnd.GameData.State.AccessPermissionsImpl;
+import backEnd.GameEngine.Behaviors.Behavior;
 
-public class Component {
+
+public class Component implements AttributeOwner {
+	/**
+	 * Any object on the grid is a component.
+	 * @author Daniel
+	 */
 	
 	private final static String DEFAULT_ATTRIBUTE_PATH = "resources/componentDefaults";
 	private final static String BEHAVIOR_PATH = "resources/behaviorNames";
 	private final static ResourceBundle behaviorResources = ResourceBundle.getBundle(BEHAVIOR_PATH);
 	private final static ResourceBundle attributeResources = ResourceBundle.getBundle(DEFAULT_ATTRIBUTE_PATH);
-	private Map<String,Attribute<?>> myAttributes;
+	private AttributeData myAttributes;
 	private Map<String, Behavior> myBehaviors;
-	
-	
+	private AccessPermissions myAccessPermissions;
 	
 	public Component(){
+		this(new AccessPermissionsImpl()); //TODO so will we actually use this if we always need to pass in an
+		//AttributeData? Component always needs to contain an AttributeData!
+	}
+	
+	public Component(AttributeData attributes){
+		this(new AccessPermissionsImpl());
+		myAttributes=attributes;
+	}
+	
+	public Component(AccessPermissions accessPermissions){
+		Component dummyComponent=new Component();
 		AttributeFactory af=new AttributeFactory();
-		BehaviorFactory bf=new BehaviorFactory(COMPONENT HERE);
-		for (String key: myResources.keySet()){
-			String value=myResources.getString(key);
-			Attribute<?> myAttribute= af.getAttribute(key, value); //FIX THIS- HOW DOES OUR FACTORY GENERATE ATTRIBUTES?
+		BehaviorFactory bf=new BehaviorFactory(dummyComponent); //add a real component
+		for (String key: behaviorResources.keySet()){
+			String value=behaviorResources.getString(key);
+			Attribute<?> myAttribute= af.getAttribute(key); //FIX THIS- HOW DOES OUR FACTORY GENERATE ATTRIBUTES?
 			myAttributes.addAttribute(key, myAttribute);
 			myBehaviors.put(key, bf.getBehavior(key));
 			}
 		setupBehaviorObserving();
+		this.myAccessPermissions = accessPermissions;
 	}
-		
+	
+	public AccessPermissions getAccessPermissions(){
+		return myAccessPermissions;
+	}
 
 	public void setupBehaviorObserving(){
 		for (String b: myBehaviors.keySet()){
@@ -48,6 +72,21 @@ public class Component {
 	
 	public Attribute<?> getAttribute(String attributeType){
 		return myAttributes.get(attributeType);
+	}
+	
+	
+	public AttributeData getMyAttributes(){
+		return myAttributes;
+	}
+	
+	public void addAttributeData(AttributeData attributes){
+		myAttributes=attributes;
+	}
+
+	@Override
+	public void addAttribute(String attrType, Attribute<?> newAttr) {
+		// TODO Auto-generated method stub
+		
 	}
 
 	/**

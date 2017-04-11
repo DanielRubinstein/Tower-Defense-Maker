@@ -1,7 +1,6 @@
 package backEnd.Data;
 
 import java.io.File;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
@@ -9,14 +8,15 @@ import java.util.Map;
 import com.thoughtworks.xstream.XStream;
 import com.thoughtworks.xstream.io.xml.DomDriver;
 
-import backEnd.Bank.BankController;
 import backEnd.GameData.GameData;
-import backEnd.GameData.GameDataInterface;
-import backEnd.GameData.Rules;
-import backEnd.GameData.State.StateImpl;
 import backEnd.GameData.State.Tile;
 import backEnd.GameEngine.Component;
-import javafx.util.Pair;
+
+/**
+ * This class handles loading both game state data and universal game data
+ * @author Riley Nisbet
+ *
+ */
 
 public class XMLReaderImpl implements XMLReader {
 	private XStream xStream;
@@ -25,18 +25,21 @@ public class XMLReaderImpl implements XMLReader {
 		xStream = new XStream(new DomDriver());
 	}
 
-	public GameData loadGameStateData(String filePath, String gameName){
-		GameData loadedGameData = null;
-		try{
-	        File xmlFile = new File(filePath + gameName + ".xml");
-	        loadedGameData = (GameData) xStream.fromXML(xmlFile);       
-	    }catch(Exception e){
-	        throw new XMLReadingException();
-	    }
-		return loadedGameData;
+	public GameData loadGameStateData(String filePath, String gameName) throws XMLReadingException{
+		File xmlFile = new File(filePath + gameName + ".xml");
+		return loadGameStateData(xmlFile);
 	}
 	
-	public List<Map<String,?>> loadUniversalGameData(String filePath){
+	public GameData loadGameStateData(File gameFile) throws XMLReadingException{
+		File xmlFile = gameFile;
+		try{
+	        return (GameData) xStream.fromXML(xmlFile);      
+	    }catch(Exception e){
+	        throw new XMLReadingException(gameFile);
+	    }
+	}
+	
+	public List<Map<String,?>> loadUniversalGameData(String filePath) throws XMLReadingException{
 		@SuppressWarnings("unchecked")
 		Map<String, Component> loadedComponentMap = (Map<String,Component>) loadXML(filePath, "ComponentMap");
 		@SuppressWarnings("unchecked")
@@ -44,15 +47,15 @@ public class XMLReaderImpl implements XMLReader {
 		return Arrays.asList(loadedComponentMap,loadedTileMap);
 	}
 
-	private Object loadXML(String filePath, String fileName) {
-		File xmlFile = null;
+	private Object loadXML(String filePath, String fileName) throws XMLReadingException {
+		File xmlFile = new File(filePath + fileName + ".xml");
 		try{
-			xmlFile = new File(filePath + fileName + ".xml");
-	            
-	    }catch(Exception e){
-	        throw new XMLReadingException();
-	    }
-		return xStream.fromXML(xmlFile);
+			return xStream.fromXML(xmlFile);
+		} catch (Exception e){
+			throw new XMLReadingException(xmlFile);
+		}
+
+		
 	}
 
 }

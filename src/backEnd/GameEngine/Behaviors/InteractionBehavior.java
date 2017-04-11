@@ -1,7 +1,10 @@
-package backEnd.GameEngine;
+package backEnd.GameEngine.Behaviors;
 
 import java.util.Map;
 import java.util.Observable;
+
+import backEnd.Attribute.Attribute;
+import backEnd.Attribute.AttributeImpl;
 
 public class InteractionBehavior implements Behavior {
 

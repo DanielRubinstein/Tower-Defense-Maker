@@ -1,6 +1,6 @@
 package ModificationFromUser;
 
-import backEnd.Model;
+import backEnd.ModelImpl;
 import backEnd.GameData.State.Tile;
 import backEnd.GameData.State.TileAttribute;
 import backEnd.Mode.ModeException;
@@ -18,7 +18,7 @@ public class Modification_RemoveTileAttribute implements ModificationFromUser {
 	}
 
 	@Override
-	public void invoke(Model myModel) throws Exception {
+	public void invoke(ModelImpl myModel) throws Exception {
 		switch (myModel.getMode().getUserMode()) {
 		case AUTHOR:
 			//FIXME need removeTileAttribute method in Tile

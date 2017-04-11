@@ -2,25 +2,21 @@ package backEnd.GameEngine.Engine;
 
 import java.util.ResourceBundle;
 
-import backEnd.GameEngine.Behavior;
-
 public class EngineFactory {
 	
 	private final static String RESOURCES_PATH = "resources/engineNames";
 	private final static ResourceBundle myResources = ResourceBundle.getBundle(RESOURCES_PATH);
 	
-	public Engine getEngine(Behavior behavior){
-		String simpleName = behavior.getClass().getSimpleName();
-		String fullName = behavior.getClass().getName();
+	public Engine getEngine(String string){
+		String simpleName = Engine.class.getSimpleName();
+		String fullName = Engine.class.getName();
 		String basePath = fullName.substring(0, fullName.length() - simpleName.length());
 		Object engine = null;
 		try {
 			engine = Class.forName(basePath + myResources.getString(simpleName)).newInstance();
 		} catch (InstantiationException | IllegalAccessException | ClassNotFoundException e) {
-			//TODO: Help!!!!!!
-			e.printStackTrace();
+			engine = new NullEngine();
 		}
-		System.out.println(engine.getClass().getSimpleName());
 		return (Engine)engine;
 	}
 
