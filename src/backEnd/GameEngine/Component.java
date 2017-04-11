@@ -9,6 +9,10 @@ import backEnd.GameEngine.Behaviors.Behavior;
 
 
 public class Component {
+	/**
+	 * Any object on the grid is a component.
+	 * @author Daniel
+	 */
 	
 	private final static String DEFAULT_ATTRIBUTE_PATH = "resources/componentDefaults";
 	private final static String BEHAVIOR_PATH = "resources/behaviorNames";
@@ -19,7 +23,13 @@ public class Component {
 	private AccessPermissions myAccessPermissions;
 	
 	public Component(){
+		this(new AccessPermissionsImpl()); //TODO so will we actually use this if we always need to pass in an
+		//AttributeData? Component always needs to contain an AttributeData!
+	}
+	
+	public Component(AttributeData attributes){
 		this(new AccessPermissionsImpl());
+		myAttributes=attributes;
 	}
 	
 	public Component(AccessPermissions accessPermissions){
@@ -64,6 +74,10 @@ public class Component {
 	
 	public AttributeData getMyAttributes(){
 		return myAttributes;
+	}
+	
+	public void addAttributeData(AttributeData attributes){
+		myAttributes=attributes;
 	}
 
 	/**
