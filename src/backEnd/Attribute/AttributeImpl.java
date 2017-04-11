@@ -2,6 +2,7 @@ package backEnd.Attribute;
 
 import java.util.Arrays;
 import java.util.Collection;
+import java.util.List;
 
 /**
  * Note: we have different attributes in GameEngine.Attributes package. Ex: position attribute, health attribute...
@@ -10,36 +11,51 @@ import java.util.Collection;
  */
 public class AttributeImpl<T> implements Attribute<T>{
 
-	T value;
+	private T myValue;
+	private AttributeType myAttrType;
+	private List<T> myParamList;
+	private String myName;
+	
+	public AttributeImpl(AttributeType attrType, List<T> paramList, String name){
+		myAttrType = attrType;
+		myParamList = paramList;
+		myName = name;
+	}
+	
 	
 	/**
 	 * set new value to the attribute (used by Behavior)
 	 * @param newVal
 	 */
+	@Override
 	public void setValue(T newVal){
-		value = newVal;
+		myValue = newVal;
 	}
 	
 	/**
 	 * used by Behavior, which needs to know the current Attribute value
 	 * @param currentVal
 	 */
+	@Override
 	public T getValue(){
-		return value;
+		return myValue;
 	}
 
 	@Override
-	public String getValueAsString() {
-		// TODO this may have to change
-		return value.toString();
+	public Collection<T> getEditParameters() {
+		return myParamList;
 	}
 
 	@Override
-	public Collection<String> getPossibleValues() {
-		// TODO how the fuck are we setting this
-		return Arrays.asList("hey", "sup", "nm", "hbu");
+	public AttributeType getAttributeType() {
+		return myAttrType;
 	}
-	
-	
+
+
+	@Override
+	public String getName() {
+		return myName;
+	}
+
 	
 }
