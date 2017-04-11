@@ -42,11 +42,11 @@ public class SettingsViewImpl implements SettingsView{
 	 */
 	private void addButtons(Stage stage){
 		myMenu = new ButtonMenuImpl("Settings");
-		myMenu.addSimpleButton("Save", e -> myView.save());
+		myMenu.addSimpleButtonWithHover("Save", e -> myView.save(), "Save your current game in the Saved Games folder");
 		
-		myMenu.addSimpleButton("Load", e -> myView.load());
+		myMenu.addSimpleButtonWithHover("Load", e -> myView.load(), "Load a saved game from the Saved Games folder");
 		
-		myMenu.addSimpleButton("New Game", e -> myView.newGame());
+		myMenu.addSimpleButtonWithHover("New Game", e -> myView.newGame(), "Create a new game from scratch");
 		
 		Node ruleButtons = createRulesButtons();
 		myMenu.addNode(ruleButtons);
