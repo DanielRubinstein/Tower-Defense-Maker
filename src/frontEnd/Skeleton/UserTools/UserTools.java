@@ -28,6 +28,7 @@ public class UserTools {
 	 * @param height of the bottom pane
 	 */
 	public void setBottomAndSideDimensions(double width, double height){
+		System.out.println("in user tools have width and height "+width  + "   "+height);
 		this.bottomRoot.setDimensions(width, height);
 		this.sideBar.setWidth(width);
 		

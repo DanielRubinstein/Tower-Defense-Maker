@@ -7,7 +7,6 @@ import java.util.Map;
 import java.util.Map.Entry;
 
 import backEnd.Attribute.Attribute;
-import backEnd.Attribute.AttributeImpl;
 import backEnd.Attribute.AttributeOwner;
 import backEnd.GameData.State.ComponentGraph;
 import backEnd.GameData.State.State;
@@ -40,7 +39,6 @@ public class TileCommandCenter implements SkeletonObject {
 		ComponentGraph myComponentGraph = state.getComponentGraph();
 		myComponents = myComponentGraph.getComponentList();
 		myView = view;
-		
 	}
 
 	private void createTabsAndStage(Tile tile) {
@@ -68,7 +66,6 @@ public class TileCommandCenter implements SkeletonObject {
 	private Collection<Tab> createComponentTabs() {
 		List<Tab> componentTabs = new ArrayList<Tab>();
 		for (Component c : myComponents) {
-			// add component tab
 			componentTabs.add(createAttributeOwnerTab(c));
 		}
 		return componentTabs;
@@ -83,7 +80,6 @@ public class TileCommandCenter implements SkeletonObject {
 			Label attLabel = new Label(entry.getKey());
 			singleAttEditor.getChildren().add(attLabel);
 			Node right;
-			
 			if (myView.getBooleanAuthorModeProperty().get()) {
 				// Author Mode
 				right = createEditor(entry);
