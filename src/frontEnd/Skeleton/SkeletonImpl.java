@@ -21,12 +21,8 @@ public class SkeletonImpl implements Skeleton{
 	private static final double CANVAS_WIDTH_FACTOR = 0.8;
 	private static final double BOTTOM_HEIGHT_FACTOR = 0.2;
 	private static final double SIDE_WIDTH_FACTOR = 0.2;
-	private static final int TILE_WIDTH = 40;
-	private static final int TILE_HEIGHT = 40;
 	private static final double CANVAS_WIDTH=MENU_WIDTH * CANVAS_WIDTH_FACTOR;
 	private static final double CANVAS_HEIGHT=MENU_HEIGHT * CANVAS_HEIGHT_FACTOR;
-	private static final int GRID_WIDTH= (int) (CANVAS_WIDTH/TILE_WIDTH);
-	private static final int GRID_HEIGHT= (int) (CANVAS_HEIGHT/TILE_HEIGHT);
 	
 	//public static final String DEFAULT_CSS = "/resources/css/vooga.css";
 	public static final String DEFAULT_CSS = "/resources/css/Flatter.css";

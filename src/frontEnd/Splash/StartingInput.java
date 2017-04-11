@@ -9,7 +9,7 @@ public class StartingInput {
 	private double pointResolutionHeight;
 	
 	public StartingInput(){
-		
+		System.out.println(" in starting input");
 	}
 
 	public int getTilesWide() {
