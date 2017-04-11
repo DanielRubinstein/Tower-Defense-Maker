@@ -83,7 +83,7 @@ public class Canvas {
 				ImageView tileView = new ImageView(image);
 				organizeImageView(tileView);
 				Tile t = myTileGrid.getTileByLocation(new Point2D(i,j));
-				//setTileInteraction(tileView,t);
+				setTileInteraction(tileView,t);
 				myGrid.add(tileView, j, i);
 			}
 		}		

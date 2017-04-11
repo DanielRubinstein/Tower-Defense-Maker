@@ -24,13 +24,12 @@ public class SettingsViewImpl implements SettingsView{
 	
 	public SettingsViewImpl(ViewEditor view) {
 		myView = view;
-		myStage = new Stage();
 		authorProperty = myView.getBooleanAuthorModeProperty();
-		addButtons(myStage);
+		addButtons();
 	}
 	
 	public void launchSettings(){
-		myMenu.display(myStage);
+		myMenu.display(new Stage());
 	}
 	/*
 	 * Buttons to add:
@@ -40,7 +39,7 @@ public class SettingsViewImpl implements SettingsView{
 	 * Rules
 	 * Author/Player toggle
 	 */
-	private void addButtons(Stage stage){
+	private void addButtons(){
 		myMenu = new ButtonMenuImpl("Settings");
 		myMenu.addSimpleButtonWithHover("Save", e -> myView.save(), "Save your current game in the Saved Games folder");
 		

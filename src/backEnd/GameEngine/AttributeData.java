@@ -5,6 +5,8 @@ import java.util.Map;
 import java.util.Observable;
 import java.util.Observer;
 
+import backEnd.Attribute.Attribute;
+
 /**
  * 
  * @author Daniel
