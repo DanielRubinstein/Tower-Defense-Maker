@@ -5,6 +5,12 @@ import backEnd.Coord;
 import backEnd.GameEngine.Component;
 import backEnd.GameEngine.Behaviors.*;
 import backEnd.GameData.State.*;
+
+/**
+ * Performs movement behaviors for all movable components
+ * @author Christian Martindale
+ *
+ */
 public class MoveEngine implements Engine{
 	@Override
 	public void gameLoop(State currentState) {

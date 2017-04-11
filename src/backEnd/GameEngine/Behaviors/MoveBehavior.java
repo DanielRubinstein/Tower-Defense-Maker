@@ -4,7 +4,7 @@ import java.util.Map;
 import java.util.Observable;
 
 import backEnd.GameData.State.Tile;
-import backEnd.GameData.State.TileAttributeType;
+//import backEnd.GameData.State.TileAttributeType;
 import backEnd.GameEngine.Attribute;
 import backEnd.GameEngine.AttributeData;
 import backEnd.GameEngine.Component;

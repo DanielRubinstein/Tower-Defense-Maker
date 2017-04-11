@@ -44,4 +44,27 @@ public class StateImpl implements State{
 		return componentGraph;
 	}
 
+
+	private void findStartTiles() {
+		for(int i=0; i<gridWidth; i++){ //find the start position
+			for(int j=0; j<gridHeight; j++){
+				if(tileGrid.getTileByCoord(i, j).getMyAttributes().getAttributeMap().get("isStartTile").getValue() == true){
+					formShortestPath(i, j);
+				}
+
+			}
+		}
+	}
+	private void formShortestPath(int i, int j){
+		findStartTiles();
+		
+		
+	}
+
+	@Override
+	public void calculateShortestPath() {
+		// TODO Auto-generated method stub
+		
+	}
+
 }
