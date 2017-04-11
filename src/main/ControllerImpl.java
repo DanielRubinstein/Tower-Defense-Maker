@@ -43,7 +43,7 @@ public class ControllerImpl implements Controller {
 				
 				
 		Consumer<File> setGameData = (File file) -> {
-			myModel = new ModelImpl(myDataController.getGameData(file));
+			myModel = new ModelImpl(myDataController.getGameDataFromFile(file));
 			myView = new ViewImpl(myModel, viewMod);
 		};
 		Consumer<StartingInput> setDimensions = (StartingInput input) -> {
