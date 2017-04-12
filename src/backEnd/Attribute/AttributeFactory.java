@@ -1,6 +1,7 @@
 package backEnd.Attribute;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -29,7 +30,7 @@ public class AttributeFactory {
 	private static ResourceBundle myAttrNameResources;
 	private Document doc;
 	
-	public AttributeFactory(){
+	public AttributeFactory() throws FileNotFoundException{
 		myAttrNameResources = ResourceBundle.getBundle(ALL_ATTRIBUTES_TYPES);
 		try{
 			File fXmlFile = new File(XML_FILE_NAME);
@@ -38,7 +39,7 @@ public class AttributeFactory {
 			doc = dBuilder.parse(fXmlFile);
 			doc.getDocumentElement().normalize();
 		} catch (Exception e){
-			e.printStackTrace();
+			throw new FileNotFoundException();
 		}
 	}
 	

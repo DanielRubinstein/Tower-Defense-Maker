@@ -27,5 +27,6 @@ public interface Model {
 	public BankController getBankController();
 	
 	public GameProcessController getGameProcessController();
+
 }
 
