@@ -24,10 +24,12 @@ public class TileImpl implements Tile, AttributeOwner{
 		this.myAccessPerm = new AccessPermissionsImpl(gameModeAccessPermissions, userModeAccessPermissions);
 		this.myAttrData = new AttributeData(new HashMap<String,Attribute<?>>());
 		AttributeFactory attrFact = new AttributeFactory();
+		this.myAttrData = new AttributeData(new HashMap<String,Attribute<?>>());
 		for (String key : attributeResources.keySet()){
 			Attribute<?> myAttribute = attrFact.getAttribute(key);
 			addAttribute(key, myAttribute);
 		}
+
 	}
 	
 	@Override

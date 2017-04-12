@@ -14,6 +14,8 @@ import org.w3c.dom.Node;
 
 import com.sun.javafx.geom.Point2D;
 
+import javafx.scene.image.Image;
+
 public class AttributeFactory {
 	
 	private final static String XML_FILE_NAME = "src/resources/AttributePresets.xml";
@@ -53,7 +55,7 @@ public class AttributeFactory {
 				String dbl_incr_str = thisAttrNode.getAttributes().getNamedItem("increment").getNodeValue();
 				double dbl_incr = Double.parseDouble(dbl_incr_str);
 				List<Double> doubleParameters = Arrays.asList(dbl_min, dbl_max, dbl_incr);
-				Attribute<Double> dbl_newAttr = new AttributeImpl<Double>(doubleParameters, gameAttributeName);;
+				Attribute<Double> dbl_newAttr = new AttributeImpl<Double>(doubleParameters, gameAttributeName);
 				dbl_newAttr.setValue(0.0);
 				return dbl_newAttr;
 				
