@@ -1,6 +1,6 @@
 package frontEnd.Skeleton.UserTools;
 
-import frontEnd.ViewEditor;
+import frontEnd.View;
 import javafx.scene.Node;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
@@ -16,7 +16,7 @@ public class BottomRootImpl implements BottomRoot{
 	private OptionsCorner myOptions;
 	private HBox myRoot;
 	
-	public BottomRootImpl(ViewEditor view) {
+	public BottomRootImpl(View view) {
 		myRoot = new HBox();
 		initializeBar(view);
 		initializeCorner(view);
@@ -31,12 +31,12 @@ public class BottomRootImpl implements BottomRoot{
 		myBottomBar.setHeight(height);
 		myOptions.setSideDimensions(width, height);
 	}
-	private void initializeBar(ViewEditor view){
+	private void initializeBar(View view){
 		myBottomBar = new BottomBarImpl(view);
 		HBox.setHgrow(myBottomBar.getRoot(), Priority.ALWAYS);
 		myRoot.getChildren().add(myBottomBar.getRoot());
 	}
-	private void initializeCorner(ViewEditor view){
+	private void initializeCorner(View view){
 		myOptions = new OptionsCornerImpl(view);
 		myRoot.getChildren().add(myOptions.getRoot());
 	}

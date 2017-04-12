@@ -2,7 +2,6 @@ package backEnd.GameData.State;
 
 import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.ResourceBundle;
 
 import backEnd.Attribute.Attribute;
@@ -13,7 +12,7 @@ import backEnd.Mode.GameModeType;
 import backEnd.Mode.UserModeType;
 import javafx.geometry.Point2D;
 
-public class TileImpl implements Tile{
+public class TileImpl implements Tile, AttributeOwner{
 	private final static String DEFAULT_ATTRIBUTE_PATH = "resources/tileDefaults";
 	private final static ResourceBundle attributeResources = ResourceBundle.getBundle(DEFAULT_ATTRIBUTE_PATH);
 	private Point2D myLocation;
@@ -23,13 +22,12 @@ public class TileImpl implements Tile{
 	public TileImpl(List<GameModeType> gameModeAccessPermissions, List<UserModeType> userModeAccessPermissions , Point2D location){
 		this.myLocation = location;
 		this.myAccessPerm = new AccessPermissionsImpl(gameModeAccessPermissions, userModeAccessPermissions);
-		this.myAttrData = new AttributeData(new HashMap<String,Attribute<?>>());
 		AttributeFactory attrFact = new AttributeFactory();
 		for (String key : attributeResources.keySet()){
-			Attribute<?> myAttribute= attrFact.getAttribute(key);
+			Attribute<?> myAttribute = attrFact.getAttribute(key);
 			addAttribute(key, myAttribute);
 		}
-		
+		this.myAttrData = new AttributeData(new HashMap<String,Attribute<?>>());
 	}
 	
 	@Override
@@ -65,15 +63,7 @@ public class TileImpl implements Tile{
 
 	@Override
 	public boolean hasAttribute(String name) {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	/*
-	@Override
-	public boolean hasAttribute(String name) {
 		return myAttrData.getAttributeMap().containsKey(attributeResources.getString(name));
 	}
-	*/
 
 }

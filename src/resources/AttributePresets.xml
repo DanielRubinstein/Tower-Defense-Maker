@@ -1,0 +1,20 @@
+<AttributePresets>
+	<IMAGE>
+		<ImageFile></ImageFile></IMAGE>
+	<BOOLEAN>
+		<BOOLEAN_TEMPLATE></BOOLEAN_TEMPLATE><Traversable></Traversable>
+		<Buildable></Buildable>
+		<GoalTile></GoalTile>
+		<StartTile></StartTile>
+		</BOOLEAN>
+	<DOUBLE>
+		<DOUBLE_TEMPLATE min="0" max="0" increment="0"></DOUBLE_TEMPLATE></DOUBLE>
+	<INTEGER>
+		<INTEGER_TEMPLATE min="0" max="0" increment="0"></INTEGER_TEMPLATE></INTEGER>
+	<EDITABLESTRING>
+		<EDITABLESTRING_TEMPLATE></EDITABLESTRING_TEMPLATE></EDITABLESTRING>
+	<STRINGLIST>
+		<STRINGLIST_TEMPLATE Options="Comma delineated String Options"></STRINGLIST_TEMPLATE><MoveDirection Options="Up,Down,Left,Right"></MoveDirection>
+		</STRINGLIST>
+	<POSITION>
+		<POSITION_TEMPLATE></POSITION_TEMPLATE></POSITION></AttributePresets>
