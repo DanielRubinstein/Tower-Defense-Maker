@@ -14,6 +14,8 @@ public interface View extends ViewReader{
 
 	public Object editRules();
 	
+	public void step();
+	
 	public void sendUserModification(ModificationFromUser mod);
 
 }

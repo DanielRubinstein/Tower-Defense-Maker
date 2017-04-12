@@ -14,4 +14,7 @@ public class Constants {
 	public static Point2D defaultLocation=new Point2D(0,0);
 	public static float defaultRadius=100;
 	public static String BULLET_IMAGE_FILE;
+	public static final int FRAMES_PER_SECOND = 5;
+	public static final int MILLISECOND_DELAY = 1000 / FRAMES_PER_SECOND;
+	public static final double SECOND_DELAY = 1.0 / FRAMES_PER_SECOND;
 }
