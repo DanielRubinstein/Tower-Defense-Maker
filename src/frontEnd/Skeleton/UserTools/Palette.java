@@ -9,11 +9,16 @@ import java.util.function.Consumer;
 import ModificationFromUser.Modification_AddAttributeOwner;
 import ModificationFromUser.Modification_AddNewPresetAttributeOwner;
 import backEnd.Attribute.AttributeOwner;
+import backEnd.Attribute.AttributeOwnerReader;
 import frontEnd.View;
 import frontEnd.CustomJavafxNodes.DoubleFieldPrompt;
+import frontEnd.Skeleton.AoTools.PresetCreation;
+import javafx.geometry.Bounds;
 import javafx.geometry.Insets;
 import javafx.geometry.Point2D;
 import javafx.scene.Node;
+import javafx.scene.control.Button;
+import javafx.scene.control.Tooltip;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseButton;
@@ -56,30 +61,44 @@ public class Palette<T extends AttributeOwner> implements SkeletonObject {
 			System.out.println("Again no presets here");
 		}
 		
+		ImageView addPresetButton = addNewPresetButton();
+		addPresetButton.disableProperty().bind(myView.getBooleanAuthorModeProperty().not());
+		Tooltip t = new Tooltip("Only possible in Author mode");
+		addPresetButton.hoverProperty().addListener((a,b,c)->{
+			if(addPresetButton.isDisabled()){
+				Bounds scenePos= addPresetButton.localToScreen(addPresetButton.getBoundsInLocal());
+				t.show(addPresetButton, scenePos.getMaxX(), scenePos.getMinY()-scenePos.getHeight());
+			}else{
+				t.hide();
+			}
+		});
 		tile.getChildren().add(addNewPresetButton());
 		
 	}
 
-	private Node addNewPresetButton() {
+	private ImageView addNewPresetButton() {
 		ImageView addImage = createImageView(SETTINGS_IMAGE, (iV) ->{
+			// TODO this is where a new preset is created in the frontend
 			String newAttributeOwnerName = null;
 			AttributeOwner newAO = null;
 			String imagePathForNewPreset = null;
 			//newAO.addAttribute(IMAGEFILE_ATTRIBUTE_NAME, imagePathForNewPreset);
-			// TODO this is where a new preset is created in the frontend
-			// you should also probably use command center
-			if (myType.equals("Tiles")){
-				
-			} else if (myType.equals("Components")){
-				
-			}
-			myView.sendUserModification(new Modification_AddNewPresetAttributeOwner(newAttributeOwnerName, newAO));
 			
+			PresetCreation presetCreation = new PresetCreation(myView, newAO);
+			presetCreation.launch(0d, 0d);
+
 			ImageView newImage = createImageView(imagePathForNewPreset, (iV2) ->{
 				myView.sendUserModification(new Modification_AddAttributeOwner(newAO, askForNewPosition()));
 			});
 			myMap.put(newImage, (T) newAO);
 		});
+		/*
+		Button b = new Button();
+		b.setGraphic(addImage);
+		b.setPadding(Insets.EMPTY);
+		b.getStyleClass().clear();
+		//b.setOnAction((e) -> addImage.getOnMouseClicked());
+		*/
 		return addImage;
 	}
 
