@@ -171,6 +171,7 @@ public class TileCommandCenter implements SkeletonObject {
 	private Node createEditor(AttributeOwnerReader obj, Attribute<?> attr) {
 		Node n = null;
 		String type = myAttrNameResources.getString(attr.getName());
+		System.out.println("$$$$$ " +type+   " attr :   "+attr + "   " +attr.getValue());
 		switch(type){
 		case "BOOLEAN":
 			ToggleSwitch myToggle = new ToggleSwitch(myView, "On", "Off", new SimpleBooleanProperty((Boolean) attr.getValue()));
@@ -182,6 +183,9 @@ public class TileCommandCenter implements SkeletonObject {
 		case "EDITABLESTRING":
 			break;
 		case "IMAGE":
+			String imagePath = (String) attr.getValue();
+			Label l = new Label(imagePath);
+			n= l;
 			break;
 		case "INTEGER":
 			break;
