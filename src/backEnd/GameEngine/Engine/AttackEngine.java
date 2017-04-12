@@ -1,8 +1,6 @@
 package backEnd.GameEngine.Engine;
 
-import java.util.List;
 import java.util.ResourceBundle;
-
 import backEnd.Attribute.Attribute;
 import backEnd.GameData.State.ComponentGraph;
 import backEnd.GameData.State.State;
@@ -25,14 +23,9 @@ public class AttackEngine implements Engine{
 	@Override
 	public void gameLoop(State currentState) {
 		ComponentGraph myComponentGraph=currentState.getComponentGraph();
-		//List<Component> componentGraph = currentState.getComponentGraph().getComponentList();
 		for(Component componentAttacker : myComponentGraph.getComponentList()){
 			if(componentAttacker.getAttribute(myResources.getString("TYPE")).getValue().equals("TOWERTYPE")){ //Fix with resource
 				for(Component componentTarget : myComponentGraph.getComponentsWithinRadius(componentAttacker, Constants.defaultRadius)){
-					//change radius if needed in constants file
-					//if(componentAttacker.getAttribute(myResources.getString("TYPE")).getValue().equals("TOWERTYPE")){ 
-						//Fix with resource
-						//why are we checking this twice?
 					addProjectile(currentState, componentAttacker, componentTarget);
 						componentAttacker.getBehavior("Attack").execute(null);
 						componentTarget.getBehavior("Gitfked").execute(null); //Attacks everything and is wrong
