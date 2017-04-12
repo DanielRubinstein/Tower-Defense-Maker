@@ -84,7 +84,7 @@ public class DataController {
 		myXMLWriter.saveUniversalGameData(bankController, UNIV_GAME_DATA_PATH);
 	}
 	
-	public void saveGameData(GameData gameData, String filePath, String gameName){
-		myXMLWriter.saveGameStateData(gameData, filePath, gameName);
+	public void saveCurrentGameStateData(GameData gameData, String gameName){
+		myXMLWriter.saveGameStateData(gameData, GAME_STATE_DATA_PATH, gameName);
 	}
 }

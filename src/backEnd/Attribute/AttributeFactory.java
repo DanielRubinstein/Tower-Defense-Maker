@@ -16,6 +16,12 @@ import com.sun.javafx.geom.Point2D;
 
 import javafx.scene.image.Image;
 
+/**
+ * This class has a method that returns an attribute of the given name and type
+ * @author Riley Nisbet
+ *
+ */
+
 public class AttributeFactory {
 	
 	private final static String XML_FILE_NAME = "src/resources/AttributePresets.xml";
