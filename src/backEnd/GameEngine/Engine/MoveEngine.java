@@ -38,30 +38,22 @@ public class MoveEngine implements Engine{
 		myState=currentState;
 		for (Component c: myState.getComponentGraph().getAllComponents()){
 			Tile currentTile=myState.getTileGrid().getTileByLocation((Point2D) c.getAttribute("Position").getValue()); 
-			// TODO: change attribute name if needed/ at least put it in resource file
-			String currentDirection=(String) currentTile.getAttribute("MoveDirection").getValue();
-			Point2D currentPosition=(Point2D) c.getAttribute("Position").getValue();
 			myState.getComponentGraph().removeComponent(c);
-			//TODO: error checking/ going off the screen.
-			Point2D newPosition = currentPosition; //initialize position with current location, change it after
-			if (currentDirection.equals("LEFT")){
-				newPosition=new Point2D(currentPosition.getX()-Constants.defaultMoveAmount, currentPosition.getY());				
-			}
-			else if (currentDirection.equals("RIGHT")){
-				newPosition=new Point2D(currentPosition.getX()+Constants.defaultMoveAmount, currentPosition.getY());				
-			}
-			else if (currentDirection.equals("UP")){
-				newPosition=new Point2D(currentPosition.getX(), currentPosition.getY()+Constants.defaultMoveAmount);				
-			}
-			else if (currentDirection.equals("DOWN")){
-				newPosition=new Point2D(currentPosition.getX()-Constants.defaultMoveAmount, currentPosition.getY()-Constants.defaultMoveAmount);				
-			}
+			MoveBehavior mb=new MoveBehavior(c);
+			mb.execute(currentTile);
+			Point2D newPosition=mb.getPosition();
 			myState.getComponentGraph().addComponentToGrid(c, newPosition);
 			Attribute<Point2D> newPositionAttribute=new AttributeImpl<Point2D>();
 			newPositionAttribute.setValue(newPosition);
 			Attribute<Point2D> positionAttribute=(Attribute<Point2D>) c.getAttribute("Position");
 			positionAttribute.setValue(newPosition);
 		}
+		
+		//TODO : different case for bullets
+		// if (Component.getMyType.equals("Projectile")
+		//(Component.getMyType.equals("Ennemy")
+		//StartPosition : Point2D
+		//TargetPosition : Point2D
 		
 	}
 }
