@@ -9,6 +9,11 @@ import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 
+/**
+ * This class is an implementation of Skeleton and contains all components of the UI.
+ * @author Tim
+ *
+ */
 public class SkeletonImpl implements Skeleton{
 	
 	private BorderPane myRoot;
@@ -21,16 +26,17 @@ public class SkeletonImpl implements Skeleton{
 	private static final double CANVAS_WIDTH_FACTOR = 0.8;
 	private static final double BOTTOM_HEIGHT_FACTOR = 0.2;
 	private static final double SIDE_WIDTH_FACTOR = 0.2;
-	private static final int TILE_WIDTH = 40;
-	private static final int TILE_HEIGHT = 40;
 	private static final double CANVAS_WIDTH=MENU_WIDTH * CANVAS_WIDTH_FACTOR;
 	private static final double CANVAS_HEIGHT=MENU_HEIGHT * CANVAS_HEIGHT_FACTOR;
-	private static final int GRID_WIDTH= (int) (CANVAS_WIDTH/TILE_WIDTH);
-	private static final int GRID_HEIGHT= (int) (CANVAS_HEIGHT/TILE_HEIGHT);
 	
-	//public static final String DEFAULT_CSS = "/resources/css/vooga.css";
 	public static final String DEFAULT_CSS = "/resources/css/Flatter.css";
 	
+
+	/**
+	 * Constructs a new SkeletonImpl object using view and model, which are used to get important information about the State.
+	 * @param view
+	 * @param model
+	 */
 	public SkeletonImpl(View view, Model model){
 		myRoot = new BorderPane();
 		align(MENU_WIDTH,MENU_HEIGHT);
@@ -46,6 +52,9 @@ public class SkeletonImpl implements Skeleton{
 	}
 	
 
+	/* (non-Javadoc)
+	 * @see frontEnd.Skeleton.Skeleton#display(javafx.stage.Stage)
+	 */
 	public void display(Stage stage) {
 		stage.setScene(myScene);
 		stage.setMinWidth(MENU_WIDTH);

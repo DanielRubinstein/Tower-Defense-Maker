@@ -4,15 +4,15 @@ import ModificationFromUser.ModificationFromUser;
 
 public interface View extends ViewReader{
 
-	public Object save();
+	public void save();
 	
-	public Object load();
+	public void load();
 	
-	public Object newGame();
+	public void newGame();
 
-	public Object viewRules();
+	public void viewRules();
 
-	public Object editRules();
+	public void editRules();
 	
 	public void step();
 	
