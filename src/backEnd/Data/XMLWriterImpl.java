@@ -11,7 +11,7 @@ import com.thoughtworks.xstream.io.xml.DomDriver;
 import backEnd.Bank.BankController;
 import backEnd.GameData.GameData;
 import backEnd.GameData.GameDataInterface;
-import backEnd.GameData.State.ComponentImpl;
+import backEnd.GameData.State.Component;
 import backEnd.GameData.State.Tile;
 
 /**
@@ -34,7 +34,7 @@ public class XMLWriterImpl implements XMLWriter{
 	}
 	
 	public void saveUniversalGameData(BankController bankController, String filePath){
-		Map<String, ComponentImpl> componentMap = bankController.getComponentMap();
+		Map<String, Component> componentMap = bankController.getComponentMap();
 		String componentMapXML = xStream.toXML(componentMap);
 		Map<String, Tile> tileMap = bankController.getTileMap();
 		String tileMapXML = xStream.toXML(tileMap);

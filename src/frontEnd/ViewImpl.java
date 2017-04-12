@@ -14,7 +14,7 @@ import backEnd.Model;
 import backEnd.Data.DataController;
 import backEnd.GameData.UserAttribute;
 import backEnd.GameData.UserAttributeImpl;
-import backEnd.GameData.State.ComponentImpl;
+import backEnd.GameData.State.Component;
 import backEnd.GameData.State.ComponentGraph;
 import backEnd.GameData.State.Tile;
 import backEnd.GameData.State.TileGrid;
@@ -139,7 +139,7 @@ public class ViewImpl implements View{
 	}
 
 	@Override
-	public Collection<ComponentImpl> getComponentPresets() {
+	public Collection<Component> getComponentPresets() {
 		return myModel.getBankController().getComponentMap().values();
 	}
 

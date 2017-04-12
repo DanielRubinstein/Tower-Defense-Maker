@@ -1,6 +1,6 @@
 package frontEnd.Skeleton.UserTools;
 
-import backEnd.GameData.State.ComponentImpl;
+import backEnd.GameData.State.Component;
 import backEnd.GameData.State.Tile;
 import frontEnd.View;
 import javafx.geometry.Side;
@@ -39,7 +39,7 @@ public class PalettePane implements SkeletonObject {
 		if (string.equals("Tiles")){
 			palette = new Palette<Tile>(myView, myView.getTilePresets());
 		} else if (string.equals("Components")){
-			palette = new Palette<ComponentImpl>(myView, myView.getComponentPresets());
+			palette = new Palette<Component>(myView, myView.getComponentPresets());
 		}
 		
 		
