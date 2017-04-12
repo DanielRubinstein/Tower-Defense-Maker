@@ -8,6 +8,8 @@ import java.util.List;
 import java.util.function.Consumer;
 
 import ModificationFromUser.ModificationFromUser;
+import ModificationFromUser.Modification_Load;
+import ModificationFromUser.Modification_Save;
 import backEnd.Model;
 import backEnd.Data.DataController;
 import backEnd.GameData.UserAttribute;
@@ -70,19 +72,12 @@ public class ViewImpl implements View{
 		return myDialog.create();
 	}
 
-	@Override
-	public void viewRules() {
-		// TODO Auto-generated method stub
-	}
 
-	@Override
-	public void editRules() {
-		// TODO Auto-generated method stub
-	}
 
 	@Override
 	public void load() {
-		// TODO Auto-generated method stub
+		String fileToLoad = null;
+		sendUserModification(new Modification_Load(fileToLoad));
 	}
 
 	@Override
@@ -127,6 +122,16 @@ public class ViewImpl implements View{
 	@Override
 	public Stage getAppStage() {
 		return appStage;
+	}
+	
+	@Override
+	public void viewRules() {
+		// TODO Auto-generated method stub
+	}
+
+	@Override
+	public void editRules() {
+		// TODO Auto-generated method stub
 	}
 
 }
