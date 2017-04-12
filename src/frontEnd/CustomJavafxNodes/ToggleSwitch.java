@@ -1,7 +1,7 @@
-package frontEnd.Skeleton.UserTools;
+package frontEnd.CustomJavafxNodes;
 
 import ModificationFromUser.Modification_ChangeMode;
-import frontEnd.ViewEditor;
+import frontEnd.View;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
@@ -19,16 +19,16 @@ public class ToggleSwitch {
 	private HBox toggle;
 	private Label label;
 	private Button button;
-	private ViewEditor myView;
+	private View myView;
 
 	private SimpleBooleanProperty switchedOn;
 
-	public ToggleSwitch(ViewEditor view, String title1, String title2, SimpleBooleanProperty authorProperty) {
+	public ToggleSwitch(View view, String title1, String title2, SimpleBooleanProperty booleanProperty) {
 		myView = view;
 		toggle = new HBox();
 		label = new Label();
 		button = new Button();
-		switchedOn = authorProperty;
+		switchedOn = booleanProperty;
 
 		init(title1, title2);
 

@@ -41,7 +41,7 @@ public class AttributeImpl<T> implements Attribute<T>{
 	}
 
 	@Override
-	public Collection<T> getEditParameters() {
+	public List<T> getEditParameters() {
 		return myParamList;
 	}
 

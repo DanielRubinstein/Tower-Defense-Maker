@@ -9,7 +9,7 @@ import java.util.Map;
 import ModificationFromUser.Modification_AddComponent;
 import backEnd.Attribute.AttributeOwner;
 import backEnd.GameEngine.Component;
-import frontEnd.ViewEditor;
+import frontEnd.View;
 import javafx.geometry.Insets;
 import javafx.geometry.Point2D;
 import javafx.scene.Node;
@@ -26,13 +26,13 @@ import javafx.scene.layout.TilePane;
  * @param <T>
  */
 public class Palette<T extends AttributeOwner> implements SkeletonObject {
-	private ViewEditor myView;
+	private View myView;
 	private TilePane tile;
 	private Collection<T> myPresets;
 	private static final String ATTRIBUTE_IMAGE_PATH_NAME = "no fucking clue";
 	private Map<ImageView, T> myMap; 
 	
-	public Palette(ViewEditor view, Collection<T> objects){
+	public Palette(View view, Collection<T> objects){
 		myView = view;
 		myPresets = objects;
 		
