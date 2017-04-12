@@ -27,7 +27,6 @@ public class Modification_CreateNewPresetComponent implements ModificationFromUs
 	public void invoke(ModelImpl myModel) throws Exception {
 		switch (myModel.getMode().getUserMode()) {
 		case AUTHOR:
-			//FIXME Model needs getBankController()
 			myModel.getBankController().addNewComponent(newCompName, newComp);
 		case PLAYER:
 			 throw new ModeException(myModel.getMode(), DESCRIPTION);
