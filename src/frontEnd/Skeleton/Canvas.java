@@ -10,17 +10,21 @@ import java.util.TreeMap;
 
 import backEnd.Attribute.AttributeImpl;
 import backEnd.Attribute.AttributeOwner;
+import backEnd.Attribute.AttributeOwnerReader;
 import backEnd.GameData.State.Component;
 import backEnd.GameData.State.ComponentGraph;
 import backEnd.GameData.State.State;
 import backEnd.GameData.State.Tile;
 import backEnd.GameData.State.TileGrid;
 import frontEnd.View;
+import frontEnd.CustomJavafxNodes.FrontEndAttributeOwnerImpl;
 import frontEnd.Skeleton.UserTools.SkeletonObject;
 import frontEnd.Skeleton.UserTools.TileCommandCenter;
 import javafx.geometry.Point2D;
 import javafx.scene.Group;
 import javafx.scene.Node;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.ColumnConstraints;
@@ -36,9 +40,8 @@ import javafx.stage.Stage;
  */
 
 public class Canvas implements SkeletonObject, Observer{
-	private StackPane root;
+	private Group root;
 	private State myState;
-	private Group allComponents;
 	private ComponentGraph myComponentGraph;
 	private GridPane myGrid;
 	private int myGridWidth;
@@ -68,8 +71,7 @@ public class Canvas implements SkeletonObject, Observer{
 		myView = view;
 		myTileGrid=state.getTileGrid();
 		state.addAsObserver(this);
-		root = new StackPane();
-		allComponents = new Group();
+		root = new Group();
 		getImages();
 		setUpGrid();
 	}
@@ -110,16 +112,15 @@ public class Canvas implements SkeletonObject, Observer{
 	private void setTileGrid(){
 		for(int i=0;i<myGridHeight;i++){
 			for(int j=0;j<myGridWidth;j++){
-				Tile t = myTileGrid.getTileByLocation(new Point2D(i,j));
-				//Image ima = new Image("/Users/Tim/Documents/workspace308/voogasalad_sup3rs1ckt34m1337/src/images/zombie.jpg");
-				String imagePath = (String) t.getAttribute("ImageFile").getValue();
-				Image image = new Image(getClass().getClassLoader().getResourceAsStream(imagePath));
-				ImageView tileView = new ImageView(image);
+				AttributeOwnerReader t = myTileGrid.getTileByLocation(new Point2D(i,j));
+				FrontEndAttributeOwnerImpl attrOwner = new FrontEndAttributeOwnerImpl(t);
+
+				ImageView tileView = attrOwner.getImageView();
 				organizeImageView(tileView);
-				System.out.println(imagePath);
 				allTiles.put((AttributeOwner)t,tileView);
-				setTileInteraction(tileView,t);
+				setTileInteraction(tileView,(Tile)t);
 				myGrid.add(tileView, j, i);
+				
 			}
 		}		
 	}
