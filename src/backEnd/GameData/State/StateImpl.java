@@ -18,7 +18,7 @@ import javafx.geometry.Point2D;
 
 /**
  * 
- * @author Alex Salas
+ * @author Alex Salas, Christian Martindale
  *
  */
 public class StateImpl implements State {

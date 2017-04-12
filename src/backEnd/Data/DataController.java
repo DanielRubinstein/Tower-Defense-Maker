@@ -38,18 +38,32 @@ public class DataController {
 		tileMap = (Map<String,Tile>) objectMaps.get(1);
 		return new BankController(tileMap, componentMap);
 	}
-	
-	public GameData generateGameData(Object o) throws XMLReadingException{
-		if (o instanceof String){
-			return myXMLReader.loadGameStateData(GAME_STATE_DATA_PATH, (String) o);
-		} else if (o instanceof File) {
-			return myXMLReader.loadGameStateData((File) o);
-		} else if (o instanceof StartingInput){
-			return createGameData((StartingInput) o);
-		} else {
+
+	public GameData generateGameData(String s) throws XMLReadingException{
+		try{
+			return myXMLReader.loadGameStateData(GAME_STATE_DATA_PATH, s);
+		}catch(Exception e){
 			throw new XMLReadingException();
 		}
 	}
+	public GameData generateGameData(File f) throws XMLReadingException{
+		try{
+			return myXMLReader.loadGameStateData(f);
+		}catch(Exception e){
+			throw new XMLReadingException();
+		}
+	}
+	public GameData generateGameData(StartingInput startInp) throws XMLReadingException{
+		try{
+			return createGameData(startInp);
+		}catch(Exception e){
+			e.printStackTrace();
+			throw new XMLReadingException();
+		}
+	}
+
+	
+	
 	
 	private GameData createGameData(StartingInput dim) {
 		StateImpl state = new StateImpl(dim.getTilesWide(), dim.getTilesHigh(), 400, 400);

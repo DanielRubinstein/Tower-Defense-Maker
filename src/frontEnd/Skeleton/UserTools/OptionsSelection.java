@@ -42,7 +42,7 @@ public class OptionsSelection {
 	public void setSize(double width, double height){
 		myRoot.setPrefWidth(width);
 		myRoot.setPrefHeight(height);
-		setUpOptions(width/4); //FIXME hard coded
+		setUpOptions(width/4-1);//hard coded
 	}
 	private void setUpOptions(double buttonWidth){
 		myButtons = new ArrayList<Button>();

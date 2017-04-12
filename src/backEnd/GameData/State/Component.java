@@ -25,6 +25,7 @@ public class Component implements AttributeOwner {
 	private AttributeData myAttributes;
 	private Map<String, Behavior> myBehaviors;
 	private AccessPermissions myAccessPermissions;
+	private String myType;
 	
 	public Component(){
 		this(new AccessPermissionsImpl()); //TODO so will we actually use this if we always need to pass in an
@@ -90,6 +91,22 @@ public class Component implements AttributeOwner {
 		
 	}
 
+	/**
+	 * 
+	 * @param type the type of this Component, i.e. Tower or Enemy
+	 */
+	public void setMyType(String type){
+		myType = type;
+	}
+	
+	/**
+	 * 
+	 * @return the type of this Component, i.e. Tower or Enemy
+	 */
+	public String getMyType(){
+		return myType;
+	}
+	
 	/**
 	 * adds an attribute to the List of Attributes
 	 * @return 
