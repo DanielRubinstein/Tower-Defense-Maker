@@ -17,7 +17,7 @@ public class SpawnEngine implements Engine{
 	private String typeOfTile = "TileType";
 	private String spawnerType = "Spawner";
 	@Override
-	public void gameLoop(State currentState) {
+	public void gameLoop(State currentState, double stepTime) {
 		//spawnPeriod = currentState.getSpawnPeriod(); Implement this ish
 		List<Tile> tileList = currentState.getTileGrid().getAllTiles();
 		for(Tile spawnTile : tileList){
