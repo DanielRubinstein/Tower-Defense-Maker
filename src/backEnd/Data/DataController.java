@@ -58,22 +58,18 @@ public class DataController {
 			System.out.println("did this");
 			return createGameData(startInp);
 		}catch(Exception e){
+			e.printStackTrace();
 			throw new XMLReadingException();
 		}
 	}
-	public GameData generateGameDataStartingInput(StartingInput startInp) throws XMLReadingException{
-		try{
-			System.out.println("did this");
-			return createGameData(startInp);
-		}catch(Exception e){
-			throw new XMLReadingException();
-		}
-	}
+
 	
 	
 	
 	private GameData createGameData(StartingInput dim) {
+		System.out.println("here");
 		StateImpl state = new StateImpl(dim.getTilesWide(), dim.getTilesHigh(), 400, 400);
+		System.out.println("here");
 		GameData gameData = new GameData(state, null);
 		return gameData;
 		

@@ -15,6 +15,8 @@ import org.w3c.dom.NodeList;
 
 import com.sun.javafx.geom.Point2D;
 
+import javafx.scene.image.Image;
+
 public class AttributeFactory {
 	
 	private final static String RESOURCES_PATH = "resources/";
@@ -25,9 +27,12 @@ public class AttributeFactory {
 	
 	public AttributeFactory(){
 		try{
-			File fXmlFile = new File(RESOURCES_PATH + XML_FILE_NAME);
+			File fXmlFile = new File("src/resources/AttributePresets.xml");
+			System.out.println(fXmlFile.exists());
 			DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
 			DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
+			System.out.println(dBuilder + "  ");
+			System.out.println("ASDFS" + dBuilder.parse(fXmlFile) + "  ");
 			doc = dBuilder.parse(fXmlFile);
 			doc.getDocumentElement().normalize();
 		} catch (Exception e){
@@ -36,7 +41,10 @@ public class AttributeFactory {
 	}
 	
 	public Attribute<?> getAttribute(String gameAttributeName){
+		System.out.println("attribute name: " + gameAttributeName);
 		String attributeType = myAttrNameResources.getString(gameAttributeName);
+		System.out.println("attribute type " + attributeType);
+		System.out.println("test " + doc);
 		Node thisAttrNode = doc.getElementsByTagName(gameAttributeName).item(0);
 		switch (attributeType) {
 			case "STRINGLIST":
@@ -74,6 +82,7 @@ public class AttributeFactory {
 				return new AttributeImpl<Point2D>(null, gameAttributeName);
 						
 			case "IMAGE":
+				return new AttributeImpl<Image>(null,gameAttributeName);
 			default: throw new IllegalArgumentException();
 		}
 	}

@@ -23,11 +23,12 @@ public class TileImpl implements Tile, AttributeOwner{
 		this.myLocation = location;
 		this.myAccessPerm = new AccessPermissionsImpl(gameModeAccessPermissions, userModeAccessPermissions);
 		AttributeFactory attrFact = new AttributeFactory();
+		this.myAttrData = new AttributeData(new HashMap<String,Attribute<?>>());
 		for (String key : attributeResources.keySet()){
 			Attribute<?> myAttribute = attrFact.getAttribute(key);
 			addAttribute(key, myAttribute);
 		}
-		this.myAttrData = new AttributeData(new HashMap<String,Attribute<?>>());
+
 	}
 	
 	@Override
@@ -52,6 +53,7 @@ public class TileImpl implements Tile, AttributeOwner{
 
 	@Override
 	public void addAttribute(String name, Attribute<?> value) {
+		System.out.println(myAttrData + "   " +attributeResources);
 		myAttrData.addAttribute(attributeResources.getString(name), value);
 		
 	}
