@@ -27,21 +27,17 @@ public class Component implements AttributeOwner {
 	private Map<String, Behavior> myBehaviors;
 	private AccessPermissions myAccessPermissions;
 	private String myType;
-	
-	public Component() throws FileNotFoundException{
-		this(new AccessPermissionsImpl()); //TODO so will we actually use this if we always need to pass in an
-		//AttributeData? Component always needs to contain an AttributeData!
-	}
+
+
 	
 	public Component(AttributeData attributes) throws FileNotFoundException{
-		this(new AccessPermissionsImpl());
-		myAttributes=attributes;
+		this(attributes, new AccessPermissionsImpl());
 	}
 	
-	public Component(AccessPermissions accessPermissions) throws FileNotFoundException{
-		Component dummyComponent=new Component();
+	public Component(AttributeData attributes, AccessPermissions accessPermissions) throws FileNotFoundException{
+		myAttributes=attributes;
 		AttributeFactory af=new AttributeFactory();
-		BehaviorFactory bf=new BehaviorFactory(dummyComponent); //add a real component
+		BehaviorFactory bf=new BehaviorFactory(this); //add a real component
 		for (String key: behaviorResources.keySet()){
 			String value=behaviorResources.getString(key);
 			Attribute<?> myAttribute= af.getAttribute(key); //FIX THIS- HOW DOES OUR FACTORY GENERATE ATTRIBUTES?
@@ -107,6 +103,7 @@ public class Component implements AttributeOwner {
 	public String getMyType(){
 		return myType;
 	}
+	
 	
 	/**
 	 * adds an attribute to the List of Attributes
