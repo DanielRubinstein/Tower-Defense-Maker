@@ -9,46 +9,58 @@ import backEnd.GameData.State.ComponentGraph;
 import backEnd.GameData.State.State;
 import javafx.geometry.Point2D;
 import resources.Constants;
+
 /**
  * 
  * @author Daniel
- * @author Alex
- *Attack components (targets) from other components (towers).
+ * @author Alex Attack components (targets) from other components (towers).
  */
 
-public class AttackEngine implements Engine{
+public class AttackEngine implements Engine {
 	private final static String RESOURCES_PATH = "resources/attributes";
 	private final static ResourceBundle myResources = ResourceBundle.getBundle(RESOURCES_PATH);
 
 	@Override
 	public void gameLoop(State currentState) {
-		ComponentGraph myComponentGraph=currentState.getComponentGraph();
-		for(Component componentAttacker : myComponentGraph.getComponentList()){
-			if(componentAttacker.getAttribute(myResources.getString("TYPE")).getValue().equals("TOWERTYPE")){ //Fix with resource
-				for(Component componentTarget : myComponentGraph.getComponentsWithinRadius(componentAttacker, Constants.defaultRadius)){
-					addProjectile(currentState, componentAttacker, componentTarget);
-						componentAttacker.getBehavior("Attack").execute(null);
-						componentTarget.getBehavior("Gitfked").execute(null); //Attacks everything and is wrong
-					}
+		ComponentGraph myComponentGraph = currentState.getComponentGraph();
+		for (Component componentAttacker : myComponentGraph.getComponentList()) {
+			if (componentAttacker.getMyType().equals("TOWER")) { // Fix with
+																	// resource
+				for (Component componentTarget : myComponentGraph.getComponentsWithinRadius(componentAttacker,
+						Constants.defaultRadius)) {
+					addProjectileToState(currentState, componentAttacker, componentTarget);
+					componentAttacker.getBehavior("Attack").execute(null);
+					componentTarget.getBehavior("TakeDamage").execute(null);
+					break;
 				}
 			}
 		}
-	
+	}
+
 	@SuppressWarnings("unchecked")
-	public void addProjectile(State currentState, Component attacker, Component target){ //add the projectile that the attacker fired
-		AttributeFactory af = new AttributeFactory();
-		Component bullet=new Component();
-		AttributeData ad=new AttributeData();
-		//I'll figure out a cleaner way of doing this later
-		Attribute<Boolean> cur=(Attribute<Boolean>) af.getAttribute(myResources.getString("Movable"));
-		cur.setValue(true);
-		ad.addAttribute(myResources.getString("Movable"), (backEnd.Attribute.AttributeImpl<?>) cur);
-		
-		Attribute<String> cur2=(Attribute<String>) af.getAttribute(myResources.getString("ImageFile"));
-		cur2.setValue(Constants.BULLET_IMAGE_FILE);
-		ad.addAttribute(myResources.getString("ImageFile"), (backEnd.Attribute.AttributeImpl<?>) cur2);
-		
-		currentState.getComponentGraph().addComponentToGrid(bullet, (Point2D) attacker.getAttribute("Position").getValue());
+	public void addProjectileToState(State currentState, Component attacker, Component target) { 
+		Component bullet = makeBullet();
+
+		currentState.getComponentGraph().addComponentToGrid(bullet,
+				(Point2D) attacker.getAttribute("Position").getValue());
 	}
 	
+	/**
+	 * 
+	 * @return a Component that represents a Bullet
+	 */
+	private Component makeBullet(){//TODO: ADD ATTRIBUTES STARTPOS AND TARGETPOS TO BULLET FOR MOVEENGINE TO USE
+		AttributeFactory af = new AttributeFactory();
+		Component bullet = new Component();
+		AttributeData ad = new AttributeData();
+		// I'll figure out a cleaner way of doing this later
+		bullet.setMyType("Projectile");
+
+		Attribute<String> bulletImage = (Attribute<String>) af.getAttribute(myResources.getString("ImageFile"));
+		bulletImage.setValue(Constants.BULLET_IMAGE_FILE);
+		ad.addAttribute(myResources.getString("ImageFile"), (backEnd.Attribute.AttributeImpl<?>) bulletImage);
+		
+		return bullet;
+	}
+
 }
