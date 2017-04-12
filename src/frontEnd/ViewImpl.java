@@ -7,6 +7,7 @@ import java.util.function.Consumer;
 
 import ModificationFromUser.ModificationFromUser;
 import backEnd.Model;
+import backEnd.Data.DataController;
 import backEnd.GameData.UserAttribute;
 import backEnd.GameData.UserAttributeImpl;
 import backEnd.GameData.State.Component;
@@ -20,13 +21,15 @@ import javafx.stage.Stage;
 
 public class ViewImpl implements View{
 	private Model myModel;
+	private DataController myDataController;
 	private Consumer<ModificationFromUser> myModConsumer;
 	private SkeletonImpl mySkeleton;
 	private SimpleBooleanProperty authorProperty;
 	private Stage appStage;
 	
-	public ViewImpl(Model model,Consumer<ModificationFromUser> inputConsumer) {
+	public ViewImpl(Model model,DataController dataController, Consumer<ModificationFromUser> inputConsumer) {
 		myModel = model;
+		myDataController = dataController;
 		myModConsumer = inputConsumer;
 		ModeReader mode = model.getModeReader();
 		authorProperty = new SimpleBooleanProperty(mode.getUserModeString().equals("AUTHOR"));
@@ -51,33 +54,28 @@ public class ViewImpl implements View{
 	}
 
 	@Override
-	public Object save() {
-		// TODO Auto-generated method stub
-		return null;
+	public void save() {
+		//myDataController.
 	}
 
 	@Override
-	public Object viewRules() {
+	public void viewRules() {
 		// TODO Auto-generated method stub
-		return null;
 	}
 
 	@Override
-	public Object editRules() {
+	public void editRules() {
 		// TODO Auto-generated method stub
-		return null;
 	}
 
 	@Override
-	public Object load() {
+	public void load() {
 		// TODO Auto-generated method stub
-		return null;
 	}
 
 	@Override
-	public Object newGame() {
+	public void newGame() {
 		// TODO Auto-generated method stub
-		return null;
 	}
 
 	@Override
