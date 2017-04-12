@@ -1,6 +1,8 @@
 package frontEnd.Skeleton;
 
 
+import java.util.Observable;
+import java.util.Observer;
 import java.util.ResourceBundle;
 
 import backEnd.GameData.State.ComponentGraph;
@@ -27,7 +29,7 @@ import javafx.stage.Stage;
  *
  */
 
-public class Canvas implements SkeletonObject{
+public class Canvas implements SkeletonObject, Observer{
 	private StackPane root;
 	private State myState;
 	private Group allComponents;
@@ -55,6 +57,7 @@ public class Canvas implements SkeletonObject{
 		myState=state;
 		myView = view;
 		myTileGrid=state.getTileGrid();
+		
 		root = new StackPane();
 		allComponents = new Group();
 		getImages();
@@ -97,10 +100,12 @@ public class Canvas implements SkeletonObject{
 	private void setTileGrid(){
 		for(int i=0;i<myGridHeight;i++){
 			for(int j=0;j<myGridWidth;j++){
+				
 				Image image = new Image(getClass().getClassLoader().getResourceAsStream(DEFAULT_TILE));
 				ImageView tileView = new ImageView(image);
 				organizeImageView(tileView);
 				Tile t = myTileGrid.getTileByLocation(new Point2D(i,j));
+				
 				setTileInteraction(tileView,t);
 				myGrid.add(tileView, j, i);
 			}
@@ -121,6 +126,10 @@ public class Canvas implements SkeletonObject{
 	private void setTileInteraction(Node n, Tile t){
 		TileCommandCenter tileInteractor = new TileCommandCenter(myView, t, myState);
 		n.setOnMouseClicked(e-> tileInteractor.launch(e.getScreenX(),e.getScreenY()));
+	}
+	@Override
+	public void update(Observable o, Object arg) {
+		// TODO Auto-generated method stub
 	}
 	
 

@@ -1,8 +1,10 @@
 package frontEnd;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.List;
 import java.util.function.Consumer;
 
 import ModificationFromUser.ModificationFromUser;
@@ -15,6 +17,7 @@ import backEnd.GameData.State.ComponentGraph;
 import backEnd.GameData.State.Tile;
 import backEnd.GameData.State.TileGrid;
 import backEnd.Mode.ModeReader;
+import frontEnd.CustomJavafxNodes.SingleFieldPrompt;
 import frontEnd.Skeleton.SkeletonImpl;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.stage.Stage;
@@ -55,7 +58,16 @@ public class ViewImpl implements View{
 
 	@Override
 	public void save() {
-		//myDataController.
+		String saveGameName = getSaveGameName();
+		sendUserModification(new Modification_Save(saveGameName));
+	}
+
+	private String getSaveGameName() {
+		List<String> dialogTitles = Arrays.asList("Save Game Utility", "Please Input a Name for your saved game");
+		String promptLabel = "Saved game name:";
+		String promptText = "";
+		SingleFieldPrompt myDialog = new SingleFieldPrompt(dialogTitles, promptLabel, promptText);
+		return myDialog.create();
 	}
 
 	@Override
