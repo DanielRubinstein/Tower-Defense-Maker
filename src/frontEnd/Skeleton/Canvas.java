@@ -17,11 +17,8 @@ import backEnd.GameData.State.State;
 import backEnd.GameData.State.Tile;
 import backEnd.GameData.State.TileGrid;
 import frontEnd.View;
-<<<<<<< HEAD
 import frontEnd.CustomJavafxNodes.FrontEndAttributeOwnerImpl;
-=======
 import frontEnd.Skeleton.AoTools.TileCommandCenter;
->>>>>>> master
 import frontEnd.Skeleton.UserTools.SkeletonObject;
 import javafx.geometry.Point2D;
 import javafx.scene.Group;
