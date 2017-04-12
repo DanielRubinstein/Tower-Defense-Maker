@@ -9,6 +9,7 @@ import backEnd.GameData.State.ComponentGraph;
 import backEnd.GameData.State.State;
 import backEnd.GameData.State.Tile;
 import frontEnd.View;
+import javafx.scene.Node;
 import javafx.scene.control.Tab;
 
 
@@ -40,7 +41,5 @@ public class TileCommandCenter extends CommandCenter {
 		tabPane.getTabs().addAll(createComponentTabs());
 		generate(x,y);
 	}
-
-	
 
 }

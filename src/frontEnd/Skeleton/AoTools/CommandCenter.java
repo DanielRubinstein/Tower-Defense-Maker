@@ -1,17 +1,23 @@
 package frontEnd.Skeleton.AoTools;
 
+import java.util.Arrays;
+import java.util.List;
 import java.util.MissingResourceException;
 import java.util.ResourceBundle;
 
+import ModificationFromUser.Modification_AddNewPresetAttributeOwner;
 import backEnd.Attribute.Attribute;
+import backEnd.Attribute.AttributeOwner;
 import backEnd.Attribute.AttributeOwnerReader;
 import frontEnd.View;
+import frontEnd.CustomJavafxNodes.SingleFieldPrompt;
 import frontEnd.Skeleton.UserTools.SkeletonObject;
 import javafx.geometry.Insets;
 import javafx.geometry.Point2D;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
@@ -45,6 +51,7 @@ public abstract class CommandCenter implements SkeletonObject{
 		HBox contents_Att = createAttributeView(obj);
 
 		contents.getChildren().add(contents_Att);
+		contents.getChildren().add(createPresetButton(obj));
 		contents.setSpacing(STANDARD_SPACING);
 		// contents.setAlignment(Pos.TOP_CENTER);
 
@@ -69,6 +76,18 @@ public abstract class CommandCenter implements SkeletonObject{
 		}
 		contents_Att.setSpacing(STANDARD_SPACING);
 		return contents_Att;
+	}
+
+	private Node createPresetButton(AttributeOwnerReader obj){
+		List<String> dialogTitles = Arrays.asList("Preset Creation Utility", "Please Input a Name for your new preset");
+		String promptLabel = "New preset name:";
+		String promptText = "";
+		SingleFieldPrompt myDialog = new SingleFieldPrompt(dialogTitles, promptLabel, promptText);
+		Button preset = new Button("Save as preset");
+		preset.setOnAction((e) -> {
+			myView.sendUserModification(new Modification_AddNewPresetAttributeOwner(myDialog.create(), obj));
+		});
+		return preset;
 	}
 
 	private HBox createAttributeValuePair(AttributeOwnerReader obj, Attribute<?> attr) {
