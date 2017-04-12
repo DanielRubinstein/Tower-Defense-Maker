@@ -1,36 +1,22 @@
 package frontEnd.Skeleton.UserTools;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
 import java.util.Map;
-import java.util.Optional;
-import java.util.function.BiConsumer;
 import java.util.function.Consumer;
 
 import ModificationFromUser.Modification_AddAttributeOwner;
 import ModificationFromUser.Modification_AddNewPresetAttributeOwner;
 import backEnd.Attribute.AttributeOwner;
-import backEnd.GameData.State.Component;
-import backEnd.GameData.State.Tile;
 import frontEnd.View;
 import frontEnd.CustomJavafxNodes.DoubleFieldPrompt;
-import frontEnd.CustomJavafxNodes.SingleFieldPrompt;
 import javafx.geometry.Insets;
 import javafx.geometry.Point2D;
 import javafx.scene.Node;
-import javafx.scene.control.ButtonBar.ButtonData;
-import javafx.scene.control.ButtonType;
-import javafx.scene.control.Dialog;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseButton;
-import javafx.scene.layout.GridPane;
 import javafx.scene.layout.TilePane;
 
 /**

@@ -23,6 +23,7 @@ public abstract class CommandCenter implements SkeletonObject{
 	private static final int STANDARD_SPACING = 10;
 	public static final String DEFAULT_CSS = "/resources/css/Flatter.css";
 	private Stage myStage;
+	private Scene myScene;
 	private final static String RESOURCES_PATH = "resources/";
 	private final static String ALL_ATTRIBUTES_TYPES = "allAttributeTypes";
 	private final static ResourceBundle myAttrNameResources = ResourceBundle
@@ -125,7 +126,11 @@ public abstract class CommandCenter implements SkeletonObject{
 	
 	protected void generate(double x, double y) {
 		myStage = new Stage();
-		Scene myScene = new Scene(tabPane);
+		try{
+			myScene = new Scene(tabPane);
+		} catch (IllegalArgumentException e){
+			myScene.setRoot(tabPane);
+		}
 		myScene.getStylesheets().add(DEFAULT_CSS);
 		myStage.setScene(myScene);
 		myStage.setTitle("Command Center");
