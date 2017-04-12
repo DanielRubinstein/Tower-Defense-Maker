@@ -1,4 +1,7 @@
 package backEnd;
+
+import javafx.geometry.Point2D;
+
 /**
  * Helper class for BFS in pathfinding algorithm
  * @author Christian Martindale
@@ -19,6 +22,10 @@ public class Coord {
     }
     public int getYCoord(){
     	return yCoord;
+    }
+    
+    public Point2D getAsPoint(){
+    	return new Point2D(xCoord, yCoord);
     }
     
     public Coord getLastCoord(){

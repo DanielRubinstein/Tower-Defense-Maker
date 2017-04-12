@@ -1,7 +1,7 @@
 package ModificationFromUser;
 
 import backEnd.ModelImpl;
-import backEnd.GameEngine.Component;
+import backEnd.GameData.State.Component;
 import javafx.geometry.Point2D;
 
 public class Modification_AddComponent implements ModificationFromUser {
