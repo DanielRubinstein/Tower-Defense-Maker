@@ -2,11 +2,11 @@ package backEnd.GameEngine.Engine;
 
 import java.util.ResourceBundle;
 import backEnd.Attribute.Attribute;
+import backEnd.Attribute.AttributeData;
+import backEnd.Attribute.AttributeFactory;
+import backEnd.GameData.State.Component;
 import backEnd.GameData.State.ComponentGraph;
 import backEnd.GameData.State.State;
-import backEnd.GameEngine.AttributeData;
-import backEnd.GameEngine.AttributeFactory;
-import backEnd.GameEngine.Component;
 import javafx.geometry.Point2D;
 import resources.Constants;
 /**
