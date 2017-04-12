@@ -4,12 +4,12 @@ import backEnd.ModelImpl;
 import backEnd.Attribute.Attribute;
 import backEnd.Attribute.AttributeOwner;
 
-public class Modification_EditAttribute implements ModificationFromUser{
+public class Modification_EditAttribute<T> implements ModificationFromUser{
 	private AttributeOwner myObj;
-	private Attribute<?> myAtt;
-	private String myNewValue;
+	private Attribute<T> myAtt;
+	private T myNewValue;
 	
-	public Modification_EditAttribute(AttributeOwner obj, Attribute<?> att, String newValue){
+	public Modification_EditAttribute(AttributeOwner obj, Attribute<T> att, T newValue){
 		myObj = obj;
 		myAtt = att;
 		myNewValue = newValue;
@@ -17,8 +17,7 @@ public class Modification_EditAttribute implements ModificationFromUser{
 
 	@Override
 	public void invoke(ModelImpl myModel) throws Exception {
-		// TODO Auto-generated method stub
-		
+		myAtt.setValue(myNewValue);
 	}
 
 }

@@ -2,6 +2,11 @@ package ModificationFromUser;
 
 import backEnd.ModelImpl;
 
+/**
+ * 
+ * @author Derek
+ *
+ */
 public class Modification_Load implements ModificationFromUser {
 	
 	private String myGameName;
