@@ -4,8 +4,7 @@ import javafx.geometry.Point2D;
 
 /**
  * Helper class for BFS in pathfinding algorithm
- * @author Christian Martindale (with online resource input)
- * @author Daniel
+ * @author Christian Martindale
  *
  */
 public class Coord {

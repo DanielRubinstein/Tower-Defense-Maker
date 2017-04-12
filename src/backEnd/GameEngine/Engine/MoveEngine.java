@@ -30,7 +30,6 @@ public class MoveEngine implements Engine{
 	 * @param xStart the starting x-coordinate
 	 * @param yStart the starting y-coordinate
 	 */
-
 	@SuppressWarnings("unchecked")
 	@Override
 	public void gameLoop(State currentState) {

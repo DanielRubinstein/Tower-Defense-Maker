@@ -22,6 +22,7 @@ public class TileImpl implements Tile, AttributeOwner{
 	public TileImpl(List<GameModeType> gameModeAccessPermissions, List<UserModeType> userModeAccessPermissions , Point2D location){
 		this.myLocation = location;
 		this.myAccessPerm = new AccessPermissionsImpl(gameModeAccessPermissions, userModeAccessPermissions);
+		this.myAttrData = new AttributeData(new HashMap<String,Attribute<?>>());
 		AttributeFactory attrFact = new AttributeFactory();
 		this.myAttrData = new AttributeData(new HashMap<String,Attribute<?>>());
 		for (String key : attributeResources.keySet()){
@@ -67,5 +68,6 @@ public class TileImpl implements Tile, AttributeOwner{
 	public boolean hasAttribute(String name) {
 		return myAttrData.getAttributeMap().containsKey(attributeResources.getString(name));
 	}
+
 
 }
