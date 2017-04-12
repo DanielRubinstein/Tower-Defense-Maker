@@ -1,6 +1,7 @@
 package frontEnd.Skeleton.UserTools;
 
-import frontEnd.ViewEditor;
+import frontEnd.View;
+import frontEnd.CustomJavafxNodes.ToggleSwitch;
 import frontEnd.Menus.ButtonMenuImpl;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.geometry.Bounds;
@@ -19,10 +20,10 @@ import javafx.stage.Stage;
  */
 public class SettingsViewImpl implements SettingsView{
 	private SimpleBooleanProperty authorProperty;
-	private ViewEditor myView;
+	private View myView;
 	private ButtonMenuImpl myMenu;
 	
-	public SettingsViewImpl(ViewEditor view) {
+	public SettingsViewImpl(View view) {
 		myView = view;
 		authorProperty = myView.getBooleanAuthorModeProperty();
 		addButtons();

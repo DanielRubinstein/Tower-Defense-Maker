@@ -48,7 +48,6 @@ public class ControllerImpl implements Controller {
 						}
 					}
 				};
-				
 
 		Consumer<Object> setGameData = o -> {
 			try {

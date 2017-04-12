@@ -3,7 +3,7 @@ package frontEnd.Skeleton;
 import backEnd.Model;
 import backEnd.GameData.State.State;
 import backEnd.GameData.State.StateImpl;
-import frontEnd.ViewEditor;
+import frontEnd.View;
 import frontEnd.Skeleton.UserTools.UserTools;
 import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
@@ -31,12 +31,13 @@ public class SkeletonImpl implements Skeleton{
 	
 	public static final String DEFAULT_CSS = "/resources/css/Flatter.css";
 	
+
 	/**
 	 * Constructs a new SkeletonImpl object using view and model, which are used to get important information about the State.
 	 * @param view
 	 * @param model
 	 */
-	public SkeletonImpl(ViewEditor view, Model model){
+	public SkeletonImpl(View view, Model model){
 		myRoot = new BorderPane();
 		align(MENU_WIDTH,MENU_HEIGHT);
 		State myState = model.getState();//new StateImpl(GRID_WIDTH,GRID_HEIGHT,(int)CANVAS_WIDTH,(int)CANVAS_HEIGHT);

@@ -5,15 +5,20 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
+import java.util.ResourceBundle;
 
 import ModificationFromUser.Modification_EditAttribute;
 import backEnd.Attribute.Attribute;
 import backEnd.Attribute.AttributeOwner;
+import backEnd.Attribute.AttributeOwnerReader;
 import backEnd.GameData.State.ComponentGraph;
 import backEnd.GameData.State.State;
 import backEnd.GameData.State.Tile;
 import backEnd.GameEngine.Component;
-import frontEnd.ViewEditor;
+import frontEnd.View;
+import frontEnd.CustomJavafxNodes.NumberChanger;
+import frontEnd.CustomJavafxNodes.ToggleSwitch;
+import javafx.beans.property.SimpleBooleanProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -34,13 +39,16 @@ import javafx.stage.Stage;
 public class TileCommandCenter implements SkeletonObject {
 	private static final int STANDARD_SPACING = 10;
 	public static final String DEFAULT_CSS = "/resources/css/Flatter.css";
-	private ViewEditor myView;
+	private View myView;
 	private TabPane tabPane;
 	private Stage myStage;
 	private Collection<Component> myComponents;
 	private Tile myTile;
+	private final static String RESOURCES_PATH = "resources/";
+	private final static String ALL_ATTRIBUTES_TYPES = "allAttributeTypes";
+	private final static ResourceBundle myAttrNameResources = ResourceBundle.getBundle(RESOURCES_PATH + ALL_ATTRIBUTES_TYPES);
 
-	public TileCommandCenter(ViewEditor view, Tile tile, State state) {
+	public TileCommandCenter(View view, Tile tile, State state) {
 		myTile = tile;
 		ComponentGraph myComponentGraph = state.getComponentGraph();
 		myComponents = myComponentGraph.getComponentList();
@@ -77,7 +85,7 @@ public class TileCommandCenter implements SkeletonObject {
 		return componentTabs;
 	}
 
-	private Tab createAttributeOwnerTab(AttributeOwner obj) {
+	private Tab createAttributeOwnerTab(AttributeOwnerReader obj) {
 		VBox contents = new VBox();
 		contents.setPadding(new Insets(STANDARD_SPACING, STANDARD_SPACING, STANDARD_SPACING, STANDARD_SPACING));
 		contents.getChildren().add(createLocationLabel());
@@ -96,15 +104,15 @@ public class TileCommandCenter implements SkeletonObject {
 		return createSingleTab("Tile", contents);
 	}
 
-	private HBox createAttributeView(AttributeOwner obj) {
+	private HBox createAttributeView(AttributeOwnerReader obj) {
 		HBox contents_Att = new HBox();
 		VBox contentRow = null;
 		int count = 0;
-		for (Map.Entry<String, Attribute<?>> entry : obj.getMyAttributes().getAttributeMap().entrySet()) {
+		for (Attribute<?> attr : obj.getMyAttributes().getAttributeMap().values()) {
 			if (count % 3 == 0){
 				contentRow = new VBox();
 			}
-			HBox singleAttEditor = createAttributeValuePair(obj, entry);
+			HBox singleAttEditor = createAttributeValuePair(obj, attr);
 			contentRow.getChildren().add(singleAttEditor);
 			if (count % 3 == 2){
 				contentRow.setSpacing(STANDARD_SPACING);
@@ -116,19 +124,19 @@ public class TileCommandCenter implements SkeletonObject {
 		return contents_Att;
 	}
 
-	private HBox createAttributeValuePair(AttributeOwner obj, Map.Entry<String, Attribute<?>> entry) {
+	private HBox createAttributeValuePair(AttributeOwnerReader obj, Attribute<?> attr) {
 		HBox singleAttEditor = new HBox();
-		Label attLabel = new Label(entry.getKey());
+		Label attLabel = new Label(attr.getName());
 		singleAttEditor.getChildren().add(attLabel);
 		Node right;
 		
 		if (myView.getBooleanAuthorModeProperty().get()) {
 			// Author Mode
-			right = createEditor(obj, entry);
+			right = createEditor(obj, attr);
 		} else {
 			// Player Mode
 			try{
-				right = new Label(entry.getValue().getValueAsString());
+				right = new Label(attr.getValue().toString());
 			} catch (NullPointerException e){
 				right = new Label("No Attribute Value Stored");
 			}
@@ -158,26 +166,44 @@ public class TileCommandCenter implements SkeletonObject {
 		return new Label(String.format("Location: (%.0f, %.0f)", myTile.getLocation().getX(), myTile.getLocation().getY()));
 	}
 
-	private Node createEditor(AttributeOwner obj, Entry<String, Attribute<?>> entry) {
-		// TODO if doubles then make a slider not a combobox (this will be the only separate case)
-		ObservableList<String> options = FXCollections.observableArrayList( entry.getValue().getPossibleValues());
-		ComboBox<String> optionsBox = new ComboBox<String>(options);
-		try{
-			// TODO this will work as long as there is an attribute there
-			optionsBox.getSelectionModel().select(entry.getValue().getValueAsString());
-		} catch (NullPointerException e){
-			// do nothing
+	private Node createEditor(AttributeOwnerReader obj, Attribute<?> attr) {
+		Node n = null;
+		String type = myAttrNameResources.getString(attr.getName());
+		switch(type){
+		case "BOOLEAN":
+			ToggleSwitch myToggle = new ToggleSwitch(myView, "On", "Off", new SimpleBooleanProperty((Boolean) attr.getValue()));
+			n = myToggle.getRoot();
+		case "DOUBLE":
+			List<Double> paramList = (List<Double>) attr.getEditParameters();
+			NumberChanger numChanger = new NumberChanger(paramList.get(0), paramList.get(1), paramList.get(2), paramList.get(3));
+			n = numChanger.getRoot();
+		case "EDITABLESTRING":
+			break;
+		case "IMAGE":
+			break;
+		case "INTEGER":
+			break;
+		case "STRINGLIST":
+			// TODO if doubles then make a slider not a combobox (this will be the only separate case)
+			ObservableList<String> options = (ObservableList<String>) FXCollections.observableArrayList( attr.getEditParameters());
+			ComboBox<String> optionsBox = new ComboBox<String>(options);
+			try{
+				// TODO this will work as long as there is an attribute there
+				optionsBox.getSelectionModel().select(attr.getValue().toString());
+			} catch (NullPointerException e){
+				// do nothing
+			}
+			optionsBox.valueProperty().addListener((o, oldValue, newValue) -> {
+				// where the actual modification gets sent
+				System.out.println("editting attribute");
+				myView.sendUserModification(new Modification_EditAttribute(obj, attr, newValue));
+			});
+			n = optionsBox;
+		default:
+			break;
+		
 		}
-		optionsBox.valueProperty().addListener((o, oldValue, newValue) -> {
-			// where the actual modification gets sent
-			System.out.println("editting attribute");
-			myView.sendUserModification(new Modification_EditAttribute(obj, entry.getValue(), newValue));
-		});
-		
-		
-		return optionsBox;
-		
-		//return new Label(entry.getValue().toString() + "*");
+		return n;
 	}
 
 	private Tab createSingleTab(String name, Node contents) {

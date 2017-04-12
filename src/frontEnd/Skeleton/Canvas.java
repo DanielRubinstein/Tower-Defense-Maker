@@ -7,7 +7,7 @@ import backEnd.GameData.State.ComponentGraph;
 import backEnd.GameData.State.State;
 import backEnd.GameData.State.Tile;
 import backEnd.GameData.State.TileGrid;
-import frontEnd.ViewEditor;
+import frontEnd.View;
 import frontEnd.Skeleton.UserTools.SkeletonObject;
 import frontEnd.Skeleton.UserTools.TileCommandCenter;
 import javafx.geometry.Point2D;
@@ -41,8 +41,9 @@ public class Canvas implements SkeletonObject{
 	private ResourceBundle myImages;
 	private static String DEFAULT_TILE;
 	private TileGrid myTileGrid;
-	private ViewEditor myView;
+	private View myView;
 	
+
 	/**
 	 * Constructs a new Canvas object given the view and state.
 	 * State contains all the required backend information like location of tiles and attributes of everything needed to be
@@ -50,7 +51,7 @@ public class Canvas implements SkeletonObject{
 	 * @param view
 	 * @param state 
 	 */
-	public Canvas(ViewEditor view, State state){
+	public Canvas(View view, State state){
 		myState=state;
 		myView = view;
 		myTileGrid=state.getTileGrid();

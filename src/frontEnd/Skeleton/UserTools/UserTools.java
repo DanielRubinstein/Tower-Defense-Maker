@@ -1,14 +1,14 @@
 package frontEnd.Skeleton.UserTools;
 
 
-import frontEnd.ViewEditor;
+import frontEnd.View;
 import javafx.scene.Node;
 
 public class UserTools {
 	private SideBar sideBar;
 	private BottomRoot bottomRoot;
 	
-	public UserTools(ViewEditor view){
+	public UserTools(View view){
 		this.sideBar = new SideBarImpl(view);
 		this.bottomRoot = new BottomRootImpl(view);
 		
