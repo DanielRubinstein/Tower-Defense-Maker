@@ -12,6 +12,12 @@ import backEnd.Mode.GameModeType;
 import backEnd.Mode.UserModeType;
 import javafx.geometry.Point2D;
 
+/**
+ * This class is the implementation of the Tile Interface that holds the tiles information and attributes
+ * @author Riley Nisbet
+ *
+ */
+
 public class TileImpl implements Tile, AttributeOwner{
 	private final static String DEFAULT_ATTRIBUTES_PATH = "resources/defaultTileAttributes";
 	private final static ResourceBundle attributeResources = ResourceBundle.getBundle(DEFAULT_ATTRIBUTES_PATH);
