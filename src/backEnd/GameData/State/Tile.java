@@ -1,8 +1,8 @@
 package backEnd.GameData.State;
 
+import backEnd.Attribute.AttributeData;
 import backEnd.Attribute.AttributeImpl;
 import backEnd.Attribute.AttributeOwner;
-import backEnd.GameEngine.AttributeData;
 import javafx.geometry.Point2D;
 
 
@@ -21,12 +21,11 @@ public interface Tile extends AttributeOwner {
 	 */
 	void setAttributeData(AttributeData newAttrData);
 	
-	
-	
 	/**
 	 * @return Tile location
 	 */
 	Point2D getLocation();
+	
 	/**
 	 * 
 	 * @param name the name of the desired Attribute

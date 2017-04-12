@@ -1,12 +1,19 @@
 package backEnd.GameEngine.Engine;
 
 
+import backEnd.GameData.State.Component;
 import backEnd.GameData.State.State;
-import backEnd.GameEngine.Component;
 import backEnd.GameEngine.Behaviors.Behavior;
 import backEnd.GameEngine.Behaviors.DeathBehavior;
 import backEnd.GameEngine.Behaviors.MoveBehavior;
 import javafx.geometry.Point2D;
+
+/**
+ * Check if objects are dead, remove them from the grid if so + if the object spawns another object
+ * when it dies, add it to the grid.
+ * @author Daniel
+ *
+ */
 
 public class DeathEngine {
 	private DeathBehavior DB;
