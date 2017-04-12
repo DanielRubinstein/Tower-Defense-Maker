@@ -19,7 +19,7 @@ public class TileCommandCenter extends CommandCenter {
 
 
 	public TileCommandCenter(View view, Tile tile, State state) {
-		super();
+		super(view);
 		myTile = tile;
 		ComponentGraph myComponentGraph = state.getComponentGraph();
 		myComponents = myComponentGraph.getComponentList();

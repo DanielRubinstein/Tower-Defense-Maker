@@ -31,7 +31,8 @@ public abstract class CommandCenter implements SkeletonObject{
 	protected View myView;
 	protected TabPane tabPane;
 	
-	public CommandCenter(){
+	public CommandCenter(View view){
+		myView = view;
 		tabPane = new TabPane();
 	}
 	
