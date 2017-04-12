@@ -1,5 +1,6 @@
 package backEnd.GameData.State;
 
+import java.util.Observer;
 
 /**
  * This interface allows other classes to interact with the state 
@@ -24,6 +25,8 @@ public interface State {
 	 * between a start and end point using BFS
 	 */
 	void calculateShortestPath();
+	
+	public void addAsObserver(Observer o);
 
 	
 }

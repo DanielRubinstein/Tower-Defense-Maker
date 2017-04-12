@@ -33,9 +33,9 @@ public class OptionsCornerImpl implements OptionsCorner{
 
 	@Override
 	public void setSideDimensions(double width, double height) {
-		myRoot.setPrefSize(width, height);
+		//myRoot.setPrefSize(width, height);
 		///myRoot.setMaxHeight(height);
-		myRoot.setPrefHeight(height);
+		
 		userOptions.setSize(width, height);
 	}
 

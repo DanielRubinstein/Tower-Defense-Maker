@@ -6,12 +6,16 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.Map;
+import java.util.Observable;
+import java.util.Observer;
 import java.util.Queue;
 import java.util.ResourceBundle;
 import java.util.Set;
 import java.util.Stack;
 
+import ModificationFromUser.Modification_EditAttribute;
 import backEnd.Coord;
+import backEnd.Attribute.Attribute;
 import backEnd.Attribute.AttributeImpl;
 import backEnd.Mode.UserModeType;
 import javafx.geometry.Point2D;
@@ -21,7 +25,7 @@ import javafx.geometry.Point2D;
  * @author Alex Salas, Christian Martindale
  *
  */
-public class StateImpl implements State {
+public class StateImpl extends Observable implements State {
 
 	private int gridWidth;
 	private int gridHeight;
@@ -49,8 +53,13 @@ public class StateImpl implements State {
 				Point2D loc = new Point2D(i, j);
 				Tile newTile = new TileImpl(Arrays.asList(), Arrays.asList(UserModeType.AUTHOR), loc);
 				stateGrid.setTile(newTile, loc);
+				Attribute<String> imgAttr = (Attribute<String>) newTile.getAttribute("ImageFile");
+				imgAttr.setValue("images/default_tile.jpg");
 			}
 		}
+	}
+	public void addAsObserver(Observer o){
+		this.addObserver(o);
 	}
 
 	@Override

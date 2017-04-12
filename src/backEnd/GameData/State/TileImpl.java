@@ -1,5 +1,6 @@
 package backEnd.GameData.State;
 
+import java.io.FileNotFoundException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.ResourceBundle;
@@ -12,6 +13,12 @@ import backEnd.Mode.GameModeType;
 import backEnd.Mode.UserModeType;
 import javafx.geometry.Point2D;
 
+/**
+ * This class is the implementation of the Tile Interface that holds the tiles information and attributes
+ * @author Riley Nisbet
+ *
+ */
+
 public class TileImpl implements Tile, AttributeOwner{
 	private final static String DEFAULT_ATTRIBUTES_PATH = "resources/defaultTileAttributes";
 	private final static ResourceBundle attributeResources = ResourceBundle.getBundle(DEFAULT_ATTRIBUTES_PATH);
@@ -19,15 +26,17 @@ public class TileImpl implements Tile, AttributeOwner{
 	private AccessPermissions myAccessPerm;
 	private AttributeData myAttrData;
 	
-	public TileImpl(List<GameModeType> gameModeAccessPermissions, List<UserModeType> userModeAccessPermissions , Point2D location){
+	public TileImpl(List<GameModeType> gameModeAccessPermissions, List<UserModeType> userModeAccessPermissions , Point2D location) throws FileNotFoundException{
 		this.myLocation = location;
 		this.myAccessPerm = new AccessPermissionsImpl(gameModeAccessPermissions, userModeAccessPermissions);
 		this.myAttrData = new AttributeData(new HashMap<String,Attribute<?>>());
 		AttributeFactory attrFact = new AttributeFactory();
+		this.myAttrData = new AttributeData(new HashMap<String,Attribute<?>>());
 		for (String key : attributeResources.keySet()){
 			Attribute<?> myAttribute = attrFact.getAttribute(key);
 			addAttribute(key, myAttribute);
 		}
+
 	}
 	
 	@Override

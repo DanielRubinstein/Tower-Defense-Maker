@@ -30,16 +30,15 @@ public class ModelImpl implements Model{
 		myDataController = dataController;
 		myGameData = gameData;
 		myMode = new ModeImpl();
-		//myEngine = new GameProcessController(myGameData.getState(), myGameData.getRules());
+		myEngine = new GameProcessController(myGameData.getState(), myGameData.getRules());
 		//myBankController = dataController.generateBanks();
 	}
 
 	public State getState(){
 		return myGameData.getState();
 	}
-	/**
-	 * Miguel likes the cast
-	 */
+
+	
 	public ModeReader getModeReader(){
 		return (ModeReader) myMode;
 	}
