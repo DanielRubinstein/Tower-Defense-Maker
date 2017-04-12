@@ -15,7 +15,7 @@ public class Modification_AddTileAttribute<T> implements ModificationFromUser {
 	
 	public Modification_AddTileAttribute(Tile myTile, TileAttribute<T> newAttr) {
 		this.myTile = myTile;
-		this.myAttr = newAttr;
+		this.myAttrVal = newAttrVal;
 
 	}
 
@@ -23,7 +23,7 @@ public class Modification_AddTileAttribute<T> implements ModificationFromUser {
 	public void invoke(ModelImpl myModel) {
 		switch (myModel.getMode().getUserMode()) {
 		case AUTHOR:
-			myTile.addTileAttribute(myAttr);
+			myTile.addTileAttribute(new TileAttribute<T>(myAttrVal));
 		case PLAYER:
 			 throw new ModeException(myModel.getMode(), DESCRIPTION);
 		}
