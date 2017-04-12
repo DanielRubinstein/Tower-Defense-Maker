@@ -1,13 +1,14 @@
-package backEnd.GameEngine;
+package backEnd.GameData.State;
 
 import java.util.Map;
 import java.util.ResourceBundle;
 
 import backEnd.Attribute.Attribute;
+import backEnd.Attribute.AttributeData;
+import backEnd.Attribute.AttributeFactory;
 import backEnd.Attribute.AttributeImpl;
 import backEnd.Attribute.AttributeOwner;
-import backEnd.GameData.State.AccessPermissions;
-import backEnd.GameData.State.AccessPermissionsImpl;
+import backEnd.GameEngine.BehaviorFactory;
 import backEnd.GameEngine.Behaviors.Behavior;
 
 

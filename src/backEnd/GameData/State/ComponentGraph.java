@@ -3,7 +3,6 @@ package backEnd.GameData.State;
 import java.util.Collection;
 import java.util.List;
 
-import backEnd.GameEngine.Component;
 import javafx.geometry.Point2D;
 
 public interface ComponentGraph {

@@ -6,7 +6,6 @@ import java.util.Queue;
 import backEnd.Coord;
 import backEnd.Attribute.Attribute;
 import backEnd.Attribute.AttributeImpl;
-import backEnd.GameEngine.Component;
 import backEnd.GameEngine.Behaviors.*;
 import javafx.geometry.Point2D;
 import resources.Constants;
