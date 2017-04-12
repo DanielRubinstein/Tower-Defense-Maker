@@ -1,6 +1,7 @@
 package backEnd.Data;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.util.List;
 import java.util.Map;
 
@@ -65,7 +66,7 @@ public class DataController {
 	
 	
 	
-	private GameData createGameData(StartingInput dim) {
+	private GameData createGameData(StartingInput dim) throws FileNotFoundException {
 		StateImpl state = new StateImpl(dim.getTilesWide(), dim.getTilesHigh(), 400, 400);
 		GameData gameData = new GameData(state, null);
 		return gameData;
