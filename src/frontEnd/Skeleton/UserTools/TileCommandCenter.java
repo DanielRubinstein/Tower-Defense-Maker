@@ -170,43 +170,80 @@ public class TileCommandCenter implements SkeletonObject {
 		String type = myAttrNameResources.getString(attr.getName());
 		switch(type){
 		case "BOOLEAN":
-			ToggleSwitch myToggle = new ToggleSwitch(myView, "On", "Off", new SimpleBooleanProperty((Boolean) attr.getValue()));
-			n = myToggle.getRoot();
+			n = createBooleanEditor(attr);
 			break;
 		case "DOUBLE":
-			List<Double> paramList = (List<Double>)attr.getEditParameters();
-			NumberChanger numChanger = new NumberChanger(paramList.get(0), paramList.get(1), paramList.get(2), paramList.get(3));
-			n = numChanger.getRoot();
+			n = createDoubleEditor(attr);
 			break;
 		case "EDITABLESTRING":
+			n = createEditableStringEditor(attr);
 			break;
 		case "IMAGE":
-			String imagePath = (String) attr.getValue();
-			Label l = new Label(imagePath);
-			n= l;
+			n = createImageEditor(attr);
 			break;
 		case "INTEGER":
+			n = createIntegerEditor(attr);
 			break;
 		case "STRINGLIST":
-			// TODO if doubles then make a slider not a combobox (this will be the only separate case)
-			ObservableList<String> options = (ObservableList<String>) FXCollections.observableArrayList( attr.getEditParameters());
-			ComboBox<String> optionsBox = new ComboBox<String>(options);
-			try{
-				// TODO this will work as long as there is an attribute there
-				optionsBox.getSelectionModel().select(attr.getValue().toString());
-			} catch (NullPointerException e){
-				// do nothing
-			}
-			optionsBox.valueProperty().addListener((o, oldValue, newValue) -> {
-				// where the actual modification gets sent
-				myView.sendUserModification(new Modification_EditAttribute( obj, attr, newValue));
-			});
-			n = optionsBox;
+			n = createStringListEditor(obj, attr);
 			break;
 		default:
 			break;
-		
 		}
+		return n;
+	}
+
+	private Node createIntegerEditor(Attribute<?> attr) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	private Node createEditableStringEditor(Attribute<?> attr) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	private Node createStringListEditor(AttributeOwnerReader obj, Attribute<?> attr) {
+		Node n;
+		List<String> editParameters = (List<String>) attr.getEditParameters();
+		
+		// TODO if doubles then make a slider not a combobox (this will be the only separate case)
+		ObservableList<String> options = (ObservableList<String>) FXCollections.observableArrayList( editParameters );
+		ComboBox<String> optionsBox = new ComboBox<String>(options);
+		try{
+			// TODO this will work as long as there is an attribute there
+			optionsBox.getSelectionModel().select(attr.getValue().toString());
+		} catch (NullPointerException e){
+			// do nothing
+		}
+		optionsBox.valueProperty().addListener((o, oldValue, newValue) -> {
+			// where the actual modification gets sent
+			myView.sendUserModification(new Modification_EditAttribute((AttributeOwner) obj, attr, newValue));
+		});
+		n = optionsBox;
+		return n;
+	}
+
+	private Node createImageEditor(Attribute<?> attr) {
+		Node n;
+		String imagePath = (String) attr.getValue();
+		Label l = new Label(imagePath);
+		n= l;
+		return n;
+	}
+
+	private Node createDoubleEditor(Attribute<?> attr) {
+		Node n;
+		List<Double> paramList = (List<Double>)attr.getEditParameters();
+		NumberChanger numChanger = new NumberChanger(paramList.get(0), paramList.get(1), paramList.get(2), paramList.get(3));
+		n = numChanger.getRoot();
+		return n;
+	}
+
+	private Node createBooleanEditor(Attribute<?> attr) {
+		Node n;
+		ToggleSwitch myToggle = new ToggleSwitch(myView, "On", "Off", new SimpleBooleanProperty((Boolean) attr.getValue()));
+		n = myToggle.getRoot();
 		return n;
 	}
 
