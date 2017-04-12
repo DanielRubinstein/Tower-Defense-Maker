@@ -21,5 +21,17 @@ public class GameData implements GameDataInterface{
 	public Rules getRules() {
 		return myRules;
 	}
+	
+	/**
+	 * copies info from newGameData and puts it in current GameData
+	 * 
+	 * @param newGameData
+	 */
+	public void updateGameData(GameData newGameData){
+		//update state
+		myState.updateState(newGameData.getState());
+		//update rules
+		
+	}
 
 }

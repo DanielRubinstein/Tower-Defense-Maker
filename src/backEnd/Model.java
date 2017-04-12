@@ -24,6 +24,7 @@ public interface Model {
 	 */
 	ModeReader getModeReader();
 	
+
 	BankController getBankController();
 	
 	/**
@@ -31,5 +32,7 @@ public interface Model {
 	 * @return the GameProcessController that owns the Engines
 	 */
 	GameProcessController getGameProcessController();
+
+
 }
 

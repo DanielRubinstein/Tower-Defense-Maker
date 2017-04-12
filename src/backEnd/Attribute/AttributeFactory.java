@@ -1,6 +1,7 @@
 package backEnd.Attribute;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -16,6 +17,12 @@ import com.sun.javafx.geom.Point2D;
 
 import javafx.scene.image.Image;
 
+/**
+ * This class has a method that returns an attribute of the given name and type
+ * @author Riley Nisbet
+ *
+ */
+
 public class AttributeFactory {
 	
 	private final static String XML_FILE_NAME = "src/resources/AttributePresets.xml";
@@ -23,7 +30,7 @@ public class AttributeFactory {
 	private static ResourceBundle myAttrNameResources;
 	private Document doc;
 	
-	public AttributeFactory(){
+	public AttributeFactory() throws FileNotFoundException{
 		myAttrNameResources = ResourceBundle.getBundle(ALL_ATTRIBUTES_TYPES);
 		try{
 			File fXmlFile = new File(XML_FILE_NAME);
@@ -32,7 +39,7 @@ public class AttributeFactory {
 			doc = dBuilder.parse(fXmlFile);
 			doc.getDocumentElement().normalize();
 		} catch (Exception e){
-			e.printStackTrace();
+			throw new FileNotFoundException();
 		}
 	}
 	
