@@ -11,6 +11,7 @@ import frontEnd.CustomJavafxNodes.NumberChanger;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.Node;
+import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
@@ -55,15 +56,21 @@ public class EditorCreator {
 	}
 
 	private Node createIntegerEditor() {
-		// TODO Auto-generated method stub
-		return null;
+		Node n;
+		List<Double> paramList = (List<Double>) myAttr.getEditParameters();
+		NumberChanger numChanger = new NumberChanger(paramList.get(0), paramList.get(1), paramList.get(2),
+				paramList.get(3));
+		n = numChanger.getRoot();
+		numChanger.addListener((o, oldValue, newValue)  -> {
+			myView.sendUserModification(new Modification_EditAttribute(myOwner, myAttr, newValue.intValue()));
+		});
+		return n;
 	}
 
 	private Node createEditableStringEditor() {
 		HBox editor = new HBox();
 		
 		TextField textField = new TextField((String) myAttr.getValue());
-		
 		
 		// TODO Auto-generated method stub
 		return null;
@@ -85,7 +92,7 @@ public class EditorCreator {
 		}
 		optionsBox.valueProperty().addListener((o, oldValue, newValue) -> {
 			// where the actual modification gets sent
-			myView.sendUserModification(new Modification_EditAttribute((AttributeOwner) myOwner, myAttr, newValue));
+			myView.sendUserModification(new Modification_EditAttribute(myOwner, myAttr, newValue));
 		});
 		n = optionsBox;
 		return n;
@@ -105,6 +112,9 @@ public class EditorCreator {
 		NumberChanger numChanger = new NumberChanger(paramList.get(0), paramList.get(1), paramList.get(2),
 				paramList.get(3));
 		n = numChanger.getRoot();
+		numChanger.addListener((o, oldValue, newValue)  -> {
+			myView.sendUserModification(new Modification_EditAttribute(myOwner, myAttr, newValue));
+		});
 		return n;
 	}
 
