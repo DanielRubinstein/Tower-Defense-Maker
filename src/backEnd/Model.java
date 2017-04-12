@@ -16,16 +16,19 @@ public interface Model {
 	 * 
 	 * @return current State
 	 */
-	public State getState();
+	State getState();
 	
 	/**
 	 * 
 	 * @return mode of the user
 	 */
-	public ModeReader getModeReader();
+	ModeReader getModeReader();
 	
-	public BankController getBankController();
+	BankController getBankController();
 	
-	public GameProcessController getGameProcessCotroller();
+	/**
+	 * 
+	 * @return the GameProcessController that owns the Engines
+	 */
+	GameProcessController getGameProcessController();
 }
-

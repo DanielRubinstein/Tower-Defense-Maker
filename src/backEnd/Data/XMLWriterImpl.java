@@ -25,7 +25,7 @@ public class XMLWriterImpl implements XMLWriter{
 	public XMLWriterImpl(){
 		xStream = new XStream(new DomDriver());
 		xStream.alias("GameData", GameData.class);
-		xStream.alias("BankController", BankController.class);
+		xStream.alias("BankController", GameData.class);
 	}
 	
 	public void saveGameStateData(GameDataInterface gameData, String filePath, String gameName){
