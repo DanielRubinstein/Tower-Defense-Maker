@@ -21,6 +21,7 @@ public class TileGridImpl implements TileGrid {
 	public TileGridImpl(int width, int height){
 		gridWidth = width;
 		gridHeight = height;
+		System.out.println("initializing tileGrid with " + width + " and height " +height);
 		tileGrid = new Tile[width][height];
 	}
 	
@@ -31,7 +32,10 @@ public class TileGridImpl implements TileGrid {
 	
 	@Override
 	public void setTile(Tile newTile, Point2D location){
-		tileGrid[(int) location.getY()][(int) location.getX()] = newTile; //Potentially wrong flipped x/y- y
+
+
+		System.out.println(" we ahffve x and y  " +location);
+		tileGrid[(int) location.getX()][(int) location.getY()] = newTile; //Potentially wrong flipped x/y?
 	}
 
 	@Override

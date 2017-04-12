@@ -61,9 +61,8 @@ public class SettingsViewImpl implements SettingsView{
 		myMenu.addNode(ruleButtons);
 		
 		//adding player/godmode switch
-		Consumer<ActionEvent> actionEventConsumer = (e) -> myView.sendUserModification(new Modification_ChangeMode());
-		Consumer<MouseEvent> mouseEventConsumer = (e) -> myView.sendUserModification(new Modification_ChangeMode());
-		ToggleSwitch modeToggle = new ToggleSwitch(myView,"Player", "Author", authorProperty, actionEventConsumer, mouseEventConsumer);
+		Runnable modRunnable = () -> myView.sendUserModification(new Modification_ChangeMode());
+		ToggleSwitch modeToggle = new ToggleSwitch(myView,"Player", "Author", authorProperty, modRunnable);
 		myMenu.addNode(modeToggle.getRoot());
 		
 		myMenu.addSimpleButtonWithHover("Help", e -> new HelpOptions(), "Get Help");
