@@ -29,8 +29,6 @@ public class AttributeFactory {
 			File fXmlFile = new File(XML_FILE_NAME);
 			DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
 			DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
-			System.out.println(dBuilder + "  ");
-			System.out.println("ASDFS" + dBuilder.parse(fXmlFile) + "  ");
 			doc = dBuilder.parse(fXmlFile);
 			doc.getDocumentElement().normalize();
 		} catch (Exception e){
@@ -39,10 +37,7 @@ public class AttributeFactory {
 	}
 	
 	public Attribute<?> getAttribute(String gameAttributeName){
-		System.out.println("attribute name: " + gameAttributeName);
 		String attributeType = myAttrNameResources.getString(gameAttributeName);
-		System.out.println("attribute type " + attributeType);
-		System.out.println("test " + doc);
 		Node thisAttrNode = doc.getElementsByTagName(gameAttributeName).item(0);
 		switch (attributeType) {
 			case "STRINGLIST":
@@ -60,7 +55,7 @@ public class AttributeFactory {
 				String dbl_incr_str = thisAttrNode.getAttributes().getNamedItem("increment").getNodeValue();
 				double dbl_incr = Double.parseDouble(dbl_incr_str);
 				List<Double> doubleParameters = Arrays.asList(dbl_min, dbl_max, dbl_incr);
-				Attribute<Double> dbl_newAttr = new AttributeImpl<Double>(doubleParameters, gameAttributeName);;
+				Attribute<Double> dbl_newAttr = new AttributeImpl<Double>(doubleParameters, gameAttributeName);
 				dbl_newAttr.setValue(0.0);
 				return dbl_newAttr;
 				

@@ -108,7 +108,6 @@ public class TileCommandCenter implements SkeletonObject {
 		HBox contents_Att = new HBox();
 		VBox contentRow = null;
 		int count = 0;
-		System.out.println(obj.getMyAttributes().getAttributeMap().keySet());
 		for (Attribute<?> attr : obj.getMyAttributes().getAttributeMap().values()) {
 			if (count % 3 == 0){
 				contentRow = new VBox();
@@ -130,10 +129,8 @@ public class TileCommandCenter implements SkeletonObject {
 		Label attLabel = new Label(attr.getName());
 		singleAttEditor.getChildren().add(attLabel);
 		Node right;
-		System.out.println("tsting");
 		if (myView.getBooleanAuthorModeProperty().get()) {
 			// Author Mode
-			System.out.println("author mode");
 			right = createEditor(obj, attr);
 		} else {
 			// Player Mode
@@ -171,15 +168,16 @@ public class TileCommandCenter implements SkeletonObject {
 	private Node createEditor(AttributeOwnerReader obj, Attribute<?> attr) {
 		Node n = null;
 		String type = myAttrNameResources.getString(attr.getName());
-		System.out.println("$$$$$ " +type+   " attr :   "+attr + "   " +attr.getValue());
 		switch(type){
 		case "BOOLEAN":
 			ToggleSwitch myToggle = new ToggleSwitch(myView, "On", "Off", new SimpleBooleanProperty((Boolean) attr.getValue()));
 			n = myToggle.getRoot();
+			break;
 		case "DOUBLE":
-			List<Double> paramList = (List<Double>) attr.getEditParameters();
+			List<Double> paramList = (List<Double>)attr.getEditParameters();
 			NumberChanger numChanger = new NumberChanger(paramList.get(0), paramList.get(1), paramList.get(2), paramList.get(3));
 			n = numChanger.getRoot();
+			break;
 		case "EDITABLESTRING":
 			break;
 		case "IMAGE":
@@ -201,10 +199,10 @@ public class TileCommandCenter implements SkeletonObject {
 			}
 			optionsBox.valueProperty().addListener((o, oldValue, newValue) -> {
 				// where the actual modification gets sent
-				System.out.println("editting attribute");
 				myView.sendUserModification(new Modification_EditAttribute(obj, attr, newValue));
 			});
 			n = optionsBox;
+			break;
 		default:
 			break;
 		

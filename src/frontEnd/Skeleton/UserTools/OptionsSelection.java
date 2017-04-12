@@ -40,7 +40,6 @@ public class OptionsSelection {
 		myRoot.setAlignment(Pos.TOP_RIGHT);
 	}
 	public void setSize(double width, double height){
-		System.out.println("in options selection " + width + " width/4   " +width/4 + "  "+height);
 		myRoot.setPrefWidth(width);
 		myRoot.setPrefHeight(height);
 		setUpOptions(width/4-1);//hard coded

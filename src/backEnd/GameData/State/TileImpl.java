@@ -54,7 +54,6 @@ public class TileImpl implements Tile, AttributeOwner{
 
 	@Override
 	public void addAttribute(String name, Attribute<?> value) {
-		System.out.println(myAttrData + "   " +attributeResources);
 		myAttrData.addAttribute(attributeResources.getString(name), value);
 		
 	}
