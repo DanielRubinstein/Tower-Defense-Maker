@@ -6,19 +6,19 @@ import java.util.Map;
 import backEnd.GameEngine.Behaviors.Behavior;
 import backEnd.Attribute.AttributeImpl;
 import backEnd.GameData.Rules;
-import backEnd.GameData.State.ComponentImpl;
+import backEnd.GameData.State.Component;
 import backEnd.GameData.State.Tile;
 
 public class BankController
 {
 	private Map<String, Tile> tileBank;
-	private Map<String, ComponentImpl> componentBank;
+	private Map<String, Component> componentBank;
 	private BehaviorBank behaviorBank;
 	private RuleBank ruleBank;
 	private AttributeBank attributeBank;
 	
 
-	public BankController(Map<String, Tile> tileBank, Map<String, ComponentImpl> componentBank)
+	public BankController(Map<String, Tile> tileBank, Map<String, Component> componentBank)
 	{
 		this.tileBank = tileBank;
 		this.componentBank = componentBank;
@@ -43,7 +43,7 @@ public class BankController
 		return tileBank;
 	}
 	
-	public void addNewComponent (String name, ComponentImpl component)
+	public void addNewComponent (String name, Component component)
 	{
 		componentBank.put(name, component);
 	}
@@ -53,7 +53,7 @@ public class BankController
 		componentBank.remove(name);
 	}
 	
-	public Map<String, ComponentImpl> getComponentMap()
+	public Map<String, Component> getComponentMap()
 	{
 		return componentBank;
 	}

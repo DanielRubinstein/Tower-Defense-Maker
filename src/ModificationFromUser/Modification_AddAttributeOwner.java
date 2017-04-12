@@ -6,7 +6,7 @@ import com.thoughtworks.xstream.io.xml.DomDriver;
 import backEnd.ModelImpl;
 import backEnd.Attribute.AttributeOwner;
 import backEnd.GameData.GameData;
-import backEnd.GameData.State.ComponentImpl;
+import backEnd.GameData.State.Component;
 import backEnd.GameData.State.Tile;
 import backEnd.Mode.ModeException;
 import javafx.geometry.Point2D;
@@ -24,7 +24,7 @@ public class Modification_AddAttributeOwner implements ModificationFromUser {
 		this.newAttrOwn = attrOwn;
 		this.location = location;
 		xStream = new XStream(new DomDriver());
-		xStream.alias("Component", ComponentImpl.class);
+		xStream.alias("Component", Component.class);
 		xStream.alias("Tile", Tile.class);
 
 	}
@@ -39,9 +39,9 @@ public class Modification_AddAttributeOwner implements ModificationFromUser {
 			case PLAYER:
 				 throw new ModeException(myModel.getMode(), DESCRIPTION_TILE);
 			}	
-		} else if (newAttrOwn instanceof ComponentImpl){
+		} else if (newAttrOwn instanceof Component){
 			
-			myModel.getState().getComponentGraph().addComponentToGrid((ComponentImpl) xStream.fromXML(serializedAO), location);
+			myModel.getState().getComponentGraph().addComponentToGrid((Component) xStream.fromXML(serializedAO), location);
 		
 		} else {
 			// can't be reached
