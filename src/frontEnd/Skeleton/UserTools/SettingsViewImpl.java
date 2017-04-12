@@ -40,7 +40,6 @@ public class SettingsViewImpl implements SettingsView{
 	public void launchSettings(){
 		// http://stackoverflow.com/questions/29514248/javafx-how-to-focus-on-one-stage
 		myStage = new Stage();
-		System.out.println("Hey");
 		myStage.initOwner(myParentStage);
 		myStage.initModality(Modality.APPLICATION_MODAL);
 		myMenu.display(myStage);

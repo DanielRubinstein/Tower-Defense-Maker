@@ -46,7 +46,7 @@ public class Palette<T extends AttributeOwner> implements SkeletonObject {
 	private TilePane tile;
 	private Collection<T> myPresets;
 	private static final String IMAGEFILE_ATTRIBUTE_NAME = "ImageFile";
-	private static final String SETTINGS_IMAGE = "images/Settings.jpg";
+	private static final String SETTINGS_IMAGE = "images/plus.jpg";
 	private Map<ImageView, T> myMap;
 	private String myType;
 
