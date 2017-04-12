@@ -23,6 +23,7 @@ public class ViewImpl implements ViewEditor{
 	private Consumer<ModificationFromUser> myModConsumer;
 	private SkeletonImpl mySkeleton;
 	private SimpleBooleanProperty authorProperty;
+	private Stage appStage;
 	
 	public ViewImpl(Model model,Consumer<ModificationFromUser> inputConsumer) {
 		myModel = model;
@@ -30,7 +31,8 @@ public class ViewImpl implements ViewEditor{
 		ModeReader mode = model.getModeReader();
 		authorProperty = new SimpleBooleanProperty(mode.getUserModeString().equals("AUTHOR"));
 		mySkeleton = new SkeletonImpl(this,model);
-		mySkeleton.display(new Stage());
+		appStage = new Stage();
+		mySkeleton.display(appStage);
 	}
 
 	public SimpleBooleanProperty getBooleanAuthorModeProperty(){
@@ -110,6 +112,11 @@ public class ViewImpl implements ViewEditor{
 	@Override
 	public Collection<Component> getComponentPresets() {
 		return myModel.getBankController().getComponentMap().values();
+	}
+
+	@Override
+	public Stage getAppStage() {
+		return appStage;
 	}
 
 }

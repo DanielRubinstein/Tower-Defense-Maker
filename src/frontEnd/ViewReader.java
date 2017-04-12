@@ -9,6 +9,7 @@ import backEnd.GameData.State.TileGrid;
 import backEnd.GameEngine.Component;
 import backEnd.Mode.ModeReader;
 import javafx.beans.property.SimpleBooleanProperty;
+import javafx.stage.Stage;
 
 public interface ViewReader {
 
@@ -26,5 +27,7 @@ public interface ViewReader {
 	public Collection<Tile> getTilePresets();
 
 	public Collection<Component> getComponentPresets();
+	
+	public Stage getAppStage();
 	
 }
