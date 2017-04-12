@@ -17,7 +17,6 @@ import javafx.stage.Stage;
  *
  */
 public class SettingsViewImpl implements SettingsView{
-	private Stage myStage;
 	private SimpleBooleanProperty authorProperty;
 	private ViewEditor myView;
 	private ButtonMenuImpl myMenu;
@@ -53,6 +52,8 @@ public class SettingsViewImpl implements SettingsView{
 		//adding player/godmode switch
 		ToggleSwitch modeToggle = new ToggleSwitch(myView,"Player", "Author", authorProperty);
 		myMenu.addNode(modeToggle.getRoot());
+		
+		myMenu.addSimpleButtonWithHover("Help", e -> new HelpOptions(), "Get Help");
 	}
 
 	
