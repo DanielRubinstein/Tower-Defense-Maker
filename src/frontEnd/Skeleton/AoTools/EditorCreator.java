@@ -114,7 +114,7 @@ public class EditorCreator {
 
 	private Node createImageEditor() {
 		String imagePath = (String) myAttr.getValue();
-		System.out.println(imagePath);
+		
 		Button b = new Button(imagePath);
 		b.setOnAction(e -> {
 			FileChooser imageChooser = new FileChooser();
@@ -123,13 +123,10 @@ public class EditorCreator {
 			imageChooser.setInitialDirectory(new File(SAVED_IMAGES_DIRECTORY));
 			
 			File selectedFile = imageChooser.showOpenDialog(new Stage());
+			
 			String newPath = selectedFile.getPath();
-			
 			String newValue = newPath.substring(newPath.indexOf("images"), newPath.length());
-			
-			//TODO: get only the end of the path
 			sendModification(newValue);
-			System.out.println(newValue);
 		});
 
 		return b;
