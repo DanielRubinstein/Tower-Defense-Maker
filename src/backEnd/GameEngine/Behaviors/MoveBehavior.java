@@ -3,12 +3,14 @@ package backEnd.GameEngine.Behaviors;
 import java.util.Map;
 import java.util.Observable;
 
+import backEnd.Attribute.Attribute;
 import backEnd.Attribute.AttributeImpl;
 import backEnd.GameData.State.Tile;
 
 import backEnd.GameData.State.TileAttributeType;
 import backEnd.GameData.State.TileImpl;
 import backEnd.GameEngine.AttributeData;
+import backEnd.GameEngine.AttributeFactory;
 import backEnd.GameEngine.Component;
 import javafx.geometry.Point2D;
 import resources.Constants;
@@ -26,12 +28,12 @@ public class MoveBehavior implements Behavior {
 	private Component myComponent;
 	private Tile currentTile;
 	
-	@SuppressWarnings("unchecked")
 	public MoveBehavior(Component inputComponent){
 		myComponent=inputComponent;
 		currentPosition=(Point2D) myComponent.getAttribute("Position").getValue();
 	}
 	
+	@SuppressWarnings("unchecked")
 	@Override
 	public <T> void execute(T tile) {//pass in a tile //TODO error checking
 		currentTile=(Tile) tile;
@@ -44,9 +46,11 @@ public class MoveBehavior implements Behavior {
 			newPoint=new Point2D(currentPosition.getX(), currentPosition.getY()+Constants.defaultMoveAmount);				
 		case "DOWN":
 			newPoint=new Point2D(currentPosition.getX(), currentPosition.getY()-Constants.defaultMoveAmount);				
-			
-		default: throw new IllegalArgumentException(); //TODO: figure out how we are doing error handling
 		}
+		AttributeFactory af=new AttributeFactory();
+		Attribute<Point2D> newPositionAttribute=(Attribute<Point2D>) af.getAttribute("Position");
+		newPositionAttribute.setValue(newPoint);
+		myComponent.addAttribute("Position", newPositionAttribute);//does it get overwritten?
 	}
 
 	/*
