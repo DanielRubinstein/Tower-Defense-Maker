@@ -8,6 +8,8 @@ import backEnd.Attribute.AttributeOwner;
 import backEnd.Attribute.AttributeOwnerReader;
 import frontEnd.View;
 import frontEnd.CustomJavafxNodes.NumberChanger;
+import frontEnd.CustomJavafxNodes.ToggleSwitch;
+import javafx.beans.property.SimpleBooleanProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.Node;
@@ -20,6 +22,7 @@ public class EditorCreator {
 	private View myView;
 	private AttributeOwnerReader myOwner;
 	private Attribute<?> myAttr;
+	private ToggleSwitch myToggle;
 
 	public EditorCreator(View view, AttributeOwnerReader obj, Attribute<?> attr){
 		myView = view;
@@ -85,7 +88,7 @@ public class EditorCreator {
 		}
 		optionsBox.valueProperty().addListener((o, oldValue, newValue) -> {
 			// where the actual modification gets sent
-			myView.sendUserModification(new Modification_EditAttribute((AttributeOwner) myOwner, myAttr, newValue));
+			sendModification(newValue);
 		});
 		n = optionsBox;
 		return n;
@@ -110,17 +113,18 @@ public class EditorCreator {
 
 	private Node createBooleanEditor() {
 		Node n = null;
-		/*
-		Consumer<ActionEvent> actionEventConsumer = (e) -> myView
-				.sendUserModification(new Modification_EditAttribute<Boolean>(myOwner, myAttr, thing));
-		Consumer<MouseEvent> mouseEventConsumer = (e) -> myView
-				.sendUserModification(new Modification_EditAttribute<Boolean>(myOwner, myAttr, thing));
-		
-		ToggleSwitch myToggle = new ToggleSwitch(myView, "Off", "On",
-				new SimpleBooleanProperty((Boolean) myAttr.getValue()), actionEventConsumer, mouseEventConsumer);
-		thing = myToggle.getSwitchedOn().getValue();
+		myToggle = new ToggleSwitch(myView, "Off", "On",
+				new SimpleBooleanProperty((Boolean) myAttr.getValue()), () -> triggerBooleanUpdate());
 		n = myToggle.getRoot();
-		*/
 		return n;
 	}
+	
+	private void triggerBooleanUpdate() {
+		sendModification(myToggle.getSwitchedOn().getValue());
+	}
+
+	private void sendModification(Object newValue){
+		myView.sendUserModification(new Modification_EditAttribute((AttributeOwner) myOwner, myAttr, newValue));
+	}
+
 }
