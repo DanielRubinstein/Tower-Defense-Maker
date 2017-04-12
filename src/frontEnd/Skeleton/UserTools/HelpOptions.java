@@ -12,10 +12,9 @@ import javafx.scene.web.WebView;
 import javafx.stage.Stage;
 
 public class HelpOptions {
-
-	
 	private static final String DEFAULT_TOWER_DEFENSE = "src/resources/html/tower_defense.htm";
 	private ButtonMenu allOptions;
+	
 	public HelpOptions(){
 		allOptions = new ButtonMenuImpl("Help");
 		addAllOptions();

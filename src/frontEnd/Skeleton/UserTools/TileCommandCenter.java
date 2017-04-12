@@ -6,8 +6,10 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
+import java.util.function.Consumer;
 import java.util.ResourceBundle;
 
+import ModificationFromUser.Modification_ChangeMode;
 import ModificationFromUser.Modification_EditAttribute;
 import backEnd.Attribute.Attribute;
 import backEnd.Attribute.AttributeOwner;
@@ -33,6 +35,8 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
+import javafx.scene.control.TextField;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.FileChooser;
@@ -49,7 +53,8 @@ public class TileCommandCenter implements SkeletonObject {
 	private Tile myTile;
 	private final static String RESOURCES_PATH = "resources/";
 	private final static String ALL_ATTRIBUTES_TYPES = "allAttributeTypes";
-	private final static ResourceBundle myAttrNameResources = ResourceBundle.getBundle(RESOURCES_PATH + ALL_ATTRIBUTES_TYPES);
+	private final static ResourceBundle myAttrNameResources = ResourceBundle
+			.getBundle(RESOURCES_PATH + ALL_ATTRIBUTES_TYPES);
 
 	public TileCommandCenter(View view, Tile tile, State state) {
 		myTile = tile;
@@ -94,15 +99,15 @@ public class TileCommandCenter implements SkeletonObject {
 		contents.getChildren().add(createLocationLabel());
 
 		HBox contents_Att = createAttributeView(obj);
-		
+
 		contents.getChildren().add(contents_Att);
 
 		if (myView.getBooleanAuthorModeProperty().get()) {
 			contents.getChildren().add(getAuthorButtons(null, null));
 		}
-		
+
 		contents.setSpacing(STANDARD_SPACING);
-		//contents.setAlignment(Pos.TOP_CENTER);
+		// contents.setAlignment(Pos.TOP_CENTER);
 
 		return createSingleTab("Tile", contents);
 	}
@@ -112,12 +117,12 @@ public class TileCommandCenter implements SkeletonObject {
 		VBox contentRow = null;
 		int count = 0;
 		for (Attribute<?> attr : obj.getMyAttributes().getAttributeMap().values()) {
-			if (count % 3 == 0){
+			if (count % 3 == 0) {
 				contentRow = new VBox();
 			}
 			HBox singleAttEditor = createAttributeValuePair(obj, attr);
 			contentRow.getChildren().add(singleAttEditor);
-			if (count % 3 == 2){
+			if (count % 3 == 2) {
 				contentRow.setSpacing(STANDARD_SPACING);
 				contents_Att.getChildren().add(contentRow);
 			}
@@ -134,18 +139,24 @@ public class TileCommandCenter implements SkeletonObject {
 		Node right;
 		if (myView.getBooleanAuthorModeProperty().get()) {
 			// Author Mode
-			right = createEditor(obj, attr);
+			EditorCreator editorCreator = new EditorCreator(myView, obj, attr);
+			right = editorCreator.extractEditor(myAttrNameResources.getString(attr.getName()));
+			
 		} else {
 			// Player Mode
-			try{
+			try {
 				right = new Label(attr.getValue().toString());
-			} catch (NullPointerException e){
+			} catch (NullPointerException e) {
 				right = new Label("No Attribute Value Stored");
 			}
 			// FIXME get it right
 		}
 		singleAttEditor.getChildren().add(new Label("    "));
-		singleAttEditor.getChildren().add(right);
+		try{
+			singleAttEditor.getChildren().add(right);
+		} catch (Exception e){
+			singleAttEditor.getChildren().add(new Label("It fucked up, deal with it"));
+		}
 		singleAttEditor.setAlignment(Pos.CENTER_RIGHT);
 		return singleAttEditor;
 	}
@@ -165,60 +176,10 @@ public class TileCommandCenter implements SkeletonObject {
 
 	private Label createLocationLabel() {
 		// TODO maybe add sell feature here
-		return new Label(String.format("Location: (%.0f, %.0f)", myTile.getLocation().getX(), myTile.getLocation().getY()));
+		return new Label(
+				String.format("Location: (%.0f, %.0f)", myTile.getLocation().getX(), myTile.getLocation().getY()));
 	}
 
-	private Node createEditor(AttributeOwnerReader obj, Attribute<?> attr) {
-		Node n = null;
-		String type = myAttrNameResources.getString(attr.getName());
-		switch(type){
-		case "BOOLEAN":
-			ToggleSwitch myToggle = new ToggleSwitch(myView, "On", "Off", new SimpleBooleanProperty((Boolean) attr.getValue()));
-			n = myToggle.getRoot();
-			break;
-		case "DOUBLE":
-			List<Double> paramList = (List<Double>)attr.getEditParameters();
-			NumberChanger numChanger = new NumberChanger(paramList.get(0), paramList.get(1), paramList.get(2), paramList.get(3));
-			n = numChanger.getRoot();
-			break;
-		case "EDITABLESTRING":
-			break;
-		case "IMAGE":
-			String imagePath = (String) attr.getValue();
-			Label l = new Label(imagePath);
-			
-			l.setOnMouseClicked(e -> {
-				FileChooser imageChooser = new FileChooser();
-				imageChooser.setTitle("Select Image");
-				imageChooser.getExtensionFilters().add(new ExtensionFilter("Image Files","*.png", "*.jpg", "*.gif"));
-				File selectedFile = imageChooser.showOpenDialog(new Stage());
-			});
-			n=l;
-			break;
-		case "INTEGER":
-			break;
-		case "STRINGLIST":
-			// TODO if doubles then make a slider not a combobox (this will be the only separate case)
-			ObservableList<String> options = (ObservableList<String>) FXCollections.observableArrayList( attr.getEditParameters());
-			ComboBox<String> optionsBox = new ComboBox<String>(options);
-			try{
-				// TODO this will work as long as there is an attribute there
-				optionsBox.getSelectionModel().select(attr.getValue().toString());
-			} catch (NullPointerException e){
-				// do nothing
-			}
-			optionsBox.valueProperty().addListener((o, oldValue, newValue) -> {
-				// where the actual modification gets sent
-				myView.sendUserModification(new Modification_EditAttribute(obj, attr, newValue));
-			});
-			n = optionsBox;
-			break;
-		default:
-			break;
-		
-		}
-		return n;
-	}
 
 	private Tab createSingleTab(String name, Node contents) {
 		Tab tab = new Tab(name);
