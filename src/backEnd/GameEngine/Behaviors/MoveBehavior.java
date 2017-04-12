@@ -6,7 +6,7 @@ import java.util.Observable;
 import backEnd.Attribute.Attribute;
 import backEnd.Attribute.AttributeData;
 import backEnd.Attribute.AttributeFactory;
-import backEnd.GameData.State.Component;
+import backEnd.GameData.State.ComponentImpl;
 import backEnd.GameData.State.Tile;
 import javafx.geometry.Point2D;
 import resources.Constants;
@@ -21,10 +21,10 @@ public class MoveBehavior implements Behavior {
 	public AttributeData myAttributes;
 	private Point2D currentPosition;
 	private Point2D newPoint;
-	private Component myComponent;
+	private ComponentImpl myComponent;
 	private Tile currentTile;
 	
-	public MoveBehavior(Component inputComponent){
+	public MoveBehavior(ComponentImpl inputComponent){
 		myComponent=inputComponent;
 		currentPosition=(Point2D) myComponent.getAttribute("Position").getValue();
 	}

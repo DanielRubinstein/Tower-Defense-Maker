@@ -4,6 +4,7 @@ import java.lang.reflect.InvocationTargetException;
 import java.util.ResourceBundle;
 
 import backEnd.GameData.State.Component;
+import backEnd.GameData.State.ComponentImpl;
 import backEnd.GameEngine.Behaviors.Behavior;
 
 public class BehaviorFactory {
@@ -22,7 +23,7 @@ public class BehaviorFactory {
 		String basePath = fullName.substring(0, fullName.length() - simpleName.length());
 		Object object = null;
 		try {
-			object = Class.forName(basePath + myResources.getString(simpleName)).getConstructor(Component.class).newInstance(myComponent);
+			object = Class.forName(basePath + myResources.getString(simpleName)).getConstructor(ComponentImpl.class).newInstance(myComponent);
 		} catch (	InstantiationException 		| IllegalAccessException	| ClassNotFoundException | IllegalArgumentException |
 					InvocationTargetException 	| NoSuchMethodException		| SecurityException e) {
 			e.printStackTrace();

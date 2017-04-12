@@ -15,11 +15,14 @@ public interface AttributeOwner extends AttributeOwnerReader{
 	 * @param attrType
 	 * @param newAttr
 	 */
-	void addAttribute(String attrName, Attribute<?> newAttr);
+	//void addAttribute(String attrName, Attribute<?> newAttr);
 	
 	
 	/**
 	 * @return AccessPermissions
 	 */
 	AccessPermissions getAccessPermissions();
+
+	<T> void setAttributeValue(String attrName, T newVal);
+	
 }

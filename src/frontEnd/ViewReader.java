@@ -3,7 +3,7 @@ package frontEnd;
 import java.util.Collection;
 
 import backEnd.GameData.UserAttribute;
-import backEnd.GameData.State.Component;
+import backEnd.GameData.State.ComponentImpl;
 import backEnd.GameData.State.ComponentGraph;
 import backEnd.GameData.State.Tile;
 import backEnd.GameData.State.TileGrid;
@@ -26,7 +26,7 @@ public interface ViewReader {
 
 	public Collection<Tile> getTilePresets();
 
-	public Collection<Component> getComponentPresets();
+	public Collection<ComponentImpl> getComponentPresets();
 	
 	public Stage getAppStage();
 	

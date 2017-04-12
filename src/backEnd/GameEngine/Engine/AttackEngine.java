@@ -4,6 +4,7 @@ import java.util.ResourceBundle;
 import backEnd.Attribute.Attribute;
 import backEnd.Attribute.AttributeData;
 import backEnd.Attribute.AttributeFactory;
+import backEnd.GameData.State.ComponentImpl;
 import backEnd.GameData.State.Component;
 import backEnd.GameData.State.ComponentGraph;
 import backEnd.GameData.State.State;
@@ -23,7 +24,7 @@ public class AttackEngine implements Engine {
 	@Override
 	public void gameLoop(State currentState, double stepTime) {
 		ComponentGraph myComponentGraph = currentState.getComponentGraph();
-		for (Component componentAttacker : myComponentGraph.getComponentList()) {
+		for (ComponentImpl componentAttacker : myComponentGraph.getComponentList()) {
 			if (componentAttacker.getMyType().equals("TOWER")) {
 				for (Component componentTarget : myComponentGraph.getComponentsWithinRadius(componentAttacker,
 						Constants.defaultRadius)) {
@@ -37,8 +38,8 @@ public class AttackEngine implements Engine {
 	}
 
 	@SuppressWarnings("unchecked")
-	public void addProjectileToState(State currentState, Component attacker, Component target) { 
-		Component bullet = makeBullet();
+	public void addProjectileToState(State currentState, ComponentImpl attacker, Component target) { 
+		ComponentImpl bullet = makeBullet();
 
 		currentState.getComponentGraph().addComponentToGrid(bullet,
 				(Point2D) attacker.getAttribute("Position").getValue());
@@ -48,9 +49,9 @@ public class AttackEngine implements Engine {
 	 * 
 	 * @return a Component that represents a Bullet
 	 */
-	private Component makeBullet(){//TODO: ADD ATTRIBUTES STARTPOS AND TARGETPOS TO BULLET FOR MOVEENGINE TO USE
+	private ComponentImpl makeBullet(){//TODO: ADD ATTRIBUTES STARTPOS AND TARGETPOS TO BULLET FOR MOVEENGINE TO USE
 		AttributeFactory af = new AttributeFactory();
-		Component bullet = new Component();
+		ComponentImpl bullet = new ComponentImpl();
 		AttributeData ad = new AttributeData();
 		// I'll figure out a cleaner way of doing this later
 		bullet.setMyType("Projectile");

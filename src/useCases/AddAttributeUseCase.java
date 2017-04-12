@@ -4,7 +4,7 @@ package useCases;
 import backEnd.Attribute.AttributeImpl;
 import backEnd.Bank.ComponentBank;
 import backEnd.Bank.EnvironmentInterface;
-import backEnd.GameData.State.Component;
+import backEnd.GameData.State.ComponentImpl;
 import backEnd.GameData.State.State;
 import backEnd.GameData.State.Tile;
 import backEnd.GameData.State.TileAttribute;

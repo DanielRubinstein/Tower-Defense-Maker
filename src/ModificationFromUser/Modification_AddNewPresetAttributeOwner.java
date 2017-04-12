@@ -2,7 +2,7 @@ package ModificationFromUser;
 
 import backEnd.ModelImpl;
 import backEnd.Attribute.AttributeOwner;
-import backEnd.GameData.State.Component;
+import backEnd.GameData.State.ComponentImpl;
 import backEnd.GameData.State.Tile;
 import backEnd.Mode.ModeException;
 
@@ -32,8 +32,8 @@ public class Modification_AddNewPresetAttributeOwner implements ModificationFrom
 			if(newAO instanceof Tile){
 				myModel.getBankController().addNewTile(newAOName, (Tile) newAO);
 			}
-			else if(newAO instanceof Component){
-				myModel.getBankController().addNewComponent(newAOName, (Component) newAO);
+			else if(newAO instanceof ComponentImpl){
+				myModel.getBankController().addNewComponent(newAOName, (ComponentImpl) newAO);
 			}
 		case PLAYER:
 			 throw new ModeException(myModel.getMode(), DESCRIPTION);

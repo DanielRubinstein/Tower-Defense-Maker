@@ -1,8 +1,11 @@
 package backEnd.GameData.State;
 
 import java.io.FileNotFoundException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Observable;
+import java.util.Observer;
 import java.util.ResourceBundle;
 
 import backEnd.Attribute.Attribute;
@@ -19,12 +22,13 @@ import javafx.geometry.Point2D;
  *
  */
 
-public class TileImpl implements Tile, AttributeOwner{
+public class TileImpl extends Observable implements Tile, AttributeOwner{
 	private final static String DEFAULT_ATTRIBUTES_PATH = "resources/defaultTileAttributes";
 	private final static ResourceBundle attributeResources = ResourceBundle.getBundle(DEFAULT_ATTRIBUTES_PATH);
 	private Point2D myLocation;
 	private AccessPermissions myAccessPerm;
 	private AttributeData myAttrData;
+	private List<Observer> observers = new ArrayList<Observer>();
 	
 	public TileImpl(List<GameModeType> gameModeAccessPermissions, List<UserModeType> userModeAccessPermissions , Point2D location) throws FileNotFoundException{
 		this.myLocation = location;
@@ -59,7 +63,7 @@ public class TileImpl implements Tile, AttributeOwner{
 		return myLocation;
 	}
 
-	@Override
+	
 	public void addAttribute(String name, Attribute<?> value) {
 		myAttrData.addAttribute(attributeResources.getString(name), value);
 		
@@ -74,6 +78,33 @@ public class TileImpl implements Tile, AttributeOwner{
 	public boolean hasAttribute(String name) {
 		return myAttrData.getAttributeMap().containsKey(attributeResources.getString(name));
 	}
+
+	@Override
+	public <T> void setAttributeValue(String attrName, T newVal) {
+		myAttrData.get(attrName).setValue(newVal);
+		notifyObservers();
+		
+	}
+	
+	
+	/* (non-Javadoc)
+	 * @see backEnd.GameData.State.Component#addObserver(java.util.Observer)
+	 */
+	@Override
+	public void addObserver(Observer obs){
+		observers.add(obs);
+	}
+	
+	/* (non-Javadoc)
+	 * @see backEnd.GameData.State.Component#notifyAllObservers()
+	 */
+	@Override
+	public void notifyObservers(){
+		for(Observer obs : observers){
+			obs.update(this, null);
+		}
+	}
+
 
 
 }

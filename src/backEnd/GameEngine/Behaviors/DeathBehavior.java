@@ -5,24 +5,24 @@ import java.util.Observable;
 
 import backEnd.Attribute.AttributeData;
 import backEnd.Attribute.AttributeImpl;
-import backEnd.GameData.State.Component;
+import backEnd.GameData.State.ComponentImpl;
 import backEnd.GameEngine.myAttributes;
 import javafx.geometry.Point2D;
 
 public class DeathBehavior implements Behavior {
 	//use the following 2 when we remove dummy attributes
-	private Component myComponent;	//
+	private ComponentImpl myComponent;	//
 	private myAttributes MA; //we won't use this later
 	private boolean spawnsOnDeath;
-	private Component componentSpawnedOnDeath;
+	private ComponentImpl componentSpawnedOnDeath;
 	private AttributeData myAttributes;
 
 	@Override
 	public <T> void execute(T componentToUse) { //pass in a component
-		myComponent=(Component) componentToUse;
+		myComponent=(ComponentImpl) componentToUse;
 		spawnsOnDeath=(boolean) myComponent.getAttribute("SPAWNS_ON_DEATH").getValue();
 		if (spawnsOnDeath){
-			componentSpawnedOnDeath=(Component) myComponent.getAttribute("COMPONENT_SPAWNED_ON_DEATH").getValue();
+			componentSpawnedOnDeath=(ComponentImpl) myComponent.getAttribute("COMPONENT_SPAWNED_ON_DEATH").getValue();
 		}
 
 	}
@@ -43,7 +43,7 @@ public class DeathBehavior implements Behavior {
 		return currentHealth>0;
 	}
 	
-	public Component getNewComponent(){
+	public ComponentImpl getNewComponent(){
 		return componentSpawnedOnDeath;
 	}
 

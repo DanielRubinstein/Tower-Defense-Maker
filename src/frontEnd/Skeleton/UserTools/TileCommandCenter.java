@@ -13,7 +13,7 @@ import ModificationFromUser.Modification_EditAttribute;
 import backEnd.Attribute.Attribute;
 import backEnd.Attribute.AttributeOwner;
 import backEnd.Attribute.AttributeOwnerReader;
-import backEnd.GameData.State.Component;
+import backEnd.GameData.State.ComponentImpl;
 import backEnd.GameData.State.ComponentGraph;
 import backEnd.GameData.State.State;
 import backEnd.GameData.State.Tile;
@@ -46,7 +46,7 @@ public class TileCommandCenter implements SkeletonObject {
 	private View myView;
 	private TabPane tabPane;
 	private Stage myStage;
-	private Collection<Component> myComponents;
+	private Collection<ComponentImpl> myComponents;
 	private Tile myTile;
 	private final static String RESOURCES_PATH = "resources/";
 	private final static String ALL_ATTRIBUTES_TYPES = "allAttributeTypes";
@@ -84,7 +84,7 @@ public class TileCommandCenter implements SkeletonObject {
 
 	private Collection<Tab> createComponentTabs() {
 		List<Tab> componentTabs = new ArrayList<Tab>();
-		for (Component c : myComponents) {
+		for (ComponentImpl c : myComponents) {
 			componentTabs.add(createAttributeOwnerTab(c));
 		}
 		return componentTabs;

@@ -7,7 +7,7 @@ import java.util.Observable;
 import java.util.Observer;
 
 import backEnd.Attribute.AttributeImpl;
-import backEnd.GameData.State.Component;
+import backEnd.GameData.State.ComponentImpl;
 import backEnd.GameData.State.Tile;
 
 
