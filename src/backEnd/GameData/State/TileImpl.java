@@ -1,5 +1,6 @@
 package backEnd.GameData.State;
 
+import java.io.FileNotFoundException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.ResourceBundle;
@@ -25,7 +26,7 @@ public class TileImpl implements Tile, AttributeOwner{
 	private AccessPermissions myAccessPerm;
 	private AttributeData myAttrData;
 	
-	public TileImpl(List<GameModeType> gameModeAccessPermissions, List<UserModeType> userModeAccessPermissions , Point2D location){
+	public TileImpl(List<GameModeType> gameModeAccessPermissions, List<UserModeType> userModeAccessPermissions , Point2D location) throws FileNotFoundException{
 		this.myLocation = location;
 		this.myAccessPerm = new AccessPermissionsImpl(gameModeAccessPermissions, userModeAccessPermissions);
 		this.myAttrData = new AttributeData(new HashMap<String,Attribute<?>>());
