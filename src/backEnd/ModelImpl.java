@@ -30,8 +30,11 @@ public class ModelImpl implements Model{
 		myDataController = dataController;
 		myGameData = gameData;
 		myMode = new ModeImpl();
+
+		myDataController = dataController;
 		myEngine = new GameProcessController(myGameData.getState(), myGameData.getRules());
 		//myBankController = dataController.generateBanks();
+
 	}
 
 	public State getState(){
@@ -51,9 +54,19 @@ public class ModelImpl implements Model{
 	public BankController getBankController(){
 		return this.myBankController;
 	}
+	
+	public DataController getDataController(){
+		return myDataController;
+	}
+	
+	public GameData getGameData(){
+		return myGameData;
+	}
 
 	@Override
-	public GameProcessController getGameProcessCotroller() {
+	public GameProcessController getGameProcessController() {
 		return myEngine;
+
 	}
 }
+
