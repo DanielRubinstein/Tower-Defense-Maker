@@ -8,6 +8,8 @@ import java.util.List;
 import java.util.function.Consumer;
 
 import ModificationFromUser.ModificationFromUser;
+import ModificationFromUser.Modification_Load;
+import ModificationFromUser.Modification_Save;
 import backEnd.Model;
 import backEnd.Data.DataController;
 import backEnd.GameData.UserAttribute;
@@ -19,16 +21,26 @@ import backEnd.GameData.State.TileGrid;
 import backEnd.Mode.ModeReader;
 import frontEnd.CustomJavafxNodes.SingleFieldPrompt;
 import frontEnd.Skeleton.SkeletonImpl;
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.stage.Stage;
+import javafx.util.Duration;
+import resources.Constants;
 
 public class ViewImpl implements View{
+
 	private Model myModel;
 	private DataController myDataController;
 	private Consumer<ModificationFromUser> myModConsumer;
 	private SkeletonImpl mySkeleton;
 	private SimpleBooleanProperty authorProperty;
 	private Stage appStage;
+	
+	public Timeline animation = new Timeline();
+	private static final double MILLISECOND_DELAY = Constants.MILLISECOND_DELAY;
+	private static final double SECOND_DELAY = Constants.SECOND_DELAY;
+
 	
 	public ViewImpl(Model model,DataController dataController, Consumer<ModificationFromUser> inputConsumer) {
 		myModel = model;
@@ -39,8 +51,22 @@ public class ViewImpl implements View{
 		mySkeleton = new SkeletonImpl(this,model);
 		appStage = new Stage();
 		mySkeleton.display(appStage);
+		
+		KeyFrame frame = new KeyFrame(Duration.millis(MILLISECOND_DELAY), e -> step(SECOND_DELAY));
+		animation.setCycleCount(Timeline.INDEFINITE);
+		animation.getKeyFrames().add(frame);
+		animation.play();
+		
 	}
 
+	/**
+	 * controls the animation of the State
+	 */
+	private void step(double delay){
+		myModel.getGameProcessController().run(delay); //TODO: TESTING ONLY
+	}
+
+	
 	public SimpleBooleanProperty getBooleanAuthorModeProperty(){
 		return this.authorProperty;
 	}
@@ -70,19 +96,12 @@ public class ViewImpl implements View{
 		return myDialog.create();
 	}
 
-	@Override
-	public void viewRules() {
-		// TODO Auto-generated method stub
-	}
 
-	@Override
-	public void editRules() {
-		// TODO Auto-generated method stub
-	}
 
 	@Override
 	public void load() {
-		// TODO Auto-generated method stub
+		String fileToLoad = null;
+		sendUserModification(new Modification_Load(fileToLoad));
 	}
 
 	@Override
@@ -127,6 +146,16 @@ public class ViewImpl implements View{
 	@Override
 	public Stage getAppStage() {
 		return appStage;
+	}
+	
+	@Override
+	public void viewRules() {
+		// TODO Auto-generated method stub
+	}
+
+	@Override
+	public void editRules() {
+		// TODO Auto-generated method stub
 	}
 
 }

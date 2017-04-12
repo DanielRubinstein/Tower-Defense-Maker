@@ -21,11 +21,10 @@ public class AttackEngine implements Engine {
 	private final static ResourceBundle myResources = ResourceBundle.getBundle(RESOURCES_PATH);
 
 	@Override
-	public void gameLoop(State currentState) {
+	public void gameLoop(State currentState, double stepTime) {
 		ComponentGraph myComponentGraph = currentState.getComponentGraph();
 		for (Component componentAttacker : myComponentGraph.getComponentList()) {
-			if (componentAttacker.getMyType().equals("TOWER")) { // Fix with
-																	// resource
+			if (componentAttacker.getMyType().equals("TOWER")) {
 				for (Component componentTarget : myComponentGraph.getComponentsWithinRadius(componentAttacker,
 						Constants.defaultRadius)) {
 					addProjectileToState(currentState, componentAttacker, componentTarget);

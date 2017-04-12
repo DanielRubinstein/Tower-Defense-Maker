@@ -8,16 +8,34 @@ public class EngineFactory {
 	private final static ResourceBundle myResources = ResourceBundle.getBundle(RESOURCES_PATH);
 	
 	public Engine getEngine(String string){
-		String simpleName = Engine.class.getSimpleName();
-		String fullName = Engine.class.getName();
-		String basePath = fullName.substring(0, fullName.length() - simpleName.length());
-		Object engine = null;
-		try {
-			engine = Class.forName(basePath + myResources.getString(simpleName)).newInstance();
-		} catch (InstantiationException | IllegalAccessException | ClassNotFoundException e) {
-			engine = new NullEngine();
+//		
+//		String simpleName = Engine.class.getSimpleName();
+//		String fullName = Engine.class.getName();
+//		String basePath = fullName.substring(0, fullName.length() - simpleName.length());
+//		System.out.println(basePath);
+//		Object engine = null;
+//		try {
+//			engine = Class.forName(basePath + myResources.getString(simpleName)).newInstance();
+//		} catch (InstantiationException | IllegalAccessException | ClassNotFoundException e) {
+//			engine = new NullEngine();
+//		}
+//		return (Engine)engine;
+		switch(string){
+		case "SpawnEngine": {
+			return new SpawnEngine();
 		}
-		return (Engine)engine;
+		case "MoveEngine": {
+			return new MoveEngine();
+		}
+		case "DeathEngine": {
+			return new DeathEngine();
+		}
+		case "AttackEngine": {
+			return new AttackEngine();
+		}
+
+		}
+		return null;
 	}
 
 }
