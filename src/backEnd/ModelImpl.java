@@ -23,9 +23,11 @@ public class ModelImpl implements Model{
 	private GameData myGameData;
 	private Mode myMode;
 	private BankController myBankController;
+	private DataController myDataController;
 	private GameProcessController myEngine;
 	
 	public ModelImpl(DataController dataController, GameData gameData) throws XMLReadingException {
+		myDataController = dataController;
 		myGameData = gameData;
 		myMode = new ModeImpl();
 		//myEngine = new GameProcessController(myGameData.getState(), myGameData.getRules());
@@ -49,5 +51,10 @@ public class ModelImpl implements Model{
 	@Override
 	public BankController getBankController(){
 		return this.myBankController;
+	}
+
+	@Override
+	public GameProcessController getGameProcessCotroller() {
+		return myEngine;
 	}
 }
