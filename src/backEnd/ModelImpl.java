@@ -49,4 +49,10 @@ public class ModelImpl implements Model{
 	public BankController getBankController(){
 		return this.myBankController;
 	}
+	
+
+	@Override
+	public GameProcessController getGameProcessController(){
+		return myEngines;
+	}
 }

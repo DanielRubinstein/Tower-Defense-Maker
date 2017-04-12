@@ -32,7 +32,7 @@ public class MoveEngine implements Engine{
 	 */
 	@SuppressWarnings("unchecked")
 	@Override
-	public void gameLoop(State currentState) {
+	public void gameLoop(State currentState, double stepTime) {
 		myState=currentState;
 		for (Component c: myState.getComponentGraph().getAllComponents()){
 			Tile currentTile=myState.getTileGrid().getTileByLocation((Point2D) c.getAttribute("Position").getValue()); 

@@ -16,16 +16,26 @@ import backEnd.GameData.State.Tile;
 import backEnd.GameData.State.TileGrid;
 import backEnd.Mode.ModeReader;
 import frontEnd.Skeleton.SkeletonImpl;
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.stage.Stage;
+import javafx.util.Duration;
+import resources.Constants;
 
 public class ViewImpl implements View{
+
 	private Model myModel;
 	private DataController myDataController;
 	private Consumer<ModificationFromUser> myModConsumer;
 	private SkeletonImpl mySkeleton;
 	private SimpleBooleanProperty authorProperty;
 	private Stage appStage;
+	
+	public Timeline animation = new Timeline();
+	private static final double MILLISECOND_DELAY = Constants.MILLISECOND_DELAY;
+	private static final double SECOND_DELAY = Constants.SECOND_DELAY;
+
 	
 	public ViewImpl(Model model,DataController dataController, Consumer<ModificationFromUser> inputConsumer) {
 		myModel = model;
@@ -36,8 +46,22 @@ public class ViewImpl implements View{
 		mySkeleton = new SkeletonImpl(this,model);
 		appStage = new Stage();
 		mySkeleton.display(appStage);
+		
+		KeyFrame frame = new KeyFrame(Duration.millis(MILLISECOND_DELAY), e -> step(SECOND_DELAY));
+		animation.setCycleCount(Timeline.INDEFINITE);
+		animation.getKeyFrames().add(frame);
+		animation.play();
+		
 	}
 
+	/**
+	 * controls the animation of the State
+	 */
+	private void step(double delay){
+		myModel.getGameProcessController().run(delay); //TODO: TESTING ONLY
+	}
+
+	
 	public SimpleBooleanProperty getBooleanAuthorModeProperty(){
 		return this.authorProperty;
 	}
