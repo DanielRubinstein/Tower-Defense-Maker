@@ -108,6 +108,7 @@ public class TileCommandCenter implements SkeletonObject {
 		HBox contents_Att = new HBox();
 		VBox contentRow = null;
 		int count = 0;
+		System.out.println(obj.getMyAttributes().getAttributeMap().keySet());
 		for (Attribute<?> attr : obj.getMyAttributes().getAttributeMap().values()) {
 			if (count % 3 == 0){
 				contentRow = new VBox();
@@ -129,9 +130,10 @@ public class TileCommandCenter implements SkeletonObject {
 		Label attLabel = new Label(attr.getName());
 		singleAttEditor.getChildren().add(attLabel);
 		Node right;
-		
+		System.out.println("tsting");
 		if (myView.getBooleanAuthorModeProperty().get()) {
 			// Author Mode
+			System.out.println("author mode");
 			right = createEditor(obj, attr);
 		} else {
 			// Player Mode

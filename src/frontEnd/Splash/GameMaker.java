@@ -50,7 +50,7 @@ public class GameMaker {
 		HBox tileWidth = new HBox();
 		Label name = new Label(text);
 		NumberChanger slide = new NumberChanger(min, max, start, 1d);
-		Label currentVal = new Label(String.format("Current value: %d", start));
+		Label currentVal = new Label(String.format("Current value: %f", start));
 		slide.addListener( (observable, oldValue, newValue)->currentVal.setText(String.format("Current value: %d", newValue.intValue())));
 		tileWidth.getChildren().addAll(name,slide.getRoot(),currentVal);
 		allSelections.addNode(tileWidth);
