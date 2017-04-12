@@ -41,14 +41,6 @@ public class ControllerImpl implements Controller {
 					}
 				};
 				
-				
-		Consumer<File> setGameData = (File file) -> {
-			myModel = new ModelImpl(myDataController.getGameDataFromFile(file));
-			myView = new ViewImpl(myModel, viewMod);
-		};
-		Consumer<StartingInput> setDimensions = (StartingInput input) -> {
-			myModel = new ModelImpl(input);
-			myView = new ViewImpl(myModel, viewMod);
 		Consumer<Object> setGameData = o -> {
 			try {
 				myGameData = myDataController.generateGameData(o);
