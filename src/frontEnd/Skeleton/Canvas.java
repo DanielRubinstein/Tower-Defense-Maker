@@ -1,10 +1,16 @@
 package frontEnd.Skeleton;
 
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Observable;
 import java.util.Observer;
 import java.util.ResourceBundle;
+import java.util.TreeMap;
 
+import backEnd.Attribute.AttributeImpl;
+import backEnd.Attribute.AttributeOwner;
+import backEnd.GameData.State.Component;
 import backEnd.GameData.State.ComponentGraph;
 import backEnd.GameData.State.State;
 import backEnd.GameData.State.Tile;
@@ -44,7 +50,9 @@ public class Canvas implements SkeletonObject, Observer{
 	private static String DEFAULT_TILE;
 	private TileGrid myTileGrid;
 	private View myView;
-	
+	//NOTE WE HAD TO USE TREEMAP b/c otherwise we can't use an interface b/c a hascode is needed...
+	private HashMap<AttributeOwner,ImageView> allTiles;// String is name of Image path
+	private HashMap<AttributeOwner,String> attrToPath;
 
 	/**
 	 * Constructs a new Canvas object given the view and state.
@@ -54,10 +62,12 @@ public class Canvas implements SkeletonObject, Observer{
 	 * @param state 
 	 */
 	public Canvas(View view, State state){
+		allTiles = new HashMap<>();
+		attrToPath = new HashMap<>();
 		myState=state;
 		myView = view;
 		myTileGrid=state.getTileGrid();
-		
+		state.addAsObserver(this);
 		root = new StackPane();
 		allComponents = new Group();
 		getImages();
@@ -101,11 +111,15 @@ public class Canvas implements SkeletonObject, Observer{
 		for(int i=0;i<myGridHeight;i++){
 			for(int j=0;j<myGridWidth;j++){
 				
-				Image image = new Image(getClass().getClassLoader().getResourceAsStream(DEFAULT_TILE));
+
+
+				Tile t = myTileGrid.getTileByLocation(new Point2D(i,j));
+				String imagePath = (String) t.getAttribute("ImageFile").getValue();
+				Image image = new Image(getClass().getClassLoader().getResourceAsStream(imagePath));
 				ImageView tileView = new ImageView(image);
 				organizeImageView(tileView);
-				Tile t = myTileGrid.getTileByLocation(new Point2D(i,j));
-				
+				System.out.println(imagePath);
+				allTiles.put((AttributeOwner)t,tileView);
 				setTileInteraction(tileView,t);
 				myGrid.add(tileView, j, i);
 			}
@@ -129,7 +143,38 @@ public class Canvas implements SkeletonObject, Observer{
 	}
 	@Override
 	public void update(Observable o, Object arg) {
-		// TODO Auto-generated method stub
+		System.out.println("updated canvas");
+		
+		for(AttributeOwner c : myState.getComponentGraph().getAllComponents()){
+			
+			String imagePath = (String)c.getAttribute("IMAGE").getValue();
+			if(!allTiles.keySet().contains(c)){
+				Image image = new Image(getClass().getClassLoader().getResourceAsStream(imagePath));
+				ImageView imView = new ImageView(image);
+				allTiles.put(c, imView);
+			}
+			String oldImPath = attrToPath.get(c);
+			ImageView oldImView = allTiles.get(c);
+			
+			Point2D pos =(Point2D) c.getAttribute("Position").getValue();
+					
+			//if old not equal to new
+			//can you just compare doubles like this? precision?
+			if(!(imagePath).equals(oldImPath) || (pos.getX()!=oldImView.getX() && pos.getY()!=oldImView.getY())){
+				Image image = new Image(getClass().getClassLoader().getResourceAsStream(imagePath));
+				ImageView imView = new ImageView(image);
+				allTiles.put(c, imView);
+				attrToPath.put(c,imagePath);
+				imView.setX(pos.getX());
+				imView.setY(pos.getX());
+				
+				myGrid.getChildren().remove(oldImView);
+				myGrid.getChildren().add(imView);
+			}
+			
+		}
+			
+		
 	}
 	
 

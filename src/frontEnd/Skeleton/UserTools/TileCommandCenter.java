@@ -1,5 +1,6 @@
 package frontEnd.Skeleton.UserTools;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -34,6 +35,8 @@ import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.stage.FileChooser;
+import javafx.stage.FileChooser.ExtensionFilter;
 import javafx.stage.Stage;
 
 public class TileCommandCenter implements SkeletonObject {
@@ -183,7 +186,14 @@ public class TileCommandCenter implements SkeletonObject {
 		case "IMAGE":
 			String imagePath = (String) attr.getValue();
 			Label l = new Label(imagePath);
-			n= l;
+			
+			l.setOnMouseClicked(e -> {
+				FileChooser imageChooser = new FileChooser();
+				imageChooser.setTitle("Select Image");
+				imageChooser.getExtensionFilters().add(new ExtensionFilter("Image Files","*.png", "*.jpg", "*.gif"));
+				File selectedFile = imageChooser.showOpenDialog(new Stage());
+			});
+			n=l;
 			break;
 		case "INTEGER":
 			break;

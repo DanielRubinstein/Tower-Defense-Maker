@@ -93,6 +93,7 @@ public class StateImpl extends Observable implements State {
 		this.pointResHeight = state.getPointResolutionHeight();
 		this.stateGrid = state.getTileGrid();
 		this.componentGraph = state.getComponentGraph();
+		this.notifyObservers();
 	}
 
 	@SuppressWarnings({ "unused", "unchecked" })
