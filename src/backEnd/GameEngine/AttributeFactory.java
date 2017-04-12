@@ -20,8 +20,7 @@ public class AttributeFactory {
 			case "String":
 				return new AttributeImpl<String>();
 			case "Integer":
-				AttributeImpl<Integer> myHealthAttribute=new AttributeImpl<Integer>();
-				return myHealthAttribute;
+				return new AttributeImpl<Integer>();
 			case "Boolean":
 				return new AttributeImpl<Boolean>();
 			case "MoveDirections":
