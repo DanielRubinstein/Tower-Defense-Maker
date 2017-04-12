@@ -11,27 +11,26 @@ import javax.xml.parsers.DocumentBuilderFactory;
 
 import org.w3c.dom.Document;
 import org.w3c.dom.Node;
-import org.w3c.dom.NodeList;
 
 import com.sun.javafx.geom.Point2D;
 
 public class AttributeFactory {
 	
-	private final static String RESOURCES_PATH = "resources/";
-	private final static String XML_FILE_NAME = "AttributePresets.xml";
-	private final static String ALL_ATTRIBUTES_TYPES = "allAttributeTypes";
-	private final static ResourceBundle myAttrNameResources = ResourceBundle.getBundle(RESOURCES_PATH + ALL_ATTRIBUTES_TYPES);
+	private final static String XML_FILE_NAME = "src/resources/AttributePresets.xml";
+	private final static String ALL_ATTRIBUTES_TYPES = "resources/allAttributeTypes";
+	private static ResourceBundle myAttrNameResources;
 	private Document doc;
 	
 	public AttributeFactory(){
+		myAttrNameResources = ResourceBundle.getBundle(ALL_ATTRIBUTES_TYPES);
 		try{
-			File fXmlFile = new File(RESOURCES_PATH + XML_FILE_NAME);
+			File fXmlFile = new File(XML_FILE_NAME);
 			DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
 			DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
 			doc = dBuilder.parse(fXmlFile);
 			doc.getDocumentElement().normalize();
 		} catch (Exception e){
-			
+			e.printStackTrace();
 		}
 	}
 	
@@ -40,7 +39,7 @@ public class AttributeFactory {
 		Node thisAttrNode = doc.getElementsByTagName(gameAttributeName).item(0);
 		switch (attributeType) {
 			case "STRINGLIST":
-				String allStringOptions = thisAttrNode.getAttributes().getNamedItem("type").getNodeValue();
+				String allStringOptions = thisAttrNode.getAttributes().getNamedItem("options").getNodeValue();
 				List<String> stringOptions = Arrays.asList(allStringOptions.split("\\s*,\\s*"));
 				return new AttributeImpl<String>(stringOptions, gameAttributeName);
 				
@@ -74,6 +73,8 @@ public class AttributeFactory {
 				return new AttributeImpl<Point2D>(null, gameAttributeName);
 						
 			case "IMAGE":
+				return new AttributeImpl<String>(null, gameAttributeName);
+				
 			default: throw new IllegalArgumentException();
 		}
 	}
