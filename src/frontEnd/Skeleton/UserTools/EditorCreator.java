@@ -13,6 +13,7 @@ import javafx.beans.property.SimpleBooleanProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.Node;
+import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
@@ -66,23 +67,25 @@ public class EditorCreator {
 		HBox editor = new HBox();
 		
 		TextField textField = new TextField((String) myAttr.getValue());
+		Button submit = new Button("Submit");
+		submit.setOnAction((e) -> {
+			sendModification(textField.getText());
+		});
 		
+		editor.getChildren().add(textField);
+		editor.getChildren().add(submit);
 		
-		// TODO Auto-generated method stub
-		return null;
+		return editor;
 	}
 
 	private Node createStringListEditor() {
 		Node n;
 		List<String> editParameters = (List<String>) myAttr.getEditParameters();
-
-		// TODO if doubles then make a slider not a combobox (this will be the
-		// only separate case)
 		ObservableList<String> options = (ObservableList<String>) FXCollections.observableArrayList(editParameters);
 		ComboBox<String> optionsBox = new ComboBox<String>(options);
 		try {
 			// TODO this will work as long as there is an attribute there
-			optionsBox.getSelectionModel().select(myAttr.getValue().toString());
+			optionsBox.getSelectionModel().select((String) myAttr.getValue());
 		} catch (NullPointerException e) {
 			// do nothing
 		}
