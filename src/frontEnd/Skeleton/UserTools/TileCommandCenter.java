@@ -101,11 +101,6 @@ public class TileCommandCenter implements SkeletonObject {
 		HBox contents_Att = createAttributeView(obj);
 
 		contents.getChildren().add(contents_Att);
-
-		if (myView.getBooleanAuthorModeProperty().get()) {
-			contents.getChildren().add(getAuthorButtons(null, null));
-		}
-
 		contents.setSpacing(STANDARD_SPACING);
 		// contents.setAlignment(Pos.TOP_CENTER);
 
@@ -161,25 +156,11 @@ public class TileCommandCenter implements SkeletonObject {
 		return singleAttEditor;
 	}
 
-	private Node getAuthorButtons(EventHandler<ActionEvent> addEvent, EventHandler<ActionEvent> removeEvent) {
-
-		Button add = new Button("ADD");
-		add.setOnAction(addEvent);
-
-		Button remove = new Button("REMOVE SELECTED");
-		remove.setOnAction(removeEvent);
-
-		HBox n = new HBox();
-		n.getChildren().addAll(add, remove);
-		return n;
-	}
-
 	private Label createLocationLabel() {
 		// TODO maybe add sell feature here
 		return new Label(
 				String.format("Location: (%.0f, %.0f)", myTile.getLocation().getX(), myTile.getLocation().getY()));
 	}
-
 
 	private Tab createSingleTab(String name, Node contents) {
 		Tab tab = new Tab(name);
