@@ -16,8 +16,8 @@ import backEnd.GameData.State.State;
 import backEnd.GameData.State.Tile;
 import backEnd.GameData.State.TileGrid;
 import frontEnd.View;
+import frontEnd.Skeleton.AoTools.TileCommandCenter;
 import frontEnd.Skeleton.UserTools.SkeletonObject;
-import frontEnd.Skeleton.UserTools.TileCommandCenter;
 import javafx.geometry.Point2D;
 import javafx.scene.Group;
 import javafx.scene.Node;
@@ -116,7 +116,7 @@ public class Canvas implements SkeletonObject, Observer{
 				Image image = new Image(getClass().getClassLoader().getResourceAsStream(imagePath));
 				ImageView tileView = new ImageView(image);
 				organizeImageView(tileView);
-				System.out.println(imagePath);
+				//System.out.println(imagePath);
 				allTiles.put((AttributeOwner)t,tileView);
 				setTileInteraction(tileView,t);
 				myGrid.add(tileView, j, i);

@@ -1,102 +1,44 @@
-package frontEnd.Skeleton.UserTools;
+package frontEnd.Skeleton.AoTools;
 
-import java.io.File;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
-import java.util.Map;
-import java.util.Map.Entry;
-import java.util.function.Consumer;
+import java.util.MissingResourceException;
 import java.util.ResourceBundle;
 
-import ModificationFromUser.Modification_ChangeMode;
-import ModificationFromUser.Modification_EditAttribute;
 import backEnd.Attribute.Attribute;
-import backEnd.Attribute.AttributeOwner;
 import backEnd.Attribute.AttributeOwnerReader;
-import backEnd.GameData.State.Component;
-import backEnd.GameData.State.ComponentGraph;
-import backEnd.GameData.State.State;
-import backEnd.GameData.State.Tile;
 import frontEnd.View;
-import frontEnd.CustomJavafxNodes.NumberChanger;
-import frontEnd.CustomJavafxNodes.ToggleSwitch;
-import javafx.beans.property.SimpleBooleanProperty;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
+import frontEnd.Skeleton.UserTools.SkeletonObject;
 import javafx.geometry.Insets;
+import javafx.geometry.Point2D;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
-import javafx.scene.control.TextField;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
-import javafx.stage.FileChooser;
-import javafx.stage.FileChooser.ExtensionFilter;
 import javafx.stage.Stage;
 
-public class TileCommandCenter implements SkeletonObject {
+public abstract class CommandCenter implements SkeletonObject{
 	private static final int STANDARD_SPACING = 10;
 	public static final String DEFAULT_CSS = "/resources/css/Flatter.css";
-	private View myView;
-	private TabPane tabPane;
 	private Stage myStage;
-	private Collection<Component> myComponents;
-	private Tile myTile;
 	private final static String RESOURCES_PATH = "resources/";
 	private final static String ALL_ATTRIBUTES_TYPES = "allAttributeTypes";
 	private final static ResourceBundle myAttrNameResources = ResourceBundle
 			.getBundle(RESOURCES_PATH + ALL_ATTRIBUTES_TYPES);
-
-	public TileCommandCenter(View view, Tile tile, State state) {
-		myTile = tile;
-		ComponentGraph myComponentGraph = state.getComponentGraph();
-		myComponents = myComponentGraph.getComponentList();
-		myView = view;
-	}
-
-	private void createTabsAndStage(Tile tile) {
+	
+	protected View myView;
+	protected TabPane tabPane;
+	
+	public CommandCenter(){
 		tabPane = new TabPane();
-		tabPane.getTabs().add(createAttributeOwnerTab(tile));
-		tabPane.getTabs().addAll(createComponentTabs());
-		myStage = new Stage();
-		Scene myScene = new Scene(tabPane);
-		myScene.getStylesheets().add(DEFAULT_CSS);
-		myStage.setScene(myScene);
-		myStage.setTitle("Tile Command Center");
 	}
-
-	public void launch(double x, double y) {
-		createTabsAndStage(myTile);
-		myStage.setX(x);
-		myStage.setY(y);
-		myStage.show();
-	}
-
-	public Node getRoot() {
-		return tabPane;
-	}
-
-	private Collection<Tab> createComponentTabs() {
-		List<Tab> componentTabs = new ArrayList<Tab>();
-		for (Component c : myComponents) {
-			componentTabs.add(createAttributeOwnerTab(c));
-		}
-		return componentTabs;
-	}
-
-	private Tab createAttributeOwnerTab(AttributeOwnerReader obj) {
+	
+	protected Tab createAttributeOwnerTab(AttributeOwnerReader obj) {
 		VBox contents = new VBox();
 		contents.setPadding(new Insets(STANDARD_SPACING, STANDARD_SPACING, STANDARD_SPACING, STANDARD_SPACING));
-		contents.getChildren().add(createLocationLabel());
+		contents.getChildren().add(createLocationLabel(obj));
 
 		HBox contents_Att = createAttributeView(obj);
 
@@ -156,12 +98,17 @@ public class TileCommandCenter implements SkeletonObject {
 		return singleAttEditor;
 	}
 
-	private Label createLocationLabel() {
+	private Label createLocationLabel(AttributeOwnerReader obj) {
 		// TODO maybe add sell feature here
-		return new Label(
-				String.format("Location: (%.0f, %.0f)", myTile.getLocation().getX(), myTile.getLocation().getY()));
+		try{
+			Point2D pos = (Point2D) obj.getAttribute("Position");
+			return new Label(
+				String.format("Location: (%.0f, %.0f)", pos.getX(), pos.getY()));
+		} catch (NullPointerException | MissingResourceException e ){
+			return new Label("Error in producing Position Attribute");
+		}
 	}
-
+	
 	private Tab createSingleTab(String name, Node contents) {
 		Tab tab = new Tab(name);
 		tab.setClosable(false);
@@ -169,4 +116,20 @@ public class TileCommandCenter implements SkeletonObject {
 		return tab;
 	}
 
+	public Node getRoot() {
+		return tabPane;
+	}
+	
+	public abstract void launch(double x, double y);
+	
+	protected void generate(double x, double y) {
+		myStage = new Stage();
+		Scene myScene = new Scene(tabPane);
+		myScene.getStylesheets().add(DEFAULT_CSS);
+		myStage.setScene(myScene);
+		myStage.setTitle("Command Center");
+		myStage.setX(x);
+		myStage.setY(y);
+		myStage.show();
+	}
 }
