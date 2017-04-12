@@ -34,4 +34,9 @@ public interface Tile extends AttributeOwner {
 	 */
 	boolean hasAttribute(String name);
 	
+	/*
+	 * return true 
+	 */
+	boolean containsComponent();
+	
 }

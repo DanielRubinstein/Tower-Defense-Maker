@@ -69,6 +69,13 @@ public class TileImpl implements Tile{
 		return false;
 	}
 
+	
+	public boolean containsComponent(){
+		// TODO do it
+		return false;
+	}
+
+	
 	/*
 	@Override
 	public boolean hasAttribute(String name) {
