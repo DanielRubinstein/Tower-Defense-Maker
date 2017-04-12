@@ -59,7 +59,6 @@ public class StateImpl extends Observable implements State {
 			}
 		}
 	}
-	
 	public void addAsObserver(Observer o){
 		this.addObserver(o);
 	}
@@ -94,7 +93,6 @@ public class StateImpl extends Observable implements State {
 		this.pointResHeight = state.getPointResolutionHeight();
 		this.stateGrid = state.getTileGrid();
 		this.componentGraph = state.getComponentGraph();
-		//notifyObservers();
 	}
 
 	@SuppressWarnings({ "unused", "unchecked" })
