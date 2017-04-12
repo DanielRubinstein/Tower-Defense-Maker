@@ -81,7 +81,7 @@ public class Palette<T extends AttributeOwner> implements SkeletonObject {
 			String imagePathForNewPreset = null;
 			//newAO.addAttribute(IMAGEFILE_ATTRIBUTE_NAME, imagePathForNewPreset);
 			// TODO this is where a new preset is created in the frontend
-			// you're gonna have to use instanceof
+			// you should also probably use command center
 			if (myType.equals("Tiles")){
 				
 			} else if (myType.equals("Components")){

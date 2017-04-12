@@ -59,7 +59,6 @@ public class SkeletonImpl implements Skeleton{
 		stage.setScene(myScene);
 		stage.setMinWidth(MENU_WIDTH);
 		stage.setMinHeight(MENU_HEIGHT);
-		
 		stage.show();
 	}
 	
