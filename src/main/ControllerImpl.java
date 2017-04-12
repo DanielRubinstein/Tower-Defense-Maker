@@ -54,7 +54,7 @@ public class ControllerImpl implements Controller {
 				Method m = myDataController.getClass().getMethod("generateGameData", o.getClass());
 				myGameData = (GameData) m.invoke(myDataController,o);
 				myModel = new ModelImpl(myDataController, myGameData);
-				myView = new ViewImpl(myModel, viewMod);
+				myView = new ViewImpl(myModel, myDataController, viewMod);
 			} catch (XMLReadingException e) {
 				ErrorDialog errDia = new ErrorDialog();
 				errDia.create("Cannot Load Game", e.getMessage());
