@@ -87,12 +87,16 @@ public class StateImpl extends Observable implements State {
 	}
 	
 	public void updateState(State state){
+		System.out.println("STATE EE");
 		this.gridWidth = state.getGridWidth();
 		this.gridHeight = state.getGridHeight();
 		this.pointResWidth = state.getPointResolutionWidth();
 		this.pointResHeight = state.getPointResolutionHeight();
 		this.stateGrid = state.getTileGrid();
 		this.componentGraph = state.getComponentGraph();
+		this.setChanged();
+		this.notifyObservers();
+
 	}
 
 	@SuppressWarnings({ "unused", "unchecked" })

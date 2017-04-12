@@ -1,5 +1,6 @@
 package frontEnd.Skeleton.UserTools;
 
+import java.io.File;
 import java.util.List;
 
 import ModificationFromUser.Modification_EditAttribute;
@@ -16,11 +17,15 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.HBox;
+import javafx.stage.FileChooser;
+import javafx.stage.Stage;
+import javafx.stage.FileChooser.ExtensionFilter;
 
 public class EditorCreator {
 	private View myView;
 	private AttributeOwnerReader myOwner;
 	private Attribute<?> myAttr;
+	public static final String SAVED_IMAGES_DIRECTORY = "./src/images";
 
 	public EditorCreator(View view, AttributeOwnerReader obj, Attribute<?> attr){
 		myView = view;
@@ -99,11 +104,22 @@ public class EditorCreator {
 	}
 
 	private Node createImageEditor() {
-		Node n;
 		String imagePath = (String) myAttr.getValue();
-		Label l = new Label(imagePath);
-		n = l;
-		return n;
+		Button b = new Button(imagePath);
+		b.setOnAction(e -> {
+			FileChooser imageChooser = new FileChooser();
+			imageChooser.setTitle("Select Image");
+			imageChooser.getExtensionFilters().add(new ExtensionFilter("Image Files","*.png", "*.jpg", "*.gif"));
+			imageChooser.setInitialDirectory(new File(SAVED_IMAGES_DIRECTORY));
+			
+			File selectedFile = imageChooser.showOpenDialog(new Stage());
+			String newPath = selectedFile.getPath();
+			//TODO: get only the end of the path
+			myView.sendUserModification(new Modification_EditAttribute((AttributeOwner)myOwner, myAttr, newPath));
+			System.out.println(newPath);
+		});
+
+		return b;
 	}
 
 	private Node createDoubleEditor() {

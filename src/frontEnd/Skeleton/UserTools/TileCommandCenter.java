@@ -1,5 +1,6 @@
 package frontEnd.Skeleton.UserTools;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -38,6 +39,8 @@ import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.stage.FileChooser;
+import javafx.stage.FileChooser.ExtensionFilter;
 import javafx.stage.Stage;
 
 public class TileCommandCenter implements SkeletonObject {
@@ -177,7 +180,6 @@ public class TileCommandCenter implements SkeletonObject {
 				String.format("Location: (%.0f, %.0f)", myTile.getLocation().getX(), myTile.getLocation().getY()));
 	}
 
-	
 
 	private Tab createSingleTab(String name, Node contents) {
 		Tab tab = new Tab(name);
