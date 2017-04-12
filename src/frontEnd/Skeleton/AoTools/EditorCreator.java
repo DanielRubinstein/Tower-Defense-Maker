@@ -1,4 +1,4 @@
-package frontEnd.Skeleton.UserTools;
+package frontEnd.Skeleton.AoTools;
 
 import java.io.File;
 import java.util.List;
@@ -11,6 +11,7 @@ import frontEnd.View;
 import frontEnd.CustomJavafxNodes.NumberChanger;
 import frontEnd.CustomJavafxNodes.ToggleSwitch;
 import javafx.beans.property.SimpleBooleanProperty;
+import javafx.beans.value.ChangeListener;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.Node;
@@ -70,7 +71,7 @@ public class EditorCreator {
 				paramList.get(3));
 		n = numChanger.getRoot();
 		numChanger.addListener((o, oldValue, newValue)  -> {
-			myView.sendUserModification(new Modification_EditAttribute(myOwner, myAttr, newValue.intValue()));
+			sendModification(newValue.intValue());
 		});
 		return n;
 	}
@@ -111,6 +112,7 @@ public class EditorCreator {
 
 	private Node createImageEditor() {
 		String imagePath = (String) myAttr.getValue();
+		System.out.println(imagePath);
 		Button b = new Button(imagePath);
 		b.setOnAction(e -> {
 			FileChooser imageChooser = new FileChooser();
@@ -121,7 +123,7 @@ public class EditorCreator {
 			File selectedFile = imageChooser.showOpenDialog(new Stage());
 			String newPath = selectedFile.getPath();
 			//TODO: get only the end of the path
-			myView.sendUserModification(new Modification_EditAttribute((AttributeOwner)myOwner, myAttr, newPath));
+			sendModification(newPath);
 			System.out.println(newPath);
 		});
 
@@ -135,7 +137,7 @@ public class EditorCreator {
 				paramList.get(3));
 		n = numChanger.getRoot();
 		numChanger.addListener((o, oldValue, newValue)  -> {
-			myView.sendUserModification(new Modification_EditAttribute(myOwner, myAttr, newValue));
+			sendModification(newValue);
 		});
 		return n;
 	}
