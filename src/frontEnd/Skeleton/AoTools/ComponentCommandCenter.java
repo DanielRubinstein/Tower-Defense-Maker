@@ -1,11 +1,13 @@
 package frontEnd.Skeleton.AoTools;
 
 import backEnd.GameData.State.Component;
+import frontEnd.View;
 
 public class ComponentCommandCenter extends CommandCenter{
 	private Component myComponent;
 	
-	public ComponentCommandCenter(Component component){
+	public ComponentCommandCenter(View view, Component component){
+		super(view);
 		myComponent = component;
 	}
 
