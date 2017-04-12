@@ -10,7 +10,5 @@ public interface AttributeReader<T> {
 	
 	public Collection<T> getEditParameters();
 	
-	public AttributeType getAttributeType();
-	
 	public String getName();
 }
