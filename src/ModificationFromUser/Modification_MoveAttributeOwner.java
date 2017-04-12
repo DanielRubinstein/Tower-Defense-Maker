@@ -5,7 +5,7 @@ import java.util.ResourceBundle;
 import backEnd.ModelImpl;
 import backEnd.Attribute.Attribute;
 import backEnd.Attribute.AttributeOwner;
-import backEnd.GameData.State.Component;
+import backEnd.GameData.State.ComponentImpl;
 import backEnd.GameData.State.Tile;
 import javafx.geometry.Point2D;
 
@@ -29,10 +29,10 @@ public class Modification_MoveAttributeOwner implements ModificationFromUser {
 		if(myAO instanceof Tile){
 			throw new Exception(ERROR_DESCRIPTION);
 		}
-		else if(myAO instanceof Component){
-			myModel.getState().getComponentGraph().removeComponent((Component) myAO);
-			myModel.getState().getComponentGraph().addComponentToGrid((Component) myAO, newLoc);
-			Attribute<Point2D> myLoc = (Attribute<Point2D>)((Component)myAO).getMyAttributes().get(myAttrNameResources.getString("Position"));
+		else if(myAO instanceof ComponentImpl){
+			myModel.getState().getComponentGraph().removeComponent((ComponentImpl) myAO);
+			myModel.getState().getComponentGraph().addComponentToGrid((ComponentImpl) myAO, newLoc);
+			Attribute<Point2D> myLoc = (Attribute<Point2D>)((ComponentImpl)myAO).getMyAttributes().get(myAttrNameResources.getString("Position"));
 			myLoc.setValue(newLoc);
 		}
 	}

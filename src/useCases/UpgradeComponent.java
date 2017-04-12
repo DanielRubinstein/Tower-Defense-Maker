@@ -4,7 +4,7 @@ import java.util.List;
 
 import backEnd.Attribute.AttributeImpl;
 import backEnd.Bank.EnvironmentInterface;
-import backEnd.GameData.State.Component;
+import backEnd.GameData.State.ComponentImpl;
 import backEnd.GameData.State.State;
 import main.ControllerImpl;
 

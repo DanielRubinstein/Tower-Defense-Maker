@@ -7,7 +7,7 @@ import java.util.Map;
 
 import backEnd.Bank.BankController;
 import backEnd.GameData.GameData;
-import backEnd.GameData.State.Component;
+import backEnd.GameData.State.ComponentImpl;
 import backEnd.GameData.State.StateImpl;
 import backEnd.GameData.State.Tile;
 import frontEnd.Splash.StartingInput;
@@ -23,7 +23,7 @@ public class DataController {
 	private static final String UNIV_GAME_DATA_PATH = "data/UniversalGameData/";
 	private XMLReader myXMLReader;
 	private XMLWriter myXMLWriter;
-	private Map<String,Component> componentMap;
+	private Map<String,ComponentImpl> componentMap;
 	private Map<String,Tile >tileMap;
 	private BankController bankController;
 	
@@ -35,7 +35,7 @@ public class DataController {
 	@SuppressWarnings("unchecked")
 	public BankController generateBanks() throws XMLReadingException{
 		List<Map<String,?>> objectMaps = myXMLReader.loadUniversalGameData(UNIV_GAME_DATA_PATH);
-		componentMap = (Map<String,Component>) objectMaps.get(0);
+		componentMap = (Map<String,ComponentImpl>) objectMaps.get(0);
 		tileMap = (Map<String,Tile>) objectMaps.get(1);
 		return new BankController(tileMap, componentMap);
 	}
@@ -73,7 +73,7 @@ public class DataController {
 		
 	}
 	
-	public Map<String, Component> getComponentsMap(){
+	public Map<String, ComponentImpl> getComponentsMap(){
 		return componentMap;
 	}
 	

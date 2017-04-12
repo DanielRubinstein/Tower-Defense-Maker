@@ -1,7 +1,7 @@
 package backEnd.GameEngine.Engine;
 
 
-import backEnd.GameData.State.Component;
+import backEnd.GameData.State.ComponentImpl;
 import backEnd.GameData.State.State;
 import backEnd.GameEngine.Behaviors.Behavior;
 import backEnd.GameEngine.Behaviors.DeathBehavior;
@@ -19,7 +19,7 @@ public class DeathEngine implements Engine{
 	private DeathBehavior DB;
 	public void gameLoop(State currentState, double stepTime){
 	DB=new DeathBehavior();
-	for(Component struct: currentState.getComponentGraph().getAllComponents()){
+	for(ComponentImpl struct: currentState.getComponentGraph().getAllComponents()){
 		DB.execute(struct);
 		if (DB.isDead()){
 			currentState.getComponentGraph().getAllComponents().remove(struct);

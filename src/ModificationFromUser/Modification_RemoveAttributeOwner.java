@@ -2,7 +2,7 @@ package ModificationFromUser;
 
 import backEnd.ModelImpl;
 import backEnd.Attribute.AttributeOwner;
-import backEnd.GameData.State.Component;
+import backEnd.GameData.State.ComponentImpl;
 import backEnd.GameData.State.Tile;
 
 public class Modification_RemoveAttributeOwner implements ModificationFromUser {
@@ -19,8 +19,8 @@ public class Modification_RemoveAttributeOwner implements ModificationFromUser {
 		if (toRemove instanceof Tile){
 			throw new Exception(ERROR_DESCRIPTION);
 		}
-		else if (toRemove instanceof Component){
-			myModel.getState().getComponentGraph().removeComponent((Component)toRemove);
+		else if (toRemove instanceof ComponentImpl){
+			myModel.getState().getComponentGraph().removeComponent((ComponentImpl)toRemove);
 
 		}
 		

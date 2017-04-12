@@ -34,7 +34,7 @@ public class MoveEngine implements Engine{
 	@Override
 	public void gameLoop(State currentState, double stepTime) {
 		myState=currentState;
-		for (Component c: myState.getComponentGraph().getAllComponents()){
+		for (ComponentImpl c: myState.getComponentGraph().getAllComponents()){
 			Tile currentTile=myState.getTileGrid().getTileByLocation((Point2D) c.getAttribute("Position").getValue()); 
 			myState.getComponentGraph().removeComponent(c);
 			MoveBehavior mb=new MoveBehavior(c);

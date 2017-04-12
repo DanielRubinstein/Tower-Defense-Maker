@@ -9,7 +9,7 @@ import com.thoughtworks.xstream.XStream;
 import com.thoughtworks.xstream.io.xml.DomDriver;
 
 import backEnd.GameData.GameData;
-import backEnd.GameData.State.Component;
+import backEnd.GameData.State.ComponentImpl;
 import backEnd.GameData.State.Tile;
 
 /**
@@ -41,7 +41,7 @@ public class XMLReaderImpl implements XMLReader {
 	
 	public List<Map<String,?>> loadUniversalGameData(String filePath) throws XMLReadingException{
 		@SuppressWarnings("unchecked")
-		Map<String, Component> loadedComponentMap = (Map<String,Component>) loadXML(filePath, "ComponentMap");
+		Map<String, ComponentImpl> loadedComponentMap = (Map<String,ComponentImpl>) loadXML(filePath, "ComponentMap");
 		@SuppressWarnings("unchecked")
 		Map<String, Tile> loadedTileMap = (Map<String,Tile>) loadXML(filePath, "TileMap");
 		return Arrays.asList(loadedComponentMap,loadedTileMap);
