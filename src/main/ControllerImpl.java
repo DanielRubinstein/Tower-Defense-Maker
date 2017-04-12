@@ -1,6 +1,14 @@
 package main;
 
+import java.io.File;
+import java.lang.reflect.Constructor;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
+import java.lang.reflect.Type;
+import java.util.Map;
 import java.util.function.Consumer;
+
+import com.sun.org.apache.xalan.internal.xsltc.runtime.Parameter;
 
 import ModificationFromUser.ModificationFromUser;
 import backEnd.ModelImpl;
@@ -11,6 +19,7 @@ import frontEnd.ViewImpl;
 import frontEnd.Menus.ErrorDialog;
 import frontEnd.Skeleton.SkeletonImpl;
 import frontEnd.Splash.MainMenu;
+import frontEnd.Splash.StartingInput;
 import javafx.stage.Stage;
 
 public class ControllerImpl implements Controller {
@@ -18,6 +27,7 @@ public class ControllerImpl implements Controller {
 	private ModelImpl myModel;
 	private GameData myGameData;
 	private DataController myDataController;
+	private Map<Object,String> dataMap;
 
 	public void start(Stage stage) {
 		//developerTestingSkeleton(stage);
@@ -38,17 +48,29 @@ public class ControllerImpl implements Controller {
 						}
 					}
 				};
-				
-				
+
 		Consumer<Object> setGameData = o -> {
 			try {
-				myGameData = myDataController.generateGameData(o);
+				Method m = myDataController.getClass().getMethod("generateGameData", o.getClass());
+				myGameData = (GameData) m.invoke(myDataController,o);
 				myModel = new ModelImpl(myDataController, myGameData);
-				myView = new ViewImpl(myModel, viewMod);
+				myView = new ViewImpl(myModel, myDataController, viewMod);
 			} catch (XMLReadingException e) {
 				ErrorDialog errDia = new ErrorDialog();
 				errDia.create("Cannot Load Game", e.getMessage());
-			}
+			} catch (SecurityException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (NoSuchMethodException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (IllegalAccessException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (InvocationTargetException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} 
 			
 		};
 					

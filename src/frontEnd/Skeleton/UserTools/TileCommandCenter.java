@@ -5,10 +5,10 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
+import java.util.ResourceBundle;
 
 import ModificationFromUser.Modification_EditAttribute;
 import backEnd.Attribute.Attribute;
-import backEnd.Attribute.AttributeImpl;
 import backEnd.Attribute.AttributeOwner;
 import backEnd.Attribute.AttributeOwnerReader;
 import backEnd.GameData.State.Component;
@@ -44,13 +44,15 @@ public class TileCommandCenter implements SkeletonObject {
 	private Stage myStage;
 	private Collection<Component> myComponents;
 	private Tile myTile;
+	private final static String RESOURCES_PATH = "resources/";
+	private final static String ALL_ATTRIBUTES_TYPES = "allAttributeTypes";
+	private final static ResourceBundle myAttrNameResources = ResourceBundle.getBundle(RESOURCES_PATH + ALL_ATTRIBUTES_TYPES);
 
 	public TileCommandCenter(View view, Tile tile, State state) {
 		myTile = tile;
 		ComponentGraph myComponentGraph = state.getComponentGraph();
 		myComponents = myComponentGraph.getComponentList();
 		myView = view;
-		
 	}
 
 	private void createTabsAndStage(Tile tile) {
@@ -78,7 +80,6 @@ public class TileCommandCenter implements SkeletonObject {
 	private Collection<Tab> createComponentTabs() {
 		List<Tab> componentTabs = new ArrayList<Tab>();
 		for (Component c : myComponents) {
-			// add component tab
 			componentTabs.add(createAttributeOwnerTab(c));
 		}
 		return componentTabs;
@@ -88,7 +89,7 @@ public class TileCommandCenter implements SkeletonObject {
 		VBox contents = new VBox();
 		contents.setPadding(new Insets(STANDARD_SPACING, STANDARD_SPACING, STANDARD_SPACING, STANDARD_SPACING));
 		contents.getChildren().add(createLocationLabel());
-		
+
 		HBox contents_Att = createAttributeView(obj);
 		
 		contents.getChildren().add(contents_Att);
@@ -128,7 +129,6 @@ public class TileCommandCenter implements SkeletonObject {
 		Label attLabel = new Label(attr.getName());
 		singleAttEditor.getChildren().add(attLabel);
 		Node right;
-		
 		if (myView.getBooleanAuthorModeProperty().get()) {
 			// Author Mode
 			right = createEditor(obj, attr);
@@ -167,36 +167,42 @@ public class TileCommandCenter implements SkeletonObject {
 
 	private Node createEditor(AttributeOwnerReader obj, Attribute<?> attr) {
 		Node n = null;
-		switch(attr.getAttributeType()){
-		case BOOLEAN:
+		String type = myAttrNameResources.getString(attr.getName());
+		switch(type){
+		case "BOOLEAN":
 			ToggleSwitch myToggle = new ToggleSwitch(myView, "On", "Off", new SimpleBooleanProperty((Boolean) attr.getValue()));
 			n = myToggle.getRoot();
-		case DOUBLE:
-			List<Double> paramList = (List<Double>) attr.getEditParameters();
+			break;
+		case "DOUBLE":
+			List<Double> paramList = (List<Double>)attr.getEditParameters();
 			NumberChanger numChanger = new NumberChanger(paramList.get(0), paramList.get(1), paramList.get(2), paramList.get(3));
 			n = numChanger.getRoot();
-		case EDITABLESTRING:
 			break;
-		case IMAGE:
+		case "EDITABLESTRING":
 			break;
-		case INTEGER:
+		case "IMAGE":
+			String imagePath = (String) attr.getValue();
+			Label l = new Label(imagePath);
+			n= l;
 			break;
-		case STRINGLIST:
+		case "INTEGER":
+			break;
+		case "STRINGLIST":
 			// TODO if doubles then make a slider not a combobox (this will be the only separate case)
-			ObservableList<String> options = FXCollections.observableArrayList( attr.getValue().getPossibleValues());
+			ObservableList<String> options = (ObservableList<String>) FXCollections.observableArrayList( attr.getEditParameters());
 			ComboBox<String> optionsBox = new ComboBox<String>(options);
 			try{
 				// TODO this will work as long as there is an attribute there
-				optionsBox.getSelectionModel().select(attr.getValue().getValueAsString());
+				optionsBox.getSelectionModel().select(attr.getValue().toString());
 			} catch (NullPointerException e){
 				// do nothing
 			}
 			optionsBox.valueProperty().addListener((o, oldValue, newValue) -> {
 				// where the actual modification gets sent
-				System.out.println("editting attribute");
-				myView.sendUserModification(new Modification_EditAttribute(obj, attr.getValue(), newValue));
+				myView.sendUserModification(new Modification_EditAttribute(obj, attr, newValue));
 			});
 			n = optionsBox;
+			break;
 		default:
 			break;
 		
