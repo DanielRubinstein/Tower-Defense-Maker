@@ -2,7 +2,7 @@ package frontEnd;
 
 import ModificationFromUser.ModificationFromUser;
 
-public interface ViewEditor extends ViewReader{
+public interface View extends ViewReader{
 
 	public Object save();
 	
