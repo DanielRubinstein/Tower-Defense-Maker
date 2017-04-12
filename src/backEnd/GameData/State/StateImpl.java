@@ -1,5 +1,6 @@
 package backEnd.GameData.State;
 
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -36,7 +37,7 @@ public class StateImpl extends Observable implements State {
 	private final static String RESOURCES_PATH = "resources/defaultTileAttributes";
 	private final static ResourceBundle myResources = ResourceBundle.getBundle(RESOURCES_PATH);
 
-	public StateImpl(int gridWidth, int gridHeight, int pointResolution_Width, int pointResolution_Height) {
+	public StateImpl(int gridWidth, int gridHeight, int pointResolution_Width, int pointResolution_Height) throws FileNotFoundException {
 		this.gridWidth = gridWidth;
 		this.gridHeight = gridHeight;
 		this.pointResWidth = pointResolution_Width;
@@ -46,7 +47,7 @@ public class StateImpl extends Observable implements State {
 	}
 
 	private void setDefaultTileGrid(int gridWidth, int gridHeight, int pointResolution_Width,
-			int pointResolution_Height) {
+			int pointResolution_Height) throws FileNotFoundException {
 		stateGrid = new TileGridImpl(gridWidth, gridHeight);
 		for (int i = 0; i < gridHeight; i++) {
 			for (int j = 0; j < gridWidth; j++) {
@@ -83,6 +84,15 @@ public class StateImpl extends Observable implements State {
 			}
 		}
 		return startTiles;
+	}
+	
+	public void updateState(State state){
+		this.gridWidth = state.getGridWidth();
+		this.gridHeight = state.getGridHeight();
+		this.pointResWidth = state.getPointResolutionWidth();
+		this.pointResHeight = state.getPointResolutionHeight();
+		this.stateGrid = state.getTileGrid();
+		this.componentGraph = state.getComponentGraph();
 	}
 
 	@SuppressWarnings({ "unused", "unchecked" })
@@ -170,6 +180,26 @@ public class StateImpl extends Observable implements State {
 	public void calculateShortestPath() {
 		// TODO Auto-generated method stub
 
+	}
+
+	@Override
+	public int getGridWidth() {
+		return gridWidth;
+	}
+
+	@Override
+	public int getGridHeight() {
+		return gridHeight;
+	}
+
+	@Override
+	public int getPointResolutionWidth() {
+		return pointResWidth;
+	}
+
+	@Override
+	public int getPointResolutionHeight() {
+		return pointResHeight;
 	}
 
 }

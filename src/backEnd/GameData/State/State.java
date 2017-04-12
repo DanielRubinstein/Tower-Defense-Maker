@@ -26,7 +26,17 @@ public interface State {
 	 */
 	void calculateShortestPath();
 	
-	public void addAsObserver(Observer o);
+	void addAsObserver(Observer o);
+	
+	void updateState(State state);
+	
+	int getGridWidth();
+	
+	int getGridHeight();
+	
+	int getPointResolutionWidth();
+	
+	int getPointResolutionHeight();
 
 	
 }
