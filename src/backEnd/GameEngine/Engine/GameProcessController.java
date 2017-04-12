@@ -16,6 +16,7 @@ public class GameProcessController {
 	private Rules myRules;
 	private final static String RESOURCES_PATH = "resources/GameProcessController";
 	private final static ResourceBundle myResources = ResourceBundle.getBundle(RESOURCES_PATH);
+	
 	public GameProcessController(State currentState, Rules gameRules){
 		myEngines = new ArrayList<Engine>();
 		myCurrentState = currentState;
@@ -27,9 +28,9 @@ public class GameProcessController {
 		}
 	}
 	
-	public void run() {
+	public void run(double stepTime) {
 		for(Engine engine : myEngines){
-			engine.gameLoop(myCurrentState);
+			engine.gameLoop(myCurrentState,stepTime);
 		}
 		//Has won/lost?
 	}	
