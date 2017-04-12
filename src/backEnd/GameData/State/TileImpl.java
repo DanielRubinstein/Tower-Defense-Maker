@@ -66,4 +66,5 @@ public class TileImpl implements Tile, AttributeOwner{
 		return myAttrData.getAttributeMap().containsKey(attributeResources.getString(name));
 	}
 
+
 }
