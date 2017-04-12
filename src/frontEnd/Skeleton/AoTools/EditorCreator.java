@@ -1,6 +1,8 @@
 package frontEnd.Skeleton.AoTools;
 
 import java.io.File;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.List;
 
 import ModificationFromUser.Modification_EditAttribute;
@@ -122,9 +124,12 @@ public class EditorCreator {
 			
 			File selectedFile = imageChooser.showOpenDialog(new Stage());
 			String newPath = selectedFile.getPath();
+			
+			String newValue = newPath.substring(newPath.indexOf("images"), newPath.length());
+			
 			//TODO: get only the end of the path
-			sendModification(newPath);
-			System.out.println(newPath);
+			sendModification(newValue);
+			System.out.println(newValue);
 		});
 
 		return b;
