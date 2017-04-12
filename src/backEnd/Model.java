@@ -24,5 +24,5 @@ public interface Model {
 	public ModeReader getModeReader();
 	
 	public BankController getBankController();
-	
 }
+
