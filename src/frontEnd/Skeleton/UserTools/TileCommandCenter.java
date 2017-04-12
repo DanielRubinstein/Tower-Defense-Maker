@@ -199,7 +199,7 @@ public class TileCommandCenter implements SkeletonObject {
 			}
 			optionsBox.valueProperty().addListener((o, oldValue, newValue) -> {
 				// where the actual modification gets sent
-				myView.sendUserModification(new Modification_EditAttribute(obj, attr, newValue));
+				myView.sendUserModification(new Modification_EditAttribute( obj, attr, newValue));
 			});
 			n = optionsBox;
 			break;
