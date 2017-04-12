@@ -1,7 +1,7 @@
 package frontEnd.Skeleton.UserTools;
 
+import backEnd.GameData.State.Component;
 import backEnd.GameData.State.Tile;
-import backEnd.GameEngine.Component;
 import frontEnd.View;
 import javafx.geometry.Side;
 import javafx.scene.Node;

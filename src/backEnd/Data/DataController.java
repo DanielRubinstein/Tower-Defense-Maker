@@ -6,9 +6,9 @@ import java.util.Map;
 
 import backEnd.Bank.BankController;
 import backEnd.GameData.GameData;
+import backEnd.GameData.State.Component;
 import backEnd.GameData.State.StateImpl;
 import backEnd.GameData.State.Tile;
-import backEnd.GameEngine.Component;
 import frontEnd.Splash.StartingInput;
 
 /**

@@ -2,7 +2,7 @@ package ModificationFromUser;
 
 import backEnd.ModelImpl;
 import backEnd.Attribute.AttributeImpl;
-import backEnd.GameEngine.Component;
+import backEnd.GameData.State.Component;
 import backEnd.Mode.ModeException;
 
 
@@ -35,5 +35,4 @@ public class Modification_AddComponentAttribute<T> implements ModificationFromUs
 	
 
 }
-
 
