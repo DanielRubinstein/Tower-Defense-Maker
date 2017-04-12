@@ -1,8 +1,8 @@
 package frontEnd.Skeleton.UserTools;
 
+import backEnd.GameData.State.Component;
 import backEnd.GameData.State.Tile;
-import backEnd.GameEngine.Component;
-import frontEnd.ViewEditor;
+import frontEnd.View;
 import javafx.geometry.Side;
 import javafx.scene.Node;
 import javafx.scene.control.ScrollPane;
@@ -10,10 +10,10 @@ import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
 
 public class PalettePane implements SkeletonObject {
-	private ViewEditor myView;
+	private View myView;
 	private TabPane palette;
 	
-	public PalettePane(ViewEditor view){
+	public PalettePane(View view){
 		this.myView = view;
 		initializePalette();
 	}

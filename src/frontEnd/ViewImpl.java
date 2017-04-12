@@ -9,20 +9,21 @@ import ModificationFromUser.ModificationFromUser;
 import backEnd.Model;
 import backEnd.GameData.UserAttribute;
 import backEnd.GameData.UserAttributeImpl;
+import backEnd.GameData.State.Component;
 import backEnd.GameData.State.ComponentGraph;
 import backEnd.GameData.State.Tile;
 import backEnd.GameData.State.TileGrid;
-import backEnd.GameEngine.Component;
 import backEnd.Mode.ModeReader;
 import frontEnd.Skeleton.SkeletonImpl;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.stage.Stage;
 
-public class ViewImpl implements ViewEditor{
+public class ViewImpl implements View{
 	private Model myModel;
 	private Consumer<ModificationFromUser> myModConsumer;
 	private SkeletonImpl mySkeleton;
 	private SimpleBooleanProperty authorProperty;
+	private Stage appStage;
 	
 	public ViewImpl(Model model,Consumer<ModificationFromUser> inputConsumer) {
 		myModel = model;
@@ -30,7 +31,8 @@ public class ViewImpl implements ViewEditor{
 		ModeReader mode = model.getModeReader();
 		authorProperty = new SimpleBooleanProperty(mode.getUserModeString().equals("AUTHOR"));
 		mySkeleton = new SkeletonImpl(this,model);
-		mySkeleton.display(new Stage());
+		appStage = new Stage();
+		mySkeleton.display(appStage);
 	}
 
 	public SimpleBooleanProperty getBooleanAuthorModeProperty(){
@@ -110,6 +112,11 @@ public class ViewImpl implements ViewEditor{
 	@Override
 	public Collection<Component> getComponentPresets() {
 		return myModel.getBankController().getComponentMap().values();
+	}
+
+	@Override
+	public Stage getAppStage() {
+		return appStage;
 	}
 
 }

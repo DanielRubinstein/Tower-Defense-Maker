@@ -3,14 +3,15 @@ package backEnd.GameEngine.Behaviors;
 import java.util.Map;
 import java.util.Observable;
 
+import backEnd.Attribute.AttributeData;
+import backEnd.Attribute.AttributeImpl;
+import backEnd.GameData.State.Component;
 import backEnd.GameData.State.Tile;
+
 import backEnd.GameData.State.TileAttributeType;
-import backEnd.GameEngine.Attribute;
-import backEnd.GameEngine.AttributeData;
-import backEnd.GameEngine.Component;
+import backEnd.GameData.State.TileImpl;
 import javafx.geometry.Point2D;
 import resources.Constants;
-import backEnd.GameEngine.myAttributes;
 
 /**
  * This class allows us to keep each Component's location attribute up to date as we move the components
@@ -19,46 +20,45 @@ import backEnd.GameEngine.myAttributes;
  *
  */
 public class MoveBehavior implements Behavior {
-	private AttributeData myAttributes; //we're not using this now, but we will once we figure out how frontend passes attributes
-	private Attribute<Point2D> currentAttribute;
-	private Point2D currentPoint;
+	public AttributeData myAttributes;
+	private Point2D currentPosition;
 	private Point2D newPoint;
-	private myAttributes MA; //we won't use this later
+	private Component myComponent;
+	private Tile currentTile;
 	
 	@SuppressWarnings("unchecked")
-	public MoveBehavior(Component myComponent){
-		MA=new myAttributes(); //use this until we figure out how we get attributes from frontend
-		currentAttribute=(Attribute<Point2D>) MA.getAttribute("LOCATION");
-		currentPoint=(Point2D) currentAttribute.getValue();
+	public MoveBehavior(Component inputComponent){
+		myComponent=inputComponent;
+		currentPosition=(Point2D) myComponent.getAttribute("Position").getValue();
 	}
 	
 	@Override
 	public <T> void execute(T tile) {//pass in a tile //TODO error checking
-		Tile myTile=(Tile) tile;
-		switch (myTile.getAttribute((TileAttributeType) myTile.getAttribute(TileAttributeType.MOVE_DIRECTION).getValue()).toString()) {
+		currentTile=(Tile) tile;
+		switch ((String) currentTile.getAttribute("MoveDirection").getValue()) {
 		case "LEFT":
-			newPoint=new Point2D(currentPoint.getX()-Constants.moveAmount, currentPoint.getY());
-			currentAttribute.setValue(newPoint);
-			MA.addAttribute("LOCATION", currentAttribute);
+			newPoint=new Point2D(currentPosition.getX()-Constants.defaultMoveAmount, currentPosition.getY());				
 		case "RIGHT":
-			newPoint=new Point2D(currentPoint.getX()+Constants.moveAmount, currentPoint.getY());
-			currentAttribute.setValue(newPoint);
-			MA.addAttribute("LOCATION", currentAttribute);
+			newPoint=new Point2D(currentPosition.getX()+Constants.defaultMoveAmount, currentPosition.getY());				
 		case "UP":
-			newPoint=new Point2D(currentPoint.getX(), currentPoint.getY()+Constants.moveAmount);
-			currentAttribute.setValue(newPoint);
-			MA.addAttribute("LOCATION", currentAttribute);
+			newPoint=new Point2D(currentPosition.getX(), currentPosition.getY()+Constants.defaultMoveAmount);				
 		case "DOWN":
-
-			newPoint=new Point2D(currentPoint.getX(), currentPoint.getY()-Constants.moveAmount);
-			currentAttribute.setValue(newPoint);
-			MA.addAttribute("LOCATION", currentAttribute);
+			newPoint=new Point2D(currentPosition.getX(), currentPosition.getY()-Constants.defaultMoveAmount);				
 			
 		default: throw new IllegalArgumentException(); //TODO: figure out how we are doing error handling
 		}
 	}
 
+	/*
+	 * return the component's new, updated position
+	 */
+	public Point2D getPosition(){
+		return newPoint;
+	}
 	
+	/*
+	 * TODO: does using observables make sense anymore?
+	 */
 	@Override
 	public void update(Observable newData, Object arg) {
 		myAttributes = (AttributeData) newData;

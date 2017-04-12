@@ -1,6 +1,7 @@
 package frontEnd.Skeleton.UserTools;
 
-import frontEnd.ViewEditor;
+import frontEnd.View;
+import frontEnd.CustomJavafxNodes.ToggleSwitch;
 import frontEnd.Menus.ButtonMenuImpl;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.geometry.Bounds;
@@ -9,6 +10,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.SplitPane;
 import javafx.scene.control.Tooltip;
 import javafx.scene.layout.HBox;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 /**
@@ -19,17 +21,20 @@ import javafx.stage.Stage;
 public class SettingsViewImpl implements SettingsView{
 	private Stage myStage;
 	private SimpleBooleanProperty authorProperty;
-	private ViewEditor myView;
+	private View myView;
 	private ButtonMenuImpl myMenu;
 	
-	public SettingsViewImpl(ViewEditor view) {
+	public SettingsViewImpl(View view) {
 		myView = view;
-		myStage = new Stage();
 		authorProperty = myView.getBooleanAuthorModeProperty();
-		addButtons(myStage);
+		addButtons();
 	}
 	
-	public void launchSettings(){
+	public void launchSettings(Stage parentStage){
+		// http://stackoverflow.com/questions/29514248/javafx-how-to-focus-on-one-stage
+		Stage myStage = new Stage();
+		myStage.initOwner(parentStage);
+		myStage.initModality(Modality.WINDOW_MODAL);
 		myMenu.display(myStage);
 	}
 	/*
@@ -40,13 +45,13 @@ public class SettingsViewImpl implements SettingsView{
 	 * Rules
 	 * Author/Player toggle
 	 */
-	private void addButtons(Stage stage){
+	private void addButtons(){
 		myMenu = new ButtonMenuImpl("Settings");
-		myMenu.addSimpleButton("Save", e -> myView.save());
+		myMenu.addSimpleButtonWithHover("Save", e -> myView.save(), "Save your current game in the Saved Games folder");
 		
-		myMenu.addSimpleButton("Load", e -> myView.load());
+		myMenu.addSimpleButtonWithHover("Load", e -> myView.load(), "Load a saved game from the Saved Games folder");
 		
-		myMenu.addSimpleButton("New Game", e -> myView.newGame());
+		myMenu.addSimpleButtonWithHover("New Game", e -> myView.newGame(), "Create a new game from scratch");
 		
 		Node ruleButtons = createRulesButtons();
 		myMenu.addNode(ruleButtons);

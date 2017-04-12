@@ -11,8 +11,8 @@ import com.thoughtworks.xstream.io.xml.DomDriver;
 import backEnd.Bank.BankController;
 import backEnd.GameData.GameData;
 import backEnd.GameData.GameDataInterface;
+import backEnd.GameData.State.Component;
 import backEnd.GameData.State.Tile;
-import backEnd.GameEngine.Component;
 
 /**
  * This class handles saving both game state data and universal game data

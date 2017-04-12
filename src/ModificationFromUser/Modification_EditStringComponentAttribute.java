@@ -1,8 +1,8 @@
 package ModificationFromUser;
 
 import backEnd.ModelImpl;
-import backEnd.GameEngine.Attribute;
-import backEnd.GameEngine.Component;
+import backEnd.Attribute.AttributeImpl;
+import backEnd.GameData.State.Component;
 import backEnd.Mode.ModeException;
 
 public class Modification_EditStringComponentAttribute implements ModificationFromUser {
@@ -26,7 +26,7 @@ public class Modification_EditStringComponentAttribute implements ModificationFr
 		switch(myModel.getMode().getUserMode()){
 		case AUTHOR:
 			//FIXME not sure how to solve this error
-			Attribute<String> attrToEdit = (Attribute<String>) myComp.getAttribute(attributeType);
+			AttributeImpl<String> attrToEdit = (AttributeImpl<String>) myComp.getAttribute(attributeType);
 			attrToEdit.setValue(newVal);
 		case PLAYER:
 			throw new ModeException(myModel.getMode(),DESCRIPTION);

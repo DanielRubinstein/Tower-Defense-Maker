@@ -3,7 +3,7 @@ package frontEnd.Skeleton;
 import backEnd.Model;
 import backEnd.GameData.State.State;
 import backEnd.GameData.State.StateImpl;
-import frontEnd.ViewEditor;
+import frontEnd.View;
 import frontEnd.Skeleton.UserTools.UserTools;
 import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
@@ -15,8 +15,8 @@ public class SkeletonImpl implements Skeleton{
 	private Scene myScene;
 	private UserTools userTools;
 
-	public static final double MENU_HEIGHT = 500d;
-	public static final double MENU_WIDTH = 500d;
+	public static final double MENU_HEIGHT = 650d;
+	public static final double MENU_WIDTH = 750d;
 	private static final double CANVAS_HEIGHT_FACTOR = 0.8;
 	private static final double CANVAS_WIDTH_FACTOR = 0.8;
 	private static final double BOTTOM_HEIGHT_FACTOR = 0.2;
@@ -31,7 +31,7 @@ public class SkeletonImpl implements Skeleton{
 	//public static final String DEFAULT_CSS = "/resources/css/vooga.css";
 	public static final String DEFAULT_CSS = "/resources/css/Flatter.css";
 	
-	public SkeletonImpl(ViewEditor view, Model model){
+	public SkeletonImpl(View view, Model model){
 		myRoot = new BorderPane();
 		align(MENU_WIDTH,MENU_HEIGHT);
 		State myState = model.getState();//new StateImpl(GRID_WIDTH,GRID_HEIGHT,(int)CANVAS_WIDTH,(int)CANVAS_HEIGHT);

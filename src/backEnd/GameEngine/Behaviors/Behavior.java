@@ -6,9 +6,9 @@ import java.util.Map;
 import java.util.Observable;
 import java.util.Observer;
 
+import backEnd.Attribute.AttributeImpl;
+import backEnd.GameData.State.Component;
 import backEnd.GameData.State.Tile;
-import backEnd.GameEngine.Attribute;
-import backEnd.GameEngine.Component;
 
 
 public interface Behavior extends Observer {

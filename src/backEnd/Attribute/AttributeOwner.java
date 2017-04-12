@@ -1,17 +1,25 @@
 package backEnd.Attribute;
 
-import java.util.Map;
+import backEnd.GameData.State.AccessPermissions;
 
-import backEnd.GameEngine.Attribute;
-
-public interface AttributeOwner {
+public interface AttributeOwner extends AttributeOwnerReader{
 	
-	public void addAttribute(String name, Attribute<?> value);
+	/**
+	 * @param attrType
+	 * @return Attribute that corresponds to the String attrType
+	 */
+	Attribute<?> getAttribute(String attrName);
 	
-	public Attribute<?> getAttribute(String name);
+	/**
+	 * Add a Attributes to the Tile of type attrType. String attrType has to be a Key from the tilDefaults properties file
+	 * @param attrType
+	 * @param newAttr
+	 */
+	void addAttribute(String attrName, Attribute<?> newAttr);
 	
-	public Map<String, Attribute<?>> getAttributeMap();
 	
-	public boolean hasAttribute(String name);
-
+	/**
+	 * @return AccessPermissions
+	 */
+	AccessPermissions getAccessPermissions();
 }

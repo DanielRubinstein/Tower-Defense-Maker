@@ -16,13 +16,10 @@ public class ModeIndicator implements SkeletonObject{
 	public ModeIndicator(ViewReader view){
 		myView=view;
 		authorProperty = myView.getBooleanAuthorModeProperty();
-		modeIndicator = new Label("No mode");
+		modeIndicator = new Label();
+		setIndicator(authorProperty.getValue());
 		authorProperty.addListener((ob, oldV, newV) -> {
-			if(newV){
-				modeIndicator.setText("Author Mode");
-			} else {
-				modeIndicator.setText("Player Mode");
-			}
+			setIndicator(newV);
 		});
 		pausedIndicator = new Label("Play or pause??");
 		
@@ -32,6 +29,16 @@ public class ModeIndicator implements SkeletonObject{
 	
 
 	
+	private void setIndicator(Boolean newV) {
+		if(newV){
+			modeIndicator.setText("Author Mode");
+		} else {
+			modeIndicator.setText("Player Mode");
+		}
+	}
+
+
+
 	public Node getRoot(){
 		return indicatorHolder;
 	}

@@ -7,9 +7,8 @@ import java.util.List;
 import java.util.Map;
 
 import javafx.geometry.Point2D;
-
-import backEnd.GameEngine.Attribute;
-import backEnd.GameEngine.Component;
+import backEnd.Attribute.Attribute;
+import backEnd.Attribute.AttributeImpl;
 
 /**
  * This is the Grid class that contains the Component Grid and all of the relevant getters/setters for other modules to use to access

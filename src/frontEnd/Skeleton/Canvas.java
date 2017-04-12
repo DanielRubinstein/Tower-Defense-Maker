@@ -7,7 +7,7 @@ import backEnd.GameData.State.ComponentGraph;
 import backEnd.GameData.State.State;
 import backEnd.GameData.State.Tile;
 import backEnd.GameData.State.TileGrid;
-import frontEnd.ViewEditor;
+import frontEnd.View;
 import frontEnd.Skeleton.UserTools.TileCommandCenter;
 import javafx.geometry.Point2D;
 import javafx.scene.Group;
@@ -40,9 +40,9 @@ public class Canvas {
 	private ResourceBundle myImages;
 	private static String DEFAULT_TILE;
 	private TileGrid myTileGrid;
-	private ViewEditor myView;
+	private View myView;
 	
-	public Canvas(ViewEditor view, State state){
+	public Canvas(View view, State state){
 		myState=state;
 		myView = view;
 		myTileGrid=state.getTileGrid();

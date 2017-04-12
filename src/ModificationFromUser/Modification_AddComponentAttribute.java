@@ -1,19 +1,19 @@
 package ModificationFromUser;
 
 import backEnd.ModelImpl;
-import backEnd.GameEngine.Attribute;
-import backEnd.GameEngine.Component;
+import backEnd.Attribute.AttributeImpl;
+import backEnd.GameData.State.Component;
 import backEnd.Mode.ModeException;
 
 
 public class Modification_AddComponentAttribute<T> implements ModificationFromUser {
 
 	private Component myComp;
-	private Attribute<T> myAttribute;
+	private AttributeImpl<T> myAttribute;
 	public static final String DESCRIPTION = "Add Component Attribute";
 	
 	@SuppressWarnings("unchecked")
-	public Modification_AddComponentAttribute(Component myComp, Attribute newAttr) {
+	public Modification_AddComponentAttribute(Component myComp, AttributeImpl newAttr) {
 		this.myComp = myComp;
 		this.myAttribute = newAttr;
 

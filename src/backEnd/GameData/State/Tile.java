@@ -1,7 +1,8 @@
 package backEnd.GameData.State;
 
-import backEnd.GameEngine.Attribute;
-import backEnd.GameEngine.AttributeData;
+import backEnd.Attribute.AttributeData;
+import backEnd.Attribute.AttributeImpl;
+import backEnd.Attribute.AttributeOwner;
 import javafx.geometry.Point2D;
 
 
@@ -11,25 +12,8 @@ import javafx.geometry.Point2D;
  * @author Riley Nisbet
  */
 
-public interface Tile {
-	
-	/**
-	 * @param attrType
-	 * @return Attribute that corresponds to the String attrType
-	 */
-	Attribute<?> getAttribute(String attrType);
-	
-	/**
-	 * Add a Attributes to the Tile of type attrType. String attrType has to be a Key from the tilDefaults properties file
-	 * @param attrType
-	 * @param newAttr
-	 */
-	void addAttribute(String attrType, Attribute<?> newAttr);
-	
-	/**
-	 * @return List of Attributes
-	 */
-	AttributeData getMyAttributes();
+public interface Tile extends AttributeOwner {
+
 	
 	/**
 	 * Replace the current AttributeData with newAttrData
@@ -38,13 +22,15 @@ public interface Tile {
 	void setAttributeData(AttributeData newAttrData);
 	
 	/**
-	 * @return AccessPermissions object for this Tile
-	 */
-	AccessPermissions getAccessPermissions();
-	
-	/**
 	 * @return Tile location
 	 */
-	public Point2D getLocation();
+	Point2D getLocation();
+	
+	/**
+	 * 
+	 * @param name the name of the desired Attribute
+	 * @return true if the Tile has the given Attribute, false otherwise
+	 */
+	boolean hasAttribute(String name);
 	
 }

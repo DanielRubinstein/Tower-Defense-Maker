@@ -9,8 +9,8 @@ import com.thoughtworks.xstream.XStream;
 import com.thoughtworks.xstream.io.xml.DomDriver;
 
 import backEnd.GameData.GameData;
+import backEnd.GameData.State.Component;
 import backEnd.GameData.State.Tile;
-import backEnd.GameEngine.Component;
 
 /**
  * This class handles loading both game state data and universal game data
@@ -25,23 +25,21 @@ public class XMLReaderImpl implements XMLReader {
 		xStream = new XStream(new DomDriver());
 	}
 
-	public GameData loadGameStateData(String filePath, String gameName){
+	public GameData loadGameStateData(String filePath, String gameName) throws XMLReadingException{
 		File xmlFile = new File(filePath + gameName + ".xml");
 		return loadGameStateData(xmlFile);
 	}
 	
-	public GameData loadGameStateData(File gameFile){
-		GameData loadedGameData = null;
+	public GameData loadGameStateData(File gameFile) throws XMLReadingException{
 		File xmlFile = gameFile;
 		try{
-	        loadedGameData = (GameData) xStream.fromXML(xmlFile);       
+	        return (GameData) xStream.fromXML(xmlFile);      
 	    }catch(Exception e){
-	        throw new XMLReadingException();
+	        throw new XMLReadingException(gameFile);
 	    }
-		return loadedGameData;
 	}
 	
-	public List<Map<String,?>> loadUniversalGameData(String filePath){
+	public List<Map<String,?>> loadUniversalGameData(String filePath) throws XMLReadingException{
 		@SuppressWarnings("unchecked")
 		Map<String, Component> loadedComponentMap = (Map<String,Component>) loadXML(filePath, "ComponentMap");
 		@SuppressWarnings("unchecked")
@@ -49,15 +47,15 @@ public class XMLReaderImpl implements XMLReader {
 		return Arrays.asList(loadedComponentMap,loadedTileMap);
 	}
 
-	private Object loadXML(String filePath, String fileName) {
-		File xmlFile = null;
+	private Object loadXML(String filePath, String fileName) throws XMLReadingException {
+		File xmlFile = new File(filePath + fileName + ".xml");
 		try{
-			xmlFile = new File(filePath + fileName + ".xml");
-	            
-	    }catch(Exception e){
-	        throw new XMLReadingException();
-	    }
-		return xStream.fromXML(xmlFile);
+			return xStream.fromXML(xmlFile);
+		} catch (Exception e){
+			throw new XMLReadingException(xmlFile);
+		}
+
+		
 	}
 
 }

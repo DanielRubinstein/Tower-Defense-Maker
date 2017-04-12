@@ -8,22 +8,26 @@ import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.Tooltip;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
 
-public class ButtonMenuImpl {
+public class ButtonMenuImpl implements ButtonMenu {
 	public static final String DEFAULT_CSS = "/resources/css/Flatter.css";
 	private GridPane myGrid;
 	private VBox myButtonRoot;
 	private Scene myScene;
 	private Label titleLbl;
+	private Label description;
 	
 	public ButtonMenuImpl(String text){
 		initializeGrid();
 		myButtonRoot = new VBox();
+		description = new Label("Please Select an Option");
+		description.setWrapText(true);
 		setText(text);
 	}
 	
@@ -43,16 +47,36 @@ public class ButtonMenuImpl {
 		//titleLbl.setStyle("");
 	}
 	
+	public void addSimpleButtonWithHover(String text, EventHandler<ActionEvent> event, String hoverText){
+		Button b = new Button(text);
+		b.setOnAction(event);
+		addButtonWithHover(b, hoverText);
+	}
+	
+	public void addButtonWithHover(Button newButton, String hoverText){
+		newButton.hoverProperty().addListener((event, oldVal, newVal) -> {
+			if(newVal){
+				description.setText(hoverText);
+			} else {
+				description.setText("Please Select an Option");
+			}
+		});
+		addButton(newButton);
+	}
+	
+	@Override
 	public void addSimpleButton(String text, EventHandler<ActionEvent> event){
    	 	Button myButton = new Button(text);
 		myButton.setOnAction(event);
 		myButtonRoot.getChildren().add(myButton);
 	}
 	
+	@Override
 	public void addButton(Button newButton){
 		myButtonRoot.getChildren().add(newButton);
 	}
 	
+	@Override
 	public void addButtonRow(String rowTitle, Button... buttons){
 		HBox box = new HBox();
 		Label rowLabel = new Label(rowTitle);
@@ -62,6 +86,7 @@ public class ButtonMenuImpl {
 		myButtonRoot.getChildren().add(box);
 	}
 	
+	@Override
 	public void addNode(Node n){
 		myButtonRoot.getChildren().add(n);
 	}
@@ -81,8 +106,10 @@ public class ButtonMenuImpl {
 	
 	
 	public void display(Stage stage){
-		create();
-		myScene.getStylesheets().add(DEFAULT_CSS);
+		if(myScene == null){
+			create();
+		}
+		
 		stage.setScene(myScene);
 		stage.show();
 	}
@@ -94,10 +121,12 @@ public class ButtonMenuImpl {
 		
 		myGrid.add(titleLbl, 0, 0, 2, 1);
 		myGrid.add(myButtonRoot, 0, 1);
-		myGrid.add(new Label("Hopefully will be a description\nof the button moused over"), 1, 1);
+		myGrid.add(description, 1, 1);
 		myGrid.add(new Label("voogasalad_sup3rs1ckt34m1337 aka Miguel's bitches"), 0, 2, 2, 1);
 		//myButtonRoot.setAlignment(Pos.CENTER);
    	 	myScene = new Scene(myGrid);
+   	 	myScene.getStylesheets().add(DEFAULT_CSS);
+		description.setMaxWidth(200d);
 	}
 
 

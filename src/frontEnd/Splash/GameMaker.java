@@ -2,15 +2,10 @@ package frontEnd.Splash;
 
 import java.util.function.Consumer;
 
-import frontEnd.Menus.ButtonMenu;
+import frontEnd.CustomJavafxNodes.NumberChanger;
 import frontEnd.Menus.ButtonMenuImpl;
-import javafx.geometry.Pos;
-import javafx.scene.Scene;
-import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.control.Slider;
 import javafx.scene.layout.HBox;
-import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 /**
@@ -23,12 +18,12 @@ import javafx.stage.Stage;
 public class GameMaker {
 	
 	private ButtonMenuImpl allSelections;
-	private Slider myTilesWide;
-	private Slider myTilesHigh;
-	private Consumer<StartingInput> onSubmit;
+	private NumberChanger myTilesWide;
+	private NumberChanger myTilesHigh;
+	private Consumer<Object> onSubmit;
 	private Stage myStage;
 	
-	public GameMaker(Stage stage, Consumer<StartingInput> gameDataConsumer) {
+	public GameMaker(Stage stage, Consumer<Object> gameDataConsumer) {
 		allSelections = new ButtonMenuImpl("Starting Values!");
 		onSubmit = gameDataConsumer;
 		setInputFields();
@@ -37,40 +32,29 @@ public class GameMaker {
 	}
 
 	private void setInputFields() {
-		myTilesWide = setInputSliderFields("Number Tiles Wide",1,10,40);
-		myTilesHigh = setInputSliderFields("Number Tiles High",1,10,40);
+		myTilesWide = setInputSliderFields("Number Tiles Wide",1d,10d,40d);
+		myTilesHigh = setInputSliderFields("Number Tiles High",1d,10d,40d);
 		setSubmit();
 	}
 	private void setSubmit() {
 		allSelections.addSimpleButton("Submit", e ->  {
 			StartingInput allValues = new StartingInput();
-			allValues.setTilesWide((int)myTilesWide.getValue());
-			allValues.setTilesHigh((int)myTilesHigh.getValue());
+			allValues.setTilesWide(myTilesWide.getValue().intValue());
+			allValues.setTilesHigh(myTilesHigh.getValue().intValue());
 			onSubmit.accept(allValues);
 			myStage.close();
 		});
 	}
 
-	private Slider setInputSliderFields(String text, int min, int start, int max){
+	private NumberChanger setInputSliderFields(String text, Double min, Double start, Double max){
 		HBox tileWidth = new HBox();
 		Label name = new Label(text);
-		Slider slide = createSlider(1,10,40);
+		NumberChanger slide = new NumberChanger(min, max, start, 1d);
 		Label currentVal = new Label(String.format("Current value: %d", start));
-		slide.valueProperty().addListener( (observable, oldValue, newValue)->currentVal.setText(String.format("Current value: %d", newValue.intValue())));
-		tileWidth.getChildren().addAll(name,slide,currentVal);
+		slide.addListener( (observable, oldValue, newValue)->currentVal.setText(String.format("Current value: %d", newValue.intValue())));
+		tileWidth.getChildren().addAll(name,slide.getRoot(),currentVal);
 		allSelections.addNode(tileWidth);
 		return slide;
-	}
-	
-	
-	private Slider createSlider(int min, int start, int max){
-		Slider slider = new Slider();
-		slider.setMin(min);
-		slider.setMax(max);
-		slider.setValue(start);
-		slider.setBlockIncrement(1);
-		return slider;
-		
 	}
 
 

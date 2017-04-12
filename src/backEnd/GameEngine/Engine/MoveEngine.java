@@ -1,35 +1,25 @@
 package backEnd.GameEngine.Engine;
+import java.util.ArrayList;
 import java.util.LinkedList;
+import java.util.List;
 import java.util.Queue;
 import backEnd.Coord;
-import backEnd.GameEngine.Component;
+import backEnd.Attribute.Attribute;
+import backEnd.Attribute.AttributeImpl;
 import backEnd.GameEngine.Behaviors.*;
+import javafx.geometry.Point2D;
+import resources.Constants;
 import backEnd.GameData.State.*;
+
+
+/**
+ * Performs movement behaviors for all movable components
+ * @author Daniel
+ * @author Christian Martindale
+ *
+ */
 public class MoveEngine implements Engine{
-	@Override
-	public void gameLoop(State currentState) {
-		
-		//might need to be in State, not here
-		for(int i=0; i<currentState.getGridWidth(); i++){ //find the start position
-			for(int j=0; j<currentState.getGridHeight(); j++){
-				if(currentState.getTileGrid().getTilebyCoord(i,j).getComponent == STARTPOS){
-					formShortestPath(currentState.getTileGrid(), i, j);
-				}
-			}
-		}
-		
-		for(Component struct: currentState.getTileGrid().getAllTiles() ){
-			if(struct.getAttribute("Movable").getValue() == "True"){ //only move stuff that are movable
-				Behavior myMovementInstructions = new MoveBehavior(struct); //can we avoid this?
-				myMovementInstructions.execute(struct);
-				
-			}
-		}
-				
-			
-		
-	}
-	
+	private State myState;
 	/**
 	 * simple BFS to label each Tile with the
 	 * direction an object on the Tile should move
@@ -40,35 +30,29 @@ public class MoveEngine implements Engine{
 	 * @param xStart the starting x-coordinate
 	 * @param yStart the starting y-coordinate
 	 */
-	private Coord formShortestPath(TileGrid stateGrid, int xStart, int yStart){
-		Queue <Coord> path = new LinkedList<Coord>();
-		
-		path.add(new Coord(xStart, yStart, null));
-		
-		while(!path.isEmpty()){
-			Coord cur = path.remove();
-			
-			if(stateGrid[cur.x][cur.y].containsComponent(ENDGOALTILE)){
-				return cur;
-			}
-			
-			
-			
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public void gameLoop(State currentState) {
+		myState=currentState;
+		for (Component c: myState.getComponentGraph().getAllComponents()){
+			Tile currentTile=myState.getTileGrid().getTileByLocation((Point2D) c.getAttribute("Position").getValue()); 
+			myState.getComponentGraph().removeComponent(c);
+			MoveBehavior mb=new MoveBehavior(c);
+			mb.execute(currentTile);
+			Point2D newPosition=mb.getPosition();
+			myState.getComponentGraph().addComponentToGrid(c, newPosition);
+			Attribute<Point2D> newPositionAttribute=new AttributeImpl<Point2D>();
+			newPositionAttribute.setValue(newPosition);
+			Attribute<Point2D> positionAttribute=(Attribute<Point2D>) c.getAttribute("Position");
+			positionAttribute.setValue(newPosition);
 		}
-	}
-	
-	/**
-	 * helper method for formShortestPath
-	 * @param xPos
-	 * @param yPos
-	 * @return whether the given Tile can be moved onto
-	 */
-	private boolean isPassable(TileGrid stateGrid, int xPos, int yPos){
-		if((xPos>=0 && xPos<stateGrid.getMyWidth()) && (yPos >=0 && yPos<stateGrid.getMyWidth())){
-			if(!stateGrid.getTileByCoord(x, y).containsComponent(IMPASSABLELABEL)){
-				return true;
-			}
-		}
-		return false;
+		
+		//TODO : different case for bullets
+		// if (Component.getMyType.equals("Projectile")
+		//(Component.getMyType.equals("Ennemy")
+		//StartPosition : Point2D
+		//TargetPosition : Point2D
+		
 	}
 }

@@ -3,10 +3,10 @@ package backEnd.Bank;
 import java.util.List;
 import java.util.Map;
 
-import backEnd.GameEngine.Attribute;
-import backEnd.GameEngine.Component;
 import backEnd.GameEngine.Behaviors.Behavior;
+import backEnd.Attribute.AttributeImpl;
 import backEnd.GameData.Rules;
+import backEnd.GameData.State.Component;
 import backEnd.GameData.State.Tile;
 
 public class BankController
@@ -68,7 +68,7 @@ public class BankController
 		return ruleBank.getRuleList();
 	}
 	
-	public List<Attribute> getAttributeList()
+	public List<AttributeImpl> getAttributeList()
 	{
 		return attributeBank.getAttributeList();
 	}

@@ -43,5 +43,10 @@ public class StatusView {
 	public Node getRoot(){
 		return this.myRoot;
 	}
+
+	public void setWidth(double in) {
+		myRoot.setMinWidth(in);
+		myRoot.setPrefWidth(in);
+	}
 }
 ;

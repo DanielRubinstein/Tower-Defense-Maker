@@ -1,22 +1,20 @@
 package backEnd.GameData.State;
 
-import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.ResourceBundle;
 
+import backEnd.Attribute.Attribute;
+import backEnd.Attribute.AttributeData;
+import backEnd.Attribute.AttributeFactory;
 import backEnd.Attribute.AttributeOwner;
-import backEnd.GameEngine.Attribute;
-import backEnd.GameEngine.AttributeData;
-import backEnd.GameEngine.AttributeFactory;
 import backEnd.Mode.GameModeType;
 import backEnd.Mode.UserModeType;
 import javafx.geometry.Point2D;
 
 public class TileImpl implements Tile, AttributeOwner{
-	private final static String DEFAULT_ATTRIBUTE_PATH = "resources/tileDefaults";
-	private final static ResourceBundle attributeResources = ResourceBundle.getBundle(DEFAULT_ATTRIBUTE_PATH);
+	private final static String DEFAULT_ATTRIBUTES_PATH = "resources/defaultTileAttributes";
+	private final static ResourceBundle attributeResources = ResourceBundle.getBundle(DEFAULT_ATTRIBUTES_PATH);
 	private Point2D myLocation;
 	private AccessPermissions myAccessPerm;
 	private AttributeData myAttrData;
@@ -26,7 +24,7 @@ public class TileImpl implements Tile, AttributeOwner{
 		this.myAccessPerm = new AccessPermissionsImpl(gameModeAccessPermissions, userModeAccessPermissions);
 		AttributeFactory attrFact = new AttributeFactory();
 		for (String key : attributeResources.keySet()){
-			Attribute<?> myAttribute= attrFact.getAttribute(key);
+			Attribute<?> myAttribute = attrFact.getAttribute(key);
 			addAttribute(key, myAttribute);
 		}
 		this.myAttrData = new AttributeData(new HashMap<String,Attribute<?>>());
@@ -61,11 +59,6 @@ public class TileImpl implements Tile, AttributeOwner{
 	@Override
 	public Attribute<?> getAttribute(String name) {
 		return myAttrData.get(attributeResources.getString(name));
-	}
-
-	@Override
-	public Map<String, Attribute<?>> getAttributeMap() {
-		return myAttrData.getAttributeMap();
 	}
 
 	@Override

@@ -2,9 +2,10 @@ package backEnd.GameEngine.Behaviors;
 
 import java.util.Map;
 import java.util.Observable;
-import backEnd.GameEngine.Attribute;
-import backEnd.GameEngine.AttributeData;
-import backEnd.GameEngine.Component;
+
+import backEnd.Attribute.AttributeData;
+import backEnd.Attribute.AttributeImpl;
+import backEnd.GameData.State.Component;
 import backEnd.GameEngine.myAttributes;
 import javafx.geometry.Point2D;
 
