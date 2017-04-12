@@ -110,9 +110,6 @@ public class Canvas implements SkeletonObject, Observer{
 	private void setTileGrid(){
 		for(int i=0;i<myGridHeight;i++){
 			for(int j=0;j<myGridWidth;j++){
-				
-
-
 				Tile t = myTileGrid.getTileByLocation(new Point2D(i,j));
 				//Image ima = new Image("/Users/Tim/Documents/workspace308/voogasalad_sup3rs1ckt34m1337/src/images/zombie.jpg");
 				String imagePath = (String) t.getAttribute("ImageFile").getValue();

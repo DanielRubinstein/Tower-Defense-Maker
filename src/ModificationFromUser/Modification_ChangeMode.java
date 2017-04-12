@@ -1,12 +1,20 @@
 package ModificationFromUser;
 
 import backEnd.ModelImpl;
+import backEnd.GameData.State.Tile;
+import backEnd.Mode.ModeException;
 
 public class Modification_ChangeMode implements ModificationFromUser {
 
 	@Override
 	public void invoke(ModelImpl myModel) {
-		myModel.getMode().toggleUserMode();
+		switch (myModel.getMode().getUserMode()) {
+		case AUTHOR:
+			myModel.getMode().toggleUserMode();		
+		case PLAYER:
+			//myModel.getGameProcessController().pause();
+			myModel.getMode().toggleUserMode();
+		}	
 	}
 	
 	

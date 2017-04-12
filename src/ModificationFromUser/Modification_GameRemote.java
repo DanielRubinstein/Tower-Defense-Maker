@@ -9,7 +9,7 @@ public enum Modification_GameRemote implements ModificationFromUser {
 	PLAY (engine -> {
 		System.out.println("PLAY GAME");
 		//FIXME should ultimately execute animation.play()
-		engine.run();
+		engine.run(100);
 		}),
 	PAUSE (engine -> {
 		System.out.println("PAUSE GAME");
@@ -29,6 +29,7 @@ public enum Modification_GameRemote implements ModificationFromUser {
 		});
 
 	private Consumer<GameProcessController> myConsumer;
+	public static final double DEFAULT_STEP_TIME = 1000; 
 	
 	Modification_GameRemote(Consumer<GameProcessController> consumer){
 		myConsumer = consumer;
