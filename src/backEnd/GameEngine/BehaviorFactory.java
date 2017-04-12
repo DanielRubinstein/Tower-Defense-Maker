@@ -3,6 +3,7 @@ package backEnd.GameEngine;
 import java.lang.reflect.InvocationTargetException;
 import java.util.ResourceBundle;
 
+import backEnd.GameData.State.Component;
 import backEnd.GameEngine.Behaviors.Behavior;
 
 public class BehaviorFactory {

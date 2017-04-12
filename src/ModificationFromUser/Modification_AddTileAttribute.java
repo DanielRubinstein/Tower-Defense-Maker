@@ -1,13 +1,10 @@
 package ModificationFromUser;
 
 import backEnd.ModelImpl;
+import backEnd.GameData.State.Component;
 import backEnd.GameData.State.Tile;
 import backEnd.GameData.State.TileAttribute;
-<<<<<<< HEAD
-=======
-import backEnd.GameEngine.Component;
 import backEnd.GameEngine.Behaviors.Behavior;
->>>>>>> 8a4c0cbcf3d59c2f0f20bdfe55709b2e111c5c03
 import backEnd.Mode.ModeException;
 
 public class Modification_AddTileAttribute<T> implements ModificationFromUser {

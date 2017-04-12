@@ -1,4 +1,4 @@
-package backEnd.GameEngine;
+package backEnd.Attribute;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -14,11 +14,6 @@ import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
 import com.sun.javafx.geom.Point2D;
-
-import backEnd.Attribute.Attribute;
-import backEnd.Attribute.AttributeImpl;
-import backEnd.Attribute.AttributeType;
-import backEnd.GameData.State.MoveDirections;
 
 public class AttributeFactory {
 	

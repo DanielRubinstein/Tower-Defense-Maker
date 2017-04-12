@@ -1,7 +1,7 @@
 package ModificationFromUser;
 
 import backEnd.ModelImpl;
-import backEnd.GameEngine.Component;
+import backEnd.GameData.State.Component;
 import backEnd.Mode.ModeException;
 
 /**
