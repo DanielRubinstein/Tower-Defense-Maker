@@ -15,7 +15,7 @@ import javafx.geometry.Point2D;
  *
  */
 
-public class DeathEngine {
+public class DeathEngine implements Engine{
 	private DeathBehavior DB;
 	public void gameLoop(State currentState, double stepTime){
 	DB=new DeathBehavior();

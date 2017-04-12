@@ -1,6 +1,7 @@
 package backEnd.Data;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.util.List;
 import java.util.Map;
 
@@ -65,7 +66,7 @@ public class DataController {
 	
 	
 	
-	private GameData createGameData(StartingInput dim) {
+	private GameData createGameData(StartingInput dim) throws FileNotFoundException {
 		StateImpl state = new StateImpl(dim.getTilesWide(), dim.getTilesHigh(), 400, 400);
 		GameData gameData = new GameData(state, null);
 		return gameData;
@@ -82,5 +83,9 @@ public class DataController {
 	
 	public void saveUniversalGameData(){
 		myXMLWriter.saveUniversalGameData(bankController, UNIV_GAME_DATA_PATH);
+	}
+	
+	public void saveCurrentGameStateData(GameData gameData, String gameName){
+		myXMLWriter.saveGameStateData(gameData, GAME_STATE_DATA_PATH, gameName);
 	}
 }

@@ -1,11 +1,15 @@
 package frontEnd;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.List;
 import java.util.function.Consumer;
 
 import ModificationFromUser.ModificationFromUser;
+import ModificationFromUser.Modification_Load;
+import ModificationFromUser.Modification_Save;
 import backEnd.Model;
 import backEnd.Data.DataController;
 import backEnd.GameData.UserAttribute;
@@ -15,6 +19,7 @@ import backEnd.GameData.State.ComponentGraph;
 import backEnd.GameData.State.Tile;
 import backEnd.GameData.State.TileGrid;
 import backEnd.Mode.ModeReader;
+import frontEnd.CustomJavafxNodes.SingleFieldPrompt;
 import frontEnd.Skeleton.SkeletonImpl;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
@@ -79,22 +84,24 @@ public class ViewImpl implements View{
 
 	@Override
 	public void save() {
-		//myDataController.
+		String saveGameName = getSaveGameName();
+		sendUserModification(new Modification_Save(saveGameName));
 	}
 
-	@Override
-	public void viewRules() {
-		// TODO Auto-generated method stub
+	private String getSaveGameName() {
+		List<String> dialogTitles = Arrays.asList("Save Game Utility", "Please Input a Name for your saved game");
+		String promptLabel = "Saved game name:";
+		String promptText = "";
+		SingleFieldPrompt myDialog = new SingleFieldPrompt(dialogTitles, promptLabel, promptText);
+		return myDialog.create();
 	}
 
-	@Override
-	public void editRules() {
-		// TODO Auto-generated method stub
-	}
+
 
 	@Override
 	public void load() {
-		// TODO Auto-generated method stub
+		String fileToLoad = null;
+		sendUserModification(new Modification_Load(fileToLoad));
 	}
 
 	@Override
@@ -139,6 +146,16 @@ public class ViewImpl implements View{
 	@Override
 	public Stage getAppStage() {
 		return appStage;
+	}
+	
+	@Override
+	public void viewRules() {
+		// TODO Auto-generated method stub
+	}
+
+	@Override
+	public void editRules() {
+		// TODO Auto-generated method stub
 	}
 
 }
