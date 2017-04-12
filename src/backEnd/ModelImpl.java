@@ -23,21 +23,25 @@ public class ModelImpl implements Model{
 	private GameData myGameData;
 	private Mode myMode;
 	private BankController myBankController;
+	private DataController myDataController;
 	private GameProcessController myEngine;
 	
 	public ModelImpl(DataController dataController, GameData gameData) throws XMLReadingException {
+		myDataController = dataController;
 		myGameData = gameData;
 		myMode = new ModeImpl();
-		//myEngine = new GameProcessController(myGameData.getState(), myGameData.getRules());
+
+		myDataController = dataController;
+		myEngine = new GameProcessController(myGameData.getState(), myGameData.getRules());
 		//myBankController = dataController.generateBanks();
+
 	}
 
 	public State getState(){
 		return myGameData.getState();
 	}
-	/**
-	 * Miguel likes the cast
-	 */
+
+	
 	public ModeReader getModeReader(){
 		return (ModeReader) myMode;
 	}
@@ -50,4 +54,19 @@ public class ModelImpl implements Model{
 	public BankController getBankController(){
 		return this.myBankController;
 	}
+	
+	public DataController getDataController(){
+		return myDataController;
+	}
+	
+	public GameData getGameData(){
+		return myGameData;
+	}
+
+	@Override
+	public GameProcessController getGameProcessController() {
+		return myEngine;
+
+	}
 }
+

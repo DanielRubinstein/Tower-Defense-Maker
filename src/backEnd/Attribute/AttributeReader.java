@@ -1,6 +1,6 @@
 package backEnd.Attribute;
 
-import java.util.Collection;
+import java.util.List;
 
 public interface AttributeReader<T> {
 	/**
@@ -8,9 +8,7 @@ public interface AttributeReader<T> {
 	 */
 	public T getValue();
 	
-	public Collection<T> getEditParameters();
-	
-	public AttributeType getAttributeType();
+	public List<T> getEditParameters();
 	
 	public String getName();
 }

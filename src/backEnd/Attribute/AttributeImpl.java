@@ -16,8 +16,7 @@ public class AttributeImpl<T> implements Attribute<T>{
 	private List<T> myParamList;
 	private String myName;
 	
-	public AttributeImpl(AttributeType attrType, List<T> paramList, String name){
-		myAttrType = attrType;
+	public AttributeImpl(List<T> paramList, String name){
 		myParamList = paramList;
 		myName = name;
 	}
@@ -42,15 +41,9 @@ public class AttributeImpl<T> implements Attribute<T>{
 	}
 
 	@Override
-	public Collection<T> getEditParameters() {
+	public List<T> getEditParameters() {
 		return myParamList;
 	}
-
-	@Override
-	public AttributeType getAttributeType() {
-		return myAttrType;
-	}
-
 
 	@Override
 	public String getName() {

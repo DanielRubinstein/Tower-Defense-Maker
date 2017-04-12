@@ -1,13 +1,16 @@
 package frontEnd.Skeleton;
 
 
+import java.util.Observable;
+import java.util.Observer;
 import java.util.ResourceBundle;
 
 import backEnd.GameData.State.ComponentGraph;
 import backEnd.GameData.State.State;
 import backEnd.GameData.State.Tile;
 import backEnd.GameData.State.TileGrid;
-import frontEnd.ViewEditor;
+import frontEnd.View;
+import frontEnd.Skeleton.UserTools.SkeletonObject;
 import frontEnd.Skeleton.UserTools.TileCommandCenter;
 import javafx.geometry.Point2D;
 import javafx.scene.Group;
@@ -21,12 +24,12 @@ import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 
 /**
- * This class is used to represent the actual game.
- * This is all messed up not because how we set up the tiles depends entirely on whether we load or start a new game.
+ * This class is used to represent the actual game, such as the Tiles and Components.
  * @author Tim
  *
  */
-public class Canvas {
+
+public class Canvas implements SkeletonObject, Observer{
 	private StackPane root;
 	private State myState;
 	private Group allComponents;
@@ -40,12 +43,21 @@ public class Canvas {
 	private ResourceBundle myImages;
 	private static String DEFAULT_TILE;
 	private TileGrid myTileGrid;
-	private ViewEditor myView;
+	private View myView;
 	
-	public Canvas(ViewEditor view, State state){
+
+	/**
+	 * Constructs a new Canvas object given the view and state.
+	 * State contains all the required backend information like location of tiles and attributes of everything needed to be
+	 * displayed on screen.
+	 * @param view
+	 * @param state 
+	 */
+	public Canvas(View view, State state){
 		myState=state;
 		myView = view;
 		myTileGrid=state.getTileGrid();
+		
 		root = new StackPane();
 		allComponents = new Group();
 		getImages();
@@ -67,10 +79,19 @@ public class Canvas {
 		DEFAULT_TILE = myImages.getString("default_tile");
 	}
 
+	/* (non-Javadoc)
+	 * @see frontEnd.Skeleton.UserTools.SkeletonObject#getRoot()
+	 */
 	public Node getRoot() {
 		return root;
 	}
 	
+	/**
+	 * Sets the size of the canvas to the given parameters. Note, however, that the user can change the size of the window
+	 * while running the application. 
+	 * @param width
+	 * @param height
+	 */
 	public void setSize(double width, double height){
 		myGrid.setPrefWidth(width);
 		myGrid.setPrefHeight(height);
@@ -79,10 +100,12 @@ public class Canvas {
 	private void setTileGrid(){
 		for(int i=0;i<myGridHeight;i++){
 			for(int j=0;j<myGridWidth;j++){
+				
 				Image image = new Image(getClass().getClassLoader().getResourceAsStream(DEFAULT_TILE));
 				ImageView tileView = new ImageView(image);
 				organizeImageView(tileView);
 				Tile t = myTileGrid.getTileByLocation(new Point2D(i,j));
+				
 				setTileInteraction(tileView,t);
 				myGrid.add(tileView, j, i);
 			}
@@ -103,6 +126,10 @@ public class Canvas {
 	private void setTileInteraction(Node n, Tile t){
 		TileCommandCenter tileInteractor = new TileCommandCenter(myView, t, myState);
 		n.setOnMouseClicked(e-> tileInteractor.launch(e.getScreenX(),e.getScreenY()));
+	}
+	@Override
+	public void update(Observable o, Object arg) {
+		// TODO Auto-generated method stub
 	}
 	
 

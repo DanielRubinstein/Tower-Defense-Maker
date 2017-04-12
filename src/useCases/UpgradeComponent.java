@@ -4,8 +4,8 @@ import java.util.List;
 
 import backEnd.Attribute.AttributeImpl;
 import backEnd.Bank.EnvironmentInterface;
+import backEnd.GameData.State.Component;
 import backEnd.GameData.State.State;
-import backEnd.GameEngine.Component;
 import main.ControllerImpl;
 
 /**

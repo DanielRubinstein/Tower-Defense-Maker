@@ -1,27 +1,32 @@
 package backEnd.GameData.State;
 
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.Map;
+import java.util.Observable;
+import java.util.Observer;
 import java.util.Queue;
 import java.util.ResourceBundle;
 import java.util.Set;
 import java.util.Stack;
 
+import ModificationFromUser.Modification_EditAttribute;
 import backEnd.Coord;
+import backEnd.Attribute.Attribute;
 import backEnd.Attribute.AttributeImpl;
 import backEnd.Mode.UserModeType;
 import javafx.geometry.Point2D;
 
 /**
  * 
- * @author Alex Salas
+ * @author Alex Salas, Christian Martindale
  *
  */
-public class StateImpl implements State {
+public class StateImpl extends Observable implements State {
 
 	private int gridWidth;
 	private int gridHeight;
@@ -29,10 +34,10 @@ public class StateImpl implements State {
 	private int pointResHeight;
 	private TileGrid stateGrid;
 	private ComponentGraph componentGraph;
-	private final static String RESOURCES_PATH = "resources/attributes";
+	private final static String RESOURCES_PATH = "resources/defaultTileAttributes";
 	private final static ResourceBundle myResources = ResourceBundle.getBundle(RESOURCES_PATH);
 
-	public StateImpl(int gridWidth, int gridHeight, int pointResolution_Width, int pointResolution_Height) {
+	public StateImpl(int gridWidth, int gridHeight, int pointResolution_Width, int pointResolution_Height) throws FileNotFoundException {
 		this.gridWidth = gridWidth;
 		this.gridHeight = gridHeight;
 		this.pointResWidth = pointResolution_Width;
@@ -42,15 +47,20 @@ public class StateImpl implements State {
 	}
 
 	private void setDefaultTileGrid(int gridWidth, int gridHeight, int pointResolution_Width,
-			int pointResolution_Height) {
+			int pointResolution_Height) throws FileNotFoundException {
 		stateGrid = new TileGridImpl(gridWidth, gridHeight);
 		for (int i = 0; i < gridHeight; i++) {
 			for (int j = 0; j < gridWidth; j++) {
 				Point2D loc = new Point2D(i, j);
 				Tile newTile = new TileImpl(Arrays.asList(), Arrays.asList(UserModeType.AUTHOR), loc);
 				stateGrid.setTile(newTile, loc);
+				Attribute<String> imgAttr = (Attribute<String>) newTile.getAttribute("ImageFile");
+				imgAttr.setValue("images/default_tile.jpg");
 			}
 		}
+	}
+	public void addAsObserver(Observer o){
+		this.addObserver(o);
 	}
 
 	@Override
@@ -71,10 +81,18 @@ public class StateImpl implements State {
 						.get(myResources.getString("StartTile")).getValue() == true) {
 					startTiles.put(stateGrid.getTileByCoord(i, j), new Coord(i, j, null));
 				}
-
 			}
 		}
 		return startTiles;
+	}
+	
+	public void updateState(State state){
+		this.gridWidth = state.getGridWidth();
+		this.gridHeight = state.getGridHeight();
+		this.pointResWidth = state.getPointResolutionWidth();
+		this.pointResHeight = state.getPointResolutionHeight();
+		this.stateGrid = state.getTileGrid();
+		this.componentGraph = state.getComponentGraph();
 	}
 
 	@SuppressWarnings({ "unused", "unchecked" })
@@ -113,21 +131,21 @@ public class StateImpl implements State {
 				nextPathCoords = pathStack.pop();
 				if(currentPathCoords == null){continue;}
 				Tile currentPathTile = stateGrid.getTileByCoord(currentPathCoords.getXCoord(),currentPathCoords.getYCoord());
-				MoveDirections pathDirection = null;
+				String pathDirection = null;
 
 				if(currentPathCoords.getXCoord()-nextPathCoords.getXCoord()!=-1){
-					pathDirection = MoveDirections.RIGHT;
+					pathDirection = "Right";
 				}
 				if(currentPathCoords.getXCoord()-nextPathCoords.getXCoord()!= 1){
-					pathDirection = MoveDirections.LEFT;
+					pathDirection = "Left";
 				}
 				if(currentPathCoords.getYCoord()-nextPathCoords.getYCoord()!=-1){
-					pathDirection = MoveDirections.DOWN;
+					pathDirection = "Down";
 				}
 				if(currentPathCoords.getYCoord()-nextPathCoords.getYCoord()!= 1){
-					pathDirection = MoveDirections.UP;
+					pathDirection = "Up";
 				}
-				((AttributeImpl<MoveDirections>) currentPathTile.getAttribute("MoveDirection")).setValue(pathDirection);
+				((AttributeImpl<String>) currentPathTile.getAttribute("MoveDirection")).setValue(pathDirection);
 			}
 		}
 	}
@@ -162,6 +180,26 @@ public class StateImpl implements State {
 	public void calculateShortestPath() {
 		// TODO Auto-generated method stub
 
+	}
+
+	@Override
+	public int getGridWidth() {
+		return gridWidth;
+	}
+
+	@Override
+	public int getGridHeight() {
+		return gridHeight;
+	}
+
+	@Override
+	public int getPointResolutionWidth() {
+		return pointResWidth;
+	}
+
+	@Override
+	public int getPointResolutionHeight() {
+		return pointResHeight;
 	}
 
 }

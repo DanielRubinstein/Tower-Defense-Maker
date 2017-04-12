@@ -3,19 +3,29 @@ package frontEnd.Skeleton.UserTools;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.util.Arrays;
 import java.util.Collection;
+import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
-import ModificationFromUser.Modification_AddComponent;
+import ModificationFromUser.Modification_AddAttributeOwner;
 import backEnd.Attribute.AttributeOwner;
-import backEnd.GameEngine.Component;
-import frontEnd.ViewEditor;
+import frontEnd.View;
+import frontEnd.CustomJavafxNodes.DoubleFieldPrompt;
+import frontEnd.CustomJavafxNodes.SingleFieldPrompt;
 import javafx.geometry.Insets;
 import javafx.geometry.Point2D;
 import javafx.scene.Node;
+import javafx.scene.control.ButtonBar.ButtonData;
+import javafx.scene.control.ButtonType;
+import javafx.scene.control.Dialog;
+import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseButton;
+import javafx.scene.layout.GridPane;
 import javafx.scene.layout.TilePane;
 
 /**
@@ -26,13 +36,13 @@ import javafx.scene.layout.TilePane;
  * @param <T>
  */
 public class Palette<T extends AttributeOwner> implements SkeletonObject {
-	private ViewEditor myView;
+	private View myView;
 	private TilePane tile;
 	private Collection<T> myPresets;
-	private static final String ATTRIBUTE_IMAGE_PATH_NAME = "no fucking clue";
+	private static final String ATTRIBUTE_IMAGE_PATH_NAME = "ImageFile";
 	private Map<ImageView, T> myMap; 
 	
-	public Palette(ViewEditor view, Collection<T> objects){
+	public Palette(View view, Collection<T> objects){
 		myView = view;
 		myPresets = objects;
 		
@@ -42,10 +52,7 @@ public class Palette<T extends AttributeOwner> implements SkeletonObject {
 			myMap.put(imageView, preset);
 			tile.getChildren().add(imageView);
 		}
-		
 		initializePane();
-		
-		
 	}
 
 	private void initializePane() {
@@ -66,20 +73,13 @@ public class Palette<T extends AttributeOwner> implements SkeletonObject {
 
 	        ImageView imageView = null;
 	        try {
-	            final Image image = new Image(new FileInputStream(imageFile), 150, 0, true,
-	                    true);
+	            Image image = new Image(new FileInputStream(imageFile), 150, 0, true, true);
 	            imageView = new ImageView(image);
 	            imageView.setFitWidth(150);
 	            imageView.setOnMouseClicked(mouseEvent -> {
                     if(mouseEvent.getButton().equals(MouseButton.PRIMARY) && mouseEvent.getClickCount() == 2){
-                    	
-                    	// ask for x and y of new thing
-                    	Double x;
-                    	Double y;
-                    	
-                    	// use modification shit to make the new thing
-                    	myView.sendUserModification(new Modification_AddComponent((Component) myMap.get(imageView), new Point2D(x, y)));
-                    	
+                    	Point2D loc = askForNewPosition();
+                    	myView.sendUserModification(new Modification_AddAttributeOwner(myMap.get(imageView), loc));
                     }
 	            });
 	        } catch (FileNotFoundException ex) {
@@ -88,8 +88,13 @@ public class Palette<T extends AttributeOwner> implements SkeletonObject {
 	        }
 	        return imageView;
 	    }
-	
-
-
-
+	 
+	private Point2D askForNewPosition() {
+		List<String> dialogTitles = Arrays.asList("Creation Utility", "Please input a location");
+		List<String> promptLabel = Arrays.asList("X Position:", "Y Position:");
+		List<String> promptText = Arrays.asList("0.0", "0.0");
+		DoubleFieldPrompt myDialog = new DoubleFieldPrompt(dialogTitles, promptLabel, promptText);
+		List<String> results = myDialog.create();
+		return new Point2D(Double.parseDouble(results.get(0)), Double.parseDouble(results.get(1)));
+	}
 }

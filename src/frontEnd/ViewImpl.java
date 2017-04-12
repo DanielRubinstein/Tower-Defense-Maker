@@ -1,32 +1,40 @@
 package frontEnd;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.List;
 import java.util.function.Consumer;
 
 import ModificationFromUser.ModificationFromUser;
+import ModificationFromUser.Modification_Load;
+import ModificationFromUser.Modification_Save;
 import backEnd.Model;
+import backEnd.Data.DataController;
 import backEnd.GameData.UserAttribute;
 import backEnd.GameData.UserAttributeImpl;
+import backEnd.GameData.State.Component;
 import backEnd.GameData.State.ComponentGraph;
 import backEnd.GameData.State.Tile;
 import backEnd.GameData.State.TileGrid;
-import backEnd.GameEngine.Component;
 import backEnd.Mode.ModeReader;
+import frontEnd.CustomJavafxNodes.SingleFieldPrompt;
 import frontEnd.Skeleton.SkeletonImpl;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.stage.Stage;
 
-public class ViewImpl implements ViewEditor{
+public class ViewImpl implements View{
 	private Model myModel;
+	private DataController myDataController;
 	private Consumer<ModificationFromUser> myModConsumer;
 	private SkeletonImpl mySkeleton;
 	private SimpleBooleanProperty authorProperty;
 	private Stage appStage;
 	
-	public ViewImpl(Model model,Consumer<ModificationFromUser> inputConsumer) {
+	public ViewImpl(Model model,DataController dataController, Consumer<ModificationFromUser> inputConsumer) {
 		myModel = model;
+		myDataController = dataController;
 		myModConsumer = inputConsumer;
 		ModeReader mode = model.getModeReader();
 		authorProperty = new SimpleBooleanProperty(mode.getUserModeString().equals("AUTHOR"));
@@ -51,33 +59,30 @@ public class ViewImpl implements ViewEditor{
 	}
 
 	@Override
-	public Object save() {
-		// TODO Auto-generated method stub
-		return null;
+	public void save() {
+		String saveGameName = getSaveGameName();
+		sendUserModification(new Modification_Save(saveGameName));
+	}
+
+	private String getSaveGameName() {
+		List<String> dialogTitles = Arrays.asList("Save Game Utility", "Please Input a Name for your saved game");
+		String promptLabel = "Saved game name:";
+		String promptText = "";
+		SingleFieldPrompt myDialog = new SingleFieldPrompt(dialogTitles, promptLabel, promptText);
+		return myDialog.create();
+	}
+
+
+
+	@Override
+	public void load() {
+		String fileToLoad = null;
+		sendUserModification(new Modification_Load(fileToLoad));
 	}
 
 	@Override
-	public Object viewRules() {
+	public void newGame() {
 		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public Object editRules() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public Object load() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public Object newGame() {
-		// TODO Auto-generated method stub
-		return null;
 	}
 
 	@Override
@@ -117,6 +122,16 @@ public class ViewImpl implements ViewEditor{
 	@Override
 	public Stage getAppStage() {
 		return appStage;
+	}
+	
+	@Override
+	public void viewRules() {
+		// TODO Auto-generated method stub
+	}
+
+	@Override
+	public void editRules() {
+		// TODO Auto-generated method stub
 	}
 
 }

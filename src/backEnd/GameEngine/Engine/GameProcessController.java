@@ -1,6 +1,8 @@
 package backEnd.GameEngine.Engine;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Enumeration;
 import java.util.List;
 import java.util.ResourceBundle;
 
@@ -19,8 +21,9 @@ public class GameProcessController {
 		myCurrentState = currentState;
 		myRules = gameRules;
 		EngineFactory engineFactory = new EngineFactory();
-		while(myResources.getKeys().hasMoreElements()){
-			myEngines.add(engineFactory.getEngine(myResources.getString(myResources.getKeys().nextElement())));
+		Enumeration<String> n = myResources.getKeys();
+		for(String key : Collections.list(n)){
+			myEngines.add(engineFactory.getEngine(myResources.getString(key)));
 		}
 	}
 	

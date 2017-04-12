@@ -1,13 +1,15 @@
-package backEnd.GameEngine;
+package backEnd.GameData.State;
 
+import java.io.FileNotFoundException;
 import java.util.Map;
 import java.util.ResourceBundle;
 
 import backEnd.Attribute.Attribute;
+import backEnd.Attribute.AttributeData;
+import backEnd.Attribute.AttributeFactory;
 import backEnd.Attribute.AttributeImpl;
 import backEnd.Attribute.AttributeOwner;
-import backEnd.GameData.State.AccessPermissions;
-import backEnd.GameData.State.AccessPermissionsImpl;
+import backEnd.GameEngine.BehaviorFactory;
 import backEnd.GameEngine.Behaviors.Behavior;
 
 
@@ -24,18 +26,19 @@ public class Component implements AttributeOwner {
 	private AttributeData myAttributes;
 	private Map<String, Behavior> myBehaviors;
 	private AccessPermissions myAccessPermissions;
+	private String myType;
 	
-	public Component(){
+	public Component() throws FileNotFoundException{
 		this(new AccessPermissionsImpl()); //TODO so will we actually use this if we always need to pass in an
 		//AttributeData? Component always needs to contain an AttributeData!
 	}
 	
-	public Component(AttributeData attributes){
+	public Component(AttributeData attributes) throws FileNotFoundException{
 		this(new AccessPermissionsImpl());
 		myAttributes=attributes;
 	}
 	
-	public Component(AccessPermissions accessPermissions){
+	public Component(AccessPermissions accessPermissions) throws FileNotFoundException{
 		Component dummyComponent=new Component();
 		AttributeFactory af=new AttributeFactory();
 		BehaviorFactory bf=new BehaviorFactory(dummyComponent); //add a real component
@@ -89,6 +92,22 @@ public class Component implements AttributeOwner {
 		
 	}
 
+	/**
+	 * 
+	 * @param type the type of this Component, i.e. Tower or Enemy
+	 */
+	public void setMyType(String type){
+		myType = type;
+	}
+	
+	/**
+	 * 
+	 * @return the type of this Component, i.e. Tower or Enemy
+	 */
+	public String getMyType(){
+		return myType;
+	}
+	
 	/**
 	 * adds an attribute to the List of Attributes
 	 * @return 

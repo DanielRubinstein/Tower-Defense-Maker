@@ -2,6 +2,7 @@ package backEnd;
 
 import backEnd.Bank.BankController;
 import backEnd.GameData.State.State;
+import backEnd.GameEngine.Engine.GameProcessController;
 import backEnd.Mode.ModeReader;
 
 /**
@@ -25,4 +26,7 @@ public interface Model {
 	
 	public BankController getBankController();
 	
+	public GameProcessController getGameProcessController();
+
 }
+

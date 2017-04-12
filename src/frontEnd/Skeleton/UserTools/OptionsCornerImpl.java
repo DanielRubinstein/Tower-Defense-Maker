@@ -1,6 +1,6 @@
 package frontEnd.Skeleton.UserTools;
 
-import frontEnd.ViewEditor;
+import frontEnd.View;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.layout.Priority;
@@ -16,7 +16,7 @@ public class OptionsCornerImpl implements OptionsCorner{
 	private VBox myRoot;
 	private OptionsSelection userOptions;
 	
-	public OptionsCornerImpl(ViewEditor view) {
+	public OptionsCornerImpl(View view) {
 		myRoot = new VBox();
 		setUserOptions(view);	
 	}
@@ -25,7 +25,7 @@ public class OptionsCornerImpl implements OptionsCorner{
 		return myRoot;
 	}
 
-	private void setUserOptions(ViewEditor view){
+	private void setUserOptions(View view){
 		userOptions = new OptionsSelection(view);
 		userOptions.setAlignment(Pos.TOP_LEFT,Priority.ALWAYS);
 		myRoot.getChildren().add(userOptions.getNode());
@@ -33,9 +33,9 @@ public class OptionsCornerImpl implements OptionsCorner{
 
 	@Override
 	public void setSideDimensions(double width, double height) {
-		myRoot.setPrefSize(width, height);
+		//myRoot.setPrefSize(width, height);
 		///myRoot.setMaxHeight(height);
-		myRoot.setPrefHeight(height);
+		
 		userOptions.setSize(width, height);
 	}
 
