@@ -12,5 +12,5 @@ public interface SettingsView {
 	/**
 	 * Launches the settings in a new stage.
 	 */
-	public void launchSettings(Stage stage);
+	public void launchSettings();
 }

@@ -22,10 +22,10 @@ public class SkeletonImpl implements Skeleton{
 
 	public static final double MENU_HEIGHT = 650d;
 	public static final double MENU_WIDTH = 750d;
-	private static final double CANVAS_HEIGHT_FACTOR = 0.8;
+	private static final double CANVAS_HEIGHT_FACTOR = 0.7;
 	private static final double CANVAS_WIDTH_FACTOR = 0.8;
-	private static final double BOTTOM_HEIGHT_FACTOR = 0.2;
-	private static final double SIDE_WIDTH_FACTOR = 0.2;
+	private static final double BOTTOM_HEIGHT_FACTOR = 1 - CANVAS_HEIGHT_FACTOR;
+	private static final double SIDE_WIDTH_FACTOR = 1 - CANVAS_WIDTH_FACTOR;
 	private static final double CANVAS_WIDTH=MENU_WIDTH * CANVAS_WIDTH_FACTOR;
 	private static final double CANVAS_HEIGHT=MENU_HEIGHT * CANVAS_HEIGHT_FACTOR;
 	
@@ -59,7 +59,6 @@ public class SkeletonImpl implements Skeleton{
 		stage.setScene(myScene);
 		stage.setMinWidth(MENU_WIDTH);
 		stage.setMinHeight(MENU_HEIGHT);
-		
 		stage.show();
 	}
 	

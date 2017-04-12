@@ -2,6 +2,7 @@ package ModificationFromUser;
 
 import backEnd.ModelImpl;
 import backEnd.Attribute.AttributeOwner;
+import backEnd.Attribute.AttributeOwnerReader;
 import backEnd.GameData.State.Component;
 import backEnd.GameData.State.Tile;
 import backEnd.Mode.ModeException;
@@ -14,17 +15,19 @@ import backEnd.Mode.ModeException;
  */
 public class Modification_AddNewPresetAttributeOwner implements ModificationFromUser {
 
-	private AttributeOwner newAO;
+	private AttributeOwnerReader newAO;
 	private String newAOName;
 	public static final String DESCRIPTION = "Add Preset Component or Tile";		
 	
-	public Modification_AddNewPresetAttributeOwner(String newAttributeOwnerName, AttributeOwner newAO){
-		this.newAO = newAO;
+	public Modification_AddNewPresetAttributeOwner(String newAttributeOwnerName, AttributeOwnerReader obj){
+		this.newAO = obj;
 		this.newAOName = newAttributeOwnerName;
 	}
 
 	//FIXME currently the new preset will overwrite an existing preset with the same name, 
 	// based on the implementation of addNewComponent()
+	
+	// FIXME how to update the frontend and alert it that there is a new preset
 	@Override
 	public void invoke(ModelImpl myModel) throws Exception {
 		switch (myModel.getMode().getUserMode()) {
