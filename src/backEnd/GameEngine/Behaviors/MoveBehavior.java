@@ -3,15 +3,23 @@ package backEnd.GameEngine.Behaviors;
 import java.util.Map;
 import java.util.Observable;
 
+<<<<<<< HEAD
 import backEnd.Attribute.Attribute;
+=======
+import backEnd.Attribute.AttributeData;
+>>>>>>> master
 import backEnd.Attribute.AttributeImpl;
+import backEnd.GameData.State.Component;
 import backEnd.GameData.State.Tile;
 
 import backEnd.GameData.State.TileAttributeType;
 import backEnd.GameData.State.TileImpl;
+<<<<<<< HEAD
 import backEnd.GameEngine.AttributeData;
 import backEnd.GameEngine.AttributeFactory;
 import backEnd.GameEngine.Component;
+=======
+>>>>>>> master
 import javafx.geometry.Point2D;
 import resources.Constants;
 

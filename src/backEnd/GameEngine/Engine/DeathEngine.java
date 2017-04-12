@@ -1,8 +1,8 @@
 package backEnd.GameEngine.Engine;
 
 
+import backEnd.GameData.State.Component;
 import backEnd.GameData.State.State;
-import backEnd.GameEngine.Component;
 import backEnd.GameEngine.Behaviors.Behavior;
 import backEnd.GameEngine.Behaviors.DeathBehavior;
 import backEnd.GameEngine.Behaviors.MoveBehavior;

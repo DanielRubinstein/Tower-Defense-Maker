@@ -18,7 +18,7 @@ import javafx.geometry.Point2D;
 
 /**
  * 
- * @author Alex Salas
+ * @author Alex Salas, Christian Martindale
  *
  */
 public class StateImpl implements State {
@@ -29,7 +29,7 @@ public class StateImpl implements State {
 	private int pointResHeight;
 	private TileGrid stateGrid;
 	private ComponentGraph componentGraph;
-	private final static String RESOURCES_PATH = "resources/attributes";
+	private final static String RESOURCES_PATH = "resources/defaultTileAttributes";
 	private final static ResourceBundle myResources = ResourceBundle.getBundle(RESOURCES_PATH);
 
 	public StateImpl(int gridWidth, int gridHeight, int pointResolution_Width, int pointResolution_Height) {
@@ -71,7 +71,6 @@ public class StateImpl implements State {
 						.get(myResources.getString("StartTile")).getValue() == true) {
 					startTiles.put(stateGrid.getTileByCoord(i, j), new Coord(i, j, null));
 				}
-
 			}
 		}
 		return startTiles;
@@ -113,21 +112,21 @@ public class StateImpl implements State {
 				nextPathCoords = pathStack.pop();
 				if(currentPathCoords == null){continue;}
 				Tile currentPathTile = stateGrid.getTileByCoord(currentPathCoords.getXCoord(),currentPathCoords.getYCoord());
-				MoveDirections pathDirection = null;
+				String pathDirection = null;
 
 				if(currentPathCoords.getXCoord()-nextPathCoords.getXCoord()!=-1){
-					pathDirection = MoveDirections.RIGHT;
+					pathDirection = "Right";
 				}
 				if(currentPathCoords.getXCoord()-nextPathCoords.getXCoord()!= 1){
-					pathDirection = MoveDirections.LEFT;
+					pathDirection = "Left";
 				}
 				if(currentPathCoords.getYCoord()-nextPathCoords.getYCoord()!=-1){
-					pathDirection = MoveDirections.DOWN;
+					pathDirection = "Down";
 				}
 				if(currentPathCoords.getYCoord()-nextPathCoords.getYCoord()!= 1){
-					pathDirection = MoveDirections.UP;
+					pathDirection = "Up";
 				}
-				((AttributeImpl<MoveDirections>) currentPathTile.getAttribute("MoveDirection")).setValue(pathDirection);
+				((AttributeImpl<String>) currentPathTile.getAttribute("MoveDirection")).setValue(pathDirection);
 			}
 		}
 	}

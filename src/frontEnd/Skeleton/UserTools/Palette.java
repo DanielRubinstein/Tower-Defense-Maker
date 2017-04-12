@@ -8,7 +8,7 @@ import java.util.Map;
 
 import ModificationFromUser.Modification_AddComponent;
 import backEnd.Attribute.AttributeOwner;
-import backEnd.GameEngine.Component;
+import backEnd.GameData.State.Component;
 import frontEnd.View;
 import javafx.geometry.Insets;
 import javafx.geometry.Point2D;

@@ -9,8 +9,8 @@ import com.thoughtworks.xstream.XStream;
 import com.thoughtworks.xstream.io.xml.DomDriver;
 
 import backEnd.GameData.GameData;
+import backEnd.GameData.State.Component;
 import backEnd.GameData.State.Tile;
-import backEnd.GameEngine.Component;
 
 /**
  * This class handles loading both game state data and universal game data

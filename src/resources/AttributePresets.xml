@@ -14,7 +14,7 @@
 	<EDITABLESTRING>
 		<EDITABLESTRING_TEMPLATE></EDITABLESTRING_TEMPLATE></EDITABLESTRING>
 	<STRINGLIST>
-		<STRINGLIST_TEMPLATE Options="Comma delineated String Options"></STRINGLIST_TEMPLATE><MoveDirection Options="Up,Down,Left,Right"></MoveDirection>
+		<STRINGLIST_TEMPLATE Options="Comma delineated String Options"></STRINGLIST_TEMPLATE><MoveDirection options="Up,Down,Left,Right"></MoveDirection>
 		</STRINGLIST>
 	<POSITION>
 		<POSITION_TEMPLATE></POSITION_TEMPLATE></POSITION></AttributePresets>
