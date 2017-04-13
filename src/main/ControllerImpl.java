@@ -43,6 +43,7 @@ public class ControllerImpl implements Controller {
 						System.out.println("Modification from user sent to back end");
 					} catch (Exception e) {
 						System.out.println("Error in Modification sent");
+						e.printStackTrace();
 						if (myModel == null){
 							System.out.println("   No model created");
 						}

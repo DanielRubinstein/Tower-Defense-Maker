@@ -55,7 +55,7 @@ public class ViewImpl implements View{
 		KeyFrame frame = new KeyFrame(Duration.millis(MILLISECOND_DELAY), e -> step(SECOND_DELAY));
 		animation.setCycleCount(Timeline.INDEFINITE);
 		animation.getKeyFrames().add(frame);
-		animation.play();
+		//animation.play();
 		
 	}
 
