@@ -80,7 +80,13 @@ public class TileCommandCenter extends CommandCenter implements SkeletonObject{
 		myStage.show();
 	}
 	
+	/**
+	 * Launches the tile command center. Note that we have to clear all previous tabs. 
+	 * @param x
+	 * @param y
+	 */
 	public void launch(double x, double y) {
+		tabPane.getTabs().clear();
 		tabPane.getTabs().add(createAttributeOwnerTab(myTile));
 		tabPane.getTabs().addAll(createComponentTabs());
 		generate(x,y);
