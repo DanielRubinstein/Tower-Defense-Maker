@@ -1,7 +1,5 @@
 package backEnd.Attribute;
 
-import java.util.Arrays;
-import java.util.Collection;
 import java.util.List;
 
 /**
@@ -12,7 +10,6 @@ import java.util.List;
 public class AttributeImpl<T> implements Attribute<T>{
 
 	private T myValue;
-	private AttributeType myAttrType;
 	private List<T> myParamList;
 	private String myName;
 	
@@ -48,6 +45,14 @@ public class AttributeImpl<T> implements Attribute<T>{
 	@Override
 	public String getName() {
 		return myName;
+	}
+
+
+	@Override
+	public Attribute copy() {
+		Attribute<T> attributeCopy = new AttributeImpl<>(myParamList, new String(myName));
+		attributeCopy.setValue(myValue);
+		return attributeCopy;
 	}
 
 	
