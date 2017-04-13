@@ -1,6 +1,7 @@
 package frontEnd.Skeleton;
 
 import backEnd.Attribute.AttributeOwnerReader;
+import javafx.scene.Node;
 import javafx.stage.Stage;
 
 public interface Skeleton {
@@ -11,5 +12,6 @@ public interface Skeleton {
 	 */
 	public void display(Stage stage);
 	
+	public Node getCanvas();
 }
 
