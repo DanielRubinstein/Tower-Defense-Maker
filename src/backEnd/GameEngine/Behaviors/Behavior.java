@@ -1,5 +1,6 @@
 package backEnd.GameEngine.Behaviors;
 
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -16,8 +17,9 @@ public interface Behavior extends Observer {
 	/**
 	 * when the engine decides to run a behavior on a component, that component's corresponding behavior is executed
 	 * @param <T>
+	 * @throws FileNotFoundException 
 	 */
-	public <T> void execute(T toModify);
+	public <T> void execute(T toModify) throws FileNotFoundException;
 
 
 }

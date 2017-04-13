@@ -17,7 +17,9 @@ import backEnd.GameData.State.State;
 import backEnd.GameData.State.Tile;
 import backEnd.GameData.State.TileGrid;
 import frontEnd.View;
+import frontEnd.CustomJavafxNodes.FrontEndAttributeOwner;
 import frontEnd.CustomJavafxNodes.FrontEndAttributeOwnerImpl;
+import frontEnd.Skeleton.AoTools.TileCommandCenterImpl;
 import frontEnd.Skeleton.AoTools.TileCommandCenter;
 import frontEnd.Skeleton.UserTools.SkeletonObject;
 import javafx.geometry.Point2D;
@@ -113,7 +115,7 @@ public class Canvas implements SkeletonObject, Observer{
 		for(int i=0;i<myGridHeight;i++){
 			for(int j=0;j<myGridWidth;j++){
 				AttributeOwnerReader t = myTileGrid.getTileByLocation(new Point2D(i,j));
-				FrontEndAttributeOwnerImpl attrOwner = new FrontEndAttributeOwnerImpl(t);
+				FrontEndAttributeOwner attrOwner = new FrontEndAttributeOwnerImpl(t);
 
 				ImageView tileView = attrOwner.getImageView();
 				organizeImageView(tileView);
@@ -132,12 +134,8 @@ public class Canvas implements SkeletonObject, Observer{
 		tileView.fitHeightProperty().bind(myGrid.heightProperty().divide(myGridHeight));
 	}
 	
-	private void setUpComponents(){
-		
-	}
-
 	private void setTileInteraction(Node n, Tile t){
-		TileCommandCenter tileInteractor = new TileCommandCenter(myView, t, myState);
+		TileCommandCenter tileInteractor = new TileCommandCenterImpl(myView, t, myState);
 		n.setOnMouseClicked(e-> tileInteractor.launch(e.getScreenX(),e.getScreenY()));
 	}
 	@Override
@@ -169,11 +167,8 @@ public class Canvas implements SkeletonObject, Observer{
 				
 				myGrid.getChildren().remove(oldImView);
 				myGrid.getChildren().add(imView);
-			}
-			
+			}		
 		}
-			
-		
 	}
 	
 

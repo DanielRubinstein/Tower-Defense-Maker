@@ -51,25 +51,16 @@ public class ControllerImpl implements Controller {
 
 		Consumer<Object> setGameData = o -> {
 			try {
-				Method m = myDataController.getClass().getMethod("generateGameData", o.getClass());
-				myGameData = (GameData) m.invoke(myDataController,o);
+				//Method m = myDataController.getClass().getMethod("generateGameData", o.getClass());
+				//myGameData = (GameData) m.invoke(myDataController,o);
+				DataInputLoader dataInput = new DataInputLoader(o,myDataController);
+				myGameData = dataInput.getGameData();
 				myModel = new ModelImpl(myDataController, myGameData);
 				myView = new ViewImpl(myModel, myDataController, viewMod);
-			} catch (XMLReadingException e) {
+
+			} catch (InstantiationException | IllegalArgumentException | XMLReadingException | NoSuchMethodException | SecurityException | IllegalAccessException | InvocationTargetException e) {
 				ErrorDialog errDia = new ErrorDialog();
 				errDia.create("Cannot Load Game", e.getMessage());
-			} catch (SecurityException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			} catch (NoSuchMethodException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			} catch (IllegalAccessException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			} catch (InvocationTargetException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
 			} 
 			
 		};
@@ -94,4 +85,5 @@ public class ControllerImpl implements Controller {
 	private void executeInteraction(ModificationFromUser myInteraction) throws Exception{
 		myInteraction.invoke(myModel);
 	}
+>>>>>>> origin/master
 }

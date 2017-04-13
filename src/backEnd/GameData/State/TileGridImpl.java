@@ -27,12 +27,11 @@ public class TileGridImpl implements TileGrid {
 	
 	@Override
 	public Tile getTileByLocation(Point2D location){
-		return getTileByCoord((int) location.getX(),(int) location.getY()); //Potentially wrong flipped x/y
+		return getTileByCoord((int) location.getY(),(int) location.getX()); //Potentially wrong flipped x/y- y
 	}
 	
 	@Override
 	public void setTile(Tile newTile, Point2D location){
-		//System.out.println("Creating tile @ " +location);
 		tileGrid[(int) location.getX()][(int) location.getY()] = newTile; //Potentially wrong flipped x/y?
 	}
 

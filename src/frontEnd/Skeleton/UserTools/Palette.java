@@ -2,6 +2,7 @@ package frontEnd.Skeleton.UserTools;
 
 import java.util.Arrays;
 import java.util.Collection;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.function.Consumer;
@@ -10,6 +11,7 @@ import ModificationFromUser.Modification_AddAttributeOwner;
 import ModificationFromUser.Modification_AddNewPresetAttributeOwner;
 import backEnd.Attribute.AttributeOwner;
 import backEnd.Attribute.AttributeOwnerReader;
+import backEnd.GameData.State.Component;
 import frontEnd.View;
 import frontEnd.CustomJavafxNodes.DoubleFieldPrompt;
 import frontEnd.Skeleton.AoTools.PresetCreation;
@@ -46,7 +48,8 @@ public class Palette<T extends AttributeOwner> implements SkeletonObject {
 		myPresets = objects;
 		myType =string;
 		initializePane();
-		
+		myMap = new HashMap<ImageView, T>();
+		System.out.println("in palette " + myPresets);
 		try{
 			for (T preset : myPresets) {
 				
@@ -80,25 +83,30 @@ public class Palette<T extends AttributeOwner> implements SkeletonObject {
 		ImageView addImage = createImageView(SETTINGS_IMAGE, (iV) ->{
 			// TODO this is where a new preset is created in the frontend
 			String newAttributeOwnerName = null;
-			AttributeOwner newAO = null;
-			String imagePathForNewPreset = null;
+			AttributeOwner newAO = new Component();
+			String imagePathForNewPreset = "images/zombie.jpg";
 			//newAO.addAttribute(IMAGEFILE_ATTRIBUTE_NAME, imagePathForNewPreset);
-			
-			PresetCreation presetCreation = new PresetCreation(myView, newAO);
-			presetCreation.launch(0d, 0d);
 
+			PresetCreation presetCreation = new PresetCreation(myView, newAO);
+			
 			ImageView newImage = createImageView(imagePathForNewPreset, (iV2) ->{
-				myView.sendUserModification(new Modification_AddAttributeOwner(newAO, askForNewPosition()));
+				System.out.println("testing eme");
+				Point2D point = askForNewPosition();
+				myView.sendUserModification(new Modification_AddAttributeOwner(newAO, point));
 			});
+			System.out.println(newImage +  "    " + ((T) newAO));
 			myMap.put(newImage, (T) newAO);
+			presetCreation.add(newImage);
+			presetCreation.launch(0d, 0d);
 		});
 		/*
 		Button b = new Button();
 		b.setGraphic(addImage);
 		b.setPadding(Insets.EMPTY);
 		b.getStyleClass().clear();
-		//b.setOnAction((e) -> addImage.getOnMouseClicked());
+		b.setOnAction((e) -> addImage.getOnMouseClicked());
 		*/
+		System.out.println(addImage.getImage());
 		return addImage;
 	}
 
@@ -119,6 +127,7 @@ public class Palette<T extends AttributeOwner> implements SkeletonObject {
 		// resizing
 		Image image = new Image(getClass().getClassLoader().getResourceAsStream(myImagePath));
 		ImageView imageView = new ImageView(image);
+		System.out.println("creaitng imageview " +myImagePath);
 		imageView.setFitWidth(TILE_SIZE);
 		imageView.setFitHeight(TILE_SIZE);
 		imageView.setOnMouseClicked(mouseEvent -> {
