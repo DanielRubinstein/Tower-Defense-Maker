@@ -17,6 +17,8 @@ import backEnd.Attribute.AttributeOwner;
 import backEnd.Bank.BankController;
 import backEnd.GameData.State.AccessPermissionsImpl;
 import backEnd.GameData.State.Component;
+import backEnd.GameData.State.TileImpl;
+import backEnd.Mode.UserModeType;
 import frontEnd.View;
 import frontEnd.CustomJavafxNodes.DoubleFieldPrompt;
 import frontEnd.Skeleton.AoTools.PresetCreation;
@@ -108,7 +110,7 @@ public class Palette<T extends AttributeOwner> implements SkeletonObject, Observ
 					case "Tiles":
 						//newAO = new TileImpl();
 						// TODO make blank tile
-						newAO = new Component(new AttributeData(),new AccessPermissionsImpl());
+						newAO = new TileImpl(Arrays.asList(), Arrays.asList(UserModeType.AUTHOR), new Point2D(0,0));
 						imagePathForNewPreset =  "images/grass.jpg";
 						break;
 					case "Components":
@@ -116,9 +118,6 @@ public class Palette<T extends AttributeOwner> implements SkeletonObject, Observ
 						imagePathForNewPreset =  "images/zombie.jpg";
 						break;
 					}
-					// = new Component(new AttributeData(),new AccessPermissionsImpl());
-					
-					
 
 					Point2D point = askForNewPosition();
 					
