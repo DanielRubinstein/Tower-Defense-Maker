@@ -50,11 +50,6 @@ public class MoveEngine implements Engine{
 			
 		}
 		
-		//TODO : different case for bullets
-		// if (Component.getMyType.equals("Projectile")
-		//(Component.getMyType.equals("Enemy")
-		//StartPosition : Point2D
-		//TargetPosition : Point2D
 		
 	}
 }
