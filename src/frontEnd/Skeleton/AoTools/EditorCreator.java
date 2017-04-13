@@ -141,7 +141,6 @@ public class EditorCreator {
 	}
 
 	private Node createBooleanEditor() {
-		System.out.println(" in editor creator " +myAttr.getValue());
 		Node n = null;
 		myToggle = new ToggleSwitch(myView, "Off", "On",
 				new SimpleBooleanProperty((Boolean) myAttr.getValue()), () -> triggerBooleanUpdate());
@@ -150,7 +149,6 @@ public class EditorCreator {
 	}
 	
 	private void triggerBooleanUpdate() {
-		System.out.println("sending in editor creator  " + myToggle.getSwitchedOn().getValue());
 		sendModification(myToggle.getSwitchedOn().getValue());
 	}
 

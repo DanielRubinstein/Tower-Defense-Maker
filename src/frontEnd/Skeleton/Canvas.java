@@ -19,6 +19,7 @@ import backEnd.GameData.State.TileGrid;
 import frontEnd.View;
 import frontEnd.CustomJavafxNodes.FrontEndAttributeOwner;
 import frontEnd.CustomJavafxNodes.FrontEndAttributeOwnerImpl;
+import frontEnd.Skeleton.AoTools.TileCommandCenterImpl;
 import frontEnd.Skeleton.AoTools.TileCommandCenter;
 import frontEnd.Skeleton.UserTools.SkeletonObject;
 import javafx.geometry.Point2D;
@@ -134,7 +135,7 @@ public class Canvas implements SkeletonObject, Observer{
 	}
 	
 	private void setTileInteraction(Node n, Tile t){
-		TileCommandCenter tileInteractor = new TileCommandCenter(myView, t, myState);
+		TileCommandCenter tileInteractor = new TileCommandCenterImpl(myView, t, myState);
 		n.setOnMouseClicked(e-> tileInteractor.launch(e.getScreenX(),e.getScreenY()));
 	}
 	@Override
