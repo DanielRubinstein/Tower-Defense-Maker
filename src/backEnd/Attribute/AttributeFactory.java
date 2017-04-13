@@ -13,8 +13,7 @@ import javax.xml.parsers.DocumentBuilderFactory;
 import org.w3c.dom.Document;
 import org.w3c.dom.Node;
 
-import com.sun.javafx.geom.Point2D;
-
+import javafx.geometry.Point2D;
 import javafx.scene.image.Image;
 
 /**

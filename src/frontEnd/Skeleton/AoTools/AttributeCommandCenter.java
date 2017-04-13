@@ -46,6 +46,12 @@ public class AttributeCommandCenter extends CommandCenter{
 
 		contents.getChildren().add(contents_Att);
 		contents.getChildren().add(createPresetButton(obj));
+		Button submit = new Button("Submit");
+		submit.setOnAction(e -> {
+			myView.addToCanvas(obj);
+			
+		});
+		contents.getChildren().add(submit);
 		contents.setSpacing(STANDARD_SPACING);
 		// contents.setAlignment(Pos.TOP_CENTER);
 		return contents;
@@ -116,7 +122,7 @@ public class AttributeCommandCenter extends CommandCenter{
 	private Label createLocationLabel(AttributeOwnerReader obj) {
 		// TODO maybe add sell feature here
 		try{
-			Point2D pos = (Point2D) obj.getAttribute("Position");
+			Point2D pos = (Point2D) obj.getAttribute("Position").getValue();
 			return new Label(
 				String.format("Location: (%.0f, %.0f)", pos.getX(), pos.getY()));
 		} catch (NullPointerException | MissingResourceException e ){

@@ -11,6 +11,7 @@ import ModificationFromUser.ModificationFromUser;
 import ModificationFromUser.Modification_Load;
 import ModificationFromUser.Modification_Save;
 import backEnd.Model;
+import backEnd.Attribute.AttributeOwnerReader;
 import backEnd.Data.DataController;
 import backEnd.GameData.UserAttribute;
 import backEnd.GameData.UserAttributeImpl;
@@ -55,7 +56,11 @@ public class ViewImpl implements View{
 		KeyFrame frame = new KeyFrame(Duration.millis(MILLISECOND_DELAY), e -> step(SECOND_DELAY));
 		animation.setCycleCount(Timeline.INDEFINITE);
 		animation.getKeyFrames().add(frame);
-		animation.play();
+		//animation.play();
+		
+	}
+	public void addToCanvas(AttributeOwnerReader ao){
+		mySkeleton.addToCanvas(ao);
 	}
 
 	/**
@@ -129,7 +134,6 @@ public class ViewImpl implements View{
 		Collection<UserAttribute> m = new ArrayList<UserAttribute>();
 		m.add(new UserAttributeImpl("Score", 3000d));
 		m.add(new UserAttributeImpl("Level", 17d));
-		m.add(new UserAttributeImpl("Health", 100d));
 		return Collections.unmodifiableCollection(m);
 	}
 
@@ -163,5 +167,4 @@ public class ViewImpl implements View{
 		// TODO Auto-generated method stub
 		
 	}
-
 }
