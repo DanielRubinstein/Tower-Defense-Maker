@@ -1,6 +1,7 @@
 package frontEnd.Skeleton.AoTools;
 
 import backEnd.Attribute.AttributeOwnerReader;
+import backEnd.GameData.State.Tile;
 import frontEnd.View;
 import javafx.scene.Node;
 import javafx.scene.Scene;
@@ -15,6 +16,9 @@ public class PresetCreation{
 	
 	public PresetCreation(View myView, AttributeOwnerReader obj){
 		AttributeCommandCenter aCC = new AttributeCommandCenter(myView, obj);
+		if(! (obj instanceof Tile)){
+			aCC.addSubmitButton(obj);
+		}
 		myRoot = aCC.get();
 	}
 	

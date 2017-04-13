@@ -70,7 +70,7 @@ public class AttributeFactory {
 				
 			case "EDITABLESTRING":
 				AttributeImpl<String> es_newAttr = new AttributeImpl<String>(null, gameAttributeName);
-				es_newAttr.setValue("");
+				es_newAttr.setValue("RIGHT");
 				return es_newAttr;
 				
 			case "INTEGER":

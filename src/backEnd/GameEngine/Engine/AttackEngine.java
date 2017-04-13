@@ -59,10 +59,13 @@ public class AttackEngine implements Engine {
 			fnf.create("Error", "File not found");
 		}
 
-		bullet.setAttributeValue(myResources.getString("ProjectileStartPosition"), attacker.getAttribute(myResources.getString("Position")));
-		bullet.setAttributeValue(myResources.getString("ProjectileTargetPosition"), target.getAttribute(myResources.getString("Position")));
-		currentState.getComponentGraph().addComponentToGrid(bullet,
-				(Point2D) attacker.getAttribute("Position").getValue());
+		Point2D bulletPos = (Point2D) attacker.getAttribute(myResources.getString("Position"));
+		Point2D targetPos = (Point2D) target.getAttribute(myResources.getString("Position"));
+		
+		bullet.setAttributeValue(myResources.getString("Position"), bulletPos);
+		bullet.setAttributeValue(myResources.getString("ProjectileTargetPosition"), targetPos);
+		bullet.setAttributeValue(myResources.getString("ProjectileDistance"), targetPos.subtract(bulletPos));
+		currentState.getComponentGraph().addComponentToGrid(bullet, bulletPos);
 	}
 
 	/**

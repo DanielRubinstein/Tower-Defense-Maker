@@ -1,6 +1,7 @@
 package frontEnd.Skeleton.UserTools;
 
 import java.util.Collection;
+import java.util.Map;
 
 import backEnd.GameData.State.Component;
 import backEnd.GameData.State.Tile;
@@ -24,8 +25,9 @@ public class PalettePane implements SkeletonObject {
 		//http://stackoverflow.com/questions/29085983/create-vertical-tabs-in-tabpane-javafx
 		palette = new TabPane();
 		palette.setSide(Side.LEFT);
-		palette.getTabs().add(createPalette("Tiles"));
 		palette.getTabs().add(createPalette("Components"));
+		palette.getTabs().add(createPalette("Tiles"));
+		
 		
 	}
 
@@ -36,18 +38,19 @@ public class PalettePane implements SkeletonObject {
 		Palette<?> palette = null;
 		
 			if (string.equals("Tiles")){
-				Collection<Tile> presets = null;
+				Map<String, Tile> presets = null;
 				try{
-					presets = myView.getTilePresets();
+					presets = myView.getBankController().getTileMap();
 				} catch (NullPointerException e) {
 					System.out.println("No presets here");
 				}
 				palette = new Palette<Tile>(myView, presets , string);
 			} else if (string.equals("Components")){
-				Collection<Component> presets = null;
+				Map<String, Component> presets = null;
 				try{
-					presets = myView.getComponentPresets();
+					presets = myView.getBankController().getComponentMap();
 				} catch (NullPointerException e) {
+	
 					System.out.println("No presets here");
 				}
 				palette = new Palette<Component>(myView, presets, string);

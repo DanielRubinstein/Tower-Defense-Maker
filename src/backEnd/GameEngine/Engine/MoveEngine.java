@@ -35,8 +35,14 @@ public class MoveEngine implements Engine{
 	@Override
 	public void gameLoop(State currentState, double stepTime) {
 		myState=currentState;
+		//System.out.println("  my state "+myState + "   "  +myState.getComponentGraph().getAllComponents() + "   " +myState.getComponentGraph().getAllComponents().size());
 		for (Component c: myState.getComponentGraph().getAllComponents()){
-			Tile currentTile=myState.getTileGrid().getTileByLocation((Point2D) c.getAttribute("Position").getValue()); 
+			//System.out.println((c instanceof Component )+   "     "   +c +   "  " + c.printID());
+			Object o = c.getAttribute("Position").getValue();
+			//System.out.println("    in move engine " +o +"     ");
+			try{
+			Tile currentTile = myState.getTileGrid().getTileByScreenLocation((Point2D)c.getAttribute("Position").getValue()); 
+			//System.out.println("successfully moved " + c + "    " +c.printID());
 			myState.getComponentGraph().removeComponent(c);
 			MoveBehavior mb=new MoveBehavior(c);
 			try {
@@ -47,14 +53,13 @@ public class MoveEngine implements Engine{
 			}
 			Point2D newPosition=mb.getPosition();
 			myState.getComponentGraph().addComponentToGrid(c, newPosition);
+			} catch (Exception e){
+				System.out.println("other erorr "+e.getMessage());
+				e.printStackTrace();
+			}
 			
 		}
 		
-		//TODO : different case for bullets
-		// if (Component.getMyType.equals("Projectile")
-		//(Component.getMyType.equals("Enemy")
-		//StartPosition : Point2D
-		//TargetPosition : Point2D
 		
 	}
 }
