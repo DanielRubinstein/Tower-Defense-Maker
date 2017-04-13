@@ -6,14 +6,15 @@ import backEnd.Attribute.Attribute;
 import backEnd.Attribute.AttributeOwner;
 import backEnd.Attribute.AttributeOwnerReader;
 
-public class Modification_EditAttribute<T> implements ModificationFromUser{
+public class Modification_EditAttribute<T> implements ModificationFromUser {
 
-
-	private AttributeOwnerReader myObj;
+	private AttributeOwner myObj;
 	private Attribute<T> myAtt;
 	private T myNewValue;
-	
-	public Modification_EditAttribute(AttributeOwnerReader myOwner, Attribute<T> att, T newValue){
+
+	// FIXME in the future the parameter will be AttributeOwnerReader and this
+	// class will get the modifiable AttributeOwner using IDs
+	public Modification_EditAttribute(AttributeOwner myOwner, Attribute<T> att, T newValue) {
 		myObj = myOwner;
 		myAtt = att;
 		myNewValue = newValue;
@@ -21,7 +22,7 @@ public class Modification_EditAttribute<T> implements ModificationFromUser{
 
 	@Override
 	public void invoke(ModelImpl myModel) throws Exception {
-		myAtt.setValue(myNewValue);
+		myObj.setAttributeValue(myAtt.getName(), myNewValue);
 	}
 
 }
