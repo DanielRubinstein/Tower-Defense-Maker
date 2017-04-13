@@ -22,7 +22,7 @@ public class Component extends Observable implements AttributeOwner {
 	 * @author Daniel
 	 */
 
-	private final static String DEFAULT_ATTRIBUTE_PATH = "resources/componentDefaults";
+	private final static String DEFAULT_ATTRIBUTE_PATH = "resources/defaultComponentAttributes";
 	private final static String BEHAVIOR_PATH = "resources/behaviorNames";
 	private final static ResourceBundle behaviorResources = ResourceBundle.getBundle(BEHAVIOR_PATH);
 	private final static ResourceBundle attributeResources = ResourceBundle.getBundle(DEFAULT_ATTRIBUTE_PATH);
@@ -31,11 +31,14 @@ public class Component extends Observable implements AttributeOwner {
 	private AccessPermissions myAccessPermissions;
 	private String myType;
 	private List<Observer> observers = new ArrayList<Observer>();
-
 	public Component(AttributeData attributes) throws FileNotFoundException {
 		this(attributes, new AccessPermissionsImpl());
 	}
 
+	public Component(){
+		
+	}
+	
 	public Component(AttributeData attributes, AccessPermissions accessPermissions) throws FileNotFoundException {
 		myAttributes = attributes;
 		AttributeFactory af = new AttributeFactory();
@@ -91,8 +94,7 @@ public class Component extends Observable implements AttributeOwner {
 
 	@Override
 	public void addAttribute(String attrType, Attribute<?> newAttr) {
-		// TODO Auto-generated method stub
-
+		myAttributes.addAttribute(attrType, newAttr);
 	}
 
 	/**
@@ -128,6 +130,11 @@ public class Component extends Observable implements AttributeOwner {
 		for (Observer obs : observers) {
 			obs.update(this, null);
 		}
+	}
+	@Override
+	public void addAsListener(Observer o) {
+		addObserver(o);
+		//addObserver(o);
 	}
 
 	/**

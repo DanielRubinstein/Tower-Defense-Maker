@@ -59,6 +59,7 @@ public class TileImpl extends Observable implements Tile, AttributeOwner {
 	@Override
 	public void setAttributeData(AttributeData newAttrData) {
 		myAttrData = newAttrData;
+		notifyObservers();
 	}
 
 	@Override
@@ -69,6 +70,7 @@ public class TileImpl extends Observable implements Tile, AttributeOwner {
 	@Override
 	public void addAttribute(String name, Attribute<?> value) {
 		myAttrData.addAttribute(attributeResources.getString(name), value);
+		notifyObservers();
 
 	}
 
@@ -99,6 +101,11 @@ public class TileImpl extends Observable implements Tile, AttributeOwner {
 		for (Observer obs : observers) {
 			obs.update(this, null);
 		}
+	}
+
+	@Override
+	public void addAsListener(Observer o) {
+		addObserver(o);
 	}
 
 }

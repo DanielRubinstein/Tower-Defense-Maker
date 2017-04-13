@@ -44,10 +44,18 @@ public class MoveBehavior implements Behavior {
 		case "DOWN":
 			newPoint=new Point2D(currentPosition.getX(), currentPosition.getY()-Constants.defaultMoveAmount);				
 		}
-		AttributeFactory af=new AttributeFactory();
+		AttributeFactory af = null;
+		try {
+			af = new AttributeFactory();
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			System.out.println("error in MoveBehavior- SAD!");
+		}
 		Attribute<Point2D> newPositionAttribute=(Attribute<Point2D>) af.getAttribute("Position");
 		newPositionAttribute.setValue(newPoint);
 		myComponent.setAttributeValue("Position",newPositionAttribute); //does it get overwritten?
+
 	}
 
 	/*

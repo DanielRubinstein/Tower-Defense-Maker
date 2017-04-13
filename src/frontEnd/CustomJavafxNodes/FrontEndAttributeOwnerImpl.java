@@ -16,9 +16,10 @@ public class FrontEndAttributeOwnerImpl implements Observer{
 	private double x;
 	private double y;
 	private static final String IMAGE_ATTRIBUTE = "ImageFile";
-	private static final String POSITION_ATTRIBUTE = "Locattion";
+	private static final String POSITION_ATTRIBUTE = "Position";
 	
 	public FrontEndAttributeOwnerImpl(AttributeOwnerReader attr){
+		attr.addAsListener(this);
 		setUpImageView(attr);
 	}
 	
@@ -46,15 +47,13 @@ public class FrontEndAttributeOwnerImpl implements Observer{
 	@Override
 	public void update(Observable o, Object arg) {
 		AttributeOwnerReader newAttr = (AttributeOwnerReader) o;
-		
+
 		String newImagePath = (String) newAttr.getMyAttributes().get(IMAGE_ATTRIBUTE).getValue();
-		Point2D newLoc = (Point2D) newAttr.getMyAttributes().get(POSITION_ATTRIBUTE).getValue();
-		
-		if(!newImagePath.equals(myImagePath) || (x!=newLoc.getX() && y!=newLoc.getY())){
-			//update
+		//Point2D newLoc = (Point2D) newAttr.getMyAttributes().get(POSITION_ATTRIBUTE).getValue();
+		if(!newImagePath.equals(myImagePath) ){//|| (x!=newLoc.getX() && y!=newLoc.getY())){
 			myImagePath = newImagePath;
-			x = newLoc.getX();
-			y = newLoc.getY();
+			//x = newLoc.getX();
+			//y = newLoc.getY();
 			Image image = new Image(getClass().getClassLoader().getResourceAsStream(myImagePath));
 			myImage.setImage(image);
 			myImage.setX(x);
@@ -62,6 +61,7 @@ public class FrontEndAttributeOwnerImpl implements Observer{
 		}
 	}
 
+	
 
 	
 }
