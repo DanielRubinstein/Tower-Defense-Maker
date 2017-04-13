@@ -2,9 +2,11 @@ package useCases;
 
 import java.util.List;
 
+import backEnd.State;
+import backEnd.Environment.*;
 import backEnd.Mode.Mode;
 import frontEnd.Skeleton.UserInteractor;
-/*
+
 public class UseCaseClickStructPlayerMode implements UserInteractor {
 
 	private Environment myEnv;
@@ -75,4 +77,3 @@ public class UseCaseClickStructPlayerMode implements UserInteractor {
 	}
 
 }
-*/

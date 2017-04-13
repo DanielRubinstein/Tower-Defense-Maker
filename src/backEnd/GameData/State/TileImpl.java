@@ -45,16 +45,6 @@ public class TileImpl extends Observable implements Tile, AttributeOwner {
 		}
 
 	}
-	
-	public TileImpl() throws FileNotFoundException{
-		this.myAttrData = new AttributeData(new HashMap<String, Attribute<?>>());
-		AttributeFactory attrFact = new AttributeFactory();
-		this.myAttrData = new AttributeData(new HashMap<String, Attribute<?>>());
-		for (String key : attributeResources.keySet()) {
-			Attribute<?> myAttribute = attrFact.getAttribute(key);
-			addAttribute(key, myAttribute);
-		}
-	}
 
 	@Override
 	public AccessPermissions getAccessPermissions() {
