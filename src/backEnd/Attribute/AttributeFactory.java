@@ -13,6 +13,7 @@ import javax.xml.parsers.DocumentBuilderFactory;
 import org.w3c.dom.Document;
 import org.w3c.dom.Node;
 
+import backEnd.GameData.State.Component;
 import javafx.geometry.Point2D;
 import javafx.scene.image.Image;
 
@@ -58,9 +59,11 @@ public class AttributeFactory {
 				double dbl_min = Double.parseDouble(dbl_min_str);
 				String dbl_max_str = thisAttrNode.getAttributes().getNamedItem("max").getNodeValue();
 				double dbl_max = Double.parseDouble(dbl_max_str);
+				String dbl_default_str = thisAttrNode.getAttributes().getNamedItem("increment").getNodeValue();
+				double dbl_default = Double.parseDouble(dbl_default_str);
 				String dbl_incr_str = thisAttrNode.getAttributes().getNamedItem("increment").getNodeValue();
 				double dbl_incr = Double.parseDouble(dbl_incr_str);
-				List<Double> doubleParameters = Arrays.asList(dbl_min, dbl_max, dbl_incr);
+				List<Double> doubleParameters = Arrays.asList(dbl_min, dbl_max, dbl_default, dbl_incr);
 				Attribute<Double> dbl_newAttr = new AttributeImpl<Double>(doubleParameters, gameAttributeName);
 				dbl_newAttr.setValue(0.0);
 				return dbl_newAttr;
@@ -75,9 +78,11 @@ public class AttributeFactory {
 				int int_min = Integer.parseInt(int_min_str);
 				String int_max_str = thisAttrNode.getAttributes().getNamedItem("max").getNodeValue();
 				int int_max = Integer.parseInt(int_max_str);
+				String int_default_str = thisAttrNode.getAttributes().getNamedItem("start").getNodeValue();
+				int int_default = Integer.parseInt(int_default_str);
 				String int_incr_str = thisAttrNode.getAttributes().getNamedItem("increment").getNodeValue();
 				int int_incr = Integer.parseInt(int_incr_str);
-				List<Integer> intParameters = Arrays.asList(int_min, int_max, int_incr);
+				List<Integer> intParameters = Arrays.asList(int_min, int_max, int_default, int_incr);
 				AttributeImpl<Integer> int_newAttr = new AttributeImpl<Integer>(intParameters, gameAttributeName);
 				int_newAttr.setValue(0);
 				return int_newAttr;
@@ -96,7 +101,10 @@ public class AttributeFactory {
 				AttributeImpl<String> img_newAttr = new AttributeImpl<String>(null, gameAttributeName);
 				img_newAttr.setValue("");
 				return img_newAttr;
-				
+			case "COMPONENT":
+				AttributeImpl<Component> comp_newAttr = new AttributeImpl<Component>(null, gameAttributeName);
+				comp_newAttr.setValue(null);
+				return comp_newAttr;
 			default: throw new IllegalArgumentException();
 		}
 	}

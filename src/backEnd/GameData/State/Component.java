@@ -28,7 +28,7 @@ public class Component extends Observable implements AttributeOwner {
 	private final static ResourceBundle behaviorResources = ResourceBundle.getBundle(BEHAVIOR_PATH);
 	private final static String DEFAULT_ATTRIBUTES_PATH = "resources/defaultTileAttributes";
 
-	private final static ResourceBundle attributeResources = ResourceBundle.getBundle(DEFAULT_ATTRIBUTES_PATH);
+	private final static ResourceBundle attributeResources = ResourceBundle.getBundle(DEFAULT_ATTRIBUTE_PATH);
 	private AttributeData myAttributes;
 	private Map<String, Behavior> myBehaviors;
 	private AccessPermissions myAccessPermissions;

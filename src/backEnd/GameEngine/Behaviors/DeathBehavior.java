@@ -46,3 +46,4 @@ public class DeathBehavior implements Behavior {
 	}
 
 }
+>>>>>>> origin/master
