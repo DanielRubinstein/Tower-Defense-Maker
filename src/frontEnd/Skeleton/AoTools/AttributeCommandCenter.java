@@ -46,15 +46,18 @@ public class AttributeCommandCenter extends CommandCenter{
 
 		contents.getChildren().add(contents_Att);
 		contents.getChildren().add(createPresetButton(obj));
-		Button submit = new Button("Submit");
+		contents.setSpacing(STANDARD_SPACING);
+		// contents.setAlignment(Pos.TOP_CENTER);
+		return contents;
+	}
+
+	public void addSubmitButton(AttributeOwnerReader obj) {
+		Button submit = new Button("Add Now");
 		submit.setOnAction(e -> {
 			myView.addToCanvas(obj);
 			
 		});
-		contents.getChildren().add(submit);
-		contents.setSpacing(STANDARD_SPACING);
-		// contents.setAlignment(Pos.TOP_CENTER);
-		return contents;
+		myRoot.getChildren().add(submit);
 	}
 	
 	private HBox createAttributeView(AttributeOwnerReader obj) {
@@ -114,7 +117,7 @@ public class AttributeCommandCenter extends CommandCenter{
 		try{
 			singleAttEditor.getChildren().add(right);
 		} catch (Exception e){
-			singleAttEditor.getChildren().add(new Label("It fucked up, deal with it"));
+			singleAttEditor.getChildren().add(new Label("Editor in production"));
 		}
 		singleAttEditor.setAlignment(Pos.CENTER_RIGHT);
 		return singleAttEditor;

@@ -38,8 +38,9 @@ public class Modification_AddNewPresetAttributeOwner implements ModificationFrom
 			else if(newAO instanceof Component){
 				myModel.getBankController().addNewComponent(newAOName, (Component) newAO);
 			}
+			break;
 		case PLAYER:
-			 throw new ModeException(myModel.getMode(), DESCRIPTION);
+			throw new ModeException(myModel.getMode(), DESCRIPTION);
 		}
 		
 	}

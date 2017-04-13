@@ -45,6 +45,8 @@ public class ComponentGraphImpl implements ComponentGraph {
 				myComponents.add(myComponent);
 			}
 		}
+		//if(!myComponents.isEmpty()) System.out.println(" ggggettting all components " + myComponents +
+		//		"   " +myComponents.get(0).getAttribute("Position").getValue() + "   " + componentMap);
 		return myComponents;
 	}
 
@@ -85,13 +87,15 @@ public class ComponentGraphImpl implements ComponentGraph {
 	
 	@Override
 	public void addComponentToGrid(Component newComponent, Point2D location){
-		System.out.println(componentMap);
+
 		List<Component> currList = componentMap.get(location);
 		if(currList==null){
 			currList= new ArrayList<Component>();
 		}
 		currList.add(newComponent);
+		//System.out.println( "   in compon graph "  + componentMap + "  " +newComponent + "   " +newComponent.getAttribute("Position").getValue());
 		componentMap.put(location, currList);
+		//System.out.println(componentMap +"    after  "+location + "  " + newComponent.getAttribute("Position").getValue() + "   " +currList);
 		
 	}
 	
@@ -99,9 +103,15 @@ public class ComponentGraphImpl implements ComponentGraph {
 	public void removeComponent(Component toRemove){
 		Attribute<?> posAttribute= toRemove.getAttribute("Position");
 		Point2D location = (Point2D) posAttribute.getValue();
+		//System.out.println("removing comp at position " +location);
+
+		//System.out.println( " befforeee " +componentMap);
 		List<Component> currList = componentMap.get(location);
+		if(currList==null){return;}
 		currList.remove(toRemove);
 		componentMap.put(location, currList);
+
+		//System.out.println( " afterrrrr " +componentMap);
 	}
 	
 	@Override

@@ -122,7 +122,7 @@ public class ButtonMenuImpl implements ButtonMenu {
 		myGrid.add(titleLbl, 0, 0, 2, 1);
 		myGrid.add(myButtonRoot, 0, 1);
 		myGrid.add(description, 1, 1);
-		myGrid.add(new Label("voogasalad_sup3rs1ckt34m1337 aka Miguel's bitches"), 0, 2, 2, 1);
+		myGrid.add(new Label("voogasalad_sup3rs1ckt34m1337"), 0, 2, 2, 1);
 		//myButtonRoot.setAlignment(Pos.CENTER);
    	 	myScene = new Scene(myGrid);
    	 	myScene.getStylesheets().add(DEFAULT_CSS);

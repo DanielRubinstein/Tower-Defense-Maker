@@ -6,6 +6,11 @@ import backEnd.GameData.State.Component;
 import backEnd.GameData.State.State;
 import javafx.geometry.Point2D;
 
+/**
+ * governs the behavior of projectiles in the game
+ * @author Christian Martindale
+ *
+ */
 public class ProjectileEngine implements Engine{
 
 	private State myState;

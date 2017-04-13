@@ -12,6 +12,7 @@ import ModificationFromUser.Modification_Load;
 import ModificationFromUser.Modification_Save;
 import backEnd.Model;
 import backEnd.Attribute.AttributeOwnerReader;
+import backEnd.Bank.BankController;
 import backEnd.Data.DataController;
 import backEnd.GameData.UserAttribute;
 import backEnd.GameData.UserAttributeImpl;
@@ -56,7 +57,7 @@ public class ViewImpl implements View{
 		KeyFrame frame = new KeyFrame(Duration.millis(MILLISECOND_DELAY), e -> step(SECOND_DELAY));
 		animation.setCycleCount(Timeline.INDEFINITE);
 		animation.getKeyFrames().add(frame);
-		//animation.play();
+		animation.play();
 		
 	}
 	public void addToCanvas(AttributeOwnerReader ao){
@@ -166,5 +167,9 @@ public class ViewImpl implements View{
 	public void step() {
 		// TODO Auto-generated method stub
 		
+	}
+	@Override
+	public BankController getBankController() {
+		return myModel.getBankController();
 	}
 }

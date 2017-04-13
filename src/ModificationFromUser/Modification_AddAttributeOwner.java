@@ -35,21 +35,27 @@ public class Modification_AddAttributeOwner implements ModificationFromUser {
 		if (newAttrOwn instanceof Tile){
 			switch (myModel.getMode().getUserMode()) {
 			case AUTHOR:
-				Tile newTile = (Tile) xStream.fromXML(serializedAO);
-				newTile.setAttributeValue("Position", location);
-				myModel.getState().getTileGrid().setTile(newTile, location);
-				
+
+				myModel.getState().getTileGrid().setTile((Tile) xStream.fromXML(serializedAO), location);
+				break;
+
 			case PLAYER:
 				 throw new ModeException(myModel.getMode(), DESCRIPTION_TILE);
 			}	
 		} else if (newAttrOwn instanceof Component){
-			System.out.println(myModel.getState());
-			System.out.println(myModel.getState().getComponentGraph());
+
+			System.out.println(myModel.getState()+ "   "  +newAttrOwn.getAttribute("Position").getValue());
+			newAttrOwn.setAttributeValue("Position", location);
+			System.out.println(myModel.getState().getComponentGraph() + "  "  +newAttrOwn.getAttribute("Position").getValue());
 			System.out.println((Component) xStream.fromXML(serializedAO));
-			System.out.println(myModel.getState());
-			Component newComp = (Component) xStream.fromXML(serializedAO);
-			newComp.setAttributeValue("Position", location);
-			myModel.getState().getComponentGraph().addComponentToGrid(newComp, location);
+
+
+			System.out.println(myModel.getState() + "     "   +location + "   " +newAttrOwn.getAttribute("Position").getValue());
+			//myModel.getState().getComponentGraph().addComponentToGrid((Component) xStream.fromXML(serializedAO), location);
+			
+			myModel.getState().getComponentGraph().addComponentToGrid((Component) newAttrOwn, location);
+			
+
 			//newAttrOwn.addAttribute(attrName, newAttr);
 		} else {
 			// can't be reached

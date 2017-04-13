@@ -2,6 +2,7 @@ package frontEnd;
 
 import ModificationFromUser.ModificationFromUser;
 import backEnd.Attribute.AttributeOwnerReader;
+import backEnd.Bank.BankController;
 
 public interface View extends ViewReader{
 
@@ -20,5 +21,7 @@ public interface View extends ViewReader{
 	public void sendUserModification(ModificationFromUser mod);
 	
 	public void addToCanvas(AttributeOwnerReader ao);
+
+	public BankController getBankController();
 
 }
