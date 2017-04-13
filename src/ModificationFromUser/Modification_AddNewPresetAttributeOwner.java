@@ -1,7 +1,6 @@
 package ModificationFromUser;
 
 import backEnd.ModelImpl;
-import backEnd.Attribute.AttributeOwner;
 import backEnd.Attribute.AttributeOwnerReader;
 import backEnd.GameData.State.Component;
 import backEnd.GameData.State.Tile;
@@ -30,7 +29,6 @@ public class Modification_AddNewPresetAttributeOwner implements ModificationFrom
 	// FIXME how to update the frontend and alert it that there is a new preset
 	@Override
 	public void invoke(ModelImpl myModel) throws Exception {
-		System.out.println(myModel.getMode().getUserModeString());
 		switch (myModel.getMode().getUserMode()) {
 		case AUTHOR:
 			if(newAO instanceof Tile){				

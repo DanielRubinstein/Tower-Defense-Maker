@@ -3,6 +3,7 @@ package backEnd.Bank;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Observable;
 
 import backEnd.GameEngine.Behaviors.Behavior;
 import backEnd.Attribute.AttributeImpl;
@@ -10,7 +11,7 @@ import backEnd.GameData.Rules;
 import backEnd.GameData.State.Component;
 import backEnd.GameData.State.Tile;
 
-public class BankController
+public class BankController extends Observable
 {
 	private Map<String, Tile> tileBank;
 	private Map<String, Component> componentBank;
@@ -41,11 +42,15 @@ public class BankController
 	public void addNewTile (String name, Tile tile)
 	{
 		tileBank.put(name, tile);
+		this.setChanged();
+		this.notifyObservers(tileBank);
 	}
 
 	public void removeTile(String name)
 	{
 		tileBank.remove(name);
+		this.setChanged();
+		this.notifyObservers(tileBank);
 	}
 	
 	public Map<String, Tile> getTileMap()
@@ -56,11 +61,15 @@ public class BankController
 	public void addNewComponent (String name, Component component)
 	{
 		componentBank.put(name, component);
+		this.setChanged();
+		this.notifyObservers(componentBank);
 	}
 
 	public void removeComponent(String name)
 	{
 		componentBank.remove(name);
+		this.setChanged();
+		this.notifyObservers(componentBank);
 	}
 	
 	public Map<String, Component> getComponentMap()
