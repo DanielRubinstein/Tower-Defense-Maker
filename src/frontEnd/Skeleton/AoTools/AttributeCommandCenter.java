@@ -19,6 +19,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
 
 public class AttributeCommandCenter extends CommandCenter{	
 	private final static String RESOURCES_PATH = "resources/";
@@ -54,10 +55,11 @@ public class AttributeCommandCenter extends CommandCenter{
 		return contents;
 	}
 	
-	public void addSubmitButton(AttributeOwnerReader obj){
+	public void addSubmitButton(Stage stage, AttributeOwnerReader obj){
 		Button submit = new Button("Submit");
 		submit.setOnAction(e -> {
 			myView.addToCanvas(obj);
+			stage.close();
 			
 		});
 		myRoot.getChildren().add(submit);

@@ -15,7 +15,7 @@ public class PresetCreation{
 	
 	public PresetCreation(View myView, AttributeOwnerReader obj){
 		AttributeCommandCenter aCC = new AttributeCommandCenter(myView, obj);
-		aCC.addSubmitButton(obj);
+		aCC.addSubmitButton(myStage, obj);
 		myRoot = aCC.get();
 	}
 	
