@@ -56,10 +56,8 @@ public class Palette<T extends AttributeOwner> implements SkeletonObject {
 		myType =string;
 		initializePane();
 		myMap = new HashMap<ImageView, T>();
-		System.out.println("in palette " + myPresets);
 		try{
 			for (T preset : myPresets) {
-				
 				String myImagePath = (String) preset.getAttribute(IMAGEFILE_ATTRIBUTE_NAME).getValue();
 				ImageView imageView = createImageView(myImagePath, (iV) ->{
 					myView.sendUserModification(new Modification_AddAttributeOwner(myMap.get(iV), askForNewPosition()));
@@ -96,19 +94,23 @@ public class Palette<T extends AttributeOwner> implements SkeletonObject {
 					String imagePathForNewPreset = "images/zombie.jpg";
 					//newAO.addAttribute(IMAGEFILE_ATTRIBUTE_NAME, imagePathForNewPreset);
 
-					PresetCreation presetCreation = new PresetCreation(myView, newAO);
-					
+
 					ImageView newImage = createImageView(imagePathForNewPreset, (iV2) ->{
-						System.out.println("testing eme");
 						Point2D point = askForNewPosition();
 						
 						myView.sendUserModification(new Modification_AddAttributeOwner(newAO, point));
 					});
-					System.out.println(newImage +  "    " + ((T) newAO));
 					myMap.put(newImage, (T) newAO);
+
+					Point2D point = askForNewPosition();
+					
+					myView.sendUserModification(new Modification_AddAttributeOwner(newAO, point));
+					myView.sendUserModification(new Modification_EditAttribute(newAO, new AttributeImpl<String>(null,"Position") , point));
 					
 					myView.sendUserModification(new Modification_EditAttribute(newAO, new AttributeImpl<String>(null,"ImageFile") , imagePathForNewPreset));
-					presetCreation.add(newImage);
+					PresetCreation presetCreation = new PresetCreation(myView, newAO);
+					
+					//presetCreation.add(newImage);
 					presetCreation.launch(0d, 0d);
 					//myView.addToCanvas(newAO);
 				} catch (FileNotFoundException e) {
@@ -124,7 +126,6 @@ public class Palette<T extends AttributeOwner> implements SkeletonObject {
 		b.getStyleClass().clear();
 		b.setOnAction((e) -> addImage.getOnMouseClicked());
 		*/
-		System.out.println(addImage.getImage());
 		return addImage;
 	}
 
@@ -145,7 +146,6 @@ public class Palette<T extends AttributeOwner> implements SkeletonObject {
 		// resizing
 		Image image = new Image(getClass().getClassLoader().getResourceAsStream(myImagePath));
 		ImageView imageView = new ImageView(image);
-		System.out.println("creaitng imageview " +myImagePath);
 		imageView.setFitWidth(TILE_SIZE);
 		imageView.setFitHeight(TILE_SIZE);
 		imageView.setOnMouseClicked(mouseEvent -> {

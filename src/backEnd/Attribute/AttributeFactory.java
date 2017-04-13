@@ -13,8 +13,7 @@ import javax.xml.parsers.DocumentBuilderFactory;
 import org.w3c.dom.Document;
 import org.w3c.dom.Node;
 
-import com.sun.javafx.geom.Point2D;
-
+import javafx.geometry.Point2D;
 import javafx.scene.image.Image;
 
 /**
@@ -55,7 +54,6 @@ public class AttributeFactory {
 				return sl_newAttr;
 				
 			case "DOUBLE":
-				System.out.println(" in att factory " + thisAttrNode.getAttributes());
 				String dbl_min_str = thisAttrNode.getAttributes().getNamedItem("min").getNodeValue();
 				double dbl_min = Double.parseDouble(dbl_min_str);
 				String dbl_max_str = thisAttrNode.getAttributes().getNamedItem("max").getNodeValue();

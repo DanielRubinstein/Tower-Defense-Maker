@@ -55,13 +55,11 @@ public class Component extends Observable implements AttributeOwner {
 																// GENERATE
 																// ATTRIBUTES?
 			myAttributes.addAttribute(key, myAttribute);
-			System.out.println(" $$$$ " + key);
 			myBehaviors.put(key, bf.getBehavior(key));
 		}
 
 		AttributeFactory attrFact = new AttributeFactory();
 		for (String key : attributeResources.keySet()) {
-			System.out.println("# attribute ky " +key);
 			Attribute<?> myAttribute = attrFact.getAttribute(key);
 			addAttribute(key, myAttribute);
 		}
@@ -129,6 +127,7 @@ public class Component extends Observable implements AttributeOwner {
 	@Override
 	public <T> void setAttributeValue(String attrName, T newVal) {
 		((Attribute<T>) myAttributes.get(attrName)).setValue(newVal);
+		System.out.println("setting component attr " +newVal);
 		notifyObservers();
 	}
 

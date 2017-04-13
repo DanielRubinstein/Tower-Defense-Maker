@@ -45,7 +45,7 @@ public class Modification_AddAttributeOwner implements ModificationFromUser {
 			System.out.println((Component) xStream.fromXML(serializedAO));
 			System.out.println(myModel.getState());
 			myModel.getState().getComponentGraph().addComponentToGrid((Component) xStream.fromXML(serializedAO), location);
-		
+			//newAttrOwn.addAttribute(attrName, newAttr);
 		} else {
 			// can't be reached
 			// FIXME AHHHHH

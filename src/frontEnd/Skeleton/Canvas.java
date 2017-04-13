@@ -128,9 +128,11 @@ public class Canvas implements SkeletonObject, Observer{
 	}
 	public void addToCanvas(AttributeOwnerReader attr){
 		FrontEndAttributeOwner attrOwner = new FrontEndAttributeOwnerImpl(attr);
+		attrOwner.refreshXY();
 		ImageView tileView = attrOwner.getImageView();
-		tileView.setX(200);
-		tileView.setY(200);
+		tileView.setPreserveRatio(false);
+		tileView.setFitWidth(TILE_WIDTH/2);
+		tileView.setFitHeight(TILE_HEIGHT/2);
 		root.getChildren().add(tileView);
 		
 	}

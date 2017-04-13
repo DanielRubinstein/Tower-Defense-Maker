@@ -69,6 +69,7 @@ public class TileImpl extends Observable implements Tile, AttributeOwner {
 
 	@Override
 	public void addAttribute(String name, Attribute<?> value) {
+		System.out.println(" in tile impl " + name  +"   " +value.getValue());
 		myAttrData.addAttribute(attributeResources.getString(name), value);
 		notifyObservers();
 
@@ -76,6 +77,12 @@ public class TileImpl extends Observable implements Tile, AttributeOwner {
 
 	@Override
 	public Attribute<?> getAttribute(String name) {
+		System.out.println("getting attr in tile impl " +name );
+
+		System.out.println("getting attr in tile impl " + attributeResources.getString(name));
+
+		System.out.println("getting attr in tile impl " + myAttrData.get(attributeResources.getString(name)).getClass());
+		
 		return myAttrData.get(attributeResources.getString(name));
 	}
 

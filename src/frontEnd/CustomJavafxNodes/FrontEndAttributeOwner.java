@@ -17,4 +17,6 @@ public interface FrontEndAttributeOwner {
 
 	void update(Observable o, Object arg);
 
+	void refreshXY();
+
 }

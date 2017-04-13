@@ -21,7 +21,6 @@ public class TileGridImpl implements TileGrid {
 	public TileGridImpl(int width, int height){
 		gridWidth = width;
 		gridHeight = height;
-		System.out.println("initializing tileGrid with " + width + " and height " +height);
 		tileGrid = new Tile[width][height];
 	}
 	
