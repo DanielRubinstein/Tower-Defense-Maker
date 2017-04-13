@@ -49,7 +49,7 @@ public class AttributeImpl<T> implements Attribute<T>{
 
 
 	@Override
-	public Attribute copy() {
+	public Attribute<T> copy() {
 		Attribute<T> attributeCopy = new AttributeImpl<>(myParamList, new String(myName));
 		attributeCopy.setValue(myValue);
 		return attributeCopy;
