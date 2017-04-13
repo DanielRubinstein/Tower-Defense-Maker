@@ -18,6 +18,7 @@ import backEnd.Bank.BankController;
 import backEnd.GameData.State.AccessPermissionsImpl;
 import backEnd.GameData.State.Component;
 import backEnd.GameData.State.Tile;
+import backEnd.GameData.State.TileImpl;
 import frontEnd.View;
 import frontEnd.CustomJavafxNodes.DoubleFieldPrompt;
 import frontEnd.Skeleton.AoTools.PresetCreation;
@@ -100,22 +101,28 @@ public class Palette<T extends AttributeOwner> implements SkeletonObject, Observ
 		ImageView addImage = createImageView(SETTINGS_IMAGE, (iV) ->{
 
 			String newAttributeOwnerName = null;
-			try {			
-				AttributeOwner newAO = new Component(new AttributeData(),new AccessPermissionsImpl());
+			try {
+				AttributeOwner newAO = null;
+				switch(myType){
+				case "Tiles":
+					newAO = new TileImpl();
+					break;
+				case "Components":
+					newAO = new Component(new AttributeData(),new AccessPermissionsImpl());
+					break;
+				}
+				
 				String imagePathForNewPreset = "images/zombie.jpg";
-
+				/*
 				ImageView newImage = createImageView(imagePathForNewPreset, (iV2) ->{
 					Point2D point = askForNewPosition();
-					
 					myView.sendUserModification(new Modification_AddAttributeOwner(newAO, point));
 				});
 				myMap.put(newImage, (T) newAO);
+				*/
 
-				Point2D point = askForNewPosition();
 				
-				myView.sendUserModification(new Modification_AddAttributeOwner(newAO, point));
-				myView.sendUserModification(new Modification_EditAttribute(newAO, new AttributeImpl<String>(null,"Position") , point));
-				
+				myView.sendUserModification(new Modification_EditAttribute(newAO, new AttributeImpl<String>(null,"Position") , new Point2D(0,0)));
 				myView.sendUserModification(new Modification_EditAttribute(newAO, new AttributeImpl<String>(null,"ImageFile") , imagePathForNewPreset));
 				PresetCreation presetCreation = new PresetCreation(myView, newAO);
 				

@@ -5,10 +5,13 @@ import java.util.List;
 import java.util.MissingResourceException;
 import java.util.ResourceBundle;
 
+import ModificationFromUser.Modification_AddAttributeOwner;
 import ModificationFromUser.Modification_AddNewPresetAttributeOwner;
 import backEnd.Attribute.Attribute;
+import backEnd.Attribute.AttributeOwner;
 import backEnd.Attribute.AttributeOwnerReader;
 import frontEnd.View;
+import frontEnd.CustomJavafxNodes.DoubleFieldPrompt;
 import frontEnd.CustomJavafxNodes.SingleFieldPrompt;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.geometry.Insets;
@@ -48,23 +51,31 @@ public class AttributeCommandCenter extends CommandCenter{
 		contents.getChildren().add(contents_Att);
 		contents.getChildren().add(createPresetButton(obj));
 		
-		
-		
 		contents.setSpacing(STANDARD_SPACING);
 		// contents.setAlignment(Pos.TOP_CENTER);
 		return contents;
 	}
 	
 	public void addSubmitButton(Stage stage, AttributeOwnerReader obj){
-		Button submit = new Button("Submit");
+		Button submit = new Button("Add to Grid Now");
 		submit.setOnAction(e -> {
-			myView.addToCanvas(obj);
-			stage.close();
+			myView.addToCanvas(obj); // FIXME this shouldn't be necessary
+			myView.sendUserModification(new Modification_AddAttributeOwner((AttributeOwner) obj, askForNewPosition()));
+			//stage.close();
 			
 		});
 		myRoot.getChildren().add(submit);
 	}
 	
+	private Point2D askForNewPosition() {
+		List<String> dialogTitles = Arrays.asList("Creation Utility", "Please input a location");
+		List<String> promptLabel = Arrays.asList("X Position:", "Y Position:");
+		List<String> promptText = Arrays.asList("0.0", "0.0");
+		DoubleFieldPrompt myDialog = new DoubleFieldPrompt(dialogTitles, promptText, promptLabel);
+		List<String> results = myDialog.create();
+		return new Point2D(Double.parseDouble(results.get(0)), Double.parseDouble(results.get(1)));
+	}
+
 	private HBox createAttributeView(AttributeOwnerReader obj) {
 		HBox contents_Att = new HBox();
 		VBox contentRow = null;
