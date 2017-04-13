@@ -1,5 +1,7 @@
 package frontEnd.Skeleton.UserTools;
 
+import java.util.Collection;
+
 import backEnd.GameData.State.Component;
 import backEnd.GameData.State.Tile;
 import frontEnd.View;
@@ -31,18 +33,26 @@ public class PalettePane implements SkeletonObject {
 		Tab tab = new Tab(string);
 		tab.setClosable(false);
 		
-		
-		
-		
-		
 		Palette<?> palette = null;
-		if (string.equals("Tiles")){
-			palette = new Palette<Tile>(myView, myView.getTilePresets());
-		} else if (string.equals("Components")){
-			palette = new Palette<Component>(myView, myView.getComponentPresets());
-		}
 		
-		
+			if (string.equals("Tiles")){
+				Collection<Tile> presets = null;
+				try{
+					presets = myView.getTilePresets();
+				} catch (NullPointerException e) {
+					System.out.println("No presets here");
+				}
+				palette = new Palette<Tile>(myView, presets , string);
+			} else if (string.equals("Components")){
+				Collection<Component> presets = null;
+				try{
+					presets = myView.getComponentPresets();
+				} catch (NullPointerException e) {
+					System.out.println("No presets here");
+				}
+				palette = new Palette<Component>(myView, presets, string);
+			}
+
 		ScrollPane scrollPane = new ScrollPane();
 		scrollPane.setContent(palette.getRoot());
 		tab.setContent(scrollPane);

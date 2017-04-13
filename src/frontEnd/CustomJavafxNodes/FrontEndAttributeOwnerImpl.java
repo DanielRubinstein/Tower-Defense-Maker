@@ -16,9 +16,10 @@ public class FrontEndAttributeOwnerImpl implements Observer{
 	private double x;
 	private double y;
 	private static final String IMAGE_ATTRIBUTE = "ImageFile";
-	private static final String POSITION_ATTRIBUTE = "Locattion";
+	private static final String POSITION_ATTRIBUTE = "Position";
 	
 	public FrontEndAttributeOwnerImpl(AttributeOwnerReader attr){
+		attr.addAsListener(this);
 		setUpImageView(attr);
 	}
 	
@@ -32,8 +33,7 @@ public class FrontEndAttributeOwnerImpl implements Observer{
 		return myImage;
 	}
 	public void setXY(double xx, double yy){
-		
-		System.out.println("fornt end att owner x and y " +xx +"   " +yy);
+		//System.out.println(String.format("setting frontEndAttributeOwner @ (%.0f, %.0f)", xx, yy));
 		myImage.setX(xx);
 		myImage.setY(yy);
 	}
@@ -41,21 +41,19 @@ public class FrontEndAttributeOwnerImpl implements Observer{
 		myImagePath = path;
 		Image image = new Image(getClass().getClassLoader().getResourceAsStream(myImagePath));
 		myImage.setImage(image);
-		System.out.println("fornt end att owner x and y " +x +"   " +y);
+		//System.out.println(String.format("there is frontEndAttributeOwner @ (%.0f, %.0f)", x, y));
 	}
 	
 	@Override
 	public void update(Observable o, Object arg) {
 		AttributeOwnerReader newAttr = (AttributeOwnerReader) o;
-		
+
 		String newImagePath = (String) newAttr.getMyAttributes().get(IMAGE_ATTRIBUTE).getValue();
-		Point2D newLoc = (Point2D) newAttr.getMyAttributes().get(POSITION_ATTRIBUTE).getValue();
-		
-		if(!newImagePath.equals(myImagePath) || (x!=newLoc.getX() && y!=newLoc.getY())){
-			//update
+		//Point2D newLoc = (Point2D) newAttr.getMyAttributes().get(POSITION_ATTRIBUTE).getValue();
+		if(!newImagePath.equals(myImagePath) ){//|| (x!=newLoc.getX() && y!=newLoc.getY())){
 			myImagePath = newImagePath;
-			x = newLoc.getX();
-			y = newLoc.getY();
+			//x = newLoc.getX();
+			//y = newLoc.getY();
 			Image image = new Image(getClass().getClassLoader().getResourceAsStream(myImagePath));
 			myImage.setImage(image);
 			myImage.setX(x);
@@ -63,6 +61,7 @@ public class FrontEndAttributeOwnerImpl implements Observer{
 		}
 	}
 
+	
 
 	
 }
