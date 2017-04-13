@@ -32,11 +32,23 @@ public class MoveEngine implements Engine{
 	 * @param xStart the starting x-coordinate
 	 * @param yStart the starting y-coordinate
 	 */
+	@SuppressWarnings("unchecked")
 	@Override
 	public void gameLoop(State currentState, double stepTime) {
 		myState=currentState;
 		for (Component c: myState.getComponentGraph().getAllComponents()){
-			Tile currentTile=myState.getTileGrid().getTileByLocation((Point2D) c.getAttribute("Position").getValue()); 
+			System.out.println(c.getMyAttributes().getAttributeMap().keySet()+" skirt skirt line 39 in moveengine");
+			System.out.println("9.3/4  "+c.containsAttribute("Position"));
+			System.out.println((c.getAttribute("Position").getValue()).getClass().getTypeName() +" skirt skirt line 40 in moveengine");
+			//System.out.println(((AttributeImpl<Point2D>)c.getAttribute("Position").getValue()).getValue().getX() +" skirt skirt line 41 in moveengine");
+			
+			Attribute<Point2D> location=(AttributeImpl<Point2D>) c.getAttribute("Position");
+			System.out.println("got to line 45 this is gr8");
+			System.out.println("is null :" + location.getValue()==null + " line 46");
+			Point2D myPoint=new Point2D((int) location.getValue().getX(), (int) location.getValue().getY());
+			System.out.println("DIDNT FAIL");
+			Tile currentTile=myState.getTileGrid().getTileByLocation(myPoint);
+			System.out.println("WORLDSTAR");
 			myState.getComponentGraph().removeComponent(c);
 			MoveBehavior mb=new MoveBehavior(c);
 			try {

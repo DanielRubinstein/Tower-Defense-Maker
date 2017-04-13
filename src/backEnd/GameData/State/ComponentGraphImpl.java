@@ -97,6 +97,9 @@ public class ComponentGraphImpl implements ComponentGraph {
 	
 	@Override
 	public void removeComponent(Component toRemove){
+		if (!componentMap.containsKey(toRemove)){
+			return;
+		}
 		Attribute<?> posAttribute= toRemove.getAttribute("Position");
 		Point2D location = (Point2D) posAttribute.getValue();
 		List<Component> currList = componentMap.get(location);

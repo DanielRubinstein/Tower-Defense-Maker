@@ -136,6 +136,11 @@ public class Component extends Observable implements AttributeOwner {
 		observers.add(obs);
 	}
 
+	
+	public boolean containsAttribute(String key){
+		return myAttributes.containsAttribute(key);
+	}
+	
 	@Override
 	public void notifyObservers() {
 		for (Observer obs : observers) {
