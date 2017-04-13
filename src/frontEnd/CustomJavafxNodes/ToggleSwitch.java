@@ -40,7 +40,6 @@ public class ToggleSwitch {
 		switchedOn = booleanProperty;
 		myModRunnable = modRunnable;
 
-		System.out.println(" in toggle switch " +booleanProperty.get());
 		init(title1, title2);
 
 		switchedOn.addListener((a, oldValue, newValue) -> {
