@@ -59,6 +59,8 @@ public class AttackEngine implements Engine {
 			fnf.create("Error", "File not found");
 		}
 
+		bullet.setAttributeValue(myResources.getString("ProjectileStartPosition"), attacker.getAttribute(myResources.getString("Position")));
+		bullet.setAttributeValue(myResources.getString("ProjectileTargetPosition"), target.getAttribute(myResources.getString("Position")));
 		currentState.getComponentGraph().addComponentToGrid(bullet,
 				(Point2D) attacker.getAttribute("Position").getValue());
 	}
@@ -69,15 +71,7 @@ public class AttackEngine implements Engine {
 	 * @throws FileNotFoundException
 	 */
 	@SuppressWarnings("unchecked")
-	private Component makeBullet() throws FileNotFoundException {// TODO: ADD
-																	// ATTRIBUTES
-																	// STARTPOS
-																	// AND
-																	// TARGETPOS
-																	// TO BULLET
-																	// FOR
-																	// MOVEENGINE
-																	// TO USE
+	private Component makeBullet() throws FileNotFoundException {
 
 		AttributeFactory af = new AttributeFactory();
 		AttributeData ad = new AttributeData();
@@ -87,8 +81,6 @@ public class AttackEngine implements Engine {
 		Attribute<String> bulletImage = (Attribute<String>) af.getAttribute(myResources.getString("ImageFile"));
 		bulletImage.setValue(Constants.BULLET_IMAGE_FILE);
 		ad.addAttribute(myResources.getString("ImageFile"), (backEnd.Attribute.AttributeImpl<?>) bulletImage);
-		
-		bullet.setAttributeValue("StartPos", "");
 		
 		return bullet;
 	}
