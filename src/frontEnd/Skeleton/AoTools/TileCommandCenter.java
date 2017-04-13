@@ -17,6 +17,12 @@ import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
 import javafx.stage.Stage;
 
+/**
+ * This class is the command center that pops up when a user clicks on a tile. It presents information about the tile
+ * and the components on it. If the user is in author mode, they can also edit their attributes. 
+ * @author Miguel, Tim
+ *
+ */
 public class TileCommandCenter extends CommandCenter implements SkeletonObject{
 	public static final String DEFAULT_CSS = "/resources/css/Flatter.css";
 	private Stage myStage;
