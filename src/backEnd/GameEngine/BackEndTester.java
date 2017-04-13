@@ -8,8 +8,8 @@ import backEnd.Attribute.AttributeImpl;
 public class BackEndTester {
 
 	public static void main(String[] args) {
-		Attribute<Point2D> myCoorAttribute=new AttributeImpl<Point2D>();
-		System.out.println(myCoorAttribute.getClass().getName());
+//		Attribute<Point2D> myCoorAttribute=new AttributeImpl<Point2D>();
+//		System.out.println(myCoorAttribute.getClass().getName());
 	}
 
 }

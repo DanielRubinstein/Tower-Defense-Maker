@@ -31,7 +31,7 @@ public class OptionsSelection {
 	public OptionsSelection(View view) {
 		myView = view;
 		myRoot = new TilePane(Orientation.HORIZONTAL,0, 0);
-		mySettings= new SettingsViewImpl(view);
+		mySettings= new SettingsViewImpl(view, myView.getAppStage());
 	}
 	public Node getNode(){
 		return myRoot;
@@ -54,7 +54,7 @@ public class OptionsSelection {
 		addButtonImage(PLAY_IMAGE, e-> myView.sendUserModification(Modification_GameRemote.PLAY) ,size);
 		addButtonImage(PAUSE_IMAGE, e-> myView.sendUserModification(Modification_GameRemote.PAUSE) ,size);
 		addButtonImage(FASTFWD_IMAGE, e-> myView.sendUserModification(Modification_GameRemote.FASTFORWARD) ,size);
-		addButtonImage(SETTINGS_IMAGE, e-> mySettings.launchSettings(myView.getAppStage()),size);
+		addButtonImage(SETTINGS_IMAGE, e-> mySettings.launchSettings(),size);
 	}
 	
 	

@@ -53,30 +53,25 @@ public class AttackEngine implements Engine {
 	 */
 	@SuppressWarnings("unchecked")
 	private Component makeBullet(){//TODO: ADD ATTRIBUTES STARTPOS AND TARGETPOS TO BULLET FOR MOVEENGINE TO USE
+
 		AttributeFactory af = null;
 		Component bullet = null;
 		try {
 			af = new AttributeFactory();
-		} catch (FileNotFoundException e) {
+		} 
+		catch (FileNotFoundException e) {
 			ErrorDialog fnf = new ErrorDialog();
 			fnf.create("Error", "File not found");
 		}
 
-		try {
-			bullet = new Component();
+		 
+
 			bullet.setMyType("Projectile");
 			Attribute<String> bulletImage = (Attribute<String>) af.getAttribute(myResources.getString("ImageFile"));
 			bulletImage.setValue(Constants.BULLET_IMAGE_FILE);
 			AttributeData ad = new AttributeData();
 			ad.addAttribute(myResources.getString("ImageFile"), (backEnd.Attribute.AttributeImpl<?>) bulletImage);
-		} catch (FileNotFoundException e) {
-			ErrorDialog fnf = new ErrorDialog();
-			fnf.create("Error", "File not found");
-		}
 
-
-		
-		
 		return bullet;
 	}
 
