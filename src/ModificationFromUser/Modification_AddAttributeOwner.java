@@ -36,6 +36,7 @@ public class Modification_AddAttributeOwner implements ModificationFromUser {
 			switch (myModel.getMode().getUserMode()) {
 			case AUTHOR:
 				myModel.getState().getTileGrid().setTile((Tile) xStream.fromXML(serializedAO), location);
+				break;
 			case PLAYER:
 				 throw new ModeException(myModel.getMode(), DESCRIPTION_TILE);
 			}	

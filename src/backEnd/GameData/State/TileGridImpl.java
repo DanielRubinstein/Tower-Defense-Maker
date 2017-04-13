@@ -72,11 +72,7 @@ public class TileGridImpl implements TileGrid {
 		System.out.println("getting tile by coord " + x +"   " + y);
 		if(x >= getMyWidth()  ||
 		   y >= getMyHeight() ){
-			double xx = (double) x / tileWidth;
-			double yy = (double) y /tileHeight;
-			int xxx = (int) Math.ceil(xx);
-			int yyy=  (int) Math.ceil(yy);
-			return tileGrid[xxx][yyy];
+			return null;
 		}
 		if( x<0 || y<0) return null;
 

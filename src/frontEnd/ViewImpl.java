@@ -12,6 +12,7 @@ import ModificationFromUser.Modification_Load;
 import ModificationFromUser.Modification_Save;
 import backEnd.Model;
 import backEnd.Attribute.AttributeOwnerReader;
+import backEnd.Bank.BankController;
 import backEnd.Data.DataController;
 import backEnd.GameData.UserAttribute;
 import backEnd.GameData.UserAttributeImpl;
@@ -166,5 +167,9 @@ public class ViewImpl implements View{
 	public void step() {
 		// TODO Auto-generated method stub
 		
+	}
+	@Override
+	public BankController getBankController() {
+		return myModel.getBankController();
 	}
 }

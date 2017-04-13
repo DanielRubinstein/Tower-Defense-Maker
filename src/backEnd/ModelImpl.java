@@ -33,7 +33,7 @@ public class ModelImpl implements Model{
 
 		myDataController = dataController;
 		myEngine = new GameProcessController(myGameData.getState(), myGameData.getRules());
-		//myBankController = dataController.generateBanks();
+		myBankController = dataController.generateBanks();
 
 	}
 
