@@ -7,27 +7,21 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.function.Consumer;
-
 import ModificationFromUser.Modification_AddAttributeOwner;
-import ModificationFromUser.Modification_AddNewPresetAttributeOwner;
 import ModificationFromUser.Modification_EditAttribute;
 import backEnd.Attribute.AttributeData;
 import backEnd.Attribute.AttributeImpl;
 import backEnd.Attribute.AttributeOwner;
-import backEnd.Attribute.AttributeOwnerReader;
 import backEnd.GameData.State.AccessPermissionsImpl;
 import backEnd.GameData.State.Component;
 import frontEnd.View;
 import frontEnd.CustomJavafxNodes.DoubleFieldPrompt;
-import frontEnd.CustomJavafxNodes.FrontEndAttributeOwner;
-import frontEnd.CustomJavafxNodes.FrontEndAttributeOwnerImpl;
 import frontEnd.Skeleton.AoTools.PresetCreation;
 import javafx.event.EventHandler;
 import javafx.geometry.Bounds;
 import javafx.geometry.Insets;
 import javafx.geometry.Point2D;
 import javafx.scene.Node;
-import javafx.scene.control.Button;
 import javafx.scene.control.Tooltip;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -64,6 +58,9 @@ public class Palette<T extends AttributeOwner> implements SkeletonObject {
 				ImageView imageView = createImageView(myImagePath, (iV) ->{
 					myView.sendUserModification(new Modification_AddAttributeOwner(myMap.get(iV), askForNewPosition()));
 				});
+				imageView.setOnDragDetected(e -> {
+					//TODO: make a component from imageView and put it into the Tile that drop ends on
+				});
 				myMap.put(imageView, preset);
 				tile.getChildren().add(imageView);
 			}
@@ -88,7 +85,9 @@ public class Palette<T extends AttributeOwner> implements SkeletonObject {
 
 	private ImageView addNewPresetButton() {
 		ImageView addImage = createImageView(SETTINGS_IMAGE, (iV) ->{
+
 			String newAttributeOwnerName = null;
+
 
 				try {			
 					AttributeOwner newAO = new Component(new AttributeData(),new AccessPermissionsImpl());

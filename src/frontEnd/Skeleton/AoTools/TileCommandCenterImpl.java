@@ -10,7 +10,6 @@ import backEnd.GameData.State.ComponentGraph;
 import backEnd.GameData.State.State;
 import backEnd.GameData.State.Tile;
 import frontEnd.View;
-import frontEnd.Skeleton.UserTools.SkeletonObject;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Tab;

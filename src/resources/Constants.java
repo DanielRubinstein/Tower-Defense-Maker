@@ -1,6 +1,6 @@
 package resources;
 
-import com.sun.javafx.geom.Point2D;
+import javafx.geometry.Point2D;
 
 /**
  * This class holds the constants that we use in the program.
