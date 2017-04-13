@@ -1,5 +1,6 @@
 package frontEnd.Skeleton.UserTools;
 
+import frontEnd.View;
 import frontEnd.ViewReader;
 import javafx.scene.Node;
 import javafx.scene.layout.HBox;
@@ -13,10 +14,10 @@ public class BottomBarImpl implements BottomBar{
 	
 	private HBox myRoot;
 	
-	public BottomBarImpl(ViewReader view){
+	public BottomBarImpl(View view){
 		myRoot = new HBox();
-		//PalettePane pp = new PalettePane(view);
-		//myRoot.getChildren().add(pp.getRoot());
+		PalettePane pp = new PalettePane(view);
+		myRoot.getChildren().add(pp.getRoot());
 	}
 	
 	public Node getRoot(){

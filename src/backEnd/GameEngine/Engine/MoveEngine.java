@@ -41,10 +41,7 @@ public class MoveEngine implements Engine{
 			mb.execute(currentTile);
 			Point2D newPosition=mb.getPosition();
 			myState.getComponentGraph().addComponentToGrid(c, newPosition);
-			Attribute<Point2D> newPositionAttribute=new AttributeImpl<Point2D>();
-			newPositionAttribute.setValue(newPosition);
-			Attribute<Point2D> positionAttribute=(Attribute<Point2D>) c.getAttribute("Position");
-			positionAttribute.setValue(newPosition);
+			
 		}
 		
 		//TODO : different case for bullets

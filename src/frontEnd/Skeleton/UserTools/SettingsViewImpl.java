@@ -1,14 +1,19 @@
 package frontEnd.Skeleton.UserTools;
 
+import java.util.function.Consumer;
+
+import ModificationFromUser.Modification_ChangeMode;
 import frontEnd.View;
 import frontEnd.CustomJavafxNodes.ToggleSwitch;
 import frontEnd.Menus.ButtonMenuImpl;
 import javafx.beans.property.SimpleBooleanProperty;
+import javafx.event.ActionEvent;
 import javafx.geometry.Bounds;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.SplitPane;
 import javafx.scene.control.Tooltip;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
@@ -22,18 +27,21 @@ public class SettingsViewImpl implements SettingsView{
 	private SimpleBooleanProperty authorProperty;
 	private View myView;
 	private ButtonMenuImpl myMenu;
+	private Stage myParentStage;
+	private Stage myStage;
 	
-	public SettingsViewImpl(View view) {
+	public SettingsViewImpl(View view, Stage parentStage) {
 		myView = view;
+		myParentStage = parentStage;
 		authorProperty = myView.getBooleanAuthorModeProperty();
 		addButtons();
 	}
 	
-	public void launchSettings(Stage parentStage){
+	public void launchSettings(){
 		// http://stackoverflow.com/questions/29514248/javafx-how-to-focus-on-one-stage
-		Stage myStage = new Stage();
-		myStage.initOwner(parentStage);
-		myStage.initModality(Modality.WINDOW_MODAL);
+		myStage = new Stage();
+		myStage.initOwner(myParentStage);
+		myStage.initModality(Modality.APPLICATION_MODAL);
 		myMenu.display(myStage);
 	}
 	/*
@@ -56,10 +64,11 @@ public class SettingsViewImpl implements SettingsView{
 		myMenu.addNode(ruleButtons);
 		
 		//adding player/godmode switch
-		ToggleSwitch modeToggle = new ToggleSwitch(myView,"Player", "Author", authorProperty);
+		Runnable modRunnable = () -> myView.sendUserModification(new Modification_ChangeMode());
+		ToggleSwitch modeToggle = new ToggleSwitch(myView,"Player", "Author", authorProperty, modRunnable);
 		myMenu.addNode(modeToggle.getRoot());
 		
-		myMenu.addSimpleButtonWithHover("Help", e -> new HelpOptions(), "Get Help");
+		myMenu.addSimpleButtonWithHover("Help", e -> new HelpOptions(myStage), "Get Help");
 	}
 
 	

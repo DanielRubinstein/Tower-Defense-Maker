@@ -9,23 +9,22 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.web.WebEngine;
 import javafx.scene.web.WebView;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 public class HelpOptions {
-
-	
 	private static final String DEFAULT_TOWER_DEFENSE = "src/resources/html/tower_defense.htm";
 	private ButtonMenu allOptions;
-	public HelpOptions(){
+	
+	public HelpOptions(Stage myParentStage){
 		allOptions = new ButtonMenuImpl("Help");
 		addAllOptions();
-		allOptions.display(new Stage());
+		Stage myStage = new Stage();
+		myStage.initOwner(myParentStage);
+		myStage.initModality(Modality.APPLICATION_MODAL);
+		allOptions.display(myStage);
 	}
-	public void launch(){
-		
-		
-		
-	}
+
 	private void addAllOptions(){
 		allOptions.addSimpleButton("What is Tower Defense?",e -> loadHTMLPage(DEFAULT_TOWER_DEFENSE));
 	}

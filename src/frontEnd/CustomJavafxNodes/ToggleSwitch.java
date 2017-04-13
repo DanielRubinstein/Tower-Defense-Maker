@@ -1,12 +1,16 @@
 package frontEnd.CustomJavafxNodes;
 
+import java.util.function.Consumer;
+
 import ModificationFromUser.Modification_ChangeMode;
 import frontEnd.View;
 import javafx.beans.property.SimpleBooleanProperty;
+import javafx.event.ActionEvent;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 
 /*
@@ -20,15 +24,21 @@ public class ToggleSwitch {
 	private Label label;
 	private Button button;
 	private View myView;
-
+	private Runnable myModRunnable;
 	private SimpleBooleanProperty switchedOn;
+	
 
-	public ToggleSwitch(View view, String title1, String title2, SimpleBooleanProperty booleanProperty) {
+	public SimpleBooleanProperty getSwitchedOn() {
+		return switchedOn;
+	}
+
+	public ToggleSwitch(View view, String title1, String title2, SimpleBooleanProperty booleanProperty, Runnable modRunnable) {
 		myView = view;
 		toggle = new HBox();
 		label = new Label();
 		button = new Button();
 		switchedOn = booleanProperty;
+		myModRunnable = modRunnable;
 
 		init(title1, title2);
 
@@ -52,26 +62,28 @@ public class ToggleSwitch {
 	}
 
 	private void init(String title1, String title2) {
-
 		label.setText(title1);
 
 		toggle.getChildren().addAll(label, button);
 		
-		button.setOnAction((e) -> {
-			myView.sendUserModification(new Modification_ChangeMode());
+		Runnable r = () -> {
+			myModRunnable.run();
 			switchedOn.set(!switchedOn.get());
+		};
+		button.setOnAction((e) -> {
+			r.run();
 		});
 		label.setOnMouseClicked((e) -> {
-			myView.sendUserModification(new Modification_ChangeMode());
-			switchedOn.set(!switchedOn.get());
+			r.run();
 		});
+		
 		setStyle();
 		bindSizeProperties();
 	}
 
 	private void setStyle() {		
 		// Default Width
-		//toggle.setPrefWidth(80);
+		toggle.setMinWidth(80);
 		//toggle.setMaxWidth(80);
 		label.setAlignment(Pos.CENTER);
 		toggle.setStyle("-fx-background-color: grey; -fx-text-fill:black; -fx-background-radius: 4;");
