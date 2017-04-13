@@ -27,6 +27,9 @@ public class Component implements AttributeOwner {
 	private Map<String, Behavior> myBehaviors;
 	private AccessPermissions myAccessPermissions;
 	private String myType;
+	
+	
+	
 
 
 	
@@ -84,7 +87,7 @@ public class Component implements AttributeOwner {
 
 	@Override
 	public void addAttribute(String attrType, Attribute<?> newAttr) {
-		// TODO Auto-generated method stub
+		myAttributes.addAttribute(attrType, newAttr);
 		
 	}
 
