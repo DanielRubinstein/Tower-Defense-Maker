@@ -54,7 +54,7 @@ public class StateImpl extends Observable implements State {
 				Point2D loc = new Point2D(j,i);
 				Tile newTile = new TileImpl(Arrays.asList(), Arrays.asList(UserModeType.AUTHOR), loc);
 				Attribute<String> imgAttr = (Attribute<String>) newTile.getAttribute("ImageFile");
-				imgAttr.setValue("images/default_tile.jpg");
+				imgAttr.setValue("images/Tiles/default_tile.jpg");
 				stateGrid.setTile(newTile, loc);
 
 			}

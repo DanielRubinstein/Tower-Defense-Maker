@@ -45,7 +45,7 @@ public class Palette<T extends AttributeOwner> implements SkeletonObject, Observ
 	private TilePane tile;
 	private Map<String, T> myPresetMap;
 	private static final String IMAGEFILE_ATTRIBUTE_NAME = "ImageFile";
-	private static final String SETTINGS_IMAGE = "images/plus.jpg";
+	private static final String SETTINGS_IMAGE = "images/Tools/plus.jpg";
 	private Map<ImageView, T> myMap;
 	private String myType;
 	private BankController observedBankController;
@@ -109,11 +109,11 @@ public class Palette<T extends AttributeOwner> implements SkeletonObject, Observ
 						//newAO = new TileImpl();
 						// TODO make blank tile
 						newAO = new TileImpl(Arrays.asList(), Arrays.asList(UserModeType.AUTHOR), new Point2D(0,0));
-						imagePathForNewPreset =  "images/grass.jpg";
+						imagePathForNewPreset =  "images/Tiles/grass.jpg";
 						break;
 					case "Components":
 						newAO = new Component(new AttributeData(),new AccessPermissionsImpl());
-						imagePathForNewPreset =  "images/zombie.jpg";
+						imagePathForNewPreset =  "images/Components/zombie.jpg";
 						break;
 					}
 
