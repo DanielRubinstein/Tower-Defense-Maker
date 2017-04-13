@@ -28,7 +28,7 @@ public class TileGridImpl implements TileGrid {
 	
 	@Override
 	public Tile getTileByLocation(Point2D location){
-		System.out.println("getin tile by point2d");
+		//System.out.println("Getting Tile by " + location.toString());
 		return getTileByCoord((int) location.getY(),(int) location.getX()); //Potentially wrong flipped x/y- y
 	}
 	@Override
@@ -69,7 +69,7 @@ public class TileGridImpl implements TileGrid {
 	@Override
 	public Tile getTileByCoord(int x, int y) {
 		//convert from 50,50 to coordinates
-		System.out.println("getting tile by coord " + x +"   " + y);
+		//System.out.println(String.format("Getting Tile by Coordinate (%d, %d)", x, y));
 		if(x >= getMyWidth()  ||
 		   y >= getMyHeight() ){
 			return null;

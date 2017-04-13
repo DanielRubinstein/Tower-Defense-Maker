@@ -25,8 +25,9 @@ public class PalettePane implements SkeletonObject {
 		//http://stackoverflow.com/questions/29085983/create-vertical-tabs-in-tabpane-javafx
 		palette = new TabPane();
 		palette.setSide(Side.LEFT);
-		palette.getTabs().add(createPalette("Tiles"));
 		palette.getTabs().add(createPalette("Components"));
+		palette.getTabs().add(createPalette("Tiles"));
+		
 		
 	}
 

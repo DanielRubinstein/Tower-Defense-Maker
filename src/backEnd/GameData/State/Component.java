@@ -135,7 +135,7 @@ public class Component extends Observable implements AttributeOwner {
 	@Override
 	public <T> void setAttributeValue(String attrName, T newVal) {
 		((Attribute<T>) myAttributes.get(attrName)).setValue(newVal);
-		System.out.println("setting component attr " +attrName + "     "    +newVal);
+		//System.out.println("setting component attr " +attrName + "     "    +newVal);
 		
 		notifyObservers();
 	}
