@@ -9,7 +9,7 @@ import java.util.Map;
 import java.util.Observable;
 import java.util.Observer;
 import java.util.function.Consumer;
-import ModificationFromUser.Modification_AddAttributeOwner;
+import ModificationFromUser.Modification_AddPresetAttributeOwnerToGrid;
 import ModificationFromUser.Modification_EditAttribute;
 import backEnd.Attribute.AttributeData;
 import backEnd.Attribute.AttributeImpl;
@@ -88,7 +88,7 @@ public class Palette<T extends AttributeOwner> implements SkeletonObject, Observ
 	private void addPresetToPalette(T preset) {
 		String myImagePath = (String) preset.getAttribute(IMAGEFILE_ATTRIBUTE_NAME).getValue();
 		ImageView imageView = createImageView(myImagePath, (iV) ->{
-			myView.sendUserModification(new Modification_AddAttributeOwner(myMap.get(iV), askForNewPosition()));
+			myView.sendUserModification(new Modification_AddPresetAttributeOwnerToGrid(myMap.get(iV), askForNewPosition()));
 		});
 		imageView.setOnDragDetected(e -> {
 			//TODO: make a component from imageView and put it into the Tile that drop ends on
@@ -121,9 +121,10 @@ public class Palette<T extends AttributeOwner> implements SkeletonObject, Observ
 
 					Point2D point = askForNewPosition();
 					
-					myView.sendUserModification(new Modification_AddAttributeOwner(newAO, point));
-					//myView.sendUserModification(new Modification_EditAttribute<Point2D>(newAO, new AttributeImpl<Point2D>(null,"Position") , point));
-					
+
+					//myView.sendUserModification(new Modification_AddPresetAttributeOwnerToGrid(newAO, point));
+					myView.sendUserModification(new Modification_EditAttribute<Point2D>(newAO, new AttributeImpl<Point2D>(null,"Position") , point));
+
 					myView.sendUserModification(new Modification_EditAttribute(newAO, new AttributeImpl<String>(null,"ImageFile") , imagePathForNewPreset));
 					PresetCreation presetCreation = new PresetCreation(myView, newAO);
 					Object o = newAO.getAttribute("Position").getValue();
