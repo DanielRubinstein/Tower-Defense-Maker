@@ -2,6 +2,7 @@ package frontEnd.Skeleton.AoTools;
 
 import backEnd.Attribute.AttributeOwnerReader;
 import frontEnd.View;
+import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
@@ -30,6 +31,9 @@ public class PresetCreation{
 		myStage.setX(x);
 		myStage.setY(y);
 		myStage.show();
+	}
+	public void add(Node n){
+		myRoot.getChildren().add(n);
 	}
 	
 	public void launch(double x, double y) {

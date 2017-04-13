@@ -33,6 +33,7 @@ public class AttributeCommandCenter extends CommandCenter{
 	public AttributeCommandCenter(View view, AttributeOwnerReader obj){
 		myView = view;
 		authorProperty = view.getBooleanAuthorModeProperty();
+
 		myRoot = createAttributeCommandCenter(obj);
 	}
 	
@@ -54,6 +55,7 @@ public class AttributeCommandCenter extends CommandCenter{
 		HBox contents_Att = new HBox();
 		VBox contentRow = null;
 		int count = 0;
+		if(obj.getMyAttributes()==null) return contents_Att;
 		for (Attribute<?> attr : obj.getMyAttributes().getAttributeMap().values()) {
 			if (count % 3 == 0) {
 				contentRow = new VBox();
