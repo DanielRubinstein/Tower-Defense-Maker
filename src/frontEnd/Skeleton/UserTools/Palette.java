@@ -99,6 +99,7 @@ public class Palette<T extends AttributeOwner> implements SkeletonObject, Observ
 			ClipboardContent content = new ClipboardContent();
 			content.putString("Drop here");
 			db.setContent(content);
+			db.setDragView(imageView.getImage());
 			
 			
 		});
