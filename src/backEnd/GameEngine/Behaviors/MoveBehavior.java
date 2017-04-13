@@ -32,7 +32,7 @@ public class MoveBehavior implements Behavior {
 	
 	@SuppressWarnings("unchecked")
 	@Override
-	public <T> void execute(T tile) {//pass in a tile //TODO error checking
+	public <T> void execute(T tile) throws FileNotFoundException {//pass in a tile //TODO error checking
 		currentTile=(Tile) tile;
 		switch ((String) currentTile.getAttribute("MoveDirection").getValue()) {
 		case "LEFT":
@@ -54,7 +54,8 @@ public class MoveBehavior implements Behavior {
 		}
 		Attribute<Point2D> newPositionAttribute=(Attribute<Point2D>) af.getAttribute("Position");
 		newPositionAttribute.setValue(newPoint);
-		myComponent.addAttribute("Position", newPositionAttribute);
+		myComponent.setAttributeValue("Position",newPositionAttribute); //does it get overwritten?
+
 	}
 
 	/*
