@@ -33,11 +33,17 @@ public class DataController {
 	}
 	
 	@SuppressWarnings("unchecked")
-	public BankController generateBanks() throws XMLReadingException{
-		List<Map<String,?>> objectMaps = myXMLReader.loadUniversalGameData(UNIV_GAME_DATA_PATH);
-		componentMap = (Map<String,Component>) objectMaps.get(0);
-		tileMap = (Map<String,Tile>) objectMaps.get(1);
-		return new BankController(tileMap, componentMap);
+	public BankController generateBanks(){
+		List<Map<String, ?>> objectMaps;
+		try {
+			objectMaps = myXMLReader.loadUniversalGameData(UNIV_GAME_DATA_PATH);
+			componentMap = (Map<String,Component>) objectMaps.get(0);
+			tileMap = (Map<String,Tile>) objectMaps.get(1);
+			return new BankController(tileMap, componentMap);
+		} catch (XMLReadingException e) {
+			return new BankController();
+		}
+		
 	}
 
 	public GameData generateGameData(String gameName) throws XMLReadingException{

@@ -2,8 +2,11 @@ package frontEnd;
 
 import ModificationFromUser.ModificationFromUser;
 import backEnd.Attribute.AttributeOwnerReader;
+import backEnd.Bank.BankController;
 
 public interface View extends ViewReader{
+	
+	public BankController getBankController();
 
 	public void save();
 	

@@ -36,13 +36,17 @@ public class MoveBehavior implements Behavior {
 		currentTile=(Tile) tile;
 		switch ((String) currentTile.getAttribute("MoveDirection").getValue()) {
 		case "LEFT":
-			newPoint=new Point2D(currentPosition.getX()-Constants.defaultMoveAmount, currentPosition.getY());				
+			newPoint=new Point2D(currentPosition.getX()-Constants.defaultMoveAmount, currentPosition.getY());
+			break;
 		case "RIGHT":
-			newPoint=new Point2D(currentPosition.getX()+Constants.defaultMoveAmount, currentPosition.getY());				
+			newPoint=new Point2D(currentPosition.getX()+Constants.defaultMoveAmount, currentPosition.getY());
+			break;
 		case "UP":
-			newPoint=new Point2D(currentPosition.getX(), currentPosition.getY()+Constants.defaultMoveAmount);				
+			newPoint=new Point2D(currentPosition.getX(), currentPosition.getY()+Constants.defaultMoveAmount);
+			break;
 		case "DOWN":
-			newPoint=new Point2D(currentPosition.getX(), currentPosition.getY()-Constants.defaultMoveAmount);				
+			newPoint=new Point2D(currentPosition.getX(), currentPosition.getY()-Constants.defaultMoveAmount);
+			break;
 		}
 		AttributeFactory af = null;
 		try {
