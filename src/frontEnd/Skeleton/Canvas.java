@@ -133,6 +133,7 @@ public class Canvas implements SkeletonObject, Observer{
 		tileView.setPreserveRatio(false);
 		tileView.setFitWidth(TILE_WIDTH/2);
 		tileView.setFitHeight(TILE_HEIGHT/2);
+		System.out.println(" %%% in canvas " +attr.getAttribute("Position").getValue());
 		root.getChildren().add(tileView);
 		
 	}

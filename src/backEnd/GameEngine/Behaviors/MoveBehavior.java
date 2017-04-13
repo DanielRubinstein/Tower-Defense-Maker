@@ -28,18 +28,24 @@ public class MoveBehavior implements Behavior {
 	public MoveBehavior(Component inputComponent){
 		myComponent=inputComponent;
 		currentPosition=(Point2D) myComponent.getAttribute("Position").getValue();
+		System.out.println("in move behavior " + myComponent.getAttribute("Position").getValue() + "    " +myComponent.getAttribute("Position").getValue().getClass());
 	}
 	
 	@SuppressWarnings("unchecked")
 	@Override
 	public <T> void execute(T tile) throws FileNotFoundException {//pass in a tile //TODO error checking
 		currentTile=(Tile) tile;
+		System.out.println("   tile  "+tile);
+		System.out.println("   tile  "+currentTile.getAttribute("MoveDirection"));
+		
+		//System.out.println("   in move behavior " +currentTile.getAttribute("MoveDirection").getValue().getClass() + "    " +
+				//currentTile.getAttribute("MoveDirection").getValue());
 		switch ((String) currentTile.getAttribute("MoveDirection").getValue()) {
 		case "LEFT":
-			newPoint=new Point2D(currentPosition.getX()-Constants.defaultMoveAmount, currentPosition.getY());
+			newPoint=new Point2D(currentPosition.getX()-Constants.defaultMoveAmount, currentPosition.getY());	
 			break;
 		case "RIGHT":
-			newPoint=new Point2D(currentPosition.getX()+Constants.defaultMoveAmount, currentPosition.getY());
+			newPoint=new Point2D(currentPosition.getX()+Constants.defaultMoveAmount, currentPosition.getY());	
 			break;
 		case "UP":
 			newPoint=new Point2D(currentPosition.getX(), currentPosition.getY()+Constants.defaultMoveAmount);
@@ -57,8 +63,9 @@ public class MoveBehavior implements Behavior {
 			System.out.println("error in MoveBehavior- SAD!");
 		}
 		Attribute<Point2D> newPositionAttribute=(Attribute<Point2D>) af.getAttribute("Position");
+		if(newPoint==null) newPoint = new Point2D(5,4);
 		newPositionAttribute.setValue(newPoint);
-		myComponent.setAttributeValue("Position",newPositionAttribute); //does it get overwritten?
+		myComponent.setAttributeValue("Position",newPoint); //does it get overwritten?
 
 	}
 

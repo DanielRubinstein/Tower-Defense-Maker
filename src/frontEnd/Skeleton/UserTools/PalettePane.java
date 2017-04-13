@@ -49,6 +49,7 @@ public class PalettePane implements SkeletonObject {
 				try{
 					presets = myView.getBankController().getComponentMap();
 				} catch (NullPointerException e) {
+	
 					System.out.println("No presets here");
 				}
 				palette = new Palette<Component>(myView, presets, string);

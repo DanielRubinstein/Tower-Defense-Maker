@@ -34,6 +34,7 @@ public class TileImpl extends Observable implements Tile, AttributeOwner {
 
 	public TileImpl(List<GameModeType> gameModeAccessPermissions, List<UserModeType> userModeAccessPermissions,
 			Point2D location) throws FileNotFoundException {
+		System.out.println("making new time");
 		this.myLocation = location;
 		this.myAccessPerm = new AccessPermissionsImpl(gameModeAccessPermissions, userModeAccessPermissions);
 		this.myAttrData = new AttributeData(new HashMap<String, Attribute<?>>());
@@ -43,6 +44,7 @@ public class TileImpl extends Observable implements Tile, AttributeOwner {
 			Attribute<?> myAttribute = attrFact.getAttribute(key);
 			addAttribute(key, myAttribute);
 		}
+		
 
 	}
 
