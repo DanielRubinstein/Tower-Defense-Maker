@@ -55,10 +55,7 @@ public class ModelImpl implements Model{
 		return this.myBankController;
 	}
 	
-<<<<<<< HEAD
 
-=======
->>>>>>> 2e8d87668a4a8cb17223de00959f768917eaa604
 	public DataController getDataController(){
 		return myDataController;
 	}
@@ -70,9 +67,6 @@ public class ModelImpl implements Model{
 	@Override
 	public GameProcessController getGameProcessController() {
 		return myEngine;
-<<<<<<< HEAD
-=======
 
->>>>>>> 2e8d87668a4a8cb17223de00959f768917eaa604
 	}
 }

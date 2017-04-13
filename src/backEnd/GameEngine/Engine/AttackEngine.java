@@ -15,7 +15,7 @@ import resources.Constants;
 /**
  * 
  * @author Daniel
- * @author Alex 
+ * @author Alex
  * @author Christian
  */
 
@@ -31,8 +31,18 @@ public class AttackEngine implements Engine {
 				for (Component componentTarget : myComponentGraph.getComponentsWithinRadius(componentAttacker,
 						Constants.defaultRadius)) {
 					addProjectileToState(currentState, componentAttacker, componentTarget);
-					componentAttacker.getBehavior("Attack").execute(null);
-					componentTarget.getBehavior("TakeDamage").execute(null);
+					try {
+						componentAttacker.getBehavior("Attack").execute(null);
+					} catch (FileNotFoundException e) {
+						ErrorDialog fnf = new ErrorDialog();
+						fnf.create("Error", "File not found");
+					}
+					try {
+						componentTarget.getBehavior("TakeDamage").execute(null);
+					} catch (FileNotFoundException e) {
+						ErrorDialog fnf = new ErrorDialog();
+						fnf.create("Error", "File not found");
+					}
 					break;
 				}
 			}
@@ -40,37 +50,49 @@ public class AttackEngine implements Engine {
 	}
 
 	@SuppressWarnings("unchecked")
-	public void addProjectileToState(State currentState, Component attacker, Component target) { 
-		Component bullet = makeBullet();
-
-		currentState.getComponentGraph().addComponentToGrid(bullet,
-				(Point2D) attacker.getAttribute("Position").getValue());
-	}
-	
-	/**
-	 * 
-	 * @return a Component that represents a Bullet
-	 */
-	@SuppressWarnings("unchecked")
-	private Component makeBullet(){//TODO: ADD ATTRIBUTES STARTPOS AND TARGETPOS TO BULLET FOR MOVEENGINE TO USE
-
-		AttributeFactory af = null;
+	public void addProjectileToState(State currentState, Component attacker, Component target) {
 		Component bullet = null;
 		try {
-			af = new AttributeFactory();
-		} 
-		catch (FileNotFoundException e) {
+			bullet = makeBullet();
+		} catch (FileNotFoundException e) {
 			ErrorDialog fnf = new ErrorDialog();
 			fnf.create("Error", "File not found");
 		}
 
-		 
+		currentState.getComponentGraph().addComponentToGrid(bullet,
+				(Point2D) attacker.getAttribute("Position").getValue());
+	}
 
-			bullet.setMyType("Projectile");
-			Attribute<String> bulletImage = (Attribute<String>) af.getAttribute(myResources.getString("ImageFile"));
-			bulletImage.setValue(Constants.BULLET_IMAGE_FILE);
-			AttributeData ad = new AttributeData();
-			ad.addAttribute(myResources.getString("ImageFile"), (backEnd.Attribute.AttributeImpl<?>) bulletImage);
+	/**
+	 * 
+	 * @return a Component that represents a Bullet
+	 * @throws FileNotFoundException
+	 */
+	@SuppressWarnings("unchecked")
+	private Component makeBullet() throws FileNotFoundException {// TODO: ADD
+																	// ATTRIBUTES
+																	// STARTPOS
+																	// AND
+																	// TARGETPOS
+																	// TO BULLET
+																	// FOR
+																	// MOVEENGINE
+																	// TO USE
+
+		AttributeFactory af = new AttributeFactory();
+		Component bullet = new Component(null);
+		try {
+			af = new AttributeFactory();
+		} catch (FileNotFoundException e) {
+			ErrorDialog fnf = new ErrorDialog();
+			fnf.create("Error", "File not found");
+		}
+
+		bullet.setMyType("Projectile");
+		Attribute<String> bulletImage = (Attribute<String>) af.getAttribute(myResources.getString("ImageFile"));
+		bulletImage.setValue(Constants.BULLET_IMAGE_FILE);
+		AttributeData ad = new AttributeData();
+		ad.addAttribute(myResources.getString("ImageFile"), (backEnd.Attribute.AttributeImpl<?>) bulletImage);
 
 		return bullet;
 	}
