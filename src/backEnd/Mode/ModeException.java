@@ -1,5 +1,6 @@
 package backEnd.Mode;
 
+@SuppressWarnings("serial")
 public class ModeException extends RuntimeException {
 	
 	public ModeException(Mode mode, String message){

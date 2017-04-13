@@ -1,7 +1,6 @@
 package frontEnd.Skeleton.UserTools;
 
 import frontEnd.View;
-import frontEnd.ViewReader;
 import javafx.scene.Node;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
