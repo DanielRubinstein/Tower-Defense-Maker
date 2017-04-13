@@ -67,8 +67,8 @@ public class ToggleSwitch {
 		toggle.getChildren().addAll(label, button);
 		
 		Runnable r = () -> {
-			myModRunnable.run();
 			switchedOn.set(!switchedOn.get());
+			myModRunnable.run();
 		};
 		button.setOnAction((e) -> {
 			r.run();

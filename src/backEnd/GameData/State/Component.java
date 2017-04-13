@@ -99,8 +99,7 @@ public class Component extends Observable implements AttributeOwner {
 
 	/**
 	 * 
-	 * @param type
-	 *            the type of this Component, i.e. Tower or Enemy
+	 * @param type the type of this Component, i.e. Tower or Enemy
 	 */
 	public void setMyType(String type) {
 		myType = type;

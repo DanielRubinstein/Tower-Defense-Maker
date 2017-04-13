@@ -10,6 +10,7 @@ import backEnd.Attribute.Attribute;
 import backEnd.Attribute.AttributeOwnerReader;
 import frontEnd.View;
 import frontEnd.CustomJavafxNodes.SingleFieldPrompt;
+import javafx.beans.property.SimpleBooleanProperty;
 import javafx.geometry.Insets;
 import javafx.geometry.Point2D;
 import javafx.geometry.Pos;
@@ -27,9 +28,12 @@ public class AttributeCommandCenter extends CommandCenter{
 			.getBundle(RESOURCES_PATH + ALL_ATTRIBUTES_TYPES);
 	private View myView;
 	private VBox myRoot;
+	private SimpleBooleanProperty authorProperty;
 	
 	public AttributeCommandCenter(View view, AttributeOwnerReader obj){
 		myView = view;
+		authorProperty = view.getBooleanAuthorModeProperty();
+
 		myRoot = createAttributeCommandCenter(obj);
 	}
 	
@@ -51,6 +55,7 @@ public class AttributeCommandCenter extends CommandCenter{
 		HBox contents_Att = new HBox();
 		VBox contentRow = null;
 		int count = 0;
+		if(obj.getMyAttributes()==null) return contents_Att;
 		for (Attribute<?> attr : obj.getMyAttributes().getAttributeMap().values()) {
 			if (count % 3 == 0) {
 				contentRow = new VBox();
@@ -84,7 +89,7 @@ public class AttributeCommandCenter extends CommandCenter{
 		Label attLabel = new Label(attr.getName());
 		singleAttEditor.getChildren().add(attLabel);
 		Node right;
-		if (myView.getBooleanAuthorModeProperty().get()) {
+		if (authorProperty.get()) {
 			// Author Mode
 			EditorCreator editorCreator = new EditorCreator(myView, obj, attr);
 			right = editorCreator.extractEditor(myAttrNameResources.getString(attr.getName()));
