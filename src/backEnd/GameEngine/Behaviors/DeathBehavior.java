@@ -22,7 +22,7 @@ public class DeathBehavior implements Behavior {
 		myComponent=(Component) componentToUse;
 		spawnsOnDeath=(boolean) myComponent.getAttribute("SPAWNS_ON_DEATH").getValue();
 		if (spawnsOnDeath){
-			componentSpawnedOnDeath=(Component) myComponent.getAttribute("COMPONENT_SPAWNED_ON_DEATH").getValue();
+			componentSpawnedOnDeath =(Component) myComponent.getAttribute("COMPONENT_SPAWNED_ON_DEATH").getValue();
 		}
 
 	}

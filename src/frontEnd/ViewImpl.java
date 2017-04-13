@@ -56,7 +56,6 @@ public class ViewImpl implements View{
 		animation.setCycleCount(Timeline.INDEFINITE);
 		animation.getKeyFrames().add(frame);
 		animation.play();
-		
 	}
 
 	/**
@@ -130,6 +129,7 @@ public class ViewImpl implements View{
 		Collection<UserAttribute> m = new ArrayList<UserAttribute>();
 		m.add(new UserAttributeImpl("Score", 3000d));
 		m.add(new UserAttributeImpl("Level", 17d));
+		m.add(new UserAttributeImpl("Health", 100d));
 		return Collections.unmodifiableCollection(m);
 	}
 
