@@ -28,15 +28,15 @@ public class MoveBehavior implements Behavior {
 	public MoveBehavior(Component inputComponent){
 		myComponent=inputComponent;
 		currentPosition=(Point2D) myComponent.getAttribute("Position").getValue();
-		System.out.println("in move behavior " + myComponent.getAttribute("Position").getValue() + "    " +myComponent.getAttribute("Position").getValue().getClass());
+		//System.out.println("in move behavior " + myComponent.getAttribute("Position").getValue() + "    " +myComponent.getAttribute("Position").getValue().getClass());
 	}
 	
 	@SuppressWarnings("unchecked")
 	@Override
 	public <T> void execute(T tile) throws FileNotFoundException {//pass in a tile //TODO error checking
 		currentTile=(Tile) tile;
-		System.out.println("   tile  "+tile);
-		System.out.println("   tile  "+currentTile.getAttribute("MoveDirection"));
+		//System.out.println("   tile  "+tile);
+		//System.out.println("   tile  "+currentTile.getAttribute("MoveDirection"));
 		
 		//System.out.println("   in move behavior " +currentTile.getAttribute("MoveDirection").getValue().getClass() + "    " +
 				//currentTile.getAttribute("MoveDirection").getValue());

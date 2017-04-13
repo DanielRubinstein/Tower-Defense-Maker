@@ -95,7 +95,7 @@ public class ComponentGraphImpl implements ComponentGraph {
 		currList.add(newComponent);
 		//System.out.println( "   in compon graph "  + componentMap + "  " +newComponent + "   " +newComponent.getAttribute("Position").getValue());
 		componentMap.put(location, currList);
-		System.out.println(componentMap +"    after  "+location + "  " + newComponent.getAttribute("Position").getValue() + "   " +currList);
+		//System.out.println(componentMap +"    after  "+location + "  " + newComponent.getAttribute("Position").getValue() + "   " +currList);
 		
 	}
 	
@@ -103,7 +103,7 @@ public class ComponentGraphImpl implements ComponentGraph {
 	public void removeComponent(Component toRemove){
 		Attribute<?> posAttribute= toRemove.getAttribute("Position");
 		Point2D location = (Point2D) posAttribute.getValue();
-		System.out.println("removing comp at position " +location);
+		//System.out.println("removing comp at position " +location);
 
 		//System.out.println( " befforeee " +componentMap);
 		List<Component> currList = componentMap.get(location);
