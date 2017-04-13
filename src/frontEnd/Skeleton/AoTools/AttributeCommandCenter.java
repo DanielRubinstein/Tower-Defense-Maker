@@ -54,8 +54,8 @@ public class AttributeCommandCenter extends CommandCenter{
 	public void addSubmitButton(AttributeOwnerReader obj) {
 		Button submit = new Button("Add Now");
 		submit.setOnAction(e -> {
-			myView.addToCanvas(obj);
-			
+			//myView.addToCanvas(obj);
+			myView.sendUserModification(new Modification_AddNewAttributeOwnerToGrid(obj));
 		});
 		myRoot.getChildren().add(submit);
 	}
@@ -101,7 +101,6 @@ public class AttributeCommandCenter extends CommandCenter{
 		if (authorProperty.get()) {
 			// Author Mode
 			EditorCreator editorCreator = new EditorCreator(myView, obj, attr);
-			System.out.println("a&&&&&&  " + attr.getName() +"    "  +myAttrNameResources.getString(attr.getName()));
 			right = editorCreator.extractEditor(myAttrNameResources.getString(attr.getName()));
 			
 		} else {

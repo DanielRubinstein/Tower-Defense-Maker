@@ -51,11 +51,17 @@ public class OptionsSelection {
 	}
 	
 	private void addButtons(double size){
-		addButtonImage(PLAY_IMAGE, e-> myView.sendUserModification(Modification_GameRemote.PLAY) ,size);
+		addButtonImage(PLAY_IMAGE, e-> {
+			System.out.println("trynig to play");
+			myView.play();
+			myView.sendUserModification(Modification_GameRemote.PLAY);
+		}
+		 ,size);
 		addButtonImage(PAUSE_IMAGE, e-> myView.sendUserModification(Modification_GameRemote.PAUSE) ,size);
 		addButtonImage(FASTFWD_IMAGE, e-> myView.sendUserModification(Modification_GameRemote.FASTFORWARD) ,size);
 		addButtonImage(SETTINGS_IMAGE, e-> mySettings.launchSettings(),size);
 	}
+	
 	
 	
 	private void addButtonImage(String imageName, EventHandler<ActionEvent> event, double size){
