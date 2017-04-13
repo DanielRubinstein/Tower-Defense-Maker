@@ -5,8 +5,8 @@ import backEnd.GameData.State.State;
 public class NullEngine implements Engine{
 
 	@Override
-	public void gameLoop(State currentState) {
-		// Intentionally blank
+	public void gameLoop(State currentState, double stepTime) {
+		//DO NOTHING
 	}
 
 }
