@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Observable;
 import java.util.Observer;
+import java.util.Set;
 
 /**
  * 
@@ -61,5 +62,16 @@ public class AttributeData extends Observable {
 		super.notifyObservers();
 	}
 	
-
+	/**
+	 * @return Copy
+	 */
+	public AttributeData copy() {
+		Set<String> attributeNames = myAttributes.keySet();
+		Map<String, Attribute<?>> attributesCopy = new HashMap<String, Attribute<?>>();
+		for(String name: attributeNames){
+			Attribute attributeCopy = myAttributes.get(name).copy();
+			attributesCopy.put(new String(name), attributeCopy);
+		}
+		return new AttributeData(attributesCopy);
+	}
 }

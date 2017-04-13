@@ -6,4 +6,9 @@ public interface Attribute<T> extends AttributeReader<T> {
 	 * @param newVal
 	 */
 	public void setValue(T newVal);
+
+	/**
+	 * @return Copy of Attribute
+	 */
+	public Attribute copy();
 }
