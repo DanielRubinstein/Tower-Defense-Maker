@@ -88,14 +88,11 @@ public class Palette<T extends AttributeOwner> implements SkeletonObject {
 
 	private ImageView addNewPresetButton() {
 		ImageView addImage = createImageView(SETTINGS_IMAGE, (iV) ->{
-			// TODO this is where a new preset is created in the frontend
 			String newAttributeOwnerName = null;
 
 				try {			
 					AttributeOwner newAO = new Component(new AttributeData(),new AccessPermissionsImpl());
 					String imagePathForNewPreset = "images/zombie.jpg";
-					//newAO.addAttribute(IMAGEFILE_ATTRIBUTE_NAME, imagePathForNewPreset);
-
 
 					ImageView newImage = createImageView(imagePathForNewPreset, (iV2) ->{
 						Point2D point = askForNewPosition();
@@ -112,9 +109,7 @@ public class Palette<T extends AttributeOwner> implements SkeletonObject {
 					myView.sendUserModification(new Modification_EditAttribute(newAO, new AttributeImpl<String>(null,"ImageFile") , imagePathForNewPreset));
 					PresetCreation presetCreation = new PresetCreation(myView, newAO);
 					
-					//presetCreation.add(newImage);
 					presetCreation.launch(0d, 0d);
-					//myView.addToCanvas(newAO);
 				} catch (FileNotFoundException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();

@@ -88,7 +88,6 @@ public class StateImpl extends Observable implements State {
 	}
 	
 	public void updateState(State state){
-		System.out.println("STATE EE");
 		this.gridWidth = state.getGridWidth();
 		this.gridHeight = state.getGridHeight();
 		this.pointResWidth = state.getPointResolutionWidth();

@@ -98,6 +98,7 @@ public class AttributeCommandCenter extends CommandCenter{
 		if (authorProperty.get()) {
 			// Author Mode
 			EditorCreator editorCreator = new EditorCreator(myView, obj, attr);
+			System.out.println("a&&&&&&  " + attr.getName() +"    "  +myAttrNameResources.getString(attr.getName()));
 			right = editorCreator.extractEditor(myAttrNameResources.getString(attr.getName()));
 			
 		} else {
