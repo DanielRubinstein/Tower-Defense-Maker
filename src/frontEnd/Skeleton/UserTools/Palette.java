@@ -1,14 +1,18 @@
 package frontEnd.Skeleton.UserTools;
 
+import java.io.FileNotFoundException;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.function.Consumer;
-
 import ModificationFromUser.Modification_AddAttributeOwner;
+import ModificationFromUser.Modification_EditAttribute;
+import backEnd.Attribute.AttributeData;
+import backEnd.Attribute.AttributeImpl;
 import backEnd.Attribute.AttributeOwner;
+import backEnd.GameData.State.AccessPermissionsImpl;
 import backEnd.GameData.State.Component;
 import frontEnd.View;
 import frontEnd.CustomJavafxNodes.DoubleFieldPrompt;
@@ -46,10 +50,8 @@ public class Palette<T extends AttributeOwner> implements SkeletonObject {
 		myType =string;
 		initializePane();
 		myMap = new HashMap<ImageView, T>();
-		System.out.println("in palette " + myPresets);
 		try{
 			for (T preset : myPresets) {
-				
 				String myImagePath = (String) preset.getAttribute(IMAGEFILE_ATTRIBUTE_NAME).getValue();
 				ImageView imageView = createImageView(myImagePath, (iV) ->{
 					myView.sendUserModification(new Modification_AddAttributeOwner(myMap.get(iV), askForNewPosition()));
@@ -82,22 +84,39 @@ public class Palette<T extends AttributeOwner> implements SkeletonObject {
 	private ImageView addNewPresetButton() {
 		ImageView addImage = createImageView(SETTINGS_IMAGE, (iV) ->{
 			// TODO this is where a new preset is created in the frontend
-			//String newAttributeOwnerName = null;
-			AttributeOwner newAO = new Component();
-			String imagePathForNewPreset = "images/zombie.jpg";
-			//newAO.addAttribute(IMAGEFILE_ATTRIBUTE_NAME, imagePathForNewPreset);
 
-			PresetCreation presetCreation = new PresetCreation(myView, newAO);
-			
-			ImageView newImage = createImageView(imagePathForNewPreset, (iV2) ->{
-				System.out.println("testing eme");
-				Point2D point = askForNewPosition();
-				myView.sendUserModification(new Modification_AddAttributeOwner(newAO, point));
-			});
-			System.out.println(newImage +  "    " + ((T) newAO));
-			myMap.put(newImage, (T) newAO);
-			presetCreation.add(newImage);
-			presetCreation.launch(0d, 0d);
+			String newAttributeOwnerName = null;
+
+
+				try {			
+					AttributeOwner newAO = new Component(new AttributeData(),new AccessPermissionsImpl());
+					String imagePathForNewPreset = "images/zombie.jpg";
+					//newAO.addAttribute(IMAGEFILE_ATTRIBUTE_NAME, imagePathForNewPreset);
+
+
+					ImageView newImage = createImageView(imagePathForNewPreset, (iV2) ->{
+						Point2D point = askForNewPosition();
+						
+						myView.sendUserModification(new Modification_AddAttributeOwner(newAO, point));
+					});
+					myMap.put(newImage, (T) newAO);
+
+					Point2D point = askForNewPosition();
+					
+					myView.sendUserModification(new Modification_AddAttributeOwner(newAO, point));
+					myView.sendUserModification(new Modification_EditAttribute(newAO, new AttributeImpl<String>(null,"Position") , point));
+					
+					myView.sendUserModification(new Modification_EditAttribute(newAO, new AttributeImpl<String>(null,"ImageFile") , imagePathForNewPreset));
+					PresetCreation presetCreation = new PresetCreation(myView, newAO);
+					
+					//presetCreation.add(newImage);
+					presetCreation.launch(0d, 0d);
+					//myView.addToCanvas(newAO);
+				} catch (FileNotFoundException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+
 		});
 		/*
 		Button b = new Button();
@@ -106,7 +125,6 @@ public class Palette<T extends AttributeOwner> implements SkeletonObject {
 		b.getStyleClass().clear();
 		b.setOnAction((e) -> addImage.getOnMouseClicked());
 		*/
-		System.out.println(addImage.getImage());
 		return addImage;
 	}
 
@@ -127,7 +145,6 @@ public class Palette<T extends AttributeOwner> implements SkeletonObject {
 		// resizing
 		Image image = new Image(getClass().getClassLoader().getResourceAsStream(myImagePath));
 		ImageView imageView = new ImageView(image);
-		System.out.println("creaitng imageview " +myImagePath);
 		imageView.setFitWidth(TILE_SIZE);
 		imageView.setFitHeight(TILE_SIZE);
 		imageView.setOnMouseClicked(mouseEvent -> {

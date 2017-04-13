@@ -1,5 +1,6 @@
 package frontEnd.Skeleton;
 
+import backEnd.Attribute.AttributeOwnerReader;
 import javafx.stage.Stage;
 
 public interface Skeleton {
@@ -9,4 +10,6 @@ public interface Skeleton {
 	 * @param stage
 	 */
 	public void display(Stage stage);
+	
 }
+
