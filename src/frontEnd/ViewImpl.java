@@ -167,5 +167,4 @@ public class ViewImpl implements View{
 		// TODO Auto-generated method stub
 		
 	}
-
 }
