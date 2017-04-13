@@ -1,31 +1,27 @@
 package frontEnd.Skeleton.UserTools;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
 import java.util.Map;
-import java.util.Optional;
+import java.util.function.Consumer;
 
 import ModificationFromUser.Modification_AddAttributeOwner;
+import ModificationFromUser.Modification_AddNewPresetAttributeOwner;
 import backEnd.Attribute.AttributeOwner;
+import backEnd.Attribute.AttributeOwnerReader;
 import frontEnd.View;
 import frontEnd.CustomJavafxNodes.DoubleFieldPrompt;
-import frontEnd.CustomJavafxNodes.SingleFieldPrompt;
+import frontEnd.Skeleton.AoTools.PresetCreation;
+import javafx.geometry.Bounds;
 import javafx.geometry.Insets;
 import javafx.geometry.Point2D;
 import javafx.scene.Node;
-import javafx.scene.control.ButtonBar.ButtonData;
-import javafx.scene.control.ButtonType;
-import javafx.scene.control.Dialog;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
+import javafx.scene.control.Button;
+import javafx.scene.control.Tooltip;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseButton;
-import javafx.scene.layout.GridPane;
 import javafx.scene.layout.TilePane;
 
 /**
@@ -36,59 +32,104 @@ import javafx.scene.layout.TilePane;
  * @param <T>
  */
 public class Palette<T extends AttributeOwner> implements SkeletonObject {
+	private static final int TILE_SIZE = 75;
 	private View myView;
 	private TilePane tile;
 	private Collection<T> myPresets;
-	private static final String ATTRIBUTE_IMAGE_PATH_NAME = "ImageFile";
-	private Map<ImageView, T> myMap; 
-	
-	public Palette(View view, Collection<T> objects){
+	private static final String IMAGEFILE_ATTRIBUTE_NAME = "ImageFile";
+	private static final String SETTINGS_IMAGE = "images/plus.jpg";
+	private Map<ImageView, T> myMap;
+	private String myType;
+
+	public Palette(View view, Collection<T> objects, String string) {
 		myView = view;
 		myPresets = objects;
-		
-		for(T preset : myPresets){
-			File file = new File((String) preset.getAttribute(ATTRIBUTE_IMAGE_PATH_NAME).getValue());
-			ImageView imageView = createImageView(file);
-			myMap.put(imageView, preset);
-			tile.getChildren().add(imageView);
-		}
+		myType =string;
 		initializePane();
+		
+		try{
+			for (T preset : myPresets) {
+				
+				String myImagePath = (String) preset.getAttribute(IMAGEFILE_ATTRIBUTE_NAME).getValue();
+				ImageView imageView = createImageView(myImagePath, (iV) ->{
+					myView.sendUserModification(new Modification_AddAttributeOwner(myMap.get(iV), askForNewPosition()));
+				});
+				myMap.put(imageView, preset);
+				tile.getChildren().add(imageView);
+			}
+		} catch (NullPointerException e){
+			System.out.println("Again no presets here");
+		}
+		
+		ImageView addPresetButton = addNewPresetButton();
+		addPresetButton.disableProperty().bind(myView.getBooleanAuthorModeProperty().not());
+		Tooltip t = new Tooltip("Only possible in Author mode");
+		addPresetButton.hoverProperty().addListener((a,b,c)->{
+			if(addPresetButton.isDisabled()){
+				Bounds scenePos= addPresetButton.localToScreen(addPresetButton.getBoundsInLocal());
+				t.show(addPresetButton, scenePos.getMaxX(), scenePos.getMinY()-scenePos.getHeight());
+			}else{
+				t.hide();
+			}
+		});
+		tile.getChildren().add(addNewPresetButton());
+		
+	}
+
+	private ImageView addNewPresetButton() {
+		ImageView addImage = createImageView(SETTINGS_IMAGE, (iV) ->{
+			// TODO this is where a new preset is created in the frontend
+			String newAttributeOwnerName = null;
+			AttributeOwner newAO = null;
+			String imagePathForNewPreset = null;
+			//newAO.addAttribute(IMAGEFILE_ATTRIBUTE_NAME, imagePathForNewPreset);
+			
+			PresetCreation presetCreation = new PresetCreation(myView, newAO);
+			presetCreation.launch(0d, 0d);
+
+			ImageView newImage = createImageView(imagePathForNewPreset, (iV2) ->{
+				myView.sendUserModification(new Modification_AddAttributeOwner(newAO, askForNewPosition()));
+			});
+			myMap.put(newImage, (T) newAO);
+		});
+		/*
+		Button b = new Button();
+		b.setGraphic(addImage);
+		b.setPadding(Insets.EMPTY);
+		b.getStyleClass().clear();
+		//b.setOnAction((e) -> addImage.getOnMouseClicked());
+		*/
+		return addImage;
 	}
 
 	private void initializePane() {
 		tile = new TilePane();
 		tile.setPadding(new Insets(15, 15, 15, 15));
-        tile.setHgap(15);
+		tile.setHgap(15);
 	}
 
 	@Override
 	public Node getRoot() {
 		return tile;
 	}
-	
-	 private ImageView createImageView(final File imageFile) {
-	        // DEFAULT_THUMBNAIL_WIDTH is a constant you need to define
-	        // The last two arguments are: preserveRatio, and use smooth (slower)
-	        // resizing
 
-	        ImageView imageView = null;
-	        try {
-	            Image image = new Image(new FileInputStream(imageFile), 150, 0, true, true);
-	            imageView = new ImageView(image);
-	            imageView.setFitWidth(150);
-	            imageView.setOnMouseClicked(mouseEvent -> {
-                    if(mouseEvent.getButton().equals(MouseButton.PRIMARY) && mouseEvent.getClickCount() == 2){
-                    	Point2D loc = askForNewPosition();
-                    	myView.sendUserModification(new Modification_AddAttributeOwner(myMap.get(imageView), loc));
-                    }
-	            });
-	        } catch (FileNotFoundException ex) {
-	        	// TODO put something here
-	            ex.printStackTrace();
-	        }
-	        return imageView;
-	    }
-	 
+	private ImageView createImageView(String myImagePath, Consumer<ImageView> consumer) {
+		// DEFAULT_THUMBNAIL_WIDTH is a constant you need to define
+		// The last two arguments are: preserveRatio, and use smooth (slower)
+		// resizing
+		Image image = new Image(getClass().getClassLoader().getResourceAsStream(myImagePath));
+		ImageView imageView = new ImageView(image);
+		imageView.setFitWidth(TILE_SIZE);
+		imageView.setFitHeight(TILE_SIZE);
+		imageView.setOnMouseClicked(mouseEvent -> {
+			if (mouseEvent.getButton().equals(MouseButton.PRIMARY) && mouseEvent.getClickCount() == 2) {
+				consumer.accept(imageView);
+			}
+		});
+
+		return imageView;
+	}
+
 	private Point2D askForNewPosition() {
 		List<String> dialogTitles = Arrays.asList("Creation Utility", "Please input a location");
 		List<String> promptLabel = Arrays.asList("X Position:", "Y Position:");

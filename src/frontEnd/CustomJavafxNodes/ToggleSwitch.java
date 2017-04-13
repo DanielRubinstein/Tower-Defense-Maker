@@ -62,19 +62,21 @@ public class ToggleSwitch {
 	}
 
 	private void init(String title1, String title2) {
-
 		label.setText(title1);
 
 		toggle.getChildren().addAll(label, button);
 		
-		button.setOnAction((e) -> {
+		Runnable r = () -> {
 			myModRunnable.run();
 			switchedOn.set(!switchedOn.get());
+		};
+		button.setOnAction((e) -> {
+			r.run();
 		});
 		label.setOnMouseClicked((e) -> {
-			myModRunnable.run();
-			switchedOn.set(!switchedOn.get());
+			r.run();
 		});
+		
 		setStyle();
 		bindSizeProperties();
 	}

@@ -1,8 +1,6 @@
 package frontEnd.Skeleton.AoTools;
 
 import java.io.File;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.List;
 
 import ModificationFromUser.Modification_EditAttribute;
@@ -13,13 +11,11 @@ import frontEnd.View;
 import frontEnd.CustomJavafxNodes.NumberChanger;
 import frontEnd.CustomJavafxNodes.ToggleSwitch;
 import javafx.beans.property.SimpleBooleanProperty;
-import javafx.beans.value.ChangeListener;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
-import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.HBox;
 import javafx.stage.FileChooser;

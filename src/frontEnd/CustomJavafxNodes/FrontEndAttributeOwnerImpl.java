@@ -32,8 +32,7 @@ public class FrontEndAttributeOwnerImpl implements Observer{
 		return myImage;
 	}
 	public void setXY(double xx, double yy){
-		
-		System.out.println("fornt end att owner x and y " +xx +"   " +yy);
+		//System.out.println(String.format("setting frontEndAttributeOwner @ (%.0f, %.0f)", xx, yy));
 		myImage.setX(xx);
 		myImage.setY(yy);
 	}
@@ -41,7 +40,7 @@ public class FrontEndAttributeOwnerImpl implements Observer{
 		myImagePath = path;
 		Image image = new Image(getClass().getClassLoader().getResourceAsStream(myImagePath));
 		myImage.setImage(image);
-		System.out.println("fornt end att owner x and y " +x +"   " +y);
+		//System.out.println(String.format("there is frontEndAttributeOwner @ (%.0f, %.0f)", x, y));
 	}
 	
 	@Override
