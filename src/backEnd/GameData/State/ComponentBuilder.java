@@ -16,10 +16,7 @@ public class ComponentBuilder {
 	private final static ResourceBundle behaviorResources = ResourceBundle.getBundle(BEHAVIOR_PATH);
 	private final static ResourceBundle attributeResources = ResourceBundle.getBundle(DEFAULT_ATTRIBUTE_PATH);
 	private AttributeData myAttributes;
-	private Map<String, Behavior> myBehaviors;
 	private AccessPermissions myAccessPermissions;
-	private String myType;
-	private List<Observer> observers = new ArrayList<Observer>();
 	
 	public ComponentBuilder(AttributeData attributes, AccessPermissions accessPermissions) {
 		myAttributes = attributes;
@@ -29,7 +26,7 @@ public class ComponentBuilder {
 	
 	public Component getComponent() {
 		try {
-			return new Component(myAttributes,myAccessPermissions);
+			return new Component(myAttributes.copy(),myAccessPermissions);
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 			return null;
