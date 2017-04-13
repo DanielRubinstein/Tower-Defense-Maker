@@ -14,6 +14,8 @@ import backEnd.Attribute.AttributeOwnerReader;
 import backEnd.GameData.State.Component;
 import frontEnd.View;
 import frontEnd.CustomJavafxNodes.DoubleFieldPrompt;
+import frontEnd.CustomJavafxNodes.FrontEndAttributeOwner;
+import frontEnd.CustomJavafxNodes.FrontEndAttributeOwnerImpl;
 import frontEnd.Skeleton.AoTools.PresetCreation;
 import javafx.geometry.Bounds;
 import javafx.geometry.Insets;
@@ -92,12 +94,14 @@ public class Palette<T extends AttributeOwner> implements SkeletonObject {
 			ImageView newImage = createImageView(imagePathForNewPreset, (iV2) ->{
 				System.out.println("testing eme");
 				Point2D point = askForNewPosition();
+				
 				myView.sendUserModification(new Modification_AddAttributeOwner(newAO, point));
 			});
 			System.out.println(newImage +  "    " + ((T) newAO));
 			myMap.put(newImage, (T) newAO);
 			presetCreation.add(newImage);
 			presetCreation.launch(0d, 0d);
+			myView.addToCanvas(newAO);
 		});
 		/*
 		Button b = new Button();

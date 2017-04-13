@@ -27,6 +27,7 @@ public class FrontEndAttributeOwnerImpl implements Observer, FrontEndAttributeOw
 		myImagePath = (String) attr.getMyAttributes().get(IMAGE_ATTRIBUTE).getValue();
 		Image image = new Image(getClass().getClassLoader().getResourceAsStream(myImagePath));
 		myImage = new ImageView(image);
+		
 	}
 
 	/* (non-Javadoc)

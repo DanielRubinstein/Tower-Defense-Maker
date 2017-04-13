@@ -11,6 +11,7 @@ import ModificationFromUser.ModificationFromUser;
 import ModificationFromUser.Modification_Load;
 import ModificationFromUser.Modification_Save;
 import backEnd.Model;
+import backEnd.Attribute.AttributeOwnerReader;
 import backEnd.Data.DataController;
 import backEnd.GameData.UserAttribute;
 import backEnd.GameData.UserAttributeImpl;
@@ -57,6 +58,9 @@ public class ViewImpl implements View{
 		animation.getKeyFrames().add(frame);
 		//animation.play();
 		
+	}
+	public void addToCanvas(AttributeOwnerReader ao){
+		mySkeleton.addToCanvas(ao);
 	}
 
 	/**

@@ -92,6 +92,7 @@ public class ComponentGraphImpl implements ComponentGraph {
 		}
 		currList.add(newComponent);
 		componentMap.put(location, currList);
+		
 	}
 	
 	@Override
