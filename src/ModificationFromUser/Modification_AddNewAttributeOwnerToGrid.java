@@ -12,7 +12,7 @@ import backEnd.Mode.ModeException;
 import javafx.geometry.Point2D;
 
 /**
- * Used for adding a preset attribute owner to the grid. Preset attribute owner is passed as parameter in constructor
+ * Used for adding a new attribute owner to the grid. New attribute owner is passed as parameter in constructor
  * 
  * @author Derek
  *
