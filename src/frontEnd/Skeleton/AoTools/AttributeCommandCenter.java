@@ -117,7 +117,7 @@ public class AttributeCommandCenter extends CommandCenter{
 		try{
 			singleAttEditor.getChildren().add(right);
 		} catch (Exception e){
-			singleAttEditor.getChildren().add(new Label("It fucked up, deal with it"));
+			singleAttEditor.getChildren().add(new Label("Editor in production"));
 		}
 		singleAttEditor.setAlignment(Pos.CENTER_RIGHT);
 		return singleAttEditor;
