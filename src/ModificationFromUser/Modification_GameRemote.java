@@ -40,15 +40,12 @@ public enum Modification_GameRemote implements ModificationFromUser {
 		switch (this) {
 		case PLAY:
 			myConsumer.accept(myModel.getGameProcessController());
-			break;
 		default:
 			switch (myModel.getMode().getUserMode()) {
 			case PLAYER:
 				myConsumer.accept(myModel.getGameProcessController());
-				break;
 			case AUTHOR:
 				// do nothing
-				break;
 			}
 		}
 

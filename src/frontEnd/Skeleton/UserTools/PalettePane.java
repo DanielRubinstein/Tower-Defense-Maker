@@ -1,7 +1,6 @@
 package frontEnd.Skeleton.UserTools;
 
 import java.util.Collection;
-import java.util.Map;
 
 import backEnd.GameData.State.Component;
 import backEnd.GameData.State.Tile;
@@ -37,17 +36,17 @@ public class PalettePane implements SkeletonObject {
 		Palette<?> palette = null;
 		
 			if (string.equals("Tiles")){
-				Map<String, Tile> presets = null;
+				Collection<Tile> presets = null;
 				try{
-					presets = myView.getBankController().getTileMap();
+					presets = myView.getTilePresets();
 				} catch (NullPointerException e) {
 					System.out.println("No presets here");
 				}
 				palette = new Palette<Tile>(myView, presets , string);
 			} else if (string.equals("Components")){
-				Map<String, Component> presets = null;
+				Collection<Component> presets = null;
 				try{
-					presets = myView.getBankController().getComponentMap();
+					presets = myView.getComponentPresets();
 				} catch (NullPointerException e) {
 					System.out.println("No presets here");
 				}
