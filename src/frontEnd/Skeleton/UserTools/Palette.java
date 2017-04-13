@@ -105,13 +105,6 @@ public class Palette<T extends AttributeOwner> implements SkeletonObject, Observ
 					AttributeOwner newAO = new Component(new AttributeData(),new AccessPermissionsImpl());
 					String imagePathForNewPreset = "images/zombie.jpg";
 
-					ImageView newImage = createImageView(imagePathForNewPreset, (iV2) ->{
-						Point2D point = askForNewPosition();
-						
-						myView.sendUserModification(new Modification_AddAttributeOwner(newAO, point));
-					});
-					myMap.put(newImage, (T) newAO);
-
 					Point2D point = askForNewPosition();
 					
 					myView.sendUserModification(new Modification_AddAttributeOwner(newAO, point));
