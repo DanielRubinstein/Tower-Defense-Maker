@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
+import backEnd.Attribute.AttributeOwner;
 import backEnd.Attribute.AttributeOwnerReader;
 import backEnd.GameData.State.Component;
 import backEnd.GameData.State.ComponentGraph;
@@ -53,7 +54,7 @@ public class TileCommandCenterImpl extends CommandCenter implements TileCommandC
 	
 	
 	private Tab createAttributeOwnerTab(AttributeOwnerReader obj) {
-		AttributeCommandCenter aCC = new AttributeCommandCenter(myView, obj);
+		AttributeCommandCenter aCC = new AttributeCommandCenter(myView, (AttributeOwner) obj);
 		String fuckedUpName = obj.toString();
 		fuckedUpName = fuckedUpName.substring(fuckedUpName.lastIndexOf('.') + 1, fuckedUpName.length());
 		return createSingleTab(fuckedUpName, aCC.get());

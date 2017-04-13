@@ -101,8 +101,6 @@ public class Palette<T extends AttributeOwner> implements SkeletonObject, Observ
 		ImageView addImage = createImageView(SETTINGS_IMAGE, (iV) ->{
 
 			String newAttributeOwnerName = null;
-
-
 				try {	
 					AttributeOwner newAO = null;
 					String imagePathForNewPreset = "";
@@ -119,17 +117,7 @@ public class Palette<T extends AttributeOwner> implements SkeletonObject, Observ
 						break;
 					}
 
-					Point2D point = askForNewPosition();
-					
-
-					//myView.sendUserModification(new Modification_AddPresetAttributeOwnerToGrid(newAO, point));
-					myView.sendUserModification(new Modification_EditAttribute<Point2D>(newAO, new AttributeImpl<Point2D>(null,"Position") , point));
-
-					myView.sendUserModification(new Modification_EditAttribute(newAO, new AttributeImpl<String>(null,"ImageFile") , imagePathForNewPreset));
 					PresetCreation presetCreation = new PresetCreation(myView, newAO);
-					Object o = newAO.getAttribute("Position").getValue();
-					System.out.println(" in paleeteeee     "  +o +"     "   + o.getClass() + "  " +newAO);
-					
 					presetCreation.launch(0d, 0d);
 				} catch (FileNotFoundException e) {
 					// TODO Auto-generated catch block

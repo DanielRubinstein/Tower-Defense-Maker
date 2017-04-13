@@ -2,13 +2,11 @@ package frontEnd.Skeleton;
 
 
 import java.util.HashMap;
-import java.util.Map;
+import java.util.HashSet;
 import java.util.Observable;
 import java.util.Observer;
 import java.util.ResourceBundle;
-import java.util.TreeMap;
-
-import backEnd.Attribute.AttributeImpl;
+import java.util.Set;
 import backEnd.Attribute.AttributeOwner;
 import backEnd.Attribute.AttributeOwnerReader;
 import backEnd.GameData.State.Component;
@@ -31,9 +29,6 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
-import javafx.scene.layout.RowConstraints;
-import javafx.scene.layout.StackPane;
-import javafx.stage.Stage;
 
 /**
  * This class is used to represent the actual game, such as the Tiles and Components.
@@ -58,6 +53,7 @@ public class Canvas implements SkeletonObject, Observer{
 	//NOTE WE HAD TO USE TREEMAP b/c otherwise we can't use an interface b/c a hascode is needed...
 	private HashMap<AttributeOwner,ImageView> allTiles;// String is name of Image path
 	private HashMap<AttributeOwner,String> attrToPath;
+	private Set<Component> myComponents;
 
 	/**
 	 * Constructs a new Canvas object given the view and state.
@@ -72,13 +68,14 @@ public class Canvas implements SkeletonObject, Observer{
 		myState=state;
 		myView = view;
 		myTileGrid=state.getTileGrid();
-		state.addAsObserver(this);
+		 myComponents = new HashSet<Component>();
 		root = new Group();
 		getImages();
 		setUpGrid();
 	}
 	private void setUpGrid(){
 		myComponentGraph= myState.getComponentGraph();
+		myComponentGraph.addAsObserver(this);
 		myGridWidth=myComponentGraph.getGridWidth();
 		myGridHeight=myComponentGraph.getGridHeight();
 		myGrid = new GridPane();	
@@ -116,7 +113,6 @@ public class Canvas implements SkeletonObject, Observer{
 			for(int j=0;j<myGridWidth;j++){
 				AttributeOwnerReader t = myTileGrid.getTileByLocation(new Point2D(i,j));
 				FrontEndAttributeOwner attrOwner = new FrontEndAttributeOwnerImpl(t);
-
 				ImageView tileView = attrOwner.getImageView();
 				organizeImageView(tileView);
 				allTiles.put((AttributeOwner)t,tileView);
@@ -133,7 +129,6 @@ public class Canvas implements SkeletonObject, Observer{
 		tileView.setPreserveRatio(false);
 		tileView.setFitWidth(TILE_WIDTH/2);
 		tileView.setFitHeight(TILE_HEIGHT/2);
-		System.out.println(" %%% in canvas " +attr.getAttribute("Position").getValue());
 		root.getChildren().add(tileView);
 		
 	}
@@ -151,35 +146,19 @@ public class Canvas implements SkeletonObject, Observer{
 	}
 	@Override
 	public void update(Observable o, Object arg) {
-		System.out.println("updated canvas");
-		
-		for(AttributeOwner c : myState.getComponentGraph().getAllComponents()){
-			
-			String imagePath = (String)c.getAttribute("IMAGE").getValue();
-			if(!allTiles.keySet().contains(c)){
-				Image image = new Image(getClass().getClassLoader().getResourceAsStream(imagePath));
-				ImageView imView = new ImageView(image);
-				allTiles.put(c, imView);
+		if(o==myComponentGraph){
+			for(AttributeOwner c : myComponentGraph.getAllComponents()){
+				if(!myComponents.contains(c)){
+					FrontEndAttributeOwner frontAttr = new FrontEndAttributeOwnerImpl(c);
+					frontAttr.refreshXY();
+					ImageView frontImage = frontAttr.getImageView();
+					frontImage.setFitWidth(TILE_WIDTH/2);
+					frontImage.setFitHeight(TILE_HEIGHT/2);
+					root.getChildren().add(frontImage);
+				}		
 			}
-			String oldImPath = attrToPath.get(c);
-			ImageView oldImView = allTiles.get(c);
-			
-			Point2D pos =(Point2D) c.getAttribute("Position").getValue();
-					
-			//if old not equal to new
-			//can you just compare doubles like this? precision?
-			if(!(imagePath).equals(oldImPath) || (pos.getX()!=oldImView.getX() && pos.getY()!=oldImView.getY())){
-				Image image = new Image(getClass().getClassLoader().getResourceAsStream(imagePath));
-				ImageView imView = new ImageView(image);
-				allTiles.put(c, imView);
-				attrToPath.put(c,imagePath);
-				imView.setX(pos.getX());
-				imView.setY(pos.getX());
-				
-				myGrid.getChildren().remove(oldImView);
-				myGrid.getChildren().add(imView);
-			}		
 		}
+
 	}
 	
 
