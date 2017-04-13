@@ -80,20 +80,16 @@ public class AttackEngine implements Engine {
 																	// TO USE
 
 		AttributeFactory af = new AttributeFactory();
-		Component bullet = new Component(null);
-		try {
-			af = new AttributeFactory();
-		} catch (FileNotFoundException e) {
-			ErrorDialog fnf = new ErrorDialog();
-			fnf.create("Error", "File not found");
-		}
+		AttributeData ad = new AttributeData();
+		Component bullet = new Component(ad);
 
-		bullet.setMyType("Projectile");
+		bullet.setMyType("Projectile");				
 		Attribute<String> bulletImage = (Attribute<String>) af.getAttribute(myResources.getString("ImageFile"));
 		bulletImage.setValue(Constants.BULLET_IMAGE_FILE);
-		AttributeData ad = new AttributeData();
 		ad.addAttribute(myResources.getString("ImageFile"), (backEnd.Attribute.AttributeImpl<?>) bulletImage);
-
+		
+		bullet.setAttributeValue("StartPos", "");
+		
 		return bullet;
 	}
 

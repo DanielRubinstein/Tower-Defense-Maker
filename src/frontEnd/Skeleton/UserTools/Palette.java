@@ -8,9 +8,7 @@ import java.util.Map;
 import java.util.function.Consumer;
 
 import ModificationFromUser.Modification_AddAttributeOwner;
-import ModificationFromUser.Modification_AddNewPresetAttributeOwner;
 import backEnd.Attribute.AttributeOwner;
-import backEnd.Attribute.AttributeOwnerReader;
 import backEnd.GameData.State.Component;
 import frontEnd.View;
 import frontEnd.CustomJavafxNodes.DoubleFieldPrompt;
@@ -19,7 +17,6 @@ import javafx.geometry.Bounds;
 import javafx.geometry.Insets;
 import javafx.geometry.Point2D;
 import javafx.scene.Node;
-import javafx.scene.control.Button;
 import javafx.scene.control.Tooltip;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -57,6 +54,9 @@ public class Palette<T extends AttributeOwner> implements SkeletonObject {
 				ImageView imageView = createImageView(myImagePath, (iV) ->{
 					myView.sendUserModification(new Modification_AddAttributeOwner(myMap.get(iV), askForNewPosition()));
 				});
+				imageView.setOnDragDetected(e -> {
+					//TODO: make a component from imageView and put it into the Tile that drop ends on
+				});
 				myMap.put(imageView, preset);
 				tile.getChildren().add(imageView);
 			}
@@ -82,7 +82,7 @@ public class Palette<T extends AttributeOwner> implements SkeletonObject {
 	private ImageView addNewPresetButton() {
 		ImageView addImage = createImageView(SETTINGS_IMAGE, (iV) ->{
 			// TODO this is where a new preset is created in the frontend
-			String newAttributeOwnerName = null;
+			//String newAttributeOwnerName = null;
 			AttributeOwner newAO = new Component();
 			String imagePathForNewPreset = "images/zombie.jpg";
 			//newAO.addAttribute(IMAGEFILE_ATTRIBUTE_NAME, imagePathForNewPreset);
