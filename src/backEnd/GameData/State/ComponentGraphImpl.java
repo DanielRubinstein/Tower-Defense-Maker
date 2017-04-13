@@ -5,6 +5,8 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Observable;
+import java.util.Observer;
 
 import javafx.geometry.Point2D;
 import backEnd.Attribute.Attribute;
@@ -17,7 +19,7 @@ import backEnd.Attribute.AttributeImpl;
  *
  */
 
-public class ComponentGraphImpl implements ComponentGraph {
+public class ComponentGraphImpl extends Observable implements ComponentGraph {
 	private int gridWidth;
 	private int gridHeight;
 	private int pointResWidth;
@@ -96,7 +98,9 @@ public class ComponentGraphImpl implements ComponentGraph {
 		//System.out.println( "   in compon graph "  + componentMap + "  " +newComponent + "   " +newComponent.getAttribute("Position").getValue());
 		componentMap.put(location, currList);
 		//System.out.println(componentMap +"    after  "+location + "  " + newComponent.getAttribute("Position").getValue() + "   " +currList);
-		
+		System.out.println("IN OCMPON GRAPH");
+		this.setChanged();
+		this.notifyObservers();
 	}
 	
 	@Override
@@ -134,6 +138,12 @@ public class ComponentGraphImpl implements ComponentGraph {
 		SortComponents_Distance sorter = new SortComponents_Distance();
 		List<Point2D> sortedLocations = sorter.nearToFar(centerLoc, locations);
 		return componentMap.get(sortedLocations.get(0));
+	}
+
+	@Override
+	public void addAsObserver(Observer o) {
+		this.addObserver(o);
+		
 	}
 
 }

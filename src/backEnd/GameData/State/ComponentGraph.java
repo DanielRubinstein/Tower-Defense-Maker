@@ -2,6 +2,8 @@ package backEnd.GameData.State;
 
 import java.util.Collection;
 import java.util.List;
+import java.util.Observable;
+import java.util.Observer;
 
 import javafx.geometry.Point2D;
 
@@ -67,5 +69,7 @@ public interface ComponentGraph {
 	 * @return List of components at the nearest location
 	 */
 	List<Component> getNearestComponents(Component centerComp);
+	
+	void addAsObserver(Observer o);
 
 }

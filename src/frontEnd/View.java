@@ -23,5 +23,7 @@ public interface View extends ViewReader{
 	public void addToCanvas(AttributeOwnerReader ao);
 
 	public BankController getBankController();
+	
+	public void play();
 
 }
