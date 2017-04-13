@@ -101,9 +101,24 @@ public class Palette<T extends AttributeOwner> implements SkeletonObject, Observ
 			String newAttributeOwnerName = null;
 
 
-				try {			
-					AttributeOwner newAO = new Component(new AttributeData(),new AccessPermissionsImpl());
-					String imagePathForNewPreset = "images/zombie.jpg";
+				try {	
+					AttributeOwner newAO = null;
+					String imagePathForNewPreset = "";
+					switch(myType){
+					case "Tiles":
+						//newAO = new TileImpl();
+						// TODO make blank tile
+						newAO = new Component(new AttributeData(),new AccessPermissionsImpl());
+						imagePathForNewPreset =  "images/grass.jpg";
+						break;
+					case "Components":
+						newAO = new Component(new AttributeData(),new AccessPermissionsImpl());
+						imagePathForNewPreset =  "images/zombie.jpg";
+						break;
+					}
+					// = new Component(new AttributeData(),new AccessPermissionsImpl());
+					
+					
 
 					Point2D point = askForNewPosition();
 					
