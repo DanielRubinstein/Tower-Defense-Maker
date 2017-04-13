@@ -40,9 +40,12 @@ public class Modification_AddAttributeOwner implements ModificationFromUser {
 				 throw new ModeException(myModel.getMode(), DESCRIPTION_TILE);
 			}	
 		} else if (newAttrOwn instanceof Component){
-			
+			System.out.println(myModel.getState());
+			System.out.println(myModel.getState().getComponentGraph());
+			System.out.println((Component) xStream.fromXML(serializedAO));
+			System.out.println(myModel.getState());
 			myModel.getState().getComponentGraph().addComponentToGrid((Component) xStream.fromXML(serializedAO), location);
-		
+			//newAttrOwn.addAttribute(attrName, newAttr);
 		} else {
 			// can't be reached
 			// FIXME AHHHHH
