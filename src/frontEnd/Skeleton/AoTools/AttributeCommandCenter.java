@@ -46,15 +46,18 @@ public class AttributeCommandCenter extends CommandCenter{
 
 		contents.getChildren().add(contents_Att);
 		contents.getChildren().add(createPresetButton(obj));
-		Button submit = new Button("Submit");
+		contents.setSpacing(STANDARD_SPACING);
+		// contents.setAlignment(Pos.TOP_CENTER);
+		return contents;
+	}
+
+	public void addSubmitButton(AttributeOwnerReader obj) {
+		Button submit = new Button("Add Now");
 		submit.setOnAction(e -> {
 			myView.addToCanvas(obj);
 			
 		});
-		contents.getChildren().add(submit);
-		contents.setSpacing(STANDARD_SPACING);
-		// contents.setAlignment(Pos.TOP_CENTER);
-		return contents;
+		myRoot.getChildren().add(submit);
 	}
 	
 	private HBox createAttributeView(AttributeOwnerReader obj) {
