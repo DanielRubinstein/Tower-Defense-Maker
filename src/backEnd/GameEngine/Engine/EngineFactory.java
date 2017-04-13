@@ -33,6 +33,9 @@ public class EngineFactory {
 		case "AttackEngine": {
 			return new AttackEngine();
 		}
+		case "ProjectileEngine": {
+			return new ProjectileEngine();
+		}
 
 		}
 		return null;
