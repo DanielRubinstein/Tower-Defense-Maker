@@ -1,5 +1,6 @@
 package frontEnd.Skeleton.UserTools;
 
+import java.io.FileNotFoundException;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.HashMap;
@@ -9,8 +10,12 @@ import java.util.function.Consumer;
 
 import ModificationFromUser.Modification_AddAttributeOwner;
 import ModificationFromUser.Modification_AddNewPresetAttributeOwner;
+import ModificationFromUser.Modification_EditAttribute;
+import backEnd.Attribute.AttributeData;
+import backEnd.Attribute.AttributeImpl;
 import backEnd.Attribute.AttributeOwner;
 import backEnd.Attribute.AttributeOwnerReader;
+import backEnd.GameData.State.AccessPermissionsImpl;
 import backEnd.GameData.State.Component;
 import frontEnd.View;
 import frontEnd.CustomJavafxNodes.DoubleFieldPrompt;
@@ -85,23 +90,32 @@ public class Palette<T extends AttributeOwner> implements SkeletonObject {
 		ImageView addImage = createImageView(SETTINGS_IMAGE, (iV) ->{
 			// TODO this is where a new preset is created in the frontend
 			String newAttributeOwnerName = null;
-			AttributeOwner newAO = new Component();
-			String imagePathForNewPreset = "images/zombie.jpg";
-			//newAO.addAttribute(IMAGEFILE_ATTRIBUTE_NAME, imagePathForNewPreset);
 
-			PresetCreation presetCreation = new PresetCreation(myView, newAO);
-			
-			ImageView newImage = createImageView(imagePathForNewPreset, (iV2) ->{
-				System.out.println("testing eme");
-				Point2D point = askForNewPosition();
-				
-				myView.sendUserModification(new Modification_AddAttributeOwner(newAO, point));
-			});
-			System.out.println(newImage +  "    " + ((T) newAO));
-			myMap.put(newImage, (T) newAO);
-			presetCreation.add(newImage);
-			presetCreation.launch(0d, 0d);
-			myView.addToCanvas(newAO);
+				try {			
+					AttributeOwner newAO = new Component(new AttributeData(),new AccessPermissionsImpl());
+					String imagePathForNewPreset = "images/zombie.jpg";
+					//newAO.addAttribute(IMAGEFILE_ATTRIBUTE_NAME, imagePathForNewPreset);
+
+					PresetCreation presetCreation = new PresetCreation(myView, newAO);
+					
+					ImageView newImage = createImageView(imagePathForNewPreset, (iV2) ->{
+						System.out.println("testing eme");
+						Point2D point = askForNewPosition();
+						
+						myView.sendUserModification(new Modification_AddAttributeOwner(newAO, point));
+					});
+					System.out.println(newImage +  "    " + ((T) newAO));
+					myMap.put(newImage, (T) newAO);
+					
+					myView.sendUserModification(new Modification_EditAttribute(newAO, new AttributeImpl<String>(null,"ImageFile") , imagePathForNewPreset));
+					presetCreation.add(newImage);
+					presetCreation.launch(0d, 0d);
+					//myView.addToCanvas(newAO);
+				} catch (FileNotFoundException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+
 		});
 		/*
 		Button b = new Button();
