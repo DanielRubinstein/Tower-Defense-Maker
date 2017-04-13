@@ -55,6 +55,7 @@ public class ModelImpl implements Model{
 		return this.myBankController;
 	}
 	
+
 	public DataController getDataController(){
 		return myDataController;
 	}
