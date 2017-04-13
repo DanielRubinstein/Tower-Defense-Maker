@@ -1,5 +1,6 @@
 package backEnd.Bank;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -22,7 +23,16 @@ public class BankController
 	{
 		this.tileBank = tileBank;
 		this.componentBank = componentBank;
-		
+		init();
+	}
+	
+	public BankController(){
+		this.tileBank = new HashMap<String, Tile>();
+		this.componentBank = new HashMap<String, Component>();
+		init();
+	}
+	
+	private void init(){
 		behaviorBank = new BehaviorBank();
 		ruleBank = new RuleBank();
 		attributeBank = new AttributeBank();

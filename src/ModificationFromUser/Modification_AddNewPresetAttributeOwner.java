@@ -30,16 +30,18 @@ public class Modification_AddNewPresetAttributeOwner implements ModificationFrom
 	// FIXME how to update the frontend and alert it that there is a new preset
 	@Override
 	public void invoke(ModelImpl myModel) throws Exception {
+		System.out.println(myModel.getMode().getUserModeString());
 		switch (myModel.getMode().getUserMode()) {
 		case AUTHOR:
-			if(newAO instanceof Tile){
+			if(newAO instanceof Tile){				
 				myModel.getBankController().addNewTile(newAOName, (Tile) newAO);
 			}
 			else if(newAO instanceof Component){
 				myModel.getBankController().addNewComponent(newAOName, (Component) newAO);
 			}
+			break;
 		case PLAYER:
-			 throw new ModeException(myModel.getMode(), DESCRIPTION);
+			throw new ModeException(myModel.getMode(), DESCRIPTION);
 		}
 		
 	}
