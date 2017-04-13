@@ -54,11 +54,14 @@ public class ViewImpl implements View{
 		appStage = new Stage();
 		mySkeleton.display(appStage);
 		
+
+		
+	}
+	public void play(){
 		KeyFrame frame = new KeyFrame(Duration.millis(MILLISECOND_DELAY), e -> step(SECOND_DELAY));
 		animation.setCycleCount(Timeline.INDEFINITE);
 		animation.getKeyFrames().add(frame);
 		animation.play();
-		
 	}
 	public void addToCanvas(AttributeOwnerReader ao){
 		mySkeleton.addToCanvas(ao);

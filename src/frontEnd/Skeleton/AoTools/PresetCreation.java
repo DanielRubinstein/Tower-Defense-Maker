@@ -1,5 +1,6 @@
 package frontEnd.Skeleton.AoTools;
 
+import backEnd.Attribute.AttributeOwner;
 import backEnd.Attribute.AttributeOwnerReader;
 import backEnd.GameData.State.Tile;
 import frontEnd.View;
@@ -15,9 +16,10 @@ public class PresetCreation{
 	private VBox myRoot;
 	
 	public PresetCreation(View myView, AttributeOwnerReader obj){
-		AttributeCommandCenter aCC = new AttributeCommandCenter(myView, obj);
-		if(! (obj instanceof Tile)){
-			aCC.addSubmitButton(obj);
+		AttributeOwner obje = (AttributeOwner) obj;
+		AttributeCommandCenter aCC = new AttributeCommandCenter(myView, obje);
+		if(! (obje instanceof Tile)){
+			aCC.addSubmitButton(obje);
 		}
 		myRoot = aCC.get();
 	}

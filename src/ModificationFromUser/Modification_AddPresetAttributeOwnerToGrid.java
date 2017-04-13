@@ -51,6 +51,7 @@ public class Modification_AddPresetAttributeOwnerToGrid implements ModificationF
 			}
 		} else if (newAttrOwn instanceof Component) {
 
+
 			Component newComp = (Component) xStream.fromXML(serializedAO);
 			newComp.setAttributeValue("Position", location);
 			myModel.getState().getComponentGraph().addComponentToGrid(newComp, location);
