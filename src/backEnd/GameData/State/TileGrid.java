@@ -48,5 +48,7 @@ public interface TileGrid {
 	 */
 	List<Tile> getAllTiles();
 
+	Tile getTileByScreenLocation(Point2D location);
+
 
 }
