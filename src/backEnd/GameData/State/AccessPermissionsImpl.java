@@ -45,5 +45,5 @@ public class AccessPermissionsImpl implements AccessPermissions {
 	public boolean permitsAccess(UserModeType userMode) {
 		return userModePermissions.contains(userMode);
 	}
-
+	
 }

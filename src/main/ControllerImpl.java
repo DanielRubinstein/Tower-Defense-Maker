@@ -85,5 +85,4 @@ public class ControllerImpl implements Controller {
 	private void executeInteraction(ModificationFromUser myInteraction) throws Exception{
 		myInteraction.invoke(myModel);
 	}
->>>>>>> origin/master
 }
