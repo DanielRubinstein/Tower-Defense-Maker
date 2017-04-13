@@ -18,6 +18,7 @@ import frontEnd.View;
 import frontEnd.CustomJavafxNodes.FrontEndAttributeOwner;
 import frontEnd.CustomJavafxNodes.FrontEndAttributeOwnerImpl;
 import frontEnd.Skeleton.AoTools.TileCommandCenterImpl;
+import frontEnd.Skeleton.AoTools.ComponentCommandCenter;
 import frontEnd.Skeleton.AoTools.TileCommandCenter;
 import frontEnd.Skeleton.UserTools.SkeletonObject;
 import javafx.geometry.Point2D;
@@ -141,8 +142,16 @@ public class Canvas implements SkeletonObject, Observer{
 	}
 	
 	private void setTileInteraction(Node n, Tile t){
-		TileCommandCenter tileInteractor = new TileCommandCenterImpl(myView, t, myState);
-		n.setOnMouseClicked(e-> tileInteractor.launch(e.getScreenX(),e.getScreenY()));
+		n.setOnMouseClicked(e-> {
+			TileCommandCenter tileInteractor = new TileCommandCenterImpl(myView, t, myState);
+			tileInteractor.launch(e.getScreenX(),e.getScreenY());
+		});
+	}
+	private void setCommandInteraction(Node n, AttributeOwner c){
+		n.setOnMouseClicked(e -> {
+			ComponentCommandCenter comCenter = new ComponentCommandCenter(myView,c);
+			comCenter.launch(e.getSceneX(), e.getSceneY());
+		});
 	}
 	@Override
 	public void update(Observable o, Object arg) {
@@ -154,6 +163,7 @@ public class Canvas implements SkeletonObject, Observer{
 					ImageView frontImage = frontAttr.getImageView();
 					frontImage.setFitWidth(TILE_WIDTH/2);
 					frontImage.setFitHeight(TILE_HEIGHT/2);
+					setCommandInteraction(frontImage,c);
 					root.getChildren().add(frontImage);
 				}		
 			}

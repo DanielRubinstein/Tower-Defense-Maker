@@ -40,12 +40,15 @@ public class TileCommandCenterImpl extends CommandCenter implements TileCommandC
 		myTile = tile;
 		ComponentGraph myComponentGraph = state.getComponentGraph();
 		myComponents = myComponentGraph.getComponentList();
+		System.out.println("   intiializing tilecmd " + myComponents.size());
 		tabPane = new TabPane();
 	}
 
 	private Collection<Tab> createComponentTabs() {
+		System.out.println("creating component tabs");
 		List<Tab> componentTabs = new ArrayList<Tab>();
 		for (Component c : myComponents) {
+			System.out.println("one componenet");
 			componentTabs.add(createAttributeOwnerTab(c));
 		}
 		return componentTabs;

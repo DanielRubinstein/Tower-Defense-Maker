@@ -95,10 +95,8 @@ public class ComponentGraphImpl extends Observable implements ComponentGraph {
 			currList= new ArrayList<Component>();
 		}
 		currList.add(newComponent);
-		//System.out.println( "   in compon graph "  + componentMap + "  " +newComponent + "   " +newComponent.getAttribute("Position").getValue());
-		componentMap.put(location, currList);
-		//System.out.println(componentMap +"    after  "+location + "  " + newComponent.getAttribute("Position").getValue() + "   " +currList);
-		System.out.println("IN OCMPON GRAPH");
+componentMap.put(location, currList);
+
 		this.setChanged();
 		this.notifyObservers();
 	}
