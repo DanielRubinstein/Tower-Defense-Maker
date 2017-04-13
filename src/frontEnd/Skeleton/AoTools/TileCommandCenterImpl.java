@@ -23,7 +23,7 @@ import javafx.stage.Stage;
  * @author Miguel, Tim
  *
  */
-public class TileCommandCenter extends CommandCenter implements SkeletonObject{
+public class TileCommandCenterImpl extends CommandCenter implements TileCommandCenter{
 	public static final String DEFAULT_CSS = "/resources/css/Flatter.css";
 	private Stage myStage;
 	private Scene myScene;
@@ -35,7 +35,7 @@ public class TileCommandCenter extends CommandCenter implements SkeletonObject{
 	private Tile myTile;
 
 
-	public TileCommandCenter(View view, Tile tile, State state) {
+	public TileCommandCenterImpl(View view, Tile tile, State state) {
 		myView = view;
 		myTile = tile;
 		ComponentGraph myComponentGraph = state.getComponentGraph();
@@ -67,6 +67,10 @@ public class TileCommandCenter extends CommandCenter implements SkeletonObject{
 		return tab;
 	}
 
+	/* (non-Javadoc)
+	 * @see frontEnd.Skeleton.AoTools.TileCommandCenterI#getRoot()
+	 */
+	@Override
 	public Node getRoot() {
 		return tabPane;
 	}
@@ -86,11 +90,10 @@ public class TileCommandCenter extends CommandCenter implements SkeletonObject{
 		myStage.show();
 	}
 	
-	/**
-	 * Launches the tile command center. Note that we have to clear all previous tabs. 
-	 * @param x
-	 * @param y
+	/* (non-Javadoc)
+	 * @see frontEnd.Skeleton.AoTools.TileCommandCenterI#launch(double, double)
 	 */
+	@Override
 	public void launch(double x, double y) {
 		tabPane.getTabs().clear();
 		tabPane.getTabs().add(createAttributeOwnerTab(myTile));
