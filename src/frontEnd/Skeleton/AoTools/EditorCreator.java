@@ -64,9 +64,9 @@ public class EditorCreator {
 
 	private Node createIntegerEditor() {
 		Node n;
-		List<Double> paramList = (List<Double>) myAttr.getEditParameters();
-		NumberChanger numChanger = new NumberChanger(paramList.get(0), paramList.get(1), paramList.get(2),
-				paramList.get(3));
+		List<Integer> paramList = (List<Integer>) myAttr.getEditParameters();
+		NumberChanger numChanger = new NumberChanger(paramList.get(0).doubleValue(), paramList.get(1).doubleValue(), 
+				paramList.get(2).doubleValue(), paramList.get(3).doubleValue());
 		n = numChanger.getRoot();
 		numChanger.addListener((o, oldValue, newValue)  -> {
 			sendModification(newValue.intValue());
@@ -131,6 +131,7 @@ public class EditorCreator {
 	private Node createDoubleEditor() {
 		Node n;
 		List<Double> paramList = (List<Double>) myAttr.getEditParameters();
+		System.out.println(" %%%% " + myAttr +"    "  +myAttr.getName() +"   " +paramList);
 		NumberChanger numChanger = new NumberChanger(paramList.get(0), paramList.get(1), paramList.get(2),
 				paramList.get(3));
 		n = numChanger.getRoot();

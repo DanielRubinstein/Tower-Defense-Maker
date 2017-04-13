@@ -11,6 +11,9 @@ public class NumberChanger implements SkeletonObject{
 	public NumberChanger(Double min, Double max, Double start, Double increment){
 		myRoot = createSlider(min, max, start, increment);
 	}
+	public NumberChanger(Integer min, Integer max, Integer start, Integer increment){
+		myRoot = createSlider(min.doubleValue(), max.doubleValue(), start.doubleValue(), increment.doubleValue());
+	}
 	
 	
 	private Slider createSlider(Double min, Double max, Double start, Double increment){

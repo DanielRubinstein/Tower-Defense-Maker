@@ -8,10 +8,12 @@
 		<StartTile></StartTile>
 	</BOOLEAN>
 	<DOUBLE>
-		<DOUBLE_TEMPLATE min="0" max="0" increment="0"></DOUBLE_TEMPLATE>
+		<DOUBLE_TEMPLATE min="0.0" max="0.0" start="0.0" increment="0.0"></DOUBLE_TEMPLATE>
+		<Speed min="0.0" max="10.0" start="1.0" increment="1.0"></Speed>
 	</DOUBLE>
 	<INTEGER>
-		<INTEGER_TEMPLATE min="0" max="0" increment="0"></INTEGER_TEMPLATE>
+		<INTEGER_TEMPLATE min="0" max="0" start="1" increment="0"></INTEGER_TEMPLATE>
+		<Health min="0" max="100" start="1" increment="5"></Health>
 	</INTEGER>
 	<EDITABLESTRING>
 		<EDITABLESTRING_TEMPLATE></EDITABLESTRING_TEMPLATE></EDITABLESTRING>
@@ -22,4 +24,7 @@
 	<POSITION>
 		<POSITION_TEMPLATE></POSITION_TEMPLATE>
 	</POSITION>
+	<SPEED>
+		<SPEED_TEMPLATE min="0" max="10" increment="1"></SPEED_TEMPLATE>
+	</SPEED>
 </AttributePresets>
