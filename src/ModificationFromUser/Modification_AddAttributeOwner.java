@@ -35,7 +35,10 @@ public class Modification_AddAttributeOwner implements ModificationFromUser {
 		if (newAttrOwn instanceof Tile){
 			switch (myModel.getMode().getUserMode()) {
 			case AUTHOR:
-				myModel.getState().getTileGrid().setTile((Tile) xStream.fromXML(serializedAO), location);
+				Tile newTile = (Tile) xStream.fromXML(serializedAO);
+				newTile.setAttributeValue("Position", location);
+				myModel.getState().getTileGrid().setTile(newTile, location);
+				
 			case PLAYER:
 				 throw new ModeException(myModel.getMode(), DESCRIPTION_TILE);
 			}	
@@ -44,7 +47,9 @@ public class Modification_AddAttributeOwner implements ModificationFromUser {
 			System.out.println(myModel.getState().getComponentGraph());
 			System.out.println((Component) xStream.fromXML(serializedAO));
 			System.out.println(myModel.getState());
-			myModel.getState().getComponentGraph().addComponentToGrid((Component) xStream.fromXML(serializedAO), location);
+			Component newComp = (Component) xStream.fromXML(serializedAO);
+			newComp.setAttributeValue("Position", location);
+			myModel.getState().getComponentGraph().addComponentToGrid(newComp, location);
 			//newAttrOwn.addAttribute(attrName, newAttr);
 		} else {
 			// can't be reached
