@@ -169,11 +169,8 @@ public class Canvas implements SkeletonObject, Observer{
 				
 				myGrid.getChildren().remove(oldImView);
 				myGrid.getChildren().add(imView);
-			}
-			
+			}		
 		}
-			
-		
 	}
 	
 

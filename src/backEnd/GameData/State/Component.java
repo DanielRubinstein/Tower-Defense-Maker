@@ -132,6 +132,11 @@ public class Component extends Observable implements AttributeOwner {
 			obs.update(this, null);
 		}
 	}
+	@Override
+	public void addAsListener(Observer o) {
+		addObserver(o);
+		//addObserver(o);
+	}
 
 	/**
 	 * adds an attribute to the List of Attributes

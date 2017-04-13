@@ -1,5 +1,6 @@
 package backEnd.GameEngine.Engine;
 
+import java.io.FileNotFoundException;
 import java.util.ResourceBundle;
 import backEnd.Attribute.Attribute;
 import backEnd.Attribute.AttributeData;
@@ -49,16 +50,29 @@ public class AttackEngine implements Engine {
 	 * @return a Component that represents a Bullet
 	 */
 	private Component makeBullet(){//TODO: ADD ATTRIBUTES STARTPOS AND TARGETPOS TO BULLET FOR MOVEENGINE TO USE
-		AttributeFactory af = new AttributeFactory();
-		Component bullet = new Component();
+		AttributeFactory af;
+		try {
+			af = new AttributeFactory();
+		} catch (FileNotFoundException e1) {
+			e1.printStackTrace();
+			return null; //TODO: Better error handling
+		}
 		AttributeData ad = new AttributeData();
 		// I'll figure out a cleaner way of doing this later
-		bullet.setMyType("Projectile");
+		
 
 		Attribute<String> bulletImage = (Attribute<String>) af.getAttribute(myResources.getString("ImageFile"));
 		bulletImage.setValue(Constants.BULLET_IMAGE_FILE);
 		ad.addAttribute(myResources.getString("ImageFile"), (backEnd.Attribute.AttributeImpl<?>) bulletImage);
 		
+		Component bullet;
+		try {
+			bullet = new Component(ad);
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+			return null; //TODO: better error handling
+		}
+		bullet.setMyType("Projectile");
 		return bullet;
 	}
 
