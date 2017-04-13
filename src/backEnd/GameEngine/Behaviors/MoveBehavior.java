@@ -1,5 +1,6 @@
 package backEnd.GameEngine.Behaviors;
 
+import java.io.FileNotFoundException;
 import java.util.Map;
 import java.util.Observable;
 
@@ -43,10 +44,17 @@ public class MoveBehavior implements Behavior {
 		case "DOWN":
 			newPoint=new Point2D(currentPosition.getX(), currentPosition.getY()-Constants.defaultMoveAmount);				
 		}
-		AttributeFactory af=new AttributeFactory();
+		AttributeFactory af = null;
+		try {
+			af = new AttributeFactory();
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			System.out.println("error in MoveBehavior- SAD!");
+		}
 		Attribute<Point2D> newPositionAttribute=(Attribute<Point2D>) af.getAttribute("Position");
 		newPositionAttribute.setValue(newPoint);
-		myComponent.addAttribute("Position", newPositionAttribute);//does it get overwritten?
+		myComponent.addAttribute("Position", newPositionAttribute);
 	}
 
 	/*
