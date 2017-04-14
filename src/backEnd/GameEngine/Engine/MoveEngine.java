@@ -1,16 +1,8 @@
 package backEnd.GameEngine.Engine;
 import java.io.FileNotFoundException;
-import java.util.ArrayList;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Queue;
-import backEnd.Coord;
-import backEnd.Attribute.Attribute;
-import backEnd.Attribute.AttributeImpl;
 import backEnd.GameEngine.Behaviors.*;
 import frontEnd.Menus.ErrorDialog;
 import javafx.geometry.Point2D;
-import resources.Constants;
 import backEnd.GameData.State.*;
 
 
