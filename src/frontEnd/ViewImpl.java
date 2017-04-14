@@ -1,5 +1,6 @@
 package frontEnd;
 
+import java.io.File;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
@@ -11,12 +12,14 @@ import ModificationFromUser.Modification_Save;
 import backEnd.Model;
 import backEnd.Bank.BankController;
 import backEnd.Data.DataController;
+import backEnd.Data.XMLReadingException;
 import backEnd.GameData.State.Component;
 import backEnd.GameData.State.Tile;
 import backEnd.Mode.ModeReader;
 import frontEnd.CustomJavafxNodes.SingleFieldPrompt;
 import frontEnd.Menus.ErrorDialog;
 import frontEnd.Skeleton.SkeletonImpl;
+import frontEnd.Splash.GameLoader;
 import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
@@ -103,7 +106,14 @@ public class ViewImpl implements View {
 
 	@Override
 	public void load() {
-		String fileToLoad = null;
+		GameLoader gL = new GameLoader();
+		File fileToLoad = null;
+		try {
+			fileToLoad = gL.loadGame();
+		} catch (XMLReadingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		sendUserModification(new Modification_Load(fileToLoad));
 	}
 
