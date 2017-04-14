@@ -26,6 +26,7 @@ import frontEnd.Skeleton.SkeletonImpl;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.beans.property.SimpleBooleanProperty;
+import javafx.scene.Node;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 import resources.Constants;
@@ -56,6 +57,9 @@ public class ViewImpl implements View{
 		
 
 		
+	}
+	public Node getCanvas(){
+		return mySkeleton.getCanvas();
 	}
 	public void play(){
 		KeyFrame frame = new KeyFrame(Duration.millis(MILLISECOND_DELAY), e -> step(SECOND_DELAY));

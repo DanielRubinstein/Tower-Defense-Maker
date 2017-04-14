@@ -17,11 +17,14 @@ import backEnd.Attribute.AttributeOwner;
 import backEnd.Bank.BankController;
 import backEnd.GameData.State.AccessPermissionsImpl;
 import backEnd.GameData.State.Component;
+import backEnd.GameData.State.Tile;
 import backEnd.GameData.State.TileImpl;
 import backEnd.Mode.UserModeType;
 import frontEnd.View;
 import frontEnd.CustomJavafxNodes.DoubleFieldPrompt;
+import frontEnd.Skeleton.AoTools.ComponentCommandCenter;
 import frontEnd.Skeleton.AoTools.PresetCreation;
+import frontEnd.Skeleton.AoTools.TileCommandCenterImpl;
 import javafx.geometry.Bounds;
 import javafx.geometry.Insets;
 import javafx.geometry.Point2D;
@@ -29,7 +32,10 @@ import javafx.scene.Node;
 import javafx.scene.control.Tooltip;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.ClipboardContent;
+import javafx.scene.input.Dragboard;
 import javafx.scene.input.MouseButton;
+import javafx.scene.input.TransferMode;
 import javafx.scene.layout.TilePane;
 
 /**
@@ -88,10 +94,22 @@ public class Palette<T extends AttributeOwner> implements SkeletonObject, Observ
 	private void addPresetToPalette(T preset) {
 		String myImagePath = (String) preset.getAttribute(IMAGEFILE_ATTRIBUTE_NAME).getValue();
 		ImageView imageView = createImageView(myImagePath, (iV) ->{
-			myView.sendUserModification(new Modification_AddPresetAttributeOwnerToGrid(myMap.get(iV), askForNewPosition()));
+			ComponentCommandCenter comCenter = new ComponentCommandCenter(myView, preset);
+			comCenter.launch(iV.getX(), iV.getY());
 		});
 		imageView.setOnDragDetected(e -> {
 			//TODO: make a component from imageView and put it into the Tile that drop ends on
+			Dragboard db = imageView.startDragAndDrop(TransferMode.ANY);
+			ClipboardContent content = new ClipboardContent();
+			content.putString("Drop here");
+			db.setContent(content);
+			db.setDragView(imageView.getImage());
+		});
+		Node canvas = myView.getCanvas();
+		canvas.setOnDragOver(e -> e.acceptTransferModes(TransferMode.ANY));
+		canvas.setOnDragDropped(e -> {
+			Point2D pos = new Point2D(e.getSceneX(),e.getSceneY());
+			myView.sendUserModification(new Modification_AddPresetAttributeOwnerToGrid(preset,pos));
 		});
 		myMap.put(imageView, preset);
 		tile.getChildren().add(imageView);
@@ -99,8 +117,7 @@ public class Palette<T extends AttributeOwner> implements SkeletonObject, Observ
 
 	private ImageView createNewPresetButton() {
 		ImageView addImage = createImageView(SETTINGS_IMAGE, (iV) ->{
-
-			String newAttributeOwnerName = null;
+			
 				try {	
 					AttributeOwner newAO = null;
 					String imagePathForNewPreset = "";
@@ -120,18 +137,10 @@ public class Palette<T extends AttributeOwner> implements SkeletonObject, Observ
 					PresetCreation presetCreation = new PresetCreation(myView, newAO);
 					presetCreation.launch(0d, 0d);
 				} catch (FileNotFoundException e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
 
 		});
-		/*
-		Button b = new Button();
-		b.setGraphic(addImage);
-		b.setPadding(Insets.EMPTY);
-		b.getStyleClass().clear();
-		b.setOnAction((e) -> addImage.getOnMouseClicked());
-		*/
 		return addImage;
 	}
 

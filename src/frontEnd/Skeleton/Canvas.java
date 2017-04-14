@@ -18,16 +18,13 @@ import frontEnd.View;
 import frontEnd.CustomJavafxNodes.FrontEndAttributeOwner;
 import frontEnd.CustomJavafxNodes.FrontEndAttributeOwnerImpl;
 import frontEnd.Skeleton.AoTools.TileCommandCenterImpl;
+import frontEnd.Skeleton.AoTools.ComponentCommandCenter;
 import frontEnd.Skeleton.AoTools.TileCommandCenter;
 import frontEnd.Skeleton.UserTools.SkeletonObject;
 import javafx.geometry.Point2D;
 import javafx.scene.Group;
 import javafx.scene.Node;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
 
 /**
@@ -47,12 +44,8 @@ public class Canvas implements SkeletonObject, Observer{
 	private static final int TILE_HEIGHT = 40;
 	private static final String IMAGE_RESOURCES = "resources/images";
 	private ResourceBundle myImages;
-	private static String DEFAULT_TILE;
 	private TileGrid myTileGrid;
 	private View myView;
-	//NOTE WE HAD TO USE TREEMAP b/c otherwise we can't use an interface b/c a hascode is needed...
-	private HashMap<AttributeOwner,ImageView> allTiles;// String is name of Image path
-	private HashMap<AttributeOwner,String> attrToPath;
 	private Set<Component> myComponents;
 
 	/**
@@ -63,14 +56,11 @@ public class Canvas implements SkeletonObject, Observer{
 	 * @param state 
 	 */
 	public Canvas(View view, State state){
-		allTiles = new HashMap<>();
-		attrToPath = new HashMap<>();
 		myState=state;
 		myView = view;
 		myTileGrid=state.getTileGrid();
 		 myComponents = new HashSet<Component>();
 		root = new Group();
-		getImages();
 		setUpGrid();
 	}
 	private void setUpGrid(){
@@ -85,10 +75,7 @@ public class Canvas implements SkeletonObject, Observer{
 		root.getChildren().add(myGrid);
 		myGrid.toBack();
 	}
-	private void getImages(){
-		myImages = ResourceBundle.getBundle(IMAGE_RESOURCES);
-		DEFAULT_TILE = myImages.getString("default_tile");
-	}
+
 
 	/* (non-Javadoc)
 	 * @see frontEnd.Skeleton.UserTools.SkeletonObject#getRoot()
@@ -115,7 +102,6 @@ public class Canvas implements SkeletonObject, Observer{
 				FrontEndAttributeOwner attrOwner = new FrontEndAttributeOwnerImpl(t);
 				ImageView tileView = attrOwner.getImageView();
 				organizeImageView(tileView);
-				allTiles.put((AttributeOwner)t,tileView);
 				setTileInteraction(tileView,(Tile)t);
 				myGrid.add(tileView, j, i);
 				
@@ -141,8 +127,16 @@ public class Canvas implements SkeletonObject, Observer{
 	}
 	
 	private void setTileInteraction(Node n, Tile t){
-		TileCommandCenter tileInteractor = new TileCommandCenterImpl(myView, t, myState);
-		n.setOnMouseClicked(e-> tileInteractor.launch(e.getScreenX(),e.getScreenY()));
+		n.setOnMouseClicked(e-> {
+			TileCommandCenter tileInteractor = new TileCommandCenterImpl(myView, t, myState);
+			tileInteractor.launch(e.getScreenX(),e.getScreenY());
+		});
+	}
+	private void setCommandInteraction(Node n, AttributeOwner c){
+		n.setOnMouseClicked(e -> {
+			ComponentCommandCenter comCenter = new ComponentCommandCenter(myView,c);
+			comCenter.launch(e.getSceneX(), e.getSceneY());
+		});
 	}
 	@Override
 	public void update(Observable o, Object arg) {
@@ -154,6 +148,7 @@ public class Canvas implements SkeletonObject, Observer{
 					ImageView frontImage = frontAttr.getImageView();
 					frontImage.setFitWidth(TILE_WIDTH/2);
 					frontImage.setFitHeight(TILE_HEIGHT/2);
+					setCommandInteraction(frontImage,c);
 					root.getChildren().add(frontImage);
 				}		
 			}

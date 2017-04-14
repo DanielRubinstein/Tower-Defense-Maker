@@ -3,6 +3,7 @@ package frontEnd;
 import ModificationFromUser.ModificationFromUser;
 import backEnd.Attribute.AttributeOwnerReader;
 import backEnd.Bank.BankController;
+import javafx.scene.Node;
 
 public interface View extends ViewReader{
 
@@ -25,5 +26,7 @@ public interface View extends ViewReader{
 	public BankController getBankController();
 	
 	public void play();
+	
+	public Node getCanvas();
 
 }
