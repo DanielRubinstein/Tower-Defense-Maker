@@ -40,7 +40,7 @@ public class ButtonMenuImpl implements ButtonMenu {
 	}
 
 
-	public void setText(String text){
+	private void setText(String text){
 		titleLbl = new Label(text);
 		titleLbl.setFont(Font.font(32));
 		titleLbl.setUnderline(true);

@@ -62,7 +62,6 @@ public class MainMenu{
 		GameLoader gameLoader = new GameLoader();
 		
 		ButtonMenuImpl templateGames = new ButtonMenuImpl("Templates");
-   	 	templateGames.setText("Which game?");
    	 	//for(String templateGame : gameLoader.getTemplateTitleList()){
    	 	for(String templateGame : gameLoader.getTemplateTitleListStupid()){
    	 		templateGames.addSimpleButton(templateGame, event -> {

@@ -15,7 +15,7 @@ public class ComponentCommandCenter extends CommandCenter {
 	
 	public ComponentCommandCenter(View view, AttributeOwnerReader attr){
 		AttributeOwner attrOwn = (AttributeOwner)attr;
-		AttributeCommandCenter aCC = new AttributeCommandCenter(view, attrOwn);
+		AttributeCommandCenter aCC = new AttributeCommandCenter(view, attrOwn, "In-Game Component");
 		myRoot = aCC.get();
 		
 	}

@@ -17,7 +17,7 @@ public class PresetCreation{
 	
 	public PresetCreation(View myView, AttributeOwnerReader obj){
 		AttributeOwner obje = (AttributeOwner) obj;
-		AttributeCommandCenter aCC = new AttributeCommandCenter(myView, obje);
+		AttributeCommandCenter aCC = new AttributeCommandCenter(myView, obje, "Preset Creation");
 		if(! (obje instanceof Tile)){
 			aCC.addSubmitButton(obje);
 		}

@@ -51,6 +51,7 @@ public class Palette<T extends AttributeOwner> implements SkeletonObject, Observ
 	private Map<ImageView, T> myMap;
 	private String myType;
 	private BankController observedBankController;
+	private ImageView addPreset;
 
 	public Palette(View view, Map<String, T> presetMap, String string){
 		myView = view;
@@ -60,31 +61,24 @@ public class Palette<T extends AttributeOwner> implements SkeletonObject, Observ
 		myType =string;
 		initializePane();
 		myMap = new HashMap<ImageView, T>();
-		try{
-			for (T preset : myPresetMap.values()) {
-				addPresetToPalette(preset);
-			}
-		} catch (NullPointerException e){
-			System.out.println("Again no presets here");
+		for (T preset : myPresetMap.values()) {
+			addPresetToPalette(preset);
 		}
-		
 		addNewPresetButton();
 		
 	}
 
 	private void addNewPresetButton() {
-		ImageView addPresetButton = createNewPresetButton();
-		addPresetButton.disableProperty().bind(myView.getBooleanAuthorModeProperty().not());
-		Tooltip t = new Tooltip("Only possible in Author mode");
-		addPresetButton.hoverProperty().addListener((a,b,c)->{
-			if(addPresetButton.isDisabled()){
-				Bounds scenePos= addPresetButton.localToScreen(addPresetButton.getBoundsInLocal());
-				t.show(addPresetButton, scenePos.getMaxX(), scenePos.getMinY()-scenePos.getHeight());
-			}else{
-				t.hide();
+		addPreset = createNewPresetButton();
+		addPreset.disableProperty().bind(myView.getBooleanAuthorModeProperty().not());
+		addPreset.disableProperty().addListener((a,b,c)->{
+			if(c){
+				tile.getChildren().remove(addPreset);
+			} else{
+				tile.getChildren().add(addPreset);
 			}
 		});
-		tile.getChildren().add(addPresetButton);
+		tile.getChildren().add(addPreset);
 	}
 
 	private void addPresetToPalette(T preset) {
@@ -109,6 +103,8 @@ public class Palette<T extends AttributeOwner> implements SkeletonObject, Observ
 		});
 		myMap.put(imageView, preset);
 		tile.getChildren().add(imageView);
+		tile.getChildren().remove(addPreset);
+		tile.getChildren().add(addPreset);
 	}
 
 	private ImageView createNewPresetButton() {
