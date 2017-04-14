@@ -87,8 +87,28 @@ public class Palette<T extends AttributeOwner> implements SkeletonObject, Observ
 			ComponentCommandCenter comCenter = new ComponentCommandCenter(myView, preset);
 			comCenter.launch(iV.getX(), iV.getY());
 		});
+		makeHoverOverName(preset, imageView);
+		makePresetDraggable(preset, imageView);
+		myMap.put(imageView, preset);
+		tile.getChildren().add(imageView);
+		tile.getChildren().remove(addPreset);
+		tile.getChildren().add(addPreset);
+	}
+
+	private void makeHoverOverName(T preset, ImageView imageView) {
+		Tooltip t = new Tooltip(observedBankController.getAOName(preset));
+		imageView.hoverProperty().addListener((o, oldV, newV) -> {
+			if(newV){
+				Bounds scenePos= imageView.localToScreen(imageView.getBoundsInLocal());
+				t.show(imageView, scenePos.getMaxX(), scenePos.getMinY());
+			}else{
+				t.hide();
+			}
+		});
+	}
+
+	private void makePresetDraggable(T preset, ImageView imageView) {
 		imageView.setOnDragDetected(e -> {
-			//TODO: make a component from imageView and put it into the Tile that drop ends on
 			Dragboard db = imageView.startDragAndDrop(TransferMode.ANY);
 			ClipboardContent content = new ClipboardContent();
 			content.putString("Drop here");
@@ -101,37 +121,31 @@ public class Palette<T extends AttributeOwner> implements SkeletonObject, Observ
 			Point2D pos = new Point2D(e.getSceneX(),e.getSceneY());
 			myView.sendUserModification(new Modification_AddPresetAttributeOwnerToGrid(preset,pos));
 		});
-		myMap.put(imageView, preset);
-		tile.getChildren().add(imageView);
-		tile.getChildren().remove(addPreset);
-		tile.getChildren().add(addPreset);
 	}
 
 	private ImageView createNewPresetButton() {
 		ImageView addImage = createImageView(SETTINGS_IMAGE, (iV) ->{
-			
-				try {	
-					AttributeOwner newAO = null;
-					String imagePathForNewPreset = "";
-					switch(myType){
-					case "Tiles":
-						//newAO = new TileImpl();
-						// TODO make blank tile
-						newAO = new TileImpl(Arrays.asList(), Arrays.asList(UserModeType.AUTHOR), new Point2D(0,0));
-						imagePathForNewPreset =  "resources/images/Tiles/grass.jpg";
-						break;
-					case "Components":
-						newAO = new Component(new AttributeData(),new AccessPermissionsImpl());
-						imagePathForNewPreset =  "resources/images/Components/zombie.png";
-						break;
-					}
-
-					PresetCreation presetCreation = new PresetCreation(myView, newAO);
-					presetCreation.launch(0d, 0d);
-				} catch (FileNotFoundException e) {
-					e.printStackTrace();
+			try {	
+				AttributeOwner newAO = null;
+				String imagePathForNewPreset = "";
+				switch(myType){
+				case "Tiles":
+					//newAO = new TileImpl();
+					// TODO make blank tile
+					newAO = new TileImpl(Arrays.asList(), Arrays.asList(UserModeType.AUTHOR), new Point2D(0,0));
+					imagePathForNewPreset =  "resources/images/Tiles/grass.jpg";
+					break;
+				case "Components":
+					newAO = new Component(new AttributeData(),new AccessPermissionsImpl());
+					imagePathForNewPreset =  "resources/images/Components/zombie.png";
+					break;
 				}
 
+				PresetCreation presetCreation = new PresetCreation(myView, newAO);
+				presetCreation.launch(0d, 0d);
+			} catch (FileNotFoundException e) {
+				e.printStackTrace();
+			}
 		});
 		return addImage;
 	}
