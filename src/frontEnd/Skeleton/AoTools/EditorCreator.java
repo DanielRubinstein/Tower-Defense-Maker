@@ -2,17 +2,19 @@ package frontEnd.Skeleton.AoTools;
 
 import java.io.File;
 import java.util.List;
+import java.util.MissingResourceException;
 
 import ModificationFromUser.Modification_EditAttribute;
 import backEnd.Attribute.Attribute;
 import backEnd.Attribute.AttributeOwner;
-import backEnd.Attribute.AttributeOwnerReader;
 import frontEnd.View;
 import frontEnd.CustomJavafxNodes.NumberChanger;
+import frontEnd.CustomJavafxNodes.PositionRequester;
 import frontEnd.CustomJavafxNodes.ToggleSwitch;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.geometry.Point2D;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
@@ -27,12 +29,12 @@ import javafx.stage.FileChooser.ExtensionFilter;
 
 public class EditorCreator {
 	private View myView;
-	private AttributeOwnerReader myOwner;
+	private AttributeOwner myOwner;
 	private Attribute<?> myAttr;
-	public static final String SAVED_IMAGES_DIRECTORY = "./src/images";
+	public static final String SAVED_IMAGES_DIRECTORY = "./src/resources/images";
 	private ToggleSwitch myToggle;
 
-	public EditorCreator(View view, AttributeOwnerReader obj, Attribute<?> attr){
+	public EditorCreator(View view, AttributeOwner obj, Attribute<?> attr){
 		myView = view;
 		myOwner = obj;
 		myAttr = attr;
@@ -62,14 +64,32 @@ public class EditorCreator {
 		case "POSITION":
 			n = createPositionEditor();
 			break;
+		case "COMPONENT":
+			n = createComponentEditor();
+			break;
 		default:
 			break;
 		}
 		return n;
 	}
 
+	private Node createComponentEditor() {
+		return new Label("Component editor in development");
+	}
+
 	private Node createPositionEditor() {
-		return new Label("Position editor in development");
+		try{
+			Point2D pos = (Point2D) myOwner.getAttribute("Position").getValue();
+			Label posLabel = new Label(String.format("(%.0f, %.0f)", pos.getX(), pos.getY()));
+			posLabel.setOnMouseClicked(e -> {
+				Point2D newPoint = PositionRequester.askUserForPosition();
+				myView.sendUserModification(new Modification_EditAttribute(myOwner,myOwner.getAttribute("Position"),newPoint));
+				posLabel.setText(String.format("Location: (%.0f, %.0f)", newPoint.getX(), newPoint.getY()));
+			});
+			return posLabel;
+		} catch (NullPointerException | MissingResourceException e ){
+			return new Label("No Position Attribute Set");
+		}
 	}
 
 	private Node createIntegerEditor() {
@@ -135,7 +155,7 @@ public class EditorCreator {
 			File selectedFile = imageChooser.showOpenDialog(new Stage());
 			
 			String newPath = selectedFile.getPath();
-			String newValue = newPath.substring(newPath.indexOf("images"), newPath.length());
+			String newValue = newPath.substring(newPath.indexOf("resources"), newPath.length());
 			sendModification(newValue);
 			Image newImage = new Image(getClass().getClassLoader().getResourceAsStream(imagePath));
 			curImage.setImage(newImage);

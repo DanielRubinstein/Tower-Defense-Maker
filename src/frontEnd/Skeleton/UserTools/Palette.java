@@ -2,17 +2,13 @@ package frontEnd.Skeleton.UserTools;
 
 import java.io.FileNotFoundException;
 import java.util.Arrays;
-import java.util.Collection;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 import java.util.Observable;
 import java.util.Observer;
 import java.util.function.Consumer;
 import ModificationFromUser.Modification_AddPresetAttributeOwnerToGrid;
-import ModificationFromUser.Modification_EditAttribute;
 import backEnd.Attribute.AttributeData;
-import backEnd.Attribute.AttributeImpl;
 import backEnd.Attribute.AttributeOwner;
 import backEnd.Bank.BankController;
 import backEnd.GameData.State.AccessPermissionsImpl;
@@ -51,7 +47,7 @@ public class Palette<T extends AttributeOwner> implements SkeletonObject, Observ
 	private TilePane tile;
 	private Map<String, T> myPresetMap;
 	private static final String IMAGEFILE_ATTRIBUTE_NAME = "ImageFile";
-	private static final String SETTINGS_IMAGE = "images/plus.jpg";
+	private static final String SETTINGS_IMAGE = "resources/images/Tools/plus.jpg";
 	private Map<ImageView, T> myMap;
 	private String myType;
 	private BankController observedBankController;
@@ -126,11 +122,11 @@ public class Palette<T extends AttributeOwner> implements SkeletonObject, Observ
 						//newAO = new TileImpl();
 						// TODO make blank tile
 						newAO = new TileImpl(Arrays.asList(), Arrays.asList(UserModeType.AUTHOR), new Point2D(0,0));
-						imagePathForNewPreset =  "images/grass.jpg";
+						imagePathForNewPreset =  "resources/images/Tiles/grass.jpg";
 						break;
 					case "Components":
 						newAO = new Component(new AttributeData(),new AccessPermissionsImpl());
-						imagePathForNewPreset =  "images/zombie.jpg";
+						imagePathForNewPreset =  "resources/images/Components/zombie.png";
 						break;
 					}
 
@@ -156,9 +152,6 @@ public class Palette<T extends AttributeOwner> implements SkeletonObject, Observ
 	}
 
 	private ImageView createImageView(String myImagePath, Consumer<ImageView> consumer) {
-		// DEFAULT_THUMBNAIL_WIDTH is a constant you need to define
-		// The last two arguments are: preserveRatio, and use smooth (slower)
-		// resizing
 		Image image = new Image(getClass().getClassLoader().getResourceAsStream(myImagePath));
 		ImageView imageView = new ImageView(image);
 		imageView.setFitWidth(TILE_SIZE);
@@ -168,17 +161,7 @@ public class Palette<T extends AttributeOwner> implements SkeletonObject, Observ
 				consumer.accept(imageView);
 			}
 		});
-
 		return imageView;
-	}
-
-	private Point2D askForNewPosition() {
-		List<String> dialogTitles = Arrays.asList("Creation Utility", "Please input a location");
-		List<String> promptLabel = Arrays.asList("X Position:", "Y Position:");
-		List<String> promptText = Arrays.asList("0.0", "0.0");
-		DoubleFieldPrompt myDialog = new DoubleFieldPrompt(dialogTitles, promptText, promptLabel);
-		List<String> results = myDialog.create();
-		return new Point2D(Double.parseDouble(results.get(0)), Double.parseDouble(results.get(1)));
 	}
 	
 	@Override
@@ -191,7 +174,6 @@ public class Palette<T extends AttributeOwner> implements SkeletonObject, Observ
 				myPresetMap = (Map<String, T>) observedBankController.getComponentMap();
 				updatePalette();
 			}
-			
 		}
 	}
 
@@ -201,7 +183,5 @@ public class Palette<T extends AttributeOwner> implements SkeletonObject, Observ
 				addPresetToPalette(preset);
 			}
 		}
-		
-	
 	}
 }

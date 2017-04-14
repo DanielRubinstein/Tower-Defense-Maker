@@ -2,21 +2,16 @@ package frontEnd.Skeleton.AoTools;
 
 import java.util.Arrays;
 import java.util.List;
-import java.util.MissingResourceException;
 import java.util.ResourceBundle;
 
 import ModificationFromUser.Modification_AddNewAttributeOwnerToGrid;
 import ModificationFromUser.Modification_AddNewPresetAttributeOwner;
-import ModificationFromUser.Modification_EditAttribute;
 import backEnd.Attribute.Attribute;
 import backEnd.Attribute.AttributeOwner;
-import backEnd.Attribute.AttributeOwner;
 import frontEnd.View;
-import frontEnd.CustomJavafxNodes.DoubleFieldPrompt;
 import frontEnd.CustomJavafxNodes.SingleFieldPrompt;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.geometry.Insets;
-import javafx.geometry.Point2D;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
@@ -44,7 +39,6 @@ public class AttributeCommandCenter extends CommandCenter{
 	private VBox createAttributeCommandCenter(AttributeOwner obj) {
 		VBox contents = new VBox();
 		contents.setPadding(new Insets(STANDARD_SPACING, STANDARD_SPACING, STANDARD_SPACING, STANDARD_SPACING));
-		contents.getChildren().add(createLocationLabel(obj));
 
 		HBox contents_Att = createAttributeView(obj);
 
@@ -121,39 +115,15 @@ public class AttributeCommandCenter extends CommandCenter{
 		try{
 			singleAttEditor.getChildren().add(right);
 		} catch (Exception e){
+			System.out.println(myAttrNameResources.getString(attr.getName()));
 			singleAttEditor.getChildren().add(new Label("Editor in production"));
 		}
 		singleAttEditor.setAlignment(Pos.CENTER_RIGHT);
 		return singleAttEditor;
 	}
 
-	private Label createLocationLabel(AttributeOwner obj) {
-		// TODO maybe add sell feature here
-		try{
-			Point2D pos = (Point2D) obj.getAttribute("Position").getValue();
-			Label posLabel = new Label(String.format("Location: (%.0f, %.0f)", pos.getX(), pos.getY()));
-			posLabel.setOnMouseClicked(e -> {
-				Point2D newPoint = askForNewPosition();
-				myView.sendUserModification(new Modification_EditAttribute(obj,obj.getAttribute("Position"),newPoint));
-				posLabel.setText(String.format("Location: (%.0f, %.0f)", newPoint.getX(), newPoint.getY()));
-			});
-			return posLabel;
-		} catch (NullPointerException | MissingResourceException e ){
-			return new Label("No Position Attribute Set");
-		}
-	}
-
 	public VBox get() {
 		return myRoot;
-	}
-	
-	private Point2D askForNewPosition() {
-		List<String> dialogTitles = Arrays.asList("Creation Utility", "Please input a location");
-		List<String> promptLabel = Arrays.asList("X Position:", "Y Position:");
-		List<String> promptText = Arrays.asList("0.0", "0.0");
-		DoubleFieldPrompt myDialog = new DoubleFieldPrompt(dialogTitles, promptText, promptLabel);
-		List<String> results = myDialog.create();
-		return new Point2D(Double.parseDouble(results.get(0)), Double.parseDouble(results.get(1)));
 	}
 
 }
