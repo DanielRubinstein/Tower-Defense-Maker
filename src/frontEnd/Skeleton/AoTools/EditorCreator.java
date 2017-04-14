@@ -123,7 +123,7 @@ public class EditorCreator {
 		String imagePath = (String) myAttr.getValue();
 		Image image = new Image(getClass().getClassLoader().getResourceAsStream(imagePath));
 		ImageView curImage = new ImageView(image);
-		curImage.setPreserveRatio(false);
+		curImage.setPreserveRatio(true);
 		both.getChildren().add(curImage);
 		Button b = new Button("Change Image");
 		b.setOnAction(e -> {
@@ -149,7 +149,6 @@ public class EditorCreator {
 	private Node createDoubleEditor() {
 		Node n;
 		List<Double> paramList = (List<Double>) myAttr.getEditParameters();
-		System.out.println(" %%%% " + myAttr +"    "  +myAttr.getName() +"   " +paramList);
 		NumberChanger numChanger = new NumberChanger(paramList.get(0), paramList.get(1), paramList.get(2),
 				paramList.get(3));
 		n = numChanger.getRoot();
