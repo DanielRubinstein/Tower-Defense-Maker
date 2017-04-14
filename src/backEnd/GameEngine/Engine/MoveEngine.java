@@ -37,17 +37,14 @@ public class MoveEngine implements Engine{
 	public void gameLoop(State currentState, double stepTime) {
 		myState=currentState;
 		for (Component c: myState.getComponentGraph().getAllComponents()){
-			System.out.println(c.getMyAttributes().getAttributeMap().keySet()+" skirt skirt line 39 in moveengine");
-			System.out.println("9.3/4  "+c.containsAttribute("Position"));
-			System.out.println((c.getAttribute("Position").getValue()).getClass().getTypeName() +" skirt skirt line 40 in moveengine");
-			//System.out.println(((AttributeImpl<Point2D>)c.getAttribute("Position").getValue()).getValue().getX() +" skirt skirt line 41 in moveengine");
-			
-			Attribute<Point2D> location=(AttributeImpl<Point2D>) c.getAttribute("Position");
-			System.out.println("got to line 45 this is gr8");
-			System.out.println("is null :" + location.getValue()==null + " line 46");
-			Point2D myPoint=new Point2D((int) location.getValue().getX(), (int) location.getValue().getY());
-			System.out.println("DIDNT FAIL");
-			Tile currentTile=myState.getTileGrid().getTileByLocation(myPoint);
+
+			Attribute<?> location=c.getAttribute("Position");
+			Point2D impl = (Point2D) location.getValue();
+			System.out.println(impl.getClass().toString()+ "line 42");
+			Point2D x=(Point2D) location.getValue();
+			//Point2D myPoint=new Point2D(location.getValue().getX(), location.getValue().getY());
+			//System.out.println("DIDNT FAIL");
+			Tile currentTile=myState.getTileGrid().getTileByLocation(x);
 			System.out.println("WORLDSTAR");
 			myState.getComponentGraph().removeComponent(c);
 			MoveBehavior mb=new MoveBehavior(c);
@@ -62,11 +59,6 @@ public class MoveEngine implements Engine{
 			
 		}
 		
-		//TODO : different case for bullets
-		// if (Component.getMyType.equals("Projectile")
-		//(Component.getMyType.equals("Enemy")
-		//StartPosition : Point2D
-		//TargetPosition : Point2D
 		
 	}
 }

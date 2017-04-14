@@ -1,7 +1,6 @@
 package frontEnd.Skeleton.AoTools;
 
 import frontEnd.Skeleton.UserTools.SkeletonObject;
-import javafx.scene.Node;
 
 public interface TileCommandCenter extends SkeletonObject{
 

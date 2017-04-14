@@ -34,7 +34,8 @@ public class MoveBehavior implements Behavior {
 	@Override
 	public <T> void execute(T tile) throws FileNotFoundException {//pass in a tile //TODO error checking
 		currentTile=(Tile) tile;
-		switch ((String) currentTile.getAttribute("MoveDirection").getValue()) {
+		//(String) currentTile.getAttribute("MoveDirection").getValue()
+		switch ("RIGHT") {
 		case "LEFT":
 			newPoint=new Point2D(currentPosition.getX()-Constants.defaultMoveAmount, currentPosition.getY());				
 		case "RIGHT":

@@ -59,8 +59,13 @@ public class AttackEngine implements Engine {
 			fnf.create("Error", "File not found");
 		}
 
-		currentState.getComponentGraph().addComponentToGrid(bullet,
-				(Point2D) attacker.getAttribute("Position").getValue());
+		Point2D bulletPos = (Point2D) attacker.getAttribute(myResources.getString("Position"));
+		Point2D targetPos = (Point2D) target.getAttribute(myResources.getString("Position"));
+		
+		bullet.setAttributeValue(myResources.getString("Position"), bulletPos);
+		bullet.setAttributeValue(myResources.getString("ProjectileTargetPosition"), targetPos);
+		bullet.setAttributeValue(myResources.getString("ProjectileDistance"), targetPos.subtract(bulletPos));
+		currentState.getComponentGraph().addComponentToGrid(bullet, bulletPos);
 	}
 
 	/**
@@ -69,31 +74,17 @@ public class AttackEngine implements Engine {
 	 * @throws FileNotFoundException
 	 */
 	@SuppressWarnings("unchecked")
-	private Component makeBullet() throws FileNotFoundException {// TODO: ADD
-																	// ATTRIBUTES
-																	// STARTPOS
-																	// AND
-																	// TARGETPOS
-																	// TO BULLET
-																	// FOR
-																	// MOVEENGINE
-																	// TO USE
+	private Component makeBullet() throws FileNotFoundException {
 
 		AttributeFactory af = new AttributeFactory();
-		Component bullet = new Component(null);
-		try {
-			af = new AttributeFactory();
-		} catch (FileNotFoundException e) {
-			ErrorDialog fnf = new ErrorDialog();
-			fnf.create("Error", "File not found");
-		}
+		AttributeData ad = new AttributeData();
+		Component bullet = new Component(ad);
 
-		bullet.setMyType("Projectile");
+		bullet.setMyType("Projectile");				
 		Attribute<String> bulletImage = (Attribute<String>) af.getAttribute(myResources.getString("ImageFile"));
 		bulletImage.setValue(Constants.BULLET_IMAGE_FILE);
-		AttributeData ad = new AttributeData();
 		ad.addAttribute(myResources.getString("ImageFile"), (backEnd.Attribute.AttributeImpl<?>) bulletImage);
-
+		
 		return bullet;
 	}
 
