@@ -5,6 +5,8 @@
 * After setting the desired values, the user selects the "Save as Preset Option", which sends an invokable through the View
 * This creates this component in the bank in the back end
 * This bottom bar now contains an image of this component and all attributes are saved
+ 
+
 2. In author mode, user adds preset component to the screen.
 
 
@@ -14,6 +16,7 @@
 * This adds this component to the ComponentGraph in the back end, which notifies the Canvas of this change
 * The Canvas then retrieves the component it did not already have, and creates a FrontEndAttributeOwner object to represent this component
 * This then gets immediately placed on screen.
+
 3. User clicks on a tile in author mode
 
 
@@ -23,6 +26,7 @@
 * In player mdoe, the user can only see this information
 * in author mode, the user can edit these attributes. This editing is again done through invokables
 * There are also various tabs if the tile has any components on it
+
 4. In player mode, user drags a component to use on screen.
  
 
@@ -32,6 +36,7 @@
 * However, now there may be restrictions to which components the user can drag and drop
 * The drag and drop process calls an invokable which adds a component to the componentGraph in the back end.
 * This component is immediately on screen and can interact with the rest of the game.
+
 5. In player mode, user clicks on a tile
 
 
