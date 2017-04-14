@@ -57,7 +57,7 @@ public class TileCommandCenterImpl extends CommandCenter implements TileCommandC
 	
 	
 	private Tab createAttributeOwnerTab(AttributeOwnerReader obj) {
-		AttributeCommandCenter aCC = new AttributeCommandCenter(myView, (AttributeOwner) obj);
+		AttributeCommandCenter aCC = new AttributeCommandCenter(myView, (AttributeOwner) obj, "On-Screen Object");
 		String fuckedUpName = obj.toString();
 		fuckedUpName = fuckedUpName.substring(fuckedUpName.lastIndexOf('.') + 1, fuckedUpName.length());
 		return createSingleTab(fuckedUpName, aCC.get());

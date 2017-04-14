@@ -18,6 +18,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.scene.text.Font;
 
 public class AttributeCommandCenter extends CommandCenter{	
 	private final static String RESOURCES_PATH = "resources/";
@@ -28,22 +29,34 @@ public class AttributeCommandCenter extends CommandCenter{
 	private View myView;
 	private VBox myRoot;
 	private SimpleBooleanProperty authorProperty;
+	private HBox bottomButtons;
+	private Label titleLbl;
 	
-	public AttributeCommandCenter(View view, AttributeOwner obj){
+	public AttributeCommandCenter(View view, AttributeOwner obj, String title){
 		myView = view;
 		authorProperty = view.getBooleanAuthorModeProperty();
-
+		setText(title);
 		myRoot = createAttributeCommandCenter(obj);
+	}
+	
+	private void setText(String text){
+		titleLbl = new Label(text);
+		titleLbl.setFont(Font.font(32));
+		titleLbl.setUnderline(true);
+		//titleLbl.setStyle("");
 	}
 	
 	private VBox createAttributeCommandCenter(AttributeOwner obj) {
 		VBox contents = new VBox();
-		contents.setPadding(new Insets(STANDARD_SPACING, STANDARD_SPACING, STANDARD_SPACING, STANDARD_SPACING));
-
+		
+		contents.getChildren().add(titleLbl);
+		
 		HBox contents_Att = createAttributeView(obj);
-
 		contents.getChildren().add(contents_Att);
+		
 		contents.getChildren().add(createPresetButton(obj));
+		
+		contents.setPadding(new Insets(STANDARD_SPACING, STANDARD_SPACING, STANDARD_SPACING, STANDARD_SPACING));
 		contents.setSpacing(STANDARD_SPACING);
 		// contents.setAlignment(Pos.TOP_CENTER);
 		return contents;
@@ -52,11 +65,9 @@ public class AttributeCommandCenter extends CommandCenter{
 	public void addSubmitButton(AttributeOwner obj) {
 		Button submit = new Button("Add Now");
 		submit.setOnAction(e -> {
-			//myView.addToCanvas(obj);
-			System.out.println(obj.getAttribute("Position").getValue());
 			myView.sendUserModification(new Modification_AddNewAttributeOwnerToGrid(obj));
 		});
-		myRoot.getChildren().add(submit);
+		bottomButtons.getChildren().add(submit);
 	}
 	
 	private HBox createAttributeView(AttributeOwner obj) {
@@ -81,6 +92,12 @@ public class AttributeCommandCenter extends CommandCenter{
 	}
 
 	private Node createPresetButton(AttributeOwner obj){
+		
+		bottomButtons = new HBox();
+		
+		bottomButtons.setSpacing(STANDARD_SPACING);
+		bottomButtons.setAlignment(Pos.BOTTOM_RIGHT);
+		
 		List<String> dialogTitles = Arrays.asList("Preset Creation Utility", "Please Input a Name for your new preset");
 		String promptLabel = "New preset name:";
 		String promptText = "";
@@ -89,7 +106,10 @@ public class AttributeCommandCenter extends CommandCenter{
 		preset.setOnAction((e) -> {
 			myView.sendUserModification(new Modification_AddNewPresetAttributeOwner(myDialog.create(), obj));
 		});
-		return preset;
+		
+		bottomButtons.getChildren().add(preset);
+		
+		return bottomButtons;
 	}
 
 	private HBox createAttributeValuePair(AttributeOwner obj, Attribute<?> attr) {

@@ -1,19 +1,15 @@
 package frontEnd.Skeleton.UserTools;
 
-import java.util.function.Consumer;
-
 import ModificationFromUser.Modification_ChangeMode;
 import frontEnd.View;
 import frontEnd.CustomJavafxNodes.ToggleSwitch;
 import frontEnd.Menus.ButtonMenuImpl;
 import javafx.beans.property.SimpleBooleanProperty;
-import javafx.event.ActionEvent;
 import javafx.geometry.Bounds;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.SplitPane;
 import javafx.scene.control.Tooltip;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
@@ -64,8 +60,8 @@ public class SettingsViewImpl implements SettingsView{
 		myMenu.addNode(ruleButtons);
 		
 		//adding player/godmode switch
-		Runnable modRunnable = () -> myView.sendUserModification(new Modification_ChangeMode());
-		ToggleSwitch modeToggle = new ToggleSwitch(myView,"Player", "Author", authorProperty, modRunnable);
+		Runnable changeMode = () -> myView.sendUserModification(new Modification_ChangeMode());
+		ToggleSwitch modeToggle = new ToggleSwitch("Player", "Author", authorProperty, changeMode);
 		myMenu.addNode(modeToggle.getRoot());
 		
 		myMenu.addSimpleButtonWithHover("Help", e -> new HelpOptions(myStage), "Get Help");
