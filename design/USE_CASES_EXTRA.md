@@ -1,14 +1,11 @@
 1. In author mode, user creates a new component from scratch and saves it as a preset
 
-
 * When the user presses the "plus" button on the bottom and if component is selected, this launches a command center where the user can edit attributes of that component. 
 * After setting the desired values, the user selects the "Save as Preset Option", which sends an invokable through the View
 * This creates this component in the bank in the back end
 * This bottom bar now contains an image of this component and all attributes are saved
- 
 
 2. In author mode, user adds preset component to the screen.
-
 
 * One a preset has been made, the user sees it in the bottom root.
 * The user can click and drag this preset onto the canvas and drop it wherever
