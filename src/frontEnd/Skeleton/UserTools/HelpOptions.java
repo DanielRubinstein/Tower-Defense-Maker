@@ -6,7 +6,6 @@ import java.net.MalformedURLException;
 import frontEnd.Menus.ButtonMenu;
 import frontEnd.Menus.ButtonMenuImpl;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
 import javafx.scene.web.WebEngine;
 import javafx.scene.web.WebView;
 import javafx.stage.Modality;

@@ -2,39 +2,31 @@ package frontEnd.Skeleton.AoTools;
 
 import backEnd.Attribute.AttributeOwner;
 import backEnd.Attribute.AttributeOwnerReader;
+import backEnd.GameData.State.Tile;
 import frontEnd.View;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 public class ComponentCommandCenter extends CommandCenter {
-	private static final String DEFAULT_CSS = "/resources/css/Flatter.css";
+	private AttributeOwner attrOwn;
+	private View myView;
 	private VBox myRoot;
-	private Stage myStage;
-	private Scene myScene;
 	
 	public ComponentCommandCenter(View view, AttributeOwnerReader attr){
-		AttributeOwner attrOwn = (AttributeOwner)attr;
-		AttributeCommandCenter aCC = new AttributeCommandCenter(view, attrOwn);
-		myRoot = aCC.get();
-		
-	}
-	private void generate(double x, double y) {
-		myStage = new Stage();
-		try{
-			myScene = new Scene(myRoot);
-		} catch (IllegalArgumentException e){
-			myScene.setRoot(myRoot);
-		}
-		myScene.getStylesheets().add(DEFAULT_CSS);
-		myStage.setScene(myScene);
-		myStage.setTitle("Command Center");
-		myStage.setX(x);
-		myStage.setY(y);
-		myStage.show();
+		myView = view;
+		attrOwn = (AttributeOwner)attr;
 	}
 	
 	public void launch(double x, double y) {
-		generate(x,y);
+		Stage stage = new Stage();
+		AttributeCommandCenter aCC = new AttributeCommandCenter(myView, stage, attrOwn, "In-Game Component");
+		if(! (attrOwn instanceof Tile)){
+			aCC.addSubmitButton(attrOwn);
+		}
+		myRoot = aCC.get();
+		
+		generate(x,y, stage, (Parent) myRoot);
 	}
 }

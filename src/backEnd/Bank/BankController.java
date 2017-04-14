@@ -7,6 +7,7 @@ import java.util.Observable;
 
 import backEnd.GameEngine.Behaviors.Behavior;
 import backEnd.Attribute.AttributeImpl;
+import backEnd.Attribute.AttributeOwner;
 import backEnd.GameData.Rules;
 import backEnd.GameData.State.Component;
 import backEnd.GameData.State.Tile;
@@ -89,6 +90,24 @@ public class BankController extends Observable
 	public List<AttributeImpl> getAttributeList()
 	{
 		return attributeBank.getAttributeList();
+	}
+
+	public String getAOName(AttributeOwner preset) {
+		if(preset instanceof Tile){
+			return findKeyFromValue(tileBank, (Tile) preset);
+		} else if (preset instanceof Component){
+			return findKeyFromValue(componentBank, (Component) preset);
+		}
+		return "";
+	}
+
+	private <V> String findKeyFromValue(Map<String, V> bank, V preset) {
+		for(Map.Entry<String, V> entry : bank.entrySet()){
+			if (entry.getValue().equals(preset)){
+				return entry.getKey();
+			}
+		}
+		return "No name found";
 	}
 }
 

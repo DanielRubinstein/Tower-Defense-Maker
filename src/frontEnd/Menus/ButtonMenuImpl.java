@@ -8,7 +8,6 @@ import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.control.Tooltip;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
@@ -40,7 +39,7 @@ public class ButtonMenuImpl implements ButtonMenu {
 	}
 
 
-	public void setText(String text){
+	private void setText(String text){
 		titleLbl = new Label(text);
 		titleLbl.setFont(Font.font(32));
 		titleLbl.setUnderline(true);

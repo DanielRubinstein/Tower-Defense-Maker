@@ -1,6 +1,5 @@
 package frontEnd.Skeleton.UserTools;
 
-import java.util.Collection;
 import java.util.Map;
 
 import backEnd.GameData.State.Component;
@@ -26,9 +25,7 @@ public class PalettePane implements SkeletonObject {
 		palette = new TabPane();
 		palette.setSide(Side.LEFT);
 		palette.getTabs().add(createPalette("Components"));
-		palette.getTabs().add(createPalette("Tiles"));
-		
-		
+		palette.getTabs().add(createPalette("Tiles"));		
 	}
 
 	private Tab createPalette(String string) {
