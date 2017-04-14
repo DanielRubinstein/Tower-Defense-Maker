@@ -17,11 +17,14 @@ import backEnd.Attribute.AttributeOwner;
 import backEnd.Bank.BankController;
 import backEnd.GameData.State.AccessPermissionsImpl;
 import backEnd.GameData.State.Component;
+import backEnd.GameData.State.Tile;
 import backEnd.GameData.State.TileImpl;
 import backEnd.Mode.UserModeType;
 import frontEnd.View;
 import frontEnd.CustomJavafxNodes.DoubleFieldPrompt;
+import frontEnd.Skeleton.AoTools.ComponentCommandCenter;
 import frontEnd.Skeleton.AoTools.PresetCreation;
+import frontEnd.Skeleton.AoTools.TileCommandCenterImpl;
 import javafx.geometry.Bounds;
 import javafx.geometry.Insets;
 import javafx.geometry.Point2D;
@@ -91,7 +94,8 @@ public class Palette<T extends AttributeOwner> implements SkeletonObject, Observ
 	private void addPresetToPalette(T preset) {
 		String myImagePath = (String) preset.getAttribute(IMAGEFILE_ATTRIBUTE_NAME).getValue();
 		ImageView imageView = createImageView(myImagePath, (iV) ->{
-			myView.sendUserModification(new Modification_AddPresetAttributeOwnerToGrid(myMap.get(iV), askForNewPosition()));
+			ComponentCommandCenter comCenter = new ComponentCommandCenter(myView, preset);
+			comCenter.launch(iV.getX(), iV.getY());
 		});
 		imageView.setOnDragDetected(e -> {
 			//TODO: make a component from imageView and put it into the Tile that drop ends on

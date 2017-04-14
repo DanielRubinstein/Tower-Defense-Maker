@@ -46,11 +46,6 @@ public class FrontEndAttributeOwnerImpl implements Observer, FrontEndAttributeOw
 		myImage.setX(xx);
 		myImage.setY(yy);
 	}
-	public void test(String path){
-		myImagePath = path;
-		Image image = new Image(getClass().getClassLoader().getResourceAsStream(myImagePath));
-		myImage.setImage(image);
-	}
 	
 	/* (non-Javadoc)
 	 * @see frontEnd.CustomJavafxNodes.FrontEndAttributeOwner#update(java.util.Observable, java.lang.Object)

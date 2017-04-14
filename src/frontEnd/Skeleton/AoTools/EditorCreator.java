@@ -18,6 +18,8 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
@@ -116,10 +118,14 @@ public class EditorCreator {
 		return n;
 	}
 
-	private Node createImageEditor() {
+	private HBox createImageEditor() {
+		HBox both = new HBox();
 		String imagePath = (String) myAttr.getValue();
-		
-		Button b = new Button(imagePath);
+		Image image = new Image(getClass().getClassLoader().getResourceAsStream(imagePath));
+		ImageView curImage = new ImageView(image);
+		curImage.setPreserveRatio(false);
+		both.getChildren().add(curImage);
+		Button b = new Button("Change Image");
 		b.setOnAction(e -> {
 			FileChooser imageChooser = new FileChooser();
 			imageChooser.setTitle("Select Image");
@@ -131,9 +137,13 @@ public class EditorCreator {
 			String newPath = selectedFile.getPath();
 			String newValue = newPath.substring(newPath.indexOf("images"), newPath.length());
 			sendModification(newValue);
+			Image newImage = new Image(getClass().getClassLoader().getResourceAsStream(imagePath));
+			curImage.setImage(newImage);
 		});
-
-		return b;
+		both.getChildren().add(b);
+		curImage.fitHeightProperty().bind(b.heightProperty());
+		curImage.fitWidthProperty().bind(b.widthProperty());
+		return both;
 	}
 
 	private Node createDoubleEditor() {
