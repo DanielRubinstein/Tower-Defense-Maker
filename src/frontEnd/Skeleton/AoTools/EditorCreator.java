@@ -27,7 +27,7 @@ public class EditorCreator {
 	private View myView;
 	private AttributeOwnerReader myOwner;
 	private Attribute<?> myAttr;
-	public static final String SAVED_IMAGES_DIRECTORY = "./src/images";
+	public static final String SAVED_IMAGES_DIRECTORY = "./src/resources/images";
 	private ToggleSwitch myToggle;
 
 	public EditorCreator(View view, AttributeOwnerReader obj, Attribute<?> attr){
@@ -129,7 +129,7 @@ public class EditorCreator {
 			File selectedFile = imageChooser.showOpenDialog(new Stage());
 			
 			String newPath = selectedFile.getPath();
-			String newValue = newPath.substring(newPath.indexOf("images"), newPath.length());
+			String newValue = newPath.substring(newPath.indexOf("resources"), newPath.length());
 			sendModification(newValue);
 		});
 

@@ -36,6 +36,8 @@ public class StateImpl extends Observable implements State {
 	private ComponentGraph componentGraph;
 	private final static String RESOURCES_PATH = "resources/defaultTileAttributes";
 	private final static ResourceBundle myResources = ResourceBundle.getBundle(RESOURCES_PATH);
+	private final static String IMAGEPATH_RESOURCES_PATH = "resources/images";
+	private final static ResourceBundle myImageResource = ResourceBundle.getBundle(IMAGEPATH_RESOURCES_PATH);
 
 	public StateImpl(int gridWidth, int gridHeight, int pointResolution_Width, int pointResolution_Height) throws FileNotFoundException {
 		this.gridWidth = gridWidth;
@@ -54,7 +56,7 @@ public class StateImpl extends Observable implements State {
 				Point2D loc = new Point2D(j,i);
 				Tile newTile = new TileImpl(Arrays.asList(), Arrays.asList(UserModeType.AUTHOR), loc);
 				Attribute<String> imgAttr = (Attribute<String>) newTile.getAttribute("ImageFile");
-				imgAttr.setValue("images/Tiles/default_tile.jpg");
+				imgAttr.setValue(myImageResource.getString("default_tile"));
 				stateGrid.setTile(newTile, loc);
 
 			}

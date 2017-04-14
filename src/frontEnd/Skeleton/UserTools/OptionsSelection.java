@@ -19,10 +19,10 @@ import javafx.scene.layout.TilePane;
 
 public class OptionsSelection {
 
-	private static final String SETTINGS_IMAGE = "images/Tools/Settings.jpg";
-	private static final String PAUSE_IMAGE = "images/Tools/pause.jpg";
-	private static final String FASTFWD_IMAGE = "images/Tools/fastfwd.jpg";
-	private static final String PLAY_IMAGE = "images/Tools/play.jpg";
+	private static final String SETTINGS_IMAGE = "resources/images/Tools/Settings.jpg";
+	private static final String PAUSE_IMAGE = "resources/images/Tools/pause.jpg";
+	private static final String FASTFWD_IMAGE = "resources/images/Tools/fastfwd.jpg";
+	private static final String PLAY_IMAGE = "resources/images/Tools/play.jpg";
 	private TilePane myRoot;
 	private SettingsView mySettings;
 	private List<Button> myButtons;

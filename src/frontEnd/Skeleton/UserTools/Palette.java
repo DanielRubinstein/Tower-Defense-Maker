@@ -45,7 +45,7 @@ public class Palette<T extends AttributeOwner> implements SkeletonObject, Observ
 	private TilePane tile;
 	private Map<String, T> myPresetMap;
 	private static final String IMAGEFILE_ATTRIBUTE_NAME = "ImageFile";
-	private static final String SETTINGS_IMAGE = "images/Tools/plus.jpg";
+	private static final String SETTINGS_IMAGE = "resources/images/Tools/plus.jpg";
 	private Map<ImageView, T> myMap;
 	private String myType;
 	private BankController observedBankController;
@@ -109,11 +109,11 @@ public class Palette<T extends AttributeOwner> implements SkeletonObject, Observ
 						//newAO = new TileImpl();
 						// TODO make blank tile
 						newAO = new TileImpl(Arrays.asList(), Arrays.asList(UserModeType.AUTHOR), new Point2D(0,0));
-						imagePathForNewPreset =  "images/Tiles/grass.jpg";
+						imagePathForNewPreset =  "resources/images/Tiles/grass.jpg";
 						break;
 					case "Components":
 						newAO = new Component(new AttributeData(),new AccessPermissionsImpl());
-						imagePathForNewPreset =  "images/Components/zombie.jpg";
+						imagePathForNewPreset =  "resources/images/Components/zombie.png";
 						break;
 					}
 
@@ -150,6 +150,7 @@ public class Palette<T extends AttributeOwner> implements SkeletonObject, Observ
 		// DEFAULT_THUMBNAIL_WIDTH is a constant you need to define
 		// The last two arguments are: preserveRatio, and use smooth (slower)
 		// resizing
+		System.out.println(myImagePath);
 		Image image = new Image(getClass().getClassLoader().getResourceAsStream(myImagePath));
 		ImageView imageView = new ImageView(image);
 		imageView.setFitWidth(TILE_SIZE);
