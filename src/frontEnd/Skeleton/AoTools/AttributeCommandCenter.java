@@ -19,6 +19,7 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
+import javafx.stage.Stage;
 
 public class AttributeCommandCenter extends CommandCenter{	
 	private final static String RESOURCES_PATH = "resources/";
@@ -31,9 +32,11 @@ public class AttributeCommandCenter extends CommandCenter{
 	private SimpleBooleanProperty authorProperty;
 	private HBox bottomButtons;
 	private Label titleLbl;
+	private Stage myHostStage;
 	
-	public AttributeCommandCenter(View view, AttributeOwner obj, String title){
+	public AttributeCommandCenter(View view, Stage hostStage , AttributeOwner obj, String title){
 		myView = view;
+		myHostStage = hostStage;
 		authorProperty = view.getBooleanAuthorModeProperty();
 		setText(title);
 		myRoot = createAttributeCommandCenter(obj);
@@ -66,6 +69,7 @@ public class AttributeCommandCenter extends CommandCenter{
 		Button submit = new Button("Add Now");
 		submit.setOnAction(e -> {
 			myView.sendUserModification(new Modification_AddNewAttributeOwnerToGrid(obj));
+			myHostStage.close();
 		});
 		bottomButtons.getChildren().add(submit);
 	}
@@ -105,6 +109,7 @@ public class AttributeCommandCenter extends CommandCenter{
 		Button preset = new Button("Save as preset");
 		preset.setOnAction((e) -> {
 			myView.sendUserModification(new Modification_AddNewPresetAttributeOwner(myDialog.create(), obj));
+			myHostStage.close();
 		});
 		
 		bottomButtons.getChildren().add(preset);
