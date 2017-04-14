@@ -1,9 +1,8 @@
 package frontEnd;
 
-import java.util.ArrayList;
+import java.io.File;
 import java.util.Arrays;
 import java.util.Collection;
-import java.util.Collections;
 import java.util.List;
 import java.util.function.Consumer;
 
@@ -11,25 +10,26 @@ import ModificationFromUser.ModificationFromUser;
 import ModificationFromUser.Modification_Load;
 import ModificationFromUser.Modification_Save;
 import backEnd.Model;
-import backEnd.Attribute.AttributeOwnerReader;
+import backEnd.Bank.BankController;
 import backEnd.Data.DataController;
-import backEnd.GameData.UserAttribute;
-import backEnd.GameData.UserAttributeImpl;
+import backEnd.Data.XMLReadingException;
 import backEnd.GameData.State.Component;
-import backEnd.GameData.State.ComponentGraph;
 import backEnd.GameData.State.Tile;
-import backEnd.GameData.State.TileGrid;
 import backEnd.Mode.ModeReader;
 import frontEnd.CustomJavafxNodes.SingleFieldPrompt;
+import frontEnd.Menus.ErrorDialog;
 import frontEnd.Skeleton.SkeletonImpl;
+import frontEnd.Splash.GameLoader;
+import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.beans.property.SimpleBooleanProperty;
+import javafx.scene.Node;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 import resources.Constants;
 
-public class ViewImpl implements View{
+public class ViewImpl implements View {
 
 	private Model myModel;
 	private DataController myDataController;
@@ -37,46 +37,50 @@ public class ViewImpl implements View{
 	private SkeletonImpl mySkeleton;
 	private SimpleBooleanProperty authorProperty;
 	private Stage appStage;
-	
+
 	public Timeline animation = new Timeline();
 	private static final double MILLISECOND_DELAY = Constants.MILLISECOND_DELAY;
 	private static final double SECOND_DELAY = Constants.SECOND_DELAY;
 
-	
-	public ViewImpl(Model model,DataController dataController, Consumer<ModificationFromUser> inputConsumer) {
+	public ViewImpl(Model model, DataController dataController, Consumer<ModificationFromUser> inputConsumer) {
 		myModel = model;
 		myDataController = dataController;
 		myModConsumer = inputConsumer;
 		ModeReader mode = model.getModeReader();
 		authorProperty = new SimpleBooleanProperty(mode.getUserModeString().equals("AUTHOR"));
-		mySkeleton = new SkeletonImpl(this,model);
+		mySkeleton = new SkeletonImpl(this, model);
 		appStage = new Stage();
 		mySkeleton.display(appStage);
-		
-		KeyFrame frame = new KeyFrame(Duration.millis(MILLISECOND_DELAY), e -> step(SECOND_DELAY));
-		animation.setCycleCount(Timeline.INDEFINITE);
-		animation.getKeyFrames().add(frame);
-		//animation.play();
-		
-	}
-	public void addToCanvas(AttributeOwnerReader ao){
-		mySkeleton.addToCanvas(ao);
+
 	}
 
+	@Override
+	public Node getCanvas() {
+		return mySkeleton.getCanvas();
+	}
+
+	@Override
+	public void play() {
+		KeyFrame frame = new KeyFrame(Duration.millis(MILLISECOND_DELAY), e -> step(SECOND_DELAY));
+		animation.setCycleCount(Animation.INDEFINITE);
+		animation.getKeyFrames().add(frame);
+		animation.play();
+	}
+	
 	/**
 	 * controls the animation of the State
 	 */
-	private void step(double delay){
-		myModel.getGameProcessController().run(delay); //TODO: TESTING ONLY
+	private void step(double delay) {
+		myModel.getGameProcessController().run(delay); // TODO: TESTING ONLY
 	}
 
-	
-	public SimpleBooleanProperty getBooleanAuthorModeProperty(){
+	@Override
+	public SimpleBooleanProperty getBooleanAuthorModeProperty() {
 		return this.authorProperty;
 	}
-	
+
 	@Override
-	public void sendUserModification(ModificationFromUser mod){
+	public void sendUserModification(ModificationFromUser mod) {
 		myModConsumer.accept(mod);
 	}
 
@@ -100,41 +104,22 @@ public class ViewImpl implements View{
 		return myDialog.create();
 	}
 
-
-
 	@Override
 	public void load() {
-		String fileToLoad = null;
+		GameLoader gL = new GameLoader();
+		File fileToLoad = null;
+		try {
+			fileToLoad = gL.loadGame();
+		} catch (XMLReadingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		sendUserModification(new Modification_Load(fileToLoad));
 	}
 
 	@Override
 	public void newGame() {
 		// TODO Auto-generated method stub
-	}
-
-	@Override
-	public TileGrid getTileGrid() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public ComponentGraph getComponentGraph() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-	
-	
-	@Override
-	public Collection<UserAttribute> getUserAttributes() {
-		// TODO find way to bind these backend values so that it is updated in the frontend
-		// could do bindings
-		// or observables
-		Collection<UserAttribute> m = new ArrayList<UserAttribute>();
-		m.add(new UserAttributeImpl("Score", 3000d));
-		m.add(new UserAttributeImpl("Level", 17d));
-		return Collections.unmodifiableCollection(m);
 	}
 
 	@Override
@@ -151,7 +136,7 @@ public class ViewImpl implements View{
 	public Stage getAppStage() {
 		return appStage;
 	}
-	
+
 	@Override
 	public void viewRules() {
 		// TODO Auto-generated method stub
@@ -165,6 +150,17 @@ public class ViewImpl implements View{
 	@Override
 	public void step() {
 		// TODO Auto-generated method stub
-		
+
+	}
+
+	@Override
+	public BankController getBankController() {
+		return myModel.getBankController();
+	}
+
+	@Override
+	public void reportError(Exception e) {
+		ErrorDialog fnf = new ErrorDialog();
+		fnf.create("Error", e.getMessage());
 	}
 }

@@ -17,6 +17,8 @@ public class TileGridImpl implements TileGrid {
 	private int gridHeight;
 	private Tile[][] tileGrid;
 	private List<Tile> tileList;
+	private double tileWidth=40;
+	private double tileHeight=40;
 	
 	public TileGridImpl(int width, int height){
 		gridWidth = width;
@@ -26,8 +28,18 @@ public class TileGridImpl implements TileGrid {
 	
 	@Override
 	public Tile getTileByLocation(Point2D location){
+		//System.out.println("Getting Tile by " + location.toString());
 		return getTileByCoord((int) location.getY(),(int) location.getX()); //Potentially wrong flipped x/y- y
 	}
+	@Override
+	public Tile getTileByScreenLocation(Point2D location){
+		double xx = (double) location.getX() / tileWidth;
+		double yy = (double) location.getY() /tileHeight;
+		int xxx = (int) Math.floor(xx);
+		int yyy=  (int) Math.floor(yy);
+		return getTileByCoord(yyy,(int) xxx); //Potentially wrong flipped x/y- y
+	}
+	
 	
 	@Override
 	public void setTile(Tile newTile, Point2D location){
@@ -56,10 +68,14 @@ public class TileGridImpl implements TileGrid {
 
 	@Override
 	public Tile getTileByCoord(int x, int y) {
-		if(x >= getMyWidth()  || x < 0 ||
-		   y >= getMyHeight() || y < 0){
+		//convert from 50,50 to coordinates
+		//System.out.println(String.format("Getting Tile by Coordinate (%d, %d)", x, y));
+		if(x >= getMyWidth()  ||
+		   y >= getMyHeight() ){
 			return null;
 		}
+		if( x<0 || y<0) return null;
+
 		return tileGrid[x][y];
 	}
 

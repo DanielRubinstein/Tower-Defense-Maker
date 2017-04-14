@@ -5,6 +5,8 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Observable;
+import java.util.Observer;
 
 import javafx.geometry.Point2D;
 import backEnd.Attribute.Attribute;
@@ -17,7 +19,7 @@ import backEnd.Attribute.AttributeImpl;
  *
  */
 
-public class ComponentGraphImpl implements ComponentGraph {
+public class ComponentGraphImpl extends Observable implements ComponentGraph {
 	private int gridWidth;
 	private int gridHeight;
 	private int pointResWidth;
@@ -45,6 +47,8 @@ public class ComponentGraphImpl implements ComponentGraph {
 				myComponents.add(myComponent);
 			}
 		}
+		//if(!myComponents.isEmpty()) System.out.println(" ggggettting all components " + myComponents +
+		//		"   " +myComponents.get(0).getAttribute("Position").getValue() + "   " + componentMap);
 		return myComponents;
 	}
 
@@ -85,23 +89,31 @@ public class ComponentGraphImpl implements ComponentGraph {
 	
 	@Override
 	public void addComponentToGrid(Component newComponent, Point2D location){
-		System.out.println(componentMap);
+
 		List<Component> currList = componentMap.get(location);
 		if(currList==null){
 			currList= new ArrayList<Component>();
 		}
 		currList.add(newComponent);
-		componentMap.put(location, currList);
-		
+componentMap.put(location, currList);
+
+		this.setChanged();
+		this.notifyObservers();
 	}
 	
 	@Override
 	public void removeComponent(Component toRemove){
 		Attribute<?> posAttribute= toRemove.getAttribute("Position");
 		Point2D location = (Point2D) posAttribute.getValue();
+		//System.out.println("removing comp at position " +location);
+
+		//System.out.println( " befforeee " +componentMap);
 		List<Component> currList = componentMap.get(location);
+		if(currList==null){return;}
 		currList.remove(toRemove);
 		componentMap.put(location, currList);
+
+		//System.out.println( " afterrrrr " +componentMap);
 	}
 	
 	@Override
@@ -124,6 +136,12 @@ public class ComponentGraphImpl implements ComponentGraph {
 		SortComponents_Distance sorter = new SortComponents_Distance();
 		List<Point2D> sortedLocations = sorter.nearToFar(centerLoc, locations);
 		return componentMap.get(sortedLocations.get(0));
+	}
+
+	@Override
+	public void addAsObserver(Observer o) {
+		this.addObserver(o);
+		
 	}
 
 }

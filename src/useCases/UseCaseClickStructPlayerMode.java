@@ -1,5 +1,5 @@
 package useCases;
-
+/*
 import java.util.List;
 
 import backEnd.State;
@@ -77,3 +77,4 @@ public class UseCaseClickStructPlayerMode implements UserInteractor {
 	}
 
 }
+*/

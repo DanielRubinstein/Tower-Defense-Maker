@@ -1,7 +1,8 @@
 package frontEnd;
 
 import ModificationFromUser.ModificationFromUser;
-import backEnd.Attribute.AttributeOwnerReader;
+import backEnd.Bank.BankController;
+import javafx.scene.Node;
 
 public interface View extends ViewReader{
 
@@ -18,7 +19,11 @@ public interface View extends ViewReader{
 	public void step();
 	
 	public void sendUserModification(ModificationFromUser mod);
+
+	public BankController getBankController();
 	
-	public void addToCanvas(AttributeOwnerReader ao);
+	public void play();
+	
+	public Node getCanvas();
 
 }

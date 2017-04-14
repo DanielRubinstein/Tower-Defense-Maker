@@ -3,9 +3,9 @@ package frontEnd.Skeleton;
 import backEnd.Model;
 import backEnd.Attribute.AttributeOwnerReader;
 import backEnd.GameData.State.State;
-import backEnd.GameData.State.StateImpl;
 import frontEnd.View;
 import frontEnd.Skeleton.UserTools.UserTools;
+import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
@@ -52,9 +52,6 @@ public class SkeletonImpl implements Skeleton{
 		myRoot.setRight(userTools.getSidePane());
 		myRoot.setBottom(userTools.getBottomPane());	
 	}
-	public void addToCanvas(AttributeOwnerReader ao){
-		myCanvas.addToCanvas(ao);
-	}
 	
 
 	/* (non-Javadoc)
@@ -72,6 +69,10 @@ public class SkeletonImpl implements Skeleton{
 		myRoot.setMinHeight(size2);
    	 	myScene = new Scene(myRoot, size1, size2);
    	 	myScene.getStylesheets().add(DEFAULT_CSS);
+	}
+	public Node getCanvas(){
+		return myCanvas.getRoot();
+		
 	}
 
 

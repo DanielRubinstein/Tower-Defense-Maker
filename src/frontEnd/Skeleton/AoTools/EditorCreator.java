@@ -2,21 +2,26 @@ package frontEnd.Skeleton.AoTools;
 
 import java.io.File;
 import java.util.List;
+import java.util.MissingResourceException;
 
 import ModificationFromUser.Modification_EditAttribute;
 import backEnd.Attribute.Attribute;
 import backEnd.Attribute.AttributeOwner;
-import backEnd.Attribute.AttributeOwnerReader;
 import frontEnd.View;
 import frontEnd.CustomJavafxNodes.NumberChanger;
+import frontEnd.CustomJavafxNodes.PositionRequester;
 import frontEnd.CustomJavafxNodes.ToggleSwitch;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.geometry.Point2D;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
@@ -24,12 +29,12 @@ import javafx.stage.FileChooser.ExtensionFilter;
 
 public class EditorCreator {
 	private View myView;
-	private AttributeOwnerReader myOwner;
+	private AttributeOwner myOwner;
 	private Attribute<?> myAttr;
-	public static final String SAVED_IMAGES_DIRECTORY = "./src/images";
+	public static final String SAVED_IMAGES_DIRECTORY = "./src/resources/images";
 	private ToggleSwitch myToggle;
 
-	public EditorCreator(View view, AttributeOwnerReader obj, Attribute<?> attr){
+	public EditorCreator(View view, AttributeOwner obj, Attribute<?> attr){
 		myView = view;
 		myOwner = obj;
 		myAttr = attr;
@@ -56,10 +61,35 @@ public class EditorCreator {
 		case "STRINGLIST":
 			n = createStringListEditor();
 			break;
+		case "POSITION":
+			n = createPositionEditor();
+			break;
+		case "COMPONENT":
+			n = createComponentEditor();
+			break;
 		default:
 			break;
 		}
 		return n;
+	}
+
+	private Node createComponentEditor() {
+		return new Label("Component editor in development");
+	}
+
+	private Node createPositionEditor() {
+		try{
+			Point2D pos = (Point2D) myOwner.getAttribute("Position").getValue();
+			Label posLabel = new Label(String.format("(%.0f, %.0f)", pos.getX(), pos.getY()));
+			posLabel.setOnMouseClicked(e -> {
+				Point2D newPoint = PositionRequester.askUserForPosition();
+				myView.sendUserModification(new Modification_EditAttribute(myOwner,myOwner.getAttribute("Position"),newPoint));
+				posLabel.setText(String.format("Location: (%.0f, %.0f)", newPoint.getX(), newPoint.getY()));
+			});
+			return posLabel;
+		} catch (NullPointerException | MissingResourceException e ){
+			return new Label("No Position Attribute Set");
+		}
 	}
 
 	private Node createIntegerEditor() {
@@ -108,10 +138,14 @@ public class EditorCreator {
 		return n;
 	}
 
-	private Node createImageEditor() {
+	private HBox createImageEditor() {
+		HBox both = new HBox();
 		String imagePath = (String) myAttr.getValue();
-		
-		Button b = new Button(imagePath);
+		Image image = new Image(getClass().getClassLoader().getResourceAsStream(imagePath));
+		ImageView curImage = new ImageView(image);
+		curImage.setPreserveRatio(false);
+		both.getChildren().add(curImage);
+		Button b = new Button("Change Image");
 		b.setOnAction(e -> {
 			FileChooser imageChooser = new FileChooser();
 			imageChooser.setTitle("Select Image");
@@ -121,11 +155,15 @@ public class EditorCreator {
 			File selectedFile = imageChooser.showOpenDialog(new Stage());
 			
 			String newPath = selectedFile.getPath();
-			String newValue = newPath.substring(newPath.indexOf("images"), newPath.length());
+			String newValue = newPath.substring(newPath.indexOf("resources"), newPath.length());
 			sendModification(newValue);
+			Image newImage = new Image(getClass().getClassLoader().getResourceAsStream(imagePath));
+			curImage.setImage(newImage);
 		});
-
-		return b;
+		both.getChildren().add(b);
+		curImage.fitHeightProperty().bind(b.heightProperty());
+		curImage.fitWidthProperty().bind(b.widthProperty());
+		return both;
 	}
 
 	private Node createDoubleEditor() {
@@ -143,7 +181,7 @@ public class EditorCreator {
 
 	private Node createBooleanEditor() {
 		Node n = null;
-		myToggle = new ToggleSwitch(myView, "Off", "On",
+		myToggle = new ToggleSwitch("Off", "On",
 				new SimpleBooleanProperty((Boolean) myAttr.getValue()), () -> triggerBooleanUpdate());
 		n = myToggle.getRoot();
 		return n;

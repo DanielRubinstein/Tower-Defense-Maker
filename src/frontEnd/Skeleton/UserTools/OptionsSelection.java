@@ -19,10 +19,10 @@ import javafx.scene.layout.TilePane;
 
 public class OptionsSelection {
 
-	private static final String SETTINGS_IMAGE = "images/Settings.jpg";
-	private static final String PAUSE_IMAGE = "images/pause.jpg";
-	private static final String FASTFWD_IMAGE = "images/fastfwd.jpg";
-	private static final String PLAY_IMAGE = "images/play.jpg";
+	private static final String SETTINGS_IMAGE = "resources/images/Tools/Settings.jpg";
+	private static final String PAUSE_IMAGE = "resources/images/Tools/pause.jpg";
+	private static final String FASTFWD_IMAGE = "resources/images/Tools/fastfwd.jpg";
+	private static final String PLAY_IMAGE = "resources/images/Tools/play.jpg";
 	private TilePane myRoot;
 	private SettingsView mySettings;
 	private List<Button> myButtons;
@@ -51,11 +51,17 @@ public class OptionsSelection {
 	}
 	
 	private void addButtons(double size){
-		addButtonImage(PLAY_IMAGE, e-> myView.sendUserModification(Modification_GameRemote.PLAY) ,size);
+		addButtonImage(PLAY_IMAGE, e-> {
+			System.out.println("trynig to play");
+			myView.play();
+			myView.sendUserModification(Modification_GameRemote.PLAY);
+		}
+		 ,size);
 		addButtonImage(PAUSE_IMAGE, e-> myView.sendUserModification(Modification_GameRemote.PAUSE) ,size);
 		addButtonImage(FASTFWD_IMAGE, e-> myView.sendUserModification(Modification_GameRemote.FASTFORWARD) ,size);
 		addButtonImage(SETTINGS_IMAGE, e-> mySettings.launchSettings(),size);
 	}
+	
 	
 	
 	private void addButtonImage(String imageName, EventHandler<ActionEvent> event, double size){
