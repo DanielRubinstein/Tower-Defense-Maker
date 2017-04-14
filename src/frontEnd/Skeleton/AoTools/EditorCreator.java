@@ -8,7 +8,6 @@ import ModificationFromUser.Modification_EditAttribute;
 import backEnd.Attribute.Attribute;
 import backEnd.Attribute.AttributeOwner;
 import frontEnd.View;
-import frontEnd.CustomJavafxNodes.DoubleFieldPrompt;
 import frontEnd.CustomJavafxNodes.NumberChanger;
 import frontEnd.CustomJavafxNodes.PositionRequester;
 import frontEnd.CustomJavafxNodes.ToggleSwitch;

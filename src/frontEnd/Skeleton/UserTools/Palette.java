@@ -2,17 +2,13 @@ package frontEnd.Skeleton.UserTools;
 
 import java.io.FileNotFoundException;
 import java.util.Arrays;
-import java.util.Collection;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 import java.util.Observable;
 import java.util.Observer;
 import java.util.function.Consumer;
 import ModificationFromUser.Modification_AddPresetAttributeOwnerToGrid;
-import ModificationFromUser.Modification_EditAttribute;
 import backEnd.Attribute.AttributeData;
-import backEnd.Attribute.AttributeImpl;
 import backEnd.Attribute.AttributeOwner;
 import backEnd.Bank.BankController;
 import backEnd.GameData.State.AccessPermissionsImpl;
@@ -20,7 +16,6 @@ import backEnd.GameData.State.Component;
 import backEnd.GameData.State.TileImpl;
 import backEnd.Mode.UserModeType;
 import frontEnd.View;
-import frontEnd.CustomJavafxNodes.DoubleFieldPrompt;
 import frontEnd.CustomJavafxNodes.PositionRequester;
 import frontEnd.Skeleton.AoTools.PresetCreation;
 import javafx.geometry.Bounds;
@@ -148,10 +143,6 @@ public class Palette<T extends AttributeOwner> implements SkeletonObject, Observ
 	}
 
 	private ImageView createImageView(String myImagePath, Consumer<ImageView> consumer) {
-		// DEFAULT_THUMBNAIL_WIDTH is a constant you need to define
-		// The last two arguments are: preserveRatio, and use smooth (slower)
-		// resizing
-		System.out.println(myImagePath);
 		Image image = new Image(getClass().getClassLoader().getResourceAsStream(myImagePath));
 		ImageView imageView = new ImageView(image);
 		imageView.setFitWidth(TILE_SIZE);
@@ -161,7 +152,6 @@ public class Palette<T extends AttributeOwner> implements SkeletonObject, Observ
 				consumer.accept(imageView);
 			}
 		});
-
 		return imageView;
 	}
 	
@@ -175,7 +165,6 @@ public class Palette<T extends AttributeOwner> implements SkeletonObject, Observ
 				myPresetMap = (Map<String, T>) observedBankController.getComponentMap();
 				updatePalette();
 			}
-			
 		}
 	}
 
@@ -185,7 +174,5 @@ public class Palette<T extends AttributeOwner> implements SkeletonObject, Observ
 				addPresetToPalette(preset);
 			}
 		}
-		
-	
 	}
 }
