@@ -21,6 +21,7 @@ import backEnd.GameData.State.TileImpl;
 import backEnd.Mode.UserModeType;
 import frontEnd.View;
 import frontEnd.CustomJavafxNodes.DoubleFieldPrompt;
+import frontEnd.CustomJavafxNodes.PositionRequester;
 import frontEnd.Skeleton.AoTools.PresetCreation;
 import javafx.geometry.Bounds;
 import javafx.geometry.Insets;
@@ -88,7 +89,7 @@ public class Palette<T extends AttributeOwner> implements SkeletonObject, Observ
 	private void addPresetToPalette(T preset) {
 		String myImagePath = (String) preset.getAttribute(IMAGEFILE_ATTRIBUTE_NAME).getValue();
 		ImageView imageView = createImageView(myImagePath, (iV) ->{
-			myView.sendUserModification(new Modification_AddPresetAttributeOwnerToGrid(myMap.get(iV), askForNewPosition()));
+			myView.sendUserModification(new Modification_AddPresetAttributeOwnerToGrid(myMap.get(iV), PositionRequester.askUserForPosition()));
 		});
 		imageView.setOnDragDetected(e -> {
 			//TODO: make a component from imageView and put it into the Tile that drop ends on
@@ -162,15 +163,6 @@ public class Palette<T extends AttributeOwner> implements SkeletonObject, Observ
 		});
 
 		return imageView;
-	}
-
-	private Point2D askForNewPosition() {
-		List<String> dialogTitles = Arrays.asList("Creation Utility", "Please input a location");
-		List<String> promptLabel = Arrays.asList("X Position:", "Y Position:");
-		List<String> promptText = Arrays.asList("0.0", "0.0");
-		DoubleFieldPrompt myDialog = new DoubleFieldPrompt(dialogTitles, promptText, promptLabel);
-		List<String> results = myDialog.create();
-		return new Point2D(Double.parseDouble(results.get(0)), Double.parseDouble(results.get(1)));
 	}
 	
 	@Override
