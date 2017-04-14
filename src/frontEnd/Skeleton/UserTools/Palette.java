@@ -7,20 +7,18 @@ import java.util.Map;
 import java.util.Observable;
 import java.util.Observer;
 import java.util.function.Consumer;
+
 import ModificationFromUser.Modification_AddPresetAttributeOwnerToGrid;
 import backEnd.Attribute.AttributeData;
 import backEnd.Attribute.AttributeOwner;
 import backEnd.Bank.BankController;
 import backEnd.GameData.State.AccessPermissionsImpl;
 import backEnd.GameData.State.Component;
-import backEnd.GameData.State.Tile;
 import backEnd.GameData.State.TileImpl;
 import backEnd.Mode.UserModeType;
 import frontEnd.View;
-import frontEnd.CustomJavafxNodes.DoubleFieldPrompt;
 import frontEnd.Skeleton.AoTools.ComponentCommandCenter;
 import frontEnd.Skeleton.AoTools.PresetCreation;
-import frontEnd.Skeleton.AoTools.TileCommandCenterImpl;
 import javafx.geometry.Bounds;
 import javafx.geometry.Insets;
 import javafx.geometry.Point2D;
@@ -45,27 +43,31 @@ public class Palette<T extends AttributeOwner> implements SkeletonObject, Observ
 	private static final int TILE_SIZE = 75;
 	private View myView;
 	private TilePane tile;
-	private Map<String, T> myPresetMap;
+	private Map<String, T> myPresetMapBackEnd;
 	private static final String IMAGEFILE_ATTRIBUTE_NAME = "ImageFile";
 	private static final String SETTINGS_IMAGE = "resources/images/Tools/plus.jpg";
-	private Map<ImageView, T> myMap;
+	private Map<ImageView, T> myPresetMapFrontEnd;
 	private String myType;
 	private BankController observedBankController;
 	private ImageView addPreset;
 
 	public Palette(View view, Map<String, T> presetMap, String string){
 		myView = view;
-		observedBankController = myView.getBankController();
-		observedBankController.addObserver(this);
-		myPresetMap = presetMap;
+		initializeMaps(presetMap);
 		myType =string;
 		initializePane();
-		myMap = new HashMap<ImageView, T>();
-		for (T preset : myPresetMap.values()) {
+		for (T preset : myPresetMapBackEnd.values()) {
 			addPresetToPalette(preset);
 		}
 		addNewPresetButton();
 		
+	}
+
+	private void initializeMaps(Map<String, T> presetMap) {
+		observedBankController = myView.getBankController();
+		observedBankController.addObserver(this);
+		myPresetMapBackEnd = presetMap;
+		myPresetMapFrontEnd = new HashMap<ImageView, T>();
 	}
 
 	private void addNewPresetButton() {
@@ -83,15 +85,33 @@ public class Palette<T extends AttributeOwner> implements SkeletonObject, Observ
 
 	private void addPresetToPalette(T preset) {
 		String myImagePath = (String) preset.getAttribute(IMAGEFILE_ATTRIBUTE_NAME).getValue();
-		ImageView imageView = createImageView(myImagePath, (iV) ->{
+		ImageView imageView = createImageView(myImagePath);
+		setPresetInteractions(preset, imageView);
+		
+		myPresetMapFrontEnd.put(imageView, preset);
+		addPresetImageViewToPalette(imageView);
+	}
+
+	private void setPresetInteractions(T preset, ImageView imageView) {
+		setDoubleClickEvent(imageView, (iV) ->{
 			ComponentCommandCenter comCenter = new ComponentCommandCenter(myView, preset);
 			comCenter.launch(iV.getX(), iV.getY());
 		});
 		makeHoverOverName(preset, imageView);
 		makePresetDraggable(preset, imageView);
-		myMap.put(imageView, preset);
-		tile.getChildren().add(imageView);
+	}
+
+	private void setDoubleClickEvent(ImageView imageView, Consumer<ImageView> consumer) {
+		imageView.setOnMouseClicked(mouseEvent -> {
+			if (mouseEvent.getButton().equals(MouseButton.PRIMARY) && mouseEvent.getClickCount() == 2) {
+				consumer.accept(imageView);
+			}
+		});
+	}
+
+	private void addPresetImageViewToPalette(ImageView imageView) {
 		tile.getChildren().remove(addPreset);
+		tile.getChildren().add(imageView);
 		tile.getChildren().add(addPreset);
 	}
 
@@ -124,7 +144,8 @@ public class Palette<T extends AttributeOwner> implements SkeletonObject, Observ
 	}
 
 	private ImageView createNewPresetButton() {
-		ImageView addImage = createImageView(SETTINGS_IMAGE, (iV) ->{
+		ImageView addImage = createImageView(SETTINGS_IMAGE);
+		setDoubleClickEvent(addImage,  (iV) ->{
 			try {	
 				AttributeOwner newAO = null;
 				String imagePathForNewPreset = "";
@@ -144,7 +165,7 @@ public class Palette<T extends AttributeOwner> implements SkeletonObject, Observ
 				PresetCreation presetCreation = new PresetCreation(myView, newAO);
 				presetCreation.launch(0d, 0d);
 			} catch (FileNotFoundException e) {
-				e.printStackTrace();
+				myView.reportError(e);
 			}
 		});
 		return addImage;
@@ -161,16 +182,11 @@ public class Palette<T extends AttributeOwner> implements SkeletonObject, Observ
 		return tile;
 	}
 
-	private ImageView createImageView(String myImagePath, Consumer<ImageView> consumer) {
+	private ImageView createImageView(String myImagePath) {
 		Image image = new Image(getClass().getClassLoader().getResourceAsStream(myImagePath));
 		ImageView imageView = new ImageView(image);
 		imageView.setFitWidth(TILE_SIZE);
 		imageView.setFitHeight(TILE_SIZE);
-		imageView.setOnMouseClicked(mouseEvent -> {
-			if (mouseEvent.getButton().equals(MouseButton.PRIMARY) && mouseEvent.getClickCount() == 2) {
-				consumer.accept(imageView);
-			}
-		});
 		return imageView;
 	}
 	
@@ -178,18 +194,18 @@ public class Palette<T extends AttributeOwner> implements SkeletonObject, Observ
 	public void update(Observable o, Object arg) {
 		if (o == observedBankController){
 			if(myType.equals("Tiles")){
-				myPresetMap = (Map<String, T>) observedBankController.getTileMap();
+				myPresetMapBackEnd = (Map<String, T>) observedBankController.getTileMap();
 				updatePalette();
 			} else if(myType.equals("Components")){
-				myPresetMap = (Map<String, T>) observedBankController.getComponentMap();
+				myPresetMapBackEnd = (Map<String, T>) observedBankController.getComponentMap();
 				updatePalette();
 			}
 		}
 	}
 
 	private void updatePalette() {
-		for (T preset : myPresetMap.values()) {
-			if (!myMap.containsValue(preset)){
+		for (T preset : myPresetMapBackEnd.values()) {
+			if (!myPresetMapFrontEnd.containsValue(preset)){
 				addPresetToPalette(preset);
 			}
 		}

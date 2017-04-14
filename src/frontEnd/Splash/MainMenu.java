@@ -4,10 +4,8 @@ import java.io.File;
 import java.util.function.Consumer;
 
 import backEnd.Data.XMLReadingException;
-import backEnd.GameData.GameData;
 import frontEnd.Menus.ButtonMenuImpl;
 import frontEnd.Menus.ErrorDialog;
-import javafx.scene.control.Button;
 import javafx.stage.Stage;
 
 /**

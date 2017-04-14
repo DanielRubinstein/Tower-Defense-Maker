@@ -1,6 +1,5 @@
 package frontEnd.Skeleton;
 
-import backEnd.Attribute.AttributeOwnerReader;
 import javafx.scene.Node;
 import javafx.stage.Stage;
 
