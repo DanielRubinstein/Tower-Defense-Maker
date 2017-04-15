@@ -33,4 +33,6 @@ public interface Model {
 	 */
 	GameProcessController getGameProcessController();
 
+	void play();
+
 }
