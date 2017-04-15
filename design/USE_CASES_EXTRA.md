@@ -17,10 +17,9 @@
 3. User clicks on a tile in author mode
 
 
-
 * When this happens, the lambda expression to launch a new instance of tile command center is called
-* This launces a new window containing information about all the attribuets of the tile
-* In player mdoe, the user can only see this information
+* This launches a new window containing information about all the attributes of the tile
+* In player mode, the user can only see this information
 * in author mode, the user can edit these attributes. This editing is again done through invokables
 * There are also various tabs if the tile has any components on it
 
@@ -35,7 +34,7 @@
 
 5. In player mode, user clicks on a tile
 
-
+* The Player menu for the Tile appears, which allows the user to purchase a Component such as a Tower to place on the Tile. 
 
 6. In author mode, user drags a preset tile and drops it on the canvas.
 
@@ -86,3 +85,22 @@
 
 14. The user attempts to set a path through the Grid that is not contiguous
 * The path checking algorithm sees that there is no way to path from a start tile to an end tile, and displays an error popup detailing the issue and asking the user to define a correct path. 
+
+15. Enemy dies leaving a coin. 
+
+* Coin is clicked and its setOnAction() causes it to disappear and add money to the player's current total.
+
+16. Player clicks on turret. 
+
+* A display for the turret pops up and allows player to change turrets target preferences. Changes attribute targetPreference via setAttribute().
+
+17. Player places bomb. 
+
+* After small time the item engine creates explode behavior that calls execute() which damages all the surrounding enemies.
+
+18. Player creates new custom component. 
+
+* This leads to creation of componentBuilder which then uses getComponent() to create a component with the correct attributes.
+
+19. Player deletes tower. 
+* Tower is selected by player and tower attributes appear. Player presses delete which removes the instance from the game using remove().

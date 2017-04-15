@@ -102,6 +102,7 @@ public class StateImpl extends Observable implements State {
 
 	}
 
+	/*
 	@SuppressWarnings({ "unused", "unchecked" })
 	private void formShortestPath(){
 		Map<Tile, Coord> startTiles = findStartTiles();
@@ -156,6 +157,7 @@ public class StateImpl extends Observable implements State {
 			}
 		}
 	}
+	*/
 
 	private ArrayList<Coord> getAdjacents(Coord current) {
 		ArrayList<Coord> adjacents = new ArrayList<Coord>();
@@ -183,12 +185,14 @@ public class StateImpl extends Observable implements State {
 		return true;
 	}
 	
+	/*
 	@Override
 	public void calculateShortestPath() {
 		// TODO Auto-generated method stub
 
 	}
-
+	*/
+	
 	@Override
 	public int getGridWidth() {
 		return numColsInGrid;
