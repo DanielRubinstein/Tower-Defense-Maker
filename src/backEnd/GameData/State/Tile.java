@@ -22,11 +22,6 @@ public interface Tile extends AttributeOwner {
 	void setAttributeData(AttributeData newAttrData);
 	
 	/**
-	 * @return Tile location
-	 */
-	Point2D getLocation();
-	
-	/**
 	 * 
 	 * @param name the name of the desired Attribute
 	 * @return true if the Tile has the given Attribute, false otherwise

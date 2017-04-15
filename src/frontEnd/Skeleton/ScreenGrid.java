@@ -120,7 +120,7 @@ public class ScreenGrid implements SkeletonObject, Observer {
 		for (int row = 0; row < numberOfTileRows; row++) {
 			for (int col = 0; col < numberOfTileCols; col++) {
 				//System.out.println("In ScreenGrid, my i is: "+i+" and my j is: "+j);
-				AttributeOwnerReader t = myTileGrid.getTileByLocation(new Point2D(row, col));
+				AttributeOwnerReader t = myTileGrid.getTileByGridPosition(col, row);
 				
 				// this is where the tile can learn its position
 				
