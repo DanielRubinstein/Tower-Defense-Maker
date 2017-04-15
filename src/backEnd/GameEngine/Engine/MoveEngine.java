@@ -17,10 +17,6 @@ public class MoveEngine implements Engine{
 	private Tile currentTile;
 	private MoveBehavior mb;
 	/**
-	 * simple BFS to label each Tile with the
-	 * direction an object on the Tile should move
-	 * 
-	 * might need to be in State? will need to be recalled when a tower is added or removed from State
 	 * 
 	 * @param TileGrid the Grid of Tiles that Components must navigate
 	 * @param xStart the starting x-coordinate
@@ -42,6 +38,7 @@ public class MoveEngine implements Engine{
 			currentTile = myState.getTileGrid().getTileByScreenLocation(currentLocation); 
 			myState.getComponentGraph().removeComponent(c);
 			try {
+				mb.setMoveAmount((double) c.getAttribute("Speed").getValue());
 				mb.execute(currentTile);
 				Point2D newPosition=mb.getPosition();
 				System.out.println("Move Behavior executed. Old position was: "+currentLocation + " new position is "+newPosition);
