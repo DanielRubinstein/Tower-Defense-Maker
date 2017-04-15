@@ -39,8 +39,12 @@ public class MoveEngine implements Engine{
 		myState=currentState;
 		for (Component c: myState.getComponentGraph().getAllComponents()){
 			mb=new MoveBehavior(c);
-			Object o = c.getAttribute("Position").getValue();
-			Point2D currentLocation=(Point2D) o;
+			
+			Point2D currentLocation = AttributeImpl.getValueWithOutCasting(c);
+			
+			//Object o = c.getAttribute("Position").getValue();
+			//Point2D currentLocation=(Point2D) o;
+			System.out.println(currentLocation+ "  printing current location");
 			if (currentLocation==null){ //there are some components that have been intialized with empty values. why?
 				System.out.println("We're checking a component with an uninitialized location.");
 				continue;
