@@ -27,7 +27,6 @@
 4. In player mode, user drags a component to use on screen.
  
 
-
 * This is what will happen when the game is fully implemented
 * This is similar to how an author can add components
 * However, now there may be restrictions to which components the user can drag and drop
@@ -51,15 +50,12 @@
 7. In author mode, user clicks on a component and changes its location.
 
 
-
 * When a component is clicked in author mode, a command center pops up where the attributes can be changed
 * IF the user clicks and enters a new position for the component, this calls an invokable through the view which interacts with ComponentGraph
 * The corresponding component's position attribute is changed, and when this happens the canvas is notified (via observable pattern) and this change is reflected in the UI
 
 
 8. In author mode, user clicks on a tile and changes its image.
-
-
 
 
 * In this scenario, the user clicks on a button to select a new image.
@@ -70,4 +66,23 @@
 
 
 9. In 
-10. 
+
+
+10. A projectile is fired (revised from v1.0)
+
+* AttackEngine sees that a turret is a Component of type Turret, and so runs its execute() on the turret. The turret generates a Component of type Projectile and selects a Component near it with the Enemy label to fire at. The projectile then moves to the target component and performs its specified behavior upon collision.
+
+11. The user clicks "Save" in the UI
+
+* The current GameData (containing State, Rules, and UserData) is bundled together and written to XML through XMLWriter (XStream). Then, this file is saved to the specified location, where it can be read in to reload the game.
+
+12. A Component's Attribute is modified through the UI
+
+* An invokable object is created in the frontend, which is passed as a lambda to the Environment. The environment runs this lambda to perform the action specified in the invokable upon the Component's attributes. This triggers an Observer to modify the Component in State to reflect the change.
+
+13. In Player Mode, the user attempts to add a new Component to the TileGrid
+
+* The Mode check is performed, which returns Player instead of the required Author. The sequence of method calls to add the Component then terminates, as this action is not permitted in Player mode.
+
+14. The user attempts to set a path through the Grid that is not contiguous
+* The path checking algorithm sees that there is no way to path from a start tile to an end tile, and displays an error popup detailing the issue and asking the user to define a correct path. 
