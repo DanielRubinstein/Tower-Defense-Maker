@@ -18,13 +18,15 @@ public interface TileGrid {
 	 * @return Tile at the given location
 	 */
 	Tile getTileByGridPosition(int column, int row);
+	
+	void setTileByScreenPosition(Tile newTile, Point2D position);
 
 	/**
 	 * Set the tile at a given location
 	 * @param newTile
 	 * @param location
 	 */
-	void setTileIntoTileGrid(Tile newTile, int column, int row);
+	void setTileByGridPosition(Tile newTile, int column, int row);
 	
 	/**
 	 * @return grid width

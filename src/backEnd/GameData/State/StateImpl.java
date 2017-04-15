@@ -57,7 +57,7 @@ public class StateImpl extends Observable implements State {
 				Attribute<String> imgAttr = (Attribute<String>) newTile.getAttribute("ImageFile");
 				imgAttr.setValue(myImageResource.getString("default_tile"));
 				
-				myTileGrid.setTileIntoTileGrid(newTile, col, row);
+				myTileGrid.setTileByGridPosition(newTile, col, row);
 
 			}
 		}

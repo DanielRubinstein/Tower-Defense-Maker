@@ -51,10 +51,15 @@ public class TileGridImpl implements TileGrid {
 		return getTileByGridPosition(column, row);
 	}
 	
-	
+	@Override
+	public void setTileByScreenPosition(Tile newTile, Point2D position) {
+		int column = (int) Math.floor(position.getX() / tileWidth);
+		int row = (int) Math.floor(position.getY() / tileHeight);
+		setTileByGridPosition(newTile, column, row);
+	}
 	
 	@Override
-	public void setTileIntoTileGrid(Tile newTile, int column, int row){
+	public void setTileByGridPosition(Tile newTile, int column, int row){
 		tileGrid[column][row] = newTile;
 	}
 
@@ -87,6 +92,8 @@ public class TileGridImpl implements TileGrid {
 	public double getTileHeight() {
 		return this.tileHeight;
 	}
+
+
 
 
 }
