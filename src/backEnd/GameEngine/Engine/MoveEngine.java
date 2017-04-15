@@ -14,6 +14,8 @@ import backEnd.GameData.State.*;
  */
 public class MoveEngine implements Engine{
 	private State myState;
+	private Tile currentTile;
+	private MoveBehavior mb;
 	/**
 	 * simple BFS to label each Tile with the
 	 * direction an object on the Tile should move
@@ -28,18 +30,31 @@ public class MoveEngine implements Engine{
 	public void gameLoop(State currentState, double stepTime) {
 		myState=currentState;
 		for (Component c: myState.getComponentGraph().getAllComponents()){
-			System.out.println(c instanceof Component);
-			Tile currentTile = myState.getTileGrid().getTileByLocation((Point2D)c.getAttribute("Position").getValue()); 
+			mb=new MoveBehavior(c);
+			Object o = c.getAttribute("Position").getValue();
+			Point2D currentLocation=(Point2D) o;
+			if (currentLocation==null){ //there are some components that have been intialized with empty values. why?
+				System.out.println("We're checking a component with an uninitialized location.");
+				continue;
+			}
+			//try{
+			System.out.println("currentLocation: "+currentLocation.getX());
+			currentTile = myState.getTileGrid().getTileByScreenLocation(currentLocation); 
 			myState.getComponentGraph().removeComponent(c);
-			MoveBehavior mb=new MoveBehavior(c);
 			try {
 				mb.execute(currentTile);
+				Point2D newPosition=mb.getPosition();
+				System.out.println("Move Behavior executed. Old position was: "+currentLocation + " new position is "+newPosition);
+				myState.getComponentGraph().addComponentToGrid(c, newPosition);
 			} catch (FileNotFoundException e) {
 				ErrorDialog fnf = new ErrorDialog();
 				fnf.create("Error", "File not found");
+			//}
+
+			//} catch (Exception e){
+			//	System.out.println("other erorr "+e.getMessage());
+			//	e.printStackTrace();
 			}
-			Point2D newPosition=mb.getPosition();
-			myState.getComponentGraph().addComponentToGrid(c, newPosition);
 			
 		}
 		

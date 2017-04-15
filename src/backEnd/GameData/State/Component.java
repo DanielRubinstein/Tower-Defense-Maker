@@ -34,6 +34,8 @@ public class Component extends Observable implements AttributeOwner {
 	private AccessPermissions myAccessPermissions;
 	private String myType;
 	private List<Observer> observers = new ArrayList<Observer>();
+	private long ID;
+	
 	public Component(AttributeData attributes) throws FileNotFoundException {
 		this(attributes, new AccessPermissionsImpl());
 	}
@@ -41,8 +43,14 @@ public class Component extends Observable implements AttributeOwner {
 	public Component(){
 		
 	}
+	public long printID(){
+		return ID;
+	}
 	
 	public Component(AttributeData attributes, AccessPermissions accessPermissions) throws FileNotFoundException {
+		ID = System.nanoTime();
+		System.out.println(ID + "   ");
+		System.out.println("creaing component " + this);
 		myAttributes = attributes;
 		myBehaviors = new HashMap<>();
 		AttributeFactory af = new AttributeFactory();
@@ -127,7 +135,8 @@ public class Component extends Observable implements AttributeOwner {
 	@Override
 	public <T> void setAttributeValue(String attrName, T newVal) {
 		((Attribute<T>) myAttributes.get(attrName)).setValue(newVal);
-		System.out.println("setting component attr " +newVal);
+		//System.out.println("setting component attr " +attrName + "     "    +newVal);
+		
 		notifyObservers();
 	}
 
@@ -136,6 +145,11 @@ public class Component extends Observable implements AttributeOwner {
 		observers.add(obs);
 	}
 
+	
+	public boolean containsAttribute(String key){
+		return myAttributes.containsAttribute(key);
+	}
+	
 	@Override
 	public void notifyObservers() {
 		for (Observer obs : observers) {
