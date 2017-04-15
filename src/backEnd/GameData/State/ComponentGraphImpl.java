@@ -50,6 +50,11 @@ public class ComponentGraphImpl extends Observable implements ComponentGraph {
 //		return componentList;
 //	}
 	
+	public Map<Point2D, List<Component>> getComponentMap()
+	{
+		return componentMap;
+	}
+	
 	@Override
 	public List<Component> getComponentsByScreenPosition(Point2D screenPosition){
 		return componentMap.get(screenPosition);

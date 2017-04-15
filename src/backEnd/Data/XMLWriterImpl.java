@@ -3,6 +3,7 @@ package backEnd.Data;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.Map;
 
 import com.thoughtworks.xstream.XStream;
@@ -11,8 +12,11 @@ import com.thoughtworks.xstream.io.xml.DomDriver;
 import backEnd.Bank.BankController;
 import backEnd.GameData.GameData;
 import backEnd.GameData.GameDataInterface;
+import backEnd.GameData.Rules;
 import backEnd.GameData.State.Component;
+import backEnd.GameData.State.State;
 import backEnd.GameData.State.Tile;
+import backEnd.GameData.State.TileGrid;
 
 /**
  * This class handles saving both game state data and universal game data
@@ -24,13 +28,25 @@ public class XMLWriterImpl implements XMLWriter{
 	
 	public XMLWriterImpl(){
 		xStream = new XStream(new DomDriver());
-		xStream.alias("GameData", GameData.class);
-		xStream.alias("BankController", GameData.class);
+		xStream.alias("Rules", Rules.class);
+
+		xStream.alias("BankController", BankController.class);
+		xStream.alias("TileGrid", TileGrid.class);
 	}
 	
-	public void saveGameStateData(GameDataInterface gameData, String filePath, String gameName){
-		String gameDataXML = xStream.toXML(gameData);
-		saveToXML(filePath, gameName, gameDataXML);
+	public void saveGameStateData(GameDataInterface gameData, String filePath, String gameName)
+	{
+		
+		String rulesXML = xStream.toXML(gameData.getRules());
+		saveToXML(filePath, gameName+ "_rules", rulesXML);
+		
+		String componentMapXML = xStream.toXML(gameData.getState().getComponentGraph().getComponentMap());
+		saveToXML(filePath, gameName + "_componentlocmap", componentMapXML);
+		
+		String tileGridXML = xStream.toXML(gameData.getState().getTileGrid());
+		saveToXML(filePath, gameName + "_tilegrid", tileGridXML);
+		
+		
 	}
 	
 	public void saveUniversalGameData(BankController bankController, String filePath){
@@ -45,13 +61,15 @@ public class XMLWriterImpl implements XMLWriter{
 	private void saveToXML(String filePath, String fileName, String xmlToWrite) {
 		FileOutputStream fos = null;
 		try {
+			System.out.println(filePath + fileName + ".xml");
 			File gameFile = new File(filePath + fileName + ".xml");
 		    fos = new FileOutputStream(gameFile, false);
 		    fos.write("<?xml version=\"1.0\"?>".getBytes("UTF-8"));
 		    byte[] bytes = xmlToWrite.getBytes("UTF-8");
 		    fos.write(bytes);
 		} catch(Exception e) {
-		    throw new XMLWritingException("Error writing " + fileName + ".xml");
+			e.printStackTrace();
+		    //throw new XMLWritingException("Error writing " + fileName + ".xml");
 		}finally{
 	        if(fos != null){
 	            try{

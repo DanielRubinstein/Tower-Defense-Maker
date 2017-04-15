@@ -2,6 +2,7 @@ package backEnd.GameData.State;
 
 import java.util.Collection;
 import java.util.List;
+import java.util.Map;
 import java.util.Observable;
 import java.util.Observer;
 
@@ -17,6 +18,7 @@ public interface ComponentGraph {
 	 */
 	List<Component> getComponentsByScreenPosition(Point2D location);
 
+	Map<Point2D, List<Component>> getComponentMap();
 	/**
 	 * Get the list of components at a given Tile location
 	 * @param Tile location
