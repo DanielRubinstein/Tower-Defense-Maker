@@ -22,6 +22,8 @@ import backEnd.GameData.State.*;
  */
 public class MoveEngine implements Engine{
 	private State myState;
+	private Tile currentTile;
+	private MoveBehavior mb;
 	/**
 	 * simple BFS to label each Tile with the
 	 * direction an object on the Tile should move
@@ -32,30 +34,35 @@ public class MoveEngine implements Engine{
 	 * @param xStart the starting x-coordinate
 	 * @param yStart the starting y-coordinate
 	 */
-	@SuppressWarnings("unchecked")
 	@Override
 	public void gameLoop(State currentState, double stepTime) {
 		myState=currentState;
 		for (Component c: myState.getComponentGraph().getAllComponents()){
-
-			Attribute<?> location=c.getAttribute("Position");
-			Point2D impl = (Point2D) location.getValue();
-			System.out.println(impl.getClass().toString()+ "line 42");
-			Point2D x=(Point2D) location.getValue();
-			//Point2D myPoint=new Point2D(location.getValue().getX(), location.getValue().getY());
-			//System.out.println("DIDNT FAIL");
-			Tile currentTile=myState.getTileGrid().getTileByLocation(x);
-			System.out.println("WORLDSTAR");
+			mb=new MoveBehavior(c);
+			Object o = c.getAttribute("Position").getValue();
+			Point2D currentLocation=(Point2D) o;
+			if (currentLocation==null){ //there are some components that have been intialized with empty values. why?
+				System.out.println("We're checking a component with an uninitialized location.");
+				continue;
+			}
+			//try{
+			System.out.println("currentLocation: "+currentLocation.getX());
+			currentTile = myState.getTileGrid().getTileByScreenLocation(currentLocation); 
 			myState.getComponentGraph().removeComponent(c);
-			MoveBehavior mb=new MoveBehavior(c);
 			try {
 				mb.execute(currentTile);
+				Point2D newPosition=mb.getPosition();
+				System.out.println("Move Behavior executed. Old position was: "+currentLocation + " new position is "+newPosition);
+				myState.getComponentGraph().addComponentToGrid(c, newPosition);
 			} catch (FileNotFoundException e) {
 				ErrorDialog fnf = new ErrorDialog();
 				fnf.create("Error", "File not found");
+			//}
+
+			//} catch (Exception e){
+			//	System.out.println("other erorr "+e.getMessage());
+			//	e.printStackTrace();
 			}
-			Point2D newPosition=mb.getPosition();
-			myState.getComponentGraph().addComponentToGrid(c, newPosition);
 			
 		}
 		

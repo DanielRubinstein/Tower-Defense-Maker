@@ -8,7 +8,6 @@ import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.control.Tooltip;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
@@ -40,7 +39,7 @@ public class ButtonMenuImpl implements ButtonMenu {
 	}
 
 
-	public void setText(String text){
+	private void setText(String text){
 		titleLbl = new Label(text);
 		titleLbl.setFont(Font.font(32));
 		titleLbl.setUnderline(true);
@@ -122,7 +121,7 @@ public class ButtonMenuImpl implements ButtonMenu {
 		myGrid.add(titleLbl, 0, 0, 2, 1);
 		myGrid.add(myButtonRoot, 0, 1);
 		myGrid.add(description, 1, 1);
-		myGrid.add(new Label("voogasalad_sup3rs1ckt34m1337 aka Miguel's bitches"), 0, 2, 2, 1);
+		myGrid.add(new Label("voogasalad_sup3rs1ckt34m1337"), 0, 2, 2, 1);
 		//myButtonRoot.setAlignment(Pos.CENTER);
    	 	myScene = new Scene(myGrid);
    	 	myScene.getStylesheets().add(DEFAULT_CSS);

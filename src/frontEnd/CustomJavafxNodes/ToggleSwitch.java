@@ -1,16 +1,10 @@
 package frontEnd.CustomJavafxNodes;
 
-import java.util.function.Consumer;
-
-import ModificationFromUser.Modification_ChangeMode;
-import frontEnd.View;
 import javafx.beans.property.SimpleBooleanProperty;
-import javafx.event.ActionEvent;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 
 /*
@@ -23,7 +17,6 @@ public class ToggleSwitch {
 	private HBox toggle;
 	private Label label;
 	private Button button;
-	private View myView;
 	private Runnable myModRunnable;
 	private SimpleBooleanProperty switchedOn;
 	
@@ -32,8 +25,7 @@ public class ToggleSwitch {
 		return switchedOn;
 	}
 
-	public ToggleSwitch(View view, String title1, String title2, SimpleBooleanProperty booleanProperty, Runnable modRunnable) {
-		myView = view;
+	public ToggleSwitch(String title1, String title2, SimpleBooleanProperty booleanProperty, Runnable modRunnable) {
 		toggle = new HBox();
 		label = new Label();
 		button = new Button();
