@@ -28,7 +28,8 @@ public class MoveBehavior implements Behavior {
 	
 	public MoveBehavior(Component inputComponent){
 		myComponent=inputComponent;
-		currentPosition=(Point2D) myComponent.getAttribute("Position").getValue();
+		Object currentPositionO=myComponent.getAttribute("Position").getValue();
+		currentPosition=(Point2D) currentPositionO;
 		//System.out.println("in move behavior " + myComponent.getAttribute("Position").getValue() + "    " +myComponent.getAttribute("Position").getValue().getClass());
 	}
 	
@@ -58,7 +59,6 @@ public class MoveBehavior implements Behavior {
 			break;
 		case "Down":
 			newPoint=new Point2D(currentPosition.getX(), currentPosition.getY()+moveAmount);
-			System.out.println("MOVE COMPONENT DOWN");
 			break;
 		default:
 			System.out.println("Movebehavior- No direction specified");

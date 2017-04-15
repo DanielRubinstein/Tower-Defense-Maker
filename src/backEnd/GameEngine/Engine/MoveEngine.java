@@ -46,7 +46,7 @@ public class MoveEngine implements Engine{
 				mb.setMoveAmount((double) c.getAttribute("Speed").getValue());
 				mb.execute(currentTile);
 				Point2D newPosition=mb.getPosition();
-				//System.out.println("Move Behavior executed. Old position was: "+currentLocation + " new position is "+newPosition);
+				System.out.println("Move Behavior executed. Old position was: "+currentLocation + " new position is "+newPosition);
 				myState.getComponentGraph().addComponentToGrid(c, newPosition);
 			} catch (FileNotFoundException e) {
 				ErrorDialog fnf = new ErrorDialog();
