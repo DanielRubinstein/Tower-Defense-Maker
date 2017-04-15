@@ -38,8 +38,8 @@ public class Canvas implements SkeletonObject, Observer {
 	private State myState;
 	private ComponentGraph myComponentGraph;
 	private GridPane myGrid;
-	private int myGridWidth;
-	private int myGridHeight;
+	private int numberOfTileCols;
+	private int numberOfTileRows;
 	private static final int TILE_WIDTH = 40;
 	private static final int TILE_HEIGHT = 40;
 	private TileGrid myTileGrid;
@@ -66,11 +66,11 @@ public class Canvas implements SkeletonObject, Observer {
 	private void setUpGrid() {
 		myComponentGraph = myState.getComponentGraph();
 		myComponentGraph.addAsObserver(this);
-		myGridWidth = myComponentGraph.getGridWidth();
-		myGridHeight = myComponentGraph.getGridHeight();
+		numberOfTileCols = myComponentGraph.getNumColsInGrid();
+		numberOfTileRows = myComponentGraph.getNumRowsInGrid();
 		myGrid = new GridPane();
-		myGrid.setMinWidth(myGridWidth);
-		myGrid.setMinHeight(myGridHeight);
+		myGrid.setMinWidth(numberOfTileCols);
+		myGrid.setMinHeight(numberOfTileRows);
 		setTileGrid();
 		root.getChildren().add(myGrid);
 		myGrid.toBack();
@@ -98,14 +98,15 @@ public class Canvas implements SkeletonObject, Observer {
 	}
 
 	private void setTileGrid() {
-		for (int i = 0; i < myGridHeight; i++) {
-			for (int j = 0; j < myGridWidth; j++) {
-				AttributeOwnerReader t = myTileGrid.getTileByLocation(new Point2D(i, j));
+		for (int row = 0; row < numberOfTileRows; row++) {
+			for (int col = 0; col < numberOfTileCols; col++) {
+				//System.out.println("In Canvas, my i is: "+i+" and my j is: "+j);
+				AttributeOwnerReader t = myTileGrid.getTileByLocation(new Point2D(row, col));
 				FrontEndAttributeOwner attrOwner = new FrontEndAttributeOwnerImpl(t);
 				ImageView tileView = attrOwner.getImageView();
 				organizeImageView(tileView);
 				setTileInteraction(tileView, (Tile) t);
-				myGrid.add(tileView, j, i);
+				myGrid.add(tileView, col, row); // this is correct, when you add to gridPane it is (node, col, row)
 
 			}
 		}
@@ -115,8 +116,8 @@ public class Canvas implements SkeletonObject, Observer {
 		tileView.setPreserveRatio(false);
 		tileView.setFitWidth(TILE_WIDTH);
 		tileView.setFitHeight(TILE_HEIGHT);
-		tileView.fitWidthProperty().bind(myGrid.widthProperty().divide(myGridWidth));
-		tileView.fitHeightProperty().bind(myGrid.heightProperty().divide(myGridHeight));
+		tileView.fitWidthProperty().bind(myGrid.widthProperty().divide(numberOfTileCols));
+		tileView.fitHeightProperty().bind(myGrid.heightProperty().divide(numberOfTileRows));
 	}
 
 	private void setTileInteraction(Node n, Tile t) {

@@ -28,8 +28,8 @@ import javafx.geometry.Point2D;
  */
 public class StateImpl extends Observable implements State {
 
-	private int gridWidth;
-	private int gridHeight;
+	private int numColsInGrid;
+	private int numRowsInGrid;
 	private int pointResWidth;
 	private int pointResHeight;
 	private TileGrid stateGrid;
@@ -39,21 +39,21 @@ public class StateImpl extends Observable implements State {
 	private final static String IMAGEPATH_RESOURCES_PATH = "resources/images";
 	private final static ResourceBundle myImageResource = ResourceBundle.getBundle(IMAGEPATH_RESOURCES_PATH);
 
-	public StateImpl(int gridWidth, int gridHeight, int pointResolution_Width, int pointResolution_Height) throws FileNotFoundException {
-		this.gridWidth = gridWidth;
-		this.gridHeight = gridHeight;
+	public StateImpl(int numColsInGrid, int numRowsInGrid, int pointResolution_Width, int pointResolution_Height) throws FileNotFoundException {
+		this.numColsInGrid = numColsInGrid;
+		this.numRowsInGrid = numRowsInGrid;
 		this.pointResWidth = pointResolution_Width;
 		this.pointResHeight = pointResolution_Height;
-		setDefaultTileGrid(gridWidth, gridHeight, pointResolution_Width, pointResolution_Height);
-		componentGraph = new ComponentGraphImpl(gridWidth, gridHeight, pointResolution_Height, pointResolution_Height);
+		setDefaultTileGrid();
+		componentGraph = new ComponentGraphImpl(numColsInGrid, numRowsInGrid, pointResolution_Height, pointResolution_Height);
 	}
 
-	private void setDefaultTileGrid(int gridWidth, int gridHeight, int pointResolution_Width,
-			int pointResolution_Height) throws FileNotFoundException {
-		stateGrid = new TileGridImpl(gridWidth, gridHeight);
-		for (int i = 0; i < gridHeight; i++) {
-			for (int j = 0; j < gridWidth; j++) {
-				Point2D loc = new Point2D(j,i);
+
+	private void setDefaultTileGrid() throws FileNotFoundException {
+		stateGrid = new TileGridImpl(numColsInGrid, numRowsInGrid);
+		for (int row = 0; row < numRowsInGrid; row++) {
+			for (int col = 0; col < numColsInGrid; col++) {
+				Point2D loc = new Point2D(col, row);
 				Tile newTile = new TileImpl(Arrays.asList(), Arrays.asList(UserModeType.AUTHOR), loc);
 				Attribute<String> imgAttr = (Attribute<String>) newTile.getAttribute("ImageFile");
 				imgAttr.setValue(myImageResource.getString("default_tile"));
@@ -62,6 +62,7 @@ public class StateImpl extends Observable implements State {
 			}
 		}
 	}
+	
 	public void addAsObserver(Observer o){
 		this.addObserver(o);
 	}
@@ -78,8 +79,8 @@ public class StateImpl extends Observable implements State {
 
 	private Map<Tile, Coord> findStartTiles() {
 		Map<Tile, Coord> startTiles = new HashMap<Tile, Coord>();
-		for (int i = 0; i < gridWidth; i++) { // find the start position
-			for (int j = 0; j < gridHeight; j++) {
+		for (int i = 0; i < numColsInGrid; i++) { // find the start position
+			for (int j = 0; j < numRowsInGrid; j++) {
 				if ((boolean) stateGrid.getTileByCoord(i, j).getMyAttributes().getAttributeMap()
 						.get(myResources.getString("StartTile")).getValue() == true) {
 					startTiles.put(stateGrid.getTileByCoord(i, j), new Coord(i, j, null));
@@ -90,8 +91,8 @@ public class StateImpl extends Observable implements State {
 	}
 	
 	public void updateState(State state){
-		this.gridWidth = state.getGridWidth();
-		this.gridHeight = state.getGridHeight();
+		this.numColsInGrid = state.getGridWidth();
+		this.numRowsInGrid = state.getGridHeight();
 		this.pointResWidth = state.getPointResolutionWidth();
 		this.pointResHeight = state.getPointResolutionHeight();
 		this.stateGrid = state.getTileGrid();
@@ -194,12 +195,12 @@ public class StateImpl extends Observable implements State {
 	
 	@Override
 	public int getGridWidth() {
-		return gridWidth;
+		return numColsInGrid;
 	}
 
 	@Override
 	public int getGridHeight() {
-		return gridHeight;
+		return numRowsInGrid;
 	}
 
 	@Override

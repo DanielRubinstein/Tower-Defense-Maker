@@ -9,16 +9,9 @@ import javafx.geometry.Point2D;
 
 public interface ComponentGraph {
 
-	int getGridWidth();
+	int getNumColsInGrid();
 
-	int getGridHeight();
-
-
-	/**
-	 * Returns list of all components on the grid
-	 * @return list of components
-	 */
-	List<Component> getComponentList();
+	int getNumRowsInGrid();
 
 
 	/**
