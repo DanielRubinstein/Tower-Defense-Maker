@@ -2,36 +2,37 @@ package ModificationFromUser;
 
 import java.util.function.Consumer;
 
+import backEnd.Model;
 import backEnd.ModelImpl;
-import backEnd.GameEngine.Engine.GameProcessController;
 
 public enum Modification_GameRemote implements ModificationFromUser {
-	PLAY (engine -> {
+	PLAY (model -> {
 		System.out.println("PLAY GAME");
 		//FIXME should ultimately execute animation.play()
-		engine.run(100);
+		model.play();
 		}),
-	PAUSE (engine -> {
+	PAUSE (model -> {
 		System.out.println("PAUSE GAME");
-		//engine.pause();
+		//model.pause();
 		}),
-	FASTFORWARD (engine -> {
+	FASTFORWARD (model -> {
 		System.out.println("FASTFORWARD");
-		//engine.fastforward();
+		//model.fastforward();
 		}),
-	RESTART (engine -> {
+	RESTART (model -> {
 		System.out.println("RESTART LEVEL");
-		//engine.play();
+		//model.play();
 		}),
-	NEXTLEVEL (engine -> {
+	NEXTLEVEL (model -> {
 		System.out.println("NEXT LEVEL");
-		//engine.play();
+		//model.play();
 		});
 
-	private Consumer<GameProcessController> myConsumer;
+	private Consumer<Model> myConsumer;
 	public static final double DEFAULT_STEP_TIME = 1000; 
 	
-	Modification_GameRemote(Consumer<GameProcessController> consumer){
+	
+	Modification_GameRemote(Consumer<Model> consumer){
 		myConsumer = consumer;
 	}
 
@@ -39,12 +40,12 @@ public enum Modification_GameRemote implements ModificationFromUser {
 	public void invoke(ModelImpl myModel) throws Exception {
 		switch (this) {
 		case PLAY:
-			myConsumer.accept(myModel.getGameProcessController());
+			myConsumer.accept(myModel);
 			break;
 		default:
 			switch (myModel.getMode().getUserMode()) {
 			case PLAYER:
-				myConsumer.accept(myModel.getGameProcessController());
+				myConsumer.accept(myModel);
 				break;
 			case AUTHOR:
 				// do nothing
