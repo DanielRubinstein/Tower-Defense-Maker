@@ -38,11 +38,12 @@ public class MoveBehavior implements Behavior {
 		currentTile=(Tile) tile;
 
 		//System.out.println("   tile  "+tile);
-		//System.out.println("   tile  "+currentTile.getAttribute("MoveDirection"));
+		System.out.println("   tile  "+currentTile.getAttribute("MoveDirection"));
 		
 		//System.out.println("   in move behavior " +currentTile.getAttribute("MoveDirection").getValue().getClass() + "    " +
 				//currentTile.getAttribute("MoveDirection").getValue());
 		if (currentTile.getAttribute("MoveDirection").getValue()==null){
+			System.out.println("WO BU ZHIDAO");
 			return;
 		}
 		switch ((String) currentTile.getAttribute("MoveDirection").getValue()) {

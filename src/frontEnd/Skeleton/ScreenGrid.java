@@ -33,47 +33,78 @@ import javafx.scene.layout.GridPane;
  *
  */
 
-public class Canvas implements SkeletonObject, Observer {
-	private Group root;
+public class ScreenGrid implements SkeletonObject, Observer {
+	private View myView;
 	private State myState;
-	private ComponentGraph myComponentGraph;
+	
+	private Group myRoot;
 	private GridPane myGrid;
+	
+	private TileGrid myTileGrid;
+	private ComponentGraph observedComponentGraph;
+	
+	private Set<Component> myComponents;
+	
+	private double myWidth;
+	private double myHeight;
 	private int numberOfTileCols;
 	private int numberOfTileRows;
-	private static final int TILE_WIDTH = 40;
-	private static final int TILE_HEIGHT = 40;
-	private TileGrid myTileGrid;
-	private View myView;
-	private Set<Component> myComponents;
+	private double tileWidth;
+	private double tileHeight;
+	
+	
+	
 
 	/**
-	 * Constructs a new Canvas object given the view and state. State contains
+	 * Constructs a new ScreenGrid object given the view and state. State contains
 	 * all the required backend information like location of tiles and
 	 * attributes of everything needed to be displayed on screen.
 	 * 
 	 * @param view
 	 * @param state
+	 * @param screenGridHeight 
+	 * @param screenGridWidth 
 	 */
-	public Canvas(View view, State state) {
-		myState = state;
+	public ScreenGrid(View view, State state, double screenGridWidth, double screenGridHeight) {
 		myView = view;
-		myTileGrid = state.getTileGrid();
-		myComponents = new HashSet<Component>();
-		root = new Group();
-		setUpGrid();
+		myState = state;
+		myWidth = screenGridWidth;
+		myHeight = screenGridHeight;
+		extractAoCollectionsFromState();
+		numberOfTileCols = myTileGrid.getNumColsInGrid();
+		numberOfTileRows = myTileGrid.getNumRowsInGrid();
+		tileWidth = myWidth / numberOfTileCols;
+		tileHeight = myHeight / numberOfTileRows;
+		myTileGrid.setTileSize(tileWidth, tileHeight);
+		placeComponents();
+		initializeGrid();
+		placeTileGridOnScreenGrid();
+		addGridToRoot();
 	}
 
-	private void setUpGrid() {
-		myComponentGraph = myState.getComponentGraph();
-		myComponentGraph.addAsObserver(this);
-		numberOfTileCols = myComponentGraph.getNumColsInGrid();
-		numberOfTileRows = myComponentGraph.getNumRowsInGrid();
+	private void placeComponents() {
+		myComponents = new HashSet<>();
+		updateComponentsOnGrid();
+	}
+
+	private void addGridToRoot() {
+		myRoot = new Group();
+		myRoot.getChildren().add(myGrid);
+		myGrid.toBack();
+	}
+
+	private void extractAoCollectionsFromState() {
+		myTileGrid = myState.getTileGrid();
+		observedComponentGraph = myState.getComponentGraph();
+		observedComponentGraph.addAsObserver(this);
+	}
+
+	private void initializeGrid() {
 		myGrid = new GridPane();
 		myGrid.setMinWidth(numberOfTileCols);
 		myGrid.setMinHeight(numberOfTileRows);
-		setTileGrid();
-		root.getChildren().add(myGrid);
-		myGrid.toBack();
+		myGrid.setPrefWidth(myWidth);
+		myGrid.setPrefHeight(myHeight);
 	}
 
 	/*
@@ -82,40 +113,31 @@ public class Canvas implements SkeletonObject, Observer {
 	 * @see frontEnd.Skeleton.UserTools.SkeletonObject#getRoot()
 	 */
 	public Node getRoot() {
-		return root;
+		return myRoot;
 	}
 
-	/**
-	 * Sets the size of the canvas to the given parameters. Note, however, that
-	 * the user can change the size of the window while running the application.
-	 * 
-	 * @param width
-	 * @param height
-	 */
-	public void setSize(double width, double height) {
-		myGrid.setPrefWidth(width);
-		myGrid.setPrefHeight(height);
-	}
-
-	private void setTileGrid() {
+	private void placeTileGridOnScreenGrid() {
 		for (int row = 0; row < numberOfTileRows; row++) {
 			for (int col = 0; col < numberOfTileCols; col++) {
-				//System.out.println("In Canvas, my i is: "+i+" and my j is: "+j);
+				//System.out.println("In ScreenGrid, my i is: "+i+" and my j is: "+j);
 				AttributeOwnerReader t = myTileGrid.getTileByLocation(new Point2D(row, col));
+				
+				// this is where the tile can learn its position
+				
 				FrontEndAttributeOwner attrOwner = new FrontEndAttributeOwnerImpl(t);
 				ImageView tileView = attrOwner.getImageView();
 				organizeImageView(tileView);
 				setTileInteraction(tileView, (Tile) t);
-				myGrid.add(tileView, col, row); // this is correct, when you add to gridPane it is (node, col, row)
-
+				myGrid.add(tileView, col, row); 
+				// this is correct, when you add to gridPane it is (node, col, row)
 			}
 		}
 	}
 
 	private void organizeImageView(ImageView tileView) {
 		tileView.setPreserveRatio(false);
-		tileView.setFitWidth(TILE_WIDTH);
-		tileView.setFitHeight(TILE_HEIGHT);
+		tileView.setFitWidth(tileWidth);
+		tileView.setFitHeight(tileHeight);
 		tileView.fitWidthProperty().bind(myGrid.widthProperty().divide(numberOfTileCols));
 		tileView.fitHeightProperty().bind(myGrid.heightProperty().divide(numberOfTileRows));
 	}
@@ -136,20 +158,29 @@ public class Canvas implements SkeletonObject, Observer {
 
 	@Override
 	public void update(Observable o, Object arg) {
-		if (o == myComponentGraph) {
-			for (AttributeOwner c : myComponentGraph.getAllComponents()) {
-				if (!myComponents.contains(c)) {
-					FrontEndAttributeOwner frontAttr = new FrontEndAttributeOwnerImpl(c);
-					frontAttr.refreshXY();
-					ImageView frontImage = frontAttr.getImageView();
-					frontImage.setFitWidth(TILE_WIDTH / 2);
-					frontImage.setFitHeight(TILE_HEIGHT / 2);
-					setCommandInteraction(frontImage, c);
-					root.getChildren().add(frontImage);
-				}
-			}
+		if (o == observedComponentGraph) {
+			updateComponentsOnGrid();
 		}
 
+	}
+
+	private void updateComponentsOnGrid() {
+		for (Component c : observedComponentGraph.getAllComponents()) {
+			if (!myComponents.contains(c)) {
+				addComponentToGrid(c);
+			}
+		}
+	}
+
+	private void addComponentToGrid(Component c) {
+		FrontEndAttributeOwner frontAttr = new FrontEndAttributeOwnerImpl(c);
+		frontAttr.refreshXY();
+		ImageView frontImage = frontAttr.getImageView();
+		frontImage.setFitWidth(tileWidth / 2);
+		frontImage.setFitHeight(tileHeight / 2);
+		setCommandInteraction(frontImage, c);
+		myComponents.add(c);
+		myRoot.getChildren().add(frontImage);
 	}
 
 }

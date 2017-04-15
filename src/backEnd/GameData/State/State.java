@@ -1,6 +1,9 @@
 package backEnd.GameData.State;
 
+import java.util.Collection;
 import java.util.Observer;
+
+import javafx.geometry.Point2D;
 
 /**
  * This interface allows other classes to interact with the state 
@@ -28,10 +31,8 @@ public interface State {
 	int getGridWidth();
 	
 	int getGridHeight();
-	
-	int getPointResolutionWidth();
-	
-	int getPointResolutionHeight();
+
+	Collection<Component> getComponentsByTileGridPosition(Point2D value);
 
 	
 }

@@ -3,6 +3,7 @@ package backEnd.GameData.State;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.LinkedList;
@@ -30,34 +31,30 @@ public class StateImpl extends Observable implements State {
 
 	private int numColsInGrid;
 	private int numRowsInGrid;
-	private int pointResWidth;
-	private int pointResHeight;
-	private TileGrid stateGrid;
-	private ComponentGraph componentGraph;
+	private TileGrid myTileGrid;
+	private ComponentGraph myComponentGraph;
 	private final static String RESOURCES_PATH = "resources/defaultTileAttributes";
 	private final static ResourceBundle myResources = ResourceBundle.getBundle(RESOURCES_PATH);
 	private final static String IMAGEPATH_RESOURCES_PATH = "resources/images";
 	private final static ResourceBundle myImageResource = ResourceBundle.getBundle(IMAGEPATH_RESOURCES_PATH);
 
-	public StateImpl(int numColsInGrid, int numRowsInGrid, int pointResolution_Width, int pointResolution_Height) throws FileNotFoundException {
+	public StateImpl(int numColsInGrid, int numRowsInGrid) throws FileNotFoundException {
 		this.numColsInGrid = numColsInGrid;
 		this.numRowsInGrid = numRowsInGrid;
-		this.pointResWidth = pointResolution_Width;
-		this.pointResHeight = pointResolution_Height;
 		setDefaultTileGrid();
-		componentGraph = new ComponentGraphImpl(numColsInGrid, numRowsInGrid, pointResolution_Height, pointResolution_Height);
+		myComponentGraph = new ComponentGraphImpl();
 	}
 
 
 	private void setDefaultTileGrid() throws FileNotFoundException {
-		stateGrid = new TileGridImpl(numColsInGrid, numRowsInGrid);
+		myTileGrid = new TileGridImpl(numColsInGrid, numRowsInGrid);
 		for (int row = 0; row < numRowsInGrid; row++) {
 			for (int col = 0; col < numColsInGrid; col++) {
 				Point2D loc = new Point2D(col, row);
 				Tile newTile = new TileImpl(Arrays.asList(), Arrays.asList(UserModeType.AUTHOR), loc);
 				Attribute<String> imgAttr = (Attribute<String>) newTile.getAttribute("ImageFile");
 				imgAttr.setValue(myImageResource.getString("default_tile"));
-				stateGrid.setTile(newTile, loc);
+				myTileGrid.setTile(newTile, loc);
 
 			}
 		}
@@ -69,21 +66,21 @@ public class StateImpl extends Observable implements State {
 
 	@Override
 	public TileGrid getTileGrid() {
-		return stateGrid;
+		return myTileGrid;
 	}
 
 	@Override
 	public ComponentGraph getComponentGraph() {
-		return componentGraph;
+		return myComponentGraph;
 	}
 
 	private Map<Tile, Coord> findStartTiles() {
 		Map<Tile, Coord> startTiles = new HashMap<Tile, Coord>();
 		for (int i = 0; i < numColsInGrid; i++) { // find the start position
 			for (int j = 0; j < numRowsInGrid; j++) {
-				if ((boolean) stateGrid.getTileByCoord(i, j).getMyAttributes().getAttributeMap()
+				if ((boolean) myTileGrid.getTileByCoord(i, j).getMyAttributes().getAttributeMap()
 						.get(myResources.getString("StartTile")).getValue() == true) {
-					startTiles.put(stateGrid.getTileByCoord(i, j), new Coord(i, j, null));
+					startTiles.put(myTileGrid.getTileByCoord(i, j), new Coord(i, j, null));
 				}
 			}
 		}
@@ -93,10 +90,8 @@ public class StateImpl extends Observable implements State {
 	public void updateState(State state){
 		this.numColsInGrid = state.getGridWidth();
 		this.numRowsInGrid = state.getGridHeight();
-		this.pointResWidth = state.getPointResolutionWidth();
-		this.pointResHeight = state.getPointResolutionHeight();
-		this.stateGrid = state.getTileGrid();
-		this.componentGraph = state.getComponentGraph();
+		this.myTileGrid = state.getTileGrid();
+		this.myComponentGraph = state.getComponentGraph();
 		this.setChanged();
 		this.notifyObservers();
 
@@ -177,7 +172,7 @@ public class StateImpl extends Observable implements State {
 	}
 
 	private boolean isPassable(int x, int y){
-		Tile curTile = stateGrid.getTileByCoord(x,y);
+		Tile curTile = myTileGrid.getTileByCoord(x,y);
 		if(curTile == null || (boolean)curTile.getAttribute(myResources.getString("Traversable")).getValue() == true){
 			return false;
 		}
@@ -203,14 +198,14 @@ public class StateImpl extends Observable implements State {
 		return numRowsInGrid;
 	}
 
-	@Override
-	public int getPointResolutionWidth() {
-		return pointResWidth;
-	}
 
 	@Override
-	public int getPointResolutionHeight() {
-		return pointResHeight;
+	public Collection<Component> getComponentsByTileGridPosition(Point2D tileGridPosition) {
+		TileCorners tileCorners = new TileCorners(tileGridPosition, myTileGrid.getTileWidth(), myTileGrid.getTileHeight());
+		return myComponentGraph.getComponentsByTileCorners(tileCorners);
 	}
+
+
+	
 
 }

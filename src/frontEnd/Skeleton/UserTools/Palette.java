@@ -137,9 +137,9 @@ public class Palette<T extends AttributeOwner> implements SkeletonObject, Observ
 			db.setContent(content);
 			db.setDragView(imageView.getImage());
 		});
-		Node canvas = myView.getCanvas();
-		canvas.setOnDragOver(e -> e.acceptTransferModes(TransferMode.ANY));
-		canvas.setOnDragDropped(e -> {
+		Node screenGrid = myView.getScreenGrid();
+		screenGrid.setOnDragOver(e -> e.acceptTransferModes(TransferMode.ANY));
+		screenGrid.setOnDragDropped(e -> {
 			Point2D pos = new Point2D(e.getSceneX(),e.getSceneY());
 			myView.sendUserModification(new Modification_AddPresetAttributeOwnerToGrid(preset,pos));
 		});

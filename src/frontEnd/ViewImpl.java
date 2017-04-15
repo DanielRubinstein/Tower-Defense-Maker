@@ -54,8 +54,8 @@ public class ViewImpl implements View {
 	}
 
 	@Override
-	public Node getCanvas() {
-		return mySkeleton.getCanvas();
+	public Node getScreenGrid() {
+		return mySkeleton.getScreenGrid();
 	}
 
 	@Override
