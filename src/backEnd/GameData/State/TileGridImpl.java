@@ -30,34 +30,32 @@ public class TileGridImpl implements TileGrid {
 	public void setTileSize(double tileWidth, double tileHeight) {
 		this.tileWidth = tileWidth;
 		this.tileHeight = tileHeight;
-		
 	}
 
 	
 	@Override
-	public Tile getTileByLocation(Point2D location){
-		//System.out.println("Getting Tile at this location:" + location.toString());
-		return getTileByCoord((int) location.getY(),(int) location.getX()); //Potentially wrong flipped x/y- y
+	public Tile getTileByGridPosition(int column, int row){
+		if (column >= getNumColsInGrid() || row >= getNumRowsInGrid()) {
+			throw new IndexOutOfBoundsException();
+		}
+		if (column < 0 || row < 0){
+			throw new IndexOutOfBoundsException();
+		}
+		return tileGrid[column][row];
 	}
 	
 	@Override
-	public Tile getTileByScreenLocation(Point2D location){
-		double xx = (double) location.getX() / tileWidth;
-		double yy = (double) location.getY() /tileHeight;
-		int xxx = (int) Math.floor(xx);
-		int yyy=  (int) Math.floor(yy);
-		return getTileByCoord(yyy, xxx); //Potentially wrong flipped x/y- y
+	public Tile getTileByScreenLocation(Point2D screenLocation){
+		int column = (int) Math.floor(screenLocation.getX() / tileWidth);
+		int row = (int) Math.floor(screenLocation.getY() / tileHeight);
+		return getTileByGridPosition(column, row); //Potentially wrong flipped x/y- y
 	}
 	
 	
 	
 	@Override
-	public void setTile(Tile newTile, Point2D location){
-		//System.out.println(tileGrid.length);
-		//System.out.println((int) location.getX());
-		//System.out.println(location.getY());
-		tileGrid[(int) location.getX()][(int) location.getY()] = newTile; //Potentially wrong flipped x/y?
-		newTile.setAttributeValue("Position", location);
+	public void setTileIntoTileGrid(Tile newTile, int column, int row){
+		tileGrid[column][row] = newTile;
 	}
 
 	@Override
@@ -72,25 +70,12 @@ public class TileGridImpl implements TileGrid {
 	
 	public List<Tile> getAllTiles(){
 		tileList=new ArrayList<Tile>();
-		for (int i=0; i<tileGrid.length; i++){
-			for (int j=0; j<tileGrid[i].length; j++){
-				tileList.add(tileGrid[i][j]);
+		for (int col = 0; col < numColsInGrid; col++) {
+			for (int row = 0; row < numRowsInGrid; row++) {
+				tileList.add(tileGrid[col][row]);
 			}
 		}
 		return tileList;
-	}
-
-	@Override
-	public Tile getTileByCoord(int x, int y) {
-		//convert from 50,50 to coordinates
-		//System.out.println(String.format("Getting Tile by Coordinate (%d, %d)", x, y));
-		if(x >= getNumColsInGrid()  ||
-		   y >= getNumRowsInGrid() ){
-			return null;
-		}
-		if( x<0 || y<0) return null;
-		//System.out.println("is returning a tile");
-		return tileGrid[x][y];
 	}
 
 	@Override

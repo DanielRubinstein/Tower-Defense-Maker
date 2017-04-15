@@ -51,10 +51,13 @@ public class StateImpl extends Observable implements State {
 		for (int row = 0; row < numRowsInGrid; row++) {
 			for (int col = 0; col < numColsInGrid; col++) {
 				Point2D loc = new Point2D(col, row);
+				
 				Tile newTile = new TileImpl(Arrays.asList(), Arrays.asList(UserModeType.AUTHOR), loc);
+				
 				Attribute<String> imgAttr = (Attribute<String>) newTile.getAttribute("ImageFile");
 				imgAttr.setValue(myImageResource.getString("default_tile"));
-				myTileGrid.setTile(newTile, loc);
+				
+				myTileGrid.setTileIntoTileGrid(newTile, col, row);
 
 			}
 		}
@@ -76,11 +79,12 @@ public class StateImpl extends Observable implements State {
 
 	private Map<Tile, Coord> findStartTiles() {
 		Map<Tile, Coord> startTiles = new HashMap<Tile, Coord>();
-		for (int i = 0; i < numColsInGrid; i++) { // find the start position
-			for (int j = 0; j < numRowsInGrid; j++) {
-				if ((boolean) myTileGrid.getTileByCoord(i, j).getMyAttributes().getAttributeMap()
+		for (int col = 0; col < numColsInGrid; col++) { // find the start position
+			for (int row = 0; row < numRowsInGrid; row++) {
+				Tile tile = myTileGrid.getTileByGridPosition(col, row);
+				if ((boolean) tile.getMyAttributes().getAttributeMap()
 						.get(myResources.getString("StartTile")).getValue() == true) {
-					startTiles.put(myTileGrid.getTileByCoord(i, j), new Coord(i, j, null));
+					startTiles.put(tile, new Coord(col, row, null));
 				}
 			}
 		}
@@ -156,23 +160,23 @@ public class StateImpl extends Observable implements State {
 
 	private ArrayList<Coord> getAdjacents(Coord current) {
 		ArrayList<Coord> adjacents = new ArrayList<Coord>();
-		if(isPassable(current.getXCoord()+1, current.getYCoord()  )){
+		if(isTraversable(current.getXCoord()+1, current.getYCoord()  )){
 			adjacents.add(new Coord(current.getXCoord()+1, current.getYCoord(), current));
 		}
-		if(isPassable(current.getXCoord()-1, current.getYCoord()  )){
+		if(isTraversable(current.getXCoord()-1, current.getYCoord()  )){
 			adjacents.add(new Coord(current.getXCoord()-1, current.getYCoord(), current));
 		}
-		if(isPassable(current.getXCoord()  , current.getYCoord()+1)){
+		if(isTraversable(current.getXCoord()  , current.getYCoord()+1)){
 			adjacents.add(new Coord(current.getXCoord(), current.getYCoord()+1, current));
 		}
-		if(isPassable(current.getXCoord()  , current.getYCoord()-1)){
+		if(isTraversable(current.getXCoord()  , current.getYCoord()-1)){
 			adjacents.add(new Coord(current.getXCoord(), current.getYCoord()-1, current));
 		}
 		return adjacents;
 	}
 
-	private boolean isPassable(int x, int y){
-		Tile curTile = myTileGrid.getTileByCoord(x,y);
+	private boolean isTraversable(int x, int y){
+		Tile curTile = myTileGrid.getTileByGridPosition(x,y);
 		if(curTile == null || (boolean)curTile.getAttribute(myResources.getString("Traversable")).getValue() == true){
 			return false;
 		}
