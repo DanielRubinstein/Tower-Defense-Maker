@@ -36,7 +36,7 @@ public class Modification_AddNewAttributeOwnerToGrid implements ModificationFrom
 		if (newAttrOwn instanceof Tile){
 			switch (myModel.getMode().getUserMode()) {
 			case AUTHOR:
-				myModel.getState().getTileGrid().setTile((Tile) newAttrOwn, location);
+				myModel.getState().getTileGrid().setTileIntoTileGrid((Tile) newAttrOwn, (int) location.getX(), (int) location.getY());
 				break;
 			case PLAYER:
 				 throw new ModeException(myModel.getMode(), DESCRIPTION_TILE);

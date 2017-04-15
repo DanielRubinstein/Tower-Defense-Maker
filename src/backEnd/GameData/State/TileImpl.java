@@ -27,15 +27,13 @@ import javafx.geometry.Point2D;
 public class TileImpl extends Observable implements Tile, AttributeOwner {
 	private final static String DEFAULT_ATTRIBUTES_PATH = "resources/defaultTileAttributes";
 	private final static ResourceBundle attributeResources = ResourceBundle.getBundle(DEFAULT_ATTRIBUTES_PATH);
-	private Point2D myLocation;
 	private AccessPermissions myAccessPerm;
 	private AttributeData myAttrData;
 	private List<Observer> observers = new ArrayList<Observer>();
 
 	public TileImpl(List<GameModeType> gameModeAccessPermissions, List<UserModeType> userModeAccessPermissions,
-			Point2D location) throws FileNotFoundException {
+			Point2D position) throws FileNotFoundException {
 		//System.out.println("executing Constructor for TileImpl");
-		this.myLocation = location;
 		this.myAccessPerm = new AccessPermissionsImpl(gameModeAccessPermissions, userModeAccessPermissions);
 		this.myAttrData = new AttributeData(new HashMap<String, Attribute<?>>());
 		AttributeFactory attrFact = new AttributeFactory();
@@ -45,7 +43,7 @@ public class TileImpl extends Observable implements Tile, AttributeOwner {
 			addAttribute(key, myAttribute);
 		}
 		
-
+		this.setAttributeValue("Position", position);
 	}
 
 	@Override
@@ -62,11 +60,6 @@ public class TileImpl extends Observable implements Tile, AttributeOwner {
 	public void setAttributeData(AttributeData newAttrData) {
 		myAttrData = newAttrData;
 		notifyObservers();
-	}
-
-	@Override
-	public Point2D getLocation() {
-		return myLocation;
 	}
 
 	@Override
