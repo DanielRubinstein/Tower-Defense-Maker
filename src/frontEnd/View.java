@@ -16,11 +16,14 @@ public interface View extends ViewReader{
 
 	public void editRules();
 	
+	public void step();
+	
 	public void sendUserModification(ModificationFromUser mod);
 
 	public BankController getBankController();
 	
+	public void play();
+	
 	public Node getScreenGrid();
-
 
 }

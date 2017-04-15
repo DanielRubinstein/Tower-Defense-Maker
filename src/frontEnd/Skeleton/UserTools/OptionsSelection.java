@@ -53,7 +53,7 @@ public class OptionsSelection {
 	private void addButtons(double size){
 		addButtonImage(PLAY_IMAGE, e-> {
 			System.out.println("trynig to play");
-			//myView.play();
+			myView.play();
 			myView.sendUserModification(Modification_GameRemote.PLAY);
 		}
 		 ,size);

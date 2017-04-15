@@ -38,7 +38,7 @@ public class ViewImpl implements View {
 	private SimpleBooleanProperty authorProperty;
 	private Stage appStage;
 
-	
+	public Timeline animation = new Timeline();
 	private static final double MILLISECOND_DELAY = Constants.MILLISECOND_DELAY;
 	private static final double SECOND_DELAY = Constants.SECOND_DELAY;
 
@@ -56,6 +56,23 @@ public class ViewImpl implements View {
 	@Override
 	public Node getScreenGrid() {
 		return mySkeleton.getScreenGrid();
+	}
+
+	@Override
+	public void play() {
+		KeyFrame frame = new KeyFrame(Duration.millis(MILLISECOND_DELAY), e -> step(SECOND_DELAY));
+		animation.setCycleCount(Animation.INDEFINITE);
+		animation.getKeyFrames().add(frame);
+		animation.play();
+	}
+	
+	/**
+	 * controls the animation of the State
+	 */
+	private void step(double delay) {
+		System.gc();
+		//System.out.println("game loop is running");
+		myModel.getGameProcessController().run(delay); // TODO: TESTING ONLY
 	}
 
 	@Override
@@ -129,6 +146,12 @@ public class ViewImpl implements View {
 	@Override
 	public void editRules() {
 		// TODO Auto-generated method stub
+	}
+
+	@Override
+	public void step() {
+		// TODO Auto-generated method stub
+
 	}
 
 	@Override
