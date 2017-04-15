@@ -45,7 +45,15 @@ public class StateImpl extends Observable implements State {
 		myComponentGraph = new ComponentGraphImpl();
 	}
 
-
+	public StateImpl(TileGrid tileGrid, ComponentGraph graph)
+	{
+		myTileGrid = tileGrid;
+		myComponentGraph = graph;
+		
+		numColsInGrid = tileGrid.getNumColsInGrid();
+		numRowsInGrid = tileGrid.getNumRowsInGrid();
+	}
+	
 	private void setDefaultTileGrid() throws FileNotFoundException {
 		myTileGrid = new TileGridImpl(numColsInGrid, numRowsInGrid);
 		for (int row = 0; row < numRowsInGrid; row++) {

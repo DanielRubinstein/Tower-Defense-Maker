@@ -68,8 +68,7 @@ public class XMLWriterImpl implements XMLWriter{
 		    byte[] bytes = xmlToWrite.getBytes("UTF-8");
 		    fos.write(bytes);
 		} catch(Exception e) {
-			e.printStackTrace();
-		    //throw new XMLWritingException("Error writing " + fileName + ".xml");
+		    throw new XMLWritingException("Error writing " + fileName + ".xml");
 		}finally{
 	        if(fos != null){
 	            try{

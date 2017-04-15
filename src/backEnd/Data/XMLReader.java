@@ -10,7 +10,6 @@ public interface XMLReader {
 	
 	GameData loadGameStateData(String filePath, String gameName) throws XMLReadingException;
 	
-	GameData loadGameStateData(File gameFile) throws XMLReadingException;
 	
 	List<Map<String,?>> loadUniversalGameData(String filePath) throws XMLReadingException;
 

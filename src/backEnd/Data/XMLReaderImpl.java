@@ -7,10 +7,14 @@ import java.util.Map;
 
 import com.thoughtworks.xstream.XStream;
 import com.thoughtworks.xstream.io.xml.DomDriver;
-
+import backEnd.GameData.Rules;
 import backEnd.GameData.GameData;
 import backEnd.GameData.State.Component;
+import backEnd.GameData.State.ComponentGraph;
+import backEnd.GameData.State.State;
+import backEnd.GameData.State.StateImpl;
 import backEnd.GameData.State.Tile;
+import backEnd.GameData.State.TileGrid;
 
 /**
  * This class handles loading both game state data and universal game data
@@ -26,17 +30,11 @@ public class XMLReaderImpl implements XMLReader {
 	}
 
 	public GameData loadGameStateData(String filePath, String gameName) throws XMLReadingException{
-		File xmlFile = new File(filePath + gameName + ".xml");
-		return loadGameStateData(xmlFile);
-	}
-	
-	public GameData loadGameStateData(File gameFile) throws XMLReadingException{
-		File xmlFile = gameFile;
-		try{
-	        return (GameData) xStream.fromXML(xmlFile);      
-	    }catch(Exception e){
-	        throw new XMLReadingException(gameFile);
-	    }
+		
+		StateImpl state = new StateImpl((TileGrid) xStream.fromXML(new File(filePath+gameName+"_tilegrid.xml")), 
+				(ComponentGraph) xStream.fromXML(new File(filePath+gameName+"_componentlocmap.xml")));
+		
+		return new GameData(state,(Rules)xStream.fromXML(new File(filePath+gameName+"_rules")));
 	}
 	
 	public List<Map<String,?>> loadUniversalGameData(String filePath) throws XMLReadingException{

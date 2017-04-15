@@ -51,13 +51,7 @@ public class DataController {
 			throw new XMLReadingException();
 		}
 	}
-	public GameData generateGameData(File f) throws XMLReadingException{
-		try{
-			return myXMLReader.loadGameStateData(f);
-		}catch(Exception e){
-			throw new XMLReadingException();
-		}
-	}
+	
 	public GameData generateGameData(StartingInput startInp) throws XMLReadingException{
 		try{
 			return createGameData(startInp);
