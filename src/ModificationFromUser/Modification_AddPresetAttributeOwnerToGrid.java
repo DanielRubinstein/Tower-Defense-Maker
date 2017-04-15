@@ -43,7 +43,7 @@ public class Modification_AddPresetAttributeOwnerToGrid implements ModificationF
 			case AUTHOR:
 				Tile newTile = (Tile) xStream.fromXML(serializedAO);
 				newTile.setAttributeValue("Position", location);
-				myModel.getState().getTileGrid().setTile(newTile, location);
+				myModel.getState().getTileGrid().setTileIntoTileGrid(newTile, (int) location.getX(), (int) location.getY());
 				break;
 
 			case PLAYER:
