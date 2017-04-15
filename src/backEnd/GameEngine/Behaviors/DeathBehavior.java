@@ -9,7 +9,6 @@ import backEnd.GameData.State.Component;
 import javafx.geometry.Point2D;
 
 public class DeathBehavior implements Behavior {
-	//use the following 2 when we remove dummy attributes
 	private Component myComponent;	//
 	
 	private boolean spawnsOnDeath;

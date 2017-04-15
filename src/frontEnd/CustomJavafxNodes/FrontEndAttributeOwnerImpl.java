@@ -17,6 +17,7 @@ public class FrontEndAttributeOwnerImpl implements Observer, FrontEndAttributeOw
 	private static final String IMAGE_ATTRIBUTE = "ImageFile";
 	private static final String POSITION_ATTRIBUTE = "Position";
 	private AttributeOwnerReader myAttr;
+	private Point2D newLoc;
 	
 	public FrontEndAttributeOwnerImpl(AttributeOwnerReader attr){
 		attr.addAsListener(this);
@@ -25,7 +26,8 @@ public class FrontEndAttributeOwnerImpl implements Observer, FrontEndAttributeOw
 	}
 	
 	private void setUpImageView(AttributeOwnerReader attr){
-		myImagePath = (String) attr.getMyAttributes().get(IMAGE_ATTRIBUTE).getValue();
+		Object myImagePathObj=attr.getMyAttributes().get(IMAGE_ATTRIBUTE).getValue();
+		myImagePath = (String) myImagePathObj;
 		Image image = new Image(getClass().getClassLoader().getResourceAsStream(myImagePath));
 		myImage = new ImageView(image);
 		
@@ -53,10 +55,11 @@ public class FrontEndAttributeOwnerImpl implements Observer, FrontEndAttributeOw
 	@Override
 	public void update(Observable o, Object arg) {
 		AttributeOwnerReader newAttr = (AttributeOwnerReader) o;
-	
-		String newImagePath = (String) newAttr.getMyAttributes().get(IMAGE_ATTRIBUTE).getValue();
-		Point2D newLoc = (Point2D) newAttr.getMyAttributes().get(POSITION_ATTRIBUTE).getValue();
-		if(!newImagePath.equals(myImagePath) || !newLoc.equals(myPosition)){
+		Object newImagePathObj=newAttr.getMyAttributes().get(IMAGE_ATTRIBUTE).getValue();
+		String newImagePath = (String) newImagePathObj;
+		Object newLocObj=newAttr.getMyAttributes().get(POSITION_ATTRIBUTE).getValue();
+		newLoc = (Point2D) newLocObj;
+		if(!newImagePath.equals(myImagePath) ){ //FIXME : I removed || !newLoc.equals(myPosition) from this line because caused error.
 			refreshXY();
 			myImagePath = newImagePath;
 			Image image = new Image(getClass().getClassLoader().getResourceAsStream(myImagePath));
@@ -66,10 +69,22 @@ public class FrontEndAttributeOwnerImpl implements Observer, FrontEndAttributeOw
 
 	@Override
 	public void refreshXY() {
-		Point2D loc= (Point2D) myAttr.getMyAttributes().get(POSITION_ATTRIBUTE).getValue();
-		myPosition = loc;
-		myImage.setX(loc.getX());
-		myImage.setY(loc.getY());
+		Object locObj=myAttr.getMyAttributes().get(POSITION_ATTRIBUTE).getValue();
+		Point2D loc= (Point2D) locObj;
+		if (newLoc==null){
+			newLoc=loc;
+		}
+		if (loc==null){ //components with null locations exist on the screen when game initialized- SAD!
+			return;
+		}
+		System.out.println("refreshXY executed. Old position: "+myPosition+" newPosition"+loc);
+//		myPosition = loc;
+//		myImage.setX(loc.getX());
+//		myImage.setY(loc.getY());
+		myPosition = newLoc;
+		myImage.setX(newLoc.getX());
+		myImage.setY(newLoc.getY());
+		System.out.println("it should have moved");
 		
 	}
 

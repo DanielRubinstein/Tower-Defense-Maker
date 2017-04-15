@@ -35,36 +35,33 @@ public class MoveBehavior implements Behavior {
 	@Override
 	public <T> void execute(T tile) throws FileNotFoundException {//pass in a tile //TODO error checking
 		currentTile=(Tile) tile;
+
 		//System.out.println("   tile  "+tile);
 		//System.out.println("   tile  "+currentTile.getAttribute("MoveDirection"));
 		
 		//System.out.println("   in move behavior " +currentTile.getAttribute("MoveDirection").getValue().getClass() + "    " +
 				//currentTile.getAttribute("MoveDirection").getValue());
+		if (currentTile.getAttribute("MoveDirection").getValue()==null){
+			return;
+		}
 		switch ((String) currentTile.getAttribute("MoveDirection").getValue()) {
-		case "LEFT":
+		case "Left":
 			newPoint=new Point2D(currentPosition.getX()-Constants.defaultMoveAmount, currentPosition.getY());	
 			break;
-		case "RIGHT":
+		case "Right":
 			newPoint=new Point2D(currentPosition.getX()+Constants.defaultMoveAmount, currentPosition.getY());	
 			break;
-		case "UP":
-			newPoint=new Point2D(currentPosition.getX(), currentPosition.getY()+Constants.defaultMoveAmount);
-			break;
-		case "DOWN":
+		case "Up":
 			newPoint=new Point2D(currentPosition.getX(), currentPosition.getY()-Constants.defaultMoveAmount);
 			break;
+		case "Down":
+			newPoint=new Point2D(currentPosition.getX(), currentPosition.getY()+Constants.defaultMoveAmount);
+			System.out.println("MOVE COMPONENT DOWN");
+			break;
+		default:
+			System.out.println("Movebehavior- No direction specified");
+			return;
 		}
-		AttributeFactory af = null;
-		try {
-			af = new AttributeFactory();
-		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-			System.out.println("error in MoveBehavior- SAD!");
-		}
-		Attribute<Point2D> newPositionAttribute=(Attribute<Point2D>) af.getAttribute("Position");
-		if(newPoint==null) newPoint = new Point2D(5,4);
-		newPositionAttribute.setValue(newPoint);
 		myComponent.setAttributeValue("Position",newPoint); //does it get overwritten?
 
 	}

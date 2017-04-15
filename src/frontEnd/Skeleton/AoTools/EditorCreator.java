@@ -153,12 +153,17 @@ public class EditorCreator {
 			imageChooser.setInitialDirectory(new File(SAVED_IMAGES_DIRECTORY));
 			
 			File selectedFile = imageChooser.showOpenDialog(new Stage());
-			
+			try{
 			String newPath = selectedFile.getPath();
 			String newValue = newPath.substring(newPath.indexOf("resources"), newPath.length());
 			sendModification(newValue);
 			Image newImage = new Image(getClass().getClassLoader().getResourceAsStream(imagePath));
 			curImage.setImage(newImage);
+			}
+			catch (NullPointerException exception){
+				System.out.println("Did not select an image- SAD!");
+			}
+
 		});
 		both.getChildren().add(b);
 		curImage.fitHeightProperty().bind(b.heightProperty());

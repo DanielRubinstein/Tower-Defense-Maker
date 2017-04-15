@@ -103,6 +103,9 @@ componentMap.put(location, currList);
 	
 	@Override
 	public void removeComponent(Component toRemove){
+		if (!componentMap.containsKey(toRemove)){
+			return;
+		}
 		Attribute<?> posAttribute= toRemove.getAttribute("Position");
 		Point2D location = (Point2D) posAttribute.getValue();
 		//System.out.println("removing comp at position " +location);

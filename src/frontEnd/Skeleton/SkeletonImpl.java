@@ -9,6 +9,7 @@ import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
+import resources.Constants;
 
 /**
  * This class is an implementation of Skeleton and contains all components of the UI.
@@ -21,14 +22,19 @@ public class SkeletonImpl implements Skeleton{
 	private Scene myScene;
 	private UserTools userTools;
 
-	public static final double MENU_HEIGHT = 650d;
-	public static final double MENU_WIDTH = 750d;
-	private static final double CANVAS_HEIGHT_FACTOR = 0.7;
-	private static final double CANVAS_WIDTH_FACTOR = 0.8;
-	private static final double BOTTOM_HEIGHT_FACTOR = 1 - CANVAS_HEIGHT_FACTOR;
-	private static final double SIDE_WIDTH_FACTOR = 1 - CANVAS_WIDTH_FACTOR;
-	private static final double CANVAS_WIDTH=MENU_WIDTH * CANVAS_WIDTH_FACTOR;
-	private static final double CANVAS_HEIGHT=MENU_HEIGHT * CANVAS_HEIGHT_FACTOR;
+	
+	
+	
+	private static final double MENU_HEIGHT = Constants.MENU_HEIGHT;
+	private static final double MENU_WIDTH = Constants.MENU_WIDTH;
+	private static final double CANVAS_HEIGHT_FACTOR = Constants.CANVAS_HEIGHT_FACTOR;
+	private static final double CANVAS_WIDTH_FACTOR = Constants.CANVAS_WIDTH_FACTOR;
+	private static final double BOTTOM_HEIGHT_FACTOR = Constants.BOTTOM_HEIGHT_FACTOR;
+	private static final double SIDE_WIDTH_FACTOR = Constants.SIDE_WIDTH_FACTOR;
+	private static final double CANVAS_WIDTH=Constants.CANVAS_WIDTH;
+	private static final double CANVAS_HEIGHT=Constants.CANVAS_HEIGHT;
+	
+
 	
 	public static final String DEFAULT_CSS = "/resources/css/Flatter.css";
 	

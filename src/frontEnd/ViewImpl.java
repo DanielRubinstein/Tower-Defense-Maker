@@ -51,7 +51,6 @@ public class ViewImpl implements View {
 		mySkeleton = new SkeletonImpl(this, model);
 		appStage = new Stage();
 		mySkeleton.display(appStage);
-
 	}
 
 	@Override
@@ -71,6 +70,8 @@ public class ViewImpl implements View {
 	 * controls the animation of the State
 	 */
 	private void step(double delay) {
+		System.gc();
+		System.out.println("game loop is running");
 		myModel.getGameProcessController().run(delay); // TODO: TESTING ONLY
 	}
 
