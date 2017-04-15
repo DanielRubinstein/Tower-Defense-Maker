@@ -29,16 +29,20 @@ public class SkeletonImpl implements Skeleton{
 	 * @param view
 	 * @param model
 	 */
-	public SkeletonImpl(View view, Model model){
+	public SkeletonImpl(){
 		myRoot = new BorderPane();
 		align(Constants.WINDOW_WIDTH,Constants.WINDOW_HEIGHT);
-		State myState = model.getState();
-		myScreenGrid = new ScreenGrid(view,myState, Constants.SCREEN_GRID_WIDTH, Constants.SCREEN_GRID_HEIGHT);
+	}
+	
+	public void init(View view, Model model){
+		State state = model.getState();
+		myScreenGrid = new ScreenGrid(view, state, Constants.SCREEN_GRID_WIDTH, Constants.SCREEN_GRID_HEIGHT);
 		myRoot.setCenter(myScreenGrid.getRoot());
+		
 		userTools = new UserTools(view);
 		userTools.setBottomAndSideDimensions(Constants.SIDE_WIDTH,Constants.BOTTOM_HEIGHT);
 		myRoot.setRight(userTools.getSidePane());
-		myRoot.setBottom(userTools.getBottomPane());	
+		myRoot.setBottom(userTools.getBottomPane());
 	}
 	
 
@@ -60,9 +64,5 @@ public class SkeletonImpl implements Skeleton{
 	}
 	public Node getScreenGrid(){
 		return myScreenGrid.getRoot();
-		
 	}
-
-
-
 }

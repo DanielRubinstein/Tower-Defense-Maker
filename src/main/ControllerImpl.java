@@ -70,18 +70,6 @@ public class ControllerImpl implements Controller {
 		MainMenu myMenu = new MainMenu(setGameData);
 		myMenu.showMenus(stage);
 	}
-
-	/**
-	 * The skeleton should be instantiated within View. This is here just for
-	 * testing purposes
-	 * 
-	 * @param stage
-	 */
-	private void developerTestingSkeleton(Stage stage) {
-		SkeletonImpl skeleton = new SkeletonImpl(myView, myModel);
-		skeleton.display(stage);
-
-	}
 	
 	private void executeInteraction(ModificationFromUser myInteraction) throws Exception{
 		myInteraction.invoke(myModel);

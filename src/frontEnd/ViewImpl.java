@@ -48,7 +48,8 @@ public class ViewImpl implements View {
 		myModConsumer = inputConsumer;
 		ModeReader mode = model.getModeReader();
 		authorProperty = new SimpleBooleanProperty(mode.getUserModeString().equals("AUTHOR"));
-		mySkeleton = new SkeletonImpl(this, model);
+		mySkeleton = new SkeletonImpl();
+		mySkeleton.init(this, model);
 		appStage = new Stage();
 		mySkeleton.display(appStage);
 	}
@@ -171,4 +172,5 @@ public class ViewImpl implements View {
 	public void pause() {
 		animation.stop();
 	}
+
 }
