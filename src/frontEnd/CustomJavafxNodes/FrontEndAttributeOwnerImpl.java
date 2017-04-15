@@ -23,8 +23,14 @@ public class FrontEndAttributeOwnerImpl implements Observer, FrontEndAttributeOw
 		attr.addAsListener(this);
 		myAttr = attr;
 		setUpImageView(attr);
+		setUpPosition(attr);
 	}
 	
+	private void setUpPosition(AttributeOwnerReader attr) {
+		Object newLocObj= attr.getMyAttributes().get(POSITION_ATTRIBUTE).getValue();
+		myPosition = (Point2D) newLocObj;
+	}
+
 	private void setUpImageView(AttributeOwnerReader attr){
 		Object myImagePathObj=attr.getMyAttributes().get(IMAGE_ATTRIBUTE).getValue();
 		myImagePath = (String) myImagePathObj;
@@ -55,11 +61,14 @@ public class FrontEndAttributeOwnerImpl implements Observer, FrontEndAttributeOw
 	@Override
 	public void update(Observable o, Object arg) {
 		AttributeOwnerReader newAttr = (AttributeOwnerReader) o;
+		
 		Object newImagePathObj=newAttr.getMyAttributes().get(IMAGE_ATTRIBUTE).getValue();
 		String newImagePath = (String) newImagePathObj;
+		
 		Object newLocObj=newAttr.getMyAttributes().get(POSITION_ATTRIBUTE).getValue();
 		newLoc = (Point2D) newLocObj;
-		if(!newImagePath.equals(myImagePath) ){ //FIXME : I removed || !newLoc.equals(myPosition) from this line because caused error.
+		
+		if(!newImagePath.equals(myImagePath) || !newLoc.equals(myPosition)){ //FIXME : I removed || !newLoc.equals(myPosition) from this line because caused error.
 			refreshXY();
 			myImagePath = newImagePath;
 			Image image = new Image(getClass().getClassLoader().getResourceAsStream(myImagePath));
@@ -77,7 +86,6 @@ public class FrontEndAttributeOwnerImpl implements Observer, FrontEndAttributeOw
 		if (loc==null){ //components with null locations exist on the screen when game initialized- SAD!
 			return;
 		}
-		System.out.println("refreshXY executed. Old position: "+myPosition+" newPosition"+loc);
 //		myPosition = loc;
 //		myImage.setX(loc.getX());
 //		myImage.setY(loc.getY());
