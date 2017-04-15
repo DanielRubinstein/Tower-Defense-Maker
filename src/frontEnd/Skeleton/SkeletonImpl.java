@@ -21,24 +21,8 @@ public class SkeletonImpl implements Skeleton{
 	private BorderPane myRoot;
 	private Scene myScene;
 	private UserTools userTools;
-
 	
-	
-	
-	private static final double MENU_HEIGHT = Constants.MENU_HEIGHT;
-	private static final double MENU_WIDTH = Constants.MENU_WIDTH;
-	private static final double CANVAS_HEIGHT_FACTOR = Constants.CANVAS_HEIGHT_FACTOR;
-	private static final double CANVAS_WIDTH_FACTOR = Constants.CANVAS_WIDTH_FACTOR;
-	private static final double BOTTOM_HEIGHT_FACTOR = Constants.BOTTOM_HEIGHT_FACTOR;
-	private static final double SIDE_WIDTH_FACTOR = Constants.SIDE_WIDTH_FACTOR;
-	private static final double CANVAS_WIDTH=Constants.CANVAS_WIDTH;
-	private static final double CANVAS_HEIGHT=Constants.CANVAS_HEIGHT;
-	
-
-	
-	public static final String DEFAULT_CSS = "/resources/css/Flatter.css";
-	
-	private Canvas myCanvas;
+	private ScreenGrid myScreenGrid;
 
 	/**
 	 * Constructs a new SkeletonImpl object using view and model, which are used to get important information about the State.
@@ -47,14 +31,12 @@ public class SkeletonImpl implements Skeleton{
 	 */
 	public SkeletonImpl(View view, Model model){
 		myRoot = new BorderPane();
-		align(MENU_WIDTH,MENU_HEIGHT);
-		State myState = model.getState();//new StateImpl(GRID_WIDTH,GRID_HEIGHT,(int)CANVAS_WIDTH,(int)CANVAS_HEIGHT);
-		Canvas canvas = new Canvas(view,myState);
-		canvas.setSize(CANVAS_WIDTH, CANVAS_HEIGHT);
-		myCanvas = canvas;
-		myRoot.setCenter(canvas.getRoot());
+		align(Constants.WINDOW_WIDTH,Constants.WINDOW_HEIGHT);
+		State myState = model.getState();
+		myScreenGrid = new ScreenGrid(view,myState, Constants.SCREEN_GRID_WIDTH, Constants.SCREEN_GRID_HEIGHT);
+		myRoot.setCenter(myScreenGrid.getRoot());
 		userTools = new UserTools(view);
-		userTools.setBottomAndSideDimensions(MENU_WIDTH*SIDE_WIDTH_FACTOR,MENU_HEIGHT*BOTTOM_HEIGHT_FACTOR);
+		userTools.setBottomAndSideDimensions(Constants.SIDE_WIDTH,Constants.BOTTOM_HEIGHT);
 		myRoot.setRight(userTools.getSidePane());
 		myRoot.setBottom(userTools.getBottomPane());	
 	}
@@ -65,8 +47,8 @@ public class SkeletonImpl implements Skeleton{
 	 */
 	public void display(Stage stage) {
 		stage.setScene(myScene);
-		stage.setMinWidth(MENU_WIDTH);
-		stage.setMinHeight(MENU_HEIGHT);
+		stage.setMinWidth(Constants.WINDOW_WIDTH);
+		stage.setMinHeight(Constants.WINDOW_HEIGHT);
 		stage.show();
 	}
 	
@@ -74,10 +56,10 @@ public class SkeletonImpl implements Skeleton{
 		myRoot.setMinWidth(size1);
 		myRoot.setMinHeight(size2);
    	 	myScene = new Scene(myRoot, size1, size2);
-   	 	myScene.getStylesheets().add(DEFAULT_CSS);
+   	 	myScene.getStylesheets().add(Constants.DEFAULT_CSS);
 	}
-	public Node getCanvas(){
-		return myCanvas.getRoot();
+	public Node getScreenGrid(){
+		return myScreenGrid.getRoot();
 		
 	}
 

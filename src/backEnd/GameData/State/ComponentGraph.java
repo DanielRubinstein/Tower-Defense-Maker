@@ -9,24 +9,20 @@ import javafx.geometry.Point2D;
 
 public interface ComponentGraph {
 
-	int getNumColsInGrid();
-
-	int getNumRowsInGrid();
-
 
 	/**
 	 * Get the list of components at a given location
 	 * @param location
 	 * @return Component at the given location
 	 */
-	List<Component> getComponentsByLocation(Point2D location);
+	List<Component> getComponentsByScreenPosition(Point2D location);
 
 	/**
 	 * Get the list of components at a given Tile location
 	 * @param Tile location
 	 * @return Component at the given location
 	 */
-	List<Component> getComponentsByTileLocation(Point2D tileLocation);
+	List<Component> getComponentsByTileCorners(TileCorners tileCorners);
 
 	/**
 	 * Gets the List of all Components in the ComponentGraph

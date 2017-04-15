@@ -24,6 +24,6 @@ public interface View extends ViewReader{
 	
 	public void play();
 	
-	public Node getCanvas();
+	public Node getScreenGrid();
 
 }

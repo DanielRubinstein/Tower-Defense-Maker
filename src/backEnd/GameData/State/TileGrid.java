@@ -36,12 +36,12 @@ public interface TileGrid {
 	/**
 	 * @return grid width
 	 */
-	int getMyWidth();
+	int getNumColsInGrid();
 	
 	/**
 	 * @return grid height
 	 */
-	int getMyHeight();
+	int getNumRowsInGrid();
 	
 	/**
 	 * return a List of all tiles in the Grid
@@ -49,6 +49,12 @@ public interface TileGrid {
 	List<Tile> getAllTiles();
 
 	Tile getTileByScreenLocation(Point2D location);
+
+	void setTileSize(double tileWidth, double tileHeight);
+
+	double getTileWidth();
+
+	double getTileHeight();
 
 
 }
