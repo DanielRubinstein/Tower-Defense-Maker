@@ -57,7 +57,10 @@ public class OptionsSelection {
 			myView.sendUserModification(Modification_GameRemote.PLAY);
 		}
 		 ,size);
-		addButtonImage(PAUSE_IMAGE, e-> myView.sendUserModification(Modification_GameRemote.PAUSE) ,size);
+		addButtonImage(PAUSE_IMAGE, e-> {
+			myView.pause();
+			myView.sendUserModification(Modification_GameRemote.PAUSE);
+		} ,size);
 		addButtonImage(FASTFWD_IMAGE, e-> myView.sendUserModification(Modification_GameRemote.FASTFORWARD) ,size);
 		addButtonImage(SETTINGS_IMAGE, e-> mySettings.launchSettings(),size);
 	}

@@ -45,10 +45,10 @@ public class TileGridImpl implements TileGrid {
 	}
 	
 	@Override
-	public Tile getTileByScreenLocation(Point2D screenLocation){
+	public Tile getTileByScreenLocation(Point2D screenLocation){		
 		int column = (int) Math.floor(screenLocation.getX() / tileWidth);
 		int row = (int) Math.floor(screenLocation.getY() / tileHeight);
-		return getTileByGridPosition(column, row); //Potentially wrong flipped x/y- y
+		return getTileByGridPosition(column, row);
 	}
 	
 	

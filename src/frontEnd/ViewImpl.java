@@ -74,6 +74,8 @@ public class ViewImpl implements View {
 		//System.out.println("game loop is running");
 		myModel.getGameProcessController().run(delay); // TODO: TESTING ONLY
 	}
+	
+	
 
 	@Override
 	public SimpleBooleanProperty getBooleanAuthorModeProperty() {
@@ -163,5 +165,10 @@ public class ViewImpl implements View {
 	public void reportError(Exception e) {
 		ErrorDialog fnf = new ErrorDialog();
 		fnf.create("Error", e.getMessage());
+	}
+
+	@Override
+	public void pause() {
+		animation.stop();
 	}
 }
