@@ -11,7 +11,7 @@ public class StartingInput {
 	public StartingInput(){
 	}
 
-	public int getTilesWide() {
+	public int getNumCols() {
 		return tilesWide;
 	}
 
@@ -19,7 +19,7 @@ public class StartingInput {
 		this.tilesWide = tilesWide;
 	}
 
-	public int getTilesHigh() {
+	public int getNumRows() {
 		return tilesHigh;
 	}
 

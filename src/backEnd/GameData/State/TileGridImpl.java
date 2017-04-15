@@ -13,17 +13,17 @@ import javafx.geometry.Point2D;
  */
 
 public class TileGridImpl implements TileGrid {
-	private int gridWidth;
-	private int gridHeight;
+	private int numColsInGrid;
+	private int numRowsInGrid;
 	private Tile[][] tileGrid;
 	private List<Tile> tileList;
 	private double tileWidth=40;
 	private double tileHeight=40;
 	
-	public TileGridImpl(int width, int height){
-		gridWidth = width;
-		gridHeight = height;
-		tileGrid = new Tile[width][height];
+	public TileGridImpl(int colsInGrid, int rowsInGrid){
+		numColsInGrid = colsInGrid;
+		numRowsInGrid = rowsInGrid;
+		tileGrid = new Tile[colsInGrid][rowsInGrid];
 	}
 	
 	@Override
@@ -43,20 +43,20 @@ public class TileGridImpl implements TileGrid {
 	
 	@Override
 	public void setTile(Tile newTile, Point2D location){
-		System.out.println(tileGrid.length);
-		System.out.println((int) location.getX());
-		System.out.println(location.getY());
+		//System.out.println(tileGrid.length);
+		//System.out.println((int) location.getX());
+		//System.out.println(location.getY());
 		tileGrid[(int) location.getX()][(int) location.getY()] = newTile; //Potentially wrong flipped x/y?
 	}
 
 	@Override
 	public int getMyWidth() {
-		return gridWidth;
+		return numColsInGrid;
 	}
 
 	@Override
 	public int getMyHeight() {
-		return gridHeight;
+		return numRowsInGrid;
 	}
 	
 	public List<Tile> getAllTiles(){

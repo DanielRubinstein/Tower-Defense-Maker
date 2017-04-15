@@ -20,24 +20,24 @@ import backEnd.Attribute.AttributeImpl;
  */
 
 public class ComponentGraphImpl extends Observable implements ComponentGraph {
-	private int gridWidth;
-	private int gridHeight;
+	private int numColsInGrid;
+	private int numRowsInGrid;
 	private int pointResWidth;
 	private int pointResHeight;
 	private Map<Point2D, List<Component>> componentMap;
 	private List<Component> myComponents;
 	
-	public ComponentGraphImpl(int width, int height, int pointResWidth, int pointResHeight){
-		this.gridWidth = width;
-		this.gridHeight = height;
+	public ComponentGraphImpl(int colsInGrid, int rowsInGrid, int pointResWidth, int pointResHeight){
+		this.numColsInGrid = colsInGrid;
+		this.numRowsInGrid = rowsInGrid;
 		this.pointResWidth = pointResWidth;
 		this.pointResHeight = pointResHeight;
 		componentMap = new HashMap<>();
 	}
 	
 	@Override
-	public int getGridWidth(){
-		return gridWidth;
+	public int getNumColsInGrid(){
+		return numColsInGrid;
 	}
 	
 	public List<Component> getAllComponents(){
@@ -54,18 +54,18 @@ public class ComponentGraphImpl extends Observable implements ComponentGraph {
 
 	
 	@Override
-	public int getGridHeight(){
-		return gridHeight;
+	public int getNumRowsInGrid(){
+		return numRowsInGrid;
 	}
 	
-	@Override
-	public List<Component> getComponentList(){
-		List<Component> componentList = new ArrayList<Component>();
-		for (List<Component> n : componentMap.values()){
-			componentList.addAll(n);
-		}
-		return componentList;
-	}
+//	@Override
+//	public List<Component> getComponentList(){
+//		List<Component> componentList = new ArrayList<Component>();
+//		for (List<Component> n : componentMap.values()){
+//			componentList.addAll(n);
+//		}
+//		return componentList;
+//	}
 	
 	@Override
 	public List<Component> getComponentsByLocation(Point2D location){
@@ -74,10 +74,10 @@ public class ComponentGraphImpl extends Observable implements ComponentGraph {
 	
 	@Override
 	public List<Component> getComponentsByTileLocation(Point2D tileLocation){
-		double leftXPoint = Math.floor(tileLocation.getX()/gridWidth * pointResWidth);
-		double rightXPoint = Math.floor(tileLocation.getX()/gridWidth * pointResWidth) + gridWidth/pointResWidth;
-		double topYPoint = Math.floor(tileLocation.getY()/gridHeight * pointResHeight);
-		double botYPoint = Math.floor(tileLocation.getY()/gridHeight * pointResHeight) + gridHeight/pointResHeight;
+		double leftXPoint = Math.floor(tileLocation.getX()/numColsInGrid * pointResWidth);
+		double rightXPoint = Math.floor(tileLocation.getX()/numColsInGrid * pointResWidth) + numColsInGrid/pointResWidth;
+		double topYPoint = Math.floor(tileLocation.getY()/numRowsInGrid * pointResHeight);
+		double botYPoint = Math.floor(tileLocation.getY()/numRowsInGrid * pointResHeight) + numRowsInGrid/pointResHeight;
 		List<Component> componentsAtLocation = new ArrayList<Component>();
 		for (Point2D n : componentMap.keySet()){
 			if (n.getX() >= leftXPoint & n.getX() <= rightXPoint & n.getY() > topYPoint & n.getY() < botYPoint){

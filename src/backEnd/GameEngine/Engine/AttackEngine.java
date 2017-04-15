@@ -26,7 +26,7 @@ public class AttackEngine implements Engine {
 	@Override
 	public void gameLoop(State currentState, double stepTime) {
 		ComponentGraph myComponentGraph = currentState.getComponentGraph();
-		for (Component componentAttacker : myComponentGraph.getComponentList()) {
+		for (Component componentAttacker : myComponentGraph.getAllComponents()) {
 			if (componentAttacker.getMyType().equals("TOWER")) {
 				for (Component componentTarget : myComponentGraph.getComponentsWithinRadius(componentAttacker,
 						Constants.defaultRadius)) {

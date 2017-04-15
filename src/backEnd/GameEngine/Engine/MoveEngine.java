@@ -44,19 +44,19 @@ public class MoveEngine implements Engine{
 			
 			//Object o = c.getAttribute("Position").getValue();
 			//Point2D currentLocation=(Point2D) o;
-			System.out.println(currentLocation+ "  printing current location");
+			//System.out.println(currentLocation+ "  printing current location");
 			if (currentLocation==null){ //there are some components that have been intialized with empty values. why?
 				System.out.println("We're checking a component with an uninitialized location.");
 				continue;
 			}
 			//try{
-			System.out.println("currentLocation: "+currentLocation.getX());
+			//System.out.println("currentLocation: "+currentLocation.getX());
 			currentTile = myState.getTileGrid().getTileByScreenLocation(currentLocation); 
 			myState.getComponentGraph().removeComponent(c);
 			try {
 				mb.execute(currentTile);
 				Point2D newPosition=mb.getPosition();
-				System.out.println("Move Behavior executed. Old position was: "+currentLocation + " new position is "+newPosition);
+				//System.out.println("Move Behavior executed. Old position was: "+currentLocation + " new position is "+newPosition);
 				myState.getComponentGraph().addComponentToGrid(c, newPosition);
 			} catch (FileNotFoundException e) {
 				ErrorDialog fnf = new ErrorDialog();

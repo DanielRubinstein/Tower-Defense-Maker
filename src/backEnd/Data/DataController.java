@@ -71,7 +71,7 @@ public class DataController {
 	
 	
 	private GameData createGameData(StartingInput dim) throws FileNotFoundException {
-		StateImpl state = new StateImpl(dim.getTilesWide(), dim.getTilesHigh(), 400, 400);
+		StateImpl state = new StateImpl(dim.getNumCols(), dim.getNumRows(), 300, 700);
 		GameData gameData = new GameData(state, null);
 		return gameData;
 		
