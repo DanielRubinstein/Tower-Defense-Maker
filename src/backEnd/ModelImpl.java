@@ -9,11 +9,6 @@ import backEnd.GameEngine.Engine.GameProcessController;
 import backEnd.Mode.Mode;
 import backEnd.Mode.ModeImpl;
 import backEnd.Mode.ModeReader;
-import javafx.animation.Animation;
-import javafx.animation.KeyFrame;
-import javafx.animation.Timeline;
-import javafx.util.Duration;
-import resources.Constants;
 
 /**
  * Controller the front end calls when it detects a backend modification from the user,
@@ -30,9 +25,6 @@ public class ModelImpl implements Model{
 	private BankController myBankController;
 	private DataController myDataController;
 	private GameProcessController myEngine;
-	private static final double MILLISECOND_DELAY = Constants.MILLISECOND_DELAY;
-	private static final double SECOND_DELAY = Constants.SECOND_DELAY;
-	private Timeline animation;
 	
 	public ModelImpl(DataController dataController, GameData gameData) throws XMLReadingException {
 		myDataController = dataController;
@@ -42,8 +34,6 @@ public class ModelImpl implements Model{
 		myDataController = dataController;
 		myEngine = new GameProcessController(myGameData.getState(), myGameData.getRules());
 		myBankController = dataController.generateBanks();
-		
-		animation = new Timeline();
 
 	}
 
@@ -78,22 +68,5 @@ public class ModelImpl implements Model{
 	public GameProcessController getGameProcessController() {
 		return myEngine;
 
-	}
-	
-	
-	public void play(){
-		KeyFrame frame = new KeyFrame(Duration.millis(MILLISECOND_DELAY), e -> step(SECOND_DELAY));
-		animation.setCycleCount(Animation.INDEFINITE);
-		animation.getKeyFrames().add(frame);
-		animation.play();
-	}
-	
-	/**
-	 * controls the animation of the State
-	 */
-	private void step(double delay) {
-		System.gc();
-		//System.out.println("game loop is running");
-		myEngine.run(delay); // TODO: TESTING ONLY
 	}
 }
