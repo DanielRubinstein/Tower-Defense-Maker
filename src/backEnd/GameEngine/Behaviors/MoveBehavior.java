@@ -24,6 +24,7 @@ public class MoveBehavior implements Behavior {
 	private Point2D newPoint;
 	private Component myComponent;
 	private Tile currentTile;
+	private double moveAmount = Constants.defaultMoveAmount;
 	
 	public MoveBehavior(Component inputComponent){
 		myComponent=inputComponent;
@@ -46,16 +47,16 @@ public class MoveBehavior implements Behavior {
 		}
 		switch ((String) currentTile.getAttribute("MoveDirection").getValue()) {
 		case "Left":
-			newPoint=new Point2D(currentPosition.getX()-Constants.defaultMoveAmount, currentPosition.getY());	
+			newPoint=new Point2D(currentPosition.getX()-moveAmount, currentPosition.getY());	
 			break;
 		case "Right":
-			newPoint=new Point2D(currentPosition.getX()+Constants.defaultMoveAmount, currentPosition.getY());	
+			newPoint=new Point2D(currentPosition.getX()+moveAmount, currentPosition.getY());	
 			break;
 		case "Up":
-			newPoint=new Point2D(currentPosition.getX(), currentPosition.getY()-Constants.defaultMoveAmount);
+			newPoint=new Point2D(currentPosition.getX(), currentPosition.getY()-moveAmount);
 			break;
 		case "Down":
-			newPoint=new Point2D(currentPosition.getX(), currentPosition.getY()+Constants.defaultMoveAmount);
+			newPoint=new Point2D(currentPosition.getX(), currentPosition.getY()+moveAmount);
 			System.out.println("MOVE COMPONENT DOWN");
 			break;
 		default:
@@ -66,11 +67,18 @@ public class MoveBehavior implements Behavior {
 
 	}
 
-	/*
+	/**
 	 * return the component's new, updated position
 	 */
 	public Point2D getPosition(){
 		return newPoint;
+	}
+	
+	/**
+	 * sets the distance the Component will move per iteration of the game loop
+	 */
+	public void setMoveAmount(double speed){
+		moveAmount = speed;
 	}
 	
 	/*

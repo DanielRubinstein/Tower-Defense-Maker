@@ -20,11 +20,6 @@ public interface State {
 	 */
 	ComponentGraph getComponentGraph();
 
-	/**
-	 * returns the shortest path in the Grid
-	 * between a start and end point using BFS
-	 */
-	void calculateShortestPath();
 	
 	void addAsObserver(Observer o);
 	
