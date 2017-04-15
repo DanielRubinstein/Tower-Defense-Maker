@@ -50,11 +50,6 @@ public class MoveEngine implements Engine{
 			} catch (FileNotFoundException e) {
 				ErrorDialog fnf = new ErrorDialog();
 				fnf.create("Error", "File not found");
-			//}
-
-			//} catch (Exception e){
-			//	System.out.println("other erorr "+e.getMessage());
-			//	e.printStackTrace();
 			}
 			
 		}
