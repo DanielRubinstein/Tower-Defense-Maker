@@ -187,6 +187,17 @@ public class ScreenGrid implements SkeletonObject, Observer {
 				addComponentToGrid(c);
 			}
 		}
+		for(Component c : myComponents){
+			if(!observedComponentGraph.getAllComponents().contains(c)){
+				removeComponentFromGrid(c);
+			}
+		}
+	}
+
+	private void removeComponentFromGrid(Component c) {
+		myComponents.remove(c);
+		myRoot.getChildren().remove(myComponentImages.get(c));
+		myComponentImages.remove(c);
 	}
 
 	private void addComponentToGrid(Component c) {
