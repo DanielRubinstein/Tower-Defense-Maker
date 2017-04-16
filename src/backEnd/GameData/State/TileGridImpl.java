@@ -1,7 +1,9 @@
 package backEnd.GameData.State;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Observable;
 import java.util.Observer;
 
@@ -18,7 +20,7 @@ import javafx.geometry.Point2D;
 public class TileGridImpl extends Observable implements TileGrid {
 	private int numColsInGrid;
 	private int numRowsInGrid;
-	private Tile[][] tileGrid;
+	private Map<Point2D, Tile> tileGrid;
 	private List<Tile> tileList;
 	private double tileWidth;
 	private double tileHeight;
@@ -26,7 +28,7 @@ public class TileGridImpl extends Observable implements TileGrid {
 	public TileGridImpl(int colsInGrid, int rowsInGrid){
 		numColsInGrid = colsInGrid;
 		numRowsInGrid = rowsInGrid;
-		tileGrid = new Tile[colsInGrid][rowsInGrid];
+		tileGrid = new HashMap<>();
 	}
 	
 	@Override
@@ -38,13 +40,17 @@ public class TileGridImpl extends Observable implements TileGrid {
 	
 	@Override
 	public Tile getTileByGridPosition(int column, int row){
+		checkAgainstBounds(column, row);
+		return tileGrid.get(new Point2D(column, row));
+	}
+
+	private void checkAgainstBounds(int column, int row) {
 		if (column >= getNumColsInGrid() || row >= getNumRowsInGrid()) {
 			throw new IndexOutOfBoundsException();
 		}
 		if (column < 0 || row < 0){
 			throw new IndexOutOfBoundsException();
 		}
-		return tileGrid[column][row];
 	}
 	
 	@Override
@@ -63,8 +69,13 @@ public class TileGridImpl extends Observable implements TileGrid {
 	
 	@Override
 	public void setTileByGridPosition(Tile newTile, int column, int row){
-		tileGrid[column][row] = newTile;
-		if(tileGrid[column][row] != null){ 
+		Point2D posOfNewTile = new Point2D(column, row);
+		Boolean initialization = false;
+		if(!tileGrid.containsKey(posOfNewTile)){
+			initialization = true;
+		}
+		tileGrid.put(posOfNewTile, newTile);
+		if(!initialization){ 
 			// do not notify ScreenGrid for each initial Tile, only if changed after intialization
 			this.setChanged();
 			this.notifyObservers();
@@ -85,7 +96,7 @@ public class TileGridImpl extends Observable implements TileGrid {
 		tileList=new ArrayList<Tile>();
 		for (int col = 0; col < numColsInGrid; col++) {
 			for (int row = 0; row < numRowsInGrid; row++) {
-				tileList.add(tileGrid[col][row]);
+				tileList.add(tileGrid.get(new Point2D(col, row)));
 			}
 		}
 		return tileList;
