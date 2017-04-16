@@ -71,7 +71,7 @@ public class ViewImpl implements View {
 	 */
 	private void step(double delay) {
 		System.gc();
-		//System.out.println("game loop is running");
+		System.out.println("game loop: "+MILLISECOND_DELAY+" "+SECOND_DELAY);
 		myModel.getGameProcessController().run(delay); // TODO: TESTING ONLY
 	}
 

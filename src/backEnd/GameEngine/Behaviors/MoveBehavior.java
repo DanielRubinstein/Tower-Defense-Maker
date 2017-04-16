@@ -39,7 +39,7 @@ public class MoveBehavior implements Behavior {
 		currentTile=(Tile) tile;
 
 		//System.out.println("   tile  "+tile);
-		System.out.println("   tile  "+currentTile.getAttribute("MoveDirection"));
+		//System.out.println("   tile  "+currentTile.getAttribute("MoveDirection"));
 		
 		//System.out.println("   in move behavior " +currentTile.getAttribute("MoveDirection").getValue().getClass() + "    " +
 				//currentTile.getAttribute("MoveDirection").getValue());
@@ -61,10 +61,11 @@ public class MoveBehavior implements Behavior {
 			newPoint=new Point2D(currentPosition.getX(), currentPosition.getY()+moveAmount);
 			break;
 		default:
-			System.out.println("Movebehavior- No direction specified");
+			//System.out.println("Movebehavior- No direction specified");
 			return;
 		}
 		myComponent.setAttributeValue("Position",newPoint); //does it get overwritten?
+		return;
 
 	}
 
