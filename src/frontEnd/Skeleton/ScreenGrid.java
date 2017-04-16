@@ -1,6 +1,8 @@
 package frontEnd.Skeleton;
 
+import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Map;
 import java.util.Observable;
 import java.util.Observer;
 import java.util.Set;
@@ -40,10 +42,14 @@ public class ScreenGrid implements SkeletonObject, Observer {
 	private Group myRoot;
 	private GridPane myGrid;
 	
-	private TileGrid myTileGrid;
+	private TileGrid observedTileGrid;
 	private ComponentGraph observedComponentGraph;
 	
 	private Set<Component> myComponents;
+	private Map<Component, ImageView> myComponentImages;
+	private Map<Point2D, Tile> myTiles;
+	private Map<Tile, ImageView> myTileImages;
+	
 	
 	private double myWidth;
 	private double myHeight;
@@ -71,19 +77,22 @@ public class ScreenGrid implements SkeletonObject, Observer {
 		myWidth = screenGridWidth;
 		myHeight = screenGridHeight;
 		extractAoCollectionsFromState();
-		numberOfTileCols = myTileGrid.getNumColsInGrid();
-		numberOfTileRows = myTileGrid.getNumRowsInGrid();
+		numberOfTileCols = observedTileGrid.getNumColsInGrid();
+		numberOfTileRows = observedTileGrid.getNumRowsInGrid();
 		tileWidth = myWidth / numberOfTileCols;
 		tileHeight = myHeight / numberOfTileRows;
-		myTileGrid.setTileSize(tileWidth, tileHeight);
+		observedTileGrid.setTileSize(tileWidth, tileHeight);
 		placeComponents();
 		initializeGrid();
-		placeTileGridOnScreenGrid();
+		myTiles = new HashMap<>();
+		myTileImages = new HashMap<>();
+		updateTilesOnGrid();
 		addGridToRoot();
 	}
 
 	private void placeComponents() {
 		myComponents = new HashSet<>();
+		myComponentImages = new HashMap<>();
 		updateComponentsOnGrid();
 	}
 
@@ -94,7 +103,8 @@ public class ScreenGrid implements SkeletonObject, Observer {
 	}
 
 	private void extractAoCollectionsFromState() {
-		myTileGrid = myState.getTileGrid();
+		observedTileGrid = myState.getTileGrid();
+		observedTileGrid.addAsObserver(this);
 		observedComponentGraph = myState.getComponentGraph();
 		observedComponentGraph.addAsObserver(this);
 	}
@@ -114,24 +124,6 @@ public class ScreenGrid implements SkeletonObject, Observer {
 	 */
 	public Node getRoot() {
 		return myRoot;
-	}
-
-	private void placeTileGridOnScreenGrid() {
-		for (int row = 0; row < numberOfTileRows; row++) {
-			for (int col = 0; col < numberOfTileCols; col++) {
-				//System.out.println("In ScreenGrid, my i is: "+i+" and my j is: "+j);
-				AttributeOwnerReader t = myTileGrid.getTileByGridPosition(col, row);
-				
-				// this is where the tile can learn its position
-				
-				FrontEndAttributeOwner attrOwner = new FrontEndAttributeOwnerImpl(t);
-				ImageView tileView = attrOwner.getImageView();
-				organizeImageView(tileView);
-				setTileInteraction(tileView, (Tile) t);
-				myGrid.add(tileView, col, row); 
-				// this is correct, when you add to gridPane it is (node, col, row)
-			}
-		}
 	}
 
 	private void organizeImageView(ImageView tileView) {
@@ -160,8 +152,33 @@ public class ScreenGrid implements SkeletonObject, Observer {
 	public void update(Observable o, Object arg) {
 		if (o == observedComponentGraph) {
 			updateComponentsOnGrid();
+		} else if (o == observedTileGrid){
+			updateTilesOnGrid();
 		}
 
+	}
+
+	private void updateTilesOnGrid() {
+		for (int row = 0; row < numberOfTileRows; row++) {
+			for (int col = 0; col < numberOfTileCols; col++) {
+				Tile t = observedTileGrid.getTileByGridPosition(col, row);
+				Point2D pos = new Point2D(col, row);
+				
+				if(!myTiles.containsKey(pos) || !myTiles.get(pos).equals(t)){
+					FrontEndAttributeOwner attrOwner = new FrontEndAttributeOwnerImpl(t);
+					ImageView tileView = attrOwner.getImageView();
+					organizeImageView(tileView);
+					setTileInteraction(tileView,  t);
+					if(myTiles.containsKey(pos) && !myTiles.get(pos).equals(t)){
+						myGrid.getChildren().remove(myTileImages.get(myTiles.get(pos)));
+					}
+					myGrid.add(tileView, col, row); 
+					// this is correct, when you add to gridPane it is (node, col, row)
+					myTiles.put(pos, t);
+					myTileImages.put(t, tileView);
+				}
+			}
+		}
 	}
 
 	private void updateComponentsOnGrid() {
@@ -180,6 +197,7 @@ public class ScreenGrid implements SkeletonObject, Observer {
 		frontImage.setFitHeight(tileHeight / 2);
 		setCommandInteraction(frontImage, c);
 		myComponents.add(c);
+		myComponentImages.put(c, frontImage);
 		myRoot.getChildren().add(frontImage);
 	}
 

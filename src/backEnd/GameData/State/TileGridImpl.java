@@ -2,7 +2,10 @@ package backEnd.GameData.State;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Observable;
+import java.util.Observer;
 
+import javafx.beans.InvalidationListener;
 import javafx.geometry.Point2D;
 
 /**
@@ -12,7 +15,7 @@ import javafx.geometry.Point2D;
  *
  */
 
-public class TileGridImpl implements TileGrid {
+public class TileGridImpl extends Observable implements TileGrid {
 	private int numColsInGrid;
 	private int numRowsInGrid;
 	private Tile[][] tileGrid;
@@ -61,6 +64,11 @@ public class TileGridImpl implements TileGrid {
 	@Override
 	public void setTileByGridPosition(Tile newTile, int column, int row){
 		tileGrid[column][row] = newTile;
+		if(tileGrid[column][row] != null){ 
+			// do not notify ScreenGrid for each initial Tile, only if changed after intialization
+			this.setChanged();
+			this.notifyObservers();
+		}
 	}
 
 	@Override
@@ -92,6 +100,13 @@ public class TileGridImpl implements TileGrid {
 	public double getTileHeight() {
 		return this.tileHeight;
 	}
+
+	@Override
+	public void addAsObserver(Observer o) {
+		this.addObserver(o);
+	}
+
+
 
 
 
