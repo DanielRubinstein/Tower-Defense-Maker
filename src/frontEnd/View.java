@@ -25,5 +25,7 @@ public interface View extends ViewReader{
 	public void play();
 	
 	public Node getScreenGrid();
+	
+	public void pause();
 
 }

@@ -1,7 +1,9 @@
 package backEnd.GameData.State;
 
 import java.util.List;
+import java.util.Observer;
 
+import javafx.beans.Observable;
 import javafx.geometry.Point2D;
 
 /**
@@ -9,7 +11,7 @@ import javafx.geometry.Point2D;
  * @author Riley Nisbet, Christian Martindale
  *
  */
-public interface TileGrid {
+public interface TileGrid{
 
 	/**
 	 * Get the tile at a given location
@@ -18,13 +20,15 @@ public interface TileGrid {
 	 * @return Tile at the given location
 	 */
 	Tile getTileByGridPosition(int column, int row);
+	
+	void setTileByScreenPosition(Tile newTile, Point2D position);
 
 	/**
 	 * Set the tile at a given location
 	 * @param newTile
 	 * @param location
 	 */
-	void setTileIntoTileGrid(Tile newTile, int column, int row);
+	void setTileByGridPosition(Tile newTile, int column, int row);
 	
 	/**
 	 * @return grid width
@@ -48,6 +52,8 @@ public interface TileGrid {
 	double getTileWidth();
 
 	double getTileHeight();
+	
+	void addAsObserver(Observer o);
 
 
 }

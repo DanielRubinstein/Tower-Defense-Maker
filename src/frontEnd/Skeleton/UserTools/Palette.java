@@ -112,9 +112,13 @@ public class Palette<T extends AttributeOwner> implements SkeletonObject, Observ
 	}
 
 	private void addPresetImageViewToPalette(ImageView imageView) {
-		tile.getChildren().remove(addPreset);
-		tile.getChildren().add(imageView);
-		tile.getChildren().add(addPreset);
+		if(addPreset == null){
+			tile.getChildren().add(imageView);
+		} else {
+			tile.getChildren().remove(addPreset);
+			tile.getChildren().add(imageView);
+			tile.getChildren().add(addPreset);
+		}
 	}
 
 	private void makeHoverOverName(T preset, ImageView imageView) {
@@ -130,18 +134,22 @@ public class Palette<T extends AttributeOwner> implements SkeletonObject, Observ
 	}
 
 	private void makePresetDraggable(T preset, ImageView imageView) {
+		
 		imageView.setOnDragDetected(e -> {
 			Dragboard db = imageView.startDragAndDrop(TransferMode.ANY);
 			ClipboardContent content = new ClipboardContent();
-			content.putString("Drop here");
+			content.putString(observedBankController.getAOName(preset));
 			db.setContent(content);
 			db.setDragView(imageView.getImage());
 		});
 		Node screenGrid = myView.getScreenGrid();
 		screenGrid.setOnDragOver(e -> e.acceptTransferModes(TransferMode.ANY));
 		screenGrid.setOnDragDropped(e -> {
+			String presetName = e.getDragboard().getString();
+			AttributeOwner presetAO = observedBankController.getPreset(presetName);
+			
 			Point2D pos = new Point2D(e.getSceneX(),e.getSceneY());
-			myView.sendUserModification(new Modification_AddPresetAttributeOwnerToGrid(preset,pos));
+			myView.sendUserModification(new Modification_AddPresetAttributeOwnerToGrid(presetAO, pos));
 		});
 	}
 
