@@ -94,7 +94,7 @@
 
 * A display for the turret pops up and allows player to change turrets target preferences. Changes attribute targetPreference via setAttribute().
 
-17. Player places bomb. 
+17. Player purchases and places a bomb object (or road spikes, etc.). 
 
 * After small time the item engine creates explode behavior that calls execute() which damages all the surrounding enemies.
 

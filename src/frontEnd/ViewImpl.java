@@ -58,6 +58,7 @@ public class ViewImpl implements View {
 		return mySkeleton.getCanvas();
 	}
 
+	/*
 	@Override
 	public void play() {
 		KeyFrame frame = new KeyFrame(Duration.millis(MILLISECOND_DELAY), e -> step(SECOND_DELAY));
@@ -65,15 +66,18 @@ public class ViewImpl implements View {
 		animation.getKeyFrames().add(frame);
 		animation.play();
 	}
-	
+	*/
 	/**
 	 * controls the animation of the State
 	 */
+	/*
 	private void step(double delay) {
 		System.gc();
 		System.out.println("game loop is running");
 		myModel.getGameProcessController().run(delay); // TODO: TESTING ONLY
 	}
+	*/
+	
 
 	@Override
 	public SimpleBooleanProperty getBooleanAuthorModeProperty() {
@@ -157,6 +161,10 @@ public class ViewImpl implements View {
 	@Override
 	public BankController getBankController() {
 		return myModel.getBankController();
+	}
+	
+	public Model getMyModel(){
+		return myModel;
 	}
 
 	@Override
