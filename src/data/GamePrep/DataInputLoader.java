@@ -8,6 +8,7 @@ import java.lang.reflect.InvocationTargetException;
 import backEnd.GameData.GameData;
 import backEnd.GameData.State.StateImpl;
 import data.XMLReader;
+import data.XMLReaderImpl;
 import data.XMLReadingException;
 /**
  * Wrapper class to get GameData without using reflection and hardcoding a method name.
@@ -18,7 +19,7 @@ import data.XMLReadingException;
 public class DataInputLoader {
 	private GameData myGameData;
 	private static final String GAME_STATE_DATA_PATH = "data/GameStateData/";
-	
+	private XMLReader myXMLReader = new XMLReaderImpl();
 	
 	
 	public DataInputLoader(String s) throws XMLReadingException{
@@ -45,14 +46,14 @@ public class DataInputLoader {
 	
 	private GameData generateGameData(String gameName) throws XMLReadingException{
 		try{
-			return XMLReader.loadGameStateData(GAME_STATE_DATA_PATH, gameName);
+			return myXMLReader.loadGameStateData(GAME_STATE_DATA_PATH, gameName);
 		}catch(Exception e){
 			throw new XMLReadingException();
 		}
 	}
 	private GameData generateGameData(File f) throws XMLReadingException{
 		try{
-			return XMLReader.loadGameStateData(f);
+			return myXMLReader.loadGameStateData(f);
 		}catch(Exception e){
 			throw new XMLReadingException();
 		}

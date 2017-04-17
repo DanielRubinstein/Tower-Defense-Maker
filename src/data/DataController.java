@@ -19,16 +19,18 @@ public class DataController {
 	private static final String UNIV_GAME_DATA_PATH = "data/UniversalGameData/";
 	private static final String GAME_STATE_DATA_PATH = "data/GameStateData/";
 	private XMLWriter myXMLWriter;
+	private XMLReader myXMLReader;
 	private BankController bankController;
 	
 	public DataController(){
 		myXMLWriter = new XMLWriterImpl();
+		myXMLReader = new XMLReaderImpl();
 	}
 	
 	@SuppressWarnings("unchecked")
 	public BankController generateBanks(){
 		try{
-			List<Map<String,?>> objectMaps = XMLReader.loadUniversalGameData(UNIV_GAME_DATA_PATH);
+			List<Map<String,?>> objectMaps = myXMLReader.loadUniversalGameData(UNIV_GAME_DATA_PATH);
 			Map<String,Component> componentMap = (Map<String,Component>) objectMaps.get(0);
 			Map<String,Tile > tileMap = (Map<String,Tile>) objectMaps.get(1);
 			return new BankController(tileMap, componentMap);
