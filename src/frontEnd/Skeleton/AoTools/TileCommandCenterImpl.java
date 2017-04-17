@@ -4,12 +4,14 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
+import backEnd.Attribute.AttributeOwner;
 import backEnd.Attribute.AttributeOwnerReader;
 import backEnd.GameData.State.Component;
 import backEnd.GameData.State.ComponentGraph;
 import backEnd.GameData.State.State;
 import backEnd.GameData.State.Tile;
 import frontEnd.View;
+import javafx.geometry.Point2D;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Tab;
@@ -37,23 +39,22 @@ public class TileCommandCenterImpl extends CommandCenter implements TileCommandC
 	public TileCommandCenterImpl(View view, Tile tile, State state) {
 		myView = view;
 		myTile = tile;
-		ComponentGraph myComponentGraph = state.getComponentGraph();
-		myComponents = myComponentGraph.getComponentList();
+		myComponents = state.getComponentsByTileGridPosition((Point2D) tile.getAttribute("Position").getValue());
 		tabPane = new TabPane();
 	}
 
-	private Collection<Tab> createComponentTabs() {
+	private Collection<Tab> createComponentTabs(Stage stage) {
 		List<Tab> componentTabs = new ArrayList<Tab>();
 		for (Component c : myComponents) {
-			componentTabs.add(createAttributeOwnerTab(c));
+			componentTabs.add(createAttributeOwnerTab(c, stage));
 		}
 		return componentTabs;
 	}
 
 	
 	
-	private Tab createAttributeOwnerTab(AttributeOwnerReader obj) {
-		AttributeCommandCenter aCC = new AttributeCommandCenter(myView, obj);
+	private Tab createAttributeOwnerTab(AttributeOwnerReader obj, Stage stage) {
+		AttributeCommandCenter aCC = new AttributeCommandCenter(myView, stage, (AttributeOwner) obj, "On-Screen Object");
 		String fuckedUpName = obj.toString();
 		fuckedUpName = fuckedUpName.substring(fuckedUpName.lastIndexOf('.') + 1, fuckedUpName.length());
 		return createSingleTab(fuckedUpName, aCC.get());
@@ -74,29 +75,16 @@ public class TileCommandCenterImpl extends CommandCenter implements TileCommandC
 		return tabPane;
 	}
 	
-	private void generate(double x, double y) {
-		myStage = new Stage();
-		try{
-			myScene = new Scene(tabPane);
-		} catch (IllegalArgumentException e){
-			myScene.setRoot(tabPane);
-		}
-		myScene.getStylesheets().add(DEFAULT_CSS);
-		myStage.setScene(myScene);
-		myStage.setTitle("Command Center");
-		myStage.setX(x);
-		myStage.setY(y);
-		myStage.show();
-	}
 	
 	/* (non-Javadoc)
 	 * @see frontEnd.Skeleton.AoTools.TileCommandCenterI#launch(double, double)
 	 */
 	@Override
 	public void launch(double x, double y) {
+		myStage = new Stage();
 		tabPane.getTabs().clear();
-		tabPane.getTabs().add(createAttributeOwnerTab(myTile));
-		tabPane.getTabs().addAll(createComponentTabs());
-		generate(x,y);
+		tabPane.getTabs().add(createAttributeOwnerTab(myTile, myStage));
+		tabPane.getTabs().addAll(createComponentTabs(myStage));
+		generate(x,y, myStage, tabPane);
 	}
 }

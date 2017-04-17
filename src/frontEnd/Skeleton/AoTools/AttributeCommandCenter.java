@@ -2,23 +2,24 @@ package frontEnd.Skeleton.AoTools;
 
 import java.util.Arrays;
 import java.util.List;
-import java.util.MissingResourceException;
 import java.util.ResourceBundle;
 
+import ModificationFromUser.Modification_AddNewAttributeOwnerToGrid;
 import ModificationFromUser.Modification_AddNewPresetAttributeOwner;
 import backEnd.Attribute.Attribute;
-import backEnd.Attribute.AttributeOwnerReader;
+import backEnd.Attribute.AttributeOwner;
 import frontEnd.View;
 import frontEnd.CustomJavafxNodes.SingleFieldPrompt;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.geometry.Insets;
-import javafx.geometry.Point2D;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.scene.text.Font;
+import javafx.stage.Stage;
 
 public class AttributeCommandCenter extends CommandCenter{	
 	private final static String RESOURCES_PATH = "resources/";
@@ -29,35 +30,51 @@ public class AttributeCommandCenter extends CommandCenter{
 	private View myView;
 	private VBox myRoot;
 	private SimpleBooleanProperty authorProperty;
+	private HBox bottomButtons;
+	private Label titleLbl;
+	private Stage myHostStage;
 	
-	public AttributeCommandCenter(View view, AttributeOwnerReader obj){
+	public AttributeCommandCenter(View view, Stage hostStage , AttributeOwner obj, String title){
 		myView = view;
+		myHostStage = hostStage;
 		authorProperty = view.getBooleanAuthorModeProperty();
-
+		setText(title);
 		myRoot = createAttributeCommandCenter(obj);
 	}
 	
-	private VBox createAttributeCommandCenter(AttributeOwnerReader obj) {
+	private void setText(String text){
+		titleLbl = new Label(text);
+		titleLbl.setFont(Font.font(32));
+		titleLbl.setUnderline(true);
+		//titleLbl.setStyle("");
+	}
+	
+	private VBox createAttributeCommandCenter(AttributeOwner obj) {
 		VBox contents = new VBox();
-		contents.setPadding(new Insets(STANDARD_SPACING, STANDARD_SPACING, STANDARD_SPACING, STANDARD_SPACING));
-		contents.getChildren().add(createLocationLabel(obj));
-
+		
+		contents.getChildren().add(titleLbl);
+		
 		HBox contents_Att = createAttributeView(obj);
-
 		contents.getChildren().add(contents_Att);
+		
 		contents.getChildren().add(createPresetButton(obj));
-		Button submit = new Button("Submit");
-		submit.setOnAction(e -> {
-			myView.addToCanvas(obj);
-			
-		});
-		contents.getChildren().add(submit);
+		
+		contents.setPadding(new Insets(STANDARD_SPACING, STANDARD_SPACING, STANDARD_SPACING, STANDARD_SPACING));
 		contents.setSpacing(STANDARD_SPACING);
 		// contents.setAlignment(Pos.TOP_CENTER);
 		return contents;
 	}
+
+	public void addSubmitButton(AttributeOwner obj) {
+		Button submit = new Button("Add Now");
+		submit.setOnAction(e -> {
+			myView.sendUserModification(new Modification_AddNewAttributeOwnerToGrid(obj));
+			myHostStage.close();
+		});
+		bottomButtons.getChildren().add(submit);
+	}
 	
-	private HBox createAttributeView(AttributeOwnerReader obj) {
+	private HBox createAttributeView(AttributeOwner obj) {
 		HBox contents_Att = new HBox();
 		VBox contentRow = null;
 		int count = 0;
@@ -78,7 +95,13 @@ public class AttributeCommandCenter extends CommandCenter{
 		return contents_Att;
 	}
 
-	private Node createPresetButton(AttributeOwnerReader obj){
+	private Node createPresetButton(AttributeOwner obj){
+		
+		bottomButtons = new HBox();
+		
+		bottomButtons.setSpacing(STANDARD_SPACING);
+		bottomButtons.setAlignment(Pos.BOTTOM_RIGHT);
+		
 		List<String> dialogTitles = Arrays.asList("Preset Creation Utility", "Please Input a Name for your new preset");
 		String promptLabel = "New preset name:";
 		String promptText = "";
@@ -86,11 +109,15 @@ public class AttributeCommandCenter extends CommandCenter{
 		Button preset = new Button("Save as preset");
 		preset.setOnAction((e) -> {
 			myView.sendUserModification(new Modification_AddNewPresetAttributeOwner(myDialog.create(), obj));
+			myHostStage.close();
 		});
-		return preset;
+		
+		bottomButtons.getChildren().add(preset);
+		
+		return bottomButtons;
 	}
 
-	private HBox createAttributeValuePair(AttributeOwnerReader obj, Attribute<?> attr) {
+	private HBox createAttributeValuePair(AttributeOwner obj, Attribute<?> attr) {
 		HBox singleAttEditor = new HBox();
 		Label attLabel = new Label(attr.getName());
 		singleAttEditor.getChildren().add(attLabel);
@@ -98,7 +125,6 @@ public class AttributeCommandCenter extends CommandCenter{
 		if (authorProperty.get()) {
 			// Author Mode
 			EditorCreator editorCreator = new EditorCreator(myView, obj, attr);
-			System.out.println("a&&&&&&  " + attr.getName() +"    "  +myAttrNameResources.getString(attr.getName()));
 			right = editorCreator.extractEditor(myAttrNameResources.getString(attr.getName()));
 			
 		} else {
@@ -114,27 +140,15 @@ public class AttributeCommandCenter extends CommandCenter{
 		try{
 			singleAttEditor.getChildren().add(right);
 		} catch (Exception e){
-			singleAttEditor.getChildren().add(new Label("It fucked up, deal with it"));
+			System.out.println(myAttrNameResources.getString(attr.getName()));
+			singleAttEditor.getChildren().add(new Label("Editor in production"));
 		}
 		singleAttEditor.setAlignment(Pos.CENTER_RIGHT);
 		return singleAttEditor;
 	}
 
-	private Label createLocationLabel(AttributeOwnerReader obj) {
-		// TODO maybe add sell feature here
-		try{
-			Point2D pos = (Point2D) obj.getAttribute("Position").getValue();
-			return new Label(
-				String.format("Location: (%.0f, %.0f)", pos.getX(), pos.getY()));
-		} catch (NullPointerException | MissingResourceException e ){
-			return new Label("No Position Attribute Set");
-		}
-	}
-
 	public VBox get() {
 		return myRoot;
 	}
-	
-
 
 }

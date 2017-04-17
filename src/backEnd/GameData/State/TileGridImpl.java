@@ -1,8 +1,13 @@
 package backEnd.GameData.State;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.Observable;
+import java.util.Observer;
 
+import javafx.beans.InvalidationListener;
 import javafx.geometry.Point2D;
 
 /**
@@ -12,55 +17,109 @@ import javafx.geometry.Point2D;
  *
  */
 
-public class TileGridImpl implements TileGrid {
-	private int gridWidth;
-	private int gridHeight;
-	private Tile[][] tileGrid;
+public class TileGridImpl extends Observable implements TileGrid {
+	private int numColsInGrid;
+	private int numRowsInGrid;
+	private Map<Point2D, Tile> tileGrid;
 	private List<Tile> tileList;
+	private double tileWidth;
+	private double tileHeight;
 	
-	public TileGridImpl(int width, int height){
-		gridWidth = width;
-		gridHeight = height;
-		tileGrid = new Tile[width][height];
+	public TileGridImpl(int colsInGrid, int rowsInGrid){
+		numColsInGrid = colsInGrid;
+		numRowsInGrid = rowsInGrid;
+		tileGrid = new HashMap<>();
 	}
 	
 	@Override
-	public Tile getTileByLocation(Point2D location){
-		return getTileByCoord((int) location.getY(),(int) location.getX()); //Potentially wrong flipped x/y- y
+	public void setTileSize(double tileWidth, double tileHeight) {
+		this.tileWidth = tileWidth;
+		this.tileHeight = tileHeight;
+	}
+
+	
+	@Override
+	public Tile getTileByGridPosition(int column, int row){
+		checkAgainstBounds(column, row);
+		return tileGrid.get(new Point2D(column, row));
+	}
+
+	private void checkAgainstBounds(int column, int row) {
+		if (column >= getNumColsInGrid() || row >= getNumRowsInGrid()) {
+			throw new IndexOutOfBoundsException();
+		}
+		if (column < 0 || row < 0){
+			throw new IndexOutOfBoundsException();
+		}
 	}
 	
 	@Override
-	public void setTile(Tile newTile, Point2D location){
-		tileGrid[(int) location.getX()][(int) location.getY()] = newTile; //Potentially wrong flipped x/y?
+	public Tile getTileByScreenLocation(Point2D screenLocation){		
+		int column = (int) Math.floor(screenLocation.getX() / tileWidth);
+		int row = (int) Math.floor(screenLocation.getY() / tileHeight);
+		return getTileByGridPosition(column, row);
+	}
+	
+	@Override
+	public void setTileByScreenPosition(Tile newTile, Point2D position) {
+		int column = (int) Math.floor(position.getX() / tileWidth);
+		int row = (int) Math.floor(position.getY() / tileHeight);
+		setTileByGridPosition(newTile, column, row);
+	}
+	
+	@Override
+	public void setTileByGridPosition(Tile newTile, int column, int row){
+		Point2D posOfNewTile = new Point2D(column, row);
+		Boolean initialization = false;
+		if(!tileGrid.containsKey(posOfNewTile)){
+			initialization = true;
+		}
+		tileGrid.put(posOfNewTile, newTile);
+		if(!initialization){ 
+			// do not notify ScreenGrid for each initial Tile, only if changed after intialization
+			this.setChanged();
+			this.notifyObservers();
+		}
 	}
 
 	@Override
-	public int getMyWidth() {
-		return gridWidth;
+	public int getNumColsInGrid() {
+		return numColsInGrid;
 	}
 
 	@Override
-	public int getMyHeight() {
-		return gridHeight;
+	public int getNumRowsInGrid() {
+		return numRowsInGrid;
 	}
 	
 	public List<Tile> getAllTiles(){
 		tileList=new ArrayList<Tile>();
-		for (int i=0; i<tileGrid.length; i++){
-			for (int j=0; j<tileGrid[i].length; j++){
-				tileList.add(tileGrid[i][j]);
+		for (int col = 0; col < numColsInGrid; col++) {
+			for (int row = 0; row < numRowsInGrid; row++) {
+				tileList.add(tileGrid.get(new Point2D(col, row)));
 			}
 		}
 		return tileList;
 	}
 
 	@Override
-	public Tile getTileByCoord(int x, int y) {
-		if(x >= getMyWidth()  || x < 0 ||
-		   y >= getMyHeight() || y < 0){
-			return null;
-		}
-		return tileGrid[x][y];
+	public double getTileWidth() {
+		return this.tileWidth;
 	}
+
+	@Override
+	public double getTileHeight() {
+		return this.tileHeight;
+	}
+
+	@Override
+	public void addAsObserver(Observer o) {
+		this.addObserver(o);
+	}
+
+
+
+
+
 
 }

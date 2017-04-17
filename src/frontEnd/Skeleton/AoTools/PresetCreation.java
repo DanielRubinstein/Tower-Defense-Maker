@@ -1,43 +1,40 @@
 package frontEnd.Skeleton.AoTools;
 
+import backEnd.Attribute.AttributeOwner;
 import backEnd.Attribute.AttributeOwnerReader;
+import backEnd.GameData.State.Tile;
 import frontEnd.View;
 import javafx.scene.Node;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
-public class PresetCreation{
-	public static final String DEFAULT_CSS = "/resources/css/Flatter.css";
-	private Stage myStage;
-	private Scene myScene;
+public class PresetCreation extends CommandCenter{
+	private View myView;
 	private VBox myRoot;
+	private AttributeOwner obje;
 	
-	public PresetCreation(View myView, AttributeOwnerReader obj){
-		AttributeCommandCenter aCC = new AttributeCommandCenter(myView, obj);
-		myRoot = aCC.get();
+	public PresetCreation(View view, AttributeOwnerReader obj){
+		myView = view;
+		obje = (AttributeOwner) obj;
+		
 	}
 	
-	private void generate(double x, double y) {
-		myStage = new Stage();
-		try{
-			myScene = new Scene(myRoot);
-		} catch (IllegalArgumentException e){
-			myScene.setRoot(myRoot);
-		}
-		myScene.getStylesheets().add(DEFAULT_CSS);
-		myStage.setScene(myScene);
-		myStage.setTitle("Command Center");
-		myStage.setX(x);
-		myStage.setY(y);
-		myStage.show();
-	}
+	
 	public void add(Node n){
 		myRoot.getChildren().add(n);
 	}
 	
 	public void launch(double x, double y) {
-		generate(x,y);
+		Stage stage = new Stage();
+		AttributeCommandCenter aCC = new AttributeCommandCenter(myView, stage, obje, "Preset Creation");
+		if(! (obje instanceof Tile)){
+			aCC.addSubmitButton(obje);
+		}
+		myRoot = aCC.get();
+		
+		generate(x,y, stage, (Parent) myRoot);
 	}
 
 }

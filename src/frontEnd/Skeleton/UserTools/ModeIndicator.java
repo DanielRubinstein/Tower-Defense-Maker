@@ -21,7 +21,7 @@ public class ModeIndicator implements SkeletonObject{
 		authorProperty.addListener((ob, oldV, newV) -> {
 			setIndicator(newV);
 		});
-		pausedIndicator = new Label("Play or pause??");
+		pausedIndicator = new Label("Game Status Indicator");
 		
 		indicatorHolder = new VBox();
 		indicatorHolder.getChildren().addAll(pausedIndicator, modeIndicator);

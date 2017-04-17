@@ -176,6 +176,18 @@
     -fx-background-color: -dark;
 }
 
+
+.tab .tab-label {
+	-fx-alignment: CENTER;
+    -fx-font-size: 17;
+    -fx-text-fill: -dark;
+    
+}
+
+.tab:selected .tab-label {
+	-fx-text-fill: white;
+}
+
 /*******************************************************************************
  *                                                                             *
  * TableView                                                                   *
