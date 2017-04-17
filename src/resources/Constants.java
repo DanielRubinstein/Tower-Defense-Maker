@@ -28,7 +28,7 @@ public class Constants {
 	public static final double WINDOW_WIDTH = 750d;
 	private static final double SCREEN_GRID_HEIGHT_FACTOR = 0.7;
 	private static final double SCREEN_GRID_WIDTH_FACTOR = 0.8;
-	private static final double SCREEN_GRID_PADDING = 50;
+	public static final double SCREEN_GRID_PADDING = 50;
 	private static final double BOTTOM_HEIGHT_FACTOR = 1 - SCREEN_GRID_HEIGHT_FACTOR;
 	private static final double SIDE_WIDTH_FACTOR = 1 - SCREEN_GRID_WIDTH_FACTOR;
 	public static final double SCREEN_GRID_WIDTH = WINDOW_WIDTH * SCREEN_GRID_WIDTH_FACTOR - SCREEN_GRID_PADDING;

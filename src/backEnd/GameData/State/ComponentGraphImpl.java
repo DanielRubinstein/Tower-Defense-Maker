@@ -102,7 +102,7 @@ public class ComponentGraphImpl extends Observable implements ComponentGraph {
 	}
 	
 	@Override
-	public List<Component> getComponentsWithinRadius(Component centerComp, float radius){
+	public List<Component> getComponentsWithinRadius(Component centerComp, double radius){
 		Point2D centerLoc = (Point2D) centerComp.getAttribute("Position").getValue();
 		ArrayList<Component> componentsWithinRadius = new ArrayList<Component>();
 		for (Point2D loc : componentMap.keySet()){

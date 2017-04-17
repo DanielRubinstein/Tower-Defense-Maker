@@ -166,9 +166,4 @@ public class ViewImpl implements View {
 		fnf.create("Error", e.getMessage());
 	}
 
-	@Override
-	public void pause() {
-		animation.stop();
-	}
-
 }
