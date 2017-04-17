@@ -7,6 +7,7 @@ import java.util.Map;
 import java.util.Observable;
 import java.util.Observer;
 
+import backEnd.Attribute.AttributeOwnerReader;
 import javafx.beans.InvalidationListener;
 import javafx.geometry.Point2D;
 
@@ -117,9 +118,9 @@ public class TileGridImpl extends Observable implements TileGrid {
 		this.addObserver(o);
 	}
 
-
-
-
-
+	@Override
+	public boolean contains(AttributeOwnerReader newAttrOwn) {
+		return tileGrid.containsValue(newAttrOwn);
+	}
 
 }
