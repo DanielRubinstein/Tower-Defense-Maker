@@ -53,23 +53,6 @@ public class ViewImpl implements View {
 	}
 
 	@Override
-	public void play() {
-		KeyFrame frame = new KeyFrame(Duration.millis(MILLISECOND_DELAY), e -> step(SECOND_DELAY));
-		animation.setCycleCount(Animation.INDEFINITE);
-		animation.getKeyFrames().add(frame);
-		animation.play();
-	}
-	
-	/**
-	 * controls the animation of the State
-	 */
-	private void step(double delay) {
-		myModel.getGameProcessController().run(delay); // TODO: TESTING ONLY
-	}
-	
-	
-
-	@Override
 	public SimpleBooleanProperty getBooleanAuthorModeProperty() {
 		return this.authorProperty;
 	}
@@ -83,38 +66,6 @@ public class ViewImpl implements View {
 	public String getRunStatus() {
 		// TODO Auto-generated method stub
 		return null;
-	}
-
-	@Override
-	public void save() {
-		String saveGameName = getSaveGameName();
-		sendUserModification(new Modification_Save(saveGameName));
-	}
-
-	private String getSaveGameName() {
-		List<String> dialogTitles = Arrays.asList("Save Game Utility", "Please Input a Name for your saved game");
-		String promptLabel = "Saved game name:";
-		String promptText = "";
-		SingleFieldPrompt myDialog = new SingleFieldPrompt(dialogTitles, promptLabel, promptText);
-		return myDialog.create();
-	}
-
-	@Override
-	public void load() {
-		GameLoader gL = new GameLoader();
-		File fileToLoad = null;
-		try {
-			fileToLoad = gL.loadGame();
-		} catch (XMLReadingException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		sendUserModification(new Modification_Load(fileToLoad));
-	}
-
-	@Override
-	public void newGame() {
-		// TODO Auto-generated method stub
 	}
 
 	@Override
@@ -140,12 +91,6 @@ public class ViewImpl implements View {
 	@Override
 	public void editRules() {
 		// TODO Auto-generated method stub
-	}
-
-	@Override
-	public void step() {
-		// TODO Auto-generated method stub
-
 	}
 
 	@Override
