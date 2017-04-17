@@ -52,7 +52,13 @@ public class BankController extends Observable
 			
 			Tile newTile = new TileImpl(Arrays.asList(), Arrays.asList(UserModeType.AUTHOR), new Point2D(0,0));
 			newTile.setAttributeValue("ImageFile", "resources/images/Tiles/Blue.png");
-			addNewTile("Blue Tile", newTile);
+			newTile.setAttributeValue("MoveDirection","Down");
+			addNewTile("Blue Down Tile", newTile);
+			
+			Tile newTile2 = new TileImpl(Arrays.asList(), Arrays.asList(UserModeType.AUTHOR), new Point2D(0,0));
+			newTile2.setAttributeValue("ImageFile", "resources/images/Tiles/Red.png");
+			newTile2.setAttributeValue("MoveDirection","Right");
+			addNewTile("Red Right Tile", newTile2);
 			
 			
 			Component newComponent = new Component(new AttributeData(),new AccessPermissionsImpl());
