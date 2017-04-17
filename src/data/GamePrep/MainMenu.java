@@ -1,9 +1,9 @@
-package frontEnd.Splash;
+package data.GamePrep;
 
 import java.io.File;
 import java.util.function.Consumer;
 
-import backEnd.Data.XMLReadingException;
+import data.XMLReadingException;
 import frontEnd.Menus.ButtonMenuImpl;
 import frontEnd.Menus.ErrorDialog;
 import javafx.stage.Stage;

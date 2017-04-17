@@ -1,7 +1,6 @@
 package frontEnd.Skeleton;
 
 import backEnd.Model;
-import backEnd.Attribute.AttributeOwnerReader;
 import backEnd.GameData.State.State;
 import frontEnd.View;
 import frontEnd.Skeleton.UserTools.UserTools;

@@ -1,4 +1,4 @@
-package frontEnd.Splash;
+package data.GamePrep;
 
 import java.util.function.Consumer;
 
