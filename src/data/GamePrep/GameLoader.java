@@ -1,4 +1,4 @@
-package frontEnd.Splash;
+package data.GamePrep;
 
 import java.io.File;
 import java.io.IOException;
@@ -11,8 +11,8 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-import backEnd.Data.XMLReadingException;
 import backEnd.GameData.GameData;
+import data.XMLReadingException;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 

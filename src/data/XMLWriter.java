@@ -1,6 +1,4 @@
-package backEnd.Data;
-
-import java.util.List;
+package data;
 
 import backEnd.Bank.BankController;
 import backEnd.GameData.GameDataInterface;

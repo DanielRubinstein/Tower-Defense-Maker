@@ -1,4 +1,4 @@
-package backEnd.Data;
+package data;
 
 import java.io.File;
 import java.util.Arrays;
@@ -18,28 +18,28 @@ import backEnd.GameData.State.Tile;
  *
  */
 
-public class XMLReaderImpl implements XMLReader {
-	private XStream xStream;
-	
-	public XMLReaderImpl(){
-		xStream = new XStream(new DomDriver());
-	}
+public class XMLReader {
 
-	public GameData loadGameStateData(String filePath, String gameName) throws XMLReadingException{
+	public static GameData loadGameStateData(String filePath, String gameName) throws XMLReadingException{
 		File xmlFile = new File(filePath + gameName + ".xml");
 		return loadGameStateData(xmlFile);
 	}
 	
-	public GameData loadGameStateData(File gameFile) throws XMLReadingException{
+	public static GameData loadGameStateData(File gameFile) throws XMLReadingException{
 		File xmlFile = gameFile;
+		XStream xStream = createXStream();
 		try{
 	        return (GameData) xStream.fromXML(xmlFile);      
 	    }catch(Exception e){
 	        throw new XMLReadingException(gameFile);
 	    }
 	}
+
+	private static XStream createXStream() {
+		return new XStream(new DomDriver());
+	}
 	
-	public List<Map<String,?>> loadUniversalGameData(String filePath) throws XMLReadingException{
+	public static List<Map<String,?>> loadUniversalGameData(String filePath) throws XMLReadingException{
 		@SuppressWarnings("unchecked")
 		Map<String, Component> loadedComponentMap = (Map<String,Component>) loadXML(filePath, "ComponentMap");
 		@SuppressWarnings("unchecked")
@@ -47,8 +47,9 @@ public class XMLReaderImpl implements XMLReader {
 		return Arrays.asList(loadedComponentMap,loadedTileMap);
 	}
 
-	private Object loadXML(String filePath, String fileName) throws XMLReadingException {
+	private static Object loadXML(String filePath, String fileName) throws XMLReadingException {
 		File xmlFile = new File(filePath + fileName + ".xml");
+		XStream xStream = createXStream();
 		try{
 			return xStream.fromXML(xmlFile);
 		} catch (Exception e){

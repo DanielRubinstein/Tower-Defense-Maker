@@ -8,7 +8,6 @@ import java.util.Observer;
 import java.util.Set;
 
 import backEnd.Attribute.AttributeOwner;
-import backEnd.Attribute.AttributeOwnerReader;
 import backEnd.GameData.State.Component;
 import backEnd.GameData.State.ComponentGraph;
 import backEnd.GameData.State.State;

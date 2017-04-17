@@ -1,14 +1,14 @@
 package backEnd;
 
 import backEnd.Bank.BankController;
-import backEnd.Data.DataController;
-import backEnd.Data.XMLReadingException;
 import backEnd.GameData.GameData;
 import backEnd.GameData.State.State;
 import backEnd.GameEngine.Engine.GameProcessController;
 import backEnd.Mode.Mode;
 import backEnd.Mode.ModeImpl;
 import backEnd.Mode.ModeReader;
+import data.DataController;
+import data.XMLReadingException;
 
 /**
  * Controller the front end calls when it detects a backend modification from the user,
@@ -26,14 +26,12 @@ public class ModelImpl implements Model{
 	private DataController myDataController;
 	private GameProcessController myEngine;
 	
-	public ModelImpl(DataController dataController, GameData gameData) throws XMLReadingException {
-		myDataController = dataController;
+	public ModelImpl(GameData gameData) throws XMLReadingException {
+		myDataController = new DataController();
 		myGameData = gameData;
 		myMode = new ModeImpl();
-
-		myDataController = dataController;
 		myEngine = new GameProcessController(myGameData.getState(), myGameData.getRules());
-		myBankController = dataController.generateBanks();
+		myBankController = myDataController.generateBanks();
 
 	}
 

@@ -11,15 +11,15 @@ import ModificationFromUser.Modification_Load;
 import ModificationFromUser.Modification_Save;
 import backEnd.Model;
 import backEnd.Bank.BankController;
-import backEnd.Data.DataController;
-import backEnd.Data.XMLReadingException;
 import backEnd.GameData.State.Component;
 import backEnd.GameData.State.Tile;
 import backEnd.Mode.ModeReader;
+import data.DataController;
+import data.XMLReadingException;
+import data.GamePrep.GameLoader;
 import frontEnd.CustomJavafxNodes.SingleFieldPrompt;
 import frontEnd.Menus.ErrorDialog;
 import frontEnd.Skeleton.SkeletonImpl;
-import frontEnd.Splash.GameLoader;
 import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
@@ -30,21 +30,14 @@ import javafx.util.Duration;
 import resources.Constants;
 
 public class ViewImpl implements View {
-
 	private Model myModel;
-	private DataController myDataController;
 	private Consumer<ModificationFromUser> myModConsumer;
 	private SkeletonImpl mySkeleton;
 	private SimpleBooleanProperty authorProperty;
 	private Stage appStage;
 
-	public Timeline animation = new Timeline();
-	private static final double MILLISECOND_DELAY = Constants.MILLISECOND_DELAY;
-	private static final double SECOND_DELAY = Constants.SECOND_DELAY;
-
-	public ViewImpl(Model model, DataController dataController, Consumer<ModificationFromUser> inputConsumer) {
+	public ViewImpl(Model model, Consumer<ModificationFromUser> inputConsumer) {
 		myModel = model;
-		myDataController = dataController;
 		myModConsumer = inputConsumer;
 		ModeReader mode = model.getModeReader();
 		authorProperty = new SimpleBooleanProperty(mode.getUserModeString().equals("AUTHOR"));
