@@ -46,6 +46,7 @@ public class GameProcessController {
 		animation.setCycleCount(Animation.INDEFINITE);
 		animation.getKeyFrames().add(frame);
 		animation.play();
+		System.out.println("GAME STARTED");
 	}
 	
 	/**
@@ -53,7 +54,7 @@ public class GameProcessController {
 	 */
 	private void step(double delay) {
 		System.gc();
-		System.out.println("game loop is running");
+		System.out.println("Game loop step preformed");
 		this.run(delay); // TODO: TESTING ONLY
 	}
 	
@@ -65,7 +66,7 @@ public class GameProcessController {
 	}
 
 	public void pause() {
-		System.out.println("GAME PAUSED");
 		animation.pause();
+		System.out.println("GAME PAUSED");
 	}	
 }

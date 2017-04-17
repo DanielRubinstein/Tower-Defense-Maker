@@ -28,7 +28,6 @@ public enum Modification_GameRemote implements ModificationFromUser {
 		});
 
 	private Consumer<GameProcessController> myConsumer;
-	public static final double DEFAULT_STEP_TIME = 1000; 
 	
 	Modification_GameRemote(Consumer<GameProcessController> consumer){
 		myConsumer = consumer;
