@@ -64,7 +64,7 @@ public class SettingsViewImpl implements SettingsView{
 		
 		//adding player/godmode switch
 		Runnable changeMode = () -> myView.sendUserModification(new Modification_ChangeMode());
-		ToggleSwitch modeToggle = new ToggleSwitch("Player", "Author", authorProperty, changeMode);
+		ToggleSwitch modeToggle = new ToggleSwitch("Player", "Author", myView.getBooleanAuthorModeProperty(), changeMode);
 		myMenu.addNode(modeToggle.getRoot());
 		
 		myMenu.addSimpleButtonWithHover("Help", () -> new HelpOptions(myStage), "Get Help");

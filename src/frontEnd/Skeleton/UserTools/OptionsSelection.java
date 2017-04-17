@@ -3,9 +3,11 @@ package frontEnd.Skeleton.UserTools;
 import java.util.ArrayList;
 import java.util.List;
 
+import ModificationFromUser.Modification_ChangeMode;
 import ModificationFromUser.Modification_GameRemote;
 import backEnd.GameEngine.Engine.GameProcessController;
 import frontEnd.View;
+import frontEnd.CustomJavafxNodes.ToggleSwitch;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
@@ -17,30 +19,40 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.TilePane;
+import javafx.scene.layout.VBox;
 
-public class OptionsSelection {
+public class OptionsSelection implements SkeletonObject{
 
 	private static final String SETTINGS_IMAGE = "resources/images/Tools/Settings.jpg";
 	private static final String PAUSE_IMAGE = "resources/images/Tools/pause.jpg";
 	private static final String FASTFWD_IMAGE = "resources/images/Tools/fastfwd.jpg";
 	private static final String PLAY_IMAGE = "resources/images/Tools/play.jpg";
-	private TilePane myRoot;
+	private VBox myRoot;
+	private TilePane myTiles;
 	private SettingsView mySettings;
 	private List<Button> myButtons;
 	private View myView;
 	
 	public OptionsSelection(View view) {
 		myView = view;
-		myRoot = new TilePane(Orientation.HORIZONTAL,0, 0);
+		myRoot = new VBox();
+		myTiles = new TilePane(Orientation.HORIZONTAL,0, 0);
 		mySettings= new SettingsViewImpl(view, myView.getAppStage());
+		myRoot.getChildren().add(myTiles);
+		//adding player/godmode switch
+		Runnable changeMode = () -> myView.sendUserModification(new Modification_ChangeMode());
+		ToggleSwitch modeToggle = new ToggleSwitch("Player", "Author", myView.getBooleanAuthorModeProperty(), changeMode);
+		myRoot.getChildren().add(modeToggle.getRoot());
 	}
-	public Node getNode(){
+	public Node getRoot(){
+		
 		return myRoot;
 	}
 	public void setAlignment(Pos position,Priority priority){
-		myRoot.setAlignment(Pos.TOP_RIGHT);
+		myTiles.setAlignment(Pos.TOP_RIGHT);
 	}
 	public void setSize(double width, double height){
+		myTiles.setPrefWidth(width);
 		myRoot.setPrefWidth(width);
 		myRoot.setPrefHeight(height);
 		setUpOptions(width/4-1); //TODO hard coded
@@ -48,7 +60,7 @@ public class OptionsSelection {
 	private void setUpOptions(double buttonWidth){
 		myButtons = new ArrayList<Button>();
 		addButtons(buttonWidth);
-		myRoot.getChildren().addAll(myButtons);
+		myTiles.getChildren().addAll(myButtons);
 	}
 	
 	private void addButtons(double size){
