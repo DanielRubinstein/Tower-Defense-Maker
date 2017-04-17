@@ -1,5 +1,8 @@
 package ModificationFromUser;
 
+import com.thoughtworks.xstream.XStream;
+import com.thoughtworks.xstream.io.xml.DomDriver;
+
 import backEnd.ModelImpl;
 import backEnd.Attribute.AttributeOwner;
 import backEnd.Attribute.AttributeOwnerReader;
@@ -15,28 +18,39 @@ import backEnd.Mode.ModeException;
  */
 public class Modification_AddNewPresetAttributeOwner implements ModificationFromUser {
 
-	private AttributeOwnerReader newAO;
+	private AttributeOwnerReader newAttrOwn;
 	private String newAOName;
+	private XStream xStream;
 	public static final String DESCRIPTION = "Add Preset Component or Tile";		
 	
 	public Modification_AddNewPresetAttributeOwner(String newAttributeOwnerName, AttributeOwnerReader obj){
-		this.newAO = obj;
+		this.newAttrOwn = obj;
 		this.newAOName = newAttributeOwnerName;
 	}
 
 	//FIXME currently the new preset will overwrite an existing preset with the same name, 
 	// based on the implementation of addNewComponent()
-	
-	// FIXME how to update the frontend and alert it that there is a new preset
 	@Override
 	public void invoke(ModelImpl myModel) throws Exception {
 		switch (myModel.getMode().getUserMode()) {
 		case AUTHOR:
-			if(newAO instanceof Tile){
-				myModel.getBankController().addNewTile(newAOName, (Tile) newAO);
+			AttributeOwnerReader newAttrOwnToAdd;
+			if(myModel.getGameData().getState().getComponentGraph().contains(newAttrOwn) || myModel.getGameData().getState().getTileGrid().contains(newAttrOwn)){
+				xStream = new XStream(new DomDriver());
+				xStream.alias("Component", Component.class);
+				xStream.alias("Tile", Tile.class);
+				String serializedAO = xStream.toXML(newAttrOwn);
+				newAttrOwnToAdd = (AttributeOwnerReader) xStream.fromXML(serializedAO);
+			} else {
+				newAttrOwnToAdd = newAttrOwn;
 			}
-			else if(newAO instanceof Component){
-				myModel.getBankController().addNewComponent(newAOName, (Component) newAO);
+			
+			if(newAttrOwnToAdd instanceof Tile){
+				myModel.getBankController().addNewTile(newAOName, (Tile) newAttrOwnToAdd);
+			}
+			else if(newAttrOwnToAdd instanceof Component){
+				System.out.println("yeah its a comp");
+				myModel.getBankController().addNewComponent(newAOName, (Component) newAttrOwnToAdd);
 			}
 			break;
 		case PLAYER:

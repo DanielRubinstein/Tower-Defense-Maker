@@ -3,6 +3,7 @@ package backEnd.GameData.State;
 import java.util.List;
 import java.util.Observer;
 
+import backEnd.Attribute.AttributeOwnerReader;
 import javafx.beans.Observable;
 import javafx.geometry.Point2D;
 
@@ -54,6 +55,8 @@ public interface TileGrid{
 	double getTileHeight();
 	
 	void addAsObserver(Observer o);
+
+	boolean contains(AttributeOwnerReader newAttrOwn);
 
 
 }
