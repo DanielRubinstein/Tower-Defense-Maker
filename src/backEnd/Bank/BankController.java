@@ -72,6 +72,7 @@ public class BankController extends Observable
 
 	public void addNewTile (String name, Tile tile)
 	{
+		System.out.println("added here");
 		tileBank.put(name, tile);
 		this.setChanged();
 		this.notifyObservers();
@@ -79,7 +80,6 @@ public class BankController extends Observable
 
 	public void removeTile(String name)
 	{
-		tileBank.remove(name);
 		this.setChanged();
 		this.notifyObservers();
 	}

@@ -22,6 +22,7 @@ public class Modification_AddNewPresetAttributeOwner implements ModificationFrom
 	public Modification_AddNewPresetAttributeOwner(String newAttributeOwnerName, AttributeOwnerReader obj){
 		this.newAO = obj;
 		this.newAOName = newAttributeOwnerName;
+
 	}
 
 	//FIXME currently the new preset will overwrite an existing preset with the same name, 
@@ -36,6 +37,7 @@ public class Modification_AddNewPresetAttributeOwner implements ModificationFrom
 				myModel.getBankController().addNewTile(newAOName, (Tile) newAO);
 			}
 			else if(newAO instanceof Component){
+				System.out.println("yeah its a comp");
 				myModel.getBankController().addNewComponent(newAOName, (Component) newAO);
 			}
 			break;
