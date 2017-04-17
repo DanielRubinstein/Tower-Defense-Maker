@@ -31,6 +31,7 @@ public class GameProcessController {
 	public void run(double stepTime) {
 		for(Engine engine : myEngines){
 			engine.gameLoop(myCurrentState,stepTime);
+			//System.out.println("steptime is  "+ stepTime);
 		}
 		//Has won/lost?
 	}	

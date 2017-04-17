@@ -12,7 +12,7 @@ public class Constants {
 	public static final String DEFAULT_CSS = "/resources/css/Flatter.css";
 	
 	//Engine constants
-	public static final int defaultMoveAmount=5;
+	public static final double defaultMoveAmount=5;
 	public static final int defaultHealth=100;
 	public static final Point2D defaultLocation=new Point2D(0,0);
 	public static final float defaultRadius=100;
