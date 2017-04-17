@@ -59,6 +59,22 @@ public class ViewImpl implements View {
 		return mySkeleton.getScreenGrid();
 	}
 
+	@Override
+	public void play() {
+		KeyFrame frame = new KeyFrame(Duration.millis(MILLISECOND_DELAY), e -> step(SECOND_DELAY));
+		animation.setCycleCount(Animation.INDEFINITE);
+		animation.getKeyFrames().add(frame);
+		animation.play();
+	}
+	
+	/**
+	 * controls the animation of the State
+	 */
+	private void step(double delay) {
+		myModel.getGameProcessController().run(delay); // TODO: TESTING ONLY
+	}
+	
+	
 
 	@Override
 	public SimpleBooleanProperty getBooleanAuthorModeProperty() {
