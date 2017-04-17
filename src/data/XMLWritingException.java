@@ -1,4 +1,4 @@
-package backEnd.Data;
+package data;
 
 public class XMLWritingException extends RuntimeException{
 	public XMLWritingException(String message){

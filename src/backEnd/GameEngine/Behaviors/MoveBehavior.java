@@ -28,7 +28,8 @@ public class MoveBehavior implements Behavior {
 	
 	public MoveBehavior(Component inputComponent){
 		myComponent=inputComponent;
-		currentPosition=(Point2D) myComponent.getAttribute("Position").getValue();
+		Object currentPositionO=myComponent.getAttribute("Position").getValue();
+		currentPosition=(Point2D) currentPositionO;
 		//System.out.println("in move behavior " + myComponent.getAttribute("Position").getValue() + "    " +myComponent.getAttribute("Position").getValue().getClass());
 	}
 	
@@ -43,6 +44,7 @@ public class MoveBehavior implements Behavior {
 		//System.out.println("   in move behavior " +currentTile.getAttribute("MoveDirection").getValue().getClass() + "    " +
 				//currentTile.getAttribute("MoveDirection").getValue());
 		if (currentTile.getAttribute("MoveDirection").getValue()==null){
+			System.out.println("WO BU ZHIDAO");
 			return;
 		}
 		switch ((String) currentTile.getAttribute("MoveDirection").getValue()) {
@@ -57,13 +59,13 @@ public class MoveBehavior implements Behavior {
 			break;
 		case "Down":
 			newPoint=new Point2D(currentPosition.getX(), currentPosition.getY()+moveAmount);
-			System.out.println("MOVE COMPONENT DOWN");
 			break;
 		default:
-			System.out.println("Movebehavior- No direction specified");
+			//System.out.println("Movebehavior- No direction specified");
 			return;
 		}
 		myComponent.setAttributeValue("Position",newPoint); //does it get overwritten?
+		return;
 
 	}
 

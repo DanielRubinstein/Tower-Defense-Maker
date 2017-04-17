@@ -25,8 +25,6 @@ public class GameProcessController {
 	private final static ResourceBundle myResources = ResourceBundle.getBundle(RESOURCES_PATH);
 	
 	public Timeline animation = new Timeline();
-	private static final double MILLISECOND_DELAY = Constants.MILLISECOND_DELAY;
-	private static final double SECOND_DELAY = Constants.SECOND_DELAY;
 	
 	public GameProcessController(State currentState, Rules gameRules){
 		myEngines = new ArrayList<Engine>();
@@ -41,25 +39,35 @@ public class GameProcessController {
 	}
 	
 	public void playAnimation() {
-		KeyFrame frame = new KeyFrame(Duration.millis(MILLISECOND_DELAY), e -> step(SECOND_DELAY));
+		// TODO include rule checking
+		
+		
+		KeyFrame frame = new KeyFrame(Duration.millis(Constants.MILLISECOND_DELAY), e -> step(Constants.SECOND_DELAY));
 		animation.setCycleCount(Animation.INDEFINITE);
 		animation.getKeyFrames().add(frame);
 		animation.play();
+		System.out.println("GAME STARTED");
 	}
 	
 	/**
 	 * controls the animation of the State
 	 */
 	private void step(double delay) {
-		System.gc();
-		System.out.println("game loop is running");
+		//System.gc();
+		//System.out.println("Game loop step preformed");
 		this.run(delay); // TODO: TESTING ONLY
 	}
 	
 	public void run(double stepTime) {
 		for(Engine engine : myEngines){
 			engine.gameLoop(myCurrentState,stepTime);
+			//System.out.println("steptime is  "+ stepTime);
 		}
 		//Has won/lost? check myRules after each loop?
+	}
+
+	public void pause() {
+		animation.pause();
+		System.out.println("GAME PAUSED");
 	}	
 }

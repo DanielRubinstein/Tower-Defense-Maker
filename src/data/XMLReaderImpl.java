@@ -1,4 +1,4 @@
-package backEnd.Data;
+package data;
 
 import java.io.File;
 import java.util.Arrays;
@@ -18,18 +18,30 @@ import backEnd.GameData.State.Tile;
  *
  */
 
-public class XMLReaderImpl implements XMLReader {
+public class XMLReaderImpl implements XMLReader{
 	private XStream xStream;
 	
 	public XMLReaderImpl(){
-		xStream = new XStream(new DomDriver());
+		xStream = createXStream();
+	}
+	
+	private XStream createXStream() {
+		return new XStream(new DomDriver());
 	}
 
+	/* (non-Javadoc)
+	 * @see data.XMLReader#loadGameStateData(java.lang.String, java.lang.String)
+	 */
+	@Override
 	public GameData loadGameStateData(String filePath, String gameName) throws XMLReadingException{
 		File xmlFile = new File(filePath + gameName + ".xml");
 		return loadGameStateData(xmlFile);
 	}
 	
+	/* (non-Javadoc)
+	 * @see data.XMLReader#loadGameStateData(java.io.File)
+	 */
+	@Override
 	public GameData loadGameStateData(File gameFile) throws XMLReadingException{
 		File xmlFile = gameFile;
 		try{
@@ -39,6 +51,10 @@ public class XMLReaderImpl implements XMLReader {
 	    }
 	}
 	
+	/* (non-Javadoc)
+	 * @see data.XMLReader#loadUniversalGameData(java.lang.String)
+	 */
+	@Override
 	public List<Map<String,?>> loadUniversalGameData(String filePath) throws XMLReadingException{
 		@SuppressWarnings("unchecked")
 		Map<String, Component> loadedComponentMap = (Map<String,Component>) loadXML(filePath, "ComponentMap");

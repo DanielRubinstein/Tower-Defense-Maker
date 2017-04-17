@@ -11,6 +11,6 @@ public interface Skeleton {
 	 */
 	public void display(Stage stage);
 	
-	public Node getCanvas();
+	public Node getScreenGrid();
 }
 

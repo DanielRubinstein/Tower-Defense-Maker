@@ -39,7 +39,7 @@ public class TileCommandCenterImpl extends CommandCenter implements TileCommandC
 	public TileCommandCenterImpl(View view, Tile tile, State state) {
 		myView = view;
 		myTile = tile;
-		myComponents = state.getComponentGraph().getComponentsByTileLocation((Point2D) tile.getAttribute("Position").getValue());
+		myComponents = state.getComponentsByTileGridPosition((Point2D) tile.getAttribute("Position").getValue());
 		tabPane = new TabPane();
 	}
 

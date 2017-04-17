@@ -5,20 +5,10 @@ import java.util.List;
 import java.util.Observable;
 import java.util.Observer;
 
+import backEnd.Attribute.AttributeOwnerReader;
 import javafx.geometry.Point2D;
 
 public interface ComponentGraph {
-
-	int getGridWidth();
-
-	int getGridHeight();
-
-
-	/**
-	 * Returns list of all components on the grid
-	 * @return list of components
-	 */
-	List<Component> getComponentList();
 
 
 	/**
@@ -26,14 +16,14 @@ public interface ComponentGraph {
 	 * @param location
 	 * @return Component at the given location
 	 */
-	List<Component> getComponentsByLocation(Point2D location);
+	List<Component> getComponentsByScreenPosition(Point2D location);
 
 	/**
 	 * Get the list of components at a given Tile location
 	 * @param Tile location
 	 * @return Component at the given location
 	 */
-	List<Component> getComponentsByTileLocation(Point2D tileLocation);
+	List<Component> getComponentsByTileCorners(TileCorners tileCorners);
 
 	/**
 	 * Gets the List of all Components in the ComponentGraph
@@ -71,5 +61,7 @@ public interface ComponentGraph {
 	List<Component> getNearestComponents(Component centerComp);
 	
 	void addAsObserver(Observer o);
+
+	boolean contains(AttributeOwnerReader c);
 
 }
