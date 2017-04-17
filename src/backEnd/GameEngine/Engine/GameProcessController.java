@@ -53,8 +53,8 @@ public class GameProcessController {
 	 * controls the animation of the State
 	 */
 	private void step(double delay) {
-		System.gc();
-		System.out.println("Game loop step preformed");
+		//System.gc();
+		//System.out.println("Game loop step preformed");
 		this.run(delay); // TODO: TESTING ONLY
 	}
 	
