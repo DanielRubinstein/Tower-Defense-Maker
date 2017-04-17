@@ -1,6 +1,7 @@
 package frontEnd;
 
 import ModificationFromUser.ModificationFromUser;
+import backEnd.Model;
 import backEnd.Bank.BankController;
 import javafx.scene.Node;
 
@@ -22,10 +23,5 @@ public interface View extends ViewReader{
 
 	public BankController getBankController();
 	
-	public void play();
-	
 	public Node getScreenGrid();
-	
-	public void pause();
-
 }

@@ -7,13 +7,12 @@ import backEnd.GameEngine.Engine.GameProcessController;
 
 public enum Modification_GameRemote implements ModificationFromUser {
 	PLAY (engine -> {
-		System.out.println("PLAY GAME");
-		//FIXME should ultimately execute animation.play()
-		engine.run(100);
+		System.out.println("Invokable to PLAY GAME");
+		engine.playAnimation();
 		}),
 	PAUSE (engine -> {
-		System.out.println("PAUSE GAME");
-		//engine.pause();
+		System.out.println("Invokable to PAUSE GAME");
+		engine.pause();
 		}),
 	FASTFORWARD (engine -> {
 		System.out.println("FASTFORWARD");
@@ -40,6 +39,7 @@ public enum Modification_GameRemote implements ModificationFromUser {
 		switch (this) {
 		case PLAY:
 			myConsumer.accept(myModel.getGameProcessController());
+			myModel.getMode().toggleUserMode();
 			break;
 		default:
 			switch (myModel.getMode().getUserMode()) {

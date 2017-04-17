@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import ModificationFromUser.Modification_GameRemote;
+import backEnd.GameEngine.Engine.GameProcessController;
 import frontEnd.View;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -24,6 +25,7 @@ public class OptionsSelection {
 	private static final String FASTFWD_IMAGE = "resources/images/Tools/fastfwd.jpg";
 	private static final String PLAY_IMAGE = "resources/images/Tools/play.jpg";
 	private TilePane myRoot;
+	private GameProcessController myAnimationProcessor;
 	private SettingsView mySettings;
 	private List<Button> myButtons;
 	private View myView;
@@ -52,13 +54,11 @@ public class OptionsSelection {
 	
 	private void addButtons(double size){
 		addButtonImage(PLAY_IMAGE, e-> {
-			System.out.println("trynig to play");
-			myView.play();
+			System.out.println("trying to play");
 			myView.sendUserModification(Modification_GameRemote.PLAY);
 		}
 		 ,size);
 		addButtonImage(PAUSE_IMAGE, e-> {
-			myView.pause();
 			myView.sendUserModification(Modification_GameRemote.PAUSE);
 		} ,size);
 		addButtonImage(FASTFWD_IMAGE, e-> myView.sendUserModification(Modification_GameRemote.FASTFORWARD) ,size);
