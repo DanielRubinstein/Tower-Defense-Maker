@@ -74,7 +74,7 @@ public class EditorCreator {
 	}
 
 	private Node createComponentEditor() {
-		return new Label("Component editor in development");
+		return new Label("inDev");
 	}
 
 	private Node createPositionEditor() {
@@ -88,7 +88,7 @@ public class EditorCreator {
 			});
 			return posLabel;
 		} catch (NullPointerException | MissingResourceException e ){
-			return new Label("No Position Attribute Set");
+			return new Label("NoneSet");
 		}
 	}
 
@@ -142,9 +142,11 @@ public class EditorCreator {
 		HBox both = new HBox();
 		String imagePath = (String) myAttr.getValue();
 		Image image = new Image(getClass().getClassLoader().getResourceAsStream(imagePath));
-		ImageView curImage = new ImageView(image);
-		curImage.setPreserveRatio(false);
-		both.getChildren().add(curImage);
+		ImageView imv = new ImageView();
+		imv.setImage(image);
+		imv.setPreserveRatio(true);
+		
+		
 		Button b = new Button("Change Image");
 		b.setOnAction(e -> {
 			FileChooser imageChooser = new FileChooser();
@@ -154,20 +156,29 @@ public class EditorCreator {
 			
 			File selectedFile = imageChooser.showOpenDialog(new Stage());
 			try{
-			String newPath = selectedFile.getPath();
-			String newValue = newPath.substring(newPath.indexOf("resources"), newPath.length());
-			sendModification(newValue);
-			Image newImage = new Image(getClass().getClassLoader().getResourceAsStream(imagePath));
-			curImage.setImage(newImage);
+				String newPath = selectedFile.getPath();
+				String newValue = newPath.substring(newPath.indexOf("resources"), newPath.length());
+				sendModification(newValue);
+				Image newImage = new Image(getClass().getClassLoader().getResourceAsStream(newValue));
+				imv.setImage(newImage);
 			}
 			catch (NullPointerException exception){
 				System.out.println("Did not select an image- SAD!");
 			}
 
 		});
-		both.getChildren().add(b);
-		curImage.fitHeightProperty().bind(b.heightProperty());
-		curImage.fitWidthProperty().bind(b.widthProperty());
+		
+		
+		// To bind the heights without the sizing screwing up
+		b.setPrefHeight(70);
+		imv.setFitHeight(b.getPrefHeight());
+		b.heightProperty().addListener((o , oldV, newV) -> {
+			imv.setFitHeight(newV.doubleValue());
+		});
+		
+		both.getChildren().add(imv);
+		both.getChildren().add(b);		
+		both.setSpacing(20);
 		return both;
 	}
 
