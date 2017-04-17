@@ -44,6 +44,10 @@ public class AttributeData extends Observable {
 		return myAttributes;
 	}
 	
+	public boolean containsAttribute(String key){ //use this for debugging
+		return myAttributes.containsKey(key);
+	}
+	
 	/**
 	 * Part of the observable interface
 	 */

@@ -2,21 +2,12 @@ package backEnd.GameData.State;
 
 import java.util.Collection;
 import java.util.List;
+import java.util.Observable;
+import java.util.Observer;
 
 import javafx.geometry.Point2D;
 
 public interface ComponentGraph {
-
-	int getGridWidth();
-
-	int getGridHeight();
-
-
-	/**
-	 * Returns list of all components on the grid
-	 * @return list of components
-	 */
-	List<Component> getComponentList();
 
 
 	/**
@@ -24,14 +15,14 @@ public interface ComponentGraph {
 	 * @param location
 	 * @return Component at the given location
 	 */
-	List<Component> getComponentsByLocation(Point2D location);
+	List<Component> getComponentsByScreenPosition(Point2D location);
 
 	/**
 	 * Get the list of components at a given Tile location
 	 * @param Tile location
 	 * @return Component at the given location
 	 */
-	List<Component> getComponentsByTileLocation(Point2D tileLocation);
+	List<Component> getComponentsByTileCorners(TileCorners tileCorners);
 
 	/**
 	 * Gets the List of all Components in the ComponentGraph
@@ -55,10 +46,10 @@ public interface ComponentGraph {
 	/**
 	 * Returns unordered list of components that lie within a certain radius from a central Component
 	 * @param centerComp
-	 * @param radius
+	 * @param d
 	 * @return Unordered list of Components 
 	 */
-	List<Component> getComponentsWithinRadius(Component centerComp, float radius);
+	List<Component> getComponentsWithinRadius(Component centerComp, double d);
 
 	/**
 	 * Returns list of components that lie at the nearest location (although if two locations are equidistant from the component,
@@ -67,5 +58,7 @@ public interface ComponentGraph {
 	 * @return List of components at the nearest location
 	 */
 	List<Component> getNearestComponents(Component centerComp);
+	
+	void addAsObserver(Observer o);
 
 }

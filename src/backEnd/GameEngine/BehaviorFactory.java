@@ -39,8 +39,8 @@ public class BehaviorFactory {
 		switch (key){
 		case "MoveBehavior":
 			return new MoveBehavior(myComponent);
-		case "AttackBehavior":
-			return new AttackBehavior(myComponent);
+		//case "AttackBehavior":
+		//	return new AttackBehavior(myComponent);
 		default:
 			System.out.println("behavior factory tried and failed to generate a behavior");
 			return null;

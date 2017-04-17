@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import ModificationFromUser.Modification_GameRemote;
+import backEnd.GameEngine.Engine.GameProcessController;
 import frontEnd.View;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -19,10 +20,10 @@ import javafx.scene.layout.TilePane;
 
 public class OptionsSelection {
 
-	private static final String SETTINGS_IMAGE = "images/Settings.jpg";
-	private static final String PAUSE_IMAGE = "images/pause.jpg";
-	private static final String FASTFWD_IMAGE = "images/fastfwd.jpg";
-	private static final String PLAY_IMAGE = "images/play.jpg";
+	private static final String SETTINGS_IMAGE = "resources/images/Tools/Settings.jpg";
+	private static final String PAUSE_IMAGE = "resources/images/Tools/pause.jpg";
+	private static final String FASTFWD_IMAGE = "resources/images/Tools/fastfwd.jpg";
+	private static final String PLAY_IMAGE = "resources/images/Tools/play.jpg";
 	private TilePane myRoot;
 	private SettingsView mySettings;
 	private List<Button> myButtons;
@@ -42,7 +43,7 @@ public class OptionsSelection {
 	public void setSize(double width, double height){
 		myRoot.setPrefWidth(width);
 		myRoot.setPrefHeight(height);
-		setUpOptions(width/4-1);//hard coded
+		setUpOptions(width/4-1); //TODO hard coded
 	}
 	private void setUpOptions(double buttonWidth){
 		myButtons = new ArrayList<Button>();
@@ -51,14 +52,15 @@ public class OptionsSelection {
 	}
 	
 	private void addButtons(double size){
-		addButtonImage(PLAY_IMAGE, e-> myView.sendUserModification(Modification_GameRemote.PLAY) ,size);
-		addButtonImage(PAUSE_IMAGE, e-> myView.sendUserModification(Modification_GameRemote.PAUSE) ,size);
-		addButtonImage(FASTFWD_IMAGE, e-> myView.sendUserModification(Modification_GameRemote.FASTFORWARD) ,size);
-		addButtonImage(SETTINGS_IMAGE, e-> mySettings.launchSettings(),size);
+		myButtons.add(createImageButton(PLAY_IMAGE, e-> myView.sendUserModification(Modification_GameRemote.PLAY) ,size));
+		myButtons.add(createImageButton(PAUSE_IMAGE, e-> myView.sendUserModification(Modification_GameRemote.PAUSE) ,size));
+		myButtons.add(createImageButton(FASTFWD_IMAGE, e-> myView.sendUserModification(Modification_GameRemote.FASTFORWARD) ,size));
+		myButtons.add(createImageButton(SETTINGS_IMAGE, e-> mySettings.launchSettings(),size));
 	}
 	
 	
-	private void addButtonImage(String imageName, EventHandler<ActionEvent> event, double size){
+	
+	private Button createImageButton(String imageName, EventHandler<ActionEvent> event, double size){
 		Image image = new Image(getClass().getClassLoader().getResourceAsStream(imageName));
 		ImageView viewImage = new ImageView(image);
 		viewImage.setPreserveRatio(false);
@@ -69,7 +71,7 @@ public class OptionsSelection {
 		b.setGraphic(viewImage);
 		b.setPadding(Insets.EMPTY);
 		b.getStyleClass().clear();
-		myButtons.add(b);
+		return b;
 	}
 
 

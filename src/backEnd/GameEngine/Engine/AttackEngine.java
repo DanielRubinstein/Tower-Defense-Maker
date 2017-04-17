@@ -20,30 +20,35 @@ import resources.Constants;
  */
 
 public class AttackEngine implements Engine {
-	private final static String RESOURCES_PATH = "resources/attributes";
+	private final static String RESOURCES_PATH = "resources/allAttributeTypes";
 	private final static ResourceBundle myResources = ResourceBundle.getBundle(RESOURCES_PATH);
 
 	@Override
 	public void gameLoop(State currentState, double stepTime) {
 		ComponentGraph myComponentGraph = currentState.getComponentGraph();
-		for (Component componentAttacker : myComponentGraph.getComponentList()) {
-			if (componentAttacker.getMyType().equals("TOWER")) {
-				for (Component componentTarget : myComponentGraph.getComponentsWithinRadius(componentAttacker,
-						Constants.defaultRadius)) {
-					addProjectileToState(currentState, componentAttacker, componentTarget);
+		for (Component attacker : myComponentGraph.getAllComponents()) {
+			if (attacker.getMyType().equals("TOWER")) {
+				for (Component componentTarget : myComponentGraph.getComponentsWithinRadius(attacker,
+						(double) attacker.getAttribute("FireRadius").getValue())) {
+					addProjectileToState(currentState, attacker, componentTarget);
 					try {
-						componentAttacker.getBehavior("Attack").execute(null);
-					} catch (FileNotFoundException e) {
+						attacker.getBehavior("Attack").execute(null);
+					} 
+					catch (FileNotFoundException e) {
 						ErrorDialog fnf = new ErrorDialog();
 						fnf.create("Error", "File not found");
 					}
+					//needs to be refactored - only works for single target attacks
+					 
 					try {
-						componentTarget.getBehavior("TakeDamage").execute(null);
-					} catch (FileNotFoundException e) {
+						componentTarget.getBehavior("TakeDamage").execute(attacker);
+					} 
+					catch (FileNotFoundException e) {
 						ErrorDialog fnf = new ErrorDialog();
 						fnf.create("Error", "File not found");
 					}
 					break;
+					
 				}
 			}
 		}
@@ -51,9 +56,10 @@ public class AttackEngine implements Engine {
 
 	@SuppressWarnings("unchecked")
 	public void addProjectileToState(State currentState, Component attacker, Component target) {
-		Component bullet = null;
+		Component projectile = null;
 		try {
-			bullet = makeBullet();
+				projectile = makeProjectile(attacker);
+			
 		} catch (FileNotFoundException e) {
 			ErrorDialog fnf = new ErrorDialog();
 			fnf.create("Error", "File not found");
@@ -62,30 +68,39 @@ public class AttackEngine implements Engine {
 		Point2D bulletPos = (Point2D) attacker.getAttribute(myResources.getString("Position"));
 		Point2D targetPos = (Point2D) target.getAttribute(myResources.getString("Position"));
 		
-		bullet.setAttributeValue(myResources.getString("Position"), bulletPos);
-		bullet.setAttributeValue(myResources.getString("ProjectileTargetPosition"), targetPos);
-		bullet.setAttributeValue(myResources.getString("ProjectileDistance"), targetPos.subtract(bulletPos));
-		currentState.getComponentGraph().addComponentToGrid(bullet, bulletPos);
+		projectile.setAttributeValue(myResources.getString("Position"), bulletPos);
+		projectile.setAttributeValue(myResources.getString("ProjectileTargetPosition"), targetPos);
+		projectile.setAttributeValue(myResources.getString("ProjectileDistance"), targetPos.subtract(bulletPos));
+		
+		currentState.getComponentGraph().addComponentToGrid(projectile, bulletPos);
 	}
+
 
 	/**
 	 * 
-	 * @return a Component that represents a Bullet
-	 * @throws FileNotFoundException
+	 * @return a Component that represents a projectile
+	 * @throws FileNotFoundException if the image files are not found
 	 */
 	@SuppressWarnings("unchecked")
-	private Component makeBullet() throws FileNotFoundException {
+	private Component makeProjectile(Component attacker) throws FileNotFoundException {
 
 		AttributeFactory af = new AttributeFactory();
 		AttributeData ad = new AttributeData();
-		Component bullet = new Component(ad);
-
-		bullet.setMyType("Projectile");				
-		Attribute<String> bulletImage = (Attribute<String>) af.getAttribute(myResources.getString("ImageFile"));
-		bulletImage.setValue(Constants.BULLET_IMAGE_FILE);
-		ad.addAttribute(myResources.getString("ImageFile"), (backEnd.Attribute.AttributeImpl<?>) bulletImage);
+	
+		Attribute<String> projectileImage = (Attribute<String>) af.getAttribute(myResources.getString("ImageFile"));
+		Attribute<String> projectileType = (Attribute<String>) af.getAttribute(myResources.getString("FireType"));
+		Attribute<Integer> projectileDamage = (Attribute<Integer>) af.getAttribute(myResources.getString("FireDamage"));
 		
-		return bullet;
+		projectileImage.setValue((String) attacker.getAttribute("FireImage").getValue());
+		projectileType.setValue((String) attacker.getAttribute("FireType").getValue());
+		projectileDamage.setValue((Integer) attacker.getAttribute("FireDamage").getValue());
+		
+		ad.addAttribute(myResources.getString("ImageFile"), (backEnd.Attribute.AttributeImpl<?>) projectileImage);
+		ad.addAttribute(myResources.getString("FireType"), (backEnd.Attribute.AttributeImpl<?>) projectileType);
+		ad.addAttribute(myResources.getString("FireDamage"), (backEnd.Attribute.AttributeImpl<?>) projectileDamage);
+		
+		Component projectile = new Component(ad);
+		projectile.setMyType("Projectile");	
+		return projectile;
 	}
-
 }

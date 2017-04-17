@@ -24,10 +24,12 @@ public class MoveBehavior implements Behavior {
 	private Point2D newPoint;
 	private Component myComponent;
 	private Tile currentTile;
+	private double moveAmount = Constants.defaultMoveAmount;
 	
 	public MoveBehavior(Component inputComponent){
 		myComponent=inputComponent;
-		currentPosition=(Point2D) myComponent.getAttribute("Position").getValue();
+		Object currentPositionO=myComponent.getAttribute("Position").getValue();
+		currentPosition=(Point2D) currentPositionO;
 		//System.out.println("in move behavior " + myComponent.getAttribute("Position").getValue() + "    " +myComponent.getAttribute("Position").getValue().getClass());
 	}
 	
@@ -35,45 +37,50 @@ public class MoveBehavior implements Behavior {
 	@Override
 	public <T> void execute(T tile) throws FileNotFoundException {//pass in a tile //TODO error checking
 		currentTile=(Tile) tile;
+
 		//System.out.println("   tile  "+tile);
 		//System.out.println("   tile  "+currentTile.getAttribute("MoveDirection"));
 		
 		//System.out.println("   in move behavior " +currentTile.getAttribute("MoveDirection").getValue().getClass() + "    " +
 				//currentTile.getAttribute("MoveDirection").getValue());
+		if (currentTile.getAttribute("MoveDirection").getValue()==null){
+			System.out.println("WO BU ZHIDAO");
+			return;
+		}
 		switch ((String) currentTile.getAttribute("MoveDirection").getValue()) {
-		case "LEFT":
-			newPoint=new Point2D(currentPosition.getX()-Constants.defaultMoveAmount, currentPosition.getY());	
+		case "Left":
+			newPoint=new Point2D(currentPosition.getX()-moveAmount, currentPosition.getY());	
 			break;
-		case "RIGHT":
-			newPoint=new Point2D(currentPosition.getX()+Constants.defaultMoveAmount, currentPosition.getY());	
+		case "Right":
+			newPoint=new Point2D(currentPosition.getX()+moveAmount, currentPosition.getY());	
 			break;
-		case "UP":
-			newPoint=new Point2D(currentPosition.getX(), currentPosition.getY()+Constants.defaultMoveAmount);
+		case "Up":
+			newPoint=new Point2D(currentPosition.getX(), currentPosition.getY()-moveAmount);
 			break;
-		case "DOWN":
-			newPoint=new Point2D(currentPosition.getX(), currentPosition.getY()-Constants.defaultMoveAmount);
+		case "Down":
+			newPoint=new Point2D(currentPosition.getX(), currentPosition.getY()+moveAmount);
 			break;
+		default:
+			//System.out.println("Movebehavior- No direction specified");
+			return;
 		}
-		AttributeFactory af = null;
-		try {
-			af = new AttributeFactory();
-		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-			System.out.println("error in MoveBehavior- SAD!");
-		}
-		Attribute<Point2D> newPositionAttribute=(Attribute<Point2D>) af.getAttribute("Position");
-		if(newPoint==null) newPoint = new Point2D(5,4);
-		newPositionAttribute.setValue(newPoint);
 		myComponent.setAttributeValue("Position",newPoint); //does it get overwritten?
+		return;
 
 	}
 
-	/*
+	/**
 	 * return the component's new, updated position
 	 */
 	public Point2D getPosition(){
 		return newPoint;
+	}
+	
+	/**
+	 * sets the distance the Component will move per iteration of the game loop
+	 */
+	public void setMoveAmount(double speed){
+		moveAmount = speed;
 	}
 	
 	/*

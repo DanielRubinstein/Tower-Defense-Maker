@@ -1,15 +1,23 @@
 package backEnd.Bank;
 
+import java.io.FileNotFoundException;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Observable;
 
 import backEnd.GameEngine.Behaviors.Behavior;
+import backEnd.Mode.UserModeType;
+import javafx.geometry.Point2D;
+import backEnd.Attribute.AttributeData;
 import backEnd.Attribute.AttributeImpl;
+import backEnd.Attribute.AttributeOwner;
 import backEnd.GameData.Rules;
+import backEnd.GameData.State.AccessPermissionsImpl;
 import backEnd.GameData.State.Component;
 import backEnd.GameData.State.Tile;
+import backEnd.GameData.State.TileImpl;
 
 public class BankController extends Observable
 {
@@ -20,22 +28,40 @@ public class BankController extends Observable
 	private AttributeBank attributeBank;
 	
 	public BankController(){
+		init();
 		this.tileBank = new HashMap<String, Tile>();
 		this.componentBank = new HashMap<String, Component>();
-		init();
+		createTemplatesForTesting();
 	}
 	
-	public BankController(Map<String, Tile> tileBank, Map<String, Component> componentBank)
-	{
+	public BankController(Map<String, Tile> tileBank, Map<String, Component> componentBank){
+		init();
 		this.tileBank = tileBank;
 		this.componentBank = componentBank;
-		init();
+		
 	}
 	
 	private void init(){
 		behaviorBank = new BehaviorBank();
 		ruleBank = new RuleBank();
 		attributeBank = new AttributeBank();
+	}
+	
+	private void createTemplatesForTesting(){
+		try{
+			
+			Tile newTile = new TileImpl(Arrays.asList(), Arrays.asList(UserModeType.AUTHOR), new Point2D(0,0));
+			newTile.setAttributeValue("ImageFile", "resources/images/Tiles/Blue.png");
+			addNewTile("Blue Tile", newTile);
+			
+			
+			Component newComponent = new Component(new AttributeData(),new AccessPermissionsImpl());
+			newComponent.setAttributeValue("ImageFile", "resources/images/Components/rainbow_bloon.png");
+			newComponent.setAttributeValue("Speed", 5d);
+			addNewComponent("Chill Bloon", newComponent);
+		} catch( FileNotFoundException e){
+			System.out.println("No image found");
+		}
 	}
 
 	public void addNewTile (String name, Tile tile)
@@ -89,6 +115,34 @@ public class BankController extends Observable
 	public List<AttributeImpl> getAttributeList()
 	{
 		return attributeBank.getAttributeList();
+	}
+
+	public String getAOName(AttributeOwner preset) {
+		if(preset instanceof Tile){
+			return findKeyFromValue(tileBank, (Tile) preset);
+		} else if (preset instanceof Component){
+			return findKeyFromValue(componentBank, (Component) preset);
+		}
+		return "";
+	}
+
+	private <V> String findKeyFromValue(Map<String, V> bank, V preset) {
+		for(Map.Entry<String, V> entry : bank.entrySet()){
+			if (entry.getValue().equals(preset)){
+				return entry.getKey();
+			}
+		}
+		return "No name found";
+	}
+
+	public AttributeOwner getPreset(String presetName) {
+		if(componentBank.containsKey(presetName)){
+			return componentBank.get(presetName);
+		} else if (tileBank.containsKey(presetName)){
+			return tileBank.get(presetName);
+		} else {
+			return null;
+		}
 	}
 }
 
