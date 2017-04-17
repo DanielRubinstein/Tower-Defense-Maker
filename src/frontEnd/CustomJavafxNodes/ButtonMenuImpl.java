@@ -1,13 +1,12 @@
-package frontEnd.Menus;
+package frontEnd.CustomJavafxNodes;
 
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.input.KeyCode;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
@@ -46,9 +45,8 @@ public class ButtonMenuImpl implements ButtonMenu {
 		//titleLbl.setStyle("");
 	}
 	
-	public void addSimpleButtonWithHover(String text, EventHandler<ActionEvent> event, String hoverText){
-		Button b = new Button(text);
-		b.setOnAction(event);
+	public void addSimpleButtonWithHover(String text, Runnable event, String hoverText){
+		ActionButton b = new ActionButton(text, event);
 		addButtonWithHover(b, hoverText);
 	}
 	
@@ -64,10 +62,9 @@ public class ButtonMenuImpl implements ButtonMenu {
 	}
 	
 	@Override
-	public void addSimpleButton(String text, EventHandler<ActionEvent> event){
-   	 	Button myButton = new Button(text);
-		myButton.setOnAction(event);
-		myButtonRoot.getChildren().add(myButton);
+	public void addSimpleButton(String text, Runnable event){
+   	 	ActionButton b = new ActionButton(text, event);
+		addButton(b);
 	}
 	
 	@Override
@@ -82,7 +79,7 @@ public class ButtonMenuImpl implements ButtonMenu {
 		box.getChildren().add(rowLabel);
 		box.getChildren().addAll(buttons);
 		box.setAlignment(Pos.CENTER);
-		myButtonRoot.getChildren().add(box);
+		addNode(box);
 	}
 	
 	@Override
@@ -90,7 +87,7 @@ public class ButtonMenuImpl implements ButtonMenu {
 		myButtonRoot.getChildren().add(n);
 	}
 	
-	public void addBackButton(EventHandler<ActionEvent> event) {
+	public void addBackButton(Runnable event) {
 		this.addSimpleButton("Go Back", event);
 		
 	}
@@ -129,5 +126,15 @@ public class ButtonMenuImpl implements ButtonMenu {
 	}
 
 
+	public void addPrimarySimpleButtonWithHover(String title, Runnable event, String hoverText) {
+		ActionButton b = new ActionButton(title, event);
+		b.setOnKeyPressed(key -> {
+			if(key.getCode().equals(KeyCode.ENTER)){
+				event.run();
+			}
+		});
+		addButtonWithHover(b, hoverText);
+		
+	}
 	
 }

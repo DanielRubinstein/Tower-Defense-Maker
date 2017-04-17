@@ -1,4 +1,4 @@
-package frontEnd.CustomJavafxNodes;
+package frontEnd.Skeleton.ScreenGrid;
 
 import java.util.Observable;
 import java.util.Observer;

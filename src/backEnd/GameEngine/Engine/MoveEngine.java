@@ -1,7 +1,7 @@
 package backEnd.GameEngine.Engine;
 import java.io.FileNotFoundException;
 import backEnd.GameEngine.Behaviors.*;
-import frontEnd.Menus.ErrorDialog;
+import frontEnd.CustomJavafxNodes.ErrorDialog;
 import javafx.geometry.Point2D;
 import backEnd.Attribute.AttributeImpl;
 import backEnd.GameData.State.*;

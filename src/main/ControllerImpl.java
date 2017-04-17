@@ -10,7 +10,7 @@ import data.XMLReadingException;
 import data.GamePrep.DataInputLoader;
 import data.GamePrep.MainMenu;
 import frontEnd.ViewImpl;
-import frontEnd.Menus.ErrorDialog;
+import frontEnd.CustomJavafxNodes.ErrorDialog;
 import javafx.stage.Stage;
 
 public class ControllerImpl implements Controller {

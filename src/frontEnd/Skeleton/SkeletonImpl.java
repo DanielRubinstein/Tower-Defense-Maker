@@ -3,6 +3,7 @@ package frontEnd.Skeleton;
 import backEnd.Model;
 import backEnd.GameData.State.State;
 import frontEnd.View;
+import frontEnd.Skeleton.ScreenGrid.ScreenGrid;
 import frontEnd.Skeleton.UserTools.UserTools;
 import javafx.scene.Node;
 import javafx.scene.Scene;
