@@ -100,20 +100,21 @@ public class AttributeCommandCenter extends CommandCenter{
 		bottomButtons = new HBox();
 		
 		bottomButtons.setSpacing(STANDARD_SPACING);
-		bottomButtons.setAlignment(Pos.BOTTOM_RIGHT);
+		bottomButtons.setAlignment(Pos.BOTTOM_RIGHT);  
 		
-		List<String> dialogTitles = Arrays.asList("Preset Creation Utility", "Please Input a Name for your new preset");
-		String promptLabel = "New preset name:";
-		String promptText = "";
-		SingleFieldPrompt myDialog = new SingleFieldPrompt(dialogTitles, promptLabel, promptText);
-		Button preset = new Button("Save as preset");
-		preset.setOnAction((e) -> {
-			myView.sendUserModification(new Modification_AddNewPresetAttributeOwner(myDialog.create(), obj));
-			myHostStage.close();
-		});
-		
-		bottomButtons.getChildren().add(preset);
-		
+		if(!(myView.getComponentPresets().contains(obj) || myView.getTilePresets().contains(obj))){
+			List<String> dialogTitles = Arrays.asList("Preset Creation Utility", "Please Input a Name for your new preset");
+			String promptLabel = "New preset name:";
+			String promptText = "";
+			SingleFieldPrompt myNameDialog = new SingleFieldPrompt(dialogTitles, promptLabel, promptText);
+			Button preset = new Button("Save a copy to preset palette");
+			preset.setOnAction((e) -> {
+				myView.sendUserModification(new Modification_AddNewPresetAttributeOwner(myNameDialog.create(), obj));
+				myHostStage.close();
+			});
+			
+			bottomButtons.getChildren().add(preset);
+		}
 		return bottomButtons;
 	}
 

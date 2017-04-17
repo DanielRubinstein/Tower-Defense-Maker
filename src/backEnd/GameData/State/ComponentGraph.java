@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Observable;
 import java.util.Observer;
 
+import backEnd.Attribute.AttributeOwnerReader;
 import javafx.geometry.Point2D;
 
 public interface ComponentGraph {
@@ -60,5 +61,7 @@ public interface ComponentGraph {
 	List<Component> getNearestComponents(Component centerComp);
 	
 	void addAsObserver(Observer o);
+
+	boolean contains(AttributeOwnerReader c);
 
 }
