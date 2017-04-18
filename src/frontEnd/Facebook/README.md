@@ -6,6 +6,7 @@
 
 # How to use
 * In order to use this utility, it is first necessary that your app is registered on Facebook. This gives you an AppId, AppSecretKey and will allow your users to access your app's page. See https://developers.facebook.com/ for more details on how to set up, etc.
+* Add the jar file to your lib folder in your program.
 * This utility, through FacebookConnector, handles all the complicated details about authenticating a user login and getting their required access token, etc.
 * One you have your AppId, etc. replace the default Strigs at the top of FacebookConnectorImpl and FacebookInteractorImpl with yours. 
 * Note, however, that only people who are listed as "developers" of your app will have unrestricted access to this utility. For instance, this app will not be able to post on a user's facebook feed if they're not a developer UNTIL you get your app approved by Facebook.
