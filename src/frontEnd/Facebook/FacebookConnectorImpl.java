@@ -1,32 +1,21 @@
 package frontEnd.Facebook;
-import java.io.File;
 import java.io.IOException;
-import java.io.InputStream;
-import java.net.MalformedURLException;
-import java.net.URL;
-import java.net.URLConnection;
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.concurrent.TimeUnit;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-
-import javax.lang.model.element.PackageElement;
-
-import com.restfb.*;
-import com.restfb.FacebookClient.AccessToken;
-import com.restfb.exception.FacebookException;
+import com.restfb.Connection;
+import com.restfb.DefaultFacebookClient;
+import com.restfb.FacebookClient;
+import com.restfb.Parameter;
+import com.restfb.Version;
 import com.restfb.exception.FacebookResponseContentException;
 import com.restfb.json.JsonObject;
-import com.restfb.scope.ScopeBuilder;
 import com.restfb.types.Conversation;
 import com.restfb.types.FacebookType;
 import com.restfb.types.Page;
-import com.restfb.types.Post;
-import com.restfb.types.User;
 
-import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;

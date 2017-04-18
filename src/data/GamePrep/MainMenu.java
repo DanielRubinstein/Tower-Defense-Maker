@@ -50,7 +50,7 @@ public class MainMenu{
    	 	primaryMenu.addSimpleButtonWithHover("Load Template Game", e -> showTemplateMenu(stage), "Load a game from a list of preapproved, ready-to-play templates");
    	 	primaryMenu.addSimpleButtonWithHover("Load Saved Game", e-> loadGame(), "Continue your progress by loading a user-saved game");
    	 	primaryMenu.addSimpleButtonWithHover("Go Back", event -> splashScreen(stage), "Return to previous screen");
-   	 	primaryMenu.addSimpleButtonWithHover("Connect to fb", e -> launchFb(stage), "Log in");
+   	 	primaryMenu.addSimpleButtonWithHover("Connect To Facebook", e -> launchFb(stage), "Log in and connect to Facebook to see high scores, screenshots, post to the official voogasalad_su3ps1ckt34m1337 page");
 		primaryMenu.display(stage);
 	}
 
