@@ -1,5 +1,6 @@
 package backEnd.Mode;
 
+import javafx.beans.property.SimpleBooleanProperty;
 
 /**
  * This class contains the current mode and has getters/setters for people to access the mode
@@ -10,15 +11,16 @@ package backEnd.Mode;
 public class ModeImpl implements ModeReader, Mode{
 	private UserModeType currUserMode;
 	private GameModeType currGameMode;
+	private SimpleBooleanProperty aBP;
 	
 	public ModeImpl(){
-		this.currGameMode = GameModeType.DEFAULT;
-		this.currUserMode = UserModeType.AUTHOR;
+		this(GameModeType.DEFAULT, UserModeType.AUTHOR);
 	}
 	
 	public ModeImpl(GameModeType gameMode, UserModeType userMode){
 		this.currGameMode = gameMode;
 		this.currUserMode = userMode;
+		aBP = new SimpleBooleanProperty(this.getUserModeString().equals("AUTHOR"));
 	}
 
 	@Override
@@ -55,6 +57,12 @@ public class ModeImpl implements ModeReader, Mode{
 	public void toggleUserMode(){
 		System.out.println("MODE CHANGE");
 		currUserMode = UserModeType.getNextMode(currUserMode);
+		aBP.setValue(!aBP.getValue());
+	}
+	
+	@Override
+	public SimpleBooleanProperty getAuthorBooleanProperty(){
+		return aBP;
 	}
 	
 }

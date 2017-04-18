@@ -1,14 +1,12 @@
-package frontEnd.Menus;
+package frontEnd.CustomJavafxNodes;
 
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.stage.Stage;
 
 public interface ButtonMenu {
 
-	public void addSimpleButton(String text, EventHandler<ActionEvent> event);
+	public void addSimpleButton(String text, Runnable event);
 	
 	public void addButton(Button newButton);
 	

@@ -10,7 +10,7 @@ import data.XMLReadingException;
 import data.GamePrep.DataInputLoader;
 import data.GamePrep.MainMenu;
 import frontEnd.ViewImpl;
-import frontEnd.Menus.ErrorDialog;
+import frontEnd.CustomJavafxNodes.ErrorDialog;
 import javafx.stage.Stage;
 
 public class ControllerImpl implements Controller {
@@ -44,6 +44,7 @@ public class ControllerImpl implements Controller {
 
 			} catch (Exception e) {
 				ErrorDialog errDia = new ErrorDialog();
+				e.printStackTrace();
 				errDia.create("Cannot Load Game", e.getMessage());
 			} 
 			

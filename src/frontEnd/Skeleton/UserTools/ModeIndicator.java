@@ -2,6 +2,7 @@ package frontEnd.Skeleton.UserTools;
 
 import frontEnd.ViewReader;
 import javafx.beans.property.SimpleBooleanProperty;
+import javafx.beans.property.SimpleStringProperty;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.layout.VBox;
@@ -12,6 +13,7 @@ public class ModeIndicator implements SkeletonObject{
 	private VBox indicatorHolder;
 	private ViewReader myView;
 	private SimpleBooleanProperty authorProperty;
+	private SimpleStringProperty runProperty;
 	
 	public ModeIndicator(ViewReader view){
 		myView=view;
@@ -21,7 +23,12 @@ public class ModeIndicator implements SkeletonObject{
 		authorProperty.addListener((ob, oldV, newV) -> {
 			setIndicator(newV);
 		});
-		pausedIndicator = new Label("Game Status Indicator");
+		runProperty = myView.getRunStatus();
+		pausedIndicator = new Label();
+		pausedIndicator.setText(runProperty.getValue());
+		runProperty.addListener((ob, oldV, newV) -> {
+			pausedIndicator.setText(newV);
+		});
 		
 		indicatorHolder = new VBox();
 		indicatorHolder.getChildren().addAll(pausedIndicator, modeIndicator);
