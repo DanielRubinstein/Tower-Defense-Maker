@@ -15,10 +15,12 @@ public class OptionsCornerImpl implements OptionsCorner{
 
 	private VBox myRoot;
 	private OptionsSelection userOptions;
+	private OptionsFacebook facebookOptions;
 	
 	public OptionsCornerImpl(View view) {
 		myRoot = new VBox();
-		setUserOptions(view);	
+		setUserOptions(view);
+		setFacebookOptions(view);
 	}
 
 	public Node getRoot(){
@@ -29,6 +31,15 @@ public class OptionsCornerImpl implements OptionsCorner{
 		userOptions = new OptionsSelection(view);
 		userOptions.setAlignment(Pos.TOP_LEFT,Priority.ALWAYS);
 		myRoot.getChildren().add(userOptions.getNode());
+		
+	}
+	private void setFacebookOptions(View view){
+		facebookOptions = new OptionsFacebook(view,view.getAppStage());
+		facebookOptions.setAlignment(Pos.TOP_LEFT,Priority.ALWAYS);
+		Node n = facebookOptions.getRoot();
+		
+		myRoot.getChildren().add(facebookOptions.getRoot());
+		
 	}
 
 	@Override
@@ -36,7 +47,8 @@ public class OptionsCornerImpl implements OptionsCorner{
 		//myRoot.setPrefSize(width, height);
 		///myRoot.setMaxHeight(height);
 		
-		userOptions.setSize(width, height);
+		userOptions.setSize(width, height/4);
+		facebookOptions.setSize(width,height/4);
 	}
 
 
