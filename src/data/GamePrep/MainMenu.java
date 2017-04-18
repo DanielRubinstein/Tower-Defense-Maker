@@ -4,8 +4,13 @@ import java.io.File;
 import java.util.function.Consumer;
 
 import data.XMLReadingException;
+import frontEnd.Facebook.FacebookConnector;
 import frontEnd.Menus.ButtonMenuImpl;
 import frontEnd.Menus.ErrorDialog;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 /**
@@ -40,10 +45,26 @@ public class MainMenu{
    	 	primaryMenu.addSimpleButtonWithHover("Load Template Game", e -> showTemplateMenu(stage), "Load a game from a list of preapproved, ready-to-play templates");
    	 	primaryMenu.addSimpleButtonWithHover("Load Saved Game", e-> loadGame(), "Continue your progress by loading a user-saved game");
    	 	primaryMenu.addSimpleButtonWithHover("Go Back", event -> splashScreen(stage), "Return to previous screen");
+   	 	primaryMenu.addSimpleButtonWithHover("Connect to fb", e -> launchFb(stage), "Log in");
 		primaryMenu.display(stage);
 	}
 
 	
+	private void launchFb(Stage stage) {
+		VBox myBox = new VBox();
+		FacebookConnector fb = new FacebookConnector();
+		Button login = new Button("login");
+		myBox.getChildren().add(login);
+		login.setOnAction(e -> {
+			fb.log2();
+			splashScreen(stage);
+		});
+
+		Scene s = new Scene(myBox);
+		stage.setScene(s);
+
+	}
+
 	private void loadGame() {
 		GameLoader gameLoader = new GameLoader();
 		try {
