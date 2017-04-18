@@ -2,7 +2,10 @@ package frontEnd.Facebook;
 
 
 /**
- * This interface defines how one can connect with Facebook using the App's information and user information
+ * This interface defines how one can connect with Facebook using the App's information and user information.
+ * 
+ * To connect to FB and interact with Facebook, one should login(), get the FacebookInteractor, and call methods through
+ * that interface.
  * @author Tim
  *
  */
