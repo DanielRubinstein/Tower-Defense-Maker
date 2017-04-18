@@ -3,7 +3,9 @@ package frontEnd.Skeleton.UserTools;
 import frontEnd.View;
 import frontEnd.CustomJavafxNodes.ActionButton;
 import frontEnd.CustomJavafxNodes.ButtonMenuImpl;
+import frontEnd.CustomJavafxNodes.ErrorDialog;
 import frontEnd.Facebook.FacebookConnector;
+import frontEnd.Facebook.FacebookException;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.Scene;
@@ -81,7 +83,12 @@ public class OptionsFacebook implements SkeletonObject {
 		Button b = new Button("Share");
 		b.setOnAction(e -> {
 			String message = text.getText().trim();
-			myFb.shareToWall(message);
+			try {
+				myFb.shareToWall(message);
+			} catch (FacebookException e1) {
+				ErrorDialog eD = new ErrorDialog();
+				eD.create("Facebook Error", e1.getMessage());
+			}
 			shareStage.close();
 		});
 		share.getChildren().addAll(text,b);

@@ -9,7 +9,7 @@ public interface FacebookConnector {
 
 	public ScrollPane getMessages();
 
-	public void shareToWall(String message);
+	public void shareToWall(String message) throws FacebookException;
 
 	public void login();
 

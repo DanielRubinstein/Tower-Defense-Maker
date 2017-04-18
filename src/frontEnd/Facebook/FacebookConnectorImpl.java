@@ -16,6 +16,7 @@ import com.restfb.types.Conversation;
 import com.restfb.types.FacebookType;
 import com.restfb.types.Page;
 
+import frontEnd.CustomJavafxNodes.ErrorDialog;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
@@ -84,14 +85,17 @@ public class FacebookConnectorImpl implements FacebookConnector {
 	 * @see frontEnd.Facebook.FacebookConnector#shareToWall(java.lang.String)
 	 */
 	@Override
-	public void shareToWall(String message){
+	public void shareToWall(String message) throws FacebookException{
 		Collection<Parameter> params = new ArrayList<Parameter>();
 		Page myPage = userClient.fetchObject(appId, Page.class);
 		params.add(Parameter.with("message", message));
 		params.add(Parameter.with("link", myPage.getLink()));
 		Parameter[] postParamsArray = params.toArray(new Parameter[params.size()]);
-
-		FacebookType post = userClient.publish("me/feed", FacebookType.class, postParamsArray);
+		try{
+			FacebookType post = userClient.publish("me/feed", FacebookType.class, postParamsArray);
+		} catch (com.restfb.exception.FacebookOAuthException e){
+			throw new FacebookException(e);
+		}
 
 	}
 	/* (non-Javadoc)
