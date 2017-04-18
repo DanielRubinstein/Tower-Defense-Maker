@@ -5,13 +5,16 @@ import java.util.function.Consumer;
 
 import data.XMLReadingException;
 import frontEnd.Facebook.FacebookConnector;
+import frontEnd.Facebook.FacebookConnectorImpl;
 import frontEnd.Menus.ButtonMenuImpl;
 import frontEnd.Menus.ErrorDialog;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.VBox;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
+import main.Controller;
 
 /**
  * The main menu which allows the use to
@@ -24,8 +27,10 @@ import javafx.stage.Stage;
 
 public class MainMenu{
 	private Consumer<Object> consumerLoadData;
+	private Controller myController;
 	
-	public MainMenu(Consumer<Object> loadData){
+	public MainMenu(Consumer<Object> loadData,Controller con){
+		myController = con;
 		consumerLoadData = loadData;
 	}
 
@@ -51,18 +56,18 @@ public class MainMenu{
 
 	
 	private void launchFb(Stage stage) {
-		VBox myBox = new VBox();
-		FacebookConnector fb = new FacebookConnector();
-		Button login = new Button("login");
-		myBox.getChildren().add(login);
-		login.setOnAction(e -> {
-			fb.log2();
-			splashScreen(stage);
-		});
+		Stage loginStage = new Stage();
+		loginStage.initOwner(stage);
+		loginStage.initModality(Modality.APPLICATION_MODAL);
 
-		Scene s = new Scene(myBox);
-		stage.setScene(s);
-
+		FacebookConnector fb = new FacebookConnectorImpl();
+		ButtonMenuImpl myLoginButton = new ButtonMenuImpl("Login!");
+		myLoginButton.addSimpleButtonWithHover("Login", e -> {
+			fb.login();
+			myController.setFb(fb);
+			loginStage.close();
+		}, "Click to launch facebook");
+		myLoginButton.display(loginStage);
 	}
 
 	private void loadGame() {

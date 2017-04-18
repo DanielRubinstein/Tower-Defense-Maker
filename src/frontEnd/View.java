@@ -3,6 +3,7 @@ package frontEnd;
 import ModificationFromUser.ModificationFromUser;
 import backEnd.Model;
 import backEnd.Bank.BankController;
+import frontEnd.Facebook.FacebookConnector;
 import javafx.scene.Node;
 
 public interface View extends ViewReader{
@@ -16,4 +17,7 @@ public interface View extends ViewReader{
 	public BankController getBankController();
 	
 	public Node getScreenGrid();
+	
+	public FacebookConnector getFb();
+	
 }

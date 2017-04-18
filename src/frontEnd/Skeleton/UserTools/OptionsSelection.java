@@ -43,14 +43,20 @@ public class OptionsSelection {
 	public void setSize(double width, double height){
 		myRoot.setPrefWidth(width);
 		myRoot.setPrefHeight(height);
-		setUpOptions(width/4-1); //TODO hard coded
+		setUpOptions(width); //TODO hard coded
 	}
-	private void setUpOptions(double buttonWidth){
+	private void setUpOptions(double totalWidth){
 		myButtons = new ArrayList<Button>();
-		addButtons(buttonWidth);
+		addButtons(totalWidth/4-1);
 		myRoot.getChildren().addAll(myButtons);
+		addFacebook();
 	}
 	
+	private void addFacebook() {
+		OptionsFacebook fb = new OptionsFacebook(myView,myView.getAppStage());
+		myRoot.getChildren().add(fb.getRoot());
+		
+	}
 	private void addButtons(double size){
 		myButtons.add(createImageButton(PLAY_IMAGE, e-> myView.sendUserModification(Modification_GameRemote.PLAY) ,size));
 		myButtons.add(createImageButton(PAUSE_IMAGE, e-> myView.sendUserModification(Modification_GameRemote.PAUSE) ,size));

@@ -18,6 +18,7 @@ import data.DataController;
 import data.XMLReadingException;
 import data.GamePrep.GameLoader;
 import frontEnd.CustomJavafxNodes.SingleFieldPrompt;
+import frontEnd.Facebook.FacebookConnector;
 import frontEnd.Menus.ErrorDialog;
 import frontEnd.Skeleton.SkeletonImpl;
 import javafx.animation.Animation;
@@ -35,16 +36,22 @@ public class ViewImpl implements View {
 	private SkeletonImpl mySkeleton;
 	private SimpleBooleanProperty authorProperty;
 	private Stage appStage;
+	private FacebookConnector myFB;
 
-	public ViewImpl(Model model, Consumer<ModificationFromUser> inputConsumer) {
+	public ViewImpl(Model model, Consumer<ModificationFromUser> inputConsumer, FacebookConnector fb) {
 		myModel = model;
 		myModConsumer = inputConsumer;
+		myFB=fb;
+		System.out.println(" in view " +myFB);
 		ModeReader mode = model.getModeReader();
 		authorProperty = new SimpleBooleanProperty(mode.getUserModeString().equals("AUTHOR"));
 		mySkeleton = new SkeletonImpl();
 		mySkeleton.init(this, model);
 		appStage = new Stage();
 		mySkeleton.display(appStage);
+	}
+	public FacebookConnector getFb(){
+		return myFB;
 	}
 
 	@Override
