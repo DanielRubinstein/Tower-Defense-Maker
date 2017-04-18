@@ -1,6 +1,6 @@
 package frontEnd.Skeleton;
 
-import backEnd.Model;
+import backEnd.ModelReader;
 import backEnd.GameData.State.State;
 import frontEnd.View;
 import frontEnd.Skeleton.ScreenGrid.ScreenGrid;
@@ -34,7 +34,7 @@ public class SkeletonImpl implements Skeleton{
 		align(Constants.WINDOW_WIDTH,Constants.WINDOW_HEIGHT);
 	}
 	
-	public void init(View view, Model model){
+	public void init(View view, ModelReader model){
 		State state = model.getState();
 		myScreenGrid = new ScreenGrid(view, state, Constants.SCREEN_GRID_WIDTH, Constants.SCREEN_GRID_HEIGHT);
 		myRoot.setCenter(myScreenGrid.getRoot());

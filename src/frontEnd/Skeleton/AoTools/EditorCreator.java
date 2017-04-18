@@ -197,8 +197,7 @@ public class EditorCreator {
 
 	private Node createBooleanEditor() {
 		Node n = null;
-		myToggle = new ToggleSwitch("Off", "On",
-				new SimpleBooleanProperty((Boolean) myAttr.getValue()), () -> triggerBooleanUpdate());
+		myToggle = new ToggleSwitch("Off", "On", (Boolean) myAttr.getValue(), () -> triggerBooleanUpdate());
 		n = myToggle.getRoot();
 		return n;
 	}

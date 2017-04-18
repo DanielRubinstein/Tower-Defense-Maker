@@ -44,6 +44,7 @@ public class ControllerImpl implements Controller {
 
 			} catch (Exception e) {
 				ErrorDialog errDia = new ErrorDialog();
+				e.printStackTrace();
 				errDia.create("Cannot Load Game", e.getMessage());
 			} 
 			

@@ -17,7 +17,7 @@ public class ToggleSwitch {
 	private HBox toggle;
 	private Label label;
 	private Button button;
-	private Runnable myModRunnable;
+	private Runnable myR;
 	private SimpleBooleanProperty switchedOn;
 	
 
@@ -25,12 +25,12 @@ public class ToggleSwitch {
 		return switchedOn;
 	}
 
-	public ToggleSwitch(String title1, String title2, SimpleBooleanProperty booleanProperty, Runnable modRunnable) {
+	public ToggleSwitch(String title1, String title2, SimpleBooleanProperty booleanProperty, Runnable r) {
 		toggle = new HBox();
 		label = new Label();
 		button = new Button();
 		switchedOn = booleanProperty;
-		myModRunnable = modRunnable;
+		myR = r;
 
 		init(title1, title2);
 
@@ -39,6 +39,15 @@ public class ToggleSwitch {
 		});
 		
 		bringCorrespondingOptionToFront(title1, title2, switchedOn.get());
+	}
+
+	public ToggleSwitch(String title1, String title2, Boolean value, Runnable modRunnable) {
+		this(title1, title2, new SimpleBooleanProperty(value), modRunnable);
+		myR = () -> {
+			switchedOn.set(!switchedOn.get());
+			modRunnable.run();
+		};
+		
 	}
 
 	private void bringCorrespondingOptionToFront(String title1, String title2, Boolean newValue) {
@@ -58,15 +67,11 @@ public class ToggleSwitch {
 
 		toggle.getChildren().addAll(label, button);
 		
-		Runnable r = () -> {
-			switchedOn.set(!switchedOn.get());
-			myModRunnable.run();
-		};
 		button.setOnAction((e) -> {
-			r.run();
+			myR.run();
 		});
 		label.setOnMouseClicked((e) -> {
-			r.run();
+			myR.run();
 		});
 		
 		setStyle();
