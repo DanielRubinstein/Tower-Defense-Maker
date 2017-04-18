@@ -1,17 +1,15 @@
 package main;
 
-import java.lang.reflect.InvocationTargetException;
 import java.util.function.Consumer;
 
 import ModificationFromUser.ModificationFromUser;
 import backEnd.ModelImpl;
 import backEnd.GameData.GameData;
-import data.XMLReadingException;
 import data.GamePrep.DataInputLoader;
 import data.GamePrep.MainMenu;
 import frontEnd.ViewImpl;
+import frontEnd.CustomJavafxNodes.ErrorDialog;
 import frontEnd.Facebook.FacebookConnector;
-import frontEnd.Menus.ErrorDialog;
 import javafx.stage.Stage;
 
 public class ControllerImpl implements Controller {

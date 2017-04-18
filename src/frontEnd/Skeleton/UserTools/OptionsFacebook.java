@@ -1,8 +1,11 @@
 package frontEnd.Skeleton.UserTools;
 
 import frontEnd.View;
+import frontEnd.CustomJavafxNodes.ActionButton;
+import frontEnd.CustomJavafxNodes.ButtonMenuImpl;
+import frontEnd.CustomJavafxNodes.ErrorDialog;
 import frontEnd.Facebook.FacebookConnector;
-import frontEnd.Menus.ButtonMenuImpl;
+import frontEnd.Facebook.FacebookException;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.Scene;
@@ -23,6 +26,7 @@ public class OptionsFacebook implements SkeletonObject {
 	private Stage myStage;
 	private ButtonMenuImpl myMenu;
 	private FacebookConnector myFb;
+	private ImageView profPic;
 	
 	public OptionsFacebook(View view,Stage parentStage){
 		myView = view;
@@ -33,10 +37,10 @@ public class OptionsFacebook implements SkeletonObject {
 	
 	private void getPicture() {
 		myFb = myView.getFb();
-		ImageView pp;
 		try {
-			pp = myFb.getPicture();
-			myRoot.getChildren().add(pp);
+			profPic = myFb.getPicture();
+			profPic.setOnMouseClicked(e -> launch());
+			myRoot.getChildren().add(profPic);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -45,10 +49,9 @@ public class OptionsFacebook implements SkeletonObject {
 
 	private void setUp(){
 		if(myView.getFb()!=null){
-			Button b = new Button("test");
-			b.setOnAction(e -> launch());
-			myRoot.getChildren().add(b);
 			getPicture();
+			ActionButton b = new ActionButton("FB Opts", () -> launch());
+			myRoot.getChildren().add(b);
 		}
 	}
 	private void launch(){
@@ -58,9 +61,9 @@ public class OptionsFacebook implements SkeletonObject {
 
 		myMenu = new ButtonMenuImpl("Interact With Facebook");
 		
-		myMenu.addSimpleButtonWithHover("Share",e -> share(myStage), "Click to share");
+		myMenu.addSimpleButtonWithHover("Share",() -> share(myStage), "Click to share onto the official voogasalad_sup3rs1ckt34m1337 page");
 		
-		myMenu.addSimpleButtonWithHover("Message Friend", e -> message(), "Click to Message");
+		myMenu.addSimpleButtonWithHover("Message a Friend", () -> message(), "Click to Message");
 		
 		myMenu.display(myStage);
 	}
@@ -80,7 +83,12 @@ public class OptionsFacebook implements SkeletonObject {
 		Button b = new Button("Share");
 		b.setOnAction(e -> {
 			String message = text.getText().trim();
-			myFb.shareToWall(message);
+			try {
+				myFb.shareToWall(message);
+			} catch (FacebookException e1) {
+				ErrorDialog eD = new ErrorDialog();
+				eD.create("Facebook Error", e1.getMessage());
+			}
 			shareStage.close();
 		});
 		share.getChildren().addAll(text,b);
@@ -91,7 +99,6 @@ public class OptionsFacebook implements SkeletonObject {
 
 	@Override
 	public Node getRoot() {
-		// TODO Auto-generated method stub
 		return myRoot;
 	}
 

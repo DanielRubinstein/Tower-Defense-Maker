@@ -1,4 +1,4 @@
-package frontEnd.Skeleton;
+package frontEnd.Skeleton.ScreenGrid;
 
 import java.util.HashMap;
 import java.util.HashSet;
@@ -14,8 +14,6 @@ import backEnd.GameData.State.State;
 import backEnd.GameData.State.Tile;
 import backEnd.GameData.State.TileGrid;
 import frontEnd.View;
-import frontEnd.CustomJavafxNodes.FrontEndAttributeOwner;
-import frontEnd.CustomJavafxNodes.FrontEndAttributeOwnerImpl;
 import frontEnd.Skeleton.AoTools.ComponentCommandCenter;
 import frontEnd.Skeleton.AoTools.TileCommandCenter;
 import frontEnd.Skeleton.AoTools.TileCommandCenterImpl;

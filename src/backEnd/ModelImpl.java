@@ -9,6 +9,7 @@ import backEnd.Mode.ModeImpl;
 import backEnd.Mode.ModeReader;
 import data.DataController;
 import data.XMLReadingException;
+import javafx.beans.property.SimpleStringProperty;
 
 /**
  * Controller the front end calls when it detects a backend modification from the user,
@@ -66,5 +67,9 @@ public class ModelImpl implements Model{
 	public GameProcessController getGameProcessController() {
 		return myEngine;
 
+	}
+	
+	public SimpleStringProperty getEngineStatus(){
+		return myEngine.getEngineStatus();
 	}
 }

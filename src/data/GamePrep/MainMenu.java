@@ -6,13 +6,13 @@ import java.util.function.Consumer;
 import data.XMLReadingException;
 import frontEnd.Facebook.FacebookConnector;
 import frontEnd.Facebook.FacebookConnectorImpl;
-import frontEnd.Menus.ButtonMenuImpl;
-import frontEnd.Menus.ErrorDialog;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
+import frontEnd.CustomJavafxNodes.ButtonMenuImpl;
+import frontEnd.CustomJavafxNodes.ErrorDialog;
 import javafx.stage.Stage;
 import main.Controller;
 
@@ -40,17 +40,17 @@ public class MainMenu{
 	
 	private void splashScreen(Stage stage) {
    	 	ButtonMenuImpl splash = new ButtonMenuImpl("Welcome");
-   	 	splash.addSimpleButtonWithHover("START", event -> showPrimaryMenu(stage), "Click to start the game!");
+   	 	splash.addPrimarySimpleButtonWithHover("START", () -> showPrimaryMenu(stage), "Click to start the game!");
 		splash.display(stage);
 	}
 
 	private void showPrimaryMenu(Stage stage) {
 		ButtonMenuImpl primaryMenu = new ButtonMenuImpl("Games");
-   	 	primaryMenu.addSimpleButtonWithHover("New Game", e -> new GameMaker(stage, consumerLoadData), "Create A New Game after selecting the size of the screen");
-   	 	primaryMenu.addSimpleButtonWithHover("Load Template Game", e -> showTemplateMenu(stage), "Load a game from a list of preapproved, ready-to-play templates");
-   	 	primaryMenu.addSimpleButtonWithHover("Load Saved Game", e-> loadGame(), "Continue your progress by loading a user-saved game");
-   	 	primaryMenu.addSimpleButtonWithHover("Go Back", event -> splashScreen(stage), "Return to previous screen");
-   	 	primaryMenu.addSimpleButtonWithHover("Connect to fb", e -> launchFb(stage), "Log in");
+   	 	primaryMenu.addPrimarySimpleButtonWithHover("New Game", () -> new GameMaker(stage, consumerLoadData), "Create A New Game after selecting the size of the screen");
+   	 	primaryMenu.addSimpleButtonWithHover("Load Template Game", () -> showTemplateMenu(stage), "Load a game from a list of preapproved, ready-to-play templates");
+   	 	primaryMenu.addSimpleButtonWithHover("Load Saved Game", () -> loadGame(), "Continue your progress by loading a user-saved game");
+   	 	primaryMenu.addSimpleButtonWithHover("Go Back", () -> splashScreen(stage), "Return to previous screen");
+   	 	primaryMenu.addSimpleButtonWithHover("Connect To Facebook", () -> launchFb(stage), "Log in and connect to Facebook to see high scores, screenshots, post to the official voogasalad_su3ps1ckt34m1337 page");
 		primaryMenu.display(stage);
 	}
 
@@ -62,7 +62,7 @@ public class MainMenu{
 
 		FacebookConnector fb = new FacebookConnectorImpl();
 		ButtonMenuImpl myLoginButton = new ButtonMenuImpl("Login!");
-		myLoginButton.addSimpleButtonWithHover("Login", e -> {
+		myLoginButton.addPrimarySimpleButtonWithHover("Login", () -> {
 			fb.login();
 			myController.setFb(fb);
 			loginStage.close();
@@ -88,11 +88,11 @@ public class MainMenu{
 		ButtonMenuImpl templateGames = new ButtonMenuImpl("Templates");
    	 	//for(String templateGame : gameLoader.getTemplateTitleList()){
    	 	for(String templateGame : gameLoader.getTemplateTitleListStupid()){
-   	 		templateGames.addSimpleButton(templateGame, event -> {
+   	 		templateGames.addSimpleButton(templateGame, () -> {
    	 			consumerLoadData.accept(templateGame);
    	 		});
    	 	}
-   	 	templateGames.addSimpleButtonWithHover("Go Back", event -> showPrimaryMenu(stage), "Return to previous screen");
+   	 	templateGames.addSimpleButtonWithHover("Go Back", () -> showPrimaryMenu(stage), "Return to previous screen");
    	 	templateGames.display(stage);
 	}
 
