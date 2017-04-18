@@ -39,7 +39,6 @@ import javafx.stage.Stage;
 
 public class FacebookConnectorImpl implements FacebookConnector {
 	
-	private FacebookClient fbClient;
 	private String appId = "426668214360430";
 	private String appSecret = "d97cba98608128cdb4ca19e1da091de5";
 	private FacebookClient userClient;
@@ -61,7 +60,6 @@ public class FacebookConnectorImpl implements FacebookConnector {
 	@Override
 	public ImageView getPicture() throws Exception{
 		JsonObject picture = userClient.fetchObject("me/picture", JsonObject.class, Parameter.with("redirect","false"));
-		System.out.println(picture.toString());
 		Pattern p = Pattern.compile(DEFAULT_PICTURE_PATTERN);
 		Matcher m = p.matcher(picture.toString());
 		if(m.matches()){
