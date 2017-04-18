@@ -8,7 +8,7 @@ import backEnd.Attribute.AttributeFactory;
 import backEnd.GameData.State.Component;
 import backEnd.GameData.State.ComponentGraph;
 import backEnd.GameData.State.State;
-import frontEnd.Menus.ErrorDialog;
+import frontEnd.CustomJavafxNodes.ErrorDialog;
 import javafx.geometry.Point2D;
 import resources.Constants;
 

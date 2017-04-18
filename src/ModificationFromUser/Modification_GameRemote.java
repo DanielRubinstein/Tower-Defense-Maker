@@ -11,8 +11,10 @@ public enum Modification_GameRemote implements ModificationFromUser {
 		engine.playAnimation();
 		}),
 	PAUSE (engine -> {
-		System.out.println("Invokable to PAUSE GAME");
-		engine.pause();
+		if(!engine.getEngineStatus().get().equals("PAUSED")){
+			System.out.println("Invokable to PAUSE GAME");
+			engine.pause();
+		}
 		}),
 	FASTFORWARD (engine -> {
 		System.out.println("FASTFORWARD");
@@ -37,8 +39,12 @@ public enum Modification_GameRemote implements ModificationFromUser {
 	public void invoke(ModelImpl myModel) throws Exception {
 		switch (this) {
 		case PLAY:
-			myConsumer.accept(myModel.getGameProcessController());
-			myModel.getMode().toggleUserMode();
+			if(!myModel.getEngineStatus().equals("RUNNING")){
+				myConsumer.accept(myModel.getGameProcessController());
+				if (myModel.getModeReader().getAuthorBooleanProperty().get()){ 
+					myModel.getMode().toggleUserMode();
+				}
+			}
 			break;
 		default:
 			switch (myModel.getMode().getUserMode()) {

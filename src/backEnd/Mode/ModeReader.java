@@ -1,13 +1,11 @@
 package backEnd.Mode;
 
+import javafx.beans.property.SimpleBooleanProperty;
+
 public interface ModeReader {
-	
-	
-	// "Player" or "Author"
-	public String getUserModeString();
 	
 	public String getGameModeString();
 
-	
+	public SimpleBooleanProperty getAuthorBooleanProperty();
 	
 }

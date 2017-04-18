@@ -2,8 +2,8 @@ package data.GamePrep;
 
 import java.util.function.Consumer;
 
+import frontEnd.CustomJavafxNodes.ButtonMenuImpl;
 import frontEnd.CustomJavafxNodes.NumberChanger;
-import frontEnd.Menus.ButtonMenuImpl;
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
@@ -32,27 +32,25 @@ public class GameMaker {
 	}
 
 	private void setInputFields() {
-		myTilesWide = setInputSliderFields("Number Tiles Wide",1d,10d,40d);
-		myTilesHigh = setInputSliderFields("Number Tiles High",1d,10d,40d);
+		myTilesWide = setInputSliderFields("Number Tiles Wide",1,10,40);
+		myTilesHigh = setInputSliderFields("Number Tiles High",1,10,40);
 		setSubmit();
 	}
 	private void setSubmit() {
-		allSelections.addSimpleButton("Submit", e ->  {
+		allSelections.addPrimarySimpleButtonWithHover("Submit", () ->  {
 			StartingInput allValues = new StartingInput();
 			allValues.setTilesWide(myTilesWide.getValue().intValue());
 			allValues.setTilesHigh(myTilesHigh.getValue().intValue());
 			onSubmit.accept(allValues);
 			myStage.close();
-		});
+		}, "Submit these values to continue");
 	}
 
-	private NumberChanger setInputSliderFields(String text, Double min, Double start, Double max){
+	private NumberChanger setInputSliderFields(String text, Integer min, Integer start, Integer max){
 		HBox tileWidth = new HBox();
 		Label name = new Label(text);
-		NumberChanger slide = new NumberChanger(min, max, start, 1d);
-		Label currentVal = new Label(String.format("Current value: %f", start));
-		slide.addListener( (observable, oldValue, newValue)->currentVal.setText(String.format("Current value: %d", newValue.intValue())));
-		tileWidth.getChildren().addAll(name,slide.getRoot(),currentVal);
+		NumberChanger slide = new NumberChanger(min, max, start, 1);
+		tileWidth.getChildren().addAll(name, slide.addIntegerIndicator());
 		allSelections.addNode(tileWidth);
 		return slide;
 	}
