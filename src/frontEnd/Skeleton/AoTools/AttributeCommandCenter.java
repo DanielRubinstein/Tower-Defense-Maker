@@ -1,5 +1,6 @@
 package frontEnd.Skeleton.AoTools;
 
+import java.lang.reflect.Method;
 import java.util.Arrays;
 import java.util.List;
 import java.util.ResourceBundle;
@@ -8,6 +9,7 @@ import ModificationFromUser.Modification_AddNewAttributeOwnerToGrid;
 import ModificationFromUser.Modification_AddNewPresetAttributeOwner;
 import backEnd.Attribute.Attribute;
 import backEnd.Attribute.AttributeOwner;
+import backEnd.GameData.State.Component;
 import frontEnd.View;
 import frontEnd.CustomJavafxNodes.SingleFieldPrompt;
 import javafx.beans.property.SimpleBooleanProperty;
@@ -59,13 +61,31 @@ public class AttributeCommandCenter extends CommandCenter{
 		
 		contents.getChildren().add(createPresetButton(obj));
 		
+		checkToAddAddNowButton(obj);
+		
 		contents.setPadding(new Insets(STANDARD_SPACING, STANDARD_SPACING, STANDARD_SPACING, STANDARD_SPACING));
 		contents.setSpacing(STANDARD_SPACING);
 		// contents.setAlignment(Pos.TOP_CENTER);
 		return contents;
 	}
 
-	public void addSubmitButton(AttributeOwner obj) {
+	private void checkToAddAddNowButton(AttributeOwner obj) {
+		try {
+			Method addSubmitButton = AttributeCommandCenter.class.getDeclaredMethod("addSubmitButton", obj.getClass());
+			addSubmitButton.setAccessible(true);
+			addSubmitButton.invoke(this, obj);
+		} catch (NoSuchMethodException e) {
+			System.out.println("No adding 'add now' buttons for tiles (this is a good thing)");
+			// do nothing
+			// this means the thing being put in attribute command center is a tile
+		} catch (Exception e) {
+			// something went wrong
+			System.out.println("Something went wrong adding the 'add now' button");
+			// TODO add exception?
+		}
+	}
+
+	private void addSubmitButton(Component obj) {
 		Button submit = new Button("Add Now");
 		submit.setOnAction(e -> {
 			myView.sendUserModification(new Modification_AddNewAttributeOwnerToGrid(obj));
