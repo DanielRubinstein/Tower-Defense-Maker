@@ -1,104 +1,56 @@
 package frontEnd.Facebook;
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Collection;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import com.restfb.Connection;
 import com.restfb.DefaultFacebookClient;
 import com.restfb.FacebookClient;
 import com.restfb.Parameter;
 import com.restfb.Version;
-import com.restfb.exception.FacebookResponseContentException;
 import com.restfb.json.JsonObject;
-import com.restfb.types.Conversation;
-import com.restfb.types.FacebookType;
-import com.restfb.types.Page;
+import com.restfb.types.User;
 
-import frontEnd.CustomJavafxNodes.ErrorDialog;
 import javafx.scene.Scene;
-import javafx.scene.control.Label;
-import javafx.scene.control.ScrollPane;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
-import javafx.scene.layout.VBox;
 import javafx.scene.web.WebEngine;
 import javafx.scene.web.WebView;
 import javafx.stage.Stage;
 
+/**
+ * Class to allow a user to connect to Facebook using his/her username and password. This class sets up the appropriate 
+ * connection with Facebook and obtains all relevant access codes from the user.
+ * The appId, appSecret, and URL's all come from the Application's Settings page on Facebook. All of the private static
+ * Strings are necessarily copied from this app's settings page. Several additional access permissions are included as
+ * they are the most important for implementing additional features.
+ * See the Facebook Developer Docs for further information. 
+ * This class and the entire package rely on the restfb API, and consequently the FacebookGraph API. 
+ * @author Tim
+ *
+ */
 public class FacebookConnectorImpl implements FacebookConnector {
 	
-	private String appId = "426668214360430";
-	private String appSecret = "d97cba98608128cdb4ca19e1da091de5";
+	private static final String appId = "426668214360430";
+	private static final String appSecret = "d97cba98608128cdb4ca19e1da091de5";
 	private FacebookClient userClient;
-	private String redirectURL = "https://www.facebook.com/connect/login_success.html";
-	private String totalLoginURL = "https://www.facebook.com/v2.8/dialog/oauth?client_id=" + appId + 
-			"&redirect_uri=" + redirectURL + "&response_type=code%20token"+"&scope=publish_actions,manage_pages,read_page_mailboxes,pages_messaging";
-	private String DEFAULT_ACCESS_PATTERN = ".*access_token=(.*)&expires.*";
-	private String DEFAULT_PICTURE_PATTERN = ".*\"url\":\"(.*)\".*";
+	private static final String redirectURL = "&redirect_uri=https://www.facebook.com/connect/login_success.html";
+	private static final String scopeRequirements = "&scope=publish_actions,manage_pages,read_page_mailboxes,pages_messaging";
+	private static final String responseType = "&response_type=code%20token";
+	private static final String totalLoginURL = "https://www.facebook.com/v2.8/dialog/oauth?client_id=" + appId + 
+			  redirectURL +responseType + scopeRequirements;
+	private static final String DEFAULT_ACCESS_PATTERN = ".*access_token=(.*)&expires.*";
+	private FacebookInteractorImpl myInteractor;
 	
 	public FacebookConnectorImpl(){
 		Version v = Version.LATEST;
 		userClient = new DefaultFacebookClient(v);
-
+		myInteractor = new FacebookInteractorImpl(userClient,appId);
 	}
 	
-	/* (non-Javadoc)
-	 * @see frontEnd.Facebook.FacebookConnector#getPicture()
-	 */
+
 	@Override
-	public ImageView getPicture() throws Exception{
-		JsonObject picture = userClient.fetchObject("me/picture", JsonObject.class, Parameter.with("redirect","false"));
-		Pattern p = Pattern.compile(DEFAULT_PICTURE_PATTERN);
-		Matcher m = p.matcher(picture.toString());
-		if(m.matches()){
-			String imageURL = m.group(1);
-			Image im = new Image(imageURL);
-			ImageView viewImage = new ImageView(im);
-			return viewImage;
-		}else{
-			throw new FacebookResponseContentException("couldnt find image", new IOException("File not found"));
-		}	
-		
-	}
-	
-	/* (non-Javadoc)
-	 * @see frontEnd.Facebook.FacebookConnector#getMessages()
-	 */
-	@Override
-	public ScrollPane getMessages(){
-		ScrollPane scroll = new ScrollPane();
-		VBox content = new VBox();
-		Connection<Conversation> pages = userClient.fetchConnection("me/conversations", Conversation.class);
-		for(Conversation c: pages.getData()){
-			content.getChildren().add(new Label(c.getSnippet()));
-		}
-		scroll.setContent(content);
-		return scroll;
+	public FacebookInteractor getInteractor(){
+		return myInteractor;
 	}
 
 
-	/* (non-Javadoc)
-	 * @see frontEnd.Facebook.FacebookConnector#shareToWall(java.lang.String)
-	 */
-	@Override
-	public void shareToWall(String message) throws FacebookException{
-		Collection<Parameter> params = new ArrayList<Parameter>();
-		Page myPage = userClient.fetchObject(appId, Page.class);
-		params.add(Parameter.with("message", message));
-		params.add(Parameter.with("link", myPage.getLink()));
-		Parameter[] postParamsArray = params.toArray(new Parameter[params.size()]);
-		try{
-			FacebookType post = userClient.publish("me/feed", FacebookType.class, postParamsArray);
-		} catch (com.restfb.exception.FacebookOAuthException e){
-			throw new FacebookException(e);
-		}
-
-	}
-	/* (non-Javadoc)
-	 * @see frontEnd.Facebook.FacebookConnector#log2()
-	 */
 	@Override
 	public void login(){
 		try {
@@ -110,6 +62,7 @@ public class FacebookConnectorImpl implements FacebookConnector {
 				if(m.matches()){
 					String accessCode = m.group(1);
 					userClient = new DefaultFacebookClient(accessCode,appSecret,Version.LATEST);
+					myInteractor.setClient(userClient);
 					web.setOnStatusChanged(null);
 				}
 			});

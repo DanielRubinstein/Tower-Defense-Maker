@@ -6,6 +6,7 @@ import frontEnd.CustomJavafxNodes.ButtonMenuImpl;
 import frontEnd.CustomJavafxNodes.ErrorDialog;
 import frontEnd.Facebook.FacebookConnector;
 import frontEnd.Facebook.FacebookException;
+import frontEnd.Facebook.FacebookInteractor;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.Scene;
@@ -25,7 +26,7 @@ public class OptionsFacebook implements SkeletonObject {
 	private Stage myParentStage;
 	private Stage myStage;
 	private ButtonMenuImpl myMenu;
-	private FacebookConnector myFb;
+	private FacebookInteractor myFb;
 	private ImageView profPic;
 	
 	public OptionsFacebook(View view,Stage parentStage){

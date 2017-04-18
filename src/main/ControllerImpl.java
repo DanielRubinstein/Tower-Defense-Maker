@@ -10,12 +10,13 @@ import data.GamePrep.MainMenu;
 import frontEnd.ViewImpl;
 import frontEnd.CustomJavafxNodes.ErrorDialog;
 import frontEnd.Facebook.FacebookConnector;
+import frontEnd.Facebook.FacebookInteractor;
 import javafx.stage.Stage;
 
 public class ControllerImpl implements Controller {
 	private ViewImpl myView;
 	private ModelImpl myModel;
-	private FacebookConnector myFb;
+	private FacebookInteractor myFb;
 
 
 	public void start(Stage stage) {
@@ -53,9 +54,8 @@ public class ControllerImpl implements Controller {
 		MainMenu myMenu = new MainMenu(setGameData,this);
 		myMenu.showMenus(stage);
 	}
-	public void setFb(FacebookConnector fb){
+	public void setFb(FacebookInteractor fb){
 		myFb=fb;
-		System.out.println(" in control impl fb " + myFb);
 	}
 	
 	private void executeInteraction(ModificationFromUser myInteraction) throws Exception{

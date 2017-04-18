@@ -12,6 +12,7 @@ import backEnd.GameData.State.Tile;
 import backEnd.Mode.ModeReader;
 import frontEnd.CustomJavafxNodes.ErrorDialog;
 import frontEnd.Facebook.FacebookConnector;
+import frontEnd.Facebook.FacebookInteractor;
 import frontEnd.Skeleton.SkeletonImpl;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleStringProperty;
@@ -24,11 +25,10 @@ public class ViewImpl implements View {
 	private SkeletonImpl mySkeleton;
 	private SimpleBooleanProperty authorProperty;
 	private Stage appStage;
-	private FacebookConnector myFB;
+	private FacebookInteractor myFB;
 
-	public ViewImpl(Model model, Consumer<ModificationFromUser> inputConsumer, FacebookConnector fb) {
+	public ViewImpl(Model model, Consumer<ModificationFromUser> inputConsumer, FacebookInteractor fb) {
 		myFB=fb;
-		System.out.println(" in view " +myFB);
 		init(model, inputConsumer);
 	}
 	
@@ -47,7 +47,7 @@ public class ViewImpl implements View {
 		mySkeleton.display(appStage);
 	}
 
-	public FacebookConnector getFb(){
+	public FacebookInteractor getFb(){
 		return myFB;
 	}
 

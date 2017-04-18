@@ -6,6 +6,7 @@ import java.util.function.Consumer;
 import data.XMLReadingException;
 import frontEnd.Facebook.FacebookConnector;
 import frontEnd.Facebook.FacebookConnectorImpl;
+import frontEnd.Facebook.FacebookInteractor;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -64,7 +65,8 @@ public class MainMenu{
 		ButtonMenuImpl myLoginButton = new ButtonMenuImpl("Login!");
 		myLoginButton.addPrimarySimpleButtonWithHover("Login", () -> {
 			fb.login();
-			myController.setFb(fb);
+			FacebookInteractor fbInter= fb.getInteractor();
+			myController.setFb(fbInter);
 			loginStage.close();
 		}, "Click to launch facebook");
 		myLoginButton.display(loginStage);
