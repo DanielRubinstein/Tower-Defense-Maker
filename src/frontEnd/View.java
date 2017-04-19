@@ -1,6 +1,7 @@
 package frontEnd;
 
 import ModificationFromUser.ModificationFromUser;
+import backEnd.Attribute.AttributeOwnerReader;
 
 public interface View extends ViewReader{
 
@@ -14,6 +15,10 @@ public interface View extends ViewReader{
 
 	public void editRules();
 	
+	public void step();
+	
 	public void sendUserModification(ModificationFromUser mod);
+	
+	public void addToCanvas(AttributeOwnerReader ao);
 
 }

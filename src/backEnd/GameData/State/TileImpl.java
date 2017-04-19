@@ -1,8 +1,11 @@
 package backEnd.GameData.State;
 
 import java.io.FileNotFoundException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Observable;
+import java.util.Observer;
 import java.util.ResourceBundle;
 
 import backEnd.Attribute.Attribute;
@@ -14,59 +17,66 @@ import backEnd.Mode.UserModeType;
 import javafx.geometry.Point2D;
 
 /**
- * This class is the implementation of the Tile Interface that holds the tiles information and attributes
+ * This class is the implementation of the Tile Interface that holds the tiles
+ * information and attributes
+ * 
  * @author Riley Nisbet
  *
  */
 
-public class TileImpl implements Tile, AttributeOwner{
+public class TileImpl extends Observable implements Tile, AttributeOwner {
 	private final static String DEFAULT_ATTRIBUTES_PATH = "resources/defaultTileAttributes";
 	private final static ResourceBundle attributeResources = ResourceBundle.getBundle(DEFAULT_ATTRIBUTES_PATH);
 	private Point2D myLocation;
 	private AccessPermissions myAccessPerm;
 	private AttributeData myAttrData;
-	
-	public TileImpl(List<GameModeType> gameModeAccessPermissions, List<UserModeType> userModeAccessPermissions , Point2D location) throws FileNotFoundException{
+	private List<Observer> observers = new ArrayList<Observer>();
+
+	public TileImpl(List<GameModeType> gameModeAccessPermissions, List<UserModeType> userModeAccessPermissions,
+			Point2D location) throws FileNotFoundException {
 		this.myLocation = location;
 		this.myAccessPerm = new AccessPermissionsImpl(gameModeAccessPermissions, userModeAccessPermissions);
-		this.myAttrData = new AttributeData(new HashMap<String,Attribute<?>>());
+		this.myAttrData = new AttributeData(new HashMap<String, Attribute<?>>());
 		AttributeFactory attrFact = new AttributeFactory();
-		this.myAttrData = new AttributeData(new HashMap<String,Attribute<?>>());
-		for (String key : attributeResources.keySet()){
+		this.myAttrData = new AttributeData(new HashMap<String, Attribute<?>>());
+		for (String key : attributeResources.keySet()) {
 			Attribute<?> myAttribute = attrFact.getAttribute(key);
 			addAttribute(key, myAttribute);
 		}
 
 	}
-	
+
 	@Override
-	public AccessPermissions getAccessPermissions(){
+	public AccessPermissions getAccessPermissions() {
 		return myAccessPerm;
 	}
-	
+
 	@Override
-	public AttributeData getMyAttributes(){
+	public AttributeData getMyAttributes() {
 		return myAttrData;
 	}
-	
+
 	@Override
-	public void setAttributeData(AttributeData newAttrData){
+	public void setAttributeData(AttributeData newAttrData) {
 		myAttrData = newAttrData;
+		notifyObservers();
 	}
-	
+
 	@Override
-	public Point2D getLocation(){
+	public Point2D getLocation() {
 		return myLocation;
 	}
 
 	@Override
 	public void addAttribute(String name, Attribute<?> value) {
 		myAttrData.addAttribute(attributeResources.getString(name), value);
-		
+		notifyObservers();
+
 	}
 
 	@Override
-	public Attribute<?> getAttribute(String name) {
+	public Attribute<?> getAttribute(String name) {;
+		
 		return myAttrData.get(attributeResources.getString(name));
 	}
 
@@ -75,5 +85,28 @@ public class TileImpl implements Tile, AttributeOwner{
 		return myAttrData.getAttributeMap().containsKey(attributeResources.getString(name));
 	}
 
+	@SuppressWarnings("unchecked")
+	@Override
+	public <T> void setAttributeValue(String attrName, T newVal) {
+		((Attribute<T>) myAttrData.get(attrName)).setValue(newVal);
+		notifyObservers();
+	}
+
+	@Override
+	public void addObserver(Observer obs) {
+		observers.add(obs);
+	}
+
+	@Override
+	public void notifyObservers() {
+		for (Observer obs : observers) {
+			obs.update(this, null);
+		}
+	}
+
+	@Override
+	public void addAsListener(Observer o) {
+		addObserver(o);
+	}
 
 }

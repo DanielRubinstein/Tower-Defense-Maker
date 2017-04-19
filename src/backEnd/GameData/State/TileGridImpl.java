@@ -26,7 +26,7 @@ public class TileGridImpl implements TileGrid {
 	
 	@Override
 	public Tile getTileByLocation(Point2D location){
-		return getTileByCoord((int) location.getX(),(int) location.getY()); //Potentially wrong flipped x/y
+		return getTileByCoord((int) location.getY(),(int) location.getX()); //Potentially wrong flipped x/y- y
 	}
 	
 	@Override

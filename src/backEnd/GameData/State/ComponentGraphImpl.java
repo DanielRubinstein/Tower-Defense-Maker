@@ -85,9 +85,14 @@ public class ComponentGraphImpl implements ComponentGraph {
 	
 	@Override
 	public void addComponentToGrid(Component newComponent, Point2D location){
+		System.out.println(componentMap);
 		List<Component> currList = componentMap.get(location);
+		if(currList==null){
+			currList= new ArrayList<Component>();
+		}
 		currList.add(newComponent);
 		componentMap.put(location, currList);
+		
 	}
 	
 	@Override
@@ -95,6 +100,7 @@ public class ComponentGraphImpl implements ComponentGraph {
 		Attribute<?> posAttribute= toRemove.getAttribute("Position");
 		Point2D location = (Point2D) posAttribute.getValue();
 		List<Component> currList = componentMap.get(location);
+		if(currList==null){return;}
 		currList.remove(toRemove);
 		componentMap.put(location, currList);
 	}

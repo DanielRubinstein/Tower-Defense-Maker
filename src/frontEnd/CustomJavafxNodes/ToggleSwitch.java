@@ -24,8 +24,7 @@ public class ToggleSwitch {
 	private Label label;
 	private Button button;
 	private View myView;
-	private Consumer<ActionEvent> myActionEventConsumer;
-	private Consumer<MouseEvent> myMouseConsumer;
+	private Runnable myModRunnable;
 	private SimpleBooleanProperty switchedOn;
 	
 
@@ -33,14 +32,13 @@ public class ToggleSwitch {
 		return switchedOn;
 	}
 
-	public ToggleSwitch(View view, String title1, String title2, SimpleBooleanProperty booleanProperty, Consumer<ActionEvent> modificationAction, Consumer<MouseEvent> modificationMouse) {
+	public ToggleSwitch(View view, String title1, String title2, SimpleBooleanProperty booleanProperty, Runnable modRunnable) {
 		myView = view;
 		toggle = new HBox();
 		label = new Label();
 		button = new Button();
 		switchedOn = booleanProperty;
-		myActionEventConsumer = modificationAction;
-		myMouseConsumer = modificationMouse;
+		myModRunnable = modRunnable;
 
 		init(title1, title2);
 
@@ -64,19 +62,21 @@ public class ToggleSwitch {
 	}
 
 	private void init(String title1, String title2) {
-
 		label.setText(title1);
 
 		toggle.getChildren().addAll(label, button);
 		
-		button.setOnAction((e) -> {
-			myActionEventConsumer.accept(e);
+		Runnable r = () -> {
 			switchedOn.set(!switchedOn.get());
+			myModRunnable.run();
+		};
+		button.setOnAction((e) -> {
+			r.run();
 		});
 		label.setOnMouseClicked((e) -> {
-			myMouseConsumer.accept(e);
-			switchedOn.set(!switchedOn.get());
+			r.run();
 		});
+		
 		setStyle();
 		bindSizeProperties();
 	}

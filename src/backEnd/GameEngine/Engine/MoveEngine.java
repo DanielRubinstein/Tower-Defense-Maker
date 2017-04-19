@@ -1,4 +1,5 @@
 package backEnd.GameEngine.Engine;
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
@@ -7,6 +8,7 @@ import backEnd.Coord;
 import backEnd.Attribute.Attribute;
 import backEnd.Attribute.AttributeImpl;
 import backEnd.GameEngine.Behaviors.*;
+import frontEnd.Menus.ErrorDialog;
 import javafx.geometry.Point2D;
 import resources.Constants;
 import backEnd.GameData.State.*;
@@ -30,28 +32,25 @@ public class MoveEngine implements Engine{
 	 * @param xStart the starting x-coordinate
 	 * @param yStart the starting y-coordinate
 	 */
-	@SuppressWarnings("unchecked")
 	@Override
 	public void gameLoop(State currentState, double stepTime) {
 		myState=currentState;
 		for (Component c: myState.getComponentGraph().getAllComponents()){
-			Tile currentTile=myState.getTileGrid().getTileByLocation((Point2D) c.getAttribute("Position").getValue()); 
+			System.out.println(c instanceof Component);
+			Tile currentTile = myState.getTileGrid().getTileByLocation((Point2D)c.getAttribute("Position").getValue()); 
 			myState.getComponentGraph().removeComponent(c);
 			MoveBehavior mb=new MoveBehavior(c);
-			mb.execute(currentTile);
+			try {
+				mb.execute(currentTile);
+			} catch (FileNotFoundException e) {
+				ErrorDialog fnf = new ErrorDialog();
+				fnf.create("Error", "File not found");
+			}
 			Point2D newPosition=mb.getPosition();
 			myState.getComponentGraph().addComponentToGrid(c, newPosition);
-			Attribute<Point2D> newPositionAttribute=new AttributeImpl<Point2D>();
-			newPositionAttribute.setValue(newPosition);
-			Attribute<Point2D> positionAttribute=(Attribute<Point2D>) c.getAttribute("Position");
-			positionAttribute.setValue(newPosition);
+			
 		}
 		
-		//TODO : different case for bullets
-		// if (Component.getMyType.equals("Projectile")
-		//(Component.getMyType.equals("Ennemy")
-		//StartPosition : Point2D
-		//TargetPosition : Point2D
 		
 	}
 }

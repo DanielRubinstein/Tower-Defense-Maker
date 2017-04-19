@@ -27,18 +27,21 @@ public class SettingsViewImpl implements SettingsView{
 	private SimpleBooleanProperty authorProperty;
 	private View myView;
 	private ButtonMenuImpl myMenu;
+	private Stage myParentStage;
+	private Stage myStage;
 	
-	public SettingsViewImpl(View view) {
+	public SettingsViewImpl(View view, Stage parentStage) {
 		myView = view;
+		myParentStage = parentStage;
 		authorProperty = myView.getBooleanAuthorModeProperty();
 		addButtons();
 	}
 	
-	public void launchSettings(Stage parentStage){
+	public void launchSettings(){
 		// http://stackoverflow.com/questions/29514248/javafx-how-to-focus-on-one-stage
-		Stage myStage = new Stage();
-		myStage.initOwner(parentStage);
-		myStage.initModality(Modality.WINDOW_MODAL);
+		myStage = new Stage();
+		myStage.initOwner(myParentStage);
+		myStage.initModality(Modality.APPLICATION_MODAL);
 		myMenu.display(myStage);
 	}
 	/*
@@ -61,12 +64,11 @@ public class SettingsViewImpl implements SettingsView{
 		myMenu.addNode(ruleButtons);
 		
 		//adding player/godmode switch
-		Consumer<ActionEvent> actionEventConsumer = (e) -> myView.sendUserModification(new Modification_ChangeMode());
-		Consumer<MouseEvent> mouseEventConsumer = (e) -> myView.sendUserModification(new Modification_ChangeMode());
-		ToggleSwitch modeToggle = new ToggleSwitch(myView,"Player", "Author", authorProperty, actionEventConsumer, mouseEventConsumer);
+		Runnable modRunnable = () -> myView.sendUserModification(new Modification_ChangeMode());
+		ToggleSwitch modeToggle = new ToggleSwitch(myView,"Player", "Author", authorProperty, modRunnable);
 		myMenu.addNode(modeToggle.getRoot());
 		
-		myMenu.addSimpleButtonWithHover("Help", e -> new HelpOptions(), "Get Help");
+		myMenu.addSimpleButtonWithHover("Help", e -> new HelpOptions(myStage), "Get Help");
 	}
 
 	

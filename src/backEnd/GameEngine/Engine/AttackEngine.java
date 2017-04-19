@@ -1,5 +1,6 @@
 package backEnd.GameEngine.Engine;
 
+import java.io.FileNotFoundException;
 import java.util.ResourceBundle;
 import backEnd.Attribute.Attribute;
 import backEnd.Attribute.AttributeData;
@@ -7,13 +8,15 @@ import backEnd.Attribute.AttributeFactory;
 import backEnd.GameData.State.Component;
 import backEnd.GameData.State.ComponentGraph;
 import backEnd.GameData.State.State;
+import frontEnd.Menus.ErrorDialog;
 import javafx.geometry.Point2D;
 import resources.Constants;
 
 /**
  * 
  * @author Daniel
- * @author Alex Attack components (targets) from other components (towers).
+ * @author Alex
+ * @author Christian
  */
 
 public class AttackEngine implements Engine {
@@ -28,8 +31,18 @@ public class AttackEngine implements Engine {
 				for (Component componentTarget : myComponentGraph.getComponentsWithinRadius(componentAttacker,
 						Constants.defaultRadius)) {
 					addProjectileToState(currentState, componentAttacker, componentTarget);
-					componentAttacker.getBehavior("Attack").execute(null);
-					componentTarget.getBehavior("TakeDamage").execute(null);
+					try {
+						componentAttacker.getBehavior("Attack").execute(null);
+					} catch (FileNotFoundException e) {
+						ErrorDialog fnf = new ErrorDialog();
+						fnf.create("Error", "File not found");
+					}
+					try {
+						componentTarget.getBehavior("TakeDamage").execute(null);
+					} catch (FileNotFoundException e) {
+						ErrorDialog fnf = new ErrorDialog();
+						fnf.create("Error", "File not found");
+					}
 					break;
 				}
 			}
@@ -37,24 +50,37 @@ public class AttackEngine implements Engine {
 	}
 
 	@SuppressWarnings("unchecked")
-	public void addProjectileToState(State currentState, Component attacker, Component target) { 
-		Component bullet = makeBullet();
+	public void addProjectileToState(State currentState, Component attacker, Component target) {
+		Component bullet = null;
+		try {
+			bullet = makeBullet();
+		} catch (FileNotFoundException e) {
+			ErrorDialog fnf = new ErrorDialog();
+			fnf.create("Error", "File not found");
+		}
 
-		currentState.getComponentGraph().addComponentToGrid(bullet,
-				(Point2D) attacker.getAttribute("Position").getValue());
+		Point2D bulletPos = (Point2D) attacker.getAttribute(myResources.getString("Position"));
+		Point2D targetPos = (Point2D) target.getAttribute(myResources.getString("Position"));
+		
+		bullet.setAttributeValue(myResources.getString("Position"), bulletPos);
+		bullet.setAttributeValue(myResources.getString("ProjectileTargetPosition"), targetPos);
+		bullet.setAttributeValue(myResources.getString("ProjectileDistance"), targetPos.subtract(bulletPos));
+		currentState.getComponentGraph().addComponentToGrid(bullet, bulletPos);
 	}
-	
+
 	/**
 	 * 
 	 * @return a Component that represents a Bullet
+	 * @throws FileNotFoundException
 	 */
-	private Component makeBullet(){//TODO: ADD ATTRIBUTES STARTPOS AND TARGETPOS TO BULLET FOR MOVEENGINE TO USE
-		AttributeFactory af = new AttributeFactory();
-		Component bullet = new Component();
-		AttributeData ad = new AttributeData();
-		// I'll figure out a cleaner way of doing this later
-		bullet.setMyType("Projectile");
+	@SuppressWarnings("unchecked")
+	private Component makeBullet() throws FileNotFoundException {
 
+		AttributeFactory af = new AttributeFactory();
+		AttributeData ad = new AttributeData();
+		Component bullet = new Component(ad);
+
+		bullet.setMyType("Projectile");				
 		Attribute<String> bulletImage = (Attribute<String>) af.getAttribute(myResources.getString("ImageFile"));
 		bulletImage.setValue(Constants.BULLET_IMAGE_FILE);
 		ad.addAttribute(myResources.getString("ImageFile"), (backEnd.Attribute.AttributeImpl<?>) bulletImage);

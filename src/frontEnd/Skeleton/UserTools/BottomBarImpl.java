@@ -1,8 +1,9 @@
 package frontEnd.Skeleton.UserTools;
 
-import frontEnd.ViewReader;
+import frontEnd.View;
 import javafx.scene.Node;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.Priority;
 /**
  * This class represents the main rectangular chunk of the bottomRoot. This will support relevant information to the user,
  * and this can be supplement in the future by various extensions (social center perhaps).
@@ -13,10 +14,11 @@ public class BottomBarImpl implements BottomBar{
 	
 	private HBox myRoot;
 	
-	public BottomBarImpl(ViewReader view){
+	public BottomBarImpl(View view){
 		myRoot = new HBox();
-		//PalettePane pp = new PalettePane(view);
-		//myRoot.getChildren().add(pp.getRoot());
+		PalettePane pp = new PalettePane(view);
+		myRoot.getChildren().add(pp.getRoot());
+		HBox.setHgrow(pp.getRoot(), Priority.ALWAYS);
 	}
 	
 	public Node getRoot(){

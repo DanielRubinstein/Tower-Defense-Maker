@@ -40,9 +40,9 @@ public class DataController {
 		return new BankController(tileMap, componentMap);
 	}
 
-	public GameData generateGameData(String s) throws XMLReadingException{
+	public GameData generateGameData(String gameName) throws XMLReadingException{
 		try{
-			return myXMLReader.loadGameStateData(GAME_STATE_DATA_PATH, s);
+			return myXMLReader.loadGameStateData(GAME_STATE_DATA_PATH, gameName);
 		}catch(Exception e){
 			throw new XMLReadingException();
 		}
