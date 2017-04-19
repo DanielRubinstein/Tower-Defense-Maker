@@ -1,6 +1,7 @@
 package frontEnd.Skeleton.AoTools;
 
 import java.io.File;
+import java.lang.reflect.Method;
 import java.util.List;
 import java.util.MissingResourceException;
 
@@ -11,7 +12,6 @@ import frontEnd.View;
 import frontEnd.CustomJavafxNodes.NumberChanger;
 import frontEnd.CustomJavafxNodes.PositionRequester;
 import frontEnd.CustomJavafxNodes.ToggleSwitch;
-import javafx.beans.property.SimpleBooleanProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.geometry.Point2D;
@@ -42,42 +42,24 @@ public class AttributeEditorCreator {
 	
 	public Node extractEditor(String type) {
 		Node n = null;
-		switch (type) {
-		case "BOOLEAN":
-			n = createBooleanEditor();
-			break;
-		case "DOUBLE":
-			n = createDoubleEditor();
-			break;
-		case "EDITABLESTRING":
-			n = createEditableStringEditor();
-			break;
-		case "IMAGE":
-			n = createImageEditor();
-			break;
-		case "INTEGER":
-			n = createIntegerEditor();
-			break;
-		case "STRINGLIST":
-			n = createStringListEditor();
-			break;
-		case "POSITION":
-			n = createPositionEditor();
-			break;
-		case "COMPONENT":
-			n = createComponentEditor();
-			break;
-		default:
-			break;
+		String stringFormatForEditorMethod = "create_%s_Editor";
+		try{
+			Method createEditor = AttributeEditorCreator.class.getDeclaredMethod(String.format(stringFormatForEditorMethod, type));
+			createEditor.setAccessible(true);
+			n = (Node) createEditor.invoke(this);
+		} catch (NoSuchMethodException e){
+			System.out.println("attribute type not yet coded");
+		} catch (Exception e){
+			// fuck
 		}
 		return n;
 	}
 
-	private Node createComponentEditor() {
+	private Node create_COMPONENT_Editor() {
 		return new Label("inDev");
 	}
 
-	private Node createPositionEditor() {
+	private Node create_POSITION_Editor() {
 		String stringFormatter = "(%.0f, %.0f)";
 		try{
 			Point2D pos = (Point2D) myAttr.getValue();
@@ -93,7 +75,7 @@ public class AttributeEditorCreator {
 		}
 	}
 
-	private Node createIntegerEditor() {
+	private Node create_INTEGER_Editor() {
 		Node n;
 		List<Integer> paramList = (List<Integer>) myAttr.getEditParameters();
 		NumberChanger numChanger = new NumberChanger(paramList.get(0).doubleValue(), paramList.get(1).doubleValue(), 
@@ -105,7 +87,7 @@ public class AttributeEditorCreator {
 		return n;
 	}
 
-	private Node createEditableStringEditor() {
+	private Node create_EDITABLESTRING_Editor() {
 		HBox editor = new HBox();
 		
 		TextField textField = new TextField((String) myAttr.getValue());
@@ -120,7 +102,7 @@ public class AttributeEditorCreator {
 		return editor;
 	}
 
-	private Node createStringListEditor() {
+	private Node create_STRINGLIST_Editor() {
 		Node n;
 		List<String> editParameters = (List<String>) myAttr.getEditParameters();
 		ObservableList<String> options = (ObservableList<String>) FXCollections.observableArrayList(editParameters);
@@ -139,7 +121,7 @@ public class AttributeEditorCreator {
 		return n;
 	}
 
-	private HBox createImageEditor() {
+	private HBox create_IMAGE_Editor() {
 		HBox both = new HBox();
 		String imagePath = (String) myAttr.getValue();
 		Image image = new Image(getClass().getClassLoader().getResourceAsStream(imagePath));
@@ -182,7 +164,7 @@ public class AttributeEditorCreator {
 		return both;
 	}
 
-	private Node createDoubleEditor() {
+	private Node create_DOUBLE_Editor() {
 		Node n;
 		List<Double> paramList = (List<Double>) myAttr.getEditParameters();
 		System.out.println(" %%%% " + myAttr +"    "  +myAttr.getName() +"   " +paramList);
@@ -195,11 +177,9 @@ public class AttributeEditorCreator {
 		return n;
 	}
 
-	private Node createBooleanEditor() {
-		Node n = null;
+	private Node create_BOOLEAN_Editor() {
 		myToggle = new ToggleSwitch("Off", "On", (Boolean) myAttr.getValue(), () -> triggerBooleanUpdate());
-		n = myToggle.getRoot();
-		return n;
+		return myToggle.getRoot();
 	}
 	
 	private void triggerBooleanUpdate() {
