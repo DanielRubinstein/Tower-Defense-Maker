@@ -5,11 +5,8 @@ import java.util.regex.Pattern;
 
 import com.restfb.DefaultFacebookClient;
 import com.restfb.FacebookClient;
-import com.restfb.Parameter;
 import com.restfb.Version;
 import com.restfb.exception.FacebookException;
-import com.restfb.json.JsonObject;
-import com.restfb.types.User;
 
 import javafx.scene.Scene;
 import javafx.scene.web.WebEngine;
