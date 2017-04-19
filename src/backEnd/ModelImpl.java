@@ -35,13 +35,12 @@ public class ModelImpl implements Model{
 		myMode = new ModeImpl();
 		myEngine = new GameProcessController(myGameData.getState(), myGameData.getRules());
 		myBankController = myDataController.generateBanks();
-		myLevelProgressionController = new LevelProgressionController();
+		myLevelProgressionController = new LevelProgressionController(myDataController, null);
 	}
 
 	public State getState(){
 		return myGameData.getState();
 	}
-
 	
 	public ModeReader getModeReader(){
 		return (ModeReader) myMode;

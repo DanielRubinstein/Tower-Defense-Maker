@@ -46,4 +46,8 @@ public class DataController {
 	public void saveCurrentGameStateData(GameData gameData, String gameName){
 		myXMLWriter.saveGameStateData(gameData, GAME_STATE_DATA_PATH, gameName);
 	}
+
+	public GameData loadGameStateData(String nextLevel) throws XMLReadingException {
+		return myXMLReader.loadGameStateData(GAME_STATE_DATA_PATH, nextLevel);
+	}
 }
