@@ -32,12 +32,12 @@ public class FacebookConnectorImpl implements FacebookConnector {
 	private static final String redirectURL = "&redirect_uri=https://www.facebook.com/connect/login_success.html";
 	private static final String responseType = "&response_type=code%20token";
 	private static final String DEFAULT_ACCESS_PATTERN = ".*access_token=(.*)&expires.*";
+	private static final String DEFAULT_CONNECTION_URL ="https://www.facebook.com/v2.8/dialog/oauth?client_id=";
 	
-	private String scopeRequirements;;
+	private String scopeRequirements;
 	private String appId;
 	private String appSecret;
-	private String totalLoginURL= "https://www.facebook.com/v2.8/dialog/oauth?client_id=" + appId + 
-					  redirectURL +responseType + scopeRequirements;
+	private String totalLoginURL;
 	private FacebookClient userClient;
 	private FacebookInteractorImpl myInteractor;
 
@@ -55,6 +55,7 @@ public class FacebookConnectorImpl implements FacebookConnector {
 		scopeRequirements = info.getString(scopeInfoKey);
 		appId = applicationId;
 		appSecret = applicationSecret;
+		totalLoginURL=  DEFAULT_CONNECTION_URL+ appId + redirectURL +responseType + scopeRequirements;
 		userClient = new DefaultFacebookClient(Version.LATEST);
 		myInteractor = new FacebookInteractorImpl(userClient,appId);
 	}
@@ -82,6 +83,11 @@ public class FacebookConnectorImpl implements FacebookConnector {
 		});		
 	}
 	
+	/**
+	 * Launches the page to allow the user to log in.
+	 * @return WebEngine
+	 * @throws FacebookException
+	 */
 	private WebEngine loadPage() throws FacebookException{
 		WebView browser = new WebView();
 		WebEngine webEngine = browser.getEngine();
