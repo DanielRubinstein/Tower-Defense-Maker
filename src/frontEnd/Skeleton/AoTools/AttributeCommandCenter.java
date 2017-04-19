@@ -98,16 +98,10 @@ public class AttributeCommandCenter extends CommandCenter{
 	
 	private Node createAttributeView(AttributeOwner obj) {
 		ScrollPane sP = new ScrollPane();
-		
 		sP.setHbarPolicy(ScrollBarPolicy.NEVER);
 		sP.setVbarPolicy(ScrollBarPolicy.AS_NEEDED);
-		sP.setPadding(new Insets(5,5,5,5));
-		sP.setFitToHeight(true);
-		sP.setFitToWidth(true);
-		sP.setPrefHeight(300);
-		sP.setPrefWidth(500);
-		
-		
+		sP.setPadding(new Insets(5,20,5,20));
+		sP.setMaxHeight(400);
 		
 		GridPane contents_Att = new GridPane();
 		if(obj.getMyAttributes()==null){
@@ -125,18 +119,7 @@ public class AttributeCommandCenter extends CommandCenter{
 			count++;
 		}
 		contents_Att.setVgap(10d);
-		contents_Att.setHgap(10d);
-		//contents_Att.setGridLinesVisible(true);
-		ColumnConstraints col1 = new ColumnConstraints();
-		col1.setPercentWidth(40);
-		ColumnConstraints col2 = new ColumnConstraints();
-		col2.setPercentWidth(100 - col1.getPercentWidth());
-		contents_Att.getColumnConstraints().addAll(col1, col2);
-		
-		//contents_Att.setSpacing(STANDARD_SPACING);
-		
-		
-		
+		contents_Att.setHgap(10d);		
 		sP.setContent(contents_Att);
 		return sP;
 	}
@@ -169,13 +152,14 @@ public class AttributeCommandCenter extends CommandCenter{
 		Node right;
 		if (authorProperty.get()) {
 			// Author Mode
-			EditorCreator editorCreator = new EditorCreator(myView, obj, attr);
+			AttributeEditorCreator editorCreator = new AttributeEditorCreator(myView, obj, attr);
 			right = editorCreator.extractEditor(myAttrNameResources.getString(attr.getName()));
 			
 		} else {
 			// Player Mode
 			try {
-				right = new Label(attr.getValue().toString());
+				AttributeViewerCreator viewerCreator = new AttributeViewerCreator(myView, obj, attr);
+				right = viewerCreator.extractViewer(myAttrNameResources.getString(attr.getName()));
 			} catch (NullPointerException e) {
 				right = new Label("No Attribute Value Stored");
 			}

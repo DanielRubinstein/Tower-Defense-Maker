@@ -27,14 +27,14 @@ import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import javafx.stage.FileChooser.ExtensionFilter;
 
-public class EditorCreator {
+public class AttributeEditorCreator {
 	private View myView;
 	private AttributeOwner myOwner;
 	private Attribute<?> myAttr;
 	public static final String SAVED_IMAGES_DIRECTORY = "./src/resources/images";
 	private ToggleSwitch myToggle;
 
-	public EditorCreator(View view, AttributeOwner obj, Attribute<?> attr){
+	public AttributeEditorCreator(View view, AttributeOwner obj, Attribute<?> attr){
 		myView = view;
 		myOwner = obj;
 		myAttr = attr;
@@ -80,11 +80,11 @@ public class EditorCreator {
 	private Node createPositionEditor() {
 		String stringFormatter = "(%.0f, %.0f)";
 		try{
-			Point2D pos = (Point2D) myOwner.getAttribute("Position").getValue();
+			Point2D pos = (Point2D) myAttr.getValue();
 			Button b = new Button(String.format(stringFormatter, pos.getX(), pos.getY()));
 			b.setOnAction(e -> {
 				Point2D newPoint = PositionRequester.askUserForPosition(pos);
-				myView.sendUserModification(new Modification_EditAttribute(myOwner,myOwner.getAttribute("Position"),newPoint));
+				sendModification(newPoint);
 				b.setText(String.format(stringFormatter, newPoint.getX(), newPoint.getY()));
 			});
 			return b;
