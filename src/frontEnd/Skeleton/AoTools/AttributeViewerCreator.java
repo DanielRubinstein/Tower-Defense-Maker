@@ -27,7 +27,7 @@ public class AttributeViewerCreator {
 		Node n = null;
 		String stringFormatForViewerMethod = "create_%s_Viewer";
 		try{
-			Method createViewer = AttributeEditorCreator.class.getDeclaredMethod(String.format(stringFormatForViewerMethod, type));
+			Method createViewer = AttributeViewerCreator.class.getDeclaredMethod(String.format(stringFormatForViewerMethod, type));
 			createViewer.setAccessible(true);
 			n = (Node) createViewer.invoke(this);
 		} catch (NoSuchMethodException e){
