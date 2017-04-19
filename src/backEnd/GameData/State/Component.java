@@ -36,6 +36,10 @@ public class Component extends Observable implements AttributeOwner {
 	private List<Observer> observers = new ArrayList<Observer>();
 	private long ID;
 	
+	public Component() throws FileNotFoundException{
+		this(new AttributeData(),new AccessPermissionsImpl());
+	}
+	
 	public Component(AttributeData attributes) throws FileNotFoundException {
 		this(attributes, new AccessPermissionsImpl());
 	}
