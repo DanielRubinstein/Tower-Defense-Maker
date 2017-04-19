@@ -2,11 +2,9 @@ package frontEnd.Skeleton.AoTools;
 
 import backEnd.Attribute.AttributeOwner;
 import backEnd.Attribute.AttributeOwnerReader;
-import backEnd.GameData.State.Tile;
 import frontEnd.View;
 import javafx.scene.Node;
 import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
@@ -29,11 +27,7 @@ public class PresetCreation extends CommandCenter{
 	public void launch(double x, double y) {
 		Stage stage = new Stage();
 		AttributeCommandCenter aCC = new AttributeCommandCenter(myView, stage, obje, "Preset Creation");
-		if(! (obje instanceof Tile)){
-			aCC.addSubmitButton(obje);
-		}
 		myRoot = aCC.get();
-		
 		generate(x,y, stage, (Parent) myRoot);
 	}
 

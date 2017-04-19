@@ -1,5 +1,6 @@
 package ModificationFromUser;
 
+import java.lang.reflect.Method;
 import java.util.List;
 import java.util.Observer;
 
@@ -9,6 +10,7 @@ import com.thoughtworks.xstream.io.xml.DomDriver;
 import backEnd.ModelImpl;
 import backEnd.Attribute.AttributeOwner;
 import backEnd.Attribute.AttributeOwnerReader;
+import backEnd.Bank.BankController;
 import backEnd.GameData.State.Component;
 import backEnd.GameData.State.Tile;
 import backEnd.Mode.ModeException;
@@ -23,6 +25,7 @@ public class Modification_AddNewPresetAttributeOwner implements ModificationFrom
 
 	private AttributeOwner newAttrOwn;
 	private String newAOName;
+	private BankController myBankController;
 	private XStream xStream;
 	public static final String DESCRIPTION = "Add Preset Component or Tile";		
 	
@@ -34,11 +37,12 @@ public class Modification_AddNewPresetAttributeOwner implements ModificationFrom
 	//FIXME currently the new preset will overwrite an existing preset with the same name, 
 	// based on the implementation of addNewComponent()
 	@Override
-	public void invoke(ModelImpl myModel) throws Exception {
-		switch (myModel.getMode().getUserMode()) {
+	public void invoke(ModelImpl model) throws Exception {
+		myBankController = model.getBankController();
+		switch (model.getMode().getUserMode()) {
 		case AUTHOR:
 			AttributeOwner newAttrOwnToAdd;
-			if(myModel.getGameData().getState().getComponentGraph().contains(newAttrOwn) || myModel.getGameData().getState().getTileGrid().contains(newAttrOwn)){
+			if(model.getGameData().getState().getComponentGraph().contains(newAttrOwn) || model.getGameData().getState().getTileGrid().contains(newAttrOwn)){
 				xStream = new XStream(new DomDriver());
 				xStream.alias("Component", Component.class);
 				xStream.alias("Tile", Tile.class);
@@ -50,19 +54,32 @@ public class Modification_AddNewPresetAttributeOwner implements ModificationFrom
 				newAttrOwnToAdd = newAttrOwn;
 			}
 			
-			if(newAttrOwnToAdd instanceof Tile){
-				myModel.getBankController().addNewTile(newAOName, (Tile) newAttrOwnToAdd);
-			}
-			else if(newAttrOwnToAdd instanceof Component){
-				System.out.println("yeah its a comp");
-				myModel.getBankController().addNewComponent(newAOName, (Component) newAttrOwnToAdd);
+			try {
+				Method add = Modification_AddNewPresetAttributeOwner.class.getDeclaredMethod("add", newAttrOwn.getClass());
+				add.setAccessible(true);
+				add.invoke(this, newAttrOwnToAdd);
+			} catch (NoSuchMethodException e) {
+				System.out.println("in Modification_AddNewPresetAttributeOwner, No method found, ugh");
+				// do nothing
+				// this means the thing being put in attribute command center is a tile
+			} catch (Exception e) {
+				// something went wrong
+				System.out.println("Something went wrong in Modification_AddNewPresetAttributeOwner");
+				// TODO add exception?
 			}
 			break;
 		case PLAYER:
-			throw new ModeException(myModel.getMode(), DESCRIPTION);
+			throw new ModeException(model.getMode(), DESCRIPTION);
 		}
 		
 	}
-
+	
+	private void add(Tile tile){
+		myBankController.addNewTile(newAOName, tile);
+	}
+	
+	private void add(Component component){
+		myBankController.addNewComponent(newAOName, component);
+	}
 	
 }
