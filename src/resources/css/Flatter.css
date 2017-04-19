@@ -169,7 +169,7 @@
    -fx-background-color: transparent;
 }
 .scroll-pane {
-   -fx-background-color: #95A5A6;
+   -fx-background-color: -dark;
 }
 
 /*******************************************************************************
