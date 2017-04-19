@@ -61,7 +61,7 @@ public class MainMenu{
 		loginStage.initOwner(stage);
 		loginStage.initModality(Modality.APPLICATION_MODAL);
 
-		FacebookConnector fb = new FacebookConnectorImpl();
+		FacebookConnector fb = new FacebookConnectorImpl("426668214360430","d97cba98608128cdb4ca19e1da091de5");
 		ButtonMenuImpl myLoginButton = new ButtonMenuImpl("Login!");
 		myLoginButton.addPrimarySimpleButtonWithHover("Login", () -> {
 			fb.login();

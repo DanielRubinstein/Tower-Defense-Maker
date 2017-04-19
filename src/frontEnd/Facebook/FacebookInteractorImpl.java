@@ -8,6 +8,7 @@ import java.util.regex.Pattern;
 
 import com.restfb.FacebookClient;
 import com.restfb.Parameter;
+import com.restfb.exception.FacebookException;
 import com.restfb.exception.FacebookResponseContentException;
 import com.restfb.json.JsonObject;
 import com.restfb.types.FacebookType;
@@ -46,12 +47,7 @@ public class FacebookInteractorImpl implements FacebookInteractor{
 		params.add(Parameter.with("message", message));
 		params.add(Parameter.with("link", myPage.getLink()));
 		Parameter[] postParamsArray = params.toArray(new Parameter[params.size()]);
-		try{
-			FacebookType post = userClient.publish("me/feed", FacebookType.class, postParamsArray);
-		} catch (com.restfb.exception.FacebookOAuthException e){
-			throw new FacebookException(e);
-		}
-
+		FacebookType post = userClient.publish("me/feed", FacebookType.class, postParamsArray);
 	}
 	
 	@Override
