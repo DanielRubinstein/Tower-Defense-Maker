@@ -1,5 +1,8 @@
 package ModificationFromUser;
 
+import java.util.List;
+import java.util.Observer;
+
 import com.thoughtworks.xstream.XStream;
 import com.thoughtworks.xstream.io.xml.DomDriver;
 
@@ -37,7 +40,9 @@ public class Modification_AddPresetAttributeOwnerToGrid implements ModificationF
 
 	@Override
 	public void invoke(ModelImpl myModel) throws Exception {
+		List<Observer> oldObservers = newAttrOwn.getAndClearObservers();
 		String serializedAO = xStream.toXML(newAttrOwn);
+		newAttrOwn.setObserverList(oldObservers);
 		if (newAttrOwn instanceof Tile) {
 			switch (myModel.getMode().getUserMode()) {
 			case AUTHOR:

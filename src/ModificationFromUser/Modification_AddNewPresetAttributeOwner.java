@@ -1,5 +1,8 @@
 package ModificationFromUser;
 
+import java.util.List;
+import java.util.Observer;
+
 import com.thoughtworks.xstream.XStream;
 import com.thoughtworks.xstream.io.xml.DomDriver;
 
@@ -18,12 +21,12 @@ import backEnd.Mode.ModeException;
  */
 public class Modification_AddNewPresetAttributeOwner implements ModificationFromUser {
 
-	private AttributeOwnerReader newAttrOwn;
+	private AttributeOwner newAttrOwn;
 	private String newAOName;
 	private XStream xStream;
 	public static final String DESCRIPTION = "Add Preset Component or Tile";		
 	
-	public Modification_AddNewPresetAttributeOwner(String newAttributeOwnerName, AttributeOwnerReader obj){
+	public Modification_AddNewPresetAttributeOwner(String newAttributeOwnerName, AttributeOwner obj){
 		this.newAttrOwn = obj;
 		this.newAOName = newAttributeOwnerName;
 	}
@@ -34,13 +37,15 @@ public class Modification_AddNewPresetAttributeOwner implements ModificationFrom
 	public void invoke(ModelImpl myModel) throws Exception {
 		switch (myModel.getMode().getUserMode()) {
 		case AUTHOR:
-			AttributeOwnerReader newAttrOwnToAdd;
+			AttributeOwner newAttrOwnToAdd;
 			if(myModel.getGameData().getState().getComponentGraph().contains(newAttrOwn) || myModel.getGameData().getState().getTileGrid().contains(newAttrOwn)){
 				xStream = new XStream(new DomDriver());
 				xStream.alias("Component", Component.class);
 				xStream.alias("Tile", Tile.class);
+				List<Observer> oldObservers = newAttrOwn.getAndClearObservers();
 				String serializedAO = xStream.toXML(newAttrOwn);
-				newAttrOwnToAdd = (AttributeOwnerReader) xStream.fromXML(serializedAO);
+				newAttrOwn.setObserverList(oldObservers);
+				newAttrOwnToAdd = (AttributeOwner) xStream.fromXML(serializedAO);
 			} else {
 				newAttrOwnToAdd = newAttrOwn;
 			}

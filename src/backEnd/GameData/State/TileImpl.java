@@ -2,6 +2,7 @@ package backEnd.GameData.State;
 
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Observable;
@@ -102,6 +103,21 @@ public class TileImpl extends Observable implements Tile, AttributeOwner {
 	@Override
 	public void addAsListener(Observer o) {
 		addObserver(o);
+	}
+
+	@Override
+	public List<Observer> getAndClearObservers() {
+		List<Observer> currObservers = observers;
+		for (Observer o : observers){
+			currObservers.add(o);
+		}
+		observers = new ArrayList<Observer>();
+		return currObservers;
+	}
+
+	@Override
+	public void setObserverList(List<Observer> observers) {
+		this.observers = observers;
 	}
 
 }
