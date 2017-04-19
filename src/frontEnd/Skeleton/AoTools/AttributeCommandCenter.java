@@ -18,6 +18,8 @@ import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.ScrollPane;
+import javafx.scene.control.ScrollPane.ScrollBarPolicy;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
@@ -55,10 +57,7 @@ public class AttributeCommandCenter extends CommandCenter{
 		VBox contents = new VBox();
 		
 		contents.getChildren().add(titleLbl);
-		
-		HBox contents_Att = createAttributeView(obj);
-		contents.getChildren().add(contents_Att);
-		
+		contents.getChildren().add(createAttributeView(obj));
 		contents.getChildren().add(createPresetButton(obj));
 		
 		checkToAddAddNowButton(obj);
@@ -94,25 +93,26 @@ public class AttributeCommandCenter extends CommandCenter{
 		bottomButtons.getChildren().add(submit);
 	}
 	
-	private HBox createAttributeView(AttributeOwner obj) {
-		HBox contents_Att = new HBox();
-		VBox contentRow = null;
-		int count = 0;
+	private Node createAttributeView(AttributeOwner obj) {
+		ScrollPane sP = new ScrollPane();
+		
+		sP.setHbarPolicy(ScrollBarPolicy.NEVER);
+		sP.setVbarPolicy(ScrollBarPolicy.AS_NEEDED);
+		sP.setPadding(new Insets(5,5,5,5));
+		sP.setFitToHeight(true);
+		sP.setPrefHeight(300);
+		sP.setPrefWidth(400);
+		VBox contents_Att = new VBox();
 		if(obj.getMyAttributes()==null) return contents_Att;
 		for (Attribute<?> attr : obj.getMyAttributes().getAttributeMap().values()) {
-			if (count % 3 == 0) {
-				contentRow = new VBox();
-			}
 			HBox singleAttEditor = createAttributeValuePair(obj, attr);
-			contentRow.getChildren().add(singleAttEditor);
-			if (count % 3 == 2) {
-				contentRow.setSpacing(STANDARD_SPACING);
-				contents_Att.getChildren().add(contentRow);
-			}
-			count++;
+			contents_Att.getChildren().add(singleAttEditor);
 		}
 		contents_Att.setSpacing(STANDARD_SPACING);
-		return contents_Att;
+		sP.setContent(contents_Att);
+		sP.setFitToWidth(true);
+		sP.prefViewportWidthProperty().bind(contents_Att.widthProperty());
+		return sP;
 	}
 
 	private Node createPresetButton(AttributeOwner obj){
