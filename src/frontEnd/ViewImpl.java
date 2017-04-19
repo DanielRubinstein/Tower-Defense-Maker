@@ -11,6 +11,8 @@ import backEnd.GameData.State.Component;
 import backEnd.GameData.State.Tile;
 import backEnd.Mode.ModeReader;
 import frontEnd.CustomJavafxNodes.ErrorDialog;
+import frontEnd.Facebook.FacebookConnector;
+import frontEnd.Facebook.FacebookInteractor;
 import frontEnd.Skeleton.SkeletonImpl;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleStringProperty;
@@ -23,16 +25,30 @@ public class ViewImpl implements View {
 	private SkeletonImpl mySkeleton;
 	private SimpleBooleanProperty authorProperty;
 	private Stage appStage;
+	private FacebookInteractor myFB;
 
+	public ViewImpl(Model model, Consumer<ModificationFromUser> inputConsumer, FacebookInteractor fb) {
+		myFB=fb;
+		init(model, inputConsumer);
+	}
+	
 	public ViewImpl(ModelReader model, Consumer<ModificationFromUser> inputConsumer) {
+		init(model, inputConsumer);
+	}
+	
+	private void init(ModelReader model, Consumer<ModificationFromUser> inputConsumer){
 		myModel = model;
 		myModConsumer = inputConsumer;
 		ModeReader mode = model.getModeReader();
 		authorProperty = mode.getAuthorBooleanProperty();
 		mySkeleton = new SkeletonImpl();
-		mySkeleton.init(this, model);
+		mySkeleton.init(this, myModel);
 		appStage = new Stage();
 		mySkeleton.display(appStage);
+	}
+
+	public FacebookInteractor getFb(){
+		return myFB;
 	}
 
 	@Override

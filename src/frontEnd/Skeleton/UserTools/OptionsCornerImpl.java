@@ -1,6 +1,8 @@
 package frontEnd.Skeleton.UserTools;
 
+import ModificationFromUser.Modification_ChangeMode;
 import frontEnd.View;
+import frontEnd.CustomJavafxNodes.ToggleSwitch;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.layout.Priority;
@@ -15,10 +17,21 @@ public class OptionsCornerImpl implements OptionsCorner{
 
 	private VBox myRoot;
 	private OptionsSelection userOptions;
+	private OptionsFacebook facebookOptions;
 	
 	public OptionsCornerImpl(View view) {
 		myRoot = new VBox();
-		setUserOptions(view);	
+		setUserOptions(view);
+		setModeToggle(view);
+		setFacebookOptions(view);
+		myRoot.setSpacing(10d);
+	}
+
+	private void setModeToggle(View view) {
+		//adding player/godmode switch
+		Runnable changeMode = () -> view.sendUserModification(new Modification_ChangeMode());
+		ToggleSwitch modeToggle = new ToggleSwitch("Player", "Author", view.getBooleanAuthorModeProperty(), changeMode);
+		myRoot.getChildren().add(modeToggle.getRoot());
 	}
 
 	public Node getRoot(){
@@ -29,6 +42,12 @@ public class OptionsCornerImpl implements OptionsCorner{
 		userOptions = new OptionsSelection(view);
 		userOptions.setAlignment(Pos.TOP_LEFT,Priority.ALWAYS);
 		myRoot.getChildren().add(userOptions.getRoot());
+		
+	}
+	private void setFacebookOptions(View view){
+		facebookOptions = new OptionsFacebook(view,view.getAppStage());
+		facebookOptions.setAlignment(Pos.TOP_LEFT,Priority.ALWAYS);
+		myRoot.getChildren().add(facebookOptions.getRoot());
 	}
 
 	@Override
@@ -36,7 +55,8 @@ public class OptionsCornerImpl implements OptionsCorner{
 		//myRoot.setPrefSize(width, height);
 		///myRoot.setMaxHeight(height);
 		
-		userOptions.setSize(width, height);
+		userOptions.setSize(width, height/4);
+		facebookOptions.setSize(width,height/4);
 	}
 
 

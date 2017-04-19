@@ -39,10 +39,7 @@ public class OptionsSelection implements SkeletonObject{
 		myTiles = new TilePane(Orientation.HORIZONTAL,0, 0);
 		mySettings= new SettingsViewImpl(view, myView.getAppStage());
 		myRoot.getChildren().add(myTiles);
-		//adding player/godmode switch
-		Runnable changeMode = () -> myView.sendUserModification(new Modification_ChangeMode());
-		ToggleSwitch modeToggle = new ToggleSwitch("Player", "Author", myView.getBooleanAuthorModeProperty(), changeMode);
-		myRoot.getChildren().add(modeToggle.getRoot());
+		
 	}
 	public Node getRoot(){
 		
@@ -55,11 +52,13 @@ public class OptionsSelection implements SkeletonObject{
 		myTiles.setPrefWidth(width);
 		myRoot.setPrefWidth(width);
 		myRoot.setPrefHeight(height);
-		setUpOptions(width/4-1); //TODO hard coded
+		myRoot.setMaxHeight(height);
+		setUpOptions(width,height); //TODO hard coded
 	}
-	private void setUpOptions(double buttonWidth){
+	private void setUpOptions(double totalWidth,double totalHeight){
 		myButtons = new ArrayList<Button>();
-		addButtons(buttonWidth);
+		addButtons(totalWidth/4-1);
+		myTiles.setPrefColumns(myButtons.size());
 		myTiles.getChildren().addAll(myButtons);
 	}
 	
