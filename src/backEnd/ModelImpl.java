@@ -1,14 +1,16 @@
 package backEnd;
 
 import backEnd.Bank.BankController;
-import backEnd.Data.DataController;
-import backEnd.Data.XMLReadingException;
 import backEnd.GameData.GameData;
 import backEnd.GameData.State.State;
 import backEnd.GameEngine.Engine.GameProcessController;
+import backEnd.LevelProgression.LevelProgressionController;
 import backEnd.Mode.Mode;
 import backEnd.Mode.ModeImpl;
 import backEnd.Mode.ModeReader;
+import data.DataController;
+import data.XMLReadingException;
+import javafx.beans.property.SimpleStringProperty;
 
 /**
  * Controller the front end calls when it detects a backend modification from the user,
@@ -25,16 +27,15 @@ public class ModelImpl implements Model{
 	private BankController myBankController;
 	private DataController myDataController;
 	private GameProcessController myEngine;
+	private LevelProgressionController myLevelProgressionController;
 	
-	public ModelImpl(DataController dataController, GameData gameData) throws XMLReadingException {
-		myDataController = dataController;
+	public ModelImpl(GameData gameData) throws XMLReadingException {
+		myDataController = new DataController();
 		myGameData = gameData;
 		myMode = new ModeImpl();
-
-		myDataController = dataController;
 		myEngine = new GameProcessController(myGameData.getState(), myGameData.getRules());
-		myBankController = dataController.generateBanks();
-
+		myBankController = myDataController.generateBanks();
+		myLevelProgressionController = new LevelProgressionController();
 	}
 
 	public State getState(){
@@ -68,5 +69,9 @@ public class ModelImpl implements Model{
 	public GameProcessController getGameProcessController() {
 		return myEngine;
 
+	}
+	
+	public SimpleStringProperty getEngineStatus(){
+		return myEngine.getEngineStatus();
 	}
 }

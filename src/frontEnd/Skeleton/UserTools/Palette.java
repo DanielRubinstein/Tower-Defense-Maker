@@ -33,6 +33,7 @@ import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.input.TransferMode;
 import javafx.scene.layout.TilePane;
+import resources.Constants;
 
 /**
  * http://stackoverflow.com/questions/27182323/working-on-creating-image-gallery-in-javafx-not-able-to-display-image-properly
@@ -112,9 +113,13 @@ public class Palette<T extends AttributeOwner> implements SkeletonObject, Observ
 	}
 
 	private void addPresetImageViewToPalette(ImageView imageView) {
-		tile.getChildren().remove(addPreset);
-		tile.getChildren().add(imageView);
-		tile.getChildren().add(addPreset);
+		if(addPreset == null){
+			tile.getChildren().add(imageView);
+		} else {
+			tile.getChildren().remove(addPreset);
+			tile.getChildren().add(imageView);
+			tile.getChildren().add(addPreset);
+		}
 	}
 
 	private void makeHoverOverName(T preset, ImageView imageView) {
@@ -130,18 +135,22 @@ public class Palette<T extends AttributeOwner> implements SkeletonObject, Observ
 	}
 
 	private void makePresetDraggable(T preset, ImageView imageView) {
+		
 		imageView.setOnDragDetected(e -> {
 			Dragboard db = imageView.startDragAndDrop(TransferMode.ANY);
 			ClipboardContent content = new ClipboardContent();
-			content.putString("Drop here");
+			content.putString(observedBankController.getAOName(preset));
 			db.setContent(content);
 			db.setDragView(imageView.getImage());
 		});
 		Node screenGrid = myView.getScreenGrid();
 		screenGrid.setOnDragOver(e -> e.acceptTransferModes(TransferMode.ANY));
 		screenGrid.setOnDragDropped(e -> {
-			Point2D pos = new Point2D(e.getSceneX(),e.getSceneY());
-			myView.sendUserModification(new Modification_AddPresetAttributeOwnerToGrid(preset,pos));
+			String presetName = e.getDragboard().getString();
+			AttributeOwner presetAO = observedBankController.getPreset(presetName);
+			
+			Point2D pos = new Point2D(e.getSceneX() - Constants.SCREEN_GRID_PADDING /2 ,e.getSceneY() - Constants.SCREEN_GRID_PADDING /2 );
+			myView.sendUserModification(new Modification_AddPresetAttributeOwnerToGrid(presetAO, pos));
 		});
 	}
 

@@ -1,78 +1,59 @@
 package frontEnd;
 
-import java.io.File;
-import java.util.Arrays;
 import java.util.Collection;
-import java.util.List;
 import java.util.function.Consumer;
 
 import ModificationFromUser.ModificationFromUser;
-import ModificationFromUser.Modification_Load;
-import ModificationFromUser.Modification_Save;
 import backEnd.Model;
+import backEnd.ModelReader;
 import backEnd.Bank.BankController;
-import backEnd.Data.DataController;
-import backEnd.Data.XMLReadingException;
 import backEnd.GameData.State.Component;
 import backEnd.GameData.State.Tile;
 import backEnd.Mode.ModeReader;
-import frontEnd.CustomJavafxNodes.SingleFieldPrompt;
-import frontEnd.Menus.ErrorDialog;
+import frontEnd.CustomJavafxNodes.ErrorDialog;
+import frontEnd.Facebook.FacebookConnector;
+import frontEnd.Facebook.FacebookInteractor;
 import frontEnd.Skeleton.SkeletonImpl;
-import frontEnd.Splash.GameLoader;
-import javafx.animation.Animation;
-import javafx.animation.KeyFrame;
-import javafx.animation.Timeline;
 import javafx.beans.property.SimpleBooleanProperty;
+import javafx.beans.property.SimpleStringProperty;
 import javafx.scene.Node;
 import javafx.stage.Stage;
-import javafx.util.Duration;
-import resources.Constants;
 
 public class ViewImpl implements View {
-
-	private Model myModel;
-	private DataController myDataController;
+	private ModelReader myModel;
 	private Consumer<ModificationFromUser> myModConsumer;
 	private SkeletonImpl mySkeleton;
 	private SimpleBooleanProperty authorProperty;
 	private Stage appStage;
+	private FacebookInteractor myFB;
 
-	public Timeline animation = new Timeline();
-	private static final double MILLISECOND_DELAY = Constants.MILLISECOND_DELAY;
-	private static final double SECOND_DELAY = Constants.SECOND_DELAY;
-
-	public ViewImpl(Model model, DataController dataController, Consumer<ModificationFromUser> inputConsumer) {
+	public ViewImpl(Model model, Consumer<ModificationFromUser> inputConsumer, FacebookInteractor fb) {
+		myFB=fb;
+		init(model, inputConsumer);
+	}
+	
+	public ViewImpl(ModelReader model, Consumer<ModificationFromUser> inputConsumer) {
+		init(model, inputConsumer);
+	}
+	
+	private void init(ModelReader model, Consumer<ModificationFromUser> inputConsumer){
 		myModel = model;
-		myDataController = dataController;
 		myModConsumer = inputConsumer;
 		ModeReader mode = model.getModeReader();
-		authorProperty = new SimpleBooleanProperty(mode.getUserModeString().equals("AUTHOR"));
-		mySkeleton = new SkeletonImpl(this, model);
+		authorProperty = mode.getAuthorBooleanProperty();
+		mySkeleton = new SkeletonImpl();
+		mySkeleton.init(this, myModel);
 		appStage = new Stage();
 		mySkeleton.display(appStage);
+	}
+
+	public FacebookInteractor getFb(){
+		return myFB;
 	}
 
 	@Override
 	public Node getScreenGrid() {
 		return mySkeleton.getScreenGrid();
-	}
-
-	@Override
-	public void play() {
-		KeyFrame frame = new KeyFrame(Duration.millis(MILLISECOND_DELAY), e -> step(SECOND_DELAY));
-		animation.setCycleCount(Animation.INDEFINITE);
-		animation.getKeyFrames().add(frame);
-		animation.play();
-	}
-	
-	/**
-	 * controls the animation of the State
-	 */
-	private void step(double delay) {
-		System.gc();
-		//System.out.println("game loop is running");
-		myModel.getGameProcessController().run(delay); // TODO: TESTING ONLY
 	}
 
 	@Override
@@ -86,41 +67,8 @@ public class ViewImpl implements View {
 	}
 
 	@Override
-	public String getRunStatus() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public void save() {
-		String saveGameName = getSaveGameName();
-		sendUserModification(new Modification_Save(saveGameName));
-	}
-
-	private String getSaveGameName() {
-		List<String> dialogTitles = Arrays.asList("Save Game Utility", "Please Input a Name for your saved game");
-		String promptLabel = "Saved game name:";
-		String promptText = "";
-		SingleFieldPrompt myDialog = new SingleFieldPrompt(dialogTitles, promptLabel, promptText);
-		return myDialog.create();
-	}
-
-	@Override
-	public void load() {
-		GameLoader gL = new GameLoader();
-		File fileToLoad = null;
-		try {
-			fileToLoad = gL.loadGame();
-		} catch (XMLReadingException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		sendUserModification(new Modification_Load(fileToLoad));
-	}
-
-	@Override
-	public void newGame() {
-		// TODO Auto-generated method stub
+	public SimpleStringProperty getRunStatus() {
+		return myModel.getEngineStatus();
 	}
 
 	@Override
@@ -149,12 +97,6 @@ public class ViewImpl implements View {
 	}
 
 	@Override
-	public void step() {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
 	public BankController getBankController() {
 		return myModel.getBankController();
 	}
@@ -164,4 +106,5 @@ public class ViewImpl implements View {
 		ErrorDialog fnf = new ErrorDialog();
 		fnf.create("Error", e.getMessage());
 	}
+
 }

@@ -74,21 +74,22 @@ public class EditorCreator {
 	}
 
 	private Node createComponentEditor() {
-		return new Label("Component editor in development");
+		return new Label("inDev");
 	}
 
 	private Node createPositionEditor() {
+		String stringFormatter = "(%.0f, %.0f)";
 		try{
 			Point2D pos = (Point2D) myOwner.getAttribute("Position").getValue();
-			Label posLabel = new Label(String.format("(%.0f, %.0f)", pos.getX(), pos.getY()));
-			posLabel.setOnMouseClicked(e -> {
-				Point2D newPoint = PositionRequester.askUserForPosition();
+			Button b = new Button(String.format(stringFormatter, pos.getX(), pos.getY()));
+			b.setOnAction(e -> {
+				Point2D newPoint = PositionRequester.askUserForPosition(pos);
 				myView.sendUserModification(new Modification_EditAttribute(myOwner,myOwner.getAttribute("Position"),newPoint));
-				posLabel.setText(String.format("Location: (%.0f, %.0f)", newPoint.getX(), newPoint.getY()));
+				b.setText(String.format(stringFormatter, newPoint.getX(), newPoint.getY()));
 			});
-			return posLabel;
+			return b;
 		} catch (NullPointerException | MissingResourceException e ){
-			return new Label("No Position Attribute Set");
+			return new Label("NoneSet");
 		}
 	}
 
@@ -97,7 +98,7 @@ public class EditorCreator {
 		List<Integer> paramList = (List<Integer>) myAttr.getEditParameters();
 		NumberChanger numChanger = new NumberChanger(paramList.get(0).doubleValue(), paramList.get(1).doubleValue(), 
 				paramList.get(2).doubleValue(), paramList.get(3).doubleValue());
-		n = numChanger.getRoot();
+		n = numChanger.addIntegerIndicator();
 		numChanger.addListener((o, oldValue, newValue)  -> {
 			sendModification(newValue.intValue());
 		});
@@ -142,9 +143,10 @@ public class EditorCreator {
 		HBox both = new HBox();
 		String imagePath = (String) myAttr.getValue();
 		Image image = new Image(getClass().getClassLoader().getResourceAsStream(imagePath));
-		ImageView curImage = new ImageView(image);
-		curImage.setPreserveRatio(false);
-		both.getChildren().add(curImage);
+		ImageView imv = new ImageView();
+		imv.setImage(image);
+		imv.setPreserveRatio(true);
+		
 		Button b = new Button("Change Image");
 		b.setOnAction(e -> {
 			FileChooser imageChooser = new FileChooser();
@@ -154,20 +156,29 @@ public class EditorCreator {
 			
 			File selectedFile = imageChooser.showOpenDialog(new Stage());
 			try{
-			String newPath = selectedFile.getPath();
-			String newValue = newPath.substring(newPath.indexOf("resources"), newPath.length());
-			sendModification(newValue);
-			Image newImage = new Image(getClass().getClassLoader().getResourceAsStream(imagePath));
-			curImage.setImage(newImage);
+				String newPath = selectedFile.getPath();
+				String newValue = newPath.substring(newPath.indexOf("resources"), newPath.length());
+				sendModification(newValue);
+				Image newImage = new Image(getClass().getClassLoader().getResourceAsStream(newValue));
+				imv.setImage(newImage);
 			}
 			catch (NullPointerException exception){
 				System.out.println("Did not select an image- SAD!");
 			}
 
 		});
-		both.getChildren().add(b);
-		curImage.fitHeightProperty().bind(b.heightProperty());
-		curImage.fitWidthProperty().bind(b.widthProperty());
+		
+		
+		// To bind the heights without the sizing screwing up
+		b.setPrefHeight(70);
+		imv.setFitHeight(b.getPrefHeight());
+		b.heightProperty().addListener((o , oldV, newV) -> {
+			imv.setFitHeight(newV.doubleValue());
+		});
+		
+		both.getChildren().add(imv);
+		both.getChildren().add(b);		
+		both.setSpacing(20);
 		return both;
 	}
 
@@ -177,7 +188,7 @@ public class EditorCreator {
 		System.out.println(" %%%% " + myAttr +"    "  +myAttr.getName() +"   " +paramList);
 		NumberChanger numChanger = new NumberChanger(paramList.get(0), paramList.get(1), paramList.get(2),
 				paramList.get(3));
-		n = numChanger.getRoot();
+		n = numChanger.addDoubleIndicator();
 		numChanger.addListener((o, oldValue, newValue)  -> {
 			sendModification(newValue);
 		});
@@ -186,8 +197,7 @@ public class EditorCreator {
 
 	private Node createBooleanEditor() {
 		Node n = null;
-		myToggle = new ToggleSwitch("Off", "On",
-				new SimpleBooleanProperty((Boolean) myAttr.getValue()), () -> triggerBooleanUpdate());
+		myToggle = new ToggleSwitch("Off", "On", (Boolean) myAttr.getValue(), () -> triggerBooleanUpdate());
 		n = myToggle.getRoot();
 		return n;
 	}

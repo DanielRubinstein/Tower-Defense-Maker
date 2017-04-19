@@ -22,11 +22,7 @@ public class ComponentCommandCenter extends CommandCenter {
 	public void launch(double x, double y) {
 		Stage stage = new Stage();
 		AttributeCommandCenter aCC = new AttributeCommandCenter(myView, stage, attrOwn, "In-Game Component");
-		if(! (attrOwn instanceof Tile)){
-			aCC.addSubmitButton(attrOwn);
-		}
 		myRoot = aCC.get();
-		
 		generate(x,y, stage, (Parent) myRoot);
 	}
 }

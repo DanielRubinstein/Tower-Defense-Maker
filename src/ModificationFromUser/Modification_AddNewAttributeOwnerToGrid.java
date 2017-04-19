@@ -1,5 +1,7 @@
 package ModificationFromUser;
 
+import java.lang.reflect.Method;
+
 import com.thoughtworks.xstream.XStream;
 import com.thoughtworks.xstream.io.xml.DomDriver;
 
@@ -9,6 +11,7 @@ import backEnd.GameData.GameData;
 import backEnd.GameData.State.Component;
 import backEnd.GameData.State.Tile;
 import backEnd.Mode.ModeException;
+import frontEnd.Skeleton.AoTools.AttributeCommandCenter;
 import javafx.geometry.Point2D;
 
 /**
@@ -20,6 +23,7 @@ import javafx.geometry.Point2D;
 public class Modification_AddNewAttributeOwnerToGrid implements ModificationFromUser {
 	private AttributeOwner newAttrOwn;
 	private Point2D location;
+	private ModelImpl myModel;
 	public static final String DESCRIPTION_TILE = "Replace Tile";
 	public static final String DESCRIPTION_COMPONENT = "Add Component";	
 	public static final String DESCRIPTION_ERROR = "Not a recognized Attribute Owner";	
@@ -32,25 +36,43 @@ public class Modification_AddNewAttributeOwnerToGrid implements ModificationFrom
 	}
 
 	@Override
-	public void invoke(ModelImpl myModel) throws Exception {
-		if (newAttrOwn instanceof Tile){
-			switch (myModel.getMode().getUserMode()) {
-			case AUTHOR:
-				myModel.getState().getTileGrid().setTileIntoTileGrid((Tile) newAttrOwn, (int) location.getX(), (int) location.getY());
-				break;
-			case PLAYER:
-				 throw new ModeException(myModel.getMode(), DESCRIPTION_TILE);
-			}	
-		} else if (newAttrOwn instanceof Component){
-			myModel.getState().getComponentGraph().addComponentToGrid((Component) newAttrOwn, location);
-
-		} else {
-			// can't be reached
-			// FIXME AHHHHH
-			throw new Exception(DESCRIPTION_ERROR);
+	public void invoke(ModelImpl model) throws Exception {
+		myModel = model;
+		try {
+			Method add = Modification_AddNewAttributeOwnerToGrid.class.getDeclaredMethod("addAttributeOwnerToGrid", newAttrOwn.getClass());
+			add.setAccessible(true);
+			add.invoke(this, newAttrOwn);
+		} catch (NoSuchMethodException e) {
+			System.out.println("in Modification_AddNewAttributeOwnerToGrid, No method found, ugh");
+			// do nothing
+			// this means the thing being put in attribute command center is a tile
+		} catch (Exception e) {
+			// something went wrong
+			System.out.println("Something went wrong in Modification_AddNewAttributeOwnerToGrid");
+			// TODO add exception?
 		}
-		
-		
-		
 	}
+	
+	private void addAttributeOwnerToGrid(Tile tile){
+		switch (myModel.getMode().getUserMode()) {
+		case AUTHOR:
+			myModel.getState().getTileGrid().setTileByGridPosition(tile, (int) location.getX(), (int) location.getY());
+			break;
+		case PLAYER:
+			 throw new ModeException(myModel.getMode(), DESCRIPTION_TILE);
+		}	
+	}
+	
+	private void addAttributeOwnerToGrid(Component component){
+		myModel.getState().getComponentGraph().addComponentToGrid(component, location);
+		switch (myModel.getMode().getUserMode()) {
+		case AUTHOR:
+			// for future, do something
+			break;
+		case PLAYER:
+			// for future, do something
+			break;
+		}	
+	}
+	
 }

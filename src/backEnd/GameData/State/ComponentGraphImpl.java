@@ -11,6 +11,7 @@ import java.util.Observer;
 import javafx.geometry.Point2D;
 import backEnd.Attribute.Attribute;
 import backEnd.Attribute.AttributeImpl;
+import backEnd.Attribute.AttributeOwnerReader;
 
 /**
  * This is the Grid class that contains the Component Grid and all of the relevant getters/setters for other modules to use to access
@@ -25,30 +26,13 @@ public class ComponentGraphImpl extends Observable implements ComponentGraph {
 	
 	public ComponentGraphImpl(){
 		componentMap = new HashMap<>();
+		myComponents=new ArrayList<Component>();
 	}
 	
 	
 	public List<Component> getAllComponents(){
-		myComponents=new ArrayList<Component>();
-		for (Point2D myKey: componentMap.keySet()){
-			for (Component myComponent: componentMap.get(myKey)){
-				myComponents.add(myComponent);
-			}
-		}
-		//if(!myComponents.isEmpty()) System.out.println(" ggggettting all components " + myComponents +
-		//		"   " +myComponents.get(0).getAttribute("Position").getValue() + "   " + componentMap);
 		return myComponents;
 	}
-
-	
-//	@Override
-//	public List<Component> getComponentList(){
-//		List<Component> componentList = new ArrayList<Component>();
-//		for (List<Component> n : componentMap.values()){
-//			componentList.addAll(n);
-//		}
-//		return componentList;
-//	}
 	
 	public Map<Point2D, List<Component>> getComponentMap()
 	{
@@ -83,6 +67,7 @@ public class ComponentGraphImpl extends Observable implements ComponentGraph {
 		}
 		currList.add(newComponent);
 		componentMap.put(screenPosition, currList);
+		myComponents.add(newComponent);
 
 		this.setChanged();
 		this.notifyObservers();
@@ -95,19 +80,18 @@ public class ComponentGraphImpl extends Observable implements ComponentGraph {
 		}
 		Attribute<?> posAttribute= toRemove.getAttribute("Position");
 		Point2D location = (Point2D) posAttribute.getValue();
-		//System.out.println("removing comp at position " +location);
-
-		//System.out.println( " befforeee " +componentMap);
 		List<Component> currList = componentMap.get(location);
 		if(currList==null){return;}
 		currList.remove(toRemove);
 		componentMap.put(location, currList);
+		myComponents.remove(toRemove);
 
-		//System.out.println( " afterrrrr " +componentMap);
+		this.setChanged();
+		this.notifyObservers();
 	}
 	
 	@Override
-	public List<Component> getComponentsWithinRadius(Component centerComp, float radius){
+	public List<Component> getComponentsWithinRadius(Component centerComp, double radius){
 		Point2D centerLoc = (Point2D) centerComp.getAttribute("Position").getValue();
 		ArrayList<Component> componentsWithinRadius = new ArrayList<Component>();
 		for (Point2D loc : componentMap.keySet()){
@@ -132,6 +116,12 @@ public class ComponentGraphImpl extends Observable implements ComponentGraph {
 	public void addAsObserver(Observer o) {
 		this.addObserver(o);
 		
+	}
+
+
+	@Override
+	public boolean contains(AttributeOwnerReader c) {
+		return myComponents.contains(c);
 	}
 
 }

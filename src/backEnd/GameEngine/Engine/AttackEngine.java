@@ -8,7 +8,7 @@ import backEnd.Attribute.AttributeFactory;
 import backEnd.GameData.State.Component;
 import backEnd.GameData.State.ComponentGraph;
 import backEnd.GameData.State.State;
-import frontEnd.Menus.ErrorDialog;
+import frontEnd.CustomJavafxNodes.ErrorDialog;
 import javafx.geometry.Point2D;
 import resources.Constants;
 
@@ -26,24 +26,29 @@ public class AttackEngine implements Engine {
 	@Override
 	public void gameLoop(State currentState, double stepTime) {
 		ComponentGraph myComponentGraph = currentState.getComponentGraph();
-		for (Component componentAttacker : myComponentGraph.getAllComponents()) {
-			if (componentAttacker.getMyType().equals("TOWER")) {
-				for (Component componentTarget : myComponentGraph.getComponentsWithinRadius(componentAttacker,
-						Constants.defaultRadius)) {
-					addProjectileToState(currentState, componentAttacker, componentTarget);
+		for (Component attacker : myComponentGraph.getAllComponents()) {
+			if (attacker.getMyType().equals("TOWER")) {
+				for (Component componentTarget : myComponentGraph.getComponentsWithinRadius(attacker,
+						(double) attacker.getAttribute("FireRadius").getValue())) {
+					addProjectileToState(currentState, attacker, componentTarget);
 					try {
-						componentAttacker.getBehavior("Attack").execute(null);
-					} catch (FileNotFoundException e) {
+						attacker.getBehavior("Attack").execute(null);
+					} 
+					catch (FileNotFoundException e) {
 						ErrorDialog fnf = new ErrorDialog();
 						fnf.create("Error", "File not found");
 					}
+					//needs to be refactored - only works for single target attacks
+					 
 					try {
-						componentTarget.getBehavior("TakeDamage").execute(null);
-					} catch (FileNotFoundException e) {
+						componentTarget.getBehavior("TakeDamage").execute(attacker);
+					} 
+					catch (FileNotFoundException e) {
 						ErrorDialog fnf = new ErrorDialog();
 						fnf.create("Error", "File not found");
 					}
 					break;
+					
 				}
 			}
 		}
@@ -66,6 +71,7 @@ public class AttackEngine implements Engine {
 		projectile.setAttributeValue(myResources.getString("Position"), bulletPos);
 		projectile.setAttributeValue(myResources.getString("ProjectileTargetPosition"), targetPos);
 		projectile.setAttributeValue(myResources.getString("ProjectileDistance"), targetPos.subtract(bulletPos));
+		
 		currentState.getComponentGraph().addComponentToGrid(projectile, bulletPos);
 	}
 

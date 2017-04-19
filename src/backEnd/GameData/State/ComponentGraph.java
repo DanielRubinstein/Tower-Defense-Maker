@@ -6,6 +6,7 @@ import java.util.Map;
 import java.util.Observable;
 import java.util.Observer;
 
+import backEnd.Attribute.AttributeOwnerReader;
 import javafx.geometry.Point2D;
 
 public interface ComponentGraph {
@@ -48,10 +49,10 @@ public interface ComponentGraph {
 	/**
 	 * Returns unordered list of components that lie within a certain radius from a central Component
 	 * @param centerComp
-	 * @param radius
+	 * @param d
 	 * @return Unordered list of Components 
 	 */
-	List<Component> getComponentsWithinRadius(Component centerComp, float radius);
+	List<Component> getComponentsWithinRadius(Component centerComp, double d);
 
 	/**
 	 * Returns list of components that lie at the nearest location (although if two locations are equidistant from the component,
@@ -62,5 +63,7 @@ public interface ComponentGraph {
 	List<Component> getNearestComponents(Component centerComp);
 	
 	void addAsObserver(Observer o);
+
+	boolean contains(AttributeOwnerReader c);
 
 }

@@ -40,9 +40,6 @@ public class Component extends Observable implements AttributeOwner {
 		this(attributes, new AccessPermissionsImpl());
 	}
 
-	public Component(){
-		
-	}
 	public long printID(){
 		return ID;
 	}
@@ -162,11 +159,16 @@ public class Component extends Observable implements AttributeOwner {
 		//addObserver(o);
 	}
 
-	/**
-	 * adds an attribute to the List of Attributes
-	 * 
-	 * @return
-	 */
-	// public abstract void addAttribute(Attribute toAdd);
+	@Override
+	public List<Observer> getAndClearObservers() {
+		List<Observer> currObservers = observers;
+		observers = new ArrayList<Observer>();
+		return currObservers;
+	}
 
+	@Override
+	public void setObserverList(List<Observer> observers) {
+		this.observers = observers;
+	}
+	
 }

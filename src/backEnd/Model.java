@@ -10,27 +10,16 @@ import backEnd.Mode.ModeReader;
  * @author Tim
  *
  */
-public interface Model {
-
-	/**
-	 * 
-	 * @return current State
-	 */
-	State getState();
-	
-	/**
-	 * 
-	 * @return mode of the user
-	 */
-	ModeReader getModeReader();
-	
-
-	BankController getBankController();
+public interface Model extends ModelReader{
 	
 	/**
 	 * 
 	 * @return the GameProcessController that owns the Engines
 	 */
 	GameProcessController getGameProcessController();
+	
+	
+	
+	
 
 }
