@@ -13,6 +13,7 @@ import backEnd.GameData.State.Component;
 import frontEnd.View;
 import frontEnd.CustomJavafxNodes.SingleFieldPrompt;
 import javafx.beans.property.SimpleBooleanProperty;
+import javafx.geometry.HPos;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
@@ -20,6 +21,8 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.ScrollPane.ScrollBarPolicy;
+import javafx.scene.layout.ColumnConstraints;
+import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
@@ -100,18 +103,41 @@ public class AttributeCommandCenter extends CommandCenter{
 		sP.setVbarPolicy(ScrollBarPolicy.AS_NEEDED);
 		sP.setPadding(new Insets(5,5,5,5));
 		sP.setFitToHeight(true);
-		sP.setPrefHeight(300);
-		sP.setPrefWidth(400);
-		VBox contents_Att = new VBox();
-		if(obj.getMyAttributes()==null) return contents_Att;
-		for (Attribute<?> attr : obj.getMyAttributes().getAttributeMap().values()) {
-			HBox singleAttEditor = createAttributeValuePair(obj, attr);
-			contents_Att.getChildren().add(singleAttEditor);
-		}
-		contents_Att.setSpacing(STANDARD_SPACING);
-		sP.setContent(contents_Att);
 		sP.setFitToWidth(true);
-		sP.prefViewportWidthProperty().bind(contents_Att.widthProperty());
+		sP.setPrefHeight(300);
+		sP.setPrefWidth(500);
+		
+		
+		
+		GridPane contents_Att = new GridPane();
+		if(obj.getMyAttributes()==null){
+			return contents_Att;
+		}
+		int count = 0;
+		for (Attribute<?> attr : obj.getMyAttributes().getAttributeMap().values()) {
+			
+			Label attLabel = new Label(attr.getName());
+			contents_Att.add(attLabel, 0, count);
+			GridPane.setHalignment(attLabel, HPos.RIGHT);
+			Node n = createAttributeValueViewer(obj, attr);
+			//GridPane.setHalignment(n, HPos.CENTER);
+			contents_Att.add(n, 1, count);
+			count++;
+		}
+		contents_Att.setVgap(10d);
+		contents_Att.setHgap(10d);
+		//contents_Att.setGridLinesVisible(true);
+		ColumnConstraints col1 = new ColumnConstraints();
+		col1.setPercentWidth(40);
+		ColumnConstraints col2 = new ColumnConstraints();
+		col2.setPercentWidth(100 - col1.getPercentWidth());
+		contents_Att.getColumnConstraints().addAll(col1, col2);
+		
+		//contents_Att.setSpacing(STANDARD_SPACING);
+		
+		
+		
+		sP.setContent(contents_Att);
 		return sP;
 	}
 
@@ -138,10 +164,8 @@ public class AttributeCommandCenter extends CommandCenter{
 		return bottomButtons;
 	}
 
-	private HBox createAttributeValuePair(AttributeOwner obj, Attribute<?> attr) {
-		HBox singleAttEditor = new HBox();
-		Label attLabel = new Label(attr.getName());
-		singleAttEditor.getChildren().add(attLabel);
+	private Node createAttributeValueViewer(AttributeOwner obj, Attribute<?> attr) {
+		HBox finalViewer = new HBox();
 		Node right;
 		if (authorProperty.get()) {
 			// Author Mode
@@ -155,17 +179,9 @@ public class AttributeCommandCenter extends CommandCenter{
 			} catch (NullPointerException e) {
 				right = new Label("No Attribute Value Stored");
 			}
-			// FIXME get it right
 		}
-		singleAttEditor.getChildren().add(new Label("    "));
-		try{
-			singleAttEditor.getChildren().add(right);
-		} catch (Exception e){
-			System.out.println(myAttrNameResources.getString(attr.getName()));
-			singleAttEditor.getChildren().add(new Label("Editor in production"));
-		}
-		singleAttEditor.setAlignment(Pos.CENTER_RIGHT);
-		return singleAttEditor;
+		finalViewer.getChildren().add(right);
+		return finalViewer;
 	}
 
 	public VBox get() {
