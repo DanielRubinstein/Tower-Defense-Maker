@@ -19,6 +19,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
 import javafx.stage.Stage;
+import resources.Constants;
 
 /**
  * This class is the command center that pops up when a user clicks on a tile. It presents information about the tile
@@ -27,10 +28,7 @@ import javafx.stage.Stage;
  *
  */
 public class TileCommandCenter implements CommandCenter, SkeletonObject{
-	public static final String DEFAULT_CSS = "/resources/css/Flatter.css";
 	private Stage myStage;
-	private Scene myScene;
-	
 	private View myView;
 	private TabPane tabPane;
 	
@@ -89,7 +87,7 @@ public class TileCommandCenter implements CommandCenter, SkeletonObject{
 	@Override
 	public void generate(double x, double y, Stage myStage, Parent myRoot) {
 		Scene myScene = new Scene(myRoot);
-		myScene.getStylesheets().add(DEFAULT_CSS);
+		myScene.getStylesheets().add(Constants.DEFAULT_CSS);
 		myStage.setScene(myScene);
 		myStage.setTitle("Command Center");
 		myStage.setX(x);

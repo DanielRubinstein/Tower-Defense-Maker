@@ -7,9 +7,9 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+import resources.Constants;
 
 public class GenericCommandCenter implements CommandCenter{
-	private static final String DEFAULT_CSS = "/resources/css/Flatter.css";
 	private View myView;
 	private VBox myRoot;
 	private AttributeOwner obje;
@@ -21,7 +21,7 @@ public class GenericCommandCenter implements CommandCenter{
 	
 	public void generate(double x, double y, Stage myStage, Parent myRoot) {
 		Scene myScene = new Scene(myRoot);
-		myScene.getStylesheets().add(DEFAULT_CSS);
+		myScene.getStylesheets().add(Constants.DEFAULT_CSS);
 		myStage.setScene(myScene);
 		myStage.setTitle("Command Center");
 		myStage.setX(x);

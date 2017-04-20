@@ -60,7 +60,7 @@ public class AttributeCommandCenter{
 		
 		contents.getChildren().add(titleLbl);
 		contents.getChildren().add(createAttributeView(obj));
-		contents.getChildren().add(createPresetButton(obj));
+		contents.getChildren().add(createBottomButtons(obj));
 		
 		checkToAddAddNowButton(obj);
 		
@@ -123,13 +123,24 @@ public class AttributeCommandCenter{
 		return sP;
 	}
 
-	private Node createPresetButton(AttributeOwner obj){
+	private Node createBottomButtons(AttributeOwner obj){
 		
 		bottomButtons = new HBox();
 		
 		bottomButtons.setSpacing(STANDARD_SPACING);
 		bottomButtons.setAlignment(Pos.BOTTOM_RIGHT);  
 		
+		createAccessPermissionButton(obj);
+		createAddToPresetButton(obj);
+		return bottomButtons;
+	}
+
+	private void createAccessPermissionButton(AttributeOwner obj) {
+		AccessPermissionsViewer accessPermissionsViewer = new AccessPermissionsViewer(myHostStage, myView, obj);
+		bottomButtons.getChildren().add(accessPermissionsViewer.getRoot());
+	}
+
+	private void createAddToPresetButton(AttributeOwner obj) {
 		if(!(myView.getComponentPresets().contains(obj) || myView.getTilePresets().contains(obj))){
 			List<String> dialogTitles = Arrays.asList("Preset Creation Utility", "Please Input a Name for your new preset");
 			String promptLabel = "New preset name:";
@@ -143,7 +154,6 @@ public class AttributeCommandCenter{
 			
 			bottomButtons.getChildren().add(preset);
 		}
-		return bottomButtons;
 	}
 
 	private Node createAttributeValueViewer(AttributeOwner obj, Attribute<?> attr) {
