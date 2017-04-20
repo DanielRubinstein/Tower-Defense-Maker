@@ -27,7 +27,7 @@ import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
 
-public class AttributeCommandCenter extends CommandCenter{	
+public class AttributeCommandCenter{	
 	private final static String RESOURCES_PATH = "resources/";
 	private static final int STANDARD_SPACING = 10;
 	private final static String ALL_ATTRIBUTES_TYPES = "allAttributeTypes";
