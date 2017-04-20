@@ -5,12 +5,13 @@ import java.util.Collection;
 import backEnd.GameData.State.Component;
 import backEnd.GameData.State.Tile;
 import javafx.beans.property.SimpleBooleanProperty;
+import javafx.beans.property.SimpleStringProperty;
 import javafx.stage.Stage;
 
 public interface ViewReader {
 
 	// play, pause, fast forward
-	public String getRunStatus();
+	public SimpleStringProperty getRunStatus();
 	
 	public SimpleBooleanProperty getBooleanAuthorModeProperty();
 

@@ -3,15 +3,14 @@ package frontEnd.CustomJavafxNodes;
 import frontEnd.Skeleton.UserTools.SkeletonObject;
 import javafx.beans.value.ChangeListener;
 import javafx.scene.Node;
+import javafx.scene.control.Label;
 import javafx.scene.control.Slider;
+import javafx.scene.layout.HBox;
 
 public class NumberChanger implements SkeletonObject{
 	Slider myRoot;
 	
-	public NumberChanger(Double min, Double max, Double start, Double increment){
-		myRoot = createSlider(min, max, start, increment);
-	}
-	public NumberChanger(Integer min, Integer max, Integer start, Integer increment){
+	public NumberChanger(Number min, Number max, Number start, Number increment){
 		myRoot = createSlider(min.doubleValue(), max.doubleValue(), start.doubleValue(), increment.doubleValue());
 	}
 	
@@ -22,8 +21,8 @@ public class NumberChanger implements SkeletonObject{
 		slider.setMax(max);
 		slider.setValue(start);
 		slider.setBlockIncrement(increment);
+		//slider.setShowTickLabels(true);
 		return slider;
-		
 	}
 	
 	public void addListener(ChangeListener<? super Number> cL){
@@ -32,6 +31,29 @@ public class NumberChanger implements SkeletonObject{
 	
 	public Double getValue(){
 		return myRoot.getValue();
+	}
+	
+	public HBox addIntegerIndicator(){
+		HBox h = new HBox();
+		h.getChildren().add(this.getRoot());
+		Label currentVal = new Label(String.format("(%d)", this.getValue().intValue()));
+		this.addListener( (observable, oldValue, newValue)->{
+			myRoot.setValue(newValue.intValue());
+			currentVal.setText(String.format("(%d)", newValue.intValue()));
+		});
+		h.getChildren().add(currentVal);
+		return h;
+	}
+	
+	public HBox addDoubleIndicator(){
+		HBox h = new HBox();
+		h.getChildren().add(this.getRoot());
+		Label currentVal = new Label(String.format("(%1$.1f)", this.getValue().doubleValue()));
+		this.addListener( (observable, oldValue, newValue)->{
+			currentVal.setText(String.format("(%1$.1f)", newValue.doubleValue()));
+		});
+		h.getChildren().add(currentVal);
+		return h;
 	}
 
 

@@ -9,9 +9,11 @@ import java.util.ResourceBundle;
 import backEnd.Model;
 import backEnd.GameData.Rules;
 import backEnd.GameData.State.State;
+import backEnd.GameEngine.EngineStatus;
 import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
+import javafx.beans.property.SimpleStringProperty;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 import resources.Constants;
@@ -23,10 +25,14 @@ public class GameProcessController {
 	private Rules myRules;
 	private final static String RESOURCES_PATH = "resources/GameProcessController";
 	private final static ResourceBundle myResources = ResourceBundle.getBundle(RESOURCES_PATH);
+	private EngineStatus engineStatus;
+	private SimpleStringProperty engineStatusProperty;
 	
 	public Timeline animation = new Timeline();
 	
 	public GameProcessController(State currentState, Rules gameRules){
+		engineStatus = EngineStatus.PAUSED;
+		engineStatusProperty = new SimpleStringProperty(engineStatus.toString());
 		myEngines = new ArrayList<Engine>();
 		myCurrentState = currentState;
 		myRules = gameRules;
@@ -42,9 +48,11 @@ public class GameProcessController {
 	
 	public void playAnimation() {
 		// TODO include rule checking
-		
-		
-		
+		engineStatus = EngineStatus.RUNNING;
+		engineStatusProperty.set(engineStatus.toString());
+		KeyFrame frame = new KeyFrame(Duration.millis(Constants.MILLISECOND_DELAY), e -> step(Constants.SECOND_DELAY));
+		animation.setCycleCount(Animation.INDEFINITE);
+		animation.getKeyFrames().add(frame);
 		animation.play();
 		System.out.println("GAME STARTED");
 	}
@@ -66,9 +74,15 @@ public class GameProcessController {
 		//System.out.println(stepTime);
 		//Has won/lost? check myRules after each loop?
 	}
+	
+	public SimpleStringProperty getEngineStatus(){
+		return engineStatusProperty;
+	}
 
 	public void pause() {
 		animation.pause();
+		engineStatus = EngineStatus.PAUSED;
+		engineStatusProperty.set(engineStatus.toString());
 		System.out.println("GAME PAUSED");
 	}	
 }
