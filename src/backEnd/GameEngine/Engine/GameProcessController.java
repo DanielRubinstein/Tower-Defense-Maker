@@ -36,7 +36,9 @@ public class GameProcessController {
 		myEngines = new ArrayList<Engine>();
 		myCurrentState = currentState;
 		myRules = gameRules;
-
+		KeyFrame frame = new KeyFrame(Duration.millis(Constants.MILLISECOND_DELAY), e -> step(Constants.SECOND_DELAY));
+		animation.setCycleCount(Animation.INDEFINITE);
+		animation.getKeyFrames().add(frame);
 		EngineFactory engineFactory = new EngineFactory();
 		Enumeration<String> n = myResources.getKeys();
 		for(String key : Collections.list(n)){
@@ -69,6 +71,7 @@ public class GameProcessController {
 			engine.gameLoop(myCurrentState,stepTime);
 			//System.out.println("steptime is  "+ stepTime);
 		}
+		//System.out.println(stepTime);
 		//Has won/lost? check myRules after each loop?
 	}
 	
