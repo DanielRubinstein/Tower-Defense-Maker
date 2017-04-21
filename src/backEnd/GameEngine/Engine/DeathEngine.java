@@ -25,7 +25,8 @@ public class DeathEngine implements Engine{
 			currentState.getComponentGraph().getAllComponents().remove(struct);
 		}
 		if (DB.spawnsOnDeath()){
-			currentState.getComponentGraph().addComponentToGrid(DB.getNewComponent(), (Point2D) struct.getMyAttributes().get("LOCATION").getValue());
+			Object currentLocation=struct.getMyAttributes().get("Position").getValue();
+			currentState.getComponentGraph().addComponentToGrid(DB.getNewComponent(), (Point2D) currentLocation);
 		}
 	}
  }

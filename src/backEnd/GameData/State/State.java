@@ -27,6 +27,12 @@ public interface State {
 	void addAsObserver(Observer o);
 	
 	void updateState(State state);
+
+	/*
+	 * Replace the current list of components by a new list of components.
+	 */
+	void setComponentGraph(ComponentGraph newComponentGraph);
+
 	
 	int getGridWidth();
 	
