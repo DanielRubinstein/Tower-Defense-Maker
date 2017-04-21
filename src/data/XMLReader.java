@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.Map;
 
 import backEnd.GameData.GameData;
-import backEnd.LevelProgression.LevelProgressionController;
+import backEnd.LevelProgression.LevelProgressionControllerImpl;
 
 public interface XMLReader {
 

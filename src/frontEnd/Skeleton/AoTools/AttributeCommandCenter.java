@@ -136,7 +136,7 @@ public class AttributeCommandCenter{
 	}
 
 	private void createAccessPermissionButton(AttributeOwner obj) {
-		AccessPermissionsViewer accessPermissionsViewer = new AccessPermissionsViewer(myHostStage, myView, obj);
+		AccessPermissionsViewer accessPermissionsViewer = new AccessPermissionsViewer(myHostStage, myView, obj.getAccessPermissions());
 		bottomButtons.getChildren().add(accessPermissionsViewer.getRoot());
 	}
 

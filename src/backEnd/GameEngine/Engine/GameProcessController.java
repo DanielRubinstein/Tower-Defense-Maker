@@ -8,7 +8,7 @@ import java.util.ResourceBundle;
 
 import backEnd.Model;
 import backEnd.GameData.Rules;
-import backEnd.GameData.GameStatus.GameStatus;
+import backEnd.GameData.PlayerStatus.PlayerStatus;
 import backEnd.GameData.State.State;
 import backEnd.GameEngine.EngineStatus;
 import javafx.animation.Animation;
@@ -32,7 +32,7 @@ public class GameProcessController {
 	
 	public Timeline animation = new Timeline();
 	
-	public GameProcessController(State currentState, Rules gameRules, GameStatus playerStatus){
+	public GameProcessController(State currentState, Rules gameRules, PlayerStatus playerStatus){
 		engineStatus = EngineStatus.PAUSED;
 		engineStatusProperty = new SimpleStringProperty(engineStatus.toString());
 		myEngines = new ArrayList<Engine>();

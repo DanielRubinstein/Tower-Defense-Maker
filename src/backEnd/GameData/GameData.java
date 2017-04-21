@@ -58,4 +58,8 @@ public class GameData implements GameDataInterface{
 		return myPlayerStatus;
 	}
 
+	public PlayerStatus getStatus() {
+		return this.myPlayerStatus;
+	}
+
 }
