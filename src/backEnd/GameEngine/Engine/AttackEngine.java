@@ -20,8 +20,8 @@ import resources.Constants;
  */
 
 public class AttackEngine implements Engine {
-	private final static String RESOURCES_PATH = "resources/allAttributeTypes";
-	private final static ResourceBundle myResources = ResourceBundle.getBundle(RESOURCES_PATH);
+	//private final static String RESOURCES_PATH = "resources/allAttributeTypes";
+	//private final static ResourceBundle myResources = ResourceBundle.getBundle(RESOURCES_PATH);
 
 	@Override
 	public void gameLoop(State currentState, double stepTime) {
@@ -65,12 +65,12 @@ public class AttackEngine implements Engine {
 			fnf.create("Error", "File not found");
 		}
 
-		Point2D bulletPos = (Point2D) attacker.getAttribute(myResources.getString("Position"));
-		Point2D targetPos = (Point2D) target.getAttribute(myResources.getString("Position"));
+		Point2D bulletPos = (Point2D) attacker.getAttribute(("Position"));
+		Point2D targetPos = (Point2D) target.getAttribute(("Position"));
 		
-		projectile.setAttributeValue(myResources.getString("Position"), bulletPos);
-		projectile.setAttributeValue(myResources.getString("ProjectileTargetPosition"), targetPos);
-		projectile.setAttributeValue(myResources.getString("ProjectileDistance"), targetPos.subtract(bulletPos));
+		projectile.setAttributeValue(("Position"), bulletPos);
+		projectile.setAttributeValue(("ProjectileTargetPosition"), targetPos);
+		projectile.setAttributeValue(("ProjectileDistance"), targetPos.subtract(bulletPos));
 		
 		currentState.getComponentGraph().addComponentToGrid(projectile, bulletPos);
 	}
@@ -80,6 +80,10 @@ public class AttackEngine implements Engine {
 	 * 
 	 * @return a Component that represents a projectile
 	 * @throws FileNotFoundException if the image files are not found
+	 * 
+	 * This class needs to be refactored - I don't understand how attributefactory really works
+	 * is there an easier/better way to make the attributes instead of manually?
+	 * 
 	 */
 	@SuppressWarnings("unchecked")
 	private Component makeProjectile(Component attacker) throws FileNotFoundException {
@@ -87,17 +91,20 @@ public class AttackEngine implements Engine {
 		AttributeFactory af = new AttributeFactory();
 		AttributeData ad = new AttributeData();
 	
-		Attribute<String> projectileImage = (Attribute<String>) af.getAttribute(myResources.getString("ImageFile"));
-		Attribute<String> projectileType = (Attribute<String>) af.getAttribute(myResources.getString("FireType"));
-		Attribute<Integer> projectileDamage = (Attribute<Integer>) af.getAttribute(myResources.getString("FireDamage"));
+		Attribute<String> projectileImage = (Attribute<String>) af.getAttribute(("ImageFile"));
+		Attribute<String> projectileType = (Attribute<String>) af.getAttribute(("FireType"));
+		Attribute<Integer> projectileDamage = (Attribute<Integer>) af.getAttribute(("FireDamage"));
+		Attribute<Double> explosionSize = (Attribute<Double>) af.getAttribute(("ExplosionRadius"));
 		
 		projectileImage.setValue((String) attacker.getAttribute("FireImage").getValue());
 		projectileType.setValue((String) attacker.getAttribute("FireType").getValue());
 		projectileDamage.setValue((Integer) attacker.getAttribute("FireDamage").getValue());
+		explosionSize.setValue((Double) attacker.getAttribute("ExplosionRadius").getValue());
 		
-		ad.addAttribute(myResources.getString("ImageFile"), (backEnd.Attribute.AttributeImpl<?>) projectileImage);
-		ad.addAttribute(myResources.getString("FireType"), (backEnd.Attribute.AttributeImpl<?>) projectileType);
-		ad.addAttribute(myResources.getString("FireDamage"), (backEnd.Attribute.AttributeImpl<?>) projectileDamage);
+		ad.addAttribute(("ImageFile"), (backEnd.Attribute.AttributeImpl<?>) projectileImage);
+		ad.addAttribute(("FireType"), (backEnd.Attribute.AttributeImpl<?>) projectileType);
+		ad.addAttribute(("FireDamage"), (backEnd.Attribute.AttributeImpl<?>) projectileDamage);
+		ad.addAttribute(("ExplosionRadius"), (backEnd.Attribute.AttributeImpl<?>) explosionSize);
 		
 		Component projectile = new Component(ad);
 		projectile.setMyType("Projectile");	
