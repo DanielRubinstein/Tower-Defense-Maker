@@ -2,6 +2,8 @@ package backEnd;
 
 import backEnd.Bank.BankController;
 import backEnd.GameData.GameData;
+import backEnd.GameData.PlayerStatus.PlayerStatusModifier;
+import backEnd.GameData.PlayerStatus.PlayerStatusReader;
 import backEnd.GameData.State.State;
 import backEnd.GameEngine.Engine.GameProcessController;
 import backEnd.LevelProgression.LevelProgressionController;
@@ -73,5 +75,15 @@ public class ModelImpl implements Model{
 	
 	public SimpleStringProperty getEngineStatus(){
 		return myEngine.getEngineStatus();
+	}
+
+	@Override
+	public PlayerStatusReader getPlayerStatusReader() {
+		return myGameData.getReadOnlyPlayerStatus();
+	}
+
+	@Override
+	public PlayerStatusModifier getModifiablePlayerStatus() {
+		return myGameData.getModifiablePlayerStatus();
 	}
 }

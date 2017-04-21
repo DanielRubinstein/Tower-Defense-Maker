@@ -1,6 +1,7 @@
 package backEnd;
 
 import backEnd.Bank.BankController;
+import backEnd.GameData.PlayerStatus.PlayerStatusModifier;
 import backEnd.GameData.State.State;
 import backEnd.GameEngine.Engine.GameProcessController;
 import backEnd.Mode.ModeReader;
@@ -18,6 +19,7 @@ public interface Model extends ModelReader{
 	 */
 	GameProcessController getGameProcessController();
 	
+	PlayerStatusModifier getModifiablePlayerStatus();
 	
 	
 	

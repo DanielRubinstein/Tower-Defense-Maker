@@ -6,6 +6,7 @@ import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 
 import backEnd.GameData.GameData;
+import backEnd.GameData.PlayerStatus.PlayerStatus;
 import backEnd.GameData.State.StateImpl;
 import data.XMLReader;
 import data.XMLReaderImpl;
@@ -69,7 +70,7 @@ public class DataInputLoader {
 	
 	private GameData createGameData(StartingInput startingInputs) throws FileNotFoundException {
 		StateImpl state = new StateImpl(startingInputs.getNumCols(), startingInputs.getNumRows());
-		GameData gameData = new GameData(state, null);
+		GameData gameData = new GameData(state, new PlayerStatus() , null);
 		return gameData;
 	}
 	
