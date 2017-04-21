@@ -8,6 +8,7 @@ import backEnd.Attribute.Attribute;
 import backEnd.Attribute.AttributeOwner;
 import backEnd.GameData.State.Component;
 import backEnd.GameData.State.Tile;
+import backEnd.GameData.State.TileImpl;
 import javafx.geometry.Point2D;
 
 public class Modification_MoveAttributeOwner implements ModificationFromUser {
@@ -45,7 +46,7 @@ public class Modification_MoveAttributeOwner implements ModificationFromUser {
 		
 	}
 	
-	private void move(Tile tile) throws Exception{
+	private void move(TileImpl tile) throws Exception{
 		throw new Exception(ERROR_DESCRIPTION);
 	}
 	

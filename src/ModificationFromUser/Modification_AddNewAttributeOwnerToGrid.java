@@ -10,6 +10,7 @@ import backEnd.Attribute.AttributeOwner;
 import backEnd.GameData.GameData;
 import backEnd.GameData.State.Component;
 import backEnd.GameData.State.Tile;
+import backEnd.GameData.State.TileImpl;
 import backEnd.Mode.ModeException;
 import frontEnd.Skeleton.AoTools.AttributeCommandCenter;
 import javafx.geometry.Point2D;
@@ -53,7 +54,7 @@ public class Modification_AddNewAttributeOwnerToGrid implements ModificationFrom
 		}
 	}
 	
-	private void addAttributeOwnerToGrid(Tile tile){
+	private void addAttributeOwnerToGrid(TileImpl tile){
 		switch (myModel.getMode().getUserMode()) {
 		case AUTHOR:
 			myModel.getState().getTileGrid().setTileByGridPosition(tile, (int) location.getX(), (int) location.getY());
