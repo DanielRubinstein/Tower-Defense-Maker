@@ -32,6 +32,8 @@ public class SpawnEngine implements Engine{
 	@Override
 	public void gameLoop(State currentState, double stepTime) {
 		//spawnPeriod = currentState.getSpawnPeriod(); Implement this ish
+		//currentState
+		
 		if(!paused){
 			startSpawnTimeMillis = System.currentTimeMillis();
 		}

@@ -8,6 +8,7 @@ import java.util.Map;
 import backEnd.Bank.BankController;
 import backEnd.GameData.GameData;
 import backEnd.GameData.State.State;
+import backEnd.GameEngine.EngineStatus;
 import backEnd.GameEngine.Engine.GameProcessController;
 import backEnd.LevelProgression.LevelProgressionController;
 import backEnd.Mode.Mode;
@@ -33,8 +34,9 @@ public class ModelImpl implements Model{
 	private DataController myDataController;
 	private GameProcessController myEngine;
 	private LevelProgressionController myLevelProgressionController;
+	private EngineStatus myEngineStatus;
 	
-	public ModelImpl(GameData gameData) throws XMLReadingException {
+	public ModelImpl(GameData gameData, EngineStatus engineStatus) throws XMLReadingException {
 		myDataController = new DataController();
 		myGameData = gameData;
 		myLevelProgressionController = myDataController.loadLevelProgressionData();

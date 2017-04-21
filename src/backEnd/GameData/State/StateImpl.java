@@ -19,6 +19,7 @@ import ModificationFromUser.Modification_EditAttribute;
 import backEnd.Coord;
 import backEnd.Attribute.Attribute;
 import backEnd.Attribute.AttributeImpl;
+import backEnd.GameEngine.EngineStatus;
 import javafx.geometry.Point2D;
 
 /**
@@ -36,12 +37,14 @@ public class StateImpl extends Observable implements State {
 	private final static ResourceBundle myResources = ResourceBundle.getBundle(RESOURCES_PATH);
 	private final static String IMAGEPATH_RESOURCES_PATH = "resources/images";
 	private final static ResourceBundle myImageResource = ResourceBundle.getBundle(IMAGEPATH_RESOURCES_PATH);
+	private EngineStatus myEngineStatus;
 
 	public StateImpl(int numColsInGrid, int numRowsInGrid) throws FileNotFoundException {
 		this.numColsInGrid = numColsInGrid;
 		this.numRowsInGrid = numRowsInGrid;
 		setDefaultTileGrid();
 		myComponentGraph = new ComponentGraphImpl();
+		myEngineStatus=EngineStatus.PAUSED;
 	}
 
 
@@ -200,6 +203,10 @@ public class StateImpl extends Observable implements State {
 	public int getGridHeight() {
 		return numRowsInGrid;
 	}
+	
+	public boolean gameIsRunning(){
+		return myEngineStatus.equals(EngineStatus.RUNNING);
+	}
 
 
 	@Override
@@ -212,6 +219,11 @@ public class StateImpl extends Observable implements State {
 	@Override
 	public void setComponentGraph(ComponentGraph newComponentGraph) {
 		myComponentGraph=newComponentGraph;
+	}
+
+
+	public void setEngineStatus(EngineStatus engineStatus) {
+		myEngineStatus=engineStatus;
 	}
 
 
