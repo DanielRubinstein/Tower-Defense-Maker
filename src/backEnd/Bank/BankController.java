@@ -8,6 +8,7 @@ import java.util.Map;
 import java.util.Observable;
 
 import backEnd.GameEngine.Behaviors.Behavior;
+import backEnd.Mode.Mode;
 import javafx.geometry.Point2D;
 import backEnd.Attribute.AttributeData;
 import backEnd.Attribute.AttributeImpl;
@@ -22,28 +23,18 @@ public class BankController extends Observable
 {
 	private Map<String, Tile> tileBank;
 	private Map<String, Component> componentBank;
-	private BehaviorBank behaviorBank;
-	private RuleBank ruleBank;
-	private AttributeBank attributeBank;
 	
-	public BankController(){
-		init();
+	public BankController()
+	{
 		this.tileBank = new HashMap<String, Tile>();
 		this.componentBank = new HashMap<String, Component>();
 		createTemplatesForTesting();
 	}
 	
-	public BankController(Map<String, Tile> tileBank, Map<String, Component> componentBank){
-		init();
+	public BankController(Map<String, Tile> tileBank, Map<String, Component> componentBank)
+	{
 		this.tileBank = tileBank;
 		this.componentBank = componentBank;
-		
-	}
-	
-	private void init(){
-		behaviorBank = new BehaviorBank();
-		ruleBank = new RuleBank();
-		attributeBank = new AttributeBank();
 	}
 	
 	private void createTemplatesForTesting(){
@@ -85,7 +76,14 @@ public class BankController extends Observable
 	
 	public Map<String, Tile> getTileMap()
 	{
-		return tileBank;
+		Map<String, Tile> subMap = new HashMap<String,Tile>();
+		
+		for (String x : tileBank.keySet())
+		{
+			if (tileBank.get(x).getAccessPermissions().permitsAccess());
+		}
+		
+		return subMap;
 	}
 	
 	public void addNewComponent (String name, Component component)
@@ -101,25 +99,11 @@ public class BankController extends Observable
 		this.setChanged();
 		this.notifyObservers();
 	}
+
 	
 	public Map<String, Component> getComponentMap()
 	{
 		return componentBank;
-	}
-	
-	public List<Behavior> getBehaviorList()
-	{
-		return behaviorBank.getBehaviorList();
-	}
-	
-	public List<Rules> getRuleList()
-	{
-		return ruleBank.getRuleList();
-	}
-	
-	public List<AttributeImpl> getAttributeList()
-	{
-		return attributeBank.getAttributeList();
 	}
 
 	public String getAOName(AttributeOwner preset) {

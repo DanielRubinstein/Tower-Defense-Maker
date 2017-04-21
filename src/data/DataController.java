@@ -28,7 +28,7 @@ public class DataController {
 		myXMLReader = new XMLReaderImpl();
 	}
 	
-	@SuppressWarnings("unchecked")
+
 	public BankController generateBanks(){
 		try{
 			List<Map<String,?>> objectMaps = myXMLReader.loadUniversalGameData(UNIV_GAME_DATA_PATH);
