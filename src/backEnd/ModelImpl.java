@@ -7,6 +7,8 @@ import java.util.Map;
 
 import backEnd.Bank.BankController;
 import backEnd.GameData.GameData;
+import backEnd.GameData.PlayerStatus.PlayerStatusModifier;
+import backEnd.GameData.PlayerStatus.PlayerStatusReader;
 import backEnd.GameData.State.State;
 import backEnd.GameEngine.EngineStatus;
 import backEnd.GameEngine.Engine.GameProcessController;
@@ -41,7 +43,7 @@ public class ModelImpl implements Model{
 		myGameData = gameData;
 		myLevelProgressionController = myDataController.loadLevelProgressionData();
 		myMode = new ModeImpl("DEFAULT", "AUTHOR", myLevelProgressionController);
-		myEngine = new GameProcessController(myGameData.getState(), myGameData.getRules());
+		myEngine = new GameProcessController(myGameData.getState(), myGameData.getRules(), myGameData.getStatus());
 		myBankController = myDataController.generateBanks();
 	}
 
@@ -79,5 +81,15 @@ public class ModelImpl implements Model{
 	
 	public SimpleStringProperty getEngineStatus(){
 		return myEngine.getEngineStatus();
+	}
+
+	@Override
+	public PlayerStatusReader getPlayerStatusReader() {
+		return myGameData.getReadOnlyPlayerStatus();
+	}
+
+	@Override
+	public PlayerStatusModifier getModifiablePlayerStatus() {
+		return myGameData.getModifiablePlayerStatus();
 	}
 }
