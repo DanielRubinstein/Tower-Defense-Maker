@@ -32,9 +32,10 @@ public class ControllerImpl implements Controller {
 					} catch (Exception e) {
 						System.out.println("Error in Modification sent");
 						e.printStackTrace();
-						if (myModel == null){
-							System.out.println("   No model created");
-						}
+						ErrorDialog errDia = new ErrorDialog();
+						errDia.create("InGame Error", e.getMessage());
+						e.printStackTrace();
+						
 					}
 				};
 

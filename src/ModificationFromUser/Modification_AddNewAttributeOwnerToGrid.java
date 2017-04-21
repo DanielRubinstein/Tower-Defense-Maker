@@ -56,10 +56,10 @@ public class Modification_AddNewAttributeOwnerToGrid implements ModificationFrom
 	
 	private void addAttributeOwnerToGrid(TileImpl tile){
 		switch (myModel.getMode().getUserMode()) {
-		case AUTHOR:
+		case "AUTHOR":
 			myModel.getState().getTileGrid().setTileByGridPosition(tile, (int) location.getX(), (int) location.getY());
 			break;
-		case PLAYER:
+		case "PLAYER":
 			 throw new ModeException(myModel.getMode(), DESCRIPTION_TILE);
 		}	
 	}
@@ -67,10 +67,10 @@ public class Modification_AddNewAttributeOwnerToGrid implements ModificationFrom
 	private void addAttributeOwnerToGrid(Component component){
 		myModel.getState().getComponentGraph().addComponentToGrid(component, location);
 		switch (myModel.getMode().getUserMode()) {
-		case AUTHOR:
+		case "AUTHOR":
 			// for future, do something
 			break;
-		case PLAYER:
+		case "PLAYER":
 			// for future, do something
 			break;
 		}	
