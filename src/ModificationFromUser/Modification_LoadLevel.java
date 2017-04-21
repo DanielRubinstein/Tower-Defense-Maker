@@ -14,22 +14,22 @@ import data.GamePrep.GameLoader;
  * @author Derek
  *
  */
-public class Modification_Load implements ModificationFromUser {
+public class Modification_LoadLevel implements ModificationFromUser {
 	
-	private String myGameName;
+	private String myLevel;
 	private File myGameFile;
 	private GameData myGameData;
 	
-	public Modification_Load(){
+	public Modification_LoadLevel(){
 		myGameFile = load();
 	}
 	
 	
-	public Modification_Load(String gameName){
+	public Modification_LoadLevel(String gameLevel){
 		myGameName = gameName;
 	}
 	
-	public Modification_Load(File gameFile){
+	public Modification_LoadLevel(File gameFile){
 		myGameFile = gameFile;
 	}
 

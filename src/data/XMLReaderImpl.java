@@ -40,7 +40,7 @@ public class XMLReaderImpl implements XMLReader{
 	@Override
 	public GameData loadGameStateData(String filePath, String levelName) throws XMLReadingException
 	{
-
+		
 		StateImpl state = new StateImpl((TileGrid) xStream.fromXML(new File(filePath+"/" + levelName+"/tilegrid.xml")), 
 				(ComponentGraph) xStream.fromXML(new File(filePath+"/" + levelName+"/componentgraph.xml")));
 		

@@ -3,11 +3,11 @@ package data;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
-<<<<<<< HEAD
+
 import java.util.HashMap;
-=======
+
 import java.util.List;
->>>>>>> ecb9e3800ae6366ed3d14cd2f320159997a3d621
+
 import java.util.Map;
 
 import com.thoughtworks.xstream.XStream;
@@ -20,11 +20,10 @@ import backEnd.GameData.Rules;
 import backEnd.GameData.State.Component;
 import backEnd.GameData.State.State;
 import backEnd.GameData.State.Tile;
-<<<<<<< HEAD
 import backEnd.GameData.State.TileGrid;
-=======
+
 import backEnd.LevelProgression.LevelProgressionController;
->>>>>>> ecb9e3800ae6366ed3d14cd2f320159997a3d621
+
 
 /**
  * This class handles saving both game state data and universal game data
@@ -42,17 +41,17 @@ public class XMLWriterImpl implements XMLWriter{
 		xStream.alias("TileGrid", TileGrid.class);
 	}
 	
-	public void saveGameStateData(GameDataInterface gameData, String filePath, String gameName)
+	public void saveGameStateData(GameDataInterface gameData, String filePath, String levelName)
 	{
 		
 		String rulesXML = xStream.toXML(gameData.getRules());
-		saveToXML(filePath, gameName+ "_rules", rulesXML);
+		saveToXML(filePath + levelName +"/", "rules", rulesXML);
 		
 		String componentMapXML = xStream.toXML(gameData.getState().getComponentGraph().getComponentMap());
-		saveToXML(filePath, gameName + "_componentlocmap", componentMapXML);
+		saveToXML(filePath+ levelName +"/", "componentgraph", componentMapXML);
 		
 		String tileGridXML = xStream.toXML(gameData.getState().getTileGrid());
-		saveToXML(filePath, gameName + "_tilegrid", tileGridXML);
+		saveToXML(filePath + levelName +"/", "tilegrid", tileGridXML);
 		
 		
 	}

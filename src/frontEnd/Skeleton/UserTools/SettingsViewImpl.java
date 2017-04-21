@@ -1,7 +1,7 @@
 package frontEnd.Skeleton.UserTools;
 
 import ModificationFromUser.Modification_ChangeMode;
-import ModificationFromUser.Modification_Load;
+import ModificationFromUser.Modification_LoadLevel;
 import ModificationFromUser.Modification_NewGame;
 import ModificationFromUser.Modification_Save;
 import frontEnd.View;
@@ -55,7 +55,7 @@ public class SettingsViewImpl implements SettingsView{
 		myMenu = new ButtonMenuImpl("Settings");
 		myMenu.addSimpleButtonWithHover("Save", () -> myView.sendUserModification(new Modification_Save()), "Save your current game in the Saved Games folder");
 		
-		myMenu.addSimpleButtonWithHover("Load", () -> myView.sendUserModification(new Modification_Load()), "Load a saved game from the Saved Games folder");
+		myMenu.addSimpleButtonWithHover("Load", () -> myView.sendUserModification(new Modification_LoadLevel()), "Load a saved game from the Saved Games folder");
 		
 		myMenu.addSimpleButtonWithHover("New Game", () -> myView.sendUserModification(new Modification_NewGame()), "Create a new game from scratch");
 		
