@@ -1,21 +1,22 @@
 package main;
 
-import java.lang.reflect.InvocationTargetException;
 import java.util.function.Consumer;
 
 import ModificationFromUser.ModificationFromUser;
 import backEnd.ModelImpl;
 import backEnd.GameData.GameData;
-import data.XMLReadingException;
 import data.GamePrep.DataInputLoader;
 import data.GamePrep.MainMenu;
 import frontEnd.ViewImpl;
-import frontEnd.Menus.ErrorDialog;
+import frontEnd.CustomJavafxNodes.ErrorDialog;
+import frontEnd.Facebook.FacebookConnector;
+import frontEnd.Facebook.FacebookInteractor;
 import javafx.stage.Stage;
 
 public class ControllerImpl implements Controller {
 	private ViewImpl myView;
 	private ModelImpl myModel;
+	private FacebookInteractor myFb;
 
 
 	public void start(Stage stage) {
@@ -40,18 +41,21 @@ public class ControllerImpl implements Controller {
 				DataInputLoader dataInput = new DataInputLoader(o);
 				GameData initialGameData = dataInput.getGameData();
 				myModel = new ModelImpl(initialGameData);
-				myView = new ViewImpl(myModel, viewMod);
+				myView = new ViewImpl(myModel, viewMod,myFb);
 
 			} catch (Exception e) {
 				ErrorDialog errDia = new ErrorDialog();
 				errDia.create("Cannot Load Game", e.getMessage());
+				e.printStackTrace();
 			} 
 			
 		};
 					
-		
-		MainMenu myMenu = new MainMenu(setGameData);
+		MainMenu myMenu = new MainMenu(setGameData,this);
 		myMenu.showMenus(stage);
+	}
+	public void setFb(FacebookInteractor fb){
+		myFb=fb;
 	}
 	
 	private void executeInteraction(ModificationFromUser myInteraction) throws Exception{

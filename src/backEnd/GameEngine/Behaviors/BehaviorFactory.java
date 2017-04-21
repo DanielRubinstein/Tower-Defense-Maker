@@ -5,6 +5,12 @@ import java.util.ResourceBundle;
 
 import backEnd.GameData.State.Component;
 
+import backEnd.GameEngine.Behaviors.AttackBehavior;
+import backEnd.GameEngine.Behaviors.Behavior;
+import backEnd.GameEngine.Behaviors.DeathBehavior;
+import backEnd.GameEngine.Behaviors.MoveBehavior;
+
+
 public class BehaviorFactory {
 //
 //	private final static String RESOURCES_PATH = "resources/BehaviorFactory";
@@ -36,6 +42,9 @@ public class BehaviorFactory {
 		switch (key){
 		case "MoveBehavior":
 			return new MoveBehavior(myComponent);
+
+		case "DeathBehavior":
+			return new DeathBehavior();
 		//case "AttackBehavior":
 		//	return new AttackBehavior(myComponent);
 		default:

@@ -144,7 +144,7 @@
 
 .scroll-bar:vertical > .thumb,
 .scroll-bar:horizontal > .thumb {
-    -fx-background-color: -flatter-blue;
+    -fx-background-color: -flatter-red;
     -fx-background-insets: 0.0;
     -fx-background-radius: 0.0;
 }
@@ -163,6 +163,13 @@
 
 .scroll-bar > .track-background{
     -fx-background-color:transparent;
+}
+
+.scroll-pane > .viewport {
+   -fx-background-color: transparent;
+}
+.scroll-pane {
+   -fx-background-color: -dark;
 }
 
 /*******************************************************************************

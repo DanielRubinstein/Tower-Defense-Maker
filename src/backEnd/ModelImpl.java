@@ -4,11 +4,13 @@ import backEnd.Bank.BankController;
 import backEnd.GameData.GameData;
 import backEnd.GameData.State.State;
 import backEnd.GameEngine.Engine.GameProcessController;
+import backEnd.LevelProgression.LevelProgressionController;
 import backEnd.Mode.Mode;
 import backEnd.Mode.ModeImpl;
 import backEnd.Mode.ModeReader;
 import data.DataController;
 import data.XMLReadingException;
+import javafx.beans.property.SimpleStringProperty;
 
 /**
  * Controller the front end calls when it detects a backend modification from the user,
@@ -25,6 +27,7 @@ public class ModelImpl implements Model{
 	private BankController myBankController;
 	private DataController myDataController;
 	private GameProcessController myEngine;
+	private LevelProgressionController myLevelProgressionController;
 	
 	public ModelImpl(GameData gameData) throws XMLReadingException {
 		myDataController = new DataController();
@@ -32,7 +35,7 @@ public class ModelImpl implements Model{
 		myMode = new ModeImpl();
 		myEngine = new GameProcessController(myGameData.getState(), myGameData.getRules());
 		myBankController = myDataController.generateBanks();
-
+		myLevelProgressionController = new LevelProgressionController();
 	}
 
 	public State getState(){
@@ -66,5 +69,9 @@ public class ModelImpl implements Model{
 	public GameProcessController getGameProcessController() {
 		return myEngine;
 
+	}
+	
+	public SimpleStringProperty getEngineStatus(){
+		return myEngine.getEngineStatus();
 	}
 }

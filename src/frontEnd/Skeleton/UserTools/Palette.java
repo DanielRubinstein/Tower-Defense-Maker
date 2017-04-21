@@ -1,7 +1,6 @@
 package frontEnd.Skeleton.UserTools;
 
 import java.io.FileNotFoundException;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Observable;
@@ -9,17 +8,12 @@ import java.util.Observer;
 import java.util.function.Consumer;
 
 import ModificationFromUser.Modification_AddPresetAttributeOwnerToGrid;
-import backEnd.Attribute.AttributeData;
 import backEnd.Attribute.AttributeOwner;
 import backEnd.Bank.BankController;
-import backEnd.GameData.State.AccessPermissionsImpl;
 import backEnd.GameData.State.Component;
 import backEnd.GameData.State.TileImpl;
-import backEnd.Mode.UserModeType;
 import frontEnd.View;
-import frontEnd.Skeleton.AoTools.ComponentCommandCenter;
-import frontEnd.Skeleton.AoTools.PresetCreation;
-import javafx.event.EventHandler;
+import frontEnd.Skeleton.AoTools.GenericCommandCenter;
 import javafx.geometry.Bounds;
 import javafx.geometry.Insets;
 import javafx.geometry.Point2D;
@@ -30,10 +24,10 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.ClipboardContent;
 import javafx.scene.input.Dragboard;
 import javafx.scene.input.MouseButton;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.input.TransferMode;
 import javafx.scene.layout.TilePane;
 import resources.Constants;
+
 
 /**
  * http://stackoverflow.com/questions/27182323/working-on-creating-image-gallery-in-javafx-not-able-to-display-image-properly
@@ -75,30 +69,33 @@ public class Palette<T extends AttributeOwner> implements SkeletonObject, Observ
 
 	private void addNewPresetButton() {
 		addPreset = createNewPresetButton();
-		addPreset.disableProperty().bind(myView.getBooleanAuthorModeProperty().not());
-		addPreset.disableProperty().addListener((a,b,c)->{
+		disableButtonInPlayerMode(addPreset);
+		tile.getChildren().add(addPreset);
+	}
+
+	private void disableButtonInPlayerMode(ImageView image1) {
+		image1.disableProperty().bind(myView.getBooleanAuthorModeProperty().not());
+		image1.disableProperty().addListener((a,b,c)->{
 			if(c){
-				tile.getChildren().remove(addPreset);
+				tile.getChildren().remove(image1);
 			} else{
-				tile.getChildren().add(addPreset);
+				tile.getChildren().add(image1);
 			}
 		});
-		tile.getChildren().add(addPreset);
 	}
 
 	private void addPresetToPalette(T preset) {
 		String myImagePath = (String) preset.getAttribute(IMAGEFILE_ATTRIBUTE_NAME).getValue();
 		ImageView imageView = createImageView(myImagePath);
 		setPresetInteractions(preset, imageView);
-		
 		myPresetMapFrontEnd.put(imageView, preset);
 		addPresetImageViewToPalette(imageView);
 	}
 
 	private void setPresetInteractions(T preset, ImageView imageView) {
 		setDoubleClickEvent(imageView, (iV) ->{
-			ComponentCommandCenter comCenter = new ComponentCommandCenter(myView, preset);
-			comCenter.launch(iV.getX(), iV.getY());
+			GenericCommandCenter presetComCenter = new GenericCommandCenter(myView, preset);
+			presetComCenter.launch("Preset", iV.getX(), iV.getY());
 		});
 		makeHoverOverName(preset, imageView);
 		makePresetDraggable(preset, imageView);
@@ -148,7 +145,6 @@ public class Palette<T extends AttributeOwner> implements SkeletonObject, Observ
 		screenGrid.setOnDragDropped(e -> {
 			String presetName = e.getDragboard().getString();
 			AttributeOwner presetAO = observedBankController.getPreset(presetName);
-			
 			Point2D pos = new Point2D(e.getSceneX() - Constants.SCREEN_GRID_PADDING /2 ,e.getSceneY() - Constants.SCREEN_GRID_PADDING /2 );
 			myView.sendUserModification(new Modification_AddPresetAttributeOwnerToGrid(presetAO, pos));
 		});
@@ -157,24 +153,18 @@ public class Palette<T extends AttributeOwner> implements SkeletonObject, Observ
 	private ImageView createNewPresetButton() {
 		ImageView addImage = createImageView(SETTINGS_IMAGE);
 		setDoubleClickEvent(addImage,  (iV) ->{
-			try {	
+			try {
 				AttributeOwner newAO = null;
-				String imagePathForNewPreset = "";
 				switch(myType){
 				case "Tiles":
-					//newAO = new TileImpl();
-					// TODO make blank tile
-					newAO = new TileImpl(Arrays.asList(), Arrays.asList(UserModeType.AUTHOR), new Point2D(0,0));
-					imagePathForNewPreset =  "resources/images/Tiles/grass.jpg";
+					newAO = new TileImpl();
 					break;
 				case "Components":
-					newAO = new Component(new AttributeData(),new AccessPermissionsImpl());
-					imagePathForNewPreset =  "resources/images/Components/zombie.png";
+					newAO = new Component();
 					break;
 				}
-
-				PresetCreation presetCreation = new PresetCreation(myView, newAO);
-				presetCreation.launch(0d, 0d);
+				GenericCommandCenter presetCreation = new GenericCommandCenter(myView, newAO);
+				presetCreation.launch("Design a new preset", 0d, 0d);
 			} catch (FileNotFoundException e) {
 				myView.reportError(e);
 			}
@@ -204,12 +194,15 @@ public class Palette<T extends AttributeOwner> implements SkeletonObject, Observ
 	@Override
 	public void update(Observable o, Object arg) {
 		if (o == observedBankController){
-			if(myType.equals("Tiles")){
+			switch(myType){
+			case "Tiles":
 				myPresetMapBackEnd = (Map<String, T>) observedBankController.getTileMap();
 				updatePalette();
-			} else if(myType.equals("Components")){
+				break;
+			case "Components":
 				myPresetMapBackEnd = (Map<String, T>) observedBankController.getComponentMap();
 				updatePalette();
+				break;
 			}
 		}
 	}
