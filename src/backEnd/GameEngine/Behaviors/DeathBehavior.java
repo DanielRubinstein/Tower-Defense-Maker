@@ -28,7 +28,7 @@ public class DeathBehavior implements Behavior {
 	@Override
 	public void update(Observable newData, Object arg) { //TODO figure out how we are using AttributeData with
 		//this. Then we can figure out how observables work.
-		myAttributes = (AttributeData) newData;
+		//myAttributes = (AttributeData) newData;
 	}
 
 
