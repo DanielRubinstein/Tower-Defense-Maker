@@ -58,20 +58,22 @@ public class Modification_AddPresetAttributeOwnerToGrid implements ModificationF
 			System.out.println("in Modification_AddNewPresetAttributeOwnerToGrid, No method found, ugh");
 			// do nothing
 			// this means the thing being put in attribute command center is a tile
-		} catch (Exception e) {
+		} catch (ModeException e){
+			throw e;
+		} finally {
 			// something went wrong
 			System.out.println("Something went wrong in Modification_AddNewPresetAttributeOwnerToGrid");
-			// TODO add exception?
+			// TODO add exception
 		}
 	}
 	
 	private void add(TileImpl tile){
 		switch (myModel.getMode().getUserMode()) {
-		case AUTHOR:
+		case "AUTHOR":
 			myModel.getState().getTileGrid().setTileByScreenPosition(tile,location);
 			break;
 
-		case PLAYER:
+		case "PLAYER":
 			throw new ModeException(myModel.getMode(), DESCRIPTION_TILE);
 		}
 	}

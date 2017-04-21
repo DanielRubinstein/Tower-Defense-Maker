@@ -5,6 +5,7 @@ import java.util.function.Consumer;
 import ModificationFromUser.ModificationFromUser;
 import backEnd.ModelImpl;
 import backEnd.GameData.GameData;
+import backEnd.GameEngine.EngineStatus;
 import data.GamePrep.DataInputLoader;
 import data.GamePrep.MainMenu;
 import frontEnd.ViewImpl;
@@ -17,6 +18,7 @@ public class ControllerImpl implements Controller {
 	private ViewImpl myView;
 	private ModelImpl myModel;
 	private FacebookInteractor myFb;
+	private EngineStatus myEngineStatus=EngineStatus.PAUSED;
 
 
 	public void start(Stage stage) {
@@ -30,9 +32,10 @@ public class ControllerImpl implements Controller {
 					} catch (Exception e) {
 						System.out.println("Error in Modification sent");
 						e.printStackTrace();
-						if (myModel == null){
-							System.out.println("   No model created");
-						}
+						ErrorDialog errDia = new ErrorDialog();
+						errDia.create("InGame Error", e.getMessage());
+						e.printStackTrace();
+						
 					}
 				};
 
@@ -40,7 +43,8 @@ public class ControllerImpl implements Controller {
 			try {
 				DataInputLoader dataInput = new DataInputLoader(o);
 				GameData initialGameData = dataInput.getGameData();
-				myModel = new ModelImpl(initialGameData);
+				initialGameData.setEngineStatus(myEngineStatus);
+				myModel = new ModelImpl(initialGameData, myEngineStatus);
 				myView = new ViewImpl(myModel, viewMod,myFb);
 
 			} catch (Exception e) {

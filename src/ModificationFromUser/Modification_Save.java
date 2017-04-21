@@ -6,6 +6,9 @@ import java.util.List;
 import backEnd.ModelImpl;
 import frontEnd.CustomJavafxNodes.SingleFieldPrompt;
 
+// Player Mode: save current GameData to a new GameState folder within a given Level folder
+// Author Mode: save current GameData to a new Level folder or overwrite an existing one
+
 public class Modification_Save implements ModificationFromUser {
 
 	private String myGameName;

@@ -42,6 +42,7 @@ public class GameProcessController {
 		KeyFrame frame = new KeyFrame(Duration.millis(Constants.MILLISECOND_DELAY), e -> step(Constants.SECOND_DELAY));
 		animation.setCycleCount(Animation.INDEFINITE);
 		animation.getKeyFrames().add(frame);
+		*/
 		EngineFactory engineFactory = new EngineFactory();
 		Enumeration<String> n = myResources.getKeys();
 		for(String key : Collections.list(n)){
@@ -51,14 +52,18 @@ public class GameProcessController {
 	
 	public void playAnimation() {
 		// TODO include rule checking
+		if (animation.getKeyFrames().isEmpty()){
+			KeyFrame frame = new KeyFrame(Duration.millis(Constants.MILLISECOND_DELAY), e -> step(Constants.SECOND_DELAY));
+			animation.setCycleCount(Animation.INDEFINITE);
+			animation.getKeyFrames().add(frame);
+		}
 		engineStatus = EngineStatus.RUNNING;
 		engineStatusProperty.set(engineStatus.toString());
-		KeyFrame frame = new KeyFrame(Duration.millis(Constants.MILLISECOND_DELAY), e -> step(Constants.SECOND_DELAY));
-		animation.setCycleCount(Animation.INDEFINITE);
-		animation.getKeyFrames().add(frame);
 		animation.play();
 		System.out.println("GAME STARTED");
 	}
+	
+
 	
 	/**
 	 * controls the animation of the State
