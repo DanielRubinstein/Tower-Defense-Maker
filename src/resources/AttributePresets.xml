@@ -11,10 +11,10 @@
 	<DOUBLE>
 		<DOUBLE_TEMPLATE min="0.0" max="0.0" start="0.0" increment="0.0"></DOUBLE_TEMPLATE>
 		<Speed min="0.0" max="10.0" start="1.0" increment="1.0"></Speed>
-		<Velocity></Velocity>
-		<FireDamage></FireDamage>
-		<FireRadius></FireRadius>
-		<ExplosionRadius></ExplosionRadius>
+		<Velocity min="0.0" max="10.0" start="1.0" increment="1.0"></Velocity>
+		<FireDamage min="0.0" max="100.0" start="0.0" increment="1.0"></FireDamage>
+		<FireRadius min="10.0" max="200.0" start="10.0" increment="2.0"></FireRadius>
+		<ExplosionRadius min="0.0" max="200.0" start="0.0" increment="2.0"></ExplosionRadius>
 		<ProjectileMaxDistance></ProjectileMaxDistance>
 		<ProjectileTraveled></ProjectileTraveled></DOUBLE>
 	<INTEGER>
@@ -32,8 +32,5 @@
 	<POSITION>
 		<POSITION_TEMPLATE></POSITION_TEMPLATE>
 		<ProjectileTargetPosition></ProjectileTargetPosition></POSITION>
-	<SPEED>
-		<SPEED_TEMPLATE min="0" max="10" increment="1"></SPEED_TEMPLATE>
-	</SPEED>
 	<COMPONENT>
 		<SpawnOnDeathObject></SpawnOnDeathObject></COMPONENT></AttributePresets>
