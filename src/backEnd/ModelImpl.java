@@ -3,6 +3,7 @@ package backEnd;
 import backEnd.Bank.BankController;
 import backEnd.GameData.GameData;
 import backEnd.GameData.State.State;
+import backEnd.GameEngine.EngineStatus;
 import backEnd.GameEngine.Engine.GameProcessController;
 import backEnd.LevelProgression.LevelProgressionController;
 import backEnd.Mode.Mode;
@@ -28,6 +29,7 @@ public class ModelImpl implements Model{
 	private DataController myDataController;
 	private GameProcessController myEngine;
 	private LevelProgressionController myLevelProgressionController;
+
 	
 	public ModelImpl(GameData gameData) throws XMLReadingException {
 		myDataController = new DataController();

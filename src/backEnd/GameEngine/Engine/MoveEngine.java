@@ -31,17 +31,11 @@ public class MoveEngine implements Engine{
 		for (Component c: myState.getComponentGraph().getAllComponents()){
 			Object o = c.getAttribute("Position").getValue();
 			Point2D currentLocation=(Point2D) o;
-			newGraph.addComponentToGrid(c, currentLocation);
 			mb=new MoveBehavior(c);
-			if (currentLocation==null){
+			currentTile = currentState.getTileGrid().getTileByScreenLocation(currentLocation);
+			if (currentTile==null){
 				continue;
 			}
-			try{
-			currentTile = myState.getTileGrid().getTileByScreenLocation(currentLocation);
-			} catch (Exception e){ //for out of bound components
-				return;
-			}
-			newGraph.removeComponent(c);
 			try {
 				Object speedObj=c.getAttribute("Speed").getValue();
 				mb.setMoveAmount((double) speedObj);
@@ -51,9 +45,11 @@ public class MoveEngine implements Engine{
 			} catch (FileNotFoundException e) {
 				ErrorDialog fnf = new ErrorDialog();
 				fnf.create("Error", "File not found");
+				break;
 			}
 		}
 		myState.setComponentGraph(newGraph);
-		
+		System.out.println("PLEASE STOP MOVE ENGINE 5");
+		return;
 	}
 }
