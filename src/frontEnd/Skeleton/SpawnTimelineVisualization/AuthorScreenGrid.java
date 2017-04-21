@@ -19,6 +19,7 @@ public class AuthorScreenGrid implements SkeletonObject{
 	private View myView;
 	private ScreenGrid myScreenGrid;
 	private Collection<Integer> takenIDs;
+	private Tab screenGridTab;
 	
 	public AuthorScreenGrid(View view, ScreenGrid screenGrid) {
 		myView = view;
@@ -32,7 +33,10 @@ public class AuthorScreenGrid implements SkeletonObject{
 		Tab tabAdd = new Tab("Add New Spawn Timeline");
 		tabAdd.setClosable(false);
 		tabAdd.setOnSelectionChanged((e) -> {
-			if(tabAdd.selectedProperty().get()){
+			if(!myRoot.getTabs().contains(screenGridTab)){
+				createGridTab();
+				myRoot.getSelectionModel().select(screenGridTab);
+			} else if(tabAdd.selectedProperty().get()){
 				createNewTimelineTab();
 			}
 		});
@@ -96,14 +100,16 @@ public class AuthorScreenGrid implements SkeletonObject{
 	}
 
 	private void createGridTab() {
-		Tab tabSG = new Tab("Game Grid");
-		tabSG.setContent(myScreenGrid.getRoot());
-		tabSG.setClosable(false);
-		myRoot.getTabs().add(tabSG);
+		screenGridTab = new Tab("Game Grid");
+		screenGridTab.setContent(myScreenGrid.getRoot());
+		screenGridTab.setClosable(false);
+		myRoot.getTabs().add(0, screenGridTab);
 	}
 
 	@Override
-	public Node getRoot() {
+	public Node getRoot(){
+		// force refresh, not sure why this needs to be done
+		myRoot.getTabs().remove(screenGridTab); 
 		return myRoot;
 	}
 

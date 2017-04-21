@@ -27,7 +27,7 @@ import resources.Constants;
  * @author Miguel, Tim
  *
  */
-public class TileCommandCenter implements CommandCenter, SkeletonObject{
+public class OnGridTileCommandCenter implements CommandCenter, SkeletonObject{
 	private Stage myStage;
 	private View myView;
 	private TabPane tabPane;
@@ -36,7 +36,7 @@ public class TileCommandCenter implements CommandCenter, SkeletonObject{
 	private Tile myTile;
 
 
-	public TileCommandCenter(View view, Tile tile, State state) {
+	public OnGridTileCommandCenter(View view, Tile tile, State state) {
 		myView = view;
 		myTile = tile;
 		myComponents = state.getComponentsByTileGridPosition((Point2D) tile.getAttribute("Position").getValue());

@@ -166,14 +166,15 @@ public class AttributeCommandCenter{
 			
 		} else {
 			// Player Mode
-			try {
-				AttributeViewerCreator viewerCreator = new AttributeViewerCreator(myView, obj, attr);
-				right = viewerCreator.extractViewer(myAttrNameResources.getString(attr.getName()));
-			} catch (NullPointerException e) {
-				right = new Label("No Attribute Value Stored");
-			}
+			AttributeViewerCreator viewerCreator = new AttributeViewerCreator(myView, obj, attr);
+			right = viewerCreator.extractViewer(myAttrNameResources.getString(attr.getName()));
 		}
-		finalViewer.getChildren().add(right);
+		try {
+			finalViewer.getChildren().add(right);
+		} catch (NullPointerException e) {
+			right = new Label("No Attribute Value Stored");
+			finalViewer.getChildren().add(right);
+		}
 		return finalViewer;
 	}
 
