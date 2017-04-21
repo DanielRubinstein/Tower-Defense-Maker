@@ -19,7 +19,6 @@ import ModificationFromUser.Modification_EditAttribute;
 import backEnd.Coord;
 import backEnd.Attribute.Attribute;
 import backEnd.Attribute.AttributeImpl;
-import backEnd.Mode.UserModeType;
 import javafx.geometry.Point2D;
 
 /**
@@ -52,7 +51,7 @@ public class StateImpl extends Observable implements State {
 			for (int col = 0; col < numColsInGrid; col++) {
 				Point2D loc = new Point2D(col, row);
 				
-				Tile newTile = new TileImpl(Arrays.asList(), Arrays.asList(UserModeType.AUTHOR), loc);
+				Tile newTile = new TileImpl(Arrays.asList(), Arrays.asList("AUTHOR"), loc);
 				
 				Attribute<String> imgAttr = (Attribute<String>) newTile.getAttribute("ImageFile");
 				imgAttr.setValue(myImageResource.getString("default_tile"));
