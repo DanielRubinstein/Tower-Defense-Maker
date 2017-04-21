@@ -68,12 +68,15 @@ public class AttackEngine implements Engine {
 		Point2D bulletPos = (Point2D) attacker.getAttribute(("Position"));
 		Point2D targetPos = (Point2D) target.getAttribute(("Position"));
 		
-		projectile.setAttributeValue(("Position"), bulletPos);
-		projectile.setAttributeValue(("ProjectileTargetPosition"), targetPos);
-		projectile.setAttributeValue(("ProjectileDistance"), targetPos.subtract(bulletPos));
+		projectile.setAttributeValue("Position", bulletPos);
+		projectile.setAttributeValue("ProjectileTargetPosition", targetPos);
+		projectile.setAttributeValue("ProjectileDistance", targetPos.subtract(bulletPos));
+		projectile.setAttributeValue("ProjectileTarget", target);
+		
 		
 		currentState.getComponentGraph().addComponentToGrid(projectile, bulletPos);
 	}
+
 
 
 	/**
@@ -95,16 +98,19 @@ public class AttackEngine implements Engine {
 		Attribute<String> projectileType = (Attribute<String>) af.getAttribute(("FireType"));
 		Attribute<Integer> projectileDamage = (Attribute<Integer>) af.getAttribute(("FireDamage"));
 		Attribute<Double> explosionSize = (Attribute<Double>) af.getAttribute(("ExplosionRadius"));
+		Attribute<Double> slowFactor = (Attribute<Double>) af.getAttribute(("SlowFactor"));
 		
 		projectileImage.setValue((String) attacker.getAttribute("FireImage").getValue());
 		projectileType.setValue((String) attacker.getAttribute("FireType").getValue());
 		projectileDamage.setValue((Integer) attacker.getAttribute("FireDamage").getValue());
 		explosionSize.setValue((Double) attacker.getAttribute("ExplosionRadius").getValue());
+		slowFactor.setValue((Double) attacker.getAttribute("SlowFactor").getValue());
 		
 		ad.addAttribute(("ImageFile"), (backEnd.Attribute.AttributeImpl<?>) projectileImage);
 		ad.addAttribute(("FireType"), (backEnd.Attribute.AttributeImpl<?>) projectileType);
 		ad.addAttribute(("FireDamage"), (backEnd.Attribute.AttributeImpl<?>) projectileDamage);
 		ad.addAttribute(("ExplosionRadius"), (backEnd.Attribute.AttributeImpl<?>) explosionSize);
+		ad.addAttribute(("SlowFactor"), (backEnd.Attribute.AttributeImpl<?>) slowFactor);
 		
 		Component projectile = new Component(ad);
 		projectile.setMyType("Projectile");	
