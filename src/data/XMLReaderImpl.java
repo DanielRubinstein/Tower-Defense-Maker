@@ -11,7 +11,7 @@ import com.thoughtworks.xstream.io.xml.DomDriver;
 import backEnd.GameData.GameData;
 import backEnd.GameData.State.Component;
 import backEnd.GameData.State.Tile;
-import backEnd.LevelProgression.LevelProgressionController;
+import backEnd.LevelProgression.LevelProgressionControllerImpl;
 
 /**
  * This class handles loading both game state data and universal game data

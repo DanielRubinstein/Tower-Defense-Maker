@@ -4,6 +4,7 @@ import java.util.Collection;
 
 import backEnd.GameData.State.Component;
 import backEnd.GameData.State.Tile;
+import backEnd.LevelProgression.LevelProgressionControllerReader;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.stage.Stage;
@@ -22,5 +23,7 @@ public interface ViewReader {
 	public Stage getAppStage();
 	
 	public void reportError(Exception e);
+	
+	LevelProgressionControllerReader getLevelProgressionController();
 	
 }

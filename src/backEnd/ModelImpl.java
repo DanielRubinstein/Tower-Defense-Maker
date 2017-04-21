@@ -9,7 +9,7 @@ import backEnd.Bank.BankController;
 import backEnd.GameData.GameData;
 import backEnd.GameData.State.State;
 import backEnd.GameEngine.Engine.GameProcessController;
-import backEnd.LevelProgression.LevelProgressionController;
+import backEnd.LevelProgression.LevelProgressionControllerReader;
 import backEnd.Mode.Mode;
 import backEnd.Mode.ModeImpl;
 import backEnd.Mode.ModeReader;
@@ -32,7 +32,7 @@ public class ModelImpl implements Model{
 	private BankController myBankController;
 	private DataController myDataController;
 	private GameProcessController myEngine;
-	private LevelProgressionController myLevelProgressionController;
+	private LevelProgressionControllerReader myLevelProgressionController;
 	
 	public ModelImpl(GameData gameData) throws XMLReadingException {
 		myDataController = new DataController();
@@ -77,5 +77,10 @@ public class ModelImpl implements Model{
 	
 	public SimpleStringProperty getEngineStatus(){
 		return myEngine.getEngineStatus();
+	}
+
+	@Override
+	public LevelProgressionControllerReader getLevelProgressionController() {
+		return (LevelProgressionControllerReader) myLevelProgressionController;
 	}
 }

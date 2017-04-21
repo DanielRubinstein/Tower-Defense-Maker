@@ -3,7 +3,7 @@ package backEnd.Mode;
 import java.util.Arrays;
 import java.util.List;
 
-import backEnd.LevelProgression.LevelProgressionController;
+import backEnd.LevelProgression.LevelProgressionControllerReader;
 import javafx.beans.property.SimpleBooleanProperty;
 
 /**
@@ -19,7 +19,7 @@ public class ModeImpl implements ModeReader, Mode{
 	private List<String> userModes;
 	private List<String> gameModes;
 	
-	public ModeImpl(String gameMode, String userMode, LevelProgressionController levelProgression){
+	public ModeImpl(String gameMode, String userMode, LevelProgressionControllerReader levelProgression){
 		this.currGameMode = gameMode;
 		this.currUserMode = userMode;
 		this.userModes = Arrays.asList("AUTHOR", "PLAYER");

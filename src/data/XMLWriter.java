@@ -5,7 +5,7 @@ import java.util.Map;
 
 import backEnd.Bank.BankController;
 import backEnd.GameData.GameDataInterface;
-import backEnd.LevelProgression.LevelProgressionController;
+import backEnd.LevelProgression.LevelProgressionControllerReader;
 
 public interface XMLWriter {
 	
@@ -13,6 +13,6 @@ public interface XMLWriter {
 	
 	void saveUniversalGameData(BankController bankController, String filePath);
 	
-	void saveLevelProgressionData(LevelProgressionController levelProgression, String filePath);
+	void saveLevelProgressionData(LevelProgressionControllerReader levelProgression, String filePath);
 	
 }
