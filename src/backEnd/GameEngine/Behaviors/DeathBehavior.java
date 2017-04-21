@@ -2,7 +2,6 @@ package backEnd.GameEngine.Behaviors;
 
 import java.util.Map;
 import java.util.Observable;
-
 import backEnd.Attribute.AttributeData;
 import backEnd.Attribute.AttributeImpl;
 import backEnd.GameData.State.Component;
@@ -13,7 +12,6 @@ public class DeathBehavior implements Behavior {
 	
 	private boolean spawnsOnDeath;
 	private Component componentSpawnedOnDeath;
-	private AttributeData myAttributes;
 
 	@Override
 	public <T> void execute(T componentToUse) { //pass in a component
@@ -21,7 +19,8 @@ public class DeathBehavior implements Behavior {
 		Object spawn=myComponent.getAttribute("SpawnsOnDeath").getValue();
 		spawnsOnDeath=(boolean) spawn;
 		if (spawnsOnDeath){
-			componentSpawnedOnDeath=(Component) myComponent.getAttribute("COMPONENT_SPAWNED_ON_DEATH").getValue();
+			Object spawnedOnDeath=myComponent.getAttribute("SpawnOnDeathObject").getValue();
+			componentSpawnedOnDeath=(Component) spawnedOnDeath;
 		}
 
 	}
