@@ -13,8 +13,8 @@ import backEnd.Attribute.Attribute;
 import backEnd.Attribute.AttributeData;
 import backEnd.Attribute.AttributeFactory;
 import backEnd.Attribute.AttributeOwner;
-import backEnd.GameEngine.BehaviorFactory;
 import backEnd.GameEngine.Behaviors.Behavior;
+import backEnd.GameEngine.Behaviors.BehaviorFactory;
 
 public class Component extends Observable implements AttributeOwner {
 	/**
