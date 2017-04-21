@@ -13,7 +13,9 @@ import java.util.Set;
  */
 
 public class AttributeData extends Observable {
-	
+	//only callee can cast
+	//Map<Class<T>, Attribute
+	//private Map<Class<?>,List<Attribute<?>>> myAttributes;
 	
 	private Map<String,Attribute<?>> myAttributes;
 	

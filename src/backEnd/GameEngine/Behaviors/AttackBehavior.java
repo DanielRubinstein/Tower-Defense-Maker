@@ -24,7 +24,7 @@ public class AttackBehavior implements Behavior{
 	public AttackBehavior(Component inputComponent, State currentState){
 		myComponent=inputComponent;
 		myState = currentState;
-		currentPosition=(Point2D) myComponent.getAttribute("Position").getValue();
+		currentPosition = (Point2D) myComponent.getAttribute("Position").getValue();
 	}
 	
 	

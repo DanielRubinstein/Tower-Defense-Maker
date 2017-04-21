@@ -1,8 +1,14 @@
 package backEnd;
 
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 import backEnd.Bank.BankController;
 import backEnd.GameData.GameData;
 import backEnd.GameData.State.State;
+import backEnd.GameEngine.EngineStatus;
 import backEnd.GameEngine.Engine.GameProcessController;
 import backEnd.LevelProgression.LevelProgressionController;
 import backEnd.Mode.Mode;
@@ -28,20 +34,20 @@ public class ModelImpl implements Model{
 	private DataController myDataController;
 	private GameProcessController myEngine;
 	private LevelProgressionController myLevelProgressionController;
+	private EngineStatus myEngineStatus;
 	
-	public ModelImpl(GameData gameData) throws XMLReadingException {
+	public ModelImpl(GameData gameData, EngineStatus engineStatus) throws XMLReadingException {
 		myDataController = new DataController();
 		myGameData = gameData;
-		myMode = new ModeImpl();
+		myLevelProgressionController = myDataController.loadLevelProgressionData();
+		myMode = new ModeImpl("DEFAULT", "AUTHOR", myLevelProgressionController);
 		myEngine = new GameProcessController(myGameData.getState(), myGameData.getRules());
 		myBankController = myDataController.generateBanks();
-		myLevelProgressionController = new LevelProgressionController();
 	}
 
 	public State getState(){
 		return myGameData.getState();
 	}
-
 	
 	public ModeReader getModeReader(){
 		return (ModeReader) myMode;

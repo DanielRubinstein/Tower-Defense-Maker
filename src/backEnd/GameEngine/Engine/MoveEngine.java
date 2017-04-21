@@ -1,9 +1,10 @@
 package backEnd.GameEngine.Engine;
 import java.io.FileNotFoundException;
+
+
 import backEnd.GameEngine.Behaviors.*;
 import frontEnd.CustomJavafxNodes.ErrorDialog;
 import javafx.geometry.Point2D;
-import backEnd.Attribute.AttributeImpl;
 import backEnd.GameData.State.*;
 
 
@@ -26,37 +27,29 @@ public class MoveEngine implements Engine{
 	@Override
 	public void gameLoop(State currentState, double stepTime) {
 		myState=currentState;
+		ComponentGraph newGraph=new ComponentGraphImpl();
 		for (Component c: myState.getComponentGraph().getAllComponents()){
-			mb=new MoveBehavior(c);
-			
-			//Point2D currentLocation = AttributeImpl.getValueWithOutCasting(c);
-			
 			Object o = c.getAttribute("Position").getValue();
 			Point2D currentLocation=(Point2D) o;
-			//System.out.println(currentLocation+ "  printing current location");
-			if (currentLocation==null){ //there are some components that have been intialized with empty values. why?
-				//System.out.println("We're checking a component with an uninitialized location.");
+			mb=new MoveBehavior(c);
+			currentTile = currentState.getTileGrid().getTileByScreenLocation(currentLocation);
+			if (currentTile==null){
 				continue;
 			}
-			//try{
-			//System.out.println("currentLocation: "+currentLocation.getX());
-			currentTile = myState.getTileGrid().getTileByScreenLocation(currentLocation); 
-			myState.getComponentGraph().removeComponent(c);
 			try {
 				Object speedObj=c.getAttribute("Speed").getValue();
-				//System.out.println("speed is: "+(double) speedObj);
 				mb.setMoveAmount((double) speedObj);
 				mb.execute(currentTile);
 				Point2D newPosition=mb.getPosition();
-				//System.out.println("Move Behavior executed. Old position was: "+currentLocation + " new position is "+newPosition);
-				myState.getComponentGraph().addComponentToGrid(c, newPosition);
+				newGraph.addComponentToGrid(c, newPosition);
 			} catch (FileNotFoundException e) {
 				ErrorDialog fnf = new ErrorDialog();
 				fnf.create("Error", "File not found");
+				break;
 			}
-			return;
 		}
-		
-		
+		myState.setComponentGraph(newGraph);
+		System.out.println("PLEASE STOP MOVE ENGINE 5");
+		return;
 	}
 }

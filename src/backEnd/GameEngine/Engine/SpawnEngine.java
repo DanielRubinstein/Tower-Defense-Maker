@@ -51,8 +51,7 @@ public class SpawnEngine implements Engine {
 		List<Tile> tileList = currentState.getTileGrid().getAllTiles();
 		for (Tile spawnTile : tileList) {
 			if (!spawnTile.getAttribute(myResources.getString(spawnQueueAttributeName)).getValue().equals(null)) {
-				Attribute<SpawnQueue> spawnQueueAttribute = (Attribute<SpawnQueue>) spawnTile
-						.getAttribute(myResources.getString(spawnQueueAttributeName));
+				Attribute<SpawnQueue> spawnQueueAttribute = (Attribute<SpawnQueue>) spawnTile.getAttribute(myResources.getString(spawnQueueAttributeName));
 				SpawnQueue currentSpawnQueue = spawnQueueAttribute.getValue();
 				// Spawning with frequencies
 				for (Component component : currentSpawnQueue

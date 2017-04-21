@@ -12,6 +12,7 @@ import backEnd.Attribute.AttributeOwner;
 import backEnd.GameData.GameData;
 import backEnd.GameData.State.Component;
 import backEnd.GameData.State.Tile;
+import backEnd.GameData.State.TileImpl;
 import backEnd.Mode.ModeException;
 import javafx.geometry.Point2D;
 
@@ -49,29 +50,30 @@ public class Modification_AddPresetAttributeOwnerToGrid implements ModificationF
 		newAttrOwn.setObserverList(oldObservers);
 		AttributeOwner cleanAO = (AttributeOwner) xStream.fromXML(serializedAO);
 		cleanAO.setAttributeValue("Position", location);
-		
 		try {
 			Method add = Modification_AddPresetAttributeOwnerToGrid.class.getDeclaredMethod("add", cleanAO.getClass());
 			add.setAccessible(true);
 			add.invoke(this, cleanAO);
 		} catch (NoSuchMethodException e) {
-			System.out.println("in Modification_AddNewAttributeOwnerToGrid, No method found, ugh");
+			System.out.println("in Modification_AddNewPresetAttributeOwnerToGrid, No method found, ugh");
 			// do nothing
 			// this means the thing being put in attribute command center is a tile
-		} catch (Exception e) {
+		} catch (ModeException e){
+			throw e;
+		} finally {
 			// something went wrong
-			System.out.println("Something went wrong in Modification_AddNewAttributeOwnerToGrid");
-			// TODO add exception?
+			System.out.println("Something went wrong in Modification_AddNewPresetAttributeOwnerToGrid");
+			// TODO add exception
 		}
 	}
 	
-	private void add(Tile tile){
+	private void add(TileImpl tile){
 		switch (myModel.getMode().getUserMode()) {
-		case AUTHOR:
+		case "AUTHOR":
 			myModel.getState().getTileGrid().setTileByScreenPosition(tile,location);
 			break;
 
-		case PLAYER:
+		case "PLAYER":
 			throw new ModeException(myModel.getMode(), DESCRIPTION_TILE);
 		}
 	}

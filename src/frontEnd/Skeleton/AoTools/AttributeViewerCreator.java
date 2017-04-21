@@ -4,12 +4,14 @@ import java.lang.reflect.Method;
 
 import backEnd.Attribute.Attribute;
 import backEnd.Attribute.AttributeOwner;
+import backEnd.GameData.State.Component;
 import frontEnd.View;
 import javafx.geometry.Point2D;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.HBox;
 
 public class AttributeViewerCreator {
 	private View myView;
@@ -40,6 +42,10 @@ public class AttributeViewerCreator {
 	
 	private Node create_IMAGE_Viewer() {
 		String imagePath = (String) myAttr.getValue();
+		return createImageView(imagePath);
+	}
+	
+	private ImageView createImageView(String imagePath) {
 		Image image = new Image(getClass().getClassLoader().getResourceAsStream(imagePath));
 		ImageView imv = new ImageView();
 		imv.setImage(image);
@@ -47,7 +53,7 @@ public class AttributeViewerCreator {
 		imv.setFitHeight(100);
 		return imv;
 	}
-	
+
 	private Node create_POSITION_Viewer() {
 		String stringFormatter = "(%.0f, %.0f)";
 		Point2D pos = (Point2D) myAttr.getValue();
@@ -55,7 +61,17 @@ public class AttributeViewerCreator {
 	}
 
 	private Node create_COMPONENT_Viewer() {
-		return new Label("inDev");
+		Component baby = (Component) myAttr.getValue();
+		
+		HBox pair = new HBox();
+		
+		String babyImagePath = (String) baby.getAttribute("IMAGEFILE").getValue();
+		ImageView imv = createImageView(babyImagePath);
+		Label name = new Label();
+		name.setText(myView.getBankController().getAOName(baby));
+		pair.getChildren().add(name);
+		pair.getChildren().add(imv);
+		return pair;
 	}
 	
 	private Node createBasicViewer() {

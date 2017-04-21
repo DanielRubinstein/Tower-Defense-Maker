@@ -13,6 +13,7 @@ import backEnd.Attribute.AttributeOwnerReader;
 import backEnd.Bank.BankController;
 import backEnd.GameData.State.Component;
 import backEnd.GameData.State.Tile;
+import backEnd.GameData.State.TileImpl;
 import backEnd.Mode.ModeException;
 
 /**
@@ -40,7 +41,7 @@ public class Modification_AddNewPresetAttributeOwner implements ModificationFrom
 	public void invoke(ModelImpl model) throws Exception {
 		myBankController = model.getBankController();
 		switch (model.getMode().getUserMode()) {
-		case AUTHOR:
+		case "AUTHOR":
 			AttributeOwner newAttrOwnToAdd;
 			if(model.getGameData().getState().getComponentGraph().contains(newAttrOwn) || model.getGameData().getState().getTileGrid().contains(newAttrOwn)){
 				xStream = new XStream(new DomDriver());
@@ -68,13 +69,13 @@ public class Modification_AddNewPresetAttributeOwner implements ModificationFrom
 				// TODO add exception?
 			}
 			break;
-		case PLAYER:
+		case "PLAYER":
 			throw new ModeException(model.getMode(), DESCRIPTION);
 		}
 		
 	}
 	
-	private void add(Tile tile){
+	private void add(TileImpl tile){
 		myBankController.addNewTile(newAOName, tile);
 	}
 	

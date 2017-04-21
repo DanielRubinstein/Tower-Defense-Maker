@@ -14,9 +14,8 @@ import backEnd.GameData.State.State;
 import backEnd.GameData.State.Tile;
 import backEnd.GameData.State.TileGrid;
 import frontEnd.View;
-import frontEnd.Skeleton.AoTools.ComponentCommandCenter;
-import frontEnd.Skeleton.AoTools.TileCommandCenter;
-import frontEnd.Skeleton.AoTools.TileCommandCenterImpl;
+import frontEnd.Skeleton.AoTools.GenericCommandCenter;
+import frontEnd.Skeleton.AoTools.OnGridTileCommandCenter;
 import frontEnd.Skeleton.UserTools.SkeletonObject;
 import javafx.geometry.Point2D;
 import javafx.scene.Group;
@@ -133,15 +132,15 @@ public class ScreenGrid implements SkeletonObject, Observer {
 
 	private void setTileInteraction(Node n, Tile t) {
 		n.setOnMouseClicked(e -> {
-			TileCommandCenter tileInteractor = new TileCommandCenterImpl(myView, t, myState);
-			tileInteractor.launch(e.getScreenX(), e.getScreenY());
+			OnGridTileCommandCenter tileInteractor = new OnGridTileCommandCenter(myView, t, myState);
+			tileInteractor.launch("On-Screen Tile" ,e.getScreenX(), e.getScreenY());
 		});
 	}
 
 	private void setCommandInteraction(Node n, AttributeOwner c) {
 		n.setOnMouseClicked(e -> {
-			ComponentCommandCenter comCenter = new ComponentCommandCenter(myView, c);
-			comCenter.launch(e.getSceneX(), e.getSceneY());
+			GenericCommandCenter comCenter = new GenericCommandCenter(myView, c);
+			comCenter.launch("On-Screen Component", e.getSceneX(), e.getSceneY());
 		});
 	}
 

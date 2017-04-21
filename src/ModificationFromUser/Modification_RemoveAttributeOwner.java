@@ -6,6 +6,7 @@ import backEnd.ModelImpl;
 import backEnd.Attribute.AttributeOwner;
 import backEnd.GameData.State.Component;
 import backEnd.GameData.State.Tile;
+import backEnd.GameData.State.TileImpl;
 
 public class Modification_RemoveAttributeOwner implements ModificationFromUser {
 	
@@ -36,7 +37,7 @@ public class Modification_RemoveAttributeOwner implements ModificationFromUser {
 		
 	}
 	
-	private void remove(Tile tile) throws Exception{
+	private void remove(TileImpl tile) throws Exception{
 		throw new Exception(ERROR_DESCRIPTION);
 	}
 	
