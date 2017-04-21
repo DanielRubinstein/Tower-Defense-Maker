@@ -84,7 +84,7 @@ public class StateImpl extends Observable implements State {
 	public ComponentGraph getComponentGraph() {
 		return myComponentGraph;
 	}
-
+	
 	private Map<Tile, Coord> findStartTiles() {
 		Map<Tile, Coord> startTiles = new HashMap<Tile, Coord>();
 		for (int col = 0; col < numColsInGrid; col++) { // find the start position
@@ -215,6 +215,12 @@ public class StateImpl extends Observable implements State {
 	public Collection<Component> getComponentsByTileGridPosition(Point2D tileGridPosition) {
 		TileCorners tileCorners = new TileCorners(tileGridPosition, myTileGrid.getTileWidth(), myTileGrid.getTileHeight());
 		return myComponentGraph.getComponentsByTileCorners(tileCorners);
+	}
+
+
+	@Override
+	public void setComponentGraph(ComponentGraph newComponentGraph) {
+		myComponentGraph=newComponentGraph;
 	}
 
 

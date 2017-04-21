@@ -13,8 +13,7 @@ import backEnd.Bank.BankController;
 import backEnd.GameData.State.Component;
 import backEnd.GameData.State.TileImpl;
 import frontEnd.View;
-import frontEnd.Skeleton.AoTools.ComponentCommandCenter;
-import frontEnd.Skeleton.AoTools.PresetCreation;
+import frontEnd.Skeleton.AoTools.GenericCommandCenter;
 import javafx.geometry.Bounds;
 import javafx.geometry.Insets;
 import javafx.geometry.Point2D;
@@ -70,15 +69,19 @@ public class Palette<T extends AttributeOwner> implements SkeletonObject, Observ
 
 	private void addNewPresetButton() {
 		addPreset = createNewPresetButton();
-		addPreset.disableProperty().bind(myView.getBooleanAuthorModeProperty().not());
-		addPreset.disableProperty().addListener((a,b,c)->{
+		disableButtonInPlayerMode(addPreset);
+		tile.getChildren().add(addPreset);
+	}
+
+	private void disableButtonInPlayerMode(ImageView image1) {
+		image1.disableProperty().bind(myView.getBooleanAuthorModeProperty().not());
+		image1.disableProperty().addListener((a,b,c)->{
 			if(c){
-				tile.getChildren().remove(addPreset);
+				tile.getChildren().remove(image1);
 			} else{
-				tile.getChildren().add(addPreset);
+				tile.getChildren().add(image1);
 			}
 		});
-		tile.getChildren().add(addPreset);
 	}
 
 	private void addPresetToPalette(T preset) {
@@ -91,8 +94,8 @@ public class Palette<T extends AttributeOwner> implements SkeletonObject, Observ
 
 	private void setPresetInteractions(T preset, ImageView imageView) {
 		setDoubleClickEvent(imageView, (iV) ->{
-			ComponentCommandCenter comCenter = new ComponentCommandCenter(myView, preset);
-			comCenter.launch(iV.getX(), iV.getY());
+			GenericCommandCenter presetComCenter = new GenericCommandCenter(myView, preset);
+			presetComCenter.launch("Preset", iV.getX(), iV.getY());
 		});
 		makeHoverOverName(preset, imageView);
 		makePresetDraggable(preset, imageView);
@@ -160,8 +163,8 @@ public class Palette<T extends AttributeOwner> implements SkeletonObject, Observ
 					newAO = new Component();
 					break;
 				}
-				PresetCreation presetCreation = new PresetCreation(myView, newAO);
-				presetCreation.launch(0d, 0d);
+				GenericCommandCenter presetCreation = new GenericCommandCenter(myView, newAO);
+				presetCreation.launch("Design a new preset", 0d, 0d);
 			} catch (FileNotFoundException e) {
 				myView.reportError(e);
 			}
