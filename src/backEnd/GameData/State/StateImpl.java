@@ -19,7 +19,7 @@ import ModificationFromUser.Modification_EditAttribute;
 import backEnd.Coord;
 import backEnd.Attribute.Attribute;
 import backEnd.Attribute.AttributeImpl;
-import backEnd.Mode.UserModeType;
+import backEnd.GameEngine.EngineStatus;
 import javafx.geometry.Point2D;
 
 /**
@@ -37,12 +37,14 @@ public class StateImpl extends Observable implements State {
 	private final static ResourceBundle myResources = ResourceBundle.getBundle(RESOURCES_PATH);
 	private final static String IMAGEPATH_RESOURCES_PATH = "resources/images";
 	private final static ResourceBundle myImageResource = ResourceBundle.getBundle(IMAGEPATH_RESOURCES_PATH);
+	private EngineStatus myEngineStatus;
 
 	public StateImpl(int numColsInGrid, int numRowsInGrid) throws FileNotFoundException {
 		this.numColsInGrid = numColsInGrid;
 		this.numRowsInGrid = numRowsInGrid;
 		setDefaultTileGrid();
 		myComponentGraph = new ComponentGraphImpl();
+		myEngineStatus=EngineStatus.PAUSED;
 	}
 
 
@@ -52,7 +54,7 @@ public class StateImpl extends Observable implements State {
 			for (int col = 0; col < numColsInGrid; col++) {
 				Point2D loc = new Point2D(col, row);
 				
-				Tile newTile = new TileImpl(Arrays.asList(), Arrays.asList(UserModeType.AUTHOR), loc);
+				Tile newTile = new TileImpl(Arrays.asList(), Arrays.asList("AUTHOR"), loc);
 				
 				Attribute<String> imgAttr = (Attribute<String>) newTile.getAttribute("ImageFile");
 				imgAttr.setValue(myImageResource.getString("default_tile"));
@@ -201,6 +203,10 @@ public class StateImpl extends Observable implements State {
 	public int getGridHeight() {
 		return numRowsInGrid;
 	}
+	
+	public boolean gameIsRunning(){
+		return myEngineStatus.equals(EngineStatus.RUNNING);
+	}
 
 
 	@Override
@@ -213,6 +219,11 @@ public class StateImpl extends Observable implements State {
 	@Override
 	public void setComponentGraph(ComponentGraph newComponentGraph) {
 		myComponentGraph=newComponentGraph;
+	}
+
+
+	public void setEngineStatus(EngineStatus engineStatus) {
+		myEngineStatus=engineStatus;
 	}
 
 

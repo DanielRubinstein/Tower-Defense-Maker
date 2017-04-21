@@ -8,7 +8,6 @@ import java.util.Map;
 import java.util.Observable;
 
 import backEnd.GameEngine.Behaviors.Behavior;
-import backEnd.Mode.UserModeType;
 import javafx.geometry.Point2D;
 import backEnd.Attribute.AttributeData;
 import backEnd.Attribute.AttributeImpl;
@@ -50,12 +49,12 @@ public class BankController extends Observable
 	private void createTemplatesForTesting(){
 		try{
 			
-			Tile newTile = new TileImpl(Arrays.asList(), Arrays.asList(UserModeType.AUTHOR), new Point2D(0,0));
+			Tile newTile = new TileImpl(Arrays.asList(), Arrays.asList("AUTHOR"), new Point2D(0,0));
 			newTile.setAttributeValue("ImageFile", "resources/images/Tiles/Blue.png");
 			newTile.setAttributeValue("MoveDirection","Down");
 			addNewTile("Blue Down Tile", newTile);
 			
-			Tile newTile2 = new TileImpl(Arrays.asList(), Arrays.asList(UserModeType.AUTHOR), new Point2D(0,0));
+			Tile newTile2 = new TileImpl(Arrays.asList(), Arrays.asList("AUTHOR"), new Point2D(0,0));
 			newTile2.setAttributeValue("ImageFile", "resources/images/Tiles/Red.png");
 			newTile2.setAttributeValue("MoveDirection","Right");
 			addNewTile("Red Right Tile", newTile2);

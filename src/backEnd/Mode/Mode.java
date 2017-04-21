@@ -6,28 +6,23 @@ public interface Mode {
 	 * Choose User Mode
 	 * @param newUserMode
 	 */
-	void setUserMode(UserModeType newUserMode);
+	void setUserMode(String newUserMode);
 
 	/**
 	 * @return current User Mode
 	 */
-	UserModeType getUserMode();
-
-	/**
-	 * @return current User Mode as string
-	 */
-	String getUserModeString();
+	String getUserMode();
 
 	/**
 	 * Choose Game Mode
 	 * @param newGameMode
 	 */
-	void setGameMode(GameModeType newGameMode);
+	void setGameMode(String newGameMode);
 
 	/**
 	 * @return current Game Mode
 	 */
-	GameModeType getGameMode();
+	String getGameMode();
 
 	/**
 	 * @return current Game Mode as string
