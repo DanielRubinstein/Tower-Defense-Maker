@@ -67,6 +67,7 @@ public class FacebookConnectorImpl implements FacebookConnector {
 	@Override
 	public void login() throws FacebookException{
 		WebEngine web = loadPage();
+		web.executeScript("document.getElementsByName('email')[0].value='" + "tim.overeem@duke.edu" + "';");
 		web.setOnStatusChanged(e -> {
 			String redirect = web.getLocation();
 			Pattern p = Pattern.compile(DEFAULT_ACCESS_PATTERN);
@@ -86,9 +87,15 @@ public class FacebookConnectorImpl implements FacebookConnector {
 	 * @throws FacebookException
 	 */
 	private WebEngine loadPage() throws FacebookException{
-		WebView browser = new WebView();
+		final WebView browser = new WebView();
+		
+		System.out.println("good version");
 		WebEngine webEngine = browser.getEngine();
 		webEngine.load(totalLoginURL);
+		webEngine.setJavaScriptEnabled(true);
+		//webEngine.load("javascript:document.getElementById('username').value = '"+"tim.overeem@duke.edu"+"';document.getElementById('password').value='"+"cali02"+"';");
+		//webEngine.load("&email=tim.overeem@duke.edu");
+		
 		browser.autosize();
 		
 		Stage dialog = new Stage();
