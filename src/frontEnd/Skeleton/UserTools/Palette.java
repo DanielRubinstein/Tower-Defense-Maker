@@ -157,14 +157,7 @@ public class Palette<T extends AttributeOwner> implements SkeletonObject, Observ
 				AttributeOwner newAO = null;
 				switch(myType){
 				case "Tiles":
-<<<<<<< HEAD
 					newAO = new TileImpl();
-=======
-					//newAO = new TileImpl();
-					// TODO make blank tile
-					newAO = new TileImpl(Arrays.asList(), Arrays.asList("AUTHOR"), new Point2D(0,0));
-					imagePathForNewPreset =  "resources/images/Tiles/grass.jpg";
->>>>>>> ecb9e3800ae6366ed3d14cd2f320159997a3d621
 					break;
 				case "Components":
 					newAO = new Component();

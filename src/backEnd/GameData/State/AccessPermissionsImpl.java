@@ -12,6 +12,7 @@ public class AccessPermissionsImpl implements AccessPermissions {
 		this.gameModePermissions = new ArrayList<String>();
 		this.gameModePermissions.add("DEFAULT");
 		this.userModePermissions = new ArrayList<String>();
+		this.userModePermissions.add("AUTHOR");
 	}
 	
 	public AccessPermissionsImpl(List<String> gameModePermissions, List<String> userModePermissions){
@@ -20,6 +21,9 @@ public class AccessPermissionsImpl implements AccessPermissions {
 			this.gameModePermissions.add("DEFAULT");
 		}
 		this.userModePermissions = new ArrayList<String>(userModePermissions);
+		if (!this.userModePermissions.contains("AUTHOR")) {
+			this.userModePermissions.add("AUTHOR");
+		}
 	}
 
 	@Override

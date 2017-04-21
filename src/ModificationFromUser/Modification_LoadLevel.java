@@ -26,7 +26,7 @@ public class Modification_LoadLevel implements ModificationFromUser {
 	
 	
 	public Modification_LoadLevel(String gameLevel){
-		myGameName = gameName;
+		myLevel = gameLevel;
 	}
 	
 	public Modification_LoadLevel(File gameFile){
@@ -35,8 +35,8 @@ public class Modification_LoadLevel implements ModificationFromUser {
 
 	@Override
 	public void invoke(ModelImpl myModel) throws Exception {		
-		if (myGameName != null){
-			DataInputLoader dataInput = new DataInputLoader(myGameName);
+		if (myLevel != null){
+			DataInputLoader dataInput = new DataInputLoader(myLevel);
 			myGameData = dataInput.getGameData();
 		} else if (myGameFile != null){
 			DataInputLoader dataInput = new DataInputLoader(myGameFile);

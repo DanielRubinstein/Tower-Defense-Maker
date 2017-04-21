@@ -48,7 +48,6 @@ public class Modification_AddPresetAttributeOwnerToGrid implements ModificationF
 		List<Observer> oldObservers = newAttrOwn.getAndClearObservers();
 		String serializedAO = xStream.toXML(newAttrOwn);
 		newAttrOwn.setObserverList(oldObservers);
-<<<<<<< HEAD
 		AttributeOwner cleanAO = (AttributeOwner) xStream.fromXML(serializedAO);
 		cleanAO.setAttributeValue("Position", location);
 		try {
@@ -59,41 +58,22 @@ public class Modification_AddPresetAttributeOwnerToGrid implements ModificationF
 			System.out.println("in Modification_AddNewPresetAttributeOwnerToGrid, No method found, ugh");
 			// do nothing
 			// this means the thing being put in attribute command center is a tile
-		} catch (Exception e) {
+		} catch (ModeException e){
+			throw e;
+		} finally {
 			// something went wrong
 			System.out.println("Something went wrong in Modification_AddNewPresetAttributeOwnerToGrid");
 			// TODO add exception?
-=======
-		if (newAttrOwn instanceof Tile) {
-			switch (myModel.getMode().getUserMode()) {
-			case "AUTHOR":
-				Tile newTile = (Tile) xStream.fromXML(serializedAO);
-				newTile.setAttributeValue("Position", location);
-				myModel.getState().getTileGrid().setTileByScreenPosition(newTile,location);
-				break;
-
-			case "PLAYER":
-				throw new ModeException(myModel.getMode(), DESCRIPTION_TILE);
-			}
-		} else if (newAttrOwn instanceof Component) {
-			Component newComp = (Component) xStream.fromXML(serializedAO);
-			newComp.setAttributeValue("Position", location);
-			myModel.getState().getComponentGraph().addComponentToGrid(newComp, location);
-		} else {
-			// can't be reached
-			// FIXME AHHHHH
-			throw new Exception(DESCRIPTION_ERROR);
->>>>>>> ecb9e3800ae6366ed3d14cd2f320159997a3d621
 		}
 	}
 	
 	private void add(TileImpl tile){
 		switch (myModel.getMode().getUserMode()) {
-		case AUTHOR:
+		case "AUTHOR":
 			myModel.getState().getTileGrid().setTileByScreenPosition(tile,location);
 			break;
 
-		case PLAYER:
+		case "PLAYER":
 			throw new ModeException(myModel.getMode(), DESCRIPTION_TILE);
 		}
 	}
