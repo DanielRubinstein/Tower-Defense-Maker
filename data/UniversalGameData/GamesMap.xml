@@ -1,0 +1,16 @@
+<?xml version="1.0"?><map>
+  <entry>
+    <string>Plants vs. Zombies</string>
+    <list>
+      <string>Level 1</string>
+    </list>
+  </entry>
+  <entry>
+    <string>Bloons</string>
+    <java.util.Arrays_-ArrayList>
+      <a class="string-array">
+        <string>Level1</string>
+      </a>
+    </java.util.Arrays_-ArrayList>
+  </entry>
+</map>

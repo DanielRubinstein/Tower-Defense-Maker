@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Map;
 
 import backEnd.GameData.GameData;
+import backEnd.LevelProgression.LevelProgressionController;
 
 public interface XMLReader {
 
@@ -13,5 +14,7 @@ public interface XMLReader {
 	GameData loadGameStateData(File gameFile) throws XMLReadingException;
 
 	List<Map<String, ?>> loadUniversalGameData(String filePath) throws XMLReadingException;
+	
+	Map<String,List<String>> loadGamesMap(String filePath) throws XMLReadingException;
 
 }
