@@ -13,6 +13,7 @@ import backEnd.Attribute.AttributeOwnerReader;
 import backEnd.Bank.BankController;
 import backEnd.GameData.State.Component;
 import backEnd.GameData.State.Tile;
+import backEnd.GameData.State.TileImpl;
 import backEnd.Mode.ModeException;
 
 /**
@@ -74,7 +75,7 @@ public class Modification_AddNewPresetAttributeOwner implements ModificationFrom
 		
 	}
 	
-	private void add(Tile tile){
+	private void add(TileImpl tile){
 		myBankController.addNewTile(newAOName, tile);
 	}
 	
