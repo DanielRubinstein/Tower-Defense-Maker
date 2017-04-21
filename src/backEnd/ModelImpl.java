@@ -29,15 +29,16 @@ public class ModelImpl implements Model{
 	private DataController myDataController;
 	private GameProcessController myEngine;
 	private LevelProgressionController myLevelProgressionController;
-
+	private EngineStatus myEngineStatus;
 	
-	public ModelImpl(GameData gameData) throws XMLReadingException {
+	public ModelImpl(GameData gameData, EngineStatus engineStatus) throws XMLReadingException {
 		myDataController = new DataController();
 		myGameData = gameData;
 		myMode = new ModeImpl();
 		myEngine = new GameProcessController(myGameData.getState(), myGameData.getRules());
 		myBankController = myDataController.generateBanks();
 		myLevelProgressionController = new LevelProgressionController();
+		myEngineStatus=engineStatus;
 	}
 
 	public State getState(){

@@ -7,6 +7,7 @@ import java.lang.reflect.InvocationTargetException;
 
 import backEnd.GameData.GameData;
 import backEnd.GameData.State.StateImpl;
+import backEnd.GameEngine.EngineStatus;
 import data.XMLReader;
 import data.XMLReaderImpl;
 import data.XMLReadingException;
@@ -26,9 +27,6 @@ public class DataInputLoader {
 		myGameData = generateGameData(s);
 	}
 	
-	public DataInputLoader(File f) throws XMLReadingException{
-		myGameData = generateGameData(f);
-	}
 	public DataInputLoader(StartingInput input) throws XMLReadingException{
 		myGameData = generateGameData(input);
 	}
