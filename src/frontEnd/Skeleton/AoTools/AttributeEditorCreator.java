@@ -2,12 +2,18 @@ package frontEnd.Skeleton.AoTools;
 
 import java.io.File;
 import java.lang.reflect.Method;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.MissingResourceException;
+import java.util.stream.Collectors;
 
 import ModificationFromUser.Modification_EditAttribute;
 import backEnd.Attribute.Attribute;
 import backEnd.Attribute.AttributeOwner;
+import backEnd.GameData.State.Component;
 import frontEnd.View;
 import frontEnd.CustomJavafxNodes.NumberChanger;
 import frontEnd.CustomJavafxNodes.PositionRequester;
@@ -22,6 +28,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.Background;
 import javafx.scene.layout.HBox;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
@@ -56,7 +63,53 @@ public class AttributeEditorCreator {
 	}
 
 	private Node create_COMPONENT_Editor() {
-		return new Label("inDev");
+		Map<HBox, Component> toCompMap = new HashMap<HBox, Component>();
+		Map<Component, HBox> toPairMap = new HashMap<Component, HBox>();
+		Collection<Component> presetComponents = myView.getBankController().getComponentMap().values();
+		Collection<HBox> visualPair = new ArrayList<HBox>();
+		for(Component preset : presetComponents){
+			visualPair.add(createVisualPair(toCompMap, toPairMap, preset));
+		}
+		ObservableList<HBox> options = (ObservableList<HBox>) FXCollections.observableArrayList(visualPair);
+		ComboBox<HBox> optionsBox = new ComboBox<HBox>(options);
+		try {
+			// TODO this will work as long as there is an attribute there
+			optionsBox.getSelectionModel().select(toPairMap.get((Component) myAttr.getValue()));
+		} catch (NullPointerException e) {
+			// do nothing
+		}
+		optionsBox.valueProperty().addListener((o, oldValue, newValue) -> {
+			// where the actual modification gets sent
+			sendModification(toCompMap.get(newValue));
+		});
+		return optionsBox;
+	}
+	
+	private HBox createVisualPair(Map<HBox, Component> toCompMap, Map<Component, HBox> toPairMap, Component preset){
+		HBox pair = new HBox();
+		
+		Label name = new Label();
+		name.setText(myView.getBankController().getAOName(preset));
+		pair.getChildren().add(name);
+		
+		String presetImagePath = (String) preset.getAttribute("ImageFile").getValue();
+		ImageView imv = createImageView(presetImagePath);
+		pair.getChildren().add(imv);
+		
+		pair.setStyle("-fx-background-color: black");
+		
+		toCompMap.put(pair, preset);
+		toPairMap.put(preset, pair);
+		return pair;
+	}
+	
+	private ImageView createImageView(String imagePath) {
+		Image image = new Image(getClass().getClassLoader().getResourceAsStream(imagePath));
+		ImageView imv = new ImageView();
+		imv.setImage(image);
+		imv.setPreserveRatio(true);
+		imv.setFitHeight(100);
+		return imv;
 	}
 
 	private Node create_POSITION_Editor() {
@@ -103,7 +156,6 @@ public class AttributeEditorCreator {
 	}
 
 	private Node create_STRINGLIST_Editor() {
-		Node n;
 		List<String> editParameters = (List<String>) myAttr.getEditParameters();
 		ObservableList<String> options = (ObservableList<String>) FXCollections.observableArrayList(editParameters);
 		ComboBox<String> optionsBox = new ComboBox<String>(options);
@@ -117,8 +169,7 @@ public class AttributeEditorCreator {
 			// where the actual modification gets sent
 			sendModification(newValue);
 		});
-		n = optionsBox;
-		return n;
+		return optionsBox;
 	}
 
 	private HBox create_IMAGE_Editor() {
