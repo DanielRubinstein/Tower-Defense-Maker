@@ -13,8 +13,7 @@ import javafx.geometry.Point2D;
 
 /**
  * 
- * @author Alex
- * @author Christian
+ * @author GameEngine team (Alex, Christian, Daniel)
  */
 public class SpawnEngine implements Engine {
 
