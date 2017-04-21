@@ -35,7 +35,9 @@ public interface ComponentGraph {
 	 * Add a component to the list of components at a given location
 	 * @param newComponent
 	 * @param location
+	 * 
 	 */
+		
 	void addComponentToGrid(Component newComponent, Point2D location);
 
 	/**
