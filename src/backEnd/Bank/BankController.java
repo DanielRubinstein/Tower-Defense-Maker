@@ -23,15 +23,17 @@ public class BankController extends Observable
 {
 	private Map<String, Tile> tileBank;
 	private Map<String, Component> componentBank;
+	private Mode myMode;
 	
-	public BankController()
+	public BankController(Mode myMode)
 	{
 		this.tileBank = new HashMap<String, Tile>();
 		this.componentBank = new HashMap<String, Component>();
+		this.myMode = myMode;
 		createTemplatesForTesting();
 	}
 	
-	public BankController(Map<String, Tile> tileBank, Map<String, Component> componentBank)
+	public BankController(Mode myMode, Map<String, Tile> tileBank, Map<String, Component> componentBank)
 	{
 		this.tileBank = tileBank;
 		this.componentBank = componentBank;
@@ -80,7 +82,7 @@ public class BankController extends Observable
 		
 		for (String x : tileBank.keySet())
 		{
-			if (tileBank.get(x).getAccessPermissions().permitsAccess());
+			//if (tileBank.get(x).getAccessPermissions().permitsAccess());
 		}
 		
 		return subMap;

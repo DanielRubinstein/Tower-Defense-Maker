@@ -40,6 +40,32 @@ public class DataController {
 		}
 	}
 	
+	public Map<String, Component> loadComponentMap()
+	{
+		try
+		{
+			List<Map<String,?>> objectMaps = myXMLReader.loadUniversalGameData(UNIV_GAME_DATA_PATH);
+			return (Map<String,Component>) objectMaps.get(0);
+		}
+		catch (Exception e)
+		{
+			return null;
+		}
+	}
+	
+	public Map<String, Tile> loadTileMap()
+	{
+		try
+		{
+			List<Map<String,?>> objectMaps = myXMLReader.loadUniversalGameData(UNIV_GAME_DATA_PATH);
+			return (Map<String,Tile>) objectMaps.get(1);
+		}
+		catch (Exception e)
+		{
+			return null;
+		}
+	}
+	
 	public void saveUniversalGameData(){
 		myXMLWriter.saveUniversalGameData(bankController, UNIV_GAME_DATA_PATH);
 	}
