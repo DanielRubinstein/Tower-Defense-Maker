@@ -50,7 +50,6 @@ public class Modification_AddPresetAttributeOwnerToGrid implements ModificationF
 		newAttrOwn.setObserverList(oldObservers);
 		AttributeOwner cleanAO = (AttributeOwner) xStream.fromXML(serializedAO);
 		cleanAO.setAttributeValue("Position", location);
-		System.out.println(cleanAO.getClass());
 		try {
 			Method add = Modification_AddPresetAttributeOwnerToGrid.class.getDeclaredMethod("add", cleanAO.getClass());
 			add.setAccessible(true);
