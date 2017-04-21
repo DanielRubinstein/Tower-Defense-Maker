@@ -36,7 +36,7 @@ public class Modification_AddNewPresetAttributeOwner implements ModificationFrom
 	@Override
 	public void invoke(ModelImpl myModel) throws Exception {
 		switch (myModel.getMode().getUserMode()) {
-		case AUTHOR:
+		case "AUTHOR":
 			AttributeOwner newAttrOwnToAdd;
 			if(myModel.getGameData().getState().getComponentGraph().contains(newAttrOwn) || myModel.getGameData().getState().getTileGrid().contains(newAttrOwn)){
 				xStream = new XStream(new DomDriver());
@@ -58,7 +58,7 @@ public class Modification_AddNewPresetAttributeOwner implements ModificationFrom
 				myModel.getBankController().addNewComponent(newAOName, (Component) newAttrOwnToAdd);
 			}
 			break;
-		case PLAYER:
+		case "PLAYER":
 			throw new ModeException(myModel.getMode(), DESCRIPTION);
 		}
 		

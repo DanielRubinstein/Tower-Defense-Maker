@@ -15,7 +15,6 @@ import backEnd.Bank.BankController;
 import backEnd.GameData.State.AccessPermissionsImpl;
 import backEnd.GameData.State.Component;
 import backEnd.GameData.State.TileImpl;
-import backEnd.Mode.UserModeType;
 import frontEnd.View;
 import frontEnd.Skeleton.AoTools.ComponentCommandCenter;
 import frontEnd.Skeleton.AoTools.PresetCreation;
@@ -164,7 +163,7 @@ public class Palette<T extends AttributeOwner> implements SkeletonObject, Observ
 				case "Tiles":
 					//newAO = new TileImpl();
 					// TODO make blank tile
-					newAO = new TileImpl(Arrays.asList(), Arrays.asList(UserModeType.AUTHOR), new Point2D(0,0));
+					newAO = new TileImpl(Arrays.asList(), Arrays.asList("AUTHOR"), new Point2D(0,0));
 					imagePathForNewPreset =  "resources/images/Tiles/grass.jpg";
 					break;
 				case "Components":

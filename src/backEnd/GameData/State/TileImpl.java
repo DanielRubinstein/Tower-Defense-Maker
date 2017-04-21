@@ -13,8 +13,6 @@ import backEnd.Attribute.Attribute;
 import backEnd.Attribute.AttributeData;
 import backEnd.Attribute.AttributeFactory;
 import backEnd.Attribute.AttributeOwner;
-import backEnd.Mode.GameModeType;
-import backEnd.Mode.UserModeType;
 import javafx.geometry.Point2D;
 
 /**
@@ -32,7 +30,7 @@ public class TileImpl extends Observable implements Tile, AttributeOwner {
 	private AttributeData myAttrData;
 	private List<Observer> observers = new ArrayList<Observer>();
 
-	public TileImpl(List<GameModeType> gameModeAccessPermissions, List<UserModeType> userModeAccessPermissions,
+	public TileImpl(List<String> gameModeAccessPermissions, List<String> userModeAccessPermissions,
 			Point2D position) throws FileNotFoundException {
 		//System.out.println("executing Constructor for TileImpl");
 		this.myAccessPerm = new AccessPermissionsImpl(gameModeAccessPermissions, userModeAccessPermissions);

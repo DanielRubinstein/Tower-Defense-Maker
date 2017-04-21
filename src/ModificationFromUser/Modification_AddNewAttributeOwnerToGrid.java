@@ -35,10 +35,10 @@ public class Modification_AddNewAttributeOwnerToGrid implements ModificationFrom
 	public void invoke(ModelImpl myModel) throws Exception {
 		if (newAttrOwn instanceof Tile){
 			switch (myModel.getMode().getUserMode()) {
-			case AUTHOR:
+			case "AUTHOR":
 				myModel.getState().getTileGrid().setTileByGridPosition((Tile) newAttrOwn, (int) location.getX(), (int) location.getY());
 				break;
-			case PLAYER:
+			case "PLAYER":
 				 throw new ModeException(myModel.getMode(), DESCRIPTION_TILE);
 			}	
 		} else if (newAttrOwn instanceof Component){

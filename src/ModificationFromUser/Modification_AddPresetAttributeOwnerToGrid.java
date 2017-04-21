@@ -45,18 +45,16 @@ public class Modification_AddPresetAttributeOwnerToGrid implements ModificationF
 		newAttrOwn.setObserverList(oldObservers);
 		if (newAttrOwn instanceof Tile) {
 			switch (myModel.getMode().getUserMode()) {
-			case AUTHOR:
+			case "AUTHOR":
 				Tile newTile = (Tile) xStream.fromXML(serializedAO);
 				newTile.setAttributeValue("Position", location);
 				myModel.getState().getTileGrid().setTileByScreenPosition(newTile,location);
 				break;
 
-			case PLAYER:
+			case "PLAYER":
 				throw new ModeException(myModel.getMode(), DESCRIPTION_TILE);
 			}
 		} else if (newAttrOwn instanceof Component) {
-
-
 			Component newComp = (Component) xStream.fromXML(serializedAO);
 			newComp.setAttributeValue("Position", location);
 			myModel.getState().getComponentGraph().addComponentToGrid(newComp, location);

@@ -1,5 +1,10 @@
 package backEnd;
 
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 import backEnd.Bank.BankController;
 import backEnd.GameData.GameData;
 import backEnd.GameData.State.State;
@@ -32,10 +37,10 @@ public class ModelImpl implements Model{
 	public ModelImpl(GameData gameData) throws XMLReadingException {
 		myDataController = new DataController();
 		myGameData = gameData;
-		myMode = new ModeImpl();
+		myLevelProgressionController = myDataController.loadLevelProgressionData();
+		myMode = new ModeImpl("DEFAULT", "AUTHOR", myLevelProgressionController);
 		myEngine = new GameProcessController(myGameData.getState(), myGameData.getRules());
 		myBankController = myDataController.generateBanks();
-		myLevelProgressionController = new LevelProgressionController(myDataController, null);
 	}
 
 	public State getState(){

@@ -35,6 +35,10 @@ public class LevelProgressionController {
 		gamesMap.put(gameName, levelList);
 	}
 	
+	public void addNewGame(String gameName){
+		gamesMap.put(gameName, new ArrayList<String>());
+	}
+	
 	public GameData getNextLevel(String gameName, String currentLevel) throws XMLReadingException{
 		List<String> levelPathsList = gamesMap.get(gameName);
 		String nextLevel = null;
