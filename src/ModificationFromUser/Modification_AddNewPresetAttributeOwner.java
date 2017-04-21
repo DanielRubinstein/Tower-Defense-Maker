@@ -38,10 +38,16 @@ public class Modification_AddNewPresetAttributeOwner implements ModificationFrom
 	//FIXME currently the new preset will overwrite an existing preset with the same name, 
 	// based on the implementation of addNewComponent()
 	@Override
+<<<<<<< HEAD
 	public void invoke(ModelImpl model) throws Exception {
 		myBankController = model.getBankController();
 		switch (model.getMode().getUserMode()) {
 		case AUTHOR:
+=======
+	public void invoke(ModelImpl myModel) throws Exception {
+		switch (myModel.getMode().getUserMode()) {
+		case "AUTHOR":
+>>>>>>> ecb9e3800ae6366ed3d14cd2f320159997a3d621
 			AttributeOwner newAttrOwnToAdd;
 			if(model.getGameData().getState().getComponentGraph().contains(newAttrOwn) || model.getGameData().getState().getTileGrid().contains(newAttrOwn)){
 				xStream = new XStream(new DomDriver());
@@ -69,8 +75,13 @@ public class Modification_AddNewPresetAttributeOwner implements ModificationFrom
 				// TODO add exception?
 			}
 			break;
+<<<<<<< HEAD
 		case PLAYER:
 			throw new ModeException(model.getMode(), DESCRIPTION);
+=======
+		case "PLAYER":
+			throw new ModeException(myModel.getMode(), DESCRIPTION);
+>>>>>>> ecb9e3800ae6366ed3d14cd2f320159997a3d621
 		}
 		
 	}

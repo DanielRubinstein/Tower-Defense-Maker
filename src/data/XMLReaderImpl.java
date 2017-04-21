@@ -15,6 +15,7 @@ import backEnd.GameData.State.State;
 import backEnd.GameData.State.StateImpl;
 import backEnd.GameData.State.Tile;
 import backEnd.GameData.State.TileGrid;
+import backEnd.LevelProgression.LevelProgressionController;
 
 /**
  * This class handles loading both game state data and universal game data
@@ -37,13 +38,13 @@ public class XMLReaderImpl implements XMLReader{
 	 * @see data.XMLReader#loadGameStateData(java.lang.String, java.lang.String)
 	 */
 	@Override
-	public GameData loadGameStateData(String filePath, String gameName) throws XMLReadingException
+	public GameData loadGameStateData(String filePath, String levelName) throws XMLReadingException
 	{
 
-		StateImpl state = new StateImpl((TileGrid) xStream.fromXML(new File(filePath+gameName+"_tilegrid.xml")), 
-				(ComponentGraph) xStream.fromXML(new File(filePath+gameName+"_componentlocmap.xml")));
+		StateImpl state = new StateImpl((TileGrid) xStream.fromXML(new File(filePath+"/" + levelName+"/tilegrid.xml")), 
+				(ComponentGraph) xStream.fromXML(new File(filePath+"/" + levelName+"/componentgraph.xml")));
 		
-		return new GameData(state,(Rules)xStream.fromXML(new File(filePath+gameName+"_rules")));
+		return new GameData(state,(Rules)xStream.fromXML(new File(filePath+"/" + levelName+"/rules.xml")));
 
 	}
 	
@@ -67,8 +68,13 @@ public class XMLReaderImpl implements XMLReader{
 		} catch (Exception e){
 			throw new XMLReadingException(xmlFile);
 		}
+	}
 
-		
+	@Override
+	public Map<String,List<String>> loadGamesMap(String filePath) throws XMLReadingException {
+		//TODO: error checking, properties file
+		Map<String, List<String>> gamesMap = (Map<String, List<String>>) loadXML(filePath, "GamesMap");
+		return gamesMap;
 	}
 
 }

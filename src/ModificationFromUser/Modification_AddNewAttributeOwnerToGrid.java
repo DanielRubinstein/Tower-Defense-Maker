@@ -37,6 +37,7 @@ public class Modification_AddNewAttributeOwnerToGrid implements ModificationFrom
 	}
 
 	@Override
+<<<<<<< HEAD
 	public void invoke(ModelImpl model) throws Exception {
 		myModel = model;
 		try {
@@ -51,6 +52,24 @@ public class Modification_AddNewAttributeOwnerToGrid implements ModificationFrom
 			// something went wrong
 			System.out.println("Something went wrong in Modification_AddNewAttributeOwnerToGrid");
 			// TODO add exception?
+=======
+	public void invoke(ModelImpl myModel) throws Exception {
+		if (newAttrOwn instanceof Tile){
+			switch (myModel.getMode().getUserMode()) {
+			case "AUTHOR":
+				myModel.getState().getTileGrid().setTileByGridPosition((Tile) newAttrOwn, (int) location.getX(), (int) location.getY());
+				break;
+			case "PLAYER":
+				 throw new ModeException(myModel.getMode(), DESCRIPTION_TILE);
+			}	
+		} else if (newAttrOwn instanceof Component){
+			myModel.getState().getComponentGraph().addComponentToGrid((Component) newAttrOwn, location);
+
+		} else {
+			// can't be reached
+			// FIXME AHHHHH
+			throw new Exception(DESCRIPTION_ERROR);
+>>>>>>> ecb9e3800ae6366ed3d14cd2f320159997a3d621
 		}
 	}
 	
