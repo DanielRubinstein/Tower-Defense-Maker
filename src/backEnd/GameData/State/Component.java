@@ -13,8 +13,8 @@ import backEnd.Attribute.Attribute;
 import backEnd.Attribute.AttributeData;
 import backEnd.Attribute.AttributeFactory;
 import backEnd.Attribute.AttributeOwner;
-import backEnd.GameEngine.BehaviorFactory;
 import backEnd.GameEngine.Behaviors.Behavior;
+import backEnd.GameEngine.Behaviors.BehaviorFactory;
 
 public class Component extends Observable implements AttributeOwner {
 	/**
@@ -34,15 +34,24 @@ public class Component extends Observable implements AttributeOwner {
 	private AccessPermissions myAccessPermissions;
 	private String myType;
 	private List<Observer> observers = new ArrayList<Observer>();
+	private long ID;
+	
+	public Component() throws FileNotFoundException{
+		this(new AttributeData(),new AccessPermissionsImpl());
+	}
+	
 	public Component(AttributeData attributes) throws FileNotFoundException {
 		this(attributes, new AccessPermissionsImpl());
 	}
 
-	public Component(){
-		
+	public long printID(){
+		return ID;
 	}
 	
 	public Component(AttributeData attributes, AccessPermissions accessPermissions) throws FileNotFoundException {
+		ID = System.nanoTime();
+		System.out.println(ID + "   ");
+		System.out.println("creaing component " + this);
 		myAttributes = attributes;
 		myBehaviors = new HashMap<>();
 		AttributeFactory af = new AttributeFactory();
@@ -127,7 +136,8 @@ public class Component extends Observable implements AttributeOwner {
 	@Override
 	public <T> void setAttributeValue(String attrName, T newVal) {
 		((Attribute<T>) myAttributes.get(attrName)).setValue(newVal);
-		System.out.println("setting component attr " +newVal);
+		//System.out.println("setting component attr " +attrName + "     "    +newVal);
+		
 		notifyObservers();
 	}
 
@@ -136,6 +146,11 @@ public class Component extends Observable implements AttributeOwner {
 		observers.add(obs);
 	}
 
+	
+	public boolean containsAttribute(String key){
+		return myAttributes.containsAttribute(key);
+	}
+	
 	@Override
 	public void notifyObservers() {
 		for (Observer obs : observers) {
@@ -148,11 +163,16 @@ public class Component extends Observable implements AttributeOwner {
 		//addObserver(o);
 	}
 
-	/**
-	 * adds an attribute to the List of Attributes
-	 * 
-	 * @return
-	 */
-	// public abstract void addAttribute(Attribute toAdd);
+	@Override
+	public List<Observer> getAndClearObservers() {
+		List<Observer> currObservers = observers;
+		observers = new ArrayList<Observer>();
+		return currObservers;
+	}
 
+	@Override
+	public void setObserverList(List<Observer> observers) {
+		this.observers = observers;
+	}
+	
 }

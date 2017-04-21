@@ -13,7 +13,9 @@ import java.util.Set;
  */
 
 public class AttributeData extends Observable {
-	
+	//only callee can cast
+	//Map<Class<T>, Attribute
+	//private Map<Class<?>,List<Attribute<?>>> myAttributes;
 	
 	private Map<String,Attribute<?>> myAttributes;
 	
@@ -42,6 +44,10 @@ public class AttributeData extends Observable {
 	
 	public Map<String, Attribute<?>> getAttributeMap(){
 		return myAttributes;
+	}
+	
+	public boolean containsAttribute(String key){ //use this for debugging
+		return myAttributes.containsKey(key);
 	}
 	
 	/**

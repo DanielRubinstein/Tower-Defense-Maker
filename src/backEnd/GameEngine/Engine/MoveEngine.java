@@ -1,16 +1,10 @@
 package backEnd.GameEngine.Engine;
 import java.io.FileNotFoundException;
-import java.util.ArrayList;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Queue;
-import backEnd.Coord;
-import backEnd.Attribute.Attribute;
-import backEnd.Attribute.AttributeImpl;
+
+
 import backEnd.GameEngine.Behaviors.*;
-import frontEnd.Menus.ErrorDialog;
+import frontEnd.CustomJavafxNodes.ErrorDialog;
 import javafx.geometry.Point2D;
-import resources.Constants;
 import backEnd.GameData.State.*;
 
 
@@ -22,11 +16,9 @@ import backEnd.GameData.State.*;
  */
 public class MoveEngine implements Engine{
 	private State myState;
+	private Tile currentTile;
+	private MoveBehavior mb;
 	/**
-	 * simple BFS to label each Tile with the
-	 * direction an object on the Tile should move
-	 * 
-	 * might need to be in State? will need to be recalled when a tower is added or removed from State
 	 * 
 	 * @param TileGrid the Grid of Tiles that Components must navigate
 	 * @param xStart the starting x-coordinate
@@ -35,22 +27,33 @@ public class MoveEngine implements Engine{
 	@Override
 	public void gameLoop(State currentState, double stepTime) {
 		myState=currentState;
+		ComponentGraph newGraph=new ComponentGraphImpl();
 		for (Component c: myState.getComponentGraph().getAllComponents()){
-			System.out.println(c instanceof Component);
-			Tile currentTile = myState.getTileGrid().getTileByLocation((Point2D)c.getAttribute("Position").getValue()); 
-			myState.getComponentGraph().removeComponent(c);
-			MoveBehavior mb=new MoveBehavior(c);
+			Object o = c.getAttribute("Position").getValue();
+			Point2D currentLocation=(Point2D) o;
+			newGraph.addComponentToGrid(c, currentLocation);
+			mb=new MoveBehavior(c);
+			if (currentLocation==null){
+				continue;
+			}
+			try{
+			currentTile = myState.getTileGrid().getTileByScreenLocation(currentLocation);
+			} catch (Exception e){ //for out of bound components
+				return;
+			}
+			newGraph.removeComponent(c);
 			try {
+				Object speedObj=c.getAttribute("Speed").getValue();
+				mb.setMoveAmount((double) speedObj);
 				mb.execute(currentTile);
+				Point2D newPosition=mb.getPosition();
+				newGraph.addComponentToGrid(c, newPosition);
 			} catch (FileNotFoundException e) {
 				ErrorDialog fnf = new ErrorDialog();
 				fnf.create("Error", "File not found");
 			}
-			Point2D newPosition=mb.getPosition();
-			myState.getComponentGraph().addComponentToGrid(c, newPosition);
-			
 		}
-		
+		myState.setComponentGraph(newGraph);
 		
 	}
 }

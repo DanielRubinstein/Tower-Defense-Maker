@@ -7,13 +7,14 @@ import backEnd.GameEngine.Engine.GameProcessController;
 
 public enum Modification_GameRemote implements ModificationFromUser {
 	PLAY (engine -> {
-		System.out.println("PLAY GAME");
-		//FIXME should ultimately execute animation.play()
-		engine.run(100);
+		System.out.println("Invokable to PLAY GAME");
+		engine.playAnimation();
 		}),
 	PAUSE (engine -> {
-		System.out.println("PAUSE GAME");
-		//engine.pause();
+		if(!engine.getEngineStatus().get().equals("PAUSED")){
+			System.out.println("Invokable to PAUSE GAME");
+			engine.pause();
+		}
 		}),
 	FASTFORWARD (engine -> {
 		System.out.println("FASTFORWARD");
@@ -29,7 +30,6 @@ public enum Modification_GameRemote implements ModificationFromUser {
 		});
 
 	private Consumer<GameProcessController> myConsumer;
-	public static final double DEFAULT_STEP_TIME = 1000; 
 	
 	Modification_GameRemote(Consumer<GameProcessController> consumer){
 		myConsumer = consumer;
@@ -39,13 +39,21 @@ public enum Modification_GameRemote implements ModificationFromUser {
 	public void invoke(ModelImpl myModel) throws Exception {
 		switch (this) {
 		case PLAY:
-			myConsumer.accept(myModel.getGameProcessController());
+			if(!myModel.getEngineStatus().equals("RUNNING")){
+				myConsumer.accept(myModel.getGameProcessController());
+				if (myModel.getModeReader().getAuthorBooleanProperty().get()){ 
+					myModel.getMode().toggleUserMode();
+				}
+			}
+			break;
 		default:
 			switch (myModel.getMode().getUserMode()) {
-			case PLAYER:
+			case "PLAYER":
 				myConsumer.accept(myModel.getGameProcessController());
-			case AUTHOR:
+				break;
+			case "AUTHOR":
 				// do nothing
+				break;
 			}
 		}
 

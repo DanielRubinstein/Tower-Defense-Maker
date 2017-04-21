@@ -2,7 +2,6 @@ package backEnd.Attribute;
 
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.ResourceBundle;
@@ -15,7 +14,6 @@ import org.w3c.dom.Node;
 
 import backEnd.GameData.State.Component;
 import javafx.geometry.Point2D;
-import javafx.scene.image.Image;
 
 /**
  * This class has a method that returns an attribute of the given name and type
@@ -70,7 +68,7 @@ public class AttributeFactory {
 				
 			case "EDITABLESTRING":
 				AttributeImpl<String> es_newAttr = new AttributeImpl<String>(null, gameAttributeName);
-				es_newAttr.setValue("");
+				es_newAttr.setValue("RIGHT");
 				return es_newAttr;
 				
 			case "INTEGER":

@@ -9,11 +9,13 @@ public class Modification_ChangeMode implements ModificationFromUser {
 	@Override
 	public void invoke(ModelImpl myModel) {
 		switch (myModel.getMode().getUserMode()) {
-		case AUTHOR:
+		case "AUTHOR":
 			myModel.getMode().toggleUserMode();		
-		case PLAYER:
+			break;
+		case "PLAYER":
 			//myModel.getGameProcessController().pause();
 			myModel.getMode().toggleUserMode();
+			break;
 		}	
 	}
 	

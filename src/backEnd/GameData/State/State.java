@@ -1,6 +1,9 @@
 package backEnd.GameData.State;
 
+import java.util.Collection;
 import java.util.Observer;
+
+import javafx.geometry.Point2D;
 
 /**
  * This interface allows other classes to interact with the state 
@@ -20,23 +23,22 @@ public interface State {
 	 */
 	ComponentGraph getComponentGraph();
 
-	/**
-	 * returns the shortest path in the Grid
-	 * between a start and end point using BFS
-	 */
-	void calculateShortestPath();
 	
 	void addAsObserver(Observer o);
 	
 	void updateState(State state);
+
+	/*
+	 * Replace the current list of components by a new list of components.
+	 */
+	void setComponentGraph(ComponentGraph newComponentGraph);
+
 	
 	int getGridWidth();
 	
 	int getGridHeight();
-	
-	int getPointResolutionWidth();
-	
-	int getPointResolutionHeight();
+
+	Collection<Component> getComponentsByTileGridPosition(Point2D value);
 
 	
 }

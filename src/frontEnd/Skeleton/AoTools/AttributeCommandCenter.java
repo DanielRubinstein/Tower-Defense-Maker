@@ -1,26 +1,33 @@
 package frontEnd.Skeleton.AoTools;
 
+import java.lang.reflect.Method;
 import java.util.Arrays;
 import java.util.List;
-import java.util.MissingResourceException;
 import java.util.ResourceBundle;
 
+import ModificationFromUser.Modification_AddNewAttributeOwnerToGrid;
 import ModificationFromUser.Modification_AddNewPresetAttributeOwner;
 import backEnd.Attribute.Attribute;
-import backEnd.Attribute.AttributeOwnerReader;
+import backEnd.Attribute.AttributeOwner;
+import backEnd.GameData.State.Component;
 import frontEnd.View;
 import frontEnd.CustomJavafxNodes.SingleFieldPrompt;
 import javafx.beans.property.SimpleBooleanProperty;
+import javafx.geometry.HPos;
 import javafx.geometry.Insets;
-import javafx.geometry.Point2D;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.ScrollPane;
+import javafx.scene.control.ScrollPane.ScrollBarPolicy;
+import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.scene.text.Font;
+import javafx.stage.Stage;
 
-public class AttributeCommandCenter extends CommandCenter{	
+public class AttributeCommandCenter{	
 	private final static String RESOURCES_PATH = "resources/";
 	private static final int STANDARD_SPACING = 10;
 	private final static String ALL_ATTRIBUTES_TYPES = "allAttributeTypes";
@@ -29,112 +36,150 @@ public class AttributeCommandCenter extends CommandCenter{
 	private View myView;
 	private VBox myRoot;
 	private SimpleBooleanProperty authorProperty;
+	private HBox bottomButtons;
+	private Label titleLbl;
+	private Stage myHostStage;
 	
-	public AttributeCommandCenter(View view, AttributeOwnerReader obj){
+	public AttributeCommandCenter(View view, Stage hostStage , AttributeOwner obj, String title){
 		myView = view;
+		myHostStage = hostStage;
 		authorProperty = view.getBooleanAuthorModeProperty();
-
+		setText(title);
 		myRoot = createAttributeCommandCenter(obj);
 	}
 	
-	private VBox createAttributeCommandCenter(AttributeOwnerReader obj) {
+	private void setText(String text){
+		titleLbl = new Label(text);
+		titleLbl.setFont(Font.font(32));
+		titleLbl.setUnderline(true);
+		//titleLbl.setStyle("");
+	}
+	
+	private VBox createAttributeCommandCenter(AttributeOwner obj) {
 		VBox contents = new VBox();
+		
+		contents.getChildren().add(titleLbl);
+		contents.getChildren().add(createAttributeView(obj));
+		contents.getChildren().add(createBottomButtons(obj));
+		
+		checkToAddAddNowButton(obj);
+		
 		contents.setPadding(new Insets(STANDARD_SPACING, STANDARD_SPACING, STANDARD_SPACING, STANDARD_SPACING));
-		contents.getChildren().add(createLocationLabel(obj));
-
-		HBox contents_Att = createAttributeView(obj);
-
-		contents.getChildren().add(contents_Att);
-		contents.getChildren().add(createPresetButton(obj));
-		Button submit = new Button("Submit");
-		submit.setOnAction(e -> {
-			myView.addToCanvas(obj);
-			
-		});
-		contents.getChildren().add(submit);
 		contents.setSpacing(STANDARD_SPACING);
 		// contents.setAlignment(Pos.TOP_CENTER);
 		return contents;
 	}
+
+	private void checkToAddAddNowButton(AttributeOwner obj) {
+		try {
+			Method addSubmitButton = AttributeCommandCenter.class.getDeclaredMethod("addSubmitButton", obj.getClass());
+			addSubmitButton.setAccessible(true);
+			addSubmitButton.invoke(this, obj);
+		} catch (NoSuchMethodException e) {
+			System.out.println("No adding 'add now' buttons for tiles (this is a good thing)");
+			// do nothing
+			// this means the thing being put in attribute command center is a tile
+		} catch (Exception e) {
+			// something went wrong
+			System.out.println("Something went wrong adding the 'add now' button");
+			// TODO add exception?
+		}
+	}
+
+	private void addSubmitButton(Component obj) {
+		Button submit = new Button("Add Now");
+		submit.setOnAction(e -> {
+			myView.sendUserModification(new Modification_AddNewAttributeOwnerToGrid(obj));
+			myHostStage.close();
+		});
+		bottomButtons.getChildren().add(submit);
+	}
 	
-	private HBox createAttributeView(AttributeOwnerReader obj) {
-		HBox contents_Att = new HBox();
-		VBox contentRow = null;
+	private Node createAttributeView(AttributeOwner obj) {
+		ScrollPane sP = new ScrollPane();
+		sP.setHbarPolicy(ScrollBarPolicy.NEVER);
+		sP.setVbarPolicy(ScrollBarPolicy.AS_NEEDED);
+		sP.setPadding(new Insets(5,20,5,20));
+		sP.setMaxHeight(400);
+		
+		GridPane contents_Att = new GridPane();
+		if(obj.getMyAttributes()==null){
+			return contents_Att;
+		}
 		int count = 0;
-		if(obj.getMyAttributes()==null) return contents_Att;
 		for (Attribute<?> attr : obj.getMyAttributes().getAttributeMap().values()) {
-			if (count % 3 == 0) {
-				contentRow = new VBox();
-			}
-			HBox singleAttEditor = createAttributeValuePair(obj, attr);
-			contentRow.getChildren().add(singleAttEditor);
-			if (count % 3 == 2) {
-				contentRow.setSpacing(STANDARD_SPACING);
-				contents_Att.getChildren().add(contentRow);
-			}
+			
+			Label attLabel = new Label(attr.getName());
+			contents_Att.add(attLabel, 0, count);
+			GridPane.setHalignment(attLabel, HPos.RIGHT);
+			Node n = createAttributeValueViewer(obj, attr);
+			//GridPane.setHalignment(n, HPos.CENTER);
+			contents_Att.add(n, 1, count);
 			count++;
 		}
-		contents_Att.setSpacing(STANDARD_SPACING);
-		return contents_Att;
+		contents_Att.setVgap(10d);
+		contents_Att.setHgap(10d);		
+		sP.setContent(contents_Att);
+		return sP;
 	}
 
-	private Node createPresetButton(AttributeOwnerReader obj){
-		List<String> dialogTitles = Arrays.asList("Preset Creation Utility", "Please Input a Name for your new preset");
-		String promptLabel = "New preset name:";
-		String promptText = "";
-		SingleFieldPrompt myDialog = new SingleFieldPrompt(dialogTitles, promptLabel, promptText);
-		Button preset = new Button("Save as preset");
-		preset.setOnAction((e) -> {
-			myView.sendUserModification(new Modification_AddNewPresetAttributeOwner(myDialog.create(), obj));
-		});
-		return preset;
+	private Node createBottomButtons(AttributeOwner obj){
+		
+		bottomButtons = new HBox();
+		
+		bottomButtons.setSpacing(STANDARD_SPACING);
+		bottomButtons.setAlignment(Pos.BOTTOM_RIGHT);  
+		
+		createAccessPermissionButton(obj);
+		createAddToPresetButton(obj);
+		return bottomButtons;
 	}
 
-	private HBox createAttributeValuePair(AttributeOwnerReader obj, Attribute<?> attr) {
-		HBox singleAttEditor = new HBox();
-		Label attLabel = new Label(attr.getName());
-		singleAttEditor.getChildren().add(attLabel);
+	private void createAccessPermissionButton(AttributeOwner obj) {
+		AccessPermissionsViewer accessPermissionsViewer = new AccessPermissionsViewer(myHostStage, myView, obj);
+		bottomButtons.getChildren().add(accessPermissionsViewer.getRoot());
+	}
+
+	private void createAddToPresetButton(AttributeOwner obj) {
+		if(!(myView.getComponentPresets().contains(obj) || myView.getTilePresets().contains(obj))){
+			List<String> dialogTitles = Arrays.asList("Preset Creation Utility", "Please Input a Name for your new preset");
+			String promptLabel = "New preset name:";
+			String promptText = "";
+			SingleFieldPrompt myNameDialog = new SingleFieldPrompt(dialogTitles, promptLabel, promptText);
+			Button preset = new Button("Save a copy to preset palette");
+			preset.setOnAction((e) -> {
+				myView.sendUserModification(new Modification_AddNewPresetAttributeOwner(myNameDialog.create(), obj));
+				myHostStage.close();
+			});
+			
+			bottomButtons.getChildren().add(preset);
+		}
+	}
+
+	private Node createAttributeValueViewer(AttributeOwner obj, Attribute<?> attr) {
+		HBox finalViewer = new HBox();
 		Node right;
 		if (authorProperty.get()) {
 			// Author Mode
-			EditorCreator editorCreator = new EditorCreator(myView, obj, attr);
-			System.out.println("a&&&&&&  " + attr.getName() +"    "  +myAttrNameResources.getString(attr.getName()));
+			AttributeEditorCreator editorCreator = new AttributeEditorCreator(myView, obj, attr);
 			right = editorCreator.extractEditor(myAttrNameResources.getString(attr.getName()));
 			
 		} else {
 			// Player Mode
-			try {
-				right = new Label(attr.getValue().toString());
-			} catch (NullPointerException e) {
-				right = new Label("No Attribute Value Stored");
-			}
-			// FIXME get it right
+			AttributeViewerCreator viewerCreator = new AttributeViewerCreator(myView, obj, attr);
+			right = viewerCreator.extractViewer(myAttrNameResources.getString(attr.getName()));
 		}
-		singleAttEditor.getChildren().add(new Label("    "));
-		try{
-			singleAttEditor.getChildren().add(right);
-		} catch (Exception e){
-			singleAttEditor.getChildren().add(new Label("It fucked up, deal with it"));
+		try {
+			finalViewer.getChildren().add(right);
+		} catch (NullPointerException e) {
+			right = new Label("No Attribute Value Stored");
+			finalViewer.getChildren().add(right);
 		}
-		singleAttEditor.setAlignment(Pos.CENTER_RIGHT);
-		return singleAttEditor;
-	}
-
-	private Label createLocationLabel(AttributeOwnerReader obj) {
-		// TODO maybe add sell feature here
-		try{
-			Point2D pos = (Point2D) obj.getAttribute("Position").getValue();
-			return new Label(
-				String.format("Location: (%.0f, %.0f)", pos.getX(), pos.getY()));
-		} catch (NullPointerException | MissingResourceException e ){
-			return new Label("No Position Attribute Set");
-		}
+		return finalViewer;
 	}
 
 	public VBox get() {
 		return myRoot;
 	}
-	
-
 
 }

@@ -4,20 +4,27 @@ import java.util.Observable;
 
 import backEnd.Attribute.AttributeData;
 import backEnd.GameData.State.Component;
+import backEnd.GameData.State.State;
 import backEnd.GameData.State.Tile;
 import javafx.geometry.Point2D;
 
+/**
+ * 
+ * @author Christian Martindale
+ * Governs the exact actions projectiles take after reaching their target
+ * 2 classes of projectile have different methods of affecting State (single target and AOE)
+ */
 public class AttackBehavior implements Behavior{
 
 	public AttributeData myAttributes;
-	private Point2D currentPosition;
-	private Point2D newPoint;
 	private Component myComponent;
-	private Tile currentTile;
-	
-	public AttackBehavior(Component inputComponent){
+	private Point2D currentPosition;
+	private State myState;
+
+	public AttackBehavior(Component inputComponent, State currentState){
 		myComponent=inputComponent;
-		currentPosition=(Point2D) myComponent.getAttribute("Position").getValue();
+		myState = currentState;
+		currentPosition = (Point2D) myComponent.getAttribute("Position").getValue();
 	}
 	
 	

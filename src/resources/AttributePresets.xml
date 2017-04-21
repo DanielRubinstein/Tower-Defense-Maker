@@ -1,30 +1,36 @@
 <AttributePresets>
 	<IMAGE>
-		<ImageFile></ImageFile></IMAGE>
+		<ImageFile></ImageFile>
+		<FireImage></FireImage></IMAGE>
 	<BOOLEAN>
 		<BOOLEAN_TEMPLATE></BOOLEAN_TEMPLATE><Traversable></Traversable>
 		<Buildable></Buildable>
 		<GoalTile></GoalTile>
 		<StartTile></StartTile>
-	</BOOLEAN>
+		<SpawnOnDeath></SpawnOnDeath></BOOLEAN>
 	<DOUBLE>
 		<DOUBLE_TEMPLATE min="0.0" max="0.0" start="0.0" increment="0.0"></DOUBLE_TEMPLATE>
 		<Speed min="0.0" max="10.0" start="1.0" increment="1.0"></Speed>
-	</DOUBLE>
+		<Velocity min="0.0" max="10.0" start="1.0" increment="1.0"></Velocity>
+		<FireDamage min="0.0" max="100.0" start="0.0" increment="1.0"></FireDamage>
+		<FireRadius min="10.0" max="200.0" start="10.0" increment="2.0"></FireRadius>
+		<ExplosionRadius min="0.0" max="200.0" start="0.0" increment="2.0"></ExplosionRadius>
+		<ProjectileMaxDistance></ProjectileMaxDistance>
+		<ProjectileTraveled></ProjectileTraveled></DOUBLE>
 	<INTEGER>
 		<INTEGER_TEMPLATE min="0" max="0" start="1" increment="0"></INTEGER_TEMPLATE>
 		<Health min="0" max="100" start="1" increment="5"></Health>
 	</INTEGER>
 	<EDITABLESTRING>
-		<EDITABLESTRING_TEMPLATE></EDITABLESTRING_TEMPLATE></EDITABLESTRING>
+		<EDITABLESTRING_TEMPLATE></EDITABLESTRING_TEMPLATE>
+		<FireType></FireType>
+		<Type></Type></EDITABLESTRING>
 	<STRINGLIST>
 		<STRINGLIST_TEMPLATE Options="Comma delineated String Options"></STRINGLIST_TEMPLATE>
 		<MoveDirection options="Up,Down,Left,Right"></MoveDirection>
 	</STRINGLIST>
 	<POSITION>
 		<POSITION_TEMPLATE></POSITION_TEMPLATE>
-	</POSITION>
-	<SPEED>
-		<SPEED_TEMPLATE min="0" max="10" increment="1"></SPEED_TEMPLATE>
-	</SPEED>
-</AttributePresets>
+		<ProjectileTargetPosition></ProjectileTargetPosition></POSITION>
+	<COMPONENT>
+		<SpawnOnDeathObject></SpawnOnDeathObject></COMPONENT></AttributePresets>
