@@ -1,5 +1,6 @@
 package data;
 
+import java.io.FileNotFoundException;
 import java.util.List;
 import java.util.Map;
 
@@ -29,15 +30,29 @@ public class DataController {
 		myXMLReader = new XMLReaderImpl();
 	}
 	
-	@SuppressWarnings("unchecked")
-	public BankController generateBanks(){
-		try{
+	public Map<String, Component> loadComponentMap()
+	{
+		try
+		{
 			List<Map<String,?>> objectMaps = myXMLReader.loadUniversalGameData(UNIV_GAME_DATA_PATH);
-			Map<String,Component> componentMap = (Map<String,Component>) objectMaps.get(0);
-			Map<String,Tile > tileMap = (Map<String,Tile>) objectMaps.get(1);
-			return new BankController(tileMap, componentMap);
-		} catch (XMLReadingException e){
-			return new BankController();
+			return (Map<String,Component>) objectMaps.get(0);
+		}
+		catch (Exception e)
+		{
+			return null;
+		}
+	}
+	
+	public Map<String, Tile> loadTileMap()
+	{
+		try
+		{
+			List<Map<String,?>> objectMaps = myXMLReader.loadUniversalGameData(UNIV_GAME_DATA_PATH);
+			return (Map<String,Tile>) objectMaps.get(1);
+		}
+		catch (Exception e)
+		{
+			return null;
 		}
 	}
 	
@@ -49,17 +64,16 @@ public class DataController {
 		myXMLWriter.saveGameStateData(gameData, GAME_STATE_DATA_PATH, gameName);
 	}
 
-	public GameData loadGameStateData(String nextLevel) throws XMLReadingException {
+	public GameData loadGameStateData(String nextLevel) throws XMLReadingException, FileNotFoundException {
 		return myXMLReader.loadGameStateData(GAME_STATE_DATA_PATH, nextLevel);
 	}
 	
-	public void saveLevelProgressionData(LevelProgressionControllerImpl levelProgression){
-		myXMLWriter.saveLevelProgressionData(levelProgression, UNIV_GAME_DATA_PATH);
+	public void saveGamesMap(Map<String,List<String>> gamesMap){
+		myXMLWriter.saveGamesMapData(gamesMap, UNIV_GAME_DATA_PATH);
 	}
 	
-	public LevelProgressionControllerImpl loadLevelProgressionData() throws XMLReadingException{
+	public Map<String,List<String>> loadGamesMapData() throws XMLReadingException{
 		Map<String, List<String>> gamesMap = myXMLReader.loadGamesMap(UNIV_GAME_DATA_PATH);
-		LevelProgressionControllerImpl levelProgression = new LevelProgressionControllerImpl(this, gamesMap);
-		return levelProgression;
+		return gamesMap;
 	}
 }

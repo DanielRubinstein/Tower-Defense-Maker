@@ -6,9 +6,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Observable;
 import java.util.Observer;
-
+import com.thoughtworks.xstream.annotations.XStreamOmitField;
 import backEnd.Attribute.AttributeOwnerReader;
-import javafx.beans.InvalidationListener;
 import javafx.geometry.Point2D;
 
 /**
@@ -19,17 +18,37 @@ import javafx.geometry.Point2D;
  */
 
 public class TileGridImpl extends Observable implements TileGrid {
+	
+	private List<Observer> observers;
+	
 	private int numColsInGrid;
 	private int numRowsInGrid;
 	private Map<Point2D, Tile> tileGrid;
 	private List<Tile> tileList;
 	private double tileWidth;
 	private double tileHeight;
+	private List<List<Observer>> tileObserverList;
 	
 	public TileGridImpl(int colsInGrid, int rowsInGrid){
+		
+		observers = new ArrayList<Observer>();
 		numColsInGrid = colsInGrid;
 		numRowsInGrid = rowsInGrid;
 		tileGrid = new HashMap<>();
+	}
+	
+	public TileGridImpl(TileGridInstantiator i)
+	{
+		observers = new ArrayList<Observer>();
+		
+		numColsInGrid = i.getNumCols();
+		numRowsInGrid = i.getNumRows();
+		tileGrid = i.getTileGrid();
+	}
+	
+	public TileGridInstantiator getInstantiator()
+	{
+		return new TileGridInstantiator(numRowsInGrid, numColsInGrid, tileGrid);
 	}
 	
 	@Override
@@ -37,7 +56,6 @@ public class TileGridImpl extends Observable implements TileGrid {
 		this.tileWidth = tileWidth;
 		this.tileHeight = tileHeight;
 	}
-
 	
 	@Override
 	public Tile getTileByGridPosition(int column, int row){
@@ -115,12 +133,59 @@ public class TileGridImpl extends Observable implements TileGrid {
 
 	@Override
 	public void addAsObserver(Observer o) {
-		this.addObserver(o);
+		observers.add(o);
 	}
-
+	
+	@Override
+	public void notifyObservers(){
+		for (Observer o : observers){
+			o.update(this, null);
+		}
+	}
+	
+	public void saveAndClearTileObservers()
+	{
+		tileObserverList = new ArrayList<List<Observer>>();
+		
+		for (int i = 0; i < getAllTiles().size(); i++)
+		{
+			tileObserverList.add(tileList.get(i).getAndClearObservers());
+		}
+		
+	}
+	
+	public void setTileObservers()
+	{
+		for (int i = 0; i < tileList.size(); i++)
+		{
+			tileList.get(i).setObserverList(tileObserverList.get(i));
+		}
+	}
+	
+	public List<Observer> getObservers()
+	{
+		return observers;
+	}
+	
+	public void clearObservers()
+	{
+		observers = new ArrayList<Observer>();
+	}
+	
+	public void setObservers(List<Observer> list)
+	{
+		observers = list;
+	}
+	
 	@Override
 	public boolean contains(AttributeOwnerReader newAttrOwn) {
 		return tileGrid.containsValue(newAttrOwn);
+	}
+
+	@Override
+	public Object getMap() {
+		
+		return tileGrid;
 	}
 
 }
