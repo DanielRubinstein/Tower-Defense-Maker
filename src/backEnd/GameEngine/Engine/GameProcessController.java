@@ -8,7 +8,7 @@ import java.util.ResourceBundle;
 
 import backEnd.Model;
 import backEnd.GameData.Rules;
-import backEnd.GameData.PlayerStatus.PlayerStatus;
+import backEnd.GameData.State.PlayerStatus;
 import backEnd.GameData.State.State;
 import backEnd.GameEngine.EngineStatus;
 import javafx.animation.Animation;

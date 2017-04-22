@@ -1,4 +1,4 @@
-package backEnd.GameData.PlayerStatus;
+package backEnd.GameData.State;
 
 /**
  * Modifier interface for back end
