@@ -6,7 +6,7 @@ import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 
 import backEnd.GameData.GameData;
-import backEnd.GameData.PlayerStatus.PlayerStatus;
+import backEnd.GameData.State.PlayerStatus;
 import backEnd.GameData.State.StateImpl;
 import backEnd.GameEngine.EngineStatus;
 import data.XMLReader;
