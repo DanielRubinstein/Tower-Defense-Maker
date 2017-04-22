@@ -44,7 +44,7 @@ public class ModelImpl implements Model{
 		myGameData = gameData;
 		myLevelProgressionController = myDataController.loadLevelProgressionData();
 		myMode = new ModeImpl("DEFAULT", "AUTHOR", myLevelProgressionController);
-		myEngine = new GameProcessController(myGameData.getState(), myGameData.getRules(), myGameData.getStatus());
+		myEngine = new GameProcessController(myGameData);
 		myBankController = myDataController.generateBanks();
 	}
 
