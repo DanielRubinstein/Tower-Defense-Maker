@@ -3,29 +3,33 @@ package backEnd.Bank;
 import java.io.FileNotFoundException;
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Observable;
 import backEnd.Mode.Mode;
 import javafx.geometry.Point2D;
 import backEnd.Attribute.AttributeData;
+import backEnd.Attribute.AttributeImpl;
 import backEnd.Attribute.AttributeOwner;
+import backEnd.GameData.Rules.Rule;
 import backEnd.GameData.State.AccessPermissionsImpl;
 import backEnd.GameData.State.Component;
 import backEnd.GameData.State.Tile;
 import backEnd.GameData.State.TileImpl;
+import backEnd.GameEngine.Behaviors.Behavior;
 
 public class BankController extends Observable
 {
 	private Map<String, Tile> tileBank;
 	private Map<String, Component> componentBank;
+	private BehaviorBank myBehaviorBank;
+	private RuleBank myRuleBank;
+	private AttributeBank myAttributeBank;
 	private Mode myMode;
 	
 	public BankController(Mode myMode)
 	{
-		this.tileBank = new HashMap<String, Tile>();
-		this.componentBank = new HashMap<String, Component>();
-		this.myMode = myMode;
-		createTemplatesForTesting();
+		this(myMode, new HashMap<String, Tile>(), new HashMap<String, Component>());
 	}
 	
 	public BankController(Mode myMode, Map<String, Tile> tileBank, Map<String, Component> componentBank)
@@ -33,6 +37,9 @@ public class BankController extends Observable
 		this.tileBank = tileBank;
 		this.componentBank = componentBank;
 		this.myMode = myMode;
+		myBehaviorBank = new BehaviorBank();
+		myRuleBank = new RuleBank();
+		myAttributeBank = new AttributeBank();
 		
 		createTemplatesForTesting();
 	}
@@ -46,15 +53,26 @@ public class BankController extends Observable
 			newTile.setAttributeValue("MoveDirection","Down");
 			addNewTile("Blue Down Tile", newTile);
 			
-			Tile newTile2 = new TileImpl(Arrays.asList(), Arrays.asList("AUTHOR"), new Point2D(0,0));
+			Tile newTile2 = new TileImpl();
 			newTile2.setAttributeValue("ImageFile", "resources/images/Tiles/Red.png");
 			newTile2.setAttributeValue("MoveDirection","Right");
 			addNewTile("Red Right Tile", newTile2);
+			
+			Tile newTile3 = new TileImpl();
+			newTile3.setAttributeValue("ImageFile", "resources/images/Tiles/Green.png");
+			newTile3.setAttributeValue("MoveDirection","Down");
+			addNewTile("Green Up Tile", newTile3);
+			
+			Tile newTile4 = new TileImpl();
+			newTile4.setAttributeValue("ImageFile", "resources/images/Tiles/Yellow.png");
+			newTile4.setAttributeValue("MoveDirection","Left");
+			addNewTile("Yellow Left Tile", newTile4);
 			
 			
 			Component newComponent = new Component(new AttributeData(),new AccessPermissionsImpl());
 			newComponent.setAttributeValue("ImageFile", "resources/images/Components/rainbow_bloon.png");
 			newComponent.setAttributeValue("Speed", 5d);
+			newComponent.setAttributeValue("Health", 10);
 			addNewComponent("Chill Bloon", newComponent);
 		} catch( FileNotFoundException e){
 			System.out.println("No image found");
@@ -132,6 +150,21 @@ public class BankController extends Observable
 		this.setChanged();
 		this.notifyObservers();
 	}
+	
+	public List<Behavior> getBehaviorList()
+	{
+		return myBehaviorBank.getBehaviorList();
+	}
+	
+	public List<Rule> getRuleList()
+	{
+		return myRuleBank.getRuleList();
+	}
+	
+	public List<AttributeImpl> getAttributeList()
+	{
+		return myAttributeBank.getAttributeList();
+	}
 
 	public String getAOName(AttributeOwner preset) {
 		if(preset instanceof Tile){
@@ -161,4 +194,3 @@ public class BankController extends Observable
 		}
 	}
 }
-

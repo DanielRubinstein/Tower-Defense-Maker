@@ -17,7 +17,7 @@ import com.thoughtworks.xstream.io.xml.DomDriver;
 import backEnd.Bank.BankController;
 import backEnd.GameData.GameData;
 import backEnd.GameData.GameDataInterface;
-import backEnd.GameData.Rules;
+import backEnd.GameData.Rules.Rule;
 import backEnd.GameData.State.Component;
 import backEnd.GameData.State.ComponentGraph;
 import backEnd.GameData.State.State;
@@ -38,7 +38,8 @@ public class XMLWriterImpl implements XMLWriter{
 	
 	public XMLWriterImpl(){
 		xStream = new XStream(new DomDriver());
-		xStream.alias("Rules", Rules.class);
+		//TODO: this should be a List<Rule>
+		xStream.alias("Rules", Rule.class);
 		
 		xStream.alias("ComponentGraph", ComponentGraph.class);
 		xStream.alias("TileGrid", TileGrid.class);

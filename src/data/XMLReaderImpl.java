@@ -1,13 +1,13 @@
 package data;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import com.thoughtworks.xstream.XStream;
 import com.thoughtworks.xstream.io.xml.DomDriver;
-import backEnd.GameData.Rules;
 import backEnd.GameData.GameData;
 import backEnd.GameData.State.Component;
 import backEnd.GameData.State.ComponentGraph;
@@ -18,6 +18,7 @@ import backEnd.GameData.State.Tile;
 import backEnd.GameData.State.TileGrid;
 import backEnd.GameData.State.TileGridImpl;
 import backEnd.GameData.State.TileGridInstantiator;
+import backEnd.GameData.Rules.Rule;
 import backEnd.LevelProgression.LevelProgressionControllerImpl;
 import javafx.geometry.Point2D;
 import backEnd.GameData.State.PlayerStatus;
@@ -44,16 +45,16 @@ public class XMLReaderImpl implements XMLReader{
 	 * @see data.XMLReader#loadGameStateData(java.lang.String, java.lang.String)
 	 */
 	@Override
-	public GameData loadGameStateData(String filePath, String levelName) throws XMLReadingException
+	public GameData loadGameStateData(String filePath, String levelName) throws XMLReadingException, FileNotFoundException
 	{
 		
 		TileGrid grid = new TileGridImpl((TileGridInstantiator) xStream.fromXML(new File(filePath+"/" + levelName+"/tilegrid.xml")));
 		ComponentGraph graph = new ComponentGraphImpl((HashMap<Point2D, List<Component>>) xStream.fromXML(new File(filePath+"/" + levelName+"/componentgraph.xml")));
 		
-		StateImpl state = new StateImpl(grid, graph);
+		StateImpl state = new StateImpl(grid.getNumRowsInGrid(), grid.getNumColsInGrid(), grid, graph);
 		
 		return new GameData(state, (PlayerStatus) xStream.fromXML(new File(filePath+"/" + levelName+"/playerstatus.xml")),
-				(Rules) xStream.fromXML(new File(filePath+"/" + levelName+"/rules.xml")));
+				(List<Rule>) xStream.fromXML(new File(filePath+"/" + levelName+"/rules.xml")));
 
 	}
 	

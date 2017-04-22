@@ -6,7 +6,7 @@ package backEnd.GameData.State;
  * @author Derek
  *
  */
-public interface PlayerStatusModifier {
+public interface PlayerStatusModifier extends PlayerStatusReader{
 	
 	/**
 	 * adds valToAdd to current val of player status item itemName

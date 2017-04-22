@@ -7,7 +7,7 @@ import java.util.Observable;
 import java.util.Observer;
 import java.util.function.Consumer;
 
-import ModificationFromUser.Modification_AddPresetAttributeOwnerToGrid;
+import ModificationFromUser.AttributeOwner.Modification_AddPresetAttributeOwnerToGrid;
 import backEnd.Attribute.AttributeOwner;
 import backEnd.Bank.BankController;
 import backEnd.GameData.State.Component;
@@ -26,6 +26,7 @@ import javafx.scene.input.Dragboard;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.TransferMode;
 import javafx.scene.layout.TilePane;
+import javafx.scene.shape.Rectangle;
 import resources.Constants;
 
 

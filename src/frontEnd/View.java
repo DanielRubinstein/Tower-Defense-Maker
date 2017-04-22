@@ -6,6 +6,7 @@ import backEnd.Bank.BankController;
 import frontEnd.Facebook.FacebookConnector;
 import frontEnd.Facebook.FacebookInteractor;
 import javafx.scene.Node;
+import javafx.scene.shape.Rectangle;
 
 public interface View extends ViewReader{
 
@@ -20,5 +21,5 @@ public interface View extends ViewReader{
 	public Node getScreenGrid();
 	
 	public FacebookInteractor getFb();
-	
+
 }

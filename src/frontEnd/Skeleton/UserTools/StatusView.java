@@ -1,9 +1,12 @@
 package frontEnd.Skeleton.UserTools;
 
 import java.util.Arrays;
+import java.util.Collection;
 import java.util.List;
 
+import backEnd.GameData.State.PlayerStatusReader;
 import frontEnd.ViewReader;
+import javafx.beans.property.ReadOnlyDoubleProperty;
 import javafx.geometry.HPos;
 import javafx.geometry.Insets;
 import javafx.geometry.Orientation;
@@ -20,25 +23,31 @@ public class StatusView {
 
 	public StatusView(ViewReader view){
 		myView = view;
+		
+		PlayerStatusReader playerStatus = myView.getPlayerStatus();
+		
 		// FIXME get from backEnd
-		List<String> a = Arrays.asList("Score", "Lives", "Health");
+		Collection<String> statusItems = playerStatus.getPropertyNames();
 		init();
-        createTitleAndVertSep(a.size());
+        createTitleAndVertSep(statusItems.size());
         int counter = 1;
-        for (String str : a){
-            createLabels(counter, str);
+        for (String str : statusItems){
+            createLabels(counter, str, playerStatus.getProperty(str));
             counter += 2;
         }
 	}
 
-	private void createLabels(int counter, String str) {
-		Label friday = new Label(str);
+	private void createLabels(int counter, String name, ReadOnlyDoubleProperty readOnlyDoubleProperty) {
+		Label friday = new Label(name);
 		friday.setFont(Font.font("Verdana", 18));
 		GridPane.setConstraints(friday, 0, counter);
 		GridPane.setColumnSpan(friday, 3);
 		grid.getChildren().add(friday);
 		
-		Label value = new Label("0.0");
+		Label value = new Label(readOnlyDoubleProperty.getValue().toString());
+		readOnlyDoubleProperty.addListener((o,oldV, newV)->{
+			value.setText(newV.toString());
+		});
 		value.setFont(Font.font("Verdana", 18));
 		GridPane.setConstraints(value, 4, counter);
 		GridPane.setColumnSpan(value, 3);

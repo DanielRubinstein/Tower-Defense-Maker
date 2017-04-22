@@ -1,8 +1,9 @@
-package ModificationFromUser;
+package ModificationFromUser.AttributeOwner;
 
 import java.lang.reflect.Method;
 import java.util.ResourceBundle;
 
+import ModificationFromUser.ModificationFromUser;
 import backEnd.ModelImpl;
 import backEnd.Attribute.Attribute;
 import backEnd.Attribute.AttributeOwner;
