@@ -1,7 +1,5 @@
 package backEnd.GameData;
 
-import java.util.List;
-
 import backEnd.GameData.Rules.Rule;
 import backEnd.GameData.State.PlayerStatus;
 import backEnd.GameData.State.PlayerStatusModifier;
@@ -10,19 +8,20 @@ import backEnd.GameData.State.State;
 import backEnd.GameData.State.StateImpl;
 import backEnd.GameEngine.EngineStatus;
 
-
 public class GameData implements GameDataInterface{
 	private StateImpl myState;
-	private List<Rule> myRules;
+	private Rule myRules;
 	private PlayerStatus myPlayerStatus;
 	private EngineStatus myEngineStatus;
+	private double myGameTime;
 	
-	public GameData(StateImpl state, PlayerStatus playerStatus, List<Rule> rules){
+	public GameData(StateImpl state, PlayerStatus playerStatus, Rule rules){
 		this.myState = state;
 		this.myRules = rules;
 		this.myPlayerStatus = playerStatus;
 		myEngineStatus=EngineStatus.PAUSED;
 		myState.setEngineStatus(myEngineStatus);
+		myGameTime = (long) 0;
 	}
 
 	@Override
@@ -31,7 +30,7 @@ public class GameData implements GameDataInterface{
 	}
 
 	@Override
-	public List<Rule> getRules() {
+	public Rule getRules() {
 		return myRules;
 	}
 	
@@ -65,4 +64,11 @@ public class GameData implements GameDataInterface{
 		return this.myPlayerStatus;
 	}
 
+	public void incrementGameTime(Double gameStep) {
+		myGameTime += gameStep;
+	}
+	
+	public double getGameTime() {
+		return myGameTime;
+	}
 }

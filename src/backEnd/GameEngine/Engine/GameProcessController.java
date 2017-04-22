@@ -69,6 +69,7 @@ public class GameProcessController {
 		//System.gc();
 		//System.out.println("Game loop step preformed");
 		this.run(delay); // TODO: TESTING ONLY
+		myGameData.incrementGameTime(delay);
 	}
 	
 	public void run(double stepTime) {

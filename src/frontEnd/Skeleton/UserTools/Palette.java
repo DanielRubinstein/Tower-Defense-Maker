@@ -26,6 +26,7 @@ import javafx.scene.input.Dragboard;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.TransferMode;
 import javafx.scene.layout.TilePane;
+import javafx.scene.shape.Rectangle;
 import resources.Constants;
 
 
