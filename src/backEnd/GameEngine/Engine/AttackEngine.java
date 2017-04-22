@@ -23,7 +23,7 @@ public class AttackEngine implements Engine {
 
 	@Override
 	public void gameLoop(GameData gameData, double stepTime) {
-		masterTime = System.currentTimeMillis();
+		masterTime = gameData.getGameTime();
 
 		ComponentGraph myComponentGraph = gameData.getState().getComponentGraph();
 		for (Component attacker : myComponentGraph.getAllComponents()) {
