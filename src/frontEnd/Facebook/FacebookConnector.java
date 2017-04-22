@@ -13,8 +13,10 @@ import com.restfb.exception.FacebookException;
 public interface FacebookConnector {
 	/**
 	 * Launches a window which allows the user to log in using username and password.
+	 * @param accessToken used to establish a connection with the Facebook API. This accessCode is specific to each 
+	 * user.
 	 */
-	public void login() throws FacebookException;
+	public void login(String accessToken) throws FacebookException;
 	/**
 	 * Gets the FacebookInteractor which one uses to send and receive information with Facebook.
 	 * @return FacebookInteractor 

@@ -1,9 +1,12 @@
 package data.GamePrep;
 
 import java.io.File;
+import java.util.ResourceBundle;
 import java.util.function.Consumer;
 
 import data.XMLReadingException;
+import frontEnd.Facebook.FacebookBrowser;
+import frontEnd.Facebook.FacebookBrowserImpl;
 import frontEnd.Facebook.FacebookConnector;
 import frontEnd.Facebook.FacebookConnectorImpl;
 import frontEnd.Facebook.FacebookInteractor;
@@ -29,6 +32,12 @@ import main.Controller;
 public class MainMenu{
 	private Consumer<Object> consumerLoadData;
 	private Controller myController;
+	
+	private static final String DEAFULT_RESOURCE_BUNDLE = "resources/facebook";
+	private ResourceBundle appInfo = ResourceBundle.getBundle(DEAFULT_RESOURCE_BUNDLE);
+	private String appSecret = appInfo.getString("appSecret");
+	private String appID = appInfo.getString("appID");
+	
 	
 	public MainMenu(Consumer<Object> loadData,Controller con){
 		myController = con;
@@ -60,14 +69,18 @@ public class MainMenu{
 		Stage loginStage = new Stage();
 		loginStage.initOwner(stage);
 		loginStage.initModality(Modality.APPLICATION_MODAL);
-
-		FacebookConnector fb = new FacebookConnectorImpl("426668214360430","d97cba98608128cdb4ca19e1da091de5");
+		FacebookBrowser fbBrowser = new FacebookBrowserImpl(appID);
+		FacebookConnector fb = new FacebookConnectorImpl(appID,appSecret);
 		ButtonMenuImpl myLoginButton = new ButtonMenuImpl("Login!");
 		myLoginButton.addPrimarySimpleButtonWithHover("Login", () -> {
-			fb.login();
-			FacebookInteractor fbInter= fb.getInteractor();
-			myController.setFb(fbInter);
-			loginStage.close();
+			fbBrowser.launchPage();
+			fbBrowser.onDialogClose(e -> {
+				String accessToken = fbBrowser.getAccessToken();
+				fb.login(accessToken);			
+				FacebookInteractor fbInter= fb.getInteractor();
+				myController.setFb(fbInter);
+				loginStage.close();
+			});
 		}, "Click to launch facebook");
 		myLoginButton.display(loginStage);
 	}
