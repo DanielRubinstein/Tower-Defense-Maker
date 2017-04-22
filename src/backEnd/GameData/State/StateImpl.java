@@ -20,6 +20,7 @@ import backEnd.Coord;
 import backEnd.Attribute.Attribute;
 import backEnd.Attribute.AttributeImpl;
 import backEnd.GameEngine.EngineStatus;
+import backEnd.GameEngine.Engine.Spawning.SpawnQueue;
 import javafx.geometry.Point2D;
 
 /**
@@ -38,24 +39,18 @@ public class StateImpl extends Observable implements State {
 	private final static String IMAGEPATH_RESOURCES_PATH = "resources/images";
 	private final static ResourceBundle myImageResource = ResourceBundle.getBundle(IMAGEPATH_RESOURCES_PATH);
 	private EngineStatus myEngineStatus;
-
+	private Map<String, SpawnQueue> mySpawnQueues;
+	
 	public StateImpl(int numColsInGrid, int numRowsInGrid) throws FileNotFoundException {
 		this.numColsInGrid = numColsInGrid;
 		this.numRowsInGrid = numRowsInGrid;
 		setDefaultTileGrid();
 		myComponentGraph = new ComponentGraphImpl();
-		myEngineStatus=EngineStatus.PAUSED;
+		myEngineStatus = EngineStatus.PAUSED;
+		mySpawnQueues = new HashMap<String,SpawnQueue>();
 	}
 
-	public StateImpl(TileGrid tileGrid, ComponentGraph graph)
-	{
-		myTileGrid = tileGrid;
-		myComponentGraph = graph;
-		
-		numColsInGrid = tileGrid.getNumColsInGrid();
-		numRowsInGrid = tileGrid.getNumRowsInGrid();
-	}
-	
+
 	private void setDefaultTileGrid() throws FileNotFoundException {
 		myTileGrid = new TileGridImpl(numColsInGrid, numRowsInGrid);
 		for (int row = 0; row < numRowsInGrid; row++) {
@@ -235,6 +230,8 @@ public class StateImpl extends Observable implements State {
 	}
 
 
-	
-
+	@Override
+	public Map<String, SpawnQueue> getSpawnQueues() {
+		return mySpawnQueues;
+	}
 }
