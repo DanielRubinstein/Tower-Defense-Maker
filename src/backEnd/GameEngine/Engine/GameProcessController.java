@@ -8,6 +8,7 @@ import java.util.ResourceBundle;
 
 import backEnd.Model;
 import backEnd.GameData.Rules;
+import backEnd.GameData.PlayerStatus.PlayerStatus;
 import backEnd.GameData.State.State;
 import backEnd.GameEngine.EngineStatus;
 import javafx.animation.Animation;
@@ -26,21 +27,22 @@ public class GameProcessController {
 	private final static String RESOURCES_PATH = "resources/GameProcessController";
 	private final static ResourceBundle myResources = ResourceBundle.getBundle(RESOURCES_PATH);
 	private EngineStatus engineStatus;
+	private PlayerStatus myPlayerStatus;
 	private SimpleStringProperty engineStatusProperty;
 	
 	public Timeline animation = new Timeline();
 	
-	public GameProcessController(State currentState, Rules gameRules){
+	public GameProcessController(State currentState, Rules gameRules, PlayerStatus playerStatus){
 		engineStatus = EngineStatus.PAUSED;
 		engineStatusProperty = new SimpleStringProperty(engineStatus.toString());
 		myEngines = new ArrayList<Engine>();
 		myCurrentState = currentState;
 		myRules = gameRules;
-		/*
+		myPlayerStatus = playerStatus;
 		KeyFrame frame = new KeyFrame(Duration.millis(Constants.MILLISECOND_DELAY), e -> step(Constants.SECOND_DELAY));
 		animation.setCycleCount(Animation.INDEFINITE);
 		animation.getKeyFrames().add(frame);
-		*/
+		
 		EngineFactory engineFactory = new EngineFactory();
 		Enumeration<String> n = myResources.getKeys();
 		for(String key : Collections.list(n)){
