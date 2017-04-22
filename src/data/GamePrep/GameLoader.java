@@ -17,7 +17,7 @@ import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
 public class GameLoader {
-	public static final String SAVED_GAMES_DIRECTORY = "./data/SavedGames";
+	public static final String SAVED_GAMES_DIRECTORY = "./data/GameStateData/";
 	public static final String TEMPLATE_GAMES_DIRECTORY = "./data/Templates";
 	public static final String GAME_FILE_EXTENSION = ".xml";
 
@@ -28,6 +28,7 @@ public class GameLoader {
 	private File loadGameFile(String searchDirectory) throws XMLReadingException {
 		FileChooser xmlChooser = new FileChooser();
 		xmlChooser.setTitle("Choose File");
+		System.out.println(searchDirectory + " TEST");
 		xmlChooser.setInitialDirectory(new File(searchDirectory));
 		xmlChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("Sup3rS1ckT34m1337 GameData File", "*.xml"));
 		File file = xmlChooser.showOpenDialog(new Stage());
