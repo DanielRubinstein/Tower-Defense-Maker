@@ -59,6 +59,7 @@ public class AccessPermissionsViewer implements SkeletonObject{
 			subBody.getChildren().add(titleLbl);
 			List<String> opts = null;
 			if(title.equals("User")){
+				myView.getLevelProgressionController().getMode();
 				opts = myView.getLevelProgressionController().getMode().getAllUserModes();
 			} else if (title.equals("Game")){
 				opts = myView.getLevelProgressionController().getGameList();
@@ -73,15 +74,43 @@ public class AccessPermissionsViewer implements SkeletonObject{
 					cB.disableProperty().set(true);
 				}
 				
-				if(myAccessPermissions.getUserModeList().contains(thing) || myAccessPermissions.getGameModeList().contains(thing)){
+				if(myAccessPermissions.getUserModeList().contains(thing)){
 					cB.setSelected(true);
+					cB.selectedProperty().addListener((o, oldV, newV) -> {
+						if (newV){
+							myAccessPermissions.addUserAccessPermission(thing);
+						}
+						else{
+							myAccessPermissions.removeUserAccessPermission(thing);;
+						}
+					});
+				}
+				
+				if(myAccessPermissions.getGameModeList().contains(thing)){
+					cB.setSelected(true);
+					cB.selectedProperty().addListener((o, oldV, newV) -> {
+						if (newV){
+							myAccessPermissions.addGameAccessPermission(thing);
+						}
+						else{
+							myAccessPermissions.removeGameAccessPermission(thing);;
+						}
+					});
+				}
+				
+				if(myAccessPermissions.getLevelModeList().contains(thing)){
+					cB.setSelected(true);
+					cB.selectedProperty().addListener((o, oldV, newV) -> {
+						if (newV){
+							myAccessPermissions.addLevelAccessPermission(thing);
+						}
+						else{
+							myAccessPermissions.removeLevelAccessPermission(thing);;
+						}
+					});
 				}
 				
 				
-				
-				cB.selectedProperty().addListener((o, oldV, newV) -> {
-					
-				});
 				subBody.getChildren().add(cB);
 			}
 			

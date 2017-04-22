@@ -18,14 +18,12 @@ public class ModeImpl implements ModeReader, Mode{
 	private String currLevelMode;
 	private SimpleBooleanProperty aBP;
 	private List<String> userModes;
-	private List<String> gameModes;
 	
 	public ModeImpl(String userMode, String gameMode, String levelMode, LevelProgressionControllerReader levelProgression){
 		this.currGameMode = gameMode;
 		this.currUserMode = userMode;
 		this.currLevelMode = levelMode;
 		this.userModes = Arrays.asList("AUTHOR", "PLAYER");
-		this.gameModes = levelProgression.getGameList();
 		aBP = new SimpleBooleanProperty(this.getUserMode().equals("AUTHOR"));
 	}
 
