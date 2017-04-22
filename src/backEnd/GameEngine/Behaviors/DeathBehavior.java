@@ -16,7 +16,7 @@ public class DeathBehavior implements Behavior {
 	@Override
 	public <T> void execute(T componentToUse) { //pass in a component
 		myComponent=(Component) componentToUse;
-		Object spawn=myComponent.getAttribute("SpawnsOnDeath").getValue();
+		Object spawn=myComponent.getAttribute("SpawnOnDeath").getValue();
 		spawnsOnDeath=(boolean) spawn;
 		if (spawnsOnDeath){
 			Object spawnedOnDeath=myComponent.getAttribute("SpawnOnDeathObject").getValue();
@@ -38,7 +38,7 @@ public class DeathBehavior implements Behavior {
 	
 	public boolean isDead(){
 		Object currentHealth=myComponent.getAttribute("Health").getValue();
-		return ((int) currentHealth)>0;
+		return ((int) currentHealth)<=0;
 	}
 	
 	public Component getNewComponent(){
