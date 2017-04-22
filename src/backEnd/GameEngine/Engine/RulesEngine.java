@@ -7,7 +7,7 @@ public class RulesEngine implements Engine{
 
 	@Override
 	public void gameLoop(GameData myGameData, double stepTime) {
-		for(Rule rule :myGameData.getRules()){
+		for(Rule rule :myGameData.getRules().values()){
 			rule.invoke(myGameData);
 		}
 	}
