@@ -1,5 +1,7 @@
 package frontEnd.Facebook;
 
+import com.restfb.exception.FacebookException;
+
 import javafx.scene.image.ImageView;
 /**
  * This interface defines how one can interact with various features of Facebook. These methods heavily utilize the restfb

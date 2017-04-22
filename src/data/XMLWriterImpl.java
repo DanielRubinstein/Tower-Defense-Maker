@@ -114,8 +114,7 @@ public class XMLWriterImpl implements XMLWriter{
 	}
 
 	@Override
-	public void saveLevelProgressionData(LevelProgressionControllerImpl levelProgression, String filePath) {
-		Map<String, List<String>> gamesMap = levelProgression.getGamesMap();
+	public void saveGamesMapData(Map<String, List<String>> gamesMap, String filePath) {
 		String gamesMapXML = xStream.toXML(gamesMap);
 		saveToXML(filePath, "GamesMap", gamesMapXML);
 	}

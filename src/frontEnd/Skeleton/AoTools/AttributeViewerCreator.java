@@ -65,7 +65,7 @@ public class AttributeViewerCreator {
 		
 		HBox pair = new HBox();
 		
-		String babyImagePath = (String) baby.getAttribute("IMAGEFILE").getValue();
+		String babyImagePath = (String) baby.getAttribute("ImageFile").getValue();
 		ImageView imv = createImageView(babyImagePath);
 		Label name = new Label();
 		name.setText(myView.getBankController().getAOName(baby));

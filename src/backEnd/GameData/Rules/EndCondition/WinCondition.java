@@ -1,6 +1,8 @@
 package backEnd.GameData.Rules.EndCondition;
 
-public abstract class WinCondition extends EndCondition{
+import backEnd.GameData.Rules.Rule;
+
+public abstract class WinCondition extends Rule{
 	
 	public WinCondition(double val) {
 		super(val);

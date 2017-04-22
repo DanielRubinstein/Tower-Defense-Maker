@@ -48,7 +48,8 @@ public class StateImpl extends Observable implements State {
 	public StateImpl(int numRowsInGrid, int numColsInGrid, TileGrid tileGrid, ComponentGraph componentGraph) throws FileNotFoundException {
 		this.numColsInGrid = numColsInGrid;
 		this.numRowsInGrid = numRowsInGrid;
-		myComponentGraph = new ComponentGraphImpl();
+		myTileGrid = tileGrid;
+		myComponentGraph = componentGraph;
 		myEngineStatus = EngineStatus.PAUSED;
 		mySpawnQueues = new HashMap<String,SpawnQueue>();
 	}
@@ -60,7 +61,7 @@ public class StateImpl extends Observable implements State {
 			for (int col = 0; col < cols; col++) {
 				Point2D loc = new Point2D(col, row);
 				
-				Tile newTile = new TileImpl(Arrays.asList(), Arrays.asList("AUTHOR"), loc);
+				Tile newTile = new TileImpl(Arrays.asList(), Arrays.asList(), Arrays.asList(), loc);
 				
 				Attribute<String> imgAttr = (Attribute<String>) newTile.getAttribute("ImageFile");
 				imgAttr.setValue(myImageResource.getString("default_tile"));
@@ -222,15 +223,10 @@ public class StateImpl extends Observable implements State {
 		return myComponentGraph.getComponentsByTileCorners(tileCorners);
 	}
 
-
-	@Override
-	public void setComponentGraph(ComponentGraph newComponentGraph) {
-		myComponentGraph=newComponentGraph;
-	}
-
-
 	public void setEngineStatus(EngineStatus engineStatus) {
 		myEngineStatus=engineStatus;
+		this.setChanged();
+		this.notifyObservers();
 	}
 
 
