@@ -7,10 +7,19 @@ import backEnd.ModelImpl;
 import backEnd.GameData.State.State;
 import backEnd.GameEngine.Engine.Spawning.SpawnQueue;
 
+/**
+ * Removes a spawn queue
+ * @author Alex
+ *
+ */
 public class Modification_RemoveSpawnQueue implements ModificationFromUser{
 
 	private String mySpawnQueueName;
 	
+	/**
+	 * Removes a spawn queue by name
+	 * @param spawnQueueName
+	 */
 	public Modification_RemoveSpawnQueue(String spawnQueueName) {
 		mySpawnQueueName = spawnQueueName;
 	}

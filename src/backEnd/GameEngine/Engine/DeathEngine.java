@@ -15,12 +15,14 @@ import javafx.geometry.Point2D;
 
 public class DeathEngine implements Engine {
 	private DeathBehavior DB;
-
 	public void gameLoop(GameData gameData, double stepTime) {
 		DB = new DeathBehavior();
 		for (Component struct : gameData.getState().getComponentGraph().getAllComponents()) {
 			DB.execute(struct);
 			if (DB.isDead()) {
+				gameData.getStatus().incrementStatusItem("KillCount", 1);
+				gameData.getStatus().incrementStatusItem("Money", (Integer)struct.getAttribute("MoneyBounty").getValue());
+				gameData.getStatus().incrementStatusItem("Score", (Integer)struct.getAttribute("ScoreBounty").getValue());
 				gameData.getState().getComponentGraph().getAllComponents().remove(struct);
 			}
 			if (DB.spawnsOnDeath()) {
