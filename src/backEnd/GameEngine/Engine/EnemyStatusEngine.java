@@ -20,8 +20,12 @@ public class EnemyStatusEngine implements Engine{
 			if(component.getMyType().equals(ENEMY_TYPE)){
 				boolean poisoned = (boolean)component.getAttribute("Poisoned").getValue(); 
 				boolean slowed   = component.getAttribute("currentSpeed").getValue() != component.getAttribute("defaultSpeed").getValue();
-				if(poisoned){}
-				if(slowed){}
+				if(poisoned){
+					
+				}
+				if(slowed){
+					
+				}
 			}
 		}
 		

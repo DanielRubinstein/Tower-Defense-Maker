@@ -12,7 +12,7 @@ public class GameData implements GameDataInterface{
 	private Rules myRules;
 	private PlayerStatus myPlayerStatus;
 	private EngineStatus myEngineStatus;
-
+	private double myGameTime;
 	
 	public GameData(StateImpl state, PlayerStatus playerStatus, Rules rules){
 		this.myState = state;
@@ -20,6 +20,7 @@ public class GameData implements GameDataInterface{
 		this.myPlayerStatus = playerStatus;
 		myEngineStatus=EngineStatus.PAUSED;
 		myState.setEngineStatus(myEngineStatus);
+		myGameTime = (long) 0;
 	}
 
 	@Override
@@ -62,4 +63,7 @@ public class GameData implements GameDataInterface{
 		return this.myPlayerStatus;
 	}
 
+	public void incrementGameTime(Double gameTime) {
+		myGameTime += gameTime;
+	}
 }
