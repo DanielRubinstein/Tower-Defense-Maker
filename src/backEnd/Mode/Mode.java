@@ -25,11 +25,6 @@ public interface Mode {
 	String getGameMode();
 
 	/**
-	 * @return current Game Mode as string
-	 */
-	String getGameModeString();
-
-	/**
 	 * Change User Mode (Author to Player or Player to Author)
 	 */
 	void toggleUserMode();

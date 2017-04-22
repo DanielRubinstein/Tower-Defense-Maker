@@ -1,5 +1,7 @@
 package backEnd.GameData.State;
 
+import java.util.Collection;
+
 import javafx.beans.property.ReadOnlyDoubleProperty;
 
 /**
@@ -17,6 +19,6 @@ public interface PlayerStatusReader {
 	 */
 	ReadOnlyDoubleProperty getProperty(String propertyName);
 	
-	
+	Collection<String> getPropertyNames();
 
 }

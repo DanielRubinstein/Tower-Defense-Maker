@@ -26,7 +26,7 @@ public class SpawnTabPane implements SkeletonObject{
 	}
 	
 	private void createAddTab() {
-		Tab tabAdd = new Tab("Add New Spawn Timeline");
+		Tab tabAdd = new Tab("+");
 		tabAdd.setClosable(false);
 		tabAdd.setOnSelectionChanged((e) -> {
 			if(tabAdd.selectedProperty().get()){
