@@ -48,19 +48,13 @@ public class ModeImpl implements ModeReader, Mode{
 	}
 	
 	@Override
-	public String getGameModeString(){
-		return currGameMode.toString();
-	}
-	
-	@Override
 	public void toggleUserMode(){
 		System.out.println("MODE CHANGE");
-		for (String mode : userModes){
-			if (!mode.equals(currUserMode)){
-				currUserMode = mode;
-				break;
-			}
-		}
+		if(currUserMode.equals("AUTHOR")){
+			currUserMode = "PLAYER";
+		} else if (currUserMode.equals("PLAYER")){
+			currUserMode = "AUTHOR";
+		} 
 		aBP.setValue(!aBP.getValue());
 	}
 	
