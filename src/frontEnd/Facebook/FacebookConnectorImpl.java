@@ -67,11 +67,19 @@ public class FacebookConnectorImpl implements FacebookConnector {
 	@Override
 	public void login() throws FacebookException{
 		WebEngine web = loadPage();
-		web.executeScript("document.getElementsByName('email')[0].value='" + "tim.overeem@duke.edu" + "';");
+		//web.executeScript("document.getElementsByName('email')[0].value='" + "tim.overeem@duke.edu" + "';");
+		//web.executeScript("javascript:document.getElementById('email').value = '"+"tim.overeem@duke.edu"+"';document.getElementById('password').value='"+"cali02"+"';");
+		System.out.println(web.getDocument());
 		web.setOnStatusChanged(e -> {
+			if(web.getDocument()!=null){
+				System.out.println(web.getDocument().getElementsByTagName("*") + "   ");
+
+				System.out.println(web.getDocument().getElementsByTagName("email") + "   ");
+				web.getDocument().getElementsByTagName("email").item(0).setNodeValue("tim.overeem@duke.edu");
+			}
 			String redirect = web.getLocation();
 			Pattern p = Pattern.compile(DEFAULT_ACCESS_PATTERN);
-			Matcher m = p.matcher(redirect);	
+			Matcher m = p.matcher(redirect);
 			if(m.matches()){
 				String accessCode = m.group(1);
 				userClient = new DefaultFacebookClient(accessCode,appSecret,Version.LATEST);
@@ -87,8 +95,7 @@ public class FacebookConnectorImpl implements FacebookConnector {
 	 * @throws FacebookException
 	 */
 	private WebEngine loadPage() throws FacebookException{
-		final WebView browser = new WebView();
-		
+		WebView browser = new WebView();
 		System.out.println("good version");
 		WebEngine webEngine = browser.getEngine();
 		webEngine.load(totalLoginURL);
