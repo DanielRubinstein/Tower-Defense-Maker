@@ -187,7 +187,8 @@ public class ScreenGrid implements SkeletonObject, Observer {
 				addComponentToGrid(c);
 			}
 		}
-		for(Component c : myComponents){
+		Set<Component> myComponentsCopy=new HashSet<>(myComponents);
+		for(Component c : myComponentsCopy){
 			if(!observedComponentGraph.getAllComponents().contains(c)){
 				removeComponentFromGrid(c);
 			}
