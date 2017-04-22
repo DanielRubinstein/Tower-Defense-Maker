@@ -19,6 +19,7 @@ import frontEnd.Skeleton.SkeletonImpl;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.scene.Node;
+import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
 
 public class ViewImpl implements View {
@@ -28,6 +29,8 @@ public class ViewImpl implements View {
 	private SimpleBooleanProperty authorProperty;
 	private Stage appStage;
 	private FacebookInteractor myFB;
+	private Rectangle mySpawnZoneRepeating;
+	private Rectangle mySpawnZoneSingle;
 
 	public ViewImpl(Model model, Consumer<ModificationFromUser> inputConsumer, FacebookInteractor fb) {
 		myFB=fb;
