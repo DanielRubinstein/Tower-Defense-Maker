@@ -1,4 +1,4 @@
-package backEnd.GameData.PlayerStatus;
+package backEnd.GameData.State;
 
 import java.util.HashMap;
 import java.util.Map;

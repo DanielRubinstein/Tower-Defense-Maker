@@ -1,8 +1,8 @@
 package backEnd.GameData;
 
-import backEnd.GameData.PlayerStatus.PlayerStatus;
-import backEnd.GameData.PlayerStatus.PlayerStatusModifier;
-import backEnd.GameData.PlayerStatus.PlayerStatusReader;
+import backEnd.GameData.State.PlayerStatus;
+import backEnd.GameData.State.PlayerStatusModifier;
+import backEnd.GameData.State.PlayerStatusReader;
 import backEnd.GameData.State.State;
 import backEnd.GameData.State.StateImpl;
 import backEnd.GameEngine.EngineStatus;
