@@ -1,5 +1,6 @@
-package ModificationFromUser;
+package ModificationFromUser.AttributeOwner;
 
+import ModificationFromUser.ModificationFromUser;
 import backEnd.ModelImpl;
 import backEnd.Attribute.Attribute;
 
