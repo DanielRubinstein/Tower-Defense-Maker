@@ -1,5 +1,6 @@
 package backEnd.LevelProgression;
 
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -47,7 +48,7 @@ public class LevelProgressionControllerImpl implements LevelProgressionControlle
 		gamesMap.put(gameName, new ArrayList<String>());
 	}
 	
-	public GameData getNextLevel(String gameName, String currentLevel) throws XMLReadingException{
+	public GameData getNextLevel(String gameName, String currentLevel) throws XMLReadingException, FileNotFoundException{
 		List<String> levelPathsList = gamesMap.get(gameName);
 		String nextLevel = null;
 		for (int i = 0; i < levelPathsList.size(); i++){

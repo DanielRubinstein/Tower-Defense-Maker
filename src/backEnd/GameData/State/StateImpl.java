@@ -5,20 +5,13 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.HashMap;
-import java.util.HashSet;
-import java.util.LinkedList;
 import java.util.Map;
 import java.util.Observable;
 import java.util.Observer;
-import java.util.Queue;
 import java.util.ResourceBundle;
-import java.util.Set;
-import java.util.Stack;
 
-import ModificationFromUser.AttributeOwner.Modification_EditAttribute;
 import backEnd.Coord;
 import backEnd.Attribute.Attribute;
-import backEnd.Attribute.AttributeImpl;
 import backEnd.GameEngine.EngineStatus;
 import backEnd.GameEngine.Engine.Spawning.SpawnQueue;
 import javafx.geometry.Point2D;
@@ -235,8 +228,4 @@ public class StateImpl extends Observable implements State {
 	public Map<String, SpawnQueue> getSpawnQueues() {
 		return mySpawnQueues;
 	}
-
-
-	
-
 }

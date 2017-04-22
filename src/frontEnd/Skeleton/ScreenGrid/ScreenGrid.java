@@ -100,6 +100,7 @@ public class ScreenGrid implements SkeletonObject, Observer {
 
 	private void extractAoCollectionsFromState() {
 		observedTileGrid = myState.getTileGrid();
+		System.out.println(this);
 		observedTileGrid.addAsObserver(this);
 		observedComponentGraph = myState.getComponentGraph();
 		observedComponentGraph.addAsObserver(this);
@@ -146,6 +147,7 @@ public class ScreenGrid implements SkeletonObject, Observer {
 
 	@Override
 	public void update(Observable o, Object arg) {
+		System.out.println("Update triggered in ScreenGrid");
 		if (o == observedComponentGraph) {
 			updateComponentsOnGrid();
 		} else if (o == observedTileGrid){

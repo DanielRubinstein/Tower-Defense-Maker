@@ -3,18 +3,14 @@ package ModificationFromUser.AttributeOwner;
 import java.lang.reflect.Method;
 import java.util.List;
 import java.util.Observer;
-
 import com.thoughtworks.xstream.XStream;
 import com.thoughtworks.xstream.io.xml.DomDriver;
 
 import ModificationFromUser.ModificationFromUser;
 import backEnd.ModelImpl;
 import backEnd.Attribute.AttributeOwner;
-import backEnd.Attribute.AttributeOwnerReader;
-import backEnd.Bank.BankController;
 import backEnd.GameData.State.Component;
 import backEnd.GameData.State.Tile;
-import backEnd.GameData.State.TileImpl;
 import backEnd.Mode.ModeException;
 
 /**
@@ -26,21 +22,18 @@ import backEnd.Mode.ModeException;
 public class Modification_AddNewPresetAttributeOwner implements ModificationFromUser {
 
 	private AttributeOwner newAttrOwn;
-	private String newAOName;
-	private BankController myBankController;
+
 	private XStream xStream;
 	public static final String DESCRIPTION = "Add Preset Component or Tile";		
 	
 	public Modification_AddNewPresetAttributeOwner(String newAttributeOwnerName, AttributeOwner obj){
 		this.newAttrOwn = obj;
-		this.newAOName = newAttributeOwnerName;
 	}
 
 	//FIXME currently the new preset will overwrite an existing preset with the same name, 
 	// based on the implementation of addNewComponent()
 	@Override
 	public void invoke(ModelImpl model) throws Exception {
-		myBankController = model.getBankController();
 		switch (model.getMode().getUserMode()) {
 		case "AUTHOR":
 			AttributeOwner newAttrOwnToAdd;
@@ -70,18 +63,11 @@ public class Modification_AddNewPresetAttributeOwner implements ModificationFrom
 				// TODO add exception?
 			}
 			break;
+			
 		case "PLAYER":
 			throw new ModeException(model.getMode(), DESCRIPTION);
 		}
 		
-	}
-	
-	private void add(TileImpl tile){
-		myBankController.addNewTile(newAOName, tile);
-	}
-	
-	private void add(Component component){
-		myBankController.addNewComponent(newAOName, component);
 	}
 	
 }

@@ -23,6 +23,7 @@ import backEnd.Attribute.AttributeOwnerReader;
 public class ComponentGraphImpl extends Observable implements ComponentGraph {
 	private Map<Point2D, List<Component>> componentMap;
 	private List<Component> myComponents;
+	private ArrayList<List<Observer>> compObserverList;
 	
 	public ComponentGraphImpl(){
 		componentMap = new HashMap<>();
@@ -30,11 +31,30 @@ public class ComponentGraphImpl extends Observable implements ComponentGraph {
 	}
 	
 	
-	public List<Component> getAllComponents(){
+	public ComponentGraphImpl(HashMap<Point2D, List<Component>> fromXML)
+	{
+		componentMap = fromXML;
+		
+	}
+
+
+	public List<Component> getAllComponents()
+	{
+		
+		myComponents = new ArrayList<Component>();
+		for (List<Component> list : componentMap.values())
+		{
+				myComponents.addAll(list);
+		}
+		
 		return myComponents;
 	}
 	
-	
+	public Map<Point2D, List<Component>> getComponentMap()
+	{
+		return componentMap;
+	}
+
 	
 	@Override
 	public List<Component> getComponentsByScreenPosition(Point2D screenPosition){
@@ -116,6 +136,28 @@ public class ComponentGraphImpl extends Observable implements ComponentGraph {
 	@Override
 	public boolean contains(AttributeOwnerReader c) {
 		return myComponents.contains(c);
+	}
+
+
+	@Override
+	public void saveAndClearObservers()
+	{
+		compObserverList = new ArrayList<List<Observer>>();
+		
+		for (int i = 0; i < myComponents.size(); i++)
+		{
+			compObserverList.add(myComponents.get(i).getAndClearObservers());
+		}
+	}
+
+
+	@Override
+	public void setObservers() {
+		for (int i = 0; i < myComponents.size(); i++)
+		{
+			myComponents.get(i).setObserverList(compObserverList.get(i));
+		}
+		
 	}
 
 }

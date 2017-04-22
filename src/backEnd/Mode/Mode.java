@@ -23,11 +23,17 @@ public interface Mode {
 	 * @return current Game Mode
 	 */
 	String getGameMode();
+	
+	/**
+	 * Choose Level Mode
+	 * @param newLevelMode
+	 */
+	void setLevelMode(String newLevelMode);
 
 	/**
-	 * @return current Game Mode as string
+	 * @return current Level Mode
 	 */
-	String getGameModeString();
+	String getLevelMode();
 
 	/**
 	 * Change User Mode (Author to Player or Player to Author)

@@ -9,6 +9,8 @@ import java.util.Observable;
 import java.util.Observer;
 import java.util.ResourceBundle;
 
+import com.thoughtworks.xstream.annotations.XStreamOmitField;
+
 import backEnd.Attribute.Attribute;
 import backEnd.Attribute.AttributeData;
 import backEnd.Attribute.AttributeFactory;
@@ -28,6 +30,8 @@ public class TileImpl extends Observable implements Tile, AttributeOwner {
 	private final static ResourceBundle attributeResources = ResourceBundle.getBundle(DEFAULT_ATTRIBUTES_PATH);
 	private AccessPermissions myAccessPerm;
 	private AttributeData myAttrData;
+	
+	@XStreamOmitField
 	private List<Observer> observers = new ArrayList<Observer>();
 	
 	public TileImpl() throws FileNotFoundException{
