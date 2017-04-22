@@ -207,6 +207,7 @@ public class StateImpl extends Observable implements State {
 		return numRowsInGrid;
 	}
 	
+	@Override
 	public boolean gameIsRunning(){
 		return myEngineStatus.equals(EngineStatus.RUNNING);
 	}
