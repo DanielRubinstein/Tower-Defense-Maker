@@ -2,6 +2,7 @@ package data;
 
 import java.io.File;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import com.thoughtworks.xstream.XStream;
@@ -10,11 +11,15 @@ import backEnd.GameData.Rules;
 import backEnd.GameData.GameData;
 import backEnd.GameData.State.Component;
 import backEnd.GameData.State.ComponentGraph;
+import backEnd.GameData.State.ComponentGraphImpl;
 import backEnd.GameData.State.State;
 import backEnd.GameData.State.StateImpl;
 import backEnd.GameData.State.Tile;
 import backEnd.GameData.State.TileGrid;
+import backEnd.GameData.State.TileGridImpl;
+import backEnd.GameData.State.TileGridInstantiator;
 import backEnd.LevelProgression.LevelProgressionControllerImpl;
+import javafx.geometry.Point2D;
 import backEnd.GameData.State.PlayerStatus;
 
 
@@ -42,8 +47,10 @@ public class XMLReaderImpl implements XMLReader{
 	public GameData loadGameStateData(String filePath, String levelName) throws XMLReadingException
 	{
 		
-		StateImpl state = new StateImpl((TileGrid) xStream.fromXML(new File(filePath+"/" + levelName+"/tilegrid.xml")), 
-				(ComponentGraph) xStream.fromXML(new File(filePath+"/" + levelName+"/componentgraph.xml")));
+		TileGrid grid = new TileGridImpl((TileGridInstantiator) xStream.fromXML(new File(filePath+"/" + levelName+"/tilegrid.xml")));
+		ComponentGraph graph = new ComponentGraphImpl((HashMap<Point2D, List<Component>>) xStream.fromXML(new File(filePath+"/" + levelName+"/componentgraph.xml")));
+		
+		StateImpl state = new StateImpl(grid, graph);
 		
 		return new GameData(state, (PlayerStatus) xStream.fromXML(new File(filePath+"/" + levelName+"/playerstatus.xml")),
 				(Rules) xStream.fromXML(new File(filePath+"/" + levelName+"/rules.xml")));
