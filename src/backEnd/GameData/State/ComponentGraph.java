@@ -68,4 +68,8 @@ public interface ComponentGraph {
 
 	boolean contains(AttributeOwnerReader c);
 
+	void saveAndClearObservers();
+
+	void setObservers();
+
 }
