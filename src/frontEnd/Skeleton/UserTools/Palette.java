@@ -105,7 +105,7 @@ public class Palette<T extends AttributeOwner> implements SkeletonObject, Observ
 
 	private void setDoubleClickEvent(ImageView imageView, Consumer<ImageView> consumer) {
 		imageView.setOnMouseClicked(mouseEvent -> {
-			if (mouseEvent.getButton().equals(MouseButton.PRIMARY) && mouseEvent.getClickCount() == 2) {
+			if (mouseEvent.getButton().equals(MouseButton.PRIMARY) && mouseEvent.getClickCount() == 1) {
 				consumer.accept(imageView);
 			}
 		});
