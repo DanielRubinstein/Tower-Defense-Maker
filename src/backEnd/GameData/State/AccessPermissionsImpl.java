@@ -65,7 +65,7 @@ public class AccessPermissionsImpl implements AccessPermissions {
 
 	@Override
 	public boolean permitsAccess(String userMode, String gameMode, String levelMode) {
-		if (gameModePermissions.contains(userMode) || userModePermissions.contains(gameMode) || levelModePermissions.contains(levelMode)){
+		if (userModePermissions.contains(userMode) & gameModePermissions.contains(gameMode) & levelModePermissions.contains(levelMode)){
 			return true;
 		}
 		return false;
@@ -85,5 +85,9 @@ public class AccessPermissionsImpl implements AccessPermissions {
 	public List<String> getLevelModeList() {
 		return levelModePermissions;
 	}
-	
+
+	@Override
+	public boolean permitsAccess(String mode) {
+		return (userModePermissions.contains(mode) || gameModePermissions.contains(mode) || levelModePermissions.contains(mode));
+	}
 }

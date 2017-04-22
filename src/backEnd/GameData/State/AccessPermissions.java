@@ -31,6 +31,8 @@ public interface AccessPermissions {
 	 */
 	boolean permitsAccess(String userMode, String gameMode, String levelMode);
 	
+	boolean permitsAccess(String mode);
+	
 	List<String> getGameModeList();
 	
 	List<String> getUserModeList();

@@ -38,9 +38,9 @@ public class TileImpl extends Observable implements Tile, AttributeOwner {
 		this(new AccessPermissionsImpl(), new Point2D(0,0));
 	}
 	
-	public TileImpl(List<String> gameModeAccessPermissions, List<String> userModeAccessPermissions,
+	public TileImpl(List<String> userModeAccessPermissions, List<String> gameModeAccessPermissions, List<String> levelModeAccessPermissions,
 			Point2D position) throws FileNotFoundException {
-		this(new AccessPermissionsImpl(gameModeAccessPermissions, userModeAccessPermissions), position);
+		this(new AccessPermissionsImpl(userModeAccessPermissions, gameModeAccessPermissions, levelModeAccessPermissions), position);
 	}
 	
 	public TileImpl(AccessPermissions aP,Point2D position )  throws FileNotFoundException {

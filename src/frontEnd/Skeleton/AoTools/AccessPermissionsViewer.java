@@ -3,6 +3,7 @@ package frontEnd.Skeleton.AoTools;
 import java.util.Arrays;
 import java.util.List;
 
+import ModificationFromUser.AttributeOwner.Modification_EditAccessPermissions;
 import backEnd.Attribute.AttributeOwner;
 import backEnd.GameData.State.AccessPermissions;
 import frontEnd.View;
@@ -74,42 +75,12 @@ public class AccessPermissionsViewer implements SkeletonObject{
 					cB.disableProperty().set(true);
 				}
 				
-				if(myAccessPermissions.getUserModeList().contains(thing)){
+				if (myAccessPermissions.permitsAccess(thing)){
 					cB.setSelected(true);
-					cB.selectedProperty().addListener((o, oldV, newV) -> {
-						if (newV){
-							myAccessPermissions.addUserAccessPermission(thing);
-						}
-						else{
-							myAccessPermissions.removeUserAccessPermission(thing);;
-						}
-					});
 				}
-				
-				if(myAccessPermissions.getGameModeList().contains(thing)){
-					cB.setSelected(true);
-					cB.selectedProperty().addListener((o, oldV, newV) -> {
-						if (newV){
-							myAccessPermissions.addGameAccessPermission(thing);
-						}
-						else{
-							myAccessPermissions.removeGameAccessPermission(thing);;
-						}
-					});
-				}
-				
-				if(myAccessPermissions.getLevelModeList().contains(thing)){
-					cB.setSelected(true);
-					cB.selectedProperty().addListener((o, oldV, newV) -> {
-						if (newV){
-							myAccessPermissions.addLevelAccessPermission(thing);
-						}
-						else{
-							myAccessPermissions.removeLevelAccessPermission(thing);;
-						}
-					});
-				}
-				
+				cB.selectedProperty().addListener((o, oldV, newV) -> {
+					myView.sendUserModification(new Modification_EditAccessPermissions(myAccessPermissions, newV, thing));
+				});
 				
 				subBody.getChildren().add(cB);
 			}
