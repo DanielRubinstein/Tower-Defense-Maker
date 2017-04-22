@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Optional;
 
+import ModificationFromUser.Spawning.Modification_AddSpawnQueue;
+import ModificationFromUser.Spawning.Modification_RemoveSpawnQueue;
 import frontEnd.View;
 import frontEnd.Skeleton.UserTools.SkeletonObject;
 import javafx.scene.Node;
@@ -26,7 +28,7 @@ public class SpawnTabPane implements SkeletonObject{
 	}
 	
 	private void createAddTab() {
-		Tab tabAdd = new Tab("Add New Spawn Timeline");
+		Tab tabAdd = new Tab("+");
 		tabAdd.setClosable(false);
 		tabAdd.setOnSelectionChanged((e) -> {
 			if(tabAdd.selectedProperty().get()){
@@ -38,14 +40,16 @@ public class SpawnTabPane implements SkeletonObject{
 
 	private void createNewTimelineTab() {
 		Integer tabID = nextTimelineIndex();
-		Tab newSpawnTab = new Tab("Spawn Timeline " + tabID);
+		String tabName = "Timeline " + tabID;
+		Tab newSpawnTab = new Tab(tabName);
+		myView.sendUserModification(new Modification_AddSpawnQueue(tabName));
 		SpawnTimelineView spawnTimelineView = new SpawnTimelineView(myView, myRoot.widthProperty());
 		
 		newSpawnTab.setContent(spawnTimelineView.getRoot());
 		newSpawnTab.setOnCloseRequest(e -> {
 			if(checkWithUser(newSpawnTab)){
 				takenIDs.remove(tabID);
-				//delete tab in backend
+				myView.sendUserModification(new Modification_RemoveSpawnQueue(tabName));
 			} else {
 				e.consume();
 			}

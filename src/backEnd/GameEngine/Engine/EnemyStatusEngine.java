@@ -2,8 +2,10 @@ package backEnd.GameEngine.Engine;
 
 import java.util.List;
 
+import backEnd.Attribute.Attribute;
 import backEnd.GameData.GameData;
 import backEnd.GameData.State.Component;
+import backEnd.GameEngine.Engine.Status.StatusEffect;
 /**
  * Updates enemy status effects 
  * @author Alex
@@ -18,16 +20,40 @@ public class EnemyStatusEngine implements Engine{
 		List<Component> components = gameData.getState().getComponentGraph().getAllComponents();
 		for(Component component : components){
 			if(component.getMyType().equals(ENEMY_TYPE)){
-				boolean poisoned = (boolean)component.getAttribute("Poisoned").getValue(); 
-				boolean slowed   = component.getAttribute("currentSpeed").getValue() != component.getAttribute("defaultSpeed").getValue();
-				if(poisoned){}
-				if(slowed){}
+				updatePoison(stepTime, component);
+				updateSlowed(stepTime, component);
 			}
 		}
-		
-		
-		
-		
 	}
 
+	private void updatePoison(double stepTime, Component component) {
+		Attribute<StatusEffect> poisoned = (Attribute<StatusEffect>)component.getAttribute("Poisoned");
+		Attribute<Double> health   		 = (Attribute<Double>)component.getAttribute("Health");
+		Double poisonTime = poisoned.getValue().getTime();
+		if(poisonTime > 0){
+			if(poisonTime - stepTime < 0){ //If poison should only do partial tick
+				poisoned.setValue(new StatusEffect(new Double(0),new Double(0)));
+				health.setValue(health.getValue() - poisoned.getValue().getFactor() * poisonTime);
+			} else { //Full poison tick
+				poisoned.getValue().setTime(poisonTime - stepTime);
+				health.setValue(health.getValue() - poisoned.getValue().getFactor() * stepTime);
+			}
+		}
+	}
+
+	private void updateSlowed(double stepTime, Component component) {
+		Attribute<StatusEffect> slowed = (Attribute<StatusEffect>)component.getAttribute("Slowed");
+		Attribute<Double> currentSpeed = (Attribute<Double>)component.getAttribute("CurrentSpeed");
+		Attribute<Double> normalSpeed  = (Attribute<Double>)component.getAttribute("NormalSpeed");
+		
+		Double poisonTime = slowed.getValue().getTime();
+		if(poisonTime > 0){
+			if(poisonTime - stepTime < 0){ //If poison should only do partial tick
+				slowed.setValue(new StatusEffect(new Double(0),new Double(0)));
+				currentSpeed.setValue(new Double(normalSpeed.getValue().doubleValue()));
+			} else { //Full poison tick
+				slowed.getValue().setTime(poisonTime - stepTime);
+			}
+		}
+	}
 }

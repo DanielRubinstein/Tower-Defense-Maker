@@ -1,9 +1,7 @@
 package backEnd.GameEngine.Engine;
 
 import java.util.List;
-import java.util.ResourceBundle;
 
-import backEnd.Attribute.Attribute;
 import backEnd.GameData.GameData;
 import backEnd.GameData.State.Component;
 import backEnd.GameData.State.ComponentBuilder;
@@ -14,8 +12,7 @@ import javafx.geometry.Point2D;
 
 /**
  * 
- * @author Alex
- * @author Christian
+ * @author GameEngine team (Alex, Christian, Daniel)
  */
 public class SpawnEngine implements Engine {
 
@@ -23,11 +20,7 @@ public class SpawnEngine implements Engine {
 	//private final static ResourceBundle myResources = ResourceBundle.getBundle(RESOURCES_PATH);
 	//private String spawnQueueAttributeName = "SpawnQueue";
 
-	private boolean internalPaused = true;
 	private boolean gamePaused = true;
-	private boolean started = false;
-	private Long startSpawnTimeMillis;
-	private Long startPauseTimeMillis;
 	private State myState;
 
 	// TODO Add logic in pausing the game and starting again... Fucked up the
@@ -35,21 +28,10 @@ public class SpawnEngine implements Engine {
 
 	@Override
 	public void gameLoop(GameData gameData, double stepTime) {
-		// gamePaused = currentState.getEnginePauserinolamo;
 		myState=gameData.getState();
-		if (internalPaused && gamePaused) {
+		gamePaused = myState.gameIsRunning();
+		if (gamePaused) {
 			return;
-		}
-		if (!internalPaused && gamePaused) { // Someone pressed pause
-			startPauseTimeMillis = System.currentTimeMillis();
-			return;
-		}
-		if (internalPaused && !gamePaused) { // Someone pressed play
-			startSpawnTimeMillis += System.currentTimeMillis() - startPauseTimeMillis;
-		}
-		if (!started) {
-			started = true;
-			startSpawnTimeMillis = System.currentTimeMillis();
 		}
 		List<Tile> tileList = gameData.getState().getTileGrid().getAllTiles();
 		for (Tile spawnTile : tileList) {
@@ -57,18 +39,18 @@ public class SpawnEngine implements Engine {
 				Object spawnQueueObj = spawnTile.getAttribute("SpawnQueue").getValue();
 				SpawnQueue currentSpawnQueue = (SpawnQueue) spawnQueueObj;
 				// Spawning with frequencies
-				for (Component component : currentSpawnQueue
-						.getNextFrequency(startSpawnTimeMillis - System.currentTimeMillis())) {
+				for (Component component : currentSpawnQueue.getNextFrequencySpawn(gameData.getGameTime())) {
 					spawn(component, spawnTile);
 				}
 				// Spawning directly with spawn queue
-				spawn(currentSpawnQueue.getNextSpawn(), spawnTile);
+				spawn(currentSpawnQueue.getNextQueueSpawn(stepTime), spawnTile);
 			}
 		}
 	}
 
 	private void spawn(Component component, Tile spawnTile) {
 		if (component == null) {
+			System.out.println("No component to add from spawn queue");
 			return;
 		}
 		ComponentBuilder componentBuilder = new ComponentBuilder(component);

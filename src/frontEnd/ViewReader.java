@@ -2,8 +2,7 @@ package frontEnd;
 
 import java.util.Collection;
 
-import backEnd.GameData.State.Component;
-import backEnd.GameData.State.Tile;
+import backEnd.GameData.State.*;
 import backEnd.LevelProgression.LevelProgressionControllerReader;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleStringProperty;
@@ -25,5 +24,7 @@ public interface ViewReader {
 	public void reportError(Exception e);
 	
 	LevelProgressionControllerReader getLevelProgressionController();
+	
+	PlayerStatusReader getPlayerStatus();
 	
 }

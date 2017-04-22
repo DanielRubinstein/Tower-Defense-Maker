@@ -15,15 +15,15 @@ import javafx.beans.property.SimpleBooleanProperty;
 public class ModeImpl implements ModeReader, Mode{
 	private String currUserMode;
 	private String currGameMode;
+	private String currLevelMode;
 	private SimpleBooleanProperty aBP;
 	private List<String> userModes;
-	private List<String> gameModes;
 	
-	public ModeImpl(String gameMode, String userMode, LevelProgressionControllerReader levelProgression){
+	public ModeImpl(String userMode, String gameMode, String levelMode, LevelProgressionControllerReader levelProgression){
 		this.currGameMode = gameMode;
 		this.currUserMode = userMode;
+		this.currLevelMode = levelMode;
 		this.userModes = Arrays.asList("AUTHOR", "PLAYER");
-		this.gameModes = levelProgression.getGameList();
 		aBP = new SimpleBooleanProperty(this.getUserMode().equals("AUTHOR"));
 	}
 
@@ -38,6 +38,11 @@ public class ModeImpl implements ModeReader, Mode{
 	}
 	
 	@Override
+	public List<String> getAllUserModes(){
+		return userModes;
+	}
+	
+	@Override
 	public void setGameMode(String newGameMode){
 		currGameMode = newGameMode;
 	}
@@ -48,24 +53,29 @@ public class ModeImpl implements ModeReader, Mode{
 	}
 	
 	@Override
-	public String getGameModeString(){
-		return currGameMode.toString();
-	}
-	
-	@Override
 	public void toggleUserMode(){
 		System.out.println("MODE CHANGE");
-		for (String mode : userModes){
-			if (!mode.equals(currUserMode)){
-				currUserMode = mode;
-			}
-		}
+		if(currUserMode.equals("AUTHOR")){
+			currUserMode = "PLAYER";
+		} else if (currUserMode.equals("PLAYER")){
+			currUserMode = "AUTHOR";
+		} 
 		aBP.setValue(!aBP.getValue());
 	}
 	
 	@Override
 	public SimpleBooleanProperty getAuthorBooleanProperty(){
 		return aBP;
+	}
+
+	@Override
+	public void setLevelMode(String newLevelMode) {
+		currLevelMode = newLevelMode;
+	}
+
+	@Override
+	public String getLevelMode() {
+		return currLevelMode;
 	}
 	
 }
