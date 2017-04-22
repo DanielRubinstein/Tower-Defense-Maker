@@ -25,6 +25,14 @@ public class SpawnData implements Comparable<SpawnData>{
 		return myTime;
 	}
 
+	public void setSpawnable(Component mySpawnable) {
+		this.mySpawnable = mySpawnable;
+	}
+	
+	public void setTime(long myTime) {
+		this.myTime = myTime;
+	}
+	
 	@Override
 	public int compareTo(SpawnData o) {
 		return (int)((this.getTime()-o.getTime()) * 1000);
