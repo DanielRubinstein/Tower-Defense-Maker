@@ -42,19 +42,23 @@ public class StateImpl extends Observable implements State {
 	private Map<String, SpawnQueue> mySpawnQueues;
 	
 	public StateImpl(int numColsInGrid, int numRowsInGrid) throws FileNotFoundException {
+		this(numColsInGrid, numRowsInGrid, setDefaultTileGrid(numColsInGrid, numRowsInGrid), new ComponentGraphImpl());
+	}
+	
+	public StateImpl(int numRowsInGrid, int numColsInGrid, TileGrid tileGrid, ComponentGraph componentGraph) throws FileNotFoundException {
 		this.numColsInGrid = numColsInGrid;
 		this.numRowsInGrid = numRowsInGrid;
-		setDefaultTileGrid();
-		myComponentGraph = new ComponentGraphImpl();
+		myTileGrid = tileGrid;
+		myComponentGraph = componentGraph;
 		myEngineStatus = EngineStatus.PAUSED;
 		mySpawnQueues = new HashMap<String,SpawnQueue>();
 	}
 
 
-	private void setDefaultTileGrid() throws FileNotFoundException {
-		myTileGrid = new TileGridImpl(numColsInGrid, numRowsInGrid);
-		for (int row = 0; row < numRowsInGrid; row++) {
-			for (int col = 0; col < numColsInGrid; col++) {
+	private static TileGrid setDefaultTileGrid(int cols, int rows) throws FileNotFoundException {
+		TileGrid tileGrid = new TileGridImpl(cols, rows);
+		for (int row = 0; row < rows; row++) {
+			for (int col = 0; col < cols; col++) {
 				Point2D loc = new Point2D(col, row);
 				
 				Tile newTile = new TileImpl(Arrays.asList(), Arrays.asList("AUTHOR"), loc);
@@ -62,10 +66,11 @@ public class StateImpl extends Observable implements State {
 				Attribute<String> imgAttr = (Attribute<String>) newTile.getAttribute("ImageFile");
 				imgAttr.setValue(myImageResource.getString("default_tile"));
 				
-				myTileGrid.setTileByGridPosition(newTile, col, row);
+				tileGrid.setTileByGridPosition(newTile, col, row);
 
 			}
 		}
+		return tileGrid;
 	}
 	
 	public void addAsObserver(Observer o){
@@ -222,11 +227,15 @@ public class StateImpl extends Observable implements State {
 	@Override
 	public void setComponentGraph(ComponentGraph newComponentGraph) {
 		myComponentGraph=newComponentGraph;
+		this.setChanged();
+		this.notifyObservers();
 	}
 
 
 	public void setEngineStatus(EngineStatus engineStatus) {
 		myEngineStatus=engineStatus;
+		this.setChanged();
+		this.notifyObservers();
 	}
 
 
@@ -234,8 +243,4 @@ public class StateImpl extends Observable implements State {
 	public Map<String, SpawnQueue> getSpawnQueues() {
 		return mySpawnQueues;
 	}
-
-
-	
-
 }

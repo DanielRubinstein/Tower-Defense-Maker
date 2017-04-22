@@ -24,6 +24,7 @@ public class Modification_EditAttribute<T> implements ModificationFromUser {
 	@Override
 	public void invoke(ModelImpl myModel) throws Exception {
 		myObj.setAttributeValue(myAtt.getName(), myNewValue);
+		System.out.println(myAtt.getName());
 	}
 
 }
