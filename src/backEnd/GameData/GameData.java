@@ -64,7 +64,11 @@ public class GameData implements GameDataInterface{
 		return this.myPlayerStatus;
 	}
 
-	public void incrementGameTime(Double gameTime) {
-		myGameTime += gameTime;
+	public void incrementGameTime(Double gameStep) {
+		myGameTime += gameStep;
+	}
+	
+	public double getGameTime() {
+		return myGameTime;
 	}
 }
