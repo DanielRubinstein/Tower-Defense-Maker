@@ -9,6 +9,7 @@ import frontEnd.View;
 import frontEnd.CustomJavafxNodes.SingleFieldPrompt;
 import frontEnd.Skeleton.UserTools.SkeletonObject;
 import javafx.beans.property.ReadOnlyDoubleProperty;
+import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
@@ -16,8 +17,12 @@ import javafx.scene.control.ScrollPane;
 import javafx.scene.control.ScrollPane.ScrollBarPolicy;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.DragEvent;
 import javafx.scene.input.TransferMode;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.ColumnConstraints;
+import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
@@ -31,7 +36,6 @@ public class SpawnTimelineView implements SkeletonObject{
 	private ScrollPane dropZone1;
 	private ScrollPane dropZone2;
 	private GridPane myRoot;
-	private ScrollPane test;
 
 	public SpawnTimelineView(View view, ReadOnlyDoubleProperty readOnlyDoubleProperty) {
 		myView = view;
@@ -44,25 +48,22 @@ public class SpawnTimelineView implements SkeletonObject{
 	}
 	
 	private void createDropZones(){
-		dropZone1 = createDropZone("Single Instance Spawns", 0);
-		dropZone1.setOnDragDropped(e -> {
-			String presetName = e.getDragboard().getString();
-			Component presetComponent = (Component) myView.getBankController().getPreset(presetName);
-			SingleFieldPrompt hey = new SingleFieldPrompt(Arrays.asList("Add Spawn",""), "Time interval", "4");
-			long value = Long.parseLong(hey.create());
-			myView.sendUserModification(new Modification_AddSpawner("", presetComponent, value, false));
-			addToDropZone(dropZone1,presetComponent,value);
-		});
+		dropZone1 = singleDropZone("Single Instance Spawns", 0,false);
 		//timelines in a map in game data
-		dropZone2 = createDropZone("Recurring Spawns", 1);
-		dropZone2.setOnDragDropped(e -> {
+		dropZone2 = singleDropZone("Recurring Spawns", 1,true);
+	}
+	
+	private ScrollPane singleDropZone(String name, int order, boolean repeating){
+		ScrollPane dropZone = createDropZone(name, order);
+		dropZone.setOnDragDropped(e -> {
 			String presetName = e.getDragboard().getString();
 			Component presetComponent = (Component) myView.getBankController().getPreset(presetName);
-			SingleFieldPrompt hey = new SingleFieldPrompt(Arrays.asList("1","2"), "3", "4");
+			SingleFieldPrompt hey = new SingleFieldPrompt(Arrays.asList("Add Spawn",""), "3", "4");
 			long value = Long.parseLong(hey.create());
-			myView.sendUserModification(new Modification_AddSpawner("", presetComponent, value, true));
-			addToDropZone(dropZone2,presetComponent,value);
+			myView.sendUserModification(new Modification_AddSpawner("", presetComponent, value, repeating));
+			addToDropZone(dropZone,presetComponent,value);
 		});
+		return dropZone;
 	}
 	private void addToDropZone(ScrollPane dropZone, Component spawn,long value){
 		HBox spawnBox = new HBox();
@@ -75,7 +76,6 @@ public class SpawnTimelineView implements SkeletonObject{
 		spawnBox.getChildren().add(name);
 		spawnBox.getChildren().add(spawnImage);
 		spawnBox.getChildren().add(valueText);
-		
 		VBox child = (VBox) dropZone.getContent();
 		child.getChildren().add(spawnBox);
 		dropZone.setContent(child);
@@ -93,11 +93,11 @@ public class SpawnTimelineView implements SkeletonObject{
 		Label title = new Label(string);
 		myRoot.add(title, i, 0);
 		ScrollPane scroll = new ScrollPane();
-		scroll.setHbarPolicy(ScrollBarPolicy.NEVER);
+		scroll.setHbarPolicy(ScrollBarPolicy.AS_NEEDED);
 		scroll.setVbarPolicy(ScrollBarPolicy.AS_NEEDED);
 		scroll.setPrefHeight(300);
-		
 		VBox wrapper = new VBox();
+		wrapper.setBackground(new Background(new BackgroundFill(Color.LIGHTGREY, CornerRadii.EMPTY, Insets.EMPTY)));
 		ColumnConstraints column1 = new ColumnConstraints();
 	    column1.setPercentWidth(50);
 	    myRoot.getColumnConstraints().add(column1);
