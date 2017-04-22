@@ -43,8 +43,8 @@ public class SpawnQueue {
 	/**
 	 * @return the next component in the spawn Queue if enough time has passed
 	 */
-	public Component getNextSpawn() {
-		if(myCurrentSpawn >= mySpawnQueue.size() || (System.currentTimeMillis() - myTimeLastQueueSpawnedMillis) / 1000 > mySpawnQueue.get(myCurrentSpawn).getTime()){
+	public Component getNextQueueSpawn(double gameTime) {
+		if(myCurrentSpawn >= mySpawnQueue.size() || (gameTime - myTimeLastQueueSpawnedMillis) / 1000 < mySpawnQueue.get(myCurrentSpawn).getTime()){
 			return null;
 		}
 		return mySpawnQueue.get(myCurrentSpawn++).getSpawnable();
@@ -55,21 +55,18 @@ public class SpawnQueue {
 	 * @param timePassed
 	 * @return
 	 */
-	public List<Component> getNextFrequency(long timeStep){
+	public List<Component> getNextFrequencySpawn(double gameStep){
 		List<Component> spawnList = new ArrayList<Component>();
 		for (int i = 0; i < myFrequencyQueue.size(); i++) {
 			SpawnData spawnData = myFrequencyQueue.get(i);
 			long frequency = spawnData.getTime();
 			double minRange = ((myTimeLastFrequencyCheck)/1000) % frequency;
-			double maxRange = ((myTimeLastFrequencyCheck + timeStep)/1000) % frequency;
-			
+			double maxRange = ((myTimeLastFrequencyCheck + gameStep)/1000) % frequency;
 			if(minRange > maxRange){
 				spawnList.add(myFrequencyQueue.get(i).getSpawnable());
 			}
-			
 		}
-		
-		myTimeLastFrequencyCheck += timeStep;
+		myTimeLastFrequencyCheck += gameStep;
 		
 		return spawnList;
 	}
