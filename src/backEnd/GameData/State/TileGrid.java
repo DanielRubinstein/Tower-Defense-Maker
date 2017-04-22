@@ -58,5 +58,19 @@ public interface TileGrid{
 
 	boolean contains(AttributeOwnerReader newAttrOwn);
 
+	Object getMap();
+
+	void saveAndClearTileObservers();
+
+	void setTileObservers();
+
+	List<Observer> getObservers();
+
+	void clearObservers();
+
+	void setObservers(List<Observer> observersave);
+
+	TileGridInstantiator getInstantiator();
+
 
 }

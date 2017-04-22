@@ -1,5 +1,7 @@
 package backEnd.GameData.State;
 
+import java.util.Collection;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.ResourceBundle;
@@ -11,7 +13,7 @@ import javafx.beans.property.ReadOnlyDoubleWrapper;
  * @author Derek
  *
  */
-public class PlayerStatus implements PlayerStatusReader, PlayerStatusModifier {
+public class PlayerStatus implements PlayerStatusModifier {
 	
 	private final static String PLAYER_STATUS_ITEMS_PATH = "resources/playerStatusItems";
 	private final static ResourceBundle myPlayerStatusItemsResources = ResourceBundle.getBundle(PLAYER_STATUS_ITEMS_PATH);
@@ -45,6 +47,11 @@ public class PlayerStatus implements PlayerStatusReader, PlayerStatusModifier {
 	@Override
 	public double getStatusItemValue(String itemName) {
 		return myStatusItems.get(itemName).getValue();
+	}
+
+	@Override
+	public Collection<String> getPropertyNames() {
+		return Collections.unmodifiableCollection(myStatusItems.keySet());
 	}
 
 }
