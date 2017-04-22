@@ -1,7 +1,7 @@
 package backEnd;
 
 import backEnd.Bank.BankController;
-import backEnd.GameData.PlayerStatus.PlayerStatusModifier;
+import backEnd.GameData.State.PlayerStatusModifier;
 import backEnd.GameData.State.State;
 import backEnd.GameEngine.Engine.GameProcessController;
 import backEnd.Mode.ModeReader;

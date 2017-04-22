@@ -1,4 +1,4 @@
-package backEnd.GameData.PlayerStatus;
+package backEnd.GameData.State;
 
 import javafx.beans.property.ReadOnlyDoubleProperty;
 
