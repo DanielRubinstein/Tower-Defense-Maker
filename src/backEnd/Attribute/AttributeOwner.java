@@ -1,5 +1,8 @@
 package backEnd.Attribute;
 
+import java.util.List;
+import java.util.Observer;
+
 import backEnd.GameData.State.AccessPermissions;
 
 public interface AttributeOwner extends AttributeOwnerReader {
@@ -19,4 +22,15 @@ public interface AttributeOwner extends AttributeOwnerReader {
 	AccessPermissions getAccessPermissions();
 
 	<T> void setAttributeValue(String attrName, T newVal);
+	
+	/**
+	 * Clear observers
+	 * @return list of observers
+	 */
+	public List<Observer> getAndClearObservers();
+	
+	/**
+	 * Set observers
+	 */
+	public void setObserverList(List<Observer> observers);
 }

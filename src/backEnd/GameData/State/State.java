@@ -1,8 +1,10 @@
 package backEnd.GameData.State;
 
 import java.util.Collection;
+import java.util.Map;
 import java.util.Observer;
 
+import backEnd.GameEngine.Engine.Spawning.SpawnQueue;
 import javafx.geometry.Point2D;
 
 /**
@@ -27,6 +29,12 @@ public interface State {
 	void addAsObserver(Observer o);
 	
 	void updateState(State state);
+
+	/*
+	 * Replace the current list of components by a new list of components.
+	 */
+	void setComponentGraph(ComponentGraph newComponentGraph);
+
 	
 	int getGridWidth();
 	
@@ -34,5 +42,5 @@ public interface State {
 
 	Collection<Component> getComponentsByTileGridPosition(Point2D value);
 
-	
+	Map<String, SpawnQueue> getSpawnQueues();
 }

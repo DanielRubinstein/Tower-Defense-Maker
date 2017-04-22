@@ -11,6 +11,7 @@ import com.thoughtworks.xstream.io.xml.DomDriver;
 import backEnd.GameData.GameData;
 import backEnd.GameData.State.Component;
 import backEnd.GameData.State.Tile;
+import backEnd.LevelProgression.LevelProgressionControllerImpl;
 
 /**
  * This class handles loading both game state data and universal game data
@@ -70,8 +71,13 @@ public class XMLReaderImpl implements XMLReader{
 		} catch (Exception e){
 			throw new XMLReadingException(xmlFile);
 		}
+	}
 
-		
+	@Override
+	public Map<String,List<String>> loadGamesMap(String filePath) throws XMLReadingException {
+		//TODO: error checking, properties file
+		Map<String, List<String>> gamesMap = (Map<String, List<String>>) loadXML(filePath, "GamesMap");
+		return gamesMap;
 	}
 
 }

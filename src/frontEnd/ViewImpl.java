@@ -8,10 +8,11 @@ import backEnd.Model;
 import backEnd.ModelReader;
 import backEnd.Bank.BankController;
 import backEnd.GameData.State.Component;
+import backEnd.GameData.State.PlayerStatusReader;
 import backEnd.GameData.State.Tile;
+import backEnd.LevelProgression.LevelProgressionControllerReader;
 import backEnd.Mode.ModeReader;
 import frontEnd.CustomJavafxNodes.ErrorDialog;
-import frontEnd.Facebook.FacebookConnector;
 import frontEnd.Facebook.FacebookInteractor;
 import frontEnd.Skeleton.SkeletonImpl;
 import javafx.beans.property.SimpleBooleanProperty;
@@ -105,6 +106,16 @@ public class ViewImpl implements View {
 	public void reportError(Exception e) {
 		ErrorDialog fnf = new ErrorDialog();
 		fnf.create("Error", e.getMessage());
+	}
+
+	@Override
+	public LevelProgressionControllerReader getLevelProgressionController() {
+		return myModel.getLevelProgressionController();
+	}
+
+	@Override
+	public PlayerStatusReader getPlayerStatus() {
+		return myModel.getPlayerStatusReader();
 	}
 
 }

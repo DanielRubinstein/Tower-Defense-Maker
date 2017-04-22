@@ -4,7 +4,9 @@ import backEnd.ModelReader;
 import backEnd.GameData.State.State;
 import frontEnd.View;
 import frontEnd.Skeleton.ScreenGrid.ScreenGrid;
+import frontEnd.Skeleton.SpawnTimelineVisualization.AuthorScreenGrid;
 import frontEnd.Skeleton.UserTools.UserTools;
+import javafx.beans.property.SimpleBooleanProperty;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
@@ -21,8 +23,9 @@ public class SkeletonImpl implements Skeleton{
 	private BorderPane myRoot;
 	private Scene myScene;
 	private UserTools userTools;
-	
+	private SimpleBooleanProperty myAuthProp;
 	private ScreenGrid myScreenGrid;
+	private AuthorScreenGrid myTimelineTabPane;
 
 	/**
 	 * Constructs a new SkeletonImpl object using view and model, which are used to get important information about the State.
@@ -36,8 +39,16 @@ public class SkeletonImpl implements Skeleton{
 	
 	public void init(View view, ModelReader model){
 		State state = model.getState();
+		myAuthProp = view.getBooleanAuthorModeProperty();
 		myScreenGrid = new ScreenGrid(view, state, Constants.SCREEN_GRID_WIDTH, Constants.SCREEN_GRID_HEIGHT);
-		myRoot.setCenter(myScreenGrid.getRoot());
+		
+		myTimelineTabPane = new AuthorScreenGrid(view, myScreenGrid);
+		chooseCenter();
+		myAuthProp.addListener((o, oldV, newV) -> {
+			chooseCenter();
+		});
+		
+		//myRoot.setCenter(myScreenGrid.getRoot());
 		
 		userTools = new UserTools(view);
 		userTools.setBottomAndSideDimensions(Constants.SIDE_WIDTH,Constants.BOTTOM_HEIGHT);
@@ -45,6 +56,14 @@ public class SkeletonImpl implements Skeleton{
 		myRoot.setBottom(userTools.getBottomPane());
 	}
 	
+
+	private void chooseCenter() {
+		if(myAuthProp.getValue()){
+			myRoot.setCenter(myTimelineTabPane.getRoot());
+		} else {
+			myRoot.setCenter(myScreenGrid.getRoot());
+		}
+	}
 
 	/* (non-Javadoc)
 	 * @see frontEnd.Skeleton.Skeleton#display(javafx.stage.Stage)

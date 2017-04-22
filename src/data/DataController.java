@@ -7,6 +7,8 @@ import backEnd.Bank.BankController;
 import backEnd.GameData.GameData;
 import backEnd.GameData.State.Component;
 import backEnd.GameData.State.Tile;
+import backEnd.LevelProgression.LevelProgressionControllerImpl;
+import backEnd.LevelProgression.LevelProgressionControllerReader;
 
 /**
  * This Class handles saving and loading data in this program
@@ -45,5 +47,19 @@ public class DataController {
 	
 	public void saveCurrentGameStateData(GameData gameData, String gameName){
 		myXMLWriter.saveGameStateData(gameData, GAME_STATE_DATA_PATH, gameName);
+	}
+
+	public GameData loadGameStateData(String nextLevel) throws XMLReadingException {
+		return myXMLReader.loadGameStateData(GAME_STATE_DATA_PATH, nextLevel);
+	}
+	
+	public void saveLevelProgressionData(LevelProgressionControllerImpl levelProgression){
+		myXMLWriter.saveLevelProgressionData(levelProgression, UNIV_GAME_DATA_PATH);
+	}
+	
+	public LevelProgressionControllerImpl loadLevelProgressionData() throws XMLReadingException{
+		Map<String, List<String>> gamesMap = myXMLReader.loadGamesMap(UNIV_GAME_DATA_PATH);
+		LevelProgressionControllerImpl levelProgression = new LevelProgressionControllerImpl(this, gamesMap);
+		return levelProgression;
 	}
 }

@@ -1,11 +1,11 @@
 package backEnd.GameEngine.Engine;
 
-import backEnd.GameData.State.State;
+import backEnd.GameData.GameData;
 
 public class NullEngine implements Engine{
 
 	@Override
-	public void gameLoop(State currentState, double stepTime) {
+	public void gameLoop(GameData gameData, double stepTime) {
 		//DO NOTHING
 	}
 

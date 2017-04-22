@@ -3,6 +3,7 @@ package data;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.util.List;
 import java.util.Map;
 
 import com.thoughtworks.xstream.XStream;
@@ -13,6 +14,8 @@ import backEnd.GameData.GameData;
 import backEnd.GameData.GameDataInterface;
 import backEnd.GameData.State.Component;
 import backEnd.GameData.State.Tile;
+import backEnd.LevelProgression.LevelProgressionControllerImpl;
+import backEnd.LevelProgression.LevelProgressionControllerReader;
 
 /**
  * This class handles saving both game state data and universal game data
@@ -61,6 +64,13 @@ public class XMLWriterImpl implements XMLWriter{
 	            }
 	        }
 	    }
+	}
+
+	@Override
+	public void saveLevelProgressionData(LevelProgressionControllerImpl levelProgression, String filePath) {
+		Map<String, List<String>> gamesMap = levelProgression.getGamesMap();
+		String gamesMapXML = xStream.toXML(gamesMap);
+		saveToXML(filePath, "GamesMap", gamesMapXML);
 	}
 
 }

@@ -1,54 +1,41 @@
 package backEnd.GameEngine.Engine;
 
 import java.io.FileNotFoundException;
-import java.util.ResourceBundle;
+import java.util.List;
 import backEnd.Attribute.Attribute;
 import backEnd.Attribute.AttributeData;
 import backEnd.Attribute.AttributeFactory;
+import backEnd.GameData.GameData;
 import backEnd.GameData.State.Component;
 import backEnd.GameData.State.ComponentGraph;
 import backEnd.GameData.State.State;
 import frontEnd.CustomJavafxNodes.ErrorDialog;
 import javafx.geometry.Point2D;
-import resources.Constants;
 
 /**
- * 
- * @author Daniel
- * @author Alex
+ * Deals with firing projectiles from towers at targets
  * @author Christian
  */
 
 public class AttackEngine implements Engine {
-	private final static String RESOURCES_PATH = "resources/allAttributeTypes";
-	private final static ResourceBundle myResources = ResourceBundle.getBundle(RESOURCES_PATH);
+
+	private double masterTime;
 
 	@Override
-	public void gameLoop(State currentState, double stepTime) {
-		ComponentGraph myComponentGraph = currentState.getComponentGraph();
+	public void gameLoop(GameData gameData, double stepTime) {
+		masterTime = System.currentTimeMillis();
+
+		ComponentGraph myComponentGraph = gameData.getState().getComponentGraph();
 		for (Component attacker : myComponentGraph.getAllComponents()) {
-			if (attacker.getMyType().equals("TOWER")) {
-				for (Component componentTarget : myComponentGraph.getComponentsWithinRadius(attacker,
-						(double) attacker.getAttribute("FireRadius").getValue())) {
-					addProjectileToState(currentState, attacker, componentTarget);
-					try {
-						attacker.getBehavior("Attack").execute(null);
-					} 
-					catch (FileNotFoundException e) {
-						ErrorDialog fnf = new ErrorDialog();
-						fnf.create("Error", "File not found");
-					}
-					//needs to be refactored - only works for single target attacks
-					 
-					try {
-						componentTarget.getBehavior("TakeDamage").execute(attacker);
-					} 
-					catch (FileNotFoundException e) {
-						ErrorDialog fnf = new ErrorDialog();
-						fnf.create("Error", "File not found");
-					}
-					break;
-					
+			if (attacker.getAttribute("Type").getValue().equals("TOWER")) {
+				if ( masterTime % ((Double) attacker.getAttribute("FireRate").getValue()) <= stepTime) {
+					List<Component> targets = myComponentGraph.getComponentsWithinRadius(attacker,
+							(double) attacker.getAttribute("FireRadius").getValue());
+					addProjectileToState(gameData.getState(), attacker, targets.get(targets.size() - 1)); // we
+																											// want
+																											// the
+																											// furthest
+																											// target
 				}
 			}
 		}
@@ -58,49 +45,40 @@ public class AttackEngine implements Engine {
 	public void addProjectileToState(State currentState, Component attacker, Component target) {
 		Component projectile = null;
 		try {
-				projectile = makeProjectile(attacker);
-			
+			projectile = makeProjectile(attacker);
+
 		} catch (FileNotFoundException e) {
 			ErrorDialog fnf = new ErrorDialog();
 			fnf.create("Error", "File not found");
 		}
 
-		Point2D bulletPos = (Point2D) attacker.getAttribute(myResources.getString("Position"));
-		Point2D targetPos = (Point2D) target.getAttribute(myResources.getString("Position"));
-		
-		projectile.setAttributeValue(myResources.getString("Position"), bulletPos);
-		projectile.setAttributeValue(myResources.getString("ProjectileTargetPosition"), targetPos);
-		projectile.setAttributeValue(myResources.getString("ProjectileDistance"), targetPos.subtract(bulletPos));
-		
+		Point2D bulletPos = (Point2D) attacker.getAttribute(("Position"));
+		Point2D targetPos = (Point2D) target.getAttribute(("Position"));
+
+		projectile.setAttributeValue("Position", bulletPos);
+		projectile.setAttributeValue("ProjectileTargetPosition", targetPos);
+		projectile.setAttributeValue("ProjectileDistance", targetPos.subtract(bulletPos));
+		projectile.setAttributeValue("ProjectileTarget", target);
+
 		currentState.getComponentGraph().addComponentToGrid(projectile, bulletPos);
 	}
-
 
 	/**
 	 * 
 	 * @return a Component that represents a projectile
-	 * @throws FileNotFoundException if the image files are not found
+	 * @throws FileNotFoundException
+	 *             if the image files are not found
+	 * 
+	 *             This class needs to be refactored - I don't understand how
+	 *             attributefactory really works is there an easier/better way
+	 *             to make the attributes instead of manually?
+	 * 
 	 */
 	@SuppressWarnings("unchecked")
 	private Component makeProjectile(Component attacker) throws FileNotFoundException {
-
-		AttributeFactory af = new AttributeFactory();
-		AttributeData ad = new AttributeData();
-	
-		Attribute<String> projectileImage = (Attribute<String>) af.getAttribute(myResources.getString("ImageFile"));
-		Attribute<String> projectileType = (Attribute<String>) af.getAttribute(myResources.getString("FireType"));
-		Attribute<Integer> projectileDamage = (Attribute<Integer>) af.getAttribute(myResources.getString("FireDamage"));
-		
-		projectileImage.setValue((String) attacker.getAttribute("FireImage").getValue());
-		projectileType.setValue((String) attacker.getAttribute("FireType").getValue());
-		projectileDamage.setValue((Integer) attacker.getAttribute("FireDamage").getValue());
-		
-		ad.addAttribute(myResources.getString("ImageFile"), (backEnd.Attribute.AttributeImpl<?>) projectileImage);
-		ad.addAttribute(myResources.getString("FireType"), (backEnd.Attribute.AttributeImpl<?>) projectileType);
-		ad.addAttribute(myResources.getString("FireDamage"), (backEnd.Attribute.AttributeImpl<?>) projectileDamage);
-		
-		Component projectile = new Component(ad);
-		projectile.setMyType("Projectile");	
+		ProjectileFactory bulletFactory = new ProjectileFactory(attacker);
+		Component projectile = new Component(bulletFactory.getMyAttributeData());
+		projectile.setMyType("Projectile");
 		return projectile;
 	}
 }

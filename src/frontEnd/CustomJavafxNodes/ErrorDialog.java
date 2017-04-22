@@ -14,7 +14,6 @@ public class ErrorDialog {
 	public void create(String headerText, String contentText){
 		alert.setHeaderText(headerText);
 		alert.setContentText(contentText);
-
 		alert.showAndWait();
 	}
 }

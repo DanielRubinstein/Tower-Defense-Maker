@@ -15,11 +15,12 @@ import java.util.ResourceBundle;
 import java.util.Set;
 import java.util.Stack;
 
-import ModificationFromUser.Modification_EditAttribute;
+import ModificationFromUser.AttributeOwner.Modification_EditAttribute;
 import backEnd.Coord;
 import backEnd.Attribute.Attribute;
 import backEnd.Attribute.AttributeImpl;
-import backEnd.Mode.UserModeType;
+import backEnd.GameEngine.EngineStatus;
+import backEnd.GameEngine.Engine.Spawning.SpawnQueue;
 import javafx.geometry.Point2D;
 
 /**
@@ -37,12 +38,16 @@ public class StateImpl extends Observable implements State {
 	private final static ResourceBundle myResources = ResourceBundle.getBundle(RESOURCES_PATH);
 	private final static String IMAGEPATH_RESOURCES_PATH = "resources/images";
 	private final static ResourceBundle myImageResource = ResourceBundle.getBundle(IMAGEPATH_RESOURCES_PATH);
-
+	private EngineStatus myEngineStatus;
+	private Map<String, SpawnQueue> mySpawnQueues;
+	
 	public StateImpl(int numColsInGrid, int numRowsInGrid) throws FileNotFoundException {
 		this.numColsInGrid = numColsInGrid;
 		this.numRowsInGrid = numRowsInGrid;
 		setDefaultTileGrid();
 		myComponentGraph = new ComponentGraphImpl();
+		myEngineStatus = EngineStatus.PAUSED;
+		mySpawnQueues = new HashMap<String,SpawnQueue>();
 	}
 
 
@@ -52,7 +57,7 @@ public class StateImpl extends Observable implements State {
 			for (int col = 0; col < numColsInGrid; col++) {
 				Point2D loc = new Point2D(col, row);
 				
-				Tile newTile = new TileImpl(Arrays.asList(), Arrays.asList(UserModeType.AUTHOR), loc);
+				Tile newTile = new TileImpl(Arrays.asList(), Arrays.asList("AUTHOR"), loc);
 				
 				Attribute<String> imgAttr = (Attribute<String>) newTile.getAttribute("ImageFile");
 				imgAttr.setValue(myImageResource.getString("default_tile"));
@@ -76,7 +81,7 @@ public class StateImpl extends Observable implements State {
 	public ComponentGraph getComponentGraph() {
 		return myComponentGraph;
 	}
-
+	
 	private Map<Tile, Coord> findStartTiles() {
 		Map<Tile, Coord> startTiles = new HashMap<Tile, Coord>();
 		for (int col = 0; col < numColsInGrid; col++) { // find the start position
@@ -201,12 +206,33 @@ public class StateImpl extends Observable implements State {
 	public int getGridHeight() {
 		return numRowsInGrid;
 	}
+	
+	public boolean gameIsRunning(){
+		return myEngineStatus.equals(EngineStatus.RUNNING);
+	}
 
 
 	@Override
 	public Collection<Component> getComponentsByTileGridPosition(Point2D tileGridPosition) {
 		TileCorners tileCorners = new TileCorners(tileGridPosition, myTileGrid.getTileWidth(), myTileGrid.getTileHeight());
 		return myComponentGraph.getComponentsByTileCorners(tileCorners);
+	}
+
+
+	@Override
+	public void setComponentGraph(ComponentGraph newComponentGraph) {
+		myComponentGraph=newComponentGraph;
+	}
+
+
+	public void setEngineStatus(EngineStatus engineStatus) {
+		myEngineStatus=engineStatus;
+	}
+
+
+	@Override
+	public Map<String, SpawnQueue> getSpawnQueues() {
+		return mySpawnQueues;
 	}
 
 
