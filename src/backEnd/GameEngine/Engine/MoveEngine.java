@@ -5,6 +5,7 @@ import java.io.FileNotFoundException;
 import backEnd.GameEngine.Behaviors.*;
 import frontEnd.CustomJavafxNodes.ErrorDialog;
 import javafx.geometry.Point2D;
+import backEnd.GameData.GameData;
 import backEnd.GameData.State.*;
 
 
@@ -25,14 +26,14 @@ public class MoveEngine implements Engine{
 	 * @param yStart the starting y-coordinate
 	 */
 	@Override
-	public void gameLoop(State currentState, double stepTime) {
-		myState=currentState;
+	public void gameLoop(GameData gameData, double stepTime) {
+		myState=gameData.getState();
 		ComponentGraph newGraph=new ComponentGraphImpl();
 		for (Component c: myState.getComponentGraph().getAllComponents()){
 			Object o = c.getAttribute("Position").getValue();
 			Point2D currentLocation=(Point2D) o;
 			mb=new MoveBehavior(c);
-			currentTile = currentState.getTileGrid().getTileByScreenLocation(currentLocation);
+			currentTile = gameData.getState().getTileGrid().getTileByScreenLocation(currentLocation);
 			if (currentTile==null){
 				continue;
 			}

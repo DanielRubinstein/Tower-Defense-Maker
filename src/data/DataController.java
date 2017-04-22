@@ -1,5 +1,6 @@
 package data;
 
+import java.io.FileNotFoundException;
 import java.util.List;
 import java.util.Map;
 
@@ -63,7 +64,7 @@ public class DataController {
 		myXMLWriter.saveGameStateData(gameData, GAME_STATE_DATA_PATH, gameName);
 	}
 
-	public GameData loadGameStateData(String nextLevel) throws XMLReadingException {
+	public GameData loadGameStateData(String nextLevel) throws XMLReadingException, FileNotFoundException {
 		return myXMLReader.loadGameStateData(GAME_STATE_DATA_PATH, nextLevel);
 	}
 	

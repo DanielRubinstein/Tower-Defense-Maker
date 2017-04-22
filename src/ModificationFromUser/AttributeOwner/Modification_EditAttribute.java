@@ -1,5 +1,6 @@
-package ModificationFromUser;
+package ModificationFromUser.AttributeOwner;
 
+import ModificationFromUser.ModificationFromUser;
 import backEnd.ModelImpl;
 import backEnd.Attribute.Attribute;
 
@@ -23,6 +24,7 @@ public class Modification_EditAttribute<T> implements ModificationFromUser {
 	@Override
 	public void invoke(ModelImpl myModel) throws Exception {
 		myObj.setAttributeValue(myAtt.getName(), myNewValue);
+		System.out.println(myAtt.getName());
 	}
 
 }

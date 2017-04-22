@@ -15,11 +15,12 @@ import java.util.ResourceBundle;
 import java.util.Set;
 import java.util.Stack;
 
-import ModificationFromUser.Modification_EditAttribute;
+import ModificationFromUser.AttributeOwner.Modification_EditAttribute;
 import backEnd.Coord;
 import backEnd.Attribute.Attribute;
 import backEnd.Attribute.AttributeImpl;
 import backEnd.GameEngine.EngineStatus;
+import backEnd.GameEngine.Engine.Spawning.SpawnQueue;
 import javafx.geometry.Point2D;
 
 /**
@@ -38,28 +39,25 @@ public class StateImpl extends Observable implements State {
 	private final static String IMAGEPATH_RESOURCES_PATH = "resources/images";
 	private final static ResourceBundle myImageResource = ResourceBundle.getBundle(IMAGEPATH_RESOURCES_PATH);
 	private EngineStatus myEngineStatus;
-
+	private Map<String, SpawnQueue> mySpawnQueues;
+	
 	public StateImpl(int numColsInGrid, int numRowsInGrid) throws FileNotFoundException {
-		this.numColsInGrid = numColsInGrid;
-		this.numRowsInGrid = numRowsInGrid;
-		setDefaultTileGrid();
-		myComponentGraph = new ComponentGraphImpl();
-		myEngineStatus=EngineStatus.PAUSED;
-	}
-
-	public StateImpl(TileGrid tileGrid, ComponentGraph graph)
-	{
-		myTileGrid = tileGrid;
-		myComponentGraph = graph;
-		
-		numColsInGrid = tileGrid.getNumColsInGrid();
-		numRowsInGrid = tileGrid.getNumRowsInGrid();
+		this(numColsInGrid, numRowsInGrid, setDefaultTileGrid(numColsInGrid, numRowsInGrid), new ComponentGraphImpl());
 	}
 	
-	private void setDefaultTileGrid() throws FileNotFoundException {
-		myTileGrid = new TileGridImpl(numColsInGrid, numRowsInGrid);
-		for (int row = 0; row < numRowsInGrid; row++) {
-			for (int col = 0; col < numColsInGrid; col++) {
+	public StateImpl(int numRowsInGrid, int numColsInGrid, TileGrid tileGrid, ComponentGraph componentGraph) throws FileNotFoundException {
+		this.numColsInGrid = numColsInGrid;
+		this.numRowsInGrid = numRowsInGrid;
+		myComponentGraph = new ComponentGraphImpl();
+		myEngineStatus = EngineStatus.PAUSED;
+		mySpawnQueues = new HashMap<String,SpawnQueue>();
+	}
+
+
+	private static TileGrid setDefaultTileGrid(int cols, int rows) throws FileNotFoundException {
+		TileGrid tileGrid = new TileGridImpl(cols, rows);
+		for (int row = 0; row < rows; row++) {
+			for (int col = 0; col < cols; col++) {
 				Point2D loc = new Point2D(col, row);
 				
 				Tile newTile = new TileImpl(Arrays.asList(), Arrays.asList("AUTHOR"), loc);
@@ -67,10 +65,11 @@ public class StateImpl extends Observable implements State {
 				Attribute<String> imgAttr = (Attribute<String>) newTile.getAttribute("ImageFile");
 				imgAttr.setValue(myImageResource.getString("default_tile"));
 				
-				myTileGrid.setTileByGridPosition(newTile, col, row);
+				tileGrid.setTileByGridPosition(newTile, col, row);
 
 			}
 		}
+		return tileGrid;
 	}
 	
 	public void addAsObserver(Observer o){
@@ -235,6 +234,8 @@ public class StateImpl extends Observable implements State {
 	}
 
 
-	
-
+	@Override
+	public Map<String, SpawnQueue> getSpawnQueues() {
+		return mySpawnQueues;
+	}
 }

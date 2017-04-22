@@ -92,9 +92,6 @@ public class ComponentGraphImpl extends Observable implements ComponentGraph {
 	
 	@Override
 	public void removeComponent(Component toRemove){
-		if (!componentMap.containsKey(toRemove)){
-			return;
-		}
 		Attribute<?> posAttribute= toRemove.getAttribute("Position");
 		Point2D location = (Point2D) posAttribute.getValue();
 		List<Component> currList = componentMap.get(location);
@@ -102,7 +99,7 @@ public class ComponentGraphImpl extends Observable implements ComponentGraph {
 		currList.remove(toRemove);
 		componentMap.put(location, currList);
 		myComponents.remove(toRemove);
-
+		System.out.println("removed in component graph");
 		this.setChanged();
 		this.notifyObservers();
 	}

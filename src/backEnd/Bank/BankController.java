@@ -3,29 +3,33 @@ package backEnd.Bank;
 import java.io.FileNotFoundException;
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Observable;
 import backEnd.Mode.Mode;
 import javafx.geometry.Point2D;
 import backEnd.Attribute.AttributeData;
+import backEnd.Attribute.AttributeImpl;
 import backEnd.Attribute.AttributeOwner;
+import backEnd.GameData.Rules.Rule;
 import backEnd.GameData.State.AccessPermissionsImpl;
 import backEnd.GameData.State.Component;
 import backEnd.GameData.State.Tile;
 import backEnd.GameData.State.TileImpl;
+import backEnd.GameEngine.Behaviors.Behavior;
 
 public class BankController extends Observable
 {
 	private Map<String, Tile> tileBank;
 	private Map<String, Component> componentBank;
+	private BehaviorBank myBehaviorBank;
+	private RuleBank myRuleBank;
+	private AttributeBank myAttributeBank;
 	private Mode myMode;
 	
 	public BankController(Mode myMode)
 	{
-		this.tileBank = new HashMap<String, Tile>();
-		this.componentBank = new HashMap<String, Component>();
-		this.myMode = myMode;
-		createTemplatesForTesting();
+		this(myMode, new HashMap<String, Tile>(), new HashMap<String, Component>());
 	}
 	
 	public BankController(Mode myMode, Map<String, Tile> tileBank, Map<String, Component> componentBank)
@@ -33,6 +37,9 @@ public class BankController extends Observable
 		this.tileBank = tileBank;
 		this.componentBank = componentBank;
 		this.myMode = myMode;
+		myBehaviorBank = new BehaviorBank();
+		myRuleBank = new RuleBank();
+		myAttributeBank = new AttributeBank();
 		
 		createTemplatesForTesting();
 	}
@@ -122,6 +129,21 @@ public class BankController extends Observable
 		componentBank.remove(name);
 		this.setChanged();
 		this.notifyObservers();
+	}
+	
+	public List<Behavior> getBehaviorList()
+	{
+		return myBehaviorBank.getBehaviorList();
+	}
+	
+	public List<Rule> getRuleList()
+	{
+		return myRuleBank.getRuleList();
+	}
+	
+	public List<AttributeImpl> getAttributeList()
+	{
+		return myAttributeBank.getAttributeList();
 	}
 
 	public String getAOName(AttributeOwner preset) {

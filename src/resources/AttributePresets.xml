@@ -17,11 +17,13 @@
 		<ExplosionRadius min="0.0" max="200.0" start="0.0" increment="2.0"></ExplosionRadius>
 		<ProjectileMaxDistance></ProjectileMaxDistance>
 		<ProjectileTraveled></ProjectileTraveled>
-		<SlowFactor></SlowFactor></DOUBLE>
+		<SlowFactor></SlowFactor>
+		<FireRate min="0.0" max="200.0" start="20.0" increment="2.0"></FireRate></DOUBLE>
 	<INTEGER>
 		<INTEGER_TEMPLATE min="0" max="0" start="1" increment="0"></INTEGER_TEMPLATE>
 		<Health min="0" max="100" start="1" increment="5"></Health>
-	</INTEGER>
+		<MoneyBounty min="0" max="9999" start="10" increment="10"></MoneyBounty>
+		<ScoreBounty min="0" max="9999" start="10" increment="10"></ScoreBounty></INTEGER>
 	<EDITABLESTRING>
 		<EDITABLESTRING_TEMPLATE></EDITABLESTRING_TEMPLATE>
 		<FireType></FireType>

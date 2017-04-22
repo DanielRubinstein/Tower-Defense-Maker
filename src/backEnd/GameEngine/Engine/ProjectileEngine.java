@@ -1,9 +1,9 @@
 package backEnd.GameEngine.Engine;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 
+import backEnd.GameData.GameData;
 import backEnd.GameData.State.Component;
 import backEnd.GameData.State.State;
 import javafx.geometry.Point2D;
@@ -21,15 +21,15 @@ public class ProjectileEngine implements Engine{
 	
 	
 	@Override
-	public void gameLoop(State currentState, double stepTime) { //should refactor the movement into separate method if time
-		myState = currentState;
+	public void gameLoop(GameData gameData, double stepTime) { //should refactor the movement into separate method if time
+		myState = gameData.getState();
 		
 		for (Component c: myState.getComponentGraph().getAllComponents()){
 			if(c.getMyType().equals("Projectile")){
 				Point2D newPos = calculateNewPos(c);
 				
 				if((Double)c.getAttribute("ProjectileTraveled").getValue() >= (Double)c.getAttribute(myResources.getString("ProjectileMaxDistance")).getValue()){								
-					List<Component> targets = currentState.getComponentGraph().getComponentsWithinRadius(c, (Double)c.getAttribute("ExplosionRadius").getValue());
+					List<Component> targets = gameData.getState().getComponentGraph().getComponentsWithinRadius(c, (Double)c.getAttribute("ExplosionRadius").getValue());
 					performProjectileAction(c,targets);
 					
 					myState.getComponentGraph().removeComponent(c); //reached destination, delete projectile
