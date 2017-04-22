@@ -1,6 +1,8 @@
 package backEnd.GameData.Rules.EndCondition;
 
-public abstract class LoseCondition extends EndCondition{
+import backEnd.GameData.Rules.Rule;
+
+public abstract class LoseCondition extends Rule{
 	
 	public LoseCondition(double val) {
 		super(val);
