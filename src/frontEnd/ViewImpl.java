@@ -8,6 +8,7 @@ import backEnd.Model;
 import backEnd.ModelReader;
 import backEnd.Bank.BankController;
 import backEnd.GameData.State.Component;
+import backEnd.GameData.State.PlayerStatusReader;
 import backEnd.GameData.State.Tile;
 import backEnd.LevelProgression.LevelProgressionControllerReader;
 import backEnd.Mode.ModeReader;
@@ -111,6 +112,11 @@ public class ViewImpl implements View {
 	@Override
 	public LevelProgressionControllerReader getLevelProgressionController() {
 		return myModel.getLevelProgressionController();
+	}
+
+	@Override
+	public PlayerStatusReader getPlayerStatus() {
+		return myModel.getPlayerStatusReader();
 	}
 
 }
