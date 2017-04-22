@@ -27,7 +27,7 @@ public class AttackEngine implements Engine {
 
 		ComponentGraph myComponentGraph = gameData.getState().getComponentGraph();
 		for (Component attacker : myComponentGraph.getAllComponents()) {
-			if (attacker.getAttribute("Type").getValue().equals("TOWER")) {
+			if (attacker.getAttribute("Type").getValue().equals("Tower")) {
 				if ( masterTime % ((Double) attacker.getAttribute("FireRate").getValue()) <= stepTime) {
 					List<Component> targets = myComponentGraph.getComponentsWithinRadius(attacker,
 							(double) attacker.getAttribute("FireRadius").getValue());
@@ -66,12 +66,7 @@ public class AttackEngine implements Engine {
 	/**
 	 * 
 	 * @return a Component that represents a projectile
-	 * @throws FileNotFoundException
-	 *             if the image files are not found
-	 * 
-	 *             This class needs to be refactored - I don't understand how
-	 *             attributefactory really works is there an easier/better way
-	 *             to make the attributes instead of manually?
+	 * @throws FileNotFoundException if the selected image files are not found
 	 * 
 	 */
 	@SuppressWarnings("unchecked")
