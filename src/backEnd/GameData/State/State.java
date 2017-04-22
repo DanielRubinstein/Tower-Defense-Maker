@@ -37,4 +37,6 @@ public interface State {
 	Collection<Component> getComponentsByTileGridPosition(Point2D value);
 
 	Map<String, SpawnQueue> getSpawnQueues();
+
+	boolean gameIsRunning();
 }

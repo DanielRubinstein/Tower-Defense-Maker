@@ -14,6 +14,6 @@ public interface XMLWriter {
 	
 	void saveUniversalGameData(BankController bankController, String filePath);
 	
-	void saveLevelProgressionData(LevelProgressionControllerImpl levelProgression, String filePath);
+	void saveGamesMapData(Map<String,List<String>> gamesMap, String filePath);
 	
 }

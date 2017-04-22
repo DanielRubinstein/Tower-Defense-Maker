@@ -17,13 +17,26 @@ public interface AccessPermissions {
 	 */
 	void addGameAccessPermission(String userMode);
 	
+	void addLevelAccessPermission(String levelMode);
+	
+	void removeUserAccessPermission(String gameMode);
+
+	void removeGameAccessPermission(String gameMode);
+
+	void removeLevelAccessPermission(String levelMode);
+	
 	/**
 	 * @param gameMode
 	 * @return boolean whether or not the GameMode has access
 	 */
+	boolean permitsAccess(String userMode, String gameMode, String levelMode);
+	
 	boolean permitsAccess(String mode);
 	
 	List<String> getGameModeList();
 	
 	List<String> getUserModeList();
+
+	List<String> getLevelModeList();
+
 }
