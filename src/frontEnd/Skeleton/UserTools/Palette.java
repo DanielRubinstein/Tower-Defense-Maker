@@ -54,6 +54,7 @@ public class Palette<T extends AttributeOwner> implements SkeletonObject, Observ
 		initializeMaps(presetMap);
 		myType =string;
 		initializePane();
+		
 		for (T preset : myPresetMapBackEnd.values()) {
 			addPresetToPalette(preset);
 		}
