@@ -13,52 +13,65 @@ public class SpawnQueue {
 	
 	List<SpawnData> myFrequencyQueue;
 	List<SpawnData> mySpawnQueue;
-	long timeLastSpawnedMillis;
+	long myTimeLastQueueSpawnedMillis;
+	long myTimeLastFrequencyCheck;
 	int myCurrentSpawn;
-	
+	/**
+	 * Initializes blank lists to spawn from
+	 */
 	public SpawnQueue() {
 		myFrequencyQueue = new ArrayList<SpawnData>();
 		mySpawnQueue	 = new ArrayList<SpawnData>();
 	}
 	
+	/**
+	 * 
+	 * @return frequencyQueue
+	 */
 	public List<SpawnData> getFrequencyQueue(){
 		return myFrequencyQueue;
 	}
 	
+	/**
+	 * SpawnQueue return
+	 * @return
+	 */
 	public List<SpawnData> getSpawnQueue() {
 		return mySpawnQueue;
 	}
 	
 	/**
-	 * Takes in the last time 
-	 * @param time
-	 * @return
+	 * @return the next component in the spawn Queue if enough time has passed
 	 */
 	public Component getNextSpawn() {
-		if(myCurrentSpawn >= mySpawnQueue.size() || (System.currentTimeMillis() - timeLastSpawnedMillis) / 1000 > mySpawnQueue.get(myCurrentSpawn).getTime()){
+		if(myCurrentSpawn >= mySpawnQueue.size() || (System.currentTimeMillis() - myTimeLastQueueSpawnedMillis) / 1000 > mySpawnQueue.get(myCurrentSpawn).getTime()){
 			return null;
 		}
 		return mySpawnQueue.get(myCurrentSpawn++).getSpawnable();
 	}
 	
-	public List<Component> getNextFrequency(long timePassed){
-		List<Component> spawnList = new ArrayList<Component>();
-		for (int i = 0; i < myFrequencyQueue.size(); i++) {
-			if(frequencySync(timePassed,myFrequencyQueue.get(i).getTime())){
-				spawnList.add(myFrequencyQueue.get(i).getSpawnable());
-			}
-		}
-		return spawnList;
-	}
-	
 	/**
 	 * 
-	 * @param timePassed in Millis
-	 * @param spawnFrequency
+	 * @param timePassed
 	 * @return
 	 */
-	private boolean frequencySync(long timePassed, long spawnFrequency) {
-		return (timePassed / 1000) % spawnFrequency < 1.0/60;
+	public List<Component> getNextFrequency(long timeStep){
+		List<Component> spawnList = new ArrayList<Component>();
+		for (int i = 0; i < myFrequencyQueue.size(); i++) {
+			SpawnData spawnData = myFrequencyQueue.get(i);
+			long frequency = spawnData.getTime();
+			double minRange = ((myTimeLastFrequencyCheck)/1000) % frequency;
+			double maxRange = ((myTimeLastFrequencyCheck + timeStep)/1000) % frequency;
+			
+			if(minRange > maxRange){
+				spawnList.add(myFrequencyQueue.get(i).getSpawnable());
+			}
+			
+		}
+		
+		myTimeLastFrequencyCheck += timeStep;
+		
+		return spawnList;
 	}
 	
 }

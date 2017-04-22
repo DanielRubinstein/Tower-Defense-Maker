@@ -18,11 +18,13 @@ import backEnd.GameData.GameData;
 import backEnd.GameData.GameDataInterface;
 import backEnd.GameData.Rules;
 import backEnd.GameData.State.Component;
+import backEnd.GameData.State.ComponentGraph;
 import backEnd.GameData.State.State;
 import backEnd.GameData.State.Tile;
 import backEnd.GameData.State.TileGrid;
+import backEnd.LevelProgression.LevelProgressionControllerImpl;
+import backEnd.LevelProgression.LevelProgressionControllerReader;
 
-import backEnd.LevelProgression.LevelProgressionController;
 
 
 /**
@@ -36,8 +38,8 @@ public class XMLWriterImpl implements XMLWriter{
 	public XMLWriterImpl(){
 		xStream = new XStream(new DomDriver());
 		xStream.alias("Rules", Rules.class);
-
-		xStream.alias("BankController", BankController.class);
+		
+		xStream.alias("ComponentGraph", ComponentGraph.class);
 		xStream.alias("TileGrid", TileGrid.class);
 	}
 	
@@ -49,6 +51,9 @@ public class XMLWriterImpl implements XMLWriter{
 		
 		String componentMapXML = xStream.toXML(gameData.getState().getComponentGraph().getComponentMap());
 		saveToXML(filePath+ levelName +"/", "componentgraph", componentMapXML);
+		
+		String playerStatusXML = xStream.toXML(gameData.getState().getPlayerStatus());
+		saveToXML(filePath+ levelName +"/", "playerstatus", playerStatusXML);
 		
 		String tileGridXML = xStream.toXML(gameData.getState().getTileGrid());
 		saveToXML(filePath + levelName +"/", "tilegrid", tileGridXML);
@@ -88,7 +93,7 @@ public class XMLWriterImpl implements XMLWriter{
 	}
 
 	@Override
-	public void saveLevelProgressionData(LevelProgressionController levelProgression, String filePath) {
+	public void saveLevelProgressionData(LevelProgressionControllerImpl levelProgression, String filePath) {
 		Map<String, List<String>> gamesMap = levelProgression.getGamesMap();
 		String gamesMapXML = xStream.toXML(gamesMap);
 		saveToXML(filePath, "GamesMap", gamesMapXML);

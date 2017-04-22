@@ -4,7 +4,6 @@ import java.io.File;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
-
 import com.thoughtworks.xstream.XStream;
 import com.thoughtworks.xstream.io.xml.DomDriver;
 import backEnd.GameData.Rules;
@@ -15,7 +14,9 @@ import backEnd.GameData.State.State;
 import backEnd.GameData.State.StateImpl;
 import backEnd.GameData.State.Tile;
 import backEnd.GameData.State.TileGrid;
-import backEnd.LevelProgression.LevelProgressionController;
+import backEnd.LevelProgression.LevelProgressionControllerImpl;
+import backEnd.GameData.PlayerStatus.*;
+
 
 /**
  * This class handles loading both game state data and universal game data
@@ -44,7 +45,7 @@ public class XMLReaderImpl implements XMLReader{
 		StateImpl state = new StateImpl((TileGrid) xStream.fromXML(new File(filePath+"/" + levelName+"/tilegrid.xml")), 
 				(ComponentGraph) xStream.fromXML(new File(filePath+"/" + levelName+"/componentgraph.xml")));
 		
-		return new GameData(state,(Rules)xStream.fromXML(new File(filePath+"/" + levelName+"/rules.xml")));
+		return new GameData(state,(PlayerStatus)xStream.fromXML(new File(filePath+"/" + levelName+"/playerstatus.xml")),(Rules)xStream.fromXML(new File(filePath+"/" + levelName+"/rules.xml")));
 
 	}
 	

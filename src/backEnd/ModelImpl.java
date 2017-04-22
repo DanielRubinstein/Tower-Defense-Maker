@@ -7,9 +7,13 @@ import java.util.Map;
 
 import backEnd.Bank.BankController;
 import backEnd.GameData.GameData;
+import backEnd.GameData.PlayerStatus.PlayerStatusModifier;
+import backEnd.GameData.PlayerStatus.PlayerStatusReader;
 import backEnd.GameData.State.State;
+import backEnd.GameEngine.EngineStatus;
 import backEnd.GameEngine.Engine.GameProcessController;
-import backEnd.LevelProgression.LevelProgressionController;
+import backEnd.LevelProgression.LevelProgressionControllerImpl;
+import backEnd.LevelProgression.LevelProgressionControllerReader;
 import backEnd.Mode.Mode;
 import backEnd.Mode.ModeImpl;
 import backEnd.Mode.ModeReader;
@@ -32,15 +36,16 @@ public class ModelImpl implements Model{
 	private BankController myBankController;
 	private DataController myDataController;
 	private GameProcessController myEngine;
-	private LevelProgressionController myLevelProgressionController;
+	private LevelProgressionControllerImpl myLevelProgressionController;
+	private EngineStatus myEngineStatus;
 	
-	public ModelImpl(GameData gameData) throws XMLReadingException {
+	public ModelImpl(GameData gameData, EngineStatus engineStatus) throws XMLReadingException {
 		myDataController = new DataController();
 		myGameData = gameData;
 		myLevelProgressionController = myDataController.loadLevelProgressionData();
 		myMode = new ModeImpl("DEFAULT", "AUTHOR", myLevelProgressionController);
-		myEngine = new GameProcessController(myGameData.getState(), myGameData.getRules());
-		myBankController = new BankController(myDataController.loadTileMap(), myDataController.loadComponentMap());
+		myEngine = new GameProcessController(myGameData.getState(), myGameData.getRules(), myGameData.getStatus());
+		myBankController = new BankController(myMode, myDataController.loadTileMap(), myDataController.loadComponentMap());
 	}
 
 	public State getState(){
@@ -77,5 +82,20 @@ public class ModelImpl implements Model{
 	
 	public SimpleStringProperty getEngineStatus(){
 		return myEngine.getEngineStatus();
+	}
+
+	@Override
+	public PlayerStatusReader getPlayerStatusReader() {
+		return myGameData.getReadOnlyPlayerStatus();
+	}
+
+	@Override
+	public PlayerStatusModifier getModifiablePlayerStatus() {
+		return myGameData.getModifiablePlayerStatus();
+	}
+
+		
+	public LevelProgressionControllerReader getLevelProgressionController() {
+		return (LevelProgressionControllerReader) myLevelProgressionController;
 	}
 }

@@ -37,6 +37,7 @@ public class BankController extends Observable
 	{
 		this.tileBank = tileBank;
 		this.componentBank = componentBank;
+		this.myMode = myMode;
 	}
 	
 	private void createTemplatesForTesting(){
@@ -82,7 +83,31 @@ public class BankController extends Observable
 		
 		for (String x : tileBank.keySet())
 		{
-			//if (tileBank.get(x).getAccessPermissions().permitsAccess());
+			if (tileBank.get(x).getAccessPermissions().permitsAccess(myMode.getGameMode()));
+			{
+				if (tileBank.get(x).getAccessPermissions().permitsAccess(myMode.getUserMode()));
+				{
+					subMap.put(x, tileBank.get(x));
+				}
+			}
+		}
+		
+		return subMap;
+	}
+	
+	public Map<String, Component> getComponentMap()
+	{
+		Map<String, Component> subMap = new HashMap<String,Component>();
+		
+		for (String x : componentBank.keySet())
+		{
+			if (componentBank.get(x).getAccessPermissions().permitsAccess(myMode.getGameMode()));
+			{
+				if (componentBank.get(x).getAccessPermissions().permitsAccess(myMode.getUserMode()));
+				{
+					subMap.put(x, componentBank.get(x));
+				}
+			}
 		}
 		
 		return subMap;
@@ -100,12 +125,6 @@ public class BankController extends Observable
 		componentBank.remove(name);
 		this.setChanged();
 		this.notifyObservers();
-	}
-
-	
-	public Map<String, Component> getComponentMap()
-	{
-		return componentBank;
 	}
 
 	public String getAOName(AttributeOwner preset) {

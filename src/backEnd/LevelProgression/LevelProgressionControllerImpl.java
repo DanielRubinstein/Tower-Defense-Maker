@@ -14,19 +14,27 @@ import data.XMLReadingException;
  * @author Riley Nisbet
  *
  */
-public class LevelProgressionController {
+public class LevelProgressionControllerImpl implements LevelProgressionControllerReader {
 	private Map<String,List<String>> gamesMap; //String gameName -> List of Level names
 	private DataController myDataController;
 	
-	public LevelProgressionController(DataController dataController, Map<String,List<String>> gamesMap){
+	public LevelProgressionControllerImpl(DataController dataController, Map<String,List<String>> gamesMap){
 		this.gamesMap = gamesMap;
 		this.myDataController = dataController;
 	}
 	
+	/* (non-Javadoc)
+	 * @see backEnd.LevelProgression.LevelProgressionControllerReader#getGameList()
+	 */
+	@Override
 	public List<String> getGameList(){
 		return new ArrayList<String>(gamesMap.keySet());
 	}
 	
+	/* (non-Javadoc)
+	 * @see backEnd.LevelProgression.LevelProgressionControllerReader#getLevelList(java.lang.String)
+	 */
+	@Override
 	public List<String> getLevelList(String gameName){
 		return gamesMap.get(gameName);
 	}
@@ -64,6 +72,7 @@ public class LevelProgressionController {
 		gamesMap.put(gameName, levelPathsList);
 	}
 	
+
 	public Map<String,List<String>> getGamesMap(){
 		return gamesMap;
 	}

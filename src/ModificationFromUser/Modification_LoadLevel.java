@@ -39,7 +39,7 @@ public class Modification_LoadLevel implements ModificationFromUser {
 			myGameData = dataInput.getGameData();
 		} 
 		
-		myModel = new ModelImpl(myGameData);
+		//myModel = new ModelImpl(myGameData);
 		
 	}
 	
