@@ -26,6 +26,9 @@ public class EnemyStatusEngine implements Engine{
 				if(slowed){
 					
 				}
+				if(frozen){
+					
+				}
 			}
 		}
 		
