@@ -3,17 +3,12 @@ package backEnd.Bank;
 import java.io.FileNotFoundException;
 import java.util.Arrays;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 import java.util.Observable;
-
-import backEnd.GameEngine.Behaviors.Behavior;
 import backEnd.Mode.Mode;
 import javafx.geometry.Point2D;
 import backEnd.Attribute.AttributeData;
-import backEnd.Attribute.AttributeImpl;
 import backEnd.Attribute.AttributeOwner;
-import backEnd.GameData.Rules;
 import backEnd.GameData.State.AccessPermissionsImpl;
 import backEnd.GameData.State.Component;
 import backEnd.GameData.State.Tile;
@@ -38,11 +33,14 @@ public class BankController extends Observable
 		this.tileBank = tileBank;
 		this.componentBank = componentBank;
 		this.myMode = myMode;
+		
+		createTemplatesForTesting();
 	}
 	
 	private void createTemplatesForTesting(){
 		try{
-			
+			this.tileBank = new HashMap<String, Tile>();
+			this.componentBank = new HashMap<String, Component>();
 			Tile newTile = new TileImpl(Arrays.asList(), Arrays.asList("AUTHOR"), new Point2D(0,0));
 			newTile.setAttributeValue("ImageFile", "resources/images/Tiles/Blue.png");
 			newTile.setAttributeValue("MoveDirection","Down");
@@ -65,7 +63,6 @@ public class BankController extends Observable
 
 	public void addNewTile (String name, Tile tile)
 	{
-		System.out.println("added here");
 		tileBank.put(name, tile);
 		this.setChanged();
 		this.notifyObservers();
