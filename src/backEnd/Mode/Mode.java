@@ -1,5 +1,7 @@
 package backEnd.Mode;
 
+import java.util.List;
+
 public interface Mode {
 
 	/**
@@ -34,6 +36,11 @@ public interface Mode {
 	 * @return current Level Mode
 	 */
 	String getLevelMode();
+	
+	/**
+	 * @return comprehensive of User Modes
+	 */
+	List<String> getAllUserModes();
 
 	/**
 	 * Change User Mode (Author to Player or Player to Author)
