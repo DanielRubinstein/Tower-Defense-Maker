@@ -5,6 +5,7 @@ import java.util.ResourceBundle;
 import backEnd.Attribute.Attribute;
 import backEnd.Attribute.AttributeData;
 import backEnd.Attribute.AttributeFactory;
+import backEnd.GameData.GameData;
 import backEnd.GameData.State.Component;
 import backEnd.GameData.State.ComponentGraph;
 import backEnd.GameData.State.State;
@@ -24,13 +25,13 @@ public class AttackEngine implements Engine {
 	//private final static ResourceBundle myResources = ResourceBundle.getBundle(RESOURCES_PATH);
 
 	@Override
-	public void gameLoop(State currentState, double stepTime) {
-		ComponentGraph myComponentGraph = currentState.getComponentGraph();
+	public void gameLoop(GameData gameData, double stepTime) {
+		ComponentGraph myComponentGraph = gameData.getState().getComponentGraph();
 		for (Component attacker : myComponentGraph.getAllComponents()) {
 			if (attacker.getMyType().equals("TOWER")) {
 				for (Component componentTarget : myComponentGraph.getComponentsWithinRadius(attacker,
 						(double) attacker.getAttribute("FireRadius").getValue())) {
-					addProjectileToState(currentState, attacker, componentTarget);
+					addProjectileToState(gameData.getState(), attacker, componentTarget);
 					try {
 						attacker.getBehavior("Attack").execute(null);
 					} 
