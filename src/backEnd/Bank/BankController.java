@@ -12,7 +12,7 @@ import javafx.geometry.Point2D;
 import backEnd.Attribute.AttributeData;
 import backEnd.Attribute.AttributeImpl;
 import backEnd.Attribute.AttributeOwner;
-import backEnd.GameData.Rules;
+import backEnd.GameData.Rules.Rule;
 import backEnd.GameData.State.AccessPermissionsImpl;
 import backEnd.GameData.State.Component;
 import backEnd.GameData.State.Tile;
@@ -112,7 +112,7 @@ public class BankController extends Observable
 		return behaviorBank.getBehaviorList();
 	}
 	
-	public List<Rules> getRuleList()
+	public List<Rule> getRuleList()
 	{
 		return ruleBank.getRuleList();
 	}
