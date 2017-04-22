@@ -12,7 +12,7 @@ public class HealthLoseCondition extends LoseCondition {
 
 	@Override
 	public void invoke(GameData myGameData) {
-		if (myGameData.getModifiablePlayerStatus().getStatusItemValue("Health") <= getVal()) {
+		if (myGameData.getModifiablePlayerStatus().getStatusItemValue("Health") <= getVal() && this.isEnabled()) {
 			loseGame();
 		}
 
