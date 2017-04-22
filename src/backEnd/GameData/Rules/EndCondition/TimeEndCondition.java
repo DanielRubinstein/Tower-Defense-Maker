@@ -12,7 +12,7 @@ public class TimeEndCondition extends EndCondition{
 
 	@Override
 	public void invoke(GameData myGameData) {
-		// TODO Auto-generated method stub
+		//if(myGameData.getTime() >= getVal()){winGame();}
 		
 	}
 
