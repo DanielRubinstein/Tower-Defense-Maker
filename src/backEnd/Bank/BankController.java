@@ -49,20 +49,31 @@ public class BankController extends Observable
 	private void createTemplatesForTesting(){
 		try{
 			
-			Tile newTile = new TileImpl(Arrays.asList(), Arrays.asList("AUTHOR"), new Point2D(0,0));
+			Tile newTile = new TileImpl();
 			newTile.setAttributeValue("ImageFile", "resources/images/Tiles/Blue.png");
 			newTile.setAttributeValue("MoveDirection","Down");
 			addNewTile("Blue Down Tile", newTile);
 			
-			Tile newTile2 = new TileImpl(Arrays.asList(), Arrays.asList("AUTHOR"), new Point2D(0,0));
+			Tile newTile2 = new TileImpl();
 			newTile2.setAttributeValue("ImageFile", "resources/images/Tiles/Red.png");
 			newTile2.setAttributeValue("MoveDirection","Right");
 			addNewTile("Red Right Tile", newTile2);
+			
+			Tile newTile3 = new TileImpl();
+			newTile3.setAttributeValue("ImageFile", "resources/images/Tiles/Green.png");
+			newTile3.setAttributeValue("MoveDirection","Down");
+			addNewTile("Green Up Tile", newTile3);
+			
+			Tile newTile4 = new TileImpl();
+			newTile4.setAttributeValue("ImageFile", "resources/images/Tiles/Yellow.png");
+			newTile4.setAttributeValue("MoveDirection","Left");
+			addNewTile("Yellow Left Tile", newTile4);
 			
 			
 			Component newComponent = new Component(new AttributeData(),new AccessPermissionsImpl());
 			newComponent.setAttributeValue("ImageFile", "resources/images/Components/rainbow_bloon.png");
 			newComponent.setAttributeValue("Speed", 5d);
+			newComponent.setAttributeValue("Health", 10);
 			addNewComponent("Chill Bloon", newComponent);
 		} catch( FileNotFoundException e){
 			System.out.println("No image found");
