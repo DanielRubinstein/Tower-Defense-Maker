@@ -48,7 +48,7 @@ public class BankController extends Observable
 		try{
 			this.tileBank = new HashMap<String, Tile>();
 			this.componentBank = new HashMap<String, Component>();
-			Tile newTile = new TileImpl(Arrays.asList(), Arrays.asList("AUTHOR"), new Point2D(0,0));
+			Tile newTile = new TileImpl(Arrays.asList(), Arrays.asList("AUTHOR"), Arrays.asList(), new Point2D(0,0));
 			newTile.setAttributeValue("ImageFile", "resources/images/Tiles/Blue.png");
 			newTile.setAttributeValue("MoveDirection","Down");
 			addNewTile("Blue Down Tile", newTile);
@@ -98,12 +98,9 @@ public class BankController extends Observable
 		
 		for (String x : tileBank.keySet())
 		{
-			if (tileBank.get(x).getAccessPermissions().permitsAccess(myMode.getGameMode()));
+			if (tileBank.get(x).getAccessPermissions().permitsAccess(myMode.getUserMode(), myMode.getGameMode(), myMode.getLevelMode()));
 			{
-				if (tileBank.get(x).getAccessPermissions().permitsAccess(myMode.getUserMode()));
-				{
-					subMap.put(x, tileBank.get(x));
-				}
+				subMap.put(x, tileBank.get(x));
 			}
 		}
 		
@@ -116,12 +113,9 @@ public class BankController extends Observable
 		
 		for (String x : componentBank.keySet())
 		{
-			if (componentBank.get(x).getAccessPermissions().permitsAccess(myMode.getGameMode()));
+			if (componentBank.get(x).getAccessPermissions().permitsAccess(myMode.getUserMode(), myMode.getGameMode(), myMode.getLevelMode()));
 			{
-				if (componentBank.get(x).getAccessPermissions().permitsAccess(myMode.getUserMode()));
-				{
-					subMap.put(x, componentBank.get(x));
-				}
+				subMap.put(x, componentBank.get(x));
 			}
 		}
 		

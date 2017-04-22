@@ -68,13 +68,12 @@ public class DataController {
 		return myXMLReader.loadGameStateData(GAME_STATE_DATA_PATH, nextLevel);
 	}
 	
-	public void saveLevelProgressionData(LevelProgressionControllerImpl levelProgression){
-		myXMLWriter.saveLevelProgressionData(levelProgression, UNIV_GAME_DATA_PATH);
+	public void saveGamesMap(Map<String,List<String>> gamesMap){
+		myXMLWriter.saveGamesMapData(gamesMap, UNIV_GAME_DATA_PATH);
 	}
 	
-	public LevelProgressionControllerImpl loadLevelProgressionData() throws XMLReadingException{
+	public Map<String,List<String>> loadGamesMapData() throws XMLReadingException{
 		Map<String, List<String>> gamesMap = myXMLReader.loadGamesMap(UNIV_GAME_DATA_PATH);
-		LevelProgressionControllerImpl levelProgression = new LevelProgressionControllerImpl(this, gamesMap);
-		return levelProgression;
+		return gamesMap;
 	}
 }
