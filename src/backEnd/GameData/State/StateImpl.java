@@ -223,15 +223,6 @@ public class StateImpl extends Observable implements State {
 		return myComponentGraph.getComponentsByTileCorners(tileCorners);
 	}
 
-
-	@Override
-	public void setComponentGraph(ComponentGraph newComponentGraph) {
-		myComponentGraph=newComponentGraph;
-		this.setChanged();
-		this.notifyObservers();
-	}
-
-
 	public void setEngineStatus(EngineStatus engineStatus) {
 		myEngineStatus=engineStatus;
 		this.setChanged();
