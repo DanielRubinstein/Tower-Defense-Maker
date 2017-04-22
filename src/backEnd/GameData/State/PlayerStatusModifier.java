@@ -1,4 +1,4 @@
-package backEnd.GameData.GameStatus;
+package backEnd.GameData.State;
 
 /**
  * Modifier interface for back end
@@ -6,10 +6,10 @@ package backEnd.GameData.GameStatus;
  * @author Derek
  *
  */
-public interface GameStatusModifier {
+public interface PlayerStatusModifier {
 	
 	/**
-	 * adds valToAdd to current val of game status item itemName
+	 * adds valToAdd to current val of player status item itemName
 	 * 
 	 * @param itemName
 	 * @param valToAdd
@@ -18,7 +18,7 @@ public interface GameStatusModifier {
 	
 
 	/**
-	 * subtracts val from itemName gamestatus item
+	 * subtracts val from itemName player status item
 	 * 
 	 * @param itemName
 	 * @param valToSubtract
@@ -30,7 +30,7 @@ public interface GameStatusModifier {
 	/**
 	 * 
 	 * @param itemName
-	 * @return value of game status item itemName
+	 * @return value of player status item itemName
 	 */
 	double getStatusItemValue(String itemName);
 

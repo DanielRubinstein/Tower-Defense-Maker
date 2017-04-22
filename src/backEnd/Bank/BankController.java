@@ -3,16 +3,12 @@ package backEnd.Bank;
 import java.io.FileNotFoundException;
 import java.util.Arrays;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 import java.util.Observable;
-
-import backEnd.GameEngine.Behaviors.Behavior;
+import backEnd.Mode.Mode;
 import javafx.geometry.Point2D;
 import backEnd.Attribute.AttributeData;
-import backEnd.Attribute.AttributeImpl;
 import backEnd.Attribute.AttributeOwner;
-import backEnd.GameData.Rules;
 import backEnd.GameData.State.AccessPermissionsImpl;
 import backEnd.GameData.State.Component;
 import backEnd.GameData.State.Tile;
@@ -22,33 +18,29 @@ public class BankController extends Observable
 {
 	private Map<String, Tile> tileBank;
 	private Map<String, Component> componentBank;
-	private BehaviorBank behaviorBank;
-	private RuleBank ruleBank;
-	private AttributeBank attributeBank;
+	private Mode myMode;
 	
-	public BankController(){
-		init();
+	public BankController(Mode myMode)
+	{
 		this.tileBank = new HashMap<String, Tile>();
 		this.componentBank = new HashMap<String, Component>();
+		this.myMode = myMode;
 		createTemplatesForTesting();
 	}
 	
-	public BankController(Map<String, Tile> tileBank, Map<String, Component> componentBank){
-		init();
+	public BankController(Mode myMode, Map<String, Tile> tileBank, Map<String, Component> componentBank)
+	{
 		this.tileBank = tileBank;
 		this.componentBank = componentBank;
+		this.myMode = myMode;
 		
-	}
-	
-	private void init(){
-		behaviorBank = new BehaviorBank();
-		ruleBank = new RuleBank();
-		attributeBank = new AttributeBank();
+		createTemplatesForTesting();
 	}
 	
 	private void createTemplatesForTesting(){
 		try{
-			
+			this.tileBank = new HashMap<String, Tile>();
+			this.componentBank = new HashMap<String, Component>();
 			Tile newTile = new TileImpl(Arrays.asList(), Arrays.asList("AUTHOR"), new Point2D(0,0));
 			newTile.setAttributeValue("ImageFile", "resources/images/Tiles/Blue.png");
 			newTile.setAttributeValue("MoveDirection","Down");
@@ -71,7 +63,6 @@ public class BankController extends Observable
 
 	public void addNewTile (String name, Tile tile)
 	{
-		System.out.println("added here");
 		tileBank.put(name, tile);
 		this.setChanged();
 		this.notifyObservers();
@@ -85,7 +76,38 @@ public class BankController extends Observable
 	
 	public Map<String, Tile> getTileMap()
 	{
-		return tileBank;
+		Map<String, Tile> subMap = new HashMap<String,Tile>();
+		
+		for (String x : tileBank.keySet())
+		{
+			if (tileBank.get(x).getAccessPermissions().permitsAccess(myMode.getGameMode()));
+			{
+				if (tileBank.get(x).getAccessPermissions().permitsAccess(myMode.getUserMode()));
+				{
+					subMap.put(x, tileBank.get(x));
+				}
+			}
+		}
+		
+		return subMap;
+	}
+	
+	public Map<String, Component> getComponentMap()
+	{
+		Map<String, Component> subMap = new HashMap<String,Component>();
+		
+		for (String x : componentBank.keySet())
+		{
+			if (componentBank.get(x).getAccessPermissions().permitsAccess(myMode.getGameMode()));
+			{
+				if (componentBank.get(x).getAccessPermissions().permitsAccess(myMode.getUserMode()));
+				{
+					subMap.put(x, componentBank.get(x));
+				}
+			}
+		}
+		
+		return subMap;
 	}
 	
 	public void addNewComponent (String name, Component component)
@@ -100,26 +122,6 @@ public class BankController extends Observable
 		componentBank.remove(name);
 		this.setChanged();
 		this.notifyObservers();
-	}
-	
-	public Map<String, Component> getComponentMap()
-	{
-		return componentBank;
-	}
-	
-	public List<Behavior> getBehaviorList()
-	{
-		return behaviorBank.getBehaviorList();
-	}
-	
-	public List<Rules> getRuleList()
-	{
-		return ruleBank.getRuleList();
-	}
-	
-	public List<AttributeImpl> getAttributeList()
-	{
-		return attributeBank.getAttributeList();
 	}
 
 	public String getAOName(AttributeOwner preset) {

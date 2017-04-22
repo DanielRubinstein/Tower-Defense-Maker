@@ -1,4 +1,4 @@
-package backEnd.GameData.GameStatus;
+package backEnd.GameData.State;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -11,15 +11,15 @@ import javafx.beans.property.ReadOnlyDoubleWrapper;
  * @author Derek
  *
  */
-public class GameStatus implements GameStatusReader, GameStatusModifier {
+public class PlayerStatus implements PlayerStatusReader, PlayerStatusModifier {
 	
-	private final static String GAME_STATUS_ITEMS_PATH = "resources/gameStatusItems";
-	private final static ResourceBundle myGameStatusItemsResources = ResourceBundle.getBundle(GAME_STATUS_ITEMS_PATH);
+	private final static String PLAYER_STATUS_ITEMS_PATH = "resources/playerStatusItems";
+	private final static ResourceBundle myPlayerStatusItemsResources = ResourceBundle.getBundle(PLAYER_STATUS_ITEMS_PATH);
 	private Map<String, ReadOnlyDoubleWrapper> myStatusItems = new HashMap<String, ReadOnlyDoubleWrapper>();
 
-	public GameStatus() {
-		for(String item : myGameStatusItemsResources.keySet()){
-			double defaultVal = Double.parseDouble(myGameStatusItemsResources.getString(item));
+	public PlayerStatus() {
+		for(String item : myPlayerStatusItemsResources.keySet()){
+			double defaultVal = Double.parseDouble(myPlayerStatusItemsResources.getString(item));
 			myStatusItems.put(item, new ReadOnlyDoubleWrapper(defaultVal));
 		}
 	}

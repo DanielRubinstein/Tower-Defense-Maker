@@ -4,6 +4,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import backEnd.Attribute.AttributeOwner;
+import backEnd.GameData.State.AccessPermissions;
 import frontEnd.View;
 import frontEnd.CustomJavafxNodes.ActionButton;
 import frontEnd.Skeleton.UserTools.SkeletonObject;
@@ -22,15 +23,15 @@ import resources.Constants;
 public class AccessPermissionsViewer implements SkeletonObject{
 	private Stage myHostStage;
 	private View myView;
-	private AttributeOwner myObj;
+	private AccessPermissions myAccessPermissions;
 	private Stage myStage;
 	private Button ignition;
 	private VBox myRoot;
 
-	public AccessPermissionsViewer(Stage hostStage, View view, AttributeOwner obj) {
+	public AccessPermissionsViewer(Stage hostStage, View view, AccessPermissions accessPermissions) {
 		myHostStage = hostStage;
 		myView = view;
-		myObj = obj;
+		myAccessPermissions = accessPermissions;
 		createIgnition();
 	}
 
@@ -56,11 +57,28 @@ public class AccessPermissionsViewer implements SkeletonObject{
 			VBox subBody = new VBox();
 			Label titleLbl = new Label(title);
 			subBody.getChildren().add(titleLbl);
+			List<String> opts = null;
+			if(title.equals("User")){
+				opts = Arrays.asList("AUTHOR", "PLAYER");
+			} else if (title.equals("Game")){
+				opts = myView.getLevelProgressionController().getGameList();
+			} else if (title.equals("Level")){
+				//opts = myView.getLevelProgressionController().getLevelList(null);
+				opts = Arrays.asList("Level 1", "Level 2", "Level 3");
+			}
 			
-			List<String> catListOpts = Arrays.asList("Bloons", "AUTHOR", "Level 3", "etc..", "More to come");
-			
-			for(String thing : catListOpts){
+			for(String thing : opts){
 				CheckBox cB = new CheckBox(thing);
+				if(!myView.getBooleanAuthorModeProperty().get() || thing.equals("AUTHOR")){
+					cB.disableProperty().set(true);
+				}
+				
+				if(myAccessPermissions.getUserModeList().contains(thing) || myAccessPermissions.getGameModeList().contains(thing)){
+					cB.setSelected(true);
+				}
+				
+				
+				
 				cB.selectedProperty().addListener((o, oldV, newV) -> {
 					
 				});

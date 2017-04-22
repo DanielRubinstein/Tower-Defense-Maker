@@ -7,7 +7,8 @@ import backEnd.Bank.BankController;
 import backEnd.GameData.GameData;
 import backEnd.GameData.State.Component;
 import backEnd.GameData.State.Tile;
-import backEnd.LevelProgression.LevelProgressionController;
+import backEnd.LevelProgression.LevelProgressionControllerImpl;
+import backEnd.LevelProgression.LevelProgressionControllerReader;
 
 /**
  * This Class handles saving and loading data in this program
@@ -28,15 +29,29 @@ public class DataController {
 		myXMLReader = new XMLReaderImpl();
 	}
 	
-	@SuppressWarnings("unchecked")
-	public BankController generateBanks(){
-		try{
+	public Map<String, Component> loadComponentMap()
+	{
+		try
+		{
 			List<Map<String,?>> objectMaps = myXMLReader.loadUniversalGameData(UNIV_GAME_DATA_PATH);
-			Map<String,Component> componentMap = (Map<String,Component>) objectMaps.get(0);
-			Map<String,Tile > tileMap = (Map<String,Tile>) objectMaps.get(1);
-			return new BankController(tileMap, componentMap);
-		} catch (XMLReadingException e){
-			return new BankController();
+			return (Map<String,Component>) objectMaps.get(0);
+		}
+		catch (Exception e)
+		{
+			return null;
+		}
+	}
+	
+	public Map<String, Tile> loadTileMap()
+	{
+		try
+		{
+			List<Map<String,?>> objectMaps = myXMLReader.loadUniversalGameData(UNIV_GAME_DATA_PATH);
+			return (Map<String,Tile>) objectMaps.get(1);
+		}
+		catch (Exception e)
+		{
+			return null;
 		}
 	}
 	
@@ -52,13 +67,13 @@ public class DataController {
 		return myXMLReader.loadGameStateData(GAME_STATE_DATA_PATH, nextLevel);
 	}
 	
-	public void saveLevelProgressionData(LevelProgressionController levelProgression){
+	public void saveLevelProgressionData(LevelProgressionControllerImpl levelProgression){
 		myXMLWriter.saveLevelProgressionData(levelProgression, UNIV_GAME_DATA_PATH);
 	}
 	
-	public LevelProgressionController loadLevelProgressionData() throws XMLReadingException{
+	public LevelProgressionControllerImpl loadLevelProgressionData() throws XMLReadingException{
 		Map<String, List<String>> gamesMap = myXMLReader.loadGamesMap(UNIV_GAME_DATA_PATH);
-		LevelProgressionController levelProgression = new LevelProgressionController(this, gamesMap);
+		LevelProgressionControllerImpl levelProgression = new LevelProgressionControllerImpl(this, gamesMap);
 		return levelProgression;
 	}
 }

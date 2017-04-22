@@ -28,10 +28,6 @@ public class Modification_LoadLevel implements ModificationFromUser {
 	public Modification_LoadLevel(String gameLevel){
 		myLevel = gameLevel;
 	}
-	
-	public Modification_LoadLevel(File gameFile){
-		myGameFile = gameFile;
-	}
 
 	@Override
 	public void invoke(ModelImpl myModel) throws Exception {		
@@ -43,7 +39,7 @@ public class Modification_LoadLevel implements ModificationFromUser {
 			myGameData = dataInput.getGameData();
 		} 
 		
-		myModel = new ModelImpl(myGameData);
+		//myModel = new ModelImpl(myGameData);
 		
 	}
 	

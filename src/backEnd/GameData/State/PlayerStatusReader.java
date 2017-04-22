@@ -1,4 +1,4 @@
-package backEnd.GameData.GameStatus;
+package backEnd.GameData.State;
 
 import javafx.beans.property.ReadOnlyDoubleProperty;
 
@@ -8,12 +8,12 @@ import javafx.beans.property.ReadOnlyDoubleProperty;
  * @author Derek
  *
  */
-public interface GameStatusReader {
+public interface PlayerStatusReader {
 	
 	
 	/**
 	 * @param propertyName
-	 * @return ReadOnlyProperty of GameStatus item propertyName
+	 * @return ReadOnlyProperty of PlayerStatus item propertyName
 	 */
 	ReadOnlyDoubleProperty getProperty(String propertyName);
 	

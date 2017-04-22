@@ -9,19 +9,19 @@ import frontEnd.CustomJavafxNodes.SingleFieldPrompt;
 // Player Mode: save current GameData to a new GameState folder within a given Level folder
 // Author Mode: save current GameData to a new Level folder or overwrite an existing one
 
-public class Modification_Save implements ModificationFromUser {
+public class Modification_SaveGameState implements ModificationFromUser {
 
-	private String myGameName;
+	private String myLevelName;
 	
-	public Modification_Save(){
-		myGameName = getSaveGameName();
+	public Modification_SaveGameState(){
+		myLevelName = getSaveGameName();
 		
 	}
 	
 	
 	@Override
 	public void invoke(ModelImpl myModel) throws Exception {
-		myModel.getDataController().saveCurrentGameStateData(myModel.getGameData(), myGameName);
+		myModel.getDataController().saveCurrentGameStateData(myModel.getGameData(), myLevelName);
 
 	}
 
