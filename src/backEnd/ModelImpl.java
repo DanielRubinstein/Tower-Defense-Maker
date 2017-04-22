@@ -7,8 +7,8 @@ import java.util.Map;
 
 import backEnd.Bank.BankController;
 import backEnd.GameData.GameData;
-import backEnd.GameData.PlayerStatus.PlayerStatusModifier;
-import backEnd.GameData.PlayerStatus.PlayerStatusReader;
+import backEnd.GameData.State.PlayerStatusModifier;
+import backEnd.GameData.State.PlayerStatusReader;
 import backEnd.GameData.State.State;
 import backEnd.GameEngine.EngineStatus;
 import backEnd.GameEngine.Engine.GameProcessController;
@@ -44,7 +44,7 @@ public class ModelImpl implements Model{
 		myGameData = gameData;
 		myLevelProgressionController = myDataController.loadLevelProgressionData();
 		myMode = new ModeImpl("DEFAULT", "AUTHOR", myLevelProgressionController);
-		myEngine = new GameProcessController(myGameData.getState(), myGameData.getRules(), myGameData.getStatus());
+		myEngine = new GameProcessController(myGameData);
 		myBankController = myDataController.generateBanks();
 	}
 

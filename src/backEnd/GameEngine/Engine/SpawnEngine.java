@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.ResourceBundle;
 
 import backEnd.Attribute.Attribute;
+import backEnd.GameData.GameData;
 import backEnd.GameData.State.Component;
 import backEnd.GameData.State.ComponentBuilder;
 import backEnd.GameData.State.State;
@@ -32,9 +33,9 @@ public class SpawnEngine implements Engine {
 	// timeline
 
 	@Override
-	public void gameLoop(State currentState, double stepTime) {
+	public void gameLoop(GameData gameData, double stepTime) {
 		// gamePaused = currentState.getEnginePauserinolamo;
-		myState=currentState;
+		myState=gameData.getState();
 		if (internalPaused && gamePaused) {
 			return;
 		}
@@ -49,7 +50,7 @@ public class SpawnEngine implements Engine {
 			started = true;
 			startSpawnTimeMillis = System.currentTimeMillis();
 		}
-		List<Tile> tileList = currentState.getTileGrid().getAllTiles();
+		List<Tile> tileList = gameData.getState().getTileGrid().getAllTiles();
 		for (Tile spawnTile : tileList) {
 			if (!spawnTile.getAttribute("SpawnQueue").getValue().equals(null)) {
 				Object spawnQueueObj = spawnTile.getAttribute("SpawnQueue").getValue();

@@ -7,8 +7,9 @@ import java.util.List;
 import java.util.ResourceBundle;
 
 import backEnd.Model;
+import backEnd.GameData.GameData;
 import backEnd.GameData.Rules;
-import backEnd.GameData.PlayerStatus.PlayerStatus;
+import backEnd.GameData.State.PlayerStatus;
 import backEnd.GameData.State.State;
 import backEnd.GameEngine.EngineStatus;
 import javafx.animation.Animation;
@@ -22,23 +23,19 @@ import resources.Constants;
 public class GameProcessController {
 
 	private List<Engine> myEngines; 
-	private State myCurrentState; 
-	private Rules myRules;
+	private GameData myGameData;
 	private final static String RESOURCES_PATH = "resources/GameProcessController";
 	private final static ResourceBundle myResources = ResourceBundle.getBundle(RESOURCES_PATH);
 	private EngineStatus engineStatus;
-	private PlayerStatus myPlayerStatus;
 	private SimpleStringProperty engineStatusProperty;
 	
 	public Timeline animation = new Timeline();
 	
-	public GameProcessController(State currentState, Rules gameRules, PlayerStatus playerStatus){
+	public GameProcessController(GameData gameData){
 		engineStatus = EngineStatus.PAUSED;
 		engineStatusProperty = new SimpleStringProperty(engineStatus.toString());
 		myEngines = new ArrayList<Engine>();
-		myCurrentState = currentState;
-		myRules = gameRules;
-		myPlayerStatus = playerStatus;
+		myGameData = gameData;
 		KeyFrame frame = new KeyFrame(Duration.millis(Constants.MILLISECOND_DELAY), e -> step(Constants.SECOND_DELAY));
 		animation.setCycleCount(Animation.INDEFINITE);
 		animation.getKeyFrames().add(frame);
@@ -76,7 +73,7 @@ public class GameProcessController {
 	
 	public void run(double stepTime) {
 		for(Engine engine : myEngines){
-			engine.gameLoop(myCurrentState,stepTime);
+			engine.gameLoop(myGameData,stepTime);
 			//System.out.println("steptime is  "+ stepTime);
 		}
 		//System.out.println(stepTime);
