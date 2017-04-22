@@ -113,7 +113,7 @@ public class TileImpl extends Observable implements Tile, AttributeOwner {
 
 	@Override
 	public List<Observer> getAndClearObservers() {
-		List<Observer> currObservers = observers;
+		List<Observer> currObservers = new ArrayList<Observer>();
 		for (Observer o : observers){
 			currObservers.add(o);
 		}
