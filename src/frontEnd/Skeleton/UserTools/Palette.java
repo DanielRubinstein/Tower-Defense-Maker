@@ -146,7 +146,7 @@ public class Palette<T extends AttributeOwner> implements SkeletonObject, Observ
 		screenGrid.setOnDragDropped(e -> {
 			String presetName = e.getDragboard().getString();
 			AttributeOwner presetAO = observedBankController.getPreset(presetName);
-			Point2D pos = new Point2D(e.getSceneX() - Constants.SCREEN_GRID_PADDING /2 ,e.getSceneY() - Constants.SCREEN_GRID_PADDING /2 );
+			Point2D pos = new Point2D(e.getSceneX() - Constants.SCREEN_GRID_PADDING+80 /2  ,e.getSceneY() - Constants.SCREEN_GRID_PADDING-20 /2  );
 			myView.sendUserModification(new Modification_AddPresetAttributeOwnerToGrid(presetAO, pos));
 		});
 	}
