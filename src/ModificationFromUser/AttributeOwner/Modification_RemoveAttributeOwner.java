@@ -1,7 +1,8 @@
-package ModificationFromUser;
+package ModificationFromUser.AttributeOwner;
 
 import java.lang.reflect.Method;
 
+import ModificationFromUser.ModificationFromUser;
 import backEnd.ModelImpl;
 import backEnd.Attribute.AttributeOwner;
 import backEnd.GameData.State.Component;

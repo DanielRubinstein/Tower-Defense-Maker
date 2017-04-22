@@ -10,7 +10,7 @@ import java.util.Map;
 import java.util.MissingResourceException;
 import java.util.stream.Collectors;
 
-import ModificationFromUser.Modification_EditAttribute;
+import ModificationFromUser.AttributeOwner.Modification_EditAttribute;
 import backEnd.Attribute.Attribute;
 import backEnd.Attribute.AttributeOwner;
 import backEnd.GameData.State.Component;
@@ -127,12 +127,26 @@ public class AttributeEditorCreator {
 			return new Label("NoneSet");
 		}
 	}
+	
+	private Node create_DOUBLE_Editor() {
+		Node n;
+		List<Double> paramList = (List<Double>) myAttr.getEditParameters();
+		Double curValue = (Double) myAttr.getValue();
+		NumberChanger numChanger = new NumberChanger(paramList.get(0), paramList.get(1), curValue,
+				paramList.get(3));
+		n = numChanger.addDoubleIndicator();
+		numChanger.addListener((o, oldValue, newValue)  -> {
+			sendModification(newValue);
+		});
+		return n;
+	}
 
 	private Node create_INTEGER_Editor() {
 		Node n;
 		List<Integer> paramList = (List<Integer>) myAttr.getEditParameters();
+		Integer curValue = (Integer) myAttr.getValue();
 		NumberChanger numChanger = new NumberChanger(paramList.get(0).doubleValue(), paramList.get(1).doubleValue(), 
-				paramList.get(2).doubleValue(), paramList.get(3).doubleValue());
+				curValue, paramList.get(3).doubleValue());
 		n = numChanger.addIntegerIndicator();
 		numChanger.addListener((o, oldValue, newValue)  -> {
 			sendModification(newValue.intValue());
@@ -213,19 +227,6 @@ public class AttributeEditorCreator {
 		both.getChildren().add(b);		
 		both.setSpacing(20);
 		return both;
-	}
-
-	private Node create_DOUBLE_Editor() {
-		Node n;
-		List<Double> paramList = (List<Double>) myAttr.getEditParameters();
-		System.out.println(" %%%% " + myAttr +"    "  +myAttr.getName() +"   " +paramList);
-		NumberChanger numChanger = new NumberChanger(paramList.get(0), paramList.get(1), paramList.get(2),
-				paramList.get(3));
-		n = numChanger.addDoubleIndicator();
-		numChanger.addListener((o, oldValue, newValue)  -> {
-			sendModification(newValue);
-		});
-		return n;
 	}
 
 	private Node create_BOOLEAN_Editor() {

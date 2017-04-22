@@ -15,7 +15,7 @@ import java.util.ResourceBundle;
 import java.util.Set;
 import java.util.Stack;
 
-import ModificationFromUser.Modification_EditAttribute;
+import ModificationFromUser.AttributeOwner.Modification_EditAttribute;
 import backEnd.Coord;
 import backEnd.Attribute.Attribute;
 import backEnd.Attribute.AttributeImpl;
