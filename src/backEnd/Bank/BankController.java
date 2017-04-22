@@ -73,6 +73,7 @@ public class BankController extends Observable
 			Component newComponent = new Component(new AttributeData(),new AccessPermissionsImpl());
 			newComponent.setAttributeValue("ImageFile", "resources/images/Components/rainbow_bloon.png");
 			newComponent.setAttributeValue("Speed", 5d);
+			newComponent.setAttributeValue("Health", 10);
 			addNewComponent("Chill Bloon", newComponent);
 		} catch( FileNotFoundException e){
 			System.out.println("No image found");

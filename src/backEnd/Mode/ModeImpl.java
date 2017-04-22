@@ -58,6 +58,7 @@ public class ModeImpl implements ModeReader, Mode{
 		for (String mode : userModes){
 			if (!mode.equals(currUserMode)){
 				currUserMode = mode;
+				break;
 			}
 		}
 		aBP.setValue(!aBP.getValue());

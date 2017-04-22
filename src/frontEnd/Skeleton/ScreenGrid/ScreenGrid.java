@@ -146,6 +146,7 @@ public class ScreenGrid implements SkeletonObject, Observer {
 
 	@Override
 	public void update(Observable o, Object arg) {
+		System.out.println("Update triggered");
 		if (o == observedComponentGraph) {
 			updateComponentsOnGrid();
 		} else if (o == observedTileGrid){
