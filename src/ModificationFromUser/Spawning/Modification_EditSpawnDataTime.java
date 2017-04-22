@@ -8,31 +8,22 @@ import backEnd.GameData.State.Component;
 import backEnd.GameData.State.State;
 import backEnd.GameEngine.Engine.Spawning.SpawnQueue;
 
-/**
- * Modification to remove spawner from a list
- * @author Alex
- *
- */
-public class Modification_RemoveSpawner implements ModificationFromUser{
+public class Modification_EditSpawnDataTime implements ModificationFromUser{
 
 	private String mySpawnQueue;
 	private boolean isFrequencySpawn;
 	private Component myComponent;
-	private long myTime;
+	private long myOldTime;
+	private long myNewTime;
 	
-	/**
-	 * 
-	 * @param spawnQueueName	Name of Queue as a string
-	 * @param component			Which component to remove		
-	 * @param time				Time of component to remove
-	 * @param frequencySpawn 	What list to remove from
-	 */
-	public Modification_RemoveSpawner(String spawnQueueName, Component component, long time, boolean frequencySpawn) {
-		mySpawnQueue = spawnQueueName;
-		myComponent = component;
-		myTime = time;
-		isFrequencySpawn = frequencySpawn;
+	public Modification_EditSpawnDataTime(String spawnQueueName, Component component, long oldTime, long newTime, boolean frequencySpawn) {
+		mySpawnQueue 		= spawnQueueName;
+		myComponent 		= component;
+		myOldTime			= oldTime;
+		myNewTime			= newTime;
+		isFrequencySpawn 	= frequencySpawn;
 	}
+	
 	
 	@Override
 	public void invoke(ModelImpl myModel) throws Exception {
@@ -45,14 +36,14 @@ public class Modification_RemoveSpawner implements ModificationFromUser{
 		SpawnQueue spawnQueue = spawnQueues.get(mySpawnQueue);
 		if(isFrequencySpawn){
 			for(int i = 0; i < spawnQueue.getFrequencyQueue().size(); i++){
-				if(spawnQueue.getFrequencyQueue().get(i).getSpawnable() == myComponent && spawnQueue.getFrequencyQueue().get(i).getTime() == myTime){
-					spawnQueue.getFrequencyQueue().remove(i);
+				if(spawnQueue.getFrequencyQueue().get(i).getSpawnable() == myComponent && spawnQueue.getFrequencyQueue().get(i).getTime() == myOldTime){
+					spawnQueue.getFrequencyQueue().get(i).setTime(myNewTime);
 				}
 			}
 		} else{
 			for(int i = 0; i < spawnQueue.getSpawnQueue().size(); i++){
-				if(spawnQueue.getSpawnQueue().get(i).getSpawnable() == myComponent && spawnQueue.getSpawnQueue().get(i).getTime() == myTime){
-					spawnQueue.getSpawnQueue().remove(i);
+				if(spawnQueue.getSpawnQueue().get(i).getSpawnable() == myComponent && spawnQueue.getSpawnQueue().get(i).getTime() == myOldTime){
+					spawnQueue.getSpawnQueue().get(i).setTime(myNewTime);
 				}
 			}
 		}
