@@ -15,7 +15,7 @@ import backEnd.GameData.State.StateImpl;
 import backEnd.GameData.State.Tile;
 import backEnd.GameData.State.TileGrid;
 import backEnd.LevelProgression.LevelProgressionControllerImpl;
-import backEnd.GameData.PlayerStatus.*;
+import backEnd.GameData.State.PlayerStatus;
 
 
 /**
@@ -45,7 +45,8 @@ public class XMLReaderImpl implements XMLReader{
 		StateImpl state = new StateImpl((TileGrid) xStream.fromXML(new File(filePath+"/" + levelName+"/tilegrid.xml")), 
 				(ComponentGraph) xStream.fromXML(new File(filePath+"/" + levelName+"/componentgraph.xml")));
 		
-		return new GameData(state,(PlayerStatus)xStream.fromXML(new File(filePath+"/" + levelName+"/playerstatus.xml")),(Rules)xStream.fromXML(new File(filePath+"/" + levelName+"/rules.xml")));
+		return new GameData(state, (PlayerStatus) xStream.fromXML(new File(filePath+"/" + levelName+"/playerstatus.xml")),
+				(Rules) xStream.fromXML(new File(filePath+"/" + levelName+"/rules.xml")));
 
 	}
 	
