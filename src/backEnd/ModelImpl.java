@@ -42,7 +42,7 @@ public class ModelImpl implements Model{
 	public ModelImpl(GameData gameData, EngineStatus engineStatus) throws XMLReadingException {
 		myDataController = new DataController();
 		myGameData = gameData;
-		myLevelProgressionController = myDataController.loadLevelProgressionData();
+		myLevelProgressionController = new LevelProgressionControllerImpl(myMode, myDataController, myDataController.loadGamesMapData());
 		myMode = new ModeImpl("AUTHOR", "DEFAULT", "DEFAULT", myLevelProgressionController);
 		myEngine = new GameProcessController(myGameData);
 		myBankController = new BankController(myMode, myDataController.loadTileMap(), myDataController.loadComponentMap());

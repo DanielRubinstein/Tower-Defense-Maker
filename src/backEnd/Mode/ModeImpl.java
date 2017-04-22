@@ -40,6 +40,11 @@ public class ModeImpl implements ModeReader, Mode{
 	}
 	
 	@Override
+	public List<String> getAllUserModes(){
+		return userModes;
+	}
+	
+	@Override
 	public void setGameMode(String newGameMode){
 		currGameMode = newGameMode;
 	}

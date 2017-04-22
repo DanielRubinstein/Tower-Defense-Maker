@@ -59,12 +59,12 @@ public class AccessPermissionsViewer implements SkeletonObject{
 			subBody.getChildren().add(titleLbl);
 			List<String> opts = null;
 			if(title.equals("User")){
-				opts = Arrays.asList("AUTHOR", "PLAYER");
+				opts = myView.getLevelProgressionController().getMode().getAllUserModes();
 			} else if (title.equals("Game")){
 				opts = myView.getLevelProgressionController().getGameList();
 			} else if (title.equals("Level")){
 				//opts = myView.getLevelProgressionController().getLevelList(null);
-				opts = Arrays.asList("Level 1", "Level 2", "Level 3");
+				opts = myView.getLevelProgressionController().getFullLevelList();
 			}
 			
 			for(String thing : opts){
