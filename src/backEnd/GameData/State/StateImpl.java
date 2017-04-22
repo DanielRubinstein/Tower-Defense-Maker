@@ -48,7 +48,8 @@ public class StateImpl extends Observable implements State {
 	public StateImpl(int numRowsInGrid, int numColsInGrid, TileGrid tileGrid, ComponentGraph componentGraph) throws FileNotFoundException {
 		this.numColsInGrid = numColsInGrid;
 		this.numRowsInGrid = numRowsInGrid;
-		myComponentGraph = new ComponentGraphImpl();
+		myTileGrid = tileGrid;
+		myComponentGraph = componentGraph;
 		myEngineStatus = EngineStatus.PAUSED;
 		mySpawnQueues = new HashMap<String,SpawnQueue>();
 	}
@@ -226,11 +227,15 @@ public class StateImpl extends Observable implements State {
 	@Override
 	public void setComponentGraph(ComponentGraph newComponentGraph) {
 		myComponentGraph=newComponentGraph;
+		this.setChanged();
+		this.notifyObservers();
 	}
 
 
 	public void setEngineStatus(EngineStatus engineStatus) {
 		myEngineStatus=engineStatus;
+		this.setChanged();
+		this.notifyObservers();
 	}
 
 
