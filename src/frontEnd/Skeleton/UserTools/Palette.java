@@ -7,7 +7,7 @@ import java.util.Observable;
 import java.util.Observer;
 import java.util.function.Consumer;
 
-import ModificationFromUser.Modification_AddPresetAttributeOwnerToGrid;
+import ModificationFromUser.AttributeOwner.Modification_AddPresetAttributeOwnerToGrid;
 import backEnd.Attribute.AttributeOwner;
 import backEnd.Bank.BankController;
 import backEnd.GameData.State.Component;

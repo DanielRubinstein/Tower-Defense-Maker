@@ -1,4 +1,4 @@
-package ModificationFromUser;
+package ModificationFromUser.AttributeOwner;
 
 import java.lang.reflect.Method;
 import java.util.List;
@@ -7,6 +7,7 @@ import java.util.Observer;
 import com.thoughtworks.xstream.XStream;
 import com.thoughtworks.xstream.io.xml.DomDriver;
 
+import ModificationFromUser.ModificationFromUser;
 import backEnd.ModelImpl;
 import backEnd.Attribute.AttributeOwner;
 import backEnd.Attribute.AttributeOwnerReader;

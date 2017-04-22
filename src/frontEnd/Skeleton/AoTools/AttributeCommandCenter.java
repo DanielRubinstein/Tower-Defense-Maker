@@ -5,8 +5,8 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.ResourceBundle;
 
-import ModificationFromUser.Modification_AddNewAttributeOwnerToGrid;
-import ModificationFromUser.Modification_AddNewPresetAttributeOwner;
+import ModificationFromUser.AttributeOwner.Modification_AddNewAttributeOwnerToGrid;
+import ModificationFromUser.AttributeOwner.Modification_AddNewPresetAttributeOwner;
 import backEnd.Attribute.Attribute;
 import backEnd.Attribute.AttributeOwner;
 import backEnd.GameData.State.Component;

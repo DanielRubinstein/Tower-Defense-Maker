@@ -10,7 +10,7 @@ import java.util.Map;
 import java.util.MissingResourceException;
 import java.util.stream.Collectors;
 
-import ModificationFromUser.Modification_EditAttribute;
+import ModificationFromUser.AttributeOwner.Modification_EditAttribute;
 import backEnd.Attribute.Attribute;
 import backEnd.Attribute.AttributeOwner;
 import backEnd.GameData.State.Component;
