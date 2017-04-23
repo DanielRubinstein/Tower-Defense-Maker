@@ -78,23 +78,17 @@ public class LevelProgressionControllerImpl implements LevelProgressionControlle
 		gamesMap.remove(gameName);
 	}
 	
-	public GameData getNextLevel(String gameName, String currentLevel) throws XMLReadingException, FileNotFoundException{
-		List<String> levelPathsList = gamesMap.get(gameName);
+	@Override
+	public String getNextLevel(){
+		List<String> levelPathsList = gamesMap.get(myMode.getGameMode());
 		String nextLevel = null;
 		for (int i = 0; i < levelPathsList.size(); i++){
-			if (levelPathsList.get(i).equals(currentLevel)){
+			if (levelPathsList.get(i).equals(myMode.getLevelMode())){
 				nextLevel = levelPathsList.get(++i);
 				break;
 			}
 		}
-		if (nextLevel == null){
-			//TODO: save high score here?
-			return null;
-			//there is no next level
-		}
-		else{
-			return myDataController.loadGameStateData(nextLevel);
-		}
+		return nextLevel;
 	}
 	
 	@Override

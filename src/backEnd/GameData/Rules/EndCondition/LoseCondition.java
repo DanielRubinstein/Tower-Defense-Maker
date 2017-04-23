@@ -4,8 +4,10 @@ import backEnd.GameData.Rules.Rule;
 
 public abstract class LoseCondition extends Rule{
 	
-	public LoseCondition(double val) {
-		super(val);
+	
+
+	public LoseCondition(double val, double minVal, double maxVal, String keyName, String displayString) {
+		super(val, minVal, maxVal, keyName, displayString);
 	}
 
 	protected void loseGame(){

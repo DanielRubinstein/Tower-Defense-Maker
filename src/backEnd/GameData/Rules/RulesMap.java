@@ -15,8 +15,6 @@ public class RulesMap {
 	private Map<String, Rule> myRules = new HashMap<String, Rule>();
 
 	public RulesMap() {
-		// FIXME add rules and make sure rules store Key, default val, DisplayString
-		//myRules.put(key, value);
 		addPresetRules();
 		
 	}
@@ -31,11 +29,15 @@ public class RulesMap {
 	}
 	
 	private void addPresetRules(){
-		//FIXME what should the keys be in myRuleBank
-		myRules.put("Health", new HealthLoseCondition());
-		myRules.put("Time", new TimeEndCondition());
-		myRules.put("Score", new ScoreWinCondition());
-		myRules.put("KillCount", new KillCountCondition());
+		Rule healthRule = new HealthLoseCondition();
+		Rule timeRule = new TimeEndCondition();
+		Rule scoreRule = new ScoreWinCondition();
+		Rule killCountRule = new KillCountCondition();
+		
+		myRules.put(healthRule.getKeyName(), healthRule);
+		myRules.put(timeRule.getKeyName(), timeRule);
+		myRules.put(scoreRule.getKeyName(), scoreRule);
+		myRules.put(killCountRule.getKeyName(), killCountRule);
 	}
 	
 	
