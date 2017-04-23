@@ -88,7 +88,7 @@ public class TileImpl extends Observable implements Tile, AttributeOwner {
 
 	@Override
 	public boolean hasAttribute(String name) {
-		return myAttrData.getAttributeMap().containsKey(attributeResources.getString(name));
+		return myAttrData.containsAttribute(attributeResources.getString(name));
 	}
 
 	@SuppressWarnings("unchecked")

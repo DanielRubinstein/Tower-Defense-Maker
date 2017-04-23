@@ -63,7 +63,7 @@ public class StateImpl extends Observable implements State {
 				
 				Tile newTile = new TileImpl(Arrays.asList(), Arrays.asList(), Arrays.asList(), loc);
 				
-				Attribute<String> imgAttr = (Attribute<String>) newTile.getAttribute("ImageFile");
+				Attribute<String> imgAttr = newTile.getAttribute("ImageFile");
 				imgAttr.setValue(myImageResource.getString("default_tile"));
 				
 				tileGrid.setTileByGridPosition(newTile, col, row);
@@ -92,8 +92,8 @@ public class StateImpl extends Observable implements State {
 		for (int col = 0; col < numColsInGrid; col++) { // find the start position
 			for (int row = 0; row < numRowsInGrid; row++) {
 				Tile tile = myTileGrid.getTileByGridPosition(col, row);
-				if ((boolean) tile.getMyAttributes().getAttributeMap()
-						.get(myResources.getString("StartTile")).getValue() == true) {
+				if (tile.getMyAttributes()
+						.<Boolean>get(myResources.getString("StartTile")).getValue() == true) {
 					startTiles.put(tile, new Coord(col, row, null));
 				}
 			}

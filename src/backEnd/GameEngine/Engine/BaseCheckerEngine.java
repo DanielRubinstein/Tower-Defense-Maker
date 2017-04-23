@@ -11,17 +11,16 @@ public class BaseCheckerEngine implements Engine {
 
 	private State myState;
 	private Tile currentTile;
-	
+
 	@Override
 	public void gameLoop(GameData gameData, double stepTime) {
-		myState=gameData.getState();
-		for (Component c: myState.getComponentGraph().getAllComponents()){
-			Object o = c.getAttribute("Position").getValue();
-			Point2D currentLocation=(Point2D) o;
+		myState = gameData.getState();
+		for (Component c : myState.getComponentGraph().getAllComponents()) {
+			Point2D currentLocation = c.<Point2D>getAttribute("Position").getValue();
 			currentTile = gameData.getState().getTileGrid().getTileByScreenLocation(currentLocation);
-			if ((boolean)currentTile.getAttribute("GoalTile").getValue()){
+			if ((boolean) currentTile.getAttribute("GoalTile").getValue()) {
 				gameData.getStatus().decrementStatusItem("Health", 1);
-				((Attribute<Integer>)c.getAttribute("Health")).setValue(new Integer(0));
+				c.getAttribute("Health").setValue(new Integer(0));
 			}
 		}
 	}
