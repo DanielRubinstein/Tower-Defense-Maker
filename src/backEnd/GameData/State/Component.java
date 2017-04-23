@@ -40,9 +40,6 @@ public class Component extends Observable implements AttributeOwner {
 		this(new AttributeData(),new AccessPermissionsImpl());
 	}
 	
-	public Component(AttributeData attributes) throws FileNotFoundException {
-		this(attributes, new AccessPermissionsImpl());
-	}
 
 	public long printID(){
 		return ID;
@@ -99,7 +96,8 @@ public class Component extends Observable implements AttributeOwner {
 		return myBehaviors.get(behaviorType);
 	}
 
-	public Attribute<?> getAttribute(String attributeType) {
+	@Override
+	public <T> Attribute<T> getAttribute(String attributeType) {
 		return myAttributes.get(attributeType);
 	}
 
@@ -132,12 +130,10 @@ public class Component extends Observable implements AttributeOwner {
 		return myType;
 	}
 
-	@SuppressWarnings("unchecked")
 	@Override
 	public <T> void setAttributeValue(String attrName, T newVal) {
-		((Attribute<T>) myAttributes.get(attrName)).setValue(newVal);
-		//System.out.println("setting component attr " +attrName + "     "    +newVal);
-		//System.out.println(myAttributes.get(attrName).getValue());
+		Attribute<T> attrToSet = myAttributes.<T>get(attrName);
+		attrToSet.setValue(newVal);
 		notifyObservers();
 	}
 
@@ -175,4 +171,4 @@ public class Component extends Observable implements AttributeOwner {
 		this.observers = observers;
 	}
 	
-}
+}

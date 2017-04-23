@@ -1,10 +1,11 @@
 package backEnd.GameEngine.Engine;
 
 import java.io.FileNotFoundException;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
-import backEnd.Attribute.Attribute;
-import backEnd.Attribute.AttributeData;
-import backEnd.Attribute.AttributeFactory;
+import java.util.Map;
+
 import backEnd.GameData.GameData;
 import backEnd.GameData.State.Component;
 import backEnd.GameData.State.ComponentGraph;
@@ -15,52 +16,64 @@ import javafx.geometry.Point2D;
 /**
  * Deals with firing projectiles from towers at targets
  * @author Christian
+ * @author Daniel
  */
 
 public class AttackEngine implements Engine {
 
 	private double masterTime;
+	private Map<Component, Point2D> toAdd;
+	private GameData myGameData;
+
 
 	@Override
 	public void gameLoop(GameData gameData, double stepTime) {
 		masterTime = gameData.getGameTime();
-
+		toAdd = new HashMap<Component, Point2D>();
+		myGameData=gameData;
 		ComponentGraph myComponentGraph = gameData.getState().getComponentGraph();
+		Map<Component, Component> attackersAndTargets=new HashMap<Component, Component>();
 		for (Component attacker : myComponentGraph.getAllComponents()) {
 			if (attacker.getAttribute("Type").getValue().equals("Tower")) {
-				if ( masterTime % ((Double) attacker.getAttribute("FireRate").getValue()) <= stepTime) {
+				if (masterTime % ((Double) attacker.getAttribute("FireRate").getValue()) <= stepTime) {
 					List<Component> targets = myComponentGraph.getComponentsWithinRadius(attacker,
 							(double) attacker.getAttribute("FireRadius").getValue());
-					addProjectileToState(gameData.getState(), attacker, targets.get(targets.size() - 1)); // we
-																											// want
-																											// the
-																											// furthest
-																											// target
+					for (Component potentialTarget : targets) { // only want to
+																// fire at
+																// enemies
+						if (potentialTarget.getAttribute("Type").getValue().equals("Enemy")) {
+							attackersAndTargets.put(attacker, potentialTarget);
+						}
+					}
 				}
 			}
+		}
+		for (Component c: attackersAndTargets.keySet()){
+			addProjectileToState(c, attackersAndTargets.get(c));
 		}
 	}
 
 	@SuppressWarnings("unchecked")
-	public void addProjectileToState(State currentState, Component attacker, Component target) {
-		Component projectile = null;
+	public void addProjectileToState(Component attacker, Component target) {
+		Component projectile;
 		try {
 			projectile = makeProjectile(attacker);
-
-		} catch (FileNotFoundException e) {
+		} catch (FileNotFoundException e1) {
+			System.out.println("projectile creation failed");
 			ErrorDialog fnf = new ErrorDialog();
 			fnf.create("Error", "File not found");
+			return;
 		}
 
-		Point2D bulletPos = (Point2D) attacker.getAttribute(("Position"));
-		Point2D targetPos = (Point2D) target.getAttribute(("Position"));
-
+		Object bulletPosObj=attacker.getAttribute(("Position")).getValue();
+		Point2D bulletPos = (Point2D) bulletPosObj;
+		Object targetPosObj=target.getAttribute(("Position")).getValue();
+		Point2D targetPos = (Point2D) targetPosObj;
 		projectile.setAttributeValue("Position", bulletPos);
 		projectile.setAttributeValue("ProjectileTargetPosition", targetPos);
-		projectile.setAttributeValue("ProjectileDistance", targetPos.subtract(bulletPos));
+		projectile.setAttributeValue("ProjectileMaxDistance", targetPos.subtract(bulletPos));
 		projectile.setAttributeValue("ProjectileTarget", target);
-
-		currentState.getComponentGraph().addComponentToGrid(projectile, bulletPos);
+		myGameData.getState().getComponentGraph().addComponentToGrid(projectile, bulletPos);
 	}
 
 	/**
@@ -69,10 +82,9 @@ public class AttackEngine implements Engine {
 	 * @throws FileNotFoundException if the selected image files are not found
 	 * 
 	 */
-	@SuppressWarnings("unchecked")
 	private Component makeProjectile(Component attacker) throws FileNotFoundException {
 		ProjectileFactory bulletFactory = new ProjectileFactory(attacker);
-		Component projectile = new Component(bulletFactory.getMyAttributeData());
+		Component projectile=bulletFactory.getProjectile();
 		projectile.setMyType("Projectile");
 		return projectile;
 	}
