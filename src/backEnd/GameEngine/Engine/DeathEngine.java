@@ -30,8 +30,6 @@ public class DeathEngine implements Engine {
 			DB.execute(struct);
 			if (DB.isDead()) {
 				toRemove.add(struct);
-				//System.out.println("OK something is indeed dead");
-				//System.out.println("previous score is "+gameData.getStatus().getStatusItemValue("Score"));
 				gameData.getStatus().incrementStatusItem("KillCount", 1);
 				gameData.getStatus().incrementStatusItem("Money", (Integer)struct.getAttribute("MoneyBounty").getValue());
 				gameData.getStatus().incrementStatusItem("Score", (Integer)struct.getAttribute("ScoreBounty").getValue());
@@ -39,8 +37,9 @@ public class DeathEngine implements Engine {
 
 				if (DB.spawnsOnDeath()) {
 					Object currentLocation = struct.getMyAttributes().get("Position").getValue();
+					Component newComponent=DB.getNewComponent();
+					newComponent.setAttributeValue("Position", (Point2D) currentLocation);
 					toAdd.put(DB.getNewComponent(), (Point2D) currentLocation);
-					//System.out.println("OK spawned");
 				}
 			}
 
