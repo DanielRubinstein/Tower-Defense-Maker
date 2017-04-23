@@ -23,7 +23,7 @@ public class BankController extends Observable
 	private Map<String, Tile> tileBank;
 	private Map<String, Component> componentBank;
 	private BehaviorBank myBehaviorBank;
-	private RuleBank myRuleBank;
+	//private RuleBank myRuleBank;
 	private AttributeBank myAttributeBank;
 	private Mode myMode;
 	
@@ -38,7 +38,7 @@ public class BankController extends Observable
 		this.componentBank = componentBank;
 		this.myMode = myMode;
 		myBehaviorBank = new BehaviorBank();
-		myRuleBank = new RuleBank();
+		//myRuleBank = new RuleBank();
 		myAttributeBank = new AttributeBank();
 		
 		createTemplatesForTesting();
@@ -150,10 +150,11 @@ public class BankController extends Observable
 		return myBehaviorBank.getBehaviorList();
 	}
 	
+	/*
 	public List<Rule> getRuleList()
 	{
 		return myRuleBank.getRuleList();
-	}
+	}*/
 	
 	public List<AttributeImpl> getAttributeList()
 	{
