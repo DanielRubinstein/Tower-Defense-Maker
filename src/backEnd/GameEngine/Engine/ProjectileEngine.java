@@ -22,21 +22,16 @@ public class ProjectileEngine implements Engine {
 	@Override
 	public void gameLoop(GameData gameData, double stepTime) {
 		System.out.println("ProjectileEngine called");
-
-		List<Component> toRemove=new ArrayList<Component>();
-		Map<Component, Point2D> toAdd=new HashMap<Component, Point2D>();
 		
 		for (Component c : gameData.getState().getComponentGraph().getAllComponents()) {
 			if (((String) c.getAttribute("Type").getValue()).equals("Projectile")) {
 				//System.out.println("Calculating projectile position");
-				toRemove.add(c);
+
 				Point2D newPos = calculateNewPos(c);
-				toAdd.put(c, (Point2D)c.getAttribute("Position").getValue());
 				System.out.println("projectileTraveled is " + c.getAttribute("ProjectileTraveled").getValue());
 				System.out.println("projectileMaxDist is " + c.getAttribute("ProjectileMaxDistance").getValue());
 				
-				if ((Double) c.getAttribute("ProjectileTraveled").getValue() >= (Double) c
-						.getAttribute(("ProjectileMaxDistance")).getValue()) {
+				if ((Double) c.getAttribute("ProjectileTraveled").getValue() >= (Double) c.getAttribute(("ProjectileMaxDistance")).getValue()) {
 					System.out.println("Projectile has reached target");
 					List<Component> targets = gameData.getState().getComponentGraph().getComponentsWithinRadius(c,
 							(Double) c.getAttribute("ExplosionRadius").getValue());
@@ -51,14 +46,7 @@ public class ProjectileEngine implements Engine {
 				c.setAttributeValue("Position", newPos);
 			}
 		}
-		for (Component toDelete: toRemove){
-			System.out.println("deleting component");
-			gameData.getState().getComponentGraph().removeComponent(toDelete);
-		}
-		for (Component c: toAdd.keySet()){
-			System.out.println("adding component");
-			gameData.getState().getComponentGraph().addComponentToGrid(c, toAdd.get(c));
-		}
+
 	}
 
 	private Point2D calculateNewPos(Component c) {
@@ -92,7 +80,9 @@ public class ProjectileEngine implements Engine {
 	private void performProjectileAction(Component projectile, List<Component> targetList) {
 
 			for (Component target : targetList) {
-				target.setAttributeValue("Health", (Integer) projectile.getAttribute("ProjectileDamage").getValue());
+				System.out.println(targetList.size());
+				System.out.println(target.getAttribute("Target health is " + target.getAttribute("Health").getValue()));
+				target.setAttributeValue("Health", (Integer)target.getAttribute("Health").getValue() - (Integer) projectile.getAttribute("ProjectileDamage").getValue());
 				target.setAttributeValue("Velocity", ((Double) projectile.getAttribute("SlowFactor").getValue()
 						* (Double) target.getAttribute("Speed").getValue()));
 				System.out.println("projectile action performed");

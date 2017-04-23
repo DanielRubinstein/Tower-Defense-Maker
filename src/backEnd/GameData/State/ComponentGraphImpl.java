@@ -105,14 +105,10 @@ public class ComponentGraphImpl extends Observable implements ComponentGraph {
 		ArrayList<Component> componentsWithinRadius = new ArrayList<Component>();
 		if (componentMap.keySet().size() != 0) {
 			for (Point2D loc : componentMap.keySet()) {
-				//loc X and Y are null from second loop onwards?
-				//System.out.println("ComponentsWithinRadius center Component type is " + centerComp.getAttribute("Type").getValue());
-				//System.out.println("ComponentsWithinRadius Loc is " + loc);
 				double distance = Math.sqrt(Math.pow(centerLoc.getX() - loc.getX(), 2) + Math.pow(centerLoc.getY() - loc.getY(), 2));
-				if (distance < radius && distance != 0) {// don't add yourself
-															// to the targets
-															// list
+				if (distance < radius) {
 					componentsWithinRadius.addAll(componentMap.get(loc));
+					componentsWithinRadius.remove(centerComp);//don't add yourself
 				}
 			}
 		}
