@@ -79,7 +79,6 @@ public class ComponentGraphImpl extends Observable implements ComponentGraph {
 		currList.add(newComponent);
 		componentMap.put(screenPosition, currList);
 		myComponents.add(newComponent);
-
 		this.setChanged();
 		this.notifyObservers();
 	}
@@ -151,7 +150,9 @@ public class ComponentGraphImpl extends Observable implements ComponentGraph {
 
 	@Override
 	public void setObservers() {
-		for (int i = 0; i < myComponents.size(); i++) {
+
+		for (int i = 0; i < myComponents.size(); i++){
+			System.out.println("in componentGraphImpl, observer list is "+compObserverList.get(i));
 			myComponents.get(i).setObserverList(compObserverList.get(i));
 		}
 

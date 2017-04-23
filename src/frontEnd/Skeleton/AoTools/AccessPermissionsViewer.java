@@ -3,6 +3,7 @@ package frontEnd.Skeleton.AoTools;
 import java.util.Arrays;
 import java.util.List;
 
+import ModificationFromUser.AttributeOwner.Modification_EditAccessPermissions;
 import backEnd.Attribute.AttributeOwner;
 import backEnd.GameData.State.AccessPermissions;
 import frontEnd.View;
@@ -59,12 +60,13 @@ public class AccessPermissionsViewer implements SkeletonObject{
 			subBody.getChildren().add(titleLbl);
 			List<String> opts = null;
 			if(title.equals("User")){
-				opts = Arrays.asList("AUTHOR", "PLAYER");
+				myView.getLevelProgressionController().getMode();
+				opts = myView.getLevelProgressionController().getMode().getAllUserModes();
 			} else if (title.equals("Game")){
 				opts = myView.getLevelProgressionController().getGameList();
 			} else if (title.equals("Level")){
 				//opts = myView.getLevelProgressionController().getLevelList(null);
-				opts = Arrays.asList("Level 1", "Level 2", "Level 3");
+				opts = myView.getLevelProgressionController().getFullLevelList();
 			}
 			
 			for(String thing : opts){
@@ -73,15 +75,13 @@ public class AccessPermissionsViewer implements SkeletonObject{
 					cB.disableProperty().set(true);
 				}
 				
-				if(myAccessPermissions.getUserModeList().contains(thing) || myAccessPermissions.getGameModeList().contains(thing)){
+				if (myAccessPermissions.permitsAccess(thing)){
 					cB.setSelected(true);
 				}
-				
-				
-				
 				cB.selectedProperty().addListener((o, oldV, newV) -> {
-					
+					myView.sendUserModification(new Modification_EditAccessPermissions(myAccessPermissions, newV, thing));
 				});
+				
 				subBody.getChildren().add(cB);
 			}
 			

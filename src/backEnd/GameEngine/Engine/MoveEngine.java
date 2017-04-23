@@ -1,6 +1,9 @@
 package backEnd.GameEngine.Engine;
 import java.io.FileNotFoundException;
-
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 import backEnd.GameEngine.Behaviors.*;
 import frontEnd.CustomJavafxNodes.ErrorDialog;
@@ -28,29 +31,39 @@ public class MoveEngine implements Engine{
 	@Override
 	public void gameLoop(GameData gameData, double stepTime) {
 		myState=gameData.getState();
-		ComponentGraph newGraph=new ComponentGraphImpl();
+		List<Component> toRemove=new ArrayList<Component>();
+		Map<Component, Point2D> toAdd=new HashMap<Component, Point2D>();
 		for (Component c: myState.getComponentGraph().getAllComponents()){
 			Object o = c.getAttribute("Position").getValue();
 			Point2D currentLocation=(Point2D) o;
-			mb=new MoveBehavior(c);
 			currentTile = gameData.getState().getTileGrid().getTileByScreenLocation(currentLocation);
 			if (currentTile==null){
 				continue;
 			}
+			mb=new MoveBehavior(c);
 			try {
 				Object speedObj=c.getAttribute("Speed").getValue();
 				mb.setMoveAmount((double) speedObj);
 				mb.execute(currentTile);
 				Point2D newPosition=mb.getPosition();
-				newGraph.addComponentToGrid(c, newPosition);
+				if (newPosition!=null&&!newPosition.equals(currentLocation)){
+					toAdd.put(c, newPosition);
+					toRemove.add(c);
+				}
 			} catch (FileNotFoundException e) {
 				ErrorDialog fnf = new ErrorDialog();
 				fnf.create("Error", "File not found");
 				break;
 			}
 		}
-		myState.setComponentGraph(newGraph);
-		//System.out.println("PLEASE STOP MOVE ENGINE 5");
+
+		for (Component toDelete: toRemove){
+			gameData.getState().getComponentGraph().removeComponent(toDelete);
+		}
+		for (Component c: toAdd.keySet()){
+			gameData.getState().getComponentGraph().addComponentToGrid(c, toAdd.get(c));
+		}
+
 		return;
 	}
 }

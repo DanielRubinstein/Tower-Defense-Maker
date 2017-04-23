@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Map;
 
 import backEnd.GameData.GameData;
+import backEnd.Mode.Mode;
 import data.DataController;
 import data.XMLReadingException;
 
@@ -18,8 +19,10 @@ import data.XMLReadingException;
 public class LevelProgressionControllerImpl implements LevelProgressionControllerReader {
 	private Map<String,List<String>> gamesMap; //String gameName -> List of Level names
 	private DataController myDataController;
+	private Mode myMode;
 	
-	public LevelProgressionControllerImpl(DataController dataController, Map<String,List<String>> gamesMap){
+	public LevelProgressionControllerImpl(Mode mode, DataController dataController, Map<String,List<String>> gamesMap){
+		this.myMode = mode;
 		this.gamesMap = gamesMap;
 		this.myDataController = dataController;
 	}
@@ -38,6 +41,14 @@ public class LevelProgressionControllerImpl implements LevelProgressionControlle
 	@Override
 	public List<String> getLevelList(String gameName){
 		return gamesMap.get(gameName);
+	}
+	
+	public List<String> getFullLevelList(){
+		List<String> allLevels = new ArrayList<String>();
+		for (List<String> levels : gamesMap.values()){
+			allLevels.addAll(levels);
+		}
+		return allLevels;
 	}
 	
 	public void setLevelList(String gameName, List<String> levelList){
@@ -72,9 +83,12 @@ public class LevelProgressionControllerImpl implements LevelProgressionControlle
 		levelPathsList.add(level);
 		gamesMap.put(gameName, levelPathsList);
 	}
-	
 
 	public Map<String,List<String>> getGamesMap(){
 		return gamesMap;
+	}
+	
+	public Mode getMode(){
+		return myMode;
 	}
 }

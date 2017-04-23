@@ -1,6 +1,6 @@
 package backEnd.GameData;
 
-import java.util.List;
+import java.util.Map;
 
 import backEnd.GameData.Rules.Rule;
 import backEnd.GameData.State.PlayerStatus;
@@ -12,12 +12,12 @@ import backEnd.GameEngine.EngineStatus;
 
 public class GameData implements GameDataInterface{
 	private StateImpl myState;
-	private List<Rule> myRules;
+	private Map<String,Rule> myRules;
 	private PlayerStatus myPlayerStatus;
 	private EngineStatus myEngineStatus;
 	private double myGameTime;
 	
-	public GameData(StateImpl state, PlayerStatus playerStatus, List<Rule> rules){
+	public GameData(StateImpl state, PlayerStatus playerStatus, Map<String, Rule> rules){
 		this.myState = state;
 		this.myRules = rules;
 		this.myPlayerStatus = playerStatus;
@@ -32,7 +32,7 @@ public class GameData implements GameDataInterface{
 	}
 
 	@Override
-	public List<Rule> getRules() {
+	public Map<String, Rule> getRules() {
 		return myRules;
 	}
 	
