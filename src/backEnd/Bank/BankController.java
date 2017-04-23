@@ -92,6 +92,7 @@ public class BankController
 			newComponent2.setAttributeValue("FireRate", 45.0);
 			newComponent2.setAttributeValue("ExplosionRadius", 40.0);
 			newComponent2.setAttributeValue("FireRadius", 200.0);
+			newComponent2.setAttributeValue("FireImage", "resources/images/Components/purple_bloon.png");
 			addNewComponent("Tower", newComponent2);
 			
 			
