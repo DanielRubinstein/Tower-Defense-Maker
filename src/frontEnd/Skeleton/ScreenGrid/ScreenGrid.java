@@ -101,7 +101,6 @@ public class ScreenGrid implements SkeletonObject, Observer {
 
 	private void extractAoCollectionsFromState() {
 		observedTileGrid = myState.getTileGrid();
-		System.out.println(this);
 		observedTileGrid.addAsObserver(this);
 		observedComponentGraph = myState.getComponentGraph();
 		observedComponentGraph.addAsObserver(this);
@@ -187,7 +186,8 @@ public class ScreenGrid implements SkeletonObject, Observer {
 				addComponentToGrid(c);
 			}
 		}
-		for(Component c : myComponents){
+		Set<Component> myComponentsCopy=new HashSet<>(myComponents);
+		for(Component c : myComponentsCopy){
 			if(!observedComponentGraph.getAllComponents().contains(c)){
 				removeComponentFromGrid(c);
 			}

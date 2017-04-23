@@ -1,6 +1,7 @@
 package frontEnd;
 
 import java.util.Collection;
+import java.util.Map;
 import java.util.function.Consumer;
 
 import ModificationFromUser.ModificationFromUser;
@@ -10,6 +11,7 @@ import backEnd.Bank.BankController;
 import backEnd.GameData.State.Component;
 import backEnd.GameData.State.PlayerStatusReader;
 import backEnd.GameData.State.Tile;
+import backEnd.GameEngine.Engine.Spawning.SpawnQueue;
 import backEnd.LevelProgression.LevelProgressionControllerReader;
 import backEnd.Mode.ModeReader;
 import frontEnd.CustomJavafxNodes.ErrorDialog;
@@ -23,10 +25,11 @@ import javafx.stage.Stage;
 public class ViewImpl implements View {
 	private ModelReader myModel;
 	private Consumer<ModificationFromUser> myModConsumer;
-	private SkeletonImpl mySkeleton;
+	private SkeletonImpl mySkeleton; 
 	private SimpleBooleanProperty authorProperty;
 	private Stage appStage;
 	private FacebookInteractor myFB;
+	private ModeReader myMode;
 
 	public ViewImpl(Model model, Consumer<ModificationFromUser> inputConsumer, FacebookInteractor fb) {
 		myFB=fb;
@@ -40,8 +43,8 @@ public class ViewImpl implements View {
 	private void init(ModelReader model, Consumer<ModificationFromUser> inputConsumer){
 		myModel = model;
 		myModConsumer = inputConsumer;
-		ModeReader mode = model.getModeReader();
-		authorProperty = mode.getAuthorBooleanProperty();
+		myMode = model.getModeReader();
+		authorProperty = myMode.getAuthorBooleanProperty();
 		mySkeleton = new SkeletonImpl();
 		mySkeleton.init(this, myModel);
 		appStage = new Stage();
@@ -116,6 +119,15 @@ public class ViewImpl implements View {
 	@Override
 	public PlayerStatusReader getPlayerStatus() {
 		return myModel.getPlayerStatusReader();
+	}
+
+	@Override
+	public Map<String, SpawnQueue> getSpawnQueues() {
+		return myModel.getState().getSpawnQueues();
+	}
+	
+	public ModeReader getModeReader(){
+		return myMode;
 	}
 
 }

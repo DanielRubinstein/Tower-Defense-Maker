@@ -10,61 +10,86 @@ import javafx.geometry.Point2D;
 
 /**
  * governs the behavior of projectiles in the State
+ * 
  * @author Christian Martindale
  *
  */
-public class ProjectileEngine implements Engine{
+public class ProjectileEngine implements Engine {
 
 	private State myState;
 	private final static String RESOURCES_PATH = "resources/attributes";
 	private final static ResourceBundle myResources = ResourceBundle.getBundle(RESOURCES_PATH);
-	
-	
+
 	@Override
-	public void gameLoop(GameData gameData, double stepTime) { //should refactor the movement into separate method if time
+	public void gameLoop(GameData gameData, double stepTime) { // should
+																// refactor the
+																// movement into
+																// separate
+																// method if
+																// time
+		System.out.println("ProjectileEngine called");
 		myState = gameData.getState();
-		
-		for (Component c: myState.getComponentGraph().getAllComponents()){
-			if(c.getMyType().equals("Projectile")){
+
+		for (Component c : myState.getComponentGraph().getAllComponents()) {
+			if (c.getMyType().equals("Projectile")) {
+				System.out.println("Calculating projectile position");
 				Point2D newPos = calculateNewPos(c);
-				
-				if((Double)c.getAttribute("ProjectileTraveled").getValue() >= (Double)c.getAttribute(myResources.getString("ProjectileMaxDistance")).getValue()){								
-					List<Component> targets = gameData.getState().getComponentGraph().getComponentsWithinRadius(c, (Double)c.getAttribute("ExplosionRadius").getValue());
-					performProjectileAction(c,targets);
-					
-					myState.getComponentGraph().removeComponent(c); //reached destination, delete projectile
+
+				if ((Double) c.getAttribute("ProjectileTraveled").getValue() >= (Double) c
+						.getAttribute(myResources.getString("ProjectileMaxDistance")).getValue()) {
+					List<Component> targets = gameData.getState().getComponentGraph().getComponentsWithinRadius(c,
+							(Double) c.getAttribute("ExplosionRadius").getValue());
+					System.out.println("About to perform projectile action");
+					performProjectileAction(c, targets);
+
+					myState.getComponentGraph().removeComponent(c); // reached
+																	// destination,
+																	// delete
+																	// projectile
 					continue;
 				}
-				c.setAttributeValue(myResources.getString("Position"), newPos);			
+				c.setAttributeValue(myResources.getString("Position"), newPos);
 			}
-		}	
+		}
 	}
-	
-	private Point2D calculateNewPos(Component c){
-		double curVel = (Double) c.getAttribute(myResources.getString("Velocity")).getValue();		
+
+	private Point2D calculateNewPos(Component c) {
+		double curVel = (Double) c.getAttribute(myResources.getString("Velocity")).getValue();
 		Point2D curPos = (Point2D) c.getAttribute(myResources.getString("Position")).getValue();
 		Point2D targetPos = (Point2D) c.getAttribute(myResources.getString("ProjectileTargetPosition")).getValue();
 		Point2D difference = targetPos.subtract(curPos);
-		
+
 		double slope = difference.getY() / difference.getX();
-		double distTraveled = Math.sqrt(Math.pow(curVel, 2) + Math.pow(slope*curVel, 2));
-		Point2D newPos = curPos.add((curVel), curVel*slope);	
-		c.setAttributeValue(myResources.getString("ProjectileTraveled"), c.getAttribute(myResources.getString("ProjectileTraveled") + distTraveled));
-		
+		double distTraveled = Math.sqrt(Math.pow(curVel, 2) + Math.pow(slope * curVel, 2));
+		Point2D newPos = curPos.add((curVel), curVel * slope);
+		c.setAttributeValue(myResources.getString("ProjectileTraveled"),
+				c.getAttribute(myResources.getString("ProjectileTraveled") + distTraveled));
+
+		System.out.println("performed targeting math" + newPos);
 		return newPos;
-		
+
 	}
 
 	/**
-	 * Upon collision, takes action on the target based on the projectile's Attributes
+	 * Upon collision, takes action on the target based on the projectile's
+	 * Attributes
 	 * 
-	 * @param projectile the projectile performing the action
-	 * @param target the object of the projectile's action (usually an enemy)
+	 * @param projectile
+	 *            the projectile performing the action
+	 * @param target
+	 *            the object of the projectile's action (usually an enemy)
 	 */
 	private void performProjectileAction(Component projectile, List<Component> targetList) {
-		for(Component target : targetList){
-			target.setAttributeValue("Health", (Integer)projectile.getAttribute("ProjectileDamage").getValue());
-			target.setAttributeValue("Velocity", ((Double)projectile.getAttribute("SlowFactor").getValue() * (Double)target.getAttribute("Speed").getValue()));
-		}
+
+			for (Component target : targetList) {
+				target.setAttributeValue("Health", (Integer) projectile.getAttribute("ProjectileDamage").getValue());
+				target.setAttributeValue("Velocity", ((Double) projectile.getAttribute("SlowFactor").getValue()
+						* (Double) target.getAttribute("Speed").getValue()));
+				System.out.println("projectile action performed");
+				if(projectile.getAttribute("FireType").getValue().equals("SingleTarget")){
+					break; //if AOE, continue to loop through all targets, else only affect one target
+				}
+			}
+		
 	}
 }

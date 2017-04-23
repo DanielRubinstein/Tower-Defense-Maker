@@ -1,8 +1,12 @@
 package frontEnd;
 
+import java.util.Map;
+
 import ModificationFromUser.ModificationFromUser;
 import backEnd.Model;
 import backEnd.Bank.BankController;
+import backEnd.GameEngine.Engine.Spawning.SpawnQueue;
+import backEnd.Mode.ModeReader;
 import frontEnd.Facebook.FacebookConnector;
 import frontEnd.Facebook.FacebookInteractor;
 import javafx.scene.Node;
@@ -21,5 +25,9 @@ public interface View extends ViewReader{
 	public Node getScreenGrid();
 	
 	public FacebookInteractor getFb();
+	
+	public Map<String, SpawnQueue> getSpawnQueues();
+	
+	public ModeReader getModeReader();
 
 }

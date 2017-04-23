@@ -92,7 +92,7 @@ public class AttributeEditorCreator {
 		name.setText(myView.getBankController().getAOName(preset));
 		pair.getChildren().add(name);
 		
-		String presetImagePath = (String) preset.getAttribute("ImageFile").getValue();
+		String presetImagePath = preset.<String>getAttribute("ImageFile").getValue();
 		ImageView imv = createImageView(presetImagePath);
 		pair.getChildren().add(imv);
 		

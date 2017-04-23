@@ -56,9 +56,9 @@ public class AttributeImpl<T> implements Attribute<T>{
 		return attributeCopy;
 	}
 	
-	public static Point2D getValueWithOutCasting(AttributeOwner c){
-		Object o = c.getAttribute("Position").getValue();
-		Point2D currentLocation=(Point2D) o;
-		return currentLocation;
-	}
+	//public static Point2D getValueWithOutCasting(AttributeOwner c){
+		//Object o = c.getAttribute("Position").getValue();
+		//Point2D currentLocation=(Point2D) o;
+		//return currentLocation;
+	//}
 }

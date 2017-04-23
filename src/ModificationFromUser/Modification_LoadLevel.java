@@ -8,6 +8,8 @@ import data.DataController;
 import data.XMLReadingException;
 import data.GamePrep.DataInputLoader;
 import data.GamePrep.GameLoader;
+import javafx.stage.DirectoryChooser;
+import javafx.stage.Stage;
 
 /**
  * 
@@ -21,12 +23,7 @@ public class Modification_LoadLevel implements ModificationFromUser {
 	private GameData myGameData;
 	
 	public Modification_LoadLevel(){
-		myGameFile = load();
-	}
-	
-	
-	public Modification_LoadLevel(String gameLevel){
-		myLevel = gameLevel;
+		myLevel = load();
 	}
 
 	@Override
@@ -43,16 +40,11 @@ public class Modification_LoadLevel implements ModificationFromUser {
 		
 	}
 	
-	private File load() {
-		GameLoader gL = new GameLoader();
-		File fileToLoad = null;
-		try {
-			fileToLoad = gL.loadGame();
-		} catch (XMLReadingException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		return fileToLoad;
+	private String load() {
+		DirectoryChooser chooser = new DirectoryChooser();
+		chooser.setInitialDirectory(new File("./data/GameStateData/"));
+	
+		return chooser.showDialog(new Stage()).getName();
 	}
 
 }

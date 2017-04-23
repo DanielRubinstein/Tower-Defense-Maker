@@ -43,11 +43,13 @@ public class DataInputLoader {
 		return myGameData;	
 	}
 	
-	private GameData generateGameData(String levelName) throws XMLReadingException{
+	private GameData generateGameData(String levelName){
 		try{
 			return myXMLReader.loadGameStateData(GAME_STATE_DATA_PATH, levelName);
 		}catch(Exception e){
-			throw new XMLReadingException();
+			//throw new XMLReadingException();
+			e.printStackTrace();
+			return null;
 		}
 	}
 

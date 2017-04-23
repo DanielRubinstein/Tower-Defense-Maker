@@ -13,6 +13,7 @@ import backEnd.Attribute.AttributeOwner;
 import backEnd.Bank.BankController;
 import backEnd.GameData.State.Component;
 import backEnd.GameData.State.TileImpl;
+import backEnd.Mode.ModeReader;
 import frontEnd.View;
 import frontEnd.Skeleton.AoTools.GenericCommandCenter;
 import javafx.geometry.Bounds;
@@ -47,6 +48,7 @@ public class Palette<T extends AttributeOwner> implements SkeletonObject, Observ
 	private Map<ImageView, T> myPresetMapFrontEnd;
 	private String myType;
 	private BankController observedBankController;
+	private ModeReader observedMode;
 	private ImageView addPreset;
 
 	public Palette(View view, Map<String, T> presetMap, String string) {
@@ -63,6 +65,7 @@ public class Palette<T extends AttributeOwner> implements SkeletonObject, Observ
 
 	private void initializeMaps(Map<String, T> presetMap) {
 		observedBankController = myView.getBankController();
+		observedMode = myView.getModeReader();
 		observedBankController.addObserver(this);
 		myPresetMapBackEnd = presetMap;
 		myPresetMapFrontEnd = new HashMap<ImageView, T>();
@@ -86,7 +89,7 @@ public class Palette<T extends AttributeOwner> implements SkeletonObject, Observ
 	}
 
 	private void addPresetToPalette(T preset) {
-		String myImagePath = (String) preset.getAttribute(IMAGEFILE_ATTRIBUTE_NAME).getValue();
+		String myImagePath = preset.<String>getAttribute(IMAGEFILE_ATTRIBUTE_NAME).getValue();
 		ImageView imageView = createImageView(myImagePath);
 		setPresetInteractions(preset, imageView);
 		myPresetMapFrontEnd.put(imageView, preset);
@@ -94,7 +97,7 @@ public class Palette<T extends AttributeOwner> implements SkeletonObject, Observ
 	}
 
 	private void setPresetInteractions(T preset, ImageView imageView) {
-		setDoubleClickEvent(imageView, (iV) -> {
+		setClickEvent(imageView, (iV) -> {
 			GenericCommandCenter presetComCenter = new GenericCommandCenter(myView, preset);
 			presetComCenter.launch("Preset", iV.getX(), iV.getY());
 		});
@@ -102,9 +105,9 @@ public class Palette<T extends AttributeOwner> implements SkeletonObject, Observ
 		makePresetDraggable(preset, imageView);
 	}
 
-	private void setDoubleClickEvent(ImageView imageView, Consumer<ImageView> consumer) {
+	private void setClickEvent(ImageView imageView, Consumer<ImageView> consumer) {
 		imageView.setOnMouseClicked(mouseEvent -> {
-			if (mouseEvent.getButton().equals(MouseButton.PRIMARY) && mouseEvent.getClickCount() == 2) {
+			if (mouseEvent.getButton().equals(MouseButton.PRIMARY)) {
 				consumer.accept(imageView);
 			}
 		});
@@ -146,31 +149,24 @@ public class Palette<T extends AttributeOwner> implements SkeletonObject, Observ
 		screenGrid.setOnDragDropped(e -> {
 			String presetName = e.getDragboard().getString();
 			AttributeOwner presetAO = observedBankController.getPreset(presetName);
-			Point2D pos = new Point2D(e.getSceneX() - Constants.SCREEN_GRID_PADDING + 40 ,e.getSceneY() - Constants.SCREEN_GRID_PADDING - 10);
+			Double offsetX;
+			Double offsetY;
+			// TODO holy shit, how do we get rid of these magic numbers
+			if(myView.getBooleanAuthorModeProperty().get()){
+				offsetX = 40d;
+				offsetY = -10d; 
+			} else {
+				offsetX = 12.5d;
+				offsetY = 12.5d; 
+			}
+			Point2D pos = new Point2D(e.getSceneX() - Constants.SCREEN_GRID_PADDING + offsetX ,e.getSceneY() - Constants.SCREEN_GRID_PADDING + offsetY);
 			myView.sendUserModification(new Modification_AddPresetAttributeOwnerToGrid(presetAO, pos));
 		});
-		//SomehowGetAccessToTheMOFUKINSpawnQueue
-//		Node singleSpawnTimeline = myView.getScreenGrid();
-//		singleSpawnTimeline.setOnDragOver(e -> e.acceptTransferModes(TransferMode.ANY));
-//		singleSpawnTimeline.setOnDragDropped(e -> {
-//			String presetName = e.getDragboard().getString();
-//			AttributeOwner presetAO = observedBankController.getPreset(presetName);
-//			Point2D pos = new Point2D(e.getSceneX() - Constants.SCREEN_GRID_PADDING /2 ,e.getSceneY() - Constants.SCREEN_GRID_PADDING /2 );
-//			myView.sendUserModification(new Modification_AddPresetAttributeOwnerToGrid(presetAO, pos));
-//		});
-//		Node freqSpawnTimeline = null;
-//		freqSpawnTimeline.setOnDragOver(e -> e.acceptTransferModes(TransferMode.ANY));
-//		freqSpawnTimeline.setOnDragDropped(e -> {
-//			String presetName = e.getDragboard().getString();
-//			AttributeOwner presetAO = observedBankController.getPreset(presetName);
-//			Point2D pos = new Point2D(e.getSceneX() - Constants.SCREEN_GRID_PADDING /2 ,e.getSceneY() - Constants.SCREEN_GRID_PADDING /2 );
-//			myView.sendUserModification(new Modification_AddSpawner(presetName, null, 0, false));
-//		});
 	}
 
 	private ImageView createNewPresetButton() {
 		ImageView addImage = createImageView(SETTINGS_IMAGE);
-		setDoubleClickEvent(addImage, (iV) -> {
+		setClickEvent(addImage, (iV) -> {
 			try {
 				AttributeOwner newAO = null;
 				switch (myType) {
