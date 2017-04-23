@@ -46,13 +46,10 @@ public class DeathEngine implements Engine {
 
 		}
 		for (Component toDelete: toRemove){
-			//System.out.println("ID is "+toDelete.printID());
 			gameData.getState().getComponentGraph().removeComponent(toDelete);
-			//System.out.println("deleted once");
 		}
 		for (Component c: toAdd.keySet()){
 			gameData.getState().getComponentGraph().addComponentToGrid(c, toAdd.get(c));
-			System.out.println("Added once");
 		}
 	}
 }

@@ -53,7 +53,7 @@ public class BankController extends Observable
 		try{
 			this.tileBank = new HashMap<String, Tile>();
 			this.componentBank = new HashMap<String, Component>();
-			Tile newTile = new TileImpl(Arrays.asList(), Arrays.asList("AUTHOR"), Arrays.asList(), new Point2D(0,0));
+			Tile newTile = new TileImpl();
 			newTile.setAttributeValue("ImageFile", "resources/images/Tiles/Blue.png");
 			newTile.setAttributeValue("MoveDirection","Down");
 			addNewTile("Blue Down Tile", newTile);
@@ -74,7 +74,7 @@ public class BankController extends Observable
 			addNewTile("Yellow Left Tile", newTile4);
 			
 			
-			Component newComponent = new Component(new AttributeData(),new AccessPermissionsImpl());
+			Component newComponent = new Component();
 			newComponent.setAttributeValue("ImageFile", "resources/images/Components/rainbow_bloon.png");
 			newComponent.setAttributeValue("Speed", 5d);
 			newComponent.setAttributeValue("Health", 10);
@@ -102,7 +102,7 @@ public class BankController extends Observable
 		this.notifyObservers();
 	}
 	
-	public Map<String, Tile> getTileMap()
+	public Map<String, Tile> getAccessibleTileMap()
 	{
 		Map<String, Tile> subMap = new HashMap<String,Tile>();
 		
@@ -117,7 +117,7 @@ public class BankController extends Observable
 		return subMap;
 	}
 	
-	public Map<String, Component> getComponentMap()
+	public Map<String, Component> getAccessibleComponentMap()
 	{
 		Map<String, Component> subMap = new HashMap<String,Component>();
 		
@@ -130,6 +130,15 @@ public class BankController extends Observable
 		}
 		
 		return subMap;
+	}
+	public Map<String, Component> getComponentMap()
+	{
+		return componentBank;
+	}
+	
+	public Map<String, Tile> getTileMap()
+	{
+		return tileBank;
 	}
 	
 	public void addNewComponent (String name, Component component)

@@ -63,7 +63,7 @@ public class StateImpl extends Observable implements State {
 				
 				Tile newTile = new TileImpl(Arrays.asList(), Arrays.asList(), Arrays.asList(), loc);
 				
-				Attribute<String> imgAttr = (Attribute<String>) newTile.getAttribute("ImageFile");
+				Attribute<String> imgAttr = newTile.getAttribute("ImageFile");
 				imgAttr.setValue(myImageResource.getString("default_tile"));
 				
 				tileGrid.setTileByGridPosition(newTile, col, row);
@@ -92,8 +92,8 @@ public class StateImpl extends Observable implements State {
 		for (int col = 0; col < numColsInGrid; col++) { // find the start position
 			for (int row = 0; row < numRowsInGrid; row++) {
 				Tile tile = myTileGrid.getTileByGridPosition(col, row);
-				if ((boolean) tile.getMyAttributes().getAttributeMap()
-						.get(myResources.getString("StartTile")).getValue() == true) {
+				if (tile.getMyAttributes()
+						.<Boolean>get(myResources.getString("StartTile")).getValue() == true) {
 					startTiles.put(tile, new Coord(col, row, null));
 				}
 			}
@@ -187,7 +187,7 @@ public class StateImpl extends Observable implements State {
 
 	private boolean isTraversable(int x, int y){
 		Tile curTile = myTileGrid.getTileByGridPosition(x,y);
-		if(curTile == null || (boolean)curTile.getAttribute(myResources.getString("Traversable")).getValue() == true){
+		if(curTile == null || curTile.<Boolean>getAttribute(myResources.getString("Traversable")).getValue() == true){
 			return false;
 		}
 		
@@ -222,15 +222,6 @@ public class StateImpl extends Observable implements State {
 		TileCorners tileCorners = new TileCorners(tileGridPosition, myTileGrid.getTileWidth(), myTileGrid.getTileHeight());
 		return myComponentGraph.getComponentsByTileCorners(tileCorners);
 	}
-
-
-	@Override
-	public void setComponentGraph(ComponentGraph newComponentGraph) {
-		myComponentGraph=newComponentGraph;
-		this.setChanged();
-		this.notifyObservers();
-	}
-
 
 	public void setEngineStatus(EngineStatus engineStatus) {
 		myEngineStatus=engineStatus;

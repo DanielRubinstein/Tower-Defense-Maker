@@ -107,7 +107,7 @@ public class AttributeCommandCenter{
 			return contents_Att;
 		}
 		int count = 0;
-		for (Attribute<?> attr : obj.getMyAttributes().getAttributeMap().values()) {
+		for (Attribute<?> attr : obj.getMyAttributes().values()) {
 			
 			Label attLabel = new Label(attr.getName());
 			contents_Att.add(attLabel, 0, count);

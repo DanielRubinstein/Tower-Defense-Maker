@@ -1,6 +1,7 @@
 package frontEnd;
 
 import java.util.Collection;
+import java.util.Map;
 import java.util.function.Consumer;
 
 import ModificationFromUser.ModificationFromUser;
@@ -10,6 +11,7 @@ import backEnd.Bank.BankController;
 import backEnd.GameData.State.Component;
 import backEnd.GameData.State.PlayerStatusReader;
 import backEnd.GameData.State.Tile;
+import backEnd.GameEngine.Engine.Spawning.SpawnQueue;
 import backEnd.LevelProgression.LevelProgressionControllerReader;
 import backEnd.Mode.ModeReader;
 import frontEnd.CustomJavafxNodes.ErrorDialog;
@@ -116,6 +118,11 @@ public class ViewImpl implements View {
 	@Override
 	public PlayerStatusReader getPlayerStatus() {
 		return myModel.getPlayerStatusReader();
+	}
+
+	@Override
+	public Map<String, SpawnQueue> getSpawnQueues() {
+		return myModel.getState().getSpawnQueues();
 	}
 
 }

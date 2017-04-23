@@ -12,7 +12,7 @@ public class ScoreWinCondition extends WinCondition {
 
 	@Override
 	public void invoke(GameData myGameData) {
-		if (myGameData.getModifiablePlayerStatus().getStatusItemValue("Score") >= getVal()) {
+		if (myGameData.getModifiablePlayerStatus().getStatusItemValue("Score") >= getVal() && this.isEnabled()) {
 			winGame();
 		}
 

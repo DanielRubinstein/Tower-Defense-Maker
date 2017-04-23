@@ -10,6 +10,7 @@ import java.util.Set;
 import backEnd.Attribute.AttributeOwner;
 import backEnd.GameData.State.Component;
 import backEnd.GameData.State.ComponentGraph;
+import backEnd.GameData.State.ComponentGraphImpl;
 import backEnd.GameData.State.State;
 import backEnd.GameData.State.Tile;
 import backEnd.GameData.State.TileGrid;
@@ -100,7 +101,6 @@ public class ScreenGrid implements SkeletonObject, Observer {
 
 	private void extractAoCollectionsFromState() {
 		observedTileGrid = myState.getTileGrid();
-		System.out.println(this);
 		observedTileGrid.addAsObserver(this);
 		observedComponentGraph = myState.getComponentGraph();
 		observedComponentGraph.addAsObserver(this);
@@ -147,8 +147,8 @@ public class ScreenGrid implements SkeletonObject, Observer {
 
 	@Override
 	public void update(Observable o, Object arg) {
-		System.out.println("Update triggered in ScreenGrid");
 		if (o == observedComponentGraph) {
+			observedComponentGraph=(ComponentGraphImpl) o;
 			updateComponentsOnGrid();
 		} else if (o == observedTileGrid){
 			updateTilesOnGrid();
@@ -182,10 +182,12 @@ public class ScreenGrid implements SkeletonObject, Observer {
 	private void updateComponentsOnGrid() {
 		for (Component c : observedComponentGraph.getAllComponents()) {
 			if (!myComponents.contains(c)) {
+				System.out.println("in screenGrid, updateComponentsOnGrid() got called");
 				addComponentToGrid(c);
 			}
 		}
-		for(Component c : myComponents){
+		Set<Component> myComponentsCopy=new HashSet<>(myComponents);
+		for(Component c : myComponentsCopy){
 			if(!observedComponentGraph.getAllComponents().contains(c)){
 				removeComponentFromGrid(c);
 			}

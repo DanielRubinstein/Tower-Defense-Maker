@@ -54,7 +54,7 @@ public class XMLReaderImpl implements XMLReader{
 		StateImpl state = new StateImpl(grid.getNumRowsInGrid(), grid.getNumColsInGrid(), grid, graph);
 		
 		return new GameData(state, (PlayerStatus) xStream.fromXML(new File(filePath+"/" + levelName+"/playerstatus.xml")),
-				(List<Rule>) xStream.fromXML(new File(filePath+"/" + levelName+"/rules.xml")));
+				(Map<String, Rule>) xStream.fromXML(new File(filePath+"/" + levelName+"/rules.xml")));
 
 	}
 	

@@ -1,13 +1,19 @@
 package frontEnd.Skeleton.UserTools;
 
+import java.lang.reflect.Field;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 
 import ModificationFromUser.Modification_ChangeMode;
 import ModificationFromUser.Modification_GameRemote;
 import backEnd.GameEngine.Engine.GameProcessController;
 import frontEnd.View;
 import frontEnd.CustomJavafxNodes.ToggleSwitch;
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
@@ -15,11 +21,14 @@ import javafx.geometry.Orientation;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
+import javafx.scene.control.Tooltip;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.TilePane;
 import javafx.scene.layout.VBox;
+import javafx.util.Duration;
 
 public class OptionsSelection implements SkeletonObject{
 
@@ -32,6 +41,7 @@ public class OptionsSelection implements SkeletonObject{
 	private SettingsView mySettings;
 	private List<Button> myButtons;
 	private View myView;
+	private Map<Button, Tooltip> myButtonsAndTooltips;
 	
 	public OptionsSelection(View view) {
 		myView = view;
@@ -63,12 +73,35 @@ public class OptionsSelection implements SkeletonObject{
 	}
 	
 	private void addButtons(double size){
-		myButtons.add(createImageButton(PLAY_IMAGE, e-> myView.sendUserModification(Modification_GameRemote.PLAY) ,size));
-		myButtons.add(createImageButton(PAUSE_IMAGE, e-> myView.sendUserModification(Modification_GameRemote.PAUSE) ,size));
-		myButtons.add(createImageButton(FASTFWD_IMAGE, e-> myView.sendUserModification(Modification_GameRemote.FASTFORWARD) ,size));
-		myButtons.add(createImageButton(SETTINGS_IMAGE, e-> mySettings.launchSettings(),size));
+		myButtonsAndTooltips=new LinkedHashMap<Button, Tooltip>();
+		myButtonsAndTooltips.put(createImageButton(PLAY_IMAGE, e-> myView.sendUserModification(Modification_GameRemote.PLAY) ,size), new Tooltip("Play game"));
+		myButtonsAndTooltips.put(createImageButton(PAUSE_IMAGE, e-> myView.sendUserModification(Modification_GameRemote.PAUSE) ,size), new Tooltip("Pause game"));
+		myButtonsAndTooltips.put(createImageButton(FASTFWD_IMAGE, e-> myView.sendUserModification(Modification_GameRemote.FASTFORWARD) ,size), new Tooltip("Fast-forward game"));
+		myButtonsAndTooltips.put(createImageButton(SETTINGS_IMAGE, e-> mySettings.launchSettings(),size), new Tooltip("View settings"));		
+		for (Button b: myButtonsAndTooltips.keySet()){
+			modifyTooltipStartTiming(myButtonsAndTooltips.get(b));
+			b.setTooltip(myButtonsAndTooltips.get(b));
+			myButtons.add(b);
+		}
 	}
 	
+	
+	private void modifyTooltipStartTiming(Tooltip tooltip) {
+	    try {
+	        Field fieldBehavior = tooltip.getClass().getDeclaredField("BEHAVIOR");
+	        fieldBehavior.setAccessible(true);
+	        Object objBehavior = fieldBehavior.get(tooltip);
+
+	        Field fieldTimer = objBehavior.getClass().getDeclaredField("activationTimer");
+	        fieldTimer.setAccessible(true);
+	        Timeline objTimer = (Timeline) fieldTimer.get(objBehavior);
+
+	        objTimer.getKeyFrames().clear();
+	        objTimer.getKeyFrames().add(new KeyFrame(new Duration(250)));
+	    } catch (Exception e) {
+	        e.printStackTrace();
+	    }
+	}
 	
 	
 	private Button createImageButton(String imageName, EventHandler<ActionEvent> event, double size){
