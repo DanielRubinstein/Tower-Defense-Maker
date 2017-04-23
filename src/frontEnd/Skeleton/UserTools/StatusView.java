@@ -30,7 +30,10 @@ public class StatusView {
 		valuesBox=new VBox();
 		globalBox=new HBox();
 		myScrollPane=new ScrollPane();
-		
+		initializeContent();
+
+	}
+	private void initializeContent(){
 		PlayerStatusReader playerStatus = myView.getPlayerStatus();
 		Collection<String> statusItems = playerStatus.getPropertyNames();
 		
@@ -51,6 +54,9 @@ public class StatusView {
         globalBox.setBorder(new Border(new BorderStroke(Color.BLACK, 
                 BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderWidths.DEFAULT)));
         myScrollPane.setContent(globalBox);
+	}
+	public void intitializeVisuals(){
+		
 	}
 
 
