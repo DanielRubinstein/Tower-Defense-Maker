@@ -29,7 +29,6 @@ public class BankController
 	private Map<String, Tile> tileBank;
 	private Map<String, Component> componentBank;
 	private BehaviorBank myBehaviorBank;
-	private RuleBank myRuleBank;
 	private AttributeBank myAttributeBank;
 	private Mode myMode;
 	private List<Observer> observers;
@@ -45,7 +44,6 @@ public class BankController
 		this.componentBank = componentBank;
 		this.myMode = myMode;
 		this.myBehaviorBank = new BehaviorBank();
-		this.myRuleBank = new RuleBank();
 		this.myAttributeBank = new AttributeBank();
 		this.observers = new ArrayList<Observer>();
 		createTemplatesForTesting();
@@ -163,10 +161,6 @@ public class BankController
 		return myBehaviorBank.getBehaviorList();
 	}
 	
-	public List<Rule> getRuleList()
-	{
-		return myRuleBank.getRuleList();
-	}
 	
 	public List<AttributeImpl> getAttributeList()
 	{
