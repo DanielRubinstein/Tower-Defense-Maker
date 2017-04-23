@@ -4,6 +4,7 @@ import java.util.Collection;
 import java.util.Map;
 import java.util.Observer;
 
+import backEnd.GameEngine.EngineStatus;
 import backEnd.GameEngine.Engine.Spawning.SpawnQueue;
 import javafx.geometry.Point2D;
 
@@ -39,4 +40,8 @@ public interface State {
 	Map<String, SpawnQueue> getSpawnQueues();
 
 	boolean gameIsRunning();
+
+	void setComponentGraph(ComponentGraph componentGraph);
+
+	EngineStatus getEngineStatus();
 }

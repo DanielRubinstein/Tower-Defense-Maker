@@ -21,6 +21,8 @@ public class DataController {
 	
 	private static final String UNIV_GAME_DATA_PATH = "data/UniversalGameData/";
 	private static final String GAME_STATE_DATA_PATH = "data/GameStateData/";
+	private static final String LEVEL_TEMPLATE_DATA_PATH = "data/LevelTemplates/";
+	
 	private XMLWriter myXMLWriter;
 	private XMLReader myXMLReader;
 	private BankController bankController;
@@ -75,5 +77,10 @@ public class DataController {
 	public Map<String,List<String>> loadGamesMapData() throws XMLReadingException{
 		Map<String, List<String>> gamesMap = myXMLReader.loadGamesMap(UNIV_GAME_DATA_PATH);
 		return gamesMap;
+	}
+
+	public void saveLevelTemplate(GameData gameData, String myLevelName)
+	{
+	
 	}
 }

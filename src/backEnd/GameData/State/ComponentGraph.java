@@ -72,4 +72,6 @@ public interface ComponentGraph {
 
 	void setObservers();
 
+	void clearComponents();
+
 }

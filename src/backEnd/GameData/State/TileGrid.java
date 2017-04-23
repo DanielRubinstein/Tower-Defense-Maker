@@ -72,5 +72,9 @@ public interface TileGrid{
 
 	TileGridInstantiator getInstantiator();
 
+	void setWidth(int numColsInGrid);
+
+	void setHeight(int numRowsInGrid);
+
 
 }
