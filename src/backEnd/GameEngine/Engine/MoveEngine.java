@@ -29,6 +29,8 @@ public class MoveEngine implements Engine{
 	 * @param yStart the starting y-coordinate
 	 */
 	@Override
+	
+	
 	public void gameLoop(GameData gameData, double stepTime) {
 		myState=gameData.getState();
 		List<Component> toRemove=new ArrayList<Component>();
@@ -47,8 +49,7 @@ public class MoveEngine implements Engine{
 				mb.execute(currentTile);
 				Point2D newPosition=mb.getPosition();
 				if (newPosition!=null&&!newPosition.equals(currentLocation)){
-					toAdd.put(c, newPosition);
-					toRemove.add(c);
+					c.setAttributeValue("Position", newPosition);
 				}
 			} catch (FileNotFoundException e) {
 				ErrorDialog fnf = new ErrorDialog();
@@ -56,14 +57,6 @@ public class MoveEngine implements Engine{
 				break;
 			}
 		}
-
-		for (Component toDelete: toRemove){
-			gameData.getState().getComponentGraph().removeComponent(toDelete);
-		}
-		for (Component c: toAdd.keySet()){
-			gameData.getState().getComponentGraph().addComponentToGrid(c, toAdd.get(c));
-		}
-
 		return;
 	}
 }
