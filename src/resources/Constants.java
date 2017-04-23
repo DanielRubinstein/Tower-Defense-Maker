@@ -25,7 +25,7 @@ public class Constants {
 	
 	//screen setup constants
 	public static final double WINDOW_HEIGHT = 650d;
-	public static final double WINDOW_WIDTH = 750d;
+	public static final double WINDOW_WIDTH = 850d;
 	private static final double SCREEN_GRID_HEIGHT_FACTOR = 0.7;
 	private static final double SCREEN_GRID_WIDTH_FACTOR = 0.8;
 	public static final double SCREEN_GRID_PADDING = 50;
