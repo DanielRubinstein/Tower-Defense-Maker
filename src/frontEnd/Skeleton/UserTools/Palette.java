@@ -146,26 +146,19 @@ public class Palette<T extends AttributeOwner> implements SkeletonObject, Observ
 		screenGrid.setOnDragDropped(e -> {
 			String presetName = e.getDragboard().getString();
 			AttributeOwner presetAO = observedBankController.getPreset(presetName);
-			Point2D pos = new Point2D(e.getSceneX() - Constants.SCREEN_GRID_PADDING + 40 ,e.getSceneY() - Constants.SCREEN_GRID_PADDING - 10);
+			Double offsetX;
+			Double offsetY;
+			// TODO holy shit, how do we get rid of these magic numbers
+			if(myView.getBooleanAuthorModeProperty().get()){
+				offsetX = 40d;
+				offsetY = -10d; 
+			} else {
+				offsetX = 12.5d;
+				offsetY = 12.5d; 
+			}
+			Point2D pos = new Point2D(e.getSceneX() - Constants.SCREEN_GRID_PADDING + offsetX ,e.getSceneY() - Constants.SCREEN_GRID_PADDING + offsetY);
 			myView.sendUserModification(new Modification_AddPresetAttributeOwnerToGrid(presetAO, pos));
 		});
-		//SomehowGetAccessToTheMOFUKINSpawnQueue
-//		Node singleSpawnTimeline = myView.getScreenGrid();
-//		singleSpawnTimeline.setOnDragOver(e -> e.acceptTransferModes(TransferMode.ANY));
-//		singleSpawnTimeline.setOnDragDropped(e -> {
-//			String presetName = e.getDragboard().getString();
-//			AttributeOwner presetAO = observedBankController.getPreset(presetName);
-//			Point2D pos = new Point2D(e.getSceneX() - Constants.SCREEN_GRID_PADDING /2 ,e.getSceneY() - Constants.SCREEN_GRID_PADDING /2 );
-//			myView.sendUserModification(new Modification_AddPresetAttributeOwnerToGrid(presetAO, pos));
-//		});
-//		Node freqSpawnTimeline = null;
-//		freqSpawnTimeline.setOnDragOver(e -> e.acceptTransferModes(TransferMode.ANY));
-//		freqSpawnTimeline.setOnDragDropped(e -> {
-//			String presetName = e.getDragboard().getString();
-//			AttributeOwner presetAO = observedBankController.getPreset(presetName);
-//			Point2D pos = new Point2D(e.getSceneX() - Constants.SCREEN_GRID_PADDING /2 ,e.getSceneY() - Constants.SCREEN_GRID_PADDING /2 );
-//			myView.sendUserModification(new Modification_AddSpawner(presetName, null, 0, false));
-//		});
 	}
 
 	private ImageView createNewPresetButton() {
