@@ -21,11 +21,13 @@ public class ModeImpl implements ModeReader, Mode{
 	private SimpleBooleanProperty aBP;
 	private List<String> userModes;
 	private List<Observer> observers;
+	private LevelProgressionControllerReader levelProgression;
 	
 	public ModeImpl(String userMode, String gameMode, String levelMode, LevelProgressionControllerReader levelProgression){
 		this.currGameMode = gameMode;
 		this.currUserMode = userMode;
 		this.currLevelMode = levelMode;
+		this.levelProgression = levelProgression;
 		this.userModes = Arrays.asList("AUTHOR", "PLAYER");
 		this.observers = new ArrayList<Observer>();
 		aBP = new SimpleBooleanProperty(this.getUserMode().equals("AUTHOR"));
@@ -50,6 +52,7 @@ public class ModeImpl implements ModeReader, Mode{
 	@Override
 	public void setGameMode(String newGameMode){
 		currGameMode = newGameMode;
+		currLevelMode = "DEFAULT";
 		notifyObservers();
 	}
 	
@@ -78,6 +81,12 @@ public class ModeImpl implements ModeReader, Mode{
 	@Override
 	public void setLevelMode(String newLevelMode) {
 		currLevelMode = newLevelMode;
+		for (String gameName : levelProgression.getGameList()){
+			if (levelProgression.getLevelList(gameName).contains(newLevelMode)){
+				currGameMode = gameName;
+				break;
+			}
+		}
 		notifyObservers();
 	}
 

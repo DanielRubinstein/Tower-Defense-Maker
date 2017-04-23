@@ -210,11 +210,11 @@ public class Palette<T extends AttributeOwner> implements SkeletonObject, Observ
 	public void update(Observable o, Object arg) {
 		switch (myType) {
 		case "Tiles":
-			myPresetMapBackEnd = (Map<String, T>) observedBankController.getTileMap();
+			myPresetMapBackEnd = (Map<String, T>) observedBankController.getAccessibleTileMap();
 			updatePalette();
 			break;
 		case "Components":
-			myPresetMapBackEnd = (Map<String, T>) observedBankController.getComponentMap();
+			myPresetMapBackEnd = (Map<String, T>) observedBankController.getAccessibleComponentMap();
 			updatePalette();
 			break;
 		}
