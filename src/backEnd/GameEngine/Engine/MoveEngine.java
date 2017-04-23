@@ -56,12 +56,14 @@ public class MoveEngine implements Engine{
 				break;
 			}
 		}
+
 		for (Component toDelete: toRemove){
 			gameData.getState().getComponentGraph().removeComponent(toDelete);
 		}
 		for (Component c: toAdd.keySet()){
 			gameData.getState().getComponentGraph().addComponentToGrid(c, toAdd.get(c));
 		}
+
 		return;
 	}
 }

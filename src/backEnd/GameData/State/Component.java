@@ -174,4 +174,4 @@ public class Component extends Observable implements AttributeOwner {
 		this.observers = observers;
 	}
 	
-}
+}
