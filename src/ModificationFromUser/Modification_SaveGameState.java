@@ -22,8 +22,6 @@ public class Modification_SaveGameState implements ModificationFromUser {
 	@Override
 	public void invoke(ModelImpl myModel) throws Exception {
 		
-		
-		/*
 		switch(myModel.getMode().getUserMode())
 		{
 		case "PLAYER":
@@ -32,9 +30,6 @@ public class Modification_SaveGameState implements ModificationFromUser {
 		case "AUTHOR":
 			myModel.getDataController().saveLevelTemplate(myModel.getGameData(), myLevelName);
 		}
-		*/
-		
-		myModel.getDataController().saveCurrentGameStateData(myModel.getGameData(), myLevelName);
 	}
 
 	private String getSaveGameName() {

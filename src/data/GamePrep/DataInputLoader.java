@@ -29,6 +29,11 @@ public class DataInputLoader {
 	public DataInputLoader(String s) throws XMLReadingException{
 		myGameData = generateGameData(s);
 	}
+	
+	public DataInputLoader(String s, String path)
+	{
+		myGameData = generateGameData(s, path);
+	}
 
 	public DataInputLoader(StartingInput input) throws XMLReadingException{
 		myGameData = generateGameData(input);
@@ -45,9 +50,15 @@ public class DataInputLoader {
 		return myGameData;	
 	}
 	
-	private GameData generateGameData(String levelName){
+	private GameData generateGameData(String levelName)
+	{
+		return generateGameData(levelName, TEMPLATE_DATA_PATH);
+	}
+	
+	private GameData generateGameData(String levelName, String dataPath)
+	{
 		try{
-			return myXMLReader.loadGameStateData(GAME_STATE_DATA_PATH, levelName);
+			return myXMLReader.loadGameStateData(dataPath, levelName);
 		}catch(Exception e){
 			//throw new XMLReadingException();
 			e.printStackTrace();
