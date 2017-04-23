@@ -21,7 +21,8 @@ import data.XMLReadingException;
  */
 public class DataInputLoader {
 	private GameData myGameData;
-	private static final String GAME_STATE_DATA_PATH = "data/GameStateData/";
+	private static final String GAME_STATE_DATA_PATH = "data/SavedGames/";
+	private static final String TEMPLATE_DATA_PATH = "data/LevelTemplates/";
 	private XMLReader myXMLReader = new XMLReaderImpl();
 	
 	
