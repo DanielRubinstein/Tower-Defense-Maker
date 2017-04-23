@@ -22,4 +22,8 @@ public interface LevelProgressionControllerEditor {
 
 	void addLevelToGame(String gameName, String level);
 
+	void removeGame(String gameName);
+
+	void removeLevelFromGame(String gameName, String level);
+
 }
