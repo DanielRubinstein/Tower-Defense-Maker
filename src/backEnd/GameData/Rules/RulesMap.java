@@ -15,8 +15,7 @@ public class RulesMap {
 	private Map<String, Rule> myRules = new HashMap<String, Rule>();
 
 	public RulesMap() {
-		// FIXME add rules and make sure rules store Key, default val, DisplayString
-		//myRules.put(key, value);
+		// FIXME make sure rules store KeyName, default val, DisplayString, max and min values
 		addPresetRules();
 		
 	}
