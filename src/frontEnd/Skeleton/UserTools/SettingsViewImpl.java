@@ -62,6 +62,11 @@ public class SettingsViewImpl implements SettingsView{
 		Node ruleButtons = createRulesButtons();
 		myMenu.addNode(ruleButtons);
 		
+		myMenu.addSimpleButtonWithHover("Game Structure", () -> {
+			LevelView gameStructure = new LevelView(myView, myStage);
+			gameStructure.launch();
+			
+		}, "See Structure");
 		//adding player/godmode switch
 		Runnable changeMode = () -> myView.sendUserModification(new Modification_ChangeMode());
 		ToggleSwitch modeToggle = new ToggleSwitch("Player", "Author", myView.getBooleanAuthorModeProperty(), changeMode);
