@@ -40,15 +40,13 @@ public class ProjectileEngine implements Engine {
 					performProjectileAction(c, targets);
 
 					toRemove.add(c);
-					//gameData.getState().getComponentGraph().removeComponent(c);  reached
-																	// destination,
-																	// will cause ConcModException probably
 					continue;
 				}
 				//c.setAttributeValue("Position", newPos);
 			}
 		}
 		for(Component c:toRemove){
+			System.out.println("Removing component at location" + c.getAttribute("Position").getValue());
 			gameData.getState().getComponentGraph().removeComponent(c);
 		}
 
@@ -85,7 +83,7 @@ public class ProjectileEngine implements Engine {
 	private void performProjectileAction(Component projectile, List<Component> targetList) {
 
 			for (Component target : targetList) {
-				System.out.println(targetList.size());
+				System.out.println("Target is " + target);
 				System.out.println(target.getAttribute("Target health is " + target.getAttribute("Health").getValue()));
 				target.setAttributeValue("Health", (Integer)target.getAttribute("Health").getValue() - (Integer) projectile.getAttribute("ProjectileDamage").getValue());
 				target.setAttributeValue("Velocity", ((Double) projectile.getAttribute("SlowFactor").getValue()
