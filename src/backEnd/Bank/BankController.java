@@ -1,11 +1,12 @@
 package backEnd.Bank;
 
 import java.io.FileNotFoundException;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Observable;
+import java.util.Observer;
 
 import javax.swing.JOptionPane;
 
@@ -22,7 +23,7 @@ import backEnd.GameData.State.Tile;
 import backEnd.GameData.State.TileImpl;
 import backEnd.GameEngine.Behaviors.Behavior;
 
-public class BankController extends Observable
+public class BankController
 {
 	private static final String DUPLICATE_NAME_ERROR = "Cannot Add Duplicate Name";
 	private Map<String, Tile> tileBank;
@@ -31,6 +32,7 @@ public class BankController extends Observable
 	private RuleBank myRuleBank;
 	private AttributeBank myAttributeBank;
 	private Mode myMode;
+	private List<Observer> observers;
 	
 	public BankController(Mode myMode)
 	{
@@ -42,10 +44,10 @@ public class BankController extends Observable
 		this.tileBank = tileBank;
 		this.componentBank = componentBank;
 		this.myMode = myMode;
-		myBehaviorBank = new BehaviorBank();
-		myRuleBank = new RuleBank();
-		myAttributeBank = new AttributeBank();
-		
+		this.myBehaviorBank = new BehaviorBank();
+		this.myRuleBank = new RuleBank();
+		this.myAttributeBank = new AttributeBank();
+		this.observers = new ArrayList<Observer>();
 		createTemplatesForTesting();
 	}
 	
@@ -91,15 +93,13 @@ public class BankController extends Observable
 		}
 		else{
 			tileBank.put(name, tile);
-			this.setChanged();
-			this.notifyObservers();
+			notifyObservers();
 		}
 	}
 
 	public void removeTile(String name)
 	{
-		this.setChanged();
-		this.notifyObservers();
+		notifyObservers();
 	}
 	
 	public Map<String, Tile> getAccessibleTileMap()
@@ -148,16 +148,14 @@ public class BankController extends Observable
 		}
 		else{
 			componentBank.put(name, component);
-			this.setChanged();
-			this.notifyObservers();
+			notifyObservers();
 		}
 	}
 
 	public void removeComponent(String name)
 	{
 		componentBank.remove(name);
-		this.setChanged();
-		this.notifyObservers();
+		notifyObservers();
 	}
 	
 	public List<Behavior> getBehaviorList()
@@ -200,6 +198,17 @@ public class BankController extends Observable
 			return tileBank.get(presetName);
 		} else {
 			return null;
+		}
+	}
+	
+	public void addObserver(Observer o){
+		observers.add(o);
+	}
+	
+	private void notifyObservers() {
+		System.out.println("notifying observersssssss1");
+		for(Observer o : observers){
+			o.update(null, null);
 		}
 	}
 }
