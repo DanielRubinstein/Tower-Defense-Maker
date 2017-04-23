@@ -10,7 +10,6 @@ import frontEnd.View;
 import frontEnd.CustomJavafxNodes.SingleFieldPrompt;
 import frontEnd.Skeleton.UserTools.SkeletonObject;
 import javafx.beans.property.ReadOnlyDoubleProperty;
-import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
@@ -18,7 +17,6 @@ import javafx.scene.control.ScrollPane;
 import javafx.scene.control.ScrollPane.ScrollBarPolicy;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.DragEvent;
 import javafx.scene.input.TransferMode;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
@@ -26,10 +24,8 @@ import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
-import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
-import javafx.scene.shape.Rectangle;
 import ModificationFromUser.Spawning.Modification_AddSpawner;
 
 public class SpawnTimelineView implements SkeletonObject {
@@ -65,7 +61,7 @@ public class SpawnTimelineView implements SkeletonObject {
 			Component presetComponent = (Component) myView.getBankController().getPreset(presetName);
 			SingleFieldPrompt hey = new SingleFieldPrompt(
 					Arrays.asList("Add Spawn", "Please input a time for your new spawn item"), "Spawn Time Value",
-					"0.0");
+					"1");
 			long value = Long.parseLong(hey.create());
 			myView.sendUserModification(
 					new Modification_AddSpawner(mySpawnQueueName, presetComponent, value, repeating));
@@ -93,6 +89,8 @@ public class SpawnTimelineView implements SkeletonObject {
 		Label name = new Label();
 		name.setText(myView.getBankController().getAOName(spawn));
 		Label valueText = new Label(Long.toString(value));
+		// TODO Editable value here valueText.setOnClick()
+		// TODO Add an X box to destroy that shit
 		spawnBox.getChildren().add(name);
 		spawnBox.getChildren().add(spawnImage);
 		spawnBox.getChildren().add(valueText);
@@ -106,7 +104,7 @@ public class SpawnTimelineView implements SkeletonObject {
 		ImageView imv = new ImageView();
 		imv.setImage(image);
 		imv.setPreserveRatio(true);
-		imv.setFitHeight(100);
+		imv.setFitHeight(50);
 		return imv;
 	}
 
