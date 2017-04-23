@@ -9,20 +9,39 @@ import javafx.scene.layout.VBox;
 
 public class ModeIndicator implements SkeletonObject{
 	private Label pausedIndicator;
-	private Label modeIndicator;
+	private Label userModeIndicator;
+	private Label gameModeIndicator;
+	private Label levelModeIndicator;
 	private VBox indicatorHolder;
 	private ViewReader myView;
 	private SimpleBooleanProperty authorProperty;
+	private SimpleStringProperty gameProperty;
+	private SimpleStringProperty levelProperty;
 	private SimpleStringProperty runProperty;
 	
 	public ModeIndicator(ViewReader view){
 		myView=view;
 		authorProperty = myView.getBooleanAuthorModeProperty();
-		modeIndicator = new Label();
+		userModeIndicator = new Label();
 		setIndicator(authorProperty.getValue());
 		authorProperty.addListener((ob, oldV, newV) -> {
 			setIndicator(newV);
 		});
+		
+		gameProperty = myView.getStringGameModeProperty();
+		gameModeIndicator = new Label();
+		gameModeIndicator.setText("Game: " + gameProperty.getValue());
+		gameProperty.addListener((ob, oldV, newV) -> {
+			gameModeIndicator.setText(newV);
+		});
+		
+		levelProperty = myView.getStringLevelModeProperty();
+		levelModeIndicator = new Label();
+		levelModeIndicator.setText("Level: " + levelProperty.getValue());
+		levelProperty.addListener((ob, oldV, newV) -> {
+			levelModeIndicator.setText(newV);
+		});
+		
 		runProperty = myView.getRunStatus();
 		pausedIndicator = new Label();
 		pausedIndicator.setText(runProperty.getValue());
@@ -31,17 +50,17 @@ public class ModeIndicator implements SkeletonObject{
 		});
 		
 		indicatorHolder = new VBox();
-		indicatorHolder.getChildren().addAll(pausedIndicator, modeIndicator);
+		indicatorHolder.getChildren().addAll(pausedIndicator, userModeIndicator, gameModeIndicator, levelModeIndicator);
 	}
 	
-
-	
 	private void setIndicator(Boolean newV) {
+		String text = "Mode: ";
 		if(newV){
-			modeIndicator.setText("Author Mode");
+			text += "Author";
 		} else {
-			modeIndicator.setText("Player Mode");
+			text+= "Player";
 		}
+		userModeIndicator.setText(text);
 	}
 
 
