@@ -4,6 +4,7 @@ import java.util.Collection;
 import backEnd.GameData.State.PlayerStatusReader;
 import frontEnd.ViewReader;
 import javafx.beans.property.ReadOnlyDoubleProperty;
+import javafx.geometry.Insets;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
@@ -43,7 +44,15 @@ public class StatusView {
     		});
         	valuesBox.getChildren().add(value);
         }
+        valuesBox.setMinWidth(80);
         valuesBox.setFillWidth(true);
+        globalBox.setSpacing(10);
+        globalBox.setStyle("-fx-padding: 10;" + 
+                "-fx-border-style: solid inside;" + 
+                "-fx-border-width: 2;" +
+                "-fx-border-insets: 5;" + 
+                "-fx-border-radius: 5;" + 
+                "-fx-border-color: red;");
         globalBox.getChildren().add(0, namesBox);
         globalBox.getChildren().add(1, valuesBox);
         myScrollPane.setMinHeight(150);
