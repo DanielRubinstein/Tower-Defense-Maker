@@ -7,7 +7,7 @@ import java.util.Observable;
 import java.util.Observer;
 import java.util.function.Consumer;
 
-import ModificationFromUser.AttributeOwner.Modification_AddPresetAttributeOwnerToGrid;
+import ModificationFromUser.AttributeOwner.Modification_Add_PaletteToGrid;
 import ModificationFromUser.Spawning.Modification_AddSpawner;
 import backEnd.Attribute.AttributeOwner;
 import backEnd.Bank.BankController;
@@ -161,7 +161,7 @@ public class Palette<T extends AttributeOwner> implements SkeletonObject, Observ
 				offsetY = 12.5d; 
 			}
 			Point2D pos = new Point2D(e.getSceneX() - Constants.SCREEN_GRID_PADDING + offsetX ,e.getSceneY() - Constants.SCREEN_GRID_PADDING + offsetY);
-			myView.sendUserModification(new Modification_AddPresetAttributeOwnerToGrid(presetAO, pos));
+			myView.sendUserModification(new Modification_Add_PaletteToGrid(presetAO, pos));
 		});
 	}
 
@@ -210,11 +210,11 @@ public class Palette<T extends AttributeOwner> implements SkeletonObject, Observ
 	public void update(Observable o, Object arg) {
 		switch (myType) {
 		case "Tiles":
-			myPresetMapBackEnd = (Map<String, T>) observedBankController.getTileMap();
+			myPresetMapBackEnd = (Map<String, T>) observedBankController.getAccessibleTileMap();
 			updatePalette();
 			break;
 		case "Components":
-			myPresetMapBackEnd = (Map<String, T>) observedBankController.getComponentMap();
+			myPresetMapBackEnd = (Map<String, T>) observedBankController.getAccessibleComponentMap();
 			updatePalette();
 			break;
 		}
