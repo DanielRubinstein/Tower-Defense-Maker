@@ -6,6 +6,7 @@ import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 
 import backEnd.GameData.GameData;
+import backEnd.GameData.Rules.RulesMap;
 import backEnd.GameData.State.PlayerStatus;
 import backEnd.GameData.State.StateImpl;
 import backEnd.GameEngine.EngineStatus;
@@ -20,7 +21,8 @@ import data.XMLReadingException;
  */
 public class DataInputLoader {
 	private GameData myGameData;
-	private static final String GAME_STATE_DATA_PATH = "data/GameStateData/";
+	private static final String GAME_STATE_DATA_PATH = "data/SavedGames/";
+	private static final String TEMPLATE_DATA_PATH = "data/LevelTemplates/";
 	private XMLReader myXMLReader = new XMLReaderImpl();
 	
 	
@@ -64,7 +66,7 @@ public class DataInputLoader {
 	
 	private GameData createGameData(StartingInput startingInputs) throws FileNotFoundException {
 		StateImpl state = new StateImpl(startingInputs.getNumCols(), startingInputs.getNumRows());
-		GameData gameData = new GameData(state, new PlayerStatus() , null);
+		GameData gameData = new GameData(state, new PlayerStatus() , new RulesMap());
 		return gameData;
 	}
 	

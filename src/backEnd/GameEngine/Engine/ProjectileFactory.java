@@ -33,7 +33,7 @@ public class ProjectileFactory {
 		Attribute<Integer> projectileDamage = (Attribute<Integer>) myAttributeFactory.getAttribute(("FireDamage"));
 		Attribute<Double> projectileVelocity = (Attribute<Double>) myAttributeFactory.getAttribute(("Velocity"));
 		Attribute<Double> projectileMaxDist = (Attribute<Double>) myAttributeFactory.getAttribute(("ProjectileMaxDistance"));
-		Attribute<Double> projectileTraveled = (Attribute<Double>) myAttributeFactory.getAttribute(("ProjectileTraveled"));		
+		Attribute<Double> projectileTraveled = (Attribute<Double>) myAttributeFactory.getAttribute(("ProjectileTraveled"));
 		Attribute<Double> explosionSize = (Attribute<Double>) myAttributeFactory.getAttribute(("ExplosionRadius"));
 		Attribute<Double> slowFactor = (Attribute<Double>) myAttributeFactory.getAttribute(("SlowFactor"));
 		Attribute<Double> fireRate = (Attribute<Double>) myAttributeFactory.getAttribute(("FireRate"));

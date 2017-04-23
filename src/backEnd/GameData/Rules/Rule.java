@@ -2,7 +2,7 @@ package backEnd.GameData.Rules;
 
 import backEnd.GameData.GameData;
 
-public abstract class Rule {
+public abstract class Rule{
 
 	private double myVal;
 	private boolean enabled = false;
@@ -15,6 +15,7 @@ public abstract class Rule {
 		myVal = newVal;
 	}
 
+	
 	public double getVal() {
 		return myVal;
 	}
@@ -22,7 +23,7 @@ public abstract class Rule {
 	public void toggle() {
 		enabled = !enabled;
 	}
-
+	
 	public boolean isEnabled() {
 		return enabled;
 	}

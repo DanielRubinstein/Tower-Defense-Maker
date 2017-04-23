@@ -26,5 +26,9 @@ public interface ViewReader {
 	LevelProgressionControllerReader getLevelProgressionController();
 	
 	PlayerStatusReader getPlayerStatus();
+
+	SimpleStringProperty getStringGameModeProperty();
+
+	SimpleStringProperty getStringLevelModeProperty();
 	
 }
