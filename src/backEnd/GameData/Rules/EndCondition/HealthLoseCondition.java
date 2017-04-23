@@ -3,11 +3,15 @@ package backEnd.GameData.Rules.EndCondition;
 import backEnd.GameData.GameData;
 
 public class HealthLoseCondition extends LoseCondition {
-	
-	private static final double DEFAULT_HEALTH = 100;
+
+	private static final double DEFAULT_HEALTH = 0;
+	private static final double MAX_HEALTH = 100;
+	private static final double MIN_HEALTH = 0;
+	private static final String KEY_NAME = "Health";
+	private static final String DISPLAY_STRING = "Set player health value that triggers loss of game";
 	
 	public HealthLoseCondition() {
-		super(DEFAULT_HEALTH);
+		super(DEFAULT_HEALTH, MIN_HEALTH, MAX_HEALTH, KEY_NAME, DISPLAY_STRING);
 	}
 
 	@Override
