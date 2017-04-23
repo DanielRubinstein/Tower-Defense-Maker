@@ -12,6 +12,7 @@ import backEnd.GameData.State.PlayerStatusReader;
 import backEnd.GameData.State.State;
 import backEnd.GameEngine.EngineStatus;
 import backEnd.GameEngine.Engine.GameProcessController;
+import backEnd.LevelProgression.LevelProgressionControllerEditor;
 import backEnd.LevelProgression.LevelProgressionControllerImpl;
 import backEnd.LevelProgression.LevelProgressionControllerReader;
 import backEnd.Mode.Mode;
@@ -96,7 +97,7 @@ public class ModelImpl implements Model{
 	}
 
 		
-	public LevelProgressionControllerReader getLevelProgressionController() {
-		return (LevelProgressionControllerReader) myLevelProgressionController;
+	public LevelProgressionControllerEditor getLevelProgressionController() {
+		return  myLevelProgressionController;
 	}
 }
