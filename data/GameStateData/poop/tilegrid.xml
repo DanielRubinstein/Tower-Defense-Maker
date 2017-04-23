@@ -1332,172 +1332,6 @@
     </entry>
     <entry>
       <javafx.geometry.Point2D>
-        <x>3.0</x>
-        <y>3.0</y>
-        <hash>16783943</hash>
-      </javafx.geometry.Point2D>
-      <backEnd.GameData.State.TileImpl>
-        <changed>false</changed>
-        <obs/>
-        <myAccessPerm class="backEnd.GameData.State.AccessPermissionsImpl">
-          <userModePermissions>
-            <string>AUTHOR</string>
-          </userModePermissions>
-          <gameModePermissions>
-            <string>DEFAULT</string>
-          </gameModePermissions>
-          <levelModePermissions>
-            <string>DEFAULT</string>
-          </levelModePermissions>
-        </myAccessPerm>
-        <myAttrData>
-          <changed>false</changed>
-          <obs/>
-          <myAttributes>
-            <entry>
-              <string>ImageFile</string>
-              <backEnd.Attribute.AttributeImpl>
-                <myValue class="string">resources/images/Tiles/default_tile.jpg</myValue>
-                <myName>ImageFile</myName>
-              </backEnd.Attribute.AttributeImpl>
-            </entry>
-            <entry>
-              <string>Position</string>
-              <backEnd.Attribute.AttributeImpl>
-                <myValue class="javafx.geometry.Point2D">
-                  <x>3.0</x>
-                  <y>3.0</y>
-                  <hash>0</hash>
-                </myValue>
-                <myName>Position</myName>
-              </backEnd.Attribute.AttributeImpl>
-            </entry>
-            <entry>
-              <string>StartTile</string>
-              <backEnd.Attribute.AttributeImpl>
-                <myValue class="boolean">false</myValue>
-                <myName>StartTile</myName>
-              </backEnd.Attribute.AttributeImpl>
-            </entry>
-            <entry>
-              <string>GoalTile</string>
-              <backEnd.Attribute.AttributeImpl>
-                <myValue class="boolean">false</myValue>
-                <myName>GoalTile</myName>
-              </backEnd.Attribute.AttributeImpl>
-            </entry>
-            <entry>
-              <string>MoveDirection</string>
-              <backEnd.Attribute.AttributeImpl>
-                <myValue class="string"></myValue>
-                <myParamList class="java.util.Arrays$ArrayList">
-                  <a class="string-array">
-                    <string>Up</string>
-                    <string>Down</string>
-                    <string>Left</string>
-                    <string>Right</string>
-                  </a>
-                </myParamList>
-                <myName>MoveDirection</myName>
-              </backEnd.Attribute.AttributeImpl>
-            </entry>
-            <entry>
-              <string>Buildable</string>
-              <backEnd.Attribute.AttributeImpl>
-                <myValue class="boolean">false</myValue>
-                <myName>Buildable</myName>
-              </backEnd.Attribute.AttributeImpl>
-            </entry>
-          </myAttributes>
-        </myAttrData>
-        <observers/>
-      </backEnd.GameData.State.TileImpl>
-    </entry>
-    <entry>
-      <javafx.geometry.Point2D>
-        <x>2.0</x>
-        <y>2.0</y>
-        <hash>6727</hash>
-      </javafx.geometry.Point2D>
-      <backEnd.GameData.State.TileImpl>
-        <changed>false</changed>
-        <obs/>
-        <myAccessPerm class="backEnd.GameData.State.AccessPermissionsImpl">
-          <userModePermissions>
-            <string>AUTHOR</string>
-          </userModePermissions>
-          <gameModePermissions>
-            <string>DEFAULT</string>
-          </gameModePermissions>
-          <levelModePermissions>
-            <string>DEFAULT</string>
-          </levelModePermissions>
-        </myAccessPerm>
-        <myAttrData>
-          <changed>false</changed>
-          <obs/>
-          <myAttributes>
-            <entry>
-              <string>ImageFile</string>
-              <backEnd.Attribute.AttributeImpl>
-                <myValue class="string">resources/images/Tiles/default_tile.jpg</myValue>
-                <myName>ImageFile</myName>
-              </backEnd.Attribute.AttributeImpl>
-            </entry>
-            <entry>
-              <string>Position</string>
-              <backEnd.Attribute.AttributeImpl>
-                <myValue class="javafx.geometry.Point2D">
-                  <x>2.0</x>
-                  <y>2.0</y>
-                  <hash>0</hash>
-                </myValue>
-                <myName>Position</myName>
-              </backEnd.Attribute.AttributeImpl>
-            </entry>
-            <entry>
-              <string>StartTile</string>
-              <backEnd.Attribute.AttributeImpl>
-                <myValue class="boolean">false</myValue>
-                <myName>StartTile</myName>
-              </backEnd.Attribute.AttributeImpl>
-            </entry>
-            <entry>
-              <string>GoalTile</string>
-              <backEnd.Attribute.AttributeImpl>
-                <myValue class="boolean">false</myValue>
-                <myName>GoalTile</myName>
-              </backEnd.Attribute.AttributeImpl>
-            </entry>
-            <entry>
-              <string>MoveDirection</string>
-              <backEnd.Attribute.AttributeImpl>
-                <myValue class="string"></myValue>
-                <myParamList class="java.util.Arrays$ArrayList">
-                  <a class="string-array">
-                    <string>Up</string>
-                    <string>Down</string>
-                    <string>Left</string>
-                    <string>Right</string>
-                  </a>
-                </myParamList>
-                <myName>MoveDirection</myName>
-              </backEnd.Attribute.AttributeImpl>
-            </entry>
-            <entry>
-              <string>Buildable</string>
-              <backEnd.Attribute.AttributeImpl>
-                <myValue class="boolean">false</myValue>
-                <myName>Buildable</myName>
-              </backEnd.Attribute.AttributeImpl>
-            </entry>
-          </myAttributes>
-        </myAttrData>
-        <observers/>
-      </backEnd.GameData.State.TileImpl>
-    </entry>
-    <entry>
-      <javafx.geometry.Point2D>
         <x>0.0</x>
         <y>0.0</y>
         <hash>6727</hash>
@@ -1865,6 +1699,172 @@
                 <myValue class="javafx.geometry.Point2D">
                   <x>8.0</x>
                   <y>8.0</y>
+                  <hash>0</hash>
+                </myValue>
+                <myName>Position</myName>
+              </backEnd.Attribute.AttributeImpl>
+            </entry>
+            <entry>
+              <string>StartTile</string>
+              <backEnd.Attribute.AttributeImpl>
+                <myValue class="boolean">false</myValue>
+                <myName>StartTile</myName>
+              </backEnd.Attribute.AttributeImpl>
+            </entry>
+            <entry>
+              <string>GoalTile</string>
+              <backEnd.Attribute.AttributeImpl>
+                <myValue class="boolean">false</myValue>
+                <myName>GoalTile</myName>
+              </backEnd.Attribute.AttributeImpl>
+            </entry>
+            <entry>
+              <string>MoveDirection</string>
+              <backEnd.Attribute.AttributeImpl>
+                <myValue class="string"></myValue>
+                <myParamList class="java.util.Arrays$ArrayList">
+                  <a class="string-array">
+                    <string>Up</string>
+                    <string>Down</string>
+                    <string>Left</string>
+                    <string>Right</string>
+                  </a>
+                </myParamList>
+                <myName>MoveDirection</myName>
+              </backEnd.Attribute.AttributeImpl>
+            </entry>
+            <entry>
+              <string>Buildable</string>
+              <backEnd.Attribute.AttributeImpl>
+                <myValue class="boolean">false</myValue>
+                <myName>Buildable</myName>
+              </backEnd.Attribute.AttributeImpl>
+            </entry>
+          </myAttributes>
+        </myAttrData>
+        <observers/>
+      </backEnd.GameData.State.TileImpl>
+    </entry>
+    <entry>
+      <javafx.geometry.Point2D>
+        <x>2.0</x>
+        <y>2.0</y>
+        <hash>6727</hash>
+      </javafx.geometry.Point2D>
+      <backEnd.GameData.State.TileImpl>
+        <changed>false</changed>
+        <obs/>
+        <myAccessPerm class="backEnd.GameData.State.AccessPermissionsImpl">
+          <userModePermissions>
+            <string>AUTHOR</string>
+          </userModePermissions>
+          <gameModePermissions>
+            <string>DEFAULT</string>
+          </gameModePermissions>
+          <levelModePermissions>
+            <string>DEFAULT</string>
+          </levelModePermissions>
+        </myAccessPerm>
+        <myAttrData>
+          <changed>false</changed>
+          <obs/>
+          <myAttributes>
+            <entry>
+              <string>ImageFile</string>
+              <backEnd.Attribute.AttributeImpl>
+                <myValue class="string">resources/images/Tiles/default_tile.jpg</myValue>
+                <myName>ImageFile</myName>
+              </backEnd.Attribute.AttributeImpl>
+            </entry>
+            <entry>
+              <string>Position</string>
+              <backEnd.Attribute.AttributeImpl>
+                <myValue class="javafx.geometry.Point2D">
+                  <x>2.0</x>
+                  <y>2.0</y>
+                  <hash>0</hash>
+                </myValue>
+                <myName>Position</myName>
+              </backEnd.Attribute.AttributeImpl>
+            </entry>
+            <entry>
+              <string>StartTile</string>
+              <backEnd.Attribute.AttributeImpl>
+                <myValue class="boolean">false</myValue>
+                <myName>StartTile</myName>
+              </backEnd.Attribute.AttributeImpl>
+            </entry>
+            <entry>
+              <string>GoalTile</string>
+              <backEnd.Attribute.AttributeImpl>
+                <myValue class="boolean">false</myValue>
+                <myName>GoalTile</myName>
+              </backEnd.Attribute.AttributeImpl>
+            </entry>
+            <entry>
+              <string>MoveDirection</string>
+              <backEnd.Attribute.AttributeImpl>
+                <myValue class="string"></myValue>
+                <myParamList class="java.util.Arrays$ArrayList">
+                  <a class="string-array">
+                    <string>Up</string>
+                    <string>Down</string>
+                    <string>Left</string>
+                    <string>Right</string>
+                  </a>
+                </myParamList>
+                <myName>MoveDirection</myName>
+              </backEnd.Attribute.AttributeImpl>
+            </entry>
+            <entry>
+              <string>Buildable</string>
+              <backEnd.Attribute.AttributeImpl>
+                <myValue class="boolean">false</myValue>
+                <myName>Buildable</myName>
+              </backEnd.Attribute.AttributeImpl>
+            </entry>
+          </myAttributes>
+        </myAttrData>
+        <observers/>
+      </backEnd.GameData.State.TileImpl>
+    </entry>
+    <entry>
+      <javafx.geometry.Point2D>
+        <x>3.0</x>
+        <y>3.0</y>
+        <hash>16783943</hash>
+      </javafx.geometry.Point2D>
+      <backEnd.GameData.State.TileImpl>
+        <changed>false</changed>
+        <obs/>
+        <myAccessPerm class="backEnd.GameData.State.AccessPermissionsImpl">
+          <userModePermissions>
+            <string>AUTHOR</string>
+          </userModePermissions>
+          <gameModePermissions>
+            <string>DEFAULT</string>
+          </gameModePermissions>
+          <levelModePermissions>
+            <string>DEFAULT</string>
+          </levelModePermissions>
+        </myAccessPerm>
+        <myAttrData>
+          <changed>false</changed>
+          <obs/>
+          <myAttributes>
+            <entry>
+              <string>ImageFile</string>
+              <backEnd.Attribute.AttributeImpl>
+                <myValue class="string">resources/images/Tiles/default_tile.jpg</myValue>
+                <myName>ImageFile</myName>
+              </backEnd.Attribute.AttributeImpl>
+            </entry>
+            <entry>
+              <string>Position</string>
+              <backEnd.Attribute.AttributeImpl>
+                <myValue class="javafx.geometry.Point2D">
+                  <x>3.0</x>
+                  <y>3.0</y>
                   <hash>0</hash>
                 </myValue>
                 <myName>Position</myName>

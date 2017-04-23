@@ -92,7 +92,7 @@ public class BankController extends Observable
 		this.notifyObservers();
 	}
 	
-	public Map<String, Tile> getTileMap()
+	public Map<String, Tile> getAccessibleTileMap()
 	{
 		Map<String, Tile> subMap = new HashMap<String,Tile>();
 		
@@ -107,7 +107,7 @@ public class BankController extends Observable
 		return subMap;
 	}
 	
-	public Map<String, Component> getComponentMap()
+	public Map<String, Component> getAccessibleComponentMap()
 	{
 		Map<String, Component> subMap = new HashMap<String,Component>();
 		
@@ -120,6 +120,15 @@ public class BankController extends Observable
 		}
 		
 		return subMap;
+	}
+	public Map<String, Component> getComponentMap()
+	{
+		return componentBank;
+	}
+	
+	public Map<String, Tile> getTileMap()
+	{
+		return tileBank;
 	}
 	
 	public void addNewComponent (String name, Component component)
