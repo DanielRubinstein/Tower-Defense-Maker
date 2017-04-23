@@ -77,7 +77,7 @@ public class AccessPermissionsViewer implements SkeletonObject {
 				opts = myView.getLevelProgressionController().getFullLevelList();
 				*/
 				subBody.getChildren()
-						.add(createGameLevelDropDown(subBody, myView.getLevelProgressionController().getGameList()));
+						.add(createGameLevelDropDown(subBody, myView.getLevelProgressionController().getFullLevelList()));
 			}
 
 			addCheckBoxes(subBody, opts);

@@ -13,6 +13,7 @@ import backEnd.Attribute.AttributeOwner;
 import backEnd.Bank.BankController;
 import backEnd.GameData.State.Component;
 import backEnd.GameData.State.TileImpl;
+import backEnd.Mode.ModeReader;
 import frontEnd.View;
 import frontEnd.Skeleton.AoTools.GenericCommandCenter;
 import javafx.geometry.Bounds;
@@ -47,6 +48,7 @@ public class Palette<T extends AttributeOwner> implements SkeletonObject, Observ
 	private Map<ImageView, T> myPresetMapFrontEnd;
 	private String myType;
 	private BankController observedBankController;
+	private ModeReader observedMode;
 	private ImageView addPreset;
 
 	public Palette(View view, Map<String, T> presetMap, String string) {
@@ -64,6 +66,8 @@ public class Palette<T extends AttributeOwner> implements SkeletonObject, Observ
 	private void initializeMaps(Map<String, T> presetMap) {
 		observedBankController = myView.getBankController();
 		observedBankController.addObserver(this);
+		observedMode = myView.getModeReader();
+		observedMode.addObserver(this);
 		myPresetMapBackEnd = presetMap;
 		myPresetMapFrontEnd = new HashMap<ImageView, T>();
 	}
@@ -204,17 +208,15 @@ public class Palette<T extends AttributeOwner> implements SkeletonObject, Observ
 
 	@Override
 	public void update(Observable o, Object arg) {
-		if (o == observedBankController) {
-			switch (myType) {
-			case "Tiles":
-				myPresetMapBackEnd = (Map<String, T>) observedBankController.getTileMap();
-				updatePalette();
-				break;
-			case "Components":
-				myPresetMapBackEnd = (Map<String, T>) observedBankController.getComponentMap();
-				updatePalette();
-				break;
-			}
+		switch (myType) {
+		case "Tiles":
+			myPresetMapBackEnd = (Map<String, T>) observedBankController.getTileMap();
+			updatePalette();
+			break;
+		case "Components":
+			myPresetMapBackEnd = (Map<String, T>) observedBankController.getComponentMap();
+			updatePalette();
+			break;
 		}
 	}
 
