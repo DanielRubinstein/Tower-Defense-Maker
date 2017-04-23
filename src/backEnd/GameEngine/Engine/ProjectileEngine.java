@@ -23,11 +23,12 @@ public class ProjectileEngine implements Engine {
 	public void gameLoop(GameData gameData, double stepTime) {
 		System.out.println("ProjectileEngine called");
 		
+		List<Component> toRemove=new ArrayList<Component>();
 		for (Component c : gameData.getState().getComponentGraph().getAllComponents()) {
 			if (((String) c.getAttribute("Type").getValue()).equals("Projectile")) {
 				//System.out.println("Calculating projectile position");
 
-				Point2D newPos = calculateNewPos(c);
+				calculateNewPos(c);
 				System.out.println("projectileTraveled is " + c.getAttribute("ProjectileTraveled").getValue());
 				System.out.println("projectileMaxDist is " + c.getAttribute("ProjectileMaxDistance").getValue());
 				
@@ -38,18 +39,22 @@ public class ProjectileEngine implements Engine {
 					System.out.println("About to perform projectile action");
 					performProjectileAction(c, targets);
 
-					gameData.getState().getComponentGraph().removeComponent(c); // reached
+					toRemove.add(c);
+					//gameData.getState().getComponentGraph().removeComponent(c);  reached
 																	// destination,
 																	// will cause ConcModException probably
 					continue;
 				}
-				c.setAttributeValue("Position", newPos);
+				//c.setAttributeValue("Position", newPos);
 			}
+		}
+		for(Component c:toRemove){
+			gameData.getState().getComponentGraph().removeComponent(c);
 		}
 
 	}
 
-	private Point2D calculateNewPos(Component c) {
+	private void calculateNewPos(Component c) {
 		Double curVel = (Double) c.getAttribute(("Velocity")).getValue();
 		
 		Point2D curPos = (Point2D) c.getAttribute(("Position")).getValue();
@@ -62,9 +67,9 @@ public class ProjectileEngine implements Engine {
 		//System.out.println("curPos.get(X) is "+curPos.getX()+" , curPos.get(Y) is "+curPos.getY()+" , curVel is: "+curVel+" ,slope is "+slope);
 		//curPos.add((curVel), curVel * slope);
 		c.setAttributeValue("ProjectileTraveled",((Double) c.getAttribute(("ProjectileTraveled")).getValue()) + distTraveled);
+		c.setAttributeValue("Position", newPos);
 		//System.out.println("Slope is " + slope + "distanceTraveled" + distTraveled);
 		//System.out.println("performed targeting math" + newPos + curPos + targetPos + difference);
-		return newPos;
 
 	}
 

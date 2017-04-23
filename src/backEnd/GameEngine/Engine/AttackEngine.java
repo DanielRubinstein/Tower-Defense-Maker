@@ -29,6 +29,7 @@ public class AttackEngine implements Engine {
 	@Override
 	public void gameLoop(GameData gameData, double stepTime) {
 		masterTime = gameData.getGameTime();
+		//TODO: add firing delay here
 		toAdd = new HashMap<Component, Point2D>();
 		myGameData=gameData;
 		ComponentGraph myComponentGraph = gameData.getState().getComponentGraph();
