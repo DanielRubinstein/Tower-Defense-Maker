@@ -65,10 +65,12 @@ public class TileGridImpl extends Observable implements TileGrid {
 
 	private void checkAgainstBounds(int column, int row) {
 		if (column >= getNumColsInGrid() || row >= getNumRowsInGrid()) {
-			throw new IndexOutOfBoundsException();
+			return;
+			//throw new IndexOutOfBoundsException();
 		}
 		if (column < 0 || row < 0){
-			throw new IndexOutOfBoundsException();
+			return;
+			//throw new IndexOutOfBoundsException();
 		}
 	}
 	

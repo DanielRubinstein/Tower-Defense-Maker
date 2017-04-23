@@ -19,6 +19,7 @@ import backEnd.GameData.State.TileGrid;
 import backEnd.GameData.State.TileGridImpl;
 import backEnd.GameData.State.TileGridInstantiator;
 import backEnd.GameData.Rules.Rule;
+import backEnd.GameData.Rules.RulesMap;
 import backEnd.LevelProgression.LevelProgressionControllerImpl;
 import javafx.geometry.Point2D;
 import backEnd.GameData.State.PlayerStatus;
@@ -54,7 +55,7 @@ public class XMLReaderImpl implements XMLReader{
 		StateImpl state = new StateImpl(grid.getNumRowsInGrid(), grid.getNumColsInGrid(), grid, graph);
 		
 		return new GameData(state, (PlayerStatus) xStream.fromXML(new File(filePath+"/" + levelName+"/playerstatus.xml")),
-				(Map<String, Rule>) xStream.fromXML(new File(filePath+"/" + levelName+"/rules.xml")));
+				new RulesMap((Map<String, Rule>) xStream.fromXML(new File(filePath+"/" + levelName+"/rules.xml"))));
 
 	}
 	

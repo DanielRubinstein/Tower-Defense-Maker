@@ -26,7 +26,8 @@ public class SideBarImpl implements SideBar{
 
 	public void setWidth(double in) {
 		myRoot.setPrefWidth(in);
-		myRoot.setMaxWidth(in);
+		myRoot.setMinWidth(in+20);
+		//myRoot.setMaxWidth(in);
 		//myStatusView.setWidth(in);
 
 	}
