@@ -28,15 +28,15 @@ public class ProjectileEngine implements Engine {
 		List<Component> toRemove=new ArrayList<Component>();
 		for (Component c : gameData.getState().getComponentGraph().getAllComponents()) {
 			if (((String) c.getAttribute("Type").getValue()).equals("Projectile")) {
-				//System.out.println("Calculating projectile position");
-
-				calculateNewPos(c);
-				//System.out.println("projectileTraveled is " + c.getAttribute("ProjectileTraveled").getValue());
-				//System.out.println("projectileMaxDist is " + c.getAttribute("ProjectileMaxDistance").getValue());
-				
+				Point2D newPos=calculateNewPos(c);
+				Tile currentTile = myGameData.getState().getTileGrid().getTileByScreenLocation(newPos);
+				if (currentTile==null){
+					toRemove.add(c);
+					return;
+				}	
 				if ((Double) c.getAttribute("ProjectileTraveled").getValue() >= (Double) c.getAttribute(("ProjectileMaxDistance")).getValue()) {
 					//System.out.println("Projectile has reached target");
-					List<Component> targets = gameData.getState().getComponentGraph().getComponentsWithinRadius(c,
+					List<Component> targets = (ArrayList<Component>) gameData.getState().getComponentGraph().getComponentsWithinRadius(c,
 							(Double) c.getAttribute("ExplosionRadius").getValue());
 					//System.out.println("About to perform projectile action");
 					performProjectileAction(c, targets);
@@ -56,7 +56,7 @@ public class ProjectileEngine implements Engine {
 
 	}
 
-	private void calculateNewPos(Component c) {
+	private Point2D calculateNewPos(Component c) {
 		Double curVel = (Double) c.getAttribute(("Velocity")).getValue();
 		
 		Point2D curPos = (Point2D) c.getAttribute(("Position")).getValue();
@@ -66,17 +66,11 @@ public class ProjectileEngine implements Engine {
 		Double slope = difference.getY() / difference.getX();
 		Double distTraveled = Math.sqrt(Math.pow(curVel, 2) + Math.pow(slope * curVel, 2));
 		Point2D newPos = new Point2D(curPos.getX()+curVel, curPos.getY()+curVel* slope);
-		Tile currentTile = myGameData.getState().getTileGrid().getTileByScreenLocation(newPos);
-		if (currentTile==null){
-			myGameData.getState().getComponentGraph().removeComponent(c);
-			return;
-		}	
+		c.setAttributeValue("ProjectileTraveled",((Double) c.getAttribute(("ProjectileTraveled")).getValue()) + distTraveled);
+		return newPos;
 		//System.out.println("curPos.get(X) is "+curPos.getX()+" , curPos.get(Y) is "+curPos.getY()+" , curVel is: "+curVel+" ,slope is "+slope);
 		//curPos.add((curVel), curVel * slope);
-		c.setAttributeValue("ProjectileTraveled",((Double) c.getAttribute(("ProjectileTraveled")).getValue()) + distTraveled);
 		//System.out.println("SKIRT SKIRT SIZES ARE: width: "+myGameData.getState().getGridWidth()+" height:"+myGameData.getState().getGridHeight());
-
-		c.setAttributeValue("Position", newPos);
 
 		//System.out.println("Slope is " + slope + "distanceTraveled" + distTraveled);
 		//System.out.println("performed targeting math" + newPos + curPos + targetPos + difference);
@@ -95,14 +89,13 @@ public class ProjectileEngine implements Engine {
 		//System.out.println("PERFORMING PROJECTILE ACTION SKIRT SKIRT");
 			for (Component target : targetList) {
 
-				//System.out.println(targetList.size()+ "LIST SIZE SKIRT SKIRT");
+				System.out.println(targetList.size()+ "LIST SIZE SKIRT SKIRT");
 				//System.out.println("Target health is " + target.getAttribute("Health").getValue());
 				target.setAttributeValue("Health", (Integer)target.getAttribute("Health").getValue() - (Integer) projectile.getAttribute("FireDamage").getValue());
 				target.setAttributeValue("Velocity", ((Double) projectile.getAttribute("SlowFactor").getValue()
 						* (Double) target.getAttribute("Speed").getValue()));
-				//System.out.println("projectile action performed");
+				System.out.println("projectile action performed");
 				if(projectile.getAttribute("FireType").getValue().equals("SingleTarget")){
-					//System.out.println("Single Target, loop broken, action finished");
 					break; //if AOE, continue to loop through all targets, else only affect one target
 				}
 			}
