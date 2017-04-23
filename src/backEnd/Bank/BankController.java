@@ -6,8 +6,12 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Observable;
+
+import javax.swing.JOptionPane;
+
 import backEnd.Mode.Mode;
 import javafx.geometry.Point2D;
+import javafx.scene.control.Alert;
 import backEnd.Attribute.AttributeData;
 import backEnd.Attribute.AttributeImpl;
 import backEnd.Attribute.AttributeOwner;
@@ -20,6 +24,7 @@ import backEnd.GameEngine.Behaviors.Behavior;
 
 public class BankController extends Observable
 {
+	private static final String DUPLICATE_NAME_ERROR = "Cannot Add Duplicate Name";
 	private Map<String, Tile> tileBank;
 	private Map<String, Component> componentBank;
 	private BehaviorBank myBehaviorBank;
@@ -81,9 +86,14 @@ public class BankController extends Observable
 
 	public void addNewTile (String name, Tile tile)
 	{
-		tileBank.put(name, tile);
-		this.setChanged();
-		this.notifyObservers();
+		if (tileBank.containsKey(name)){
+			JOptionPane.showMessageDialog(null, DUPLICATE_NAME_ERROR);
+		}
+		else{
+			tileBank.put(name, tile);
+			this.setChanged();
+			this.notifyObservers();
+		}
 	}
 
 	public void removeTile(String name)
@@ -124,9 +134,14 @@ public class BankController extends Observable
 	
 	public void addNewComponent (String name, Component component)
 	{
-		componentBank.put(name, component);
-		this.setChanged();
-		this.notifyObservers();
+		if (tileBank.containsKey(name)){
+			JOptionPane.showMessageDialog(null, DUPLICATE_NAME_ERROR);
+		}
+		else{
+			componentBank.put(name, component);
+			this.setChanged();
+			this.notifyObservers();
+		}
 	}
 
 	public void removeComponent(String name)

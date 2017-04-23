@@ -23,7 +23,7 @@ import javafx.stage.Stage;
 public class ViewImpl implements View {
 	private ModelReader myModel;
 	private Consumer<ModificationFromUser> myModConsumer;
-	private SkeletonImpl mySkeleton;
+	private SkeletonImpl mySkeleton; 
 	private SimpleBooleanProperty authorProperty;
 	private Stage appStage;
 	private FacebookInteractor myFB;
