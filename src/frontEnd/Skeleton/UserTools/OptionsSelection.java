@@ -3,6 +3,7 @@ package frontEnd.Skeleton.UserTools;
 import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -72,7 +73,7 @@ public class OptionsSelection implements SkeletonObject{
 	}
 	
 	private void addButtons(double size){
-		myButtonsAndTooltips=new HashMap<Button, Tooltip>();
+		myButtonsAndTooltips=new LinkedHashMap<Button, Tooltip>();
 		myButtonsAndTooltips.put(createImageButton(PLAY_IMAGE, e-> myView.sendUserModification(Modification_GameRemote.PLAY) ,size), new Tooltip("Play game"));
 		myButtonsAndTooltips.put(createImageButton(PAUSE_IMAGE, e-> myView.sendUserModification(Modification_GameRemote.PAUSE) ,size), new Tooltip("Pause game"));
 		myButtonsAndTooltips.put(createImageButton(FASTFWD_IMAGE, e-> myView.sendUserModification(Modification_GameRemote.FASTFORWARD) ,size), new Tooltip("Fast-forward game"));
