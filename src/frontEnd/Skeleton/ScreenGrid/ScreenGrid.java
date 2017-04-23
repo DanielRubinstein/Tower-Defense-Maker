@@ -186,7 +186,7 @@ public class ScreenGrid implements SkeletonObject, Observer {
 	private void updateComponentsOnGrid() {
 		for (Component c : observedComponentGraph.getAllComponents()) {
 			if (!myComponents.contains(c)) {
-				System.out.println("in screenGrid, updateComponentsOnGrid() got called");
+				//System.out.println("in screenGrid, updateComponentsOnGrid() got called");
 				addComponentToGrid(c);
 			}
 		}

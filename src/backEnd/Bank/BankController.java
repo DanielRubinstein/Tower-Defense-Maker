@@ -1,11 +1,12 @@
 package backEnd.Bank;
 
 import java.io.FileNotFoundException;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Observable;
+import java.util.Observer;
 
 import javax.swing.JOptionPane;
 
@@ -22,15 +23,15 @@ import backEnd.GameData.State.Tile;
 import backEnd.GameData.State.TileImpl;
 import backEnd.GameEngine.Behaviors.Behavior;
 
-public class BankController extends Observable
+public class BankController
 {
 	private static final String DUPLICATE_NAME_ERROR = "Cannot Add Duplicate Name";
 	private Map<String, Tile> tileBank;
 	private Map<String, Component> componentBank;
 	private BehaviorBank myBehaviorBank;
-	private RuleBank myRuleBank;
 	private AttributeBank myAttributeBank;
 	private Mode myMode;
+	private List<Observer> observers;
 	
 	public BankController(Mode myMode)
 	{
@@ -42,10 +43,9 @@ public class BankController extends Observable
 		this.tileBank = tileBank;
 		this.componentBank = componentBank;
 		this.myMode = myMode;
-		myBehaviorBank = new BehaviorBank();
-		myRuleBank = new RuleBank();
-		myAttributeBank = new AttributeBank();
-		
+		this.myBehaviorBank = new BehaviorBank();
+		this.myAttributeBank = new AttributeBank();
+		this.observers = new ArrayList<Observer>();
 		createTemplatesForTesting();
 	}
 	
@@ -78,7 +78,22 @@ public class BankController extends Observable
 			newComponent.setAttributeValue("ImageFile", "resources/images/Components/rainbow_bloon.png");
 			newComponent.setAttributeValue("Speed", 5d);
 			newComponent.setAttributeValue("Health", 10);
-			addNewComponent("Chill Bloon", newComponent);
+			newComponent.setAttributeValue("Type", "Enemy");
+			addNewComponent("Enemy", newComponent);
+			
+			Component newComponent2 = new Component();
+			newComponent2.setAttributeValue("ImageFile", "resources/images/Components/zombie.png");
+			newComponent2.setAttributeValue("Health", 10);
+			newComponent2.setAttributeValue("Type", "Tower");
+			newComponent2.setAttributeValue("Velocity", 0.6);
+			newComponent2.setAttributeValue("FireDamage", 10);
+			newComponent2.setAttributeValue("FireRate", 45.0);
+			newComponent2.setAttributeValue("ExplosionRadius", 40.0);
+			newComponent2.setAttributeValue("FireRadius", 200.0);
+			newComponent2.setAttributeValue("FireImage", "resources/images/Components/purple_bloon.png");
+			addNewComponent("Tower", newComponent2);
+			
+			
 		} catch( FileNotFoundException e){
 			System.out.println("No image found");
 		}
@@ -91,15 +106,13 @@ public class BankController extends Observable
 		}
 		else{
 			tileBank.put(name, tile);
-			this.setChanged();
-			this.notifyObservers();
+			notifyObservers();
 		}
 	}
 
 	public void removeTile(String name)
 	{
-		this.setChanged();
-		this.notifyObservers();
+		notifyObservers();
 	}
 	
 	public Map<String, Tile> getAccessibleTileMap()
@@ -148,16 +161,14 @@ public class BankController extends Observable
 		}
 		else{
 			componentBank.put(name, component);
-			this.setChanged();
-			this.notifyObservers();
+			notifyObservers();
 		}
 	}
 
 	public void removeComponent(String name)
 	{
 		componentBank.remove(name);
-		this.setChanged();
-		this.notifyObservers();
+		notifyObservers();
 	}
 	
 	public List<Behavior> getBehaviorList()
@@ -165,10 +176,6 @@ public class BankController extends Observable
 		return myBehaviorBank.getBehaviorList();
 	}
 	
-	public List<Rule> getRuleList()
-	{
-		return myRuleBank.getRuleList();
-	}
 	
 	public List<AttributeImpl> getAttributeList()
 	{
@@ -200,6 +207,17 @@ public class BankController extends Observable
 			return tileBank.get(presetName);
 		} else {
 			return null;
+		}
+	}
+	
+	public void addObserver(Observer o){
+		observers.add(o);
+	}
+	
+	private void notifyObservers() {
+		System.out.println("notifying observersssssss1");
+		for(Observer o : observers){
+			o.update(null, null);
 		}
 	}
 }

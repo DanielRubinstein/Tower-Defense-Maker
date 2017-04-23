@@ -7,7 +7,7 @@ import java.util.Observable;
 import java.util.Observer;
 import java.util.function.Consumer;
 
-import ModificationFromUser.AttributeOwner.Modification_AddPresetAttributeOwnerToGrid;
+import ModificationFromUser.AttributeOwner.Modification_Add_PaletteToGrid;
 import ModificationFromUser.Spawning.Modification_AddSpawner;
 import backEnd.Attribute.AttributeOwner;
 import backEnd.Bank.BankController;
@@ -65,8 +65,9 @@ public class Palette<T extends AttributeOwner> implements SkeletonObject, Observ
 
 	private void initializeMaps(Map<String, T> presetMap) {
 		observedBankController = myView.getBankController();
-		observedMode = myView.getModeReader();
 		observedBankController.addObserver(this);
+		observedMode = myView.getModeReader();
+		observedMode.addObserver(this);
 		myPresetMapBackEnd = presetMap;
 		myPresetMapFrontEnd = new HashMap<ImageView, T>();
 	}
@@ -160,7 +161,7 @@ public class Palette<T extends AttributeOwner> implements SkeletonObject, Observ
 				offsetY = 12.5d; 
 			}
 			Point2D pos = new Point2D(e.getSceneX() - Constants.SCREEN_GRID_PADDING + offsetX ,e.getSceneY() - Constants.SCREEN_GRID_PADDING + offsetY);
-			myView.sendUserModification(new Modification_AddPresetAttributeOwnerToGrid(presetAO, pos));
+			myView.sendUserModification(new Modification_Add_PaletteToGrid(presetAO, pos));
 		});
 	}
 
@@ -207,17 +208,15 @@ public class Palette<T extends AttributeOwner> implements SkeletonObject, Observ
 
 	@Override
 	public void update(Observable o, Object arg) {
-		if (o == observedBankController) {
-			switch (myType) {
-			case "Tiles":
-				myPresetMapBackEnd = (Map<String, T>) observedBankController.getTileMap();
-				updatePalette();
-				break;
-			case "Components":
-				myPresetMapBackEnd = (Map<String, T>) observedBankController.getComponentMap();
-				updatePalette();
-				break;
-			}
+		switch (myType) {
+		case "Tiles":
+			myPresetMapBackEnd = (Map<String, T>) observedBankController.getAccessibleTileMap();
+			updatePalette();
+			break;
+		case "Components":
+			myPresetMapBackEnd = (Map<String, T>) observedBankController.getAccessibleComponentMap();
+			updatePalette();
+			break;
 		}
 	}
 

@@ -65,6 +65,16 @@ public class ViewImpl implements View {
 	public SimpleBooleanProperty getBooleanAuthorModeProperty() {
 		return this.authorProperty;
 	}
+	
+	@Override
+	public SimpleStringProperty getStringGameModeProperty() {
+		return myMode.getGameStringProperty();
+	}
+	
+	@Override
+	public SimpleStringProperty getStringLevelModeProperty() {
+		return myMode.getLevelStringProperty();
+	}
 
 	@Override
 	public void sendUserModification(ModificationFromUser mod) {

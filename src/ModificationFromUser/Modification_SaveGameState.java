@@ -21,13 +21,20 @@ public class Modification_SaveGameState implements ModificationFromUser {
 	
 	@Override
 	public void invoke(ModelImpl myModel) throws Exception {
-		myModel.getDataController().saveCurrentGameStateData(myModel.getGameData(), myLevelName);
-
+		
+		switch(myModel.getMode().getUserMode())
+		{
+		case "PLAYER":
+			myModel.getDataController().saveCurrentGameStateData(myModel.getGameData(), myLevelName);
+			break;
+		case "AUTHOR":
+			myModel.getDataController().saveLevelTemplate(myModel.getGameData(), myLevelName);
+		}
 	}
 
 	private String getSaveGameName() {
-		List<String> dialogTitles = Arrays.asList("Save Game Utility", "Please Input a Name for your saved game");
-		String promptLabel = "Saved game name:";
+		List<String> dialogTitles = Arrays.asList("Save Game Utility", "Please Input a Name for your save");
+		String promptLabel = "Name:";
 		String promptText = "";
 		SingleFieldPrompt myDialog = new SingleFieldPrompt(dialogTitles, promptLabel, promptText);
 		return myDialog.create();

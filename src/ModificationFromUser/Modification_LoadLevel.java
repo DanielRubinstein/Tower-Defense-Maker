@@ -1,13 +1,9 @@
 package ModificationFromUser;
 
 import java.io.File;
-
 import backEnd.ModelImpl;
 import backEnd.GameData.GameData;
-import data.DataController;
-import data.XMLReadingException;
 import data.GamePrep.DataInputLoader;
-import data.GamePrep.GameLoader;
 import javafx.stage.DirectoryChooser;
 import javafx.stage.Stage;
 
@@ -19,32 +15,54 @@ import javafx.stage.Stage;
 public class Modification_LoadLevel implements ModificationFromUser {
 	
 	private String myLevel;
-	private File myGameFile;
 	private GameData myGameData;
 	
 	public Modification_LoadLevel(){
-		myLevel = load();
+		
+	}
+	
+	public Modification_LoadLevel(String levelName)
+	{
+		myLevel = levelName;
 	}
 
 	@Override
-	public void invoke(ModelImpl myModel) throws Exception {		
-		if (myLevel != null){
-			DataInputLoader dataInput = new DataInputLoader(myLevel);
+	public void invoke(ModelImpl myModel) throws Exception {	
+			
+			DataInputLoader dataInput;
+			
+			if (myLevel == null)
+			{
+				File file = load(myModel);
+				myLevel = file.getName();
+				dataInput = new DataInputLoader(myLevel, file.getParentFile().getPath());
+				
+			}
+			else
+			{
+				dataInput = new DataInputLoader(myLevel);
+			}
+			
+			
 			myGameData = dataInput.getGameData();
-		} else if (myGameFile != null){
-			DataInputLoader dataInput = new DataInputLoader(myGameFile);
-			myGameData = dataInput.getGameData();
-		} 
-		
-		//myModel = new ModelImpl(myGameData);
+			myModel.getState().updateState(myGameData.getState());
 		
 	}
 	
-	private String load() {
+	private File load(ModelImpl myModel) {
 		DirectoryChooser chooser = new DirectoryChooser();
-		chooser.setInitialDirectory(new File("./data/GameStateData/"));
+		
+		switch (myModel.getMode().getUserMode())
+		{
+		case "PLAYER":
+			chooser.setInitialDirectory(new File("./data/SavedGames/"));
+			break;
+		case "AUTHOR":
+			chooser.setInitialDirectory(new File("./data/LevelTemplates/"));
+		}
+		
 	
-		return chooser.showDialog(new Stage()).getName();
+		return chooser.showDialog(new Stage());
 	}
 
 }

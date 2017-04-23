@@ -1,11 +1,14 @@
 package backEnd.LevelProgression;
 
+import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FilenameFilter;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
+import backEnd.LevelProgression.LevelProgressionControllerEditor;
 import backEnd.GameData.GameData;
 import backEnd.Mode.Mode;
 import data.DataController;
@@ -20,6 +23,7 @@ public class LevelProgressionControllerImpl implements LevelProgressionControlle
 	private Map<String,List<String>> gamesMap; //String gameName -> List of Level names
 	private DataController myDataController;
 	private Mode myMode;
+	private static final String LEVEL_TEMPLATE_PATH = "data/GameStateData/";
 	
 	public LevelProgressionControllerImpl(Mode mode, DataController dataController, Map<String,List<String>> gamesMap){
 		this.myMode = mode;
@@ -42,11 +46,19 @@ public class LevelProgressionControllerImpl implements LevelProgressionControlle
 	
 	@Override
 	public List<String> getFullLevelList(){
-		List<String> allLevels = new ArrayList<String>();
+		File file = new File(LEVEL_TEMPLATE_PATH);
+		String[] directories = file.list(new FilenameFilter() {
+		  @Override
+		  public boolean accept(File current, String name) {
+		    return new File(current, name).isDirectory();
+		  }
+		});
+		
+		/*List<String> allLevels = new ArrayList<String>();
 		for (List<String> levels : gamesMap.values()){
 			allLevels.addAll(levels);
-		}
-		return allLevels;
+		}*/
+		return Arrays.asList(directories);
 	}
 	
 	

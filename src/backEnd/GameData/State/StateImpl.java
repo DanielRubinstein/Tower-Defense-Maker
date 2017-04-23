@@ -104,11 +104,41 @@ public class StateImpl extends Observable implements State {
 	public void updateState(State state){
 		this.numColsInGrid = state.getGridWidth();
 		this.numRowsInGrid = state.getGridHeight();
-		this.myTileGrid = state.getTileGrid();
-		this.myComponentGraph = state.getComponentGraph();
+		replaceTiles(state.getTileGrid());
+		replaceComponents(state.getComponentGraph());
+		this.myEngineStatus = state.getEngineStatus();
+		
 		this.setChanged();
 		this.notifyObservers();
 
+	}
+
+	private void replaceComponents(ComponentGraph componentGraph)
+	{
+		myComponentGraph.clearComponents();
+		for (Point2D x : componentGraph.getComponentMap().keySet())
+		{
+			for (Component y : componentGraph.getComponentMap().get(x))
+			{
+				myComponentGraph.addComponentToGrid(y, x);
+			}
+		}
+	}
+
+	private void replaceTiles(TileGrid tileGrid)
+	{
+		
+		myTileGrid.setWidth(tileGrid.getNumColsInGrid());
+		myTileGrid.setHeight(tileGrid.getNumRowsInGrid());
+		
+		for (int x = 0; x < tileGrid.getNumRowsInGrid(); x++)
+		{
+			for (int y = 0; y < tileGrid.getNumColsInGrid(); y++)
+			{
+				myTileGrid.setTileByGridPosition(tileGrid.getTileByGridPosition(y, x), y, x);
+			}
+		}
+		System.out.println(myTileGrid.getTileByGridPosition(0, 0).getAttribute("ImageFile").getValue() + " GGG");
 	}
 
 	/*
@@ -185,6 +215,11 @@ public class StateImpl extends Observable implements State {
 		return adjacents;
 	}
 
+	public EngineStatus getEngineStatus()
+	{
+		return myEngineStatus;
+	}
+	
 	private boolean isTraversable(int x, int y){
 		Tile curTile = myTileGrid.getTileByGridPosition(x,y);
 		if(curTile == null || curTile.<Boolean>getAttribute(myResources.getString("Traversable")).getValue() == true){
@@ -213,9 +248,8 @@ public class StateImpl extends Observable implements State {
 	}
 	
 	public boolean gameIsRunning(){
-		return myEngineStatus.equals(EngineStatus.RUNNING);
+		return myEngineStatus.toString().equals("RUNNING");
 	}
-
 
 	@Override
 	public Collection<Component> getComponentsByTileGridPosition(Point2D tileGridPosition) {
@@ -233,5 +267,11 @@ public class StateImpl extends Observable implements State {
 	@Override
 	public Map<String, SpawnQueue> getSpawnQueues() {
 		return mySpawnQueues;
+	}
+
+	@Override
+	public void setComponentGraph(ComponentGraph componentGraph) {
+		// TODO Auto-generated method stub
+		
 	}
 }

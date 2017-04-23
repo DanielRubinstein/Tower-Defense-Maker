@@ -5,8 +5,8 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.ResourceBundle;
 
-import ModificationFromUser.AttributeOwner.Modification_AddNewAttributeOwnerToGrid;
-import ModificationFromUser.AttributeOwner.Modification_AddNewPresetAttributeOwner;
+import ModificationFromUser.AttributeOwner.Modification_Add_StraightToGrid;
+import ModificationFromUser.AttributeOwner.Modification_Add_ToPalette;
 import backEnd.Attribute.Attribute;
 import backEnd.Attribute.AttributeOwner;
 import backEnd.GameData.State.Component;
@@ -89,7 +89,7 @@ public class AttributeCommandCenter{
 	private void addSubmitButton(Component obj) {
 		Button submit = new Button("Add Now");
 		submit.setOnAction(e -> {
-			myView.sendUserModification(new Modification_AddNewAttributeOwnerToGrid(obj));
+			myView.sendUserModification(new Modification_Add_StraightToGrid(obj));
 			myHostStage.close();
 		});
 		bottomButtons.getChildren().add(submit);
@@ -148,7 +148,7 @@ public class AttributeCommandCenter{
 			SingleFieldPrompt myNameDialog = new SingleFieldPrompt(dialogTitles, promptLabel, promptText);
 			Button preset = new Button("Save a copy to preset palette");
 			preset.setOnAction((e) -> {
-				myView.sendUserModification(new Modification_AddNewPresetAttributeOwner(myNameDialog.create(), obj));
+				myView.sendUserModification(new Modification_Add_ToPalette(myNameDialog.create(), obj));
 				myHostStage.close();
 			});
 			

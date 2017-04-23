@@ -128,6 +128,8 @@ public class TileImpl extends Observable implements Tile, AttributeOwner {
 	@Override
 	public void setObserverList(List<Observer> observers) {
 		this.observers = observers;
+		this.setChanged();
+		this.notifyObservers();
 	}
 
 }

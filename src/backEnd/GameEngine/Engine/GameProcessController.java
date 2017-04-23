@@ -3,11 +3,13 @@ package backEnd.GameEngine.Engine;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Enumeration;
+import java.util.HashMap;
 import java.util.List;
 import java.util.ResourceBundle;
 
 import backEnd.GameData.GameData;
 import backEnd.GameEngine.EngineStatus;
+import backEnd.LevelProgression.LevelProgressionControllerImpl;
 import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
@@ -53,7 +55,7 @@ public class GameProcessController {
 		engineStatus = EngineStatus.RUNNING;
 		engineStatusProperty.set(engineStatus.toString());
 		animation.play();
-		System.out.println("GAME STARTED");
+		System.out.println(this.getClass().getSimpleName() + ": GAME STARTED");
 	}
 
 	/**
@@ -61,17 +63,19 @@ public class GameProcessController {
 	 */
 	private void step(double delay) {
 		// System.gc();
-		// System.out.println("Game loop step preformed");
+		//System.out.println(this.getClass().getSimpleName() + "Game loop step preformed: " + delay);
 		this.run(delay); // TODO: TESTING ONLY
-		if (myGameData.getState().gameIsRunning()) {
+		System.out.println(this.getClass().getSimpleName() + " : " + engineStatus + " : " + myGameData.getState().gameIsRunning());
+		if (engineStatus.toString().equals("RUNNING")) {
 			myGameData.incrementGameTime(delay);
+			System.out.println(this.getClass().getSimpleName() + " : " + myGameData.getGameTime() +" incremented by "+ delay);
 		}
 	}
 
 	public void run(double stepTime) {
 		for (Engine engine : myEngines) {
 			engine.gameLoop(myGameData, stepTime);
-			// System.out.println("steptime is "+ stepTime);
+			System.out.println("steptime is "+ stepTime);
 		}
 		// System.out.println(stepTime);
 		// Has won/lost? check myRules after each loop?
@@ -85,6 +89,6 @@ public class GameProcessController {
 		animation.pause();
 		engineStatus = EngineStatus.PAUSED;
 		engineStatusProperty.set(engineStatus.toString());
-		System.out.println("GAME PAUSED");
+		System.out.println(this.getClass().getSimpleName() + ": GAME PAUSED");
 	}
 }

@@ -30,7 +30,10 @@ public class ProjectileFactory {
 		Attribute<String> projectileImage = (Attribute<String>) myAttributeFactory.getAttribute(("ImageFile"));
 		Attribute<String> projectileType = (Attribute<String>) myAttributeFactory.getAttribute(("FireType"));
 		Attribute<Integer> projectileHealth = (Attribute<Integer>) myAttributeFactory.getAttribute(("Health"));
-		Attribute<Double> projectileDamage = (Attribute<Double>) myAttributeFactory.getAttribute(("FireDamage"));
+		Attribute<Double> projectileVelocity = (Attribute<Double>) myAttributeFactory.getAttribute(("Velocity"));
+		Attribute<Double> projectileMaxDist = (Attribute<Double>) myAttributeFactory.getAttribute(("ProjectileMaxDistance"));
+		Attribute<Double> projectileTraveled = (Attribute<Double>) myAttributeFactory.getAttribute(("ProjectileTraveled"));
+		Attribute<Integer> projectileDamage = (Attribute<Integer>) myAttributeFactory.getAttribute(("FireDamage"));
 		Attribute<Double> explosionSize = (Attribute<Double>) myAttributeFactory.getAttribute(("ExplosionRadius"));
 		Attribute<Double> slowFactor = (Attribute<Double>) myAttributeFactory.getAttribute(("SlowFactor"));
 		Attribute<Double> fireRate = (Attribute<Double>) myAttributeFactory.getAttribute(("FireRate"));
@@ -39,7 +42,10 @@ public class ProjectileFactory {
 		projectileImage.setValue((String) tower.getAttribute("FireImage").getValue());
 		projectileType.setValue((String) tower.getAttribute("FireType").getValue());
 		projectileHealth.setValue((Integer) tower.getAttribute("Health").getValue());
-		projectileDamage.setValue((Double) tower.getAttribute("FireDamage").getValue());
+		projectileDamage.setValue((Integer) tower.getAttribute("FireDamage").getValue());
+		projectileMaxDist.setValue(0.0);
+		projectileTraveled.setValue(0.0);
+		projectileVelocity.setValue((Double) tower.getAttribute("Velocity").getValue());
 		explosionSize.setValue((Double) tower.getAttribute("ExplosionRadius").getValue());
 		slowFactor.setValue((Double) tower.getAttribute("SlowFactor").getValue());
 		fireRate.setValue((Double) tower.getAttribute("FireRate").getValue());
@@ -48,7 +54,10 @@ public class ProjectileFactory {
 		myComponent.setAttributeValue(("ImageFile"), (String) projectileImage.getValue());
 		myComponent.setAttributeValue(("FireType"), (String) projectileType.getValue());
 		myComponent.setAttributeValue(("Health"), (Integer) projectileHealth.getValue());
-		myComponent.setAttributeValue(("FireDamage"), (Double) projectileDamage.getValue());
+		myComponent.setAttributeValue(("FireDamage"), (Integer) projectileDamage.getValue());
+		myComponent.setAttributeValue(("ProjectileMaxDistance"), (Double) projectileMaxDist.getValue());
+		myComponent.setAttributeValue(("ProjectileTraveled"), (Double) projectileTraveled.getValue());
+		myComponent.setAttributeValue(("Velocity"), (Double) projectileVelocity.getValue());
 		myComponent.setAttributeValue(("ExplosionRadius"), (Double) explosionSize.getValue());
 		myComponent.setAttributeValue(("SlowFactor"), (Double) slowFactor.getValue());
 		myComponent.setAttributeValue(("FireRate"), (Double) fireRate.getValue());
