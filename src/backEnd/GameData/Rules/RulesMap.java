@@ -1,6 +1,7 @@
 package backEnd.GameData.Rules;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -49,6 +50,14 @@ public class RulesMap {
 		}
 		return myReaderList;
 		
+	}
+	
+	public Collection<Rule> getRuleCollection(){
+		return myRules.values();
+	}
+	
+	public Rule get(String ruleName){
+		return myRules.get(ruleName);
 	}
 	
 	
