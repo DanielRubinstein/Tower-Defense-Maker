@@ -40,9 +40,6 @@ public class Component extends Observable implements AttributeOwner {
 		this(new AttributeData(),new AccessPermissionsImpl());
 	}
 	
-	public Component(AttributeData attributes) throws FileNotFoundException {
-		this(attributes, new AccessPermissionsImpl());
-	}
 
 	public long printID(){
 		return ID;

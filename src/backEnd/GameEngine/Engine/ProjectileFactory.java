@@ -18,13 +18,14 @@ public class ProjectileFactory {
 
 	private AttributeData myAttributeData;
 	private AttributeFactory myAttributeFactory;
+	private Component myComponent;
 	
 	@SuppressWarnings("unchecked")
 	public ProjectileFactory(Component tower) throws FileNotFoundException{
-		System.out.println("In projectileFactory");
+		myComponent=new Component();
 		myAttributeFactory = new AttributeFactory();
 		AttributeData ad = new AttributeData();
-
+		//TODO clean up code
 		Attribute<String> myType = (Attribute<String>) myAttributeFactory.getAttribute(("Type"));
 		Attribute<String> projectileImage = (Attribute<String>) myAttributeFactory.getAttribute(("ImageFile"));
 		Attribute<String> projectileType = (Attribute<String>) myAttributeFactory.getAttribute(("FireType"));
@@ -43,19 +44,23 @@ public class ProjectileFactory {
 		slowFactor.setValue((Double) tower.getAttribute("SlowFactor").getValue());
 		fireRate.setValue((Double) tower.getAttribute("FireRate").getValue());
 
-		ad.addAttribute(("Type"), (backEnd.Attribute.AttributeImpl<?>) myType);
-		ad.addAttribute(("ImageFile"), (backEnd.Attribute.AttributeImpl<?>) projectileImage);
-		ad.addAttribute(("FireType"), (backEnd.Attribute.AttributeImpl<?>) projectileType);
-		ad.addAttribute(("Health"), (backEnd.Attribute.AttributeImpl<?>) projectileHealth);
-		ad.addAttribute(("FireDamage"), (backEnd.Attribute.AttributeImpl<?>) projectileDamage);
-		ad.addAttribute(("ExplosionRadius"), (backEnd.Attribute.AttributeImpl<?>) explosionSize);
-		ad.addAttribute(("SlowFactor"), (backEnd.Attribute.AttributeImpl<?>) slowFactor);
-		ad.addAttribute(("FireRate"), (backEnd.Attribute.AttributeImpl<?>) fireRate);
+		myComponent.setAttributeValue(("Type"), (String) myType.getValue());
+		myComponent.setAttributeValue(("ImageFile"), (String) projectileImage.getValue());
+		myComponent.setAttributeValue(("FireType"), (String) projectileType.getValue());
+		myComponent.setAttributeValue(("Health"), (Integer) projectileHealth.getValue());
+		myComponent.setAttributeValue(("FireDamage"), (Double) projectileDamage.getValue());
+		myComponent.setAttributeValue(("ExplosionRadius"), (Double) explosionSize.getValue());
+		myComponent.setAttributeValue(("SlowFactor"), (Double) slowFactor.getValue());
+		myComponent.setAttributeValue(("FireRate"), (Double) fireRate.getValue());
 		
 		myAttributeData = ad;
 	}
 
 	public AttributeData getMyAttributeData() {
 		return myAttributeData;
+	}
+	
+	public Component getProjectile(){
+		return myComponent;
 	}
 }

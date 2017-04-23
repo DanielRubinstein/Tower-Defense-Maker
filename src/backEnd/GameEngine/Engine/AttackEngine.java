@@ -16,72 +16,64 @@ import javafx.geometry.Point2D;
 /**
  * Deals with firing projectiles from towers at targets
  * @author Christian
+ * @author Daniel
  */
 
 public class AttackEngine implements Engine {
 
 	private double masterTime;
+	private Map<Component, Point2D> toAdd;
+	private GameData myGameData;
+
 
 	@Override
 	public void gameLoop(GameData gameData, double stepTime) {
-		System.out.println("AttackEngine called");
 		masterTime = gameData.getGameTime();
-
-		//Need to make a toAdd (and toRemove?) list, then do that after for loop terminates
+		toAdd = new HashMap<Component, Point2D>();
+		myGameData=gameData;
 		ComponentGraph myComponentGraph = gameData.getState().getComponentGraph();
-		Map<Component, Point2D> toAdd = new HashMap<Component, Point2D>();
-		
+		Map<Component, Component> attackersAndTargets=new HashMap<Component, Component>();
 		for (Component attacker : myComponentGraph.getAllComponents()) {
 			if (attacker.getAttribute("Type").getValue().equals("Tower")) {
-				System.out.println("Tower found");
-				if ( masterTime % ((Double) attacker.getAttribute("FireRate").getValue()) <= stepTime) {
+				if (masterTime % ((Double) attacker.getAttribute("FireRate").getValue()) <= stepTime) {
 					List<Component> targets = myComponentGraph.getComponentsWithinRadius(attacker,
 							(double) attacker.getAttribute("FireRadius").getValue());
-					for(Component potentialTarget:targets){ //only want to fire at enemies
-						if(potentialTarget.getAttribute("Type").getValue().equals("Enemy")){
-							System.out.println("Decided to create a projectile, found an enemy with position " + potentialTarget.getAttribute("Position").getValue());
-							addProjectileToState(gameData.getState(), attacker, targets.get(0), toAdd);
+					for (Component potentialTarget : targets) { // only want to
+																// fire at
+																// enemies
+						if (potentialTarget.getAttribute("Type").getValue().equals("Enemy")) {
+							attackersAndTargets.put(attacker, potentialTarget);
 						}
 					}
 				}
 			}
 		}
-		//do adding here
-		for(Component c:toAdd.keySet()){
-			System.out.println("toAdd's size is " + toAdd.size());
-			System.out.println("component toAdd location is " + c.getAttribute("Position").getValue());
-			gameData.getState().getComponentGraph().addComponentToGrid(c, toAdd.get(c));
+		for (Component c: attackersAndTargets.keySet()){
+			addProjectileToState(c, attackersAndTargets.get(c));
 		}
-		System.out.println("Projectiles should all be added to State");
 	}
 
 	@SuppressWarnings("unchecked")
-	public void addProjectileToState(State currentState, Component attacker, Component target, Map<Component, Point2D> toAdd) {
-		Component projectile = null;
+	public void addProjectileToState(Component attacker, Component target) {
+		Component projectile;
 		try {
 			projectile = makeProjectile(attacker);
-			System.out.println("Made projectile");
-
-		} catch (FileNotFoundException e) {
+		} catch (FileNotFoundException e1) {
+			System.out.println("projectile creation failed");
 			ErrorDialog fnf = new ErrorDialog();
 			fnf.create("Error", "File not found");
+			return;
 		}
 
-		Point2D bulletPos = (Point2D) attacker.getAttribute(("Position")).getValue();
-		Point2D targetPos = (Point2D) target.getAttribute(("Position")).getValue();
-
-		System.out.println("bulletPos is " + bulletPos);
-		System.out.println("TargetPos is " + targetPos);
-		
+		Object bulletPosObj=attacker.getAttribute(("Position")).getValue();
+		Point2D bulletPos = (Point2D) bulletPosObj;
+		Object targetPosObj=target.getAttribute(("Position")).getValue();
+		Point2D targetPos = (Point2D) targetPosObj;
 		projectile.setAttributeValue("Position", bulletPos);
 		projectile.setAttributeValue("ProjectileTargetPosition", targetPos);
-		System.out.println("subtracted point is" + targetPos.subtract(bulletPos));
 		projectile.setAttributeValue("ProjectileMaxDistance", targetPos.subtract(bulletPos));
 		projectile.setAttributeValue("ProjectileTarget", target);
-
-		//currentState.getComponentGraph().addComponentToGrid(projectile, bulletPos);
-		toAdd.put(projectile, bulletPos);
-		System.out.println("Projectile should be added to toAdd Map");
+		myGameData.getState().getComponentGraph().addComponentToGrid(projectile, bulletPos);
 	}
 
 	/**
@@ -90,12 +82,9 @@ public class AttackEngine implements Engine {
 	 * @throws FileNotFoundException if the selected image files are not found
 	 * 
 	 */
-	@SuppressWarnings("unchecked")
 	private Component makeProjectile(Component attacker) throws FileNotFoundException {
-		System.out.println("Making projectile");
-		
 		ProjectileFactory bulletFactory = new ProjectileFactory(attacker);
-		Component projectile = new Component(bulletFactory.getMyAttributeData());
+		Component projectile=bulletFactory.getProjectile();
 		projectile.setMyType("Projectile");
 		return projectile;
 	}
