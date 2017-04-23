@@ -1,6 +1,7 @@
 package backEnd.GameData.Rules;
 
 import backEnd.GameData.GameData;
+import backEnd.LevelProgression.LevelProgressionControllerImpl;
 
 public abstract class Rule {
 
