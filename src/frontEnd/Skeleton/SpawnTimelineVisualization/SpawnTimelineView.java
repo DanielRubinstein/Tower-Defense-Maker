@@ -87,7 +87,7 @@ public class SpawnTimelineView implements SkeletonObject {
 
 	private void addToDropZone(ScrollPane dropZone, Component spawn, long value) {
 		HBox spawnBox = new HBox();
-		String spawnImagePath = (String) spawn.getAttribute("ImageFile").getValue();
+		String spawnImagePath = spawn.<String>getAttribute("ImageFile").getValue();
 		ImageView spawnImage = createImageView(spawnImagePath);
 
 		Label name = new Label();

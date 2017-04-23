@@ -86,7 +86,7 @@ public class Palette<T extends AttributeOwner> implements SkeletonObject, Observ
 	}
 
 	private void addPresetToPalette(T preset) {
-		String myImagePath = (String) preset.getAttribute(IMAGEFILE_ATTRIBUTE_NAME).getValue();
+		String myImagePath = preset.<String>getAttribute(IMAGEFILE_ATTRIBUTE_NAME).getValue();
 		ImageView imageView = createImageView(myImagePath);
 		setPresetInteractions(preset, imageView);
 		myPresetMapFrontEnd.put(imageView, preset);

@@ -187,7 +187,7 @@ public class StateImpl extends Observable implements State {
 
 	private boolean isTraversable(int x, int y){
 		Tile curTile = myTileGrid.getTileByGridPosition(x,y);
-		if(curTile == null || (boolean)curTile.getAttribute(myResources.getString("Traversable")).getValue() == true){
+		if(curTile == null || curTile.<Boolean>getAttribute(myResources.getString("Traversable")).getValue() == true){
 			return false;
 		}
 		

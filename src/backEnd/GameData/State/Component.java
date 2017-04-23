@@ -55,7 +55,7 @@ public class Component extends Observable implements AttributeOwner {
 		BehaviorFactory bf = new BehaviorFactory(this); // add a real component
 		for (String key : behaviorResources.keySet()) {
 			String value = behaviorResources.getString(key);
-			Attribute<?> myAttribute = af.getAttribute(key); // FIX THIS- HOW
+			Attribute<?> myAttribute = af.getAttribute(key); // FIXME THIS- HOW
 																// DOES OUR
 																// FACTORY
 																// GENERATE
