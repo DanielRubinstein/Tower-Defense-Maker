@@ -32,7 +32,7 @@ public class BankController
 	//private RuleBank myRuleBank;
 	private AttributeBank myAttributeBank;
 	private Mode myMode;
-	private List<Observer> observers;
+	private List<Observer> observers = new ArrayList<Observer>();
 	
 	public BankController(Mode myMode)
 	{
