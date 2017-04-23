@@ -38,7 +38,7 @@ public class ProjectileEngine implements Engine {
 					//System.out.println("Projectile has reached target");
 					List<Component> targets = gameData.getState().getComponentGraph().getComponentsWithinRadius(c,
 							(Double) c.getAttribute("ExplosionRadius").getValue());
-					System.out.println("About to perform projectile action");
+					//System.out.println("About to perform projectile action");
 					performProjectileAction(c, targets);
 
 					toRemove.add(c);
@@ -52,7 +52,7 @@ public class ProjectileEngine implements Engine {
 		}
 		for(Component c:toRemove){
 			gameData.getState().getComponentGraph().removeComponent(c);
-			System.out.println("PROJECTILE GOT REMOVED");
+			//System.out.println("PROJECTILE GOT REMOVED");
 		}
 
 	}
@@ -75,7 +75,7 @@ public class ProjectileEngine implements Engine {
 		//System.out.println("curPos.get(X) is "+curPos.getX()+" , curPos.get(Y) is "+curPos.getY()+" , curVel is: "+curVel+" ,slope is "+slope);
 		//curPos.add((curVel), curVel * slope);
 		c.setAttributeValue("ProjectileTraveled",((Double) c.getAttribute(("ProjectileTraveled")).getValue()) + distTraveled);
-		System.out.println("SKIRT SKIRT SIZES ARE: width: "+myGameData.getState().getGridWidth()+" height:"+myGameData.getState().getGridHeight());
+		//System.out.println("SKIRT SKIRT SIZES ARE: width: "+myGameData.getState().getGridWidth()+" height:"+myGameData.getState().getGridHeight());
 
 		c.setAttributeValue("Position", newPos);
 
@@ -93,16 +93,16 @@ public class ProjectileEngine implements Engine {
 	 *            the object of the projectile's action (usually an enemy)
 	 */
 	private void performProjectileAction(Component projectile, List<Component> targetList) {
-		System.out.println("PERFORMING PROJECTILE ACTION SKIRT SKIRT");
+		//System.out.println("PERFORMING PROJECTILE ACTION SKIRT SKIRT");
 			for (Component target : targetList) {
-				System.out.println(targetList.size()+ "LIST SIZE SKIRT SKIRT");
-				System.out.println("Target health is " + target.getAttribute("Health").getValue());
+				//System.out.println(targetList.size()+ "LIST SIZE SKIRT SKIRT");
+				//System.out.println("Target health is " + target.getAttribute("Health").getValue());
 				target.setAttributeValue("Health", (Integer)target.getAttribute("Health").getValue() - (Integer) projectile.getAttribute("FireDamage").getValue());
 				target.setAttributeValue("Velocity", ((Double) projectile.getAttribute("SlowFactor").getValue()
 						* (Double) target.getAttribute("Speed").getValue()));
-				System.out.println("projectile action performed");
+				//System.out.println("projectile action performed");
 				if(projectile.getAttribute("FireType").getValue().equals("SingleTarget")){
-					System.out.println("Single Target, loop broken, action finished");
+					//System.out.println("Single Target, loop broken, action finished");
 					break; //if AOE, continue to loop through all targets, else only affect one target
 				}
 			}
