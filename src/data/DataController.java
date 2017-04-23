@@ -7,6 +7,7 @@ import java.util.Map;
 import backEnd.Bank.BankController;
 import backEnd.GameData.GameData;
 import backEnd.GameData.State.Component;
+import backEnd.GameData.State.PlayerStatus;
 import backEnd.GameData.State.Tile;
 import backEnd.LevelProgression.LevelProgressionControllerImpl;
 import backEnd.LevelProgression.LevelProgressionControllerReader;
@@ -20,7 +21,7 @@ import backEnd.LevelProgression.LevelProgressionControllerReader;
 public class DataController {
 	
 	private static final String UNIV_GAME_DATA_PATH = "data/UniversalGameData/";
-	private static final String GAME_STATE_DATA_PATH = "data/GameStateData/";
+	private static final String GAME_STATE_DATA_PATH = "data/SavedGames/";
 	private static final String LEVEL_TEMPLATE_DATA_PATH = "data/LevelTemplates/";
 	
 	private XMLWriter myXMLWriter;
@@ -81,6 +82,6 @@ public class DataController {
 
 	public void saveLevelTemplate(GameData gameData, String myLevelName)
 	{
-	
+		myXMLWriter.saveLevelTemplate(gameData, LEVEL_TEMPLATE_DATA_PATH, myLevelName);
 	}
 }

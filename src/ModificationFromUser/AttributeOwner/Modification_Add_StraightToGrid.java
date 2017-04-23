@@ -22,7 +22,7 @@ import javafx.geometry.Point2D;
  * @author Derek
  *
  */
-public class Modification_AddNewAttributeOwnerToGrid implements ModificationFromUser {
+public class Modification_Add_StraightToGrid implements ModificationFromUser {
 	private AttributeOwner newAttrOwn;
 	private Point2D location;
 	private ModelImpl myModel;
@@ -31,7 +31,7 @@ public class Modification_AddNewAttributeOwnerToGrid implements ModificationFrom
 	public static final String DESCRIPTION_ERROR = "Not a recognized Attribute Owner";	
 	
 
-	public Modification_AddNewAttributeOwnerToGrid(AttributeOwner toAdd) {
+	public Modification_Add_StraightToGrid(AttributeOwner toAdd) {
 		this.newAttrOwn = toAdd;
 		this.location = toAdd.<Point2D>getAttribute("Position").getValue();
 
@@ -41,16 +41,16 @@ public class Modification_AddNewAttributeOwnerToGrid implements ModificationFrom
 	public void invoke(ModelImpl model) throws Exception {
 		myModel = model;
 		try {
-			Method add = Modification_AddNewAttributeOwnerToGrid.class.getDeclaredMethod("addAttributeOwnerToGrid", newAttrOwn.getClass());
+			Method add = Modification_Add_StraightToGrid.class.getDeclaredMethod("addAttributeOwnerToGrid", newAttrOwn.getClass());
 			add.setAccessible(true);
 			add.invoke(this, newAttrOwn);
 		} catch (NoSuchMethodException e) {
-			System.out.println("in Modification_AddNewAttributeOwnerToGrid, No method found, ugh");
+			System.out.println("in Modification_Add_StraightToGrid, No method found, ugh");
 			// do nothing
 			// this means the thing being put in attribute command center is a tile
 		} catch (Exception e) {
 			// something went wrong
-			System.out.println("Something went wrong in Modification_AddNewAttributeOwnerToGrid");
+			System.out.println("Something went wrong in Modification_Add_StraightToGrid");
 			// TODO add exception?
 		}
 	}

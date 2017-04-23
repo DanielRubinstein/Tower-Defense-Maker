@@ -20,6 +20,7 @@ import backEnd.GameData.GameDataInterface;
 import backEnd.GameData.Rules.Rule;
 import backEnd.GameData.State.Component;
 import backEnd.GameData.State.ComponentGraph;
+import backEnd.GameData.State.PlayerStatus;
 import backEnd.GameData.State.State;
 import backEnd.GameData.State.Tile;
 import backEnd.GameData.State.TileGrid;
@@ -49,8 +50,6 @@ public class XMLWriterImpl implements XMLWriter{
 	{
 		
 		String rulesXML = xStream.toXML(gameData.getRules());
-		
-		System.out.println(rulesXML);
 		
 		saveToXML(filePath + levelName +"/", "rules", rulesXML);
 		
@@ -117,6 +116,31 @@ public class XMLWriterImpl implements XMLWriter{
 	public void saveGamesMapData(Map<String, List<String>> gamesMap, String filePath) {
 		String gamesMapXML = xStream.toXML(gamesMap);
 		saveToXML(filePath, "GamesMap", gamesMapXML);
+	}
+
+	@Override
+	public void saveLevelTemplate(GameData gameData, String levelTemplateDataPath, String levelName)
+	{
+		String rulesXML = xStream.toXML(gameData.getRules());
+		
+		saveToXML(levelTemplateDataPath + levelName +"/", "rules", rulesXML);
+		
+		gameData.getState().getComponentGraph().saveAndClearObservers();
+		
+		String componentMapXML = xStream.toXML(gameData.getState().getComponentGraph().getComponentMap());
+		saveToXML(levelTemplateDataPath+ levelName +"/", "componentgraph", componentMapXML);
+		
+		gameData.getState().getComponentGraph().setObservers();
+		
+		String playerStatusXML = xStream.toXML(new PlayerStatus());
+		saveToXML(levelTemplateDataPath+ levelName +"/", "playerstatus", playerStatusXML);
+		
+		gameData.getState().getTileGrid().saveAndClearTileObservers();
+		
+		String tileGridXML = xStream.toXML(gameData.getState().getTileGrid().getInstantiator());
+		saveToXML(levelTemplateDataPath + levelName +"/", "tilegrid", tileGridXML);
+		
+		gameData.getState().getTileGrid().setTileObservers();
 	}
 
 }

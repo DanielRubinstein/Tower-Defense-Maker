@@ -10,6 +10,7 @@ import com.thoughtworks.xstream.io.xml.DomDriver;
 import ModificationFromUser.ModificationFromUser;
 import backEnd.ModelImpl;
 import backEnd.Attribute.AttributeOwner;
+import backEnd.Attribute.AttributeOwnerSerializer;
 import backEnd.GameData.GameData;
 import backEnd.GameData.State.Component;
 import backEnd.GameData.State.Tile;
@@ -24,21 +25,17 @@ import javafx.geometry.Point2D;
  * @author Derek
  *
  */
-public class Modification_AddPresetAttributeOwnerToGrid implements ModificationFromUser {
+public class Modification_Add_PaletteToGrid implements ModificationFromUser {
 	private AttributeOwner newAttrOwn;
 	private Point2D location;
-	private XStream xStream;
 	private ModelImpl myModel;
 	public static final String DESCRIPTION_TILE = "Replace Tile";
 	public static final String DESCRIPTION_COMPONENT = "Add Component";
 	public static final String DESCRIPTION_ERROR = "Not a recognized Attribute Owner";
 
-	public Modification_AddPresetAttributeOwnerToGrid(AttributeOwner preset, Point2D location) {
+	public Modification_Add_PaletteToGrid(AttributeOwner preset, Point2D location) {
 		this.newAttrOwn = preset;
 		this.location = location;
-		xStream = new XStream(new DomDriver());
-		xStream.alias("Component", Component.class);
-		xStream.alias("Tile", Tile.class);
 
 	}
 
@@ -46,24 +43,22 @@ public class Modification_AddPresetAttributeOwnerToGrid implements ModificationF
 	public void invoke(ModelImpl model) throws Exception {
 		myModel = model;
 		
-		List<Observer> oldObservers = newAttrOwn.getAndClearObservers();
-		String serializedAO = xStream.toXML(newAttrOwn);
-		newAttrOwn.setObserverList(oldObservers);
-		AttributeOwner cleanAO = (AttributeOwner) xStream.fromXML(serializedAO);
+		AttributeOwnerSerializer attributeOwnerSerializer = new AttributeOwnerSerializer();
+		AttributeOwner cleanAO = attributeOwnerSerializer.createCopy(newAttrOwn);
 		cleanAO.setAttributeValue("Position", location);
 		try {
-			Method add = Modification_AddPresetAttributeOwnerToGrid.class.getDeclaredMethod("add", cleanAO.getClass());
+			Method add = Modification_Add_PaletteToGrid.class.getDeclaredMethod("add", cleanAO.getClass());
 			add.setAccessible(true);
 			add.invoke(this, cleanAO);
 		} catch (NoSuchMethodException e) {
-			System.out.println("in Modification_AddNewPresetAttributeOwnerToGrid, No method found, ugh");
+			System.out.println("in Modification_Add_PaletteToGrid, No method found, ugh");
 			// do nothing
 			// this means the thing being put in attribute command center is a tile
 		} catch (ModeException e){
 			throw e;
 		} catch (Exception e) {
 			// something went wrong
-			System.out.println("Something went wrong in Modification_AddNewPresetAttributeOwnerToGrid");
+			System.out.println("Something went wrong in Modification_Add_PaletteToGrid");
 			e.printStackTrace();
 		}
 	}
@@ -81,5 +76,14 @@ public class Modification_AddPresetAttributeOwnerToGrid implements ModificationF
 	
 	private void add(Component component){
 		myModel.getState().getComponentGraph().addComponentToGrid(component, location);
+		switch (myModel.getMode().getUserMode()) {
+		case "AUTHOR":
+			// do nothing
+			break;
+		case "PLAYER":
+			// for future, do something
+			// deduct price
+			break;
+		}	
 	}
 }
