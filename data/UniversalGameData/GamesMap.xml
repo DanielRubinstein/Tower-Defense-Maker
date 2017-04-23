@@ -2,14 +2,18 @@
   <entry>
     <string>Plants vs. Zombies</string>
     <list>
-      <string>Level 1</string>
+      <string>PvL Level 1</string>
+      <string>Level 2</string>
+      <string>Level 3</string>
     </list>
   </entry>
   <entry>
     <string>Bloons</string>
     <java.util.Arrays_-ArrayList>
       <a class="string-array">
-        <string>Level1</string>
+        <string>Bloons Level A</string>
+        <string>Level B</string>
+        <string>Level C</string>
       </a>
     </java.util.Arrays_-ArrayList>
   </entry>
