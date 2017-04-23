@@ -1,6 +1,7 @@
 package backEnd;
 
 import backEnd.Bank.BankController;
+import backEnd.GameData.State.PlayerStatusModifier;
 import backEnd.GameData.State.State;
 import backEnd.GameEngine.Engine.GameProcessController;
 import backEnd.Mode.ModeReader;
@@ -10,27 +11,17 @@ import backEnd.Mode.ModeReader;
  * @author Tim
  *
  */
-public interface Model {
-
-	/**
-	 * 
-	 * @return current State
-	 */
-	State getState();
-	
-	/**
-	 * 
-	 * @return mode of the user
-	 */
-	ModeReader getModeReader();
-	
-
-	BankController getBankController();
+public interface Model extends ModelReader{
 	
 	/**
 	 * 
 	 * @return the GameProcessController that owns the Engines
 	 */
 	GameProcessController getGameProcessController();
+	
+	PlayerStatusModifier getModifiablePlayerStatus();
+	
+	
+	
 
 }

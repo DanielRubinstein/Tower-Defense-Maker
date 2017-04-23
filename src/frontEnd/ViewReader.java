@@ -2,15 +2,16 @@ package frontEnd;
 
 import java.util.Collection;
 
-import backEnd.GameData.State.Component;
-import backEnd.GameData.State.Tile;
+import backEnd.GameData.State.*;
+import backEnd.LevelProgression.LevelProgressionControllerReader;
 import javafx.beans.property.SimpleBooleanProperty;
+import javafx.beans.property.SimpleStringProperty;
 import javafx.stage.Stage;
 
 public interface ViewReader {
 
 	// play, pause, fast forward
-	public String getRunStatus();
+	public SimpleStringProperty getRunStatus();
 	
 	public SimpleBooleanProperty getBooleanAuthorModeProperty();
 
@@ -21,5 +22,9 @@ public interface ViewReader {
 	public Stage getAppStage();
 	
 	public void reportError(Exception e);
+	
+	LevelProgressionControllerReader getLevelProgressionController();
+	
+	PlayerStatusReader getPlayerStatus();
 	
 }

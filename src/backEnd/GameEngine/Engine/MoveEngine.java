@@ -1,16 +1,14 @@
 package backEnd.GameEngine.Engine;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
-import java.util.LinkedList;
+import java.util.HashMap;
 import java.util.List;
-import java.util.Queue;
-import backEnd.Coord;
-import backEnd.Attribute.Attribute;
-import backEnd.Attribute.AttributeImpl;
+import java.util.Map;
+
 import backEnd.GameEngine.Behaviors.*;
-import frontEnd.Menus.ErrorDialog;
+import frontEnd.CustomJavafxNodes.ErrorDialog;
 import javafx.geometry.Point2D;
-import resources.Constants;
+import backEnd.GameData.GameData;
 import backEnd.GameData.State.*;
 
 
@@ -22,44 +20,50 @@ import backEnd.GameData.State.*;
  */
 public class MoveEngine implements Engine{
 	private State myState;
+	private Tile currentTile;
+	private MoveBehavior mb;
 	/**
-	 * simple BFS to label each Tile with the
-	 * direction an object on the Tile should move
-	 * 
-	 * might need to be in State? will need to be recalled when a tower is added or removed from State
 	 * 
 	 * @param TileGrid the Grid of Tiles that Components must navigate
 	 * @param xStart the starting x-coordinate
 	 * @param yStart the starting y-coordinate
 	 */
 	@Override
-	public void gameLoop(State currentState, double stepTime) {
-		myState=currentState;
-		//System.out.println("  my state "+myState + "   "  +myState.getComponentGraph().getAllComponents() + "   " +myState.getComponentGraph().getAllComponents().size());
+	public void gameLoop(GameData gameData, double stepTime) {
+		myState=gameData.getState();
+		List<Component> toRemove=new ArrayList<Component>();
+		Map<Component, Point2D> toAdd=new HashMap<Component, Point2D>();
 		for (Component c: myState.getComponentGraph().getAllComponents()){
-			//System.out.println((c instanceof Component )+   "     "   +c +   "  " + c.printID());
 			Object o = c.getAttribute("Position").getValue();
-			//System.out.println("    in move engine " +o +"     ");
-			try{
-			Tile currentTile = myState.getTileGrid().getTileByScreenLocation((Point2D)c.getAttribute("Position").getValue()); 
-			//System.out.println("successfully moved " + c + "    " +c.printID());
-			myState.getComponentGraph().removeComponent(c);
-			MoveBehavior mb=new MoveBehavior(c);
+			Point2D currentLocation=(Point2D) o;
+			currentTile = gameData.getState().getTileGrid().getTileByScreenLocation(currentLocation);
+			if (currentTile==null){
+				continue;
+			}
+			mb=new MoveBehavior(c);
 			try {
+				Object speedObj=c.getAttribute("Speed").getValue();
+				mb.setMoveAmount((double) speedObj);
 				mb.execute(currentTile);
+				Point2D newPosition=mb.getPosition();
+				if (newPosition!=null&&!newPosition.equals(currentLocation)){
+					toAdd.put(c, newPosition);
+					toRemove.add(c);
+				}
 			} catch (FileNotFoundException e) {
 				ErrorDialog fnf = new ErrorDialog();
 				fnf.create("Error", "File not found");
+				break;
 			}
-			Point2D newPosition=mb.getPosition();
-			myState.getComponentGraph().addComponentToGrid(c, newPosition);
-			} catch (Exception e){
-				System.out.println("other erorr "+e.getMessage());
-				e.printStackTrace();
-			}
-			
 		}
-		
-		
+
+		for (Component toDelete: toRemove){
+			gameData.getState().getComponentGraph().removeComponent(toDelete);
+		}
+		for (Component c: toAdd.keySet()){
+			gameData.getState().getComponentGraph().addComponentToGrid(c, toAdd.get(c));
+		}
+
+		return;
 	}
 }

@@ -1,0 +1,20 @@
+<?xml version="1.0"?><map>
+  <entry>
+    <string>Plants vs. Zombies</string>
+    <list>
+      <string>PvL Level 1</string>
+      <string>Level 2</string>
+      <string>Level 3</string>
+    </list>
+  </entry>
+  <entry>
+    <string>Bloons</string>
+    <java.util.Arrays_-ArrayList>
+      <a class="string-array">
+        <string>Bloons Level A</string>
+        <string>Level B</string>
+        <string>Level C</string>
+      </a>
+    </java.util.Arrays_-ArrayList>
+  </entry>
+</map>

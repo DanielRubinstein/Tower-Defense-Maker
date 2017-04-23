@@ -2,6 +2,8 @@ package backEnd.Attribute;
 
 import java.util.List;
 
+import javafx.geometry.Point2D;
+
 /**
  * Note: we have different attributes in GameEngine.Attributes package. Ex: position attribute, health attribute...
  * 	each of these will have a different type for its value so we use generics in the interface
@@ -53,4 +55,10 @@ public class AttributeImpl<T> implements Attribute<T>{
 		attributeCopy.setValue(myValue);
 		return attributeCopy;
 	}
+	
+	//public static Point2D getValueWithOutCasting(AttributeOwner c){
+		//Object o = c.getAttribute("Position").getValue();
+		//Point2D currentLocation=(Point2D) o;
+		//return currentLocation;
+	//}
 }

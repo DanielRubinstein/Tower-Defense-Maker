@@ -1,91 +1,91 @@
 package backEnd.GameEngine.Engine;
 
 import java.io.FileNotFoundException;
-import java.util.ResourceBundle;
-import backEnd.Attribute.Attribute;
-import backEnd.Attribute.AttributeData;
-import backEnd.Attribute.AttributeFactory;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import backEnd.GameData.GameData;
 import backEnd.GameData.State.Component;
 import backEnd.GameData.State.ComponentGraph;
 import backEnd.GameData.State.State;
-import frontEnd.Menus.ErrorDialog;
+import frontEnd.CustomJavafxNodes.ErrorDialog;
 import javafx.geometry.Point2D;
-import resources.Constants;
 
 /**
- * 
- * @author Daniel
- * @author Alex
+ * Deals with firing projectiles from towers at targets
  * @author Christian
+ * @author Daniel
  */
 
 public class AttackEngine implements Engine {
-	private final static String RESOURCES_PATH = "resources/attributes";
-	private final static ResourceBundle myResources = ResourceBundle.getBundle(RESOURCES_PATH);
+
+	private double masterTime;
+	private Map<Component, Point2D> toAdd;
+	private GameData myGameData;
+
 
 	@Override
-	public void gameLoop(State currentState, double stepTime) {
-		ComponentGraph myComponentGraph = currentState.getComponentGraph();
-		for (Component componentAttacker : myComponentGraph.getComponentList()) {
-			if (componentAttacker.getMyType().equals("TOWER")) {
-				for (Component componentTarget : myComponentGraph.getComponentsWithinRadius(componentAttacker,
-						Constants.defaultRadius)) {
-					addProjectileToState(currentState, componentAttacker, componentTarget);
-					try {
-						componentAttacker.getBehavior("Attack").execute(null);
-					} catch (FileNotFoundException e) {
-						ErrorDialog fnf = new ErrorDialog();
-						fnf.create("Error", "File not found");
+	public void gameLoop(GameData gameData, double stepTime) {
+		masterTime = gameData.getGameTime();
+		toAdd = new HashMap<Component, Point2D>();
+		myGameData=gameData;
+		ComponentGraph myComponentGraph = gameData.getState().getComponentGraph();
+		Map<Component, Component> attackersAndTargets=new HashMap<Component, Component>();
+		for (Component attacker : myComponentGraph.getAllComponents()) {
+			if (attacker.getAttribute("Type").getValue().equals("Tower")) {
+				if (masterTime % ((Double) attacker.getAttribute("FireRate").getValue()) <= stepTime) {
+					List<Component> targets = myComponentGraph.getComponentsWithinRadius(attacker,
+							(double) attacker.getAttribute("FireRadius").getValue());
+					for (Component potentialTarget : targets) { // only want to
+																// fire at
+																// enemies
+						if (potentialTarget.getAttribute("Type").getValue().equals("Enemy")) {
+							attackersAndTargets.put(attacker, potentialTarget);
+						}
 					}
-					try {
-						componentTarget.getBehavior("TakeDamage").execute(null);
-					} catch (FileNotFoundException e) {
-						ErrorDialog fnf = new ErrorDialog();
-						fnf.create("Error", "File not found");
-					}
-					break;
 				}
 			}
+		}
+		for (Component c: attackersAndTargets.keySet()){
+			addProjectileToState(c, attackersAndTargets.get(c));
 		}
 	}
 
 	@SuppressWarnings("unchecked")
-	public void addProjectileToState(State currentState, Component attacker, Component target) {
-		Component bullet = null;
+	public void addProjectileToState(Component attacker, Component target) {
+		Component projectile;
 		try {
-			bullet = makeBullet();
-		} catch (FileNotFoundException e) {
+			projectile = makeProjectile(attacker);
+		} catch (FileNotFoundException e1) {
+			System.out.println("projectile creation failed");
 			ErrorDialog fnf = new ErrorDialog();
 			fnf.create("Error", "File not found");
+			return;
 		}
 
-		Point2D bulletPos = (Point2D) attacker.getAttribute(myResources.getString("Position"));
-		Point2D targetPos = (Point2D) target.getAttribute(myResources.getString("Position"));
-		
-		bullet.setAttributeValue(myResources.getString("Position"), bulletPos);
-		bullet.setAttributeValue(myResources.getString("ProjectileTargetPosition"), targetPos);
-		bullet.setAttributeValue(myResources.getString("ProjectileDistance"), targetPos.subtract(bulletPos));
-		currentState.getComponentGraph().addComponentToGrid(bullet, bulletPos);
+		Object bulletPosObj=attacker.getAttribute(("Position")).getValue();
+		Point2D bulletPos = (Point2D) bulletPosObj;
+		Object targetPosObj=target.getAttribute(("Position")).getValue();
+		Point2D targetPos = (Point2D) targetPosObj;
+		projectile.setAttributeValue("Position", bulletPos);
+		projectile.setAttributeValue("ProjectileTargetPosition", targetPos);
+		projectile.setAttributeValue("ProjectileMaxDistance", targetPos.subtract(bulletPos));
+		projectile.setAttributeValue("ProjectileTarget", target);
+		myGameData.getState().getComponentGraph().addComponentToGrid(projectile, bulletPos);
 	}
 
 	/**
 	 * 
-	 * @return a Component that represents a Bullet
-	 * @throws FileNotFoundException
+	 * @return a Component that represents a projectile
+	 * @throws FileNotFoundException if the selected image files are not found
+	 * 
 	 */
-	@SuppressWarnings("unchecked")
-	private Component makeBullet() throws FileNotFoundException {
-
-		AttributeFactory af = new AttributeFactory();
-		AttributeData ad = new AttributeData();
-		Component bullet = new Component(ad);
-
-		bullet.setMyType("Projectile");				
-		Attribute<String> bulletImage = (Attribute<String>) af.getAttribute(myResources.getString("ImageFile"));
-		bulletImage.setValue(Constants.BULLET_IMAGE_FILE);
-		ad.addAttribute(myResources.getString("ImageFile"), (backEnd.Attribute.AttributeImpl<?>) bulletImage);
-		
-		return bullet;
+	private Component makeProjectile(Component attacker) throws FileNotFoundException {
+		ProjectileFactory bulletFactory = new ProjectileFactory(attacker);
+		Component projectile=bulletFactory.getProjectile();
+		//projectile.setMyType("Projectile");
+		return projectile;
 	}
-
 }

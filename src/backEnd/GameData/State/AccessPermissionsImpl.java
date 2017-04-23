@@ -3,47 +3,91 @@ package backEnd.GameData.State;
 import java.util.ArrayList;
 import java.util.List;
 
-import backEnd.Mode.GameModeType;
-import backEnd.Mode.UserModeType;
-
 public class AccessPermissionsImpl implements AccessPermissions {
 
-	private ArrayList<GameModeType> gameModePermissions;
-	private ArrayList<UserModeType> userModePermissions;
+	private ArrayList<String> userModePermissions;
+	private ArrayList<String> gameModePermissions;
+	private ArrayList<String> levelModePermissions;
 	
 	public AccessPermissionsImpl(){
-		this.gameModePermissions = new ArrayList<GameModeType>();
-		this.gameModePermissions.add(GameModeType.DEFAULT);
-		this.userModePermissions = new ArrayList<UserModeType>();
+		this.userModePermissions = new ArrayList<String>();
+		this.userModePermissions.add("AUTHOR");
+		this.gameModePermissions = new ArrayList<String>();
+		this.gameModePermissions.add("DEFAULT");
+		this.levelModePermissions = new ArrayList<String>();
+		this.levelModePermissions.add("DEFAULT");
 	}
 	
-	public AccessPermissionsImpl(List<GameModeType> gameModePermissions, List<UserModeType> userModePermissions){
-		this.gameModePermissions = new ArrayList<GameModeType>(gameModePermissions);
-		if (!this.gameModePermissions.contains(GameModeType.DEFAULT)) {
-			this.gameModePermissions.add(GameModeType.DEFAULT);
+	public AccessPermissionsImpl(List<String> gameModePermissions, List<String> userModePermissions, List<String> levelModePermissions){
+		this.userModePermissions = new ArrayList<String>(userModePermissions);
+		if (!this.userModePermissions.contains("AUTHOR")) {
+			this.userModePermissions.add("AUTHOR");
 		}
-		this.userModePermissions = new ArrayList<UserModeType>(userModePermissions);
+		this.gameModePermissions = new ArrayList<String>(gameModePermissions);
+		if (!this.gameModePermissions.contains("DEFAULT")) {
+			this.gameModePermissions.add("DEFAULT");
+		}
+		this.levelModePermissions = new ArrayList<String>(levelModePermissions);
+		if (!this.levelModePermissions.contains("DEFAULT")) {
+			this.levelModePermissions.add("DEFAULT");
+		}
 	}
-	
-	
+
 	@Override
-	public void addAccessPermission(GameModeType gameMode) {
+	public void addUserAccessPermission(String gameMode) {
+		userModePermissions.add(gameMode);
+	}
+
+	@Override
+	public void addGameAccessPermission(String gameMode) {
 		gameModePermissions.add(gameMode);
 	}
-
+	
 	@Override
-	public void addAccessPermission(UserModeType userMode) {
-		userModePermissions.add(userMode);
-	}
-
-	@Override
-	public boolean permitsAccess(GameModeType gameMode) {
-		return gameModePermissions.contains(gameMode);
-	}
-
-	@Override
-	public boolean permitsAccess(UserModeType userMode) {
-		return userModePermissions.contains(userMode);
+	public void addLevelAccessPermission(String levelMode) {
+		gameModePermissions.add(levelMode);
 	}
 	
+	@Override
+	public void removeUserAccessPermission(String gameMode) {
+		userModePermissions.remove(gameMode);
+	}
+
+	@Override
+	public void removeGameAccessPermission(String gameMode) {
+		gameModePermissions.remove(gameMode);
+	}
+	
+	@Override
+	public void removeLevelAccessPermission(String levelMode) {
+		gameModePermissions.remove(levelMode);
+	}
+
+	@Override
+	public boolean permitsAccess(String userMode, String gameMode, String levelMode) {
+		if (userModePermissions.contains(userMode) & gameModePermissions.contains(gameMode) & levelModePermissions.contains(levelMode)){
+			return true;
+		}
+		return false;
+	}
+
+	@Override
+	public List<String> getGameModeList() {
+		return gameModePermissions;
+	}
+
+	@Override
+	public List<String> getUserModeList() {
+		return userModePermissions;
+	}
+	
+	@Override
+	public List<String> getLevelModeList() {
+		return levelModePermissions;
+	}
+
+	@Override
+	public boolean permitsAccess(String mode) {
+		return (userModePermissions.contains(mode) || gameModePermissions.contains(mode) || levelModePermissions.contains(mode));
+	}
 }

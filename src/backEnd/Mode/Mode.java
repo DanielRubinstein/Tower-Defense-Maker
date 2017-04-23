@@ -1,38 +1,46 @@
 package backEnd.Mode;
 
+import java.util.List;
+
 public interface Mode {
 
 	/**
 	 * Choose User Mode
 	 * @param newUserMode
 	 */
-	void setUserMode(UserModeType newUserMode);
+	void setUserMode(String newUserMode);
 
 	/**
 	 * @return current User Mode
 	 */
-	UserModeType getUserMode();
-
-	/**
-	 * @return current User Mode as string
-	 */
-	String getUserModeString();
+	String getUserMode();
 
 	/**
 	 * Choose Game Mode
 	 * @param newGameMode
 	 */
-	void setGameMode(GameModeType newGameMode);
+	void setGameMode(String newGameMode);
 
 	/**
 	 * @return current Game Mode
 	 */
-	GameModeType getGameMode();
+	String getGameMode();
+	
+	/**
+	 * Choose Level Mode
+	 * @param newLevelMode
+	 */
+	void setLevelMode(String newLevelMode);
 
 	/**
-	 * @return current Game Mode as string
+	 * @return current Level Mode
 	 */
-	String getGameModeString();
+	String getLevelMode();
+	
+	/**
+	 * @return comprehensive of User Modes
+	 */
+	List<String> getAllUserModes();
 
 	/**
 	 * Change User Mode (Author to Player or Player to Author)

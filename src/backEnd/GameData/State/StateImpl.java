@@ -3,6 +3,7 @@ package backEnd.GameData.State;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.LinkedList;
@@ -14,11 +15,12 @@ import java.util.ResourceBundle;
 import java.util.Set;
 import java.util.Stack;
 
-import ModificationFromUser.Modification_EditAttribute;
+import ModificationFromUser.AttributeOwner.Modification_EditAttribute;
 import backEnd.Coord;
 import backEnd.Attribute.Attribute;
 import backEnd.Attribute.AttributeImpl;
-import backEnd.Mode.UserModeType;
+import backEnd.GameEngine.EngineStatus;
+import backEnd.GameEngine.Engine.Spawning.SpawnQueue;
 import javafx.geometry.Point2D;
 
 /**
@@ -28,61 +30,71 @@ import javafx.geometry.Point2D;
  */
 public class StateImpl extends Observable implements State {
 
-	private int gridWidth;
-	private int gridHeight;
-	private int pointResWidth;
-	private int pointResHeight;
-	private TileGrid stateGrid;
-	private ComponentGraph componentGraph;
+	private int numColsInGrid;
+	private int numRowsInGrid;
+	private TileGrid myTileGrid;
+	private ComponentGraph myComponentGraph;
 	private final static String RESOURCES_PATH = "resources/defaultTileAttributes";
 	private final static ResourceBundle myResources = ResourceBundle.getBundle(RESOURCES_PATH);
 	private final static String IMAGEPATH_RESOURCES_PATH = "resources/images";
 	private final static ResourceBundle myImageResource = ResourceBundle.getBundle(IMAGEPATH_RESOURCES_PATH);
-
-	public StateImpl(int gridWidth, int gridHeight, int pointResolution_Width, int pointResolution_Height) throws FileNotFoundException {
-		this.gridWidth = gridWidth;
-		this.gridHeight = gridHeight;
-		this.pointResWidth = pointResolution_Width;
-		this.pointResHeight = pointResolution_Height;
-		setDefaultTileGrid(gridWidth, gridHeight, pointResolution_Width, pointResolution_Height);
-		componentGraph = new ComponentGraphImpl(gridWidth, gridHeight, pointResolution_Height, pointResolution_Height);
+	private EngineStatus myEngineStatus;
+	private Map<String, SpawnQueue> mySpawnQueues;
+	
+	public StateImpl(int numColsInGrid, int numRowsInGrid) throws FileNotFoundException {
+		this(numColsInGrid, numRowsInGrid, setDefaultTileGrid(numColsInGrid, numRowsInGrid), new ComponentGraphImpl());
+	}
+	
+	public StateImpl(int numRowsInGrid, int numColsInGrid, TileGrid tileGrid, ComponentGraph componentGraph) throws FileNotFoundException {
+		this.numColsInGrid = numColsInGrid;
+		this.numRowsInGrid = numRowsInGrid;
+		myTileGrid = tileGrid;
+		myComponentGraph = componentGraph;
+		myEngineStatus = EngineStatus.PAUSED;
+		mySpawnQueues = new HashMap<String,SpawnQueue>();
 	}
 
-	private void setDefaultTileGrid(int gridWidth, int gridHeight, int pointResolution_Width,
-			int pointResolution_Height) throws FileNotFoundException {
-		stateGrid = new TileGridImpl(gridWidth, gridHeight);
-		for (int i = 0; i < gridHeight; i++) {
-			for (int j = 0; j < gridWidth; j++) {
-				Point2D loc = new Point2D(j,i);
-				Tile newTile = new TileImpl(Arrays.asList(), Arrays.asList(UserModeType.AUTHOR), loc);
-				Attribute<String> imgAttr = (Attribute<String>) newTile.getAttribute("ImageFile");
+
+	private static TileGrid setDefaultTileGrid(int cols, int rows) throws FileNotFoundException {
+		TileGrid tileGrid = new TileGridImpl(cols, rows);
+		for (int row = 0; row < rows; row++) {
+			for (int col = 0; col < cols; col++) {
+				Point2D loc = new Point2D(col, row);
+				
+				Tile newTile = new TileImpl(Arrays.asList(), Arrays.asList(), Arrays.asList(), loc);
+				
+				Attribute<String> imgAttr = newTile.getAttribute("ImageFile");
 				imgAttr.setValue(myImageResource.getString("default_tile"));
-				stateGrid.setTile(newTile, loc);
+				
+				tileGrid.setTileByGridPosition(newTile, col, row);
 
 			}
 		}
+		return tileGrid;
 	}
+	
 	public void addAsObserver(Observer o){
 		this.addObserver(o);
 	}
 
 	@Override
 	public TileGrid getTileGrid() {
-		return stateGrid;
+		return myTileGrid;
 	}
 
 	@Override
 	public ComponentGraph getComponentGraph() {
-		return componentGraph;
+		return myComponentGraph;
 	}
-
+	
 	private Map<Tile, Coord> findStartTiles() {
 		Map<Tile, Coord> startTiles = new HashMap<Tile, Coord>();
-		for (int i = 0; i < gridWidth; i++) { // find the start position
-			for (int j = 0; j < gridHeight; j++) {
-				if ((boolean) stateGrid.getTileByCoord(i, j).getMyAttributes().getAttributeMap()
-						.get(myResources.getString("StartTile")).getValue() == true) {
-					startTiles.put(stateGrid.getTileByCoord(i, j), new Coord(i, j, null));
+		for (int col = 0; col < numColsInGrid; col++) { // find the start position
+			for (int row = 0; row < numRowsInGrid; row++) {
+				Tile tile = myTileGrid.getTileByGridPosition(col, row);
+				if (tile.getMyAttributes()
+						.<Boolean>get(myResources.getString("StartTile")).getValue() == true) {
+					startTiles.put(tile, new Coord(col, row, null));
 				}
 			}
 		}
@@ -90,17 +102,16 @@ public class StateImpl extends Observable implements State {
 	}
 	
 	public void updateState(State state){
-		this.gridWidth = state.getGridWidth();
-		this.gridHeight = state.getGridHeight();
-		this.pointResWidth = state.getPointResolutionWidth();
-		this.pointResHeight = state.getPointResolutionHeight();
-		this.stateGrid = state.getTileGrid();
-		this.componentGraph = state.getComponentGraph();
+		this.numColsInGrid = state.getGridWidth();
+		this.numRowsInGrid = state.getGridHeight();
+		this.myTileGrid = state.getTileGrid();
+		this.myComponentGraph = state.getComponentGraph();
 		this.setChanged();
 		this.notifyObservers();
 
 	}
 
+	/*
 	@SuppressWarnings({ "unused", "unchecked" })
 	private void formShortestPath(){
 		Map<Tile, Coord> startTiles = findStartTiles();
@@ -155,57 +166,72 @@ public class StateImpl extends Observable implements State {
 			}
 		}
 	}
+	*/
 
 	private ArrayList<Coord> getAdjacents(Coord current) {
 		ArrayList<Coord> adjacents = new ArrayList<Coord>();
-		if(isPassable(current.getXCoord()+1, current.getYCoord()  )){
+		if(isTraversable(current.getXCoord()+1, current.getYCoord()  )){
 			adjacents.add(new Coord(current.getXCoord()+1, current.getYCoord(), current));
 		}
-		if(isPassable(current.getXCoord()-1, current.getYCoord()  )){
+		if(isTraversable(current.getXCoord()-1, current.getYCoord()  )){
 			adjacents.add(new Coord(current.getXCoord()-1, current.getYCoord(), current));
 		}
-		if(isPassable(current.getXCoord()  , current.getYCoord()+1)){
+		if(isTraversable(current.getXCoord()  , current.getYCoord()+1)){
 			adjacents.add(new Coord(current.getXCoord(), current.getYCoord()+1, current));
 		}
-		if(isPassable(current.getXCoord()  , current.getYCoord()-1)){
+		if(isTraversable(current.getXCoord()  , current.getYCoord()-1)){
 			adjacents.add(new Coord(current.getXCoord(), current.getYCoord()-1, current));
 		}
 		return adjacents;
 	}
 
-	private boolean isPassable(int x, int y){
-		Tile curTile = stateGrid.getTileByCoord(x,y);
-		if(curTile == null || (boolean)curTile.getAttribute(myResources.getString("Traversable")).getValue() == true){
+	private boolean isTraversable(int x, int y){
+		Tile curTile = myTileGrid.getTileByGridPosition(x,y);
+		if(curTile == null || curTile.<Boolean>getAttribute(myResources.getString("Traversable")).getValue() == true){
 			return false;
 		}
 		
 		return true;
 	}
 	
+	/*
 	@Override
 	public void calculateShortestPath() {
 		// TODO Auto-generated method stub
 
 	}
-
+	*/
+	
 	@Override
 	public int getGridWidth() {
-		return gridWidth;
+		return numColsInGrid;
 	}
 
 	@Override
 	public int getGridHeight() {
-		return gridHeight;
+		return numRowsInGrid;
 	}
+	
+	public boolean gameIsRunning(){
+		return myEngineStatus.equals(EngineStatus.RUNNING);
+	}
+
 
 	@Override
-	public int getPointResolutionWidth() {
-		return pointResWidth;
+	public Collection<Component> getComponentsByTileGridPosition(Point2D tileGridPosition) {
+		TileCorners tileCorners = new TileCorners(tileGridPosition, myTileGrid.getTileWidth(), myTileGrid.getTileHeight());
+		return myComponentGraph.getComponentsByTileCorners(tileCorners);
 	}
+
+	public void setEngineStatus(EngineStatus engineStatus) {
+		myEngineStatus=engineStatus;
+		this.setChanged();
+		this.notifyObservers();
+	}
+
 
 	@Override
-	public int getPointResolutionHeight() {
-		return pointResHeight;
+	public Map<String, SpawnQueue> getSpawnQueues() {
+		return mySpawnQueues;
 	}
-
 }

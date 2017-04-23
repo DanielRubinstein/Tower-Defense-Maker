@@ -13,8 +13,8 @@ import backEnd.Attribute.Attribute;
 import backEnd.Attribute.AttributeData;
 import backEnd.Attribute.AttributeFactory;
 import backEnd.Attribute.AttributeOwner;
-import backEnd.GameEngine.BehaviorFactory;
 import backEnd.GameEngine.Behaviors.Behavior;
+import backEnd.GameEngine.Behaviors.BehaviorFactory;
 
 public class Component extends Observable implements AttributeOwner {
 	/**
@@ -36,13 +36,11 @@ public class Component extends Observable implements AttributeOwner {
 	private List<Observer> observers = new ArrayList<Observer>();
 	private long ID;
 	
-	public Component(AttributeData attributes) throws FileNotFoundException {
-		this(attributes, new AccessPermissionsImpl());
+	public Component() throws FileNotFoundException{
+		this(new AttributeData(),new AccessPermissionsImpl());
 	}
+	
 
-	public Component(){
-		
-	}
 	public long printID(){
 		return ID;
 	}
@@ -57,7 +55,7 @@ public class Component extends Observable implements AttributeOwner {
 		BehaviorFactory bf = new BehaviorFactory(this); // add a real component
 		for (String key : behaviorResources.keySet()) {
 			String value = behaviorResources.getString(key);
-			Attribute<?> myAttribute = af.getAttribute(key); // FIX THIS- HOW
+			Attribute<?> myAttribute = af.getAttribute(key); // FIXME THIS- HOW
 																// DOES OUR
 																// FACTORY
 																// GENERATE
@@ -98,7 +96,8 @@ public class Component extends Observable implements AttributeOwner {
 		return myBehaviors.get(behaviorType);
 	}
 
-	public Attribute<?> getAttribute(String attributeType) {
+	@Override
+	public <T> Attribute<T> getAttribute(String attributeType) {
 		return myAttributes.get(attributeType);
 	}
 
@@ -131,12 +130,10 @@ public class Component extends Observable implements AttributeOwner {
 		return myType;
 	}
 
-	@SuppressWarnings("unchecked")
 	@Override
 	public <T> void setAttributeValue(String attrName, T newVal) {
-		((Attribute<T>) myAttributes.get(attrName)).setValue(newVal);
-		//System.out.println("setting component attr " +attrName + "     "    +newVal);
-		
+		Attribute<T> attrToSet = myAttributes.<T>get(attrName);
+		attrToSet.setValue(newVal);
 		notifyObservers();
 	}
 
@@ -145,6 +142,11 @@ public class Component extends Observable implements AttributeOwner {
 		observers.add(obs);
 	}
 
+	
+	public boolean containsAttribute(String key){
+		return myAttributes.containsAttribute(key);
+	}
+	
 	@Override
 	public void notifyObservers() {
 		for (Observer obs : observers) {
@@ -157,11 +159,16 @@ public class Component extends Observable implements AttributeOwner {
 		//addObserver(o);
 	}
 
-	/**
-	 * adds an attribute to the List of Attributes
-	 * 
-	 * @return
-	 */
-	// public abstract void addAttribute(Attribute toAdd);
+	@Override
+	public List<Observer> getAndClearObservers() {
+		List<Observer> currObservers = observers;
+		observers = new ArrayList<Observer>();
+		return currObservers;
+	}
 
-}
+	@Override
+	public void setObserverList(List<Observer> observers) {
+		this.observers = observers;
+	}
+	
+}

@@ -3,8 +3,8 @@ package frontEnd.Skeleton.UserTools;
 import java.io.File;
 import java.net.MalformedURLException;
 
-import frontEnd.Menus.ButtonMenu;
-import frontEnd.Menus.ButtonMenuImpl;
+import frontEnd.CustomJavafxNodes.ButtonMenu;
+import frontEnd.CustomJavafxNodes.ButtonMenuImpl;
 import javafx.scene.Scene;
 import javafx.scene.web.WebEngine;
 import javafx.scene.web.WebView;
@@ -25,12 +25,13 @@ public class HelpOptions {
 	}
 
 	private void addAllOptions(){
-		allOptions.addSimpleButton("What is Tower Defense?",e -> loadHTMLPage(DEFAULT_TOWER_DEFENSE));
+		allOptions.addSimpleButton("What is Tower Defense?", () -> loadHTMLPage(DEFAULT_TOWER_DEFENSE));
 	}
 	
 	
 	private void loadHTMLPage(String path){
 		try {
+			
 			WebView browser = new WebView();
 			WebEngine webEngine = browser.getEngine();
 			webEngine.load(new File(path).toURI().toURL().toExternalForm());

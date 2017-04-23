@@ -1,14 +1,25 @@
 package backEnd;
 
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 import backEnd.Bank.BankController;
-import backEnd.Data.DataController;
-import backEnd.Data.XMLReadingException;
 import backEnd.GameData.GameData;
+import backEnd.GameData.State.PlayerStatusModifier;
+import backEnd.GameData.State.PlayerStatusReader;
 import backEnd.GameData.State.State;
+import backEnd.GameEngine.EngineStatus;
 import backEnd.GameEngine.Engine.GameProcessController;
+import backEnd.LevelProgression.LevelProgressionControllerImpl;
+import backEnd.LevelProgression.LevelProgressionControllerReader;
 import backEnd.Mode.Mode;
 import backEnd.Mode.ModeImpl;
 import backEnd.Mode.ModeReader;
+import data.DataController;
+import data.XMLReadingException;
+import javafx.beans.property.SimpleStringProperty;
 
 /**
  * Controller the front end calls when it detects a backend modification from the user,
@@ -25,22 +36,21 @@ public class ModelImpl implements Model{
 	private BankController myBankController;
 	private DataController myDataController;
 	private GameProcessController myEngine;
+	private LevelProgressionControllerImpl myLevelProgressionController;
+	private EngineStatus myEngineStatus;
 	
-	public ModelImpl(DataController dataController, GameData gameData) throws XMLReadingException {
-		myDataController = dataController;
+	public ModelImpl(GameData gameData, EngineStatus engineStatus) throws XMLReadingException {
+		myDataController = new DataController();
 		myGameData = gameData;
-		myMode = new ModeImpl();
-
-		myDataController = dataController;
-		myEngine = new GameProcessController(myGameData.getState(), myGameData.getRules());
-		myBankController = dataController.generateBanks();
-
+		myMode = new ModeImpl("AUTHOR", "DEFAULT", "DEFAULT", myLevelProgressionController);
+		myLevelProgressionController = new LevelProgressionControllerImpl(myMode, myDataController, myDataController.loadGamesMapData());
+		myEngine = new GameProcessController(myGameData);
+		myBankController = new BankController(myMode, myDataController.loadTileMap(), myDataController.loadComponentMap());
 	}
 
 	public State getState(){
 		return myGameData.getState();
 	}
-
 	
 	public ModeReader getModeReader(){
 		return (ModeReader) myMode;
@@ -68,5 +78,24 @@ public class ModelImpl implements Model{
 	public GameProcessController getGameProcessController() {
 		return myEngine;
 
+	}
+	
+	public SimpleStringProperty getEngineStatus(){
+		return myEngine.getEngineStatus();
+	}
+
+	@Override
+	public PlayerStatusReader getPlayerStatusReader() {
+		return myGameData.getReadOnlyPlayerStatus();
+	}
+
+	@Override
+	public PlayerStatusModifier getModifiablePlayerStatus() {
+		return myGameData.getModifiablePlayerStatus();
+	}
+
+		
+	public LevelProgressionControllerReader getLevelProgressionController() {
+		return (LevelProgressionControllerReader) myLevelProgressionController;
 	}
 }

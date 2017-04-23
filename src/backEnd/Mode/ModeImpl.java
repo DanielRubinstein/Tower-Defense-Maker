@@ -1,5 +1,10 @@
 package backEnd.Mode;
 
+import java.util.Arrays;
+import java.util.List;
+
+import backEnd.LevelProgression.LevelProgressionControllerReader;
+import javafx.beans.property.SimpleBooleanProperty;
 
 /**
  * This class contains the current mode and has getters/setters for people to access the mode
@@ -8,53 +13,69 @@ package backEnd.Mode;
  *
  */
 public class ModeImpl implements ModeReader, Mode{
-	private UserModeType currUserMode;
-	private GameModeType currGameMode;
+	private String currUserMode;
+	private String currGameMode;
+	private String currLevelMode;
+	private SimpleBooleanProperty aBP;
+	private List<String> userModes;
 	
-	public ModeImpl(){
-		this.currGameMode = GameModeType.DEFAULT;
-		this.currUserMode = UserModeType.AUTHOR;
-	}
-	
-	public ModeImpl(GameModeType gameMode, UserModeType userMode){
+	public ModeImpl(String userMode, String gameMode, String levelMode, LevelProgressionControllerReader levelProgression){
 		this.currGameMode = gameMode;
 		this.currUserMode = userMode;
+		this.currLevelMode = levelMode;
+		this.userModes = Arrays.asList("AUTHOR", "PLAYER");
+		aBP = new SimpleBooleanProperty(this.getUserMode().equals("AUTHOR"));
 	}
 
 	@Override
-	public void setUserMode(UserModeType newUserMode){
+	public void setUserMode(String newUserMode){
 		currUserMode = newUserMode;
 	}
 	
 	@Override
-	public UserModeType getUserMode(){
+	public String getUserMode(){
 		return currUserMode;
 	}
 	
 	@Override
-	public String getUserModeString(){
-		return currUserMode.toString();
+	public List<String> getAllUserModes(){
+		return userModes;
 	}
 	
 	@Override
-	public void setGameMode(GameModeType newGameMode){
+	public void setGameMode(String newGameMode){
 		currGameMode = newGameMode;
 	}
 	
 	@Override
-	public GameModeType getGameMode(){
+	public String getGameMode(){
 		return currGameMode;
-	}
-	
-	@Override
-	public String getGameModeString(){
-		return currGameMode.toString();
 	}
 	
 	@Override
 	public void toggleUserMode(){
 		System.out.println("MODE CHANGE");
-		currUserMode = UserModeType.getNextMode(currUserMode);
+		if(currUserMode.equals("AUTHOR")){
+			currUserMode = "PLAYER";
+		} else if (currUserMode.equals("PLAYER")){
+			currUserMode = "AUTHOR";
+		} 
+		aBP.setValue(!aBP.getValue());
+	}
+	
+	@Override
+	public SimpleBooleanProperty getAuthorBooleanProperty(){
+		return aBP;
+	}
+
+	@Override
+	public void setLevelMode(String newLevelMode) {
+		currLevelMode = newLevelMode;
+	}
+
+	@Override
+	public String getLevelMode() {
+		return currLevelMode;
 	}
 	
 }

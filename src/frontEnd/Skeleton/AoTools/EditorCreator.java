@@ -4,7 +4,7 @@ import java.io.File;
 import java.util.List;
 import java.util.MissingResourceException;
 
-import ModificationFromUser.Modification_EditAttribute;
+import ModificationFromUser.AttributeOwner.Modification_EditAttribute;
 import backEnd.Attribute.Attribute;
 import backEnd.Attribute.AttributeOwner;
 import frontEnd.View;

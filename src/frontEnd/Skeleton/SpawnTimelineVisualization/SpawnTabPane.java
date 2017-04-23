@@ -1,0 +1,123 @@
+package frontEnd.Skeleton.SpawnTimelineVisualization;
+
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Map;
+import java.util.Optional;
+
+import ModificationFromUser.Spawning.Modification_AddSpawnQueue;
+import ModificationFromUser.Spawning.Modification_RemoveSpawnQueue;
+import backEnd.GameEngine.Engine.Spawning.SpawnQueue;
+import frontEnd.View;
+import frontEnd.Skeleton.UserTools.SkeletonObject;
+import javafx.scene.Node;
+import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
+import javafx.scene.control.Tab;
+import javafx.scene.control.TabPane;
+import javafx.scene.control.Alert.AlertType;
+
+public class SpawnTabPane implements SkeletonObject {
+	private TabPane myRoot;
+	private Collection<Integer> takenIDs;
+	private View myView;
+	private Map<String, SpawnQueue> mySpawnQueues;
+
+	public SpawnTabPane(View view) {
+
+		// TODO there has to be some observation of the backend. When the
+		// spawnqueue changes, the front end must be notified so it can update.
+
+		myView = view;
+		myRoot = new TabPane();
+		mySpawnQueues = myView.getSpawnQueues();
+		if (!mySpawnQueues.isEmpty()) {
+			addPresetQueues();
+		}
+		createAddTab();
+	}
+
+	private void addPresetQueues() {
+		for (Map.Entry<String, SpawnQueue> entry : mySpawnQueues.entrySet()) {
+			createNewTimelineTab(entry.getKey(), entry.getValue());
+		}
+	}
+
+	private void createNewTimelineTab(String key, SpawnQueue value) {
+		SpawnTimelineView spawnTimelineView = new SpawnTimelineView(myView, myRoot.widthProperty(), key, value);
+		Tab newSpawnTab = new Tab(key);
+		newSpawnTab.setContent(spawnTimelineView.getRoot());
+		newSpawnTab.setOnCloseRequest(e -> {
+			if (checkWithUser(newSpawnTab)) {
+				takenIDs.remove(key.substring(key.indexOf(' ')));
+				myView.sendUserModification(new Modification_RemoveSpawnQueue(key));
+			} else {
+				e.consume();
+			}
+		});
+
+		myRoot.getTabs().add(myRoot.getTabs().size() - 1, newSpawnTab);
+		myRoot.getSelectionModel().select(newSpawnTab);
+	}
+
+	private void createAddTab() {
+		Tab tabAdd = new Tab("+");
+		tabAdd.setClosable(false);
+		tabAdd.setOnSelectionChanged((e) -> {
+			if (tabAdd.selectedProperty().get()) {
+				createNewTimelineTab();
+			}
+		});
+		myRoot.getTabs().add(tabAdd);
+	}
+
+	private void createNewTimelineTab() {
+		Integer tabID = nextTimelineIndex();
+		String tabName = "Timeline " + tabID;
+		myView.sendUserModification(new Modification_AddSpawnQueue(tabName));
+		createNewTimelineTab(tabName, mySpawnQueues.get(tabName));
+	}
+
+	/**
+	 * http://stackoverflow.com/questions/31540500/alert-box-for-when-user-attempts-to-close-application-using-setoncloserequest-in
+	 * 
+	 * @param tab
+	 * @return
+	 */
+	private boolean checkWithUser(Tab tab) {
+		Alert alert = new Alert(AlertType.CONFIRMATION);
+		alert.setTitle("Close Confirmation");
+		alert.setHeaderText("Delete Spawn Timeline");
+		alert.setContentText("Are you sure you want to delete this spawn timeline? This cannot be undone");
+		Optional<ButtonType> result = alert.showAndWait();
+		if (result.get() == ButtonType.OK) {
+			alert.close();
+			return true;
+		}
+
+		if (result.get() == ButtonType.CANCEL) {
+			alert.close();
+			return false;
+		}
+		return false;
+	}
+
+	private Integer nextTimelineIndex() {
+		Integer count = 1;
+		if (takenIDs != null) {
+			while (takenIDs.contains(count)) {
+				count++;
+			}
+		} else {
+			takenIDs = new ArrayList<Integer>();
+		}
+		takenIDs.add(count);
+		return count;
+	}
+
+	@Override
+	public Node getRoot() {
+		return myRoot;
+	}
+
+}
