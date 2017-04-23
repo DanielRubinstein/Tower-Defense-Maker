@@ -29,6 +29,7 @@ public class ViewImpl implements View {
 	private SimpleBooleanProperty authorProperty;
 	private Stage appStage;
 	private FacebookInteractor myFB;
+	private ModeReader myMode;
 
 	public ViewImpl(Model model, Consumer<ModificationFromUser> inputConsumer, FacebookInteractor fb) {
 		myFB=fb;
@@ -42,8 +43,8 @@ public class ViewImpl implements View {
 	private void init(ModelReader model, Consumer<ModificationFromUser> inputConsumer){
 		myModel = model;
 		myModConsumer = inputConsumer;
-		ModeReader mode = model.getModeReader();
-		authorProperty = mode.getAuthorBooleanProperty();
+		myMode = model.getModeReader();
+		authorProperty = myMode.getAuthorBooleanProperty();
 		mySkeleton = new SkeletonImpl();
 		mySkeleton.init(this, myModel);
 		appStage = new Stage();
@@ -123,6 +124,10 @@ public class ViewImpl implements View {
 	@Override
 	public Map<String, SpawnQueue> getSpawnQueues() {
 		return myModel.getState().getSpawnQueues();
+	}
+	
+	public ModeReader getModeReader(){
+		return myMode;
 	}
 
 }

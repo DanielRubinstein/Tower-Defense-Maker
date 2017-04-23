@@ -16,7 +16,7 @@ import data.XMLReadingException;
  * @author Riley Nisbet
  *
  */
-public class LevelProgressionControllerImpl implements LevelProgressionControllerReader {
+public class LevelProgressionControllerImpl implements LevelProgressionControllerReader, LevelProgressionControllerEditor {
 	private Map<String,List<String>> gamesMap; //String gameName -> List of Level names
 	private DataController myDataController;
 	private Mode myMode;
@@ -30,6 +30,9 @@ public class LevelProgressionControllerImpl implements LevelProgressionControlle
 	/* (non-Javadoc)
 	 * @see backEnd.LevelProgression.LevelProgressionControllerReader#getGameList()
 	 */
+	/* (non-Javadoc)
+	 * @see backEnd.LevelProgression.LevelProgressionControllerEditor#getGameList()
+	 */
 	@Override
 	public List<String> getGameList(){
 		return new ArrayList<String>(gamesMap.keySet());
@@ -38,11 +41,18 @@ public class LevelProgressionControllerImpl implements LevelProgressionControlle
 	/* (non-Javadoc)
 	 * @see backEnd.LevelProgression.LevelProgressionControllerReader#getLevelList(java.lang.String)
 	 */
+	/* (non-Javadoc)
+	 * @see backEnd.LevelProgression.LevelProgressionControllerEditor#getLevelList(java.lang.String)
+	 */
 	@Override
 	public List<String> getLevelList(String gameName){
 		return gamesMap.get(gameName);
 	}
 	
+	/* (non-Javadoc)
+	 * @see backEnd.LevelProgression.LevelProgressionControllerEditor#getFullLevelList()
+	 */
+	@Override
 	public List<String> getFullLevelList(){
 		List<String> allLevels = new ArrayList<String>();
 		for (List<String> levels : gamesMap.values()){
@@ -51,10 +61,18 @@ public class LevelProgressionControllerImpl implements LevelProgressionControlle
 		return allLevels;
 	}
 	
+	/* (non-Javadoc)
+	 * @see backEnd.LevelProgression.LevelProgressionControllerEditor#setLevelList(java.lang.String, java.util.List)
+	 */
+	@Override
 	public void setLevelList(String gameName, List<String> levelList){
 		gamesMap.put(gameName, levelList);
 	}
 	
+	/* (non-Javadoc)
+	 * @see backEnd.LevelProgression.LevelProgressionControllerEditor#addNewGame(java.lang.String)
+	 */
+	@Override
 	public void addNewGame(String gameName){
 		gamesMap.put(gameName, new ArrayList<String>());
 	}
@@ -78,6 +96,10 @@ public class LevelProgressionControllerImpl implements LevelProgressionControlle
 		}
 	}
 	
+	/* (non-Javadoc)
+	 * @see backEnd.LevelProgression.LevelProgressionControllerEditor#addLevelToGame(java.lang.String, java.lang.String)
+	 */
+	@Override
 	public void addLevelToGame(String gameName, String level){
 		List<String> levelPathsList = gamesMap.get(gameName);
 		levelPathsList.add(level);
