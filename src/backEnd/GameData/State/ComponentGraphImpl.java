@@ -105,7 +105,7 @@ public class ComponentGraphImpl extends Observable implements ComponentGraph {
 	
 	@Override
 	public List<Component> getComponentsWithinRadius(Component centerComp, double radius){
-		Point2D centerLoc = (Point2D) centerComp.getAttribute("Position").getValue();
+		Point2D centerLoc = centerComp.<Point2D>getAttribute("Position").getValue();
 		ArrayList<Component> componentsWithinRadius = new ArrayList<Component>();
 		for (Point2D loc : componentMap.keySet()){
 			double distance = Math.sqrt(Math.pow(centerLoc.getX() - loc.getX(), 2) + Math.pow(centerLoc.getY() - loc.getY(), 2));

@@ -12,7 +12,7 @@ public interface AttributeOwnerReader {
 	 * @param attrType
 	 * @return Attribute that corresponds to the String attrType
 	 */
-	Attribute<?> getAttribute(String attrName);
+	<T> Attribute<T> getAttribute(String attrName);
 	
 	void addAsListener(Observer o);
 }
