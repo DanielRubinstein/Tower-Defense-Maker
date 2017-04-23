@@ -18,11 +18,13 @@ public class LevelEditor {
 	private String currentGame;
 	private Label currentGameLabel;
 	private VBox levelsView;
+	private VBox gamesView;
 	private LevelProgressionControllerEditor myContr;
 	
-	public LevelEditor(double width, VBox levels, LevelProgressionControllerEditor myLevels){
+	public LevelEditor(double width, VBox levels, VBox games,LevelProgressionControllerEditor myLevels){
 		levelsView = levels;
 		myContr = myLevels;
+		gamesView = games;
 		currentGameLabel = new Label("No game selected");
 		createAllLevelsEditor();
 		createGameEditor();
@@ -40,7 +42,7 @@ public class LevelEditor {
 		Button addGame = new Button("Add Game");
 		addGame.setOnAction(e -> {
 			myContr.addNewGame(addText.getText());
-			
+			addNew(addText.getText(),gamesView);
 		});
 		HBox removeBox = new HBox();
 		removeBox.getChildren().addAll(removeGame,currentGameLabel);
@@ -74,27 +76,30 @@ public class LevelEditor {
 		allLevelsEditor = new HBox();
 		Button instructions = new Button("Add this to levels:");
 		Label levelToAdd = new Label();
-		instructions.setOnAction(e -> addNewLevel(levelToAdd.getText()));
+		instructions.setOnAction(e -> {
+			String lev = levelToAdd.getText();
+			addNew(lev,levelsView);
+			myContr.addLevelToGame(currentGame,lev);
+		});
 		allLevelsEditor.getChildren().addAll(instructions,levelToAdd);
 	}
 	public void makeLevelToAdd(String level){
 		Label l = (Label) allLevelsEditor.getChildren().get(1);
 		l.setText(level);
 	}
-	private void addNewLevel( String s){
+	private void addNew( String s,VBox addTo){
 		Button b = new Button(s);
 		b.setOnAction(e -> populateLevelEditor(b));
-		addAtIndex(b,levelsView.getChildren().size());
-		myContr.addLevelToGame(currentGame, s);
+		addAtIndex(b,addTo.getChildren().size(),addTo);
 	}
 	public void populateLevelToAdd(String text){
 		Label l = (Label) allLevelsEditor.getChildren().get(1);
 		l.setText(text);
 	}
 	
-	private void addAtIndex(Button b, int newIndex){
-		levelsView.getChildren().remove(b);
-		levelsView.getChildren().add(newIndex, b);
+	private void addAtIndex(Button b, int newIndex, VBox addTo){
+		addTo.getChildren().remove(b);
+		addTo.getChildren().add(newIndex, b);
 	}
 	private void incrementIndex(Button b, int increment){
 		int oldIndex = levelsView.getChildren().indexOf(b);

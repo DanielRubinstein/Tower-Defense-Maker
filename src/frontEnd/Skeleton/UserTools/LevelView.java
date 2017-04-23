@@ -21,6 +21,7 @@ import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import resources.Constants;
 
 public class LevelView {
 	
@@ -50,6 +51,7 @@ public class LevelView {
 	
 	public void launch(){
 		myScene = new Scene(myRoot);
+		myScene.getStylesheets().add(Constants.DEFAULT_CSS);
 		myStage.setScene(myScene);
 		myStage.show();
 	}
@@ -60,17 +62,17 @@ public class LevelView {
 
 		Label game = new Label("Game");
 		myRoot.add(game, 0, 1);
-		VBox outline = createSingleBox(0);
+		VBox gameOutline = createSingleBox(0);
 		VBox levelOutline = createSingleBox(1);
 		VBox allLevelsOutline = createSingleBox(2);
-		populateGame(outline,myLevels.getGameList(),levelOutline);
+		populateGame(gameOutline,myLevels.getGameList(),levelOutline);
 		populateAllLevels(allLevelsOutline,myLevels.getFullLevelList());
 		
 		Label levels = new Label("Levels");
 		myRoot.add(levels, 1, 1);
 		Label allLevels = new Label("All Levels");
 		myRoot.add(allLevels, 2, 1);
-		myLevelEditor = new LevelEditor(100,levelOutline,myLevels);
+		myLevelEditor = new LevelEditor(100,levelOutline,gameOutline,myLevels);
 		createBottomEditor(levelOutline);
 	}
 	private void populateGame(VBox wrapper,List<String> toAdd,VBox addToBox){
