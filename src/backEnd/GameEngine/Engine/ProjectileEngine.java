@@ -1,6 +1,9 @@
 package backEnd.GameEngine.Engine;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.ResourceBundle;
 
 import backEnd.GameData.GameData;
@@ -16,56 +19,63 @@ import javafx.geometry.Point2D;
  */
 public class ProjectileEngine implements Engine {
 
-	private State myState;
-	private final static String RESOURCES_PATH = "resources/attributes";
-	private final static ResourceBundle myResources = ResourceBundle.getBundle(RESOURCES_PATH);
-
 	@Override
-	public void gameLoop(GameData gameData, double stepTime) { // should
-																// refactor the
-																// movement into
-																// separate
-																// method if
-																// time
+	public void gameLoop(GameData gameData, double stepTime) {
 		System.out.println("ProjectileEngine called");
-		myState = gameData.getState();
 
-		for (Component c : myState.getComponentGraph().getAllComponents()) {
-			if (c.getMyType().equals("Projectile")) {
-				System.out.println("Calculating projectile position");
+		List<Component> toRemove=new ArrayList<Component>();
+		Map<Component, Point2D> toAdd=new HashMap<Component, Point2D>();
+		
+		for (Component c : gameData.getState().getComponentGraph().getAllComponents()) {
+			if (((String) c.getAttribute("Type").getValue()).equals("Projectile")) {
+				//System.out.println("Calculating projectile position");
+				toRemove.add(c);
 				Point2D newPos = calculateNewPos(c);
-
+				toAdd.put(c, (Point2D)c.getAttribute("Position").getValue());
+				System.out.println("projectileTraveled is " + c.getAttribute("ProjectileTraveled").getValue());
+				System.out.println("projectileMaxDist is " + c.getAttribute("ProjectileMaxDistance").getValue());
+				
 				if ((Double) c.getAttribute("ProjectileTraveled").getValue() >= (Double) c
-						.getAttribute(myResources.getString("ProjectileMaxDistance")).getValue()) {
+						.getAttribute(("ProjectileMaxDistance")).getValue()) {
+					System.out.println("Projectile has reached target");
 					List<Component> targets = gameData.getState().getComponentGraph().getComponentsWithinRadius(c,
 							(Double) c.getAttribute("ExplosionRadius").getValue());
 					System.out.println("About to perform projectile action");
 					performProjectileAction(c, targets);
 
-					myState.getComponentGraph().removeComponent(c); // reached
+					gameData.getState().getComponentGraph().removeComponent(c); // reached
 																	// destination,
-																	// delete
-																	// projectile
+																	// will cause ConcModException probably
 					continue;
 				}
-				c.setAttributeValue(myResources.getString("Position"), newPos);
+				c.setAttributeValue("Position", newPos);
 			}
+		}
+		for (Component toDelete: toRemove){
+			System.out.println("deleting component");
+			gameData.getState().getComponentGraph().removeComponent(toDelete);
+		}
+		for (Component c: toAdd.keySet()){
+			System.out.println("adding component");
+			gameData.getState().getComponentGraph().addComponentToGrid(c, toAdd.get(c));
 		}
 	}
 
 	private Point2D calculateNewPos(Component c) {
-		double curVel = (Double) c.getAttribute(myResources.getString("Velocity")).getValue();
-		Point2D curPos = (Point2D) c.getAttribute(myResources.getString("Position")).getValue();
-		Point2D targetPos = (Point2D) c.getAttribute(myResources.getString("ProjectileTargetPosition")).getValue();
+		Double curVel = (Double) c.getAttribute(("Velocity")).getValue();
+		
+		Point2D curPos = (Point2D) c.getAttribute(("Position")).getValue();
+		Point2D targetPos = (Point2D) c.getAttribute(("ProjectileTargetPosition")).getValue();
 		Point2D difference = targetPos.subtract(curPos);
 
-		double slope = difference.getY() / difference.getX();
-		double distTraveled = Math.sqrt(Math.pow(curVel, 2) + Math.pow(slope * curVel, 2));
-		Point2D newPos = curPos.add((curVel), curVel * slope);
-		c.setAttributeValue(myResources.getString("ProjectileTraveled"),
-				c.getAttribute(myResources.getString("ProjectileTraveled") + distTraveled));
-
-		System.out.println("performed targeting math" + newPos);
+		Double slope = difference.getY() / difference.getX();
+		Double distTraveled = Math.sqrt(Math.pow(curVel, 2) + Math.pow(slope * curVel, 2));
+		Point2D newPos = new Point2D(curPos.getX()+curVel, curPos.getY()+curVel* slope);
+		//System.out.println("curPos.get(X) is "+curPos.getX()+" , curPos.get(Y) is "+curPos.getY()+" , curVel is: "+curVel+" ,slope is "+slope);
+		//curPos.add((curVel), curVel * slope);
+		c.setAttributeValue("ProjectileTraveled",((Double) c.getAttribute(("ProjectileTraveled")).getValue()) + distTraveled);
+		//System.out.println("Slope is " + slope + "distanceTraveled" + distTraveled);
+		//System.out.println("performed targeting math" + newPos + curPos + targetPos + difference);
 		return newPos;
 
 	}
@@ -87,6 +97,7 @@ public class ProjectileEngine implements Engine {
 						* (Double) target.getAttribute("Speed").getValue()));
 				System.out.println("projectile action performed");
 				if(projectile.getAttribute("FireType").getValue().equals("SingleTarget")){
+					System.out.println("Single Target, loop broken, action finished");
 					break; //if AOE, continue to loop through all targets, else only affect one target
 				}
 			}

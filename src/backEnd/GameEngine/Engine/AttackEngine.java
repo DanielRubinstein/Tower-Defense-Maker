@@ -15,7 +15,7 @@ import javafx.geometry.Point2D;
 
 /**
  * Deals with firing projectiles from towers at targets
- * @author Christian
+ * @author Christian Martindale
  * @author Daniel
  */
 
@@ -71,8 +71,9 @@ public class AttackEngine implements Engine {
 		Point2D targetPos = (Point2D) targetPosObj;
 		projectile.setAttributeValue("Position", bulletPos);
 		projectile.setAttributeValue("ProjectileTargetPosition", targetPos);
-		projectile.setAttributeValue("ProjectileMaxDistance", targetPos.subtract(bulletPos));
-		projectile.setAttributeValue("ProjectileTarget", target);
+		Point2D finalTargetPoint = targetPos.subtract(bulletPos);
+		//TODO: USE .magnitude() method below
+		projectile.setAttributeValue("ProjectileMaxDistance", Math.sqrt(Math.pow(finalTargetPoint.getX(),2) + Math.pow(finalTargetPoint.getY(), 2)));
 		myGameData.getState().getComponentGraph().addComponentToGrid(projectile, bulletPos);
 	}
 
