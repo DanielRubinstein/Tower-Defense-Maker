@@ -48,7 +48,7 @@ public class BankController extends Observable
 		try{
 			this.tileBank = new HashMap<String, Tile>();
 			this.componentBank = new HashMap<String, Component>();
-			Tile newTile = new TileImpl(Arrays.asList(), Arrays.asList("AUTHOR"), Arrays.asList(), new Point2D(0,0));
+			Tile newTile = new TileImpl();
 			newTile.setAttributeValue("ImageFile", "resources/images/Tiles/Blue.png");
 			newTile.setAttributeValue("MoveDirection","Down");
 			addNewTile("Blue Down Tile", newTile);
@@ -69,7 +69,7 @@ public class BankController extends Observable
 			addNewTile("Yellow Left Tile", newTile4);
 			
 			
-			Component newComponent = new Component(new AttributeData(),new AccessPermissionsImpl());
+			Component newComponent = new Component();
 			newComponent.setAttributeValue("ImageFile", "resources/images/Components/rainbow_bloon.png");
 			newComponent.setAttributeValue("Speed", 5d);
 			newComponent.setAttributeValue("Health", 10);
