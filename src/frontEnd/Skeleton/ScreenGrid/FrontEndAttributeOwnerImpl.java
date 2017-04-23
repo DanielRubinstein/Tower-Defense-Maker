@@ -92,7 +92,7 @@ public class FrontEndAttributeOwnerImpl implements Observer, FrontEndAttributeOw
 		myPosition = newLoc;
 		myImage.setX(newLoc.getX());
 		myImage.setY(newLoc.getY());
-		System.out.println("it should have moved "+System.currentTimeMillis());
+		//System.out.println("it should have moved "+System.currentTimeMillis());
 		
 	}
 
