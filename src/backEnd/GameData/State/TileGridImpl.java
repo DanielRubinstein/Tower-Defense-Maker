@@ -89,13 +89,17 @@ public class TileGridImpl extends Observable implements TileGrid {
 	@Override
 	public void setTileByGridPosition(Tile newTile, int column, int row){
 		Point2D posOfNewTile = new Point2D(column, row);
+		
 		Boolean initialization = false;
 		if(!tileGrid.containsKey(posOfNewTile)){
 			initialization = true;
+			tileGrid.put(posOfNewTile, newTile);
 		}
-		tileGrid.put(posOfNewTile, newTile);
+
 		if(!initialization){ 
 			// do not notify ScreenGrid for each initial Tile, only if changed after intialization
+			newTile.setObserverList(tileGrid.get(posOfNewTile).getAndClearObservers());
+			tileGrid.put(posOfNewTile, newTile);
 			this.setChanged();
 			this.notifyObservers();
 		}
@@ -186,6 +190,22 @@ public class TileGridImpl extends Observable implements TileGrid {
 	public Object getMap() {
 		
 		return tileGrid;
+	}
+
+	@Override
+	public void setWidth(int numColsInGrid)
+	{
+		this.numColsInGrid = numColsInGrid;
+		this.setChanged();
+		this.notifyObservers();
+	}
+
+	@Override
+	public void setHeight(int numRowsInGrid)
+	{
+		this.numRowsInGrid = numRowsInGrid;
+		this.setChanged();
+		this.notifyObservers();
 	}
 
 }

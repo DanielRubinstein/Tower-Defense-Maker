@@ -47,10 +47,10 @@ public class XMLReaderImpl implements XMLReader{
 	@Override
 	public GameData loadGameStateData(String filePath, String levelName) throws XMLReadingException, FileNotFoundException
 	{
-		
+
 		TileGrid grid = new TileGridImpl((TileGridInstantiator) xStream.fromXML(new File(filePath+"/" + levelName+"/tilegrid.xml")));
 		ComponentGraph graph = new ComponentGraphImpl((HashMap<Point2D, List<Component>>) xStream.fromXML(new File(filePath+"/" + levelName+"/componentgraph.xml")));
-		
+		System.out.println(graph.getAllComponents().toString()+ "TEST");
 		StateImpl state = new StateImpl(grid.getNumRowsInGrid(), grid.getNumColsInGrid(), grid, graph);
 		
 		return new GameData(state, (PlayerStatus) xStream.fromXML(new File(filePath+"/" + levelName+"/playerstatus.xml")),

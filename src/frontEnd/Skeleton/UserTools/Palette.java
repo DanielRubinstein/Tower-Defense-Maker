@@ -65,8 +65,9 @@ public class Palette<T extends AttributeOwner> implements SkeletonObject, Observ
 
 	private void initializeMaps(Map<String, T> presetMap) {
 		observedBankController = myView.getBankController();
-		observedMode = myView.getModeReader();
 		observedBankController.addObserver(this);
+		observedMode = myView.getModeReader();
+		observedMode.addObserver(this);
 		myPresetMapBackEnd = presetMap;
 		myPresetMapFrontEnd = new HashMap<ImageView, T>();
 	}
@@ -207,17 +208,15 @@ public class Palette<T extends AttributeOwner> implements SkeletonObject, Observ
 
 	@Override
 	public void update(Observable o, Object arg) {
-		if (o == observedBankController) {
-			switch (myType) {
-			case "Tiles":
-				myPresetMapBackEnd = (Map<String, T>) observedBankController.getTileMap();
-				updatePalette();
-				break;
-			case "Components":
-				myPresetMapBackEnd = (Map<String, T>) observedBankController.getComponentMap();
-				updatePalette();
-				break;
-			}
+		switch (myType) {
+		case "Tiles":
+			myPresetMapBackEnd = (Map<String, T>) observedBankController.getTileMap();
+			updatePalette();
+			break;
+		case "Components":
+			myPresetMapBackEnd = (Map<String, T>) observedBankController.getComponentMap();
+			updatePalette();
+			break;
 		}
 	}
 
