@@ -7,6 +7,7 @@ import java.util.Map;
 
 import backEnd.Bank.BankController;
 import backEnd.GameData.GameData;
+import backEnd.GameData.Rules.RuleReader;
 import backEnd.GameData.State.PlayerStatusModifier;
 import backEnd.GameData.State.PlayerStatusReader;
 import backEnd.GameData.State.State;
@@ -96,8 +97,14 @@ public class ModelImpl implements Model{
 		return myGameData.getModifiablePlayerStatus();
 	}
 
+	
 		
 	public LevelProgressionControllerEditor getLevelProgressionController() {
 		return  myLevelProgressionController;
+	}
+
+	@Override
+	public List<RuleReader> getRulesList() {
+		return myGameData.getRules().getRuleReaderList();
 	}
 }

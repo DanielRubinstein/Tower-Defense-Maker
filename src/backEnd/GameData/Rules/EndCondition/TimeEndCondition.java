@@ -16,7 +16,9 @@ public class TimeEndCondition extends WinCondition{
 
 	@Override
 	public void invoke(GameData myGameData) {
-		//if(myGameData.getTime() >= getVal()&& this.isEnabled()){winGame();}
+		if(myGameData.getGameTime() >= getVal()&& this.isEnabled()){
+			winGame(myGameData);
+		}
 		
 	}
 

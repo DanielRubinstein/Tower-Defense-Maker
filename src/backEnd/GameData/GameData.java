@@ -40,8 +40,8 @@ public class GameData implements GameDataInterface{
 	}
 
 	@Override
-	public Map<String, Rule> getRules() {
-		return myRules.getMapWithKeyNames();
+	public RulesMap getRules() {
+		return myRules;
 	}
 	
 	public void setEngineStatus(EngineStatus currentEngineStatus){
