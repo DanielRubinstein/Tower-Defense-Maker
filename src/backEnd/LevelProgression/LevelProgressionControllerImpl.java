@@ -27,31 +27,19 @@ public class LevelProgressionControllerImpl implements LevelProgressionControlle
 		this.myDataController = dataController;
 	}
 	
-	/* (non-Javadoc)
-	 * @see backEnd.LevelProgression.LevelProgressionControllerReader#getGameList()
-	 */
-	/* (non-Javadoc)
-	 * @see backEnd.LevelProgression.LevelProgressionControllerEditor#getGameList()
-	 */
+
 	@Override
 	public List<String> getGameList(){
 		return new ArrayList<String>(gamesMap.keySet());
 	}
 	
-	/* (non-Javadoc)
-	 * @see backEnd.LevelProgression.LevelProgressionControllerReader#getLevelList(java.lang.String)
-	 */
-	/* (non-Javadoc)
-	 * @see backEnd.LevelProgression.LevelProgressionControllerEditor#getLevelList(java.lang.String)
-	 */
+	
 	@Override
 	public List<String> getLevelList(String gameName){
 		return gamesMap.get(gameName);
 	}
 	
-	/* (non-Javadoc)
-	 * @see backEnd.LevelProgression.LevelProgressionControllerEditor#getFullLevelList()
-	 */
+	
 	@Override
 	public List<String> getFullLevelList(){
 		List<String> allLevels = new ArrayList<String>();
@@ -61,20 +49,21 @@ public class LevelProgressionControllerImpl implements LevelProgressionControlle
 		return allLevels;
 	}
 	
-	/* (non-Javadoc)
-	 * @see backEnd.LevelProgression.LevelProgressionControllerEditor#setLevelList(java.lang.String, java.util.List)
-	 */
+	
 	@Override
 	public void setLevelList(String gameName, List<String> levelList){
 		gamesMap.put(gameName, levelList);
 	}
 	
-	/* (non-Javadoc)
-	 * @see backEnd.LevelProgression.LevelProgressionControllerEditor#addNewGame(java.lang.String)
-	 */
+	
 	@Override
 	public void addNewGame(String gameName){
 		gamesMap.put(gameName, new ArrayList<String>());
+	}
+	
+	@Override
+	public void removeGame(String gameName){
+		gamesMap.remove(gameName);
 	}
 	
 	public GameData getNextLevel(String gameName, String currentLevel) throws XMLReadingException, FileNotFoundException{
@@ -96,13 +85,17 @@ public class LevelProgressionControllerImpl implements LevelProgressionControlle
 		}
 	}
 	
-	/* (non-Javadoc)
-	 * @see backEnd.LevelProgression.LevelProgressionControllerEditor#addLevelToGame(java.lang.String, java.lang.String)
-	 */
 	@Override
 	public void addLevelToGame(String gameName, String level){
 		List<String> levelPathsList = gamesMap.get(gameName);
 		levelPathsList.add(level);
+		gamesMap.put(gameName, levelPathsList);
+	}
+	
+	@Override
+	public void removeLevelFromGame(String gameName, String level){
+		List<String> levelPathsList = gamesMap.get(gameName);
+		levelPathsList.remove(level);
 		gamesMap.put(gameName, levelPathsList);
 	}
 
