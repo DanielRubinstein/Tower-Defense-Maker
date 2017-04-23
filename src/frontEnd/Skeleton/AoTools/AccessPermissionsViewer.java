@@ -123,6 +123,7 @@ public class AccessPermissionsViewer implements SkeletonObject {
 			parent.getChildren().clear();
 			parent.getChildren().add(optionsBox);
 			addCheckBoxes(parent, myView.getLevelProgressionController().getLevelList(newValue));
+			//optionsBox.requestFocus();
 			
 		});
 		return optionsBox;
@@ -139,7 +140,7 @@ public class AccessPermissionsViewer implements SkeletonObject {
 		myStage = new Stage();
 		myStage.initOwner(myHostStage);
 		myStage.initModality(Modality.APPLICATION_MODAL);
-		Scene scene = new Scene(myRoot);
+		Scene scene = new Scene(myRoot, 500, 300);
 		scene.getStylesheets().add(Constants.DEFAULT_CSS);
 		myStage.setScene(scene);
 		myStage.show();
