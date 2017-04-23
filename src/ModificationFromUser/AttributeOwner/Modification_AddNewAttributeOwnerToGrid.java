@@ -33,7 +33,7 @@ public class Modification_AddNewAttributeOwnerToGrid implements ModificationFrom
 
 	public Modification_AddNewAttributeOwnerToGrid(AttributeOwner toAdd) {
 		this.newAttrOwn = toAdd;
-		this.location = (Point2D)toAdd.getAttribute("Position").getValue();
+		this.location = toAdd.<Point2D>getAttribute("Position").getValue();
 
 	}
 

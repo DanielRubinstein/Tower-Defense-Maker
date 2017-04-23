@@ -5,6 +5,7 @@ import java.util.List;
 
 import backEnd.Attribute.AttributeOwner;
 import backEnd.GameData.State.Component;
+import backEnd.GameEngine.Engine.Spawning.SpawnQueue;
 import frontEnd.View;
 import frontEnd.CustomJavafxNodes.SingleFieldPrompt;
 import frontEnd.Skeleton.UserTools.SkeletonObject;
@@ -31,14 +32,18 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import ModificationFromUser.Spawning.Modification_AddSpawner;
 
-public class SpawnTimelineView implements SkeletonObject{
+public class SpawnTimelineView implements SkeletonObject {
 	private View myView;
 	private ScrollPane dropZone1;
 	private ScrollPane dropZone2;
 	private GridPane myRoot;
+	private String mySpawnQueueName;
+	private SpawnQueue mySpawnQueue;
 
-	public SpawnTimelineView(View view, ReadOnlyDoubleProperty readOnlyDoubleProperty) {
+	public SpawnTimelineView(View view, ReadOnlyDoubleProperty readOnlyDoubleProperty, String key, SpawnQueue value) {
 		myView = view;
+		mySpawnQueueName = key;
+		mySpawnQueue = value;
 		myRoot = new GridPane();
 		myRoot.prefWidthProperty().bind(readOnlyDoubleProperty);
 		myRoot.setPadding(new Insets(20, 20, 20, 20));
@@ -46,30 +51,45 @@ public class SpawnTimelineView implements SkeletonObject{
 		myRoot.setHgap(20);
 		createDropZones();
 	}
-	
-	private void createDropZones(){
-		dropZone1 = singleDropZone("Single Instance Spawns", 0,false);
-		//timelines in a map in game data
-		dropZone2 = singleDropZone("Recurring Spawns", 1,true);
+
+	private void createDropZones() {
+		dropZone1 = singleDropZone("Single Instance Spawns", 0, false);
+		// timelines in a map in game data
+		dropZone2 = singleDropZone("Recurring Spawns", 1, true);
 	}
-	
-	private ScrollPane singleDropZone(String name, int order, boolean repeating){
+
+	private ScrollPane singleDropZone(String name, int order, boolean repeating) {
 		ScrollPane dropZone = createDropZone(name, order);
 		dropZone.setOnDragDropped(e -> {
 			String presetName = e.getDragboard().getString();
 			Component presetComponent = (Component) myView.getBankController().getPreset(presetName);
-			SingleFieldPrompt hey = new SingleFieldPrompt(Arrays.asList("Add Spawn",""), "3", "4");
+			SingleFieldPrompt hey = new SingleFieldPrompt(
+					Arrays.asList("Add Spawn", "Please input a time for your new spawn item"), "Spawn Time Value",
+					"0.0");
 			long value = Long.parseLong(hey.create());
-			myView.sendUserModification(new Modification_AddSpawner("", presetComponent, value, repeating));
-			addToDropZone(dropZone,presetComponent,value);
+			myView.sendUserModification(
+					new Modification_AddSpawner(mySpawnQueueName, presetComponent, value, repeating));
+			addToDropZone(dropZone, presetComponent, value); // This will be
+																// removed.
+																// Instead the
+																// method will
+																// be called via
+																// the update
+																// process from
+																// the backend
+																// (must be the
+																// result of an
+																// observation
+																// trigger)
 		});
 		return dropZone;
 	}
-	private void addToDropZone(ScrollPane dropZone, Component spawn,long value){
+
+	private void addToDropZone(ScrollPane dropZone, Component spawn, long value) {
 		HBox spawnBox = new HBox();
-		String spawnImagePath = (String) spawn.getAttribute("ImageFile").getValue();
-		ImageView spawnImage =  createImageView(spawnImagePath);
-		
+		String spawnImagePath = spawn.<String>getAttribute("ImageFile").getValue();
+		ImageView spawnImage = createImageView(spawnImagePath);
+
 		Label name = new Label();
 		name.setText(myView.getBankController().getAOName(spawn));
 		Label valueText = new Label(Long.toString(value));
@@ -80,6 +100,7 @@ public class SpawnTimelineView implements SkeletonObject{
 		child.getChildren().add(spawnBox);
 		dropZone.setContent(child);
 	}
+
 	private ImageView createImageView(String imagePath) {
 		Image image = new Image(getClass().getClassLoader().getResourceAsStream(imagePath));
 		ImageView imv = new ImageView();
@@ -99,12 +120,12 @@ public class SpawnTimelineView implements SkeletonObject{
 		VBox wrapper = new VBox();
 		wrapper.setBackground(new Background(new BackgroundFill(Color.LIGHTGREY, CornerRadii.EMPTY, Insets.EMPTY)));
 		ColumnConstraints column1 = new ColumnConstraints();
-	    column1.setPercentWidth(50);
-	    myRoot.getColumnConstraints().add(column1);
-	    wrapper.maxWidthProperty().bind(myRoot.widthProperty().divide(3));
-	    wrapper.setPrefHeight(300);
-	    scroll.setContent(wrapper);
-		myRoot.add(scroll, i, 1);		
+		column1.setPercentWidth(50);
+		myRoot.getColumnConstraints().add(column1);
+		wrapper.maxWidthProperty().bind(myRoot.widthProperty().divide(3));
+		wrapper.setPrefHeight(300);
+		scroll.setContent(wrapper);
+		myRoot.add(scroll, i, 1);
 		scroll.setOnDragOver(e -> e.acceptTransferModes(TransferMode.ANY));
 		return scroll;
 	}
