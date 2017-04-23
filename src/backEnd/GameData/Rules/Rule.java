@@ -2,7 +2,7 @@ package backEnd.GameData.Rules;
 
 import backEnd.GameData.GameData;
 
-public abstract class Rule implements RuleReader{
+public abstract class Rule{
 
 	private double myVal;
 	private boolean enabled = false;
@@ -15,7 +15,7 @@ public abstract class Rule implements RuleReader{
 		myVal = newVal;
 	}
 
-	@Override
+	
 	public double getVal() {
 		return myVal;
 	}
@@ -23,8 +23,7 @@ public abstract class Rule implements RuleReader{
 	public void toggle() {
 		enabled = !enabled;
 	}
-
-	@Override
+	
 	public boolean isEnabled() {
 		return enabled;
 	}

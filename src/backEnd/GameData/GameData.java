@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import backEnd.GameData.Rules.Rule;
+import backEnd.GameData.Rules.RulesMap;
 import backEnd.GameData.Rules.EndCondition.HealthLoseCondition;
 import backEnd.GameData.Rules.EndCondition.KillCountCondition;
 import backEnd.GameData.Rules.EndCondition.ScoreWinCondition;
@@ -17,19 +18,18 @@ import backEnd.GameEngine.EngineStatus;
 
 public class GameData implements GameDataInterface{
 	private StateImpl myState;
-	private Map<String,Rule> myRules;
+	private RulesMap myRules;
 	private PlayerStatus myPlayerStatus;
 	private EngineStatus myEngineStatus;
 	private double myGameTime;
 	
-	public GameData(StateImpl state, PlayerStatus playerStatus, Map<String, Rule> rules){
+	public GameData(StateImpl state, PlayerStatus playerStatus, RulesMap myRules){
 		this.myState = state;
-		this.myRules = new HashMap<String, Rule>();
+		this.myRules = myRules;
 		this.myPlayerStatus = playerStatus;
 		myEngineStatus=EngineStatus.PAUSED;
 		myState.setEngineStatus(myEngineStatus);
 		myGameTime = (long) 0;
-		addPresetRules();
 	}
 
 	@Override
@@ -39,7 +39,7 @@ public class GameData implements GameDataInterface{
 
 	@Override
 	public Map<String, Rule> getRules() {
-		return myRules;
+		return myRules.getMapWithKeyNames();
 	}
 	
 	public void setEngineStatus(EngineStatus currentEngineStatus){
@@ -80,11 +80,11 @@ public class GameData implements GameDataInterface{
 		return myGameTime;
 	}
 	
-	private void addPresetRules(){
-		//FIXME what should the keys be in myRuleBank
-		myRules.put("Health", new HealthLoseCondition());
-		myRules.put("Time", new TimeEndCondition());
-		myRules.put("Score", new ScoreWinCondition());
-		myRules.put("KillCount", new KillCountCondition());
+	public void printRules(){
+		for(String key: myRules.getMapWithKeyNames().keySet()){
+			System.out.println(key + " : " + myRules.getMapWithKeyNames().get(key));
+		}
 	}
+	
+
 }

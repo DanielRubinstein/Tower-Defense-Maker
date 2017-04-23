@@ -3,7 +3,6 @@ package ModificationFromUser.Rules;
 import ModificationFromUser.ModificationFromUser;
 import backEnd.ModelImpl;
 import backEnd.GameData.Rules.Rule;
-import backEnd.GameData.Rules.RuleReader;
 
 public class Modification_EditRuleValue implements ModificationFromUser{
 
