@@ -50,7 +50,7 @@ public class MoveEngine implements Engine{
 			}
 		}
 		myState.setComponentGraph(newGraph);
-		System.out.println("PLEASE STOP MOVE ENGINE 5");
+		//System.out.println("PLEASE STOP MOVE ENGINE 5");
 		return;
 	}
 }

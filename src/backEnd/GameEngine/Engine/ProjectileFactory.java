@@ -21,22 +21,24 @@ public class ProjectileFactory {
 	
 	@SuppressWarnings("unchecked")
 	public ProjectileFactory(Component tower) throws FileNotFoundException{
-		
+		System.out.println("In projectileFactory");
 		myAttributeFactory = new AttributeFactory();
 		AttributeData ad = new AttributeData();
 
 		Attribute<String> myType = (Attribute<String>) myAttributeFactory.getAttribute(("Type"));
 		Attribute<String> projectileImage = (Attribute<String>) myAttributeFactory.getAttribute(("ImageFile"));
 		Attribute<String> projectileType = (Attribute<String>) myAttributeFactory.getAttribute(("FireType"));
-		Attribute<Integer> projectileDamage = (Attribute<Integer>) myAttributeFactory.getAttribute(("FireDamage"));
+		Attribute<Integer> projectileHealth = (Attribute<Integer>) myAttributeFactory.getAttribute(("Health"));
+		Attribute<Double> projectileDamage = (Attribute<Double>) myAttributeFactory.getAttribute(("FireDamage"));
 		Attribute<Double> explosionSize = (Attribute<Double>) myAttributeFactory.getAttribute(("ExplosionRadius"));
 		Attribute<Double> slowFactor = (Attribute<Double>) myAttributeFactory.getAttribute(("SlowFactor"));
 		Attribute<Double> fireRate = (Attribute<Double>) myAttributeFactory.getAttribute(("FireRate"));
 
-		myType.setValue((String) tower.getAttribute("Projectile").getValue());
+		myType.setValue("Projectile"); //surprisingly, all projectiles are of type Projectile!
 		projectileImage.setValue((String) tower.getAttribute("FireImage").getValue());
 		projectileType.setValue((String) tower.getAttribute("FireType").getValue());
-		projectileDamage.setValue((Integer) tower.getAttribute("FireDamage").getValue());
+		projectileHealth.setValue((Integer) tower.getAttribute("Health").getValue());
+		projectileDamage.setValue((Double) tower.getAttribute("FireDamage").getValue());
 		explosionSize.setValue((Double) tower.getAttribute("ExplosionRadius").getValue());
 		slowFactor.setValue((Double) tower.getAttribute("SlowFactor").getValue());
 		fireRate.setValue((Double) tower.getAttribute("FireRate").getValue());
@@ -44,6 +46,7 @@ public class ProjectileFactory {
 		ad.addAttribute(("Type"), (backEnd.Attribute.AttributeImpl<?>) myType);
 		ad.addAttribute(("ImageFile"), (backEnd.Attribute.AttributeImpl<?>) projectileImage);
 		ad.addAttribute(("FireType"), (backEnd.Attribute.AttributeImpl<?>) projectileType);
+		ad.addAttribute(("Health"), (backEnd.Attribute.AttributeImpl<?>) projectileHealth);
 		ad.addAttribute(("FireDamage"), (backEnd.Attribute.AttributeImpl<?>) projectileDamage);
 		ad.addAttribute(("ExplosionRadius"), (backEnd.Attribute.AttributeImpl<?>) explosionSize);
 		ad.addAttribute(("SlowFactor"), (backEnd.Attribute.AttributeImpl<?>) slowFactor);
