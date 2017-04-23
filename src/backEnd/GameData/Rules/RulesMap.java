@@ -1,6 +1,8 @@
 package backEnd.GameData.Rules;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.ResourceBundle;
 
@@ -38,6 +40,15 @@ public class RulesMap {
 		myRules.put(timeRule.getKeyName(), timeRule);
 		myRules.put(scoreRule.getKeyName(), scoreRule);
 		myRules.put(killCountRule.getKeyName(), killCountRule);
+	}
+	
+	public List<RuleReader> getRuleReaderList(){
+		List<RuleReader> myReaderList = new ArrayList<RuleReader>();
+		for(Rule rule : myRules.values()){
+			myReaderList.add(rule);
+		}
+		return myReaderList;
+		
 	}
 	
 	
