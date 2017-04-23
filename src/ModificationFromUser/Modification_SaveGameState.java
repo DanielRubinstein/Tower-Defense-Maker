@@ -21,8 +21,20 @@ public class Modification_SaveGameState implements ModificationFromUser {
 	
 	@Override
 	public void invoke(ModelImpl myModel) throws Exception {
+		
+		
+		/*
+		switch(myModel.getMode().getUserMode())
+		{
+		case "PLAYER":
+			myModel.getDataController().saveCurrentGameStateData(myModel.getGameData(), myLevelName);
+			break;
+		case "AUTHOR":
+			myModel.getDataController().saveLevelTemplate(myModel.getGameData(), myLevelName);
+		}
+		*/
+		
 		myModel.getDataController().saveCurrentGameStateData(myModel.getGameData(), myLevelName);
-
 	}
 
 	private String getSaveGameName() {

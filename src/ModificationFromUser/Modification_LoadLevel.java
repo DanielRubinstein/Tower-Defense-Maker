@@ -19,11 +19,10 @@ import javafx.stage.Stage;
 public class Modification_LoadLevel implements ModificationFromUser {
 	
 	private String myLevel;
-	private File myGameFile;
 	private GameData myGameData;
 	
 	public Modification_LoadLevel(){
-		myLevel = load();
+		
 	}
 	
 	public Modification_LoadLevel(String levelName)
@@ -32,22 +31,22 @@ public class Modification_LoadLevel implements ModificationFromUser {
 	}
 
 	@Override
-	public void invoke(ModelImpl myModel) throws Exception {		
-		if (myLevel != null){
+	public void invoke(ModelImpl myModel) throws Exception {	
+			
+			if (myLevel == null) myLevel = load(myModel);
+			System.out.println(myLevel);
 			DataInputLoader dataInput = new DataInputLoader(myLevel);
 			myGameData = dataInput.getGameData();
-		} else if (myGameFile != null){
-			DataInputLoader dataInput = new DataInputLoader(myGameFile);
-			myGameData = dataInput.getGameData();
-		} 
 		
-		myModel.getState().updateState(myGameData.getState());
+			myModel.getState().updateState(myGameData.getState());
 		
 	}
 	
-	private String load() {
+	private String load(ModelImpl myModel) {
 		DirectoryChooser chooser = new DirectoryChooser();
-		chooser.setInitialDirectory(new File("./data/GameStateData/"));
+		
+		
+		chooser.setInitialDirectory(new File("./data/SavedGames/"));
 	
 		return chooser.showDialog(new Stage()).getName();
 	}
