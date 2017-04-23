@@ -85,7 +85,7 @@ public class AttackEngine implements Engine {
 	private Component makeProjectile(Component attacker) throws FileNotFoundException {
 		ProjectileFactory bulletFactory = new ProjectileFactory(attacker);
 		Component projectile=bulletFactory.getProjectile();
-		projectile.setMyType("Projectile");
+		//projectile.setMyType("Projectile");
 		return projectile;
 	}
 }

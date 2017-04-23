@@ -94,7 +94,7 @@ public class Palette<T extends AttributeOwner> implements SkeletonObject, Observ
 	}
 
 	private void setPresetInteractions(T preset, ImageView imageView) {
-		setDoubleClickEvent(imageView, (iV) -> {
+		setClickEvent(imageView, (iV) -> {
 			GenericCommandCenter presetComCenter = new GenericCommandCenter(myView, preset);
 			presetComCenter.launch("Preset", iV.getX(), iV.getY());
 		});
@@ -102,9 +102,9 @@ public class Palette<T extends AttributeOwner> implements SkeletonObject, Observ
 		makePresetDraggable(preset, imageView);
 	}
 
-	private void setDoubleClickEvent(ImageView imageView, Consumer<ImageView> consumer) {
+	private void setClickEvent(ImageView imageView, Consumer<ImageView> consumer) {
 		imageView.setOnMouseClicked(mouseEvent -> {
-			if (mouseEvent.getButton().equals(MouseButton.PRIMARY) && mouseEvent.getClickCount() == 2) {
+			if (mouseEvent.getButton().equals(MouseButton.PRIMARY)) {
 				consumer.accept(imageView);
 			}
 		});
@@ -163,7 +163,7 @@ public class Palette<T extends AttributeOwner> implements SkeletonObject, Observ
 
 	private ImageView createNewPresetButton() {
 		ImageView addImage = createImageView(SETTINGS_IMAGE);
-		setDoubleClickEvent(addImage, (iV) -> {
+		setClickEvent(addImage, (iV) -> {
 			try {
 				AttributeOwner newAO = null;
 				switch (myType) {
