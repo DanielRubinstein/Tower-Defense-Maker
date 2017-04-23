@@ -25,6 +25,11 @@ public class Modification_LoadLevel implements ModificationFromUser {
 	public Modification_LoadLevel(){
 		myLevel = load();
 	}
+	
+	public Modification_LoadLevel(String levelName)
+	{
+		myLevel = levelName;
+	}
 
 	@Override
 	public void invoke(ModelImpl myModel) throws Exception {		
@@ -36,7 +41,7 @@ public class Modification_LoadLevel implements ModificationFromUser {
 			myGameData = dataInput.getGameData();
 		} 
 		
-		//myModel = new ModelImpl(myGameData);
+		myModel.getState().updateState(myGameData.getState());
 		
 	}
 	

@@ -134,6 +134,7 @@ public class Component extends Observable implements AttributeOwner {
 	public <T> void setAttributeValue(String attrName, T newVal) {
 		Attribute<T> attrToSet = myAttributes.<T>get(attrName);
 		attrToSet.setValue(newVal);
+		this.setChanged();
 		notifyObservers();
 	}
 

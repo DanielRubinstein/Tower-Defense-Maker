@@ -26,8 +26,8 @@ public class Modification_SaveGameState implements ModificationFromUser {
 	}
 
 	private String getSaveGameName() {
-		List<String> dialogTitles = Arrays.asList("Save Game Utility", "Please Input a Name for your saved game");
-		String promptLabel = "Saved game name:";
+		List<String> dialogTitles = Arrays.asList("Save Game Utility", "Please Input a Name for your save");
+		String promptLabel = "Name:";
 		String promptText = "";
 		SingleFieldPrompt myDialog = new SingleFieldPrompt(dialogTitles, promptLabel, promptText);
 		return myDialog.create();
