@@ -9,12 +9,10 @@
   </entry>
   <entry>
     <string>Bloons</string>
-    <java.util.Arrays_-ArrayList>
-      <a class="string-array">
+    <list>
         <string>Bloons Level A</string>
         <string>Level B</string>
         <string>Level C</string>
-      </a>
-    </java.util.Arrays_-ArrayList>
+    </list>
   </entry>
 </map>
