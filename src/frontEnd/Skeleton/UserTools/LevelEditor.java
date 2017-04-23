@@ -6,22 +6,24 @@ import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 
 public class LevelEditor {
 
-	private HBox gameEditor;
+	private GridPane gameEditor;
 	private HBox levelEditor;
 	private HBox allLevelsEditor;
 	private String currentGame;
+	private Label currentGameLabel;
 	private VBox levelsView;
 	private LevelProgressionControllerEditor myContr;
 	
 	public LevelEditor(double width, VBox levels, LevelProgressionControllerEditor myLevels){
 		levelsView = levels;
 		myContr = myLevels;
-		
+		currentGameLabel = new Label("No game selected");
 		createAllLevelsEditor();
 		createGameEditor();
 		createLevelEditor();
@@ -29,11 +31,10 @@ public class LevelEditor {
 	
 	public void setGameName(String name){
 		currentGame = name;
+		currentGameLabel.setText(name);
 	}
 	private void createGameEditor(){
-		gameEditor = new HBox();
-		Label curGame = new Label();
-		curGame.textProperty().bind(new SimpleStringProperty(currentGame));
+		gameEditor = new GridPane();
 		Button removeGame = new Button("Remove Game");
 		TextField addText = new TextField();
 		Button addGame = new Button("Add Game");
@@ -42,9 +43,12 @@ public class LevelEditor {
 			
 		});
 		HBox removeBox = new HBox();
-		removeBox.getChildren().addAll(removeGame,curGame);
+		removeBox.getChildren().addAll(removeGame,currentGameLabel);
 		HBox addBox = new HBox();
 		addBox.getChildren().addAll(addGame,addText);
+		
+		gameEditor.add(removeBox, 0, 0);
+		gameEditor.add(addBox, 0, 1);
 		
 	}
 	private void createLevelEditor(){
