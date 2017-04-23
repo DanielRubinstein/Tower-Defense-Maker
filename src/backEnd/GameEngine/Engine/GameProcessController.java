@@ -61,17 +61,19 @@ public class GameProcessController {
 	 */
 	private void step(double delay) {
 		// System.gc();
-		// System.out.println("Game loop step preformed");
+		//System.out.println(this.getClass().getSimpleName() + "Game loop step preformed: " + delay);
 		this.run(delay); // TODO: TESTING ONLY
-		if (myGameData.getState().gameIsRunning()) {
+		System.out.println(this.getClass().getSimpleName() + " : " + engineStatus + " : " + myGameData.getState().gameIsRunning());
+		if (engineStatus.toString().equals("RUNNING")) {
 			myGameData.incrementGameTime(delay);
+			System.out.println(this.getClass().getSimpleName() + " : " + myGameData.getGameTime() +" incremented by "+ delay);
 		}
 	}
 
 	public void run(double stepTime) {
 		for (Engine engine : myEngines) {
 			engine.gameLoop(myGameData, stepTime);
-			// System.out.println("steptime is "+ stepTime);
+			System.out.println("steptime is "+ stepTime);
 		}
 		// System.out.println(stepTime);
 		// Has won/lost? check myRules after each loop?

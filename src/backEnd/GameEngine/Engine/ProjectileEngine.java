@@ -21,7 +21,7 @@ public class ProjectileEngine implements Engine {
 
 	@Override
 	public void gameLoop(GameData gameData, double stepTime) {
-		System.out.println("ProjectileEngine called");
+		//System.out.println(this.getClass().getSimpleName() + ": ProjectileEngine called");
 		
 		List<Component> toRemove=new ArrayList<Component>();
 		for (Component c : gameData.getState().getComponentGraph().getAllComponents()) {

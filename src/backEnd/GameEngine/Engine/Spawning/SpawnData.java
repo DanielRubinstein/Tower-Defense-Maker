@@ -9,9 +9,9 @@ import backEnd.GameData.State.Component;
 public class SpawnData implements Comparable<SpawnData>{
 
 	Component mySpawnable;
-	long myTime;
+	double myTime;
 	
-	public SpawnData(Component component, long time) {
+	public SpawnData(Component component, double time) {
 		//NOT SURE IF COMPONENT IS ACTUALLY THE WAY TO GO HERE TODO CHANGE TO SOMETHING BETTER?
 		mySpawnable = component;
 		myTime = time;
@@ -21,7 +21,7 @@ public class SpawnData implements Comparable<SpawnData>{
 		return mySpawnable;
 	}
 	
-	public long getTime() {
+	public double getTime() {
 		return myTime;
 	}
 

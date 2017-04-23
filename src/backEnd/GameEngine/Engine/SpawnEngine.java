@@ -2,6 +2,7 @@ package backEnd.GameEngine.Engine;
 
 import java.util.List;
 
+import backEnd.Attribute.Attribute;
 import backEnd.GameData.GameData;
 import backEnd.GameData.State.Component;
 import backEnd.GameData.State.ComponentBuilder;
@@ -42,7 +43,7 @@ public class SpawnEngine implements Engine {
 			if (currentSpawnQueue != null) {
 				// Spawning with frequencies
 				//System.out.println(this.getClass().getName() + ": FrequencyQueue: " + currentSpawnQueue.getFrequencyQueue().size());
-				for (Component component : currentSpawnQueue.getNextFrequencySpawn(gameData.getGameTime())) {
+				for (Component component : currentSpawnQueue.getNextFrequencySpawn(gameData.getGameTime(), stepTime)) {
 					spawn(component, spawnTile);
 				}
 				// Spawning directly with spawn queue
@@ -51,16 +52,18 @@ public class SpawnEngine implements Engine {
 		}
 	}
 
+	@SuppressWarnings("unchecked")
 	private void spawn(Component component, Tile spawnTile) {
 		if (component == null) {
-			//System.out.println(this.getClass().getName() + ": No component to add from spawn queue");
+			System.out.println(this.getClass().getName() + ": No component to add from spawn queue");
 			return;
 		}
 		//System.out.println(this.getClass().getName() + ": Should add component from spawn queue");
 		ComponentBuilder componentBuilder = new ComponentBuilder(component);
 		Component spawnable = componentBuilder.getComponent();
 		Object positionObj = spawnTile.getMyAttributes().get("Position");
-		Point2D spawnPosition = (Point2D) positionObj;
+		Attribute<Point2D> spawnPositionAttribute = (Attribute<Point2D>) positionObj;
+		Point2D spawnPosition = spawnPositionAttribute.getValue();
 		myState.getComponentGraph().addComponentToGrid(spawnable, spawnPosition);
 	}
 }
