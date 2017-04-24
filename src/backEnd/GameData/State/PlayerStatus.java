@@ -54,4 +54,15 @@ public class PlayerStatus implements PlayerStatusModifier {
 		return Collections.unmodifiableCollection(myStatusItems.keySet());
 	}
 
+	@Override
+	public Collection<String> getKeySet() {
+		return myStatusItems.keySet();
+	}
+
+	@Override
+	public void setStatusItemValue(String itemKey, double newVal) {
+		myStatusItems.get(itemKey).set(newVal);
+		
+	}
+
 }

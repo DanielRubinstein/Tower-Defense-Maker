@@ -71,11 +71,13 @@ public class SpawnTimelineView implements SkeletonObject, Observer {
 			Component presetComponent = (Component) myView.getBankController().getPreset(presetName);
 			SingleFieldPrompt hey = new SingleFieldPrompt(
 					Arrays.asList("Add Spawn", "Please input a time for your new spawn item"), "Spawn Time Value",
-					"1");
-			long value = Long.parseLong(hey.create());
+					"1.0");
+			double value = Double.parseDouble(hey.create());
 			myView.sendUserModification(
-					new Modification_AddSpawner(mySpawnQueueName, presetComponent, value, repeating));
+
+					new Modification_AddSpawner(mySpawnQueueName, presetName, value, repeating));
 			addToDropZone(dropZone, presetComponent, value,repeating); // This will be
+
 																// removed.
 																// Instead the
 																// method will
@@ -91,26 +93,27 @@ public class SpawnTimelineView implements SkeletonObject, Observer {
 		return dropZone;
 	}
 
-	private void addToDropZone(ScrollPane dropZone, Component spawn, long value, boolean repeating) {
+	private void addToDropZone(ScrollPane dropZone, Component spawn, double value, boolean repeating) {
+
 		HBox spawnBox = new HBox();
 		String spawnImagePath = spawn.<String>getAttribute("ImageFile").getValue();
 		ImageView spawnImage = createImageView(spawnImagePath);
-		
+		String spawnName = myView.getBankController().getAOName(spawn);
 		Label name = new Label();
-		name.setText(myView.getBankController().getAOName(spawn));
-		Label valueText = new Label(Long.toString(value));
+		name.setText(spawnName);
+		Label valueText = new Label(Double.toString(value));
 		// TODO Editable value here valueText.setOnClick()
 		valueText.setOnMouseClicked(e -> {
 			SingleFieldPrompt newPrompt = new SingleFieldPrompt(
 					Arrays.asList("Add Spawn", "Please input a time for your new spawn item"), "Spawn Time Value",
 					"1");
-			long newValue = Long.parseLong(newPrompt.create());
-			myView.sendUserModification(new Modification_EditSpawnDataTime(mySpawnQueueName,spawn,value,newValue,repeating));
-			valueText.setText(Long.toString(newValue));
+			double newValue = Double.parseDouble(newPrompt.create());
+			myView.sendUserModification(new Modification_EditSpawnDataTime(mySpawnQueueName,spawnName,value,newValue,repeating));
+			valueText.setText(Double.toString(newValue));
 		});
 		Button remove = new Button("Delete");
 		remove.setOnAction(e -> {
-			myView.sendUserModification(new Modification_RemoveSpawner(mySpawnQueueName,spawn,value,repeating));
+			myView.sendUserModification(new Modification_RemoveSpawner(mySpawnQueueName,spawnName,value,repeating));
 			spawnBox.getChildren().clear();
 		});
 		spawnBox.getChildren().add(name);
