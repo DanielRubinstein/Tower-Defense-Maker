@@ -57,9 +57,17 @@ public class GameData implements GameDataInterface{
 		//update state
 		myState.updateState(newGameData.getState());
 		//update rules
-		
+		myRules = newGameData.getRules();
+		//update playerstatus
+		updatePlayerStatus(newGameData.getStatus());
 	}
 
+	private void updatePlayerStatus(PlayerStatus newStatus){
+		for(String key : myPlayerStatus.getKeySet()){
+			myPlayerStatus.setStatusItemValue(key, newStatus.getStatusItemValue(key));
+		}
+	}
+	
 	@Override
 	public PlayerStatusModifier getModifiablePlayerStatus() {
 		return myPlayerStatus;
@@ -83,8 +91,8 @@ public class GameData implements GameDataInterface{
 	}
 	
 	public void printRules(){
-		for(String key: myRules.getMapWithKeyNames().keySet()){
-			System.out.println(key + " : " + myRules.getMapWithKeyNames().get(key));
+		for(Rule x: myRules.getMapWithKeyNames().values()){
+			x.printRule();
 		}
 	}
 	
