@@ -11,6 +11,7 @@ import ModificationFromUser.Modification_ChangeMode;
 import ModificationFromUser.Modification_GameRemote;
 import backEnd.GameEngine.Engine.GameProcessController;
 import frontEnd.View;
+import frontEnd.CustomJavafxNodes.ActionButton;
 import frontEnd.CustomJavafxNodes.ToggleSwitch;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
@@ -36,6 +37,8 @@ public class OptionsSelection implements SkeletonObject{
 	private static final String PAUSE_IMAGE = "resources/images/Tools/pause.jpg";
 	private static final String FASTFWD_IMAGE = "resources/images/Tools/fastfwd.jpg";
 	private static final String PLAY_IMAGE = "resources/images/Tools/play.jpg";
+
+	private static final String RESTART_IMAGE = "resources/images/Tools/restart.png";
 	private VBox myRoot;
 	private TilePane myTiles;
 	private SettingsView mySettings;
@@ -70,14 +73,21 @@ public class OptionsSelection implements SkeletonObject{
 		addButtons(totalWidth/4-1);
 		myTiles.setPrefColumns(myButtons.size());
 		myTiles.getChildren().addAll(myButtons);
+		addSettingsButton();
 	}
 	
+	private void addSettingsButton() {
+		ActionButton settings = new ActionButton("Settings", e -> mySettings.launchSettings());
+		myRoot.getChildren().add(settings);
+	}
 	private void addButtons(double size){
 		myButtonsAndTooltips=new LinkedHashMap<Button, Tooltip>();
 		myButtonsAndTooltips.put(createImageButton(PLAY_IMAGE, e-> myView.sendUserModification(Modification_GameRemote.PLAY) ,size), new Tooltip("Play game"));
 		myButtonsAndTooltips.put(createImageButton(PAUSE_IMAGE, e-> myView.sendUserModification(Modification_GameRemote.PAUSE) ,size), new Tooltip("Pause game"));
 		myButtonsAndTooltips.put(createImageButton(FASTFWD_IMAGE, e-> myView.sendUserModification(Modification_GameRemote.FASTFORWARD) ,size), new Tooltip("Fast-forward game"));
-		myButtonsAndTooltips.put(createImageButton(SETTINGS_IMAGE, e-> mySettings.launchSettings(),size), new Tooltip("View settings"));		
+		myButtonsAndTooltips.put(createImageButton(RESTART_IMAGE, e-> myView.sendUserModification(Modification_GameRemote.FASTFORWARD) ,size), new Tooltip("Restart Level"));
+		
+		//myButtonsAndTooltips.put(createImageButton(SETTINGS_IMAGE, e-> mySettings.launchSettings(),size), new Tooltip("View settings"));		
 		for (Button b: myButtonsAndTooltips.keySet()){
 			modifyTooltipStartTiming(myButtonsAndTooltips.get(b));
 			b.setTooltip(myButtonsAndTooltips.get(b));
