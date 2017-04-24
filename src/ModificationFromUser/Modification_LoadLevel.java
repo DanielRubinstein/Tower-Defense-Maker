@@ -45,7 +45,7 @@ public class Modification_LoadLevel implements ModificationFromUser {
 			
 			
 			myGameData = dataInput.getGameData();
-			myModel.getState().updateState(myGameData.getState());
+			myModel.getGameData().updateGameData(myGameData);
 		
 	}
 	
