@@ -18,7 +18,7 @@ public class ControllerImpl implements Controller {
 	private ViewImpl myView;
 	private ModelImpl myModel;
 	private FacebookInteractor myFb;
-	private EngineStatus myEngineStatus=EngineStatus.PAUSED;
+	private EngineStatus myEngineStatus = EngineStatus.PAUSED;
 
 
 	public void start(Stage stage) {
@@ -41,8 +41,9 @@ public class ControllerImpl implements Controller {
 
 		Consumer<Object> setGameData = o -> {
 			try {
-				DataInputLoader dataInput = new DataInputLoader(o);
-				GameData initialGameData = dataInput.getGameData();
+				DataInputLoader loader = new DataInputLoader(o);
+				GameData initialGameData = loader.getGameData();
+				
 				initialGameData.setEngineStatus(myEngineStatus);
 				myModel = new ModelImpl(initialGameData, myEngineStatus);
 				myView = new ViewImpl(myModel, viewMod,myFb);

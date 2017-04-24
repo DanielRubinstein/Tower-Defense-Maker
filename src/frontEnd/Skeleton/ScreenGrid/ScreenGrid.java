@@ -72,13 +72,14 @@ public class ScreenGrid implements SkeletonObject, Observer {
 		myView = view;
 		myState = state;
 		extractAoCollectionsFromState();
+
 		adjustSize(screenGridWidth,screenGridHeight);
-		placeComponents();
 		initializeGrid();
 		myTiles = new HashMap<>();
 		myTileImages = new HashMap<>();
 		updateTilesOnGrid();
 		addGridToRoot();
+		placeComponents();
 	}
 	
 	private void adjustSize(double screenGridWidth, double screenGridHeight){
@@ -213,6 +214,7 @@ public class ScreenGrid implements SkeletonObject, Observer {
 		setCommandInteraction(frontImage, c);
 		myComponents.add(c);
 		myComponentImages.put(c, frontImage);
+		if (myRoot == null) System.out.println("PROP");
 		myRoot.getChildren().add(frontImage);
 	}
 
