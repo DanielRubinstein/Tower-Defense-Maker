@@ -10,6 +10,13 @@ import javafx.scene.layout.HBox;
 public class NumberChanger implements SkeletonObject{
 	Slider myRoot;
 	
+	/**
+	 * Initializes the numberChanger with the given parameters
+	 * @param min
+	 * @param max
+	 * @param start
+	 * @param increment
+	 */
 	public NumberChanger(Number min, Number max, Number start, Number increment){
 		myRoot = createSlider(min.doubleValue(), max.doubleValue(), start.doubleValue(), increment.doubleValue());
 	}

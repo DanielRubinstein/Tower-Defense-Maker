@@ -84,7 +84,10 @@ public class SettingsViewImpl implements SettingsView{
 	
 		HBox bothButtons = new HBox();
 		Button button1 = new Button("View Rules");
-		button1.setOnAction(e -> myView.viewRules());
+		button1.setOnAction(e -> {
+			RulesView myRules = new RulesView(myView,myStage);
+			myRules.launch();
+		});
 		Button button2 = new Button("Edit Rules");
 		button2.setOnAction(e -> myView.editRules());
 		
