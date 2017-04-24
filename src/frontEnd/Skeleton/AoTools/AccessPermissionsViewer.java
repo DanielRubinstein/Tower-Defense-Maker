@@ -119,6 +119,26 @@ public class AccessPermissionsViewer implements SkeletonObject {
 			subBody.getChildren().add(cB);
 		}
 	}
+
+	private Node createGameLevelDropDown(VBox parent, List<String> list) {
+		
+		ObservableList<String> options = (ObservableList<String>) FXCollections.observableArrayList(list);
+		ComboBox<String> optionsBox = new ComboBox<String>(options);
+		try {
+			// TODO this will work as long as there is an attribute there
+			optionsBox.getSelectionModel().select(null);
+		} catch (NullPointerException e) {
+			// do nothing
+		}
+		optionsBox.valueProperty().addListener((o, oldValue, newValue) -> {
+			parent.getChildren().clear();
+			parent.getChildren().add(optionsBox);
+			addCheckBoxes(parent, myView.getLevelProgressionController().getLevelList(newValue));
+			//optionsBox.requestFocus();
+			
+		});
+		return optionsBox;
+	}
 	
 	private void indentInVBox(Node n){
 		// Add offset to left side to indent from title

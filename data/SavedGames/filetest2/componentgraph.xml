@@ -1,9 +1,9 @@
 <?xml version="1.0"?><map>
   <entry>
     <javafx.geometry.Point2D>
-      <x>161.33333333333334</x>
-      <y>165.33333333333334</y>
-      <hash>1506851570</hash>
+      <x>168.0</x>
+      <y>246.66666666666669</y>
+      <hash>1509735112</hash>
     </javafx.geometry.Point2D>
     <list>
       <backEnd.GameData.State.Component>
@@ -286,15 +286,15 @@
           </levelModePermissions>
         </myAccessPermissions>
         <observers/>
-        <ID>176677504824406</ID>
+        <ID>237361336262220</ID>
       </backEnd.GameData.State.Component>
     </list>
   </entry>
   <entry>
     <javafx.geometry.Point2D>
-      <x>276.6666666666667</x>
-      <y>162.66666666666666</y>
-      <hash>236747345</hash>
+      <x>313.3333333333333</x>
+      <y>55.33333333333333</y>
+      <hash>239786556</hash>
     </javafx.geometry.Point2D>
     <list>
       <backEnd.GameData.State.Component>
@@ -577,8 +577,17 @@
           </levelModePermissions>
         </myAccessPermissions>
         <observers/>
-        <ID>176677511504210</ID>
+        <ID>237361342150786</ID>
       </backEnd.GameData.State.Component>
+    </list>
+  </entry>
+  <entry>
+    <javafx.geometry.Point2D>
+      <x>360.6666666666667</x>
+      <y>275.3333333333333</y>
+      <hash>248257105</hash>
+    </javafx.geometry.Point2D>
+    <list>
       <backEnd.GameData.State.Component>
         <changed>true</changed>
         <obs/>
@@ -611,7 +620,7 @@
             <entry>
               <string>ProjectileMaxDistance</string>
               <backEnd.Attribute.AttributeImpl>
-                <myValue class="double">115.36415773059191</myValue>
+                <myValue class="double">0.0</myValue>
                 <myParamList class="java.util.Arrays$ArrayList">
                   <a class="java.lang.Double-array">
                     <double>0.0</double>
@@ -626,14 +635,14 @@
             <entry>
               <string>ImageFile</string>
               <backEnd.Attribute.AttributeImpl>
-                <myValue class="string">resources/images/Components/purple_bloon.png</myValue>
+                <myValue class="string">resources/images/Components/zombie.png</myValue>
                 <myName>ImageFile</myName>
               </backEnd.Attribute.AttributeImpl>
             </entry>
             <entry>
               <string>ProjectileTraveled</string>
               <backEnd.Attribute.AttributeImpl>
-                <myValue class="double">63.01683760428297</myValue>
+                <myValue class="double">0.0</myValue>
                 <myParamList class="java.util.Arrays$ArrayList">
                   <a class="java.lang.Double-array">
                     <double>0.0</double>
@@ -685,7 +694,7 @@
             <entry>
               <string>FireImage</string>
               <backEnd.Attribute.AttributeImpl>
-                <myValue class="string"></myValue>
+                <myValue class="string">resources/images/Components/purple_bloon.png</myValue>
                 <myName>FireImage</myName>
               </backEnd.Attribute.AttributeImpl>
             </entry>
@@ -750,7 +759,7 @@
             <entry>
               <string>Type</string>
               <backEnd.Attribute.AttributeImpl>
-                <myValue class="string">Projectile</myValue>
+                <myValue class="string">Tower</myValue>
                 <myParamList class="java.util.Arrays$ArrayList">
                   <a class="string-array">
                     <string>Tower</string>
@@ -764,7 +773,11 @@
             <entry>
               <string>ProjectileTargetPosition</string>
               <backEnd.Attribute.AttributeImpl>
-                <myValue class="javafx.geometry.Point2D" reference="../../../../../../../../entry/javafx.geometry.Point2D"/>
+                <myValue class="javafx.geometry.Point2D">
+                  <x>0.0</x>
+                  <y>0.0</y>
+                  <hash>0</hash>
+                </myValue>
                 <myName>ProjectileTargetPosition</myName>
               </backEnd.Attribute.AttributeImpl>
             </entry>
@@ -798,7 +811,7 @@
             <entry>
               <string>FireRadius</string>
               <backEnd.Attribute.AttributeImpl>
-                <myValue class="double">0.0</myValue>
+                <myValue class="double">200.0</myValue>
                 <myParamList class="java.util.Arrays$ArrayList">
                   <a class="java.lang.Double-array">
                     <double>10.0</double>
@@ -855,8 +868,17 @@
           </levelModePermissions>
         </myAccessPermissions>
         <observers/>
-        <ID>176702926357467</ID>
+        <ID>237391162637230</ID>
       </backEnd.GameData.State.Component>
+    </list>
+  </entry>
+  <entry>
+    <javafx.geometry.Point2D>
+      <x>439.3333333333333</x>
+      <y>226.0</y>
+      <hash>1510611655</hash>
+    </javafx.geometry.Point2D>
+    <list>
       <backEnd.GameData.State.Component>
         <changed>true</changed>
         <obs/>
@@ -874,7 +896,7 @@
             <entry>
               <string>Speed</string>
               <backEnd.Attribute.AttributeImpl>
-                <myValue class="double">0.0</myValue>
+                <myValue class="double">5.0</myValue>
                 <myParamList class="java.util.Arrays$ArrayList">
                   <a class="java.lang.Double-array">
                     <double>0.0</double>
@@ -889,7 +911,7 @@
             <entry>
               <string>ProjectileMaxDistance</string>
               <backEnd.Attribute.AttributeImpl>
-                <myValue class="double">115.36415773059191</myValue>
+                <myValue class="double">0.0</myValue>
                 <myParamList class="java.util.Arrays$ArrayList">
                   <a class="java.lang.Double-array">
                     <double>0.0</double>
@@ -904,14 +926,14 @@
             <entry>
               <string>ImageFile</string>
               <backEnd.Attribute.AttributeImpl>
-                <myValue class="string">resources/images/Components/purple_bloon.png</myValue>
+                <myValue class="string">resources/images/Components/rainbow_bloon.png</myValue>
                 <myName>ImageFile</myName>
               </backEnd.Attribute.AttributeImpl>
             </entry>
             <entry>
               <string>ProjectileTraveled</string>
               <backEnd.Attribute.AttributeImpl>
-                <myValue class="double">62.41667724614694</myValue>
+                <myValue class="double">0.0</myValue>
                 <myParamList class="java.util.Arrays$ArrayList">
                   <a class="java.lang.Double-array">
                     <double>0.0</double>
@@ -948,7 +970,7 @@
             <entry>
               <string>FireRate</string>
               <backEnd.Attribute.AttributeImpl>
-                <myValue class="double">45.0</myValue>
+                <myValue class="double">0.0</myValue>
                 <myParamList class="java.util.Arrays$ArrayList">
                   <a class="java.lang.Double-array">
                     <double>0.0</double>
@@ -970,7 +992,7 @@
             <entry>
               <string>Velocity</string>
               <backEnd.Attribute.AttributeImpl>
-                <myValue class="double">0.6</myValue>
+                <myValue class="double">0.0</myValue>
                 <myParamList class="java.util.Arrays$ArrayList">
                   <a class="java.lang.Double-array">
                     <double>0.0</double>
@@ -1000,7 +1022,7 @@
             <entry>
               <string>FireDamage</string>
               <backEnd.Attribute.AttributeImpl>
-                <myValue class="int">10</myValue>
+                <myValue class="int">0</myValue>
                 <myParamList class="java.util.Arrays$ArrayList">
                   <a class="java.lang.Integer-array">
                     <int>0</int>
@@ -1028,7 +1050,7 @@
             <entry>
               <string>Type</string>
               <backEnd.Attribute.AttributeImpl>
-                <myValue class="string">Projectile</myValue>
+                <myValue class="string">Enemy</myValue>
                 <myParamList class="java.util.Arrays$ArrayList">
                   <a class="string-array">
                     <string>Tower</string>
@@ -1042,7 +1064,11 @@
             <entry>
               <string>ProjectileTargetPosition</string>
               <backEnd.Attribute.AttributeImpl>
-                <myValue class="javafx.geometry.Point2D" reference="../../../../../../../../entry/javafx.geometry.Point2D"/>
+                <myValue class="javafx.geometry.Point2D">
+                  <x>0.0</x>
+                  <y>0.0</y>
+                  <hash>0</hash>
+                </myValue>
                 <myName>ProjectileTargetPosition</myName>
               </backEnd.Attribute.AttributeImpl>
             </entry>
@@ -1091,7 +1117,7 @@
             <entry>
               <string>ExplosionRadius</string>
               <backEnd.Attribute.AttributeImpl>
-                <myValue class="double">40.0</myValue>
+                <myValue class="double">0.0</myValue>
                 <myParamList class="java.util.Arrays$ArrayList">
                   <a class="java.lang.Double-array">
                     <double>0.0</double>
@@ -1133,7 +1159,7 @@
           </levelModePermissions>
         </myAccessPermissions>
         <observers/>
-        <ID>176702949893070</ID>
+        <ID>237391156425357</ID>
       </backEnd.GameData.State.Component>
     </list>
   </entry>
