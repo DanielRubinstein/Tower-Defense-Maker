@@ -1,35 +1,28 @@
-package backEnd.Bank;
+package backEnd;
 
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Observer;
-
 import javax.swing.JOptionPane;
-
 import backEnd.Mode.Mode;
-import javafx.geometry.Point2D;
-import javafx.scene.control.Alert;
-import backEnd.Attribute.AttributeData;
-import backEnd.Attribute.AttributeImpl;
 import backEnd.Attribute.AttributeOwner;
-import backEnd.GameData.Rules.Rule;
-import backEnd.GameData.State.AccessPermissionsImpl;
 import backEnd.GameData.State.Component;
 import backEnd.GameData.State.Tile;
 import backEnd.GameData.State.TileImpl;
-import backEnd.GameEngine.Behaviors.Behavior;
 
+/**
+ * 
+ * @author Juan Philippe
+ *
+ */
 public class BankController
 {
 	private static final String DUPLICATE_NAME_ERROR = "Cannot Add Duplicate Name";
 	private Map<String, Tile> tileBank;
 	private Map<String, Component> componentBank;
-	private BehaviorBank myBehaviorBank;
-	private AttributeBank myAttributeBank;
 	private Mode myMode;
 	private List<Observer> observers;
 	
@@ -43,8 +36,6 @@ public class BankController
 		this.tileBank = tileBank;
 		this.componentBank = componentBank;
 		this.myMode = myMode;
-		this.myBehaviorBank = new BehaviorBank();
-		this.myAttributeBank = new AttributeBank();
 		this.observers = new ArrayList<Observer>();
 		createTemplatesForTesting();
 	}
@@ -170,17 +161,6 @@ public class BankController
 		componentBank.remove(name);
 		notifyObservers();
 	}
-	
-	public List<Behavior> getBehaviorList()
-	{
-		return myBehaviorBank.getBehaviorList();
-	}
-	
-	
-	public List<AttributeImpl> getAttributeList()
-	{
-		return myAttributeBank.getAttributeList();
-	}
 
 	public String getAOName(AttributeOwner preset) {
 		if(preset instanceof Tile){
@@ -215,7 +195,6 @@ public class BankController
 	}
 	
 	private void notifyObservers() {
-		System.out.println("notifying observersssssss1");
 		for(Observer o : observers){
 			o.update(null, null);
 		}

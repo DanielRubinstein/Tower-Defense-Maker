@@ -5,9 +5,10 @@ import java.util.Map;
 import java.util.function.Consumer;
 
 import ModificationFromUser.ModificationFromUser;
+import backEnd.BankController;
 import backEnd.Model;
 import backEnd.ModelReader;
-import backEnd.Bank.BankController;
+import backEnd.GameData.Rules.RuleReader;
 import backEnd.GameData.State.Component;
 import backEnd.GameData.State.PlayerStatusReader;
 import backEnd.GameData.State.Tile;
@@ -109,6 +110,10 @@ public class ViewImpl implements View {
 	@Override
 	public void editRules() {
 		// TODO Auto-generated method stub
+	}
+	@Override
+	public Collection<RuleReader> getRules(){
+		return myModel.getRulesList();
 	}
 
 	@Override

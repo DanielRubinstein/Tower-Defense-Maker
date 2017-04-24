@@ -28,6 +28,15 @@ public class ButtonMenuImpl implements ButtonMenu {
 		description.setWrapText(true);
 		setText(text);
 	}
+	public GridPane getGridPane()
+	{
+		return myGrid;
+	}
+	
+	public VBox getButtonRoot()
+	{
+		return myButtonRoot;
+	}
 	
 
 	private void initializeGrid() {

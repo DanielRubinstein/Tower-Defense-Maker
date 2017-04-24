@@ -12,22 +12,19 @@ import backEnd.GameData.GameData;
 import backEnd.GameData.State.Component;
 import backEnd.GameData.State.ComponentGraph;
 import backEnd.GameData.State.ComponentGraphImpl;
-import backEnd.GameData.State.State;
 import backEnd.GameData.State.StateImpl;
 import backEnd.GameData.State.Tile;
 import backEnd.GameData.State.TileGrid;
 import backEnd.GameData.State.TileGridImpl;
 import backEnd.GameData.State.TileGridInstantiator;
-import backEnd.GameData.Rules.Rule;
 import backEnd.GameData.Rules.RulesMap;
-import backEnd.LevelProgression.LevelProgressionControllerImpl;
 import javafx.geometry.Point2D;
 import backEnd.GameData.State.PlayerStatus;
 
 
 /**
  * This class handles loading both game state data and universal game data
- * @author Riley Nisbet
+ * @author Riley Nisbet, Juan Philippe
  *
  */
 
@@ -51,11 +48,10 @@ public class XMLReaderImpl implements XMLReader{
 
 		TileGrid grid = new TileGridImpl((TileGridInstantiator) xStream.fromXML(new File(filePath+"/" + levelName+"/tilegrid.xml")));
 		ComponentGraph graph = new ComponentGraphImpl((HashMap<Point2D, List<Component>>) xStream.fromXML(new File(filePath+"/" + levelName+"/componentgraph.xml")));
-		System.out.println(graph.getAllComponents().toString()+ "TEST");
 		StateImpl state = new StateImpl(grid.getNumRowsInGrid(), grid.getNumColsInGrid(), grid, graph);
 		
 		return new GameData(state, (PlayerStatus) xStream.fromXML(new File(filePath+"/" + levelName+"/playerstatus.xml")),
-				new RulesMap((Map<String, Rule>) xStream.fromXML(new File(filePath+"/" + levelName+"/rules.xml"))));
+				(RulesMap) xStream.fromXML(new File(filePath+"/" + levelName+"/rules.xml")));
 
 	}
 	
