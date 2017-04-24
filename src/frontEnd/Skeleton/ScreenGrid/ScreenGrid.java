@@ -214,7 +214,6 @@ public class ScreenGrid implements SkeletonObject, Observer {
 		setCommandInteraction(frontImage, c);
 		myComponents.add(c);
 		myComponentImages.put(c, frontImage);
-		if (myRoot == null) System.out.println("PROP");
 		myRoot.getChildren().add(frontImage);
 	}
 
