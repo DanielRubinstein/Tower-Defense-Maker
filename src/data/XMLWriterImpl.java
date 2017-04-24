@@ -3,35 +3,25 @@ package data;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
-
-import java.util.HashMap;
-
 import java.util.List;
-
 import java.util.Map;
-import java.util.Observer;
-
 import com.thoughtworks.xstream.XStream;
 import com.thoughtworks.xstream.io.xml.DomDriver;
 
-import backEnd.Bank.BankController;
+import backEnd.BankController;
 import backEnd.GameData.GameData;
 import backEnd.GameData.GameDataInterface;
 import backEnd.GameData.Rules.Rule;
 import backEnd.GameData.State.Component;
 import backEnd.GameData.State.ComponentGraph;
 import backEnd.GameData.State.PlayerStatus;
-import backEnd.GameData.State.State;
 import backEnd.GameData.State.Tile;
 import backEnd.GameData.State.TileGrid;
-import backEnd.LevelProgression.LevelProgressionControllerImpl;
-import backEnd.LevelProgression.LevelProgressionControllerReader;
-
 
 
 /**
  * This class handles saving both game state data and universal game data
- * @author Riley Nisbet
+ * @author Riley Nisbet, Juan Philippe
  *
  */
 public class XMLWriterImpl implements XMLWriter{

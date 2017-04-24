@@ -1,10 +1,12 @@
 package frontEnd;
 
+import java.util.Collection;
 import java.util.Map;
 
 import ModificationFromUser.ModificationFromUser;
+import backEnd.BankController;
 import backEnd.Model;
-import backEnd.Bank.BankController;
+import backEnd.GameData.Rules.RuleReader;
 import backEnd.GameEngine.Engine.Spawning.SpawnQueue;
 import backEnd.LevelProgression.LevelProgressionControllerEditor;
 import backEnd.LevelProgression.LevelProgressionControllerReader;
@@ -33,5 +35,7 @@ public interface View extends ViewReader{
 	public ModeReader getModeReader();
 	
 	LevelProgressionControllerEditor getLevelProgressionController();
+	
+	public Collection<RuleReader> getRules();
 
 }

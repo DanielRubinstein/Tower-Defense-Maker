@@ -23,7 +23,7 @@ public class LevelProgressionControllerImpl implements LevelProgressionControlle
 	private Map<String,List<String>> gamesMap; //String gameName -> List of Level names
 	private DataController myDataController;
 	private Mode myMode;
-	private static final String LEVEL_TEMPLATE_PATH = "data/GameStateData/";
+	private static final String LEVEL_TEMPLATE_PATH = "data/LevelTemplates/";
 	
 	public LevelProgressionControllerImpl(Mode mode, DataController dataController, Map<String,List<String>> gamesMap){
 		this.myMode = mode;
