@@ -8,16 +8,15 @@ import backEnd.GameData.State.Component;
  */
 public class SpawnData implements Comparable<SpawnData>{
 
-	Component mySpawnable;
+	String mySpawnable;
 	double myTime;
 	
-	public SpawnData(Component component, double time) {
-		//NOT SURE IF COMPONENT IS ACTUALLY THE WAY TO GO HERE TODO CHANGE TO SOMETHING BETTER?
+	public SpawnData(String component, double time) {
 		mySpawnable = component;
 		myTime = time;
 	}
 	
-	public Component getSpawnable() {
+	public String getSpawnable() {
 		return mySpawnable;
 	}
 	
@@ -25,7 +24,7 @@ public class SpawnData implements Comparable<SpawnData>{
 		return myTime;
 	}
 
-	public void setSpawnable(Component mySpawnable) {
+	public void setSpawnable(String presetName) {
 		this.mySpawnable = mySpawnable;
 	}
 	

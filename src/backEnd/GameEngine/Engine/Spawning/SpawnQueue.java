@@ -44,7 +44,7 @@ public class SpawnQueue {
 	/**
 	 * @return the next component in the spawn Queue if enough time has passed
 	 */
-	public Component getNextQueueSpawn(double gameTime) {
+	public String getNextQueueSpawn(double gameTime) {
 		//System.out.println(this.getClass().getSimpleName() + ": " + myCurrentSpawn + " | " + mySpawnQueue.size() + " | " + gameTime + " | " + myTimeLastQueueSpawned + " | " + mySpawnQueue.get(myCurrentSpawn).getTime());
 		if(myCurrentSpawn >= mySpawnQueue.size() || gameTime - myTimeLastQueueSpawned < mySpawnQueue.get(myCurrentSpawn).getTime()){
 			return null;
@@ -57,8 +57,8 @@ public class SpawnQueue {
 	 * @param timePassed
 	 * @return
 	 */
-	public List<Component> getNextFrequencySpawn(double gameTime, double gameStep){
-		List<Component> spawnList = new ArrayList<Component>();
+	public List<String> getNextFrequencySpawn(double gameTime, double gameStep){
+		List<String> spawnList = new ArrayList<String>();
 		for (int i = 0; i < myFrequencyQueue.size(); i++) {
 			SpawnData spawnData = myFrequencyQueue.get(i);
 			double frequency = spawnData.getTime();

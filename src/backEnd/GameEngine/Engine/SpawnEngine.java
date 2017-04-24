@@ -2,6 +2,7 @@ package backEnd.GameEngine.Engine;
 
 import java.util.List;
 
+import backEnd.BankController;
 import backEnd.Attribute.Attribute;
 import backEnd.GameData.GameData;
 import backEnd.GameData.State.Component;
@@ -25,6 +26,7 @@ public class SpawnEngine implements Engine {
 
 	private boolean gamePaused = true;
 	private State myState;
+	private BankController myBank;
 
 	// TODO Add logic in pausing the game and starting again... Fucked up the
 	// timeline
@@ -32,6 +34,7 @@ public class SpawnEngine implements Engine {
 	@Override
 	public void gameLoop(GameData gameData, double stepTime) {
 		myState = gameData.getState();
+		myBank = gameData.getBankController();
 		gamePaused = myState.gameIsRunning();
 		if (gamePaused) {
 			return;
@@ -43,8 +46,8 @@ public class SpawnEngine implements Engine {
 			if (currentSpawnQueue != null) {
 				// Spawning with frequencies
 				//System.out.println(this.getClass().getName() + ": FrequencyQueue: " + currentSpawnQueue.getFrequencyQueue().size());
-				for (Component component : currentSpawnQueue.getNextFrequencySpawn(gameData.getGameTime(), stepTime)) {
-					spawn(component, spawnTile);
+				for (String component : currentSpawnQueue.getNextFrequencySpawn(gameData.getGameTime(), stepTime)) {
+					spawn((component), spawnTile);
 				}
 				// Spawning directly with spawn queue
 				Component nextQueueSpawn = currentSpawnQueue.getNextQueueSpawn(gameData.getGameTime());

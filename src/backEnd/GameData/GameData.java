@@ -3,6 +3,7 @@ package backEnd.GameData;
 import java.util.HashMap;
 import java.util.Map;
 
+import backEnd.BankController;
 import backEnd.GameData.Rules.Rule;
 import backEnd.GameData.Rules.RulesMap;
 import backEnd.GameData.Rules.EndCondition.HealthLoseCondition;
@@ -24,6 +25,7 @@ public class GameData implements GameDataInterface{
 	private EngineStatus myEngineStatus;
 	private LevelProgressionControllerReader myLPC;
 	private double myGameTime;
+	private BankController myBankController;
 	
 	public GameData(StateImpl state, PlayerStatus playerStatus, RulesMap myRules){
 		this.myState = state;
@@ -96,6 +98,13 @@ public class GameData implements GameDataInterface{
 	public LevelProgressionControllerReader getLevelProgressionController(){
 		return myLPC;
 	}
+
+	public void setBankController(BankController bankController) {
+		myBankController = bankController;
+	}
 	
+	public BankController getBankController() {
+		return myBankController;
+	}
 
 }
