@@ -13,9 +13,9 @@ public class Modification_EditSpawnDataComponent implements ModificationFromUser
 	private boolean isFrequencySpawn;
 	private String myOldComponent;
 	private String myNewComponent;
-	private long myTime;
+	private double myTime;
 	
-	public Modification_EditSpawnDataComponent(String spawnQueueName, String oldComponent, String newComponent, long time, boolean frequencySpawn) {
+	public Modification_EditSpawnDataComponent(String spawnQueueName, String oldComponent, String newComponent, double time, boolean frequencySpawn) {
 		mySpawnQueue 		= spawnQueueName;
 		myOldComponent 		= oldComponent;
 		myNewComponent 		= newComponent;

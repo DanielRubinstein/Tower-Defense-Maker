@@ -17,7 +17,7 @@ public class Modification_RemoveSpawner implements ModificationFromUser{
 	private String mySpawnQueue;
 	private boolean isFrequencySpawn;
 	private String myComponent;
-	private long myTime;
+	private double myTime;
 	
 	/**
 	 * 
@@ -26,7 +26,7 @@ public class Modification_RemoveSpawner implements ModificationFromUser{
 	 * @param time				Time of component to remove
 	 * @param frequencySpawn 	What list to remove from
 	 */
-	public Modification_RemoveSpawner(String spawnQueueName, String component, long time, boolean frequencySpawn) {
+	public Modification_RemoveSpawner(String spawnQueueName, String component, double time, boolean frequencySpawn) {
 		mySpawnQueue = spawnQueueName;
 		myComponent = component;
 		myTime = time;
