@@ -7,11 +7,13 @@ import java.util.Map;
 
 import backEnd.Bank.BankController;
 import backEnd.GameData.GameData;
+import backEnd.GameData.Rules.RuleReader;
 import backEnd.GameData.State.PlayerStatusModifier;
 import backEnd.GameData.State.PlayerStatusReader;
 import backEnd.GameData.State.State;
 import backEnd.GameEngine.EngineStatus;
 import backEnd.GameEngine.Engine.GameProcessController;
+import backEnd.LevelProgression.LevelProgressionControllerEditor;
 import backEnd.LevelProgression.LevelProgressionControllerImpl;
 import backEnd.LevelProgression.LevelProgressionControllerReader;
 import backEnd.Mode.Mode;
@@ -44,6 +46,7 @@ public class ModelImpl implements Model{
 		myGameData = gameData;
 		myMode = new ModeImpl("AUTHOR", "DEFAULT", "DEFAULT", myLevelProgressionController);
 		myLevelProgressionController = new LevelProgressionControllerImpl(myMode, myDataController, myDataController.loadGamesMapData());
+		myGameData.setLevelProgressionController(myLevelProgressionController);
 		myEngine = new GameProcessController(myGameData);
 		myBankController = new BankController(myMode, myDataController.loadTileMap(), myDataController.loadComponentMap());
 	}
@@ -94,8 +97,14 @@ public class ModelImpl implements Model{
 		return myGameData.getModifiablePlayerStatus();
 	}
 
+	
 		
-	public LevelProgressionControllerReader getLevelProgressionController() {
-		return (LevelProgressionControllerReader) myLevelProgressionController;
+	public LevelProgressionControllerEditor getLevelProgressionController() {
+		return  myLevelProgressionController;
+	}
+
+	@Override
+	public List<RuleReader> getRulesList() {
+		return myGameData.getRules().getRuleReaderList();
 	}
 }

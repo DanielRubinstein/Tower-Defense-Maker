@@ -32,7 +32,10 @@ public class StatusView {
 		valuesBox=new VBox();
 		globalBox=new HBox();
 		myScrollPane=new ScrollPane();
-		
+		initializeContent();
+
+	}
+	private void initializeContent(){
 		PlayerStatusReader playerStatus = myView.getPlayerStatus();
 		Collection<String> statusItems = playerStatus.getPropertyNames();
 		
@@ -59,6 +62,9 @@ public class StatusView {
         myScrollPane.setMinHeight(150);
         myScrollPane.setVbarPolicy(ScrollBarPolicy.NEVER);
         myScrollPane.setContent(globalBox);
+	}
+	public void intitializeVisuals(){
+		
 	}
 
 
