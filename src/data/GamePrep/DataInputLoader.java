@@ -40,26 +40,14 @@ public class DataInputLoader
 		 
 		 generateGamesMap();
 	}
-	private void generateGamesMap() {
-		try {
-			gamesMap = myXMLReader.loadGamesMap(UNIVERSAL_DATA_PATH);
-		 }
-		 catch (XMLReadingException e)
-		 {
-			e.printStackTrace();
-		 }
-	}
-	public DataInputLoader(String s) throws XMLReadingException{
-		myGameData = generateGameData(s);
-		
-	}
 	
-	public DataInputLoader(String s, String path)
-	{
-		myGameData = generateGameData(s, path);
+	public DataInputLoader(String s) throws XMLReadingException{
+		this();
+		myGameData = generateGameData(s);
 	}
 
 	public DataInputLoader(StartingInput input) throws XMLReadingException{
+		this();
 		myGameData = generateGameData(input);
 	}
 	
@@ -77,6 +65,8 @@ public class DataInputLoader
 		myGameData = generateGameData(file.getName(),file.getParent());
 	}
 
+	
+	
 	public GameData getGameData()
 	{
 		return myGameData;	
@@ -94,6 +84,7 @@ public class DataInputLoader
 	
 	private GameData generateGameData(String levelName, String dataPath)
 	{
+		System.out.println(dataPath + levelName);
 		try{
 			return myXMLReader.loadGameStateData(dataPath, levelName);
 		}catch(Exception e){
@@ -117,6 +108,14 @@ public class DataInputLoader
 		GameData gameData = new GameData(state, new PlayerStatus() , new RulesMap());
 		return gameData;
 	}
-	
+	private void generateGamesMap() {
+		try {
+			gamesMap = myXMLReader.loadGamesMap(UNIVERSAL_DATA_PATH);
+		 }
+		 catch (XMLReadingException e)
+		 {
+			e.printStackTrace();
+		 }
+	}
 	
 }

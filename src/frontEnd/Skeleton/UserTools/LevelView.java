@@ -84,7 +84,7 @@ public class LevelView {
 		Label allLevels = new Label("All Levels");
 		myRoot.add(allLevels, 2, 1);
 		myLevelEditor = new LevelEditor(100,levelOutline,gameOutline,myLevels);
-		createBottomEditor(levelOutline);
+		createBottomEditor();
 	}
 	private void populateGame(VBox wrapper,List<String> toAdd,VBox addToBox){
 		for (String str : toAdd){
@@ -128,7 +128,7 @@ public class LevelView {
 	}
 
 	
-	private void createBottomEditor(VBox levels){
+	private void createBottomEditor(){
 		gameEditor = myLevelEditor.getGameEditor();
 		myRoot.add(gameEditor, 0, 3);
 		
