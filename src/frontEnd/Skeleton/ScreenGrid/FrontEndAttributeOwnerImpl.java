@@ -95,6 +95,12 @@ public class FrontEndAttributeOwnerImpl implements Observer, FrontEndAttributeOw
 		//System.out.println("it should have moved "+System.currentTimeMillis());
 		
 	}
+	@Override
+	public void center(double x,double y){
+		
+		myImage.setX(x-myImage.getFitWidth()/2);
+		myImage.setY(y-myImage.getFitHeight()/2);
+	}
 
 	
 
