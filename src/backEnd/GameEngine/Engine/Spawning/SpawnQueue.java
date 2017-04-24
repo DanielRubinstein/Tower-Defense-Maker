@@ -2,6 +2,8 @@ package backEnd.GameEngine.Engine.Spawning;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Observable;
+import java.util.Observer;
 
 import backEnd.GameData.State.Component;
 /**
@@ -9,7 +11,7 @@ import backEnd.GameData.State.Component;
  * @author Alex
  *
  */
-public class SpawnQueue {
+public class SpawnQueue extends Observable{
 	
 	private List<SpawnData> myFrequencyQueue;
 	private List<SpawnData> mySpawnQueue;
@@ -67,6 +69,20 @@ public class SpawnQueue {
 			}
 		}		
 		return spawnList;
+	}
+	
+	public void addAsListener(Observer o) {
+		addObserver(o);
+	}
+
+	public void add(SpawnData mySpawnData, boolean isFrequencySpawn) {
+		if(isFrequencySpawn){
+			myFrequencyQueue.add(mySpawnData);
+			this.notifyObservers(myFrequencyQueue);
+		} else{
+			mySpawnQueue.add(mySpawnData);
+			this.notifyObservers(mySpawnQueue);
+		}
 	}
 	
 }

@@ -80,7 +80,7 @@ public class AttributeCommandCenter{
 		} catch (Exception e) {
 			// something went wrong
 			// TODO add exception?
-			System.out.println("Something went wrong adding the 'add now' button");
+			System.out.println("Something went wrong adding the 'add' or 'remove' button");
 		}
 	}
 
