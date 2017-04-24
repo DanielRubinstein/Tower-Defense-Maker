@@ -67,10 +67,10 @@ public class SpawnTimelineView implements SkeletonObject, Observer {
 			Component presetComponent = (Component) myView.getBankController().getPreset(presetName);
 			SingleFieldPrompt hey = new SingleFieldPrompt(
 					Arrays.asList("Add Spawn", "Please input a time for your new spawn item"), "Spawn Time Value",
-					"1");
-			long value = Long.parseLong(hey.create());
+					"1.0");
+			double value = Double.parseDouble(hey.create());
 			myView.sendUserModification(
-					new Modification_AddSpawner(mySpawnQueueName, presetComponent, value, repeating));
+					new Modification_AddSpawner(mySpawnQueueName, presetName, value, repeating));
 			addToDropZone(dropZone, presetComponent, value); // This will be
 																// removed.
 																// Instead the
@@ -87,14 +87,14 @@ public class SpawnTimelineView implements SkeletonObject, Observer {
 		return dropZone;
 	}
 
-	private void addToDropZone(ScrollPane dropZone, Component spawn, long value) {
+	private void addToDropZone(ScrollPane dropZone, Component spawn, double value) {
 		HBox spawnBox = new HBox();
 		String spawnImagePath = spawn.<String>getAttribute("ImageFile").getValue();
 		ImageView spawnImage = createImageView(spawnImagePath);
 
 		Label name = new Label();
 		name.setText(myView.getBankController().getAOName(spawn));
-		Label valueText = new Label(Long.toString(value));
+		Label valueText = new Label(Double.toString(value));
 		// TODO Editable value here valueText.setOnClick()
 		// TODO Add an X box to destroy that shit
 		spawnBox.getChildren().add(name);
