@@ -7,10 +7,10 @@ import com.thoughtworks.xstream.XStream;
 import com.thoughtworks.xstream.io.xml.DomDriver;
 
 import ModificationFromUser.ModificationFromUser;
+import backEnd.BankController;
 import backEnd.ModelImpl;
 import backEnd.Attribute.AttributeOwner;
 import backEnd.Attribute.AttributeOwnerSerializer;
-import backEnd.Bank.BankController;
 import backEnd.GameData.State.Component;
 import backEnd.GameData.State.Tile;
 import backEnd.GameData.State.TileImpl;
