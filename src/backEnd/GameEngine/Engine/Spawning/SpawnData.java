@@ -27,8 +27,8 @@ public class SpawnData implements Comparable<SpawnData>{
 		this.mySpawnable = presetName;
 	}
 	
-	public void setTime(long myTime) {
-		this.myTime = myTime;
+	public void setTime(double myNewTime) {
+		this.myTime = myNewTime;
 	}
 	
 	@Override

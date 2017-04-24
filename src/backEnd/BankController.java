@@ -60,7 +60,7 @@ public class BankController
 			
 			Tile newTile3 = new TileImpl();
 			newTile3.setAttributeValue("ImageFile", "resources/images/Tiles/Green.png");
-			newTile3.setAttributeValue("MoveDirection","Up");
+			newTile3.setAttributeValue("MoveDirection","Up");	
 			addNewTile("Green Up Tile", newTile3);
 			
 			Tile newTile4 = new TileImpl();

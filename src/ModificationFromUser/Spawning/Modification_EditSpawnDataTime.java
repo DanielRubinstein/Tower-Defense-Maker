@@ -12,10 +12,10 @@ public class Modification_EditSpawnDataTime implements ModificationFromUser{
 	private String mySpawnQueue;
 	private boolean isFrequencySpawn;
 	private String myComponent;
-	private long myOldTime;
-	private long myNewTime;
+	private double myOldTime;
+	private double myNewTime;
 	
-	public Modification_EditSpawnDataTime(String spawnQueueName, String component, long oldTime, long newTime, boolean frequencySpawn) {
+	public Modification_EditSpawnDataTime(String spawnQueueName, String component, double oldTime, double newTime, boolean frequencySpawn) {
 		mySpawnQueue 		= spawnQueueName;
 		myComponent 		= component;
 		myOldTime			= oldTime;

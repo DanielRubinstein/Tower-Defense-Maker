@@ -13,5 +13,7 @@ public interface RuleReader {
 	public String getKeyName();
 
 	public String getDisplayString();
+	
+	public void printRule();
 
 }

@@ -28,8 +28,8 @@ public class FrontEndAttributeOwnerImpl implements Observer, FrontEndAttributeOw
 	private void setPosition(Point2D newPosition){
 		if (newPosition != null){
 			myPosition = newPosition;
-			myImage.setX(newPosition.getX());
-			myImage.setY(newPosition.getY());
+			myImage.setX(newPosition.getX()-myImage.getFitWidth());
+			myImage.setY(newPosition.getY()-myImage.getFitHeight());
 		}
 	}
 	
@@ -73,11 +73,6 @@ public class FrontEndAttributeOwnerImpl implements Observer, FrontEndAttributeOw
 	public void refreshXY() {
 		setPosition(myAttr.getMyAttributes().<Point2D>get(POSITION_ATTRIBUTE).getValue());
 	}
-	
-	@Override
-	public void center(double x,double y){
-		myImage.setX(x-myImage.getFitWidth()/2);
-		myImage.setY(y-myImage.getFitHeight()/2);
-	}
+
 	
 }

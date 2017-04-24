@@ -1,5 +1,7 @@
 package backEnd.GameData.State;
 
+import java.util.Collection;
+
 /**
  * Modifier interface for back end
  * 
@@ -33,5 +35,10 @@ public interface PlayerStatusModifier extends PlayerStatusReader{
 	 * @return value of player status item itemName
 	 */
 	double getStatusItemValue(String itemName);
+	
+	Collection<String> getKeySet();
+	
+	void setStatusItemValue(String itemKey, double newVal);
+	
 
 }

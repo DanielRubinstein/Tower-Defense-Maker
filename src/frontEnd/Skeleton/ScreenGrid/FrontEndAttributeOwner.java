@@ -16,7 +16,5 @@ public interface FrontEndAttributeOwner {
 	void update(Observable o, Object arg);
 
 	void refreshXY();
-	
-	void center(double x,double y);
 
 }
