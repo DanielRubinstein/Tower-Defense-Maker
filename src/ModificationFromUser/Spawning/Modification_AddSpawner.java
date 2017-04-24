@@ -41,11 +41,7 @@ public class Modification_AddSpawner implements ModificationFromUser{
 			System.out.println("ERROR: SPAWN QUEUE NOT INITIALIZED PREVIOUSLY");
 		}
 		SpawnQueue spawnQueue = spawnQueues.get(mySpawnQueue);
-		if(isFrequencySpawn){
-			spawnQueue.getFrequencyQueue().add(mySpawnData);
-		} else{
-			spawnQueue.getSpawnQueue().add(mySpawnData);
-		}
+		spawnQueue.add(mySpawnData, isFrequencySpawn);
 	}
 
 }

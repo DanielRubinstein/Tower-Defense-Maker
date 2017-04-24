@@ -2,9 +2,13 @@ package frontEnd.Skeleton.SpawnTimelineVisualization;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Map;
+import java.util.Observable;
+import java.util.Observer;
 
 import backEnd.Attribute.AttributeOwner;
 import backEnd.GameData.State.Component;
+import backEnd.GameEngine.Engine.Spawning.SpawnData;
 import backEnd.GameEngine.Engine.Spawning.SpawnQueue;
 import frontEnd.View;
 import frontEnd.CustomJavafxNodes.SingleFieldPrompt;
@@ -28,13 +32,15 @@ import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import ModificationFromUser.Spawning.Modification_AddSpawner;
 
-public class SpawnTimelineView implements SkeletonObject {
+public class SpawnTimelineView implements SkeletonObject, Observer {
 	private View myView;
 	private ScrollPane dropZone1;
 	private ScrollPane dropZone2;
 	private GridPane myRoot;
 	private String mySpawnQueueName;
 	private SpawnQueue mySpawnQueue;
+	private Map<SpawnData, VisualSpawnEntry> myFrequencySpawns;
+	private Map<SpawnData, VisualSpawnEntry> mySingleSpawns;
 
 	public SpawnTimelineView(View view, ReadOnlyDoubleProperty readOnlyDoubleProperty, String key, SpawnQueue value) {
 		myView = view;
@@ -131,6 +137,15 @@ public class SpawnTimelineView implements SkeletonObject {
 	@Override
 	public Node getRoot() {
 		return myRoot;
+	}
+
+	@Override
+	public void update(Observable arg0, Object arg1) {
+		if(arg0 == mySpawnQueue){
+			if(arg1 == mySpawnQueue.getFrequencyQueue()){
+				System.out.println("yo yo yo");
+			}
+		}
 	}
 
 }
