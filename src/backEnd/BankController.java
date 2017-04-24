@@ -190,6 +190,10 @@ public class BankController
 		}
 	}
 	
+	public Component getComponent(String componentName){
+		return componentBank.get(componentName)
+;	}
+	
 	public void addObserver(Observer o){
 		observers.add(o);
 	}
