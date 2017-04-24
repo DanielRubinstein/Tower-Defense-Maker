@@ -76,13 +76,12 @@ public class AttributeCommandCenter{
 			addSubmitButton.setAccessible(true);
 			addSubmitButton.invoke(this, obj);
 		} catch (NoSuchMethodException e) {
-			System.out.println("No adding 'add now' buttons for tiles (this is a good thing)");
 			// do nothing
 			// this means the thing being put in attribute command center is a tile
 		} catch (Exception e) {
 			// something went wrong
-			System.out.println("Something went wrong adding the 'add now' button");
 			// TODO add exception?
+			System.out.println("Something went wrong adding the 'add now' button");
 		}
 	}
 

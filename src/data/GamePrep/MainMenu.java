@@ -55,7 +55,7 @@ public class MainMenu{
    	 	primaryMenu.addPrimarySimpleButtonWithHover("Create New Game", () -> new GameMaker(stage, consumerLoadData), "Create A New Game after selecting the size of the screen");
    	 	primaryMenu.addSimpleButtonWithHover("Modify Level", () -> chooseLevel(), "Load a game from a list of preapproved, ready-to-play templates");
    	 	primaryMenu.addSimpleButtonWithHover("Load Saved Game", () -> chooseGame(), "Continue your progress by loading a user-saved game");
-   	 	primaryMenu.addSimpleButtonWithHover("Play Game", () -> new GameChooserWindow(stage, consumerLoadData) , "Return to previous screen");
+   	 	primaryMenu.addSimpleButtonWithHover("Play Game", () -> new GameChooserWindow(stage, consumerLoadData) , "Play game");
    	 	primaryMenu.addSimpleButtonWithHover("Connect To Facebook", () -> launchFb(stage), "Log in and connect to Facebook to see high scores, screenshots, post to the official voogasalad_su3ps1ckt34m1337 page");
 		primaryMenu.display(stage);
 	}

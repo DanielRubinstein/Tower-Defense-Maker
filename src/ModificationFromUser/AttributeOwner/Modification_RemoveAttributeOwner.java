@@ -13,7 +13,8 @@ public class Modification_RemoveAttributeOwner implements ModificationFromUser {
 	
 	private AttributeOwner toRemove;
 	private ModelImpl myModel;
-	public static final String ERROR_DESCRIPTION = "Cannot remove tiles";
+	public static final String TILE_ERROR = "Cannot move tiles";
+	public static final String DESCRIPTION_ERROR = "Not a recognized Attribute Owner";
 
 	public Modification_RemoveAttributeOwner(AttributeOwner toRemove){
 		this.toRemove = toRemove;
@@ -27,19 +28,13 @@ public class Modification_RemoveAttributeOwner implements ModificationFromUser {
 			remove.setAccessible(true);
 			remove.invoke(this, toRemove);
 		} catch (NoSuchMethodException e) {
-			System.out.println("in Modification_RemoveAttributeOwner, No method found, ugh");
-			// do nothing
-			// this means the thing being put in attribute command center is a tile
-		} catch (Exception e) {
-			// something went wrong
-			System.out.println("Something went wrong in Modification_RemoveAttributeOwner");
-			// TODO add exception?
+			throw new Exception(DESCRIPTION_ERROR);
 		}
 		
 	}
 	
 	private void remove(TileImpl tile) throws Exception{
-		throw new Exception(ERROR_DESCRIPTION);
+		throw new Exception(TILE_ERROR);
 	}
 	
 	private void remove(Component component){
