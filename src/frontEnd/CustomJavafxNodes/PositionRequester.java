@@ -6,20 +6,26 @@ import java.util.List;
 import javafx.geometry.Point2D;
 
 public class PositionRequester {
-	/*
-	private List<String> dialogTitles = Arrays.asList("Position Utility", "Please input a location");
-	private List<String> promptLabel = Arrays.asList("X Position:", "Y Position:");
-	private List<String> promptText = Arrays.asList("0.0", "0.0");
+	
+	private static final List<String> dialogTitles = Arrays.asList("Position Utility", "Please input a location");
+	private static final List<String> promptLabel = Arrays.asList("X Position:", "Y Position:");
+	private static final List<String> promptText = Arrays.asList("0.0", "0.0");
 	private DoubleFieldPrompt myDialog;
 	
 	public PositionRequester(){
 		myDialog = new DoubleFieldPrompt(dialogTitles, promptText, promptLabel);
 	}
-	public Point2D promptUser(){
+	public Point2D promptUser(Point2D oldPoint){
 		List<String> results = myDialog.create();
-		return new Point2D(Double.parseDouble(results.get(0)), Double.parseDouble(results.get(1)));
+		try{
+			return new Point2D(Double.parseDouble(results.get(0)), Double.parseDouble(results.get(1)));
+		} catch (NullPointerException e){
+			return oldPoint;
+		}
 	}
-	*/
+	
+	
+	/*
 	
 	public static Point2D askUserForPosition(){
 		return askUserForPosition(new Point2D(0,0));
@@ -37,4 +43,6 @@ public class PositionRequester {
 			return oldPoint;
 		}
 	}
+	
+	*/
 }

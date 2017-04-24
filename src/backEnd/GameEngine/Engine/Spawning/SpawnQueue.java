@@ -2,13 +2,15 @@ package backEnd.GameEngine.Engine.Spawning;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Observable;
+import java.util.Observer;
 
 /**
  * SpawnQueue object that is held in tiles to determine what needs to be spawned next
  * @author Alex
  *
  */
-public class SpawnQueue {
+public class SpawnQueue extends Observable{
 	
 	private List<SpawnData> myFrequencyQueue;
 	private List<SpawnData> mySpawnQueue;
@@ -68,12 +70,26 @@ public class SpawnQueue {
 		}		
 		return spawnList;
 	}
-	
+
 	public void update(double gameTime) {
 		myGameTime = gameTime;
 		if(myCurrentSpawn >= mySpawnQueue.size() || myGameTime - myTimeLastQueueSpawned < mySpawnQueue.get(myCurrentSpawn).getTime()){} else {
 			myTimeLastQueueSpawned = myGameTime;
 			myCurrentSpawn++;
+		}
+	}
+
+	public void addAsListener(Observer o) {
+		addObserver(o);
+	}
+
+	public void add(SpawnData mySpawnData, boolean isFrequencySpawn) {
+		if(isFrequencySpawn){
+			myFrequencyQueue.add(mySpawnData);
+			this.notifyObservers(myFrequencyQueue);
+		} else{
+			mySpawnQueue.add(mySpawnData);
+			this.notifyObservers(mySpawnQueue);
 		}
 	}
 }
