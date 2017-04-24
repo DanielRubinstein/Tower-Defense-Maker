@@ -1,15 +1,7 @@
 package backEnd.GameData;
 
-import java.util.HashMap;
-import java.util.Map;
-
 import backEnd.BankController;
-import backEnd.GameData.Rules.Rule;
 import backEnd.GameData.Rules.RulesMap;
-import backEnd.GameData.Rules.EndCondition.HealthLoseCondition;
-import backEnd.GameData.Rules.EndCondition.KillCountCondition;
-import backEnd.GameData.Rules.EndCondition.ScoreWinCondition;
-import backEnd.GameData.Rules.EndCondition.TimeEndCondition;
 import backEnd.GameData.State.PlayerStatus;
 import backEnd.GameData.State.PlayerStatusModifier;
 import backEnd.GameData.State.PlayerStatusReader;

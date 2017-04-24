@@ -47,10 +47,10 @@ public class SpawnEngine implements Engine {
 				// Spawning with frequencies
 				//System.out.println(this.getClass().getName() + ": FrequencyQueue: " + currentSpawnQueue.getFrequencyQueue().size());
 				for (String component : currentSpawnQueue.getNextFrequencySpawn(gameData.getGameTime(), stepTime)) {
-					spawn((component), spawnTile);
+					spawn(myBank.getComponent(component), spawnTile);
 				}
 				// Spawning directly with spawn queue
-				Component nextQueueSpawn = currentSpawnQueue.getNextQueueSpawn(gameData.getGameTime());
+				Component nextQueueSpawn = myBank.getComponent(currentSpawnQueue.getNextQueueSpawn(gameData.getGameTime()));
 				spawn(nextQueueSpawn, spawnTile);
 			}
 		}
@@ -66,7 +66,7 @@ public class SpawnEngine implements Engine {
 	@SuppressWarnings("unchecked")
 	private void spawn(Component component, Tile spawnTile) {
 		if (component == null) {
-			System.out.println(this.getClass().getName() + ": No component to add from spawn queue");
+			//System.out.println(this.getClass().getName() + ": No component to add from spawn queue");
 			return;
 		}
 		//System.out.println(this.getClass().getName() + ": Should add component from spawn queue");
@@ -74,7 +74,9 @@ public class SpawnEngine implements Engine {
 		Component spawnable = componentBuilder.getComponent();
 		Object positionObj = spawnTile.getMyAttributes().get("Position");
 		Attribute<Point2D> spawnPositionAttribute = (Attribute<Point2D>) positionObj;
-		Point2D spawnPosition = spawnPositionAttribute.getValue();
+		Point2D tilePosition = spawnPositionAttribute.getValue();
+		Point2D spawnPosition = new Point2D(tilePosition.getX()*40,tilePosition.getY()*40);
+		System.out.println(this.getClass().getName() + ": Spawn Position: " + spawnPosition.getX() + " | " + spawnPosition.getY());
 		myState.getComponentGraph().addComponentToGrid(spawnable, spawnPosition);
 	}
 }

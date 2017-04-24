@@ -1,6 +1,5 @@
 package backEnd.GameEngine.Engine.Spawning;
 
-import backEnd.GameData.State.Component;
 /**
  * Container class for Components to spawn with the time/frequency to spawn them at
  * @author Alex
@@ -25,7 +24,7 @@ public class SpawnData implements Comparable<SpawnData>{
 	}
 
 	public void setSpawnable(String presetName) {
-		this.mySpawnable = mySpawnable;
+		this.mySpawnable = presetName;
 	}
 	
 	public void setTime(long myTime) {

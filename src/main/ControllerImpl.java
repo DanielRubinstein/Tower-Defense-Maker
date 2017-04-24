@@ -10,7 +10,6 @@ import data.GamePrep.DataInputLoader;
 import data.GamePrep.MainMenu;
 import frontEnd.ViewImpl;
 import frontEnd.CustomJavafxNodes.ErrorDialog;
-import frontEnd.Facebook.FacebookConnector;
 import frontEnd.Facebook.FacebookInteractor;
 import javafx.stage.Stage;
 

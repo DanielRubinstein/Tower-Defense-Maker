@@ -4,7 +4,6 @@ import java.util.Map;
 
 import ModificationFromUser.ModificationFromUser;
 import backEnd.ModelImpl;
-import backEnd.GameData.State.Component;
 import backEnd.GameData.State.State;
 import backEnd.GameEngine.Engine.Spawning.SpawnData;
 import backEnd.GameEngine.Engine.Spawning.SpawnQueue;
@@ -26,7 +25,7 @@ public class Modification_AddSpawner implements ModificationFromUser{
 	 * @param value				Time of component to remove
 	 * @param frequencySpawn 	What list to remove from
 	 */
-	public Modification_AddSpawner(String spawnQueueName, Component component, double value, boolean frequencySpawn) {
+	public Modification_AddSpawner(String spawnQueueName, String component, double value, boolean frequencySpawn) {
 		mySpawnQueue = spawnQueueName;
 		mySpawnData = new SpawnData(component, value);
 		isFrequencySpawn = frequencySpawn;

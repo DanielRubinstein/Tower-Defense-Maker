@@ -64,7 +64,7 @@ public class SpawnTimelineView implements SkeletonObject {
 					"1.0");
 			double value = Double.parseDouble(hey.create());
 			myView.sendUserModification(
-					new Modification_AddSpawner(mySpawnQueueName, presetComponent, value, repeating));
+					new Modification_AddSpawner(mySpawnQueueName, presetName, value, repeating));
 			addToDropZone(dropZone, presetComponent, value); // This will be
 																// removed.
 																// Instead the

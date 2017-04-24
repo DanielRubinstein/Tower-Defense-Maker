@@ -1,9 +1,6 @@
 package backEnd;
 
-import java.util.Arrays;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import backEnd.GameData.GameData;
 import backEnd.GameData.Rules.RuleReader;
@@ -14,7 +11,6 @@ import backEnd.GameEngine.EngineStatus;
 import backEnd.GameEngine.Engine.GameProcessController;
 import backEnd.LevelProgression.LevelProgressionControllerEditor;
 import backEnd.LevelProgression.LevelProgressionControllerImpl;
-import backEnd.LevelProgression.LevelProgressionControllerReader;
 import backEnd.Mode.Mode;
 import backEnd.Mode.ModeImpl;
 import backEnd.Mode.ModeReader;
