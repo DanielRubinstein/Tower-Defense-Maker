@@ -13,7 +13,7 @@ public class Modification_ChangeMode implements ModificationFromUser {
 			myModel.getMode().toggleUserMode();		
 			break;
 		case "PLAYER":
-			//myModel.getGameProcessController().pause();
+			myModel.getGameProcessController().pause();
 			myModel.getMode().toggleUserMode();
 			break;
 		}	

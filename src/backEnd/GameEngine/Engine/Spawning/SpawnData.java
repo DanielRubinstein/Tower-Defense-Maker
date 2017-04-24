@@ -1,6 +1,5 @@
 package backEnd.GameEngine.Engine.Spawning;
 
-import backEnd.GameData.State.Component;
 /**
  * Container class for Components to spawn with the time/frequency to spawn them at
  * @author Alex
@@ -8,16 +7,15 @@ import backEnd.GameData.State.Component;
  */
 public class SpawnData implements Comparable<SpawnData>{
 
-	Component mySpawnable;
+	String mySpawnable;
 	double myTime;
 	
-	public SpawnData(Component component, double time) {
-		//NOT SURE IF COMPONENT IS ACTUALLY THE WAY TO GO HERE TODO CHANGE TO SOMETHING BETTER?
+	public SpawnData(String component, double time) {
 		mySpawnable = component;
 		myTime = time;
 	}
 	
-	public Component getSpawnable() {
+	public String getSpawnable() {
 		return mySpawnable;
 	}
 	
@@ -25,8 +23,8 @@ public class SpawnData implements Comparable<SpawnData>{
 		return myTime;
 	}
 
-	public void setSpawnable(Component mySpawnable) {
-		this.mySpawnable = mySpawnable;
+	public void setSpawnable(String presetName) {
+		this.mySpawnable = presetName;
 	}
 	
 	public void setTime(long myTime) {
@@ -35,6 +33,6 @@ public class SpawnData implements Comparable<SpawnData>{
 	
 	@Override
 	public int compareTo(SpawnData o) {
-		return (int)((this.getTime()-o.getTime()) * 1000);
+		return (int)(this.getTime()-o.getTime());
 	}
 }

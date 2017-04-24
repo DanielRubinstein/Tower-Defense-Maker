@@ -3,6 +3,7 @@ package frontEnd.CustomJavafxNodes;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
+import java.util.ResourceBundle;
 
 import javafx.geometry.Insets;
 import javafx.scene.Node;
@@ -19,6 +20,9 @@ import javafx.scene.layout.GridPane;
  *
  */
 public class DoubleFieldPrompt {
+	private static final String BUNDLE_NAME = "resources.messages";
+	private static final ResourceBundle RESOURCE_BUNDLE = ResourceBundle.getBundle(BUNDLE_NAME);
+	
 	private List<String> myDialogTitles;
 	private List<String> myPromptText;
 	private List<String> myPromptLabel;
@@ -42,7 +46,7 @@ public class DoubleFieldPrompt {
 		 */
 
 		// Set the button types.
-		ButtonType createButtonType = new ButtonType("Submit", ButtonData.OK_DONE);
+		ButtonType createButtonType = new ButtonType(RESOURCE_BUNDLE.getString("Submit"), ButtonData.OK_DONE);
 		dialog.getDialogPane().getButtonTypes().addAll(createButtonType, ButtonType.CANCEL);
 
 		// Create the username and password labels and fields.
