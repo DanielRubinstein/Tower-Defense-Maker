@@ -14,4 +14,6 @@ public interface LevelProgressionControllerEditor extends LevelProgressionContro
 
 	void removeLevelFromGame(String gameName, String level);
 
+	void saveGamesMap();
+
 }

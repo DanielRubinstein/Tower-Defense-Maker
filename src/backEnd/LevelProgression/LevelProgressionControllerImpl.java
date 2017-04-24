@@ -31,7 +31,7 @@ public class LevelProgressionControllerImpl implements LevelProgressionControlle
 		this.myDataController = dataController;
 	}
 	
-
+	
 	@Override
 	public List<String> getGameList(){
 		return new ArrayList<String>(gamesMap.keySet());
@@ -39,10 +39,27 @@ public class LevelProgressionControllerImpl implements LevelProgressionControlle
 	
 	
 	@Override
-	public List<String> getLevelList(String gameName){
+	public List<String> getLevelList(String gameName)
+	{	
+		List<String> toRemove = new ArrayList<String>();
+		
+		//check to see if a level still exists as a template
+		for (String level : gamesMap.get(gameName))
+		{
+			if (!getFullLevelList().contains(level))
+			{
+				toRemove.add(level);
+			}
+		}
+		gamesMap.get(gameName).removeAll(toRemove);
+		
 		return gamesMap.get(gameName);
 	}
 	
+	public void saveGamesMap()
+	{
+		myDataController.saveGamesMap(gamesMap);
+	}
 	
 	@Override
 	public List<String> getFullLevelList(){

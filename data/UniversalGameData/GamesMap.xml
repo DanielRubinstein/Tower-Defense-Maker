@@ -2,17 +2,14 @@
   <entry>
     <string>Plants vs. Zombies</string>
     <list>
-      <string>PvL Level 1</string>
-      <string>Level 2</string>
-      <string>Level 3</string>
+      <string>filetest</string>
+      <string>loop</string>
     </list>
   </entry>
   <entry>
     <string>Bloons</string>
     <list>
-        <string>Bloons Level A</string>
-        <string>Level B</string>
-        <string>Level C</string>
+      <string>riley</string>
     </list>
   </entry>
 </map>
