@@ -6,12 +6,10 @@ import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 import java.util.List;
 import java.util.Map;
-
 import backEnd.GameData.GameData;
 import backEnd.GameData.Rules.RulesMap;
 import backEnd.GameData.State.PlayerStatus;
 import backEnd.GameData.State.StateImpl;
-import backEnd.GameEngine.EngineStatus;
 import data.XMLReader;
 import data.XMLReaderImpl;
 import data.XMLReadingException;
@@ -24,7 +22,6 @@ import data.XMLReadingException;
  */
 public class DataInputLoader
 {
-	
 	
 	private static final String GAME_STATE_DATA_PATH = "data/SavedGames/";
 	private static final String TEMPLATE_DATA_PATH = "data/LevelTemplates/";
@@ -41,17 +38,25 @@ public class DataInputLoader
 		 generateGamesMap();
 	}
 	
-	public DataInputLoader(String s) throws XMLReadingException{
+	public DataInputLoader(String s) throws XMLReadingException
+	{
 		this();
 		myGameData = generateGameData(s);
 	}
 
-	public DataInputLoader(StartingInput input) throws XMLReadingException{
+	public DataInputLoader(StartingInput input) throws XMLReadingException
+	{
 		this();
 		myGameData = generateGameData(input);
 	}
 	
+	public DataInputLoader(File file) throws NoSuchMethodException, SecurityException, InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException {
+		this();
+		myGameData = generateGameData(file.getName(),file.getParent());
+	}
+	
 	public DataInputLoader(Object o) throws NoSuchMethodException, SecurityException, InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException {
+		this();
 		Constructor<? extends DataInputLoader> cons = this.getClass().getDeclaredConstructor(o.getClass());
 		
 		
@@ -60,12 +65,6 @@ public class DataInputLoader
 		myGameData = d.getGameData();
 		
 	}
-	
-	public DataInputLoader(File file) throws NoSuchMethodException, SecurityException, InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException {
-		myGameData = generateGameData(file.getName(),file.getParent());
-	}
-
-	
 	
 	public GameData getGameData()
 	{
@@ -84,7 +83,6 @@ public class DataInputLoader
 	
 	private GameData generateGameData(String levelName, String dataPath)
 	{
-		System.out.println(dataPath + levelName);
 		try{
 			return myXMLReader.loadGameStateData(dataPath, levelName);
 		}catch(Exception e){

@@ -1,31 +1,29 @@
 package backEnd.LevelProgression;
 
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FilenameFilter;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import backEnd.LevelProgression.LevelProgressionControllerEditor;
-import backEnd.GameData.GameData;
 import backEnd.Mode.Mode;
 import data.DataController;
-import data.XMLReadingException;
 
 /**
  * 
  * @author Riley Nisbet
  *
  */
-public class LevelProgressionControllerImpl implements LevelProgressionControllerReader, LevelProgressionControllerEditor {
+public class LevelProgressionControllerImpl implements LevelProgressionControllerReader, LevelProgressionControllerEditor
+{
 	private Map<String,List<String>> gamesMap; //String gameName -> List of Level names
 	private DataController myDataController;
 	private Mode myMode;
 	private static final String LEVEL_TEMPLATE_PATH = "data/LevelTemplates/";
 	
-	public LevelProgressionControllerImpl(Mode mode, DataController dataController, Map<String,List<String>> gamesMap){
+	public LevelProgressionControllerImpl(Mode mode, DataController dataController, Map<String,List<String>> gamesMap)
+	{
 		this.myMode = mode;
 		this.gamesMap = gamesMap;
 		this.myDataController = dataController;
