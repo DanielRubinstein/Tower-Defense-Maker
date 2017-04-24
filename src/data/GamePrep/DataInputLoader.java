@@ -52,6 +52,7 @@ public class DataInputLoader
 	}
 	
 	public DataInputLoader(Object o) throws NoSuchMethodException, SecurityException, InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException {
+		this();
 		Constructor<? extends DataInputLoader> cons = this.getClass().getDeclaredConstructor(o.getClass());
 		
 		
