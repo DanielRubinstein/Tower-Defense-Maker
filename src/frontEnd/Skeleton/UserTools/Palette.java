@@ -115,6 +115,7 @@ public class Palette<T extends AttributeOwner> implements SkeletonObject, Observ
 			if (newV) {
 				Bounds scenePos = imageView.localToScreen(imageView.getBoundsInLocal());
 				t.show(imageView, scenePos.getMaxX(), scenePos.getMinY());
+				// TODO someone help
 			} else {
 				t.hide();
 			}
