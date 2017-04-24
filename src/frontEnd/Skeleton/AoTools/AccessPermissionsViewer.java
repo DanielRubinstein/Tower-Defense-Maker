@@ -109,8 +109,6 @@ public class AccessPermissionsViewer implements SkeletonObject {
 
 	private Node createGameLevelDropDown(VBox parent, List<String> list) {
 		
-		list = list.stream().filter(e -> myAccessPermissions.permitsAccess(e)).collect(Collectors.toList());
-		
 		ObservableList<String> options = (ObservableList<String>) FXCollections.observableArrayList(list);
 		ComboBox<String> optionsBox = new ComboBox<String>(options);
 		try {

@@ -1,7 +1,9 @@
 package frontEnd.Skeleton.UserTools;
 
 import java.io.FileNotFoundException;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Observable;
 import java.util.Observer;
@@ -123,6 +125,18 @@ public class Palette<T extends AttributeOwner> implements SkeletonObject, Observ
 			tile.getChildren().add(addPreset);
 		}
 	}
+	
+	private void removePresetFromPalette(ImageView imageView) {
+		tile.getChildren().remove(imageView);
+		myPresetMapFrontEnd.remove(imageView);
+		/*if (addPreset == null) {
+			tile.getChildren().remove(imageView);
+		} else {
+			tile.getChildren().remove(addPreset);
+			tile.getChildren().remove(imageView);
+			tile.getChildren().add(addPreset);
+		}*/
+	}
 
 	private void makeHoverOverName(T preset, ImageView imageView) {
 		Tooltip t = new Tooltip(observedBankController.getAOName(preset));
@@ -225,6 +239,15 @@ public class Palette<T extends AttributeOwner> implements SkeletonObject, Observ
 			if (!myPresetMapFrontEnd.containsValue(preset)) {
 				addPresetToPalette(preset);
 			}
+		}
+		List<ImageView> toRemove = new ArrayList<ImageView>();
+		for (ImageView iv : myPresetMapFrontEnd.keySet()) {
+			if (!myPresetMapBackEnd.containsValue(myPresetMapFrontEnd.get(iv))) {
+				toRemove.add(iv);
+			}
+		}
+		for (ImageView iv : toRemove){
+			removePresetFromPalette(iv);
 		}
 	}
 }
