@@ -59,6 +59,8 @@ public class ProjectileEngine implements Engine {
 	private Point2D calculateNewPos(Component c) {
 		Double curVel = (Double) c.getAttribute(("Velocity")).getValue();
 		
+		//TODO: CHRISTIAN targeting is screwed up for going backwards - probably in slope (if not, then error
+		//might be in the target point initialization in AttackEngine (.subtract?)
 		Point2D curPos = (Point2D) c.getAttribute(("Position")).getValue();
 		Point2D targetPos = (Point2D) c.getAttribute(("ProjectileTargetPosition")).getValue();
 		Point2D difference = targetPos.subtract(curPos);
