@@ -157,7 +157,6 @@ public class ScreenGrid implements SkeletonObject, Observer {
 		} else if (o == observedTileGrid){
 			updateTilesOnGrid();
 		}
-
 	}
 
 	private void updateTilesOnGrid() {
@@ -183,7 +182,7 @@ public class ScreenGrid implements SkeletonObject, Observer {
 		}
 	}
 
-	private void updateComponentsOnGrid() {
+	private void updateComponentsOnGrid() {	
 		for (Component c : observedComponentGraph.getAllComponents()) {
 			if (!myComponents.contains(c)) {
 				//System.out.println("in screenGrid, updateComponentsOnGrid() got called");
@@ -197,7 +196,7 @@ public class ScreenGrid implements SkeletonObject, Observer {
 			}
 		}
 	}
-
+	
 	private void removeComponentFromGrid(Component c) {
 		myComponents.remove(c);
 		myRoot.getChildren().remove(myComponentImages.get(c));

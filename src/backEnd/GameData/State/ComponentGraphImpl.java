@@ -79,8 +79,10 @@ public class ComponentGraphImpl extends Observable implements ComponentGraph {
 		currList.add(newComponent);
 		componentMap.put(screenPosition, currList);
 		myComponents.add(newComponent);
+		newComponent.getAttribute("Position").setValue(screenPosition);
 		this.setChanged();
 		this.notifyObservers();
+		System.out.println(this.getClass().getSimpleName() + screenPosition.getX() + "  " + screenPosition.getY());
 	}
 
 	@Override
