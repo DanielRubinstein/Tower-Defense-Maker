@@ -51,15 +51,7 @@ public class Modification_Add_PaletteToGrid implements ModificationFromUser {
 			add.setAccessible(true);
 			add.invoke(this, cleanAO);
 		} catch (NoSuchMethodException e) {
-			System.out.println("in Modification_Add_PaletteToGrid, No method found, ugh");
-			// do nothing
-			// this means the thing being put in attribute command center is a tile
-		} catch (ModeException e){
-			throw e;
-		} catch (Exception e) {
-			// something went wrong
-			System.out.println("Something went wrong in Modification_Add_PaletteToGrid");
-			e.printStackTrace();
+			throw new Exception(DESCRIPTION_ERROR);
 		}
 	}
 	

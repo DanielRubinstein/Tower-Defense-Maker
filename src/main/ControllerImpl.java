@@ -31,11 +31,14 @@ public class ControllerImpl implements Controller {
 						System.out.println("Modification from user sent to back end");
 					} catch (Exception e) {
 						System.out.println("Error in Modification sent");
-						e.printStackTrace();
 						ErrorDialog errDia = new ErrorDialog();
-						errDia.create("InGame Error", e.getMessage());
-						e.printStackTrace();
-						
+						String eMessage = "";
+						if(e.getMessage() != null){
+							eMessage = e.getMessage();
+						} else {
+							eMessage = e.getCause().getMessage();
+						}
+						errDia.create("InGame Error", eMessage);
 					}
 				};
 
