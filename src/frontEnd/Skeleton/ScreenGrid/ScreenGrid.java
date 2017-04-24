@@ -7,6 +7,7 @@ import java.util.Observable;
 import java.util.Observer;
 import java.util.Set;
 
+import ModificationFromUser.AttributeOwner.Modification_EditAttribute;
 import backEnd.Attribute.AttributeOwner;
 import backEnd.GameData.State.Component;
 import backEnd.GameData.State.ComponentGraph;
@@ -21,7 +22,11 @@ import frontEnd.Skeleton.UserTools.SkeletonObject;
 import javafx.geometry.Point2D;
 import javafx.scene.Group;
 import javafx.scene.Node;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.ClipboardContent;
+import javafx.scene.input.Dragboard;
+import javafx.scene.input.TransferMode;
 import javafx.scene.layout.GridPane;
 
 /**
@@ -53,9 +58,6 @@ public class ScreenGrid implements SkeletonObject, Observer {
 	private int numberOfTileRows;
 	private double tileWidth;
 	private double tileHeight;
-	
-	
-	
 
 	/**
 	 * Constructs a new ScreenGrid object given the view and state. State contains
@@ -118,11 +120,6 @@ public class ScreenGrid implements SkeletonObject, Observer {
 		myGrid.setPrefHeight(myHeight);
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see frontEnd.Skeleton.UserTools.SkeletonObject#getRoot()
-	 */
 	public Node getRoot() {
 		return myRoot;
 	}
@@ -147,6 +144,22 @@ public class ScreenGrid implements SkeletonObject, Observer {
 			GenericCommandCenter comCenter = new GenericCommandCenter(myView, c);
 			comCenter.launch("On-Screen Component", e.getSceneX(), e.getSceneY());
 		});
+		n.setOnDragDetected(e -> {
+			Dragboard db = n.startDragAndDrop(TransferMode.ANY);
+			ClipboardContent content = new ClipboardContent();
+			content.putString(myView.getBankController().getAOName(c));
+			db.setContent(content);
+			String imagePath = c.<String>getAttribute("ImageFile").getValue();
+			Image image = new Image(getClass().getClassLoader().getResourceAsStream(imagePath));
+			db.setDragView(image);
+		});
+		myRoot.setOnDragOver(e -> e.acceptTransferModes(TransferMode.ANY));
+		
+		myRoot.setOnDragDropped(e -> {
+			Point2D newPos = new Point2D(e.getSceneX(),e.getSceneY());
+			myView.sendUserModification(new Modification_EditAttribute(c,c.getAttribute("Position"),newPos));
+		});
+		
 	}
 
 	@Override
@@ -206,7 +219,6 @@ public class ScreenGrid implements SkeletonObject, Observer {
 	private void addComponentToGrid(Component c) {
 		FrontEndAttributeOwner frontAttr = new FrontEndAttributeOwnerImpl(c);
 		frontAttr.refreshXY();
-		
 		ImageView frontImage = frontAttr.getImageView();
 		frontImage.setFitWidth(tileWidth / 2);
 		frontImage.setFitHeight(tileHeight / 2);
