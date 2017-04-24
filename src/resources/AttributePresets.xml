@@ -28,7 +28,8 @@
 		<STRINGLIST_TEMPLATE Options="Comma delineated String Options"></STRINGLIST_TEMPLATE>
 		<MoveDirection options="Up,Down,Left,Right"></MoveDirection>
 		<Type options="Tower, Projectile, Enemy"></Type>
-		<FireType options="Single, AOE"></FireType></STRINGLIST>
+		<FireType options="Single, AOE"></FireType>
+		<SpawnTimeline options="Timeline 1"></SpawnTimeline></STRINGLIST>
 	<POSITION>
 		<POSITION_TEMPLATE></POSITION_TEMPLATE>
 		<ProjectileTargetPosition></ProjectileTargetPosition></POSITION>
