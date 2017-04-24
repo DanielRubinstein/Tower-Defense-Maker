@@ -24,7 +24,7 @@ public class Modification_RemoveAttributeOwner implements ModificationFromUser {
 	public void invoke(ModelImpl model) throws Exception {
 		myModel = model;
 		try {
-			Method remove = Modification_RemoveAttributeOwner.class.getDeclaredMethod("add", toRemove.getClass());
+			Method remove = Modification_RemoveAttributeOwner.class.getDeclaredMethod("remove", toRemove.getClass());
 			remove.setAccessible(true);
 			remove.invoke(this, toRemove);
 		} catch (NoSuchMethodException e) {
