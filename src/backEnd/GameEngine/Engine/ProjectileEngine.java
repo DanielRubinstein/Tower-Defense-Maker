@@ -83,12 +83,12 @@ public class ProjectileEngine implements Engine {
 			if (! ((String)target.getAttribute("Type").getValue()).equals("Enemy")){
 				System.out.println("Target isn't an enemy");
 			}
-			System.out.println(targetList.size() + "LIST SIZE SKIRT SKIRT");
+			//System.out.println(targetList.size() + "LIST SIZE SKIRT SKIRT");
 			target.setAttributeValue("Health", (Integer) target.getAttribute("Health").getValue()
 					- (Integer) projectile.getAttribute("FireDamage").getValue());
 			target.setAttributeValue("Velocity", ((Double) projectile.getAttribute("SlowFactor").getValue()
 					* (Double) target.getAttribute("Speed").getValue()));
-			System.out.println("projectile action performed");
+			//System.out.println("projectile action performed");
 			myGameData.getState().getComponentGraph().removeComponent(projectile);
 			if (projectile.getAttribute("FireType").getValue().equals("SingleTarget")) {
 				break; // if AOE, continue to loop through all targets, else
