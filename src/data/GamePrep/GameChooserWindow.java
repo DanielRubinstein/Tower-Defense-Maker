@@ -11,12 +11,24 @@ import frontEnd.CustomJavafxNodes.ActionButton;
 import frontEnd.CustomJavafxNodes.ButtonMenuImpl;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.geometry.Insets;
+import javafx.scene.Group;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.ScrollPane;
+import javafx.scene.control.ScrollPane.ScrollBarPolicy;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundFill;
+import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.ColumnConstraints;
+import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
+import javafx.scene.layout.HBox;
+import javafx.scene.paint.Color;
 import javafx.stage.Stage;
+import resources.Constants;
 
 /**
  * 
@@ -25,10 +37,12 @@ import javafx.stage.Stage;
  */
 public class GameChooserWindow
 {
+	private VBox overallContainer;
+	private HBox selectorContainer;
 	private VBox gameContainer;
 	private VBox levelContainer;
 	private DataInputLoader reader;
-	private GridPane myRoot;
+	private BorderPane myRoot;
 	private Map<String, List<String>> gamesData;
 	private String currentLevel;
 	
@@ -37,14 +51,27 @@ public class GameChooserWindow
 		reader = new DataInputLoader();
 		gamesData = reader.getGamesMap();
 		
-		myRoot = new GridPane();
-		Scene myScene = new Scene(myRoot, 600,  400);
+		overallContainer = new VBox();
+		
+		populateOverallContainer(consumerLoadData);
+		
+		Scene myScene = new Scene(overallContainer, 600,  400);
+		myScene.getStylesheets().add(Constants.DEFAULT_CSS);
 		stage.setScene(myScene);
 		
-		addVBoxes();
-		addButton(consumerLoadData);
+		
+		
 		
 		stage.show();
+	}
+
+	private void populateOverallContainer(Consumer<Object> consumerLoadData)
+	{
+		selectorContainer = new HBox();
+		overallContainer.getChildren().add(selectorContainer);
+		createGameBox();
+		createLevelBox();
+		addButton(consumerLoadData);
 	}
 
 	private void addButton(Consumer<Object> consumerLoadData)
@@ -57,29 +84,38 @@ public class GameChooserWindow
 			}
 			
 		});
-		myRoot.add(button, 2, 2);
-	}
-
-	private void addVBoxes()
-	{
-		createGameBox();
-		createLevelBox();
+		overallContainer.getChildren().add(button);
 	}
 
 	private void createLevelBox()
 	{
+		ScrollPane scroll = new ScrollPane();
+		scroll.setHbarPolicy(ScrollBarPolicy.AS_NEEDED);
+		scroll.setVbarPolicy(ScrollBarPolicy.AS_NEEDED);
+		scroll.setPrefHeight(300);
 		levelContainer = new VBox();
-		myRoot.add(levelContainer, 5, 0);
+		levelContainer.setBackground(new Background(new BackgroundFill(Color.LIGHTGREY, CornerRadii.EMPTY, Insets.EMPTY)));
+		
+		scroll.setContent(levelContainer);
+		selectorContainer.getChildren().add(scroll);
+		
 	}
 
 	private void createGameBox() {
+		ScrollPane scroll = new ScrollPane();
+		scroll.setHbarPolicy(ScrollBarPolicy.AS_NEEDED);
+		scroll.setVbarPolicy(ScrollBarPolicy.AS_NEEDED);
+		scroll.setPrefHeight(300);
 		gameContainer = new VBox();
+		gameContainer.setBackground(new Background(new BackgroundFill(Color.LIGHTGREY, CornerRadii.EMPTY, Insets.EMPTY)));
+		
+		scroll.setContent(gameContainer);
+		selectorContainer.getChildren().add(scroll);
 		
 		for (String name : gamesData.keySet())
 		{
 			gameContainer.getChildren().add(new ActionButton(name, () -> generateLevels(name)));
 		}
-		myRoot.add(gameContainer, 0, 0);
 	}
 
 	private void generateLevels(String gameName)
