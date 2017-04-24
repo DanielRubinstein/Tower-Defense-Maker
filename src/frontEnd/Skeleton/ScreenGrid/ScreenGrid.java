@@ -79,12 +79,13 @@ public class ScreenGrid implements SkeletonObject, Observer {
 		tileWidth = myWidth / numberOfTileCols;
 		tileHeight = myHeight / numberOfTileRows;
 		observedTileGrid.setTileSize(tileWidth, tileHeight);
-		placeComponents();
+		
 		initializeGrid();
 		myTiles = new HashMap<>();
 		myTileImages = new HashMap<>();
 		updateTilesOnGrid();
 		addGridToRoot();
+		placeComponents();
 	}
 
 	private void placeComponents() {
@@ -209,6 +210,7 @@ public class ScreenGrid implements SkeletonObject, Observer {
 		setCommandInteraction(frontImage, c);
 		myComponents.add(c);
 		myComponentImages.put(c, frontImage);
+		if (myRoot == null) System.out.println("PROP");
 		myRoot.getChildren().add(frontImage);
 	}
 
