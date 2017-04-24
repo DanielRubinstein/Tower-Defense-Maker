@@ -86,13 +86,10 @@ public class FrontEndAttributeOwnerImpl implements Observer, FrontEndAttributeOw
 		if (loc==null){ //components with null locations exist on the screen when game initialized- SAD!
 			return;
 		}
-//		myPosition = loc;
-//		myImage.setX(loc.getX());
-//		myImage.setY(loc.getY());
+		//make the  center the reference point
 		myPosition = newLoc;
-		myImage.setX(newLoc.getX());
-		myImage.setY(newLoc.getY());
-		//System.out.println("it should have moved "+System.currentTimeMillis());
+		myImage.setX(newLoc.getX()-myImage.getFitWidth()/2);
+		myImage.setY(newLoc.getY()-myImage.getFitHeight()/2);
 		
 	}
 	@Override
