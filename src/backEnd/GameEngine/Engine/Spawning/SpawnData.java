@@ -35,6 +35,6 @@ public class SpawnData implements Comparable<SpawnData>{
 	
 	@Override
 	public int compareTo(SpawnData o) {
-		return (int)((this.getTime()-o.getTime()) * 1000);
+		return (int)(this.getTime()-o.getTime());
 	}
 }

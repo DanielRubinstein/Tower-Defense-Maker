@@ -50,6 +50,13 @@ public class SpawnEngine implements Engine {
 				spawn(currentSpawnQueue.getNextQueueSpawn(stepTime), spawnTile);
 			}
 		}
+		updateSpawnTimelines(gameData.getGameTime());
+	}
+
+	private void updateSpawnTimelines(double gameTime) {
+		for(SpawnQueue spawnQueue : myState.getSpawnQueues().values()){
+			spawnQueue.update(gameTime);
+		}
 	}
 
 	@SuppressWarnings("unchecked")

@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import backEnd.GameData.State.Component;
+import data.GamePrep.GameMaker;
 /**
  * SpawnQueue object that is held in tiles to determine what needs to be spawned next
  * @author Alex
@@ -15,6 +16,7 @@ public class SpawnQueue {
 	private List<SpawnData> mySpawnQueue;
 	private double myTimeLastQueueSpawned;
 	private int myCurrentSpawn;
+	private double myGameTime;
 	/**
 	 * Initializes blank lists to spawn from
 	 */
@@ -46,8 +48,7 @@ public class SpawnQueue {
 		if(myCurrentSpawn >= mySpawnQueue.size() || gameTime - myTimeLastQueueSpawned < mySpawnQueue.get(myCurrentSpawn).getTime()){
 			return null;
 		}
-		myTimeLastQueueSpawned = gameTime;
-		return mySpawnQueue.get(myCurrentSpawn++).getSpawnable();
+		return mySpawnQueue.get(myCurrentSpawn).getSpawnable();
 	}
 	
 	/**
@@ -69,4 +70,12 @@ public class SpawnQueue {
 		return spawnList;
 	}
 	
+	public void update(double gameTime) {
+		myGameTime = gameTime;
+		if(myCurrentSpawn >= mySpawnQueue.size() || myGameTime - myTimeLastQueueSpawned < mySpawnQueue.get(myCurrentSpawn).getTime()){} else {
+			myTimeLastQueueSpawned = myGameTime;
+		}
+		//Maybe add step
+		myCurrentSpawn++;
+	}
 }
