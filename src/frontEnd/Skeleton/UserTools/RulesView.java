@@ -7,11 +7,14 @@ import ModificationFromUser.Rules.Modification_ToggleRule;
 import backEnd.GameData.Rules.RuleReader;
 import frontEnd.View;
 import frontEnd.CustomJavafxNodes.NumberChanger;
+import javafx.beans.property.BooleanProperty;
 import javafx.geometry.Insets;
+import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.HBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import resources.Constants;
@@ -21,9 +24,11 @@ public class RulesView {
 	private GridPane myRoot;
 	private View myView;
 	private Stage myStage;
+	private BooleanProperty canEdit;
 	public RulesView(View view, Stage parentStage){
 		myRoot = new GridPane();
 		myView = view;
+		canEdit = view.getBooleanAuthorModeProperty();
 		myStage = new Stage();
 		myStage.initOwner(parentStage);
 		myStage.initModality(Modality.APPLICATION_MODAL);
@@ -54,18 +59,28 @@ public class RulesView {
 			ruleEnabled.setOnAction(e -> {
 				myView.sendUserModification(new Modification_ToggleRule(rule.getKeyName()));
 			});
+			ruleEnabled.disableProperty().bind(canEdit.not());
 			
-			NumberChanger ruleChanger = new NumberChanger(rule.getMinVal(), rule.getMaxVal(), 
-					rule.getVal(), (rule.getMaxVal()-rule.getMinVal())/100);
-			ruleChanger.addListener((observable, oldValue, newValue) -> {
-				myView.sendUserModification(new Modification_EditRuleValue(rule.getKeyName(),newValue.doubleValue()));
-			});
+			Node ruleChanger = createRuleChanger(rule);
+			ruleChanger.disableProperty().bind(canEdit.not());
 			myRoot.add(ruleText, 0, rowIndex);
 			myRoot.add(ruleEnabled, 1, rowIndex);
-			myRoot.add(ruleChanger.getRoot(), 2, rowIndex);
+			myRoot.add(ruleChanger, 2, rowIndex);
 			rowIndex++;
 		}
 		
+	}
+	private Node createRuleChanger(RuleReader rule){
+		HBox changer = new HBox();
+		NumberChanger ruleChanger = new NumberChanger(rule.getMinVal(), rule.getMaxVal(), 
+				rule.getVal(), (rule.getMaxVal()-rule.getMinVal())/100);
+		ruleChanger.addListener((observable, oldValue, newValue) -> {
+			myView.sendUserModification(new Modification_EditRuleValue(rule.getKeyName(),newValue.doubleValue()));
+		});
+		HBox indicatorBox = ruleChanger.addIntegerIndicator();
+		changer.getChildren().addAll(ruleChanger.getRoot(),indicatorBox);
+		
+		return changer;
 	}
 	private void setupTitle(String title, int col){
 		Label exampleTitle = new Label(title);
