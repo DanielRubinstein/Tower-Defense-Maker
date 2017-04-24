@@ -1,4 +1,4 @@
-package frontEnd.Skeleton.UserTools;
+package frontEnd.Skeleton.UserTools.Presets;
 
 import java.io.FileNotFoundException;
 import java.util.function.BiConsumer;
@@ -10,6 +10,7 @@ import backEnd.GameData.State.Component;
 import backEnd.GameData.State.TileImpl;
 import frontEnd.View;
 import frontEnd.Skeleton.AoTools.GenericCommandCenter;
+import frontEnd.Skeleton.UserTools.SkeletonObject;
 import javafx.scene.Node;
 import javafx.scene.image.ImageView;
 
