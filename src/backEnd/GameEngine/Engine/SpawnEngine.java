@@ -2,6 +2,7 @@ package backEnd.GameEngine.Engine;
 
 import java.util.List;
 
+import backEnd.BankController;
 import backEnd.Attribute.Attribute;
 import backEnd.GameData.GameData;
 import backEnd.GameData.State.Component;
@@ -25,6 +26,7 @@ public class SpawnEngine implements Engine {
 
 	private boolean gamePaused = true;
 	private State myState;
+	private BankController myBank;
 
 	// TODO Add logic in pausing the game and starting again... Fucked up the
 	// timeline
@@ -32,6 +34,7 @@ public class SpawnEngine implements Engine {
 	@Override
 	public void gameLoop(GameData gameData, double stepTime) {
 		myState = gameData.getState();
+		myBank = gameData.getBankController();
 		gamePaused = myState.gameIsRunning();
 		if (gamePaused) {
 			return;
@@ -43,19 +46,27 @@ public class SpawnEngine implements Engine {
 			if (currentSpawnQueue != null) {
 				// Spawning with frequencies
 				//System.out.println(this.getClass().getName() + ": FrequencyQueue: " + currentSpawnQueue.getFrequencyQueue().size());
-				for (Component component : currentSpawnQueue.getNextFrequencySpawn(gameData.getGameTime(), stepTime)) {
-					spawn(component, spawnTile);
+				for (String component : currentSpawnQueue.getNextFrequencySpawn(gameData.getGameTime(), stepTime)) {
+					spawn(myBank.getComponent(component), spawnTile);
 				}
 				// Spawning directly with spawn queue
-				spawn(currentSpawnQueue.getNextQueueSpawn(stepTime), spawnTile);
+				Component nextQueueSpawn = myBank.getComponent(currentSpawnQueue.getNextQueueSpawn(gameData.getGameTime()));
+				spawn(nextQueueSpawn, spawnTile);
 			}
+		}
+		updateSpawnTimelines(gameData.getGameTime());
+	}
+
+	private void updateSpawnTimelines(double gameTime) {
+		for(SpawnQueue spawnQueue : myState.getSpawnQueues().values()){
+			spawnQueue.update(gameTime);
 		}
 	}
 
 	@SuppressWarnings("unchecked")
 	private void spawn(Component component, Tile spawnTile) {
 		if (component == null) {
-			System.out.println(this.getClass().getName() + ": No component to add from spawn queue");
+			//System.out.println(this.getClass().getName() + ": No component to add from spawn queue");
 			return;
 		}
 		//System.out.println(this.getClass().getName() + ": Should add component from spawn queue");
@@ -63,7 +74,9 @@ public class SpawnEngine implements Engine {
 		Component spawnable = componentBuilder.getComponent();
 		Object positionObj = spawnTile.getMyAttributes().get("Position");
 		Attribute<Point2D> spawnPositionAttribute = (Attribute<Point2D>) positionObj;
-		Point2D spawnPosition = spawnPositionAttribute.getValue();
+		Point2D tilePosition = spawnPositionAttribute.getValue();
+		Point2D spawnPosition = new Point2D(15 + tilePosition.getX()*60, 10 + tilePosition.getY()*40);
+		System.out.println(this.getClass().getName() + ": Spawn Position: " + spawnPosition.getX() + " | " + spawnPosition.getY());
 		myState.getComponentGraph().addComponentToGrid(spawnable, spawnPosition);
 	}
 }

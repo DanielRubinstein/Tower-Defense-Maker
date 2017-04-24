@@ -1,4 +1,4 @@
-package backEnd.Bank;
+package backEnd;
 
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
@@ -7,29 +7,26 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Observer;
-
 import javax.swing.JOptionPane;
-
 import backEnd.Mode.Mode;
-import javafx.geometry.Point2D;
-import javafx.scene.control.Alert;
 import backEnd.Attribute.AttributeData;
-import backEnd.Attribute.AttributeImpl;
 import backEnd.Attribute.AttributeOwner;
-import backEnd.GameData.Rules.Rule;
+import backEnd.GameData.State.AccessPermissions;
 import backEnd.GameData.State.AccessPermissionsImpl;
 import backEnd.GameData.State.Component;
 import backEnd.GameData.State.Tile;
 import backEnd.GameData.State.TileImpl;
-import backEnd.GameEngine.Behaviors.Behavior;
 
+/**
+ * 
+ * @author Juan Philippe
+ *
+ */
 public class BankController
 {
 	private static final String DUPLICATE_NAME_ERROR = "Cannot Add Duplicate Name";
 	private Map<String, Tile> tileBank;
 	private Map<String, Component> componentBank;
-	private BehaviorBank myBehaviorBank;
-	private AttributeBank myAttributeBank;
 	private Mode myMode;
 	private List<Observer> observers;
 	
@@ -43,8 +40,6 @@ public class BankController
 		this.tileBank = tileBank;
 		this.componentBank = componentBank;
 		this.myMode = myMode;
-		this.myBehaviorBank = new BehaviorBank();
-		this.myAttributeBank = new AttributeBank();
 		this.observers = new ArrayList<Observer>();
 		createTemplatesForTesting();
 	}
@@ -65,7 +60,7 @@ public class BankController
 			
 			Tile newTile3 = new TileImpl();
 			newTile3.setAttributeValue("ImageFile", "resources/images/Tiles/Green.png");
-			newTile3.setAttributeValue("MoveDirection","Up");
+			newTile3.setAttributeValue("MoveDirection","Up");	
 			addNewTile("Green Up Tile", newTile3);
 			
 			Tile newTile4 = new TileImpl();
@@ -74,14 +69,16 @@ public class BankController
 			addNewTile("Yellow Left Tile", newTile4);
 			
 			
-			Component newComponent = new Component();
+			Component newComponent = new Component(new AttributeData(), 
+					new AccessPermissionsImpl(Arrays.asList("PLAYER"), new ArrayList<String>(), new ArrayList<String>()));
 			newComponent.setAttributeValue("ImageFile", "resources/images/Components/rainbow_bloon.png");
 			newComponent.setAttributeValue("Speed", 5d);
 			newComponent.setAttributeValue("Health", 10);
 			newComponent.setAttributeValue("Type", "Enemy");
 			addNewComponent("Enemy", newComponent);
 			
-			Component newComponent2 = new Component();
+			Component newComponent2 = new Component(new AttributeData(), 
+					new AccessPermissionsImpl(Arrays.asList("PLAYER"), new ArrayList<String>(), new ArrayList<String>()));
 			newComponent2.setAttributeValue("ImageFile", "resources/images/Components/zombie.png");
 			newComponent2.setAttributeValue("Health", 10);
 			newComponent2.setAttributeValue("Type", "Tower");
@@ -121,7 +118,7 @@ public class BankController
 		
 		for (String x : tileBank.keySet())
 		{
-			if (tileBank.get(x).getAccessPermissions().permitsAccess(myMode.getUserMode(), myMode.getGameMode(), myMode.getLevelMode()));
+			if (tileBank.get(x).getAccessPermissions().permitsAccess(myMode.getUserMode(), myMode.getGameMode(), myMode.getLevelMode()))
 			{
 				subMap.put(x, tileBank.get(x));
 			}
@@ -136,7 +133,7 @@ public class BankController
 		
 		for (String x : componentBank.keySet())
 		{
-			if (componentBank.get(x).getAccessPermissions().permitsAccess(myMode.getUserMode(), myMode.getGameMode(), myMode.getLevelMode()));
+			if (componentBank.get(x).getAccessPermissions().permitsAccess(myMode.getUserMode(), myMode.getGameMode(), myMode.getLevelMode()))
 			{
 				subMap.put(x, componentBank.get(x));
 			}
@@ -170,17 +167,6 @@ public class BankController
 		componentBank.remove(name);
 		notifyObservers();
 	}
-	
-	public List<Behavior> getBehaviorList()
-	{
-		return myBehaviorBank.getBehaviorList();
-	}
-	
-	
-	public List<AttributeImpl> getAttributeList()
-	{
-		return myAttributeBank.getAttributeList();
-	}
 
 	public String getAOName(AttributeOwner preset) {
 		if(preset instanceof Tile){
@@ -210,12 +196,15 @@ public class BankController
 		}
 	}
 	
+	public Component getComponent(String componentName){
+		return componentBank.get(componentName)
+;	}
+	
 	public void addObserver(Observer o){
 		observers.add(o);
 	}
 	
 	private void notifyObservers() {
-		System.out.println("notifying observersssssss1");
 		for(Observer o : observers){
 			o.update(null, null);
 		}

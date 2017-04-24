@@ -1,10 +1,11 @@
-package frontEnd.Skeleton.UserTools;
+package frontEnd.Skeleton.UserTools.Presets;
 
 import java.util.Map;
 
 import backEnd.GameData.State.Component;
 import backEnd.GameData.State.Tile;
 import frontEnd.View;
+import frontEnd.Skeleton.UserTools.SkeletonObject;
 import javafx.geometry.Side;
 import javafx.scene.Node;
 import javafx.scene.control.ScrollPane;

@@ -4,7 +4,6 @@ import java.util.Map;
 
 import ModificationFromUser.ModificationFromUser;
 import backEnd.ModelImpl;
-import backEnd.GameData.State.Component;
 import backEnd.GameData.State.State;
 import backEnd.GameEngine.Engine.Spawning.SpawnData;
 import backEnd.GameEngine.Engine.Spawning.SpawnQueue;
@@ -23,12 +22,12 @@ public class Modification_AddSpawner implements ModificationFromUser{
 	 * 
 	 * @param spawnQueueName	Name of Queue as a string
 	 * @param component			Which component to remove		
-	 * @param time				Time of component to remove
+	 * @param value				Time of component to remove
 	 * @param frequencySpawn 	What list to remove from
 	 */
-	public Modification_AddSpawner(String spawnQueueName, Component component, long time, boolean frequencySpawn) {
+	public Modification_AddSpawner(String spawnQueueName, String component, double value, boolean frequencySpawn) {
 		mySpawnQueue = spawnQueueName;
-		mySpawnData = new SpawnData(component, time);
+		mySpawnData = new SpawnData(component, value);
 		isFrequencySpawn = frequencySpawn;
 	}
 	
@@ -41,11 +40,7 @@ public class Modification_AddSpawner implements ModificationFromUser{
 			System.out.println("ERROR: SPAWN QUEUE NOT INITIALIZED PREVIOUSLY");
 		}
 		SpawnQueue spawnQueue = spawnQueues.get(mySpawnQueue);
-		if(isFrequencySpawn){
-			spawnQueue.getFrequencyQueue().add(mySpawnData);
-		} else{
-			spawnQueue.getSpawnQueue().add(mySpawnData);
-		}
+		spawnQueue.add(mySpawnData, isFrequencySpawn);
 	}
 
 }

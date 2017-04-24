@@ -7,6 +7,7 @@ import java.util.ResourceBundle;
 
 import ModificationFromUser.AttributeOwner.Modification_Add_StraightToGrid;
 import ModificationFromUser.AttributeOwner.Modification_Add_ToPalette;
+import ModificationFromUser.AttributeOwner.Modification_RemoveAttributeOwner;
 import backEnd.Attribute.Attribute;
 import backEnd.Attribute.AttributeOwner;
 import backEnd.GameData.State.Component;
@@ -62,37 +63,36 @@ public class AttributeCommandCenter{
 		contents.getChildren().add(createAttributeView(obj));
 		contents.getChildren().add(createBottomButtons(obj));
 		
-		checkToAddAddNowButton(obj);
-		
 		contents.setPadding(new Insets(STANDARD_SPACING, STANDARD_SPACING, STANDARD_SPACING, STANDARD_SPACING));
 		contents.setSpacing(STANDARD_SPACING);
 		// contents.setAlignment(Pos.TOP_CENTER);
 		return contents;
 	}
 
-	private void checkToAddAddNowButton(AttributeOwner obj) {
+	private void checkToAddAttributeOwnerSpecificButton(AttributeOwner obj, String methodName) {
 		try {
-			Method addSubmitButton = AttributeCommandCenter.class.getDeclaredMethod("addSubmitButton", obj.getClass());
+			Method addSubmitButton = AttributeCommandCenter.class.getDeclaredMethod(methodName, obj.getClass());
 			addSubmitButton.setAccessible(true);
 			addSubmitButton.invoke(this, obj);
 		} catch (NoSuchMethodException e) {
-			System.out.println("No adding 'add now' buttons for tiles (this is a good thing)");
 			// do nothing
 			// this means the thing being put in attribute command center is a tile
 		} catch (Exception e) {
 			// something went wrong
-			System.out.println("Something went wrong adding the 'add now' button");
 			// TODO add exception?
+			System.out.println("Something went wrong adding the 'add' or 'remove' button");
 		}
 	}
 
 	private void addSubmitButton(Component obj) {
-		Button submit = new Button("Add Now");
-		submit.setOnAction(e -> {
-			myView.sendUserModification(new Modification_Add_StraightToGrid(obj));
-			myHostStage.close();
-		});
-		bottomButtons.getChildren().add(submit);
+		if(myView.getBankController().getAccessibleComponentMap().containsValue(obj)){
+			Button submit = new Button("Add Now");
+			submit.setOnAction(e -> {
+				myView.sendUserModification(new Modification_Add_StraightToGrid(obj));
+				myHostStage.close();
+			});
+			bottomButtons.getChildren().add(submit);
+		}
 	}
 	
 	private Node createAttributeView(AttributeOwner obj) {
@@ -132,7 +132,20 @@ public class AttributeCommandCenter{
 		
 		createAccessPermissionButton(obj);
 		createAddToPresetButton(obj);
+		checkToAddAttributeOwnerSpecificButton(obj, "addSubmitButton");
+		checkToAddAttributeOwnerSpecificButton(obj, "removeButton");
 		return bottomButtons;
+	}
+
+	private void removeButton(Component c) {
+		if(!myView.getBankController().getAccessibleComponentMap().containsValue(c)){
+			Button submit = new Button("Remove Now");
+			submit.setOnAction(e -> {
+				myView.sendUserModification(new Modification_RemoveAttributeOwner(c));
+				myHostStage.close();
+			});
+			bottomButtons.getChildren().add(submit);
+		}
 	}
 
 	private void createAccessPermissionButton(AttributeOwner obj) {

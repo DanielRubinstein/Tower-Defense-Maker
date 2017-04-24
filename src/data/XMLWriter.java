@@ -3,7 +3,7 @@ package data;
 import java.util.List;
 import java.util.Map;
 
-import backEnd.Bank.BankController;
+import backEnd.BankController;
 import backEnd.GameData.GameData;
 import backEnd.GameData.GameDataInterface;
 import backEnd.LevelProgression.LevelProgressionControllerImpl;

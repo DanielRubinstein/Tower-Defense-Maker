@@ -1,5 +1,7 @@
 package frontEnd.CustomJavafxNodes;
 
+import java.util.ResourceBundle;
+
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
@@ -14,7 +16,8 @@ import javafx.scene.text.Font;
 import javafx.stage.Stage;
 
 public class ButtonMenuImpl implements ButtonMenu {
-	public static final String DEFAULT_CSS = "/resources/css/Flatter.css";
+	private static final String BUNDLE_NAME = "resources.messages";
+	private static final ResourceBundle RESOURCE_BUNDLE = ResourceBundle.getBundle(BUNDLE_NAME);
 	private GridPane myGrid;
 	private VBox myButtonRoot;
 	private Scene myScene;
@@ -24,9 +27,18 @@ public class ButtonMenuImpl implements ButtonMenu {
 	public ButtonMenuImpl(String text){
 		initializeGrid();
 		myButtonRoot = new VBox();
-		description = new Label("Please Select an Option");
+		description = new Label(RESOURCE_BUNDLE.getString("SelectAnOption"));
 		description.setWrapText(true);
 		setText(text);
+	}
+	public GridPane getGridPane()
+	{
+		return myGrid;
+	}
+	
+	public VBox getButtonRoot()
+	{
+		return myButtonRoot;
 	}
 	
 
@@ -55,7 +67,7 @@ public class ButtonMenuImpl implements ButtonMenu {
 			if(newVal){
 				description.setText(hoverText);
 			} else {
-				description.setText("Please Select an Option");
+				description.setText(RESOURCE_BUNDLE.getString("SelectAnOption"));
 			}
 		});
 		addButton(newButton);
@@ -118,10 +130,10 @@ public class ButtonMenuImpl implements ButtonMenu {
 		myGrid.add(titleLbl, 0, 0, 2, 1);
 		myGrid.add(myButtonRoot, 0, 1);
 		myGrid.add(description, 1, 1);
-		myGrid.add(new Label("voogasalad_sup3rs1ckt34m1337"), 0, 2, 2, 1);
+		myGrid.add(new Label(RESOURCE_BUNDLE.getString("TEAMNAME")), 0, 2, 2, 1);
 		//myButtonRoot.setAlignment(Pos.CENTER);
    	 	myScene = new Scene(myGrid);
-   	 	myScene.getStylesheets().add(DEFAULT_CSS);
+   	 	myScene.getStylesheets().add(RESOURCE_BUNDLE.getString("DEFAULT_CSS"));
 		description.setMaxWidth(200d);
 	}
 

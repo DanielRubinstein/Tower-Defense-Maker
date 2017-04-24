@@ -45,13 +45,7 @@ public class Modification_Add_StraightToGrid implements ModificationFromUser {
 			add.setAccessible(true);
 			add.invoke(this, newAttrOwn);
 		} catch (NoSuchMethodException e) {
-			System.out.println("in Modification_Add_StraightToGrid, No method found, ugh");
-			// do nothing
-			// this means the thing being put in attribute command center is a tile
-		} catch (Exception e) {
-			// something went wrong
-			System.out.println("Something went wrong in Modification_Add_StraightToGrid");
-			// TODO add exception?
+			throw new Exception(DESCRIPTION_ERROR);
 		}
 	}
 	

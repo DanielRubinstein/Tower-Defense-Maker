@@ -1,14 +1,8 @@
 package backEnd.GameData;
 
-import java.util.HashMap;
-import java.util.Map;
-
+import backEnd.BankController;
 import backEnd.GameData.Rules.Rule;
 import backEnd.GameData.Rules.RulesMap;
-import backEnd.GameData.Rules.EndCondition.HealthLoseCondition;
-import backEnd.GameData.Rules.EndCondition.KillCountCondition;
-import backEnd.GameData.Rules.EndCondition.ScoreWinCondition;
-import backEnd.GameData.Rules.EndCondition.TimeEndCondition;
 import backEnd.GameData.State.PlayerStatus;
 import backEnd.GameData.State.PlayerStatusModifier;
 import backEnd.GameData.State.PlayerStatusReader;
@@ -24,6 +18,7 @@ public class GameData implements GameDataInterface{
 	private EngineStatus myEngineStatus;
 	private LevelProgressionControllerReader myLPC;
 	private double myGameTime;
+	private BankController myBankController;
 	
 	public GameData(StateImpl state, PlayerStatus playerStatus, RulesMap myRules){
 		this.myState = state;
@@ -31,7 +26,7 @@ public class GameData implements GameDataInterface{
 		this.myPlayerStatus = playerStatus;
 		myEngineStatus=EngineStatus.PAUSED;
 		myState.setEngineStatus(myEngineStatus);
-		myGameTime = (long) 0;
+		myGameTime = 0;
 	}
 
 	@Override
@@ -57,9 +52,17 @@ public class GameData implements GameDataInterface{
 		//update state
 		myState.updateState(newGameData.getState());
 		//update rules
-		
+		myRules = newGameData.getRules();
+		//update playerstatus
+		updatePlayerStatus(newGameData.getStatus());
 	}
 
+	private void updatePlayerStatus(PlayerStatus newStatus){
+		for(String key : myPlayerStatus.getKeySet()){
+			myPlayerStatus.setStatusItemValue(key, newStatus.getStatusItemValue(key));
+		}
+	}
+	
 	@Override
 	public PlayerStatusModifier getModifiablePlayerStatus() {
 		return myPlayerStatus;
@@ -74,19 +77,19 @@ public class GameData implements GameDataInterface{
 		return this.myPlayerStatus;
 	}
 
-	public void incrementGameTime(Double gameStep) {
+	public void incrementGameTime(double gameStep) {
 		myGameTime += gameStep;
 	}
 	
 	public double getGameTime() {
 		return myGameTime;
 	}
-	
+	/*
 	public void printRules(){
-		for(String key: myRules.getMapWithKeyNames().keySet()){
-			System.out.println(key + " : " + myRules.getMapWithKeyNames().get(key));
+		for(Rule x: myRules.getMapWithKeyNames().values()){
+			x.printRule();
 		}
-	}
+	}*/
 	
 	public void setLevelProgressionController(LevelProgressionControllerReader myLPC){
 		this.myLPC = myLPC;
@@ -96,6 +99,13 @@ public class GameData implements GameDataInterface{
 	public LevelProgressionControllerReader getLevelProgressionController(){
 		return myLPC;
 	}
+
+	public void setBankController(BankController bankController) {
+		myBankController = bankController;
+	}
 	
+	public BankController getBankController() {
+		return myBankController;
+	}
 
 }

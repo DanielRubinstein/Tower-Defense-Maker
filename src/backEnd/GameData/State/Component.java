@@ -157,7 +157,6 @@ public class Component extends Observable implements AttributeOwner {
 	@Override
 	public void addAsListener(Observer o) {
 		addObserver(o);
-		//addObserver(o);
 	}
 
 	@Override

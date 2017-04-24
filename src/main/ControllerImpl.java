@@ -28,14 +28,16 @@ public class ControllerImpl implements Controller {
 				(ModificationFromUser m) -> {
 					try {
 						executeInteraction(m);
-						System.out.println("Modification from user sent to back end");
+						System.out.println("In Controller - Modification from fE to bE executed");
 					} catch (Exception e) {
-						System.out.println("Error in Modification sent");
-						e.printStackTrace();
 						ErrorDialog errDia = new ErrorDialog();
-						errDia.create("InGame Error", e.getMessage());
-						e.printStackTrace();
-						
+						String eMessage = "";
+						if(e.getMessage() != null){
+							eMessage = e.getMessage();
+						} else {
+							eMessage = e.getCause().getMessage();
+						}
+						errDia.create("InGame Error", eMessage);
 					}
 				};
 

@@ -52,7 +52,6 @@ public enum Modification_GameRemote implements ModificationFromUser {
 				myConsumer.accept(myModel.getGameProcessController());
 				break;
 			case "AUTHOR":
-				myModel.getGameData().printRules();
 				// do nothing
 				break;
 			}

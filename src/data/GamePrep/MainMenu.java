@@ -1,25 +1,16 @@
 package data.GamePrep;
 
 import java.io.File;
-import java.lang.reflect.InvocationTargetException;
 import java.util.ResourceBundle;
 import java.util.function.Consumer;
-
-import backEnd.GameData.GameData;
-import data.XMLReadingException;
 import frontEnd.Facebook.FacebookBrowser;
 import frontEnd.Facebook.FacebookBrowserImpl;
 import frontEnd.Facebook.FacebookConnector;
 import frontEnd.Facebook.FacebookConnectorImpl;
 import frontEnd.Facebook.FacebookInteractor;
-import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.layout.VBox;
 import javafx.stage.DirectoryChooser;
 import javafx.stage.Modality;
 import frontEnd.CustomJavafxNodes.ButtonMenuImpl;
-import frontEnd.CustomJavafxNodes.ErrorDialog;
 import javafx.stage.Stage;
 import main.Controller;
 
@@ -28,7 +19,7 @@ import main.Controller;
  * 	1) Create a new game (via GameMaker)
  *  2) Open a Game Template
  *  3) Load a saved game
- * @author Miguel Anderson
+ * @author Miguel Anderson, Juan Philippe
  *
  */
 
@@ -36,10 +27,10 @@ public class MainMenu{
 	private Consumer<Object> consumerLoadData;
 	private Controller myController;
 	
-	private static final String DEAFULT_RESOURCE_BUNDLE = "resources/facebook";
+	private static final String DEFAULT_RESOURCE_BUNDLE = "resources/facebook";
 	private static final String SAVED_GAME_FILEPATH = "data/SavedGames/";
 	private static final String TEMPLATE_PATH = "data/LevelTemplates";
-	private ResourceBundle appInfo = ResourceBundle.getBundle(DEAFULT_RESOURCE_BUNDLE);
+	private ResourceBundle appInfo = ResourceBundle.getBundle(DEFAULT_RESOURCE_BUNDLE);
 	private String appSecret = appInfo.getString("appSecret");
 	private String appID = appInfo.getString("appID");
 	
@@ -62,9 +53,9 @@ public class MainMenu{
 	private void showPrimaryMenu(Stage stage) {
 		ButtonMenuImpl primaryMenu = new ButtonMenuImpl("Games");
    	 	primaryMenu.addPrimarySimpleButtonWithHover("Create New Game", () -> new GameMaker(stage, consumerLoadData), "Create A New Game after selecting the size of the screen");
-   	 	primaryMenu.addSimpleButtonWithHover("Modify Level", () -> chooseLevel(), "Load a game from a list of preapproved, ready-to-play templates");
-   	 	primaryMenu.addSimpleButtonWithHover("Load Saved Game", () -> chooseGame(), "Continue your progress by loading a user-saved game");
-   	 	primaryMenu.addSimpleButtonWithHover("Play Game", () -> { }, "Return to previous screen");
+   	 	primaryMenu.addSimpleButtonWithHover("Modify Level", () -> chooseLevel(), "Load a level to edit");
+   	 	primaryMenu.addSimpleButtonWithHover("Load Saved Game", () -> chooseSavedGame(), "Continue your progress by loading a user-saved game");
+   	 	primaryMenu.addSimpleButtonWithHover("Play Game", () -> new GameChooserWindow(stage, consumerLoadData) , "Play game");
    	 	primaryMenu.addSimpleButtonWithHover("Connect To Facebook", () -> launchFb(stage), "Log in and connect to Facebook to see high scores, screenshots, post to the official voogasalad_su3ps1ckt34m1337 page");
 		primaryMenu.display(stage);
 	}
@@ -75,20 +66,16 @@ public class MainMenu{
 		loadLevel(TEMPLATE_PATH);
 	}
 	
-	private void chooseGame()
+	private void chooseSavedGame()
 	{
 		loadLevel(SAVED_GAME_FILEPATH);
 	}
 
 	private void loadLevel(String filePath) 
 	{
-		System.out.println(filePath);
 		DirectoryChooser chooser = new DirectoryChooser();
 		chooser.setInitialDirectory(new File(filePath));
 		File path = chooser.showDialog(new Stage());
-		
-		System.out.println(path.getAbsolutePath());
-		System.out.println(path.getPath());
 		
 		consumerLoadData.accept(path);
 	}

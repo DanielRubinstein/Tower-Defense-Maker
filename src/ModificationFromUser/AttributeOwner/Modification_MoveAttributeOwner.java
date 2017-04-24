@@ -17,7 +17,8 @@ public class Modification_MoveAttributeOwner implements ModificationFromUser {
 	private AttributeOwner myAO;
 	private Point2D newLoc;
 	private ModelImpl myModel;
-	public static final String ERROR_DESCRIPTION = "Cannot move tiles";
+	public static final String TILE_ERROR = "Cannot move tiles";
+	public static final String DESCRIPTION_ERROR = "Not a recognized Attribute Owner";
 	private final static String DEFAULT_COMPONENT_ATTRIBUTES = "resources/defaultComponentAttributes";
 	private static ResourceBundle myAttrNameResources;
 	
@@ -36,27 +37,19 @@ public class Modification_MoveAttributeOwner implements ModificationFromUser {
 			move.setAccessible(true);
 			move.invoke(this, myAO);
 		} catch (NoSuchMethodException e) {
-			System.out.println("in Modification_MoveAttributeOwner, No method found, ugh");
-			// do nothing
-			// this means the thing being put in attribute command center is a tile
-		} catch (Exception e) {
-			// something went wrong
-			System.out.println("Something went wrong in Modification_MoveAttributeOwner");
-			// TODO add exception?
+			throw new Exception(DESCRIPTION_ERROR);
 		}
 		
 	}
 	
 	private void move(TileImpl tile) throws Exception{
-		throw new Exception(ERROR_DESCRIPTION);
+		throw new Exception(TILE_ERROR);
 	}
 	
 	private void move(Component component){
 		myModel.getState().getComponentGraph().removeComponent(component);
 		myModel.getState().getComponentGraph().addComponentToGrid(component, newLoc);
 		component.setAttributeValue(myAttrNameResources.getString("Position"), newLoc);
-		//Attribute<Point2D> myLoc = (Attribute<Point2D>)(component).getMyAttributes().get(myAttrNameResources.getString("Position"));
-		//myLoc.setValue(newLoc);
 	}
 
 	

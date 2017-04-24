@@ -7,10 +7,10 @@ import com.thoughtworks.xstream.XStream;
 import com.thoughtworks.xstream.io.xml.DomDriver;
 
 import ModificationFromUser.ModificationFromUser;
+import backEnd.BankController;
 import backEnd.ModelImpl;
 import backEnd.Attribute.AttributeOwner;
 import backEnd.Attribute.AttributeOwnerSerializer;
-import backEnd.Bank.BankController;
 import backEnd.GameData.State.Component;
 import backEnd.GameData.State.Tile;
 import backEnd.GameData.State.TileImpl;
@@ -28,7 +28,8 @@ public class Modification_Add_ToPalette implements ModificationFromUser {
 	private BankController myBankController;
 	private String newName;
 
-	public static final String DESCRIPTION = "Add Preset Component or Tile";		
+	public static final String DESCRIPTION = "Add Preset Component or Tile";	
+	public static final String DESCRIPTION_ERROR = "Not a recognized Attribute Owner";
 	
 	public Modification_Add_ToPalette(String newAttributeOwnerName, AttributeOwner obj){
 		this.newAttrOwn = obj;
@@ -55,13 +56,7 @@ public class Modification_Add_ToPalette implements ModificationFromUser {
 				add.setAccessible(true);
 				add.invoke(this, newAttrOwnToAdd);
 			} catch (NoSuchMethodException e) {
-				System.out.println("in Modification_Add_ToPalette, No method found, ugh");
-				// do nothing
-				// this means the thing being put in attribute command center is a tile
-			} catch (Exception e) {
-				// something went wrong
-				System.out.println("Something went wrong in Modification_Add_ToPalette");
-				// TODO add exception?
+				throw new Exception(DESCRIPTION_ERROR);
 			}
 			break;
 			

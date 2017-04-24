@@ -79,8 +79,10 @@ public class ComponentGraphImpl extends Observable implements ComponentGraph {
 		currList.add(newComponent);
 		componentMap.put(screenPosition, currList);
 		myComponents.add(newComponent);
+		newComponent.getAttribute("Position").setValue(screenPosition);
 		this.setChanged();
 		this.notifyObservers();
+		System.out.println(this.getClass().getSimpleName() + screenPosition.getX() + "  " + screenPosition.getY());
 	}
 
 	@Override
@@ -157,12 +159,18 @@ public class ComponentGraphImpl extends Observable implements ComponentGraph {
 	@Override
 	public void clearComponents()
 	{
+		List<Component> list = new ArrayList<Component>();
 		for (Point2D x : componentMap.keySet())
 		{
 			for (Component y : componentMap.get(x))
 			{
-				removeComponent(y);
+				list.add(y);
 			}
+		}
+		
+		for (Component x : list)
+		{
+			removeComponent(x);
 		}
 	}
 

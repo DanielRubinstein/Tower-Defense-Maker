@@ -1,7 +1,9 @@
-package frontEnd.Skeleton.UserTools;
+package frontEnd.Skeleton.UserTools.Presets;
 
 import java.io.FileNotFoundException;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Observable;
 import java.util.Observer;
@@ -9,13 +11,16 @@ import java.util.function.Consumer;
 
 import ModificationFromUser.AttributeOwner.Modification_Add_PaletteToGrid;
 import ModificationFromUser.Spawning.Modification_AddSpawner;
+import backEnd.BankController;
 import backEnd.Attribute.AttributeOwner;
-import backEnd.Bank.BankController;
 import backEnd.GameData.State.Component;
 import backEnd.GameData.State.TileImpl;
 import backEnd.Mode.ModeReader;
 import frontEnd.View;
 import frontEnd.Skeleton.AoTools.GenericCommandCenter;
+import frontEnd.Skeleton.ScreenGrid.FrontEndAttributeOwner;
+import frontEnd.Skeleton.ScreenGrid.FrontEndAttributeOwnerImpl;
+import frontEnd.Skeleton.UserTools.SkeletonObject;
 import javafx.geometry.Bounds;
 import javafx.geometry.Insets;
 import javafx.geometry.Point2D;
@@ -44,13 +49,11 @@ public class Palette<T extends AttributeOwner> implements SkeletonObject, Observ
 	private TilePane tile;
 	private Map<String, T> myPresetMapBackEnd;
 	private static final String IMAGEFILE_ATTRIBUTE_NAME = "ImageFile";
-	private static final String SETTINGS_IMAGE = "resources/images/Tools/plus.jpg";
 	private Map<ImageView, T> myPresetMapFrontEnd;
 	private String myType;
 	private BankController observedBankController;
 	private ModeReader observedMode;
-	private ImageView addPreset;
-
+	
 	public Palette(View view, Map<String, T> presetMap, String string) {
 		myView = view;
 		initializeMaps(presetMap);
@@ -59,7 +62,7 @@ public class Palette<T extends AttributeOwner> implements SkeletonObject, Observ
 		for (T preset : myPresetMapBackEnd.values()) {
 			addPresetToPalette(preset);
 		}
-		addNewPresetButton();
+		createNewPresetButton();
 
 	}
 
@@ -72,26 +75,13 @@ public class Palette<T extends AttributeOwner> implements SkeletonObject, Observ
 		myPresetMapFrontEnd = new HashMap<ImageView, T>();
 	}
 
-	private void addNewPresetButton() {
-		addPreset = createNewPresetButton();
-		disableButtonInPlayerMode(addPreset);
-		tile.getChildren().add(addPreset);
-	}
-
-	private void disableButtonInPlayerMode(ImageView image1) {
-		image1.disableProperty().bind(myView.getBooleanAuthorModeProperty().not());
-		image1.disableProperty().addListener((a, b, c) -> {
-			if (c) {
-				tile.getChildren().remove(image1);
-			} else {
-				tile.getChildren().add(image1);
-			}
-		});
-	}
+	
 
 	private void addPresetToPalette(T preset) {
-		String myImagePath = preset.<String>getAttribute(IMAGEFILE_ATTRIBUTE_NAME).getValue();
-		ImageView imageView = createImageView(myImagePath);
+		FrontEndAttributeOwner attrOwner = new FrontEndAttributeOwnerImpl(preset);
+		ImageView imageView = attrOwner.getImageView();
+		imageView.setFitWidth(TILE_SIZE);
+		imageView.setFitHeight(TILE_SIZE);
 		setPresetInteractions(preset, imageView);
 		myPresetMapFrontEnd.put(imageView, preset);
 		addPresetImageViewToPalette(imageView);
@@ -100,13 +90,13 @@ public class Palette<T extends AttributeOwner> implements SkeletonObject, Observ
 	private void setPresetInteractions(T preset, ImageView imageView) {
 		setClickEvent(imageView, (iV) -> {
 			GenericCommandCenter presetComCenter = new GenericCommandCenter(myView, preset);
-			presetComCenter.launch("Preset", iV.getX(), iV.getY());
+			presetComCenter.launch("Preset", iV.getLayoutX(), iV.getLayoutY());
 		});
 		makeHoverOverName(preset, imageView);
 		makePresetDraggable(preset, imageView);
 	}
 
-	private void setClickEvent(ImageView imageView, Consumer<ImageView> consumer) {
+	private void setClickEvent(Node imageView, Consumer<Node> consumer) {
 		imageView.setOnMouseClicked(mouseEvent -> {
 			if (mouseEvent.getButton().equals(MouseButton.PRIMARY)) {
 				consumer.accept(imageView);
@@ -115,13 +105,21 @@ public class Palette<T extends AttributeOwner> implements SkeletonObject, Observ
 	}
 
 	private void addPresetImageViewToPalette(ImageView imageView) {
-		if (addPreset == null) {
-			tile.getChildren().add(imageView);
+		if(myView.getBooleanAuthorModeProperty().get()){
+			try{
+				tile.getChildren().add(tile.getChildren().size() - 1, imageView);
+			} catch (IndexOutOfBoundsException e){
+				tile.getChildren().add(imageView);
+			}	
 		} else {
-			tile.getChildren().remove(addPreset);
 			tile.getChildren().add(imageView);
-			tile.getChildren().add(addPreset);
+			// this should not happen (potentially MODE EXCEPTION SHIT)
 		}
+	}
+	
+	private void removePresetFromPalette(ImageView imageView) {
+		tile.getChildren().remove(imageView);
+		myPresetMapFrontEnd.remove(imageView);
 	}
 
 	private void makeHoverOverName(T preset, ImageView imageView) {
@@ -130,6 +128,7 @@ public class Palette<T extends AttributeOwner> implements SkeletonObject, Observ
 			if (newV) {
 				Bounds scenePos = imageView.localToScreen(imageView.getBoundsInLocal());
 				t.show(imageView, scenePos.getMaxX(), scenePos.getMinY());
+				// TODO someone help
 			} else {
 				t.hide();
 			}
@@ -165,26 +164,16 @@ public class Palette<T extends AttributeOwner> implements SkeletonObject, Observ
 		});
 	}
 
-	private ImageView createNewPresetButton() {
-		ImageView addImage = createImageView(SETTINGS_IMAGE);
-		setClickEvent(addImage, (iV) -> {
-			try {
-				AttributeOwner newAO = null;
-				switch (myType) {
-				case "Tiles":
-					newAO = new TileImpl();
-					break;
-				case "Components":
-					newAO = new Component();
-					break;
-				}
-				GenericCommandCenter presetCreation = new GenericCommandCenter(myView, newAO);
-				presetCreation.launch("Design a new preset", 0d, 0d);
-			} catch (FileNotFoundException e) {
-				myView.reportError(e);
+	private void createNewPresetButton() {
+		PresetCreationButton presetCreationButton = new PresetCreationButton(myView, myType, (imagePath) -> createImageView(imagePath), (node, consumer) -> setClickEvent(node, consumer) );
+		tile.getChildren().add(presetCreationButton.getRoot());
+		presetCreationButton.disableInPlayerMode((inPlayerMode) -> {
+			if(inPlayerMode){
+				tile.getChildren().remove(presetCreationButton.getRoot());
+			} else {
+				tile.getChildren().add(presetCreationButton.getRoot());
 			}
 		});
-		return addImage;
 	}
 
 	private void initializePane() {
@@ -225,6 +214,15 @@ public class Palette<T extends AttributeOwner> implements SkeletonObject, Observ
 			if (!myPresetMapFrontEnd.containsValue(preset)) {
 				addPresetToPalette(preset);
 			}
+		}
+		List<ImageView> toRemove = new ArrayList<ImageView>();
+		for (ImageView iv : myPresetMapFrontEnd.keySet()) {
+			if (!myPresetMapBackEnd.containsValue(myPresetMapFrontEnd.get(iv))) {
+				toRemove.add(iv);
+			}
+		}
+		for (ImageView iv : toRemove){
+			removePresetFromPalette(iv);
 		}
 	}
 }
