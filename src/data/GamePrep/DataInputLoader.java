@@ -4,6 +4,8 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
+import java.util.List;
+import java.util.Map;
 
 import backEnd.GameData.GameData;
 import backEnd.GameData.Rules.RulesMap;
@@ -17,17 +19,39 @@ import data.XMLReadingException;
  * Wrapper class to get GameData without using reflection and hardcoding a method name.
  * This class is much more extendible and hides any ugly implementation details
  * @author Tim
+ * @author Juan
  *
  */
-public class DataInputLoader {
-	private GameData myGameData;
+public class DataInputLoader
+{
+	
+	
 	private static final String GAME_STATE_DATA_PATH = "data/SavedGames/";
 	private static final String TEMPLATE_DATA_PATH = "data/LevelTemplates/";
-	private XMLReader myXMLReader = new XMLReaderImpl();
+	private static final String UNIVERSAL_DATA_PATH = "data/UniversalGameData/";
 	
+	private XMLReader myXMLReader;
+	private GameData myGameData;
+	private Map<String, List<String>> gamesMap;
 	
+	public DataInputLoader()
+	{
+		 myXMLReader = new XMLReaderImpl();
+		 
+		 generateGamesMap();
+	}
+	private void generateGamesMap() {
+		try {
+			gamesMap = myXMLReader.loadGamesMap(UNIVERSAL_DATA_PATH);
+		 }
+		 catch (XMLReadingException e)
+		 {
+			e.printStackTrace();
+		 }
+	}
 	public DataInputLoader(String s) throws XMLReadingException{
 		myGameData = generateGameData(s);
+		
 	}
 	
 	public DataInputLoader(String s, String path)
@@ -53,8 +77,14 @@ public class DataInputLoader {
 		myGameData = generateGameData(file.getName(),file.getParent());
 	}
 
-	public GameData getGameData(){
+	public GameData getGameData()
+	{
 		return myGameData;	
+	}
+	
+	public Map<String, List<String>> getGamesMap()
+	{
+		return gamesMap;
 	}
 	
 	private GameData generateGameData(String levelName)
