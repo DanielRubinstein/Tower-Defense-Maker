@@ -47,7 +47,8 @@ public class SpawnEngine implements Engine {
 					spawn(component, spawnTile);
 				}
 				// Spawning directly with spawn queue
-				spawn(currentSpawnQueue.getNextQueueSpawn(stepTime), spawnTile);
+				Component nextQueueSpawn = currentSpawnQueue.getNextQueueSpawn(gameData.getGameTime());
+				spawn(nextQueueSpawn, spawnTile);
 			}
 		}
 		updateSpawnTimelines(gameData.getGameTime());

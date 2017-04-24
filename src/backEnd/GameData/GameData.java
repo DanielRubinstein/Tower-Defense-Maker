@@ -31,7 +31,7 @@ public class GameData implements GameDataInterface{
 		this.myPlayerStatus = playerStatus;
 		myEngineStatus=EngineStatus.PAUSED;
 		myState.setEngineStatus(myEngineStatus);
-		myGameTime = (long) 0;
+		myGameTime = 0;
 	}
 
 	@Override
@@ -74,7 +74,7 @@ public class GameData implements GameDataInterface{
 		return this.myPlayerStatus;
 	}
 
-	public void incrementGameTime(Double gameStep) {
+	public void incrementGameTime(double gameStep) {
 		myGameTime += gameStep;
 	}
 	
