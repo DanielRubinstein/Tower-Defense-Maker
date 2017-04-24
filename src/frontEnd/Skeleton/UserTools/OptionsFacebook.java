@@ -1,6 +1,7 @@
 package frontEnd.Skeleton.UserTools;
 
 import frontEnd.View;
+import frontEnd.ViewReader;
 import frontEnd.CustomJavafxNodes.ActionButton;
 import frontEnd.CustomJavafxNodes.ButtonMenuImpl;
 import frontEnd.CustomJavafxNodes.ErrorDialog;
@@ -21,7 +22,7 @@ import javafx.stage.Stage;
 
 public class OptionsFacebook implements SkeletonObject {
 
-	private View myView;
+	private ViewReader myView;
 	private HBox myRoot;
 	private Stage myParentStage;
 	private Stage myStage;
@@ -29,7 +30,7 @@ public class OptionsFacebook implements SkeletonObject {
 	private FacebookInteractor myFb;
 	private ImageView profPic;
 	
-	public OptionsFacebook(View view,Stage parentStage){
+	public OptionsFacebook(ViewReader view,Stage parentStage){
 		myView = view;
 		myRoot = new HBox();
 		myParentStage = parentStage;
@@ -64,16 +65,10 @@ public class OptionsFacebook implements SkeletonObject {
 		
 		myMenu.addSimpleButtonWithHover("Share",() -> share(myStage), "Click to share onto the official voogasalad_sup3rs1ckt34m1337 page");
 		
-		myMenu.addSimpleButtonWithHover("Message a Friend", () -> message(), "Click to Message");
-		
 		myMenu.display(myStage);
 	}
 	
 	
-	
-	private void message() {
-		
-	}
 
 	private void share(Stage parStage) {
 		Stage shareStage = new Stage();
@@ -103,8 +98,8 @@ public class OptionsFacebook implements SkeletonObject {
 		return myRoot;
 	}
 
-	public void setAlignment(Pos topLeft, Priority always) {
-		myRoot.setAlignment(Pos.CENTER_RIGHT);
+	public void setAlignment(Pos alignment, Priority always) {
+		myRoot.setAlignment(alignment);
 	}
 	public void setSize(double width, double height){
 		myRoot.setMaxHeight(height);
