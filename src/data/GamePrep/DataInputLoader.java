@@ -45,12 +45,6 @@ public class DataInputLoader
 		this();
 		myGameData = generateGameData(s);
 	}
-	
-	public DataInputLoader(String s, String path)
-	{
-		this();
-		myGameData = generateGameData(s, path);
-	}
 
 	public DataInputLoader(StartingInput input) throws XMLReadingException{
 		this();
