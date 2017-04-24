@@ -2,13 +2,17 @@ package backEnd;
 
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Observer;
 import javax.swing.JOptionPane;
 import backEnd.Mode.Mode;
+import backEnd.Attribute.AttributeData;
 import backEnd.Attribute.AttributeOwner;
+import backEnd.GameData.State.AccessPermissions;
+import backEnd.GameData.State.AccessPermissionsImpl;
 import backEnd.GameData.State.Component;
 import backEnd.GameData.State.Tile;
 import backEnd.GameData.State.TileImpl;
@@ -65,14 +69,16 @@ public class BankController
 			addNewTile("Yellow Left Tile", newTile4);
 			
 			
-			Component newComponent = new Component();
+			Component newComponent = new Component(new AttributeData(), 
+					new AccessPermissionsImpl(Arrays.asList("PLAYER"), new ArrayList<String>(), new ArrayList<String>()));
 			newComponent.setAttributeValue("ImageFile", "resources/images/Components/rainbow_bloon.png");
 			newComponent.setAttributeValue("Speed", 5d);
 			newComponent.setAttributeValue("Health", 10);
 			newComponent.setAttributeValue("Type", "Enemy");
 			addNewComponent("Enemy", newComponent);
 			
-			Component newComponent2 = new Component();
+			Component newComponent2 = new Component(new AttributeData(), 
+					new AccessPermissionsImpl(Arrays.asList("PLAYER"), new ArrayList<String>(), new ArrayList<String>()));
 			newComponent2.setAttributeValue("ImageFile", "resources/images/Components/zombie.png");
 			newComponent2.setAttributeValue("Health", 10);
 			newComponent2.setAttributeValue("Type", "Tower");
@@ -112,7 +118,7 @@ public class BankController
 		
 		for (String x : tileBank.keySet())
 		{
-			if (tileBank.get(x).getAccessPermissions().permitsAccess(myMode.getUserMode(), myMode.getGameMode(), myMode.getLevelMode()));
+			if (tileBank.get(x).getAccessPermissions().permitsAccess(myMode.getUserMode(), myMode.getGameMode(), myMode.getLevelMode()))
 			{
 				subMap.put(x, tileBank.get(x));
 			}
@@ -127,7 +133,7 @@ public class BankController
 		
 		for (String x : componentBank.keySet())
 		{
-			if (componentBank.get(x).getAccessPermissions().permitsAccess(myMode.getUserMode(), myMode.getGameMode(), myMode.getLevelMode()));
+			if (componentBank.get(x).getAccessPermissions().permitsAccess(myMode.getUserMode(), myMode.getGameMode(), myMode.getLevelMode()))
 			{
 				subMap.put(x, componentBank.get(x));
 			}
