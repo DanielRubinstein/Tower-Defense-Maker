@@ -3,13 +3,10 @@ package backEnd.GameEngine.Engine;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Enumeration;
-import java.util.HashMap;
 import java.util.List;
 import java.util.ResourceBundle;
-
 import backEnd.GameData.GameData;
 import backEnd.GameEngine.EngineStatus;
-import backEnd.LevelProgression.LevelProgressionControllerImpl;
 import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
@@ -40,6 +37,7 @@ public class GameProcessController {
 		EngineFactory engineFactory = new EngineFactory();
 		Enumeration<String> n = myResources.getKeys();
 		for (String key : Collections.list(n)) {
+			System.out.println("TEST");
 			myEngines.add(engineFactory.getEngine(myResources.getString(key)));
 		}
 	}
