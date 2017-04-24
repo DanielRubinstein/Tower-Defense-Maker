@@ -38,7 +38,8 @@ public class AttributeEditorCreator {
 	private View myView;
 	private AttributeOwner myOwner;
 	private Attribute<?> myAttr;
-	public static final String SAVED_IMAGES_DIRECTORY = "./src/resources/images";
+	public static final String SAVED_IMAGES_DIRECTORY = "src" + File.separator + "resources" + File.separator + "images";
+	public static final String CLASS_LOADER_DIRECTORY = "resources" + File.separator + "images" + File.separator;
 	private ToggleSwitch myToggle;
 
 	public AttributeEditorCreator(View view, AttributeOwner obj, Attribute<?> attr){
@@ -203,11 +204,12 @@ public class AttributeEditorCreator {
 			
 			File selectedFile = imageChooser.showOpenDialog(new Stage());
 			try{
-				String newPath = selectedFile.getPath();
-				String newValue = newPath.substring(newPath.indexOf("resources"), newPath.length());
-				sendModification(newValue);
-				Image newImage = new Image(getClass().getClassLoader().getResourceAsStream(newValue));
+				String newPath = CLASS_LOADER_DIRECTORY + selectedFile.getParentFile().getName()+ File.separator + selectedFile.getName();
+				
+				Image newImage = new Image(getClass().getClassLoader().getResourceAsStream(newPath));
 				imv.setImage(newImage);
+				sendModification(newPath);
+				
 			}
 			catch (NullPointerException exception){
 				System.out.println("Did not select an image- SAD!");
