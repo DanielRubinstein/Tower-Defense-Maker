@@ -1,6 +1,7 @@
 package backEnd.GameData;
 
 import backEnd.BankController;
+import backEnd.GameData.Rules.Rule;
 import backEnd.GameData.Rules.RulesMap;
 import backEnd.GameData.State.PlayerStatus;
 import backEnd.GameData.State.PlayerStatusModifier;
