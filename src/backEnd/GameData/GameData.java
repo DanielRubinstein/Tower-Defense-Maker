@@ -84,12 +84,12 @@ public class GameData implements GameDataInterface{
 	public double getGameTime() {
 		return myGameTime;
 	}
-	
+	/*
 	public void printRules(){
 		for(Rule x: myRules.getMapWithKeyNames().values()){
 			x.printRule();
 		}
-	}
+	}*/
 	
 	public void setLevelProgressionController(LevelProgressionControllerReader myLPC){
 		this.myLPC = myLPC;
