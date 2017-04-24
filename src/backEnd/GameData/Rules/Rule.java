@@ -58,6 +58,11 @@ public abstract class Rule implements RuleReader{
 		return myDisplayString;
 	}
 
+	@Override
+	public void printRule(){
+		System.out.println(myKeyName + ": " + myVal + ": " + enabled);
+	}
+	
 	public abstract void invoke(GameData myGameData);
 
 }
