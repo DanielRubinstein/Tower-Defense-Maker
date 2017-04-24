@@ -2,6 +2,7 @@ package frontEnd.Skeleton.UserTools;
 
 import frontEnd.View;
 import frontEnd.Skeleton.ScreenGrid.ScreenGrid;
+import frontEnd.Skeleton.UserTools.Presets.PalettePane;
 import javafx.scene.Node;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;

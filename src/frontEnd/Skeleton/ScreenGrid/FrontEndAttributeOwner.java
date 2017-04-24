@@ -13,12 +13,8 @@ public interface FrontEndAttributeOwner {
 
 	ImageView getImageView();
 
-	void setXY(double xx, double yy);
-
 	void update(Observable o, Object arg);
 
 	void refreshXY();
-	
-	void center(double x,double y);
 
 }

@@ -28,9 +28,8 @@ public class ControllerImpl implements Controller {
 				(ModificationFromUser m) -> {
 					try {
 						executeInteraction(m);
-						System.out.println("Modification from user sent to back end");
+						System.out.println("In Controller - Modification from fE to bE executed");
 					} catch (Exception e) {
-						System.out.println("Error in Modification sent");
 						ErrorDialog errDia = new ErrorDialog();
 						String eMessage = "";
 						if(e.getMessage() != null){

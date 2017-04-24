@@ -17,26 +17,30 @@ public class FrontEndAttributeOwnerImpl implements Observer, FrontEndAttributeOw
 	private static final String IMAGE_ATTRIBUTE = "ImageFile";
 	private static final String POSITION_ATTRIBUTE = "Position";
 	private AttributeOwnerReader myAttr;
-	private Point2D newLoc;
 	
 	public FrontEndAttributeOwnerImpl(AttributeOwnerReader attr){
-		attr.addAsListener(this);
 		myAttr = attr;
-		setUpImageView(attr);
-		setUpPosition(attr);
+		myAttr.addAsListener(this);
+		setImage(myAttr.getMyAttributes().<String>get(IMAGE_ATTRIBUTE).getValue());
+		setPosition(myAttr.getMyAttributes().<Point2D>get(POSITION_ATTRIBUTE).getValue());
 	}
 	
-	private void setUpPosition(AttributeOwnerReader attr) {
-		Object newLocObj= attr.getMyAttributes().get(POSITION_ATTRIBUTE).getValue();
-		myPosition = (Point2D) newLocObj;
+	private void setPosition(Point2D newPosition){
+		if (newPosition != null){
+			myPosition = newPosition;
+			myImage.setX(newPosition.getX()-myImage.getFitWidth());
+			myImage.setY(newPosition.getY()-myImage.getFitHeight());
+		}
 	}
-
-	private void setUpImageView(AttributeOwnerReader attr){
-		Object myImagePathObj=attr.getMyAttributes().get(IMAGE_ATTRIBUTE).getValue();
-		myImagePath = (String) myImagePathObj;
-		Image image = new Image(getClass().getClassLoader().getResourceAsStream(myImagePath));
-		myImage = new ImageView(image);
-		
+	
+	private void setImage(String newImagePath){
+		myImagePath = newImagePath;
+		Image image = new Image(getClass().getClassLoader().getResourceAsStream(newImagePath));
+		if(myImage == null){
+			myImage = new ImageView(image);
+		} else {
+			myImage.setImage(image);
+		}
 	}
 
 	/* (non-Javadoc)
@@ -46,60 +50,29 @@ public class FrontEndAttributeOwnerImpl implements Observer, FrontEndAttributeOw
 	public ImageView getImageView() {
 		return myImage;
 	}
-	/* (non-Javadoc)
-	 * @see frontEnd.CustomJavafxNodes.FrontEndAttributeOwner#setXY(double, double)
-	 */
-	@Override
-	public void setXY(double xx, double yy){
-		myImage.setX(xx);
-		myImage.setY(yy);
-	}
 	
 	/* (non-Javadoc)
 	 * @see frontEnd.CustomJavafxNodes.FrontEndAttributeOwner#update(java.util.Observable, java.lang.Object)
 	 */
 	@Override
 	public void update(Observable o, Object arg) {
-		AttributeOwnerReader newAttr = (AttributeOwnerReader) o;
-		
-		Object newImagePathObj=newAttr.getMyAttributes().get(IMAGE_ATTRIBUTE).getValue();
-		String newImagePath = (String) newImagePathObj;
-		
-		Object newLocObj=newAttr.getMyAttributes().get(POSITION_ATTRIBUTE).getValue();
-		newLoc = (Point2D) newLocObj;
-		
-		if(!newImagePath.equals(myImagePath) || !newLoc.equals(myPosition)){ //FIXME : I removed || !newLoc.equals(myPosition) from this line because caused error.
-			refreshXY();
-			myImagePath = newImagePath;
-			Image image = new Image(getClass().getClassLoader().getResourceAsStream(myImagePath));
-			myImage.setImage(image);
+		if(o == myAttr){
+			String newImagePath = myAttr.getMyAttributes().<String>get(IMAGE_ATTRIBUTE).getValue();
+			Point2D newPosition = myAttr.getMyAttributes().<Point2D>get(POSITION_ATTRIBUTE).getValue();
+			
+			if(!newImagePath.equals(myImagePath)){
+				setImage(newImagePath);
+			}
+			if(!newPosition.equals(myPosition)){
+				setPosition(newPosition);
+			}
 		}
 	}
 
 	@Override
 	public void refreshXY() {
-		Object locObj=myAttr.getMyAttributes().get(POSITION_ATTRIBUTE).getValue();
-		Point2D loc= (Point2D) locObj;
-		if (newLoc==null){
-			newLoc=loc;
-		}
-		if (loc==null){ //components with null locations exist on the screen when game initialized- SAD!
-			return;
-		}
-		//make the  center the reference point
-		myPosition = newLoc;
-		myImage.setX(newLoc.getX()-myImage.getFitWidth()/2);
-		myImage.setY(newLoc.getY()-myImage.getFitHeight()/2);
-		
+		setPosition(myAttr.getMyAttributes().<Point2D>get(POSITION_ATTRIBUTE).getValue());
 	}
-	@Override
-	public void center(double x,double y){
-		
-		myImage.setX(x-myImage.getFitWidth()/2);
-		myImage.setY(y-myImage.getFitHeight()/2);
-	}
-
-	
 
 	
 }
