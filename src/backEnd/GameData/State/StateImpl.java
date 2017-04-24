@@ -248,9 +248,8 @@ public class StateImpl extends Observable implements State {
 	}
 	
 	public boolean gameIsRunning(){
-		return myEngineStatus.equals(EngineStatus.RUNNING);
+		return myEngineStatus.toString().equals("RUNNING");
 	}
-
 
 	@Override
 	public Collection<Component> getComponentsByTileGridPosition(Point2D tileGridPosition) {

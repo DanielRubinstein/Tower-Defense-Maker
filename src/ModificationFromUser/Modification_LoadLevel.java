@@ -1,13 +1,9 @@
 package ModificationFromUser;
 
 import java.io.File;
-
 import backEnd.ModelImpl;
 import backEnd.GameData.GameData;
-import data.DataController;
-import data.XMLReadingException;
 import data.GamePrep.DataInputLoader;
-import data.GamePrep.GameLoader;
 import javafx.stage.DirectoryChooser;
 import javafx.stage.Stage;
 
@@ -33,22 +29,40 @@ public class Modification_LoadLevel implements ModificationFromUser {
 	@Override
 	public void invoke(ModelImpl myModel) throws Exception {	
 			
-			if (myLevel == null) myLevel = load(myModel);
-			System.out.println(myLevel);
-			DataInputLoader dataInput = new DataInputLoader(myLevel);
+			DataInputLoader dataInput;
+			
+			if (myLevel == null)
+			{
+				File file = load(myModel);
+				myLevel = file.getName();
+				dataInput = new DataInputLoader(myLevel, file.getParentFile().getPath());
+				
+			}
+			else
+			{
+				dataInput = new DataInputLoader(myLevel);
+			}
+			
+			
 			myGameData = dataInput.getGameData();
-		
 			myModel.getState().updateState(myGameData.getState());
 		
 	}
 	
-	private String load(ModelImpl myModel) {
+	private File load(ModelImpl myModel) {
 		DirectoryChooser chooser = new DirectoryChooser();
 		
+		switch (myModel.getMode().getUserMode())
+		{
+		case "PLAYER":
+			chooser.setInitialDirectory(new File("./data/SavedGames/"));
+			break;
+		case "AUTHOR":
+			chooser.setInitialDirectory(new File("./data/LevelTemplates/"));
+		}
 		
-		chooser.setInitialDirectory(new File("./data/SavedGames/"));
 	
-		return chooser.showDialog(new Stage()).getName();
+		return chooser.showDialog(new Stage());
 	}
 
 }

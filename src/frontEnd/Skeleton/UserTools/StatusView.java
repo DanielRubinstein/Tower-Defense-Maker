@@ -4,10 +4,12 @@ import java.util.Collection;
 import backEnd.GameData.State.PlayerStatusReader;
 import frontEnd.ViewReader;
 import javafx.beans.property.ReadOnlyDoubleProperty;
+import javafx.geometry.Insets;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.ScrollPane.ScrollBarPolicy;
+import javafx.scene.effect.DropShadow;
 import javafx.scene.layout.Border;
 import javafx.scene.layout.BorderStroke;
 import javafx.scene.layout.BorderStrokeStyle;
@@ -30,7 +32,10 @@ public class StatusView {
 		valuesBox=new VBox();
 		globalBox=new HBox();
 		myScrollPane=new ScrollPane();
-		
+		initializeContent();
+
+	}
+	private void initializeContent(){
 		PlayerStatusReader playerStatus = myView.getPlayerStatus();
 		Collection<String> statusItems = playerStatus.getPropertyNames();
 		
@@ -43,14 +48,23 @@ public class StatusView {
     		});
         	valuesBox.getChildren().add(value);
         }
+        valuesBox.setMinWidth(80);
         valuesBox.setFillWidth(true);
+        globalBox.setSpacing(10);
+        globalBox.setStyle("-fx-padding: 10;"+
+                "-fx-background-color: 	#696969;"+
+                "-fx-background-radius: 5;"+
+                "-fx-background-insets: 3,3,3;"+
+                "-fx-padding: 4 4 4 4;"+
+        		"-fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 0, 0);");
         globalBox.getChildren().add(0, namesBox);
         globalBox.getChildren().add(1, valuesBox);
         myScrollPane.setMinHeight(150);
         myScrollPane.setVbarPolicy(ScrollBarPolicy.NEVER);
-        globalBox.setBorder(new Border(new BorderStroke(Color.BLACK, 
-                BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderWidths.DEFAULT)));
         myScrollPane.setContent(globalBox);
+	}
+	public void intitializeVisuals(){
+		
 	}
 
 

@@ -71,20 +71,24 @@ public class ScreenGrid implements SkeletonObject, Observer {
 	public ScreenGrid(View view, State state, double screenGridWidth, double screenGridHeight) {
 		myView = view;
 		myState = state;
-		myWidth = screenGridWidth;
-		myHeight = screenGridHeight;
 		extractAoCollectionsFromState();
-		numberOfTileCols = observedTileGrid.getNumColsInGrid();
-		numberOfTileRows = observedTileGrid.getNumRowsInGrid();
-		tileWidth = myWidth / numberOfTileCols;
-		tileHeight = myHeight / numberOfTileRows;
-		observedTileGrid.setTileSize(tileWidth, tileHeight);
+		adjustSize(screenGridWidth,screenGridHeight);
 		placeComponents();
 		initializeGrid();
 		myTiles = new HashMap<>();
 		myTileImages = new HashMap<>();
 		updateTilesOnGrid();
 		addGridToRoot();
+	}
+	
+	private void adjustSize(double screenGridWidth, double screenGridHeight){
+		myWidth = screenGridWidth;
+		myHeight = screenGridHeight;
+		numberOfTileCols = observedTileGrid.getNumColsInGrid();
+		numberOfTileRows = observedTileGrid.getNumRowsInGrid();
+		tileWidth = myWidth / numberOfTileCols;
+		tileHeight = myHeight / numberOfTileRows;
+		observedTileGrid.setTileSize(tileWidth, tileHeight);
 	}
 
 	private void placeComponents() {
@@ -182,7 +186,7 @@ public class ScreenGrid implements SkeletonObject, Observer {
 	private void updateComponentsOnGrid() {
 		for (Component c : observedComponentGraph.getAllComponents()) {
 			if (!myComponents.contains(c)) {
-				System.out.println("in screenGrid, updateComponentsOnGrid() got called");
+				//System.out.println("in screenGrid, updateComponentsOnGrid() got called");
 				addComponentToGrid(c);
 			}
 		}

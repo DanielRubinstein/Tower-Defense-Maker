@@ -78,7 +78,22 @@ public class BankController
 			newComponent.setAttributeValue("ImageFile", "resources/images/Components/rainbow_bloon.png");
 			newComponent.setAttributeValue("Speed", 5d);
 			newComponent.setAttributeValue("Health", 10);
-			addNewComponent("Chill Bloon", newComponent);
+			newComponent.setAttributeValue("Type", "Enemy");
+			addNewComponent("Enemy", newComponent);
+			
+			Component newComponent2 = new Component();
+			newComponent2.setAttributeValue("ImageFile", "resources/images/Components/zombie.png");
+			newComponent2.setAttributeValue("Health", 10);
+			newComponent2.setAttributeValue("Type", "Tower");
+			newComponent2.setAttributeValue("Velocity", 0.6);
+			newComponent2.setAttributeValue("FireDamage", 10);
+			newComponent2.setAttributeValue("FireRate", 45.0);
+			newComponent2.setAttributeValue("ExplosionRadius", 40.0);
+			newComponent2.setAttributeValue("FireRadius", 200.0);
+			newComponent2.setAttributeValue("FireImage", "resources/images/Components/purple_bloon.png");
+			addNewComponent("Tower", newComponent2);
+			
+			
 		} catch( FileNotFoundException e){
 			System.out.println("No image found");
 		}

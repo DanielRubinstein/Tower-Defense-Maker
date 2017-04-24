@@ -12,7 +12,6 @@
 		<DOUBLE_TEMPLATE min="0.0" max="0.0" start="0.0" increment="0.0"></DOUBLE_TEMPLATE>
 		<Speed min="0.0" max="10.0" start="1.0" increment="1.0"></Speed>
 		<Velocity min="0.0" max="10.0" start="1.0" increment="1.0"></Velocity>
-		<FireDamage min="0.0" max="100.0" start="0.0" increment="1.0"></FireDamage>
 		<FireRadius min="10.0" max="200.0" start="10.0" increment="2.0"></FireRadius>
 		<ExplosionRadius min="0.0" max="200.0" start="0.0" increment="2.0"></ExplosionRadius>
 		<ProjectileMaxDistance min="0.0" max="200.0" start="50.0" increment="2.0"></ProjectileMaxDistance>
@@ -23,14 +22,16 @@
 		<INTEGER_TEMPLATE min="0" max="0" start="1" increment="0"></INTEGER_TEMPLATE>
 		<Health min="1" max="100" start="1" increment="5"></Health>
 		<MoneyBounty min="0" max="999" start="10" increment="10"></MoneyBounty>
-		<ScoreBounty min="0" max="999" start="10" increment="10"></ScoreBounty></INTEGER>
+		<ScoreBounty min="0" max="999" start="10" increment="10"></ScoreBounty>
+		<FireDamage min="0" max="100" start="0" increment="1"></FireDamage></INTEGER>
 	<EDITABLESTRING>
 		<EDITABLESTRING_TEMPLATE></EDITABLESTRING_TEMPLATE></EDITABLESTRING>
 	<STRINGLIST>
 		<STRINGLIST_TEMPLATE Options="Comma delineated String Options"></STRINGLIST_TEMPLATE>
 		<MoveDirection options="Up,Down,Left,Right"></MoveDirection>
 		<Type options="Tower, Projectile, Enemy"></Type>
-		<FireType options="Single, AOE"></FireType></STRINGLIST>
+		<FireType options="Single, AOE"></FireType>
+		<SpawnTimeline options="Timeline 1"></SpawnTimeline></STRINGLIST>
 	<POSITION>
 		<POSITION_TEMPLATE></POSITION_TEMPLATE>
 		<ProjectileTargetPosition></ProjectileTargetPosition></POSITION>

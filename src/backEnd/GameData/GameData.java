@@ -15,12 +15,14 @@ import backEnd.GameData.State.PlayerStatusReader;
 import backEnd.GameData.State.State;
 import backEnd.GameData.State.StateImpl;
 import backEnd.GameEngine.EngineStatus;
+import backEnd.LevelProgression.LevelProgressionControllerReader;
 
 public class GameData implements GameDataInterface{
 	private StateImpl myState;
 	private RulesMap myRules;
 	private PlayerStatus myPlayerStatus;
 	private EngineStatus myEngineStatus;
+	private LevelProgressionControllerReader myLPC;
 	private double myGameTime;
 	
 	public GameData(StateImpl state, PlayerStatus playerStatus, RulesMap myRules){
@@ -38,8 +40,8 @@ public class GameData implements GameDataInterface{
 	}
 
 	@Override
-	public Map<String, Rule> getRules() {
-		return myRules.getMapWithKeyNames();
+	public RulesMap getRules() {
+		return myRules;
 	}
 	
 	public void setEngineStatus(EngineStatus currentEngineStatus){
@@ -84,6 +86,15 @@ public class GameData implements GameDataInterface{
 		for(String key: myRules.getMapWithKeyNames().keySet()){
 			System.out.println(key + " : " + myRules.getMapWithKeyNames().get(key));
 		}
+	}
+	
+	public void setLevelProgressionController(LevelProgressionControllerReader myLPC){
+		this.myLPC = myLPC;
+		
+	}
+	
+	public LevelProgressionControllerReader getLevelProgressionController(){
+		return myLPC;
 	}
 	
 
