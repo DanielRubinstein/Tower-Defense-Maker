@@ -41,10 +41,17 @@ public class DataInputLoader {
 	
 	public DataInputLoader(Object o) throws NoSuchMethodException, SecurityException, InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException {
 		Constructor<? extends DataInputLoader> cons = this.getClass().getDeclaredConstructor(o.getClass());
+		
+		
 		DataInputLoader d = cons.newInstance(o);
+		
 		myGameData = d.getGameData();
+		
 	}
-
+	
+	public DataInputLoader(File file) throws NoSuchMethodException, SecurityException, InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException {
+		myGameData = generateGameData(file.getName(),file.getParent());
+	}
 
 	public GameData getGameData(){
 		return myGameData;	
