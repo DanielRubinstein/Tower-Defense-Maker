@@ -36,8 +36,8 @@ public class AttackEngine implements Engine {
 		Map<Component, Component> attackersAndTargets=new HashMap<Component, Component>();
 		for (Component attacker : myComponentGraph.getAllComponents()) {
 			if (attacker.getAttribute("Type").getValue().equals("Tower")) {
-				System.out.println("VALUE 1: "+(masterTime % ((Double) attacker.getAttribute("FireRate").getValue())+ " VALUE 2: "+stepTime));
-				if (masterTime % ((Double) attacker.getAttribute("FireRate").getValue()) <= stepTime) {
+				System.out.println("VALUE 1: "+(masterTime % ((Double) attacker.getAttribute("FireRate").getValue()/1000)+ " VALUE 2: "+stepTime/10));
+				if (masterTime % ((Double) attacker.getAttribute("FireRate").getValue()/1000) <= stepTime/10) { //TODO: keep everything in milliseconds
 					System.out.println("THIS IS TRUE SKIRT SKIRT");
 					List<Component> targets = myComponentGraph.getComponentsWithinRadius(attacker,
 							(double) attacker.getAttribute("FireRadius").getValue());
