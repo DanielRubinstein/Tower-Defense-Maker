@@ -37,7 +37,7 @@ public class OptionsSelection implements SkeletonObject{
 	private static final String PAUSE_IMAGE = "resources/images/Tools/pause.jpg";
 	private static final String FASTFWD_IMAGE = "resources/images/Tools/fastfwd.jpg";
 	private static final String PLAY_IMAGE = "resources/images/Tools/play.jpg";
-
+	private static final String NEXT_LEVEL_IMAGE = "resources/images/Tools/nextlevel.png";
 	private static final String RESTART_IMAGE = "resources/images/Tools/restart.png";
 	private VBox myRoot;
 	private TilePane myTiles;
@@ -70,7 +70,7 @@ public class OptionsSelection implements SkeletonObject{
 	}
 	private void setUpOptions(double totalWidth,double totalHeight){
 		myButtons = new ArrayList<Button>();
-		addButtons(totalWidth/4-1);
+		addButtons(totalWidth/5);
 		myTiles.setPrefColumns(myButtons.size());
 		myTiles.getChildren().addAll(myButtons);
 		addSettingsButton();
@@ -85,9 +85,9 @@ public class OptionsSelection implements SkeletonObject{
 		myButtonsAndTooltips.put(createImageButton(PLAY_IMAGE, e-> myView.sendUserModification(Modification_GameRemote.PLAY) ,size), new Tooltip("Play game"));
 		myButtonsAndTooltips.put(createImageButton(PAUSE_IMAGE, e-> myView.sendUserModification(Modification_GameRemote.PAUSE) ,size), new Tooltip("Pause game"));
 		myButtonsAndTooltips.put(createImageButton(FASTFWD_IMAGE, e-> myView.sendUserModification(Modification_GameRemote.FASTFORWARD) ,size), new Tooltip("Fast-forward game"));
-		myButtonsAndTooltips.put(createImageButton(RESTART_IMAGE, e-> myView.sendUserModification(Modification_GameRemote.FASTFORWARD) ,size), new Tooltip("Restart Level"));
+		myButtonsAndTooltips.put(createImageButton(RESTART_IMAGE, e-> myView.sendUserModification(Modification_GameRemote.RESTART) ,size), new Tooltip("Restart level"));
+		myButtonsAndTooltips.put(createImageButton(NEXT_LEVEL_IMAGE, e-> myView.sendUserModification(Modification_GameRemote.NEXTLEVEL) ,size), new Tooltip("Go to next level"));
 		
-		//myButtonsAndTooltips.put(createImageButton(SETTINGS_IMAGE, e-> mySettings.launchSettings(),size), new Tooltip("View settings"));		
 		for (Button b: myButtonsAndTooltips.keySet()){
 			modifyTooltipStartTiming(myButtonsAndTooltips.get(b));
 			b.setTooltip(myButtonsAndTooltips.get(b));
