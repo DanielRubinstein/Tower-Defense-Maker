@@ -1,24 +1,19 @@
 package frontEnd.Skeleton.AoTools;
 
-import java.util.Arrays;
 import java.util.List;
-import java.util.stream.Collectors;
+import java.util.ResourceBundle;
 
 import ModificationFromUser.AttributeOwner.Modification_EditAccessPermissions;
-import backEnd.Attribute.AttributeOwner;
 import backEnd.GameData.State.AccessPermissions;
 import backEnd.LevelProgression.LevelProgressionControllerReader;
 import frontEnd.View;
 import frontEnd.CustomJavafxNodes.ActionButton;
 import frontEnd.Skeleton.UserTools.SkeletonObject;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.geometry.Insets;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
-import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.ScrollPane.ScrollBarPolicy;
@@ -30,6 +25,9 @@ import javafx.stage.Stage;
 import resources.Constants;
 
 public class AccessPermissionsViewer implements SkeletonObject {
+	private static final String BUNDLE_NAME = "resources.messages";
+	private static final ResourceBundle RESOURCE_BUNDLE = ResourceBundle.getBundle(BUNDLE_NAME);
+	
 	private Stage myHostStage;
 	private View myView;
 	private AccessPermissions myAccessPermissions;
@@ -48,7 +46,7 @@ public class AccessPermissionsViewer implements SkeletonObject {
 	}
 
 	private void createIgnition() {
-		ignition = new ActionButton("See Access Permissions", () -> {
+		ignition = new ActionButton(RESOURCE_BUNDLE.getString("AccessPermissions"), () -> {
 			loadViewer();
 			generate();
 		});
@@ -129,7 +127,7 @@ public class AccessPermissionsViewer implements SkeletonObject {
 	}
 
 	private Label createTitle() {
-		Label titleLbl = new Label("Access Permissions");
+		Label titleLbl = new Label(RESOURCE_BUNDLE.getString("AccessPermissions"));
 		titleLbl.setFont(Font.font(32));
 		titleLbl.setUnderline(true);
 		return titleLbl;

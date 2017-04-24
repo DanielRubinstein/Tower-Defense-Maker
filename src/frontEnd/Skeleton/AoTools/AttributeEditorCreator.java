@@ -118,7 +118,8 @@ public class AttributeEditorCreator {
 			Point2D pos = (Point2D) myAttr.getValue();
 			Button b = new Button(String.format(stringFormatter, pos.getX(), pos.getY()));
 			b.setOnAction(e -> {
-				Point2D newPoint = PositionRequester.askUserForPosition(pos);
+				PositionRequester positionRequester = new PositionRequester();
+				Point2D newPoint = positionRequester.promptUser(pos);
 				sendModification(newPoint);
 				b.setText(String.format(stringFormatter, newPoint.getX(), newPoint.getY()));
 			});
