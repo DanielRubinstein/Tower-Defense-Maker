@@ -41,7 +41,6 @@ public class AccessPermissionsViewer implements SkeletonObject {
 		myView = view;
 		myModeController = myView.getLevelProgressionController();
 		myAccessPermissions = accessPermissions;
-		// TODO NEED TO OBSERVE backend to populate level options as new games are selected!!!
 		createIgnition();
 	}
 
