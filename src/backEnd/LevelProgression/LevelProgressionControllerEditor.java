@@ -2,19 +2,7 @@ package backEnd.LevelProgression;
 
 import java.util.List;
 
-public interface LevelProgressionControllerEditor {
-
-	/* (non-Javadoc)
-	 * @see backEnd.LevelProgression.LevelProgressionControllerReader#getGameList()
-	 */
-	List<String> getGameList();
-
-	/* (non-Javadoc)
-	 * @see backEnd.LevelProgression.LevelProgressionControllerReader#getLevelList(java.lang.String)
-	 */
-	List<String> getLevelList(String gameName);
-
-	List<String> getFullLevelList();
+public interface LevelProgressionControllerEditor extends LevelProgressionControllerReader{
 
 	void setLevelList(String gameName, List<String> levelList);
 

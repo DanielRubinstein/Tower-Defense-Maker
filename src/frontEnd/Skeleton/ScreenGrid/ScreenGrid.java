@@ -71,21 +71,25 @@ public class ScreenGrid implements SkeletonObject, Observer {
 	public ScreenGrid(View view, State state, double screenGridWidth, double screenGridHeight) {
 		myView = view;
 		myState = state;
-		myWidth = screenGridWidth;
-		myHeight = screenGridHeight;
 		extractAoCollectionsFromState();
-		numberOfTileCols = observedTileGrid.getNumColsInGrid();
-		numberOfTileRows = observedTileGrid.getNumRowsInGrid();
-		tileWidth = myWidth / numberOfTileCols;
-		tileHeight = myHeight / numberOfTileRows;
-		observedTileGrid.setTileSize(tileWidth, tileHeight);
-		
+
+		adjustSize(screenGridWidth,screenGridHeight);
 		initializeGrid();
 		myTiles = new HashMap<>();
 		myTileImages = new HashMap<>();
 		updateTilesOnGrid();
 		addGridToRoot();
 		placeComponents();
+	}
+	
+	private void adjustSize(double screenGridWidth, double screenGridHeight){
+		myWidth = screenGridWidth;
+		myHeight = screenGridHeight;
+		numberOfTileCols = observedTileGrid.getNumColsInGrid();
+		numberOfTileRows = observedTileGrid.getNumRowsInGrid();
+		tileWidth = myWidth / numberOfTileCols;
+		tileHeight = myHeight / numberOfTileRows;
+		observedTileGrid.setTileSize(tileWidth, tileHeight);
 	}
 
 	private void placeComponents() {

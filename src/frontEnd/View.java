@@ -6,6 +6,8 @@ import ModificationFromUser.ModificationFromUser;
 import backEnd.Model;
 import backEnd.Bank.BankController;
 import backEnd.GameEngine.Engine.Spawning.SpawnQueue;
+import backEnd.LevelProgression.LevelProgressionControllerEditor;
+import backEnd.LevelProgression.LevelProgressionControllerReader;
 import backEnd.Mode.ModeReader;
 import frontEnd.Facebook.FacebookConnector;
 import frontEnd.Facebook.FacebookInteractor;
@@ -29,5 +31,7 @@ public interface View extends ViewReader{
 	public Map<String, SpawnQueue> getSpawnQueues();
 	
 	public ModeReader getModeReader();
+	
+	LevelProgressionControllerEditor getLevelProgressionController();
 
 }

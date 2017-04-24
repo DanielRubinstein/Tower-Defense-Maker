@@ -12,6 +12,7 @@ import backEnd.GameData.State.Component;
 import backEnd.GameData.State.PlayerStatusReader;
 import backEnd.GameData.State.Tile;
 import backEnd.GameEngine.Engine.Spawning.SpawnQueue;
+import backEnd.LevelProgression.LevelProgressionControllerEditor;
 import backEnd.LevelProgression.LevelProgressionControllerReader;
 import backEnd.Mode.ModeReader;
 import frontEnd.CustomJavafxNodes.ErrorDialog;
@@ -122,7 +123,7 @@ public class ViewImpl implements View {
 	}
 
 	@Override
-	public LevelProgressionControllerReader getLevelProgressionController() {
+	public LevelProgressionControllerEditor getLevelProgressionController() {
 		return myModel.getLevelProgressionController();
 	}
 
