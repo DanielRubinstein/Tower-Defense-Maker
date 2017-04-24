@@ -59,13 +59,14 @@ public class SettingsViewImpl implements SettingsView{
 		
 		myMenu.addSimpleButtonWithHover("New Game", () -> myView.sendUserModification(new Modification_NewGame()), "Create a new game from scratch");
 		
-		Node ruleButtons = createRulesButtons();
-		myMenu.addNode(ruleButtons);
+		myMenu.addSimpleButtonWithHover("Rules", () -> {
+			RulesView myRules = new RulesView(myView,myStage);
+			myRules.launch();
+		}, "Click to view/edit rules");
 		
 		myMenu.addSimpleButtonWithHover("Game Structure", () -> {
 			LevelView gameStructure = new LevelView(myView, myStage);
 			gameStructure.launch();
-			
 		}, "See Structure");
 		//adding player/godmode switch
 		Runnable changeMode = () -> myView.sendUserModification(new Modification_ChangeMode());
@@ -76,37 +77,5 @@ public class SettingsViewImpl implements SettingsView{
 	}
 
 	
-	/**
-	 * Adds two side by side buttons to the button menu. 
-	 * Wraps each button to allow for the tooltip to be shown even when a button is disabled. Both buttons are wrapped for consistency
-	 */
-	private Node createRulesButtons(){
-	
-		HBox bothButtons = new HBox();
-		Button button1 = new Button("View Rules");
-		button1.setOnAction(e -> {
-			RulesView myRules = new RulesView(myView,myStage);
-			myRules.launch();
-		});
-		Button button2 = new Button("Edit Rules");
-		button2.setOnAction(e -> myView.editRules());
-		
-		button2.disableProperty().bind(authorProperty.not());
-		
-		SplitPane wrapper1 = new SplitPane(button1);
-		Tooltip t = new Tooltip("Only possible in Author mode");
-		SplitPane wrapper2 = new SplitPane(button2);
-		wrapper2.setTooltip(t);
-		wrapper2.hoverProperty().addListener((a,b,c)->{
-			if(wrapper2.isHover()&&button2.isDisabled()){
-				Bounds scenePos= wrapper2.localToScreen(wrapper2.getBoundsInLocal());
-				t.show(wrapper2, scenePos.getMaxX(), scenePos.getMinY()-scenePos.getHeight());
-			}else{
-				t.hide();
-			}
-		});
-		bothButtons.getChildren().addAll(wrapper1,wrapper2);	
-		return bothButtons;
-	}
 
 }
