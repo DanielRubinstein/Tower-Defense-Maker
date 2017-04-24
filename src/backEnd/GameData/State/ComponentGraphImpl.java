@@ -157,12 +157,18 @@ public class ComponentGraphImpl extends Observable implements ComponentGraph {
 	@Override
 	public void clearComponents()
 	{
+		List<Component> list = new ArrayList<Component>();
 		for (Point2D x : componentMap.keySet())
 		{
 			for (Component y : componentMap.get(x))
 			{
-				removeComponent(y);
+				list.add(y);
 			}
+		}
+		
+		for (Component x : list)
+		{
+			removeComponent(x);
 		}
 	}
 

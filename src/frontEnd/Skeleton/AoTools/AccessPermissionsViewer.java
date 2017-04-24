@@ -7,17 +7,21 @@ import java.util.stream.Collectors;
 import ModificationFromUser.AttributeOwner.Modification_EditAccessPermissions;
 import backEnd.Attribute.AttributeOwner;
 import backEnd.GameData.State.AccessPermissions;
+import backEnd.LevelProgression.LevelProgressionControllerReader;
 import frontEnd.View;
 import frontEnd.CustomJavafxNodes.ActionButton;
 import frontEnd.Skeleton.UserTools.SkeletonObject;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.geometry.Insets;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
+import javafx.scene.control.ScrollPane;
+import javafx.scene.control.ScrollPane.ScrollBarPolicy;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
@@ -32,10 +36,12 @@ public class AccessPermissionsViewer implements SkeletonObject {
 	private Stage myStage;
 	private Button ignition;
 	private VBox myRoot;
+	private LevelProgressionControllerReader myModeController;
 
 	public AccessPermissionsViewer(Stage hostStage, View view, AccessPermissions accessPermissions) {
 		myHostStage = hostStage;
 		myView = view;
+		myModeController = myView.getLevelProgressionController();
 		myAccessPermissions = accessPermissions;
 		// TODO NEED TO OBSERVE backend to populate level options as new games are selected!!!
 		createIgnition();
@@ -51,38 +57,47 @@ public class AccessPermissionsViewer implements SkeletonObject {
 	private void loadViewer() {
 		myRoot = new VBox();
 		myRoot.getChildren().add(createTitle());
-
 		myRoot.getChildren().add(createBody());
-		myRoot.setSpacing(30);
+		myRoot.setSpacing(20);
+		myRoot.setPadding(new Insets(10,10,10,10));
 	}
 
 	private HBox createBody() {
 		HBox body = new HBox();
-		List<String> catList = Arrays.asList("User", "Game", "Level");
-		for (String title : catList) {
+		List<String> modeCategories = myModeController.getModeCategories();
+		for (String category : modeCategories) {
 			VBox subBody = new VBox();
-			Label titleLbl = new Label(title);
+			Label titleLbl = new Label(category);
+			titleLbl.setFont(Font.font(24));
+			titleLbl.setUnderline(true);
 			subBody.getChildren().add(titleLbl);
-			List<String> opts = null;
-
-			// TODO fix this shit
-			if (title.equals("User")) {
-				myView.getLevelProgressionController().getMode();
-				opts = myView.getLevelProgressionController().getMode().getAllUserModes();
-			} else if (title.equals("Game")) {
-				opts = myView.getLevelProgressionController().getGameList();
-			} else if (title.equals("Level")) {
-				/*
-				opts = myView.getLevelProgressionController().getLevelList(null);
-				opts = myView.getLevelProgressionController().getFullLevelList();
-				*/
-				subBody.getChildren()
-						.add(createGameLevelDropDown(subBody, myView.getLevelProgressionController().getFullLevelList()));
+			
+			ScrollPane scrollPane = new ScrollPane();
+			scrollPane.setHbarPolicy(ScrollBarPolicy.NEVER);
+			scrollPane.setVbarPolicy(ScrollBarPolicy.AS_NEEDED);
+			scrollPane.setMaxHeight(300);
+			
+			VBox subsubBody = new VBox();
+			
+			
+			if(category.equals("Level")){
+				for(String game : myModeController.getOptions("Game")){
+					VBox subsubsubBody = new VBox();
+					Label gameLbl = new Label(game);
+					subsubsubBody.getChildren().add(gameLbl);
+					addCheckBoxes(subsubsubBody, myModeController.getLevelList(game));
+					indentInVBox(subsubsubBody);
+					subsubBody.getChildren().add(subsubsubBody);
+				}
+			} else {
+				List<String> opts = myModeController.getOptions(category);
+				addCheckBoxes(subsubBody, opts);
 			}
-
-			addCheckBoxes(subBody, opts);
-
+			
+			scrollPane.setContent(subsubBody);
+			subBody.getChildren().add(scrollPane);
 			body.getChildren().add(subBody);
+			
 		}
 
 		return body;
@@ -92,7 +107,7 @@ public class AccessPermissionsViewer implements SkeletonObject {
 		if(opts == null) return;
 		for (String option : opts) {
 			CheckBox cB = new CheckBox(option);
-			if (!myView.getBooleanAuthorModeProperty().get() || option.equals("AUTHOR")) {
+			if (!myView.getBooleanAuthorModeProperty().get() || option.equals("AUTHOR") || option.equals("DEFAULT")) {
 				cB.disableProperty().set(true);
 			}
 
@@ -102,7 +117,7 @@ public class AccessPermissionsViewer implements SkeletonObject {
 			cB.selectedProperty().addListener((o, oldV, newV) -> {
 				myView.sendUserModification(new Modification_EditAccessPermissions(myAccessPermissions, newV, option));
 			});
-
+			indentInVBox(cB);
 			subBody.getChildren().add(cB);
 		}
 	}
@@ -126,6 +141,12 @@ public class AccessPermissionsViewer implements SkeletonObject {
 		});
 		return optionsBox;
 	}
+	
+	private void indentInVBox(Node n){
+		// Add offset to left side to indent from title
+		// from http://docs.oracle.com/javafx/2/layout/LayoutSampleCSS.java.html
+		VBox.setMargin(n, new Insets(0, 0, 0, 12));
+	}
 
 	private Label createTitle() {
 		Label titleLbl = new Label("Access Permissions");
@@ -138,7 +159,7 @@ public class AccessPermissionsViewer implements SkeletonObject {
 		myStage = new Stage();
 		myStage.initOwner(myHostStage);
 		myStage.initModality(Modality.APPLICATION_MODAL);
-		Scene scene = new Scene(myRoot, 500, 300);
+		Scene scene = new Scene(myRoot);
 		scene.getStylesheets().add(Constants.DEFAULT_CSS);
 		myStage.setScene(scene);
 		myStage.show();

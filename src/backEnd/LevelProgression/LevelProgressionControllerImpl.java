@@ -112,4 +112,25 @@ public class LevelProgressionControllerImpl implements LevelProgressionControlle
 	public Mode getMode(){
 		return myMode;
 	}
+
+
+	@Override
+	public List<String> getModeCategories() {
+		return Arrays.asList("User", "Game", "Level");
+	}
+
+
+	@Override
+	public List<String> getOptions(String category) {
+		switch(category){
+		case "User":
+			return myMode.getAllUserModes();
+		case "Game":
+			return this.getGameList();
+		case "Level":
+			return this.getFullLevelList();
+		default:
+			return null;
+		}
+	}
 }
