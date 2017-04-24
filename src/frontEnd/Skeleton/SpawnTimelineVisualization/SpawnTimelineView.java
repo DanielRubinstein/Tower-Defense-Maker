@@ -2,9 +2,13 @@ package frontEnd.Skeleton.SpawnTimelineVisualization;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Map;
+import java.util.Observable;
+import java.util.Observer;
 
 import backEnd.Attribute.AttributeOwner;
 import backEnd.GameData.State.Component;
+import backEnd.GameEngine.Engine.Spawning.SpawnData;
 import backEnd.GameEngine.Engine.Spawning.SpawnQueue;
 import frontEnd.View;
 import frontEnd.CustomJavafxNodes.SingleFieldPrompt;
@@ -28,13 +32,15 @@ import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import ModificationFromUser.Spawning.Modification_AddSpawner;
 
-public class SpawnTimelineView implements SkeletonObject {
+public class SpawnTimelineView implements SkeletonObject, Observer {
 	private View myView;
 	private ScrollPane dropZone1;
 	private ScrollPane dropZone2;
 	private GridPane myRoot;
 	private String mySpawnQueueName;
 	private SpawnQueue mySpawnQueue;
+	private Map<SpawnData, VisualSpawnEntry> myFrequencySpawns;
+	private Map<SpawnData, VisualSpawnEntry> mySingleSpawns;
 
 	public SpawnTimelineView(View view, ReadOnlyDoubleProperty readOnlyDoubleProperty, String key, SpawnQueue value) {
 		myView = view;
@@ -61,10 +67,10 @@ public class SpawnTimelineView implements SkeletonObject {
 			Component presetComponent = (Component) myView.getBankController().getPreset(presetName);
 			SingleFieldPrompt hey = new SingleFieldPrompt(
 					Arrays.asList("Add Spawn", "Please input a time for your new spawn item"), "Spawn Time Value",
-					"1");
-			long value = Long.parseLong(hey.create());
+					"1.0");
+			double value = Double.parseDouble(hey.create());
 			myView.sendUserModification(
-					new Modification_AddSpawner(mySpawnQueueName, presetComponent, value, repeating));
+					new Modification_AddSpawner(mySpawnQueueName, presetName, value, repeating));
 			addToDropZone(dropZone, presetComponent, value); // This will be
 																// removed.
 																// Instead the
@@ -81,14 +87,14 @@ public class SpawnTimelineView implements SkeletonObject {
 		return dropZone;
 	}
 
-	private void addToDropZone(ScrollPane dropZone, Component spawn, long value) {
+	private void addToDropZone(ScrollPane dropZone, Component spawn, double value) {
 		HBox spawnBox = new HBox();
 		String spawnImagePath = spawn.<String>getAttribute("ImageFile").getValue();
 		ImageView spawnImage = createImageView(spawnImagePath);
 
 		Label name = new Label();
 		name.setText(myView.getBankController().getAOName(spawn));
-		Label valueText = new Label(Long.toString(value));
+		Label valueText = new Label(Double.toString(value));
 		// TODO Editable value here valueText.setOnClick()
 		// TODO Add an X box to destroy that shit
 		spawnBox.getChildren().add(name);
@@ -131,6 +137,15 @@ public class SpawnTimelineView implements SkeletonObject {
 	@Override
 	public Node getRoot() {
 		return myRoot;
+	}
+
+	@Override
+	public void update(Observable arg0, Object arg1) {
+		if(arg0 == mySpawnQueue){
+			if(arg1 == mySpawnQueue.getFrequencyQueue()){
+				System.out.println("yo yo yo");
+			}
+		}
 	}
 
 }

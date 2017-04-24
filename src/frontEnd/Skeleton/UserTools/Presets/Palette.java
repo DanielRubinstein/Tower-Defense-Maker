@@ -1,4 +1,4 @@
-package frontEnd.Skeleton.UserTools;
+package frontEnd.Skeleton.UserTools.Presets;
 
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
@@ -18,6 +18,9 @@ import backEnd.GameData.State.TileImpl;
 import backEnd.Mode.ModeReader;
 import frontEnd.View;
 import frontEnd.Skeleton.AoTools.GenericCommandCenter;
+import frontEnd.Skeleton.ScreenGrid.FrontEndAttributeOwner;
+import frontEnd.Skeleton.ScreenGrid.FrontEndAttributeOwnerImpl;
+import frontEnd.Skeleton.UserTools.SkeletonObject;
 import javafx.geometry.Bounds;
 import javafx.geometry.Insets;
 import javafx.geometry.Point2D;
@@ -50,6 +53,7 @@ public class Palette<T extends AttributeOwner> implements SkeletonObject, Observ
 	private String myType;
 	private BankController observedBankController;
 	private ModeReader observedMode;
+	
 	public Palette(View view, Map<String, T> presetMap, String string) {
 		myView = view;
 		initializeMaps(presetMap);
@@ -74,8 +78,10 @@ public class Palette<T extends AttributeOwner> implements SkeletonObject, Observ
 	
 
 	private void addPresetToPalette(T preset) {
-		String myImagePath = preset.<String>getAttribute(IMAGEFILE_ATTRIBUTE_NAME).getValue();
-		ImageView imageView = createImageView(myImagePath);
+		FrontEndAttributeOwner attrOwner = new FrontEndAttributeOwnerImpl(preset);
+		ImageView imageView = attrOwner.getImageView();
+		imageView.setFitWidth(TILE_SIZE);
+		imageView.setFitHeight(TILE_SIZE);
 		setPresetInteractions(preset, imageView);
 		myPresetMapFrontEnd.put(imageView, preset);
 		addPresetImageViewToPalette(imageView);
@@ -114,13 +120,6 @@ public class Palette<T extends AttributeOwner> implements SkeletonObject, Observ
 	private void removePresetFromPalette(ImageView imageView) {
 		tile.getChildren().remove(imageView);
 		myPresetMapFrontEnd.remove(imageView);
-		/*if (addPreset == null) {
-			tile.getChildren().remove(imageView);
-		} else {
-			tile.getChildren().remove(addPreset);
-			tile.getChildren().remove(imageView);
-			tile.getChildren().add(addPreset);
-		}*/
 	}
 
 	private void makeHoverOverName(T preset, ImageView imageView) {
