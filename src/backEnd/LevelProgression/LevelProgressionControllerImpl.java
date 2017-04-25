@@ -6,10 +6,13 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
+import java.util.function.Consumer;
+
 import backEnd.LevelProgression.LevelProgressionControllerEditor;
 import backEnd.Mode.Mode;
 import data.DataController;
 import data.XMLReadingException;
+import frontEnd.Skeleton.SplashScreens.SplashScreenData;
 
 /**
  * 
@@ -22,14 +25,22 @@ public class LevelProgressionControllerImpl implements LevelProgressionControlle
 	private Map<String,List<String>> gamesMap; //String gameName -> List of Level names
 	private DataController myDataController;
 	private Mode myMode;
+	private Consumer<SplashScreenData> splashScreenLoader;
 	
 	private static final String LEVEL_TEMPLATE_PATH = "data/LevelTemplates/";
 	
-	public LevelProgressionControllerImpl(Mode mode, DataController dataController)
+	public LevelProgressionControllerImpl(Mode mode, DataController dataController, Consumer<SplashScreenData> splashScreenLoader)
 	{
 		this.myMode = mode;
 		this.myDataController = dataController;
+		this.splashScreenLoader = splashScreenLoader;
+		
 		setGamesMap();
+	}
+	
+	public void initiateSplashScreen(SplashScreenData data)
+	{
+		splashScreenLoader.accept(data);
 	}
 	
 	@Override

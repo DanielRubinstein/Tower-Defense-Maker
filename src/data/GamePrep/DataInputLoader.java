@@ -68,6 +68,7 @@ public class DataInputLoader
 	
 	public GameData getGameData()
 	{
+		System.out.println(myGameData.getRules().get("KillCount").getStatus());
 		return myGameData;	
 	}
 	
