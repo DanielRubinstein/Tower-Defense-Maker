@@ -47,7 +47,6 @@ public class Palette<T extends AttributeOwner> implements SkeletonObject, Observ
 	private View myView;
 	private TilePane tile;
 	private Map<String, T> myPresetMapBackEnd;
-	private static final String IMAGEFILE_ATTRIBUTE_NAME = "ImageFile";
 	private Map<ImageView, T> myPresetMapFrontEnd;
 	private String myType;
 	private BankController observedBankController;
@@ -102,16 +101,7 @@ public class Palette<T extends AttributeOwner> implements SkeletonObject, Observ
 	}
 
 	private void addPresetImageViewToPalette(ImageView imageView) {
-		if(myView.getBooleanAuthorModeProperty().get()){
-			try{
-				tile.getChildren().add(tile.getChildren().size() - 1, imageView);
-			} catch (IndexOutOfBoundsException e){
-				tile.getChildren().add(imageView);
-			}	
-		} else {
-			tile.getChildren().add(imageView);
-			// this should not happen (potentially MODE EXCEPTION SHIT)
-		}
+		tile.getChildren().add(imageView);
 	}
 	
 	private void removePresetFromPalette(ImageView imageView) {
@@ -153,12 +143,12 @@ public class Palette<T extends AttributeOwner> implements SkeletonObject, Observ
 
 	private void createNewPresetButton() {
 		PresetCreationButton presetCreationButton = new PresetCreationButton(myView, myType, (imagePath) -> createImageView(imagePath), (node, consumer) -> setClickEvent(node, consumer) );
-		tile.getChildren().add(presetCreationButton.getRoot());
+		tile.getChildren().add(0, presetCreationButton.getRoot());
 		presetCreationButton.disableInPlayerMode((inPlayerMode) -> {
 			if(inPlayerMode){
 				tile.getChildren().remove(presetCreationButton.getRoot());
 			} else {
-				tile.getChildren().add(presetCreationButton.getRoot());
+				tile.getChildren().add(0, presetCreationButton.getRoot());
 			}
 		});
 	}
