@@ -5,7 +5,6 @@ import java.util.ResourceBundle;
 
 import backEnd.GameData.State.Component;
 
-import backEnd.GameEngine.Behaviors.AttackBehavior;
 import backEnd.GameEngine.Behaviors.Behavior;
 import backEnd.GameEngine.Behaviors.DeathBehavior;
 import backEnd.GameEngine.Behaviors.MoveBehavior;

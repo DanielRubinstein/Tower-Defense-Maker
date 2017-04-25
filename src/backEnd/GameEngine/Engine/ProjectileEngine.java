@@ -36,11 +36,14 @@ public class ProjectileEngine implements Engine {
 					continue;
 				}
 				c.setAttributeValue("Position", newPos);
-				if ((Double) c.getAttribute("ProjectileTraveled").getValue() >= (Double) c
+				//System.out.println("traveledDist is " + (Double) c.getAttribute("ProjectileTraveled").getValue());
+				//System.out.println("maxDist is " + (Double) c.getAttribute("ProjectileMaxDistance").getValue());
+				if (((Double) c.getAttribute("ProjectileTraveled").getValue() + 1.0) >= (Double) c //1.0 is to allow for wiggle room
 						.getAttribute(("ProjectileMaxDistance")).getValue()) {
-					List<Component> targets = (ArrayList<Component>) myGameData.getState().getComponentGraph()
-							.getComponentsWithinRadius(c, (Double) c.getAttribute("ExplosionRadius").getValue());
-					performProjectileAction(c, targets);
+					//TODO: may have issues when the target is already destroyed before it gets there
+					//System.out.println("about to perform projectile actions");
+					performProjectileAction(gameData, (Component)c.getAttribute("ProjectileTarget").getValue(), c);
+
 
 					toRemove.add(c);
 
@@ -56,12 +59,19 @@ public class ProjectileEngine implements Engine {
 
 	private Point2D calculateNewPos(Component c) {
 		Double curVel = (Double) c.getAttribute(("Velocity")).getValue();
+		
+		//TODO: CHRISTIAN targeting is screwed up for going backwards - probably in slope (if not, then error
+		//might be in the target point initialization in AttackEngine (.subtract?)
+		// CHRISTIAN make sure the projectiles and targets are getting from the list that it's looping over 
 
 		Point2D curPos = (Point2D) c.getAttribute(("Position")).getValue();
 		Point2D targetPos = (Point2D) c.getAttribute(("ProjectileTargetPosition")).getValue();
+		System.out.println("Projectile Target Point is " + targetPos);
 		Point2D difference = targetPos.subtract(curPos);
 
+		System.out.print("Difference is " + difference);
 		Double slope = difference.getY() / difference.getX();
+		System.out.println("slope is " + slope);
 		Double distTraveled = Math.sqrt(Math.pow(curVel, 2) + Math.pow(slope * curVel, 2));
 		Point2D newPos = new Point2D(curPos.getX() + curVel, curPos.getY() + curVel * slope);
 		c.setAttributeValue("ProjectileTraveled",
@@ -73,28 +83,31 @@ public class ProjectileEngine implements Engine {
 	 * Upon collision, takes action on the target based on the projectile's
 	 * Attributes
 	 * 
-	 * @param projectile
-	 *            the projectile performing the action
-	 * @param target
-	 *            the object of the projectile's action (usually an enemy)
+	 * @param projectile the projectile performing the action
+	 * @param target the object of the projectile's action (usually an enemy)
 	 */
-	private void performProjectileAction(Component projectile, List<Component> targetList) {
-		for (Component target : targetList) {
-			if (! ((String)target.getAttribute("Type").getValue()).equals("Enemy")){
-				System.out.println("Target isn't an enemy");
-			}
-			//System.out.println(targetList.size() + "LIST SIZE SKIRT SKIRT");
-			target.setAttributeValue("Health", (Integer) target.getAttribute("Health").getValue()
+	private void performProjectileAction(GameData gameData, Component target, Component projectile) {
+
+		List<Component> targetList = (ArrayList<Component>) gameData.getState().getComponentGraph()
+				.getComponentsWithinRadius(target, (Double) projectile.getAttribute("ExplosionRadius").getValue());
+		targetList.add(target);
+		//System.out.println("targetList size is " + targetList.size());
+		
+		for (Component toHit : targetList) {
+			//System.out.println("Target looping has begun");
+
+			toHit.setAttributeValue("Health", (Integer) toHit.getAttribute("Health").getValue()
 					- (Integer) projectile.getAttribute("FireDamage").getValue());
-			target.setAttributeValue("Velocity", ((Double) projectile.getAttribute("SlowFactor").getValue()
-					* (Double) target.getAttribute("Speed").getValue()));
-			//System.out.println("projectile action performed");
-			myGameData.getState().getComponentGraph().removeComponent(projectile);
+			//System.out.println("should have reduced HP to " + toHit.getAttribute("Health").getValue());
+			toHit.setAttributeValue("Velocity", ((Double) projectile.getAttribute("SlowFactor").getValue()
+					* (Double) toHit.getAttribute("Speed").getValue()));
+			gameData.getState().getComponentGraph().removeComponent(projectile);
 			if (projectile.getAttribute("FireType").getValue().equals("SingleTarget")) {
 				break; // if AOE, continue to loop through all targets, else
-						// only affect one target
+						// only affect one target, needs testing
 			}
 		}
+		
 
 	}
 }

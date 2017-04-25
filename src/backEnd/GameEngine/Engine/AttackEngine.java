@@ -29,21 +29,17 @@ public class AttackEngine implements Engine {
 	@Override
 	public void gameLoop(GameData gameData, double stepTime) {
 		masterTime = gameData.getGameTime();
-		//TODO: add firing delay here
 		toAdd = new HashMap<Component, Point2D>();
 		myGameData=gameData;
 		ComponentGraph myComponentGraph = gameData.getState().getComponentGraph();
 		Map<Component, Component> attackersAndTargets=new HashMap<Component, Component>();
+		
 		for (Component attacker : myComponentGraph.getAllComponents()) {
 			if (attacker.getAttribute("Type").getValue().equals("Tower")) {
-				//System.out.println("VALUE 1: "+(masterTime % ((Double) attacker.getAttribute("FireRate").getValue()/1000)+ " VALUE 2: "+stepTime/10));
-				if (masterTime % ((Double) attacker.getAttribute("FireRate").getValue()/1000) <= stepTime/10) { //TODO: keep everything in milliseconds
-					System.out.println("THIS IS TRUE SKIRT SKIRT");
+				if (masterTime % ((Double) attacker.getAttribute("FireRate").getValue()/1000) <= stepTime/10) { 
 					List<Component> targets = myComponentGraph.getComponentsWithinRadius(attacker,
 							(double) attacker.getAttribute("FireRadius").getValue());
-					for (Component potentialTarget : targets) { // only want to
-																// fire at
-																// enemies
+					for (Component potentialTarget : targets) {
 						if (potentialTarget.getAttribute("Type").getValue().equals("Enemy")) {
 							attackersAndTargets.put(attacker, potentialTarget);
 						}
@@ -74,7 +70,9 @@ public class AttackEngine implements Engine {
 		Point2D targetPos = (Point2D) targetPosObj;
 		projectile.setAttributeValue("Position", bulletPos);
 		projectile.setAttributeValue("ProjectileTargetPosition", targetPos);
+		projectile.setAttributeValue("ProjectileTarget", target);
 		Point2D finalTargetPoint = targetPos.subtract(bulletPos);
+		//System.out.println("finalTargetPoint is " + finalTargetPoint);
 		//TODO: USE .magnitude() method below
 		projectile.setAttributeValue("ProjectileMaxDistance", Math.sqrt(Math.pow(finalTargetPoint.getX(),2) + Math.pow(finalTargetPoint.getY(), 2)));
 		myGameData.getState().getComponentGraph().addComponentToGrid(projectile, bulletPos);

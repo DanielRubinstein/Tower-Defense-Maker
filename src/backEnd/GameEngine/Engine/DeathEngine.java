@@ -29,6 +29,7 @@ public class DeathEngine implements Engine {
 		for (Component struct : gameData.getState().getComponentGraph().getAllComponents()) {
 			DB.execute(struct);
 			if (DB.isDead()) {
+				System.out.println("Death Behavior Created for " + struct);
 				toRemove.add(struct);
 				gameData.getStatus().incrementStatusItem("KillCount", 1);
 				gameData.getStatus().incrementStatusItem("Money", (Integer)struct.getAttribute("MoneyBounty").getValue());

@@ -82,12 +82,4 @@ public class MoveBehavior implements Behavior {
 	public void setMoveAmount(double speed){
 		moveAmount = speed;
 	}
-	
-	/*
-	 * TODO: does using observables make sense anymore?
-	 */
-	@Override
-	public void update(Observable newData, Object arg) {
-		myAttributes = (AttributeData) newData;
-	}
 }
