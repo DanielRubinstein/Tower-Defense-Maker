@@ -44,7 +44,6 @@ import resources.Constants;
  * @param <T>
  */
 public class Palette<T extends AttributeOwner> implements SkeletonObject, Observer {
-	private static final int TILE_SIZE = 75;
 	private View myView;
 	private TilePane tile;
 	private Map<String, T> myPresetMapBackEnd;
@@ -80,8 +79,6 @@ public class Palette<T extends AttributeOwner> implements SkeletonObject, Observ
 	private void addPresetToPalette(T preset) {
 		AttributeOwnerVisual attrOwner = new AttributeOwnerVisualImpl(preset);
 		ImageView imageView = attrOwner.getImageView();
-		//imageView.setFitWidth(TILE_SIZE);
-		//imageView.setFitHeight(TILE_SIZE);
 		setPresetInteractions(preset, imageView);
 		myPresetMapFrontEnd.put(imageView, preset);
 		addPresetImageViewToPalette(imageView);
@@ -180,8 +177,7 @@ public class Palette<T extends AttributeOwner> implements SkeletonObject, Observ
 	private ImageView createImageView(String myImagePath) {
 		Image image = new Image(getClass().getClassLoader().getResourceAsStream(myImagePath));
 		ImageView imageView = new ImageView(image);
-		imageView.setFitWidth(TILE_SIZE);
-		imageView.setFitHeight(TILE_SIZE);
+		
 		return imageView;
 	}
 

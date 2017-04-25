@@ -19,6 +19,7 @@ public class AttributeOwnerVisualImpl implements Observer, AttributeOwnerVisual{
 	private Point2D myPosition;
 	private static final String IMAGE_ATTRIBUTE = "ImageFile";
 	private static final String POSITION_ATTRIBUTE = "Position";
+	private static final Double PRESET_SIZE = 75d;
 	private AttributeOwnerReader myAttr;
 	
 	public AttributeOwnerVisualImpl(AttributeOwnerReader attr){
@@ -27,7 +28,7 @@ public class AttributeOwnerVisualImpl implements Observer, AttributeOwnerVisual{
 		setImage(myAttr.getMyAttributes().<String>get(IMAGE_ATTRIBUTE).getValue());
 		setImageHover();
 		if(myAttr instanceof TileImpl){
-			mySize = 0d;
+			mySize = 0d; // FIXME
 		} else {
 			setSize(myAttr.getMyAttributes().<Double>get("Size").getValue());
 		}
@@ -63,11 +64,18 @@ public class AttributeOwnerVisualImpl implements Observer, AttributeOwnerVisual{
 		} else {
 			myImage.setImage(image);
 		}
-		if(mySize==null){
-			setSize(1d);
+		
+		
+		if(!(myAttr instanceof TileImpl)){ // FIXME
+			if(mySize==null){
+				setSize(1d);
+			} else {
+				setSize(mySize);
+			}
 		} else {
-			setSize(mySize);
+			setSize(PRESET_SIZE);
 		}
+		
 		
 	}
 
