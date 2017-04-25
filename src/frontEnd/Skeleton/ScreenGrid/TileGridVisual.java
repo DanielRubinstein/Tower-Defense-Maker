@@ -19,7 +19,6 @@ import javafx.scene.effect.ColorAdjust;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.layout.GridPane;
-import javafx.scene.shape.Line;
 
 public class TileGridVisual implements Observer, SkeletonObject{
 
@@ -62,8 +61,9 @@ public class TileGridVisual implements Observer, SkeletonObject{
 		myRoot.requestFocus();
 		myRoot.setOnKeyPressed(e -> {			
 			if(e.getCode().equals(KeyCode.LEFT)||e.getCode().equals(KeyCode.RIGHT)||e.getCode().equals(KeyCode.DOWN)||e.getCode().equals(KeyCode.UP)){
+				String toSend = e.getCode().toString().charAt(0) + e.getCode().toString().substring(1).toLowerCase();
 				selectedTiles.keySet().forEach(t -> {
-					myView.sendUserModification(new Modification_EditAttribute(t,t.getAttribute("MoveDirection"),e.getCode().toString()));
+					myView.sendUserModification(new Modification_EditAttribute<String>(t,t.getAttribute("MoveDirection"),toSend));
 				});
 			}
 		});
@@ -91,16 +91,13 @@ public class TileGridVisual implements Observer, SkeletonObject{
 				tileInteractor.launch("On-Screen Tile" ,e.getScreenX(), e.getScreenY());
 			}else if(e.isControlDown()){
 				selectedTiles.put(t, n);
-				if(n.getEffect()==null){
-					ColorAdjust color = new ColorAdjust();
-					color.setBrightness(0.4);
-					color.setContrast(-0.5);
-					n.setEffect(color);
-				}
+				ColorAdjust color = new ColorAdjust();
+				color.setBrightness(0.4);
+				color.setContrast(-0.5);
+				n.setEffect(color);
 			}else{
 				selectedTiles.values().forEach(f -> f.setEffect(null));
 				selectedTiles.clear();
-
 			}
 		});
 

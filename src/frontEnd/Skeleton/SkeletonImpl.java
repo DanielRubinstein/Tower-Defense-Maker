@@ -43,9 +43,7 @@ public class SkeletonImpl implements Skeleton{
 		myScreenGrid = new ScreenGrid(view, state, Constants.SCREEN_GRID_WIDTH, Constants.SCREEN_GRID_HEIGHT);
 		myTimelineTabPane = new AuthorScreenGrid(view, myScreenGrid);
 		chooseCenter();
-		myAuthProp.addListener((o, oldV, newV) -> {
-			chooseCenter();
-		});
+		myAuthProp.addListener((o, oldV, newV) -> chooseCenter());
 		
 		//myRoot.setCenter(myScreenGrid.getRoot());
 		
