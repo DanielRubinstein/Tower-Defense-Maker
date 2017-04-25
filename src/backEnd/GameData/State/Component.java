@@ -15,6 +15,7 @@ import backEnd.Attribute.AttributeFactory;
 import backEnd.Attribute.AttributeOwner;
 import backEnd.GameEngine.Behaviors.Behavior;
 import backEnd.GameEngine.Behaviors.BehaviorFactory;
+import backEnd.GameEngine.Engine.Coordinates;
 
 public class Component extends Observable implements AttributeOwner {
 	/**
@@ -35,6 +36,8 @@ public class Component extends Observable implements AttributeOwner {
 	private String myType;
 	private List<Observer> observers = new ArrayList<Observer>();
 	private long ID;
+	private Coordinates previousMovement;
+
 	
 	public Component() throws FileNotFoundException{
 		this(new AttributeData(),new AccessPermissionsImpl());
@@ -46,6 +49,7 @@ public class Component extends Observable implements AttributeOwner {
 	}
 	
 	public Component(AttributeData attributes, AccessPermissions accessPermissions) throws FileNotFoundException {
+		previousMovement=new Coordinates(0,0);
 		ID = System.nanoTime();
 		System.out.println(ID + "   ");
 		System.out.println("creaing component " + this);
@@ -169,7 +173,15 @@ public class Component extends Observable implements AttributeOwner {
 		observers = new ArrayList<Observer>();
 		return currObservers;
 	}
+	
+	public void setPreviousMovement(Coordinates myPreviousMovement){
+		previousMovement=myPreviousMovement;
+	}
 
+	public Coordinates getPreviousMovement(){
+		return previousMovement;
+	}
+	
 	@Override
 	public void setObserverList(List<Observer> observers) {
 		this.observers = observers;
