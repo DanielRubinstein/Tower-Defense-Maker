@@ -94,7 +94,7 @@ public class TileImpl extends Observable implements Tile, AttributeOwner {
 	@SuppressWarnings("unchecked")
 	@Override
 	public <T> void setAttributeValue(String attrName, T newVal) {
-		((Attribute<T>) myAttrData.get(attrName)).setValue(newVal);
+		myAttrData.<T>get(attrName).setValue(newVal);
 		notifyObservers();
 	}
 
