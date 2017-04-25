@@ -76,9 +76,10 @@ public class SpawnQueue extends Observable{
 	}
 
 	public void add(SpawnData mySpawnData, boolean isFrequencySpawn) {
+		System.out.println("Adding");
 		if(isFrequencySpawn){
 			myFrequencyQueue.add(mySpawnData);
-			this.notifyObservers(myFrequencyQueue);
+			this.notifyObservers("Hey");
 		} else{
 			mySpawnQueue.add(mySpawnData);
 			this.notifyObservers(mySpawnQueue);

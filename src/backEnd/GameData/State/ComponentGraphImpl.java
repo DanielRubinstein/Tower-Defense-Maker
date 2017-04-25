@@ -80,7 +80,7 @@ public class ComponentGraphImpl extends Observable implements ComponentGraph {
 		componentMap.put(screenPosition, currList);
 		myComponents.add(newComponent);
 		this.setChanged();
-		this.notifyObservers();
+		this.notifyObservers(newComponent);
 	}
 
 	@Override
@@ -96,7 +96,7 @@ public class ComponentGraphImpl extends Observable implements ComponentGraph {
 		myComponents.remove(toRemove);
 		System.out.println("removed in component graph");
 		this.setChanged();
-		this.notifyObservers();
+		this.notifyObservers(toRemove);
 	}
 
 	@Override
