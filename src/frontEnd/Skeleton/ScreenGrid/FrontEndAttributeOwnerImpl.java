@@ -5,6 +5,7 @@ import java.util.Observer;
 
 
 import backEnd.Attribute.AttributeOwnerReader;
+import backEnd.GameData.State.TileImpl;
 import javafx.geometry.Point2D;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -13,6 +14,7 @@ public class FrontEndAttributeOwnerImpl implements Observer, FrontEndAttributeOw
 
 	private ImageView myImage;
 	private String myImagePath;
+	private Double mySize;
 	private Point2D myPosition;
 	private static final String IMAGE_ATTRIBUTE = "ImageFile";
 	private static final String POSITION_ATTRIBUTE = "Position";
@@ -22,14 +24,26 @@ public class FrontEndAttributeOwnerImpl implements Observer, FrontEndAttributeOw
 		myAttr = attr;
 		myAttr.addAsListener(this);
 		setImage(myAttr.getMyAttributes().<String>get(IMAGE_ATTRIBUTE).getValue());
+		if(myAttr instanceof TileImpl){
+			mySize = 0d;
+		} else {
+			setSize(myAttr.getMyAttributes().<Double>get("Size").getValue());
+		}
 		setPosition(myAttr.getMyAttributes().<Point2D>get(POSITION_ATTRIBUTE).getValue());
 	}
 	
+	private void setSize(Double value) {
+		mySize = value;
+		myImage.setPreserveRatio(true);
+		myImage.setFitHeight(value);
+		//System.out.println(myImage.getFitHeight());
+	}
+
 	private void setPosition(Point2D newPosition){
 		if (newPosition != null){
 			myPosition = newPosition;
-			myImage.setX(newPosition.getX()-myImage.getFitWidth());
-			myImage.setY(newPosition.getY()-myImage.getFitHeight());
+			myImage.setX(newPosition.getX()-myImage.getFitWidth()/2);
+			myImage.setY(newPosition.getY()-myImage.getFitHeight()/2);
 		}
 	}
 	
@@ -59,6 +73,15 @@ public class FrontEndAttributeOwnerImpl implements Observer, FrontEndAttributeOw
 		if(o == myAttr){
 			String newImagePath = myAttr.getMyAttributes().<String>get(IMAGE_ATTRIBUTE).getValue();
 			Point2D newPosition = myAttr.getMyAttributes().<Point2D>get(POSITION_ATTRIBUTE).getValue();
+			try{
+				Double newSize = myAttr.getMyAttributes().<Double>get("Size").getValue();
+				if(!newSize.equals(mySize)){
+					setSize(newSize);
+				}
+			} catch (Exception e){
+				// do nothing
+			}
+			
 			
 			if(!newImagePath.equals(myImagePath)){
 				setImage(newImagePath);

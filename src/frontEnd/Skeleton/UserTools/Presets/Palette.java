@@ -149,17 +149,7 @@ public class Palette<T extends AttributeOwner> implements SkeletonObject, Observ
 		screenGrid.setOnDragDropped(e -> {
 			String presetName = e.getDragboard().getString();
 			AttributeOwner presetAO = observedBankController.getPreset(presetName);
-			Double offsetX;
-			Double offsetY;
-			// TODO holy shit, how do we get rid of these magic numbers
-			if(myView.getBooleanAuthorModeProperty().get()){
-				offsetX = 40d;
-				offsetY = -10d; 
-			} else {
-				offsetX = 12.5d;
-				offsetY = 12.5d; 
-			}
-			Point2D pos = new Point2D(e.getSceneX() - Constants.SCREEN_GRID_PADDING + offsetX ,e.getSceneY() - Constants.SCREEN_GRID_PADDING + offsetY);
+			Point2D pos = new Point2D(e.getX(), e.getY());
 			myView.sendUserModification(new Modification_Add_PaletteToGrid(presetAO, pos));
 		});
 	}

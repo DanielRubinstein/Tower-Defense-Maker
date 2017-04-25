@@ -237,8 +237,8 @@ public class ScreenGrid implements SkeletonObject, Observer {
 		frontAttr.refreshXY();
 		
 		ImageView frontImage = frontAttr.getImageView();
-		frontImage.setFitWidth(tileWidth / 2);
-		frontImage.setFitHeight(tileHeight / 2);
+		//frontImage.setFitWidth(tileWidth / 2);
+		//frontImage.setFitHeight(tileHeight / 2);
 		setCommandInteraction(frontImage, c);
 		myComponents.add(c);
 		myComponentImages.put(c, frontImage);
