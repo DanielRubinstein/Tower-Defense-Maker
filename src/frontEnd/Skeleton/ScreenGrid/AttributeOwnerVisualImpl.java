@@ -7,10 +7,11 @@ import java.util.Observer;
 import backEnd.Attribute.AttributeOwnerReader;
 import backEnd.GameData.State.TileImpl;
 import javafx.geometry.Point2D;
+import javafx.scene.control.Tooltip;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
-public class FrontEndAttributeOwnerImpl implements Observer, FrontEndAttributeOwner{
+public class AttributeOwnerVisualImpl implements Observer, AttributeOwnerVisual{
 
 	private ImageView myImage;
 	private String myImagePath;
@@ -20,23 +21,30 @@ public class FrontEndAttributeOwnerImpl implements Observer, FrontEndAttributeOw
 	private static final String POSITION_ATTRIBUTE = "Position";
 	private AttributeOwnerReader myAttr;
 	
-	public FrontEndAttributeOwnerImpl(AttributeOwnerReader attr){
+	public AttributeOwnerVisualImpl(AttributeOwnerReader attr){
 		myAttr = attr;
 		myAttr.addAsListener(this);
 		setImage(myAttr.getMyAttributes().<String>get(IMAGE_ATTRIBUTE).getValue());
+		setImageHover();
 		if(myAttr instanceof TileImpl){
 			mySize = 0d;
 		} else {
 			setSize(myAttr.getMyAttributes().<Double>get("Size").getValue());
 		}
 		setPosition(myAttr.getMyAttributes().<Point2D>get(POSITION_ATTRIBUTE).getValue());
+		
+		
 	}
 	
 	private void setSize(Double value) {
 		mySize = value;
 		myImage.setPreserveRatio(true);
 		myImage.setFitHeight(value);
-		//System.out.println(myImage.getFitHeight());
+		myImage.setFitWidth(value);
+	}
+	
+	private void setImageHover() {
+		Tooltip hover = new Tooltip();
 	}
 
 	private void setPosition(Point2D newPosition){
@@ -55,6 +63,12 @@ public class FrontEndAttributeOwnerImpl implements Observer, FrontEndAttributeOw
 		} else {
 			myImage.setImage(image);
 		}
+		if(mySize==null){
+			setSize(1d);
+		} else {
+			setSize(mySize);
+		}
+		
 	}
 
 	/* (non-Javadoc)
@@ -73,13 +87,12 @@ public class FrontEndAttributeOwnerImpl implements Observer, FrontEndAttributeOw
 		if(o == myAttr){
 			String newImagePath = myAttr.getMyAttributes().<String>get(IMAGE_ATTRIBUTE).getValue();
 			Point2D newPosition = myAttr.getMyAttributes().<Point2D>get(POSITION_ATTRIBUTE).getValue();
-			try{
+			if(!(myAttr instanceof TileImpl)){
 				Double newSize = myAttr.getMyAttributes().<Double>get("Size").getValue();
 				if(!newSize.equals(mySize)){
 					setSize(newSize);
+					setPosition(myPosition);
 				}
-			} catch (Exception e){
-				// do nothing
 			}
 			
 			
