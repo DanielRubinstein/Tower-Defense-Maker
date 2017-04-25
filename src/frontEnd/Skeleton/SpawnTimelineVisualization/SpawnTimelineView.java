@@ -1,7 +1,6 @@
 package frontEnd.Skeleton.SpawnTimelineVisualization;
 
 import java.util.Arrays;
-import java.util.List;
 import java.util.Map;
 import java.util.Observable;
 import java.util.Observer;
@@ -20,18 +19,13 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.ScrollPane.ScrollBarPolicy;
-import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.TransferMode;
-import javafx.scene.layout.Background;
-import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.ColumnConstraints;
-import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
-import javafx.scene.paint.Color;
 import ModificationFromUser.Spawning.Modification_AddSpawner;
 import ModificationFromUser.Spawning.Modification_EditSpawnDataTime;
 import ModificationFromUser.Spawning.Modification_RemoveSpawner;

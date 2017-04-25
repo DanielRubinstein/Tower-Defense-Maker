@@ -57,13 +57,13 @@ public class AttributeFactory {
 				double dbl_min = Double.parseDouble(dbl_min_str);
 				String dbl_max_str = thisAttrNode.getAttributes().getNamedItem("max").getNodeValue();
 				double dbl_max = Double.parseDouble(dbl_max_str);
-				String dbl_default_str = thisAttrNode.getAttributes().getNamedItem("increment").getNodeValue();
+				String dbl_default_str = thisAttrNode.getAttributes().getNamedItem("start").getNodeValue();
 				double dbl_default = Double.parseDouble(dbl_default_str);
 				String dbl_incr_str = thisAttrNode.getAttributes().getNamedItem("increment").getNodeValue();
 				double dbl_incr = Double.parseDouble(dbl_incr_str);
 				List<Double> doubleParameters = Arrays.asList(dbl_min, dbl_max, dbl_default, dbl_incr);
 				Attribute<Double> dbl_newAttr = new AttributeImpl<Double>(doubleParameters, gameAttributeName);
-				dbl_newAttr.setValue(0.0);
+				dbl_newAttr.setValue(dbl_default);
 				return dbl_newAttr;
 				
 			case "EDITABLESTRING":
@@ -82,7 +82,7 @@ public class AttributeFactory {
 				int int_incr = Integer.parseInt(int_incr_str);
 				List<Integer> intParameters = Arrays.asList(int_min, int_max, int_default, int_incr);
 				AttributeImpl<Integer> int_newAttr = new AttributeImpl<Integer>(intParameters, gameAttributeName);
-				int_newAttr.setValue(0);
+				int_newAttr.setValue(int_default);
 				return int_newAttr;
 				
 			case "BOOLEAN":

@@ -4,14 +4,11 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
 import backEnd.GameEngine.Behaviors.*;
 import frontEnd.CustomJavafxNodes.ErrorDialog;
 import javafx.geometry.Point2D;
 import backEnd.GameData.GameData;
 import backEnd.GameData.State.*;
-
-
 /**
  * Performs movement behaviors for all movable components
  * @author Daniel
@@ -36,17 +33,14 @@ public class MoveEngine implements Engine{
 		List<Component> toRemove=new ArrayList<Component>();
 		Map<Component, Point2D> toAdd=new HashMap<Component, Point2D>();
 		for (Component c: myState.getComponentGraph().getAllComponents()){
-			Object o = c.getAttribute("Position").getValue();
-			Point2D currentLocation=(Point2D) o;
+			Point2D currentLocation=c.<Point2D>getAttribute("Position").getValue();
 			currentTile = gameData.getState().getTileGrid().getTileByScreenPosition(currentLocation);
 			if (currentTile==null){
 				continue;
 			}
 			mb=new MoveBehavior(c);
 			try {
-				Object speedObj=c.getAttribute("Speed").getValue();
-				mb.setMoveAmount((double) speedObj);
-				mb.execute(currentTile);
+				mb.execute(currentTile, gameData.getState().getTileGrid().atMiddleOfTile(currentLocation));
 				Point2D newPosition=mb.getPosition();
 				if (newPosition!=null&&!newPosition.equals(currentLocation)){
 					c.setAttributeValue("Position", newPosition);

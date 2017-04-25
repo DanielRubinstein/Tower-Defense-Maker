@@ -18,8 +18,8 @@ import backEnd.GameData.State.TileImpl;
 import backEnd.Mode.ModeReader;
 import frontEnd.View;
 import frontEnd.Skeleton.AoTools.GenericCommandCenter;
-import frontEnd.Skeleton.ScreenGrid.FrontEndAttributeOwner;
-import frontEnd.Skeleton.ScreenGrid.FrontEndAttributeOwnerImpl;
+import frontEnd.Skeleton.ScreenGrid.AttributeOwnerVisual;
+import frontEnd.Skeleton.ScreenGrid.AttributeOwnerVisualImpl;
 import frontEnd.Skeleton.UserTools.SkeletonObject;
 import javafx.geometry.Bounds;
 import javafx.geometry.Insets;
@@ -44,11 +44,9 @@ import resources.Constants;
  * @param <T>
  */
 public class Palette<T extends AttributeOwner> implements SkeletonObject, Observer {
-	private static final int TILE_SIZE = 75;
 	private View myView;
 	private TilePane tile;
 	private Map<String, T> myPresetMapBackEnd;
-	private static final String IMAGEFILE_ATTRIBUTE_NAME = "ImageFile";
 	private Map<ImageView, T> myPresetMapFrontEnd;
 	private String myType;
 	private BankController observedBankController;
@@ -78,10 +76,8 @@ public class Palette<T extends AttributeOwner> implements SkeletonObject, Observ
 	
 
 	private void addPresetToPalette(T preset) {
-		FrontEndAttributeOwner attrOwner = new FrontEndAttributeOwnerImpl(preset);
+		AttributeOwnerVisual attrOwner = new AttributeOwnerVisualImpl(preset);
 		ImageView imageView = attrOwner.getImageView();
-		imageView.setFitWidth(TILE_SIZE);
-		imageView.setFitHeight(TILE_SIZE);
 		setPresetInteractions(preset, imageView);
 		myPresetMapFrontEnd.put(imageView, preset);
 		addPresetImageViewToPalette(imageView);
@@ -105,16 +101,7 @@ public class Palette<T extends AttributeOwner> implements SkeletonObject, Observ
 	}
 
 	private void addPresetImageViewToPalette(ImageView imageView) {
-		if(myView.getBooleanAuthorModeProperty().get()){
-			try{
-				tile.getChildren().add(tile.getChildren().size() - 1, imageView);
-			} catch (IndexOutOfBoundsException e){
-				tile.getChildren().add(imageView);
-			}	
-		} else {
-			tile.getChildren().add(imageView);
-			// this should not happen (potentially MODE EXCEPTION SHIT)
-		}
+		tile.getChildren().add(imageView);
 	}
 	
 	private void removePresetFromPalette(ImageView imageView) {
@@ -149,29 +136,19 @@ public class Palette<T extends AttributeOwner> implements SkeletonObject, Observ
 		screenGrid.setOnDragDropped(e -> {
 			String presetName = e.getDragboard().getString();
 			AttributeOwner presetAO = observedBankController.getPreset(presetName);
-			Double offsetX;
-			Double offsetY;
-			// TODO holy shit, how do we get rid of these magic numbers
-			if(myView.getBooleanAuthorModeProperty().get()){
-				offsetX = 40d;
-				offsetY = -10d; 
-			} else {
-				offsetX = 12.5d;
-				offsetY = 12.5d; 
-			}
-			Point2D pos = new Point2D(e.getSceneX() - Constants.SCREEN_GRID_PADDING + offsetX ,e.getSceneY() - Constants.SCREEN_GRID_PADDING + offsetY);
+			Point2D pos = new Point2D(e.getX(), e.getY());
 			myView.sendUserModification(new Modification_Add_PaletteToGrid(presetAO, pos));
 		});
 	}
 
 	private void createNewPresetButton() {
 		PresetCreationButton presetCreationButton = new PresetCreationButton(myView, myType, (imagePath) -> createImageView(imagePath), (node, consumer) -> setClickEvent(node, consumer) );
-		tile.getChildren().add(presetCreationButton.getRoot());
+		tile.getChildren().add(0, presetCreationButton.getRoot());
 		presetCreationButton.disableInPlayerMode((inPlayerMode) -> {
 			if(inPlayerMode){
 				tile.getChildren().remove(presetCreationButton.getRoot());
 			} else {
-				tile.getChildren().add(presetCreationButton.getRoot());
+				tile.getChildren().add(0, presetCreationButton.getRoot());
 			}
 		});
 	}
@@ -190,8 +167,7 @@ public class Palette<T extends AttributeOwner> implements SkeletonObject, Observ
 	private ImageView createImageView(String myImagePath) {
 		Image image = new Image(getClass().getClassLoader().getResourceAsStream(myImagePath));
 		ImageView imageView = new ImageView(image);
-		imageView.setFitWidth(TILE_SIZE);
-		imageView.setFitHeight(TILE_SIZE);
+		
 		return imageView;
 	}
 
