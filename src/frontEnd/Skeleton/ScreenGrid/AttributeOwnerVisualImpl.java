@@ -10,7 +10,7 @@ import javafx.scene.control.Tooltip;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
-public class FrontEndAttributeOwnerImpl implements Observer, FrontEndAttributeOwner{
+public class AttributeOwnerVisualImpl implements Observer, AttributeOwnerVisual{
 
 	private ImageView myImage;
 	private String myImagePath;
@@ -19,7 +19,7 @@ public class FrontEndAttributeOwnerImpl implements Observer, FrontEndAttributeOw
 	private static final String POSITION_ATTRIBUTE = "Position";
 	private AttributeOwnerReader myAttr;
 	
-	public FrontEndAttributeOwnerImpl(AttributeOwnerReader attr){
+	public AttributeOwnerVisualImpl(AttributeOwnerReader attr){
 		myAttr = attr;
 		myAttr.addAsListener(this);
 		setImage(myAttr.getMyAttributes().<String>get(IMAGE_ATTRIBUTE).getValue());

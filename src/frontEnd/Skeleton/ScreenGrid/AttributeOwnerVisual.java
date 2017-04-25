@@ -9,7 +9,7 @@ import javafx.scene.image.ImageView;
  * @author Tim
  *
  */
-public interface FrontEndAttributeOwner {
+public interface AttributeOwnerVisual {
 
 	ImageView getImageView();
 

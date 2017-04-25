@@ -92,7 +92,7 @@ public class TileGridVisual implements Observer, SkeletonObject{
 
 	}
 	private void addTileToGrid(Tile t, Point2D pos) {
-		FrontEndAttributeOwner attrOwner = new FrontEndAttributeOwnerImpl(t);
+		AttributeOwnerVisual attrOwner = new AttributeOwnerVisualImpl(t);
 		ImageView tileView = attrOwner.getImageView();
 		organizeImageView(tileView);
 		setTileInteraction(tileView,  t);

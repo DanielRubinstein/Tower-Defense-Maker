@@ -80,7 +80,7 @@ public class ComponentGraphVisual implements SkeletonObject, Observer {
 	}
 
 	private void addComponentToGrid(Component c) {
-		FrontEndAttributeOwner frontAttr = new FrontEndAttributeOwnerImpl(c);
+		AttributeOwnerVisual frontAttr = new AttributeOwnerVisualImpl(c);
 		frontAttr.refreshXY();
 		ImageView frontImage = frontAttr.getImageView();
 		frontImage.setFitWidth(20);
