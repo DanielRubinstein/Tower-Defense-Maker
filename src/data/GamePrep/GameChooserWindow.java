@@ -3,27 +3,16 @@ package data.GamePrep;
 import java.util.List;
 import java.util.Map;
 import java.util.function.Consumer;
-
-import data.DataController;
-import data.XMLReader;
-import data.XMLReaderImpl;
 import frontEnd.CustomJavafxNodes.ActionButton;
-import frontEnd.CustomJavafxNodes.ButtonMenuImpl;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
-import javafx.scene.Group;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.ScrollPane.ScrollBarPolicy;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
-import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.CornerRadii;
-import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.layout.HBox;
 import javafx.scene.paint.Color;
@@ -42,7 +31,7 @@ public class GameChooserWindow
 	private VBox gameContainer;
 	private VBox levelContainer;
 	private DataInputLoader reader;
-	private BorderPane myRoot;
+	
 	private Map<String, List<String>> gamesData;
 	private String currentLevel;
 	
@@ -58,9 +47,6 @@ public class GameChooserWindow
 		Scene myScene = new Scene(overallContainer, 600,  400);
 		myScene.getStylesheets().add(Constants.DEFAULT_CSS);
 		stage.setScene(myScene);
-		
-		
-		
 		
 		stage.show();
 	}

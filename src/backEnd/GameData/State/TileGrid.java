@@ -46,7 +46,7 @@ public interface TileGrid{
 	 */
 	List<Tile> getAllTiles();
 
-	Tile getTileByScreenLocation(Point2D location);
+	Tile getTileByScreenPosition(Point2D location);
 
 	void setTileSize(double tileWidth, double tileHeight);
 
@@ -60,6 +60,7 @@ public interface TileGrid{
 
 	Object getMap();
 
+	
 	void saveAndClearTileObservers();
 
 	void setTileObservers();
@@ -69,12 +70,15 @@ public interface TileGrid{
 	void clearObservers();
 
 	void setObservers(List<Observer> observersave);
+	
 
 	TileGridInstantiator getInstantiator();
 
 	void setWidth(int numColsInGrid);
 
 	void setHeight(int numRowsInGrid);
+
+	Point2D getGridPositionFromScreenPosition(Point2D newTileScreenPosition);
 
 
 }

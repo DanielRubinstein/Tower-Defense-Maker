@@ -30,7 +30,7 @@ public class ProjectileEngine implements Engine {
 		for (Component c : myGameData.getState().getComponentGraph().getAllComponents()) {
 			if (((String) c.getAttribute("Type").getValue()).equals("Projectile")) {
 				Point2D newPos = calculateNewPos(c);
-				Tile currentTile = myGameData.getState().getTileGrid().getTileByScreenLocation(newPos);
+				Tile currentTile = myGameData.getState().getTileGrid().getTileByScreenPosition(newPos);
 				if (currentTile == null) {
 					toRemove.add(c);
 					continue;

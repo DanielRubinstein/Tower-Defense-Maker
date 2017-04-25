@@ -6,12 +6,10 @@ import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 import java.util.List;
 import java.util.Map;
-
 import backEnd.GameData.GameData;
 import backEnd.GameData.Rules.RulesMap;
 import backEnd.GameData.State.PlayerStatus;
 import backEnd.GameData.State.StateImpl;
-import backEnd.GameEngine.EngineStatus;
 import data.XMLReader;
 import data.XMLReaderImpl;
 import data.XMLReadingException;
@@ -24,7 +22,6 @@ import data.XMLReadingException;
  */
 public class DataInputLoader
 {
-	
 	
 	private static final String GAME_STATE_DATA_PATH = "data/SavedGames/";
 	private static final String TEMPLATE_DATA_PATH = "data/LevelTemplates/";
@@ -40,30 +37,26 @@ public class DataInputLoader
 		 
 		 generateGamesMap();
 	}
-	private void generateGamesMap() {
-		try {
-			gamesMap = myXMLReader.loadGamesMap(UNIVERSAL_DATA_PATH);
-		 }
-		 catch (XMLReadingException e)
-		 {
-			e.printStackTrace();
-		 }
-	}
-	public DataInputLoader(String s) throws XMLReadingException{
-		myGameData = generateGameData(s);
-		
-	}
 	
-	public DataInputLoader(String s, String path)
+	public DataInputLoader(String s) throws XMLReadingException
 	{
-		myGameData = generateGameData(s, path);
+		this();
+		myGameData = generateGameData(s);
 	}
 
-	public DataInputLoader(StartingInput input) throws XMLReadingException{
+	public DataInputLoader(StartingInput input) throws XMLReadingException
+	{
+		this();
 		myGameData = generateGameData(input);
 	}
 	
+	public DataInputLoader(File file) throws NoSuchMethodException, SecurityException, InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException {
+		this();
+		myGameData = generateGameData(file.getName(),file.getParent());
+	}
+	
 	public DataInputLoader(Object o) throws NoSuchMethodException, SecurityException, InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException {
+		this();
 		Constructor<? extends DataInputLoader> cons = this.getClass().getDeclaredConstructor(o.getClass());
 		
 		
@@ -73,10 +66,6 @@ public class DataInputLoader
 		
 	}
 	
-	public DataInputLoader(File file) throws NoSuchMethodException, SecurityException, InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException {
-		myGameData = generateGameData(file.getName(),file.getParent());
-	}
-
 	public GameData getGameData()
 	{
 		return myGameData;	
@@ -117,6 +106,14 @@ public class DataInputLoader
 		GameData gameData = new GameData(state, new PlayerStatus() , new RulesMap());
 		return gameData;
 	}
-	
+	private void generateGamesMap() {
+		try {
+			gamesMap = myXMLReader.loadGamesMap(UNIVERSAL_DATA_PATH);
+		 }
+		 catch (XMLReadingException e)
+		 {
+			e.printStackTrace();
+		 }
+	}
 	
 }

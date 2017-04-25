@@ -50,6 +50,7 @@ public class SpawnTimelineView implements SkeletonObject, Observer {
 		myView = view;
 		mySpawnQueueName = key;
 		mySpawnQueue = value;
+		mySpawnQueue.addObserver(this);
 		myRoot = new GridPane();
 		myRoot.prefWidthProperty().bind(readOnlyDoubleProperty);
 		myRoot.setPadding(new Insets(20, 20, 20, 20));
@@ -162,7 +163,9 @@ public class SpawnTimelineView implements SkeletonObject, Observer {
 
 	@Override
 	public void update(Observable arg0, Object arg1) {
+		System.out.println("fuck");
 		if(arg0 == mySpawnQueue){
+			System.out.println(arg1);
 			if(arg1 == mySpawnQueue.getFrequencyQueue()){
 				System.out.println("yo yo yo");
 			}
