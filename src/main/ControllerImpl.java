@@ -58,7 +58,7 @@ public class ControllerImpl implements Controller {
 			
 		};
 					
-		MainMenu myMenu = new MainMenu(setGameData,this);
+		MainMenu myMenu = new MainMenu(setGameData, (FacebookInteractor f) -> setFb(f));
 		myMenu.showMenus(stage);
 	}
 	public void setFb(FacebookInteractor fb){

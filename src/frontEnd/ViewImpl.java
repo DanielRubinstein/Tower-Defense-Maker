@@ -14,7 +14,6 @@ import backEnd.GameData.State.PlayerStatusReader;
 import backEnd.GameData.State.Tile;
 import backEnd.GameEngine.Engine.Spawning.SpawnQueue;
 import backEnd.LevelProgression.LevelProgressionControllerEditor;
-import backEnd.LevelProgression.LevelProgressionControllerReader;
 import backEnd.Mode.ModeReader;
 import frontEnd.CustomJavafxNodes.ErrorDialog;
 import frontEnd.Facebook.FacebookInteractor;

@@ -23,7 +23,7 @@ public abstract class WinCondition extends Rule {
 		if (levelName != null) {
 			try {
 				DataInputLoader loader = new DataInputLoader(levelName);
-				myGameData = loader.getGameData();
+				myGameData.updateGameData(loader.getGameData());
 			} catch (XMLReadingException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
