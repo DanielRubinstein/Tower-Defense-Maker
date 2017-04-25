@@ -63,5 +63,4 @@ public class ScreenGrid implements SkeletonObject {
 	public Node getRoot() {
 		return myRoot;
 	}
-
 }
