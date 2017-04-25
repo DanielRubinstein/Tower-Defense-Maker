@@ -69,16 +69,14 @@ public class BankController
 			addNewTile("Yellow Left Tile", newTile4);
 			
 			
-			Component testingBloon = new Component(new AttributeData(), 
-					new AccessPermissionsImpl(Arrays.asList("PLAYER"), new ArrayList<String>(), new ArrayList<String>()));
+			Component testingBloon = new Component();
 			testingBloon.setAttributeValue("ImageFile", "resources/images/Components/rainbow_bloon.png");
 			testingBloon.setAttributeValue("Speed", 1d);
 			testingBloon.setAttributeValue("Health", 20);
 			testingBloon.setAttributeValue("Type", "Enemy");
 			addNewComponent("Enemy", testingBloon);
 			
-			Component testingTurret = new Component(new AttributeData(), 
-					new AccessPermissionsImpl(Arrays.asList("PLAYER"), new ArrayList<String>(), new ArrayList<String>()));
+			Component testingTurret = new Component();
 			testingTurret.setAttributeValue("ImageFile", "resources/images/Components/zombie.png");
 			testingTurret.setAttributeValue("Health", 10);
 			testingTurret.setAttributeValue("Type", "Tower");
