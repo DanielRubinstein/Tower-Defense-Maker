@@ -1,9 +1,9 @@
 <?xml version="1.0"?><map>
   <entry>
     <javafx.geometry.Point2D>
-      <x>281.0</x>
-      <y>82.0</y>
-      <hash>236251719</hash>
+      <x>275.3333333333333</x>
+      <y>124.0</y>
+      <hash>1530993351</hash>
     </javafx.geometry.Point2D>
     <list>
       <backEnd.GameData.State.Component>
@@ -286,15 +286,15 @@
           </levelModePermissions>
         </myAccessPermissions>
         <observers/>
-        <ID>249308040390432</ID>
+        <ID>234247845967951</ID>
       </backEnd.GameData.State.Component>
     </list>
   </entry>
   <entry>
     <javafx.geometry.Point2D>
-      <x>292.0</x>
-      <y>230.0</y>
-      <hash>239245895</hash>
+      <x>82.66666666666667</x>
+      <y>137.33333333333334</y>
+      <hash>1609874162</hash>
     </javafx.geometry.Point2D>
     <list>
       <backEnd.GameData.State.Component>
@@ -577,7 +577,7 @@
           </levelModePermissions>
         </myAccessPermissions>
         <observers/>
-        <ID>249308044485265</ID>
+        <ID>234247852795179</ID>
       </backEnd.GameData.State.Component>
     </list>
   </entry>

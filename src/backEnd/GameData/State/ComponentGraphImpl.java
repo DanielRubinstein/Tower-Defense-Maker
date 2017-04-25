@@ -79,14 +79,14 @@ public class ComponentGraphImpl extends Observable implements ComponentGraph {
 		currList.add(newComponent);
 		componentMap.put(screenPosition, currList);
 		myComponents.add(newComponent);
+		newComponent.getAttribute("Position").setValue(screenPosition);
 		this.setChanged();
 		this.notifyObservers(newComponent);
 	}
 
 	@Override
 	public void removeComponent(Component toRemove) {
-		Attribute<?> posAttribute = toRemove.getAttribute("Position");
-		Point2D location = (Point2D) posAttribute.getValue();
+		Point2D location = toRemove.<Point2D>getAttribute("Position").getValue();
 		List<Component> currList = componentMap.get(location);
 		if (currList == null) {
 			return;
@@ -118,7 +118,7 @@ public class ComponentGraphImpl extends Observable implements ComponentGraph {
 	@Override
 	public List<Component> getNearestComponents(Component centerComp) {
 		List<Point2D> locations = new ArrayList<Point2D>(componentMap.keySet());
-		Point2D centerLoc = (Point2D) centerComp.getAttribute("Position").getValue();
+		Point2D centerLoc = centerComp.<Point2D>getAttribute("Position").getValue();
 		SortComponents_Distance sorter = new SortComponents_Distance();
 		List<Point2D> sortedLocations = sorter.nearToFar(centerLoc, locations);
 		return componentMap.get(sortedLocations.get(0));

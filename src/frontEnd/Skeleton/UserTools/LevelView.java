@@ -3,7 +3,10 @@ package frontEnd.Skeleton.UserTools;
 import java.util.List;
 
 import backEnd.LevelProgression.LevelProgressionControllerEditor;
+import data.XMLWriter;
+import data.XMLWriterImpl;
 import frontEnd.View;
+import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.scene.Node;
 import javafx.scene.Scene;
@@ -21,11 +24,12 @@ import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import javafx.stage.WindowEvent;
 import resources.Constants;
+
 
 public class LevelView {
 	
-	private View myView;
 	private GridPane myRoot;
 	private Stage myStage;
 	private LevelProgressionControllerEditor myLevels;
@@ -35,10 +39,10 @@ public class LevelView {
 	private Node allLevelsEditor;
 	private LevelEditor myLevelEditor;
 	
-	public LevelView(View view, Stage parentStage){
-		myView = view;
+	public LevelView(LevelProgressionControllerEditor levels, Stage parentStage)
+	{
 		myRoot = new GridPane();
-		myLevels = myView.getLevelProgressionController();
+		myLevels = levels;
 		myStage = new Stage();
 		myStage.initOwner(parentStage);
 		myStage.initModality(Modality.APPLICATION_MODAL);
@@ -47,6 +51,13 @@ public class LevelView {
 		myRoot.setVgap(20);
 		myRoot.setHgap(20);
 		createStructureBoxes();
+		
+		myStage.setOnCloseRequest(new EventHandler<WindowEvent>() {
+			@Override
+			public void handle(WindowEvent arg0) {
+				levels.saveGamesMap();
+			}
+	      });
 	}
 	
 	public void launch(){
@@ -73,7 +84,7 @@ public class LevelView {
 		Label allLevels = new Label("All Levels");
 		myRoot.add(allLevels, 2, 1);
 		myLevelEditor = new LevelEditor(100,levelOutline,gameOutline,myLevels);
-		createBottomEditor(levelOutline);
+		createBottomEditor();
 	}
 	private void populateGame(VBox wrapper,List<String> toAdd,VBox addToBox){
 		for (String str : toAdd){
@@ -117,7 +128,7 @@ public class LevelView {
 	}
 
 	
-	private void createBottomEditor(VBox levels){
+	private void createBottomEditor(){
 		gameEditor = myLevelEditor.getGameEditor();
 		myRoot.add(gameEditor, 0, 3);
 		

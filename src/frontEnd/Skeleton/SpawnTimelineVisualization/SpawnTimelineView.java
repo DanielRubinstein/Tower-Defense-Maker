@@ -16,9 +16,11 @@ import frontEnd.Skeleton.UserTools.SkeletonObject;
 import javafx.beans.property.ReadOnlyDoubleProperty;
 import javafx.geometry.Insets;
 import javafx.scene.Node;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.ScrollPane.ScrollBarPolicy;
+import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.TransferMode;
@@ -31,6 +33,8 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import ModificationFromUser.Spawning.Modification_AddSpawner;
+import ModificationFromUser.Spawning.Modification_EditSpawnDataTime;
+import ModificationFromUser.Spawning.Modification_RemoveSpawner;
 
 public class SpawnTimelineView implements SkeletonObject, Observer {
 	private View myView;
@@ -68,11 +72,13 @@ public class SpawnTimelineView implements SkeletonObject, Observer {
 			Component presetComponent = (Component) myView.getBankController().getPreset(presetName);
 			SingleFieldPrompt hey = new SingleFieldPrompt(
 					Arrays.asList("Add Spawn", "Please input a time for your new spawn item"), "Spawn Time Value",
-					"1");
-			long value = Long.parseLong(hey.create());
+					"1.0");
+			double value = Double.parseDouble(hey.create());
 			myView.sendUserModification(
-					new Modification_AddSpawner(mySpawnQueueName, presetComponent, value, repeating));
-			addToDropZone(dropZone, presetComponent, value); // This will be
+
+					new Modification_AddSpawner(mySpawnQueueName, presetName, value, repeating));
+			addToDropZone(dropZone, presetComponent, value,repeating); // This will be
+
 																// removed.
 																// Instead the
 																// method will
@@ -88,19 +94,33 @@ public class SpawnTimelineView implements SkeletonObject, Observer {
 		return dropZone;
 	}
 
-	private void addToDropZone(ScrollPane dropZone, Component spawn, long value) {
+	private void addToDropZone(ScrollPane dropZone, Component spawn, double value, boolean repeating) {
+
 		HBox spawnBox = new HBox();
 		String spawnImagePath = spawn.<String>getAttribute("ImageFile").getValue();
 		ImageView spawnImage = createImageView(spawnImagePath);
-
+		String spawnName = myView.getBankController().getAOName(spawn);
 		Label name = new Label();
-		name.setText(myView.getBankController().getAOName(spawn));
-		Label valueText = new Label(Long.toString(value));
+		name.setText(spawnName);
+		Label valueText = new Label(Double.toString(value));
 		// TODO Editable value here valueText.setOnClick()
-		// TODO Add an X box to destroy that shit
+		valueText.setOnMouseClicked(e -> {
+			SingleFieldPrompt newPrompt = new SingleFieldPrompt(
+					Arrays.asList("Add Spawn", "Please input a time for your new spawn item"), "Spawn Time Value",
+					"1");
+			double newValue = Double.parseDouble(newPrompt.create());
+			myView.sendUserModification(new Modification_EditSpawnDataTime(mySpawnQueueName,spawnName,value,newValue,repeating));
+			valueText.setText(Double.toString(newValue));
+		});
+		Button remove = new Button("Delete");
+		remove.setOnAction(e -> {
+			myView.sendUserModification(new Modification_RemoveSpawner(mySpawnQueueName,spawnName,value,repeating));
+			spawnBox.getChildren().clear();
+		});
 		spawnBox.getChildren().add(name);
 		spawnBox.getChildren().add(spawnImage);
 		spawnBox.getChildren().add(valueText);
+		spawnBox.getChildren().add(remove);
 		VBox child = (VBox) dropZone.getContent();
 		child.getChildren().add(spawnBox);
 		dropZone.setContent(child);
@@ -111,7 +131,7 @@ public class SpawnTimelineView implements SkeletonObject, Observer {
 		ImageView imv = new ImageView();
 		imv.setImage(image);
 		imv.setPreserveRatio(true);
-		imv.setFitHeight(50);
+		imv.setFitHeight(30);
 		return imv;
 	}
 
@@ -123,11 +143,12 @@ public class SpawnTimelineView implements SkeletonObject, Observer {
 		scroll.setVbarPolicy(ScrollBarPolicy.AS_NEEDED);
 		scroll.setPrefHeight(300);
 		VBox wrapper = new VBox();
-		wrapper.setBackground(new Background(new BackgroundFill(Color.LIGHTGREY, CornerRadii.EMPTY, Insets.EMPTY)));
+		//wrapper.setBackground(new Background(new BackgroundFill(Color.LIGHTGREY, CornerRadii.EMPTY, Insets.EMPTY)));
 		ColumnConstraints column1 = new ColumnConstraints();
 		column1.setPercentWidth(50);
 		myRoot.getColumnConstraints().add(column1);
-		wrapper.maxWidthProperty().bind(myRoot.widthProperty().divide(3));
+		wrapper.prefWidthProperty().bind(myRoot.widthProperty().divide(2.5));
+		wrapper.setFillWidth(true);
 		wrapper.setPrefHeight(300);
 		scroll.setContent(wrapper);
 		myRoot.add(scroll, i, 1);

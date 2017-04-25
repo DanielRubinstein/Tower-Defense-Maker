@@ -165,6 +165,7 @@ public class ScreenGrid implements SkeletonObject, Observer {
 			}
 			
 		}
+
 	}
 
 	private void updateCorrespondingGrid(Component arg) {
@@ -181,6 +182,7 @@ public class ScreenGrid implements SkeletonObject, Observer {
 		Point2D newTileScreenPosition = arg.getMyAttributes().<Point2D>get("Position").getValue();
 		Point2D newTileGridPosition =observedTileGrid.getGridPositionFromScreenPosition(newTileScreenPosition);
 		addTileToGrid(arg, newTileGridPosition);
+
 	}
 
 	private void updateTilesOnGrid() {
@@ -223,7 +225,7 @@ public class ScreenGrid implements SkeletonObject, Observer {
 			}
 		}
 	}
-
+	
 	private void removeComponentFromGrid(Component c) {
 		myComponents.remove(c);
 		myRoot.getChildren().remove(myComponentImages.get(c));

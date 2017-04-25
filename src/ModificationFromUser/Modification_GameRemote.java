@@ -37,26 +37,8 @@ public enum Modification_GameRemote implements ModificationFromUser {
 
 	@Override
 	public void invoke(ModelImpl myModel) throws Exception {
-		switch (this) {
-		case PLAY:
-			if(!myModel.getEngineStatus().equals("RUNNING")){
-				myConsumer.accept(myModel.getGameProcessController());
-				if (myModel.getModeReader().getAuthorBooleanProperty().get()){ 
-					myModel.getMode().toggleUserMode();
-				}
-			}
-			break;
-		default:
-			switch (myModel.getMode().getUserMode()) {
-			case "PLAYER":
-				myConsumer.accept(myModel.getGameProcessController());
-				break;
-			case "AUTHOR":
-				myModel.getGameData().printRules();
-				// do nothing
-				break;
-			}
-		}
+		myConsumer.accept(myModel.getGameProcessController());
+		
 
 	}
 
