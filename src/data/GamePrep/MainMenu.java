@@ -25,7 +25,7 @@ import main.Controller;
 
 public class MainMenu{
 	private Consumer<Object> consumerLoadData;
-	private Controller myController;
+	private Consumer<FacebookInteractor> setFb;
 	
 	private static final String DEFAULT_RESOURCE_BUNDLE = "resources/facebook";
 	private static final String SAVED_GAME_FILEPATH = "data/SavedGames/";
@@ -35,9 +35,9 @@ public class MainMenu{
 	private String appID = appInfo.getString("appID");
 	
 	
-	public MainMenu(Consumer<Object> setGameData,Controller con){
-		myController = con;
+	public MainMenu(Consumer<Object> setGameData, Consumer<FacebookInteractor> setFb){
 		consumerLoadData = setGameData;
+		this.setFb = setFb;
 	}
 
 	public void showMenus(Stage stage) {
@@ -93,7 +93,7 @@ public class MainMenu{
 				String accessToken = fbBrowser.getAccessToken();
 				fb.login(accessToken);			
 				FacebookInteractor fbInter= fb.getInteractor();
-				myController.setFb(fbInter);
+				setFb.accept(fbInter);
 				loginStage.close();
 			});
 		}, "Click to launch facebook");

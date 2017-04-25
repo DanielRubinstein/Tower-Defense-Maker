@@ -14,11 +14,11 @@ import backEnd.GameData.State.PlayerStatusReader;
 import backEnd.GameData.State.Tile;
 import backEnd.GameEngine.Engine.Spawning.SpawnQueue;
 import backEnd.LevelProgression.LevelProgressionControllerEditor;
-import backEnd.LevelProgression.LevelProgressionControllerReader;
 import backEnd.Mode.ModeReader;
 import frontEnd.CustomJavafxNodes.ErrorDialog;
 import frontEnd.Facebook.FacebookInteractor;
 import frontEnd.Skeleton.SkeletonImpl;
+import frontEnd.Skeleton.SplashScreens.SplashScreen;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.scene.Node;
@@ -144,6 +144,11 @@ public class ViewImpl implements View {
 	
 	public ModeReader getModeReader(){
 		return myMode;
+	}
+
+	public void setSplashScreen(SplashScreen splashScreen) {
+		// TODO Auto-generated method stub
+		
 	}
 
 }
