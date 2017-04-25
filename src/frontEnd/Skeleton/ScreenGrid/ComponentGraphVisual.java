@@ -83,8 +83,8 @@ public class ComponentGraphVisual implements SkeletonObject, Observer {
 		AttributeOwnerVisual frontAttr = new AttributeOwnerVisualImpl(c);
 		frontAttr.refreshXY();
 		ImageView frontImage = frontAttr.getImageView();
-		frontImage.setFitWidth(20);
-		frontImage.setFitHeight(40);
+		//frontImage.setFitWidth(20);
+		//frontImage.setFitHeight(40);
 		myComponents.add(c);
 		myComponentImages.put(c, frontImage);
 		myRoot.getChildren().add(frontImage);

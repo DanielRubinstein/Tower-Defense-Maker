@@ -44,7 +44,6 @@ import resources.Constants;
  * @param <T>
  */
 public class Palette<T extends AttributeOwner> implements SkeletonObject, Observer {
-	private static final int TILE_SIZE = 75;
 	private View myView;
 	private TilePane tile;
 	private Map<String, T> myPresetMapBackEnd;
@@ -80,8 +79,6 @@ public class Palette<T extends AttributeOwner> implements SkeletonObject, Observ
 	private void addPresetToPalette(T preset) {
 		AttributeOwnerVisual attrOwner = new AttributeOwnerVisualImpl(preset);
 		ImageView imageView = attrOwner.getImageView();
-		imageView.setFitWidth(TILE_SIZE);
-		imageView.setFitHeight(TILE_SIZE);
 		setPresetInteractions(preset, imageView);
 		myPresetMapFrontEnd.put(imageView, preset);
 		addPresetImageViewToPalette(imageView);
@@ -149,17 +146,7 @@ public class Palette<T extends AttributeOwner> implements SkeletonObject, Observ
 		screenGrid.setOnDragDropped(e -> {
 			String presetName = e.getDragboard().getString();
 			AttributeOwner presetAO = observedBankController.getPreset(presetName);
-			Double offsetX;
-			Double offsetY;
-			// TODO holy shit, how do we get rid of these magic numbers
-			if(myView.getBooleanAuthorModeProperty().get()){
-				offsetX = 40d;
-				offsetY = -10d; 
-			} else {
-				offsetX = 12.5d;
-				offsetY = 12.5d; 
-			}
-			Point2D pos = new Point2D(e.getSceneX() - Constants.SCREEN_GRID_PADDING + offsetX ,e.getSceneY() - Constants.SCREEN_GRID_PADDING + offsetY);
+			Point2D pos = new Point2D(e.getX(), e.getY());
 			myView.sendUserModification(new Modification_Add_PaletteToGrid(presetAO, pos));
 		});
 	}
@@ -190,8 +177,7 @@ public class Palette<T extends AttributeOwner> implements SkeletonObject, Observ
 	private ImageView createImageView(String myImagePath) {
 		Image image = new Image(getClass().getClassLoader().getResourceAsStream(myImagePath));
 		ImageView imageView = new ImageView(image);
-		imageView.setFitWidth(TILE_SIZE);
-		imageView.setFitHeight(TILE_SIZE);
+		
 		return imageView;
 	}
 

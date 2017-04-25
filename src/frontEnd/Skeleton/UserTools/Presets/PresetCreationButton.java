@@ -16,11 +16,14 @@ import javafx.scene.image.ImageView;
 
 public class PresetCreationButton implements SkeletonObject {
 	private static final String PLUS_IMAGE = "resources/images/Tools/plus.jpg";
+	private static final Double PRESET_SIZE = 75d;
 	private View myView;
 	private ImageView myRoot;
 	
 	public PresetCreationButton(View view, String myType, Function<String, ImageView> imageCreator, BiConsumer<Node, Consumer<Node>> clickEventSetter){
 		myRoot = imageCreator.apply(PLUS_IMAGE);
+		myRoot.setFitWidth(PRESET_SIZE);
+		myRoot.setFitHeight(PRESET_SIZE);
 		myView = view;
 		clickEventSetter.accept(myRoot, (iV) -> {
 			try {
