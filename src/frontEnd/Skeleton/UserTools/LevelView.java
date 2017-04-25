@@ -46,18 +46,14 @@ public class LevelView {
 		myStage = new Stage();
 		myStage.initOwner(parentStage);
 		myStage.initModality(Modality.APPLICATION_MODAL);
+		myStage.setOnCloseRequest(e -> levels.saveGamesMap());
 		//myRoot.prefWidthProperty().bind(readOnlyDoubleProperty);
 		myRoot.setPadding(new Insets(20, 20, 20, 20));
 		myRoot.setVgap(20);
 		myRoot.setHgap(20);
 		createStructureBoxes();
+
 		
-		myStage.setOnCloseRequest(new EventHandler<WindowEvent>() {
-			@Override
-			public void handle(WindowEvent arg0) {
-				levels.saveGamesMap();
-			}
-	      });
 	}
 	
 	public void launch(){
@@ -76,6 +72,7 @@ public class LevelView {
 		VBox gameOutline = createSingleBox(0);
 		VBox levelOutline = createSingleBox(1);
 		VBox allLevelsOutline = createSingleBox(2);
+		
 		populateGame(gameOutline,myLevels.getGameList(),levelOutline);
 		populateAllLevels(allLevelsOutline,myLevels.getFullLevelList());
 		

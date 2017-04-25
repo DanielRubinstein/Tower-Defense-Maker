@@ -6,6 +6,7 @@ import java.util.Observer;
 
 import backEnd.Attribute.AttributeOwnerReader;
 import javafx.geometry.Point2D;
+import javafx.scene.control.Tooltip;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
@@ -22,9 +23,15 @@ public class FrontEndAttributeOwnerImpl implements Observer, FrontEndAttributeOw
 		myAttr = attr;
 		myAttr.addAsListener(this);
 		setImage(myAttr.getMyAttributes().<String>get(IMAGE_ATTRIBUTE).getValue());
+		setImageHover();
 		setPosition(myAttr.getMyAttributes().<Point2D>get(POSITION_ATTRIBUTE).getValue());
 	}
 	
+	private void setImageHover() {
+		Tooltip hover = new Tooltip();
+		
+	}
+
 	private void setPosition(Point2D newPosition){
 		if (newPosition != null){
 			myPosition = newPosition;
