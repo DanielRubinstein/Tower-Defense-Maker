@@ -115,7 +115,7 @@ public class TileGridVisual implements Observer, SkeletonObject{
 	}
 	private void updateCorrespondingGrid(TileImpl arg) {
 		Point2D newTileScreenPosition = arg.getMyAttributes().<Point2D>get("Position").getValue();
-		Point2D newTileGridPosition =observedTileGrid.getGridPositionFromScreenPosition(newTileScreenPosition);
+		Point2D newTileGridPosition = observedTileGrid.getGridPositionFromScreenPosition(newTileScreenPosition);
 		addTileToGrid(arg, newTileGridPosition);
 
 	}
@@ -127,14 +127,19 @@ public class TileGridVisual implements Observer, SkeletonObject{
 		if(myTiles.containsKey(pos) && !myTiles.get(pos).equals(t)){
 			myRoot.getChildren().remove(myTileImages.get(myTiles.get(pos)));
 		}
-		myRoot.add(tileView, (int) pos.getX(), (int) pos.getY()); 
+		myRoot.add(tileView, (int) pos.getX(), (int) pos.getY());
 		myTiles.put(pos, t);
 		myTileImages.put(t, tileView);
 	}
 	@Override
 	public void update(Observable o, Object arg) {
-		updateCorrespondingGrid((TileImpl)arg);
+		if(arg != null){
+			updateCorrespondingGrid((TileImpl)arg);
+		} else {
+			adjustSize();
+		}
 	}
+	
 	@Override
 	public Node getRoot() {
 		return myRoot;

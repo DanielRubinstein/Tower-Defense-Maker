@@ -9,6 +9,7 @@ import backEnd.GameData.State.PlayerStatusReader;
 import backEnd.GameData.State.State;
 import backEnd.GameData.State.StateImpl;
 import backEnd.GameEngine.EngineStatus;
+import backEnd.LevelProgression.LevelProgressionControllerEditor;
 import backEnd.LevelProgression.LevelProgressionControllerReader;
 
 public class GameData implements GameDataInterface{
@@ -16,7 +17,7 @@ public class GameData implements GameDataInterface{
 	private RulesMap myRules;
 	private PlayerStatus myPlayerStatus;
 	private EngineStatus myEngineStatus;
-	private LevelProgressionControllerReader myLPC;
+	private LevelProgressionControllerEditor myLPC;
 	private double myGameTime;
 	private BankController myBankController;
 	
@@ -91,12 +92,12 @@ public class GameData implements GameDataInterface{
 		}
 	}*/
 	
-	public void setLevelProgressionController(LevelProgressionControllerReader myLPC){
+	public void setLevelProgressionController(LevelProgressionControllerEditor myLPC){
 		this.myLPC = myLPC;
 		
 	}
 	
-	public LevelProgressionControllerReader getLevelProgressionController(){
+	public LevelProgressionControllerEditor getLevelProgressionController(){
 		return myLPC;
 	}
 
