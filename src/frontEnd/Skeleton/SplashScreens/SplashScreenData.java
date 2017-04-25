@@ -1,5 +1,6 @@
 package frontEnd.Skeleton.SplashScreens;
 
+
 public class SplashScreenData
 {
 	private String messageBody;
@@ -18,6 +19,11 @@ public class SplashScreenData
 	public SplashScreenType getType()
 	{
 		return type;
+	}
+
+	public Runnable getOnContinue() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 	
 }

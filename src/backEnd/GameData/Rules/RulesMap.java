@@ -13,19 +13,21 @@ import backEnd.GameData.Rules.EndCondition.ScoreWinCondition;
 import backEnd.GameData.Rules.EndCondition.TimeEndCondition;
 import javafx.beans.property.ReadOnlyDoubleWrapper;
 
+/**
+ * 
+ * @author Derek
+ * @author Juan
+ *
+ */
 public class RulesMap {
 
-	private Map<String, Rule> myRules = new HashMap<String, Rule>();
+	private Map<String, Rule> myRules;
 
-	public RulesMap() {
+	public RulesMap()
+	{
+		myRules = new HashMap<String, Rule>();
 		addPresetRules();
-		
 	}
-	
-	public RulesMap(Map<String, Rule> myMap){
-		myRules = myMap;
-	}
-
 	
 	public Map<String, Rule> getMapWithKeyNames(){
 		return myRules;

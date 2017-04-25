@@ -37,7 +37,6 @@ public class GameProcessController {
 		EngineFactory engineFactory = new EngineFactory();
 		Enumeration<String> n = myResources.getKeys();
 		for (String key : Collections.list(n)) {
-			System.out.println("TEST");
 			myEngines.add(engineFactory.getEngine(myResources.getString(key)));
 		}
 	}
