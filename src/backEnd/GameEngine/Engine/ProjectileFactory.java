@@ -37,6 +37,7 @@ public class ProjectileFactory {
 		Attribute<Double> explosionSize = (Attribute<Double>) myAttributeFactory.getAttribute(("ExplosionRadius"));
 		Attribute<Double> slowFactor = (Attribute<Double>) myAttributeFactory.getAttribute(("SlowFactor"));
 		Attribute<Double> fireRate = (Attribute<Double>) myAttributeFactory.getAttribute(("FireRate"));
+		Attribute<Component> target = (Attribute<Component>) myAttributeFactory.getAttribute(("ProjectileTarget"));
 
 		myType.setValue("Projectile"); //surprisingly, all projectiles are of type Projectile!
 		projectileImage.setValue((String) tower.getAttribute("FireImage").getValue());
@@ -49,6 +50,7 @@ public class ProjectileFactory {
 		explosionSize.setValue((Double) tower.getAttribute("ExplosionRadius").getValue());
 		slowFactor.setValue((Double) tower.getAttribute("SlowFactor").getValue());
 		fireRate.setValue((Double) tower.getAttribute("FireRate").getValue());
+		target.setValue((Component) tower.getAttribute("ProjectileTarget").getValue());
 
 		myComponent.setAttributeValue(("Type"), (String) myType.getValue());
 		myComponent.setAttributeValue(("ImageFile"), (String) projectileImage.getValue());
@@ -61,6 +63,7 @@ public class ProjectileFactory {
 		myComponent.setAttributeValue(("ExplosionRadius"), (Double) explosionSize.getValue());
 		myComponent.setAttributeValue(("SlowFactor"), (Double) slowFactor.getValue());
 		myComponent.setAttributeValue(("FireRate"), (Double) fireRate.getValue());
+		myComponent.setAttributeValue(("ProjectileTarget"), (Component) target.getValue());
 		
 		myAttributeData = ad;
 	}

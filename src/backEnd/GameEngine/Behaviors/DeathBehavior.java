@@ -15,6 +15,7 @@ public class DeathBehavior implements Behavior {
 
 	@Override
 	public <T> void execute(T componentToUse) { //pass in a component
+		
 		myComponent=(Component) componentToUse;
 		Object spawn=myComponent.getAttribute("SpawnOnDeath").getValue();
 		spawnsOnDeath=(boolean) spawn;
@@ -25,11 +26,6 @@ public class DeathBehavior implements Behavior {
 
 	}
 	
-	@Override
-	public void update(Observable newData, Object arg) { //TODO figure out how we are using AttributeData with
-		//this. Then we can figure out how observables work.
-		//myAttributes = (AttributeData) newData;
-	}
 
 
 	public boolean spawnsOnDeath(){
@@ -38,6 +34,7 @@ public class DeathBehavior implements Behavior {
 	
 	public boolean isDead(){
 		Object currentHealth=myComponent.getAttribute("Health").getValue();
+		//System.out.println("Current HP is " + myComponent.getAttribute("Health").getValue());
 		return ((int) currentHealth)<=0;
 	}
 	
