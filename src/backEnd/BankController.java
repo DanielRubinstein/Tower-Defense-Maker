@@ -69,26 +69,26 @@ public class BankController
 			addNewTile("Yellow Left Tile", newTile4);
 			
 			
-			Component newComponent = new Component(new AttributeData(), 
+			Component testingBloon = new Component(new AttributeData(), 
 					new AccessPermissionsImpl(Arrays.asList("PLAYER"), new ArrayList<String>(), new ArrayList<String>()));
-			newComponent.setAttributeValue("ImageFile", "resources/images/Components/rainbow_bloon.png");
-			newComponent.setAttributeValue("Speed", 5d);
-			newComponent.setAttributeValue("Health", 10);
-			newComponent.setAttributeValue("Type", "Enemy");
-			addNewComponent("Enemy", newComponent);
+			testingBloon.setAttributeValue("ImageFile", "resources/images/Components/rainbow_bloon.png");
+			testingBloon.setAttributeValue("Speed", 1d);
+			testingBloon.setAttributeValue("Health", 20);
+			testingBloon.setAttributeValue("Type", "Enemy");
+			addNewComponent("Enemy", testingBloon);
 			
-			Component newComponent2 = new Component(new AttributeData(), 
+			Component testingTurret = new Component(new AttributeData(), 
 					new AccessPermissionsImpl(Arrays.asList("PLAYER"), new ArrayList<String>(), new ArrayList<String>()));
-			newComponent2.setAttributeValue("ImageFile", "resources/images/Components/zombie.png");
-			newComponent2.setAttributeValue("Health", 10);
-			newComponent2.setAttributeValue("Type", "Tower");
-			newComponent2.setAttributeValue("Velocity", 0.6);
-			newComponent2.setAttributeValue("FireDamage", 10);
-			newComponent2.setAttributeValue("FireRate", 45.0);
-			newComponent2.setAttributeValue("ExplosionRadius", 40.0);
-			newComponent2.setAttributeValue("FireRadius", 200.0);
-			newComponent2.setAttributeValue("FireImage", "resources/images/Components/purple_bloon.png");
-			addNewComponent("Tower", newComponent2);
+			testingTurret.setAttributeValue("ImageFile", "resources/images/Components/zombie.png");
+			testingTurret.setAttributeValue("Health", 10);
+			testingTurret.setAttributeValue("Type", "Tower");
+			testingTurret.setAttributeValue("Velocity", 1.0);
+			testingTurret.setAttributeValue("FireDamage", 10);
+			testingTurret.setAttributeValue("FireRate", 1000.0);
+			testingTurret.setAttributeValue("ExplosionRadius", 40.0);
+			testingTurret.setAttributeValue("FireRadius", 200.0);
+			testingTurret.setAttributeValue("FireImage", "resources/images/Components/purple_bloon.png");
+			addNewComponent("Tower", testingTurret);
 			
 			
 		} catch( FileNotFoundException e){

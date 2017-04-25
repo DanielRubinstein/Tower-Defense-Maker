@@ -69,7 +69,7 @@ public class Component extends Observable implements AttributeOwner {
 			Attribute<?> myAttribute = attrFact.getAttribute(key);
 			addAttribute(key, myAttribute);
 		}
-		setupBehaviorObserving();
+		//setupBehaviorObserving();
 		this.myAccessPermissions = accessPermissions;
 	}
 
@@ -77,6 +77,9 @@ public class Component extends Observable implements AttributeOwner {
 		return myAccessPermissions;
 	}
 
+	/*
+	 
+	
 	public void setupBehaviorObserving() {
 		for (String b : myBehaviors.keySet()) {
 			Behavior currentBehavior = myBehaviors.get(b);
@@ -84,6 +87,7 @@ public class Component extends Observable implements AttributeOwner {
 		}
 
 	}
+	*/
 
 	/**
 	 * When the engines call behaviors (for the behavior to be executed), it
