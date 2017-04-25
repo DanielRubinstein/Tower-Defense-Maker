@@ -1,13 +1,9 @@
 package frontEnd.Skeleton.ScreenGrid;
 
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.Map;
 import java.util.Observable;
 import java.util.Observer;
-import java.util.Set;
-
-import com.sun.corba.se.impl.oa.poa.ActiveObjectMap.Key;
 
 import ModificationFromUser.AttributeOwner.Modification_EditAttribute;
 import backEnd.GameData.State.State;
@@ -20,7 +16,6 @@ import frontEnd.Skeleton.UserTools.SkeletonObject;
 import javafx.geometry.Point2D;
 import javafx.scene.Node;
 import javafx.scene.effect.ColorAdjust;
-import javafx.scene.effect.DropShadow;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.layout.GridPane;
@@ -89,10 +84,8 @@ public class TileGridVisual implements Observer, SkeletonObject{
 		tileView.fitHeightProperty().bind(myRoot.heightProperty().divide(numberOfTileRows));
 	}
 	private void setTileInteraction(Node n, Tile t) {
-		System.out.println(myRoot.isFocused() + "   "  +myRoot.isFocusTraversable());
 		n.setOnMouseClicked(e ->{
 			myRoot.requestFocus();
-			System.out.println(myRoot.isFocused() + "   "  +myRoot.isFocusTraversable());
 			if(e.getClickCount()==2){
 				OnGridTileCommandCenter tileInteractor = new OnGridTileCommandCenter(myView, t, myState);
 				tileInteractor.launch("On-Screen Tile" ,e.getScreenX(), e.getScreenY());
