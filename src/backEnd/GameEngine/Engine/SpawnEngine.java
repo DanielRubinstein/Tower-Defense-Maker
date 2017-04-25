@@ -75,7 +75,7 @@ public class SpawnEngine implements Engine {
 		Object positionObj = spawnTile.getMyAttributes().get("Position");
 		Attribute<Point2D> spawnPositionAttribute = (Attribute<Point2D>) positionObj;
 		Point2D tilePosition = spawnPositionAttribute.getValue();
-		Point2D spawnPosition = new Point2D(15 + tilePosition.getX()*60, 10 + tilePosition.getY()*40);
+		Point2D spawnPosition = new Point2D(tilePosition.getX(), tilePosition.getY());
 		System.out.println(this.getClass().getName() + ": Spawn Position: " + spawnPosition.getX() + " | " + spawnPosition.getY());
 		myState.getComponentGraph().addComponentToGrid(spawnable, spawnPosition);
 	}
