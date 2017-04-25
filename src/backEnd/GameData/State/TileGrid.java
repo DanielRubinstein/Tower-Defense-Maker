@@ -59,8 +59,9 @@ public interface TileGrid{
 	boolean contains(AttributeOwnerReader newAttrOwn);
 
 	Object getMap();
-
 	
+	boolean atMiddleOfTile(Point2D screenPosition);
+
 	void saveAndClearTileObservers();
 
 	void setTileObservers();
