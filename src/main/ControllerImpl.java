@@ -13,6 +13,7 @@ import frontEnd.CustomJavafxNodes.ErrorDialog;
 import frontEnd.Facebook.FacebookConnector;
 import frontEnd.Facebook.FacebookInteractor;
 import javafx.stage.Stage;
+import frontEnd.Skeleton.SplashScreens.SplashScreen;
 
 public class ControllerImpl implements Controller {
 	private ViewImpl myView;
@@ -23,6 +24,10 @@ public class ControllerImpl implements Controller {
 
 	public void start(Stage stage) {
 		
+		Consumer<SplashScreen> splashScreenLoader = (screen) ->
+		{
+			
+		};
 		
 		Consumer<ModificationFromUser> viewMod = 
 				(ModificationFromUser m) -> {
@@ -47,7 +52,7 @@ public class ControllerImpl implements Controller {
 				GameData initialGameData = loader.getGameData();
 				
 				initialGameData.setEngineStatus(myEngineStatus);
-				myModel = new ModelImpl(initialGameData, myEngineStatus);
+				myModel = new ModelImpl(initialGameData, myEngineStatus, splashScreenLoader);
 				myView = new ViewImpl(myModel, viewMod,myFb);
 
 			} catch (Exception e) {

@@ -1,6 +1,7 @@
 package backEnd;
 
 import java.util.List;
+import java.util.function.Consumer;
 
 import backEnd.GameData.GameData;
 import backEnd.GameData.Rules.RuleReader;
@@ -16,6 +17,7 @@ import backEnd.Mode.ModeImpl;
 import backEnd.Mode.ModeReader;
 import data.DataController;
 import data.XMLReadingException;
+import frontEnd.Skeleton.SplashScreens.SplashScreen;
 import javafx.beans.property.SimpleStringProperty;
 
 /**
@@ -36,11 +38,11 @@ public class ModelImpl implements Model{
 	private LevelProgressionControllerImpl myLevelProgressionController;
 	private EngineStatus myEngineStatus;
 	
-	public ModelImpl(GameData gameData, EngineStatus engineStatus) throws XMLReadingException {
+	public ModelImpl(GameData gameData, EngineStatus engineStatus, Consumer<SplashScreen> splashScreenLoader) throws XMLReadingException {
 		myDataController = new DataController();
 		myGameData = gameData;
 		myMode = new ModeImpl("AUTHOR", "DEFAULT", "DEFAULT", myLevelProgressionController);
-		myLevelProgressionController = new LevelProgressionControllerImpl(myMode, myDataController, myDataController.loadGamesMapData());
+		myLevelProgressionController = new LevelProgressionControllerImpl(myMode, myDataController);
 		myGameData.setLevelProgressionController(myLevelProgressionController);
 		myEngine = new GameProcessController(myGameData);
 		myBankController = new BankController(myMode, myDataController.loadTileMap(), myDataController.loadComponentMap());
