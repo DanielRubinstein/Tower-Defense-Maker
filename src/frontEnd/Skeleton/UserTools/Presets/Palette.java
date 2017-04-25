@@ -157,7 +157,6 @@ public class Palette<T extends AttributeOwner> implements SkeletonObject, Observ
 		tile = new TilePane();
 		tile.setPadding(new Insets(15, 15, 15, 15));
 		tile.setHgap(15);
-		tile.setFocusTraversable(false);
 	}
 
 	@Override

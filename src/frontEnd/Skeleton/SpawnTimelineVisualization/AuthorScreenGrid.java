@@ -24,7 +24,6 @@ public class AuthorScreenGrid implements SkeletonObject{
 		myRoot = new TabPane();
 		myRoot.setOnKeyPressed(e -> e.consume());
 		myRoot.setOnKeyTyped(e -> e.consume());
-		myRoot.setFocusTraversable(false);
 		createGridTab();
 		
 		createSpawnTab();
