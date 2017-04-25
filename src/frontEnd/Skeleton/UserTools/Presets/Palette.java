@@ -18,8 +18,8 @@ import backEnd.GameData.State.TileImpl;
 import backEnd.Mode.ModeReader;
 import frontEnd.View;
 import frontEnd.Skeleton.AoTools.GenericCommandCenter;
-import frontEnd.Skeleton.ScreenGrid.FrontEndAttributeOwner;
-import frontEnd.Skeleton.ScreenGrid.FrontEndAttributeOwnerImpl;
+import frontEnd.Skeleton.ScreenGrid.AttributeOwnerVisual;
+import frontEnd.Skeleton.ScreenGrid.AttributeOwnerVisualImpl;
 import frontEnd.Skeleton.UserTools.SkeletonObject;
 import javafx.geometry.Bounds;
 import javafx.geometry.Insets;
@@ -78,7 +78,7 @@ public class Palette<T extends AttributeOwner> implements SkeletonObject, Observ
 	
 
 	private void addPresetToPalette(T preset) {
-		FrontEndAttributeOwner attrOwner = new FrontEndAttributeOwnerImpl(preset);
+		AttributeOwnerVisual attrOwner = new AttributeOwnerVisualImpl(preset);
 		ImageView imageView = attrOwner.getImageView();
 		imageView.setFitWidth(TILE_SIZE);
 		imageView.setFitHeight(TILE_SIZE);
