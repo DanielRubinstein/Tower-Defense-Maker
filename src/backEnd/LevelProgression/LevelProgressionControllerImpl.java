@@ -9,10 +9,12 @@ import java.util.Map;
 import backEnd.LevelProgression.LevelProgressionControllerEditor;
 import backEnd.Mode.Mode;
 import data.DataController;
+import data.XMLReadingException;
 
 /**
  * 
  * @author Riley Nisbet
+ * @author Juan
  *
  */
 public class LevelProgressionControllerImpl implements LevelProgressionControllerReader, LevelProgressionControllerEditor
@@ -20,15 +22,15 @@ public class LevelProgressionControllerImpl implements LevelProgressionControlle
 	private Map<String,List<String>> gamesMap; //String gameName -> List of Level names
 	private DataController myDataController;
 	private Mode myMode;
+	
 	private static final String LEVEL_TEMPLATE_PATH = "data/LevelTemplates/";
 	
-	public LevelProgressionControllerImpl(Mode mode, DataController dataController, Map<String,List<String>> gamesMap)
+	public LevelProgressionControllerImpl(Mode mode, DataController dataController)
 	{
 		this.myMode = mode;
-		this.gamesMap = gamesMap;
 		this.myDataController = dataController;
+		setGamesMap();
 	}
-	
 	
 	@Override
 	public List<String> getGameList(){
@@ -146,6 +148,16 @@ public class LevelProgressionControllerImpl implements LevelProgressionControlle
 			return this.getFullLevelList();
 		default:
 			return null;
+		}
+	}
+	
+
+	private void setGamesMap() {
+		try {
+			this.gamesMap = myDataController.loadGamesMapData();
+		} catch (XMLReadingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 	}
 }
