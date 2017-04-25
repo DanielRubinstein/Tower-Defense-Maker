@@ -1,6 +1,10 @@
 package frontEnd.Skeleton.SplashScreens;
 
-public abstract class SplashScreen
+public class SplashScreen
 {
 
+	public SplashScreen(SplashScreenData data)
+	{
+		
+	}
 }

@@ -18,6 +18,7 @@ import backEnd.Mode.ModeReader;
 import frontEnd.CustomJavafxNodes.ErrorDialog;
 import frontEnd.Facebook.FacebookInteractor;
 import frontEnd.Skeleton.SkeletonImpl;
+import frontEnd.Skeleton.SplashScreens.SplashScreen;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.scene.Node;
@@ -143,6 +144,11 @@ public class ViewImpl implements View {
 	
 	public ModeReader getModeReader(){
 		return myMode;
+	}
+
+	public void setSplashScreen(SplashScreen splashScreen) {
+		// TODO Auto-generated method stub
+		
 	}
 
 }
