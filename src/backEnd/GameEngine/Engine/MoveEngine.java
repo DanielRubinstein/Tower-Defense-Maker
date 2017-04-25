@@ -38,7 +38,7 @@ public class MoveEngine implements Engine{
 		for (Component c: myState.getComponentGraph().getAllComponents()){
 			Object o = c.getAttribute("Position").getValue();
 			Point2D currentLocation=(Point2D) o;
-			currentTile = gameData.getState().getTileGrid().getTileByScreenLocation(currentLocation);
+			currentTile = gameData.getState().getTileGrid().getTileByScreenPosition(currentLocation);
 			if (currentTile==null){
 				continue;
 			}
