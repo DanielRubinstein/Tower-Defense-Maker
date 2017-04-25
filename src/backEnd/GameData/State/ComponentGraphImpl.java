@@ -81,14 +81,12 @@ public class ComponentGraphImpl extends Observable implements ComponentGraph {
 		myComponents.add(newComponent);
 		newComponent.getAttribute("Position").setValue(screenPosition);
 		this.setChanged();
-		this.notifyObservers();
-		System.out.println(this.getClass().getSimpleName() + screenPosition.getX() + "  " + screenPosition.getY());
+		this.notifyObservers(newComponent);
 	}
 
 	@Override
 	public void removeComponent(Component toRemove) {
-		Attribute<Point2D> posAttribute = toRemove.getAttribute("Position");
-		Point2D location = posAttribute.<Point2D>getValue();
+		Point2D location = toRemove.<Point2D>getAttribute("Position").getValue();
 		List<Component> currList = componentMap.get(location);
 		if (currList == null) {
 			return;
@@ -98,7 +96,7 @@ public class ComponentGraphImpl extends Observable implements ComponentGraph {
 		myComponents.remove(toRemove);
 		System.out.println("removed in component graph");
 		this.setChanged();
-		this.notifyObservers();
+		this.notifyObservers(toRemove);
 	}
 
 	@Override

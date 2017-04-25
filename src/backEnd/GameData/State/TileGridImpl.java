@@ -75,17 +75,22 @@ public class TileGridImpl extends Observable implements TileGrid {
 	}
 	
 	@Override
-	public Tile getTileByScreenLocation(Point2D screenLocation){		
-		int column = (int) Math.floor(screenLocation.getX() / tileWidth);
-		int row = (int) Math.floor(screenLocation.getY() / tileHeight);
-		return getTileByGridPosition(column, row);
+	public Point2D getGridPositionFromScreenPosition(Point2D screenPosition) {
+		int column = (int) Math.floor(screenPosition.getX() / tileWidth);
+		int row = (int) Math.floor(screenPosition.getY() / tileHeight);
+		return new Point2D(column, row);
 	}
 	
 	@Override
-	public void setTileByScreenPosition(Tile newTile, Point2D position) {
-		int column = (int) Math.floor(position.getX() / tileWidth);
-		int row = (int) Math.floor(position.getY() / tileHeight);
-		setTileByGridPosition(newTile, column, row);
+	public Tile getTileByScreenPosition(Point2D screenPosition){		
+		Point2D gridPosition = getGridPositionFromScreenPosition(screenPosition);
+		return getTileByGridPosition((int) gridPosition.getX(), (int) gridPosition.getY());
+	}
+	
+	@Override
+	public void setTileByScreenPosition(Tile newTile, Point2D screenPosition) {
+		Point2D gridPosition = getGridPositionFromScreenPosition(screenPosition);
+		setTileByGridPosition(newTile, (int) gridPosition.getX(), (int) gridPosition.getY());
 	}
 	
 	@Override
@@ -103,7 +108,7 @@ public class TileGridImpl extends Observable implements TileGrid {
 			newTile.setObserverList(tileGrid.get(posOfNewTile).getAndClearObservers());
 			tileGrid.put(posOfNewTile, newTile);
 			this.setChanged();
-			this.notifyObservers();
+			this.notifyObservers(newTile);
 		}
 	}
 
@@ -142,12 +147,21 @@ public class TileGridImpl extends Observable implements TileGrid {
 		observers.add(o);
 	}
 	
+	
 	@Override
 	public void notifyObservers(){
 		for (Observer o : observers){
 			o.update(this, null);
 		}
 	}
+	
+	@Override
+	public void notifyObservers(Object arg){
+		for (Observer o : observers){
+			o.update(this, arg);
+		}
+	}
+	
 	
 	public void saveAndClearTileObservers()
 	{
@@ -183,6 +197,7 @@ public class TileGridImpl extends Observable implements TileGrid {
 		observers = list;
 	}
 	
+	
 	@Override
 	public boolean contains(AttributeOwnerReader newAttrOwn) {
 		return tileGrid.containsValue(newAttrOwn);
@@ -209,5 +224,7 @@ public class TileGridImpl extends Observable implements TileGrid {
 		this.setChanged();
 		this.notifyObservers();
 	}
+
+	
 
 }

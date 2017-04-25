@@ -1,5 +1,6 @@
 package frontEnd.Skeleton.ScreenGrid;
 
+import java.lang.reflect.Method;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
@@ -14,6 +15,7 @@ import backEnd.GameData.State.ComponentGraphImpl;
 import backEnd.GameData.State.State;
 import backEnd.GameData.State.Tile;
 import backEnd.GameData.State.TileGrid;
+import backEnd.GameData.State.TileImpl;
 import frontEnd.View;
 import frontEnd.Skeleton.AoTools.GenericCommandCenter;
 import frontEnd.Skeleton.AoTools.OnGridTileCommandCenter;
@@ -151,12 +153,36 @@ public class ScreenGrid implements SkeletonObject, Observer {
 
 	@Override
 	public void update(Observable o, Object arg) {
-		if (o == observedComponentGraph) {
-			observedComponentGraph=(ComponentGraphImpl) o;
-			updateComponentsOnGrid();
-		} else if (o == observedTileGrid){
-			updateTilesOnGrid();
+		if (o == observedComponentGraph || o == observedTileGrid){
+			try{
+				Method updateMethod = ScreenGrid.class.getDeclaredMethod("updateCorrespondingGrid", arg.getClass());
+				updateMethod.setAccessible(false);
+				updateMethod.invoke(this, arg);
+			} catch (NoSuchMethodException e){
+				
+			} catch (Exception e){
+				
+			}
+			
 		}
+
+	}
+
+	private void updateCorrespondingGrid(Component arg) {
+		if (!myComponents.contains(arg)) {
+			addComponentToGrid(arg);
+		}
+		if(!observedComponentGraph.getAllComponents().contains(arg)){
+			removeComponentFromGrid(arg);
+		}
+		
+	}
+	
+	private void updateCorrespondingGrid(TileImpl arg) {
+		Point2D newTileScreenPosition = arg.getMyAttributes().<Point2D>get("Position").getValue();
+		Point2D newTileGridPosition =observedTileGrid.getGridPositionFromScreenPosition(newTileScreenPosition);
+		addTileToGrid(arg, newTileGridPosition);
+
 	}
 
 	private void updateTilesOnGrid() {
@@ -164,25 +190,28 @@ public class ScreenGrid implements SkeletonObject, Observer {
 			for (int col = 0; col < numberOfTileCols; col++) {
 				Tile t = observedTileGrid.getTileByGridPosition(col, row);
 				Point2D pos = new Point2D(col, row);
-				
 				if(!myTiles.containsKey(pos) || !myTiles.get(pos).equals(t)){
-					FrontEndAttributeOwner attrOwner = new FrontEndAttributeOwnerImpl(t);
-					ImageView tileView = attrOwner.getImageView();
-					organizeImageView(tileView);
-					setTileInteraction(tileView,  t);
-					if(myTiles.containsKey(pos) && !myTiles.get(pos).equals(t)){
-						myGrid.getChildren().remove(myTileImages.get(myTiles.get(pos)));
-					}
-					myGrid.add(tileView, col, row); 
-					// this is correct, when you add to gridPane it is (node, col, row)
-					myTiles.put(pos, t);
-					myTileImages.put(t, tileView);
+					addTileToGrid(t, pos);
 				}
 			}
 		}
 	}
 
-	private void updateComponentsOnGrid() {	
+	private void addTileToGrid(Tile t, Point2D pos) {
+		FrontEndAttributeOwner attrOwner = new FrontEndAttributeOwnerImpl(t);
+		ImageView tileView = attrOwner.getImageView();
+		organizeImageView(tileView);
+		setTileInteraction(tileView,  t);
+		if(myTiles.containsKey(pos) && !myTiles.get(pos).equals(t)){
+			myGrid.getChildren().remove(myTileImages.get(myTiles.get(pos)));
+		}
+		myGrid.add(tileView, (int) pos.getX(), (int) pos.getY()); 
+		// this is correct, when you add to gridPane it is (node, col, row)
+		myTiles.put(pos, t);
+		myTileImages.put(t, tileView);
+	}
+
+	private void updateComponentsOnGrid() {
 		for (Component c : observedComponentGraph.getAllComponents()) {
 			if (!myComponents.contains(c)) {
 				//System.out.println("in screenGrid, updateComponentsOnGrid() got called");
