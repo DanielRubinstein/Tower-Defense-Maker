@@ -14,6 +14,7 @@ import frontEnd.Facebook.FacebookConnector;
 import frontEnd.Facebook.FacebookInteractor;
 import javafx.stage.Stage;
 import frontEnd.Skeleton.SplashScreens.SplashScreen;
+import frontEnd.Skeleton.SplashScreens.SplashScreenData;
 
 public class ControllerImpl implements Controller {
 	private ViewImpl myView;
@@ -24,9 +25,9 @@ public class ControllerImpl implements Controller {
 
 	public void start(Stage stage) {
 		
-		Consumer<SplashScreen> splashScreenLoader = (screen) ->
+		Consumer<SplashScreenData> splashScreenLoader = (data) ->
 		{
-			
+			myView.setSplashScreen(new SplashScreen(data));
 		};
 		
 		Consumer<ModificationFromUser> viewMod = 

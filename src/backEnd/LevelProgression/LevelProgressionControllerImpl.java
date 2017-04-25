@@ -22,21 +22,15 @@ public class LevelProgressionControllerImpl implements LevelProgressionControlle
 	private Map<String,List<String>> gamesMap; //String gameName -> List of Level names
 	private DataController myDataController;
 	private Mode myMode;
+	
 	private static final String LEVEL_TEMPLATE_PATH = "data/LevelTemplates/";
 	
 	public LevelProgressionControllerImpl(Mode mode, DataController dataController)
 	{
 		this.myMode = mode;
-		
-		try {
-			this.gamesMap = dataController.loadGamesMapData();
-		} catch (XMLReadingException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-
+		this.myDataController = dataController;
+		setGamesMap();
 	}
-	
 	
 	@Override
 	public List<String> getGameList(){
@@ -154,6 +148,16 @@ public class LevelProgressionControllerImpl implements LevelProgressionControlle
 			return this.getFullLevelList();
 		default:
 			return null;
+		}
+	}
+	
+
+	private void setGamesMap() {
+		try {
+			this.gamesMap = myDataController.loadGamesMapData();
+		} catch (XMLReadingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 	}
 }

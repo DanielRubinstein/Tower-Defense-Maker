@@ -18,6 +18,7 @@ import backEnd.Mode.ModeReader;
 import data.DataController;
 import data.XMLReadingException;
 import frontEnd.Skeleton.SplashScreens.SplashScreen;
+import frontEnd.Skeleton.SplashScreens.SplashScreenData;
 import javafx.beans.property.SimpleStringProperty;
 
 /**
@@ -38,7 +39,7 @@ public class ModelImpl implements Model{
 	private LevelProgressionControllerImpl myLevelProgressionController;
 	private EngineStatus myEngineStatus;
 	
-	public ModelImpl(GameData gameData, EngineStatus engineStatus, Consumer<SplashScreen> splashScreenLoader) throws XMLReadingException {
+	public ModelImpl(GameData gameData, EngineStatus engineStatus, Consumer<SplashScreenData> splashScreenLoader) throws XMLReadingException {
 		myDataController = new DataController();
 		myGameData = gameData;
 		myMode = new ModeImpl("AUTHOR", "DEFAULT", "DEFAULT", myLevelProgressionController);
