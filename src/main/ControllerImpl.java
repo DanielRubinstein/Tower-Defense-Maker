@@ -34,7 +34,7 @@ public class ControllerImpl implements Controller {
 				(ModificationFromUser m) -> {
 					try {
 						executeInteraction(m);
-						System.out.println("In Controller - Modification from fE to bE executed");
+//						System.out.println("In Controller - Modification from fE to bE executed");
 					} catch (Exception e) {
 						ErrorDialog errDia = new ErrorDialog();
 						String eMessage = "";
