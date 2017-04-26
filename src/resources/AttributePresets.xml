@@ -25,12 +25,12 @@
 		<MoneyBounty min="0" max="999" start="10" increment="10"></MoneyBounty>
 		<ScoreBounty min="0" max="999" start="10" increment="10"></ScoreBounty><FireDamage min="0" max="200" start="1" increment="2"></FireDamage></INTEGER><INTEGER></INTEGER><EDITABLESTRING>
 		<EDITABLESTRING_TEMPLATE></EDITABLESTRING_TEMPLATE></EDITABLESTRING>
-	<STRINGLIST>
-		<STRINGLIST_TEMPLATE Options="Comma delineated String Options"></STRINGLIST_TEMPLATE>
+	<STATICSTRINGLIST>
+		<STATICSTRINGLIST_TEMPLATE Options="Comma delineated String Options"></STATICSTRINGLIST_TEMPLATE>
 		<MoveDirection options="Up,Down,Left,Right"></MoveDirection>
 		<Type options="Tower, Projectile, Enemy"></Type>
 		<FireType options="Single, AOE"></FireType>
-		<SpawnTimeline options="Timeline 1"></SpawnTimeline></STRINGLIST>
+		<SpawnTimeline options="Timeline 1"></SpawnTimeline></STATICSTRINGLIST>
 	<POSITION>
 		<POSITION_TEMPLATE></POSITION_TEMPLATE>
 		<ProjectileTargetPosition></ProjectileTargetPosition></POSITION>
