@@ -19,7 +19,7 @@ import backEnd.Coord;
 import backEnd.Attribute.Attribute;
 import backEnd.Attribute.AttributeImpl;
 import backEnd.GameEngine.EngineStatus;
-import backEnd.GameEngine.Engine.Spawning.SpawnQueue;
+import backEnd.GameEngine.Engine.Spawning.SpawnQueues;
 import javafx.geometry.Point2D;
 
 /**
@@ -38,7 +38,7 @@ public class StateImpl implements State, SerializableObservable {
 	private final static String IMAGEPATH_RESOURCES_PATH = "resources/images";
 	private final static ResourceBundle myImageResource = ResourceBundle.getBundle(IMAGEPATH_RESOURCES_PATH);
 	private EngineStatus myEngineStatus;
-	private Map<String, SpawnQueue> mySpawnQueues;
+	private Map<String, SpawnQueues> mySpawnQueues;
 	private List<SerializableObserver> observers;
 	
 	public StateImpl(int numColsInGrid, int numRowsInGrid) throws FileNotFoundException {
@@ -51,7 +51,7 @@ public class StateImpl implements State, SerializableObservable {
 		myTileGrid = tileGrid;
 		myComponentGraph = componentGraph;
 		myEngineStatus = EngineStatus.PAUSED;
-		mySpawnQueues = new HashMap<String,SpawnQueue>();
+		mySpawnQueues = new HashMap<String,SpawnQueues>();
 		observers = new ArrayList<SerializableObserver>();
 	}
 
@@ -262,7 +262,8 @@ public class StateImpl implements State, SerializableObservable {
 
 
 	@Override
-	public Map<String, SpawnQueue> getSpawnQueues() {
+	public Map<String, SpawnQueues> getSpawnQueues() {
+		System.out.println(mySpawnQueues);
 		return mySpawnQueues;
 	}
 	

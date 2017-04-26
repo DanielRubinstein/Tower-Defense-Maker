@@ -4,7 +4,7 @@ import java.util.Collection;
 import java.util.Map;
 
 import backEnd.GameEngine.EngineStatus;
-import backEnd.GameEngine.Engine.Spawning.SpawnQueue;
+import backEnd.GameEngine.Engine.Spawning.SpawnQueues;
 import javafx.geometry.Point2D;
 
 /**
@@ -35,7 +35,7 @@ public interface State {
 
 	Collection<Component> getComponentsByTileGridPosition(Point2D value);
 
-	Map<String, SpawnQueue> getSpawnQueues();
+	Map<String, SpawnQueues> getSpawnQueues();
 
 	boolean gameIsRunning();
 
