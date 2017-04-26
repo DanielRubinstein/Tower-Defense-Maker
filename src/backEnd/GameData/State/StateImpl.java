@@ -59,7 +59,7 @@ public class StateImpl extends Observable implements State {
 		TileGrid tileGrid = new TileGridImpl(cols, rows);
 		for (int row = 0; row < rows; row++) {
 			for (int col = 0; col < cols; col++) {
-				Point2D loc = new Point2D(col, row);
+				Point2D loc = new Point2D((col + 0.5) * (630.0 / cols), (row + 0.5) * (405.0 / rows));//TODO get height / width some legit way instead
 				
 				Tile newTile = new TileImpl(Arrays.asList(), Arrays.asList(), Arrays.asList(), loc);
 				

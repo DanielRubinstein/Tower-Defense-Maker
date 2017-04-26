@@ -102,7 +102,7 @@ public class TileGridImpl implements TileGrid {
 	private void checkAgainstBounds(int column, int row) {
 		if (column >= getNumColsInGrid() || row >= getNumRowsInGrid()) {
 			return;
-			// throw new IndexOutOfBoundsException();
+			// throw new IndexOutOfBoundsException(); TODO WAT???
 		}
 		if (column < 0 || row < 0) {
 			return;
@@ -131,6 +131,7 @@ public class TileGridImpl implements TileGrid {
 
 	@Override
 	public void setTileByGridPosition(Tile newTile, int column, int row) {
+		//System.out.println(this.getClass().getSimpleName() + ": " + column + " " + row);
 		Point2D posOfNewTile = new Point2D(column, row);
 
 		Boolean initialization = false;

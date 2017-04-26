@@ -73,6 +73,7 @@ public class TileGridVisual implements Observer, SkeletonObject{
 		numberOfTileRows = observedTileGrid.getNumRowsInGrid();
 		tileWidth = myWidth / numberOfTileCols;
 		tileHeight = myHeight / numberOfTileRows;
+		System.out.println(this.getClass().getSimpleName() + ": " + myWidth + " " + myHeight);
 		observedTileGrid.setTileSize(tileWidth, tileHeight);
 	}
 
@@ -106,7 +107,7 @@ public class TileGridVisual implements Observer, SkeletonObject{
 		for (int row = 0; row < numberOfTileRows; row++) {
 			for (int col = 0; col < numberOfTileCols; col++) {
 				Tile t = observedTileGrid.getTileByGridPosition(col, row);
-				Point2D pos = new Point2D(col, row);
+				Point2D pos = new Point2D(col, row);//TODO Possible bug in initialization idk
 				if(!myTiles.containsKey(pos) || !myTiles.get(pos).equals(t)){
 					addTileToGrid(t, pos);
 				}
