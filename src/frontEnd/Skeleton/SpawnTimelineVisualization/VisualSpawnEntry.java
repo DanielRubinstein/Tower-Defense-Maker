@@ -8,6 +8,8 @@ import backEnd.Attribute.AttributeOwner;
 import backEnd.GameEngine.Engine.Spawning.SpawnDataReader;
 import frontEnd.View;
 import frontEnd.CustomJavafxNodes.SingleFieldPrompt;
+import frontEnd.Skeleton.ScreenGrid.AttributeOwnerVisual;
+import frontEnd.Skeleton.ScreenGrid.AttributeOwnerVisualImpl;
 import frontEnd.Skeleton.UserTools.SkeletonObject;
 import javafx.geometry.Orientation;
 import javafx.geometry.Pos;
@@ -34,16 +36,19 @@ public class VisualSpawnEntry implements SkeletonObject {
 	
 	private void addToDropZone(SpawnDataReader spawnData,  boolean repeating) {
 		mySpawnBox = new HBox();
+		
 		String presetName = spawnData.getPresetName();
 		Double time = spawnData.getTime();
-		AttributeOwner presetComponent = myView.getBankController().getPreset(presetName);
 		
-		String spawnImagePath = presetComponent.<String>getAttribute("ImageFile").getValue();
-		ImageView spawnImage = createImageView(spawnImagePath);
+		AttributeOwner presetComponent = myView.getBankController().getPreset(presetName);
+		AttributeOwnerVisual presetVisual = new AttributeOwnerVisualImpl(presetComponent);
+		ImageView spawnImage = presetVisual.getImageView();
+		spawnImage.setFitHeight(30);
+		
 		Label name = new Label();
 		name.setText(presetName);
+		
 		Label valueText = new Label(Double.toString(time));
-		// TODO Editable value here valueText.setOnClick()
 		valueText.setOnMouseClicked(e -> {
 			SingleFieldPrompt newPrompt = new SingleFieldPrompt(
 					Arrays.asList("Add Spawn", "Please input a time for your new spawn item"), "Spawn Time Value",
@@ -52,6 +57,7 @@ public class VisualSpawnEntry implements SkeletonObject {
 			myView.sendUserModification(new Modification_EditSpawnDataTime(spawnData,newValue));
 			valueText.setText(Double.toString(newValue));
 		});
+		
 		Button remove = new Button("Delete");
 		remove.setOnAction(e -> {
 			myView.sendUserModification(new Modification_RemoveSpawner(mySpawnQueueName, spawnData));
@@ -68,16 +74,6 @@ public class VisualSpawnEntry implements SkeletonObject {
 		mySpawnBox.setAlignment(Pos.CENTER);
 		mySpawnBox.setSpacing(10);
 	}
-	
-	private ImageView createImageView(String imagePath) {
-		Image image = new Image(getClass().getClassLoader().getResourceAsStream(imagePath));
-		ImageView imv = new ImageView();
-		imv.setImage(image);
-		imv.setPreserveRatio(true);
-		imv.setFitHeight(30);
-		return imv;
-	}
-
 
 
 	@Override
