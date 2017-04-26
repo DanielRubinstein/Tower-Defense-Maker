@@ -12,6 +12,8 @@ import ModificationFromUser.AttributeOwner.Modification_Add_PaletteToGrid;
 import backEnd.BankController;
 import backEnd.Attribute.Attribute;
 import backEnd.Attribute.AttributeOwner;
+import backEnd.GameData.State.Component;
+import backEnd.GameData.State.TileImpl;
 import backEnd.Mode.ModeReader;
 import frontEnd.View;
 import frontEnd.Skeleton.AoTools.GenericCommandCenter;
@@ -30,6 +32,7 @@ import javafx.scene.input.Dragboard;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.TransferMode;
 import javafx.scene.layout.TilePane;
+import util.reflection.Reflection;
 
 /**
  * http://stackoverflow.com/questions/27182323/working-on-creating-image-gallery
@@ -56,7 +59,7 @@ public class Palette implements SkeletonObject, Observer {
 			addPresetToPalette(preset);
 		}
 		createNewPresetButton();
-
+		
 	}
 
 	private void initializeMaps(Map<String, ? extends AttributeOwner> presetMap) {
@@ -169,7 +172,6 @@ public class Palette implements SkeletonObject, Observer {
 	private ImageView createImageView(String myImagePath) {
 		Image image = new Image(getClass().getClassLoader().getResourceAsStream(myImagePath));
 		ImageView imageView = new ImageView(image);
-		
 		return imageView;
 	}
 

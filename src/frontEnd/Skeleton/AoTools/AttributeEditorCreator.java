@@ -33,6 +33,7 @@ import javafx.scene.layout.HBox;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import javafx.stage.FileChooser.ExtensionFilter;
+import util.reflection.Reflection;
 
 public class AttributeEditorCreator {
 	private View myView;
@@ -51,6 +52,7 @@ public class AttributeEditorCreator {
 	public Node extractEditor(String type) {
 		Node n = null;
 		String stringFormatForEditorMethod = "create_%s_Editor";
+		
 		try{
 			Method createEditor = AttributeEditorCreator.class.getDeclaredMethod(String.format(stringFormatForEditorMethod, type));
 			createEditor.setAccessible(true);
