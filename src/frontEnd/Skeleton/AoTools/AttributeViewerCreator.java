@@ -86,10 +86,6 @@ public class AttributeViewerCreator {
 		return createBasicViewer();
 	}
 
-	private Node create_STRINGLIST_Viewer() {
-		return createBasicViewer();
-	}
-
 	private Node create_DOUBLE_Viewer() {
 		return createBasicViewer();
 	}
@@ -98,5 +94,7 @@ public class AttributeViewerCreator {
 		return createBasicViewer();
 	}
 
-
+	private Node create_STRINGLIST_Viewer() {
+		return createBasicViewer();
+	}
 }

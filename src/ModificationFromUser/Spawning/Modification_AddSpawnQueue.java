@@ -25,6 +25,7 @@ public class Modification_AddSpawnQueue implements ModificationFromUser {
 	 */
 	public Modification_AddSpawnQueue(String spawnQueueName) {
 		mySpawnQueueName = spawnQueueName;
+		System.out.println(this.getClass().getSimpleName() + ": " + spawnQueueName);
 	}
 
 	@Override
@@ -32,6 +33,7 @@ public class Modification_AddSpawnQueue implements ModificationFromUser {
 		State state = myModel.getState();
 		Map<String, SpawnQueue> spawnQueues = state.getSpawnQueues();
 		if (!spawnQueues.containsKey(mySpawnQueueName)) {
+			System.out.println(this.getClass().getSimpleName() + ": " + "New spawn queue");
 			spawnQueues.put(mySpawnQueueName, new SpawnQueue());
 		} else {
 			System.out.println("ERROR: NON-UNIQUE SPAWN QUEUE ID");

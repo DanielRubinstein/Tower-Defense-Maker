@@ -72,8 +72,6 @@ public class AttributeOwnerVisualImpl implements SerializableObserver, Attribute
 			} else {
 				setSize(mySize);
 			}
-		} else {
-			setSize(PRESET_SIZE);
 		}
 		
 		
