@@ -1,7 +1,6 @@
 package backEnd.GameData.State;
 
 import java.util.List;
-import java.util.Observer;
 
 import com.thoughtworks.xstream.XStream;
 import com.thoughtworks.xstream.io.xml.DomDriver;
@@ -17,7 +16,7 @@ public class ComponentBuilder {
 	}
 	
 	public Component getComponent() {
-		List<Observer> oldObservers = myComponent.getAndClearObservers();
+		List<SerializableObserver> oldObservers = myComponent.getAndClearObservers();
 		String serializedAO = xStream.toXML(myComponent);
 		myComponent.setObserverList(oldObservers);
 		return (Component) xStream.fromXML(serializedAO);

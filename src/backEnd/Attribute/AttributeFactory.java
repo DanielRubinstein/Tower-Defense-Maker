@@ -100,7 +100,7 @@ public class AttributeFactory {
 				img_newAttr.setValue("");
 				return img_newAttr;
 			case "COMPONENT":
-				AttributeImpl<Component> comp_newAttr = new AttributeImpl<Component>(null, gameAttributeName);
+				AttributeImpl<String> comp_newAttr = new AttributeImpl<String>(null, gameAttributeName);
 				comp_newAttr.setValue(null);
 				return comp_newAttr;
 			default: throw new IllegalArgumentException();

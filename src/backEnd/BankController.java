@@ -6,7 +6,6 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Observer;
 import javax.swing.JOptionPane;
 import backEnd.Mode.Mode;
 import backEnd.Attribute.AttributeData;
@@ -14,6 +13,7 @@ import backEnd.Attribute.AttributeOwner;
 import backEnd.GameData.State.AccessPermissions;
 import backEnd.GameData.State.AccessPermissionsImpl;
 import backEnd.GameData.State.Component;
+import backEnd.GameData.State.SerializableObserver;
 import backEnd.GameData.State.Tile;
 import backEnd.GameData.State.TileImpl;
 
@@ -22,13 +22,13 @@ import backEnd.GameData.State.TileImpl;
  * @author Juan Philippe
  *
  */
-public class BankController
+public class BankController implements BankControllerReader
 {
 	private static final String DUPLICATE_NAME_ERROR = "Cannot Add Duplicate Name";
 	private Map<String, Tile> tileBank;
 	private Map<String, Component> componentBank;
 	private Mode myMode;
-	private List<Observer> observers;
+	private List<SerializableObserver> observers;
 	
 	public BankController(Mode myMode)
 	{
@@ -40,8 +40,13 @@ public class BankController
 		this.tileBank = tileBank;
 		this.componentBank = componentBank;
 		this.myMode = myMode;
-		this.observers = new ArrayList<Observer>();
+		this.observers = new ArrayList<SerializableObserver>();
 		createTemplatesForTesting();
+	}
+	
+	@Override
+	public String getComponentName(Component component){
+		return findKeyFromValue(componentBank, component);
 	}
 	
 	private void createTemplatesForTesting(){
@@ -198,12 +203,12 @@ public class BankController
 		return componentBank.get(componentName)
 ;	}
 	
-	public void addObserver(Observer o){
+	public void addObserver(SerializableObserver o){
 		observers.add(o);
 	}
 	
 	private void notifyObservers() {
-		for(Observer o : observers){
+		for(SerializableObserver o : observers){
 			o.update(null, null);
 		}
 	}

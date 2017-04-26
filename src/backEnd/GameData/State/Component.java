@@ -5,8 +5,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Observable;
-import java.util.Observer;
 import java.util.ResourceBundle;
 
 import backEnd.Attribute.Attribute;
@@ -34,7 +32,7 @@ public class Component implements AttributeOwner, SerializableObservable {
 	private Map<String, Behavior> myBehaviors;
 	private AccessPermissions myAccessPermissions;
 	private String myType;
-	private List<Observer> observers;
+	private List<SerializableObserver> observers;
 	private long ID;
 	private Coordinates previousMovement;
 
@@ -49,7 +47,7 @@ public class Component implements AttributeOwner, SerializableObservable {
 	}
 	
 	public Component(AttributeData attributes, AccessPermissions accessPermissions) throws FileNotFoundException {
-		observers = new ArrayList<Observer>();
+		observers = new ArrayList<SerializableObserver>();
 		previousMovement=new Coordinates(0,0);
 		ID = System.nanoTime();
 		System.out.println(ID + "   ");
@@ -147,7 +145,7 @@ public class Component implements AttributeOwner, SerializableObservable {
 	}
 
 	@Override
-	public void addObserver(Observer obs) {
+	public void addObserver(SerializableObserver obs) {
 		observers.add(obs);
 	}
 
@@ -157,19 +155,15 @@ public class Component implements AttributeOwner, SerializableObservable {
 	}
 	
 	private void notifyObservers() {
-		for (Observer obs : observers) {
-			obs.update(null, null);
+		for (SerializableObserver obs : observers) {
+			obs.update(this, null);
 		}
-	}
-	@Override
-	public void addAsListener(Observer o) {
-		addObserver(o);
 	}
 
 	@Override
-	public List<Observer> getAndClearObservers() {
-		List<Observer> currObservers = observers;
-		observers = new ArrayList<Observer>();
+	public List<SerializableObserver> getAndClearObservers() {
+		List<SerializableObserver> currObservers = observers;
+		observers = new ArrayList<SerializableObserver>();
 		return currObservers;
 	}
 	
@@ -182,13 +176,13 @@ public class Component implements AttributeOwner, SerializableObservable {
 	}
 	
 	@Override
-	public void setObserverList(List<Observer> observers) {
+	public void setObserverList(List<SerializableObserver> observers) {
 		this.observers = observers;
 	}
 
 
 	@Override
-	public List<Observer> getObservers() {
+	public List<SerializableObserver> getObservers() {
 		return observers;
 	}
 
@@ -198,7 +192,7 @@ public class Component implements AttributeOwner, SerializableObservable {
 	}
 
 	@Override
-	public void setObservers(List<Observer> observersave) {
+	public void setObservers(List<SerializableObserver> observersave) {
 		observers = observersave;
 	}
 	

@@ -81,7 +81,8 @@ public class AttributeEditorCreator {
 		}
 		optionsBox.valueProperty().addListener((o, oldValue, newValue) -> {
 			// where the actual modification gets sent
-			sendModification(toCompMap.get(newValue));
+			String componentName = myView.getBankControllerReader().getComponentName(toCompMap.get(newValue));
+			sendModification(componentName);
 		});
 		return optionsBox;
 	}

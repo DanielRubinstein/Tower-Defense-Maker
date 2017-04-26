@@ -2,7 +2,6 @@ package backEnd.GameData.State;
 
 import java.util.Collection;
 import java.util.Map;
-import java.util.Observer;
 
 import backEnd.GameEngine.EngineStatus;
 import backEnd.GameEngine.Engine.Spawning.SpawnQueue;
@@ -26,8 +25,7 @@ public interface State {
 	 */
 	ComponentGraph getComponentGraph();
 
-	
-	void addAsObserver(Observer o);
+	void addAsObserver(SerializableObserver o);
 	
 	void updateState(State state);
 	

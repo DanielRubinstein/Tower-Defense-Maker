@@ -8,6 +8,7 @@ import java.util.ResourceBundle;
 import ModificationFromUser.AttributeOwner.Modification_Add_StraightToGrid;
 import ModificationFromUser.AttributeOwner.Modification_Add_ToPalette;
 import ModificationFromUser.AttributeOwner.Modification_RemoveAttributeOwner;
+import ModificationFromUser.AttributeOwner.Modification_UpgradeComponent;
 import backEnd.Attribute.Attribute;
 import backEnd.Attribute.AttributeOwner;
 import backEnd.GameData.State.Component;
@@ -167,6 +168,14 @@ public class AttributeCommandCenter{
 			
 			bottomButtons.getChildren().add(preset);
 		}
+	}
+	
+	private void createUpgradeButton(AttributeOwner obj){
+		Button upgrade = new Button("Upgrade Component");
+		upgrade.setOnAction((e) -> {
+			myView.sendUserModification(new Modification_UpgradeComponent((Component) obj));
+			myHostStage.close();
+		});
 	}
 
 	private Node createAttributeValueViewer(AttributeOwner obj, Attribute<?> attr) {

@@ -4,8 +4,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Observable;
-import java.util.Observer;
 import com.thoughtworks.xstream.annotations.XStreamOmitField;
 import backEnd.Attribute.AttributeOwnerReader;
 import javafx.geometry.Point2D;
@@ -19,7 +17,7 @@ import javafx.geometry.Point2D;
 
 public class TileGridImpl implements TileGrid {
 	
-	private List<Observer> observers;
+	private List<SerializableObserver> observers;
 	
 	private int numColsInGrid;
 	private int numRowsInGrid;
@@ -27,11 +25,11 @@ public class TileGridImpl implements TileGrid {
 	private List<Tile> tileList;
 	private double tileWidth;
 	private double tileHeight;
-	private List<List<Observer>> tileObserverList;
+	private List<List<SerializableObserver>> tileObserverList;
 	
 	public TileGridImpl(int colsInGrid, int rowsInGrid){
 		
-		observers = new ArrayList<Observer>();
+		observers = new ArrayList<SerializableObserver>();
 		numColsInGrid = colsInGrid;
 		numRowsInGrid = rowsInGrid;
 		tileGrid = new HashMap<>();
@@ -39,7 +37,7 @@ public class TileGridImpl implements TileGrid {
 	
 	public TileGridImpl(TileGridInstantiator i)
 	{
-		observers = new ArrayList<Observer>();
+		observers = new ArrayList<SerializableObserver>();
 		
 		numColsInGrid = i.getNumCols();
 		numRowsInGrid = i.getNumRows();
@@ -156,18 +154,16 @@ public class TileGridImpl implements TileGrid {
 	}
 
 	@Override
-	public void addObserver(Observer o) {
+	public void addObserver(SerializableObserver o) {
 		observers.add(o);
 	}
 	
 	private void notifyObservers(){
-		for (Observer o : observers){
-			o.update(null, null);
-		}
+		notifyObservers(null);
 	}
 	
 	private void notifyObservers(Object arg){
-		for (Observer o : observers){
+		for (SerializableObserver o : observers){
 			o.update(null, arg);
 		}
 	}
@@ -175,7 +171,7 @@ public class TileGridImpl implements TileGrid {
 	
 	public void saveAndClearTileObservers()
 	{
-		tileObserverList = new ArrayList<List<Observer>>();
+		tileObserverList = new ArrayList<List<SerializableObserver>>();
 		
 		for (int i = 0; i < getAllTiles().size(); i++)
 		{
@@ -219,7 +215,7 @@ public class TileGridImpl implements TileGrid {
 	}
 
 	@Override
-	public List<Observer> getObservers() {
+	public List<SerializableObserver> getObservers() {
 		return observers;
 	}
 
@@ -229,7 +225,7 @@ public class TileGridImpl implements TileGrid {
 	}
 
 	@Override
-	public void setObservers(List<Observer> observersave) {
+	public void setObservers(List<SerializableObserver> observersave) {
 		observers = observersave;
 	}
 

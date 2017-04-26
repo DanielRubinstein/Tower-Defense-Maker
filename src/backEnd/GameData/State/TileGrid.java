@@ -1,10 +1,8 @@
 package backEnd.GameData.State;
 
 import java.util.List;
-import java.util.Observer;
 
 import backEnd.Attribute.AttributeOwnerReader;
-import javafx.beans.Observable;
 import javafx.geometry.Point2D;
 
 /**
@@ -64,7 +62,6 @@ public interface TileGrid extends SerializableObservable{
 
 	void setTileObservers();
 	
-
 	TileGridInstantiator getInstantiator();
 
 	void setNumCols(int numColsInGrid);

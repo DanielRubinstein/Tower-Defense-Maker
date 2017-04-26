@@ -1,7 +1,6 @@
 package backEnd.Mode;
 
-import java.util.Observer;
-
+import backEnd.GameData.State.SerializableObserver;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleStringProperty;
 
@@ -9,7 +8,7 @@ public interface ModeReader {
 
 	public SimpleBooleanProperty getAuthorBooleanProperty();
 	
-	public void addObserver(Observer o);
+	public void addObserver(SerializableObserver o);
 
 	SimpleStringProperty getGameStringProperty();
 

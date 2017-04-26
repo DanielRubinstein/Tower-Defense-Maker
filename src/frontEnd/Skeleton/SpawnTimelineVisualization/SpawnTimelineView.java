@@ -2,11 +2,11 @@ package frontEnd.Skeleton.SpawnTimelineVisualization;
 
 import java.util.Arrays;
 import java.util.Map;
-import java.util.Observable;
-import java.util.Observer;
 
 import backEnd.Attribute.AttributeOwner;
 import backEnd.GameData.State.Component;
+import backEnd.GameData.State.SerializableObservable;
+import backEnd.GameData.State.SerializableObserver;
 import backEnd.GameEngine.Engine.Spawning.SpawnData;
 import backEnd.GameEngine.Engine.Spawning.SpawnQueue;
 import frontEnd.View;
@@ -30,7 +30,7 @@ import ModificationFromUser.Spawning.Modification_AddSpawner;
 import ModificationFromUser.Spawning.Modification_EditSpawnDataTime;
 import ModificationFromUser.Spawning.Modification_RemoveSpawner;
 
-public class SpawnTimelineView implements SkeletonObject, Observer {
+public class SpawnTimelineView implements SkeletonObject, SerializableObserver {
 	private View myView;
 	private ScrollPane dropZone1;
 	private ScrollPane dropZone2;
@@ -156,11 +156,11 @@ public class SpawnTimelineView implements SkeletonObject, Observer {
 	}
 
 	@Override
-	public void update(Observable arg0, Object arg1) {
+	public void update(SerializableObservable so, Object obj) {
 		System.out.println("fuck");
-		if(arg0 == mySpawnQueue){
-			System.out.println(arg1);
-			if(arg1 == mySpawnQueue.getFrequencyQueue()){
+		if(so == mySpawnQueue){
+			System.out.println(obj);
+			if(obj == mySpawnQueue.getFrequencyQueue()){
 				System.out.println("yo yo yo");
 			}
 		}
