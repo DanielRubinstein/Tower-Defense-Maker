@@ -3,10 +3,12 @@ package frontEnd.Skeleton.AoTools;
 import java.lang.reflect.Method;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
 import java.util.ResourceBundle;
 
 import ModificationFromUser.AttributeOwner.Modification_Add_StraightToGrid;
 import ModificationFromUser.AttributeOwner.Modification_Add_ToPalette;
+import ModificationFromUser.AttributeOwner.Modification_PurchaseComponent;
 import ModificationFromUser.AttributeOwner.Modification_RemoveAttributeOwner;
 import ModificationFromUser.AttributeOwner.Modification_UpgradeComponent;
 import backEnd.Attribute.Attribute;
@@ -19,9 +21,12 @@ import javafx.geometry.HPos;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.ScrollPane.ScrollBarPolicy;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
@@ -135,6 +140,10 @@ public class AttributeCommandCenter{
 		createAddToPresetButton(obj);
 		checkToAddAttributeOwnerSpecificButton(obj, "addSubmitButton");
 		checkToAddAttributeOwnerSpecificButton(obj, "removeButton");
+		
+		if (!myView.getBooleanAuthorModeProperty().get()){
+			createUpgradeButton(obj);
+		}
 		return bottomButtons;
 	}
 
@@ -172,10 +181,23 @@ public class AttributeCommandCenter{
 	
 	private void createUpgradeButton(AttributeOwner obj){
 		Button upgrade = new Button("Upgrade Component");
+		int cost = (int) obj.getAttribute("UpgradeCost").getValue();
 		upgrade.setOnAction((e) -> {
-			myView.sendUserModification(new Modification_UpgradeComponent((Component) obj));
+			Alert alert = new Alert(AlertType.CONFIRMATION);
+			alert.setTitle("Buy Confirmation");
+			alert.setHeaderText("This Upgrade Costs " + cost + " Dollars");
+			alert.setContentText("Are you sure you want to upgrade this component?");
+			Optional<ButtonType> result = alert.showAndWait();
+			if (result.get() == ButtonType.OK || result.get() == ButtonType.CANCEL) {
+				alert.close();
+			}
+			if (result.get() == ButtonType.OK){
+				myView.sendUserModification(new Modification_PurchaseComponent(cost));
+				myView.sendUserModification(new Modification_UpgradeComponent((Component) obj));
+			}
 			myHostStage.close();
 		});
+		bottomButtons.getChildren().add(upgrade);
 	}
 
 	private Node createAttributeValueViewer(AttributeOwner obj, Attribute<?> attr) {
