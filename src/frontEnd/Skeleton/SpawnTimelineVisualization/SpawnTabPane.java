@@ -49,7 +49,7 @@ public class SpawnTabPane implements SkeletonObject {
 		newSpawnTab.setContent(spawnTimelineView.getRoot());
 		newSpawnTab.setOnCloseRequest(e -> {
 			if (checkWithUser(newSpawnTab)) {
-				takenIDs.remove(key.substring(key.indexOf(' ')));
+				takenIDs.remove(Integer.parseInt(key.substring(key.indexOf(' ')+1)));
 				myView.sendUserModification(new Modification_RemoveSpawnQueue(key));
 			} else {
 				e.consume();
