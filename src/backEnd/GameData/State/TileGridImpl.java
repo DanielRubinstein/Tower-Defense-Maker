@@ -17,7 +17,7 @@ import javafx.geometry.Point2D;
  *
  */
 
-public class TileGridImpl extends Observable implements TileGrid {
+public class TileGridImpl implements TileGrid {
 	
 	private List<Observer> observers;
 	
@@ -121,8 +121,7 @@ public class TileGridImpl extends Observable implements TileGrid {
 			// do not notify ScreenGrid for each initial Tile, only if changed after intialization
 			newTile.setObserverList(tileGrid.get(posOfNewTile).getAndClearObservers());
 			tileGrid.put(posOfNewTile, newTile);
-			this.setChanged();
-			this.notifyObservers(newTile);
+			notifyObservers(newTile);
 		}
 	}
 
@@ -157,22 +156,19 @@ public class TileGridImpl extends Observable implements TileGrid {
 	}
 
 	@Override
-	public void addAsObserver(Observer o) {
+	public void addObserver(Observer o) {
 		observers.add(o);
 	}
 	
-	
-	@Override
-	public void notifyObservers(){
+	private void notifyObservers(){
 		for (Observer o : observers){
-			o.update(this, null);
+			o.update(null, null);
 		}
 	}
 	
-	@Override
-	public void notifyObservers(Object arg){
+	private void notifyObservers(Object arg){
 		for (Observer o : observers){
-			o.update(this, arg);
+			o.update(null, arg);
 		}
 	}
 	
@@ -196,21 +192,6 @@ public class TileGridImpl extends Observable implements TileGrid {
 		}
 	}
 	
-	public List<Observer> getObservers()
-	{
-		return observers;
-	}
-	
-	public void clearObservers()
-	{
-		observers = new ArrayList<Observer>();
-	}
-	
-	public void setObservers(List<Observer> list)
-	{
-		observers = list;
-	}
-	
 	
 	@Override
 	public boolean contains(AttributeOwnerReader newAttrOwn) {
@@ -227,16 +208,29 @@ public class TileGridImpl extends Observable implements TileGrid {
 	public void setNumCols(int numColsInGrid)
 	{
 		this.numColsInGrid = numColsInGrid;
-		this.setChanged();
-		this.notifyObservers();
+		notifyObservers();
 	}
 
 	@Override
 	public void setNumRows(int numRowsInGrid)
 	{
 		this.numRowsInGrid = numRowsInGrid;
-		this.setChanged();
-		this.notifyObservers();
+		notifyObservers();
+	}
+
+	@Override
+	public List<Observer> getObservers() {
+		return observers;
+	}
+
+	@Override
+	public void clearObservers() {
+		observers = null;
+	}
+
+	@Override
+	public void setObservers(List<Observer> observersave) {
+		observers = observersave;
 	}
 
 	

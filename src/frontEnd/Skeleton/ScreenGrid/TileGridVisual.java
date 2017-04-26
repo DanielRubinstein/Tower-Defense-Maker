@@ -46,7 +46,7 @@ public class TileGridVisual implements Observer, SkeletonObject{
 		myWidth = sceneWidth;
 		myHeight = sceneHeight;
 		observedTileGrid = myState.getTileGrid();
-		observedTileGrid.addAsObserver(this);
+		observedTileGrid.addObserver(this);
 		initializeGrid();
 		adjustSize();
 		updateTilesOnGrid();

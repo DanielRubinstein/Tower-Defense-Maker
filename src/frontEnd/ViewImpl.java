@@ -80,6 +80,7 @@ public class ViewImpl implements View {
 
 	@Override
 	public void sendUserModification(ModificationFromUser mod) {
+		System.out.println(mod);
 		myModConsumer.accept(mod);
 	}
 

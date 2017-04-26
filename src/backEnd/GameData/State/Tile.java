@@ -12,7 +12,7 @@ import javafx.geometry.Point2D;
  * @author Riley Nisbet
  */
 
-public interface Tile extends AttributeOwner {
+public interface Tile extends AttributeOwner, SerializableObservable {
 
 	
 	/**

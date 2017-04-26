@@ -9,7 +9,7 @@ import java.util.Observer;
 import backEnd.Attribute.AttributeOwnerReader;
 import javafx.geometry.Point2D;
 
-public interface ComponentGraph {
+public interface ComponentGraph extends SerializableObservable{
 
 
 	/**
@@ -63,15 +63,13 @@ public interface ComponentGraph {
 	 * @return List of components at the nearest location
 	 */
 	List<Component> getNearestComponents(Component centerComp);
-	
-	void addAsObserver(Observer o);
 
 	boolean contains(AttributeOwnerReader c);
 
 	void saveAndClearObservers();
 
-	void setObservers();
-
 	void clearComponents();
+
+	void setComponentObservers();
 
 }

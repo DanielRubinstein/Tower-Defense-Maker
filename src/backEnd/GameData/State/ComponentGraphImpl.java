@@ -21,19 +21,20 @@ import backEnd.Attribute.AttributeOwnerReader;
  *
  */
 
-public class ComponentGraphImpl extends Observable implements ComponentGraph {
+public class ComponentGraphImpl implements ComponentGraph {
 	private Map<Point2D, List<Component>> componentMap;
 	private List<Component> myComponents;
-	private ArrayList<List<Observer>> compObserverList;
+	private List<Observer> observers;
+	private List<List<Observer>> compObserverList;
 
 	public ComponentGraphImpl() {
-		componentMap = new HashMap<>();
-		myComponents = new ArrayList<Component>();
+		this(new HashMap<>());
 	}
 
 	public ComponentGraphImpl(HashMap<Point2D, List<Component>> fromXML) {
 		componentMap = fromXML;
-
+		observers = new ArrayList<Observer>();
+		myComponents = new ArrayList<Component>();
 	}
 
 	public List<Component> getAllComponents() {
@@ -80,8 +81,7 @@ public class ComponentGraphImpl extends Observable implements ComponentGraph {
 		componentMap.put(screenPosition, currList);
 		myComponents.add(newComponent);
 		newComponent.getAttribute("Position").setValue(screenPosition);
-		this.setChanged();
-		this.notifyObservers(newComponent);
+		notifyObservers(newComponent);
 	}
 
 	@Override
@@ -95,8 +95,7 @@ public class ComponentGraphImpl extends Observable implements ComponentGraph {
 		componentMap.put(location, currList);
 		myComponents.remove(toRemove);
 		System.out.println("removed in component graph");
-		this.setChanged();
-		this.notifyObservers(toRemove);
+		notifyObservers(toRemove);
 	}
 
 	@Override
@@ -125,8 +124,8 @@ public class ComponentGraphImpl extends Observable implements ComponentGraph {
 	}
 
 	@Override
-	public void addAsObserver(Observer o) {
-		this.addObserver(o);
+	public void addObserver(Observer o) {
+		observers.add(o);
 
 	}
 
@@ -145,7 +144,7 @@ public class ComponentGraphImpl extends Observable implements ComponentGraph {
 	}
 
 	@Override
-	public void setObservers() {
+	public void setComponentObservers() {
 
 		for (int i = 0; i < myComponents.size(); i++){
 			System.out.println("in componentGraphImpl, observer list is "+compObserverList.get(i));
@@ -169,6 +168,27 @@ public class ComponentGraphImpl extends Observable implements ComponentGraph {
 		for (Component x : list)
 		{
 			removeComponent(x);
+		}
+	}
+
+	@Override
+	public List<Observer> getObservers() {
+		return observers;
+	}
+
+	@Override
+	public void clearObservers() {
+		observers = null;
+	}
+
+	@Override
+	public void setObservers(List<Observer> observersave) {
+		observers = observersave;
+	}
+	
+	private void notifyObservers(Object obj){
+		for (Observer o : observers){
+			o.update(null, obj);
 		}
 	}
 

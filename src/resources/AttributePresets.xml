@@ -24,7 +24,8 @@
 		<Health min="1" max="100" start="1" increment="5"></Health>
 		<MoneyBounty min="0" max="999" start="10" increment="10"></MoneyBounty>
 		<ScoreBounty min="0" max="999" start="10" increment="10"></ScoreBounty><FireDamage min="0" max="200" start="1" increment="2"></FireDamage></INTEGER><INTEGER></INTEGER><EDITABLESTRING>
-		<EDITABLESTRING_TEMPLATE></EDITABLESTRING_TEMPLATE></EDITABLESTRING>
+		<EDITABLESTRING_TEMPLATE></EDITABLESTRING_TEMPLATE>
+		<Upgrade></Upgrade></EDITABLESTRING>
 	<STRINGLIST>
 		<STRINGLIST_TEMPLATE Options="Comma delineated String Options"></STRINGLIST_TEMPLATE>
 		<MoveDirection options="Up,Down,Left,Right"></MoveDirection>
