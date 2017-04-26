@@ -40,8 +40,8 @@ public class AttributeOwnerVisualImpl implements Observer, AttributeOwnerVisual{
 	private void setSize(Double value) {
 		mySize = value;
 		myImage.setPreserveRatio(true);
-		myImage.setFitHeight(value);
-		myImage.setFitWidth(value);
+		myImage.setFitHeight(mySize);
+		myImage.setFitWidth(mySize);
 	}
 	
 	private void setImageHover() {

@@ -84,7 +84,7 @@ public class SettingsViewImpl implements SettingsView{
 
 	private void close()
 	{
-		myParentStage.close();
+		if (myParentStage!= null) myParentStage.close();
 		myStage.close();
 	}
 

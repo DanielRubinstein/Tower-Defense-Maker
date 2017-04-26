@@ -19,26 +19,10 @@ public abstract class WinCondition extends Rule {
 	protected void winGame(GameData myGameData) {
 		// ask level progress controller for next level
 		LevelProgressionControllerEditor myLPC = myGameData.getLevelProgressionController();
-
-		//String levelName = myLPC.getNextLevel();
 		
-		//load splash screen
-		myLPC.initiateSplashScreen(new SplashScreenData("hello", SplashScreenType.LEVEL_WON));
+		//load splash screen and action to occur after splash screen
+		myLPC.initiateSplashScreen(new SplashScreenData("hello", SplashScreenType.LEVEL_WON, () -> myLPC.loadNextGame()));
 		
-
-		// load in new level
-		/*if (levelName != null) {
-			try {
-				DataInputLoader loader = new DataInputLoader(levelName);
-				myGameData.updateGameData(loader.getGameData());
-			} catch (XMLReadingException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-
-		} else {
-			// if there is no next level, go to end game win screen
-		} */
 	}
 
 }

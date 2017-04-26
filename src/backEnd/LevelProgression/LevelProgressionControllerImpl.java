@@ -26,14 +26,17 @@ public class LevelProgressionControllerImpl implements LevelProgressionControlle
 	private DataController myDataController;
 	private Mode myMode;
 	private Consumer<SplashScreenData> splashScreenLoader;
+	private Consumer<Object> gameLoader;
 	
 	private static final String LEVEL_TEMPLATE_PATH = "data/LevelTemplates/";
 	
-	public LevelProgressionControllerImpl(Mode mode, DataController dataController, Consumer<SplashScreenData> splashScreenLoader)
+	public LevelProgressionControllerImpl(Mode mode, DataController dataController, Consumer<SplashScreenData> splashScreenLoader,
+			Consumer<Object> gameLoader)
 	{
 		this.myMode = mode;
 		this.myDataController = dataController;
 		this.splashScreenLoader = splashScreenLoader;
+		this.gameLoader = gameLoader;
 		
 		setGamesMap();
 	}
@@ -170,5 +173,11 @@ public class LevelProgressionControllerImpl implements LevelProgressionControlle
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+	}
+
+	@Override
+	public void loadNextGame()
+	{
+		gameLoader.accept(getNextLevel());
 	}
 }
