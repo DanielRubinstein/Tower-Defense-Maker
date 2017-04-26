@@ -1,5 +1,8 @@
 package frontEnd.Skeleton.ScreenGrid;
 
+import java.io.File;
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -13,9 +16,11 @@ import backEnd.GameData.State.TileImpl;
 import frontEnd.View;
 import frontEnd.Skeleton.AoTools.OnGridTileCommandCenter;
 import frontEnd.Skeleton.UserTools.SkeletonObject;
+import javafx.event.EventHandler;
 import javafx.geometry.Point2D;
 import javafx.scene.Node;
 import javafx.scene.effect.ColorAdjust;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.layout.GridPane;
@@ -35,6 +40,9 @@ public class TileGridVisual implements SerializableObserver, SkeletonObject{
 	private View myView;
 	private State myState;
 	private Map<Tile,Node> selectedTiles;
+	private Collection<ImageView> arrowSet;
+	
+	public static final String ARROW_LOADER_DIRECTORY = "resources" + File.separator + "images" + File.separator + "Arrows" + File.separator;
 	
 	public TileGridVisual(View view, State state, double sceneWidth, double sceneHeight){
 		myView = view;
@@ -65,9 +73,49 @@ public class TileGridVisual implements SerializableObserver, SkeletonObject{
 				selectedTiles.keySet().forEach(t -> {
 					myView.sendUserModification(new Modification_EditAttribute<String>(t,t.getAttribute("MoveDirection"),toSend));
 				});
+			} else if (e.getCode().equals(KeyCode.SPACE)){
+				showArrowsOnTiles();
+			}
+		});
+		
+		myRoot.setOnKeyReleased(e -> {
+			if(e.getCode().equals(KeyCode.SPACE)){
+				hideArrowsOnTiles();
 			}
 		});
 	}
+	
+	private void hideArrowsOnTiles() {
+		for(ImageView imageView : arrowSet){
+			myRoot.getChildren().remove(imageView);
+		}
+		arrowSet.clear();
+	}
+	
+	private void showArrowsOnTiles() {
+		if(arrowSet != null && !arrowSet.isEmpty()) return;
+		arrowSet = new ArrayList<ImageView>();
+		for(Tile tile : myTileImages.keySet()){
+			
+			String moveDirection = tile.getMyAttributes().<String>get("MoveDirection").getValue();
+			Point2D screenPosition = tile.getMyAttributes().<Point2D>get("Position").getValue();
+			Point2D gridPosition = observedTileGrid.getGridPositionFromScreenPosition(screenPosition);
+			if (moveDirection == null || moveDirection.equals("")){
+				//moveDirection = "NoDirection";
+				continue;
+			}
+			System.out.println("printing tile");
+			Image newImage = new Image(getClass().getClassLoader().getResourceAsStream(ARROW_LOADER_DIRECTORY + moveDirection + ".png"));
+			ImageView imageView = new ImageView(newImage);
+
+			
+			arrowSet.add(imageView);
+			myRoot.add(imageView, (int) gridPosition.getX(), (int) gridPosition.getY());
+			imageView.setFitWidth(30);
+			imageView.setFitHeight(30);
+		}
+	}
+	
 	private void adjustSize(){
 		numberOfTileCols = observedTileGrid.getNumColsInGrid();
 		numberOfTileRows = observedTileGrid.getNumRowsInGrid();
@@ -126,6 +174,7 @@ public class TileGridVisual implements SerializableObserver, SkeletonObject{
 		setTileInteraction(tileView,  t);
 		if(myTiles.containsKey(pos) && !myTiles.get(pos).equals(t)){
 			myRoot.getChildren().remove(myTileImages.get(myTiles.get(pos)));
+			myTileImages.remove(myTiles.get(pos));
 		}
 		myRoot.add(tileView, (int) pos.getX(), (int) pos.getY());
 		myTiles.put(pos, t);

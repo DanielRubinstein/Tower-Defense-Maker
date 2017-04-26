@@ -16,6 +16,7 @@ import backEnd.GameData.State.Tile;
 import backEnd.GameData.State.TileImpl;
 import backEnd.Mode.ModeException;
 import javafx.geometry.Point2D;
+import util.reflection.Reflection;
 
 /**
  * Used for adding a preset attribute owner to the grid. Preset attribute owner
@@ -45,6 +46,9 @@ public class Modification_Add_PaletteToGrid implements ModificationFromUser {
 		AttributeOwnerSerializer attributeOwnerSerializer = new AttributeOwnerSerializer();
 		AttributeOwner cleanAO = attributeOwnerSerializer.createCopy(newAttrOwn);
 		cleanAO.setAttributeValue("Position", location);
+
+		//Reflection.callMethod(this, "add", cleanAO.getClass());
+		
 		try {
 			Method add = Modification_Add_PaletteToGrid.class.getDeclaredMethod("add", cleanAO.getClass());
 			add.setAccessible(true);
@@ -52,6 +56,7 @@ public class Modification_Add_PaletteToGrid implements ModificationFromUser {
 		} catch (NoSuchMethodException e) {
 			throw new Exception(DESCRIPTION_ERROR);
 		}
+		
 	}
 	
 	private void add(TileImpl tile){
@@ -65,7 +70,7 @@ public class Modification_Add_PaletteToGrid implements ModificationFromUser {
 		}
 	}
 	
-	private void add(Component component){
+	public void add(Component component){
 		myModel.getState().getComponentGraph().addComponentToGrid(component, location);
 		switch (myModel.getMode().getUserMode()) {
 		case "AUTHOR":
