@@ -2,10 +2,10 @@ package frontEnd.Skeleton.ScreenGrid;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Observable;
-import java.util.Observer;
 
 import ModificationFromUser.AttributeOwner.Modification_EditAttribute;
+import backEnd.GameData.State.SerializableObservable;
+import backEnd.GameData.State.SerializableObserver;
 import backEnd.GameData.State.State;
 import backEnd.GameData.State.Tile;
 import backEnd.GameData.State.TileGrid;
@@ -20,7 +20,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.layout.GridPane;
 
-public class TileGridVisual implements Observer, SkeletonObject{
+public class TileGridVisual implements SerializableObserver, SkeletonObject{
 
 	private GridPane myRoot;
 	private Map<Point2D, Tile> myTiles;
@@ -73,7 +73,6 @@ public class TileGridVisual implements Observer, SkeletonObject{
 		numberOfTileRows = observedTileGrid.getNumRowsInGrid();
 		tileWidth = myWidth / numberOfTileCols;
 		tileHeight = myHeight / numberOfTileRows;
-		System.out.println(this.getClass().getSimpleName() + ": " + myWidth + " " + myHeight);
 		observedTileGrid.setTileSize(tileWidth, tileHeight);
 	}
 
@@ -107,7 +106,7 @@ public class TileGridVisual implements Observer, SkeletonObject{
 		for (int row = 0; row < numberOfTileRows; row++) {
 			for (int col = 0; col < numberOfTileCols; col++) {
 				Tile t = observedTileGrid.getTileByGridPosition(col, row);
-				Point2D pos = new Point2D(col, row);//TODO Possible bug in initialization idk
+				Point2D pos = new Point2D(col, row);
 				if(!myTiles.containsKey(pos) || !myTiles.get(pos).equals(t)){
 					addTileToGrid(t, pos);
 				}
@@ -133,9 +132,9 @@ public class TileGridVisual implements Observer, SkeletonObject{
 		myTileImages.put(t, tileView);
 	}
 	@Override
-	public void update(Observable o, Object arg) {
-		if(arg != null){
-			updateCorrespondingGrid((TileImpl)arg);
+	public void update(SerializableObservable so, Object obj) {
+		if(obj != null){
+			updateCorrespondingGrid((TileImpl)obj);
 		} else {
 			adjustSize();
 			int counter = 0;

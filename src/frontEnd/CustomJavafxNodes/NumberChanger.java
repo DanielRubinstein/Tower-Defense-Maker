@@ -49,7 +49,7 @@ public class NumberChanger implements SkeletonObject{
 		HBox h = new HBox();
 		h.getChildren().add(this.getRoot());
 		Label currentVal = new Label(String.format(RESOURCE_BUNDLE.getString("SingleIntegerWithParenthesis"), this.getValue().intValue()));
-		this.addListener( (observable, oldValue, newValue)->{
+		this.addListener( (SerializableObservable, oldValue, newValue)->{
 			myRoot.setValue(newValue.intValue());
 			currentVal.setText(String.format(RESOURCE_BUNDLE.getString("SingleIntegerWithParenthesis"), newValue.intValue()));
 		});
@@ -61,7 +61,7 @@ public class NumberChanger implements SkeletonObject{
 		HBox h = new HBox();
 		h.getChildren().add(this.getRoot());
 		Label currentVal = new Label(String.format(RESOURCE_BUNDLE.getString("SingleDoubleRoundedToTenthsWithParenthesis"), this.getValue().doubleValue()));
-		this.addListener( (observable, oldValue, newValue)->{
+		this.addListener( (SerializableObservable, oldValue, newValue)->{
 			currentVal.setText(String.format(RESOURCE_BUNDLE.getString("SingleDoubleRoundedToTenthsWithParenthesis"), newValue.doubleValue()));
 		});
 		h.getChildren().add(currentVal);

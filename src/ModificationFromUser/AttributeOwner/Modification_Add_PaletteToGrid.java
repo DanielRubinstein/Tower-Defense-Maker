@@ -1,7 +1,6 @@
 package ModificationFromUser.AttributeOwner;
 
 import java.util.List;
-import java.util.Observer;
 import java.lang.reflect.Method;
 
 import com.thoughtworks.xstream.XStream;

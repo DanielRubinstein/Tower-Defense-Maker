@@ -7,9 +7,8 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.LinkedList;
+import java.util.List;
 import java.util.Map;
-import java.util.Observable;
-import java.util.Observer;
 import java.util.Queue;
 import java.util.ResourceBundle;
 import java.util.Set;
@@ -28,7 +27,7 @@ import javafx.geometry.Point2D;
  * @author Alex Salas, Christian Martindale
  *
  */
-public class StateImpl extends Observable implements State {
+public class StateImpl implements State, SerializableObservable {
 
 	private int numColsInGrid;
 	private int numRowsInGrid;
@@ -40,6 +39,7 @@ public class StateImpl extends Observable implements State {
 	private final static ResourceBundle myImageResource = ResourceBundle.getBundle(IMAGEPATH_RESOURCES_PATH);
 	private EngineStatus myEngineStatus;
 	private Map<String, SpawnQueue> mySpawnQueues;
+	private List<SerializableObserver> observers;
 	
 	public StateImpl(int numColsInGrid, int numRowsInGrid) throws FileNotFoundException {
 		this(numColsInGrid, numRowsInGrid, setDefaultTileGrid(numColsInGrid, numRowsInGrid), new ComponentGraphImpl());
@@ -52,6 +52,7 @@ public class StateImpl extends Observable implements State {
 		myComponentGraph = componentGraph;
 		myEngineStatus = EngineStatus.PAUSED;
 		mySpawnQueues = new HashMap<String,SpawnQueue>();
+		observers = new ArrayList<SerializableObserver>();
 	}
 
 
@@ -73,7 +74,7 @@ public class StateImpl extends Observable implements State {
 		return tileGrid;
 	}
 	
-	public void addAsObserver(Observer o){
+	public void addAsObserver(SerializableObserver o){
 		this.addObserver(o);
 	}
 
@@ -107,10 +108,7 @@ public class StateImpl extends Observable implements State {
 		replaceTiles(state.getTileGrid());
 		replaceComponents(state.getComponentGraph());
 		this.myEngineStatus = state.getEngineStatus();
-		
-		this.setChanged();
-		this.notifyObservers();
-
+		notifyObservers();
 	}
 
 	private void replaceComponents(ComponentGraph componentGraph)
@@ -259,8 +257,7 @@ public class StateImpl extends Observable implements State {
 
 	public void setEngineStatus(EngineStatus engineStatus) {
 		myEngineStatus=engineStatus;
-		this.setChanged();
-		this.notifyObservers();
+		notifyObservers();
 	}
 
 
@@ -268,10 +265,35 @@ public class StateImpl extends Observable implements State {
 	public Map<String, SpawnQueue> getSpawnQueues() {
 		return mySpawnQueues;
 	}
+	
+	private void notifyObservers() {
+		for (SerializableObserver o : observers){
+			o.update(this, null);
+		}
+	}
 
 	@Override
 	public void setComponentGraph(ComponentGraph componentGraph) {
-		// TODO Auto-generated method stub
-		
+		myComponentGraph = componentGraph;
+	}
+
+	@Override
+	public void addObserver(SerializableObserver o) {
+		observers.add(o);
+	}
+
+	@Override
+	public List<SerializableObserver> getObservers() {
+		return observers;
+	}
+
+	@Override
+	public void clearObservers() {
+		observers = null;
+	}
+
+	@Override
+	public void setObservers(List<SerializableObserver> observersave) {
+		observers = observersave;
 	}
 }

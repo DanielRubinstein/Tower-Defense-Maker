@@ -45,7 +45,6 @@ public class AttributeFactory {
 		String attributeType = myAttrNameResources.getString(gameAttributeName);
 		Node thisAttrNode = doc.getElementsByTagName(gameAttributeName).item(0);
 		switch (attributeType) {
-
 			case "STRINGLIST":
 				String allStringOptions = thisAttrNode.getAttributes().getNamedItem("options").getNodeValue();
 				List<String> stringOptions = Arrays.asList(allStringOptions.split("\\s*,\\s*"));
@@ -101,7 +100,7 @@ public class AttributeFactory {
 				img_newAttr.setValue("");
 				return img_newAttr;
 			case "COMPONENT":
-				AttributeImpl<Component> comp_newAttr = new AttributeImpl<Component>(null, gameAttributeName);
+				AttributeImpl<String> comp_newAttr = new AttributeImpl<String>(null, gameAttributeName);
 				comp_newAttr.setValue(null);
 				return comp_newAttr;
 			default: throw new IllegalArgumentException();

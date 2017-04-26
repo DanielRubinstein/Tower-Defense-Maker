@@ -1,17 +1,17 @@
 package frontEnd.Skeleton.ScreenGrid;
 
-import java.util.Observable;
-import java.util.Observer;
 
 
 import backEnd.Attribute.AttributeOwnerReader;
+import backEnd.GameData.State.SerializableObservable;
+import backEnd.GameData.State.SerializableObserver;
 import backEnd.GameData.State.TileImpl;
 import javafx.geometry.Point2D;
 import javafx.scene.control.Tooltip;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
-public class AttributeOwnerVisualImpl implements Observer, AttributeOwnerVisual{
+public class AttributeOwnerVisualImpl implements SerializableObserver, AttributeOwnerVisual{
 
 	private ImageView myImage;
 	private String myImagePath;
@@ -24,7 +24,7 @@ public class AttributeOwnerVisualImpl implements Observer, AttributeOwnerVisual{
 	
 	public AttributeOwnerVisualImpl(AttributeOwnerReader attr){
 		myAttr = attr;
-		myAttr.addAsListener(this);
+		myAttr.addObserver(this);
 		setImage(myAttr.getMyAttributes().<String>get(IMAGE_ATTRIBUTE).getValue());
 		setImageHover();
 		if(myAttr instanceof TileImpl){
@@ -86,10 +86,10 @@ public class AttributeOwnerVisualImpl implements Observer, AttributeOwnerVisual{
 	}
 	
 	/* (non-Javadoc)
-	 * @see frontEnd.CustomJavafxNodes.FrontEndAttributeOwner#update(java.util.Observable, java.lang.Object)
+	 * @see frontEnd.CustomJavafxNodes.FrontEndAttributeOwner#update(java.util.SerializableObservable, java.lang.Object)
 	 */
 	@Override
-	public void update(Observable o, Object arg) {
+	public void update(SerializableObservable o, Object arg) {
 		if(o == myAttr){
 			String newImagePath = myAttr.getMyAttributes().<String>get(IMAGE_ATTRIBUTE).getValue();
 			Point2D newPosition = myAttr.getMyAttributes().<Point2D>get(POSITION_ATTRIBUTE).getValue();
