@@ -173,7 +173,7 @@ public class AttributeEditorCreator {
 	}
 
 	private Node create_STRINGLIST_Editor() {
-		List<String> editParameters = (List<String>) myAttr.getEditParameters();
+		List<String> editParameters = getStringListOptions();
 		ObservableList<String> options = (ObservableList<String>) FXCollections.observableArrayList(editParameters);
 		ComboBox<String> optionsBox = new ComboBox<String>(options);
 		try {
@@ -189,6 +189,13 @@ public class AttributeEditorCreator {
 		return optionsBox;
 	}
 
+	private List<String> getStringListOptions() {
+		if(myAttr.getName().equals("SpawnTimeline")){
+			return new ArrayList<String>(myView.getSpawnQueues().keySet());
+		}
+		return (List<String>) myAttr.getEditParameters();
+	}
+	
 	private HBox create_IMAGE_Editor() {
 		HBox both = new HBox();
 		String imagePath = (String) myAttr.getValue();
