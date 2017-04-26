@@ -72,8 +72,6 @@ public class AttributeOwnerVisualImpl implements Observer, AttributeOwnerVisual{
 			} else {
 				setSize(mySize);
 			}
-		} else {
-			setSize(PRESET_SIZE);
 		}
 		
 		

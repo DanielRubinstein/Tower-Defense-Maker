@@ -101,6 +101,13 @@ public class Palette<T extends AttributeOwner> implements SkeletonObject, Observ
 	}
 
 	private void addPresetImageViewToPalette(ImageView imageView) {
+		switch (myType) {
+		case "Tiles":
+			imageView.setFitHeight(75d);
+			imageView.setFitWidth(75d);
+			break;
+		}
+				
 		tile.getChildren().add(imageView);
 	}
 	
