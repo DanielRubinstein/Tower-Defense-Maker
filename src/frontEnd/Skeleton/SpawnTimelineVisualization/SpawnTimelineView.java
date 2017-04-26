@@ -24,6 +24,7 @@ import javafx.scene.control.ScrollPane.ScrollBarPolicy;
 import javafx.scene.input.TransferMode;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.util.Pair;
 
@@ -125,8 +126,7 @@ public class SpawnTimelineView implements SkeletonObject, SerializableObserver {
 
 	private void removeSpawn(Object obj) {
 		SpawnDataImpl toRemove_Spawn = getToRemove_Spawn(obj);
-		Node toRemove_Node = spawnDataToVisual.get(toRemove_Spawn).getRoot();
-		((VBox) spawnDataToDropZone.get(toRemove_Spawn).getContent()).getChildren().remove(toRemove_Node);
+		((HBox) spawnDataToVisual.get(toRemove_Spawn).getRoot()).getChildren().clear();
 		spawnDataToDropZone.remove(toRemove_Spawn);
 		spawnDataToVisual.remove(toRemove_Spawn);
 		spawnDataToQueue.remove(toRemove_Spawn);

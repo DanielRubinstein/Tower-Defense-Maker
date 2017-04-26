@@ -31,10 +31,6 @@ public class Modification_RemoveSpawner implements ModificationFromUser{
 	
 	@Override
 	public void invoke(ModelImpl myModel) throws Exception {
-		State state = myModel.getState();
-		Map<String, SpawnQueues> spawnQueues = state.getSpawnQueues();
-		SpawnQueues spawnQueue = spawnQueues.get(mySpawnQueueName);
-		spawnQueue.getFrequencySpawnQueue().remove(mySpawnDataToRemove);
-		spawnQueue.getSingleSpawnQueue().remove(mySpawnDataToRemove);
+		myModel.getState().getSpawnQueues().get(mySpawnQueueName).remove(mySpawnDataToRemove);
 	}
 }

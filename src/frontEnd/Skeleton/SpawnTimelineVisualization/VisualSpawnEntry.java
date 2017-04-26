@@ -55,7 +55,6 @@ public class VisualSpawnEntry implements SkeletonObject {
 		Button remove = new Button("Delete");
 		remove.setOnAction(e -> {
 			myView.sendUserModification(new Modification_RemoveSpawner(mySpawnQueueName, spawnData));
-			mySpawnBox.getChildren().clear();
 		});
 		
 		Separator separator2 = new Separator();
