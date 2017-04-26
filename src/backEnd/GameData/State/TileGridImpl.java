@@ -65,12 +65,16 @@ public class TileGridImpl extends Observable implements TileGrid {
 	
 	
 	public boolean atMiddleOfTile(Point2D screenPosition){
+		try{
 		Tile bottom=getTileByScreenPosition(new Point2D(screenPosition.getX(), screenPosition.getY()-tileHeight/2.1));
 		Tile top=getTileByScreenPosition(new Point2D(screenPosition.getX(), screenPosition.getY()+tileHeight/2.1));
 		Tile left=getTileByScreenPosition(new Point2D(screenPosition.getX()-tileWidth/2.1, screenPosition.getY()));
 		Tile right=getTileByScreenPosition(new Point2D(screenPosition.getX()+tileWidth/2.1, screenPosition.getY()));
 		Tile thisTile=getTileByScreenPosition(screenPosition);
 		return ((bottom.equals(thisTile)&&thisTile.equals(top))||(left.equals(thisTile)&&thisTile.equals(right)));
+		} catch (NullPointerException e){
+			return false;
+		}
 	}
 
 	private void checkAgainstBounds(int column, int row) {
