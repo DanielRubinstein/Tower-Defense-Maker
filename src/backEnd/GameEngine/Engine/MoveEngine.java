@@ -19,6 +19,11 @@ public class MoveEngine implements Engine{
 	private State myState;
 	private Tile currentTile;
 	private MoveBehavior mb;
+	private final String POSITION="Position";
+	private final String TYPE="Type";
+	private final String PROJECTILE="Projectile";
+	private final String ENEMY="Enemy";
+	private final String TOWER="Tower";
 	/**
 	 * 
 	 * @param TileGrid the Grid of Tiles that Components must navigate
@@ -33,7 +38,10 @@ public class MoveEngine implements Engine{
 		List<Component> toRemove=new ArrayList<Component>();
 		Map<Component, Point2D> toAdd=new HashMap<Component, Point2D>();
 		for (Component c: myState.getComponentGraph().getAllComponents()){
-			Point2D currentLocation=c.<Point2D>getAttribute("Position").getValue();
+			if (!c.<String>getAttribute(TYPE).getValue().equals(ENEMY)){
+				continue;
+			}
+			Point2D currentLocation=c.<Point2D>getAttribute(POSITION).getValue();
 			currentTile = gameData.getState().getTileGrid().getTileByScreenPosition(currentLocation);
 			if (currentTile==null){
 				continue;
@@ -43,7 +51,7 @@ public class MoveEngine implements Engine{
 				mb.execute(currentTile, gameData.getState().getTileGrid().atMiddleOfTile(currentLocation));
 				Point2D newPosition=mb.getPosition();
 				if (newPosition!=null&&!newPosition.equals(currentLocation)){
-					c.setAttributeValue("Position", newPosition);
+					c.setAttributeValue(POSITION, newPosition);
 				}
 			} catch (FileNotFoundException e) {
 				ErrorDialog fnf = new ErrorDialog();

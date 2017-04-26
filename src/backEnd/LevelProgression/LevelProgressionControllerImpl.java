@@ -6,10 +6,13 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
+import java.util.function.Consumer;
+
 import backEnd.LevelProgression.LevelProgressionControllerEditor;
 import backEnd.Mode.Mode;
 import data.DataController;
 import data.XMLReadingException;
+import frontEnd.Skeleton.SplashScreens.SplashScreenData;
 
 /**
  * 
@@ -22,14 +25,25 @@ public class LevelProgressionControllerImpl implements LevelProgressionControlle
 	private Map<String,List<String>> gamesMap; //String gameName -> List of Level names
 	private DataController myDataController;
 	private Mode myMode;
+	private Consumer<SplashScreenData> splashScreenLoader;
+	private Consumer<Object> gameLoader;
 	
 	private static final String LEVEL_TEMPLATE_PATH = "data/LevelTemplates/";
 	
-	public LevelProgressionControllerImpl(Mode mode, DataController dataController)
+	public LevelProgressionControllerImpl(Mode mode, DataController dataController, Consumer<SplashScreenData> splashScreenLoader,
+			Consumer<Object> gameLoader)
 	{
 		this.myMode = mode;
 		this.myDataController = dataController;
+		this.splashScreenLoader = splashScreenLoader;
+		this.gameLoader = gameLoader;
+		
 		setGamesMap();
+	}
+	
+	public void initiateSplashScreen(SplashScreenData data)
+	{
+		splashScreenLoader.accept(data);
 	}
 	
 	@Override
@@ -159,5 +173,11 @@ public class LevelProgressionControllerImpl implements LevelProgressionControlle
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+	}
+
+	@Override
+	public void loadNextGame()
+	{
+		gameLoader.accept(getNextLevel());
 	}
 }

@@ -13,13 +13,13 @@ import frontEnd.CustomJavafxNodes.ErrorDialog;
 import frontEnd.Facebook.FacebookConnector;
 import frontEnd.Facebook.FacebookInteractor;
 import javafx.stage.Stage;
-import frontEnd.Skeleton.SplashScreens.SplashScreen;
 import frontEnd.Skeleton.SplashScreens.SplashScreenData;
 
 public class ControllerImpl implements Controller {
 	private ViewImpl myView;
 	private ModelImpl myModel;
 	private FacebookInteractor myFb;
+	private Consumer<Object> setGameData;
 	private EngineStatus myEngineStatus = EngineStatus.PAUSED;
 
 
@@ -27,15 +27,16 @@ public class ControllerImpl implements Controller {
 		
 		Consumer<SplashScreenData> splashScreenLoader = (data) ->
 		{
-			myView.setSplashScreen(new SplashScreen(data));
+			myView.setSplashScreen(data);
 		};
 		
 		Consumer<ModificationFromUser> viewMod = 
 				(ModificationFromUser m) -> {
 					try {
 						executeInteraction(m);
-						System.out.println("In Controller - Modification from fE to bE executed");
+//						System.out.println("In Controller - Modification from fE to bE executed");
 					} catch (Exception e) {
+						e.printStackTrace();
 						ErrorDialog errDia = new ErrorDialog();
 						String eMessage = "";
 						if(e.getMessage() != null){
@@ -47,13 +48,15 @@ public class ControllerImpl implements Controller {
 					}
 				};
 
-		Consumer<Object> setGameData = o -> {
+		setGameData = o ->
+		{
 			try {
+				
 				DataInputLoader loader = new DataInputLoader(o);
 				GameData initialGameData = loader.getGameData();
 				
 				initialGameData.setEngineStatus(myEngineStatus);
-				myModel = new ModelImpl(initialGameData, myEngineStatus, splashScreenLoader);
+				myModel = new ModelImpl(initialGameData, myEngineStatus, splashScreenLoader, setGameData);
 				myView = new ViewImpl(myModel, viewMod,myFb);
 
 			} catch (Exception e) {

@@ -17,13 +17,8 @@ public class Modification_LoadLevel implements ModificationFromUser
 
 	@Override
 	public void invoke(ModelImpl myModel) throws Exception
-	{	
-			
-			File file = load(myModel);
-			DataInputLoader dataInput = new DataInputLoader(file);
-
-			myModel.getGameData().updateGameData(dataInput.getGameData());
-		
+	{
+			myModel.getGameLoader().accept(load(myModel));
 	}
 	
 	private File load(ModelImpl myModel)

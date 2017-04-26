@@ -7,8 +7,6 @@ import java.util.Map;
 import java.util.Observable;
 import java.util.Observer;
 import com.thoughtworks.xstream.annotations.XStreamOmitField;
-
-import backEnd.Attribute.Attribute;
 import backEnd.Attribute.AttributeOwnerReader;
 import javafx.geometry.Point2D;
 
@@ -20,7 +18,7 @@ import javafx.geometry.Point2D;
  *
  */
 
-public class TileGridImpl extends Observable implements TileGrid {
+public class TileGridImpl implements TileGrid {
 
 	private List<Observer> observers;
 
@@ -65,29 +63,39 @@ public class TileGridImpl extends Observable implements TileGrid {
 	}
 
 	public boolean atMiddleOfTile(Point2D screenPosition) {
-//		Tile bottom = getTileByScreenPosition(
-//				new Point2D(screenPosition.getX(), screenPosition.getY() - tileHeight / 2.1));
-//		Tile top = getTileByScreenPosition(
-//				new Point2D(screenPosition.getX(), screenPosition.getY() + tileHeight / 2.1));
-//		Tile left = getTileByScreenPosition(
-//				new Point2D(screenPosition.getX() - tileWidth / 2.1, screenPosition.getY()));
-//		Tile right = getTileByScreenPosition(
-//				new Point2D(screenPosition.getX() + tileWidth / 2.1, screenPosition.getY()));
-//		Tile thisTile = getTileByScreenPosition(screenPosition);
-//		return ((bottom.equals(thisTile) && thisTile.equals(top)) || (left.equals(thisTile) && thisTile.equals(right)));
-		//Almost got cancer and died from reading the above
+		// Tile bottom = getTileByScreenPosition(
+		// new Point2D(screenPosition.getX(), screenPosition.getY() - tileHeight
+		// / 2.1));
+		// Tile top = getTileByScreenPosition(
+		// new Point2D(screenPosition.getX(), screenPosition.getY() + tileHeight
+		// / 2.1));
+		// Tile left = getTileByScreenPosition(
+		// new Point2D(screenPosition.getX() - tileWidth / 2.1,
+		// screenPosition.getY()));
+		// Tile right = getTileByScreenPosition(
+		// new Point2D(screenPosition.getX() + tileWidth / 2.1,
+		// screenPosition.getY()));
+		// Tile thisTile = getTileByScreenPosition(screenPosition);
+		// return ((bottom.equals(thisTile) && thisTile.equals(top)) ||
+		// (left.equals(thisTile) && thisTile.equals(right)));
+		// Almost got cancer and died from reading the above
 		Tile thisTile = getTileByScreenPosition(screenPosition);
-		Point2D xyTilePosition = thisTile.<Point2D>getAttribute("Position").getValue();
-		Point2D position = new Point2D((int)(xyTilePosition.getX() / tileWidth),(int)(xyTilePosition.getY() / tileHeight));
-		double midMagicNumLmao = (.1 / 2.1);//TODO fix this (it is the percent of the tile considered the middle)
-		double topMiddle    = (position.getY() + (1 - midMagicNumLmao) / 2) * tileHeight; //Top    as in higher visually
-		double bottomMiddle = (position.getY() + (1 + midMagicNumLmao) / 2) * tileHeight; //Bottom as in lower  visually
-		double leftMiddle   = (position.getX() + (1 - midMagicNumLmao) / 2) * tileWidth;
-		double rightMiddle  = (position.getX() + (1 + midMagicNumLmao) / 2) * tileWidth;
+		Point2D xyTilePosition = thisTile.<Point2D> getAttribute("Position").getValue();
+		Point2D position = new Point2D((int) (xyTilePosition.getX() / tileWidth),
+				(int) (xyTilePosition.getY() / tileHeight));
+		double midMagicNumLmao = (.1 / 2.1);// TODO fix this (it is the percent
+											// of the tile considered the
+											// middle)
+		double topMiddle = (position.getY() + (1 - midMagicNumLmao) / 2) * tileHeight; 
+			// Top as in higher visually
+		double bottomMiddle = (position.getY() + (1 + midMagicNumLmao) / 2) * tileHeight; 
+			// Bottom as in lower visually
+		double leftMiddle = (position.getX() + (1 - midMagicNumLmao) / 2) * tileWidth;
+		double rightMiddle = (position.getX() + (1 + midMagicNumLmao) / 2) * tileWidth;
 		double xPos = screenPosition.getX();
 		double yPos = screenPosition.getY();
 		boolean middleTopBottom = topMiddle < yPos && yPos < bottomMiddle;
-		boolean middleLeftRight = leftMiddle < xPos && xPos < rightMiddle;						
+		boolean middleLeftRight = leftMiddle < xPos && xPos < rightMiddle;
 		return middleTopBottom || middleLeftRight;
 	}
 
@@ -136,8 +144,7 @@ public class TileGridImpl extends Observable implements TileGrid {
 			// after intialization
 			newTile.setObserverList(tileGrid.get(posOfNewTile).getAndClearObservers());
 			tileGrid.put(posOfNewTile, newTile);
-			this.setChanged();
-			this.notifyObservers(newTile);
+			notifyObservers(newTile);
 		}
 	}
 
@@ -172,21 +179,19 @@ public class TileGridImpl extends Observable implements TileGrid {
 	}
 
 	@Override
-	public void addAsObserver(Observer o) {
+	public void addObserver(Observer o) {
 		observers.add(o);
 	}
 
-	@Override
-	public void notifyObservers() {
+	private void notifyObservers() {
 		for (Observer o : observers) {
-			o.update(this, null);
+			o.update(null, null);
 		}
 	}
 
-	@Override
-	public void notifyObservers(Object arg) {
+	private void notifyObservers(Object arg) {
 		for (Observer o : observers) {
-			o.update(this, arg);
+			o.update(null, arg);
 		}
 	}
 
@@ -205,18 +210,6 @@ public class TileGridImpl extends Observable implements TileGrid {
 		}
 	}
 
-	public List<Observer> getObservers() {
-		return observers;
-	}
-
-	public void clearObservers() {
-		observers = new ArrayList<Observer>();
-	}
-
-	public void setObservers(List<Observer> list) {
-		observers = list;
-	}
-
 	@Override
 	public boolean contains(AttributeOwnerReader newAttrOwn) {
 		return tileGrid.containsValue(newAttrOwn);
@@ -229,17 +222,29 @@ public class TileGridImpl extends Observable implements TileGrid {
 	}
 
 	@Override
-	public void setWidth(int numColsInGrid) {
+	public void setNumCols(int numColsInGrid) {
 		this.numColsInGrid = numColsInGrid;
-		this.setChanged();
-		this.notifyObservers();
+		notifyObservers();
 	}
 
 	@Override
-	public void setHeight(int numRowsInGrid) {
+	public void setNumRows(int numRowsInGrid) {
 		this.numRowsInGrid = numRowsInGrid;
-		this.setChanged();
-		this.notifyObservers();
+		notifyObservers();
 	}
 
+	@Override
+	public List<Observer> getObservers() {
+		return observers;
+	}
+
+	@Override
+	public void clearObservers() {
+		observers = null;
+	}
+
+	@Override
+	public void setObservers(List<Observer> observersave) {
+		observers = observersave;
+	}
 }

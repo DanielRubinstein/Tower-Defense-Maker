@@ -48,7 +48,7 @@ public class XMLWriterImpl implements XMLWriter{
 		String componentMapXML = xStream.toXML(gameData.getState().getComponentGraph().getComponentMap());
 		saveToXML(filePath+ levelName +"/", "componentgraph", componentMapXML);
 		
-		gameData.getState().getComponentGraph().setObservers();
+		gameData.getState().getComponentGraph().setComponentObservers();
 		
 		String playerStatusXML = xStream.toXML(gameData.getStatus());
 		saveToXML(filePath+ levelName +"/", "playerstatus", playerStatusXML);
@@ -120,7 +120,7 @@ public class XMLWriterImpl implements XMLWriter{
 		String componentMapXML = xStream.toXML(gameData.getState().getComponentGraph().getComponentMap());
 		saveToXML(levelTemplateDataPath+ levelName +"/", "componentgraph", componentMapXML);
 		
-		gameData.getState().getComponentGraph().setObservers();
+		gameData.getState().getComponentGraph().setComponentObservers();
 		
 		String playerStatusXML = xStream.toXML(new PlayerStatus());
 		saveToXML(levelTemplateDataPath+ levelName +"/", "playerstatus", playerStatusXML);

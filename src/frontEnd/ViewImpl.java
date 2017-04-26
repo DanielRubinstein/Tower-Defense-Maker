@@ -19,6 +19,7 @@ import frontEnd.CustomJavafxNodes.ErrorDialog;
 import frontEnd.Facebook.FacebookInteractor;
 import frontEnd.Skeleton.SkeletonImpl;
 import frontEnd.Skeleton.SplashScreens.SplashScreen;
+import frontEnd.Skeleton.SplashScreens.SplashScreenData;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.scene.Node;
@@ -79,6 +80,7 @@ public class ViewImpl implements View {
 
 	@Override
 	public void sendUserModification(ModificationFromUser mod) {
+		System.out.println(mod);
 		myModConsumer.accept(mod);
 	}
 
@@ -146,9 +148,9 @@ public class ViewImpl implements View {
 		return myMode;
 	}
 
-	public void setSplashScreen(SplashScreen splashScreen) {
-		// TODO Auto-generated method stub
-		
+	public void setSplashScreen(SplashScreenData data)
+	{
+		mySkeleton.setScene(new SplashScreen(data));
 	}
 
 }
