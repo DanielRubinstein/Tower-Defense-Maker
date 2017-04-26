@@ -71,10 +71,10 @@ public class DoubleFieldPrompt {
 		createButton.setDisable(true);
 
 		// Do some validation (using the Java 8 lambda syntax).
-		text1.textProperty().addListener((observable, oldValue, newValue) -> {
+		text1.textProperty().addListener((SerializableObservable, oldValue, newValue) -> {
 			createButton.setDisable(newValue.trim().isEmpty() && text2.getText().trim().isEmpty());
 		});
-		text2.textProperty().addListener((observable, oldValue, newValue) -> {
+		text2.textProperty().addListener((SerializableObservable, oldValue, newValue) -> {
 			createButton.setDisable(newValue.trim().isEmpty() && text1.getText().trim().isEmpty());
 		});
 

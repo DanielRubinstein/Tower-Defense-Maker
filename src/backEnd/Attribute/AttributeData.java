@@ -1,36 +1,41 @@
 package backEnd.Attribute;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
-import java.util.Observable;
-import java.util.Observer;
 import java.util.Set;
 
 import com.sun.javafx.geom.Point2D;
 
+import backEnd.GameData.State.SerializableObservable;
+import backEnd.GameData.State.SerializableObserver;
+
 /**
  * 
  * @author Daniel Wrapper class for our list of attributes. We use this object
- *         as an observable.
+ *         as an SerializableObservable.
  */
 
-public class AttributeData extends Observable {
+public class AttributeData implements SerializableObservable {
 	// only callee can cast
 	// Map<Class<T>, Attribute
 	// private Map<Class<?>,List<Attribute<?>>> myAttributes;
 
 	private Map<String, Attribute<?>> myAttributes;
 	//private Map<Attribute<?>, Class<?>> myAttributeTypes;
+	private List<SerializableObserver> observers;
 	
 	
 
 	public AttributeData() { // create an empty AttributeData
-		myAttributes = new HashMap<String, Attribute<?>>();
+		this(new HashMap<String, Attribute<?>>());
 	}
 
 	public AttributeData(Map<String, Attribute<?>> initialAttributes) {
 		this.myAttributes = initialAttributes;
+		observers = new ArrayList<SerializableObserver>();
 	}
 
 	public void addAttribute(String key, Attribute<?> toAdd){
@@ -62,21 +67,18 @@ public class AttributeData extends Observable {
 	}
 
 	/**
-	 * Part of the observable interface
+	 * Part of the SerializableObservable interface
 	 */
 	@Override
-	public void addObserver(Observer o) {
-		super.addObserver(o);
+	public void addObserver(SerializableObserver o) {
+		addObserver(o);
 		o.update(this, null);
 	}
 
-	/**
-	 * Part of the observable interface
-	 */
-	@Override
-	public void notifyObservers() {
-		setChanged();
-		super.notifyObservers();
+	private void notifyObservers() {
+		for (SerializableObserver o : observers){
+			o.update(this, null);
+		}
 	}
 
 	/**
@@ -94,5 +96,20 @@ public class AttributeData extends Observable {
 	
 	public Collection<Attribute<?>> values(){
 		return myAttributes.values();
+	}
+
+	@Override
+	public List<SerializableObserver> getObservers() {
+		return observers;
+	}
+
+	@Override
+	public void clearObservers() {
+		observers = null;
+	}
+
+	@Override
+	public void setObservers(List<SerializableObserver> observersave) {
+		observers = observersave;
 	}
 }

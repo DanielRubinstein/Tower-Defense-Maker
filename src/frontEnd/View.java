@@ -5,6 +5,7 @@ import java.util.Map;
 
 import ModificationFromUser.ModificationFromUser;
 import backEnd.BankController;
+import backEnd.BankControllerReader;
 import backEnd.Model;
 import backEnd.GameData.Rules.RuleReader;
 import backEnd.GameEngine.Engine.Spawning.SpawnQueue;
@@ -37,5 +38,7 @@ public interface View extends ViewReader{
 	LevelProgressionControllerEditor getLevelProgressionController();
 	
 	public Collection<RuleReader> getRules();
+
+	BankControllerReader getBankControllerReader();
 
 }

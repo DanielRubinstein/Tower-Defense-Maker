@@ -2,27 +2,30 @@ package backEnd.GameEngine.Engine.Spawning;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Observable;
-import java.util.Observer;
+
+import backEnd.GameData.State.SerializableObservable;
+import backEnd.GameData.State.SerializableObserver;
 
 /**
  * SpawnQueue object that is held in tiles to determine what needs to be spawned next
  * @author Alex
  *
  */
-public class SpawnQueue extends Observable{
+public class SpawnQueue implements SerializableObservable{
 	
 	private List<SpawnData> myFrequencyQueue;
 	private List<SpawnData> mySpawnQueue;
 	private double myTimeLastQueueSpawned;
 	private int myCurrentSpawn;
 	private double myGameTime;
+	private List<SerializableObserver> observers;
 	/**
 	 * Initializes blank lists to spawn from
 	 */
 	public SpawnQueue() {
 		myFrequencyQueue = new ArrayList<SpawnData>();
 		mySpawnQueue	 = new ArrayList<SpawnData>();
+		observers = new ArrayList<SerializableObserver>();
 	}
 	
 	/**
@@ -79,18 +82,40 @@ public class SpawnQueue extends Observable{
 		}
 	}
 
-	public void addAsListener(Observer o) {
-		addObserver(o);
-	}
-
 	public void add(SpawnData mySpawnData, boolean isFrequencySpawn) {
 		System.out.println("Adding");
 		if(isFrequencySpawn){
 			myFrequencyQueue.add(mySpawnData);
-			this.notifyObservers("Hey");
+			notifyObservers("Hey");
 		} else{
 			mySpawnQueue.add(mySpawnData);
-			this.notifyObservers(mySpawnQueue);
+			notifyObservers(mySpawnQueue);
 		}
+	}
+
+	private void notifyObservers(Object obj) {
+		for (SerializableObserver o : observers){
+			o.update(this, obj);
+		}
+	}
+
+	@Override
+	public void addObserver(SerializableObserver o) {
+		observers.add(o);
+	}
+
+	@Override
+	public List<SerializableObserver> getObservers() {
+		return observers;
+	}
+
+	@Override
+	public void clearObservers() {
+		observers = null;
+	}
+
+	@Override
+	public void setObservers(List<SerializableObserver> observersave) {
+		observers = observersave;
 	}
 }

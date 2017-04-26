@@ -1,9 +1,9 @@
 package backEnd.Attribute;
 
 import java.util.List;
-import java.util.Observer;
 
 import backEnd.GameData.State.AccessPermissions;
+import backEnd.GameData.State.SerializableObserver;
 
 public interface AttributeOwner extends AttributeOwnerReader {
 
@@ -27,10 +27,10 @@ public interface AttributeOwner extends AttributeOwnerReader {
 	 * Clear observers
 	 * @return list of observers
 	 */
-	public List<Observer> getAndClearObservers();
+	public List<SerializableObserver> getAndClearObservers();
 	
 	/**
 	 * Set observers
 	 */
-	public void setObserverList(List<Observer> observers);
+	public void setObserverList(List<SerializableObserver> observers);
 }

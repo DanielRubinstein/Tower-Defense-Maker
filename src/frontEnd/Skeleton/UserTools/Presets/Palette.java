@@ -5,8 +5,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Observable;
-import java.util.Observer;
 import java.util.function.Consumer;
 
 import ModificationFromUser.AttributeOwner.Modification_Add_PaletteToGrid;
@@ -14,6 +12,8 @@ import ModificationFromUser.Spawning.Modification_AddSpawner;
 import backEnd.BankController;
 import backEnd.Attribute.AttributeOwner;
 import backEnd.GameData.State.Component;
+import backEnd.GameData.State.SerializableObservable;
+import backEnd.GameData.State.SerializableObserver;
 import backEnd.GameData.State.TileImpl;
 import backEnd.Mode.ModeReader;
 import frontEnd.View;
@@ -43,7 +43,7 @@ import resources.Constants;
  *
  * @param <T>
  */
-public class Palette<T extends AttributeOwner> implements SkeletonObject, Observer {
+public class Palette<T extends AttributeOwner> implements SkeletonObject, SerializableObserver {
 	private View myView;
 	private TilePane tile;
 	private Map<String, T> myPresetMapBackEnd;
@@ -179,7 +179,7 @@ public class Palette<T extends AttributeOwner> implements SkeletonObject, Observ
 	}
 
 	@Override
-	public void update(Observable o, Object arg) {
+	public void update(SerializableObservable so, Object obj) {
 		switch (myType) {
 		case "Tiles":
 			myPresetMapBackEnd = (Map<String, T>) observedBankController.getAccessibleTileMap();

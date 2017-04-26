@@ -6,6 +6,7 @@ import java.util.function.Consumer;
 
 import ModificationFromUser.ModificationFromUser;
 import backEnd.BankController;
+import backEnd.BankControllerReader;
 import backEnd.Model;
 import backEnd.ModelReader;
 import backEnd.GameData.Rules.RuleReader;
@@ -80,7 +81,6 @@ public class ViewImpl implements View {
 
 	@Override
 	public void sendUserModification(ModificationFromUser mod) {
-		System.out.println(mod);
 		myModConsumer.accept(mod);
 	}
 
@@ -121,6 +121,11 @@ public class ViewImpl implements View {
 	@Override
 	public BankController getBankController() {
 		return myModel.getBankController();
+	}
+	
+	@Override
+	public BankControllerReader getBankControllerReader(){
+		return (BankControllerReader) myModel.getBankController();
 	}
 
 	@Override
