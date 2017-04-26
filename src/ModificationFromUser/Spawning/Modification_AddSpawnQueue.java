@@ -5,7 +5,7 @@ import java.util.Map;
 import ModificationFromUser.ModificationFromUser;
 import backEnd.ModelImpl;
 import backEnd.GameData.State.State;
-import backEnd.GameEngine.Engine.Spawning.SpawnQueue;
+import backEnd.GameEngine.Engine.Spawning.SpawnQueues;
 
 /**
  * Adds a spawn queue of a given name
@@ -30,11 +30,9 @@ public class Modification_AddSpawnQueue implements ModificationFromUser {
 
 	@Override
 	public void invoke(ModelImpl myModel) throws Exception {
-		State state = myModel.getState();
-		Map<String, SpawnQueue> spawnQueues = state.getSpawnQueues();
+		Map<String, SpawnQueues> spawnQueues = myModel.getState().getSpawnQueues();
 		if (!spawnQueues.containsKey(mySpawnQueueName)) {
-			System.out.println(this.getClass().getSimpleName() + ": " + "New spawn queue");
-			spawnQueues.put(mySpawnQueueName, new SpawnQueue());
+			spawnQueues.put(mySpawnQueueName, new SpawnQueues());
 		} else {
 			System.out.println("ERROR: NON-UNIQUE SPAWN QUEUE ID");
 		}

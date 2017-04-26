@@ -5,16 +5,17 @@ import java.util.List;
 
 import backEnd.GameData.State.SerializableObservable;
 import backEnd.GameData.State.SerializableObserver;
+import backEnd.GameData.State.State;
 
 /**
  * SpawnQueue object that is held in tiles to determine what needs to be spawned next
  * @author Alex
  *
  */
-public class SpawnQueue implements SerializableObservable{
+public class SpawnQueues implements SerializableObservable{
 	
-	private List<SpawnData> myFrequencyQueue;
-	private List<SpawnData> mySpawnQueue;
+	private List<SpawnDataImpl> myFrequencySpawnQueue;
+	private List<SpawnDataImpl> mySingleSpawnQueue;
 	private double myTimeLastQueueSpawned;
 	private int myCurrentSpawn;
 	private double myGameTime;
@@ -22,9 +23,9 @@ public class SpawnQueue implements SerializableObservable{
 	/**
 	 * Initializes blank lists to spawn from
 	 */
-	public SpawnQueue() {
-		myFrequencyQueue = new ArrayList<SpawnData>();
-		mySpawnQueue	 = new ArrayList<SpawnData>();
+	public SpawnQueues() {
+		myFrequencySpawnQueue = new ArrayList<SpawnDataImpl>();
+		mySingleSpawnQueue	 = new ArrayList<SpawnDataImpl>();
 		observers = new ArrayList<SerializableObserver>();
 	}
 	
@@ -32,27 +33,27 @@ public class SpawnQueue implements SerializableObservable{
 	 * 
 	 * @return frequencyQueue
 	 */
-	public List<SpawnData> getFrequencyQueue(){
-		return myFrequencyQueue;
+	public List<SpawnDataImpl> getFrequencySpawnQueue(){
+		return myFrequencySpawnQueue;
 	}
 	
 	/**
 	 * SpawnQueue return
 	 * @return
 	 */
-	public List<SpawnData> getSpawnQueue() {
-		return mySpawnQueue;
+	public List<SpawnDataImpl> getSingleSpawnQueue() {
+		return mySingleSpawnQueue;
 	}
 	
 	/**
 	 * @return the next component in the spawn Queue if enough time has passed
 	 */
-	public String getNextQueueSpawn(double gameTime) {
+	public String getNextSingleSpawn(double gameTime) {
 		//System.out.println(this.getClass().getSimpleName() + ": " + myCurrentSpawn + " | " + mySpawnQueue.size() + " | " + gameTime + " | " + myTimeLastQueueSpawned + " | " + mySpawnQueue.get(myCurrentSpawn).getTime());
-		if(myCurrentSpawn >= mySpawnQueue.size() || gameTime - myTimeLastQueueSpawned < mySpawnQueue.get(myCurrentSpawn).getTime()){
+		if(myCurrentSpawn >= mySingleSpawnQueue.size() || gameTime - myTimeLastQueueSpawned < mySingleSpawnQueue.get(myCurrentSpawn).getTime()){
 			return null;
 		}
-		return mySpawnQueue.get(myCurrentSpawn).getSpawnable();
+		return mySingleSpawnQueue.get(myCurrentSpawn).getPresetName();
 	}
 	
 	/**
@@ -62,13 +63,13 @@ public class SpawnQueue implements SerializableObservable{
 	 */
 	public List<String> getNextFrequencySpawn(double gameTime, double gameStep){
 		List<String> spawnList = new ArrayList<String>();
-		for (int i = 0; i < myFrequencyQueue.size(); i++) {
-			SpawnData spawnData = myFrequencyQueue.get(i);
+		for (int i = 0; i < myFrequencySpawnQueue.size(); i++) {
+			SpawnDataImpl spawnData = myFrequencySpawnQueue.get(i);
 			double frequency = spawnData.getTime();
 			double modFreq = gameTime % frequency;
 			//System.out.println(this.getClass().getSimpleName() + " " + (gameStep > modFreq) + " : " + modFreq + " : " + gameTime + " : " + frequency);
 			if(gameStep > modFreq){
-				spawnList.add(myFrequencyQueue.get(i).getSpawnable());
+				spawnList.add(myFrequencySpawnQueue.get(i).getPresetName());
 			}
 		}		
 		return spawnList;
@@ -76,21 +77,19 @@ public class SpawnQueue implements SerializableObservable{
 
 	public void update(double gameTime) {
 		myGameTime = gameTime;
-		if(myCurrentSpawn >= mySpawnQueue.size() || myGameTime - myTimeLastQueueSpawned < mySpawnQueue.get(myCurrentSpawn).getTime()){} else {
+		if(myCurrentSpawn >= mySingleSpawnQueue.size() || myGameTime - myTimeLastQueueSpawned < mySingleSpawnQueue.get(myCurrentSpawn).getTime()){} else {
 			myTimeLastQueueSpawned = myGameTime;
 			myCurrentSpawn++;
 		}
 	}
 
-	public void add(SpawnData mySpawnData, boolean isFrequencySpawn) {
-		System.out.println("Adding");
+	public void add(SpawnDataImpl mySpawnData, boolean isFrequencySpawn) {
 		if(isFrequencySpawn){
-			myFrequencyQueue.add(mySpawnData);
-			notifyObservers("Hey");
+			myFrequencySpawnQueue.add(mySpawnData);
 		} else{
-			mySpawnQueue.add(mySpawnData);
-			notifyObservers(mySpawnQueue);
+			mySingleSpawnQueue.add(mySpawnData);
 		}
+		notifyObservers(mySpawnData);
 	}
 
 	private void notifyObservers(Object obj) {
@@ -117,5 +116,11 @@ public class SpawnQueue implements SerializableObservable{
 	@Override
 	public void setObservers(List<SerializableObserver> observersave) {
 		observers = observersave;
+	}
+
+	public void remove(SpawnDataReader mySpawnDataToRemove) {
+		myFrequencySpawnQueue.remove(mySpawnDataToRemove);
+		mySingleSpawnQueue.remove(mySpawnDataToRemove);
+		this.notifyObservers(mySpawnDataToRemove);
 	}
 }
