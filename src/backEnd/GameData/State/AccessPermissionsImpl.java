@@ -66,10 +66,10 @@ public class AccessPermissionsImpl implements AccessPermissions {
 
 	@Override
 	public boolean permitsAccess(String userMode, String gameMode, String levelMode) {
-		if (userModePermissions.contains(userMode) & gameModePermissions.contains(gameMode) & levelModePermissions.contains(levelMode)){
+		if (userMode.equals("AUTHOR")){
 			return true;
 		}
-		return false;
+		return (userModePermissions.contains(userMode) & gameModePermissions.contains(gameMode) & levelModePermissions.contains(levelMode));
 	}
 
 	@Override

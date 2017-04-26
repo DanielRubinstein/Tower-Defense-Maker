@@ -12,7 +12,7 @@ import javafx.geometry.Point2D;
  * @author Riley Nisbet, Christian Martindale
  *
  */
-public interface TileGrid{
+public interface TileGrid extends SerializableObservable{
 
 	/**
 	 * Get the tile at a given location
@@ -53,8 +53,6 @@ public interface TileGrid{
 	double getTileWidth();
 
 	double getTileHeight();
-	
-	void addAsObserver(Observer o);
 
 	boolean contains(AttributeOwnerReader newAttrOwn);
 
@@ -65,12 +63,6 @@ public interface TileGrid{
 	void saveAndClearTileObservers();
 
 	void setTileObservers();
-
-	List<Observer> getObservers();
-
-	void clearObservers();
-
-	void setObservers(List<Observer> observersave);
 	
 
 	TileGridInstantiator getInstantiator();

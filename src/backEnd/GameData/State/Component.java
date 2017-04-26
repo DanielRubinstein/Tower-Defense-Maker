@@ -17,7 +17,7 @@ import backEnd.GameEngine.Behaviors.Behavior;
 import backEnd.GameEngine.Behaviors.BehaviorFactory;
 import backEnd.GameEngine.Engine.Coordinates;
 
-public class Component extends Observable implements AttributeOwner {
+public class Component implements AttributeOwner, SerializableObservable {
 	/**
 	 * Any object on the grid is a component.
 	 * 
@@ -34,7 +34,7 @@ public class Component extends Observable implements AttributeOwner {
 	private Map<String, Behavior> myBehaviors;
 	private AccessPermissions myAccessPermissions;
 	private String myType;
-	private List<Observer> observers = new ArrayList<Observer>();
+	private List<Observer> observers;
 	private long ID;
 	private Coordinates previousMovement;
 
@@ -49,6 +49,7 @@ public class Component extends Observable implements AttributeOwner {
 	}
 	
 	public Component(AttributeData attributes, AccessPermissions accessPermissions) throws FileNotFoundException {
+		observers = new ArrayList<Observer>();
 		previousMovement=new Coordinates(0,0);
 		ID = System.nanoTime();
 		System.out.println(ID + "   ");
@@ -142,7 +143,6 @@ public class Component extends Observable implements AttributeOwner {
 	public <T> void setAttributeValue(String attrName, T newVal) {
 		Attribute<T> attrToSet = myAttributes.<T>get(attrName);
 		attrToSet.setValue(newVal);
-		this.setChanged();
 		notifyObservers();
 	}
 
@@ -156,10 +156,9 @@ public class Component extends Observable implements AttributeOwner {
 		return myAttributes.containsAttribute(key);
 	}
 	
-	@Override
-	public void notifyObservers() {
+	private void notifyObservers() {
 		for (Observer obs : observers) {
-			obs.update(this, null);
+			obs.update(null, null);
 		}
 	}
 	@Override
@@ -185,6 +184,22 @@ public class Component extends Observable implements AttributeOwner {
 	@Override
 	public void setObserverList(List<Observer> observers) {
 		this.observers = observers;
+	}
+
+
+	@Override
+	public List<Observer> getObservers() {
+		return observers;
+	}
+
+	@Override
+	public void clearObservers() {
+		observers = null;
+	}
+
+	@Override
+	public void setObservers(List<Observer> observersave) {
+		observers = observersave;
 	}
 	
 }

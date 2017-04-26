@@ -33,7 +33,7 @@ public class ComponentGraphVisual implements SkeletonObject, Observer {
 		myView = view;
 		myState = state;
 		observedComponentGraph = myState.getComponentGraph();
-		observedComponentGraph.addAsObserver(this);
+		observedComponentGraph.addObserver(this);
 		placeComponents();
 	}
 	private void placeComponents() {

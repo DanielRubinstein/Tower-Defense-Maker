@@ -127,9 +127,23 @@ public class TileImpl extends Observable implements Tile, AttributeOwner {
 
 	@Override
 	public void setObserverList(List<Observer> observers) {
-		this.observers = observers;
-		this.setChanged();
-		this.notifyObservers();
+		observers = observers;
+		notifyObservers();
+	}
+
+	@Override
+	public List<Observer> getObservers() {
+		return observers;
+	}
+
+	@Override
+	public void clearObservers() {
+		observers = null;
+	}
+
+	@Override
+	public void setObservers(List<Observer> observersave) {
+		observers = observersave;
 	}
 
 }
