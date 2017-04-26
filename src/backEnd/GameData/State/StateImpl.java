@@ -263,7 +263,7 @@ public class StateImpl implements State, SerializableObservable {
 
 	@Override
 	public Map<String, SpawnQueues> getSpawnQueues() {
-		System.out.println(mySpawnQueues);
+		//System.out.println(mySpawnQueues);
 		return mySpawnQueues;
 	}
 	
