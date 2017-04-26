@@ -137,6 +137,15 @@ public class TileGridVisual implements Observer, SkeletonObject{
 			updateCorrespondingGrid((TileImpl)arg);
 		} else {
 			adjustSize();
+			int counter = 0;
+			for (Tile x : myTiles.values())
+			{
+				counter++;
+				System.out.println("test10000" + counter);
+				AttributeOwnerVisual attrOwner = new AttributeOwnerVisualImpl(x);
+				ImageView tileView = attrOwner.getImageView();
+				organizeImageView(tileView);
+			}
 		}
 	}
 	

@@ -19,6 +19,7 @@ public class ControllerImpl implements Controller {
 	private ViewImpl myView;
 	private ModelImpl myModel;
 	private FacebookInteractor myFb;
+	private Consumer<Object> setGameData;
 	private EngineStatus myEngineStatus = EngineStatus.PAUSED;
 
 
@@ -47,13 +48,15 @@ public class ControllerImpl implements Controller {
 					}
 				};
 
-		Consumer<Object> setGameData = o -> {
+		setGameData = o ->
+		{
 			try {
+				
 				DataInputLoader loader = new DataInputLoader(o);
 				GameData initialGameData = loader.getGameData();
 				
 				initialGameData.setEngineStatus(myEngineStatus);
-				myModel = new ModelImpl(initialGameData, myEngineStatus, splashScreenLoader);
+				myModel = new ModelImpl(initialGameData, myEngineStatus, splashScreenLoader, setGameData);
 				myView = new ViewImpl(myModel, viewMod,myFb);
 
 			} catch (Exception e) {

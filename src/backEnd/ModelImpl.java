@@ -37,10 +37,12 @@ public class ModelImpl implements Model{
 	private GameProcessController myEngine;
 	private LevelProgressionControllerImpl myLevelProgressionController;
 	private EngineStatus myEngineStatus;
+	private Consumer<Object> gameLoader;
 	
-	public ModelImpl(GameData gameData, EngineStatus engineStatus, Consumer<SplashScreenData> splashScreenLoader) throws XMLReadingException {
+	public ModelImpl(GameData gameData, EngineStatus engineStatus, Consumer<SplashScreenData> splashScreenLoader, Consumer<Object> gameLoader) throws XMLReadingException {
 		myDataController = new DataController();
 		myGameData = gameData;
+		this.gameLoader = gameLoader;
 		myMode = new ModeImpl("AUTHOR", "DEFAULT", "DEFAULT", myLevelProgressionController);
 		myLevelProgressionController = new LevelProgressionControllerImpl(myMode, myDataController, splashScreenLoader);
 		myGameData.setLevelProgressionController(myLevelProgressionController);
@@ -49,7 +51,13 @@ public class ModelImpl implements Model{
 		myGameData.setBankController(myBankController);
 	}
 
-	public State getState(){
+	public Consumer<Object> getGameLoader()
+	{
+		return gameLoader;
+	}
+	
+	public State getState()
+	{
 		return myGameData.getState();
 	}
 	

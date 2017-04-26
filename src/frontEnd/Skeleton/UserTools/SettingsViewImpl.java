@@ -55,9 +55,15 @@ public class SettingsViewImpl implements SettingsView{
 		myMenu = new ButtonMenuImpl("Settings");
 		myMenu.addSimpleButtonWithHover("Save", () -> myView.sendUserModification(new Modification_SaveGameState()), "Save your current game in the Saved Games folder");
 		
-		myMenu.addSimpleButtonWithHover("Load", () -> myView.sendUserModification(new Modification_LoadLevel()), "Load a saved game from the Saved Games folder");
+		myMenu.addSimpleButtonWithHover("Load", () -> 
+		{
+			close();
+			myView.sendUserModification(new Modification_LoadLevel()); }, "Load a saved game from the Saved Games folder");
 		
-		myMenu.addSimpleButtonWithHover("New Game", () -> myView.sendUserModification(new Modification_NewGame()), "Create a new game from scratch");
+		myMenu.addSimpleButtonWithHover("New Game", () -> {
+			close();
+			myView.sendUserModification(new Modification_NewGame());
+			}, "Create a new game from scratch");
 		
 		myMenu.addSimpleButtonWithHover("Rules", () -> {
 			RulesView myRules = new RulesView(myView,myStage);
@@ -74,6 +80,12 @@ public class SettingsViewImpl implements SettingsView{
 		myMenu.addNode(modeToggle.getRoot());
 		
 		myMenu.addSimpleButtonWithHover("Help", () -> new HelpOptions(myStage), "Get Help");
+	}
+
+	private void close()
+	{
+		myParentStage.close();
+		myStage.close();
 	}
 
 	
