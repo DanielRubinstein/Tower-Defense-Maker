@@ -90,16 +90,10 @@ public class SpawnTabPane implements SkeletonObject {
 		alert.setHeaderText("Delete Spawn Timeline");
 		alert.setContentText("Are you sure you want to delete this spawn timeline? This cannot be undone");
 		Optional<ButtonType> result = alert.showAndWait();
-		if (result.get() == ButtonType.OK) {
+		if (result.get() == ButtonType.OK || result.get() == ButtonType.CANCEL) {
 			alert.close();
-			return true;
 		}
-
-		if (result.get() == ButtonType.CANCEL) {
-			alert.close();
-			return false;
-		}
-		return false;
+		return result.get() == ButtonType.OK;
 	}
 
 	private Integer nextTimelineIndex() {

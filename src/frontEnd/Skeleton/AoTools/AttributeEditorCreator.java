@@ -170,11 +170,16 @@ public class AttributeEditorCreator {
 		
 		return editor;
 	}
-
+	
 	private Node create_STRINGLIST_Editor() {
-		List<String> editParameters = (List<String>) myAttr.getEditParameters();
+		List<String> editParameters = getStringListEditParameters();
+		if (editParameters == null) {
+			//TODO
+			System.out.println(this.getClass().getSimpleName() + ": ERROR null Edit parameters");
+		}
 		ObservableList<String> options = (ObservableList<String>) FXCollections.observableArrayList(editParameters);
 		ComboBox<String> optionsBox = new ComboBox<String>(options);
+		//System.out.println(this.getClass().getSimpleName() + " | " + options + " | " + editParameters);
 		try {
 			// TODO this will work as long as there is an attribute there
 			optionsBox.getSelectionModel().select((String) myAttr.getValue());
@@ -187,7 +192,17 @@ public class AttributeEditorCreator {
 		});
 		return optionsBox;
 	}
-
+	
+	private List<String> getStringListEditParameters(){
+		List<String> editParameters = null;
+		if(myAttr.getName().equals("SpawnTimeline")){
+			System.out.println(this.getClass().getSimpleName() + ": " + "MAde it");
+			editParameters = new ArrayList<String>(myView.getSpawnQueues().keySet());
+			return editParameters;
+		}
+		return (List<String>) myAttr.getEditParameters();
+	}
+	
 	private HBox create_IMAGE_Editor() {
 		HBox both = new HBox();
 		String imagePath = (String) myAttr.getValue();

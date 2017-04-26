@@ -45,6 +45,7 @@ public class AttributeFactory {
 		String attributeType = myAttrNameResources.getString(gameAttributeName);
 		Node thisAttrNode = doc.getElementsByTagName(gameAttributeName).item(0);
 		switch (attributeType) {
+
 			case "STRINGLIST":
 				String allStringOptions = thisAttrNode.getAttributes().getNamedItem("options").getNodeValue();
 				List<String> stringOptions = Arrays.asList(allStringOptions.split("\\s*,\\s*"));
