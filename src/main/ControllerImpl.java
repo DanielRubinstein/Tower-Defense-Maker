@@ -48,10 +48,9 @@ public class ControllerImpl implements Controller {
 					}
 				};
 
-		setGameData = o -> {
+		setGameData = o ->
+		{
 			try {
-				
-				if (myView != null) myView.close();
 				
 				DataInputLoader loader = new DataInputLoader(o);
 				GameData initialGameData = loader.getGameData();
