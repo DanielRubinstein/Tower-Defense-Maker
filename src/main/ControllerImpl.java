@@ -13,7 +13,6 @@ import frontEnd.CustomJavafxNodes.ErrorDialog;
 import frontEnd.Facebook.FacebookConnector;
 import frontEnd.Facebook.FacebookInteractor;
 import javafx.stage.Stage;
-import frontEnd.Skeleton.SplashScreens.SplashScreen;
 import frontEnd.Skeleton.SplashScreens.SplashScreenData;
 
 public class ControllerImpl implements Controller {
@@ -27,15 +26,16 @@ public class ControllerImpl implements Controller {
 		
 		Consumer<SplashScreenData> splashScreenLoader = (data) ->
 		{
-			myView.setSplashScreen(new SplashScreen(data));
+			myView.setSplashScreen(data);
 		};
 		
 		Consumer<ModificationFromUser> viewMod = 
 				(ModificationFromUser m) -> {
 					try {
 						executeInteraction(m);
-						System.out.println("In Controller - Modification from fE to bE executed");
+//						System.out.println("In Controller - Modification from fE to bE executed");
 					} catch (Exception e) {
+						e.printStackTrace();
 						ErrorDialog errDia = new ErrorDialog();
 						String eMessage = "";
 						if(e.getMessage() != null){

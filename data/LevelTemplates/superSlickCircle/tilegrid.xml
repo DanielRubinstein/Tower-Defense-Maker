@@ -9,7 +9,7 @@
         <hash>71309895</hash>
       </javafx.geometry.Point2D>
       <backEnd.GameData.State.TileImpl>
-        <changed>true</changed>
+        <changed>false</changed>
         <obs/>
         <myAccessPerm class="backEnd.GameData.State.AccessPermissionsImpl">
           <userModePermissions>
@@ -104,7 +104,7 @@
         <hash>55843399</hash>
       </javafx.geometry.Point2D>
       <backEnd.GameData.State.TileImpl>
-        <changed>true</changed>
+        <changed>false</changed>
         <obs/>
         <myAccessPerm class="backEnd.GameData.State.AccessPermissionsImpl">
           <userModePermissions>
@@ -199,7 +199,7 @@
         <hash>39590471</hash>
       </javafx.geometry.Point2D>
       <backEnd.GameData.State.TileImpl>
-        <changed>true</changed>
+        <changed>false</changed>
         <obs/>
         <myAccessPerm class="backEnd.GameData.State.AccessPermissionsImpl">
           <userModePermissions>
@@ -294,7 +294,7 @@
         <hash>-1016849849</hash>
       </javafx.geometry.Point2D>
       <backEnd.GameData.State.TileImpl>
-        <changed>true</changed>
+        <changed>false</changed>
         <obs/>
         <myAccessPerm class="backEnd.GameData.State.AccessPermissionsImpl">
           <userModePermissions>
@@ -389,7 +389,7 @@
         <hash>56891975</hash>
       </javafx.geometry.Point2D>
       <backEnd.GameData.State.TileImpl>
-        <changed>true</changed>
+        <changed>false</changed>
         <obs/>
         <myAccessPerm class="backEnd.GameData.State.AccessPermissionsImpl">
           <userModePermissions>
@@ -484,7 +484,7 @@
         <hash>-1033102777</hash>
       </javafx.geometry.Point2D>
       <backEnd.GameData.State.TileImpl>
-        <changed>true</changed>
+        <changed>false</changed>
         <obs/>
         <myAccessPerm class="backEnd.GameData.State.AccessPermissionsImpl">
           <userModePermissions>
@@ -579,7 +579,7 @@
         <hash>40639047</hash>
       </javafx.geometry.Point2D>
       <backEnd.GameData.State.TileImpl>
-        <changed>true</changed>
+        <changed>false</changed>
         <obs/>
         <myAccessPerm class="backEnd.GameData.State.AccessPermissionsImpl">
           <userModePermissions>
@@ -674,7 +674,7 @@
         <hash>57416263</hash>
       </javafx.geometry.Point2D>
       <backEnd.GameData.State.TileImpl>
-        <changed>true</changed>
+        <changed>false</changed>
         <obs/>
         <myAccessPerm class="backEnd.GameData.State.AccessPermissionsImpl">
           <userModePermissions>
@@ -774,6 +774,7 @@
         <myAccessPerm class="backEnd.GameData.State.AccessPermissionsImpl">
           <userModePermissions>
             <string>AUTHOR</string>
+            <string>PLAYER</string>
           </userModePermissions>
           <gameModePermissions>
             <string>DEFAULT</string>
@@ -789,7 +790,7 @@
             <entry>
               <string>ImageFile</string>
               <backEnd.Attribute.AttributeImpl>
-                <myValue class="string">resources/images/Tiles/default_tile.jpg</myValue>
+                <myValue class="string">resources/images/Tiles/Red.png</myValue>
                 <myName>ImageFile</myName>
               </backEnd.Attribute.AttributeImpl>
             </entry>
@@ -797,8 +798,8 @@
               <string>Position</string>
               <backEnd.Attribute.AttributeImpl>
                 <myValue class="javafx.geometry.Point2D">
-                  <x>5.0</x>
-                  <y>3.0</y>
+                  <x>345.0</x>
+                  <y>132.0</y>
                   <hash>0</hash>
                 </myValue>
                 <myName>Position</myName>
@@ -833,7 +834,7 @@
             <entry>
               <string>MoveDirection</string>
               <backEnd.Attribute.AttributeImpl>
-                <myValue class="string"></myValue>
+                <myValue class="string">Right</myValue>
                 <myParamList class="java.util.Arrays$ArrayList">
                   <a class="string-array">
                     <string>Up</string>
@@ -864,7 +865,7 @@
         <hash>57940551</hash>
       </javafx.geometry.Point2D>
       <backEnd.GameData.State.TileImpl>
-        <changed>true</changed>
+        <changed>false</changed>
         <obs/>
         <myAccessPerm class="backEnd.GameData.State.AccessPermissionsImpl">
           <userModePermissions>
@@ -959,7 +960,7 @@
         <hash>41687623</hash>
       </javafx.geometry.Point2D>
       <backEnd.GameData.State.TileImpl>
-        <changed>true</changed>
+        <changed>false</changed>
         <obs/>
         <myAccessPerm class="backEnd.GameData.State.AccessPermissionsImpl">
           <userModePermissions>
@@ -1054,7 +1055,7 @@
         <hash>58464839</hash>
       </javafx.geometry.Point2D>
       <backEnd.GameData.State.TileImpl>
-        <changed>true</changed>
+        <changed>false</changed>
         <obs/>
         <myAccessPerm class="backEnd.GameData.State.AccessPermissionsImpl">
           <userModePermissions>
@@ -1149,7 +1150,7 @@
         <hash>58202695</hash>
       </javafx.geometry.Point2D>
       <backEnd.GameData.State.TileImpl>
-        <changed>true</changed>
+        <changed>false</changed>
         <obs/>
         <myAccessPerm class="backEnd.GameData.State.AccessPermissionsImpl">
           <userModePermissions>
@@ -1244,7 +1245,7 @@
         <hash>33823303</hash>
       </javafx.geometry.Point2D>
       <backEnd.GameData.State.TileImpl>
-        <changed>true</changed>
+        <changed>false</changed>
         <obs/>
         <myAccessPerm class="backEnd.GameData.State.AccessPermissionsImpl">
           <userModePermissions>
@@ -1339,7 +1340,7 @@
         <hash>50600519</hash>
       </javafx.geometry.Point2D>
       <backEnd.GameData.State.TileImpl>
-        <changed>true</changed>
+        <changed>false</changed>
         <obs/>
         <myAccessPerm class="backEnd.GameData.State.AccessPermissionsImpl">
           <userModePermissions>
@@ -1434,7 +1435,7 @@
         <hash>67246663</hash>
       </javafx.geometry.Point2D>
       <backEnd.GameData.State.TileImpl>
-        <changed>true</changed>
+        <changed>false</changed>
         <obs/>
         <myAccessPerm class="backEnd.GameData.State.AccessPermissionsImpl">
           <userModePermissions>
@@ -1529,7 +1530,7 @@
         <hash>6727</hash>
       </javafx.geometry.Point2D>
       <backEnd.GameData.State.TileImpl>
-        <changed>true</changed>
+        <changed>false</changed>
         <obs/>
         <myAccessPerm class="backEnd.GameData.State.AccessPermissionsImpl">
           <userModePermissions>
@@ -1624,7 +1625,7 @@
         <hash>-1073735097</hash>
       </javafx.geometry.Point2D>
       <backEnd.GameData.State.TileImpl>
-        <changed>true</changed>
+        <changed>false</changed>
         <obs/>
         <myAccessPerm class="backEnd.GameData.State.AccessPermissionsImpl">
           <userModePermissions>
@@ -1719,7 +1720,7 @@
         <hash>-33547705</hash>
       </javafx.geometry.Point2D>
       <backEnd.GameData.State.TileImpl>
-        <changed>true</changed>
+        <changed>false</changed>
         <obs/>
         <myAccessPerm class="backEnd.GameData.State.AccessPermissionsImpl">
           <userModePermissions>
@@ -1814,7 +1815,7 @@
         <hash>1073748551</hash>
       </javafx.geometry.Point2D>
       <backEnd.GameData.State.TileImpl>
-        <changed>true</changed>
+        <changed>false</changed>
         <obs/>
         <myAccessPerm class="backEnd.GameData.State.AccessPermissionsImpl">
           <userModePermissions>
@@ -1909,7 +1910,7 @@
         <hash>67115591</hash>
       </javafx.geometry.Point2D>
       <backEnd.GameData.State.TileImpl>
-        <changed>true</changed>
+        <changed>false</changed>
         <obs/>
         <myAccessPerm class="backEnd.GameData.State.AccessPermissionsImpl">
           <userModePermissions>
@@ -2004,7 +2005,7 @@
         <hash>6727</hash>
       </javafx.geometry.Point2D>
       <backEnd.GameData.State.TileImpl>
-        <changed>true</changed>
+        <changed>false</changed>
         <obs/>
         <myAccessPerm class="backEnd.GameData.State.AccessPermissionsImpl">
           <userModePermissions>
@@ -2104,6 +2105,7 @@
         <myAccessPerm class="backEnd.GameData.State.AccessPermissionsImpl">
           <userModePermissions>
             <string>AUTHOR</string>
+            <string>PLAYER</string>
           </userModePermissions>
           <gameModePermissions>
             <string>DEFAULT</string>
@@ -2119,7 +2121,7 @@
             <entry>
               <string>ImageFile</string>
               <backEnd.Attribute.AttributeImpl>
-                <myValue class="string">resources/images/Tiles/default_tile.jpg</myValue>
+                <myValue class="string">resources/images/Tiles/Red.png</myValue>
                 <myName>ImageFile</myName>
               </backEnd.Attribute.AttributeImpl>
             </entry>
@@ -2127,8 +2129,8 @@
               <string>Position</string>
               <backEnd.Attribute.AttributeImpl>
                 <myValue class="javafx.geometry.Point2D">
-                  <x>3.0</x>
-                  <y>3.0</y>
+                  <x>229.0</x>
+                  <y>136.0</y>
                   <hash>0</hash>
                 </myValue>
                 <myName>Position</myName>
@@ -2163,7 +2165,7 @@
             <entry>
               <string>MoveDirection</string>
               <backEnd.Attribute.AttributeImpl>
-                <myValue class="string"></myValue>
+                <myValue class="string">Right</myValue>
                 <myParamList class="java.util.Arrays$ArrayList">
                   <a class="string-array">
                     <string>Up</string>
@@ -2194,7 +2196,7 @@
         <hash>33561159</hash>
       </javafx.geometry.Point2D>
       <backEnd.GameData.State.TileImpl>
-        <changed>true</changed>
+        <changed>false</changed>
         <obs/>
         <myAccessPerm class="backEnd.GameData.State.AccessPermissionsImpl">
           <userModePermissions>
@@ -2294,6 +2296,7 @@
         <myAccessPerm class="backEnd.GameData.State.AccessPermissionsImpl">
           <userModePermissions>
             <string>AUTHOR</string>
+            <string>PLAYER</string>
           </userModePermissions>
           <gameModePermissions>
             <string>DEFAULT</string>
@@ -2309,7 +2312,7 @@
             <entry>
               <string>ImageFile</string>
               <backEnd.Attribute.AttributeImpl>
-                <myValue class="string">resources/images/Tiles/default_tile.jpg</myValue>
+                <myValue class="string">resources/images/Tiles/Yellow.png</myValue>
                 <myName>ImageFile</myName>
               </backEnd.Attribute.AttributeImpl>
             </entry>
@@ -2317,8 +2320,8 @@
               <string>Position</string>
               <backEnd.Attribute.AttributeImpl>
                 <myValue class="javafx.geometry.Point2D">
-                  <x>6.0</x>
-                  <y>6.0</y>
+                  <x>397.0</x>
+                  <y>253.0</y>
                   <hash>0</hash>
                 </myValue>
                 <myName>Position</myName>
@@ -2353,7 +2356,7 @@
             <entry>
               <string>MoveDirection</string>
               <backEnd.Attribute.AttributeImpl>
-                <myValue class="string"></myValue>
+                <myValue class="string">Left</myValue>
                 <myParamList class="java.util.Arrays$ArrayList">
                   <a class="string-array">
                     <string>Up</string>
@@ -2384,7 +2387,7 @@
         <hash>68033095</hash>
       </javafx.geometry.Point2D>
       <backEnd.GameData.State.TileImpl>
-        <changed>true</changed>
+        <changed>false</changed>
         <obs/>
         <myAccessPerm class="backEnd.GameData.State.AccessPermissionsImpl">
           <userModePermissions>
@@ -2484,6 +2487,7 @@
         <myAccessPerm class="backEnd.GameData.State.AccessPermissionsImpl">
           <userModePermissions>
             <string>AUTHOR</string>
+            <string>PLAYER</string>
           </userModePermissions>
           <gameModePermissions>
             <string>DEFAULT</string>
@@ -2499,7 +2503,7 @@
             <entry>
               <string>ImageFile</string>
               <backEnd.Attribute.AttributeImpl>
-                <myValue class="string">resources/images/Tiles/default_tile.jpg</myValue>
+                <myValue class="string">resources/images/Tiles/Green.png</myValue>
                 <myName>ImageFile</myName>
               </backEnd.Attribute.AttributeImpl>
             </entry>
@@ -2507,8 +2511,8 @@
               <string>Position</string>
               <backEnd.Attribute.AttributeImpl>
                 <myValue class="javafx.geometry.Point2D">
-                  <x>3.0</x>
-                  <y>5.0</y>
+                  <x>214.0</x>
+                  <y>215.0</y>
                   <hash>0</hash>
                 </myValue>
                 <myName>Position</myName>
@@ -2543,7 +2547,7 @@
             <entry>
               <string>MoveDirection</string>
               <backEnd.Attribute.AttributeImpl>
-                <myValue class="string"></myValue>
+                <myValue class="string">Up</myValue>
                 <myParamList class="java.util.Arrays$ArrayList">
                   <a class="string-array">
                     <string>Up</string>
@@ -2574,7 +2578,7 @@
         <hash>34347591</hash>
       </javafx.geometry.Point2D>
       <backEnd.GameData.State.TileImpl>
-        <changed>true</changed>
+        <changed>false</changed>
         <obs/>
         <myAccessPerm class="backEnd.GameData.State.AccessPermissionsImpl">
           <userModePermissions>
@@ -2669,7 +2673,7 @@
         <hash>50993735</hash>
       </javafx.geometry.Point2D>
       <backEnd.GameData.State.TileImpl>
-        <changed>true</changed>
+        <changed>false</changed>
         <obs/>
         <myAccessPerm class="backEnd.GameData.State.AccessPermissionsImpl">
           <userModePermissions>
@@ -2764,7 +2768,7 @@
         <hash>1074272839</hash>
       </javafx.geometry.Point2D>
       <backEnd.GameData.State.TileImpl>
-        <changed>true</changed>
+        <changed>false</changed>
         <obs/>
         <myAccessPerm class="backEnd.GameData.State.AccessPermissionsImpl">
           <userModePermissions>
@@ -2859,7 +2863,7 @@
         <hash>531015</hash>
       </javafx.geometry.Point2D>
       <backEnd.GameData.State.TileImpl>
-        <changed>true</changed>
+        <changed>false</changed>
         <obs/>
         <myAccessPerm class="backEnd.GameData.State.AccessPermissionsImpl">
           <userModePermissions>
@@ -2959,6 +2963,7 @@
         <myAccessPerm class="backEnd.GameData.State.AccessPermissionsImpl">
           <userModePermissions>
             <string>AUTHOR</string>
+            <string>PLAYER</string>
           </userModePermissions>
           <gameModePermissions>
             <string>DEFAULT</string>
@@ -2974,7 +2979,7 @@
             <entry>
               <string>ImageFile</string>
               <backEnd.Attribute.AttributeImpl>
-                <myValue class="string">resources/images/Tiles/default_tile.jpg</myValue>
+                <myValue class="string">resources/images/Tiles/Green.png</myValue>
                 <myName>ImageFile</myName>
               </backEnd.Attribute.AttributeImpl>
             </entry>
@@ -2982,8 +2987,8 @@
               <string>Position</string>
               <backEnd.Attribute.AttributeImpl>
                 <myValue class="javafx.geometry.Point2D">
-                  <x>3.0</x>
-                  <y>4.0</y>
+                  <x>207.0</x>
+                  <y>184.0</y>
                   <hash>0</hash>
                 </myValue>
                 <myName>Position</myName>
@@ -3018,7 +3023,7 @@
             <entry>
               <string>MoveDirection</string>
               <backEnd.Attribute.AttributeImpl>
-                <myValue class="string"></myValue>
+                <myValue class="string">Up</myValue>
                 <myParamList class="java.util.Arrays$ArrayList">
                   <a class="string-array">
                     <string>Up</string>
@@ -3054,6 +3059,7 @@
         <myAccessPerm class="backEnd.GameData.State.AccessPermissionsImpl">
           <userModePermissions>
             <string>AUTHOR</string>
+            <string>PLAYER</string>
           </userModePermissions>
           <gameModePermissions>
             <string>DEFAULT</string>
@@ -3069,7 +3075,7 @@
             <entry>
               <string>ImageFile</string>
               <backEnd.Attribute.AttributeImpl>
-                <myValue class="string">resources/images/Tiles/default_tile.jpg</myValue>
+                <myValue class="string">resources/images/Tiles/Yellow.png</myValue>
                 <myName>ImageFile</myName>
               </backEnd.Attribute.AttributeImpl>
             </entry>
@@ -3077,8 +3083,8 @@
               <string>Position</string>
               <backEnd.Attribute.AttributeImpl>
                 <myValue class="javafx.geometry.Point2D">
-                  <x>4.0</x>
-                  <y>6.0</y>
+                  <x>282.0</x>
+                  <y>268.0</y>
                   <hash>0</hash>
                 </myValue>
                 <myName>Position</myName>
@@ -3113,7 +3119,7 @@
             <entry>
               <string>MoveDirection</string>
               <backEnd.Attribute.AttributeImpl>
-                <myValue class="string"></myValue>
+                <myValue class="string">Left</myValue>
                 <myParamList class="java.util.Arrays$ArrayList">
                   <a class="string-array">
                     <string>Up</string>
@@ -3144,7 +3150,7 @@
         <hash>50862663</hash>
       </javafx.geometry.Point2D>
       <backEnd.GameData.State.TileImpl>
-        <changed>true</changed>
+        <changed>false</changed>
         <obs/>
         <myAccessPerm class="backEnd.GameData.State.AccessPermissionsImpl">
           <userModePermissions>
@@ -3239,7 +3245,7 @@
         <hash>1075059271</hash>
       </javafx.geometry.Point2D>
       <backEnd.GameData.State.TileImpl>
-        <changed>true</changed>
+        <changed>false</changed>
         <obs/>
         <myAccessPerm class="backEnd.GameData.State.AccessPermissionsImpl">
           <userModePermissions>
@@ -3334,7 +3340,7 @@
         <hash>1317447</hash>
       </javafx.geometry.Point2D>
       <backEnd.GameData.State.TileImpl>
-        <changed>true</changed>
+        <changed>false</changed>
         <obs/>
         <myAccessPerm class="backEnd.GameData.State.AccessPermissionsImpl">
           <userModePermissions>
@@ -3429,7 +3435,7 @@
         <hash>18094663</hash>
       </javafx.geometry.Point2D>
       <backEnd.GameData.State.TileImpl>
-        <changed>true</changed>
+        <changed>false</changed>
         <obs/>
         <myAccessPerm class="backEnd.GameData.State.AccessPermissionsImpl">
           <userModePermissions>
@@ -3524,7 +3530,7 @@
         <hash>34740807</hash>
       </javafx.geometry.Point2D>
       <backEnd.GameData.State.TileImpl>
-        <changed>true</changed>
+        <changed>false</changed>
         <obs/>
         <myAccessPerm class="backEnd.GameData.State.AccessPermissionsImpl">
           <userModePermissions>
@@ -3619,7 +3625,7 @@
         <hash>-1106240953</hash>
       </javafx.geometry.Point2D>
       <backEnd.GameData.State.TileImpl>
-        <changed>true</changed>
+        <changed>false</changed>
         <obs/>
         <myAccessPerm class="backEnd.GameData.State.AccessPermissionsImpl">
           <userModePermissions>
@@ -3714,7 +3720,7 @@
         <hash>-32499129</hash>
       </javafx.geometry.Point2D>
       <backEnd.GameData.State.TileImpl>
-        <changed>true</changed>
+        <changed>false</changed>
         <obs/>
         <myAccessPerm class="backEnd.GameData.State.AccessPermissionsImpl">
           <userModePermissions>
@@ -3809,7 +3815,7 @@
         <hash>1074797127</hash>
       </javafx.geometry.Point2D>
       <backEnd.GameData.State.TileImpl>
-        <changed>true</changed>
+        <changed>false</changed>
         <obs/>
         <myAccessPerm class="backEnd.GameData.State.AccessPermissionsImpl">
           <userModePermissions>
@@ -3904,7 +3910,7 @@
         <hash>1055303</hash>
       </javafx.geometry.Point2D>
       <backEnd.GameData.State.TileImpl>
-        <changed>true</changed>
+        <changed>false</changed>
         <obs/>
         <myAccessPerm class="backEnd.GameData.State.AccessPermissionsImpl">
           <userModePermissions>
@@ -4004,6 +4010,7 @@
         <myAccessPerm class="backEnd.GameData.State.AccessPermissionsImpl">
           <userModePermissions>
             <string>AUTHOR</string>
+            <string>PLAYER</string>
           </userModePermissions>
           <gameModePermissions>
             <string>DEFAULT</string>
@@ -4019,7 +4026,7 @@
             <entry>
               <string>ImageFile</string>
               <backEnd.Attribute.AttributeImpl>
-                <myValue class="string">resources/images/Tiles/default_tile.jpg</myValue>
+                <myValue class="string">resources/images/Tiles/Green.png</myValue>
                 <myName>ImageFile</myName>
               </backEnd.Attribute.AttributeImpl>
             </entry>
@@ -4027,8 +4034,8 @@
               <string>Position</string>
               <backEnd.Attribute.AttributeImpl>
                 <myValue class="javafx.geometry.Point2D">
-                  <x>3.0</x>
-                  <y>6.0</y>
+                  <x>215.0</x>
+                  <y>265.0</y>
                   <hash>0</hash>
                 </myValue>
                 <myName>Position</myName>
@@ -4063,7 +4070,7 @@
             <entry>
               <string>MoveDirection</string>
               <backEnd.Attribute.AttributeImpl>
-                <myValue class="string"></myValue>
+                <myValue class="string">Up</myValue>
                 <myParamList class="java.util.Arrays$ArrayList">
                   <a class="string-array">
                     <string>Up</string>
@@ -4094,7 +4101,7 @@
         <hash>34609735</hash>
       </javafx.geometry.Point2D>
       <backEnd.GameData.State.TileImpl>
-        <changed>true</changed>
+        <changed>false</changed>
         <obs/>
         <myAccessPerm class="backEnd.GameData.State.AccessPermissionsImpl">
           <userModePermissions>
@@ -4189,7 +4196,7 @@
         <hash>-1004660153</hash>
       </javafx.geometry.Point2D>
       <backEnd.GameData.State.TileImpl>
-        <changed>true</changed>
+        <changed>false</changed>
         <obs/>
         <myAccessPerm class="backEnd.GameData.State.AccessPermissionsImpl">
           <userModePermissions>
@@ -4284,7 +4291,7 @@
         <hash>69081671</hash>
       </javafx.geometry.Point2D>
       <backEnd.GameData.State.TileImpl>
-        <changed>true</changed>
+        <changed>false</changed>
         <obs/>
         <myAccessPerm class="backEnd.GameData.State.AccessPermissionsImpl">
           <userModePermissions>
@@ -4379,7 +4386,7 @@
         <hash>1075583559</hash>
       </javafx.geometry.Point2D>
       <backEnd.GameData.State.TileImpl>
-        <changed>true</changed>
+        <changed>false</changed>
         <obs/>
         <myAccessPerm class="backEnd.GameData.State.AccessPermissionsImpl">
           <userModePermissions>
@@ -4474,7 +4481,7 @@
         <hash>1841735</hash>
       </javafx.geometry.Point2D>
       <backEnd.GameData.State.TileImpl>
-        <changed>true</changed>
+        <changed>false</changed>
         <obs/>
         <myAccessPerm class="backEnd.GameData.State.AccessPermissionsImpl">
           <userModePermissions>
@@ -4569,7 +4576,7 @@
         <hash>18487879</hash>
       </javafx.geometry.Point2D>
       <backEnd.GameData.State.TileImpl>
-        <changed>true</changed>
+        <changed>false</changed>
         <obs/>
         <myAccessPerm class="backEnd.GameData.State.AccessPermissionsImpl">
           <userModePermissions>
@@ -4664,7 +4671,7 @@
         <hash>-31974841</hash>
       </javafx.geometry.Point2D>
       <backEnd.GameData.State.TileImpl>
-        <changed>true</changed>
+        <changed>false</changed>
         <obs/>
         <myAccessPerm class="backEnd.GameData.State.AccessPermissionsImpl">
           <userModePermissions>
@@ -4759,7 +4766,7 @@
         <hash>1075321415</hash>
       </javafx.geometry.Point2D>
       <backEnd.GameData.State.TileImpl>
-        <changed>true</changed>
+        <changed>false</changed>
         <obs/>
         <myAccessPerm class="backEnd.GameData.State.AccessPermissionsImpl">
           <userModePermissions>
@@ -4854,7 +4861,7 @@
         <hash>1579591</hash>
       </javafx.geometry.Point2D>
       <backEnd.GameData.State.TileImpl>
-        <changed>true</changed>
+        <changed>false</changed>
         <obs/>
         <myAccessPerm class="backEnd.GameData.State.AccessPermissionsImpl">
           <userModePermissions>
@@ -4949,7 +4956,7 @@
         <hash>18356807</hash>
       </javafx.geometry.Point2D>
       <backEnd.GameData.State.TileImpl>
-        <changed>true</changed>
+        <changed>false</changed>
         <obs/>
         <myAccessPerm class="backEnd.GameData.State.AccessPermissionsImpl">
           <userModePermissions>
@@ -5044,7 +5051,7 @@
         <hash>69605959</hash>
       </javafx.geometry.Point2D>
       <backEnd.GameData.State.TileImpl>
-        <changed>true</changed>
+        <changed>false</changed>
         <obs/>
         <myAccessPerm class="backEnd.GameData.State.AccessPermissionsImpl">
           <userModePermissions>
@@ -5139,7 +5146,7 @@
         <hash>-31188409</hash>
       </javafx.geometry.Point2D>
       <backEnd.GameData.State.TileImpl>
-        <changed>true</changed>
+        <changed>false</changed>
         <obs/>
         <myAccessPerm class="backEnd.GameData.State.AccessPermissionsImpl">
           <userModePermissions>
@@ -5234,7 +5241,7 @@
         <hash>1075976775</hash>
       </javafx.geometry.Point2D>
       <backEnd.GameData.State.TileImpl>
-        <changed>true</changed>
+        <changed>false</changed>
         <obs/>
         <myAccessPerm class="backEnd.GameData.State.AccessPermissionsImpl">
           <userModePermissions>
@@ -5329,7 +5336,7 @@
         <hash>2234951</hash>
       </javafx.geometry.Point2D>
       <backEnd.GameData.State.TileImpl>
-        <changed>true</changed>
+        <changed>false</changed>
         <obs/>
         <myAccessPerm class="backEnd.GameData.State.AccessPermissionsImpl">
           <userModePermissions>
@@ -5424,7 +5431,7 @@
         <hash>-31450553</hash>
       </javafx.geometry.Point2D>
       <backEnd.GameData.State.TileImpl>
-        <changed>true</changed>
+        <changed>false</changed>
         <obs/>
         <myAccessPerm class="backEnd.GameData.State.AccessPermissionsImpl">
           <userModePermissions>
@@ -5519,7 +5526,7 @@
         <hash>1075845703</hash>
       </javafx.geometry.Point2D>
       <backEnd.GameData.State.TileImpl>
-        <changed>true</changed>
+        <changed>false</changed>
         <obs/>
         <myAccessPerm class="backEnd.GameData.State.AccessPermissionsImpl">
           <userModePermissions>
@@ -5614,7 +5621,7 @@
         <hash>2103879</hash>
       </javafx.geometry.Point2D>
       <backEnd.GameData.State.TileImpl>
-        <changed>true</changed>
+        <changed>false</changed>
         <obs/>
         <myAccessPerm class="backEnd.GameData.State.AccessPermissionsImpl">
           <userModePermissions>
@@ -5709,7 +5716,7 @@
         <hash>70130247</hash>
       </javafx.geometry.Point2D>
       <backEnd.GameData.State.TileImpl>
-        <changed>true</changed>
+        <changed>false</changed>
         <obs/>
         <myAccessPerm class="backEnd.GameData.State.AccessPermissionsImpl">
           <userModePermissions>
@@ -5804,7 +5811,7 @@
         <hash>-30664121</hash>
       </javafx.geometry.Point2D>
       <backEnd.GameData.State.TileImpl>
-        <changed>true</changed>
+        <changed>false</changed>
         <obs/>
         <myAccessPerm class="backEnd.GameData.State.AccessPermissionsImpl">
           <userModePermissions>
@@ -5899,7 +5906,7 @@
         <hash>-30926265</hash>
       </javafx.geometry.Point2D>
       <backEnd.GameData.State.TileImpl>
-        <changed>true</changed>
+        <changed>false</changed>
         <obs/>
         <myAccessPerm class="backEnd.GameData.State.AccessPermissionsImpl">
           <userModePermissions>
@@ -5994,7 +6001,7 @@
         <hash>70654535</hash>
       </javafx.geometry.Point2D>
       <backEnd.GameData.State.TileImpl>
-        <changed>true</changed>
+        <changed>false</changed>
         <obs/>
         <myAccessPerm class="backEnd.GameData.State.AccessPermissionsImpl">
           <userModePermissions>
@@ -6089,7 +6096,7 @@
         <hash>70392391</hash>
       </javafx.geometry.Point2D>
       <backEnd.GameData.State.TileImpl>
-        <changed>true</changed>
+        <changed>false</changed>
         <obs/>
         <myAccessPerm class="backEnd.GameData.State.AccessPermissionsImpl">
           <userModePermissions>
@@ -6184,7 +6191,7 @@
         <hash>-30270905</hash>
       </javafx.geometry.Point2D>
       <backEnd.GameData.State.TileImpl>
-        <changed>true</changed>
+        <changed>false</changed>
         <obs/>
         <myAccessPerm class="backEnd.GameData.State.AccessPermissionsImpl">
           <userModePermissions>
@@ -6279,7 +6286,7 @@
         <hash>-30401977</hash>
       </javafx.geometry.Point2D>
       <backEnd.GameData.State.TileImpl>
-        <changed>true</changed>
+        <changed>false</changed>
         <obs/>
         <myAccessPerm class="backEnd.GameData.State.AccessPermissionsImpl">
           <userModePermissions>
@@ -6374,7 +6381,7 @@
         <hash>71178823</hash>
       </javafx.geometry.Point2D>
       <backEnd.GameData.State.TileImpl>
-        <changed>true</changed>
+        <changed>false</changed>
         <obs/>
         <myAccessPerm class="backEnd.GameData.State.AccessPermissionsImpl">
           <userModePermissions>
@@ -6469,7 +6476,7 @@
         <hash>70916679</hash>
       </javafx.geometry.Point2D>
       <backEnd.GameData.State.TileImpl>
-        <changed>true</changed>
+        <changed>false</changed>
         <obs/>
         <myAccessPerm class="backEnd.GameData.State.AccessPermissionsImpl">
           <userModePermissions>
@@ -6564,7 +6571,7 @@
         <hash>63969863</hash>
       </javafx.geometry.Point2D>
       <backEnd.GameData.State.TileImpl>
-        <changed>true</changed>
+        <changed>false</changed>
         <obs/>
         <myAccessPerm class="backEnd.GameData.State.AccessPermissionsImpl">
           <userModePermissions>
@@ -6659,7 +6666,7 @@
         <hash>47716935</hash>
       </javafx.geometry.Point2D>
       <backEnd.GameData.State.TileImpl>
-        <changed>true</changed>
+        <changed>false</changed>
         <obs/>
         <myAccessPerm class="backEnd.GameData.State.AccessPermissionsImpl">
           <userModePermissions>
@@ -6754,7 +6761,7 @@
         <hash>-1008723385</hash>
       </javafx.geometry.Point2D>
       <backEnd.GameData.State.TileImpl>
-        <changed>true</changed>
+        <changed>false</changed>
         <obs/>
         <myAccessPerm class="backEnd.GameData.State.AccessPermissionsImpl">
           <userModePermissions>
@@ -6849,7 +6856,7 @@
         <hash>31464007</hash>
       </javafx.geometry.Point2D>
       <backEnd.GameData.State.TileImpl>
-        <changed>true</changed>
+        <changed>false</changed>
         <obs/>
         <myAccessPerm class="backEnd.GameData.State.AccessPermissionsImpl">
           <userModePermissions>
@@ -6944,7 +6951,7 @@
         <hash>65018439</hash>
       </javafx.geometry.Point2D>
       <backEnd.GameData.State.TileImpl>
-        <changed>true</changed>
+        <changed>false</changed>
         <obs/>
         <myAccessPerm class="backEnd.GameData.State.AccessPermissionsImpl">
           <userModePermissions>
@@ -7039,7 +7046,7 @@
         <hash>-1024976313</hash>
       </javafx.geometry.Point2D>
       <backEnd.GameData.State.TileImpl>
-        <changed>true</changed>
+        <changed>false</changed>
         <obs/>
         <myAccessPerm class="backEnd.GameData.State.AccessPermissionsImpl">
           <userModePermissions>
@@ -7134,7 +7141,7 @@
         <hash>15211079</hash>
       </javafx.geometry.Point2D>
       <backEnd.GameData.State.TileImpl>
-        <changed>true</changed>
+        <changed>false</changed>
         <obs/>
         <myAccessPerm class="backEnd.GameData.State.AccessPermissionsImpl">
           <userModePermissions>
@@ -7229,7 +7236,7 @@
         <hash>48765511</hash>
       </javafx.geometry.Point2D>
       <backEnd.GameData.State.TileImpl>
-        <changed>true</changed>
+        <changed>false</changed>
         <obs/>
         <myAccessPerm class="backEnd.GameData.State.AccessPermissionsImpl">
           <userModePermissions>
@@ -7324,7 +7331,7 @@
         <hash>65542727</hash>
       </javafx.geometry.Point2D>
       <backEnd.GameData.State.TileImpl>
-        <changed>true</changed>
+        <changed>false</changed>
         <obs/>
         <myAccessPerm class="backEnd.GameData.State.AccessPermissionsImpl">
           <userModePermissions>
@@ -7419,7 +7426,7 @@
         <hash>66329159</hash>
       </javafx.geometry.Point2D>
       <backEnd.GameData.State.TileImpl>
-        <changed>true</changed>
+        <changed>false</changed>
         <obs/>
         <myAccessPerm class="backEnd.GameData.State.AccessPermissionsImpl">
           <userModePermissions>
@@ -7514,7 +7521,7 @@
         <hash>-1041229241</hash>
       </javafx.geometry.Point2D>
       <backEnd.GameData.State.TileImpl>
-        <changed>true</changed>
+        <changed>false</changed>
         <obs/>
         <myAccessPerm class="backEnd.GameData.State.AccessPermissionsImpl">
           <userModePermissions>
@@ -7609,7 +7616,7 @@
         <hash>1072699975</hash>
       </javafx.geometry.Point2D>
       <backEnd.GameData.State.TileImpl>
-        <changed>true</changed>
+        <changed>false</changed>
         <obs/>
         <myAccessPerm class="backEnd.GameData.State.AccessPermissionsImpl">
           <userModePermissions>
@@ -7704,7 +7711,7 @@
         <hash>-1041849</hash>
       </javafx.geometry.Point2D>
       <backEnd.GameData.State.TileImpl>
-        <changed>true</changed>
+        <changed>false</changed>
         <obs/>
         <myAccessPerm class="backEnd.GameData.State.AccessPermissionsImpl">
           <userModePermissions>
@@ -7799,7 +7806,7 @@
         <hash>32512583</hash>
       </javafx.geometry.Point2D>
       <backEnd.GameData.State.TileImpl>
-        <changed>true</changed>
+        <changed>false</changed>
         <obs/>
         <myAccessPerm class="backEnd.GameData.State.AccessPermissionsImpl">
           <userModePermissions>
@@ -7899,6 +7906,7 @@
         <myAccessPerm class="backEnd.GameData.State.AccessPermissionsImpl">
           <userModePermissions>
             <string>AUTHOR</string>
+            <string>PLAYER</string>
           </userModePermissions>
           <gameModePermissions>
             <string>DEFAULT</string>
@@ -7914,7 +7922,7 @@
             <entry>
               <string>ImageFile</string>
               <backEnd.Attribute.AttributeImpl>
-                <myValue class="string">resources/images/Tiles/default_tile.jpg</myValue>
+                <myValue class="string">resources/images/Tiles/Blue.png</myValue>
                 <myName>ImageFile</myName>
               </backEnd.Attribute.AttributeImpl>
             </entry>
@@ -7922,8 +7930,8 @@
               <string>Position</string>
               <backEnd.Attribute.AttributeImpl>
                 <myValue class="javafx.geometry.Point2D">
-                  <x>6.0</x>
-                  <y>3.0</y>
+                  <x>397.0</x>
+                  <y>144.0</y>
                   <hash>0</hash>
                 </myValue>
                 <myName>Position</myName>
@@ -7958,7 +7966,7 @@
             <entry>
               <string>MoveDirection</string>
               <backEnd.Attribute.AttributeImpl>
-                <myValue class="string"></myValue>
+                <myValue class="string">Down</myValue>
                 <myParamList class="java.util.Arrays$ArrayList">
                   <a class="string-array">
                     <string>Up</string>
@@ -7989,7 +7997,7 @@
         <hash>66067015</hash>
       </javafx.geometry.Point2D>
       <backEnd.GameData.State.TileImpl>
-        <changed>true</changed>
+        <changed>false</changed>
         <obs/>
         <myAccessPerm class="backEnd.GameData.State.AccessPermissionsImpl">
           <userModePermissions>
@@ -8089,6 +8097,7 @@
         <myAccessPerm class="backEnd.GameData.State.AccessPermissionsImpl">
           <userModePermissions>
             <string>AUTHOR</string>
+            <string>PLAYER</string>
           </userModePermissions>
           <gameModePermissions>
             <string>DEFAULT</string>
@@ -8104,7 +8113,7 @@
             <entry>
               <string>ImageFile</string>
               <backEnd.Attribute.AttributeImpl>
-                <myValue class="string">resources/images/Tiles/default_tile.jpg</myValue>
+                <myValue class="string">resources/images/Tiles/Blue.png</myValue>
                 <myName>ImageFile</myName>
               </backEnd.Attribute.AttributeImpl>
             </entry>
@@ -8112,8 +8121,8 @@
               <string>Position</string>
               <backEnd.Attribute.AttributeImpl>
                 <myValue class="javafx.geometry.Point2D">
-                  <x>6.0</x>
-                  <y>5.0</y>
+                  <x>402.0</x>
+                  <y>214.0</y>
                   <hash>0</hash>
                 </myValue>
                 <myName>Position</myName>
@@ -8148,7 +8157,7 @@
             <entry>
               <string>MoveDirection</string>
               <backEnd.Attribute.AttributeImpl>
-                <myValue class="string"></myValue>
+                <myValue class="string">Down</myValue>
                 <myParamList class="java.util.Arrays$ArrayList">
                   <a class="string-array">
                     <string>Up</string>
@@ -8179,7 +8188,7 @@
         <hash>66853447</hash>
       </javafx.geometry.Point2D>
       <backEnd.GameData.State.TileImpl>
-        <changed>true</changed>
+        <changed>false</changed>
         <obs/>
         <myAccessPerm class="backEnd.GameData.State.AccessPermissionsImpl">
           <userModePermissions>
@@ -8274,7 +8283,7 @@
         <hash>-1057482169</hash>
       </javafx.geometry.Point2D>
       <backEnd.GameData.State.TileImpl>
-        <changed>true</changed>
+        <changed>false</changed>
         <obs/>
         <myAccessPerm class="backEnd.GameData.State.AccessPermissionsImpl">
           <userModePermissions>
@@ -8369,7 +8378,7 @@
         <hash>16259655</hash>
       </javafx.geometry.Point2D>
       <backEnd.GameData.State.TileImpl>
-        <changed>true</changed>
+        <changed>false</changed>
         <obs/>
         <myAccessPerm class="backEnd.GameData.State.AccessPermissionsImpl">
           <userModePermissions>
@@ -8469,6 +8478,7 @@
         <myAccessPerm class="backEnd.GameData.State.AccessPermissionsImpl">
           <userModePermissions>
             <string>AUTHOR</string>
+            <string>PLAYER</string>
           </userModePermissions>
           <gameModePermissions>
             <string>DEFAULT</string>
@@ -8484,7 +8494,7 @@
             <entry>
               <string>ImageFile</string>
               <backEnd.Attribute.AttributeImpl>
-                <myValue class="string">resources/images/Tiles/default_tile.jpg</myValue>
+                <myValue class="string">resources/images/Tiles/Red.png</myValue>
                 <myName>ImageFile</myName>
               </backEnd.Attribute.AttributeImpl>
             </entry>
@@ -8492,8 +8502,8 @@
               <string>Position</string>
               <backEnd.Attribute.AttributeImpl>
                 <myValue class="javafx.geometry.Point2D">
-                  <x>4.0</x>
-                  <y>3.0</y>
+                  <x>285.0</x>
+                  <y>141.0</y>
                   <hash>0</hash>
                 </myValue>
                 <myName>Position</myName>
@@ -8528,7 +8538,7 @@
             <entry>
               <string>MoveDirection</string>
               <backEnd.Attribute.AttributeImpl>
-                <myValue class="string"></myValue>
+                <myValue class="string">Right</myValue>
                 <myParamList class="java.util.Arrays$ArrayList">
                   <a class="string-array">
                     <string>Up</string>
@@ -8564,6 +8574,7 @@
         <myAccessPerm class="backEnd.GameData.State.AccessPermissionsImpl">
           <userModePermissions>
             <string>AUTHOR</string>
+            <string>PLAYER</string>
           </userModePermissions>
           <gameModePermissions>
             <string>DEFAULT</string>
@@ -8579,7 +8590,7 @@
             <entry>
               <string>ImageFile</string>
               <backEnd.Attribute.AttributeImpl>
-                <myValue class="string">resources/images/Tiles/default_tile.jpg</myValue>
+                <myValue class="string">resources/images/Tiles/Blue.png</myValue>
                 <myName>ImageFile</myName>
               </backEnd.Attribute.AttributeImpl>
             </entry>
@@ -8587,8 +8598,8 @@
               <string>Position</string>
               <backEnd.Attribute.AttributeImpl>
                 <myValue class="javafx.geometry.Point2D">
-                  <x>6.0</x>
-                  <y>4.0</y>
+                  <x>402.0</x>
+                  <y>172.0</y>
                   <hash>0</hash>
                 </myValue>
                 <myName>Position</myName>
@@ -8623,7 +8634,7 @@
             <entry>
               <string>MoveDirection</string>
               <backEnd.Attribute.AttributeImpl>
-                <myValue class="string"></myValue>
+                <myValue class="string">Down</myValue>
                 <myParamList class="java.util.Arrays$ArrayList">
                   <a class="string-array">
                     <string>Up</string>
@@ -8654,7 +8665,7 @@
         <hash>66591303</hash>
       </javafx.geometry.Point2D>
       <backEnd.GameData.State.TileImpl>
-        <changed>true</changed>
+        <changed>false</changed>
         <obs/>
         <myAccessPerm class="backEnd.GameData.State.AccessPermissionsImpl">
           <userModePermissions>
@@ -8749,7 +8760,7 @@
         <hash>59120199</hash>
       </javafx.geometry.Point2D>
       <backEnd.GameData.State.TileImpl>
-        <changed>true</changed>
+        <changed>false</changed>
         <obs/>
         <myAccessPerm class="backEnd.GameData.State.AccessPermissionsImpl">
           <userModePermissions>
@@ -8849,6 +8860,7 @@
         <myAccessPerm class="backEnd.GameData.State.AccessPermissionsImpl">
           <userModePermissions>
             <string>AUTHOR</string>
+            <string>PLAYER</string>
           </userModePermissions>
           <gameModePermissions>
             <string>DEFAULT</string>
@@ -8864,7 +8876,7 @@
             <entry>
               <string>ImageFile</string>
               <backEnd.Attribute.AttributeImpl>
-                <myValue class="string">resources/images/Tiles/default_tile.jpg</myValue>
+                <myValue class="string">resources/images/Tiles/Yellow.png</myValue>
                 <myName>ImageFile</myName>
               </backEnd.Attribute.AttributeImpl>
             </entry>
@@ -8872,8 +8884,8 @@
               <string>Position</string>
               <backEnd.Attribute.AttributeImpl>
                 <myValue class="javafx.geometry.Point2D">
-                  <x>5.0</x>
-                  <y>6.0</y>
+                  <x>356.0</x>
+                  <y>266.0</y>
                   <hash>0</hash>
                 </myValue>
                 <myName>Position</myName>
@@ -8908,7 +8920,7 @@
             <entry>
               <string>MoveDirection</string>
               <backEnd.Attribute.AttributeImpl>
-                <myValue class="string"></myValue>
+                <myValue class="string">Left</myValue>
                 <myParamList class="java.util.Arrays$ArrayList">
                   <a class="string-array">
                     <string>Up</string>
@@ -8939,7 +8951,7 @@
         <hash>58989127</hash>
       </javafx.geometry.Point2D>
       <backEnd.GameData.State.TileImpl>
-        <changed>true</changed>
+        <changed>false</changed>
         <obs/>
         <myAccessPerm class="backEnd.GameData.State.AccessPermissionsImpl">
           <userModePermissions>
@@ -9034,7 +9046,7 @@
         <hash>58726983</hash>
       </javafx.geometry.Point2D>
       <backEnd.GameData.State.TileImpl>
-        <changed>true</changed>
+        <changed>false</changed>
         <obs/>
         <myAccessPerm class="backEnd.GameData.State.AccessPermissionsImpl">
           <userModePermissions>
@@ -9129,7 +9141,7 @@
         <hash>41949767</hash>
       </javafx.geometry.Point2D>
       <backEnd.GameData.State.TileImpl>
-        <changed>true</changed>
+        <changed>false</changed>
         <obs/>
         <myAccessPerm class="backEnd.GameData.State.AccessPermissionsImpl">
           <userModePermissions>
@@ -9224,7 +9236,7 @@
         <hash>42867271</hash>
       </javafx.geometry.Point2D>
       <backEnd.GameData.State.TileImpl>
-        <changed>true</changed>
+        <changed>false</changed>
         <obs/>
         <myAccessPerm class="backEnd.GameData.State.AccessPermissionsImpl">
           <userModePermissions>
@@ -9319,7 +9331,7 @@
         <hash>42736199</hash>
       </javafx.geometry.Point2D>
       <backEnd.GameData.State.TileImpl>
-        <changed>true</changed>
+        <changed>false</changed>
         <obs/>
         <myAccessPerm class="backEnd.GameData.State.AccessPermissionsImpl">
           <userModePermissions>
@@ -9414,7 +9426,7 @@
         <hash>42474055</hash>
       </javafx.geometry.Point2D>
       <backEnd.GameData.State.TileImpl>
-        <changed>true</changed>
+        <changed>false</changed>
         <obs/>
         <myAccessPerm class="backEnd.GameData.State.AccessPermissionsImpl">
           <userModePermissions>

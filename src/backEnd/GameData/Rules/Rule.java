@@ -20,6 +20,11 @@ public abstract class Rule implements RuleReader{
 		this.myDisplayString = displayString;
 	}
 
+	public boolean getStatus()
+	{
+		return enabled;
+	}
+	
 	public void setVal(double newVal) {
 		myVal = newVal;
 	}
