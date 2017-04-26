@@ -128,8 +128,8 @@ public class StateImpl extends Observable implements State {
 	private void replaceTiles(TileGrid tileGrid)
 	{
 		
-		myTileGrid.setWidth(tileGrid.getNumColsInGrid());
-		myTileGrid.setHeight(tileGrid.getNumRowsInGrid());
+		myTileGrid.setNumCols(tileGrid.getNumColsInGrid());
+		myTileGrid.setNumRows(tileGrid.getNumRowsInGrid());
 		
 		for (int x = 0; x < tileGrid.getNumRowsInGrid(); x++)
 		{

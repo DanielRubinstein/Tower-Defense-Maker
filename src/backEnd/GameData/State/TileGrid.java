@@ -75,9 +75,9 @@ public interface TileGrid{
 
 	TileGridInstantiator getInstantiator();
 
-	void setWidth(int numColsInGrid);
+	void setNumCols(int numColsInGrid);
 
-	void setHeight(int numRowsInGrid);
+	void setNumRows(int numRowsInGrid);
 
 	Point2D getGridPositionFromScreenPosition(Point2D newTileScreenPosition);
 

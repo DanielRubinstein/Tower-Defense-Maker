@@ -53,6 +53,11 @@ public class ViewImpl implements View {
 		appStage = new Stage();
 		mySkeleton.display(appStage);
 	}
+	
+	public void close()
+	{
+		appStage.close();
+	}
 
 	public FacebookInteractor getFb(){
 		return myFB;

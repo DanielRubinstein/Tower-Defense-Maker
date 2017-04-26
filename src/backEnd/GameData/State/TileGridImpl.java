@@ -220,7 +220,7 @@ public class TileGridImpl extends Observable implements TileGrid {
 	}
 
 	@Override
-	public void setWidth(int numColsInGrid)
+	public void setNumCols(int numColsInGrid)
 	{
 		this.numColsInGrid = numColsInGrid;
 		this.setChanged();
@@ -228,7 +228,7 @@ public class TileGridImpl extends Observable implements TileGrid {
 	}
 
 	@Override
-	public void setHeight(int numRowsInGrid)
+	public void setNumRows(int numRowsInGrid)
 	{
 		this.numRowsInGrid = numRowsInGrid;
 		this.setChanged();
