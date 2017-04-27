@@ -100,6 +100,28 @@ public class Reflection {
             throw new ReflectionException(e, NO_MATCHING_PUBLIC_METHOD, name, target.getClass().getName());
         }
     }
+    
+    /**
+     * Given a target object with methods that take the
+     * given actual parameters, call the named methods on that object.
+     * This will not return any of the return values of the methods.
+     * 
+     * @author Miguel Anderson
+     */
+    public static void callAllMethods (Object target, Object ... args) throws ReflectionException {
+        try {
+            for (Method current : target.getClass().getMethods()) {
+                Class<?>[] formals = current.getParameterTypes();
+                if (typesMatch(current, formals, args)) {
+                    current.invoke(target, convertArgs(current, formals, args));
+                } 
+            }
+            return;
+        }
+        catch (Exception e) {
+            throw new ReflectionException(e, NO_MATCHING_PUBLIC_METHOD, "ANY", target.getClass().getName());
+        }
+    }
 
     /**
      * Given a target object with an instance variable with the given name, get
@@ -178,6 +200,7 @@ public class Reflection {
     private static boolean isInstance (Class<?> clss, Object instance) {
         final String TYPE = "TYPE";
         try {
+        	//System.out.println(clss.toString() + " " + instance.toString());
             // handle primitives specially
             if (clss.isPrimitive()) {
                 Class<?> thePrimitive = (Class<?>) getFieldValue(instance, TYPE);
@@ -191,7 +214,7 @@ public class Reflection {
                 // not an instance of class or its sub-classes
                 return false;
             }
-            System.out.println(clss.toString() + " " + instance.toString());
+            
             return true;
         }
         catch (Exception e) {

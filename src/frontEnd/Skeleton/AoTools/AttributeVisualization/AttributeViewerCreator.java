@@ -1,6 +1,4 @@
-package frontEnd.Skeleton.AoTools;
-
-import java.lang.reflect.Method;
+package frontEnd.Skeleton.AoTools.AttributeVisualization;
 
 import backEnd.Attribute.Attribute;
 import backEnd.Attribute.AttributeOwner;
@@ -13,7 +11,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 
-public class AttributeViewerCreator {
+public class AttributeViewerCreator implements AttributeVisualization{
 	private View myView;
 	private AttributeOwner myOwner;
 	private Attribute<?> myAttr;
@@ -24,23 +22,13 @@ public class AttributeViewerCreator {
 		myOwner = obj;
 		myAttr = attr;
 	}
-
-	public Node extractViewer(String type) {
-		Node n = null;
-		String stringFormatForViewerMethod = "create_%s_Viewer";
-		try{
-			Method createViewer = AttributeViewerCreator.class.getDeclaredMethod(String.format(stringFormatForViewerMethod, type));
-			createViewer.setAccessible(true);
-			n = (Node) createViewer.invoke(this);
-		} catch (NoSuchMethodException e){
-			System.out.println("attribute type not yet coded");
-		} catch (Exception e){
-			// fuck
-		}
-		return n;
+	
+	@Override
+	public String getMethodNameFormat() {
+		return "get%s";
 	}
 	
-	private Node create_IMAGE_Viewer() {
+	public Node getIMAGE() {
 		String imagePath = (String) myAttr.getValue();
 		return createImageView(imagePath);
 	}
@@ -54,13 +42,13 @@ public class AttributeViewerCreator {
 		return imv;
 	}
 
-	private Node create_POSITION_Viewer() {
+	public Node getPOSITION() {
 		String stringFormatter = "(%.0f, %.0f)";
 		Point2D pos = (Point2D) myAttr.getValue();
 		return new Label(String.format(stringFormatter, pos.getX(), pos.getY()));
 	}
 
-	private Node create_COMPONENT_Viewer() {
+	public Node getCOMPONENT() {
 		Component baby = (Component) myAttr.getValue();
 		
 		HBox pair = new HBox();
@@ -78,23 +66,24 @@ public class AttributeViewerCreator {
 		return new Label(myAttr.getValue().toString());
 	}
 
-	private Node create_INTEGER_Viewer() {
+	public Node getINTEGER() {
 		return createBasicViewer();
 	}
 
-	private Node create_EDITABLESTRING_Viewer() {
+	public Node getEDITABLESTRING() {
 		return createBasicViewer();
 	}
 
-	private Node create_DOUBLE_Viewer() {
+	public Node getDOUBLE() {
 		return createBasicViewer();
 	}
 
-	private Node create_BOOLEAN_Viewer() {
+	public Node getBOOLEAN() {
 		return createBasicViewer();
 	}
 
-	private Node create_STRINGLIST_Viewer() {
+	public Node getSTRINGLIST() {
 		return createBasicViewer();
 	}
+
 }
