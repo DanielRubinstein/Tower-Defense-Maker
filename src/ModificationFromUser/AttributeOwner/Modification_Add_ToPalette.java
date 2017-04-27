@@ -1,19 +1,13 @@
 package ModificationFromUser.AttributeOwner;
 
-import java.lang.reflect.Method;
-import java.util.List;
-import com.thoughtworks.xstream.XStream;
-import com.thoughtworks.xstream.io.xml.DomDriver;
-
 import ModificationFromUser.ModificationFromUser;
+import ModificationFromUser.AttributeOwner.ReflectionMethods.Modification_Add_ToPalette_Methods;
 import backEnd.BankController;
 import backEnd.ModelImpl;
 import backEnd.Attribute.AttributeOwner;
 import backEnd.Attribute.AttributeOwnerSerializer;
-import backEnd.GameData.State.Component;
-import backEnd.GameData.State.Tile;
-import backEnd.GameData.State.TileImpl;
 import backEnd.Mode.ModeException;
+import util.reflection.Reflection;
 
 /**
  * Used when user creates a new preset component
@@ -28,7 +22,6 @@ public class Modification_Add_ToPalette implements ModificationFromUser {
 	private String newName;
 
 	public static final String DESCRIPTION = "Add Preset Component or Tile";	
-	public static final String DESCRIPTION_ERROR = "Not a recognized Attribute Owner";
 	
 	public Modification_Add_ToPalette(String newAttributeOwnerName, AttributeOwner obj){
 		this.newAttrOwn = obj;
@@ -50,13 +43,10 @@ public class Modification_Add_ToPalette implements ModificationFromUser {
 				newAttrOwnToAdd = newAttrOwn;
 			}
 			myBankController = model.getBankController();
-			try {
-				Method add = Modification_Add_ToPalette.class.getDeclaredMethod("add", newAttrOwn.getClass());
-				add.setAccessible(true);
-				add.invoke(this, newAttrOwnToAdd);
-			} catch (NoSuchMethodException e) {
-				throw new Exception(DESCRIPTION_ERROR);
-			}
+			
+			Modification_Add_ToPalette_Methods methods = new Modification_Add_ToPalette_Methods(myBankController, newName);
+			
+			Reflection.callMethod(methods, "add", newAttrOwnToAdd);
 			break;
 			
 		case "PLAYER":
@@ -64,13 +54,6 @@ public class Modification_Add_ToPalette implements ModificationFromUser {
 		}
 		
 	}
-	
-	private void add(TileImpl tile){
-		myBankController.addNewTile(newName, tile);
-	}
-	
-	private void add(Component component){
-		myBankController.addNewComponent(newName, component);
-	}
+
 	
 }

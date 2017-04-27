@@ -16,6 +16,9 @@ import backEnd.Attribute.AttributeOwner;
 import backEnd.GameData.State.Component;
 import frontEnd.View;
 import frontEnd.CustomJavafxNodes.SingleFieldPrompt;
+import frontEnd.Skeleton.AoTools.AttributeVisualization.AttributeEditorCreator;
+import frontEnd.Skeleton.AoTools.AttributeVisualization.AttributeViewerCreator;
+import frontEnd.Skeleton.AoTools.AttributeVisualization.AttributeVisualization;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.geometry.HPos;
 import javafx.geometry.Insets;
@@ -33,6 +36,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
+import util.reflection.Reflection;
 
 public class AttributeCommandCenter{	
 	private final static String RESOURCES_PATH = "resources/";
@@ -43,7 +47,6 @@ public class AttributeCommandCenter{
 	private View myView;
 	private VBox myRoot;
 	private SimpleBooleanProperty authorProperty;
-	private HBox bottomButtons;
 	private Label titleLbl;
 	private Stage myHostStage;
 	
@@ -73,32 +76,6 @@ public class AttributeCommandCenter{
 		contents.setSpacing(STANDARD_SPACING);
 		// contents.setAlignment(Pos.TOP_CENTER);
 		return contents;
-	}
-
-	private void checkToAddAttributeOwnerSpecificButton(AttributeOwner obj, String methodName) {
-		try {
-			Method addSubmitButton = AttributeCommandCenter.class.getDeclaredMethod(methodName, obj.getClass());
-			addSubmitButton.setAccessible(true);
-			addSubmitButton.invoke(this, obj);
-		} catch (NoSuchMethodException e) {
-			// do nothing
-			// this means the thing being put in attribute command center is a tile
-		} catch (Exception e) {
-			// something went wrong
-			// TODO add exception?
-			System.out.println("Something went wrong adding the 'add' or 'remove' button");
-		}
-	}
-
-	private void addSubmitButton(Component obj) {
-		if(myView.getBankController().getAccessibleComponentMap().containsValue(obj)){
-			Button submit = new Button("Add Now");
-			submit.setOnAction(e -> {
-				myView.sendUserModification(new Modification_Add_StraightToGrid(obj));
-				myHostStage.close();
-			});
-			bottomButtons.getChildren().add(submit);
-		}
 	}
 	
 	private Node createAttributeView(AttributeOwner obj) {
@@ -130,89 +107,24 @@ public class AttributeCommandCenter{
 	}
 
 	private Node createBottomButtons(AttributeOwner obj){
-		
-		bottomButtons = new HBox();
-		
-		bottomButtons.setSpacing(STANDARD_SPACING);
-		bottomButtons.setAlignment(Pos.BOTTOM_RIGHT);  
-		
-		createAccessPermissionButton(obj);
-		createAddToPresetButton(obj);
-		checkToAddAttributeOwnerSpecificButton(obj, "addSubmitButton");
-		checkToAddAttributeOwnerSpecificButton(obj, "removeButton");
-		
-		if (!myView.getBooleanAuthorModeProperty().get()){
-			createUpgradeButton(obj);
-		}
-		return bottomButtons;
-	}
-
-	private void removeButton(Component c) {
-		if(!myView.getBankController().getAccessibleComponentMap().containsValue(c)){
-			Button submit = new Button("Remove Now");
-			submit.setOnAction(e -> {
-				myView.sendUserModification(new Modification_RemoveAttributeOwner(c));
-				myHostStage.close();
-			});
-			bottomButtons.getChildren().add(submit);
-		}
-	}
-
-	private void createAccessPermissionButton(AttributeOwner obj) {
-		AccessPermissionsViewer accessPermissionsViewer = new AccessPermissionsViewer(myHostStage, myView, obj.getAccessPermissions());
-		bottomButtons.getChildren().add(accessPermissionsViewer.getRoot());
-	}
-
-	private void createAddToPresetButton(AttributeOwner obj) {
-		if(!(myView.getComponentPresets().contains(obj) || myView.getTilePresets().contains(obj))){
-			List<String> dialogTitles = Arrays.asList("Preset Creation Utility", "Please Input a Name for your new preset");
-			String promptLabel = "New preset name:";
-			String promptText = "";
-			SingleFieldPrompt myNameDialog = new SingleFieldPrompt(dialogTitles, promptLabel, promptText);
-			Button preset = new Button("Save a copy to preset palette");
-			preset.setOnAction((e) -> {
-				myView.sendUserModification(new Modification_Add_ToPalette(myNameDialog.create(), obj));
-				myHostStage.close();
-			});
-			
-			bottomButtons.getChildren().add(preset);
-		}
-	}
-	
-	private void createUpgradeButton(AttributeOwner obj){
-		Button upgrade = new Button("Upgrade Component");
-		int cost = (int) obj.getAttribute("UpgradeCost").getValue();
-		upgrade.setOnAction((e) -> {
-			Alert alert = new Alert(AlertType.CONFIRMATION);
-			alert.setTitle("Buy Confirmation");
-			alert.setHeaderText("This Upgrade Costs " + cost + " Dollars");
-			alert.setContentText("Are you sure you want to upgrade this component?");
-			Optional<ButtonType> result = alert.showAndWait();
-			if (result.get() == ButtonType.OK || result.get() == ButtonType.CANCEL) {
-				alert.close();
-			}
-			if (result.get() == ButtonType.OK){
-				myView.sendUserModification(new Modification_PurchaseComponent(cost));
-				myView.sendUserModification(new Modification_UpgradeComponent((Component) obj));
-			}
-			myHostStage.close();
-		});
-		bottomButtons.getChildren().add(upgrade);
-	}
+		AttributeCommandCenterBottomButtons attributeCommandCenterBottomButtons = new AttributeCommandCenterBottomButtons(myView, myHostStage);
+		Reflection.callAllMethods(attributeCommandCenterBottomButtons, obj);
+		return attributeCommandCenterBottomButtons.getRoot();
+	}	
 
 	private Node createAttributeValueViewer(AttributeOwner obj, Attribute<?> attr) {
 		HBox finalViewer = new HBox();
-		Node right;
+		AttributeVisualization attributeVisualization;
 		if (authorProperty.get()) {
 			// Author Mode
-			AttributeEditorCreator editorCreator = new AttributeEditorCreator(myView, obj, attr);
-			right = editorCreator.extractEditor(myAttrNameResources.getString(attr.getName()));
-			
+			attributeVisualization = new AttributeEditorCreator(myView, obj, attr);
 		} else {
 			// Player Mode
-			AttributeViewerCreator viewerCreator = new AttributeViewerCreator(myView, obj, attr);
-			right = viewerCreator.extractViewer(myAttrNameResources.getString(attr.getName()));
+			attributeVisualization = new AttributeViewerCreator(myView, obj, attr);
 		}
+		String methodNameFormat = attributeVisualization.getMethodNameFormat();
+		Node right = (Node) Reflection.callMethod(attributeVisualization, String.format(methodNameFormat, myAttrNameResources.getString(attr.getName())));			
+		
 		try {
 			finalViewer.getChildren().add(right);
 		} catch (NullPointerException e) {

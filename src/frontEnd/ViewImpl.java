@@ -158,4 +158,9 @@ public class ViewImpl implements View {
 		mySkeleton.setScene(new SplashScreen(data));
 	}
 
+	@Override
+	public boolean isComponentOnGrid(Component c) {
+		return myModel.getState().getComponentGraph().contains(c);
+	}
+
 }
