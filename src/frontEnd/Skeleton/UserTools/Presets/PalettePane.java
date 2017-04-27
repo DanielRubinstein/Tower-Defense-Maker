@@ -38,11 +38,11 @@ public class PalettePane implements SkeletonObject {
 		if (string.equals("Tiles")){
 			Map<String, Tile> presets = null;
 			presets = myView.getBankController().getAccessibleTileMap();
-			singlePalette = new Palette(myView, presets , string);
+			singlePalette = new Palette(myView, presets);
 		} else if (string.equals("Components")){
 			Map<String, Component> presets = null;
 			presets = myView.getBankController().getAccessibleComponentMap();
-			singlePalette = new Palette(myView, presets, string);
+			singlePalette = new Palette(myView, presets);
 		}
 
 		ScrollPane scrollPane = new ScrollPane();
