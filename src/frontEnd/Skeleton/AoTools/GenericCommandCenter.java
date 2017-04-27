@@ -7,9 +7,10 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
-import resources.Constants;
+import resources.constants.StringResourceBundle;
 
 public class GenericCommandCenter implements CommandCenter{
+	private StringResourceBundle stringResourceBundle = new StringResourceBundle();
 	private View myView;
 	private VBox myRoot;
 	private AttributeOwner obje;
@@ -21,7 +22,7 @@ public class GenericCommandCenter implements CommandCenter{
 	
 	public void generate(double x, double y, Stage myStage, Parent myRoot) {
 		Scene myScene = new Scene(myRoot);
-		myScene.getStylesheets().add(Constants.DEFAULT_CSS);
+		myScene.getStylesheets().add(stringResourceBundle.getDefaultCSS());
 		myStage.setScene(myScene);
 		myStage.setTitle("Command Center");
 		myStage.setX(x);

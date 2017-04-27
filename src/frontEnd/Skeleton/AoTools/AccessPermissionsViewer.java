@@ -1,7 +1,6 @@
 package frontEnd.Skeleton.AoTools;
 
 import java.util.List;
-import java.util.ResourceBundle;
 
 import ModificationFromUser.AttributeOwner.Modification_EditAccessPermissions;
 import backEnd.GameData.State.AccessPermissions;
@@ -22,11 +21,10 @@ import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
-import resources.Constants;
+import resources.constants.StringResourceBundle;
 
 public class AccessPermissionsViewer implements SkeletonObject {
-	private static final String BUNDLE_NAME = "resources.messages";
-	private static final ResourceBundle RESOURCE_BUNDLE = ResourceBundle.getBundle(BUNDLE_NAME);
+	private StringResourceBundle stringResourceBundle = new StringResourceBundle();
 	
 	private Stage myHostStage;
 	private View myView;
@@ -45,7 +43,7 @@ public class AccessPermissionsViewer implements SkeletonObject {
 	}
 
 	private void createIgnition() {
-		ignition = new ActionButton(RESOURCE_BUNDLE.getString("AccessPermissions"), () -> {
+		ignition = new ActionButton(stringResourceBundle.getString("AccessPermissions"), () -> {
 			loadViewer();
 			generate();
 		});
@@ -126,7 +124,7 @@ public class AccessPermissionsViewer implements SkeletonObject {
 	}
 
 	private Label createTitle() {
-		Label titleLbl = new Label(RESOURCE_BUNDLE.getString("AccessPermissions"));
+		Label titleLbl = new Label(stringResourceBundle.getString("AccessPermissions"));
 		titleLbl.setFont(Font.font(32));
 		titleLbl.setUnderline(true);
 		return titleLbl;
@@ -137,7 +135,7 @@ public class AccessPermissionsViewer implements SkeletonObject {
 		myStage.initOwner(myHostStage);
 		myStage.initModality(Modality.APPLICATION_MODAL);
 		Scene scene = new Scene(myRoot);
-		scene.getStylesheets().add(Constants.DEFAULT_CSS);
+		scene.getStylesheets().add(stringResourceBundle.getDefaultCSS());
 		myStage.setScene(scene);
 		myStage.show();
 	}
