@@ -3,10 +3,6 @@ package frontEnd.Skeleton.UserTools;
 import java.util.List;
 
 import backEnd.LevelProgression.LevelProgressionControllerEditor;
-import data.XMLWriter;
-import data.XMLWriterImpl;
-import frontEnd.View;
-import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.scene.Node;
 import javafx.scene.Scene;
@@ -19,17 +15,15 @@ import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.GridPane;
-import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
-import javafx.stage.WindowEvent;
-import resources.Constants;
+import resources.constants.StringConstants;
 
 
 public class LevelView {
-	
+	private StringConstants stringConstants = new StringConstants();
 	private GridPane myRoot;
 	private Stage myStage;
 	private LevelProgressionControllerEditor myLevels;
@@ -58,7 +52,7 @@ public class LevelView {
 	
 	public void launch(){
 		myScene = new Scene(myRoot);
-		myScene.getStylesheets().add(Constants.DEFAULT_CSS);
+		myScene.getStylesheets().add(stringConstants.getDefaultCSS());
 		myStage.setScene(myScene);
 		myStage.show();
 	}

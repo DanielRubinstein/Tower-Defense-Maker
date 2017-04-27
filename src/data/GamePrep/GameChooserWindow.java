@@ -3,6 +3,7 @@ package data.GamePrep;
 import java.util.List;
 import java.util.Map;
 import java.util.function.Consumer;
+
 import frontEnd.CustomJavafxNodes.ActionButton;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -13,11 +14,11 @@ import javafx.scene.control.ScrollPane.ScrollBarPolicy;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.CornerRadii;
-import javafx.scene.layout.VBox;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
-import resources.Constants;
+import resources.constants.StringConstants;
 
 /**
  * 
@@ -31,6 +32,7 @@ public class GameChooserWindow
 	private VBox gameContainer;
 	private VBox levelContainer;
 	private DataInputLoader reader;
+	private StringConstants stringConstants = new StringConstants();
 	
 	private Map<String, List<String>> gamesData;
 	private String currentLevel;
@@ -45,7 +47,7 @@ public class GameChooserWindow
 		populateOverallContainer(consumerLoadData);
 		
 		Scene myScene = new Scene(overallContainer, 600,  400);
-		myScene.getStylesheets().add(Constants.DEFAULT_CSS);
+		myScene.getStylesheets().add(stringConstants.getDefaultCSS());
 		stage.setScene(myScene);
 		
 		stage.show();

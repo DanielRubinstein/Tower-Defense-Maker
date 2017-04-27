@@ -1,18 +1,16 @@
 package frontEnd.CustomJavafxNodes;
 
-import java.util.ResourceBundle;
-
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
+import resources.constants.StringConstants;
 
 public class ErrorDialog {
-	private static final String BUNDLE_NAME = "resources.messages";
-	private static final ResourceBundle RESOURCE_BUNDLE = ResourceBundle.getBundle(BUNDLE_NAME);
+	private StringConstants stringConstants = new StringConstants();
 	private Alert alert;
 
 	public ErrorDialog(){
 		alert = new Alert(AlertType.ERROR);
-		alert.setTitle(RESOURCE_BUNDLE.getString("ErrorDialogTitle"));
+		alert.setTitle(stringConstants.getString("ErrorDialogTitle"));
 	}
 	
 	public void create(String headerText, String contentText){

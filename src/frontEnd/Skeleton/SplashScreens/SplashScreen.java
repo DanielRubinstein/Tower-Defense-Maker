@@ -5,10 +5,12 @@ import javafx.event.EventHandler;
 import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.text.Text;
-import resources.Constants;
+import resources.constants.NumericConstants;
+import resources.constants.StringConstants;
 
 public class SplashScreen extends Scene
 {
+	private StringConstants stringConstants = new StringConstants();
 	private BorderPane myRoot;
 	
 	public SplashScreen(SplashScreenData data)
@@ -16,7 +18,7 @@ public class SplashScreen extends Scene
 		super(new BorderPane());
 		myRoot = (BorderPane) getRoot();
 		
-		getStylesheets().add(Constants.DEFAULT_CSS);
+		getStylesheets().add(stringConstants.getDefaultCSS());
 		
 		myRoot.setBottom(new Text(data.getMessageBody()));
 		
