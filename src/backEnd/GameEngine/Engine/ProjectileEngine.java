@@ -80,16 +80,21 @@ public class ProjectileEngine implements Engine {
 		Point2D targetPos = (Point2D) c.getAttribute(("ProjectileTargetPosition")).getValue();
 		Point2D difference = targetPos.subtract(curPos);
 		Double slope = difference.getY() / difference.getX();
-		/*
+		
 		if (difference.getX() < 0) {
 			xVel *= -1;
 		}
+		
 		if (difference.getY() < 0) {
 			yVel *= -1;
 		}
-		*/
+		
+		System.out.println("XVEL is " + xVel);
+		System.out.println("YVEL is " + yVel);
+		System.out.println("YVEL * Slope is " + yVel*slope);
 		Double distTraveled = Math.sqrt(Math.pow(curVel, 2) + Math.pow(slope * curVel, 2));
-		Point2D newPos = new Point2D(curPos.getX() + xVel, curPos.getY() + yVel * slope);
+		Point2D newPos = new Point2D(curPos.getX() + xVel, curPos.getY() + yVel * Math.abs(slope));
+		System.out.println("NEWPOS IS " + newPos);
 		c.setAttributeValue("ProjectileTraveled",
 				((Double) c.getAttribute(("ProjectileTraveled")).getValue()) + distTraveled);
 		return newPos;
