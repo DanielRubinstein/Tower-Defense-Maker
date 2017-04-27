@@ -3,6 +3,7 @@ package frontEnd.Skeleton.ScreenGrid;
 import backEnd.Attribute.AttributeOwnerReader;
 import backEnd.GameData.State.SerializableObservable;
 import backEnd.GameData.State.SerializableObserver;
+import javafx.geometry.Bounds;
 import javafx.geometry.Point2D;
 import javafx.scene.control.Tooltip;
 import javafx.scene.image.Image;
@@ -23,7 +24,6 @@ public class AttributeOwnerVisualImpl implements SerializableObserver, Attribute
 		myAttr.addObserver(this);
 		myImage = new ImageView();
 		setImage(myAttr.getMyAttributes().<String>get(IMAGE_ATTRIBUTE).getValue());
-		setImageHover();
 		try{
 			Double size = myAttr.getMyAttributes().<Double>get("Size").getValue();
 			setSize(size);
@@ -43,8 +43,17 @@ public class AttributeOwnerVisualImpl implements SerializableObserver, Attribute
 	}
 	
 	private void setImageHover() {
-		Tooltip hover = new Tooltip();
-		// TODO is this supposed to be position hover?
+		String format = "(%.0f, %.0f)";
+		Tooltip hover = new Tooltip(String.format(format, myPosition.getX(), myPosition.getY()));
+		myImage.hoverProperty().addListener((o, oldV, newV) -> {
+			if (newV) {
+				Bounds scenePos = myImage.localToScreen(myImage.getBoundsInLocal());
+				hover.show(myImage, scenePos.getMaxX(), scenePos.getMinY());
+				// TODO someone help
+			} else {
+				hover.hide();
+			}
+		});
 	}
 
 	private void setPosition(Point2D newPosition){
@@ -53,6 +62,7 @@ public class AttributeOwnerVisualImpl implements SerializableObserver, Attribute
 			myImage.setX(newPosition.getX()-myImage.getFitWidth()/2);
 			myImage.setY(newPosition.getY()-myImage.getFitHeight()/2);
 		}
+		//setImageHover();
 	}
 	
 	private void setImage(String newImagePath){
