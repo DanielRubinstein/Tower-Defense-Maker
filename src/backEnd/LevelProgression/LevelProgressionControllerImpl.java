@@ -43,7 +43,9 @@ public class LevelProgressionControllerImpl implements LevelProgressionControlle
 	
 	public void initiateSplashScreen(SplashScreenData data)
 	{
+		System.out.println("LPC line 46");
 		splashScreenLoader.accept(data);
+		System.out.println("LPC line 48");
 	}
 	
 	@Override
@@ -178,6 +180,8 @@ public class LevelProgressionControllerImpl implements LevelProgressionControlle
 	@Override
 	public void loadNextGame()
 	{
+		System.out.println("LPC line 183");
 		gameLoader.accept(getNextLevel());
+		System.out.println("LPC line 185");
 	}
 }
