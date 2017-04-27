@@ -34,7 +34,7 @@ public class DeathEngine implements Engine {
 				gameData.getStatus().incrementStatusItem("KillCount", 1);
 				gameData.getStatus().incrementStatusItem("Money", (Integer)struct.getAttribute("MoneyBounty").getValue());
 				gameData.getStatus().incrementStatusItem("Score", (Integer)struct.getAttribute("ScoreBounty").getValue());
-				System.out.println("current score is "+gameData.getStatus().getStatusItemValue("Score"));
+				//System.out.println("current score is "+gameData.getStatus().getStatusItemValue("Score"));
 
 				if (DB.spawnsOnDeath()) {
 					Object currentLocation = struct.getMyAttributes().get("Position").getValue();
@@ -47,6 +47,7 @@ public class DeathEngine implements Engine {
 		}
 		for (Component toDelete: toRemove){
 			gameData.getState().getComponentGraph().removeComponent(toDelete);
+			System.out.println("Deathbehavior executed, component removed");
 		}
 		for (Component c: toAdd.keySet()){
 			gameData.getState().getComponentGraph().addComponentToGrid(c, toAdd.get(c));

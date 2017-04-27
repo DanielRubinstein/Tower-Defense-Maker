@@ -37,10 +37,11 @@ public class MoveEngine implements Engine{
 		myState=gameData.getState();
 		List<Component> toRemove=new ArrayList<Component>();
 		Map<Component, Point2D> toAdd=new HashMap<Component, Point2D>();
-		for (Component c: myState.getComponentGraph().getAllComponents()){
-			if (!c.<String>getAttribute(TYPE).getValue().equals(ENEMY)){
+		for (Component c: myState.getComponentGraph().getAllComponents()){		
+			if (c.<String>getAttribute(TYPE).getValue().equals(PROJECTILE)){ //don't want path to influence projectiles
 				continue;
 			}
+			
 			Point2D currentLocation=c.<Point2D>getAttribute(POSITION).getValue();
 			currentTile = gameData.getState().getTileGrid().getTileByScreenPosition(currentLocation);
 			if (currentTile==null){
