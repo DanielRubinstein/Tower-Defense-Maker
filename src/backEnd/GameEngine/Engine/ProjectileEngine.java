@@ -36,17 +36,7 @@ public class ProjectileEngine implements Engine {
 					continue;
 				}
 				c.setAttributeValue("Position", newPos);
-				// System.out.println("traveledDist is " + (Double)
-				// c.getAttribute("ProjectileTraveled").getValue());
-				// System.out.println("maxDist is " + (Double)
-				// c.getAttribute("ProjectileMaxDistance").getValue());
-				if (((Double) c.getAttribute("ProjectileTraveled").getValue() + 1.0) >= (Double) c // 1.0
-																									// is
-																									// to
-																									// allow
-																									// for
-																									// wiggle
-																									// room
+				if (((Double) c.getAttribute("ProjectileTraveled").getValue() + 1.0) >= (Double) c //1.0 is wiggle room
 						.getAttribute(("ProjectileMaxDistance")).getValue()) {
 					// TODO: may have issues when the target is already
 					// destroyed before it gets there
@@ -71,8 +61,7 @@ public class ProjectileEngine implements Engine {
 		Double xVel = curVel;
 		Double yVel = curVel;
 
-		// TODO: there is an issue where the projectiles speed up and drop sharply to the bottom
-		// of the screen - caused by this method probably in lines 83 - 89
+		// TODO:
 		// CHRISTIAN make sure the projectiles and targets are getting from the
 		// list that it's looping over
 
@@ -89,12 +78,8 @@ public class ProjectileEngine implements Engine {
 			yVel *= -1;
 		}
 		
-		System.out.println("XVEL is " + xVel);
-		System.out.println("YVEL is " + yVel);
-		System.out.println("YVEL * Slope is " + yVel*slope);
 		Double distTraveled = Math.sqrt(Math.pow(curVel, 2) + Math.pow(slope * curVel, 2));
 		Point2D newPos = new Point2D(curPos.getX() + xVel, curPos.getY() + yVel * Math.abs(slope));
-		System.out.println("NEWPOS IS " + newPos);
 		c.setAttributeValue("ProjectileTraveled",
 				((Double) c.getAttribute(("ProjectileTraveled")).getValue()) + distTraveled);
 		return newPos;
@@ -119,13 +104,11 @@ public class ProjectileEngine implements Engine {
 		for (Component toHit : targetList) {
 			// System.out.println("Target looping has begun");
 			if (toHit.getAttribute("Type").getValue().equals("Enemy")) {
-				toHit.setAttributeValue("Health", (Integer) toHit.getAttribute("Health").getValue()
-						- (Integer) projectile.getAttribute("FireDamage").getValue());
-				// System.out.println("should have reduced HP to " +
-				// toHit.getAttribute("Health").getValue());
-				toHit.setAttributeValue("Velocity", ((Double) projectile.getAttribute("SlowFactor").getValue()
-						* (Double) toHit.getAttribute("Speed").getValue()));
-				gameData.getState().getComponentGraph().removeComponent(projectile);
+				toHit.setAttributeValue("Health", (Integer) toHit.getAttribute("Health").getValue() - (Integer) projectile.getAttribute("FireDamage").getValue());
+				System.out.println("should have reduced HP to " + toHit.getAttribute("Health").getValue());
+				toHit.setAttributeValue("Velocity", ((Double) projectile.getAttribute("SlowFactor").getValue() * (Double) toHit.getAttribute("Speed").getValue()));
+				toRemove.add(projectile);
+				//gameData.getState().getComponentGraph().removeComponent(projectile);
 				if (projectile.getAttribute("FireType").getValue().equals("SingleTarget")) {
 					break; // if AOE, continue to loop through all targets, else
 							// only affect one target, needs testing
