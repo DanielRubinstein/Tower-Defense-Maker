@@ -8,9 +8,9 @@ import java.util.ResourceBundle;
  *
  */
 
-public class NumericConstants {
+public class NumericResourceBundle {
 	
-	private static final String BUNDLE_NAME = "resources.constants.numericConstants";
+	private static final String BUNDLE_NAME = "resources.constants.numericResourceBundle";
 	private static final ResourceBundle RESOURCE_BUNDLE = ResourceBundle.getBundle(BUNDLE_NAME);
 	
 	

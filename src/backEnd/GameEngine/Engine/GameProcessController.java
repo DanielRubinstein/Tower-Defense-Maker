@@ -13,7 +13,7 @@ import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.util.Duration;
-import resources.constants.NumericConstants;
+import resources.constants.NumericResourceBundle;
 
 public class GameProcessController {
 
@@ -23,7 +23,7 @@ public class GameProcessController {
 	private final static ResourceBundle myResources = ResourceBundle.getBundle(RESOURCES_PATH);
 	private EngineStatus engineStatus;
 	private SimpleStringProperty engineStatusProperty;
-	private NumericConstants numericConstants = new NumericConstants();
+	private NumericResourceBundle numericResourceBundle = new NumericResourceBundle();
 
 	public Timeline animation = new Timeline();
 
@@ -41,7 +41,7 @@ public class GameProcessController {
 	}
 
 	private void addNewFrameToAnimation() {
-		KeyFrame frame = new KeyFrame(Duration.millis(numericConstants.getMillisecondDelay()), e -> step(numericConstants.getSecondDelay()));
+		KeyFrame frame = new KeyFrame(Duration.millis(numericResourceBundle.getMillisecondDelay()), e -> step(numericResourceBundle.getSecondDelay()));
 		animation.setCycleCount(Animation.INDEFINITE);
 		animation.getKeyFrames().add(frame);
 	}

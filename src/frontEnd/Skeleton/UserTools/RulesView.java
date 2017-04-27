@@ -17,10 +17,10 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
-import resources.constants.StringConstants;
+import resources.constants.StringResourceBundle;
 
 public class RulesView {
-	private StringConstants stringConstants = new StringConstants();
+	private StringResourceBundle stringResourceBundle = new StringResourceBundle();
 	private GridPane myRoot;
 	private View myView;
 	private Stage myStage;
@@ -40,7 +40,7 @@ public class RulesView {
 	
 	public void launch(){
 		Scene scene = new Scene(myRoot);
-		scene.getStylesheets().add(stringConstants.getDefaultCSS());
+		scene.getStylesheets().add(stringResourceBundle.getDefaultCSS());
 		myStage.setScene(scene);
 		myStage.show();
 	}

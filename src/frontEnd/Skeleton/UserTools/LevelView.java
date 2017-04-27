@@ -19,11 +19,11 @@ import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
-import resources.constants.StringConstants;
+import resources.constants.StringResourceBundle;
 
 
 public class LevelView {
-	private StringConstants stringConstants = new StringConstants();
+	private StringResourceBundle stringResourceBundle = new StringResourceBundle();
 	private GridPane myRoot;
 	private Stage myStage;
 	private LevelProgressionControllerEditor myLevels;
@@ -52,7 +52,7 @@ public class LevelView {
 	
 	public void launch(){
 		myScene = new Scene(myRoot);
-		myScene.getStylesheets().add(stringConstants.getDefaultCSS());
+		myScene.getStylesheets().add(stringResourceBundle.getDefaultCSS());
 		myStage.setScene(myScene);
 		myStage.show();
 	}

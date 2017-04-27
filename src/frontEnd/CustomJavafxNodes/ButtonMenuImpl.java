@@ -12,10 +12,10 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
-import resources.constants.StringConstants;
+import resources.constants.StringResourceBundle;
 
 public class ButtonMenuImpl implements ButtonMenu {
-	private StringConstants stringConstants = new StringConstants();
+	private StringResourceBundle stringResourceBundle = new StringResourceBundle();
 	private GridPane myGrid;
 	private VBox myButtonRoot;
 	private Scene myScene;
@@ -25,7 +25,7 @@ public class ButtonMenuImpl implements ButtonMenu {
 	public ButtonMenuImpl(String text){
 		initializeGrid();
 		myButtonRoot = new VBox();
-		description = new Label(stringConstants.getString("SelectAnOption"));
+		description = new Label(stringResourceBundle.getString("SelectAnOption"));
 		description.setWrapText(true);
 		setText(text);
 	}
@@ -65,7 +65,7 @@ public class ButtonMenuImpl implements ButtonMenu {
 			if(newVal){
 				description.setText(hoverText);
 			} else {
-				description.setText(stringConstants.getString("SelectAnOption"));
+				description.setText(stringResourceBundle.getString("SelectAnOption"));
 			}
 		});
 		addButton(newButton);
@@ -128,10 +128,10 @@ public class ButtonMenuImpl implements ButtonMenu {
 		myGrid.add(titleLbl, 0, 0, 2, 1);
 		myGrid.add(myButtonRoot, 0, 1);
 		myGrid.add(description, 1, 1);
-		myGrid.add(new Label(stringConstants.getString("TEAMNAME")), 0, 2, 2, 1);
+		myGrid.add(new Label(stringResourceBundle.getString("TEAMNAME")), 0, 2, 2, 1);
 		//myButtonRoot.setAlignment(Pos.CENTER);
    	 	myScene = new Scene(myGrid);
-   	 	myScene.getStylesheets().add(stringConstants.getString("DEFAULT_CSS"));
+   	 	myScene.getStylesheets().add(stringResourceBundle.getString("DEFAULT_CSS"));
 		description.setMaxWidth(200d);
 	}
 

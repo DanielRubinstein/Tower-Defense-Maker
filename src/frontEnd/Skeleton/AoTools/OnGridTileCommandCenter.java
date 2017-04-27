@@ -18,7 +18,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
 import javafx.stage.Stage;
-import resources.constants.StringConstants;
+import resources.constants.StringResourceBundle;
 
 /**
  * This class is the command center that pops up when a user clicks on a tile. It presents information about the tile
@@ -27,7 +27,7 @@ import resources.constants.StringConstants;
  *
  */
 public class OnGridTileCommandCenter implements CommandCenter, SkeletonObject{
-	private StringConstants stringConstants = new StringConstants();
+	private StringResourceBundle stringResourceBundle = new StringResourceBundle();
 	private Stage myStage;
 	private View myView;
 	private TabPane tabPane;
@@ -87,7 +87,7 @@ public class OnGridTileCommandCenter implements CommandCenter, SkeletonObject{
 	@Override
 	public void generate(double x, double y, Stage myStage, Parent myRoot) {
 		Scene myScene = new Scene(myRoot);
-		myScene.getStylesheets().add(stringConstants.getDefaultCSS());
+		myScene.getStylesheets().add(stringResourceBundle.getDefaultCSS());
 		myStage.setScene(myScene);
 		myStage.setTitle("Command Center");
 		myStage.setX(x);

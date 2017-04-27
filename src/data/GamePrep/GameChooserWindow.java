@@ -18,7 +18,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
-import resources.constants.StringConstants;
+import resources.constants.StringResourceBundle;
 
 /**
  * 
@@ -32,7 +32,7 @@ public class GameChooserWindow
 	private VBox gameContainer;
 	private VBox levelContainer;
 	private DataInputLoader reader;
-	private StringConstants stringConstants = new StringConstants();
+	private StringResourceBundle stringResourceBundle = new StringResourceBundle();
 	
 	private Map<String, List<String>> gamesData;
 	private String currentLevel;
@@ -47,7 +47,7 @@ public class GameChooserWindow
 		populateOverallContainer(consumerLoadData);
 		
 		Scene myScene = new Scene(overallContainer, 600,  400);
-		myScene.getStylesheets().add(stringConstants.getDefaultCSS());
+		myScene.getStylesheets().add(stringResourceBundle.getDefaultCSS());
 		stage.setScene(myScene);
 		
 		stage.show();

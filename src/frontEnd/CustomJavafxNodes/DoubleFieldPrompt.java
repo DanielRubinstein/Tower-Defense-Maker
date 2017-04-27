@@ -12,7 +12,7 @@ import javafx.scene.control.Dialog;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
-import resources.constants.StringConstants;
+import resources.constants.StringResourceBundle;
 
 /**
  * 
@@ -20,7 +20,7 @@ import resources.constants.StringConstants;
  *
  */
 public class DoubleFieldPrompt {
-	private StringConstants stringConstants = new StringConstants();
+	private StringResourceBundle stringResourceBundle = new StringResourceBundle();
 	
 	private List<String> myDialogTitles;
 	private List<String> myPromptText;
@@ -45,7 +45,7 @@ public class DoubleFieldPrompt {
 		 */
 
 		// Set the button types.
-		ButtonType createButtonType = new ButtonType(stringConstants.getString("Submit"), ButtonData.OK_DONE);
+		ButtonType createButtonType = new ButtonType(stringResourceBundle.getString("Submit"), ButtonData.OK_DONE);
 		dialog.getDialogPane().getButtonTypes().addAll(createButtonType, ButtonType.CANCEL);
 
 		// Create the username and password labels and fields.

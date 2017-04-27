@@ -21,10 +21,10 @@ import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
-import resources.constants.StringConstants;
+import resources.constants.StringResourceBundle;
 
 public class AccessPermissionsViewer implements SkeletonObject {
-	private StringConstants stringConstants = new StringConstants();
+	private StringResourceBundle stringResourceBundle = new StringResourceBundle();
 	
 	private Stage myHostStage;
 	private View myView;
@@ -43,7 +43,7 @@ public class AccessPermissionsViewer implements SkeletonObject {
 	}
 
 	private void createIgnition() {
-		ignition = new ActionButton(stringConstants.getString("AccessPermissions"), () -> {
+		ignition = new ActionButton(stringResourceBundle.getString("AccessPermissions"), () -> {
 			loadViewer();
 			generate();
 		});
@@ -124,7 +124,7 @@ public class AccessPermissionsViewer implements SkeletonObject {
 	}
 
 	private Label createTitle() {
-		Label titleLbl = new Label(stringConstants.getString("AccessPermissions"));
+		Label titleLbl = new Label(stringResourceBundle.getString("AccessPermissions"));
 		titleLbl.setFont(Font.font(32));
 		titleLbl.setUnderline(true);
 		return titleLbl;
@@ -135,7 +135,7 @@ public class AccessPermissionsViewer implements SkeletonObject {
 		myStage.initOwner(myHostStage);
 		myStage.initModality(Modality.APPLICATION_MODAL);
 		Scene scene = new Scene(myRoot);
-		scene.getStylesheets().add(stringConstants.getDefaultCSS());
+		scene.getStylesheets().add(stringResourceBundle.getDefaultCSS());
 		myStage.setScene(scene);
 		myStage.show();
 	}
