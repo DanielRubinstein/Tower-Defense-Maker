@@ -8,12 +8,9 @@ import java.util.function.Consumer;
 
 import ModificationFromUser.AttributeOwner.Modification_Add_PaletteToGrid;
 import backEnd.BankController;
-import backEnd.Attribute.Attribute;
 import backEnd.Attribute.AttributeOwner;
-import backEnd.GameData.State.Component;
 import backEnd.GameData.State.SerializableObservable;
 import backEnd.GameData.State.SerializableObserver;
-import backEnd.GameData.State.TileImpl;
 import backEnd.Mode.ModeReader;
 import frontEnd.View;
 import frontEnd.Skeleton.AoTools.GenericCommandCenter;
@@ -32,7 +29,6 @@ import javafx.scene.input.Dragboard;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.TransferMode;
 import javafx.scene.layout.TilePane;
-import util.reflection.Reflection;
 
 /**
  * http://stackoverflow.com/questions/27182323/working-on-creating-image-gallery
@@ -49,6 +45,7 @@ public class Palette implements SkeletonObject, SerializableObserver{
 	private String myType;
 	private BankController observedBankController;
 	private ModeReader observedMode;
+	private static final Double PRESET_SIZE = 75d;
 	
 	public Palette(View view, Map<String, ? extends AttributeOwner> presetMap, String string) {
 		myView = view;
@@ -99,11 +96,10 @@ public class Palette implements SkeletonObject, SerializableObserver{
 	}
 
 	private void addPresetImageViewToPalette(ImageView imageView) {
-		switch (myType) {
-		case "Tiles":
-			imageView.setFitHeight(75d);
-			imageView.setFitWidth(75d);
-			break;
+		if(imageView.getFitHeight() == 0 || imageView.getFitWidth() == 0){
+			// no size attribute for this attribute owner
+			imageView.setFitHeight(PRESET_SIZE);
+			imageView.setFitWidth(PRESET_SIZE);
 		}
 				
 		tile.getChildren().add(imageView);
