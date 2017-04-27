@@ -72,7 +72,6 @@ public class AttackEngine implements Engine {
 		projectile.setAttributeValue("ProjectileTargetPosition", targetPos);
 		projectile.setAttributeValue("ProjectileTarget", target);
 		Point2D finalTargetPoint = targetPos.subtract(bulletPos);
-		//System.out.println("finalTargetPoint is " + finalTargetPoint);
 		//TODO: USE .magnitude() method below
 		projectile.setAttributeValue("ProjectileMaxDistance", Math.sqrt(Math.pow(finalTargetPoint.getX(),2) + Math.pow(finalTargetPoint.getY(), 2)));
 		myGameData.getState().getComponentGraph().addComponentToGrid(projectile, bulletPos);
