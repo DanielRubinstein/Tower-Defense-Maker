@@ -89,6 +89,7 @@ public class BankController implements BankControllerReader
 			testingTurret.setAttributeValue("Health", 10);
 			testingTurret.setAttributeValue("Type", "Tower");
 			testingTurret.setAttributeValue("Velocity", 1.0);
+			testingTurret.setAttributeValue("Speed", 1.0);
 			testingTurret.setAttributeValue("FireDamage", 10);
 			testingTurret.setAttributeValue("FireRate", 1000.0);
 			testingTurret.setAttributeValue("ExplosionRadius", 40.0);

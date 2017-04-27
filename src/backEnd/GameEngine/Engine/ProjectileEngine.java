@@ -30,12 +30,8 @@ public class ProjectileEngine implements Engine {
 		for (Component c : myGameData.getState().getComponentGraph().getAllComponents()) {
 			if (((String) c.getAttribute("Type").getValue()).equals("Projectile")) {
 				Point2D newPos = calculateNewPos(c);
-				Tile currentTile = myGameData.getState().getTileGrid().getTileByScreenPosition(newPos);
-				if (currentTile == null) {
-					toRemove.add(c);
-					continue;
-				}
 				c.setAttributeValue("Position", newPos);
+				checkProjectileOutOfBounds(c);
 				if (((Double) c.getAttribute("ProjectileTraveled").getValue() + 1.0) >= (Double) c //1.0 is wiggle room
 						.getAttribute(("ProjectileMaxDistance")).getValue()) {
 					// TODO: may have issues when the target is already
@@ -43,19 +39,25 @@ public class ProjectileEngine implements Engine {
 					// System.out.println("about to perform projectile
 					// actions");
 					performProjectileAction(gameData, (Component) c.getAttribute("ProjectileTarget").getValue(), c);
-
 					toRemove.add(c);
 
 				}
 
 			}
 		}
+		System.out.println("About to remove stuff from graph" );
 		for (Component c : toRemove) {
 			myGameData.getState().getComponentGraph().removeComponent(c);
 		}
 
 	}
 
+	private void checkProjectileOutOfBounds(Component projectile){
+		if (myGameData.getState().getTileGrid().getTileByScreenPosition((Point2D) projectile.getAttribute("Position").getValue())==null){
+			toRemove.add(projectile);
+			}
+	}
+	
 	private Point2D calculateNewPos(Component c) {
 		Double curVel = (Double) c.getAttribute(("Velocity")).getValue();
 		Double xVel = curVel;
@@ -99,16 +101,14 @@ public class ProjectileEngine implements Engine {
 		List<Component> targetList = (ArrayList<Component>) gameData.getState().getComponentGraph()
 				.getComponentsWithinRadius(target, (Double) projectile.getAttribute("ExplosionRadius").getValue());
 		targetList.add(target);
-		// System.out.println("targetList size is " + targetList.size());
 
 		for (Component toHit : targetList) {
 			// System.out.println("Target looping has begun");
 			if (toHit.getAttribute("Type").getValue().equals("Enemy")) {
 				toHit.setAttributeValue("Health", (Integer) toHit.getAttribute("Health").getValue() - (Integer) projectile.getAttribute("FireDamage").getValue());
-				System.out.println("should have reduced HP to " + toHit.getAttribute("Health").getValue());
+				System.out.println("should have reduced HP to " + toHit.getAttribute("Health").getValue() + " type is " + toHit.getAttribute("Type").getValue());
 				toHit.setAttributeValue("Velocity", ((Double) projectile.getAttribute("SlowFactor").getValue() * (Double) toHit.getAttribute("Speed").getValue()));
 				toRemove.add(projectile);
-				//gameData.getState().getComponentGraph().removeComponent(projectile);
 				if (projectile.getAttribute("FireType").getValue().equals("SingleTarget")) {
 					break; // if AOE, continue to loop through all targets, else
 							// only affect one target, needs testing
