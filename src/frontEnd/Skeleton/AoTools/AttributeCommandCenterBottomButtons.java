@@ -52,6 +52,7 @@ public class AttributeCommandCenterBottomButtons implements SkeletonObject{
 	}
 	
 	public void addSubmitButton(Component obj) {
+		// as is this option is not available when creating a preset
 		if(myView.getBankController().getAccessibleComponentMap().containsValue(obj)){
 			Button submit = new Button("Add Now");
 			submit.setOnAction(e -> {

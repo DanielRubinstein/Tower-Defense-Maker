@@ -1,13 +1,10 @@
 package ModificationFromUser.AttributeOwner;
 
-import java.lang.reflect.Method;
-
 import ModificationFromUser.ModificationFromUser;
+import ModificationFromUser.AttributeOwner.ReflectionMethods.Modification_RemoveAttributeOwner_Methods;
 import backEnd.ModelImpl;
 import backEnd.Attribute.AttributeOwner;
-import backEnd.GameData.State.Component;
-import backEnd.GameData.State.Tile;
-import backEnd.GameData.State.TileImpl;
+import util.reflection.Reflection;
 
 public class Modification_RemoveAttributeOwner implements ModificationFromUser {
 	
@@ -23,22 +20,9 @@ public class Modification_RemoveAttributeOwner implements ModificationFromUser {
 	@Override
 	public void invoke(ModelImpl model) throws Exception {
 		myModel = model;
-		try {
-			Method remove = Modification_RemoveAttributeOwner.class.getDeclaredMethod("remove", toRemove.getClass());
-			remove.setAccessible(true);
-			remove.invoke(this, toRemove);
-		} catch (NoSuchMethodException e) {
-			throw new Exception(DESCRIPTION_ERROR);
-		}
+		Modification_RemoveAttributeOwner_Methods methods = new Modification_RemoveAttributeOwner_Methods(myModel);
+		Reflection.callMethod(methods, "remove", toRemove);
 		
-	}
-	
-	private void remove(TileImpl tile) throws Exception{
-		throw new Exception(TILE_ERROR);
-	}
-	
-	private void remove(Component component){
-		myModel.getState().getComponentGraph().removeComponent(component);
 	}
 
 }
