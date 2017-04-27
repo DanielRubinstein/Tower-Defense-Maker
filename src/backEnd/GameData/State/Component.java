@@ -9,7 +9,8 @@ import java.util.ResourceBundle;
 
 import backEnd.Attribute.Attribute;
 import backEnd.Attribute.AttributeData;
-import backEnd.Attribute.AttributeFactory;
+import backEnd.Attribute.AttributeFactoryImpl;
+import backEnd.Attribute.AttributeFactoryReader;
 import backEnd.Attribute.AttributeOwner;
 import backEnd.GameEngine.Behaviors.Behavior;
 import backEnd.GameEngine.Behaviors.BehaviorFactory;
@@ -54,11 +55,11 @@ public class Component implements AttributeOwner, SerializableObservable {
 		System.out.println("creaing component " + this);
 		myAttributes = attributes;
 		myBehaviors = new HashMap<>();
-		AttributeFactory af = new AttributeFactory();
+		AttributeFactoryReader attributeFactory = new AttributeFactoryImpl();
 		BehaviorFactory bf = new BehaviorFactory(this); // add a real component
 		for (String key : behaviorResources.keySet()) {
 			String value = behaviorResources.getString(key);
-			Attribute<?> myAttribute = af.getAttribute(key); // FIXME THIS- HOW
+			Attribute<?> myAttribute = attributeFactory.getAttribute(key); // FIXME THIS- HOW
 																// DOES OUR
 																// FACTORY
 																// GENERATE
@@ -67,9 +68,8 @@ public class Component implements AttributeOwner, SerializableObservable {
 			myBehaviors.put(key, bf.getBehavior(key));
 		}
 
-		AttributeFactory attrFact = new AttributeFactory();
 		for (String key : attributeResources.keySet()) {
-			Attribute<?> myAttribute = attrFact.getAttribute(key);
+			Attribute<?> myAttribute = attributeFactory.getAttribute(key);
 			addAttribute(key, myAttribute);
 		}
 		//setupBehaviorObserving();
