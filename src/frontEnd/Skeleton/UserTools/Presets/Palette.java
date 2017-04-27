@@ -1,25 +1,21 @@
 package frontEnd.Skeleton.UserTools.Presets;
 
-import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Observable;
-import java.util.Observer;
 import java.util.function.Consumer;
 
 import ModificationFromUser.AttributeOwner.Modification_Add_PaletteToGrid;
-import ModificationFromUser.Spawning.Modification_AddSpawner;
 import backEnd.BankController;
 import backEnd.Attribute.AttributeOwner;
-import backEnd.GameData.State.Component;
-import backEnd.GameData.State.TileImpl;
+import backEnd.GameData.State.SerializableObservable;
+import backEnd.GameData.State.SerializableObserver;
 import backEnd.Mode.ModeReader;
 import frontEnd.View;
 import frontEnd.Skeleton.AoTools.GenericCommandCenter;
-import frontEnd.Skeleton.ScreenGrid.FrontEndAttributeOwner;
-import frontEnd.Skeleton.ScreenGrid.FrontEndAttributeOwnerImpl;
+import frontEnd.Skeleton.ScreenGrid.AttributeOwnerVisual;
+import frontEnd.Skeleton.ScreenGrid.AttributeOwnerVisualImpl;
 import frontEnd.Skeleton.UserTools.SkeletonObject;
 import javafx.geometry.Bounds;
 import javafx.geometry.Insets;
@@ -33,7 +29,6 @@ import javafx.scene.input.Dragboard;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.TransferMode;
 import javafx.scene.layout.TilePane;
-import resources.Constants;
 
 /**
  * http://stackoverflow.com/questions/27182323/working-on-creating-image-gallery
@@ -41,53 +36,49 @@ import resources.Constants;
  * 
  * @author Miguel Anderson
  *
- * @param <T>
  */
-public class Palette<T extends AttributeOwner> implements SkeletonObject, Observer {
-	private static final int TILE_SIZE = 75;
+public class Palette implements SkeletonObject, SerializableObserver{
 	private View myView;
 	private TilePane tile;
-	private Map<String, T> myPresetMapBackEnd;
-	private static final String IMAGEFILE_ATTRIBUTE_NAME = "ImageFile";
-	private Map<ImageView, T> myPresetMapFrontEnd;
+	private Map<String, ? extends AttributeOwner> myPresetMapBackEnd;
+	private Map<ImageView, AttributeOwner> myPresetMapFrontEnd;
 	private String myType;
 	private BankController observedBankController;
 	private ModeReader observedMode;
+	private static final Double PRESET_SIZE = 75d;
 	
-	public Palette(View view, Map<String, T> presetMap, String string) {
+	public Palette(View view, Map<String, ? extends AttributeOwner> presetMap, String string) {
 		myView = view;
 		initializeMaps(presetMap);
 		myType = string;
 		initializePane();
-		for (T preset : myPresetMapBackEnd.values()) {
+		for (AttributeOwner preset : myPresetMapBackEnd.values()) {
 			addPresetToPalette(preset);
 		}
 		createNewPresetButton();
-
+		
 	}
 
-	private void initializeMaps(Map<String, T> presetMap) {
+	private void initializeMaps(Map<String, ? extends AttributeOwner> presetMap) {
 		observedBankController = myView.getBankController();
 		observedBankController.addObserver(this);
 		observedMode = myView.getModeReader();
 		observedMode.addObserver(this);
 		myPresetMapBackEnd = presetMap;
-		myPresetMapFrontEnd = new HashMap<ImageView, T>();
+		myPresetMapFrontEnd = new HashMap<ImageView, AttributeOwner>();
 	}
 
 	
 
-	private void addPresetToPalette(T preset) {
-		FrontEndAttributeOwner attrOwner = new FrontEndAttributeOwnerImpl(preset);
+	private void addPresetToPalette(AttributeOwner preset) {
+		AttributeOwnerVisual attrOwner = new AttributeOwnerVisualImpl(preset);
 		ImageView imageView = attrOwner.getImageView();
-		imageView.setFitWidth(TILE_SIZE);
-		imageView.setFitHeight(TILE_SIZE);
 		setPresetInteractions(preset, imageView);
 		myPresetMapFrontEnd.put(imageView, preset);
 		addPresetImageViewToPalette(imageView);
 	}
 
-	private void setPresetInteractions(T preset, ImageView imageView) {
+	private void setPresetInteractions(AttributeOwner preset, ImageView imageView) {
 		setClickEvent(imageView, (iV) -> {
 			GenericCommandCenter presetComCenter = new GenericCommandCenter(myView, preset);
 			presetComCenter.launch("Preset", iV.getLayoutX(), iV.getLayoutY());
@@ -105,16 +96,13 @@ public class Palette<T extends AttributeOwner> implements SkeletonObject, Observ
 	}
 
 	private void addPresetImageViewToPalette(ImageView imageView) {
-		if(myView.getBooleanAuthorModeProperty().get()){
-			try{
-				tile.getChildren().add(tile.getChildren().size() - 1, imageView);
-			} catch (IndexOutOfBoundsException e){
-				tile.getChildren().add(imageView);
-			}	
-		} else {
-			tile.getChildren().add(imageView);
-			// this should not happen (potentially MODE EXCEPTION SHIT)
+		if(imageView.getFitHeight() == 0 || imageView.getFitWidth() == 0){
+			// no size attribute for this attribute owner
+			imageView.setFitHeight(PRESET_SIZE);
+			imageView.setFitWidth(PRESET_SIZE);
 		}
+				
+		tile.getChildren().add(imageView);
 	}
 	
 	private void removePresetFromPalette(ImageView imageView) {
@@ -122,7 +110,7 @@ public class Palette<T extends AttributeOwner> implements SkeletonObject, Observ
 		myPresetMapFrontEnd.remove(imageView);
 	}
 
-	private void makeHoverOverName(T preset, ImageView imageView) {
+	private void makeHoverOverName(AttributeOwner preset, ImageView imageView) {
 		Tooltip t = new Tooltip(observedBankController.getAOName(preset));
 		imageView.hoverProperty().addListener((o, oldV, newV) -> {
 			if (newV) {
@@ -135,7 +123,7 @@ public class Palette<T extends AttributeOwner> implements SkeletonObject, Observ
 		});
 	}
 
-	private void makePresetDraggable(T preset, ImageView imageView) {
+	private void makePresetDraggable(AttributeOwner preset, ImageView imageView) {
 		
 		imageView.setOnDragDetected(e -> {
 			Dragboard db = imageView.startDragAndDrop(TransferMode.ANY);
@@ -149,29 +137,19 @@ public class Palette<T extends AttributeOwner> implements SkeletonObject, Observ
 		screenGrid.setOnDragDropped(e -> {
 			String presetName = e.getDragboard().getString();
 			AttributeOwner presetAO = observedBankController.getPreset(presetName);
-			Double offsetX;
-			Double offsetY;
-			// TODO holy shit, how do we get rid of these magic numbers
-			if(myView.getBooleanAuthorModeProperty().get()){
-				offsetX = 40d;
-				offsetY = -10d; 
-			} else {
-				offsetX = 12.5d;
-				offsetY = 12.5d; 
-			}
-			Point2D pos = new Point2D(e.getSceneX() - Constants.SCREEN_GRID_PADDING + offsetX ,e.getSceneY() - Constants.SCREEN_GRID_PADDING + offsetY);
+			Point2D pos = new Point2D(e.getX(), e.getY());
 			myView.sendUserModification(new Modification_Add_PaletteToGrid(presetAO, pos));
 		});
 	}
 
 	private void createNewPresetButton() {
 		PresetCreationButton presetCreationButton = new PresetCreationButton(myView, myType, (imagePath) -> createImageView(imagePath), (node, consumer) -> setClickEvent(node, consumer) );
-		tile.getChildren().add(presetCreationButton.getRoot());
+		tile.getChildren().add(0, presetCreationButton.getRoot());
 		presetCreationButton.disableInPlayerMode((inPlayerMode) -> {
 			if(inPlayerMode){
 				tile.getChildren().remove(presetCreationButton.getRoot());
 			} else {
-				tile.getChildren().add(presetCreationButton.getRoot());
+				tile.getChildren().add(0, presetCreationButton.getRoot());
 			}
 		});
 	}
@@ -190,27 +168,16 @@ public class Palette<T extends AttributeOwner> implements SkeletonObject, Observ
 	private ImageView createImageView(String myImagePath) {
 		Image image = new Image(getClass().getClassLoader().getResourceAsStream(myImagePath));
 		ImageView imageView = new ImageView(image);
-		imageView.setFitWidth(TILE_SIZE);
-		imageView.setFitHeight(TILE_SIZE);
 		return imageView;
 	}
 
 	@Override
-	public void update(Observable o, Object arg) {
-		switch (myType) {
-		case "Tiles":
-			myPresetMapBackEnd = (Map<String, T>) observedBankController.getAccessibleTileMap();
-			updatePalette();
-			break;
-		case "Components":
-			myPresetMapBackEnd = (Map<String, T>) observedBankController.getAccessibleComponentMap();
-			updatePalette();
-			break;
-		}
+	public void update(SerializableObservable so, Object obj) {
+		updatePalette();
 	}
 
 	private void updatePalette() {
-		for (T preset : myPresetMapBackEnd.values()) {
+		for (AttributeOwner preset : myPresetMapBackEnd.values()) {
 			if (!myPresetMapFrontEnd.containsValue(preset)) {
 				addPresetToPalette(preset);
 			}

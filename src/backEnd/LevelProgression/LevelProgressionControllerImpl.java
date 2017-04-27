@@ -6,13 +6,18 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
+import java.util.function.Consumer;
+
 import backEnd.LevelProgression.LevelProgressionControllerEditor;
 import backEnd.Mode.Mode;
 import data.DataController;
+import data.XMLReadingException;
+import frontEnd.Skeleton.SplashScreens.SplashScreenData;
 
 /**
  * 
  * @author Riley Nisbet
+ * @author Juan
  *
  */
 public class LevelProgressionControllerImpl implements LevelProgressionControllerReader, LevelProgressionControllerEditor
@@ -20,15 +25,26 @@ public class LevelProgressionControllerImpl implements LevelProgressionControlle
 	private Map<String,List<String>> gamesMap; //String gameName -> List of Level names
 	private DataController myDataController;
 	private Mode myMode;
+	private Consumer<SplashScreenData> splashScreenLoader;
+	private Consumer<Object> gameLoader;
+	
 	private static final String LEVEL_TEMPLATE_PATH = "data/LevelTemplates/";
 	
-	public LevelProgressionControllerImpl(Mode mode, DataController dataController, Map<String,List<String>> gamesMap)
+	public LevelProgressionControllerImpl(Mode mode, DataController dataController, Consumer<SplashScreenData> splashScreenLoader,
+			Consumer<Object> gameLoader)
 	{
 		this.myMode = mode;
-		this.gamesMap = gamesMap;
 		this.myDataController = dataController;
+		this.splashScreenLoader = splashScreenLoader;
+		this.gameLoader = gameLoader;
+		
+		setGamesMap();
 	}
 	
+	public void initiateSplashScreen(SplashScreenData data)
+	{
+		splashScreenLoader.accept(data);
+	}
 	
 	@Override
 	public List<String> getGameList(){
@@ -147,5 +163,21 @@ public class LevelProgressionControllerImpl implements LevelProgressionControlle
 		default:
 			return null;
 		}
+	}
+	
+
+	private void setGamesMap() {
+		try {
+			this.gamesMap = myDataController.loadGamesMapData();
+		} catch (XMLReadingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+
+	@Override
+	public void loadNextGame()
+	{
+		gameLoader.accept(getNextLevel());
 	}
 }

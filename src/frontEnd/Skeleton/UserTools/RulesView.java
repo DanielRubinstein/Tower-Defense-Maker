@@ -74,7 +74,7 @@ public class RulesView {
 		HBox changer = new HBox();
 		NumberChanger ruleChanger = new NumberChanger(rule.getMinVal(), rule.getMaxVal(), 
 				rule.getVal(), (rule.getMaxVal()-rule.getMinVal())/100);
-		ruleChanger.addListener((observable, oldValue, newValue) -> {
+		ruleChanger.addListener((SerializableObservable, oldValue, newValue) -> {
 			myView.sendUserModification(new Modification_EditRuleValue(rule.getKeyName(),newValue.doubleValue()));
 		});
 		HBox indicatorBox = ruleChanger.addIntegerIndicator();

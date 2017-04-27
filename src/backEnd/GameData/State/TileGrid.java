@@ -1,10 +1,8 @@
 package backEnd.GameData.State;
 
 import java.util.List;
-import java.util.Observer;
 
 import backEnd.Attribute.AttributeOwnerReader;
-import javafx.beans.Observable;
 import javafx.geometry.Point2D;
 
 /**
@@ -12,7 +10,7 @@ import javafx.geometry.Point2D;
  * @author Riley Nisbet, Christian Martindale
  *
  */
-public interface TileGrid{
+public interface TileGrid extends SerializableObservable{
 
 	/**
 	 * Get the tile at a given location
@@ -53,30 +51,22 @@ public interface TileGrid{
 	double getTileWidth();
 
 	double getTileHeight();
-	
-	void addAsObserver(Observer o);
 
 	boolean contains(AttributeOwnerReader newAttrOwn);
 
 	Object getMap();
-
 	
+	boolean atMiddleOfTile(Point2D screenPosition);
+
 	void saveAndClearTileObservers();
 
 	void setTileObservers();
-
-	List<Observer> getObservers();
-
-	void clearObservers();
-
-	void setObservers(List<Observer> observersave);
 	
-
 	TileGridInstantiator getInstantiator();
 
-	void setWidth(int numColsInGrid);
+	void setNumCols(int numColsInGrid);
 
-	void setHeight(int numRowsInGrid);
+	void setNumRows(int numRowsInGrid);
 
 	Point2D getGridPositionFromScreenPosition(Point2D newTileScreenPosition);
 

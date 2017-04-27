@@ -1,0 +1,5 @@
+ResourceEngine
+==============
+>Team: ePrintStackTrace
+
+Utility package intended to pull files based on specific parameters. More specifically, it is ideal for known files such as jpeg, xml, wav, png, mp3, and gif. Other file types are currently not supported. The ResourceEngine should first be constructed with extensions or have them added on later. This sets up the ResourceEngine to continually search for the defined types of files. Next, the ResourceEngine should be called to pull and cache files from a directory. This will then store all the files based on their name and their file extension. Finally, you can access these files by either getting all the files associated with a file type, or directly access a file by its extension and name. This provides a data structure for resource files throughout implementing features. For example, images for a game can all be loaded into one ResourceEngine. This engine can then be passed to other parts of a program to avoid repeated file accesses and keep consistency throughout the program.

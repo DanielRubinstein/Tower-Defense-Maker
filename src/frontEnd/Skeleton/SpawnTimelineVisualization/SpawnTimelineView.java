@@ -1,138 +1,89 @@
 package frontEnd.Skeleton.SpawnTimelineVisualization;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Observable;
-import java.util.Observer;
 
-import backEnd.Attribute.AttributeOwner;
-import backEnd.GameData.State.Component;
-import backEnd.GameEngine.Engine.Spawning.SpawnData;
-import backEnd.GameEngine.Engine.Spawning.SpawnQueue;
+import ModificationFromUser.Spawning.Modification_AddSpawner;
+import backEnd.GameData.State.SerializableObservable;
+import backEnd.GameData.State.SerializableObserver;
+import backEnd.GameEngine.Engine.Spawning.SpawnDataImpl;
+import backEnd.GameEngine.Engine.Spawning.SpawnDataReader;
+import backEnd.GameEngine.Engine.Spawning.SpawnQueues;
 import frontEnd.View;
 import frontEnd.CustomJavafxNodes.SingleFieldPrompt;
 import frontEnd.Skeleton.UserTools.SkeletonObject;
 import javafx.beans.property.ReadOnlyDoubleProperty;
 import javafx.geometry.Insets;
 import javafx.scene.Node;
-import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.ScrollPane.ScrollBarPolicy;
-import javafx.scene.control.TextField;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.input.TransferMode;
-import javafx.scene.layout.Background;
-import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.ColumnConstraints;
-import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
-import javafx.scene.paint.Color;
-import ModificationFromUser.Spawning.Modification_AddSpawner;
-import ModificationFromUser.Spawning.Modification_EditSpawnDataTime;
-import ModificationFromUser.Spawning.Modification_RemoveSpawner;
+import javafx.util.Pair;
 
-public class SpawnTimelineView implements SkeletonObject, Observer {
+public class SpawnTimelineView implements SkeletonObject, SerializableObserver {
 	private View myView;
-	private ScrollPane dropZone1;
-	private ScrollPane dropZone2;
 	private GridPane myRoot;
 	private String mySpawnQueueName;
-	private SpawnQueue mySpawnQueue;
-	private Map<SpawnData, VisualSpawnEntry> myFrequencySpawns;
-	private Map<SpawnData, VisualSpawnEntry> mySingleSpawns;
+	private SpawnQueues mySpawnQueues;
+	private List<Pair<List<SpawnDataImpl>, ScrollPane>> spawnQueueToDropZone;
+	private Map<SpawnDataImpl, List<SpawnDataImpl>> spawnDataToQueue;
+	private Map<SpawnDataReader, VisualSpawnEntry> spawnDataToVisual;
+	private Map<SpawnDataImpl, ScrollPane> spawnDataToDropZone;
 
-	public SpawnTimelineView(View view, ReadOnlyDoubleProperty readOnlyDoubleProperty, String key, SpawnQueue value) {
+	public SpawnTimelineView(View view, ReadOnlyDoubleProperty readOnlyDoubleProperty, String key, SpawnQueues value) {
 		myView = view;
 		mySpawnQueueName = key;
-		mySpawnQueue = value;
-		mySpawnQueue.addObserver(this);
+		initializeGrid(readOnlyDoubleProperty);
+		initializingSpawnQueue(value);
+	}
+
+	private void initializingSpawnQueue(SpawnQueues value) {
+		mySpawnQueues = value;
+		mySpawnQueues.addObserver(this);
+		spawnDataToQueue = new HashMap<>();
+		spawnDataToVisual = new HashMap<>();
+		spawnDataToDropZone = new HashMap<>();
+		spawnQueueToDropZone = new ArrayList<Pair<List<SpawnDataImpl>,ScrollPane>>();
+		
+		
+		spawnQueueToDropZone.add(new Pair<List<SpawnDataImpl>, ScrollPane>(mySpawnQueues.getSingleSpawnQueue(), singleDropZone("Single Instance Spawns", 0, false)));
+		spawnQueueToDropZone.add(new Pair<List<SpawnDataImpl>, ScrollPane>(mySpawnQueues.getFrequencySpawnQueue(), singleDropZone("Recurring Spawns", 1, true)));
+	}
+
+	private void initializeGrid(ReadOnlyDoubleProperty readOnlyDoubleProperty) {
 		myRoot = new GridPane();
 		myRoot.prefWidthProperty().bind(readOnlyDoubleProperty);
 		myRoot.setPadding(new Insets(20, 20, 20, 20));
 		myRoot.setVgap(20);
 		myRoot.setHgap(20);
-		createDropZones();
 	}
 
-	private void createDropZones() {
-		dropZone1 = singleDropZone("Single Instance Spawns", 0, false);
-		// timelines in a map in game data
-		dropZone2 = singleDropZone("Recurring Spawns", 1, true);
-	}
 
 	private ScrollPane singleDropZone(String name, int order, boolean repeating) {
 		ScrollPane dropZone = createDropZone(name, order);
+		setDragCondition(dropZone, repeating);
+		return dropZone;
+	}
+
+	private void setDragCondition(ScrollPane dropZone, boolean repeating) {
 		dropZone.setOnDragDropped(e -> {
 			String presetName = e.getDragboard().getString();
-			Component presetComponent = (Component) myView.getBankController().getPreset(presetName);
+			//Component presetComponent = (Component) myView.getBankController().getPreset(presetName);
 			SingleFieldPrompt hey = new SingleFieldPrompt(
 					Arrays.asList("Add Spawn", "Please input a time for your new spawn item"), "Spawn Time Value",
 					"1.0");
 			double value = Double.parseDouble(hey.create());
 			myView.sendUserModification(
-
 					new Modification_AddSpawner(mySpawnQueueName, presetName, value, repeating));
-			addToDropZone(dropZone, presetComponent, value,repeating); // This will be
-
-																// removed.
-																// Instead the
-																// method will
-																// be called via
-																// the update
-																// process from
-																// the backend
-																// (must be the
-																// result of an
-																// observation
-																// trigger)
 		});
-		return dropZone;
-	}
-
-	private void addToDropZone(ScrollPane dropZone, Component spawn, double value, boolean repeating) {
-
-		HBox spawnBox = new HBox();
-		String spawnImagePath = spawn.<String>getAttribute("ImageFile").getValue();
-		ImageView spawnImage = createImageView(spawnImagePath);
-		String spawnName = myView.getBankController().getAOName(spawn);
-		Label name = new Label();
-		name.setText(spawnName);
-		Label valueText = new Label(Double.toString(value));
-		// TODO Editable value here valueText.setOnClick()
-		valueText.setOnMouseClicked(e -> {
-			SingleFieldPrompt newPrompt = new SingleFieldPrompt(
-					Arrays.asList("Add Spawn", "Please input a time for your new spawn item"), "Spawn Time Value",
-					"1");
-			double newValue = Double.parseDouble(newPrompt.create());
-			myView.sendUserModification(new Modification_EditSpawnDataTime(mySpawnQueueName,spawnName,value,newValue,repeating));
-			valueText.setText(Double.toString(newValue));
-		});
-		Button remove = new Button("Delete");
-		remove.setOnAction(e -> {
-			myView.sendUserModification(new Modification_RemoveSpawner(mySpawnQueueName,spawnName,value,repeating));
-			spawnBox.getChildren().clear();
-		});
-		spawnBox.getChildren().add(name);
-		spawnBox.getChildren().add(spawnImage);
-		spawnBox.getChildren().add(valueText);
-		spawnBox.getChildren().add(remove);
-		VBox child = (VBox) dropZone.getContent();
-		child.getChildren().add(spawnBox);
-		dropZone.setContent(child);
-	}
-
-	private ImageView createImageView(String imagePath) {
-		Image image = new Image(getClass().getClassLoader().getResourceAsStream(imagePath));
-		ImageView imv = new ImageView();
-		imv.setImage(image);
-		imv.setPreserveRatio(true);
-		imv.setFitHeight(30);
-		return imv;
 	}
 
 	private ScrollPane createDropZone(String string, int i) {
@@ -162,14 +113,46 @@ public class SpawnTimelineView implements SkeletonObject, Observer {
 	}
 
 	@Override
-	public void update(Observable arg0, Object arg1) {
-		System.out.println("fuck");
-		if(arg0 == mySpawnQueue){
-			System.out.println(arg1);
-			if(arg1 == mySpawnQueue.getFrequencyQueue()){
-				System.out.println("yo yo yo");
+	public void update(SerializableObservable so, Object obj) {
+		for(Pair<List<SpawnDataImpl>, ScrollPane> entry : spawnQueueToDropZone){
+			List<SpawnDataImpl> queue = entry.getKey();
+			if(queue.contains(obj)){
+				addSpawn(obj, entry, queue);
+				return;
 			}
 		}
+		removeSpawn(obj);
+	}
+
+	private void removeSpawn(Object obj) {
+		SpawnDataImpl toRemove_Spawn = getToRemove_Spawn(obj);
+		((HBox) spawnDataToVisual.get(toRemove_Spawn).getRoot()).getChildren().clear();
+		spawnDataToDropZone.remove(toRemove_Spawn);
+		spawnDataToVisual.remove(toRemove_Spawn);
+		spawnDataToQueue.remove(toRemove_Spawn);
+	}
+
+	private void addSpawn(Object obj, Pair<List<SpawnDataImpl>, ScrollPane> entry, List<SpawnDataImpl> queue) {
+		SpawnDataImpl toAdd_Spawn = queue.get(queue.indexOf(obj));
+		spawnDataToQueue.put(toAdd_Spawn, queue);
+		Node toAdd = createVisual(toAdd_Spawn);
+		((VBox) entry.getValue().getContent()).getChildren().add(toAdd);
+		spawnDataToDropZone.put(toAdd_Spawn, entry.getValue());
+	}
+
+	private SpawnDataImpl getToRemove_Spawn(Object obj) {
+		for(SpawnDataImpl spawnData : spawnDataToQueue.keySet()){
+			if (spawnData == obj){
+				return spawnData;
+			}
+		}
+		return null;
+	}
+
+	private Node createVisual(SpawnDataReader spawnData) {
+		VisualSpawnEntry visualSpawnEntry = new VisualSpawnEntry(myView, mySpawnQueueName , spawnData);
+		spawnDataToVisual.put(spawnData, visualSpawnEntry);
+		return visualSpawnEntry.getRoot();
 	}
 
 }

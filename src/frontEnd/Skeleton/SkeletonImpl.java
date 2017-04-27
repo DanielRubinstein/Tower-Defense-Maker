@@ -41,12 +41,9 @@ public class SkeletonImpl implements Skeleton{
 		State state = model.getState();
 		myAuthProp = view.getBooleanAuthorModeProperty();
 		myScreenGrid = new ScreenGrid(view, state, Constants.SCREEN_GRID_WIDTH, Constants.SCREEN_GRID_HEIGHT);
-		
 		myTimelineTabPane = new AuthorScreenGrid(view, myScreenGrid);
 		chooseCenter();
-		myAuthProp.addListener((o, oldV, newV) -> {
-			chooseCenter();
-		});
+		myAuthProp.addListener((o, oldV, newV) -> chooseCenter());
 		
 		//myRoot.setCenter(myScreenGrid.getRoot());
 		
@@ -73,6 +70,11 @@ public class SkeletonImpl implements Skeleton{
 		stage.setMinWidth(Constants.WINDOW_WIDTH);
 		stage.setMinHeight(Constants.WINDOW_HEIGHT);
 		stage.show();
+	}
+	
+	public void setScene(Scene scene)
+	{
+		myScene = scene;
 	}
 	
 	private void align(Double size1, Double size2){

@@ -7,9 +7,8 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.LinkedList;
+import java.util.List;
 import java.util.Map;
-import java.util.Observable;
-import java.util.Observer;
 import java.util.Queue;
 import java.util.ResourceBundle;
 import java.util.Set;
@@ -20,7 +19,7 @@ import backEnd.Coord;
 import backEnd.Attribute.Attribute;
 import backEnd.Attribute.AttributeImpl;
 import backEnd.GameEngine.EngineStatus;
-import backEnd.GameEngine.Engine.Spawning.SpawnQueue;
+import backEnd.GameEngine.Engine.Spawning.SpawnQueues;
 import javafx.geometry.Point2D;
 
 /**
@@ -28,7 +27,7 @@ import javafx.geometry.Point2D;
  * @author Alex Salas, Christian Martindale
  *
  */
-public class StateImpl extends Observable implements State {
+public class StateImpl implements State, SerializableObservable {
 
 	private int numColsInGrid;
 	private int numRowsInGrid;
@@ -39,7 +38,8 @@ public class StateImpl extends Observable implements State {
 	private final static String IMAGEPATH_RESOURCES_PATH = "resources/images";
 	private final static ResourceBundle myImageResource = ResourceBundle.getBundle(IMAGEPATH_RESOURCES_PATH);
 	private EngineStatus myEngineStatus;
-	private Map<String, SpawnQueue> mySpawnQueues;
+	private Map<String, SpawnQueues> mySpawnQueues;
+	private List<SerializableObserver> observers;
 	
 	public StateImpl(int numColsInGrid, int numRowsInGrid) throws FileNotFoundException {
 		this(numColsInGrid, numRowsInGrid, setDefaultTileGrid(numColsInGrid, numRowsInGrid), new ComponentGraphImpl());
@@ -51,7 +51,8 @@ public class StateImpl extends Observable implements State {
 		myTileGrid = tileGrid;
 		myComponentGraph = componentGraph;
 		myEngineStatus = EngineStatus.PAUSED;
-		mySpawnQueues = new HashMap<String,SpawnQueue>();
+		mySpawnQueues = new HashMap<String,SpawnQueues>();
+		observers = new ArrayList<SerializableObserver>();
 	}
 
 
@@ -59,7 +60,7 @@ public class StateImpl extends Observable implements State {
 		TileGrid tileGrid = new TileGridImpl(cols, rows);
 		for (int row = 0; row < rows; row++) {
 			for (int col = 0; col < cols; col++) {
-				Point2D loc = new Point2D(col, row);
+				Point2D loc = new Point2D((col + 0.5) * (630.0 / cols), (row + 0.5) * (405.0 / rows));//TODO get height / width some legit way instead
 				
 				Tile newTile = new TileImpl(Arrays.asList(), Arrays.asList(), Arrays.asList(), loc);
 				
@@ -73,7 +74,7 @@ public class StateImpl extends Observable implements State {
 		return tileGrid;
 	}
 	
-	public void addAsObserver(Observer o){
+	public void addAsObserver(SerializableObserver o){
 		this.addObserver(o);
 	}
 
@@ -107,10 +108,7 @@ public class StateImpl extends Observable implements State {
 		replaceTiles(state.getTileGrid());
 		replaceComponents(state.getComponentGraph());
 		this.myEngineStatus = state.getEngineStatus();
-		
-		this.setChanged();
-		this.notifyObservers();
-
+		notifyObservers();
 	}
 
 	private void replaceComponents(ComponentGraph componentGraph)
@@ -128,8 +126,8 @@ public class StateImpl extends Observable implements State {
 	private void replaceTiles(TileGrid tileGrid)
 	{
 		
-		myTileGrid.setWidth(tileGrid.getNumColsInGrid());
-		myTileGrid.setHeight(tileGrid.getNumRowsInGrid());
+		myTileGrid.setNumCols(tileGrid.getNumColsInGrid());
+		myTileGrid.setNumRows(tileGrid.getNumRowsInGrid());
 		
 		for (int x = 0; x < tileGrid.getNumRowsInGrid(); x++)
 		{
@@ -259,19 +257,44 @@ public class StateImpl extends Observable implements State {
 
 	public void setEngineStatus(EngineStatus engineStatus) {
 		myEngineStatus=engineStatus;
-		this.setChanged();
-		this.notifyObservers();
+		notifyObservers();
 	}
 
 
 	@Override
-	public Map<String, SpawnQueue> getSpawnQueues() {
+	public Map<String, SpawnQueues> getSpawnQueues() {
+		//System.out.println(mySpawnQueues);
 		return mySpawnQueues;
+	}
+	
+	private void notifyObservers() {
+		for (SerializableObserver o : observers){
+			o.update(this, null);
+		}
 	}
 
 	@Override
 	public void setComponentGraph(ComponentGraph componentGraph) {
-		// TODO Auto-generated method stub
-		
+		myComponentGraph = componentGraph;
+	}
+
+	@Override
+	public void addObserver(SerializableObserver o) {
+		observers.add(o);
+	}
+
+	@Override
+	public List<SerializableObserver> getObservers() {
+		return observers;
+	}
+
+	@Override
+	public void clearObservers() {
+		observers = null;
+	}
+
+	@Override
+	public void setObservers(List<SerializableObserver> observersave) {
+		observers = observersave;
 	}
 }

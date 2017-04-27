@@ -6,7 +6,6 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Observer;
 import javax.swing.JOptionPane;
 import backEnd.Mode.Mode;
 import backEnd.Attribute.AttributeData;
@@ -14,6 +13,7 @@ import backEnd.Attribute.AttributeOwner;
 import backEnd.GameData.State.AccessPermissions;
 import backEnd.GameData.State.AccessPermissionsImpl;
 import backEnd.GameData.State.Component;
+import backEnd.GameData.State.SerializableObserver;
 import backEnd.GameData.State.Tile;
 import backEnd.GameData.State.TileImpl;
 
@@ -22,26 +22,35 @@ import backEnd.GameData.State.TileImpl;
  * @author Juan Philippe
  *
  */
-public class BankController
+
+public class BankController implements BankControllerReader
 {
 	private static final String DUPLICATE_NAME_ERROR = "Cannot Add Duplicate Name";
 	private Map<String, Tile> tileBank;
 	private Map<String, Component> componentBank;
+	private Map<String, Tile> accessibleTileBank;
+	private Map<String, Component> accessibleComponentBank;
 	private Mode myMode;
-	private List<Observer> observers;
+	private List<SerializableObserver> observers;
 	
 	public BankController(Mode myMode)
 	{
 		this(myMode, new HashMap<String, Tile>(), new HashMap<String, Component>());
 	}
-	
-	public BankController(Mode myMode, Map<String, Tile> tileBank, Map<String, Component> componentBank)
-	{
+
+	public BankController(Mode myMode, Map<String, Tile> tileBank, Map<String, Component> componentBank) {
 		this.tileBank = tileBank;
 		this.componentBank = componentBank;
 		this.myMode = myMode;
-		this.observers = new ArrayList<Observer>();
+		this.observers = new ArrayList<SerializableObserver>();
+		accessibleComponentBank = new HashMap<>();
+		accessibleTileBank = new HashMap<>();
 		createTemplatesForTesting();
+	}
+	
+	@Override
+	public String getComponentName(Component component){
+		return findKeyFromValue(componentBank, component);
 	}
 	
 	private void createTemplatesForTesting(){
@@ -50,35 +59,32 @@ public class BankController
 			this.componentBank = new HashMap<String, Component>();
 			Tile newTile = new TileImpl();
 			newTile.setAttributeValue("ImageFile", "resources/images/Tiles/Blue.png");
-			newTile.setAttributeValue("MoveDirection","Down");
+			newTile.setAttributeValue("MoveDirection", "Down");
 			addNewTile("Blue Down Tile", newTile);
-			
+
 			Tile newTile2 = new TileImpl();
 			newTile2.setAttributeValue("ImageFile", "resources/images/Tiles/Red.png");
-			newTile2.setAttributeValue("MoveDirection","Right");
+			newTile2.setAttributeValue("MoveDirection", "Right");
 			addNewTile("Red Right Tile", newTile2);
-			
+
 			Tile newTile3 = new TileImpl();
 			newTile3.setAttributeValue("ImageFile", "resources/images/Tiles/Green.png");
-			newTile3.setAttributeValue("MoveDirection","Up");	
+			newTile3.setAttributeValue("MoveDirection", "Up");
 			addNewTile("Green Up Tile", newTile3);
-			
+
 			Tile newTile4 = new TileImpl();
 			newTile4.setAttributeValue("ImageFile", "resources/images/Tiles/Yellow.png");
-			newTile4.setAttributeValue("MoveDirection","Left");
+			newTile4.setAttributeValue("MoveDirection", "Left");
 			addNewTile("Yellow Left Tile", newTile4);
-			
-			
-			Component testingBloon = new Component(new AttributeData(), 
-					new AccessPermissionsImpl(Arrays.asList("PLAYER"), new ArrayList<String>(), new ArrayList<String>()));
+
+			Component testingBloon = new Component();
 			testingBloon.setAttributeValue("ImageFile", "resources/images/Components/rainbow_bloon.png");
 			testingBloon.setAttributeValue("Speed", 1d);
 			testingBloon.setAttributeValue("Health", 20);
 			testingBloon.setAttributeValue("Type", "Enemy");
 			addNewComponent("Enemy", testingBloon);
-			
-			Component testingTurret = new Component(new AttributeData(), 
-					new AccessPermissionsImpl(Arrays.asList("PLAYER"), new ArrayList<String>(), new ArrayList<String>()));
+
+			Component testingTurret = new Component();
 			testingTurret.setAttributeValue("ImageFile", "resources/images/Components/zombie.png");
 			testingTurret.setAttributeValue("Health", 10);
 			testingTurret.setAttributeValue("Type", "Tower");
@@ -89,97 +95,96 @@ public class BankController
 			testingTurret.setAttributeValue("FireRadius", 200.0);
 			testingTurret.setAttributeValue("FireImage", "resources/images/Components/purple_bloon.png");
 			addNewComponent("Tower", testingTurret);
-			
-			
-		} catch( FileNotFoundException e){
+
+		} catch (FileNotFoundException e) {
 			System.out.println("No image found");
 		}
 	}
 
-	public void addNewTile (String name, Tile tile)
-	{
-		if (tileBank.containsKey(name)){
+	public void addNewTile(String name, Tile tile) {
+		if (tileBank.containsKey(name)) {
 			JOptionPane.showMessageDialog(null, DUPLICATE_NAME_ERROR);
-		}
-		else{
+		} else {
 			tileBank.put(name, tile);
+			refreshAccessibleTileMap();
 			notifyObservers();
 		}
 	}
 
-	public void removeTile(String name)
-	{
+	public void removeTile(String name) {
+		tileBank.remove(name);
+		refreshAccessibleTileMap();
 		notifyObservers();
 	}
-	
-	public Map<String, Tile> getAccessibleTileMap()
-	{
-		Map<String, Tile> subMap = new HashMap<String,Tile>();
-		
-		for (String x : tileBank.keySet())
-		{
-			if (tileBank.get(x).getAccessPermissions().permitsAccess(myMode.getUserMode(), myMode.getGameMode(), myMode.getLevelMode()))
-			{
-				subMap.put(x, tileBank.get(x));
+
+	public Map<String, Tile> getAccessibleTileMap() {
+		refreshAccessibleTileMap();
+		return accessibleTileBank;
+	}
+
+	private void refreshAccessibleTileMap() {
+		accessibleTileBank.clear();
+
+		for (String x : tileBank.keySet()) {
+			if (tileBank.get(x).getAccessPermissions().permitsAccess(myMode.getUserMode(), myMode.getGameMode(),
+					myMode.getLevelMode())) {
+				accessibleTileBank.put(x, tileBank.get(x));
 			}
 		}
-		
-		return subMap;
 	}
-	
-	public Map<String, Component> getAccessibleComponentMap()
-	{
-		Map<String, Component> subMap = new HashMap<String,Component>();
-		
-		for (String x : componentBank.keySet())
-		{
-			if (componentBank.get(x).getAccessPermissions().permitsAccess(myMode.getUserMode(), myMode.getGameMode(), myMode.getLevelMode()))
-			{
-				subMap.put(x, componentBank.get(x));
+
+	public Map<String, Component> getAccessibleComponentMap() {
+		refreshAccessibleComponentMap();
+		return accessibleComponentBank;
+	}
+
+	private void refreshAccessibleComponentMap() {
+		accessibleComponentBank.clear();
+
+		for (String x : componentBank.keySet()) {
+			if (componentBank.get(x).getAccessPermissions().permitsAccess(myMode.getUserMode(), myMode.getGameMode(),
+					myMode.getLevelMode())) {
+				accessibleComponentBank.put(x, componentBank.get(x));
 			}
 		}
-		
-		return subMap;
 	}
-	public Map<String, Component> getComponentMap()
-	{
+
+	public Map<String, Component> getComponentMap() {
 		return componentBank;
 	}
-	
-	public Map<String, Tile> getTileMap()
-	{
+
+	public Map<String, Tile> getTileMap() {
 		return tileBank;
 	}
-	
-	public void addNewComponent (String name, Component component)
-	{
-		if (tileBank.containsKey(name)){
+
+	public void addNewComponent(String name, Component component) {
+		if (tileBank.containsKey(name)) {
 			JOptionPane.showMessageDialog(null, DUPLICATE_NAME_ERROR);
-		}
-		else{
+		} else {
 			componentBank.put(name, component);
+			refreshAccessibleComponentMap();
 			notifyObservers();
 		}
 	}
 
-	public void removeComponent(String name)
-	{
+	public void removeComponent(String name) {
 		componentBank.remove(name);
+		refreshAccessibleComponentMap();
 		notifyObservers();
 	}
 
 	public String getAOName(AttributeOwner preset) {
-		if(preset instanceof Tile){
+		if (preset instanceof Tile) {
 			return findKeyFromValue(tileBank, (Tile) preset);
-		} else if (preset instanceof Component){
+		} else if (preset instanceof Component) {
 			return findKeyFromValue(componentBank, (Component) preset);
 		}
 		return "";
 	}
 
 	private <V> String findKeyFromValue(Map<String, V> bank, V preset) {
-		for(Map.Entry<String, V> entry : bank.entrySet()){
-			if (entry.getValue().equals(preset)){
+		for (Map.Entry<String, V> entry : bank.entrySet()) {
+			if (entry.getValue().equals(preset)) {
 				return entry.getKey();
 			}
 		}
@@ -187,9 +192,9 @@ public class BankController
 	}
 
 	public AttributeOwner getPreset(String presetName) {
-		if(componentBank.containsKey(presetName)){
+		if (componentBank.containsKey(presetName)) {
 			return componentBank.get(presetName);
-		} else if (tileBank.containsKey(presetName)){
+		} else if (tileBank.containsKey(presetName)) {
 			return tileBank.get(presetName);
 		} else {
 			return null;
@@ -197,15 +202,15 @@ public class BankController
 	}
 	
 	public Component getComponent(String componentName){
-		return componentBank.get(componentName)
-;	}
-	
-	public void addObserver(Observer o){
-		observers.add(o);
+		return componentBank.get(componentName);
 	}
 	
+	public void addObserver(SerializableObserver o){
+		observers.add(o);
+	}
+
 	private void notifyObservers() {
-		for(Observer o : observers){
+		for(SerializableObserver o : observers){
 			o.update(null, null);
 		}
 	}
