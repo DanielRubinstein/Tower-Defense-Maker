@@ -13,7 +13,7 @@ import backEnd.GameData.Rules.RuleReader;
 import backEnd.GameData.State.Component;
 import backEnd.GameData.State.PlayerStatusReader;
 import backEnd.GameData.State.Tile;
-import backEnd.GameEngine.Engine.Spawning.SpawnQueue;
+import backEnd.GameEngine.Engine.Spawning.SpawnQueues;
 import backEnd.LevelProgression.LevelProgressionControllerEditor;
 import backEnd.Mode.ModeReader;
 import frontEnd.CustomJavafxNodes.ErrorDialog;
@@ -145,7 +145,7 @@ public class ViewImpl implements View {
 	}
 
 	@Override
-	public Map<String, SpawnQueue> getSpawnQueues() {
+	public Map<String, SpawnQueues> getSpawnQueues() {
 		return myModel.getState().getSpawnQueues();
 	}
 	
@@ -156,6 +156,11 @@ public class ViewImpl implements View {
 	public void setSplashScreen(SplashScreenData data)
 	{
 		mySkeleton.setScene(new SplashScreen(data));
+	}
+
+	@Override
+	public boolean isComponentOnGrid(Component c) {
+		return myModel.getState().getComponentGraph().contains(c);
 	}
 
 }

@@ -8,7 +8,8 @@ import backEnd.BankController;
 import backEnd.BankControllerReader;
 import backEnd.Model;
 import backEnd.GameData.Rules.RuleReader;
-import backEnd.GameEngine.Engine.Spawning.SpawnQueue;
+import backEnd.GameData.State.Component;
+import backEnd.GameEngine.Engine.Spawning.SpawnQueues;
 import backEnd.LevelProgression.LevelProgressionControllerEditor;
 import backEnd.LevelProgression.LevelProgressionControllerReader;
 import backEnd.Mode.ModeReader;
@@ -31,7 +32,7 @@ public interface View extends ViewReader{
 	
 	public FacebookInteractor getFb();
 	
-	public Map<String, SpawnQueue> getSpawnQueues();
+	public Map<String, SpawnQueues> getSpawnQueues();
 	
 	public ModeReader getModeReader();
 	
@@ -40,5 +41,7 @@ public interface View extends ViewReader{
 	public Collection<RuleReader> getRules();
 
 	BankControllerReader getBankControllerReader();
+
+	public boolean isComponentOnGrid(Component c);
 
 }

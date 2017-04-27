@@ -5,6 +5,7 @@ import java.util.Collections;
 import java.util.Enumeration;
 import java.util.List;
 import java.util.ResourceBundle;
+
 import backEnd.GameData.GameData;
 import backEnd.GameEngine.EngineStatus;
 import javafx.animation.Animation;
@@ -12,7 +13,7 @@ import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.util.Duration;
-import resources.Constants;
+import resources.constants.NumericResourceBundle;
 
 public class GameProcessController {
 
@@ -22,6 +23,7 @@ public class GameProcessController {
 	private final static ResourceBundle myResources = ResourceBundle.getBundle(RESOURCES_PATH);
 	private EngineStatus engineStatus;
 	private SimpleStringProperty engineStatusProperty;
+	private NumericResourceBundle numericResourceBundle = new NumericResourceBundle();
 
 	public Timeline animation = new Timeline();
 
@@ -30,10 +32,7 @@ public class GameProcessController {
 		engineStatusProperty = new SimpleStringProperty(engineStatus.toString());
 		myEngines = new ArrayList<Engine>();
 		myGameData = gameData;
-		KeyFrame frame = new KeyFrame(Duration.millis(Constants.MILLISECOND_DELAY), e -> step(Constants.SECOND_DELAY));
-		animation.setCycleCount(Animation.INDEFINITE);
-		animation.getKeyFrames().add(frame);
-
+		addNewFrameToAnimation();
 		EngineFactory engineFactory = new EngineFactory();
 		Enumeration<String> n = myResources.getKeys();
 		for (String key : Collections.list(n)) {
@@ -41,13 +40,16 @@ public class GameProcessController {
 		}
 	}
 
+	private void addNewFrameToAnimation() {
+		KeyFrame frame = new KeyFrame(Duration.millis(numericResourceBundle.getMillisecondDelay()), e -> step(numericResourceBundle.getSecondDelay()));
+		animation.setCycleCount(Animation.INDEFINITE);
+		animation.getKeyFrames().add(frame);
+	}
+
 	public void playAnimation() {
 		// TODO include rule checking
 		if (animation.getKeyFrames().isEmpty()) {
-			KeyFrame frame = new KeyFrame(Duration.millis(Constants.MILLISECOND_DELAY),
-					e -> step(Constants.SECOND_DELAY));
-			animation.setCycleCount(Animation.INDEFINITE);
-			animation.getKeyFrames().add(frame);
+			addNewFrameToAnimation();
 		}
 		engineStatus = EngineStatus.RUNNING;
 		engineStatusProperty.set(engineStatus.toString());

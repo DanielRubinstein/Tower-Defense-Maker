@@ -7,7 +7,7 @@ import java.util.Optional;
 
 import ModificationFromUser.Spawning.Modification_AddSpawnQueue;
 import ModificationFromUser.Spawning.Modification_RemoveSpawnQueue;
-import backEnd.GameEngine.Engine.Spawning.SpawnQueue;
+import backEnd.GameEngine.Engine.Spawning.SpawnQueues;
 import frontEnd.View;
 import frontEnd.Skeleton.UserTools.SkeletonObject;
 import javafx.scene.Node;
@@ -21,7 +21,7 @@ public class SpawnTabPane implements SkeletonObject {
 	private TabPane myRoot;
 	private Collection<Integer> takenIDs;
 	private View myView;
-	private Map<String, SpawnQueue> mySpawnQueues;
+	private Map<String, SpawnQueues> mySpawnQueues;
 
 	public SpawnTabPane(View view) {
 
@@ -38,18 +38,18 @@ public class SpawnTabPane implements SkeletonObject {
 	}
 
 	private void addPresetQueues() {
-		for (Map.Entry<String, SpawnQueue> entry : mySpawnQueues.entrySet()) {
+		for (Map.Entry<String, SpawnQueues> entry : mySpawnQueues.entrySet()) {
 			createNewTimelineTab(entry.getKey(), entry.getValue());
 		}
 	}
 
-	private void createNewTimelineTab(String key, SpawnQueue value) {
+	private void createNewTimelineTab(String key, SpawnQueues value) {
 		SpawnTimelineView spawnTimelineView = new SpawnTimelineView(myView, myRoot.widthProperty(), key, value);
 		Tab newSpawnTab = new Tab(key);
 		newSpawnTab.setContent(spawnTimelineView.getRoot());
 		newSpawnTab.setOnCloseRequest(e -> {
 			if (checkWithUser(newSpawnTab)) {
-				takenIDs.remove(key.substring(key.indexOf(' ')));
+				takenIDs.remove(Integer.parseInt(key.substring(key.indexOf(' ')+1)));
 				myView.sendUserModification(new Modification_RemoveSpawnQueue(key));
 			} else {
 				e.consume();
