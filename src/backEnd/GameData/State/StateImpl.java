@@ -21,6 +21,7 @@ import backEnd.Attribute.AttributeImpl;
 import backEnd.GameEngine.EngineStatus;
 import backEnd.GameEngine.Engine.Spawning.SpawnQueues;
 import javafx.geometry.Point2D;
+import resources.constants.NumericResourceBundle;
 
 /**
  * 
@@ -28,7 +29,8 @@ import javafx.geometry.Point2D;
  *
  */
 public class StateImpl implements State, SerializableObservable {
-
+	private NumericResourceBundle numericResourceBundle = new NumericResourceBundle();
+	
 	private int numColsInGrid;
 	private int numRowsInGrid;
 	private TileGrid myTileGrid;
@@ -42,12 +44,18 @@ public class StateImpl implements State, SerializableObservable {
 	private List<SerializableObserver> observers;
 	
 	public StateImpl(int numColsInGrid, int numRowsInGrid) throws FileNotFoundException {
-		this(numColsInGrid, numRowsInGrid, setDefaultTileGrid(numColsInGrid, numRowsInGrid), new ComponentGraphImpl());
+		this.numColsInGrid = numColsInGrid;
+		this.numRowsInGrid = numRowsInGrid;
+		initialize(setDefaultTileGrid(numColsInGrid, numRowsInGrid), new ComponentGraphImpl());
 	}
 	
 	public StateImpl(int numRowsInGrid, int numColsInGrid, TileGrid tileGrid, ComponentGraph componentGraph) throws FileNotFoundException {
 		this.numColsInGrid = numColsInGrid;
 		this.numRowsInGrid = numRowsInGrid;
+		initialize(tileGrid, componentGraph);
+	}
+	
+	private void initialize(TileGrid tileGrid, ComponentGraph componentGraph){
 		myTileGrid = tileGrid;
 		myComponentGraph = componentGraph;
 		myEngineStatus = EngineStatus.PAUSED;
@@ -56,19 +64,17 @@ public class StateImpl implements State, SerializableObservable {
 	}
 
 
-	private static TileGrid setDefaultTileGrid(int cols, int rows) throws FileNotFoundException {
+	private TileGrid setDefaultTileGrid(int cols, int rows) throws FileNotFoundException {
 		TileGrid tileGrid = new TileGridImpl(cols, rows);
 		for (int row = 0; row < rows; row++) {
 			for (int col = 0; col < cols; col++) {
-				Point2D loc = new Point2D((col + 0.5) * (630.0 / cols), (row + 0.5) * (405.0 / rows));//TODO get height / width some legit way instead
-				
-				Tile newTile = new TileImpl(Arrays.asList(), Arrays.asList(), Arrays.asList(), loc);
-				
-				Attribute<String> imgAttr = newTile.getAttribute("ImageFile");
-				imgAttr.setValue(myImageResource.getString("default_tile"));
-				
+				Double tileWidth = numericResourceBundle.getScreenGridWidth() / cols;
+				Double tileHeight = numericResourceBundle.getScreenGridHeight() / rows;
+				Point2D pos = new Point2D((col + 0.5) * (tileWidth), (row + 0.5) * (tileHeight));
+				Tile newTile = new TileImpl();
+				newTile.getAttribute("Position").setValue(pos);
+				newTile.getAttribute("ImageFile").setValue(myImageResource.getString("default_tile"));
 				tileGrid.setTileByGridPosition(newTile, col, row);
-
 			}
 		}
 		return tileGrid;
@@ -86,20 +92,6 @@ public class StateImpl implements State, SerializableObservable {
 	@Override
 	public ComponentGraph getComponentGraph() {
 		return myComponentGraph;
-	}
-	
-	private Map<Tile, Coord> findStartTiles() {
-		Map<Tile, Coord> startTiles = new HashMap<Tile, Coord>();
-		for (int col = 0; col < numColsInGrid; col++) { // find the start position
-			for (int row = 0; row < numRowsInGrid; row++) {
-				Tile tile = myTileGrid.getTileByGridPosition(col, row);
-				if (tile.getMyAttributes()
-						.<Boolean>get(myResources.getString("StartTile")).getValue() == true) {
-					startTiles.put(tile, new Coord(col, row, null));
-				}
-			}
-		}
-		return startTiles;
 	}
 	
 	public void updateState(State state){

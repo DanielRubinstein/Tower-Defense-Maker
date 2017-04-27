@@ -76,7 +76,7 @@ public class AttributeCommandCenterBottomButtons implements SkeletonObject{
 			SingleFieldPrompt myNameDialog = new SingleFieldPrompt(dialogTitles, promptLabel, promptText);
 			Button preset = new Button("Save a copy to preset palette");
 			preset.setOnAction((e) -> {
-				myView.sendUserModification(new Modification_Add_ToPalette(myNameDialog.create(), obj));
+				myView.sendUserModification(new Modification_Add_ToPalette(myNameDialog.getUserInputString(), obj));
 				myHostStage.close();
 			});
 			

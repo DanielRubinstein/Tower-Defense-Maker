@@ -6,7 +6,6 @@
 		<BOOLEAN_TEMPLATE></BOOLEAN_TEMPLATE><Traversable></Traversable>
 		<Buildable></Buildable>
 		<GoalTile></GoalTile>
-		<StartTile></StartTile>
 		<SpawnOnDeath></SpawnOnDeath></BOOLEAN>
 	<DOUBLE>
 		<DOUBLE_TEMPLATE min="0.0" max="0.0" start="0.0" increment="0.0"></DOUBLE_TEMPLATE>
