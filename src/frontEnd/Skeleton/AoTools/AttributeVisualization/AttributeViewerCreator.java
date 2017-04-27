@@ -28,6 +28,7 @@ public class AttributeViewerCreator implements AttributeVisualization{
 		return "get%s";
 	}
 	
+	@Override
 	public Node getIMAGE() {
 		String imagePath = (String) myAttr.getValue();
 		return createImageView(imagePath);
@@ -42,48 +43,59 @@ public class AttributeViewerCreator implements AttributeVisualization{
 		return imv;
 	}
 
+	@Override
 	public Node getPOSITION() {
 		String stringFormatter = "(%.0f, %.0f)";
 		Point2D pos = (Point2D) myAttr.getValue();
 		return new Label(String.format(stringFormatter, pos.getX(), pos.getY()));
-	}
-
-	public Node getCOMPONENT() {
-		Component baby = (Component) myAttr.getValue();
-		
-		HBox pair = new HBox();
-		
-		String babyImagePath =  baby.<String>getAttribute("ImageFile").getValue();
-		ImageView imv = createImageView(babyImagePath);
-		Label name = new Label();
-		name.setText(myView.getBankController().getAOName(baby));
-		pair.getChildren().add(name);
-		pair.getChildren().add(imv);
-		return pair;
 	}
 	
 	private Node createBasicViewer() {
 		return new Label(myAttr.getValue().toString());
 	}
 
+	@Override
 	public Node getINTEGER() {
 		return createBasicViewer();
 	}
 
+	@Override
 	public Node getEDITABLESTRING() {
 		return createBasicViewer();
 	}
 
+	@Override
 	public Node getDOUBLE() {
 		return createBasicViewer();
 	}
 
+	@Override
 	public Node getBOOLEAN() {
 		return createBasicViewer();
 	}
 
+	@Override
 	public Node getSTRINGLIST() {
 		return createBasicViewer();
+	}
+
+	@Override
+	public Node getCOMPONENT() {
+		try{
+			Component baby = (Component) myAttr.getValue();
+			
+			HBox pair = new HBox();
+			
+			String babyImagePath =  baby.<String>getAttribute("ImageFile").getValue();
+			ImageView imv = createImageView(babyImagePath);
+			Label name = new Label();
+			name.setText(myView.getBankController().getAOName(baby));
+			pair.getChildren().add(name);
+			pair.getChildren().add(imv);
+			return pair;
+		} catch (NullPointerException e){
+			return new Label("None Selected");
+		}
 	}
 
 }
