@@ -1,5 +1,6 @@
 package backEnd.GameEngine.Engine;
 
+import java.util.Collection;
 import java.util.List;
 
 import backEnd.Attribute.Attribute;
@@ -19,7 +20,7 @@ public class EnemyStatusEngine implements Engine {
 
 	@Override
 	public void gameLoop(GameData gameData, double stepTime) {
-		List<Component> components = gameData.getState().getComponentGraph().getAllComponents();
+		Collection<Component> components = gameData.getState().getComponentGraph().getAllComponents();
 		for (Component component : components) {
 			if (component.getMyType().equals(ENEMY_TYPE)) {
 				updatePoison(stepTime, component);

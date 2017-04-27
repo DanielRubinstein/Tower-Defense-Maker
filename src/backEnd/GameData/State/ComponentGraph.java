@@ -29,7 +29,7 @@ public interface ComponentGraph extends SerializableObservable{
 	 * Gets the List of all Components in the ComponentGraph
 	 * @return a List of Components
 	 */
-	List<Component> getAllComponents();
+	Collection<Component> getAllComponents();
 	
 	/**
 	 * Add a component to the list of components at a given location

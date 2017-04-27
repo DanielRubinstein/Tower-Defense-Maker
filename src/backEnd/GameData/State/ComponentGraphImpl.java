@@ -35,7 +35,7 @@ public class ComponentGraphImpl implements ComponentGraph {
 		myComponents = new ArrayList<Component>();
 	}
 
-	public List<Component> getAllComponents() {
+	public Collection<Component> getAllComponents() {
 
 		myComponents = new ArrayList<Component>();
 		for (List<Component> list : componentMap.values()) {

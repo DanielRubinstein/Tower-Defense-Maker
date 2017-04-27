@@ -106,12 +106,10 @@ public class StateImpl implements State, SerializableObservable {
 	private void replaceComponents(ComponentGraph componentGraph)
 	{
 		myComponentGraph.clearComponents();
-		for (Point2D pos : componentGraph.getComponentMap().keySet())
-		{
-			for (Component component : componentGraph.getComponentMap().get(pos))
-			{
-				myComponentGraph.addComponentToGrid(component, pos);
-			}
+		
+		for(Component component : componentGraph.getAllComponents()){
+			Point2D pos = component.<Point2D>getAttribute("Position").getValue();
+			myComponentGraph.addComponentToGrid(component, pos);
 		}
 	}
 
