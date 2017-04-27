@@ -74,11 +74,6 @@ public class SkeletonImpl implements Skeleton{
 		stage.show();
 	}
 	
-	public void setScene(Scene scene)
-	{
-		myScene = scene;
-	}
-	
 	private void align(Double size1, Double size2){
 		myRoot.setMinWidth(size1);
 		myRoot.setMinHeight(size2);

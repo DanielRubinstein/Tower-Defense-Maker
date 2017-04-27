@@ -4,7 +4,7 @@ import java.util.Collection;
 import java.util.Map;
 import java.util.function.Consumer;
 
-import ModificationFromUser.ModificationFromUser;
+import ModificationFromUser.*;
 import backEnd.BankController;
 import backEnd.BankControllerReader;
 import backEnd.Model;
@@ -155,7 +155,10 @@ public class ViewImpl implements View {
 
 	public void setSplashScreen(SplashScreenData data)
 	{
-		mySkeleton.setScene(new SplashScreen(data));
+		System.out.println("View Line 158");
+		sendUserModification(Modification_GameRemote.PAUSE); 
+		SplashScreen splashScreen = new SplashScreen(data);
+		splashScreen.display(appStage);
 	}
 
 	@Override

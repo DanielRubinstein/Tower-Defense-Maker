@@ -12,6 +12,7 @@ public class SplashScreenData
 		this.messageBody = messageBody;
 		this.type = type;
 		this.action = action;
+		System.out.println("SSD line 15");
 	}
 
 	public String getMessageBody() {
