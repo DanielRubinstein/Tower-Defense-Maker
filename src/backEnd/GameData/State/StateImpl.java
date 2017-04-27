@@ -74,7 +74,7 @@ public class StateImpl implements State, SerializableObservable {
 				Tile newTile = new TileImpl();
 				newTile.getAttribute("Position").setValue(pos);
 				newTile.getAttribute("ImageFile").setValue(myImageResource.getString("default_tile"));
-				tileGrid.setTileByGridPosition(newTile, col, row);
+				tileGrid.setTileByScreenPosition(newTile, pos);
 			}
 		}
 		return tileGrid;
@@ -106,29 +106,24 @@ public class StateImpl implements State, SerializableObservable {
 	private void replaceComponents(ComponentGraph componentGraph)
 	{
 		myComponentGraph.clearComponents();
-		for (Point2D x : componentGraph.getComponentMap().keySet())
+		for (Point2D pos : componentGraph.getComponentMap().keySet())
 		{
-			for (Component y : componentGraph.getComponentMap().get(x))
+			for (Component component : componentGraph.getComponentMap().get(pos))
 			{
-				myComponentGraph.addComponentToGrid(y, x);
+				myComponentGraph.addComponentToGrid(component, pos);
 			}
 		}
 	}
 
-	private void replaceTiles(TileGrid tileGrid)
-	{
+	private void replaceTiles(TileGrid tileGrid){
 		
 		myTileGrid.setNumCols(tileGrid.getNumColsInGrid());
 		myTileGrid.setNumRows(tileGrid.getNumRowsInGrid());
-		
-		for (int x = 0; x < tileGrid.getNumRowsInGrid(); x++)
-		{
-			for (int y = 0; y < tileGrid.getNumColsInGrid(); y++)
-			{
-				myTileGrid.setTileByGridPosition(tileGrid.getTileByGridPosition(y, x), y, x);
-			}
+
+		for(Tile tile : tileGrid.getAllTiles()){
+			Point2D pos = tile.<Point2D>getAttribute("Position").getValue();
+			myTileGrid.setTileByScreenPosition(tile, pos);
 		}
-		System.out.println(myTileGrid.getTileByGridPosition(0, 0).getAttribute("ImageFile").getValue() + " GGG");
 	}
 
 	/*
@@ -187,7 +182,7 @@ public class StateImpl implements State, SerializableObservable {
 		}
 	}
 	*/
-
+	/*
 	private ArrayList<Coord> getAdjacents(Coord current) {
 		ArrayList<Coord> adjacents = new ArrayList<Coord>();
 		if(isTraversable(current.getXCoord()+1, current.getYCoord()  )){
@@ -204,19 +199,11 @@ public class StateImpl implements State, SerializableObservable {
 		}
 		return adjacents;
 	}
+	*/
 
 	public EngineStatus getEngineStatus()
 	{
 		return myEngineStatus;
-	}
-	
-	private boolean isTraversable(int x, int y){
-		Tile curTile = myTileGrid.getTileByGridPosition(x,y);
-		if(curTile == null || curTile.<Boolean>getAttribute(myResources.getString("Traversable")).getValue() == true){
-			return false;
-		}
-		
-		return true;
 	}
 	
 	/*
@@ -242,7 +229,7 @@ public class StateImpl implements State, SerializableObservable {
 	}
 
 	@Override
-	public Collection<Component> getComponentsByTileGridPosition(Point2D tileGridPosition) {
+	public Collection<Component> getComponentsByTilePosition(Point2D tileGridPosition) {
 		TileCorners tileCorners = new TileCorners(tileGridPosition, myTileGrid.getTileWidth(), myTileGrid.getTileHeight());
 		return myComponentGraph.getComponentsByTileCorners(tileCorners);
 	}

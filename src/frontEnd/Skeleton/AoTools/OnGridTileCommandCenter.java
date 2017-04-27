@@ -39,7 +39,7 @@ public class OnGridTileCommandCenter implements CommandCenter, SkeletonObject{
 	public OnGridTileCommandCenter(View view, Tile tile, State state) {
 		myView = view;
 		myTile = tile;
-		myComponents = state.getComponentsByTileGridPosition(tile.<Point2D>getAttribute("Position").getValue());
+		myComponents = state.getComponentsByTilePosition(tile.<Point2D>getAttribute("Position").getValue());
 		tabPane = new TabPane();
 	}
 
