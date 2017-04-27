@@ -10,7 +10,7 @@ import java.util.ResourceBundle;
 
 public class NumericConstants {
 	
-	private static final String BUNDLE_NAME = "resources.numericConstants";
+	private static final String BUNDLE_NAME = "resources.constants.numericConstants";
 	private static final ResourceBundle RESOURCE_BUNDLE = ResourceBundle.getBundle(BUNDLE_NAME);
 	
 	
@@ -21,7 +21,7 @@ public class NumericConstants {
 	}
 	
 	public Double getMillisecondDelay(){
-		return 1000 / getFramesPerSecond();
+		return 1000.0 / getFramesPerSecond();
 	}
 	
 	public Double getSecondDelay(){
@@ -39,7 +39,7 @@ public class NumericConstants {
 	}
 	
 	public Double getScreenPadding(){
-		return Double.valueOf(RESOURCE_BUNDLE.getString("ScreenPadding"));
+		return Double.valueOf(RESOURCE_BUNDLE.getString("ScreenGridPadding"));
 	}
 	
 	private Double getScreenGridHeightFactor(){
