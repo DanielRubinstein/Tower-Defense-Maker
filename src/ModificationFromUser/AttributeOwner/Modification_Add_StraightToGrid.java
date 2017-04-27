@@ -1,7 +1,7 @@
 package ModificationFromUser.AttributeOwner;
 
 import ModificationFromUser.ModificationFromUser;
-import ModificationFromUser.AttributeOwner.ReflectionMethods.Modification_Add_StraightToGrid_Methods;
+import ModificationFromUser.AttributeOwner.ReflectionMethods.Modification_Add_ToGrid_Methods;
 import backEnd.ModelImpl;
 import backEnd.Attribute.AttributeOwner;
 import javafx.geometry.Point2D;
@@ -28,7 +28,7 @@ public class Modification_Add_StraightToGrid implements ModificationFromUser {
 	@Override
 	public void invoke(ModelImpl model) throws Exception {
 		myModel = model;
-		Modification_Add_StraightToGrid_Methods methods = new Modification_Add_StraightToGrid_Methods(myModel, location);
+		Modification_Add_ToGrid_Methods methods = new Modification_Add_ToGrid_Methods(myModel, location);
 		Reflection.callMethod(methods, "addAttributeOwnerToGrid", newAttrOwn);
 	}
 	

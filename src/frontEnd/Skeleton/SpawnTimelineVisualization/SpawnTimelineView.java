@@ -9,6 +9,7 @@ import java.util.Map;
 import ModificationFromUser.Spawning.Modification_AddSpawner;
 import backEnd.GameData.State.SerializableObservable;
 import backEnd.GameData.State.SerializableObserver;
+import backEnd.GameData.State.TileImpl;
 import backEnd.GameEngine.Engine.Spawning.SpawnDataImpl;
 import backEnd.GameEngine.Engine.Spawning.SpawnDataReader;
 import backEnd.GameEngine.Engine.Spawning.SpawnQueues;
@@ -76,11 +77,18 @@ public class SpawnTimelineView implements SkeletonObject, SerializableObserver {
 	private void setDragCondition(ScrollPane dropZone, boolean repeating) {
 		dropZone.setOnDragDropped(e -> {
 			String presetName = e.getDragboard().getString();
-			//Component presetComponent = (Component) myView.getBankController().getPreset(presetName);
+			if(myView.getBankController().getPreset(presetName) instanceof TileImpl){
+				// FIXME avoid instance of
+				// TODO show error to user
+				return;
+			}
 			SingleFieldPrompt hey = new SingleFieldPrompt(
 					Arrays.asList("Add Spawn", "Please input a time for your new spawn item"), "Spawn Time Value",
 					"1.0");
-			double value = Double.parseDouble(hey.create());
+			Double value = hey.getUserInputDouble();
+			if(value == null){
+				return;
+			}
 			myView.sendUserModification(
 					new Modification_AddSpawner(mySpawnQueueName, presetName, value, repeating));
 		});

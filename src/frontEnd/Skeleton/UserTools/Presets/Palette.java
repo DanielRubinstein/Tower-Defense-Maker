@@ -29,6 +29,7 @@ import javafx.scene.input.Dragboard;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.TransferMode;
 import javafx.scene.layout.TilePane;
+import resources.constants.NumericResourceBundle;
 
 /**
  * http://stackoverflow.com/questions/27182323/working-on-creating-image-gallery
@@ -38,6 +39,8 @@ import javafx.scene.layout.TilePane;
  *
  */
 public class Palette implements SkeletonObject, SerializableObserver{
+	private NumericResourceBundle numericResourceBundle = new NumericResourceBundle();
+	
 	private View myView;
 	private TilePane tile;
 	private Map<String, ? extends AttributeOwner> myPresetMapBackEnd;
@@ -45,18 +48,24 @@ public class Palette implements SkeletonObject, SerializableObserver{
 	private String myType;
 	private BankController observedBankController;
 	private ModeReader observedMode;
-	private static final Double PRESET_SIZE = 75d;
 	
-	public Palette(View view, Map<String, ? extends AttributeOwner> presetMap, String string) {
+	public Palette(View view, Map<String, ? extends AttributeOwner> presetMap) {
 		myView = view;
 		initializeMaps(presetMap);
-		myType = string;
 		initializePane();
 		for (AttributeOwner preset : myPresetMapBackEnd.values()) {
 			addPresetToPalette(preset);
 		}
+		extractStringType();
 		createNewPresetButton();
 		
+	}
+
+	private void extractStringType() {
+		for(AttributeOwner attributeOwner : myPresetMapFrontEnd.values()){
+			myType = attributeOwner.getClass().getName();
+			break;
+		}
 	}
 
 	private void initializeMaps(Map<String, ? extends AttributeOwner> presetMap) {
@@ -98,8 +107,8 @@ public class Palette implements SkeletonObject, SerializableObserver{
 	private void addPresetImageViewToPalette(ImageView imageView) {
 		if(imageView.getFitHeight() == 0 || imageView.getFitWidth() == 0){
 			// no size attribute for this attribute owner
-			imageView.setFitHeight(PRESET_SIZE);
-			imageView.setFitWidth(PRESET_SIZE);
+			imageView.setFitHeight(numericResourceBundle.getPresetSizeInPalette());
+			imageView.setFitWidth(numericResourceBundle.getPresetSizeInPalette());
 		}
 				
 		tile.getChildren().add(imageView);

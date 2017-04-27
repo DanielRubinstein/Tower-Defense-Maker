@@ -1,5 +1,6 @@
 package backEnd.GameEngine.Engine;
 
+import java.util.Collection;
 import java.util.List;
 
 import backEnd.BankController;
@@ -39,7 +40,7 @@ public class SpawnEngine implements Engine {
 		if (gamePaused) {
 			return;
 		}
-		List<Tile> tileList = gameData.getState().getTileGrid().getAllTiles();
+		Collection<Tile> tileList = gameData.getState().getTileGrid().getAllTiles();
 		for (Tile spawnTile : tileList) {
 			Object spawnQueueNameObj = spawnTile.getAttribute("SpawnTimeline").getValue();
 			SpawnQueues currentSpawnQueue = gameData.getState().getSpawnQueues().get((String) spawnQueueNameObj);

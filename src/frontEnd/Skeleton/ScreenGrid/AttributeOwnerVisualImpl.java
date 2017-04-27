@@ -62,7 +62,7 @@ public class AttributeOwnerVisualImpl implements SerializableObserver, Attribute
 			myImage.setX(newPosition.getX()-myImage.getFitWidth()/2);
 			myImage.setY(newPosition.getY()-myImage.getFitHeight()/2);
 		}
-		//setImageHover();
+		setImageHover();
 	}
 	
 	private void setImage(String newImagePath){
