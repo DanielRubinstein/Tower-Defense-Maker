@@ -20,15 +20,13 @@ import javafx.scene.input.MouseEvent;
  */
 public class ScreenHoverVisual implements SkeletonObject{
 
-	private View myView;
 	private Label myRoot;
 	
 	/**
 	 * Initializes this class with the View. By default, this is only displayed in author mode.
 	 * @param view
 	 */
-	public ScreenHoverVisual(View view, BooleanProperty condition){
-		myView = view;
+	public ScreenHoverVisual(BooleanProperty condition){
 		myRoot = new Label();
 		myRoot.visibleProperty().bind(condition);
 	}

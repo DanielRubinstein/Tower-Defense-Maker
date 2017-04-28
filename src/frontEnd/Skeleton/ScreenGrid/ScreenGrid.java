@@ -45,11 +45,10 @@ public class ScreenGrid implements SkeletonObject {
 		myTileGrid = new TileGridVisual(view,state,screenGridWidth,screenGridHeight);
 		myComponentGraph = new ComponentGridVisual(view,state);
 		myView = view;
+		myHover = new ScreenHoverVisual(myView.getBooleanAuthorModeProperty());
 		addGridToRoot();
 		addGraphToRoot();
 		setDrag();
-		myHover = new ScreenHoverVisual(myView,myView.getBooleanAuthorModeProperty());
-		myRoot.getChildren().add(myHover.getRoot());
 	}
 	
 	private void setDrag(){
@@ -77,7 +76,7 @@ public class ScreenGrid implements SkeletonObject {
 		Node visualTileGrid = myTileGrid.getRoot();
 		myRoot.getChildren().add(visualTileGrid);
 		visualTileGrid.toBack();
-		
+		myRoot.getChildren().add(myHover.getRoot());
 	}
 	private void addGraphToRoot(){
 		myRoot.getChildren().add(myComponentGraph.getRoot());
