@@ -9,7 +9,7 @@ import java.util.Map;
 import com.thoughtworks.xstream.XStream;
 import com.thoughtworks.xstream.io.xml.DomDriver;
 import backEnd.GameData.GameData;
-import backEnd.GameData.State.Component;
+import backEnd.GameData.State.ComponentImpl;
 import backEnd.GameData.State.ComponentGraph;
 import backEnd.GameData.State.ComponentGraphImpl;
 import backEnd.GameData.State.StateImpl;
@@ -50,7 +50,7 @@ public class XMLReaderImpl implements XMLReader{
 
 		TileGrid grid = new TileGridImpl((TileGridInstantiator) xStream.fromXML(new File(filePath + "/" + levelName + "/" + 
 				strResources.getFromFilePaths("TileGrid_FileName") + ".xml")));
-		ComponentGraph graph = new ComponentGraphImpl((HashMap<Point2D, List<Component>>) xStream.fromXML(
+		ComponentGraph graph = new ComponentGraphImpl((HashMap<Point2D, List<ComponentImpl>>) xStream.fromXML(
 				new File(filePath+"/" + levelName+"/" + strResources.getFromFilePaths("ComponentGraph_FileName") + ".xml")));
 		StateImpl state = new StateImpl(grid.getNumRowsInGrid(), grid.getNumColsInGrid(), grid, graph);
 		
@@ -67,7 +67,7 @@ public class XMLReaderImpl implements XMLReader{
 	public List<Map<String,?>> loadUniversalGameData(String filePath) throws XMLReadingException
 	{
 		@SuppressWarnings("unchecked")
-		Map<String, Component> loadedComponentMap = (Map<String,Component>) loadXML(filePath, strResources.getFromFilePaths("ComponentMap_FileName"));
+		Map<String, ComponentImpl> loadedComponentMap = (Map<String,ComponentImpl>) loadXML(filePath, strResources.getFromFilePaths("ComponentMap_FileName"));
 		@SuppressWarnings("unchecked")
 		Map<String, Tile> loadedTileMap = (Map<String,Tile>) loadXML(filePath, strResources.getFromFilePaths("TileMap_FileName"));
 		return Arrays.asList(loadedComponentMap,loadedTileMap);

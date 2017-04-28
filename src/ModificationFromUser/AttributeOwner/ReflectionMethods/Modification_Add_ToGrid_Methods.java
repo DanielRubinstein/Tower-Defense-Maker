@@ -1,7 +1,7 @@
 package ModificationFromUser.AttributeOwner.ReflectionMethods;
 
 import backEnd.ModelImpl;
-import backEnd.GameData.State.Component;
+import backEnd.GameData.State.ComponentImpl;
 import backEnd.GameData.State.TileImpl;
 import backEnd.Mode.ModeException;
 import javafx.geometry.Point2D;
@@ -29,7 +29,7 @@ public class Modification_Add_ToGrid_Methods{
 		}
 	}
 	
-	public void add(Component component){
+	public void add(ComponentImpl component){
 		myModel.getState().getComponentGraph().addComponentToGrid(component, location);
 		switch (myModel.getMode().getUserMode()) {
 		case "AUTHOR":

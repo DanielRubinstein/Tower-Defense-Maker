@@ -3,7 +3,7 @@ package backEnd.GameEngine.Behaviors;
 import java.lang.reflect.InvocationTargetException;
 import java.util.ResourceBundle;
 
-import backEnd.GameData.State.Component;
+import backEnd.GameData.State.ComponentImpl;
 
 import backEnd.GameEngine.Behaviors.Behavior;
 import backEnd.GameEngine.Behaviors.DeathBehavior;
@@ -14,9 +14,9 @@ public class BehaviorFactory {
 //
 //	private final static String RESOURCES_PATH = "resources/BehaviorFactory";
 //	private final static ResourceBundle myResources = ResourceBundle.getBundle(RESOURCES_PATH);
-	private Component myComponent;
+	private ComponentImpl myComponent;
 	
-	public BehaviorFactory(Component component) {
+	public BehaviorFactory(ComponentImpl component) {
 		myComponent = component;
 	}
 	

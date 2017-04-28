@@ -6,6 +6,7 @@ import java.util.Map;
 import java.util.Set;
 
 import backEnd.Attribute.AttributeOwner;
+import backEnd.GameData.State.ComponentImpl;
 import backEnd.GameData.State.Component;
 import backEnd.GameData.State.ComponentGraph;
 import backEnd.GameData.State.SerializableObservable;
@@ -22,8 +23,8 @@ public class ComponentGraphVisual implements SkeletonObject, SerializableObserve
 	
 	private ComponentGraph observedComponentGraph;
 	
-	private Set<Component> myComponents;
-	private Map<Component, ImageView> myComponentImages;
+	private Set<ComponentImpl> myComponents;
+	private Map<ComponentImpl, ImageView> myComponentImages;
 	private State myState;
 	private View myView;
 	private Group myRoot;
@@ -48,7 +49,7 @@ public class ComponentGraphVisual implements SkeletonObject, SerializableObserve
 		});
 	}
 
-	private void updateCorrespondingGrid(Component arg) {
+	private void updateCorrespondingGrid(ComponentImpl arg) {
 		if (!myComponents.contains(arg)) {
 			addComponentToGrid(arg);
 		}
@@ -59,13 +60,13 @@ public class ComponentGraphVisual implements SkeletonObject, SerializableObserve
 	}
 
 	private void updateComponentsOnGrid() {
-		for (Component c : observedComponentGraph.getAllComponents()) {
+		for (ComponentImpl c : observedComponentGraph.getAllComponents()) {
 			if (!myComponents.contains(c)) {
 				//System.out.println("in screenGrid, updateComponentsOnGrid() got called");
 				addComponentToGrid(c);
 			}
 		}
-		Set<Component> myComponentsCopy=new HashSet<>(myComponents);
+		Set<ComponentImpl> myComponentsCopy=new HashSet<>(myComponents);
 		for(Component c : myComponentsCopy){
 			if(!observedComponentGraph.getAllComponents().contains(c)){
 				removeComponentFromGrid(c);
@@ -79,7 +80,7 @@ public class ComponentGraphVisual implements SkeletonObject, SerializableObserve
 		myComponentImages.remove(c);
 	}
 
-	private void addComponentToGrid(Component c) {
+	private void addComponentToGrid(ComponentImpl c) {
 		AttributeOwnerVisual frontAttr = new AttributeOwnerVisualImpl(c);
 		frontAttr.refreshXY();
 		ImageView frontImage = frontAttr.getImageView();
@@ -93,7 +94,7 @@ public class ComponentGraphVisual implements SkeletonObject, SerializableObserve
 
 	@Override
 	public void update(SerializableObservable so, Object obj) {
-		updateCorrespondingGrid((Component) obj);
+		updateCorrespondingGrid((ComponentImpl) obj);
 	}
 
 	@Override

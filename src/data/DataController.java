@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.Map;
 import backEnd.BankController;
 import backEnd.GameData.GameData;
-import backEnd.GameData.State.Component;
+import backEnd.GameData.State.ComponentImpl;
 import backEnd.GameData.State.Tile;
 import resources.constants.StringResourceBundle;
 
@@ -35,12 +35,12 @@ public class DataController implements DataControllerReader {
 		this.bankController = bankController;
 	}
 	
-	public Map<String, Component> loadComponentMap()
+	public Map<String, ComponentImpl> loadComponentMap()
 	{
 		try
 		{
 			List<Map<String,?>> objectMaps = myXMLReader.loadUniversalGameData(UNIV_GAME_DATA_PATH);
-			return (Map<String,Component>) objectMaps.get(0);
+			return (Map<String,ComponentImpl>) objectMaps.get(0);
 		}
 		catch (Exception e)
 		{
