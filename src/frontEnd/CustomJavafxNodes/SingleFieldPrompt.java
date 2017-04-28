@@ -16,7 +16,7 @@ public class SingleFieldPrompt {
 		this.myPromptLabel = promptLabel;
 	}
 	
-	public String create(){
+	public String getUserInputString(){
 		TextInputDialog dialog = new TextInputDialog(myPromptText);
 		dialog.setTitle(myDialogTitles.get(0));
 		dialog.setHeaderText(myDialogTitles.get(1));
@@ -28,5 +28,14 @@ public class SingleFieldPrompt {
 		    return result.get();
 		}
 		return null;
+	}
+	
+	public Double getUserInputDouble(){
+		String userInput = getUserInputString();
+		if(userInput == null){
+			return null;
+		}
+		Double value = Double.valueOf(userInput);
+		return value;
 	}
 }

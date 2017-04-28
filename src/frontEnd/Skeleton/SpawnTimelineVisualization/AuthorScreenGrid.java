@@ -28,7 +28,7 @@ public class AuthorScreenGrid implements SkeletonObject{
 	}
 
 	private void createSpawnTab() {
-		Tab spawnTabs = new Tab(stringResourceBundle.getString("AuthorScreenGrid.0")); //$NON-NLS-1$
+		Tab spawnTabs = new Tab(stringResourceBundle.getFromStringConstants("AuthorScreenGrid.0")); //$NON-NLS-1$
 		spawnTabs.setClosable(false);
 		SpawnTabPane sTP = new SpawnTabPane(myView);
 		spawnTabs.setContent(sTP.getRoot());
@@ -38,7 +38,7 @@ public class AuthorScreenGrid implements SkeletonObject{
 	
 
 	private void createGridTab() {
-		screenGridTab = new Tab(stringResourceBundle.getString("AuthorScreenGrid.1")); //$NON-NLS-1$
+		screenGridTab = new Tab(stringResourceBundle.getFromStringConstants("AuthorScreenGrid.1")); //$NON-NLS-1$
 		screenGridTab.setContent(myScreenGrid.getRoot());
 		screenGridTab.setClosable(false);
 		myRoot.getTabs().add(0, screenGridTab);

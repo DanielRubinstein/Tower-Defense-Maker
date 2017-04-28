@@ -53,7 +53,10 @@ public class VisualSpawnEntry implements SkeletonObject {
 			SingleFieldPrompt newPrompt = new SingleFieldPrompt(
 					Arrays.asList("Add Spawn", "Please input a time for your new spawn item"), "Spawn Time Value",
 					"1");
-			double newValue = Double.parseDouble(newPrompt.create());
+			Double newValue = newPrompt.getUserInputDouble();
+			if(newValue == null){
+				return;
+			}
 			myView.sendUserModification(new Modification_EditSpawnDataTime(spawnData,newValue));
 			valueText.setText(Double.toString(newValue));
 		});

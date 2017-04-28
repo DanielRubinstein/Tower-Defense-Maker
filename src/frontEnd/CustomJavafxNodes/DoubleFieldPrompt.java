@@ -45,7 +45,7 @@ public class DoubleFieldPrompt {
 		 */
 
 		// Set the button types.
-		ButtonType createButtonType = new ButtonType(stringResourceBundle.getString("Submit"), ButtonData.OK_DONE);
+		ButtonType createButtonType = new ButtonType(stringResourceBundle.getFromStringConstants("Submit"), ButtonData.OK_DONE);
 		dialog.getDialogPane().getButtonTypes().addAll(createButtonType, ButtonType.CANCEL);
 
 		// Create the username and password labels and fields.

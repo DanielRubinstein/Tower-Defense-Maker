@@ -73,4 +73,8 @@ public class NumericResourceBundle {
 	public Double getSideWidth(){
 		return getSideWidthFactor() * getWindowWidth();
 	}
+	
+	public Double getPresetSizeInPalette(){
+		return Double.valueOf(RESOURCE_BUNDLE.getString("PresetSizeInPalette"));
+	}
 }

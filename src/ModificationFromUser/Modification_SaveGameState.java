@@ -37,7 +37,7 @@ public class Modification_SaveGameState implements ModificationFromUser {
 		String promptLabel = "Name:";
 		String promptText = "";
 		SingleFieldPrompt myDialog = new SingleFieldPrompt(dialogTitles, promptLabel, promptText);
-		return myDialog.create();
+		return myDialog.getUserInputString();
 	}
 
 }

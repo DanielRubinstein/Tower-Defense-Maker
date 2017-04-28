@@ -1,7 +1,7 @@
 package ModificationFromUser.AttributeOwner;
 
 import ModificationFromUser.ModificationFromUser;
-import ModificationFromUser.AttributeOwner.ReflectionMethods.Modification_Add_PaletteToGrid_Methods;
+import ModificationFromUser.AttributeOwner.ReflectionMethods.Modification_Add_ToGrid_Methods;
 import backEnd.ModelImpl;
 import backEnd.Attribute.AttributeOwner;
 import backEnd.Attribute.AttributeOwnerSerializer;
@@ -29,12 +29,12 @@ public class Modification_Add_PaletteToGrid implements ModificationFromUser {
 	@Override
 	public void invoke(ModelImpl model) throws Exception {
 		myModel = model;
-		
+		 
 		AttributeOwnerSerializer attributeOwnerSerializer = new AttributeOwnerSerializer();
 		AttributeOwner cleanAO = attributeOwnerSerializer.createCopy(newAttrOwn);
 		cleanAO.setAttributeValue("Position", location);
 		
-		Modification_Add_PaletteToGrid_Methods methods = new Modification_Add_PaletteToGrid_Methods(model, location);
+		Modification_Add_ToGrid_Methods methods = new Modification_Add_ToGrid_Methods(myModel, location);
 		Reflection.callMethod(methods, "add", cleanAO);
 	}
 }

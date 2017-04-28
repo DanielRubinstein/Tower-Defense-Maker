@@ -1,10 +1,10 @@
 package backEnd.GameData.State;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import com.thoughtworks.xstream.annotations.XStreamOmitField;
 import backEnd.Attribute.AttributeOwnerReader;
 import javafx.geometry.Point2D;
 
@@ -53,84 +53,64 @@ public class TileGridImpl implements TileGrid {
 		this.tileHeight = tileHeight;
 	}
 
-	@Override
-	public Tile getTileByGridPosition(int column, int row) {
-		checkAgainstBounds(column, row);
-		return tileGrid.get(new Point2D(column, row));
-	}
-
-	public boolean atMiddleOfTile(Point2D screenPosition) {
-		// Tile bottom = getTileByScreenPosition(
-		// new Point2D(screenPosition.getX(), screenPosition.getY() - tileHeight
-		// / 2.1));
-		// Tile top = getTileByScreenPosition(
-		// new Point2D(screenPosition.getX(), screenPosition.getY() + tileHeight
-		// / 2.1));
-		// Tile left = getTileByScreenPosition(
-		// new Point2D(screenPosition.getX() - tileWidth / 2.1,
-		// screenPosition.getY()));
-		// Tile right = getTileByScreenPosition(
-		// new Point2D(screenPosition.getX() + tileWidth / 2.1,
-		// screenPosition.getY()));
-		// Tile thisTile = getTileByScreenPosition(screenPosition);
-		// return ((bottom.equals(thisTile) && thisTile.equals(top)) ||
-		// (left.equals(thisTile) && thisTile.equals(right)));
-		// Almost got cancer and died from reading the above
-		Tile thisTile = getTileByScreenPosition(screenPosition);
-		Point2D xyTilePosition = thisTile.<Point2D> getAttribute("Position").getValue();
-		Point2D position = new Point2D((int) (xyTilePosition.getX() / tileWidth),
-				(int) (xyTilePosition.getY() / tileHeight));
-		double midMagicNumLmao = (.1 / 2.1);// TODO fix this (it is the percent
-											// of the tile considered the
-											// middle)
-		double topMiddle = (position.getY() + (1 - midMagicNumLmao) / 2) * tileHeight; 
-			// Top as in higher visually
-		double bottomMiddle = (position.getY() + (1 + midMagicNumLmao) / 2) * tileHeight; 
-			// Bottom as in lower visually
-		double leftMiddle = (position.getX() + (1 - midMagicNumLmao) / 2) * tileWidth;
-		double rightMiddle = (position.getX() + (1 + midMagicNumLmao) / 2) * tileWidth;
-		double xPos = screenPosition.getX();
-		double yPos = screenPosition.getY();
-		boolean middleTopBottom = topMiddle < yPos && yPos < bottomMiddle;
-		boolean middleLeftRight = leftMiddle < xPos && xPos < rightMiddle;
-		return middleTopBottom || middleLeftRight;
-	}
-
-	private void checkAgainstBounds(int column, int row) {
-		if (column >= getNumColsInGrid() || row >= getNumRowsInGrid()) {
-			return;
-			// throw new IndexOutOfBoundsException(); TODO WAT???
+	/*
+	 * These middle of tile methods need a lot of refactoring; I'm on it. 
+	 * Just wanted to push now to get functionality working.
+	 */
+		
+		public boolean atMiddleXOfTile(Point2D screenPosition){
+			 Tile left = getTileByScreenPosition(
+			 new Point2D(screenPosition.getX() - tileWidth / 2.1,
+			 screenPosition.getY()));
+			 Tile right = getTileByScreenPosition(
+			 new Point2D(screenPosition.getX() + tileWidth / 2.1,
+			 screenPosition.getY()));
+			 Tile thisTile = getTileByScreenPosition(screenPosition);
+			 return (left.equals(thisTile) && thisTile.equals(right));
 		}
-		if (column < 0 || row < 0) {
-			return;
-			// throw new IndexOutOfBoundsException();
+		
+		public boolean atMiddleYOfTile(Point2D screenPosition){
+			 Tile bottom = getTileByScreenPosition(
+			 new Point2D(screenPosition.getX(), screenPosition.getY() - tileHeight
+			 / 2.1));
+			 Tile top = getTileByScreenPosition(
+			 new Point2D(screenPosition.getX(), screenPosition.getY() + tileHeight
+			 / 2.1));
+			 Tile thisTile = getTileByScreenPosition(screenPosition);
+			 return (bottom.equals(thisTile) && thisTile.equals(top));
 		}
-	}
 
-	@Override
-	public Point2D getGridPositionFromScreenPosition(Point2D screenPosition) {
-		int column = (int) Math.floor(screenPosition.getX() / tileWidth);
-		int row = (int) Math.floor(screenPosition.getY() / tileHeight);
-		return new Point2D(column, row);
-	}
+		
+		public boolean atMiddleOfTile(Point2D screenPosition) {
+			 Tile bottom = getTileByScreenPosition(
+			 new Point2D(screenPosition.getX(), screenPosition.getY() - tileHeight
+			 / 2.1));
+			 Tile top = getTileByScreenPosition(
+			 new Point2D(screenPosition.getX(), screenPosition.getY() + tileHeight
+			 / 2.1));
+			 Tile left = getTileByScreenPosition(
+			 new Point2D(screenPosition.getX() - tileWidth / 2.1,
+			 screenPosition.getY()));
+			 Tile right = getTileByScreenPosition(
+			 new Point2D(screenPosition.getX() + tileWidth / 2.1,
+			 screenPosition.getY()));
+			 Tile thisTile = getTileByScreenPosition(screenPosition);
+			 return ((bottom.equals(thisTile) && thisTile.equals(top)) ||
+			 (left.equals(thisTile) && thisTile.equals(right)));
+					}
+
 
 	@Override
 	public Tile getTileByScreenPosition(Point2D screenPosition) {
-		Point2D gridPosition = getGridPositionFromScreenPosition(screenPosition);
-		return getTileByGridPosition((int) gridPosition.getX(), (int) gridPosition.getY());
+		return tileGrid.get(this.getSnapPosition(screenPosition));
 	}
 
 	@Override
-	public void setTileByScreenPosition(Tile newTile, Point2D screenPosition) {
-		Point2D gridPosition = getGridPositionFromScreenPosition(screenPosition);
-		setTileByGridPosition(newTile, (int) gridPosition.getX(), (int) gridPosition.getY());
-	}
-
-	@Override
-	public void setTileByGridPosition(Tile newTile, int column, int row) {
-		//System.out.println(this.getClass().getSimpleName() + ": " + column + " " + row);
-		Point2D posOfNewTile = new Point2D(column, row);
-
+	public void setTileByScreenPosition(Tile newTile, Point2D posOfNewTile) {
+		if(tileHeight != 0.0 && tileWidth != 0.0){
+			posOfNewTile = this.getSnapPosition(posOfNewTile);
+			newTile.getAttribute("Position").setValue(posOfNewTile);
+		}
 		Boolean initialization = false;
 		if (!tileGrid.containsKey(posOfNewTile)) {
 			initialization = true;
@@ -139,12 +119,19 @@ public class TileGridImpl implements TileGrid {
 
 		if (!initialization) {
 			// do not notify ScreenGrid for each initial Tile, only if changed
-			// after intialization
+			// after initialization
 			newTile.setObserverList(tileGrid.get(posOfNewTile).getAndClearObservers());
 			tileGrid.put(posOfNewTile, newTile);
 			notifyObservers(newTile);
 		}
 	}
+	
+	private Point2D getSnapPosition(Point2D screenPosition) {
+		int column = (int) Math.floor(screenPosition.getX() / tileWidth);
+		int row = (int) Math.floor(screenPosition.getY() / tileHeight);
+		return new Point2D((column + 0.5) * (tileWidth), (row + 0.5) * (tileHeight));
+	}
+	
 
 	@Override
 	public int getNumColsInGrid() {
@@ -156,14 +143,8 @@ public class TileGridImpl implements TileGrid {
 		return numRowsInGrid;
 	}
 
-	public List<Tile> getAllTiles() {
-		tileList = new ArrayList<Tile>();
-		for (int col = 0; col < numColsInGrid; col++) {
-			for (int row = 0; row < numRowsInGrid; row++) {
-				tileList.add(tileGrid.get(new Point2D(col, row)));
-			}
-		}
-		return tileList;
+	public Collection<Tile> getAllTiles() {
+		return tileGrid.values();
 	}
 
 	@Override
@@ -238,11 +219,16 @@ public class TileGridImpl implements TileGrid {
 
 	@Override
 	public void clearObservers() {
-		observers = null;
+		observers.clear();
 	}
 
 	@Override
 	public void setObservers(List<SerializableObserver> observersave) {
 		observers = observersave;
+	}
+	
+	@Override
+	public int compareTo(Object o) {
+		return Integer.compare(this.hashCode(), o.hashCode());
 	}
 }

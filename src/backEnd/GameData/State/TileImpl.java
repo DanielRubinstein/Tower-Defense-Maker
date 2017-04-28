@@ -11,7 +11,8 @@ import com.thoughtworks.xstream.annotations.XStreamOmitField;
 
 import backEnd.Attribute.Attribute;
 import backEnd.Attribute.AttributeData;
-import backEnd.Attribute.AttributeFactory;
+import backEnd.Attribute.AttributeFactoryImpl;
+import backEnd.Attribute.AttributeFactoryReader;
 import backEnd.Attribute.AttributeOwner;
 import javafx.geometry.Point2D;
 
@@ -45,7 +46,7 @@ public class TileImpl implements Tile, AttributeOwner, SerializableObservable {
 		//System.out.println("executing Constructor for TileImpl");
 		this.myAccessPerm = aP;
 		this.myAttrData = new AttributeData(new HashMap<String, Attribute<?>>());
-		AttributeFactory attrFact = new AttributeFactory();
+		AttributeFactoryReader attrFact = new AttributeFactoryImpl();
 		this.myAttrData = new AttributeData(new HashMap<String, Attribute<?>>());
 		for (String key : attributeResources.keySet()) {
 			Attribute<?> myAttribute = attrFact.getAttribute(key);
@@ -130,12 +131,17 @@ public class TileImpl implements Tile, AttributeOwner, SerializableObservable {
 
 	@Override
 	public void clearObservers() {
-		observers = null;
+		observers.clear();
 	}
 
 	@Override
 	public void setObservers(List<SerializableObserver> observersave) {
 		observers = observersave;
+	}
+
+	@Override
+	public int compareTo(Object o) {
+		return Integer.compare(this.hashCode(), o.hashCode());
 	}
 
 }

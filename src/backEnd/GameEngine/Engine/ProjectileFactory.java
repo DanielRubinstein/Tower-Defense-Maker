@@ -4,9 +4,10 @@ import java.io.FileNotFoundException;
 
 import backEnd.Attribute.Attribute;
 import backEnd.Attribute.AttributeData;
-import backEnd.Attribute.AttributeFactory;
+import backEnd.Attribute.AttributeFactoryImpl;
+import backEnd.Attribute.AttributeFactoryReader;
 import backEnd.Attribute.AttributeImpl;
-import backEnd.GameData.State.Component;
+import backEnd.GameData.State.ComponentImpl;
 
 /**
  * 
@@ -17,13 +18,13 @@ import backEnd.GameData.State.Component;
 public class ProjectileFactory {
 
 	private AttributeData myAttributeData;
-	private AttributeFactory myAttributeFactory;
-	private Component myComponent;
+	private AttributeFactoryReader myAttributeFactory;
+	private ComponentImpl myComponent;
 	
 	@SuppressWarnings("unchecked")
-	public ProjectileFactory(Component tower) throws FileNotFoundException{
-		myComponent=new Component();
-		myAttributeFactory = new AttributeFactory();
+	public ProjectileFactory(ComponentImpl tower) throws FileNotFoundException{
+		myComponent=new ComponentImpl();
+		myAttributeFactory = new AttributeFactoryImpl();
 		AttributeData ad = new AttributeData();
 		//TODO clean up code
 		Attribute<String> myType = (Attribute<String>) myAttributeFactory.getAttribute(("Type"));
@@ -72,7 +73,7 @@ public class ProjectileFactory {
 		return myAttributeData;
 	}
 	
-	public Component getProjectile(){
+	public ComponentImpl getProjectile(){
 		return myComponent;
 	}
 }

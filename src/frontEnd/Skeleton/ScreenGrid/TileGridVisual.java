@@ -99,7 +99,7 @@ public class TileGridVisual implements SerializableObserver, SkeletonObject{
 			
 			String moveDirection = tile.getMyAttributes().<String>get("MoveDirection").getValue();
 			Point2D screenPosition = tile.getMyAttributes().<Point2D>get("Position").getValue();
-			Point2D gridPosition = observedTileGrid.getGridPositionFromScreenPosition(screenPosition);
+			Point2D gridPosition = this.getGridPosition(screenPosition);
 			if (moveDirection == null || moveDirection.equals("")){
 				//moveDirection = "NoDirection";
 				continue;
@@ -151,21 +151,12 @@ public class TileGridVisual implements SerializableObserver, SkeletonObject{
 
 	}
 	private void updateTilesOnGrid() {
-		for (int row = 0; row < numberOfTileRows; row++) {
-			for (int col = 0; col < numberOfTileCols; col++) {
-				Tile t = observedTileGrid.getTileByGridPosition(col, row);
-				Point2D pos = new Point2D(col, row);
-				if(!myTiles.containsKey(pos) || !myTiles.get(pos).equals(t)){
-					addTileToGrid(t, pos);
-				}
-			}
+		for(Tile tile : observedTileGrid.getAllTiles()){
+			addTileToGrid(tile, tile.<Point2D>getAttribute("Position").getValue());
 		}
 	}
-	private void updateCorrespondingGrid(TileImpl arg) {
-		Point2D newTileScreenPosition = arg.getMyAttributes().<Point2D>get("Position").getValue();
-		Point2D newTileGridPosition = observedTileGrid.getGridPositionFromScreenPosition(newTileScreenPosition);
-		addTileToGrid(arg, newTileGridPosition);
-
+	private void updateCorrespondingGrid(Tile tile) {
+		addTileToGrid(tile, tile.<Point2D>getAttribute("Position").getValue());
 	}
 	private void addTileToGrid(Tile t, Point2D pos) {
 		AttributeOwnerVisual attrOwner = new AttributeOwnerVisualImpl(t);
@@ -176,10 +167,17 @@ public class TileGridVisual implements SerializableObserver, SkeletonObject{
 			myRoot.getChildren().remove(myTileImages.get(myTiles.get(pos)));
 			myTileImages.remove(myTiles.get(pos));
 		}
-		myRoot.add(tileView, (int) pos.getX(), (int) pos.getY());
+		Point2D gridPosition = getGridPosition(pos);
+		myRoot.add(tileView, (int) gridPosition.getX(), (int) gridPosition.getY());
 		myTiles.put(pos, t);
 		myTileImages.put(t, tileView);
 	}
+	private Point2D getGridPosition(Point2D screenPosition) {
+		int column = (int) Math.floor(screenPosition.getX() / tileWidth);
+		int row = (int) Math.floor(screenPosition.getY() / tileHeight);
+		return new Point2D(column, row);
+	}
+	
 	@Override
 	public void update(SerializableObservable so, Object obj) {
 		if(obj != null){

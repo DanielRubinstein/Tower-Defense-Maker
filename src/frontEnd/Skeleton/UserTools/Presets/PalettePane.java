@@ -2,7 +2,8 @@ package frontEnd.Skeleton.UserTools.Presets;
 
 import java.util.Map;
 
-import backEnd.GameData.State.Component;
+import backEnd.Attribute.AttributeOwner;
+import backEnd.GameData.State.ComponentImpl;
 import backEnd.GameData.State.Tile;
 import frontEnd.View;
 import frontEnd.Skeleton.UserTools.SkeletonObject;
@@ -33,18 +34,15 @@ public class PalettePane implements SkeletonObject {
 		Tab tab = new Tab(string);
 		tab.setClosable(false);
 		
-		Palette singlePalette = null;
+		Map<String, ? extends AttributeOwner> presets = null;
 		
 		if (string.equals("Tiles")){
-			Map<String, Tile> presets = null;
 			presets = myView.getBankController().getAccessibleTileMap();
-			singlePalette = new Palette(myView, presets , string);
 		} else if (string.equals("Components")){
-			Map<String, Component> presets = null;
 			presets = myView.getBankController().getAccessibleComponentMap();
-			singlePalette = new Palette(myView, presets, string);
 		}
-
+		
+		Palette singlePalette = new Palette(myView, presets);
 		ScrollPane scrollPane = new ScrollPane();
 		scrollPane.setContent(singlePalette.getRoot());
 		tab.setContent(scrollPane);

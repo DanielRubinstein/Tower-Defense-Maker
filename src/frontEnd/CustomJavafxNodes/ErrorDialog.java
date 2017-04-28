@@ -10,7 +10,7 @@ public class ErrorDialog {
 
 	public ErrorDialog(){
 		alert = new Alert(AlertType.ERROR);
-		alert.setTitle(stringResourceBundle.getString("ErrorDialogTitle"));
+		alert.setTitle(stringResourceBundle.getFromErrorMessages("Error_Dialog_Title"));
 	}
 	
 	public void create(String headerText, String contentText){

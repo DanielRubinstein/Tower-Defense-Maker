@@ -3,31 +3,37 @@ package frontEnd.Skeleton.SplashScreens;
 import javafx.event.Event;
 import javafx.event.EventHandler;
 import javafx.scene.Scene;
+import javafx.scene.control.Label;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.text.Text;
+import javafx.stage.Stage;
 import resources.constants.NumericResourceBundle;
 import resources.constants.StringResourceBundle;
 
-public class SplashScreen extends Scene
+public class SplashScreen
 {
 	private StringResourceBundle stringResourceBundle = new StringResourceBundle();
-	private BorderPane myRoot;
+	private BorderPane myBP;
+	private Scene myScene;
 	
 	public SplashScreen(SplashScreenData data)
 	{
-		super(new BorderPane());
-		myRoot = (BorderPane) getRoot();
+		myBP = new BorderPane();
 		
-		getStylesheets().add(stringResourceBundle.getDefaultCSS());
+
 		
-		myRoot.setBottom(new Text(data.getMessageBody()));
+		myBP.setBottom(new Label(data.getMessageBody()));
 		
+		
+		myScene = new Scene(myBP);
+		myScene.getStylesheets().add(stringResourceBundle.getFromStringConstants("DEFAULT_CSS"));
 		setContinue(data.getOnContinue());
+		
 	}
 
 	private void setContinue(Runnable onContinue)
 	{
-		setOnKeyPressed(new EventHandler<Event>()
+		myScene.setOnKeyPressed(new EventHandler<Event>()
 		{
 			@Override
 			public void handle(Event e)
@@ -37,6 +43,13 @@ public class SplashScreen extends Scene
 
 		});
 	}
+	
+	
+	public void display(Stage myStage){
+		myStage.setScene(myScene);
+		myStage.show();
+	}
+	
 	
 	
 }

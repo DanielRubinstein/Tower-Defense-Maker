@@ -1,9 +1,11 @@
 package backEnd;
 
-import backEnd.GameData.State.Component;
+import backEnd.GameData.State.ComponentImpl;
 
 public interface BankControllerReader {
 
-	String getComponentName(Component component);
+	String getComponentName(ComponentImpl component);
+	
+	ComponentImpl getComponent(String componentName);
 
 }

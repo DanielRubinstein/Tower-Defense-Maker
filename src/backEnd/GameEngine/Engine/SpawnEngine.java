@@ -1,11 +1,12 @@
 package backEnd.GameEngine.Engine;
 
+import java.util.Collection;
 import java.util.List;
 
-import backEnd.BankController;
+import backEnd.BankControllerReader;
 import backEnd.Attribute.Attribute;
 import backEnd.GameData.GameData;
-import backEnd.GameData.State.Component;
+import backEnd.GameData.State.ComponentImpl;
 import backEnd.GameData.State.ComponentBuilder;
 import backEnd.GameData.State.State;
 import backEnd.GameData.State.Tile;
@@ -26,7 +27,7 @@ public class SpawnEngine implements Engine {
 
 	private boolean gamePaused = true;
 	private State myState;
-	private BankController myBank;
+	private BankControllerReader myBank;
 
 	// TODO Add logic in pausing the game and starting again... Fucked up the
 	// timeline
@@ -39,7 +40,7 @@ public class SpawnEngine implements Engine {
 		if (gamePaused) {
 			return;
 		}
-		List<Tile> tileList = gameData.getState().getTileGrid().getAllTiles();
+		Collection<Tile> tileList = gameData.getState().getTileGrid().getAllTiles();
 		for (Tile spawnTile : tileList) {
 			Object spawnQueueNameObj = spawnTile.getAttribute("SpawnTimeline").getValue();
 			SpawnQueues currentSpawnQueue = gameData.getState().getSpawnQueues().get((String) spawnQueueNameObj);
@@ -50,7 +51,7 @@ public class SpawnEngine implements Engine {
 					spawn(myBank.getComponent(component), spawnTile);
 				}
 				// Spawning directly with spawn queue
-				Component nextQueueSpawn = myBank.getComponent(currentSpawnQueue.getNextSingleSpawn(gameData.getGameTime()));
+				ComponentImpl nextQueueSpawn = myBank.getComponent(currentSpawnQueue.getNextSingleSpawn(gameData.getGameTime()));
 				spawn(nextQueueSpawn, spawnTile);
 			}
 		}
@@ -64,14 +65,14 @@ public class SpawnEngine implements Engine {
 	}
 
 	@SuppressWarnings("unchecked")
-	private void spawn(Component component, Tile spawnTile) {
+	private void spawn(ComponentImpl component, Tile spawnTile) {
 		if (component == null) {
 			//System.out.println(this.getClass().getName() + ": No component to add from spawn queue");
 			return;
 		}
 		//System.out.println(this.getClass().getName() + ": Should add component from spawn queue");
 		ComponentBuilder componentBuilder = new ComponentBuilder(component);
-		Component spawnable = componentBuilder.getComponent();
+		ComponentImpl spawnable = componentBuilder.getComponent();
 		Object positionObj = spawnTile.getMyAttributes().get("Position");
 		Attribute<Point2D> spawnPositionAttribute = (Attribute<Point2D>) positionObj;
 		Point2D tilePosition = spawnPositionAttribute.getValue();

@@ -4,13 +4,14 @@ import java.util.Collection;
 import java.util.Map;
 import java.util.function.Consumer;
 
-import ModificationFromUser.ModificationFromUser;
+import ModificationFromUser.*;
 import backEnd.BankController;
 import backEnd.BankControllerReader;
+import backEnd.BankController;
 import backEnd.Model;
 import backEnd.ModelReader;
 import backEnd.GameData.Rules.RuleReader;
-import backEnd.GameData.State.Component;
+import backEnd.GameData.State.ComponentImpl;
 import backEnd.GameData.State.PlayerStatusReader;
 import backEnd.GameData.State.Tile;
 import backEnd.GameEngine.Engine.Spawning.SpawnQueues;
@@ -95,7 +96,7 @@ public class ViewImpl implements View {
 	}
 
 	@Override
-	public Collection<Component> getComponentPresets() {
+	public Collection<ComponentImpl> getComponentPresets() {
 		return myModel.getBankController().getComponentMap().values();
 	}
 
@@ -155,11 +156,14 @@ public class ViewImpl implements View {
 
 	public void setSplashScreen(SplashScreenData data)
 	{
-		mySkeleton.setScene(new SplashScreen(data));
+		System.out.println("View Line 158");
+		sendUserModification(Modification_GameRemote.PAUSE); 
+		SplashScreen splashScreen = new SplashScreen(data);
+		splashScreen.display(appStage);
 	}
 
 	@Override
-	public boolean isComponentOnGrid(Component c) {
+	public boolean isComponentOnGrid(ComponentImpl c) {
 		return myModel.getState().getComponentGraph().contains(c);
 	}
 
