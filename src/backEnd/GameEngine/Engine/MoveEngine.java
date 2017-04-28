@@ -14,16 +14,15 @@ import backEnd.GameData.State.*;
  * @author Daniel
  * @author Christian Martindale
  *
+ *
  */
 public class MoveEngine implements Engine{
 	private State myState;
 	private Tile currentTile;
-	private MoveBehavior mb;
-	private final String POSITION="Position";
-	private final String TYPE="Type";
-	private final String PROJECTILE="Projectile";
-	private final String ENEMY="Enemy";
-	private final String TOWER="Tower";
+	private final static String UP="Up";
+	private final static String DOWN="Down";
+	private final static String RIGHT="Right";
+	private final static String LEFT="Left";
 	/**
 	 * 
 	 * @param TileGrid the Grid of Tiles that Components must navigate
@@ -35,31 +34,65 @@ public class MoveEngine implements Engine{
 	
 	public void gameLoop(GameData gameData, double stepTime) {
 		myState=gameData.getState();
-		List<Component> toRemove=new ArrayList<Component>();
-		Map<Component, Point2D> toAdd=new HashMap<Component, Point2D>();
-		for (Component c: myState.getComponentGraph().getAllComponents()){		
-			if (c.<String>getAttribute(TYPE).getValue().equals(PROJECTILE)){ //don't want path to influence projectiles
-				continue;
-			}
-			
-			Point2D currentLocation=c.<Point2D>getAttribute(POSITION).getValue();
-			currentTile = gameData.getState().getTileGrid().getTileByScreenPosition(currentLocation);
-			if (currentTile==null){
-				continue;
-			}
-			mb=new MoveBehavior(c);
-			try {
-				mb.execute(currentTile, gameData.getState().getTileGrid().atMiddleOfTile(currentLocation));
-				Point2D newPosition=mb.getPosition();
-				if (newPosition!=null&&!newPosition.equals(currentLocation)){
-					c.setAttributeValue(POSITION, newPosition);
-				}
-			} catch (FileNotFoundException e) {
-				ErrorDialog fnf = new ErrorDialog();
-				fnf.create("Error", "File not found");
-				break;
-			}
+		for (ComponentImpl myComponent: myState.getComponentGraph().getAllComponents()){
+			move(myComponent);
 		}
-		return;
+	}
+	
+	
+	
+	private void move(ComponentImpl c) {
+		Coordinates previousMovement=c.getPreviousMovement();
+		Coordinates newMovement;
+		double speed = c.<Double>getAttribute("Speed").getValue();
+		Point2D newPoint;
+		Point2D currentLocation=c.<Point2D>getAttribute("Position").getValue();
+		double currentX = currentLocation.getX();
+		double currentY = currentLocation.getY();
+		newMovement=new Coordinates(0,0);
+		currentTile = myState.getTileGrid().getTileByScreenPosition(currentLocation);
+		if (currentTile==null){
+			return;
+		}
+		switch (currentTile.<String>getAttribute("MoveDirection").getValue()) {
+		case LEFT:
+			if (myState.getTileGrid().atMiddleYOfTile(currentLocation)||(previousMovement.getX()==0&&previousMovement.getY()==0)){
+				newMovement = new Coordinates(-1, 0);
+			}
+			else if (!(previousMovement.getX()==0&&previousMovement.getY()==0)){
+				newMovement=previousMovement;
+			}
+			break;
+		case RIGHT:
+			if (myState.getTileGrid().atMiddleYOfTile(currentLocation)||(previousMovement.getX()==0&&previousMovement.getY()==0)){
+				newMovement = new Coordinates(1, 0);
+			}
+			else if (!(previousMovement.getX()==0&&previousMovement.getY()==0)){
+				newMovement=previousMovement;
+			}
+			break;
+		case UP:
+			if (myState.getTileGrid().atMiddleXOfTile(currentLocation)||(previousMovement.getX()==0&&previousMovement.getY()==0)){
+				newMovement = new Coordinates(0, -1);
+			}
+			else if (!(previousMovement.getX()==0&&previousMovement.getY()==0)){
+				newMovement=previousMovement;
+			}
+			break;
+		case DOWN:
+			if (myState.getTileGrid().atMiddleXOfTile(currentLocation)||(previousMovement.getX()==0&&previousMovement.getY()==0)){
+				newMovement = new Coordinates(0, 1);
+			}
+			else if (!(previousMovement.getX()==0&&previousMovement.getY()==0)){
+				newMovement=previousMovement;
+			}
+			break;
+		default:
+			return;
+		}
+		Coordinates velocity=new Coordinates(newMovement.getX()*speed, newMovement.getY()*speed);
+		newPoint = new Point2D( currentX+velocity.getX(), currentY+velocity.getY());
+		c.setPreviousMovement(newMovement);
+		c.setAttributeValue("Position", newPoint);		
 	}
 }

@@ -40,7 +40,7 @@ public class RulesView {
 	
 	public void launch(){
 		Scene scene = new Scene(myRoot);
-		scene.getStylesheets().add(stringResourceBundle.getDefaultCSS());
+		scene.getStylesheets().add(stringResourceBundle.getFromStringConstants("DEFAULT_CSS"));
 		myStage.setScene(scene);
 		myStage.show();
 	}

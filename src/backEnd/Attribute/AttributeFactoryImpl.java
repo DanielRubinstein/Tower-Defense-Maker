@@ -12,8 +12,9 @@ import javax.xml.parsers.DocumentBuilderFactory;
 import org.w3c.dom.Document;
 import org.w3c.dom.Node;
 
-import backEnd.GameData.State.Component;
+import backEnd.GameData.State.ComponentImpl;
 import javafx.geometry.Point2D;
+import resources.constants.StringResourceBundle;
 import util.reflection.Reflection;
 
 /**
@@ -25,17 +26,14 @@ import util.reflection.Reflection;
 
 public class AttributeFactoryImpl implements AttributeFactory{
 	
-	private final static String XML_FILE_NAME = "src/resources/AttributePresets.xml";
-	private final static String ALL_ATTRIBUTES_TYPES = "resources/allAttributeTypes";
-	private static ResourceBundle myAttrNameResources;
+	private static final StringResourceBundle strResources = new StringResourceBundle();
 	private Document doc;
 	private String currentGameAttributeName;
 	private Node currentAttributeNode;
 	
 	public AttributeFactoryImpl() throws FileNotFoundException{
-		myAttrNameResources = ResourceBundle.getBundle(ALL_ATTRIBUTES_TYPES);
 		try{
-			File fXmlFile = new File(XML_FILE_NAME);
+			File fXmlFile = new File(strResources.getFromFilePaths("Attribute_Presets_XML"));
 			DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
 			DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
 			doc = dBuilder.parse(fXmlFile);
@@ -49,7 +47,7 @@ public class AttributeFactoryImpl implements AttributeFactory{
 		currentGameAttributeName = gameAttributeName;
 		currentAttributeNode = doc.getElementsByTagName(currentGameAttributeName).item(0);
 		
-		String attributeType = myAttrNameResources.getString(currentGameAttributeName);
+		String attributeType = strResources.getFromAttributeTypes(currentGameAttributeName);
 		String methodFormat = "get%sAttribute";
 		
 		return (Attribute<?>) Reflection.callMethod(this, String.format(methodFormat, attributeType));
