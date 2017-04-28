@@ -27,7 +27,7 @@ public class ProjectileEngine implements Engine {
 	public void gameLoop(GameData gameData, double stepTime) {
 		myGameData = gameData;
 		toRemove = new ArrayList<Component>();
-		for (Component c : myGameData.getState().getComponentGraph().getAllComponents()) {
+		for (Component c : gameData.getState().getComponentGraph().getAllComponents()) {
 			if (((String) c.getAttribute("Type").getValue()).equals("Projectile")) {
 				Point2D newPos = calculateNewPos(c);
 				c.setAttributeValue("Position", newPos);
@@ -36,18 +36,16 @@ public class ProjectileEngine implements Engine {
 						.getAttribute(("ProjectileMaxDistance")).getValue()) {
 					// TODO: may have issues when the target is already
 					// destroyed before it gets there
-					// System.out.println("about to perform projectile
-					// actions");
-					performProjectileAction(gameData, (Component) c.getAttribute("ProjectileTarget").getValue(), c);
-					toRemove.add(c);
+					//System.out.println("about to perform projectile actions");
+					performProjectileAction(gameData, (Component)c.getAttribute("ProjectileTarget").getValue(), c);
 
 				}
 
 			}
 		}
-		System.out.println("About to remove stuff from graph" );
+		//System.out.println("About to remove stuff from graph" );
 		for (Component c : toRemove) {
-			myGameData.getState().getComponentGraph().removeComponent(c);
+			gameData.getState().getComponentGraph().removeComponent(c);
 		}
 
 	}
@@ -98,21 +96,21 @@ public class ProjectileEngine implements Engine {
 	 */
 	private void performProjectileAction(GameData gameData, Component target, Component projectile) {
 
+		
 		List<Component> targetList = (ArrayList<Component>) gameData.getState().getComponentGraph()
 				.getComponentsWithinRadius(target, (Double) projectile.getAttribute("ExplosionRadius").getValue());
+		if(projectile.getAttribute("FireType").getValue().equals("SingleTarget")){ 
+			targetList.clear(); //only want the target to be affected if not an AOE tower
+		}
 		targetList.add(target);
 
 		for (Component toHit : targetList) {
-			// System.out.println("Target looping has begun");
+			//System.out.println("Target looping has begun");
 			if (toHit.getAttribute("Type").getValue().equals("Enemy")) {
 				toHit.setAttributeValue("Health", (Integer) toHit.getAttribute("Health").getValue() - (Integer) projectile.getAttribute("FireDamage").getValue());
-				System.out.println("should have reduced HP to " + toHit.getAttribute("Health").getValue() + " type is " + toHit.getAttribute("Type").getValue());
+				//System.out.println("should have reduced HP to " + toHit.getAttribute("Health").getValue() + " type is " + toHit.getAttribute("Type").getValue());
 				toHit.setAttributeValue("Velocity", ((Double) projectile.getAttribute("SlowFactor").getValue() * (Double) toHit.getAttribute("Speed").getValue()));
 				toRemove.add(projectile);
-				if (projectile.getAttribute("FireType").getValue().equals("SingleTarget")) {
-					break; // if AOE, continue to loop through all targets, else
-							// only affect one target, needs testing
-				}
 			}
 		}
 

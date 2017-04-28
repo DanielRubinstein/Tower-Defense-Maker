@@ -77,22 +77,31 @@ public class BankController implements BankControllerReader
 			newTile4.setAttributeValue("MoveDirection", "Left");
 			addNewTile("Yellow Left Tile", newTile4);
 
+			Component testerSpawnedBloon = new Component();
+			testerSpawnedBloon.setAttributeValue("ImageFile", "resources/images/Components/blue_bloon.png");
+			testerSpawnedBloon.setAttributeValue("Speed", 1d);
+			testerSpawnedBloon.setAttributeValue("Health", 20);
+			testerSpawnedBloon.setAttributeValue("Type", "Enemy");
+			
 			Component testingBloon = new Component();
 			testingBloon.setAttributeValue("ImageFile", "resources/images/Components/rainbow_bloon.png");
 			testingBloon.setAttributeValue("Speed", 1d);
 			testingBloon.setAttributeValue("Health", 20);
 			testingBloon.setAttributeValue("Type", "Enemy");
+			testingBloon.setAttributeValue("SpawnOnDeath", true);
+			testingBloon.setAttributeValue("SpawnOnDeathObject", testerSpawnedBloon);
 			addNewComponent("Enemy", testingBloon);
 
 			Component testingTurret = new Component();
 			testingTurret.setAttributeValue("ImageFile", "resources/images/Components/zombie.png");
 			testingTurret.setAttributeValue("Health", 10);
 			testingTurret.setAttributeValue("Type", "Tower");
-			testingTurret.setAttributeValue("Velocity", 1.0);
+			testingTurret.setAttributeValue("Velocity", 2.0);
 			testingTurret.setAttributeValue("Speed", 1.0);
 			testingTurret.setAttributeValue("FireDamage", 10);
 			testingTurret.setAttributeValue("FireRate", 1000.0);
 			testingTurret.setAttributeValue("ExplosionRadius", 40.0);
+			testingTurret.setAttributeValue("FireType", "SingleTarget");
 			testingTurret.setAttributeValue("FireRadius", 200.0);
 			testingTurret.setAttributeValue("FireImage", "resources/images/Components/purple_bloon.png");
 			addNewComponent("Tower", testingTurret);
