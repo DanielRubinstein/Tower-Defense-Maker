@@ -23,14 +23,12 @@ public interface ComponentGraph extends SerializableObservable{
 	 * @param Tile location
 	 * @return Component at the given location
 	 */
-	
 	List<Component> getComponentsByTileCorners(TileCorners tileCorners);
 
 	/**
 	 * Gets the List of all Components in the ComponentGraph
 	 * @return a List of Components
 	 */
-	
 	Collection<Component> getAllComponents();
 	
 	/**
@@ -62,7 +60,7 @@ public interface ComponentGraph extends SerializableObservable{
 	 * @param centerComp
 	 * @return List of components at the nearest location
 	 */
-	//List<Component> getNearestComponents(Component centerComp);
+	List<Component> getNearestComponents(Component centerComp);
 
 	boolean contains(AttributeOwnerReader c);
 

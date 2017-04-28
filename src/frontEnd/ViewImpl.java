@@ -7,7 +7,6 @@ import java.util.function.Consumer;
 import ModificationFromUser.*;
 import backEnd.BankController;
 import backEnd.BankControllerReader;
-import backEnd.BankController;
 import backEnd.Model;
 import backEnd.ModelReader;
 import backEnd.GameData.Rules.RuleReader;

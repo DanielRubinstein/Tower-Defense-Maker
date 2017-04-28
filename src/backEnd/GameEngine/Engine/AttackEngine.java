@@ -37,12 +37,10 @@ public class AttackEngine implements Engine {
 		for (Component attacker : myComponentGraph.getAllComponents()) {
 			if (attacker.getAttribute("Type").getValue().equals("Tower")) {
 				if (masterTime % ((Double) attacker.getAttribute("FireRate").getValue()/1000) <= stepTime/10) { 
-					System.out.println("tower decided to fire (timing)");
 					List<Component> targets = myComponentGraph.getComponentsWithinRadius(attacker,
 							(double) attacker.getAttribute("FireRadius").getValue());
 					for (Component potentialTarget : targets) {
 						if (potentialTarget.getAttribute("Type").getValue().equals("Enemy")) {
-							System.out.println("Attack engine selected a new target");
 							attackersAndTargets.put(attacker, potentialTarget);
 						}
 					}
@@ -71,7 +69,7 @@ public class AttackEngine implements Engine {
 		Object targetPosObj=target.getAttribute(("Position")).getValue();
 		Point2D targetPos = (Point2D) targetPosObj;
 		projectile.setAttributeValue("Position", bulletPos);
-		projectile.setAttributeValue("ProjectileTargetPosition", new Point2D(targetPos.getX(), targetPos.getY()));
+		projectile.setAttributeValue("ProjectileTargetPosition", targetPos);
 		projectile.setAttributeValue("ProjectileTarget", target);
 		Point2D finalTargetPoint = targetPos.subtract(bulletPos);
 		//TODO: USE .magnitude() method below

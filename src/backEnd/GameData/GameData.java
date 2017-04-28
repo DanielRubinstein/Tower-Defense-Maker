@@ -1,6 +1,6 @@
 package backEnd.GameData;
 
-import backEnd.BankControllerReader;
+import backEnd.BankController;
 import backEnd.GameData.Rules.Rule;
 import backEnd.GameData.Rules.RulesMap;
 import backEnd.GameData.State.PlayerStatus;
@@ -19,7 +19,7 @@ public class GameData implements GameDataInterface{
 	private EngineStatus myEngineStatus;
 	private LevelProgressionControllerEditor myLPC;
 	private double myGameTime;
-	private BankControllerReader myBankController;
+	private BankController myBankController;
 	
 	public GameData(StateImpl state, PlayerStatus playerStatus, RulesMap myRules){
 		this.myState = state;
@@ -101,11 +101,11 @@ public class GameData implements GameDataInterface{
 		return myLPC;
 	}
 
-	public void setBankController(BankControllerReader bankController) {
+	public void setBankController(BankController bankController) {
 		myBankController = bankController;
 	}
 	
-	public BankControllerReader getBankController() {
+	public BankController getBankController() {
 		return myBankController;
 	}
 
