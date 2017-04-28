@@ -107,7 +107,7 @@ public class StateImpl implements State, SerializableObservable {
 	{
 		myComponentGraph.clearComponents();
 		
-		for(Component component : componentGraph.getAllComponents()){
+		for(ComponentImpl component : componentGraph.getAllComponents()){
 			Point2D pos = component.<Point2D>getAttribute("Position").getValue();
 			myComponentGraph.addComponentToGrid(component, pos);
 		}
@@ -227,7 +227,7 @@ public class StateImpl implements State, SerializableObservable {
 	}
 
 	@Override
-	public Collection<Component> getComponentsByTilePosition(Point2D tileGridPosition) {
+	public Collection<ComponentImpl> getComponentsByTilePosition(Point2D tileGridPosition) {
 		TileCorners tileCorners = new TileCorners(tileGridPosition, myTileGrid.getTileWidth(), myTileGrid.getTileHeight());
 		return myComponentGraph.getComponentsByTileCorners(tileCorners);
 	}

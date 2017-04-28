@@ -6,7 +6,7 @@
       <hash>249801287</hash>
     </javafx.geometry.Point2D>
     <list>
-      <backEnd.GameData.State.Component>
+      <backEnd.GameData.State.ComponentImpl>
         <myAttributes>
           <myAttributes>
             <entry>
@@ -325,7 +325,7 @@
           <x>0.0</x>
           <y>0.0</y>
         </previousMovement>
-      </backEnd.GameData.State.Component>
+      </backEnd.GameData.State.ComponentImpl>
     </list>
   </entry>
   <entry>
@@ -335,7 +335,7 @@
       <hash>225487431</hash>
     </javafx.geometry.Point2D>
     <list>
-      <backEnd.GameData.State.Component>
+      <backEnd.GameData.State.ComponentImpl>
         <myAttributes>
           <myAttributes>
             <entry>
@@ -654,7 +654,7 @@
           <x>0.0</x>
           <y>0.0</y>
         </previousMovement>
-      </backEnd.GameData.State.Component>
+      </backEnd.GameData.State.ComponentImpl>
     </list>
   </entry>
 </map>

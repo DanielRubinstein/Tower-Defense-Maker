@@ -34,14 +34,14 @@ public class MoveEngine implements Engine{
 	
 	public void gameLoop(GameData gameData, double stepTime) {
 		myState=gameData.getState();
-		for (Component myComponent: myState.getComponentGraph().getAllComponents()){
+		for (ComponentImpl myComponent: myState.getComponentGraph().getAllComponents()){
 			move(myComponent);
 		}
 	}
 	
 	
 	
-	private void move(Component c) {
+	private void move(ComponentImpl c) {
 		Coordinates previousMovement=c.getPreviousMovement();
 		Coordinates newMovement;
 		double speed = c.<Double>getAttribute("Speed").getValue();

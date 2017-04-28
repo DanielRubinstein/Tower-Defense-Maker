@@ -12,7 +12,7 @@ import javax.xml.parsers.DocumentBuilderFactory;
 import org.w3c.dom.Document;
 import org.w3c.dom.Node;
 
-import backEnd.GameData.State.Component;
+import backEnd.GameData.State.ComponentImpl;
 import javafx.geometry.Point2D;
 import resources.constants.StringResourceBundle;
 import util.reflection.Reflection;
