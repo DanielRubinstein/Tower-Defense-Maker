@@ -92,7 +92,6 @@ public class ComponentGraphImpl implements ComponentGraph {
 		currList.remove(toRemove);
 		componentMap.put(location, currList);
 		myComponents.remove(toRemove);
-		System.out.println("removed in component graph");
 		notifyObservers(toRemove);
 	}
 
