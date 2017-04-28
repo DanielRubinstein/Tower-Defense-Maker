@@ -1,13 +1,10 @@
 package frontEnd.Skeleton.ScreenGrid;
 
 import java.io.File;
-import java.util.ArrayList;
-import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.function.Consumer;
 
-import ModificationFromUser.AttributeOwner.Modification_EditAttribute;
 import backEnd.GameData.State.SerializableObservable;
 import backEnd.GameData.State.SerializableObserver;
 import backEnd.GameData.State.State;
@@ -15,15 +12,11 @@ import backEnd.GameData.State.Tile;
 import backEnd.GameData.State.TileGrid;
 import backEnd.GameData.State.TileImpl;
 import frontEnd.View;
-import frontEnd.Skeleton.AoTools.OnGridTileCommandCenter;
 import frontEnd.Skeleton.UserTools.SkeletonObject;
-import javafx.event.EventHandler;
 import javafx.geometry.Point2D;
 import javafx.scene.Node;
-import javafx.scene.effect.ColorAdjust;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.KeyCode;
 import javafx.scene.layout.GridPane;
 
 public class TileGridVisual implements SerializableObserver, SkeletonObject{
@@ -48,12 +41,9 @@ public class TileGridVisual implements SerializableObserver, SkeletonObject{
 	public TileGridVisual(View view, State state, double sceneWidth, double sceneHeight){
 		myView = view;
 		myRoot = new GridPane();
-		myRoot.setFocusTraversable(true);
-		myRoot.requestFocus();
 		myTiles = new HashMap<>();
 		myTileImages = new HashMap<>();
-
-		myInteractor = new TileGridInteractor(view, myRoot,this,state);
+		myInteractor = new TileGridInteractor(view,this,state);
 		myState = state;
 		myWidth = sceneWidth;
 		myHeight = sceneHeight;
@@ -145,7 +135,6 @@ public class TileGridVisual implements SerializableObserver, SkeletonObject{
 		Point2D screenPosition = tile.getMyAttributes().<Point2D>get("Position").getValue();
 		Point2D gridPosition = this.getGridPosition(screenPosition);
 		if (moveDirection == null || moveDirection.equals("")){
-			//moveDirection = "NoDirection";
 			return null;
 		}
 
@@ -161,8 +150,7 @@ public class TileGridVisual implements SerializableObserver, SkeletonObject{
 	void forEachTile(Consumer<? super Tile> method){
 		myTileImages.keySet().forEach(method);
 	}
-	
-	
+
 	@Override
 	public Node getRoot() {
 		return myRoot;
