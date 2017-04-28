@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.function.Consumer;
 
 import ModificationFromUser.AttributeOwner.Modification_EditAttribute;
 import backEnd.GameData.State.SerializableObservable;
@@ -39,17 +40,20 @@ public class TileGridVisual implements SerializableObserver, SkeletonObject{
 	private double myHeight;
 	private View myView;
 	private State myState;
-	private Map<Tile,Node> selectedTiles;
-	private Collection<ImageView> arrowSet;
+	private TileGridInteractor myInteractor;
+
 	
 	public static final String ARROW_LOADER_DIRECTORY = "resources" + File.separator + "images" + File.separator + "Arrows" + File.separator;
 	
 	public TileGridVisual(View view, State state, double sceneWidth, double sceneHeight){
 		myView = view;
 		myRoot = new GridPane();
+		myRoot.setFocusTraversable(true);
+		myRoot.requestFocus();
 		myTiles = new HashMap<>();
 		myTileImages = new HashMap<>();
-		selectedTiles = new HashMap<>();
+
+		myInteractor = new TileGridInteractor(view, myRoot,this,state);
 		myState = state;
 		myWidth = sceneWidth;
 		myHeight = sceneHeight;
@@ -68,53 +72,9 @@ public class TileGridVisual implements SerializableObserver, SkeletonObject{
 		myRoot.setPrefHeight(myHeight);
 		myRoot.setFocusTraversable(true);
 		myRoot.requestFocus();
-		myRoot.setOnKeyPressed(e -> {			
-			if(e.getCode().equals(KeyCode.LEFT)||e.getCode().equals(KeyCode.RIGHT)||e.getCode().equals(KeyCode.DOWN)||e.getCode().equals(KeyCode.UP)){
-				String toSend = e.getCode().toString().charAt(0) + e.getCode().toString().substring(1).toLowerCase();
-				selectedTiles.keySet().forEach(t -> {
-					myView.sendUserModification(new Modification_EditAttribute<String>(t,t.getAttribute("MoveDirection"),toSend));
-				});
-				clearTileSelection();
-			} else if (e.getCode().equals(KeyCode.SPACE)){
-				showArrowsOnTiles();
-			}
-		});
-		myRoot.setOnKeyReleased(e -> {
-			if(e.getCode().equals(KeyCode.SPACE)){
-				hideArrowsOnTiles();
-			}
-		});
+		myInteractor.setTileGridInteraction(myRoot);
 	}
 	
-	private void hideArrowsOnTiles() {
-		myRoot.getChildren().removeAll(arrowSet);
-		arrowSet.clear();
-	}
-	
-	private void showArrowsOnTiles() {
-		if(arrowSet != null && !arrowSet.isEmpty()) return;
-		arrowSet = new ArrayList<ImageView>();
-		for(Tile tile : myTileImages.keySet()){
-			
-			String moveDirection = tile.getMyAttributes().<String>get("MoveDirection").getValue();
-			Point2D screenPosition = tile.getMyAttributes().<Point2D>get("Position").getValue();
-			Point2D gridPosition = this.getGridPosition(screenPosition);
-			if (moveDirection == null || moveDirection.equals("")){
-				//moveDirection = "NoDirection";
-				continue;
-			}
-			System.out.println("printing tile");
-			Image newImage = new Image(getClass().getClassLoader().getResourceAsStream(ARROW_LOADER_DIRECTORY + moveDirection + ".png"));
-			ImageView imageView = new ImageView(newImage);
-
-			
-			arrowSet.add(imageView);
-			myRoot.add(imageView, (int) gridPosition.getX(), (int) gridPosition.getY());
-			imageView.setFitWidth(30);
-			imageView.setFitHeight(30);
-		}
-	}
-
 	private void adjustSize(){
 		numberOfTileCols = observedTileGrid.getNumColsInGrid();
 		numberOfTileRows = observedTileGrid.getNumRowsInGrid();
@@ -130,46 +90,23 @@ public class TileGridVisual implements SerializableObserver, SkeletonObject{
 		tileView.fitWidthProperty().bind(myRoot.widthProperty().divide(numberOfTileCols));
 		tileView.fitHeightProperty().bind(myRoot.heightProperty().divide(numberOfTileRows));
 	}
-	private void setTileInteraction(Node n, Tile t) {
-		n.setOnMouseClicked(e ->{
-			myRoot.requestFocus();
-			if(e.getClickCount()==2){
-				OnGridTileCommandCenter tileInteractor = new OnGridTileCommandCenter(myView, t, myState);
-				tileInteractor.launch("On-Screen Tile" ,e.getScreenX(), e.getScreenY());
-			}else if(e.isControlDown()){
-				addToTileSelection(n,t);
-			}else{
-				clearTileSelection();
-			}
-		});
 
-	}
-	private void addToTileSelection(Node n, Tile t){
-		selectedTiles.put(t, n);
-		ColorAdjust color = new ColorAdjust();
-		color.setBrightness(0.4);
-		color.setContrast(-0.5);
-		n.setEffect(color);
-	}
-	
-	private void clearTileSelection(){
-		selectedTiles.values().forEach(f -> f.setEffect(null));
-		selectedTiles.clear();
-	}
-	
+
 	private void updateTilesOnGrid() {
 		for(Tile tile : observedTileGrid.getAllTiles()){
 			addTileToGrid(tile, tile.<Point2D>getAttribute("Position").getValue());
 		}
 	}
 	private void updateCorrespondingGrid(Tile tile) {
-		addTileToGrid(tile, tile.<Point2D>getAttribute("Position").getValue());
+		myInteractor.forEachSelectedTile(e -> {
+			addTileToGrid(e, e.<Point2D>getAttribute("Position").getValue());
+		});
 	}
 	private void addTileToGrid(Tile t, Point2D pos) {
 		AttributeOwnerVisual attrOwner = new AttributeOwnerVisualImpl(t);
 		ImageView tileView = attrOwner.getImageView();
 		organizeImageView(tileView);
-		setTileInteraction(tileView,  t);
+		myInteractor.setTileInteraction(tileView,  t);
 		if(myTiles.containsKey(pos) && !myTiles.get(pos).equals(t)){
 			myRoot.getChildren().remove(myTileImages.get(myTiles.get(pos)));
 			myTileImages.remove(myTiles.get(pos));
@@ -201,6 +138,29 @@ public class TileGridVisual implements SerializableObserver, SkeletonObject{
 			}
 		}
 	}
+	
+	public ImageView addArrowToVisual(Tile tile){
+		String moveDirection = tile.getMyAttributes().<String>get("MoveDirection").getValue();
+		Point2D screenPosition = tile.getMyAttributes().<Point2D>get("Position").getValue();
+		Point2D gridPosition = this.getGridPosition(screenPosition);
+		if (moveDirection == null || moveDirection.equals("")){
+			//moveDirection = "NoDirection";
+			return null;
+		}
+
+		Image newImage = new Image(getClass().getClassLoader().getResourceAsStream(ARROW_LOADER_DIRECTORY + moveDirection + ".png"));
+		ImageView imageView = new ImageView(newImage);
+
+		myRoot.add(imageView, (int) gridPosition.getX(), (int) gridPosition.getY());
+		imageView.setFitWidth(30);
+		imageView.setFitHeight(30);
+		return imageView;
+	}
+	
+	void forEachTile(Consumer<? super Tile> method){
+		myTileImages.keySet().forEach(method);
+	}
+	
 	
 	@Override
 	public Node getRoot() {
