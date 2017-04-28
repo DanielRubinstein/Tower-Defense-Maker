@@ -73,7 +73,6 @@ public class GameProcessController {
 
 	public void run(double stepTime) {
 		for (Engine engine : myEngines) {
-			System.out.println(engine);
 			engine.gameLoop(myGameData, stepTime);
 //			System.out.println("steptime is "+ stepTime);
 		}

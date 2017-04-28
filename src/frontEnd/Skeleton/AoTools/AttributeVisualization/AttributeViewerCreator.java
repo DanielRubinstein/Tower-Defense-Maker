@@ -78,7 +78,7 @@ public class AttributeViewerCreator implements AttributeVisualization{
 	public Node getSTRINGLIST() {
 		return createBasicViewer();
 	}
-
+	
 	@Override
 	public Node getCOMPONENT() {
 		try{

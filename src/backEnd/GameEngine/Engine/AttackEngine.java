@@ -1,15 +1,12 @@
 package backEnd.GameEngine.Engine;
 
 import java.io.FileNotFoundException;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
 import backEnd.GameData.GameData;
 import backEnd.GameData.State.Component;
 import backEnd.GameData.State.ComponentGraph;
-import backEnd.GameData.State.State;
 import frontEnd.CustomJavafxNodes.ErrorDialog;
 import javafx.geometry.Point2D;
 
@@ -22,14 +19,12 @@ import javafx.geometry.Point2D;
 public class AttackEngine implements Engine {
 
 	private double masterTime;
-	private Map<Component, Point2D> toAdd;
 	private GameData myGameData;
 
 
 	@Override
 	public void gameLoop(GameData gameData, double stepTime) {
 		masterTime = gameData.getGameTime();
-		toAdd = new HashMap<Component, Point2D>();
 		myGameData=gameData;
 		ComponentGraph myComponentGraph = gameData.getState().getComponentGraph();
 		Map<Component, Component> attackersAndTargets=new HashMap<Component, Component>();
@@ -75,7 +70,8 @@ public class AttackEngine implements Engine {
 		projectile.setAttributeValue("ProjectileTarget", target);
 		Point2D finalTargetPoint = targetPos.subtract(bulletPos);
 		//TODO: USE .magnitude() method below
-		projectile.setAttributeValue("ProjectileMaxDistance", Math.sqrt(Math.pow(finalTargetPoint.getX(),2) + Math.pow(finalTargetPoint.getY(), 2)));
+		projectile.setAttributeValue("ProjectileMaxDistance", finalTargetPoint.magnitude());
+		//projectile.setAttributeValue("ProjectileMaxDistance", Math.sqrt(Math.pow(finalTargetPoint.getX(),2) + Math.pow(finalTargetPoint.getY(), 2)));
 		myGameData.getState().getComponentGraph().addComponentToGrid(projectile, bulletPos);
 	}
 

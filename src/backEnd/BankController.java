@@ -84,7 +84,7 @@ public class BankController implements BankControllerReader
 			
 			Component testingBloon = new Component();
 			testingBloon.setAttributeValue("ImageFile", "resources/images/Components/rainbow_bloon.png");
-			testingBloon.setAttributeValue("Speed", 1d);
+			testingBloon.setAttributeValue("Speed", 0.1);
 			testingBloon.setAttributeValue("Health", 20);
 			testingBloon.setAttributeValue("Type", "Enemy");
 			testingBloon.setAttributeValue("SpawnOnDeath", true);
@@ -95,7 +95,7 @@ public class BankController implements BankControllerReader
 			testingTurret.setAttributeValue("ImageFile", "resources/images/Components/zombie.png");
 			testingTurret.setAttributeValue("Health", 10);
 			testingTurret.setAttributeValue("Type", "Tower");
-			testingTurret.setAttributeValue("Velocity", 2.0);
+			testingTurret.setAttributeValue("Velocity", 5.0);
 			testingTurret.setAttributeValue("Speed", 1.0);
 			testingTurret.setAttributeValue("FireDamage", 10);
 			testingTurret.setAttributeValue("FireRate", 1000.0);

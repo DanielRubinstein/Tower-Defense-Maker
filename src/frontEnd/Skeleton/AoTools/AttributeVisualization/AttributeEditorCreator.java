@@ -163,7 +163,8 @@ public class AttributeEditorCreator implements AttributeVisualization{
 		ComboBox<HBox> optionsBox = new ComboBox<HBox>(options);
 		try {
 			// TODO this will work as long as there is an attribute there
-			optionsBox.getSelectionModel().select(toPairMap.get((Component) myAttr.getValue()));
+			//TODO: used to be cast to Component below - Miguel might want to take a look
+			optionsBox.getSelectionModel().select(toPairMap.get((String) myAttr.getValue()));
 		} catch (NullPointerException e) {
 			// do nothing
 		}

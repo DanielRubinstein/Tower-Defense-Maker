@@ -7,8 +7,6 @@ import java.util.List;
 import java.util.Map;
 
 import javafx.geometry.Point2D;
-import backEnd.Attribute.Attribute;
-import backEnd.Attribute.AttributeImpl;
 import backEnd.Attribute.AttributeOwnerReader;
 
 /**
@@ -41,14 +39,6 @@ public class ComponentGraphImpl implements ComponentGraph {
 	}
 
 	public Collection<Component> getAllComponents() {
-
-		/*
-		myComponents = new ArrayList<Component>();
-		for (List<Component> list : componentMap.values()) {
-			myComponents.addAll(list);
-		}
-		*/
-
 		return myComponents;
 	}
 
@@ -84,64 +74,20 @@ public class ComponentGraphImpl implements ComponentGraph {
 			}
 		}
 		
-		/*
-		for (Point2D componentGridPosition : componentMap.keySet()) {
-			if (componentGridPosition.getX() >= tileCorners.getMinX()
-					&& componentGridPosition.getX() <= tileCorners.getMaxX()
-					&& componentGridPosition.getY() > tileCorners.getMinY()
-					&& componentGridPosition.getY() < tileCorners.getMaxY()) {
-				componentsOnTile.addAll(componentMap.get(componentGridPosition));
-			}
-		}
-		*/
 		return componentsOnTile;
 	}
 	
 
 	@Override
 	public void addComponentToGrid(Component newComponent, Point2D screenPosition) {
-		/*
-		List<Component> currList = componentMap.get(screenPosition);
-		if (currList == null) {
-			currList = new ArrayList<Component>();
-		}
-		currList.add(newComponent);
-		componentMap.put(newComponent.<Point2D>getAttribute("Position").getValue(), currList);
-		*/
 		myComponents.add(newComponent);
 		newComponent.setAttributeValue("Position", screenPosition);
-		//newComponent.getAttribute("Position").setValue(screenPosition);
 		notifyObservers(newComponent);
 	}
 
 	@Override
 	public void removeComponent(Component toRemove) {
-		/*
-		Point2D location = toRemove.<Point2D>getAttribute("Position").getValue();
-		System.out.print("location in removemethod is " + location);
-		List<Component> currList = componentMap.get((Point2D)toRemove.getAttribute("Position").getValue());
-		if(currList == null){
-			System.out.println("SOMETHING WRONG");
-			return;
-		}
-		currList.remove(toRemove);
-		componentMap.put((Point2D)toRemove.getAttribute("Position").getValue(), currList);
-		
-		
-		
-		for (Point2D location: componentMap.keySet()){
-			if (componentMap.get(location).contains(toRemove)){
-				List<Component> currList = componentMap.get((Point2D)toRemove.getAttribute("Position").getValue());
-				currList.remove(toRemove);
-				componentMap.put((Point2D)toRemove.getAttribute("Position").getValue(), currList);
-				myComponents.remove(toRemove);
-
-			}
-		}
-		*/
-		
 		myComponents.remove(toRemove);
-		//System.out.println("removed in component graph");
 		notifyObservers(toRemove);
 	}
 
@@ -156,30 +102,10 @@ public class ComponentGraphImpl implements ComponentGraph {
 				componentsWithinRadius.add(c);	
 			}
 		}
-		
-			/*
-			for (Point2D loc : componentMap.keySet()) {
-				double distance = Math.sqrt(Math.pow(centerLoc.getX() - loc.getX(), 2) + Math.pow(centerLoc.getY() - loc.getY(), 2));
-				if (distance < radius) {
-					componentsWithinRadius.addAll(componentMap.get(loc));
-					componentsWithinRadius.remove(centerComp);//don't add yourself
-				}
-			}
-			*/
 		componentsWithinRadius.remove(centerComp);//don't add yourself
 		return componentsWithinRadius;
 	}
 
-	/*
-	@Override
-	public List<Component> getNearestComponents(Component centerComp) {
-		List<Point2D> locations = new ArrayList<Point2D>(componentMap.keySet());
-		Point2D centerLoc = centerComp.<Point2D>getAttribute("Position").getValue();
-		SortComponents_Distance sorter = new SortComponents_Distance();
-		List<Point2D> sortedLocations = sorter.nearToFar(centerLoc, locations);
-		return componentMap.get(sortedLocations.get(0));
-	}
-	*/
 
 	@Override
 	public void addObserver(SerializableObserver o) {
@@ -205,7 +131,6 @@ public class ComponentGraphImpl implements ComponentGraph {
 	public void setComponentObservers() {
 
 		for (int i = 0; i < myComponents.size(); i++){
-			//System.out.println("in componentGraphImpl, SerializableObserver list is "+compObserverList.get(i));
 			myComponents.get(i).setObserverList(compObserverList.get(i));
 		}
 
@@ -217,22 +142,6 @@ public class ComponentGraphImpl implements ComponentGraph {
 		for(Component c : myComponents){
 			removeComponent(c);
 		}
-		
-		/*
-		List<Component> list = new ArrayList<Component>();
-		for (Point2D x : componentMap.keySet())
-		{
-			for (Component y : componentMap.get(x))
-			{
-				list.add(y);
-			}
-		}
-		
-		for (Component x : list)
-		{
-			removeComponent(x);
-		}
-		*/
 	}
 
 	@Override
