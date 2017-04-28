@@ -17,6 +17,7 @@ public class Modification_ChangeMode implements ModificationFromUser {
 			myModel.getMode().toggleUserMode();
 			break;
 		}	
+		myModel.getDataController().saveUniversalGameData();
 	}
 	
 	

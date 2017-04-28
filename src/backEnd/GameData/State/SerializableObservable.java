@@ -2,7 +2,7 @@ package backEnd.GameData.State;
 
 import java.util.List;
 
-public interface SerializableObservable {
+public interface SerializableObservable extends Comparable{
 
 	void addObserver(SerializableObserver o);
 

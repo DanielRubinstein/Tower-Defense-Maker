@@ -29,7 +29,7 @@ public class Modification_Add_StraightToGrid implements ModificationFromUser {
 	public void invoke(ModelImpl model) throws Exception {
 		myModel = model;
 		Modification_Add_ToGrid_Methods methods = new Modification_Add_ToGrid_Methods(myModel, location);
-		Reflection.callMethod(methods, "addAttributeOwnerToGrid", newAttrOwn);
+		Reflection.callMethod(methods, "add", newAttrOwn);
 	}
 	
 
