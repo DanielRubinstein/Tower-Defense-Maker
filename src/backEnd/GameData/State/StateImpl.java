@@ -124,62 +124,7 @@ public class StateImpl implements State, SerializableObservable {
 		}
 	}
 
-	/*
-	@SuppressWarnings({ "unused", "unchecked" })
-	private void formShortestPath(){
-		Map<Tile, Coord> startTiles = findStartTiles();
-		
-		for(Tile current : startTiles.keySet()){
-			Queue <Coord> path = new LinkedList<Coord>();
-			Set<Coord> visitedTiles = new HashSet<Coord>();
-			path.add(startTiles.get(current));
-			visitedTiles.add(startTiles.get(current));
-			Coord finalPath = null;
-			while(!path.isEmpty()){
-				Coord cur = path.remove();
-				ArrayList<Coord> adjacentTiles = getAdjacents(cur);
-				adjacentTiles.removeAll(visitedTiles); 
-				path.addAll(adjacentTiles);
-				if((boolean) stateGrid.getTileByCoord(cur.getXCoord(), cur.getYCoord()).getAttribute(myResources.getString("GoalTile")).getValue() == true){
-					finalPath = cur;
-					break; //DONE
-				}
-			}
-			if(finalPath == null){
-				//No good path found smh lmao
-			}
-			Coord pathStep = finalPath;
-			Stack<Coord> pathStack = new Stack<Coord>();
-			while(pathStep != null){
-				pathStack.add(pathStep);
-				pathStep = pathStep.getLastCoord();
-			}
-			Coord currentPathCoords = null;
-			Coord nextPathCoords = null;
-			while(!(pathStack.size()==1)){
-				currentPathCoords = nextPathCoords;
-				nextPathCoords = pathStack.pop();
-				if(currentPathCoords == null){continue;}
-				Tile currentPathTile = stateGrid.getTileByCoord(currentPathCoords.getXCoord(),currentPathCoords.getYCoord());
-				String pathDirection = null;
-
-				if(currentPathCoords.getXCoord()-nextPathCoords.getXCoord()!=-1){
-					pathDirection = "Right";
-				}
-				if(currentPathCoords.getXCoord()-nextPathCoords.getXCoord()!= 1){
-					pathDirection = "Left";
-				}
-				if(currentPathCoords.getYCoord()-nextPathCoords.getYCoord()!=-1){
-					pathDirection = "Down";
-				}
-				if(currentPathCoords.getYCoord()-nextPathCoords.getYCoord()!= 1){
-					pathDirection = "Up";
-				}
-				((AttributeImpl<String>) currentPathTile.getAttribute("MoveDirection")).setValue(pathDirection);
-			}
-		}
-	}
-	*/
+	
 	/*
 	private ArrayList<Coord> getAdjacents(Coord current) {
 		ArrayList<Coord> adjacents = new ArrayList<Coord>();
