@@ -8,6 +8,7 @@ import backEnd.GameData.State.SerializableObserver;
 import backEnd.LevelProgression.LevelProgressionControllerReader;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleStringProperty;
+import resources.constants.StringResourceBundle;
 
 /**
  * This class contains the current mode and has getters/setters for people to access the mode
@@ -16,6 +17,7 @@ import javafx.beans.property.SimpleStringProperty;
  *
  */
 public class ModeImpl implements ModeReader, Mode{
+	private static final StringResourceBundle strResources = new StringResourceBundle();
 	private String currUserMode;
 	private String currGameMode;
 	private String currLevelMode;
@@ -31,7 +33,7 @@ public class ModeImpl implements ModeReader, Mode{
 		this.currUserMode = userMode;
 		this.currLevelMode = levelMode;
 		this.levelProgression = levelProgression;
-		this.userModes = Arrays.asList("AUTHOR", "PLAYER");
+		this.userModes = Arrays.asList(strResources.getFromStringConstants("AUTHOR"), strResources.getFromStringConstants("PLAYER"));
 		this.observers = new ArrayList<SerializableObserver>();
 		aBP = new SimpleBooleanProperty(this.getUserMode().equals("AUTHOR"));
 		gSP = new SimpleStringProperty(this.getGameMode());
@@ -57,7 +59,7 @@ public class ModeImpl implements ModeReader, Mode{
 	@Override
 	public void setGameMode(String newGameMode){
 		currGameMode = newGameMode;
-		currLevelMode = "DEFAULT";
+		currLevelMode = strResources.getFromStringConstants("DEFAULT");
 		notifyObservers();
 	}
 	
@@ -69,10 +71,10 @@ public class ModeImpl implements ModeReader, Mode{
 	@Override
 	public void toggleUserMode(){
 		System.out.println("MODE CHANGE");
-		if(currUserMode.equals("AUTHOR")){
-			currUserMode = "PLAYER";
-		} else if (currUserMode.equals("PLAYER")){
-			currUserMode = "AUTHOR";
+		if(currUserMode.equals(strResources.getFromStringConstants("AUTHOR"))){
+			currUserMode = strResources.getFromStringConstants("PLAYER");
+		} else if (currUserMode.equals(strResources.getFromStringConstants("PLAYER"))){
+			currUserMode = strResources.getFromStringConstants("AUTHOR");
 		} 
 		aBP.setValue(!aBP.getValue());
 		notifyObservers();

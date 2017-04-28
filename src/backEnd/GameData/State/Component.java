@@ -23,11 +23,9 @@ public class Component implements AttributeOwner, SerializableObservable {
 	 * 
 	 * @author Daniel
 	 */
-
-	private final static String DEFAULT_ATTRIBUTE_PATH = "resources/defaultComponentAttributes";
+	//TODO: do we need this behavior thing still? the file is empty
 	private final static String BEHAVIOR_PATH = "resources/behaviorNames";
 	private final static ResourceBundle behaviorResources = ResourceBundle.getBundle(BEHAVIOR_PATH);
-	private final static String DEFAULT_ATTRIBUTES_PATH = "resources/defaultTileAttributes";
 	private static final StringResourceBundle strResources = new StringResourceBundle();
 
 	private AttributeData myAttributes;
@@ -53,7 +51,7 @@ public class Component implements AttributeOwner, SerializableObservable {
 		previousMovement=new Coordinates(0,0);
 		ID = System.nanoTime();
 		System.out.println(ID + "   ");
-		System.out.println("creaing component " + this);
+		System.out.println("creating component " + this);
 		myAttributes = attributes;
 		myBehaviors = new HashMap<>();
 		AttributeFactoryReader attributeFactory = new AttributeFactoryImpl();
