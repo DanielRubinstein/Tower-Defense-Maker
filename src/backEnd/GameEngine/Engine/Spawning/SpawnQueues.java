@@ -110,7 +110,7 @@ public class SpawnQueues implements SerializableObservable{
 
 	@Override
 	public void clearObservers() {
-		observers = null;
+		observers.clear();
 	}
 
 	@Override
@@ -122,5 +122,10 @@ public class SpawnQueues implements SerializableObservable{
 		myFrequencySpawnQueue.remove(mySpawnDataToRemove);
 		mySingleSpawnQueue.remove(mySpawnDataToRemove);
 		this.notifyObservers(mySpawnDataToRemove);
+	}
+
+	@Override
+	public int compareTo(Object o) {
+		return Integer.compare(this.hashCode(), o.hashCode());
 	}
 }

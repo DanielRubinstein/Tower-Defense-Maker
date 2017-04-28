@@ -181,7 +181,7 @@ public class LevelProgressionControllerImpl implements LevelProgressionControlle
 	public void loadNextGame()
 	{
 		System.out.println("LPC line 183");
-		gameLoader.accept(getNextLevel());
+		gameLoader.accept("Spider");
 		System.out.println("LPC line 185");
 	}
 }

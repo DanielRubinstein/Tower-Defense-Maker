@@ -146,6 +146,7 @@ public class Component implements AttributeOwner, SerializableObservable {
 
 	@Override
 	public void addObserver(SerializableObserver obs) {
+		System.out.println(observers);
 		observers.add(obs);
 	}
 
@@ -188,12 +189,17 @@ public class Component implements AttributeOwner, SerializableObservable {
 
 	@Override
 	public void clearObservers() {
-		observers = null;
+		observers.clear();
 	}
 
 	@Override
 	public void setObservers(List<SerializableObserver> observersave) {
 		observers = observersave;
+	}
+	
+	@Override
+	public int compareTo(Object o) {
+		return Integer.compare(this.hashCode(), o.hashCode());
 	}
 	
 }
