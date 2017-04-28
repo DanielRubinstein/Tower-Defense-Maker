@@ -27,6 +27,24 @@ public class SpawnQueues implements SerializableObservable{
 		observers = new ArrayList<SerializableObserver>();
 	}
 	
+	public SpawnQueues(SpawnQueueInstantiator i)
+	{
+
+			myFrequencySpawnQueue = i.getFrequencyQueue();
+			mySingleSpawnQueue = i.getSpawnQueue();
+			myTimeLastQueueSpawned = i.getLastSpawnTime();
+			myCurrentSpawn = i.getCurrentSpawn();
+			myGameTime = i.getGameTime();
+		
+		
+	}
+	
+	public SpawnQueueInstantiator getInstantiator()
+	{
+		return new SpawnQueueInstantiator(myFrequencySpawnQueue, mySingleSpawnQueue, myTimeLastQueueSpawned, myCurrentSpawn, myGameTime);
+	}
+
+
 	/**
 	 * 
 	 * @return frequencyQueue

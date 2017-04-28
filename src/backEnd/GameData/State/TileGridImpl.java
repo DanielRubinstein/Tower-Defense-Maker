@@ -34,6 +34,7 @@ public class TileGridImpl implements TileGrid {
 		numColsInGrid = colsInGrid;
 		numRowsInGrid = rowsInGrid;
 		tileGrid = new HashMap<>();
+		
 	}
 
 	public TileGridImpl(TileGridInstantiator i) {
