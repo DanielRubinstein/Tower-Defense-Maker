@@ -2,13 +2,18 @@ package data;
 
 import java.io.File;
 
+import resources.constants.StringResourceBundle;
+
 @SuppressWarnings("serial")
 public class XMLReadingException extends Exception {
+	
+	private static final StringResourceBundle strResources = new StringResourceBundle();
+	
 	public XMLReadingException() {
-		super("Please Select A Valid Game File (Extension: .xml)");
+		super(strResources.getFromErrorMessages("Select_Valid_Game"));
 	}
 
 	public XMLReadingException(File file) {
-		super(String.format("Could not load selected file (%s).\n\nPlease select a valid game file (Extension: .xml)", file.getAbsolutePath()));
+		super(String.format(strResources.getFromErrorMessages("Could_Not_Load_File"), file.getAbsolutePath()));
 	}	
 }

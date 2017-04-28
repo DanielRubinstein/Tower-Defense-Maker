@@ -10,6 +10,7 @@ import javax.swing.JOptionPane;
 import backEnd.Mode.Mode;
 import data.DataController;
 import data.DataControllerReader;
+import resources.constants.StringResourceBundle;
 import backEnd.Attribute.AttributeData;
 import backEnd.Attribute.AttributeOwner;
 import backEnd.GameData.State.AccessPermissions;
@@ -28,6 +29,7 @@ import backEnd.GameData.State.TileImpl;
 public class BankController implements BankControllerReader
 {
 	private static final String DUPLICATE_NAME_ERROR = "Cannot Add Duplicate Name";
+	private static final StringResourceBundle strResources = new StringResourceBundle();
 	private Map<String, Tile> tileBank;
 	private Map<String, Component> componentBank;
 	private Map<String, Tile> accessibleTileBank;
@@ -103,7 +105,7 @@ public class BankController implements BankControllerReader
 
 	public void addNewTile(String name, Tile tile) {
 		if (tileBank.containsKey(name)) {
-			JOptionPane.showMessageDialog(null, DUPLICATE_NAME_ERROR);
+			JOptionPane.showMessageDialog(null, strResources.getFromErrorMessages("Duplicate_Name_Error"));
 		} else {
 			tileBank.put(name, tile);
 			refreshAccessibleTileMap();
@@ -159,7 +161,7 @@ public class BankController implements BankControllerReader
 
 	public void addNewComponent(String name, Component component) {
 		if (tileBank.containsKey(name)) {
-			JOptionPane.showMessageDialog(null, DUPLICATE_NAME_ERROR);
+			JOptionPane.showMessageDialog(null, strResources.getFromErrorMessages("Duplicate_Name_Error"));
 		} else {
 			componentBank.put(name, component);
 			refreshAccessibleComponentMap();
@@ -188,7 +190,7 @@ public class BankController implements BankControllerReader
 				return entry.getKey();
 			}
 		}
-		return "No name found";
+		return strResources.getFromErrorMessages("No_Name_Found");
 	}
 
 	public AttributeOwner getPreset(String presetName) {
