@@ -79,7 +79,7 @@ public class ScreenGrid implements SkeletonObject {
 		myRoot = new Group();
 		myRoot.setFocusTraversable(true);
 		Node visualTileGrid = myTileGrid.getRoot();
-		myRoot.getChildren().add(myTileGrid.getRoot());
+		myRoot.getChildren().add(visualTileGrid);
 		visualTileGrid.toBack();
 	}
 	private void addGraphToRoot(){

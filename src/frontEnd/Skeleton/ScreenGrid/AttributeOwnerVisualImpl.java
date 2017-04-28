@@ -31,8 +31,6 @@ public class AttributeOwnerVisualImpl implements SerializableObserver, Attribute
 			// means we are dealing with something that does not have size
 		}
 		setPosition(myAttr.getMyAttributes().<Point2D>get(POSITION_ATTRIBUTE).getValue());
-		
-		
 	}
 	
 	private void setSize(Double value) {
@@ -62,7 +60,7 @@ public class AttributeOwnerVisualImpl implements SerializableObserver, Attribute
 			myImage.setX(newPosition.getX()-myImage.getFitWidth()/2);
 			myImage.setY(newPosition.getY()-myImage.getFitHeight()/2);
 		}
-		setImageHover();
+		//setImageHover();
 	}
 	
 	private void setImage(String newImagePath){
