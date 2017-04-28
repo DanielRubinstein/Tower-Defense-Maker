@@ -99,8 +99,9 @@ public class TileGridVisual implements SerializableObserver, SkeletonObject{
 	}
 	private void updateCorrespondingGrid(Tile tile) {
 		myInteractor.forEachSelectedTile(e -> {
-			addTileToGrid(e, e.<Point2D>getAttribute("Position").getValue());
+			addTileToGrid(tile, e.<Point2D>getAttribute("Position").getValue());
 		});
+		addTileToGrid(tile, tile.<Point2D>getAttribute("Position").getValue());
 	}
 	private void addTileToGrid(Tile t, Point2D pos) {
 		AttributeOwnerVisual attrOwner = new AttributeOwnerVisualImpl(t);
