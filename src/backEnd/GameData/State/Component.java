@@ -67,7 +67,7 @@ public class Component implements AttributeOwner, SerializableObservable {
 			myBehaviors.put(key, bf.getBehavior(key));
 		}
 
-		for (String key : strResources.getKeysFromDefaultTileAttributes()) {
+		for (String key : strResources.getKeysFromDefaultComponentAttributes()) {
 			Attribute<?> myAttribute = attributeFactory.getAttribute(key);
 			addAttribute(key, myAttribute);
 		}
