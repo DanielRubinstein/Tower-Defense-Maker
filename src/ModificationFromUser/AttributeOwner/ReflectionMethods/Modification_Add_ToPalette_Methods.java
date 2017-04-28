@@ -1,7 +1,7 @@
 package ModificationFromUser.AttributeOwner.ReflectionMethods;
 
 import backEnd.BankController;
-import backEnd.GameData.State.Component;
+import backEnd.GameData.State.ComponentImpl;
 import backEnd.GameData.State.TileImpl;
 
 public class Modification_Add_ToPalette_Methods{
@@ -19,7 +19,7 @@ public class Modification_Add_ToPalette_Methods{
 		myBankController.addNewTile(newName, tile);
 	}
 	
-	public void add(Component component){
+	public void add(ComponentImpl component){
 		myBankController.addNewComponent(newName, component);
 	}
 	

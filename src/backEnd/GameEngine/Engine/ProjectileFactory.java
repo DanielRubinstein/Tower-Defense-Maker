@@ -7,7 +7,7 @@ import backEnd.Attribute.AttributeData;
 import backEnd.Attribute.AttributeFactoryImpl;
 import backEnd.Attribute.AttributeFactoryReader;
 import backEnd.Attribute.AttributeImpl;
-import backEnd.GameData.State.Component;
+import backEnd.GameData.State.ComponentImpl;
 
 /**
  * 
@@ -17,11 +17,14 @@ import backEnd.GameData.State.Component;
  */
 public class ProjectileFactory {
 
-	private Component myComponent;
+
+	private AttributeData myAttributeData;
+	private AttributeFactoryReader myAttributeFactory;
+	private ComponentImpl myComponent;
 	
 	@SuppressWarnings("unchecked")
-	public ProjectileFactory(Component tower) throws FileNotFoundException{
-		myComponent=new Component();
+	public ProjectileFactory(ComponentImpl tower) throws FileNotFoundException{
+		myComponent = new ComponentImpl();
 		
 		myComponent.setAttributeValue("Type", "Projectile");
 		myComponent.setAttributeValue("ImageFile", (String) tower.getAttribute("FireImage").getValue());
@@ -33,10 +36,10 @@ public class ProjectileFactory {
 		myComponent.setAttributeValue("ExplosionRadius", (Double)tower.getAttribute("ExplosionRadius").getValue());
 		myComponent.setAttributeValue("SlowFactor", (Double)tower.getAttribute("SlowFactor").getValue());
 		myComponent.setAttributeValue("FireRate", (Double)tower.getAttribute("FireRate").getValue());
-		myComponent.setAttributeValue("ProjectileTarget", (Component)tower.getAttribute("ProjectileTarget").getValue());	
+		myComponent.setAttributeValue("ProjectileTarget", (ComponentImpl)tower.getAttribute("ProjectileTarget").getValue());	
 	}
-
-	public Component getProjectile(){
+	
+	public ComponentImpl getProjectile(){
 		return myComponent;
 	}
 }
