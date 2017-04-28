@@ -82,7 +82,6 @@ public class TileGridVisual implements SerializableObserver, SkeletonObject{
 		tileView.fitWidthProperty().bind(myRoot.widthProperty().divide(numberOfTileCols));
 		tileView.fitHeightProperty().bind(myRoot.heightProperty().divide(numberOfTileRows));
 	}
-
 	private void updateTilesOnGrid() {
 		for(Tile tile : observedTileGrid.getAllTiles()){
 			addTileToGrid(tile, tile.<Point2D>getAttribute("Position").getValue());
