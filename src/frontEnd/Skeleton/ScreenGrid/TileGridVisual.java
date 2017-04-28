@@ -134,19 +134,25 @@ public class TileGridVisual implements SerializableObserver, SkeletonObject{
 	private void setTileInteraction(Node n, Tile t) {
 		n.setOnMouseClicked(e ->{
 			myRoot.requestFocus();
-			if(e.getClickCount()==2){
-				OnGridTileCommandCenter tileInteractor = new OnGridTileCommandCenter(myView, t, myState);
-				tileInteractor.launch("On-Screen Tile" ,e.getScreenX(), e.getScreenY());
-			}else if(e.isControlDown()){
+			if(!e.isControlDown()){
+				selectedTiles.values().forEach(f -> f.setEffect(null));
+				selectedTiles.clear();
+			}
+			if(selectedTiles.containsKey(t)){
+				selectedTiles.get(t).setEffect(null);
+				selectedTiles.remove(t);
+			}else{
 				selectedTiles.put(t, n);
 				ColorAdjust color = new ColorAdjust();
 				color.setBrightness(0.4);
 				color.setContrast(-0.5);
 				n.setEffect(color);
-			}else{
-				selectedTiles.values().forEach(f -> f.setEffect(null));
-				selectedTiles.clear();
 			}
+			if(e.getClickCount()==2){
+				OnGridTileCommandCenter tileInteractor = new OnGridTileCommandCenter(myView, t, myState);
+				tileInteractor.launch("On-Screen Tile" ,e.getScreenX(), e.getScreenY());
+			}
+
 		});
 
 	}
