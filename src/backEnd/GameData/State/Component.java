@@ -15,6 +15,7 @@ import backEnd.Attribute.AttributeOwner;
 import backEnd.GameEngine.Behaviors.Behavior;
 import backEnd.GameEngine.Behaviors.BehaviorFactory;
 import backEnd.GameEngine.Engine.Coordinates;
+import resources.constants.StringResourceBundle;
 
 public class Component implements AttributeOwner, SerializableObservable {
 	/**
@@ -27,8 +28,8 @@ public class Component implements AttributeOwner, SerializableObservable {
 	private final static String BEHAVIOR_PATH = "resources/behaviorNames";
 	private final static ResourceBundle behaviorResources = ResourceBundle.getBundle(BEHAVIOR_PATH);
 	private final static String DEFAULT_ATTRIBUTES_PATH = "resources/defaultTileAttributes";
+	private static final StringResourceBundle strResources = new StringResourceBundle();
 
-	private final static ResourceBundle attributeResources = ResourceBundle.getBundle(DEFAULT_ATTRIBUTE_PATH);
 	private AttributeData myAttributes;
 	private Map<String, Behavior> myBehaviors;
 	private AccessPermissions myAccessPermissions;
@@ -68,7 +69,7 @@ public class Component implements AttributeOwner, SerializableObservable {
 			myBehaviors.put(key, bf.getBehavior(key));
 		}
 
-		for (String key : attributeResources.keySet()) {
+		for (String key : strResources.getKeysFromDefaultTileAttributes()) {
 			Attribute<?> myAttribute = attributeFactory.getAttribute(key);
 			addAttribute(key, myAttribute);
 		}

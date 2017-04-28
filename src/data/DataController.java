@@ -7,6 +7,7 @@ import backEnd.BankController;
 import backEnd.GameData.GameData;
 import backEnd.GameData.State.Component;
 import backEnd.GameData.State.Tile;
+import resources.constants.StringResourceBundle;
 
 /**
  * This Class handles saving and loading data in this program
@@ -16,9 +17,10 @@ import backEnd.GameData.State.Tile;
 
 public class DataController implements DataControllerReader {
 	
-	private static final String UNIV_GAME_DATA_PATH = "data/UniversalGameData/";
-	private static final String GAME_STATE_DATA_PATH = "data/SavedGames/";
-	private static final String LEVEL_TEMPLATE_DATA_PATH = "data/LevelTemplates/";
+	private static final StringResourceBundle strResources = new StringResourceBundle();
+	private static final String UNIV_GAME_DATA_PATH = strResources.getFromFilePaths("Univ_Game_Data_Path");
+	private static final String GAME_STATE_DATA_PATH = strResources.getFromFilePaths("Game_State_Data_Path");
+	private static final String LEVEL_TEMPLATE_DATA_PATH = strResources.getFromFilePaths("Level_Template_Path");
 	
 	private XMLWriter myXMLWriter;
 	private XMLReader myXMLReader;

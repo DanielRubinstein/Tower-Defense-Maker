@@ -2,6 +2,7 @@ package resources.constants;
 
 import java.util.Enumeration;
 import java.util.ResourceBundle;
+import java.util.Set;
 
 public class StringResourceBundle {
 
@@ -12,8 +13,8 @@ public class StringResourceBundle {
 		return STRING_CONSTANTS_RESOURCE.getString(str);
 	}
 	
-	public Enumeration<String> getKeysFromStringConstants(){
-		return STRING_CONSTANTS_RESOURCE.getKeys();
+	public Set<String> getKeysFromStringConstants(){
+		return STRING_CONSTANTS_RESOURCE.keySet();
 	}
 	
 	private static final String ATTRIBUTE_TYPES_PATH = "resources.allAttributeTypes";
@@ -23,8 +24,8 @@ public class StringResourceBundle {
 		return ATTRIBUTE_TYPES_RESOURCE.getString(str);
 	}
 	
-	public Enumeration<String> getKeysFromAttributeTypes(){
-		return ATTRIBUTE_TYPES_RESOURCE.getKeys();
+	public Set<String> getKeysFromAttributeTypes(){
+		return ATTRIBUTE_TYPES_RESOURCE.keySet();
 	}
 	
 	private static final String ATTRIBUTE_NAMES_PATH = "resources.allAttributeNames";
@@ -34,8 +35,8 @@ public class StringResourceBundle {
 		return ATTRIBUTE_NAMES_RESOURCE.getString(str);
 	}
 	
-	public Enumeration<String> getKeysFromAttributeNames(){
-		return ATTRIBUTE_NAMES_RESOURCE.getKeys();
+	public Set<String> getKeysFromAttributeNames(){
+		return ATTRIBUTE_NAMES_RESOURCE.keySet();
 	}
 	
 	private static final String DEFAULT_COMPONENT_ATTRIBUTES_PATH = "resources.defaultComponentAttributes";
@@ -45,8 +46,8 @@ public class StringResourceBundle {
 		return DEFAULT_COMPONENT_ATTRIBUTES_RESOURCE.getString(str);
 	}
 	
-	public Enumeration<String> getKeysFromDefaultComponentAttributes(){
-		return DEFAULT_COMPONENT_ATTRIBUTES_RESOURCE.getKeys();
+	public Set<String> getKeysFromDefaultComponentAttributes(){
+		return DEFAULT_COMPONENT_ATTRIBUTES_RESOURCE.keySet();
 	}
 	
 	private static final String DEFAULT_TILE_ATTRIBUTES_PATH = "resources.defaultTileAttributes";
@@ -56,8 +57,8 @@ public class StringResourceBundle {
 		return DEFAULT_TILE_ATTRIBUTES_RESOURCE.getString(str);
 	}
 	
-	public Enumeration<String> getKeysFromDefaultTileAttributes(){
-		return DEFAULT_TILE_ATTRIBUTES_RESOURCE.getKeys();
+	public Set<String> getKeysFromDefaultTileAttributes(){
+		return DEFAULT_TILE_ATTRIBUTES_RESOURCE.keySet();
 	}
 	
 	private static final String ENGINE_NAMES_PATH = "resources.engineNames";
@@ -67,8 +68,8 @@ public class StringResourceBundle {
 		return ENGINE_NAMES_RESOURCE.getString(str);
 	}
 	
-	public Enumeration<String> getKeysFromEngineNames(){
-		return ENGINE_NAMES_RESOURCE.getKeys();
+	public Set<String> getKeysFromEngineNames(){
+		return ENGINE_NAMES_RESOURCE.keySet();
 	}
 	
 	private static final String FACEBOOK_PATH = "resources.facebook";
@@ -78,8 +79,8 @@ public class StringResourceBundle {
 		return FACEBOOK_RESOURCE.getString(str);
 	}
 	
-	public Enumeration<String> getKeysFromFacebook(){
-		return FACEBOOK_RESOURCE.getKeys();
+	public Set<String> getKeysFromFacebook(){
+		return FACEBOOK_RESOURCE.keySet();
 	}
 	
 	private static final String GAME_PROCESS_CTLR_PATH = "resources.GameProcessController";
@@ -90,8 +91,8 @@ public class StringResourceBundle {
 		return GAME_PROCESS_CTLR_RESOURCE.getString(str);
 	}
 	
-	public Enumeration<String> getKeysFromGameProcessController(){
-		return GAME_PROCESS_CTLR_RESOURCE.getKeys();
+	public Set<String> getKeysFromGameProcessController(){
+		return GAME_PROCESS_CTLR_RESOURCE.keySet();
 	}
 	
 	private static final String PLAYER_STATUS_ITEMS_PATH = "resources.playerStatusItems";
@@ -101,8 +102,30 @@ public class StringResourceBundle {
 		return PLAYER_STATUS_ITEMS_RESOURCE.getString(str);
 	}
 	
-	public Enumeration<String> getKeysFromPlayerStatusItems(){
-		return PLAYER_STATUS_ITEMS_RESOURCE.getKeys();
+	public Set<String> getKeysFromPlayerStatusItems(){
+		return PLAYER_STATUS_ITEMS_RESOURCE.keySet();
+	}
+	
+	private static final String ERROR_MESSAGES_PATH = "resources.errorMessages";
+	private static final ResourceBundle ERROR_MESSAGES_RESOURCE = ResourceBundle.getBundle(ERROR_MESSAGES_PATH);
+	
+	public String getFromErrorMessages(String str){
+		return ERROR_MESSAGES_RESOURCE.getString(str);
+	}
+	
+	public Set<String> getKeysFromErrorMessages(){
+		return ERROR_MESSAGES_RESOURCE.keySet();
+	}
+	
+	private static final String FILE_PATHS_PATH = "resources.filePaths";
+	private static final ResourceBundle FILE_PATHS_RESOURCE = ResourceBundle.getBundle(FILE_PATHS_PATH);
+	
+	public String getFromFilePaths(String str){
+		return FILE_PATHS_RESOURCE.getString(str);
+	}
+	
+	public Set<String> getKeysFromFilePaths(){
+		return FILE_PATHS_RESOURCE.keySet();
 	}
 	
 }
