@@ -18,7 +18,7 @@ import javafx.scene.Group;
 import javafx.scene.Node;
 import javafx.scene.image.ImageView;
 
-public class ComponentGraphVisual implements SkeletonObject, SerializableObserver {
+public class ComponentGridVisual implements SkeletonObject, SerializableObserver {
 	
 	private ComponentGraph observedComponentGraph;
 	
@@ -28,7 +28,7 @@ public class ComponentGraphVisual implements SkeletonObject, SerializableObserve
 	private View myView;
 	private Group myRoot;
 	
-	public ComponentGraphVisual(View view, State state){
+	public ComponentGridVisual(View view, State state){
 		myRoot = new Group();
 		myView = view;
 		myState = state;

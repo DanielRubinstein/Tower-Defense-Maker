@@ -5,6 +5,8 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.function.Consumer;
 
+import ModificationFromUser.AttributeOwner.Modification_Add_PaletteToGrid;
+import backEnd.Attribute.AttributeOwner;
 import backEnd.GameData.State.SerializableObservable;
 import backEnd.GameData.State.SerializableObserver;
 import backEnd.GameData.State.State;
@@ -81,18 +83,16 @@ public class TileGridVisual implements SerializableObserver, SkeletonObject{
 		tileView.fitHeightProperty().bind(myRoot.heightProperty().divide(numberOfTileRows));
 	}
 
-
 	private void updateTilesOnGrid() {
 		for(Tile tile : observedTileGrid.getAllTiles()){
 			addTileToGrid(tile, tile.<Point2D>getAttribute("Position").getValue());
 		}
 	}
 	private void updateCorrespondingGrid(Tile tile) {
-		myInteractor.forEachSelectedTile(e -> {
-			addTileToGrid(tile, e.<Point2D>getAttribute("Position").getValue());
-		});
+		
 		addTileToGrid(tile, tile.<Point2D>getAttribute("Position").getValue());
 	}
+	
 	private void addTileToGrid(Tile t, Point2D pos) {
 		AttributeOwnerVisual attrOwner = new AttributeOwnerVisualImpl(t);
 		ImageView tileView = attrOwner.getImageView();
@@ -107,6 +107,7 @@ public class TileGridVisual implements SerializableObserver, SkeletonObject{
 		myTiles.put(pos, t);
 		myTileImages.put(t, tileView);
 	}
+	
 	private Point2D getGridPosition(Point2D screenPosition) {
 		int column = (int) Math.floor(screenPosition.getX() / tileWidth);
 		int row = (int) Math.floor(screenPosition.getY() / tileHeight);
@@ -137,7 +138,6 @@ public class TileGridVisual implements SerializableObserver, SkeletonObject{
 		if (moveDirection == null || moveDirection.equals("")){
 			return null;
 		}
-
 		Image newImage = new Image(getClass().getClassLoader().getResourceAsStream(ARROW_LOADER_DIRECTORY + moveDirection + ".png"));
 		ImageView imageView = new ImageView(newImage);
 
@@ -154,5 +154,12 @@ public class TileGridVisual implements SerializableObserver, SkeletonObject{
 	@Override
 	public Node getRoot() {
 		return myRoot;
+	}
+
+	public void addPreset(Tile presetAO, Point2D pos) {
+		myInteractor.forEachSelectedTile(e -> {
+			myView.sendUserModification(new Modification_Add_PaletteToGrid(presetAO, e.<Point2D>getAttribute("Position").getValue()));
+		});
+		myView.sendUserModification(new Modification_Add_PaletteToGrid(presetAO, pos));
 	}
 }

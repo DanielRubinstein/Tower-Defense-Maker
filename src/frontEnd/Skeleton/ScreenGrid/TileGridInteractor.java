@@ -104,6 +104,7 @@ public class TileGridInteractor {
 	
 	void forEachSelectedTile(Consumer<? super Tile> method){
 		selectedTiles.keySet().forEach(method);
+		clearTileSelection();
 	}
 	
 	
