@@ -13,6 +13,7 @@ import backEnd.Mode.Mode;
 import data.DataController;
 import data.XMLReadingException;
 import frontEnd.Skeleton.SplashScreens.SplashScreenData;
+import resources.constants.StringResourceBundle;
 
 /**
  * 
@@ -27,8 +28,7 @@ public class LevelProgressionControllerImpl implements LevelProgressionControlle
 	private Mode myMode;
 	private Consumer<SplashScreenData> splashScreenLoader;
 	private Consumer<Object> gameLoader;
-	
-	private static final String LEVEL_TEMPLATE_PATH = "data/LevelTemplates/";
+	private static final StringResourceBundle strResources = new StringResourceBundle();
 	
 	public LevelProgressionControllerImpl(Mode mode, DataController dataController, Consumer<SplashScreenData> splashScreenLoader,
 			Consumer<Object> gameLoader)
@@ -79,7 +79,7 @@ public class LevelProgressionControllerImpl implements LevelProgressionControlle
 	
 	@Override
 	public List<String> getFullLevelList(){
-		File file = new File(LEVEL_TEMPLATE_PATH);
+		File file = new File(strResources.getFromFilePaths("Level_Template_Path"));
 		String[] directories = file.list(new FilenameFilter() {
 		  @Override
 		  public boolean accept(File current, String name) {
@@ -149,7 +149,8 @@ public class LevelProgressionControllerImpl implements LevelProgressionControlle
 
 	@Override
 	public List<String> getModeCategories() {
-		return Arrays.asList("User", "Game", "Level");
+		return Arrays.asList(strResources.getFromStringConstants("User"), 
+				strResources.getFromStringConstants("Game"), strResources.getFromStringConstants("Level"));
 	}
 
 

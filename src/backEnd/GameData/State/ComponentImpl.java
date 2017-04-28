@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 package backEnd.GameData.State;
 
 import java.io.FileNotFoundException;
@@ -16,20 +15,19 @@ import backEnd.Attribute.AttributeOwner;
 import backEnd.GameEngine.Behaviors.Behavior;
 import backEnd.GameEngine.Behaviors.BehaviorFactory;
 import backEnd.GameEngine.Engine.Coordinates;
+import resources.constants.StringResourceBundle;
 
-public class Component implements AttributeOwner, SerializableObservable {
+public class ComponentImpl implements AttributeOwner, SerializableObservable, Component, ComponentReader {
 	/**
 	 * Any object on the grid is a component.
 	 * 
 	 * @author Daniel
 	 */
-
-	private final static String DEFAULT_ATTRIBUTE_PATH = "resources/defaultComponentAttributes";
+	//TODO: do we need this behavior thing still? the file is empty
 	private final static String BEHAVIOR_PATH = "resources/behaviorNames";
 	private final static ResourceBundle behaviorResources = ResourceBundle.getBundle(BEHAVIOR_PATH);
-	private final static String DEFAULT_ATTRIBUTES_PATH = "resources/defaultTileAttributes";
+	private static final StringResourceBundle strResources = new StringResourceBundle();
 
-	private final static ResourceBundle attributeResources = ResourceBundle.getBundle(DEFAULT_ATTRIBUTE_PATH);
 	private AttributeData myAttributes;
 	private Map<String, Behavior> myBehaviors;
 	private AccessPermissions myAccessPermissions;
@@ -39,21 +37,28 @@ public class Component implements AttributeOwner, SerializableObservable {
 	private Coordinates previousMovement;
 
 	
-	public Component() throws FileNotFoundException{
+	public ComponentImpl() throws FileNotFoundException{
 		this(new AttributeData(),new AccessPermissionsImpl());
 	}
 	
 
+	/* (non-Javadoc)
+	 * @see backEnd.GameData.State.Component#printID()
+	 */
+	/* (non-Javadoc)
+	 * @see backEnd.GameData.State.ComponentReader#printID()
+	 */
+	@Override
 	public long printID(){
 		return ID;
 	}
 	
-	public Component(AttributeData attributes, AccessPermissions accessPermissions) throws FileNotFoundException {
+	public ComponentImpl(AttributeData attributes, AccessPermissions accessPermissions) throws FileNotFoundException {
 		observers = new ArrayList<SerializableObserver>();
 		previousMovement=new Coordinates(0,0);
 		ID = System.nanoTime();
 		System.out.println(ID + "   ");
-		System.out.println("creaing component " + this);
+		System.out.println("creating component " + this);
 		myAttributes = attributes;
 		myBehaviors = new HashMap<>();
 		AttributeFactoryReader attributeFactory = new AttributeFactoryImpl();
@@ -69,7 +74,7 @@ public class Component implements AttributeOwner, SerializableObservable {
 			myBehaviors.put(key, bf.getBehavior(key));
 		}
 
-		for (String key : attributeResources.keySet()) {
+		for (String key : strResources.getKeysFromDefaultComponentAttributes()) {
 			Attribute<?> myAttribute = attributeFactory.getAttribute(key);
 			addAttribute(key, myAttribute);
 		}
@@ -77,6 +82,13 @@ public class Component implements AttributeOwner, SerializableObservable {
 		this.myAccessPermissions = accessPermissions;
 	}
 
+	/* (non-Javadoc)
+	 * @see backEnd.GameData.State.Component#getAccessPermissions()
+	 */
+	/* (non-Javadoc)
+	 * @see backEnd.GameData.State.ComponentReader#getAccessPermissions()
+	 */
+	@Override
 	public AccessPermissions getAccessPermissions() {
 		return myAccessPermissions;
 	}
@@ -93,51 +105,74 @@ public class Component implements AttributeOwner, SerializableObservable {
 	}
 	*/
 
-	/**
-	 * When the engines call behaviors (for the behavior to be executed), it
-	 * does so in Component via this method.
-	 * 
-	 * @param behaviorType
-	 * @return
+	/* (non-Javadoc)
+	 * @see backEnd.GameData.State.Component#getBehavior(java.lang.String)
 	 */
+	/* (non-Javadoc)
+	 * @see backEnd.GameData.State.ComponentReader#getBehavior(java.lang.String)
+	 */
+	@Override
 	public Behavior getBehavior(String behaviorType) {
 		return myBehaviors.get(behaviorType);
 	}
 
+	/* (non-Javadoc)
+	 * @see backEnd.GameData.State.Component#getAttribute(java.lang.String)
+	 */
 	@Override
 	public <T> Attribute<T> getAttribute(String attributeType) {
 		return myAttributes.get(attributeType);
 	}
 
+	/* (non-Javadoc)
+	 * @see backEnd.GameData.State.Component#getMyAttributes()
+	 */
+	/* (non-Javadoc)
+	 * @see backEnd.GameData.State.ComponentReader#getMyAttributes()
+	 */
+	@Override
 	public AttributeData getMyAttributes() {
 		return myAttributes;
 	}
 
+	/* (non-Javadoc)
+	 * @see backEnd.GameData.State.Component#addAttributeData(backEnd.Attribute.AttributeData)
+	 */
+	@Override
 	public void addAttributeData(AttributeData attributes) {
 		myAttributes = attributes;
 	}
 
+	/* (non-Javadoc)
+	 * @see backEnd.GameData.State.Component#addAttribute(java.lang.String, backEnd.Attribute.Attribute)
+	 */
 	@Override
 	public void addAttribute(String attrType, Attribute<?> newAttr) {
 		myAttributes.addAttribute(attrType, newAttr);
 	}
 
-	/**
-	 * 
-	 * @param type the type of this Component, i.e. Tower or Enemy
+	/* (non-Javadoc)
+	 * @see backEnd.GameData.State.Component#setMyType(java.lang.String)
 	 */
+	@Override
 	public void setMyType(String type) {
 		myType = type;
 	}
 
-	/**
-	 * 
-	 * @return the type of this Component, i.e. Tower or Enemy
+	/* (non-Javadoc)
+	 * @see backEnd.GameData.State.Component#getMyType()
 	 */
+	/* (non-Javadoc)
+	 * @see backEnd.GameData.State.ComponentReader#getMyType()
+	 */
+	@Override
 	public String getMyType() {
 		return myType;
 	}
 
+	/* (non-Javadoc)
+	 * @see backEnd.GameData.State.Component#setAttributeValue(java.lang.String, T)
+	 */
 	@Override
 	public <T> void setAttributeValue(String attrName, T newVal) {
 		Attribute<T> attrToSet = myAttributes.<T>get(attrName);
@@ -145,12 +180,26 @@ public class Component implements AttributeOwner, SerializableObservable {
 		notifyObservers();
 	}
 
+	/* (non-Javadoc)
+	 * @see backEnd.GameData.State.Component#addObserver(backEnd.GameData.State.SerializableObserver)
+	 */
+	/* (non-Javadoc)
+	 * @see backEnd.GameData.State.ComponentReader#addObserver(backEnd.GameData.State.SerializableObserver)
+	 */
 	@Override
 	public void addObserver(SerializableObserver obs) {
+		System.out.println(observers);
 		observers.add(obs);
 	}
 
 	
+	/* (non-Javadoc)
+	 * @see backEnd.GameData.State.Component#containsAttribute(java.lang.String)
+	 */
+	/* (non-Javadoc)
+	 * @see backEnd.GameData.State.ComponentReader#containsAttribute(java.lang.String)
+	 */
+	@Override
 	public boolean containsAttribute(String key){
 		return myAttributes.containsAttribute(key);
 	}
@@ -161,6 +210,9 @@ public class Component implements AttributeOwner, SerializableObservable {
 		}
 	}
 
+	/* (non-Javadoc)
+	 * @see backEnd.GameData.State.Component#getAndClearObservers()
+	 */
 	@Override
 	public List<SerializableObserver> getAndClearObservers() {
 		List<SerializableObserver> currObservers = observers;
@@ -168,102 +220,61 @@ public class Component implements AttributeOwner, SerializableObservable {
 		return currObservers;
 	}
 	
+	/* (non-Javadoc)
+	 * @see backEnd.GameData.State.Component#setPreviousMovement(backEnd.GameEngine.Engine.Coordinates)
+	 */
+	@Override
 	public void setPreviousMovement(Coordinates myPreviousMovement){
 		previousMovement=myPreviousMovement;
 	}
 
+	/* (non-Javadoc)
+	 * @see backEnd.GameData.State.Component#getPreviousMovement()
+	 */
+	@Override
 	public Coordinates getPreviousMovement(){
 		return previousMovement;
 	}
 	
+	/* (non-Javadoc)
+	 * @see backEnd.GameData.State.Component#setObserverList(java.util.List)
+	 */
 	@Override
 	public void setObserverList(List<SerializableObserver> observers) {
 		this.observers = observers;
 	}
 
 
+	/* (non-Javadoc)
+	 * @see backEnd.GameData.State.Component#getObservers()
+	 */
 	@Override
 	public List<SerializableObserver> getObservers() {
 		return observers;
 	}
 
+	/* (non-Javadoc)
+	 * @see backEnd.GameData.State.Component#clearObservers()
+	 */
 	@Override
 	public void clearObservers() {
-		observers = null;
+		observers.clear();
 	}
 
+	/* (non-Javadoc)
+	 * @see backEnd.GameData.State.Component#setObservers(java.util.List)
+	 */
 	@Override
 	public void setObservers(List<SerializableObserver> observersave) {
 		observers = observersave;
 	}
 	
-}
-=======
-package backEnd.GameData.State;
-
-import java.util.List;
-
-import backEnd.Attribute.Attribute;
-import backEnd.Attribute.AttributeData;
-import backEnd.GameEngine.Behaviors.Behavior;
-import backEnd.GameEngine.Engine.Coordinates;
-
-public interface Component {
-
-	long printID();
-
-	AccessPermissions getAccessPermissions();
-
-	/**
-	 * When the engines call behaviors (for the behavior to be executed), it
-	 * does so in Component via this method.
-	 * 
-	 * @param behaviorType
-	 * @return
+	/* (non-Javadoc)
+	 * @see backEnd.GameData.State.Component#compareTo(java.lang.Object)
 	 */
-	Behavior getBehavior(String behaviorType);
-
-	<T> Attribute<T> getAttribute(String attributeType);
-
-	AttributeData getMyAttributes();
-
-	void addAttributeData(AttributeData attributes);
-
-	void addAttribute(String attrType, Attribute<?> newAttr);
-
-	/**
-	 * 
-	 * @param type the type of this Component, i.e. Tower or Enemy
-	 */
-	void setMyType(String type);
-
-	/**
-	 * 
-	 * @return the type of this Component, i.e. Tower or Enemy
-	 */
-	String getMyType();
-
-	<T> void setAttributeValue(String attrName, T newVal);
-
-	void addObserver(SerializableObserver obs);
-
-	boolean containsAttribute(String key);
-
-	List<SerializableObserver> getAndClearObservers();
-
-	void setPreviousMovement(Coordinates myPreviousMovement);
-
-	Coordinates getPreviousMovement();
-
-	void setObserverList(List<SerializableObserver> observers);
-
-	List<SerializableObserver> getObservers();
-
-	void clearObservers();
-
-	void setObservers(List<SerializableObserver> observersave);
-
-	int compareTo(Object o);
-
-}
->>>>>>> 24bb9c3fa1bf8e7df3482775321bbe43dd9b7326
+	@Override
+	public int compareTo(Object o) {
+		return Integer.compare(this.hashCode(), o.hashCode());
+	}
+	
+}

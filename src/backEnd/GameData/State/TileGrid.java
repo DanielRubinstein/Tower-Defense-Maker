@@ -54,8 +54,8 @@ public interface TileGrid extends SerializableObservable{
 
 	void setNumRows(int numRowsInGrid);
 
-	boolean atMiddleYOfTile(Point2D currentLocation);
-
 	boolean atMiddleXOfTile(Point2D currentLocation);
+
+	boolean atMiddleYOfTile(Point2D currentLocation);
 
 }

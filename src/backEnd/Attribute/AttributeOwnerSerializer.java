@@ -5,7 +5,7 @@ import java.util.List;
 import com.thoughtworks.xstream.XStream;
 import com.thoughtworks.xstream.io.xml.DomDriver;
 
-import backEnd.GameData.State.Component;
+import backEnd.GameData.State.ComponentImpl;
 import backEnd.GameData.State.SerializableObserver;
 import backEnd.GameData.State.Tile;
 
@@ -14,7 +14,7 @@ public class AttributeOwnerSerializer {
 	
 	public AttributeOwnerSerializer(){
 		xStream = new XStream(new DomDriver());
-		xStream.alias("Component", Component.class);
+		xStream.alias("ComponentImpl", ComponentImpl.class);
 		xStream.alias("Tile", Tile.class);
 	}
 	

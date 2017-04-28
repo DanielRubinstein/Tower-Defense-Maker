@@ -19,6 +19,7 @@ import data.DataController;
 import data.XMLReadingException;
 import frontEnd.Skeleton.SplashScreens.SplashScreenData;
 import javafx.beans.property.SimpleStringProperty;
+import resources.constants.StringResourceBundle;
 
 /**
  * Controller the front end calls when it detects a backend modification from the user,
@@ -38,12 +39,14 @@ public class ModelImpl implements Model{
 	private LevelProgressionControllerImpl myLevelProgressionController;
 	private EngineStatus myEngineStatus;
 	private Consumer<Object> gameLoader;
+	private static final StringResourceBundle strResource = new StringResourceBundle();;
 	
 	public ModelImpl(GameData gameData, EngineStatus engineStatus, Consumer<SplashScreenData> splashScreenLoader, Consumer<Object> gameLoader) throws XMLReadingException {
 		myDataController = new DataController();
 		myGameData = gameData;
 		this.gameLoader = gameLoader;
-		myMode = new ModeImpl("AUTHOR", "DEFAULT", "DEFAULT", myLevelProgressionController);
+		myMode = new ModeImpl(strResource.getFromStringConstants("AUTHOR"), strResource.getFromStringConstants("DEFAULT"),
+				strResource.getFromStringConstants("DEFAULT"), myLevelProgressionController);
 		myLevelProgressionController = new LevelProgressionControllerImpl(myMode, myDataController, splashScreenLoader, gameLoader);
 		myGameData.setLevelProgressionController(myLevelProgressionController);
 		myEngine = new GameProcessController(myGameData);

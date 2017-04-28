@@ -47,7 +47,7 @@ public class GameChooserWindow
 		populateOverallContainer(consumerLoadData);
 		
 		Scene myScene = new Scene(overallContainer, 600,  400);
-		myScene.getStylesheets().add(stringResourceBundle.getDefaultCSS());
+		myScene.getStylesheets().add(stringResourceBundle.getFromStringConstants("DEFAULT_CSS"));
 		stage.setScene(myScene);
 		
 		stage.show();

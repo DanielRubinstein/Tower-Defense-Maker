@@ -3,7 +3,7 @@ package ModificationFromUser.AttributeOwner.ReflectionMethods;
 import java.util.ResourceBundle;
 
 import backEnd.ModelImpl;
-import backEnd.GameData.State.Component;
+import backEnd.GameData.State.ComponentImpl;
 import backEnd.GameData.State.TileImpl;
 import javafx.geometry.Point2D;
 
@@ -27,7 +27,7 @@ public class Modification_MoveAttributeOwner_Methods{
 		throw new Exception(TILE_ERROR);
 	}
 	
-	public void move(Component component){
+	public void move(ComponentImpl component){
 		myModel.getState().getComponentGraph().removeComponent(component);
 		myModel.getState().getComponentGraph().addComponentToGrid(component, newLoc);
 		component.setAttributeValue(myAttrNameResources.getString("Position"), newLoc);

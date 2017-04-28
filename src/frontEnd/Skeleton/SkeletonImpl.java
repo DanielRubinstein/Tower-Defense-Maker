@@ -78,7 +78,7 @@ public class SkeletonImpl implements Skeleton{
 		myRoot.setMinWidth(size1);
 		myRoot.setMinHeight(size2);
    	 	myScene = new Scene(myRoot, size1, size2);
-   	 	myScene.getStylesheets().add(stringResourceBundle.getDefaultCSS());
+   	 	myScene.getStylesheets().add(stringResourceBundle.getFromStringConstants("DEFAULT_CSS"));
 	}
 	public Node getScreenGrid(){
 		return myScreenGrid.getRoot();

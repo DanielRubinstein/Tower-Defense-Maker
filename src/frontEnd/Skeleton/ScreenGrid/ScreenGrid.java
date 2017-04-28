@@ -7,7 +7,7 @@ import java.util.Map;
 import java.util.Set;
 
 import backEnd.Attribute.AttributeOwner;
-import backEnd.GameData.State.Component;
+import backEnd.GameData.State.ComponentImpl;
 import backEnd.GameData.State.ComponentGraph;
 import backEnd.GameData.State.State;
 import frontEnd.View;

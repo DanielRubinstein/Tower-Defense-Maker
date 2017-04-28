@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.Map;
 
 import backEnd.GameData.GameData;
-import backEnd.GameData.State.Component;
+import backEnd.GameData.State.ComponentImpl;
 import backEnd.GameData.State.ComponentGraph;
 import backEnd.GameData.State.ComponentGraphImpl;
 import backEnd.GameEngine.Behaviors.DeathBehavior;
@@ -24,9 +24,9 @@ public class DeathEngine implements Engine {
 	private DeathBehavior DB;
 	public void gameLoop(GameData gameData, double stepTime) {
 		DB = new DeathBehavior();
-		List<Component> toRemove=new ArrayList<Component>();
-		Map<Component, Point2D> toAdd=new HashMap<Component, Point2D>();
-		for (Component struct : gameData.getState().getComponentGraph().getAllComponents()) {
+		List<ComponentImpl> toRemove=new ArrayList<ComponentImpl>();
+		Map<ComponentImpl, Point2D> toAdd=new HashMap<ComponentImpl, Point2D>();
+		for (ComponentImpl struct : gameData.getState().getComponentGraph().getAllComponents()) {
 			DB.execute(struct);
 			if (DB.isDead()) {
 				System.out.println("Death Behavior Created for " + struct);
@@ -38,18 +38,18 @@ public class DeathEngine implements Engine {
 
 				if (DB.spawnsOnDeath()) {
 					Object currentLocation = struct.getMyAttributes().get("Position").getValue();
-					Component newComponent=DB.getNewComponent();
+					ComponentImpl newComponent=DB.getNewComponent();
 					newComponent.setAttributeValue("Position", (Point2D) currentLocation);
 					toAdd.put(DB.getNewComponent(), (Point2D) currentLocation);
 				}
 			}
 
 		}
-		for (Component toDelete: toRemove){
+		for (ComponentImpl toDelete: toRemove){
 			gameData.getState().getComponentGraph().removeComponent(toDelete);
 			System.out.println("Deathbehavior executed, component removed");
 		}
-		for (Component c: toAdd.keySet()){
+		for (ComponentImpl c: toAdd.keySet()){
 			gameData.getState().getComponentGraph().addComponentToGrid(c, toAdd.get(c));
 		}
 	}
