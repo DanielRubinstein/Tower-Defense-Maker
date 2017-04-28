@@ -5,7 +5,7 @@ import java.util.Map;
 import ModificationFromUser.ModificationFromUser;
 import backEnd.ModelImpl;
 import backEnd.GameData.State.State;
-import backEnd.GameEngine.Engine.Spawning.SpawnQueue;
+import backEnd.GameEngine.Engine.Spawning.SpawnQueues;
 
 /**
  * Removes a spawn queue
@@ -27,7 +27,7 @@ public class Modification_RemoveSpawnQueue implements ModificationFromUser{
 	@Override
 	public void invoke(ModelImpl myModel) throws Exception {
 		State state = myModel.getState();
-		Map<String, SpawnQueue> spawnQueues = state.getSpawnQueues();
+		Map<String, SpawnQueues> spawnQueues = state.getSpawnQueues();
 		if (spawnQueues.containsKey(mySpawnQueueName)) {
 			spawnQueues.remove(mySpawnQueueName);
 		} else {

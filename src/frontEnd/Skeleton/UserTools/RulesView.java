@@ -17,10 +17,10 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
-import resources.Constants;
+import resources.constants.StringResourceBundle;
 
 public class RulesView {
-
+	private StringResourceBundle stringResourceBundle = new StringResourceBundle();
 	private GridPane myRoot;
 	private View myView;
 	private Stage myStage;
@@ -40,7 +40,7 @@ public class RulesView {
 	
 	public void launch(){
 		Scene scene = new Scene(myRoot);
-		scene.getStylesheets().add(Constants.DEFAULT_CSS);
+		scene.getStylesheets().add(stringResourceBundle.getDefaultCSS());
 		myStage.setScene(scene);
 		myStage.show();
 	}
@@ -74,7 +74,7 @@ public class RulesView {
 		HBox changer = new HBox();
 		NumberChanger ruleChanger = new NumberChanger(rule.getMinVal(), rule.getMaxVal(), 
 				rule.getVal(), (rule.getMaxVal()-rule.getMinVal())/100);
-		ruleChanger.addListener((observable, oldValue, newValue) -> {
+		ruleChanger.addListener((SerializableObservable, oldValue, newValue) -> {
 			myView.sendUserModification(new Modification_EditRuleValue(rule.getKeyName(),newValue.doubleValue()));
 		});
 		HBox indicatorBox = ruleChanger.addIntegerIndicator();

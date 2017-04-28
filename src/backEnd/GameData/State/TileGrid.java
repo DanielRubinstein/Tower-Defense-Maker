@@ -1,10 +1,9 @@
 package backEnd.GameData.State;
 
+import java.util.Collection;
 import java.util.List;
-import java.util.Observer;
 
 import backEnd.Attribute.AttributeOwnerReader;
-import javafx.beans.Observable;
 import javafx.geometry.Point2D;
 
 /**
@@ -12,25 +11,10 @@ import javafx.geometry.Point2D;
  * @author Riley Nisbet, Christian Martindale
  *
  */
-public interface TileGrid{
-
-	/**
-	 * Get the tile at a given location
-	 * @param column
-	 * @param row TODO
-	 * @return Tile at the given location
-	 */
-	Tile getTileByGridPosition(int column, int row);
+public interface TileGrid extends SerializableObservable{
 	
 	void setTileByScreenPosition(Tile newTile, Point2D position);
 
-	/**
-	 * Set the tile at a given location
-	 * @param newTile
-	 * @param location
-	 */
-	void setTileByGridPosition(Tile newTile, int column, int row);
-	
 	/**
 	 * @return grid width
 	 */
@@ -44,7 +28,7 @@ public interface TileGrid{
 	/**
 	 * return a List of all tiles in the Grid
 	 */
-	List<Tile> getAllTiles();
+	Collection<Tile> getAllTiles();
 
 	Tile getTileByScreenPosition(Point2D location);
 
@@ -53,32 +37,21 @@ public interface TileGrid{
 	double getTileWidth();
 
 	double getTileHeight();
-	
-	void addAsObserver(Observer o);
 
 	boolean contains(AttributeOwnerReader newAttrOwn);
 
 	Object getMap();
-
 	
+	boolean atMiddleOfTile(Point2D screenPosition);
+
 	void saveAndClearTileObservers();
 
 	void setTileObservers();
-
-	List<Observer> getObservers();
-
-	void clearObservers();
-
-	void setObservers(List<Observer> observersave);
 	
-
 	TileGridInstantiator getInstantiator();
 
-	void setWidth(int numColsInGrid);
+	void setNumCols(int numColsInGrid);
 
-	void setHeight(int numRowsInGrid);
-
-	Point2D getGridPositionFromScreenPosition(Point2D newTileScreenPosition);
-
+	void setNumRows(int numRowsInGrid);
 
 }

@@ -5,15 +5,14 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Observable;
-import java.util.Observer;
 import java.util.ResourceBundle;
 
 import com.thoughtworks.xstream.annotations.XStreamOmitField;
 
 import backEnd.Attribute.Attribute;
 import backEnd.Attribute.AttributeData;
-import backEnd.Attribute.AttributeFactory;
+import backEnd.Attribute.AttributeFactoryImpl;
+import backEnd.Attribute.AttributeFactoryReader;
 import backEnd.Attribute.AttributeOwner;
 import javafx.geometry.Point2D;
 
@@ -25,14 +24,14 @@ import javafx.geometry.Point2D;
  *
  */
 
-public class TileImpl extends Observable implements Tile, AttributeOwner {
+public class TileImpl implements Tile, AttributeOwner, SerializableObservable {
 	private final static String DEFAULT_ATTRIBUTES_PATH = "resources/defaultTileAttributes";
 	private final static ResourceBundle attributeResources = ResourceBundle.getBundle(DEFAULT_ATTRIBUTES_PATH);
 	private AccessPermissions myAccessPerm;
 	private AttributeData myAttrData;
 	
 	@XStreamOmitField
-	private List<Observer> observers = new ArrayList<Observer>();
+	private List<SerializableObserver> observers = new ArrayList<SerializableObserver>();
 	
 	public TileImpl() throws FileNotFoundException{
 		this(new AccessPermissionsImpl(), new Point2D(0,0));
@@ -47,7 +46,7 @@ public class TileImpl extends Observable implements Tile, AttributeOwner {
 		//System.out.println("executing Constructor for TileImpl");
 		this.myAccessPerm = aP;
 		this.myAttrData = new AttributeData(new HashMap<String, Attribute<?>>());
-		AttributeFactory attrFact = new AttributeFactory();
+		AttributeFactoryReader attrFact = new AttributeFactoryImpl();
 		this.myAttrData = new AttributeData(new HashMap<String, Attribute<?>>());
 		for (String key : attributeResources.keySet()) {
 			Attribute<?> myAttribute = attrFact.getAttribute(key);
@@ -99,37 +98,45 @@ public class TileImpl extends Observable implements Tile, AttributeOwner {
 	}
 
 	@Override
-	public void addObserver(Observer obs) {
+	public void addObserver(SerializableObserver obs) {
 		observers.add(obs);
 	}
 
-	@Override
-	public void notifyObservers() {
-		for (Observer obs : observers) {
+	private void notifyObservers() {
+		for (SerializableObserver obs : observers) {
 			obs.update(this, null);
 		}
 	}
 
 	@Override
-	public void addAsListener(Observer o) {
-		addObserver(o);
-	}
-
-	@Override
-	public List<Observer> getAndClearObservers() {
-		List<Observer> currObservers = new ArrayList<Observer>();
-		for (Observer o : observers){
+	public List<SerializableObserver> getAndClearObservers() {
+		List<SerializableObserver> currObservers = new ArrayList<SerializableObserver>();
+		for (SerializableObserver o : observers){
 			currObservers.add(o);
 		}
-		observers = new ArrayList<Observer>();
+		observers = new ArrayList<SerializableObserver>();
 		return currObservers;
 	}
 
 	@Override
-	public void setObserverList(List<Observer> observers) {
-		this.observers = observers;
-		this.setChanged();
-		this.notifyObservers();
+	public void setObserverList(List<SerializableObserver> observers) {
+		observers = observers;
+		notifyObservers();
+	}
+
+	@Override
+	public List<SerializableObserver> getObservers() {
+		return observers;
+	}
+
+	@Override
+	public void clearObservers() {
+		observers = null;
+	}
+
+	@Override
+	public void setObservers(List<SerializableObserver> observersave) {
+		observers = observersave;
 	}
 
 }

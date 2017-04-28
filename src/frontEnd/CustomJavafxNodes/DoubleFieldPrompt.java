@@ -3,16 +3,16 @@ package frontEnd.CustomJavafxNodes;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
-import java.util.ResourceBundle;
 
 import javafx.geometry.Insets;
 import javafx.scene.Node;
+import javafx.scene.control.ButtonBar.ButtonData;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.Dialog;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
-import javafx.scene.control.ButtonBar.ButtonData;
 import javafx.scene.layout.GridPane;
+import resources.constants.StringResourceBundle;
 
 /**
  * 
@@ -20,8 +20,7 @@ import javafx.scene.layout.GridPane;
  *
  */
 public class DoubleFieldPrompt {
-	private static final String BUNDLE_NAME = "resources.messages";
-	private static final ResourceBundle RESOURCE_BUNDLE = ResourceBundle.getBundle(BUNDLE_NAME);
+	private StringResourceBundle stringResourceBundle = new StringResourceBundle();
 	
 	private List<String> myDialogTitles;
 	private List<String> myPromptText;
@@ -46,7 +45,7 @@ public class DoubleFieldPrompt {
 		 */
 
 		// Set the button types.
-		ButtonType createButtonType = new ButtonType(RESOURCE_BUNDLE.getString("Submit"), ButtonData.OK_DONE);
+		ButtonType createButtonType = new ButtonType(stringResourceBundle.getString("Submit"), ButtonData.OK_DONE);
 		dialog.getDialogPane().getButtonTypes().addAll(createButtonType, ButtonType.CANCEL);
 
 		// Create the username and password labels and fields.
@@ -71,10 +70,10 @@ public class DoubleFieldPrompt {
 		createButton.setDisable(true);
 
 		// Do some validation (using the Java 8 lambda syntax).
-		text1.textProperty().addListener((observable, oldValue, newValue) -> {
+		text1.textProperty().addListener((SerializableObservable, oldValue, newValue) -> {
 			createButton.setDisable(newValue.trim().isEmpty() && text2.getText().trim().isEmpty());
 		});
-		text2.textProperty().addListener((observable, oldValue, newValue) -> {
+		text2.textProperty().addListener((SerializableObservable, oldValue, newValue) -> {
 			createButton.setDisable(newValue.trim().isEmpty() && text1.getText().trim().isEmpty());
 		});
 

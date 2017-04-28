@@ -1,6 +1,6 @@
 package backEnd.Attribute;
 
-import java.util.Observer;
+import backEnd.GameData.State.SerializableObserver;
 
 public interface AttributeOwnerReader {
 	/**
@@ -14,5 +14,5 @@ public interface AttributeOwnerReader {
 	 */
 	<T> Attribute<T> getAttribute(String attrName);
 	
-	void addAsListener(Observer o);
+	void addObserver(SerializableObserver o);
 }

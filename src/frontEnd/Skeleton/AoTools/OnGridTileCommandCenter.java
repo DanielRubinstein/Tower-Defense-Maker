@@ -7,7 +7,6 @@ import java.util.List;
 import backEnd.Attribute.AttributeOwner;
 import backEnd.Attribute.AttributeOwnerReader;
 import backEnd.GameData.State.Component;
-import backEnd.GameData.State.ComponentGraph;
 import backEnd.GameData.State.State;
 import backEnd.GameData.State.Tile;
 import frontEnd.View;
@@ -19,7 +18,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
 import javafx.stage.Stage;
-import resources.Constants;
+import resources.constants.StringResourceBundle;
 
 /**
  * This class is the command center that pops up when a user clicks on a tile. It presents information about the tile
@@ -28,6 +27,7 @@ import resources.Constants;
  *
  */
 public class OnGridTileCommandCenter implements CommandCenter, SkeletonObject{
+	private StringResourceBundle stringResourceBundle = new StringResourceBundle();
 	private Stage myStage;
 	private View myView;
 	private TabPane tabPane;
@@ -39,7 +39,7 @@ public class OnGridTileCommandCenter implements CommandCenter, SkeletonObject{
 	public OnGridTileCommandCenter(View view, Tile tile, State state) {
 		myView = view;
 		myTile = tile;
-		myComponents = state.getComponentsByTileGridPosition(tile.<Point2D>getAttribute("Position").getValue());
+		myComponents = state.getComponentsByTilePosition(tile.<Point2D>getAttribute("Position").getValue());
 		tabPane = new TabPane();
 	}
 
@@ -87,7 +87,7 @@ public class OnGridTileCommandCenter implements CommandCenter, SkeletonObject{
 	@Override
 	public void generate(double x, double y, Stage myStage, Parent myRoot) {
 		Scene myScene = new Scene(myRoot);
-		myScene.getStylesheets().add(Constants.DEFAULT_CSS);
+		myScene.getStylesheets().add(stringResourceBundle.getDefaultCSS());
 		myStage.setScene(myScene);
 		myStage.setTitle("Command Center");
 		myStage.setX(x);

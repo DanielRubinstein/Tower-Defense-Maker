@@ -3,8 +3,8 @@ package backEnd.Mode;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.Observer;
 
+import backEnd.GameData.State.SerializableObserver;
 import backEnd.LevelProgression.LevelProgressionControllerReader;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleStringProperty;
@@ -23,7 +23,7 @@ public class ModeImpl implements ModeReader, Mode{
 	private SimpleStringProperty gSP;
 	private SimpleStringProperty lSP;
 	private List<String> userModes;
-	private List<Observer> observers;
+	private List<SerializableObserver> observers;
 	private LevelProgressionControllerReader levelProgression;
 	
 	public ModeImpl(String userMode, String gameMode, String levelMode, LevelProgressionControllerReader levelProgression){
@@ -32,7 +32,7 @@ public class ModeImpl implements ModeReader, Mode{
 		this.currLevelMode = levelMode;
 		this.levelProgression = levelProgression;
 		this.userModes = Arrays.asList("AUTHOR", "PLAYER");
-		this.observers = new ArrayList<Observer>();
+		this.observers = new ArrayList<SerializableObserver>();
 		aBP = new SimpleBooleanProperty(this.getUserMode().equals("AUTHOR"));
 		gSP = new SimpleStringProperty(this.getGameMode());
 		lSP = new SimpleStringProperty(this.getLevelMode());
@@ -111,13 +111,13 @@ public class ModeImpl implements ModeReader, Mode{
 	}
 
 	@Override
-	public void addObserver(Observer o) {
+	public void addObserver(SerializableObserver o) {
 		observers.add(o);
 	}
 	
 	private void notifyObservers() {
 		System.out.println("Notifying Observers within ModeImpl (i.e. resetting Palette)");
-		for(Observer o : observers){
+		for(SerializableObserver o : observers){
 			o.update(null, null);
 		}
 	}

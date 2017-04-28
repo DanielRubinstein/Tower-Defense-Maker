@@ -3,13 +3,13 @@ package frontEnd.Skeleton.ScreenGrid;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
-import java.util.Observable;
-import java.util.Observer;
 import java.util.Set;
 
 import backEnd.Attribute.AttributeOwner;
 import backEnd.GameData.State.Component;
 import backEnd.GameData.State.ComponentGraph;
+import backEnd.GameData.State.SerializableObservable;
+import backEnd.GameData.State.SerializableObserver;
 import backEnd.GameData.State.State;
 import frontEnd.View;
 import frontEnd.Skeleton.AoTools.GenericCommandCenter;
@@ -18,7 +18,7 @@ import javafx.scene.Group;
 import javafx.scene.Node;
 import javafx.scene.image.ImageView;
 
-public class ComponentGraphVisual implements SkeletonObject, Observer {
+public class ComponentGraphVisual implements SkeletonObject, SerializableObserver {
 	
 	private ComponentGraph observedComponentGraph;
 	
@@ -33,7 +33,7 @@ public class ComponentGraphVisual implements SkeletonObject, Observer {
 		myView = view;
 		myState = state;
 		observedComponentGraph = myState.getComponentGraph();
-		observedComponentGraph.addAsObserver(this);
+		observedComponentGraph.addObserver(this);
 		placeComponents();
 	}
 	private void placeComponents() {
@@ -92,9 +92,8 @@ public class ComponentGraphVisual implements SkeletonObject, Observer {
 	}
 
 	@Override
-	public void update(Observable o, Object arg) {
-		updateCorrespondingGrid((Component) arg);
-
+	public void update(SerializableObservable so, Object obj) {
+		updateCorrespondingGrid((Component) obj);
 	}
 
 	@Override

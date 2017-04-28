@@ -1,5 +1,6 @@
 package backEnd.GameEngine.Engine;
 
+import java.util.Collection;
 import java.util.List;
 
 import backEnd.BankController;
@@ -9,7 +10,7 @@ import backEnd.GameData.State.Component;
 import backEnd.GameData.State.ComponentBuilder;
 import backEnd.GameData.State.State;
 import backEnd.GameData.State.Tile;
-import backEnd.GameEngine.Engine.Spawning.SpawnQueue;
+import backEnd.GameEngine.Engine.Spawning.SpawnQueues;
 import javafx.geometry.Point2D;
 
 /**
@@ -39,10 +40,10 @@ public class SpawnEngine implements Engine {
 		if (gamePaused) {
 			return;
 		}
-		List<Tile> tileList = gameData.getState().getTileGrid().getAllTiles();
+		Collection<Tile> tileList = gameData.getState().getTileGrid().getAllTiles();
 		for (Tile spawnTile : tileList) {
 			Object spawnQueueNameObj = spawnTile.getAttribute("SpawnTimeline").getValue();
-			SpawnQueue currentSpawnQueue = gameData.getState().getSpawnQueues().get((String) spawnQueueNameObj);
+			SpawnQueues currentSpawnQueue = gameData.getState().getSpawnQueues().get((String) spawnQueueNameObj);
 			if (currentSpawnQueue != null) {
 				// Spawning with frequencies
 				//System.out.println(this.getClass().getName() + ": FrequencyQueue: " + currentSpawnQueue.getFrequencyQueue().size());
@@ -50,7 +51,7 @@ public class SpawnEngine implements Engine {
 					spawn(myBank.getComponent(component), spawnTile);
 				}
 				// Spawning directly with spawn queue
-				Component nextQueueSpawn = myBank.getComponent(currentSpawnQueue.getNextQueueSpawn(gameData.getGameTime()));
+				Component nextQueueSpawn = myBank.getComponent(currentSpawnQueue.getNextSingleSpawn(gameData.getGameTime()));
 				spawn(nextQueueSpawn, spawnTile);
 			}
 		}
@@ -58,7 +59,7 @@ public class SpawnEngine implements Engine {
 	}
 
 	private void updateSpawnTimelines(double gameTime) {
-		for(SpawnQueue spawnQueue : myState.getSpawnQueues().values()){
+		for(SpawnQueues spawnQueue : myState.getSpawnQueues().values()){
 			spawnQueue.update(gameTime);
 		}
 	}

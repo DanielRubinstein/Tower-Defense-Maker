@@ -2,10 +2,9 @@ package backEnd.GameData.State;
 
 import java.util.Collection;
 import java.util.Map;
-import java.util.Observer;
 
 import backEnd.GameEngine.EngineStatus;
-import backEnd.GameEngine.Engine.Spawning.SpawnQueue;
+import backEnd.GameEngine.Engine.Spawning.SpawnQueues;
 import javafx.geometry.Point2D;
 
 /**
@@ -26,8 +25,7 @@ public interface State {
 	 */
 	ComponentGraph getComponentGraph();
 
-	
-	void addAsObserver(Observer o);
+	void addAsObserver(SerializableObserver o);
 	
 	void updateState(State state);
 	
@@ -35,9 +33,9 @@ public interface State {
 	
 	int getGridHeight();
 
-	Collection<Component> getComponentsByTileGridPosition(Point2D value);
+	Collection<Component> getComponentsByTilePosition(Point2D value);
 
-	Map<String, SpawnQueue> getSpawnQueues();
+	Map<String, SpawnQueues> getSpawnQueues();
 
 	boolean gameIsRunning();
 

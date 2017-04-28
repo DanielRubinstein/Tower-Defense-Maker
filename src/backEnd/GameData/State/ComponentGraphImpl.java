@@ -5,8 +5,6 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Observable;
-import java.util.Observer;
 
 import javafx.geometry.Point2D;
 import backEnd.Attribute.Attribute;
@@ -21,22 +19,23 @@ import backEnd.Attribute.AttributeOwnerReader;
  *
  */
 
-public class ComponentGraphImpl extends Observable implements ComponentGraph {
+public class ComponentGraphImpl implements ComponentGraph {
 	private Map<Point2D, List<Component>> componentMap;
 	private List<Component> myComponents;
-	private ArrayList<List<Observer>> compObserverList;
+	private List<SerializableObserver> observers;
+	private List<List<SerializableObserver>> compObserverList;
 
 	public ComponentGraphImpl() {
-		componentMap = new HashMap<>();
-		myComponents = new ArrayList<Component>();
+		this(new HashMap<>());
 	}
 
 	public ComponentGraphImpl(HashMap<Point2D, List<Component>> fromXML) {
 		componentMap = fromXML;
-
+		observers = new ArrayList<SerializableObserver>();
+		myComponents = new ArrayList<Component>();
 	}
 
-	public List<Component> getAllComponents() {
+	public Collection<Component> getAllComponents() {
 
 		myComponents = new ArrayList<Component>();
 		for (List<Component> list : componentMap.values()) {
@@ -80,8 +79,7 @@ public class ComponentGraphImpl extends Observable implements ComponentGraph {
 		componentMap.put(screenPosition, currList);
 		myComponents.add(newComponent);
 		newComponent.getAttribute("Position").setValue(screenPosition);
-		this.setChanged();
-		this.notifyObservers(newComponent);
+		notifyObservers(newComponent);
 	}
 
 	@Override
@@ -95,8 +93,7 @@ public class ComponentGraphImpl extends Observable implements ComponentGraph {
 		componentMap.put(location, currList);
 		myComponents.remove(toRemove);
 		System.out.println("removed in component graph");
-		this.setChanged();
-		this.notifyObservers(toRemove);
+		notifyObservers(toRemove);
 	}
 
 	@Override
@@ -125,8 +122,8 @@ public class ComponentGraphImpl extends Observable implements ComponentGraph {
 	}
 
 	@Override
-	public void addAsObserver(Observer o) {
-		this.addObserver(o);
+	public void addObserver(SerializableObserver o) {
+		observers.add(o);
 
 	}
 
@@ -137,7 +134,7 @@ public class ComponentGraphImpl extends Observable implements ComponentGraph {
 
 	@Override
 	public void saveAndClearObservers() {
-		compObserverList = new ArrayList<List<Observer>>();
+		compObserverList = new ArrayList<List<SerializableObserver>>();
 
 		for (int i = 0; i < myComponents.size(); i++) {
 			compObserverList.add(myComponents.get(i).getAndClearObservers());
@@ -145,10 +142,10 @@ public class ComponentGraphImpl extends Observable implements ComponentGraph {
 	}
 
 	@Override
-	public void setObservers() {
+	public void setComponentObservers() {
 
 		for (int i = 0; i < myComponents.size(); i++){
-			System.out.println("in componentGraphImpl, observer list is "+compObserverList.get(i));
+			System.out.println("in componentGraphImpl, SerializableObserver list is "+compObserverList.get(i));
 			myComponents.get(i).setObserverList(compObserverList.get(i));
 		}
 
@@ -169,6 +166,27 @@ public class ComponentGraphImpl extends Observable implements ComponentGraph {
 		for (Component x : list)
 		{
 			removeComponent(x);
+		}
+	}
+
+	@Override
+	public List<SerializableObserver> getObservers() {
+		return observers;
+	}
+
+	@Override
+	public void clearObservers() {
+		observers = null;
+	}
+
+	@Override
+	public void setObservers(List<SerializableObserver> observersave) {
+		observers = observersave;
+	}
+	
+	private void notifyObservers(Object obj){
+		for (SerializableObserver o : observers){
+			o.update(null, obj);
 		}
 	}
 

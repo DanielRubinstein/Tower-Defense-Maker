@@ -7,9 +7,8 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.LinkedList;
+import java.util.List;
 import java.util.Map;
-import java.util.Observable;
-import java.util.Observer;
 import java.util.Queue;
 import java.util.ResourceBundle;
 import java.util.Set;
@@ -20,16 +19,18 @@ import backEnd.Coord;
 import backEnd.Attribute.Attribute;
 import backEnd.Attribute.AttributeImpl;
 import backEnd.GameEngine.EngineStatus;
-import backEnd.GameEngine.Engine.Spawning.SpawnQueue;
+import backEnd.GameEngine.Engine.Spawning.SpawnQueues;
 import javafx.geometry.Point2D;
+import resources.constants.NumericResourceBundle;
 
 /**
  * 
  * @author Alex Salas, Christian Martindale
  *
  */
-public class StateImpl extends Observable implements State {
-
+public class StateImpl implements State, SerializableObservable {
+	private NumericResourceBundle numericResourceBundle = new NumericResourceBundle();
+	
 	private int numColsInGrid;
 	private int numRowsInGrid;
 	private TileGrid myTileGrid;
@@ -39,41 +40,47 @@ public class StateImpl extends Observable implements State {
 	private final static String IMAGEPATH_RESOURCES_PATH = "resources/images";
 	private final static ResourceBundle myImageResource = ResourceBundle.getBundle(IMAGEPATH_RESOURCES_PATH);
 	private EngineStatus myEngineStatus;
-	private Map<String, SpawnQueue> mySpawnQueues;
+	private Map<String, SpawnQueues> mySpawnQueues;
+	private List<SerializableObserver> observers;
 	
 	public StateImpl(int numColsInGrid, int numRowsInGrid) throws FileNotFoundException {
-		this(numColsInGrid, numRowsInGrid, setDefaultTileGrid(numColsInGrid, numRowsInGrid), new ComponentGraphImpl());
+		this.numColsInGrid = numColsInGrid;
+		this.numRowsInGrid = numRowsInGrid;
+		initialize(setDefaultTileGrid(numColsInGrid, numRowsInGrid), new ComponentGraphImpl());
 	}
 	
 	public StateImpl(int numRowsInGrid, int numColsInGrid, TileGrid tileGrid, ComponentGraph componentGraph) throws FileNotFoundException {
 		this.numColsInGrid = numColsInGrid;
 		this.numRowsInGrid = numRowsInGrid;
+		initialize(tileGrid, componentGraph);
+	}
+	
+	private void initialize(TileGrid tileGrid, ComponentGraph componentGraph){
 		myTileGrid = tileGrid;
 		myComponentGraph = componentGraph;
 		myEngineStatus = EngineStatus.PAUSED;
-		mySpawnQueues = new HashMap<String,SpawnQueue>();
+		mySpawnQueues = new HashMap<String,SpawnQueues>();
+		observers = new ArrayList<SerializableObserver>();
 	}
 
 
-	private static TileGrid setDefaultTileGrid(int cols, int rows) throws FileNotFoundException {
+	private TileGrid setDefaultTileGrid(int cols, int rows) throws FileNotFoundException {
 		TileGrid tileGrid = new TileGridImpl(cols, rows);
 		for (int row = 0; row < rows; row++) {
 			for (int col = 0; col < cols; col++) {
-				Point2D loc = new Point2D(col, row);
-				
-				Tile newTile = new TileImpl(Arrays.asList(), Arrays.asList(), Arrays.asList(), loc);
-				
-				Attribute<String> imgAttr = newTile.getAttribute("ImageFile");
-				imgAttr.setValue(myImageResource.getString("default_tile"));
-				
-				tileGrid.setTileByGridPosition(newTile, col, row);
-
+				Double tileWidth = numericResourceBundle.getScreenGridWidth() / cols;
+				Double tileHeight = numericResourceBundle.getScreenGridHeight() / rows;
+				Point2D pos = new Point2D((col + 0.5) * (tileWidth), (row + 0.5) * (tileHeight));
+				Tile newTile = new TileImpl();
+				newTile.getAttribute("Position").setValue(pos);
+				newTile.getAttribute("ImageFile").setValue(myImageResource.getString("default_tile"));
+				tileGrid.setTileByScreenPosition(newTile, pos);
 			}
 		}
 		return tileGrid;
 	}
 	
-	public void addAsObserver(Observer o){
+	public void addAsObserver(SerializableObserver o){
 		this.addObserver(o);
 	}
 
@@ -87,58 +94,34 @@ public class StateImpl extends Observable implements State {
 		return myComponentGraph;
 	}
 	
-	private Map<Tile, Coord> findStartTiles() {
-		Map<Tile, Coord> startTiles = new HashMap<Tile, Coord>();
-		for (int col = 0; col < numColsInGrid; col++) { // find the start position
-			for (int row = 0; row < numRowsInGrid; row++) {
-				Tile tile = myTileGrid.getTileByGridPosition(col, row);
-				if (tile.getMyAttributes()
-						.<Boolean>get(myResources.getString("StartTile")).getValue() == true) {
-					startTiles.put(tile, new Coord(col, row, null));
-				}
-			}
-		}
-		return startTiles;
-	}
-	
 	public void updateState(State state){
 		this.numColsInGrid = state.getGridWidth();
 		this.numRowsInGrid = state.getGridHeight();
 		replaceTiles(state.getTileGrid());
 		replaceComponents(state.getComponentGraph());
 		this.myEngineStatus = state.getEngineStatus();
-		
-		this.setChanged();
-		this.notifyObservers();
-
+		notifyObservers();
 	}
 
 	private void replaceComponents(ComponentGraph componentGraph)
 	{
 		myComponentGraph.clearComponents();
-		for (Point2D x : componentGraph.getComponentMap().keySet())
-		{
-			for (Component y : componentGraph.getComponentMap().get(x))
-			{
-				myComponentGraph.addComponentToGrid(y, x);
-			}
+		
+		for(Component component : componentGraph.getAllComponents()){
+			Point2D pos = component.<Point2D>getAttribute("Position").getValue();
+			myComponentGraph.addComponentToGrid(component, pos);
 		}
 	}
 
-	private void replaceTiles(TileGrid tileGrid)
-	{
+	private void replaceTiles(TileGrid tileGrid){
 		
-		myTileGrid.setWidth(tileGrid.getNumColsInGrid());
-		myTileGrid.setHeight(tileGrid.getNumRowsInGrid());
-		
-		for (int x = 0; x < tileGrid.getNumRowsInGrid(); x++)
-		{
-			for (int y = 0; y < tileGrid.getNumColsInGrid(); y++)
-			{
-				myTileGrid.setTileByGridPosition(tileGrid.getTileByGridPosition(y, x), y, x);
-			}
+		myTileGrid.setNumCols(tileGrid.getNumColsInGrid());
+		myTileGrid.setNumRows(tileGrid.getNumRowsInGrid());
+
+		for(Tile tile : tileGrid.getAllTiles()){
+			Point2D pos = tile.<Point2D>getAttribute("Position").getValue();
+			myTileGrid.setTileByScreenPosition(tile, pos);
 		}
-		System.out.println(myTileGrid.getTileByGridPosition(0, 0).getAttribute("ImageFile").getValue() + " GGG");
 	}
 
 	/*
@@ -197,7 +180,7 @@ public class StateImpl extends Observable implements State {
 		}
 	}
 	*/
-
+	/*
 	private ArrayList<Coord> getAdjacents(Coord current) {
 		ArrayList<Coord> adjacents = new ArrayList<Coord>();
 		if(isTraversable(current.getXCoord()+1, current.getYCoord()  )){
@@ -214,19 +197,11 @@ public class StateImpl extends Observable implements State {
 		}
 		return adjacents;
 	}
+	*/
 
 	public EngineStatus getEngineStatus()
 	{
 		return myEngineStatus;
-	}
-	
-	private boolean isTraversable(int x, int y){
-		Tile curTile = myTileGrid.getTileByGridPosition(x,y);
-		if(curTile == null || curTile.<Boolean>getAttribute(myResources.getString("Traversable")).getValue() == true){
-			return false;
-		}
-		
-		return true;
 	}
 	
 	/*
@@ -252,26 +227,51 @@ public class StateImpl extends Observable implements State {
 	}
 
 	@Override
-	public Collection<Component> getComponentsByTileGridPosition(Point2D tileGridPosition) {
+	public Collection<Component> getComponentsByTilePosition(Point2D tileGridPosition) {
 		TileCorners tileCorners = new TileCorners(tileGridPosition, myTileGrid.getTileWidth(), myTileGrid.getTileHeight());
 		return myComponentGraph.getComponentsByTileCorners(tileCorners);
 	}
 
 	public void setEngineStatus(EngineStatus engineStatus) {
 		myEngineStatus=engineStatus;
-		this.setChanged();
-		this.notifyObservers();
+		notifyObservers();
 	}
 
 
 	@Override
-	public Map<String, SpawnQueue> getSpawnQueues() {
+	public Map<String, SpawnQueues> getSpawnQueues() {
+		//System.out.println(mySpawnQueues);
 		return mySpawnQueues;
+	}
+	
+	private void notifyObservers() {
+		for (SerializableObserver o : observers){
+			o.update(this, null);
+		}
 	}
 
 	@Override
 	public void setComponentGraph(ComponentGraph componentGraph) {
-		// TODO Auto-generated method stub
-		
+		myComponentGraph = componentGraph;
+	}
+
+	@Override
+	public void addObserver(SerializableObserver o) {
+		observers.add(o);
+	}
+
+	@Override
+	public List<SerializableObserver> getObservers() {
+		return observers;
+	}
+
+	@Override
+	public void clearObservers() {
+		observers = null;
+	}
+
+	@Override
+	public void setObservers(List<SerializableObserver> observersave) {
+		observers = observersave;
 	}
 }
