@@ -29,7 +29,7 @@ public class DeathEngine implements Engine {
 		for (Component struct : gameData.getState().getComponentGraph().getAllComponents()) {
 			DB.execute(struct);
 			if (DB.isDead()) {
-				//System.out.println("Death Behavior Created for " + struct);
+				System.out.println("Death Behavior Created for " + struct);
 				toRemove.add(struct);
 				gameData.getStatus().incrementStatusItem("KillCount", 1);
 				gameData.getStatus().incrementStatusItem("Money", (Integer)struct.getAttribute("MoneyBounty").getValue());
@@ -47,7 +47,7 @@ public class DeathEngine implements Engine {
 		}
 		for (Component toDelete: toRemove){
 			gameData.getState().getComponentGraph().removeComponent(toDelete);
-			//System.out.println("Deathbehavior executed, component removed");
+			System.out.println("Deathbehavior executed, component removed");
 		}
 		for (Component c: toAdd.keySet()){
 			gameData.getState().getComponentGraph().addComponentToGrid(c, toAdd.get(c));

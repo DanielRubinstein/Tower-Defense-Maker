@@ -6,7 +6,6 @@ import java.util.Map;
 import ModificationFromUser.ModificationFromUser;
 import backEnd.BankController;
 import backEnd.BankControllerReader;
-import backEnd.BankController;
 import backEnd.Model;
 import backEnd.GameData.Rules.RuleReader;
 import backEnd.GameData.State.Component;

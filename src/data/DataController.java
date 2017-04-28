@@ -14,7 +14,7 @@ import backEnd.GameData.State.Tile;
  *
  */
 
-public class DataController implements DataControllerReader {
+public class DataController {
 	
 	private static final String UNIV_GAME_DATA_PATH = "data/UniversalGameData/";
 	private static final String GAME_STATE_DATA_PATH = "data/SavedGames/";
@@ -27,10 +27,6 @@ public class DataController implements DataControllerReader {
 	public DataController(){
 		myXMLWriter = new XMLWriterImpl();
 		myXMLReader = new XMLReaderImpl();
-	}
-	
-	public void setBankController(BankController bankController){
-		this.bankController = bankController;
 	}
 	
 	public Map<String, Component> loadComponentMap()
@@ -59,10 +55,6 @@ public class DataController implements DataControllerReader {
 		}
 	}
 	
-	/* (non-Javadoc)
-	 * @see data.DataControllerSaver#saveUniversalGameData()
-	 */
-	@Override
 	public void saveUniversalGameData(){
 		myXMLWriter.saveUniversalGameData(bankController, UNIV_GAME_DATA_PATH);
 	}

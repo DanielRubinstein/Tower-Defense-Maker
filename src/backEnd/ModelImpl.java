@@ -16,7 +16,6 @@ import backEnd.Mode.Mode;
 import backEnd.Mode.ModeImpl;
 import backEnd.Mode.ModeReader;
 import data.DataController;
-import data.DataControllerReader;
 import data.XMLReadingException;
 import frontEnd.Skeleton.SplashScreens.SplashScreenData;
 import javafx.beans.property.SimpleStringProperty;
@@ -48,8 +47,7 @@ public class ModelImpl implements Model{
 		myLevelProgressionController = new LevelProgressionControllerImpl(myMode, myDataController, splashScreenLoader, gameLoader);
 		myGameData.setLevelProgressionController(myLevelProgressionController);
 		myEngine = new GameProcessController(myGameData);
-		myBankController = new BankController(myMode, myDataController);
-		myDataController.setBankController(myBankController);
+		myBankController = new BankController(myMode, myDataController.loadTileMap(), myDataController.loadComponentMap());
 		myGameData.setBankController(myBankController);
 	}
 

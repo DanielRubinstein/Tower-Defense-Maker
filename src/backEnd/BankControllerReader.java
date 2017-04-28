@@ -5,7 +5,5 @@ import backEnd.GameData.State.Component;
 public interface BankControllerReader {
 
 	String getComponentName(Component component);
-	
-	Component getComponent(String componentName);
 
 }

@@ -105,16 +105,11 @@ public class AttributeData implements SerializableObservable {
 
 	@Override
 	public void clearObservers() {
-		observers.clear();
+		observers = null;
 	}
 
 	@Override
 	public void setObservers(List<SerializableObserver> observersave) {
 		observers = observersave;
-	}
-
-	@Override
-	public int compareTo(Object o) {
-		return Integer.compare(this.hashCode(), o.hashCode());
 	}
 }
