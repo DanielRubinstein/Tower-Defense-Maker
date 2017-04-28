@@ -176,7 +176,7 @@ public class ComponentGraphImpl implements ComponentGraph {
 
 	@Override
 	public void clearObservers() {
-		observers = null;
+		observers.clear();
 	}
 
 	@Override
@@ -188,6 +188,11 @@ public class ComponentGraphImpl implements ComponentGraph {
 		for (SerializableObserver o : observers){
 			o.update(null, obj);
 		}
+	}
+	
+	@Override
+	public int compareTo(Object o) {
+		return Integer.compare(this.hashCode(), o.hashCode());
 	}
 
 }

@@ -3,7 +3,7 @@ package backEnd.GameEngine.Engine;
 import java.util.Collection;
 import java.util.List;
 
-import backEnd.BankController;
+import backEnd.BankControllerReader;
 import backEnd.Attribute.Attribute;
 import backEnd.GameData.GameData;
 import backEnd.GameData.State.Component;
@@ -27,7 +27,7 @@ public class SpawnEngine implements Engine {
 
 	private boolean gamePaused = true;
 	private State myState;
-	private BankController myBank;
+	private BankControllerReader myBank;
 
 	// TODO Add logic in pausing the game and starting again... Fucked up the
 	// timeline
