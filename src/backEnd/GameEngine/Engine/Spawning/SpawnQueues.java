@@ -2,10 +2,8 @@ package backEnd.GameEngine.Engine.Spawning;
 
 import java.util.ArrayList;
 import java.util.List;
-
 import backEnd.GameData.State.SerializableObservable;
 import backEnd.GameData.State.SerializableObserver;
-import backEnd.GameData.State.State;
 
 /**
  * SpawnQueue object that is held in tiles to determine what needs to be spawned next

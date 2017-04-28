@@ -1,35 +1,18 @@
 package frontEnd.Skeleton.AoTools;
 
-import java.lang.reflect.Method;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Optional;
 import java.util.ResourceBundle;
-
-import ModificationFromUser.AttributeOwner.Modification_Add_StraightToGrid;
-import ModificationFromUser.AttributeOwner.Modification_Add_ToPalette;
-import ModificationFromUser.AttributeOwner.Modification_PurchaseComponent;
-import ModificationFromUser.AttributeOwner.Modification_RemoveAttributeOwner;
-import ModificationFromUser.AttributeOwner.Modification_UpgradeComponent;
 import backEnd.Attribute.Attribute;
 import backEnd.Attribute.AttributeOwner;
-import backEnd.GameData.State.Component;
 import frontEnd.View;
-import frontEnd.CustomJavafxNodes.SingleFieldPrompt;
 import frontEnd.Skeleton.AoTools.AttributeVisualization.AttributeEditorCreator;
 import frontEnd.Skeleton.AoTools.AttributeVisualization.AttributeViewerCreator;
 import frontEnd.Skeleton.AoTools.AttributeVisualization.AttributeVisualization;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.geometry.HPos;
 import javafx.geometry.Insets;
-import javafx.geometry.Pos;
 import javafx.scene.Node;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Button;
-import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
-import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.ScrollPane.ScrollBarPolicy;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
