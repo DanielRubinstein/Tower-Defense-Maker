@@ -38,6 +38,7 @@ public class ScreenGrid implements SkeletonObject {
 	private Group myRoot;
 	private ComponentGridVisual myComponentGraph;
 	private View myView;
+	private ScreenHoverVisual myHover;
 
 	/**
 	 * Constructs a new ScreenGrid object given the view and state. State contains
@@ -56,9 +57,16 @@ public class ScreenGrid implements SkeletonObject {
 		addGridToRoot();
 		addGraphToRoot();
 		setDrag();
+		myHover = new ScreenHoverVisual(myView,myRoot);
+		myRoot.getChildren().add(myHover.getRoot());
 	}
 	private void setDrag(){
 		BankController bank = myView.getBankController();
+		myRoot.setOnMouseMoved(e -> {
+			myHover.display(e);
+			//myRoot.hoverProperty().addListener((o, oldV, newV) -> myHover.tryDisplay(e,o,oldV,newV));
+		});
+		
 		myRoot.setOnDragOver(e -> e.acceptTransferModes(TransferMode.ANY));
 		myRoot.setOnDragDropped(e -> {
 			String presetName = e.getDragboard().getString();
@@ -81,6 +89,7 @@ public class ScreenGrid implements SkeletonObject {
 		Node visualTileGrid = myTileGrid.getRoot();
 		myRoot.getChildren().add(visualTileGrid);
 		visualTileGrid.toBack();
+		
 	}
 	private void addGraphToRoot(){
 		myRoot.getChildren().add(myComponentGraph.getRoot());
