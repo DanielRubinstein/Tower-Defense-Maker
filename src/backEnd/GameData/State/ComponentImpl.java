@@ -17,7 +17,7 @@ import backEnd.GameEngine.Behaviors.BehaviorFactory;
 import backEnd.GameEngine.Engine.Coordinates;
 import resources.constants.StringResourceBundle;
 
-public class ComponentImpl implements AttributeOwner, SerializableObservable, Component {
+public class ComponentImpl implements AttributeOwner, SerializableObservable, Component, ComponentReader {
 	/**
 	 * Any object on the grid is a component.
 	 * 
@@ -44,6 +44,9 @@ public class ComponentImpl implements AttributeOwner, SerializableObservable, Co
 
 	/* (non-Javadoc)
 	 * @see backEnd.GameData.State.Component#printID()
+	 */
+	/* (non-Javadoc)
+	 * @see backEnd.GameData.State.ComponentReader#printID()
 	 */
 	@Override
 	public long printID(){
@@ -82,6 +85,9 @@ public class ComponentImpl implements AttributeOwner, SerializableObservable, Co
 	/* (non-Javadoc)
 	 * @see backEnd.GameData.State.Component#getAccessPermissions()
 	 */
+	/* (non-Javadoc)
+	 * @see backEnd.GameData.State.ComponentReader#getAccessPermissions()
+	 */
 	@Override
 	public AccessPermissions getAccessPermissions() {
 		return myAccessPermissions;
@@ -102,6 +108,9 @@ public class ComponentImpl implements AttributeOwner, SerializableObservable, Co
 	/* (non-Javadoc)
 	 * @see backEnd.GameData.State.Component#getBehavior(java.lang.String)
 	 */
+	/* (non-Javadoc)
+	 * @see backEnd.GameData.State.ComponentReader#getBehavior(java.lang.String)
+	 */
 	@Override
 	public Behavior getBehavior(String behaviorType) {
 		return myBehaviors.get(behaviorType);
@@ -117,6 +126,9 @@ public class ComponentImpl implements AttributeOwner, SerializableObservable, Co
 
 	/* (non-Javadoc)
 	 * @see backEnd.GameData.State.Component#getMyAttributes()
+	 */
+	/* (non-Javadoc)
+	 * @see backEnd.GameData.State.ComponentReader#getMyAttributes()
 	 */
 	@Override
 	public AttributeData getMyAttributes() {
@@ -150,6 +162,9 @@ public class ComponentImpl implements AttributeOwner, SerializableObservable, Co
 	/* (non-Javadoc)
 	 * @see backEnd.GameData.State.Component#getMyType()
 	 */
+	/* (non-Javadoc)
+	 * @see backEnd.GameData.State.ComponentReader#getMyType()
+	 */
 	@Override
 	public String getMyType() {
 		return myType;
@@ -161,12 +176,16 @@ public class ComponentImpl implements AttributeOwner, SerializableObservable, Co
 	@Override
 	public <T> void setAttributeValue(String attrName, T newVal) {
 		Attribute<T> attrToSet = myAttributes.<T>get(attrName);
+		System.out.println("---" +attrToSet);
 		attrToSet.setValue(newVal);
 		notifyObservers();
 	}
 
 	/* (non-Javadoc)
 	 * @see backEnd.GameData.State.Component#addObserver(backEnd.GameData.State.SerializableObserver)
+	 */
+	/* (non-Javadoc)
+	 * @see backEnd.GameData.State.ComponentReader#addObserver(backEnd.GameData.State.SerializableObserver)
 	 */
 	@Override
 	public void addObserver(SerializableObserver obs) {
@@ -177,6 +196,9 @@ public class ComponentImpl implements AttributeOwner, SerializableObservable, Co
 	
 	/* (non-Javadoc)
 	 * @see backEnd.GameData.State.Component#containsAttribute(java.lang.String)
+	 */
+	/* (non-Javadoc)
+	 * @see backEnd.GameData.State.ComponentReader#containsAttribute(java.lang.String)
 	 */
 	@Override
 	public boolean containsAttribute(String key){

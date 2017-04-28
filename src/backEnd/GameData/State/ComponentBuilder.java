@@ -12,7 +12,7 @@ public class ComponentBuilder {
 	public ComponentBuilder(ComponentImpl component) {
 		myComponent = component;
 		xStream = new XStream(new DomDriver());
-		xStream.alias("Component", ComponentImpl.class);
+		xStream.alias("ComponentImpl", ComponentImpl.class);
 	}
 	
 	public ComponentImpl getComponent() {

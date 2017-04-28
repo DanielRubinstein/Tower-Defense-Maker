@@ -67,14 +67,14 @@ public class ComponentGraphVisual implements SkeletonObject, SerializableObserve
 			}
 		}
 		Set<ComponentImpl> myComponentsCopy=new HashSet<>(myComponents);
-		for(Component c : myComponentsCopy){
+		for(ComponentImpl c : myComponentsCopy){
 			if(!observedComponentGraph.getAllComponents().contains(c)){
 				removeComponentFromGrid(c);
 			}
 		}
 	}
 	
-	private void removeComponentFromGrid(Component c) {
+	private void removeComponentFromGrid(ComponentImpl c) {
 		myComponents.remove(c);
 		myRoot.getChildren().remove(myComponentImages.get(c));
 		myComponentImages.remove(c);

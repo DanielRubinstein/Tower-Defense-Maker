@@ -14,7 +14,7 @@ public class AttributeOwnerSerializer {
 	
 	public AttributeOwnerSerializer(){
 		xStream = new XStream(new DomDriver());
-		xStream.alias("Component", ComponentImpl.class);
+		xStream.alias("ComponentImpl", ComponentImpl.class);
 		xStream.alias("Tile", Tile.class);
 	}
 	

@@ -1,7 +1,7 @@
 <?xml version="1.0"?><map>
   <entry>
     <string>Plant</string>
-    <backEnd.GameData.State.Component>
+    <backEnd.GameData.State.ComponentImpl>
       <myAttributes>
         <myAttributes>
           <entry>
@@ -325,11 +325,11 @@
         <x>0.0</x>
         <y>0.0</y>
       </previousMovement>
-    </backEnd.GameData.State.Component>
+    </backEnd.GameData.State.ComponentImpl>
   </entry>
   <entry>
     <string>Enemy</string>
-    <backEnd.GameData.State.Component>
+    <backEnd.GameData.State.ComponentImpl>
       <myAttributes>
         <myAttributes>
           <entry>
@@ -653,11 +653,11 @@
         <x>0.0</x>
         <y>0.0</y>
       </previousMovement>
-    </backEnd.GameData.State.Component>
+    </backEnd.GameData.State.ComponentImpl>
   </entry>
   <entry>
     <string>Tower</string>
-    <backEnd.GameData.State.Component>
+    <backEnd.GameData.State.ComponentImpl>
       <myAttributes>
         <myAttributes>
           <entry>
@@ -981,6 +981,6 @@
         <x>0.0</x>
         <y>0.0</y>
       </previousMovement>
-    </backEnd.GameData.State.Component>
+    </backEnd.GameData.State.ComponentImpl>
   </entry>
 </map>
