@@ -74,7 +74,7 @@ public class ComponentImpl implements AttributeOwner, SerializableObservable, Co
 			myBehaviors.put(key, bf.getBehavior(key));
 		}
 
-		for (String key : strResources.getKeysFromDefaultTileAttributes()) {
+		for (String key : strResources.getKeysFromDefaultComponentAttributes()) {
 			Attribute<?> myAttribute = attributeFactory.getAttribute(key);
 			addAttribute(key, myAttribute);
 		}
