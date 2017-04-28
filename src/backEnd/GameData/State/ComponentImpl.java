@@ -176,7 +176,6 @@ public class ComponentImpl implements AttributeOwner, SerializableObservable, Co
 	@Override
 	public <T> void setAttributeValue(String attrName, T newVal) {
 		Attribute<T> attrToSet = myAttributes.<T>get(attrName);
-		System.out.println("---" +attrToSet);
 		attrToSet.setValue(newVal);
 		notifyObservers();
 	}

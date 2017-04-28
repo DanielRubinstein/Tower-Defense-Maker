@@ -50,7 +50,7 @@ public class Modification_Add_ToPalette implements ModificationFromUser {
 			break;
 			
 		case "PLAYER":
-			throw new ModeException(model.getMode(), DESCRIPTION);
+			new ModeException(model.getMode(), DESCRIPTION);
 		}
 		
 	}
