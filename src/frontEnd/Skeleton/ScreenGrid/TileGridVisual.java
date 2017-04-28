@@ -59,6 +59,7 @@ public class TileGridVisual implements SerializableObserver, SkeletonObject{
 		adjustSize();
 		updateTilesOnGrid();
 	}
+	
 	private void initializeGrid() {
 		myRoot = new GridPane();
 		myRoot.setMinWidth(numberOfTileCols);
@@ -73,11 +74,11 @@ public class TileGridVisual implements SerializableObserver, SkeletonObject{
 				selectedTiles.keySet().forEach(t -> {
 					myView.sendUserModification(new Modification_EditAttribute<String>(t,t.getAttribute("MoveDirection"),toSend));
 				});
+				clearTileSelection();
 			} else if (e.getCode().equals(KeyCode.SPACE)){
 				showArrowsOnTiles();
 			}
 		});
-		
 		myRoot.setOnKeyReleased(e -> {
 			if(e.getCode().equals(KeyCode.SPACE)){
 				hideArrowsOnTiles();
@@ -86,9 +87,7 @@ public class TileGridVisual implements SerializableObserver, SkeletonObject{
 	}
 	
 	private void hideArrowsOnTiles() {
-		for(ImageView imageView : arrowSet){
-			myRoot.getChildren().remove(imageView);
-		}
+		myRoot.getChildren().removeAll(arrowSet);
 		arrowSet.clear();
 	}
 	
@@ -115,7 +114,7 @@ public class TileGridVisual implements SerializableObserver, SkeletonObject{
 			imageView.setFitHeight(30);
 		}
 	}
-	
+
 	private void adjustSize(){
 		numberOfTileCols = observedTileGrid.getNumColsInGrid();
 		numberOfTileRows = observedTileGrid.getNumRowsInGrid();
@@ -138,18 +137,26 @@ public class TileGridVisual implements SerializableObserver, SkeletonObject{
 				OnGridTileCommandCenter tileInteractor = new OnGridTileCommandCenter(myView, t, myState);
 				tileInteractor.launch("On-Screen Tile" ,e.getScreenX(), e.getScreenY());
 			}else if(e.isControlDown()){
-				selectedTiles.put(t, n);
-				ColorAdjust color = new ColorAdjust();
-				color.setBrightness(0.4);
-				color.setContrast(-0.5);
-				n.setEffect(color);
+				addToTileSelection(n,t);
 			}else{
-				selectedTiles.values().forEach(f -> f.setEffect(null));
-				selectedTiles.clear();
+				clearTileSelection();
 			}
 		});
 
 	}
+	private void addToTileSelection(Node n, Tile t){
+		selectedTiles.put(t, n);
+		ColorAdjust color = new ColorAdjust();
+		color.setBrightness(0.4);
+		color.setContrast(-0.5);
+		n.setEffect(color);
+	}
+	
+	private void clearTileSelection(){
+		selectedTiles.values().forEach(f -> f.setEffect(null));
+		selectedTiles.clear();
+	}
+	
 	private void updateTilesOnGrid() {
 		for(Tile tile : observedTileGrid.getAllTiles()){
 			addTileToGrid(tile, tile.<Point2D>getAttribute("Position").getValue());
@@ -185,8 +192,7 @@ public class TileGridVisual implements SerializableObserver, SkeletonObject{
 		} else {
 			adjustSize();
 			int counter = 0;
-			for (Tile x : myTiles.values())
-			{
+			for (Tile x : myTiles.values()){
 				counter++;
 				System.out.println("test10000" + counter);
 				AttributeOwnerVisual attrOwner = new AttributeOwnerVisualImpl(x);
