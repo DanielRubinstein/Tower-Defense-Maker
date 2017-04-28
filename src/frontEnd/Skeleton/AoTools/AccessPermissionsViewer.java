@@ -43,7 +43,7 @@ public class AccessPermissionsViewer implements SkeletonObject {
 	}
 
 	private void createIgnition() {
-		ignition = new ActionButton(stringResourceBundle.getString("AccessPermissions"), () -> {
+		ignition = new ActionButton(stringResourceBundle.getFromStringConstants("AccessPermissions"), () -> {
 			loadViewer();
 			generate();
 		});
@@ -124,7 +124,7 @@ public class AccessPermissionsViewer implements SkeletonObject {
 	}
 
 	private Label createTitle() {
-		Label titleLbl = new Label(stringResourceBundle.getString("AccessPermissions"));
+		Label titleLbl = new Label(stringResourceBundle.getFromStringConstants("AccessPermissions"));
 		titleLbl.setFont(Font.font(32));
 		titleLbl.setUnderline(true);
 		return titleLbl;
@@ -135,7 +135,7 @@ public class AccessPermissionsViewer implements SkeletonObject {
 		myStage.initOwner(myHostStage);
 		myStage.initModality(Modality.APPLICATION_MODAL);
 		Scene scene = new Scene(myRoot);
-		scene.getStylesheets().add(stringResourceBundle.getDefaultCSS());
+		scene.getStylesheets().add(stringResourceBundle.getFromStringConstants("DEFAULT_CSS"));
 		myStage.setScene(scene);
 		myStage.show();
 	}

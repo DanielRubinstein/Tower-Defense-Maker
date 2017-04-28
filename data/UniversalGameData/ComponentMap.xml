@@ -208,7 +208,7 @@
           <entry>
             <string>Type</string>
             <backEnd.Attribute.AttributeImpl>
-              <myValue class="string"></myValue>
+              <myValue class="string">Enemy</myValue>
               <myParamList class="java.util.Arrays$ArrayList">
                 <a class="string-array">
                   <string>Tower</string>
@@ -317,6 +317,7 @@
         <levelModePermissions>
           <string>DEFAULT</string>
         </levelModePermissions>
+        <strResources/>
       </myAccessPermissions>
       <observers/>
       <ID>313283562595452</ID>
@@ -572,7 +573,7 @@
           <entry>
             <string>ScoreBounty</string>
             <backEnd.Attribute.AttributeImpl>
-              <myValue class="int">10</myValue>
+              <myValue class="int">9</myValue>
               <myParamList class="java.util.Arrays$ArrayList">
                 <a class="java.lang.Integer-array">
                   <int>0</int>
@@ -644,6 +645,7 @@
         <levelModePermissions>
           <string>DEFAULT</string>
         </levelModePermissions>
+        <strResources/>
       </myAccessPermissions>
       <observers/>
       <ID>313184702384797</ID>
@@ -971,6 +973,7 @@
         <levelModePermissions>
           <string>DEFAULT</string>
         </levelModePermissions>
+        <strResources/>
       </myAccessPermissions>
       <observers/>
       <ID>313184705722629</ID>

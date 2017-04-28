@@ -26,7 +26,7 @@ public class SplashScreen
 		
 		
 		myScene = new Scene(myBP);
-		myScene.getStylesheets().add(stringResourceBundle.getDefaultCSS());
+		myScene.getStylesheets().add(stringResourceBundle.getFromStringConstants("DEFAULT_CSS"));
 		setContinue(data.getOnContinue());
 		
 	}
