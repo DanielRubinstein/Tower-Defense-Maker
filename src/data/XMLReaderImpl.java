@@ -61,7 +61,7 @@ public class XMLReaderImpl implements XMLReader{
 		
 		TileGrid grid = new TileGridImpl((TileGridInstantiator) xStream.fromXML(new File(filePath + "/" + levelName + "/" + 
 				strResources.getFromFilePaths("TileGrid_FileName") + ".xml")));
-		ComponentGraph graph = new ComponentGraphImpl((HashMap<Point2D, List<Component>>) xStream.fromXML(
+		ComponentGraph graph = new ComponentGraphImpl((List<Component>) xStream.fromXML(
 				new File(filePath+"/" + levelName+"/" + strResources.getFromFilePaths("ComponentGraph_FileName") + ".xml")));
 		
 		

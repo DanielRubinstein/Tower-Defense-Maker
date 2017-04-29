@@ -52,8 +52,8 @@ public class XMLWriterImpl implements XMLWriter{
 		
 		gameData.getState().getComponentGraph().saveAndClearObservers();
 		
-		String componentMapXML = xStream.toXML(gameData.getState().getComponentGraph().getComponentMap());
-		saveToXML(filePath+ levelName +"/", strResources.getFromFilePaths("ComponentGraph_FileName"), componentMapXML);
+		String componentListXML = xStream.toXML(gameData.getState().getComponentGraph().getAllComponents());
+		saveToXML(filePath+ levelName +"/", strResources.getFromFilePaths("ComponentGraph_FileName"), componentListXML);
 		
 		gameData.getState().getComponentGraph().setComponentObservers();
 		
@@ -116,9 +116,9 @@ public class XMLWriterImpl implements XMLWriter{
 		StripAndSaveObservers componentsStripper = new StripAndSaveObservers(so);
 		componentsStripper.stripObservers();
 
-		String componentMapXML = xStream.toXML(gameData.getState().getComponentGraph().getComponentMap());
+		String componentListXML = xStream.toXML(gameData.getState().getComponentGraph().getAllComponents());
 		componentsStripper.giveBackObservers();
-		saveToXML(levelTemplateDataPath+ levelName +"/", strResources.getFromFilePaths("ComponentMap_FileName"), componentMapXML);
+		saveToXML(levelTemplateDataPath+ levelName +"/", strResources.getFromFilePaths("ComponentMap_FileName"), componentListXML);
 		
 		String playerStatusXML = xStream.toXML(new PlayerStatus());
 		saveToXML(levelTemplateDataPath+ levelName +"/", strResources.getFromFilePaths("PlayerStatus_FileName"), playerStatusXML);
