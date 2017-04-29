@@ -1,15 +1,9 @@
 package backEnd.GameEngine.Engine;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
-import java.util.ResourceBundle;
-
 import backEnd.GameData.GameData;
 import backEnd.GameData.State.Component;
-import backEnd.GameData.State.State;
-import backEnd.GameData.State.Tile;
 import javafx.geometry.Point2D;
 
 /**
@@ -45,7 +39,6 @@ public class ProjectileEngine implements Engine {
 
 			}
 		}
-		System.out.println("About to remove stuff from graph" );
 		for (Component c : toRemove) {
 			myGameData.getState().getComponentGraph().removeComponent(c);
 		}
@@ -97,10 +90,11 @@ public class ProjectileEngine implements Engine {
 	 *            the object of the projectile's action (usually an enemy)
 	 */
 	private void performProjectileAction(GameData gameData, Component target, Component projectile) {
-
 		List<Component> targetList = (ArrayList<Component>) gameData.getState().getComponentGraph()
+
 				.getComponentsWithinRadius(target, (Double) projectile.getAttribute("ExplosionRadius").getValue());
 		targetList.add(target);
+
 
 		for (Component toHit : targetList) {
 			// System.out.println("Target looping has begun");

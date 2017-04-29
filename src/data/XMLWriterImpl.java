@@ -3,6 +3,10 @@ package data;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import com.thoughtworks.xstream.XStream;
@@ -12,11 +16,14 @@ import backEnd.BankController;
 import backEnd.GameData.GameData;
 import backEnd.GameData.GameDataInterface;
 import backEnd.GameData.Rules.Rule;
+import backEnd.GameData.State.ComponentImpl;
 import backEnd.GameData.State.Component;
 import backEnd.GameData.State.ComponentGraph;
 import backEnd.GameData.State.PlayerStatus;
+import backEnd.GameData.State.SerializableObservable;
 import backEnd.GameData.State.Tile;
 import backEnd.GameData.State.TileGrid;
+import resources.constants.StringResourceBundle;
 
 
 /**
@@ -26,12 +33,12 @@ import backEnd.GameData.State.TileGrid;
  */
 public class XMLWriterImpl implements XMLWriter{
 	private XStream xStream;
+	private static final StringResourceBundle strResources = new StringResourceBundle();
 	
 	public XMLWriterImpl(){
 		xStream = new XStream(new DomDriver());
 		//TODO: this should be a List<Rule>
 		xStream.alias("Rules", Rule.class);
-		
 		xStream.alias("ComponentGraph", ComponentGraph.class);
 		xStream.alias("TileGrid", TileGrid.class);
 	}
@@ -41,35 +48,24 @@ public class XMLWriterImpl implements XMLWriter{
 		
 		String rulesXML = xStream.toXML(gameData.getRules());
 		
-		saveToXML(filePath + levelName +"/", "rules", rulesXML);
+		saveToXML(filePath + levelName +"/", strResources.getFromFilePaths("Rules_FileName"), rulesXML);
 		
 		gameData.getState().getComponentGraph().saveAndClearObservers();
 		
 		String componentMapXML = xStream.toXML(gameData.getState().getComponentGraph().getComponentMap());
-		saveToXML(filePath+ levelName +"/", "componentgraph", componentMapXML);
+		saveToXML(filePath+ levelName +"/", strResources.getFromFilePaths("ComponentGraph_FileName"), componentMapXML);
 		
 		gameData.getState().getComponentGraph().setComponentObservers();
 		
 		String playerStatusXML = xStream.toXML(gameData.getStatus());
-		saveToXML(filePath+ levelName +"/", "playerstatus", playerStatusXML);
+		saveToXML(filePath+ levelName +"/", strResources.getFromFilePaths("PlayerSatus_FileName"), playerStatusXML);
 		
 		gameData.getState().getTileGrid().saveAndClearTileObservers();
 		
 		String tileGridXML = xStream.toXML(gameData.getState().getTileGrid().getInstantiator());
-		saveToXML(filePath + levelName +"/", "tilegrid", tileGridXML);
+		saveToXML(filePath + levelName +"/", strResources.getFromFilePaths("TileGrid_FileName"), tileGridXML);
 		
 		gameData.getState().getTileGrid().setTileObservers();
-	}
-
-	
-
-	public void saveUniversalGameData(BankController bankController, String filePath){
-		Map<String, Component> componentMap = bankController.getComponentMap();
-		String componentMapXML = xStream.toXML(componentMap);
-		Map<String, Tile> tileMap = bankController.getTileMap();
-		String tileMapXML = xStream.toXML(tileMap);
-		saveToXML(filePath, "ComponentMap", componentMapXML);
-		saveToXML(filePath, "TileMap", tileMapXML);
 	}
 	
 	private void saveToXML(String filePath, String fileName, String xmlToWrite) {
@@ -105,32 +101,57 @@ public class XMLWriterImpl implements XMLWriter{
 	@Override
 	public void saveGamesMapData(Map<String, List<String>> gamesMap, String filePath) {
 		String gamesMapXML = xStream.toXML(gamesMap);
-		saveToXML(filePath, "GamesMap", gamesMapXML);
+		saveToXML(filePath, strResources.getFromFilePaths("GamesMap_FileName"), gamesMapXML);
 	}
 
 	@Override
 	public void saveLevelTemplate(GameData gameData, String levelTemplateDataPath, String levelName)
 	{
 		String rulesXML = xStream.toXML(gameData.getRules());
+		saveToXML(levelTemplateDataPath + levelName +"/", strResources.getFromFilePaths("Rules_FileName"), rulesXML);
 		
-		saveToXML(levelTemplateDataPath + levelName +"/", "rules", rulesXML);
+		List<SerializableObservable> list = new ArrayList<SerializableObservable>();
 		
-		gameData.getState().getComponentGraph().saveAndClearObservers();
+		for (Component component : gameData.getState().getComponentGraph().getAllComponents())
+		{
+			list.add((SerializableObservable) component);
+		}
+		StripAndSaveObservers componentsStripper = new StripAndSaveObservers(list);
 		
 		String componentMapXML = xStream.toXML(gameData.getState().getComponentGraph().getComponentMap());
-		saveToXML(levelTemplateDataPath+ levelName +"/", "componentgraph", componentMapXML);
-		
-		gameData.getState().getComponentGraph().setComponentObservers();
+		componentsStripper.giveBackObservers();
+		saveToXML(levelTemplateDataPath+ levelName +"/", strResources.getFromFilePaths("ComponentMap_FileName"), componentMapXML);
 		
 		String playerStatusXML = xStream.toXML(new PlayerStatus());
-		saveToXML(levelTemplateDataPath+ levelName +"/", "playerstatus", playerStatusXML);
+		saveToXML(levelTemplateDataPath+ levelName +"/", strResources.getFromFilePaths("PlayerStatus_FileName"), playerStatusXML);
 		
-		gameData.getState().getTileGrid().saveAndClearTileObservers();
-		
+		StripAndSaveObservers tilesStripper = new StripAndSaveObservers(new ArrayList<SerializableObservable>(gameData.getState().getTileGrid().getAllTiles()));
 		String tileGridXML = xStream.toXML(gameData.getState().getTileGrid().getInstantiator());
-		saveToXML(levelTemplateDataPath + levelName +"/", "tilegrid", tileGridXML);
-		
-		gameData.getState().getTileGrid().setTileObservers();
+		tilesStripper.giveBackObservers();
+		saveToXML(levelTemplateDataPath + levelName +"/", strResources.getFromFilePaths("TileGrid_FileName"), tileGridXML);
 	}
 
+	public void saveUniversalGameData(BankController bankController, String filePath){
+		Map<String, Component> componentMap = bankController.getComponentMap();
+		
+		List<SerializableObservable> list = new ArrayList<SerializableObservable>();
+		
+		for (Component component : componentMap.values())
+		{
+			list.add((SerializableObservable) component);
+		}
+		
+		StripAndSaveObservers componentsStripper = new StripAndSaveObservers(list);
+		componentsStripper.stripObservers();
+		String componentMapXML = xStream.toXML(componentMap);
+		componentsStripper.giveBackObservers();
+		Map<String, Tile> tileMap = bankController.getTileMap();
+		
+		StripAndSaveObservers tilesStripper = new StripAndSaveObservers(new ArrayList<SerializableObservable>(tileMap.values()));
+		tilesStripper.stripObservers();
+		String tileMapXML = xStream.toXML(tileMap);
+		tilesStripper.giveBackObservers();
+		saveToXML(filePath, strResources.getFromFilePaths("ComponentMap_FileName"), componentMapXML);
+		saveToXML(filePath, strResources.getFromFilePaths("TileMap_FileName"), tileMapXML);
+	}
 }

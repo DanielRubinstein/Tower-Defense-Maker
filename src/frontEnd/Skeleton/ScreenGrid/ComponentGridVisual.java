@@ -14,11 +14,13 @@ import backEnd.GameData.State.State;
 import frontEnd.View;
 import frontEnd.Skeleton.AoTools.GenericCommandCenter;
 import frontEnd.Skeleton.UserTools.SkeletonObject;
+import javafx.geometry.Bounds;
 import javafx.scene.Group;
 import javafx.scene.Node;
+import javafx.scene.control.Tooltip;
 import javafx.scene.image.ImageView;
 
-public class ComponentGraphVisual implements SkeletonObject, SerializableObserver {
+public class ComponentGridVisual implements SkeletonObject, SerializableObserver {
 	
 	private ComponentGraph observedComponentGraph;
 	
@@ -28,7 +30,7 @@ public class ComponentGraphVisual implements SkeletonObject, SerializableObserve
 	private View myView;
 	private Group myRoot;
 	
-	public ComponentGraphVisual(View view, State state){
+	public ComponentGridVisual(View view, State state){
 		myRoot = new Group();
 		myView = view;
 		myState = state;
@@ -43,8 +45,10 @@ public class ComponentGraphVisual implements SkeletonObject, SerializableObserve
 	}
 	private void setCommandInteraction(Node n, AttributeOwner c) {
 		n.setOnMouseClicked(e -> {
-			GenericCommandCenter comCenter = new GenericCommandCenter(myView, c);
-			comCenter.launch("On-Screen Component", e.getSceneX(), e.getSceneY());
+			if(e.getClickCount()==2){
+				GenericCommandCenter comCenter = new GenericCommandCenter(myView, c);
+				comCenter.launch("On-Screen Component", e.getSceneX(), e.getSceneY());
+			}
 		});
 	}
 
@@ -83,12 +87,29 @@ public class ComponentGraphVisual implements SkeletonObject, SerializableObserve
 		AttributeOwnerVisual frontAttr = new AttributeOwnerVisualImpl(c);
 		frontAttr.refreshXY();
 		ImageView frontImage = frontAttr.getImageView();
+		addHover(frontImage,c);
 		//frontImage.setFitWidth(20);
 		//frontImage.setFitHeight(40);
 		myComponents.add(c);
 		myComponentImages.put(c, frontImage);
 		myRoot.getChildren().add(frontImage);
 		setCommandInteraction(frontImage, c);
+	}
+	
+	private void addHover(ImageView n,Component c){
+		String format = "(Upgrade Cost: %d)";
+		Tooltip hover = new Tooltip();
+		
+		n.hoverProperty().addListener((o, oldV, newV) -> {
+			if (newV) {
+				//if(myView.getBooleanAuthorModeProperty().getValue()) return;
+				hover.setText(String.format(format,c.getAttribute("UpgradeCost").getValue()));
+				Bounds scenePos = n.localToScreen(n.getBoundsInLocal());
+				hover.show(n, scenePos.getMaxX(), scenePos.getMinY());
+			} else {
+				hover.hide();
+			}
+		});
 	}
 
 	@Override

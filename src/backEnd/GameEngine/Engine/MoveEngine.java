@@ -1,11 +1,5 @@
 package backEnd.GameEngine.Engine;
-import java.io.FileNotFoundException;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import backEnd.GameEngine.Behaviors.*;
-import frontEnd.CustomJavafxNodes.ErrorDialog;
+import java.util.ResourceBundle;
 import javafx.geometry.Point2D;
 import backEnd.GameData.GameData;
 import backEnd.GameData.State.*;
@@ -18,48 +12,63 @@ import backEnd.GameData.State.*;
 public class MoveEngine implements Engine{
 	private State myState;
 	private Tile currentTile;
-	private MoveBehavior mb;
-	private final String POSITION="Position";
-	private final String TYPE="Type";
-	private final String PROJECTILE="Projectile";
-	private final String ENEMY="Enemy";
-	private final String TOWER="Tower";
+	private final String BUNDLE_NAME = "resources.constants.stringResourceBundle";
+	private final ResourceBundle RESOURCE_BUNDLE = ResourceBundle.getBundle(BUNDLE_NAME);
+	private final String ATTRIBUTE_BUNDLE_NAME = "resources.allAttributeNames";
+	private final ResourceBundle ATTRIBUTE_RESOURCE_BUNDLE = ResourceBundle.getBundle(ATTRIBUTE_BUNDLE_NAME);
+	private final String DOWN=RESOURCE_BUNDLE.getString("Down");
+	private final String UP=RESOURCE_BUNDLE.getString("Up");
+	private final String LEFT=RESOURCE_BUNDLE.getString("Left");
+	private final String RIGHT=RESOURCE_BUNDLE.getString("Right");
+
 	/**
 	 * 
 	 * @param TileGrid the Grid of Tiles that Components must navigate
 	 * @param xStart the starting x-coordinate
 	 * @param yStart the starting y-coordinate
 	 */
-	@Override
-	
-	
+		
 	public void gameLoop(GameData gameData, double stepTime) {
 		myState=gameData.getState();
-		List<Component> toRemove=new ArrayList<Component>();
-		Map<Component, Point2D> toAdd=new HashMap<Component, Point2D>();
-		for (Component c: myState.getComponentGraph().getAllComponents()){		
-			if (c.<String>getAttribute(TYPE).getValue().equals(PROJECTILE)){ //don't want path to influence projectiles
-				continue;
+		for (Component myComponent: myState.getComponentGraph().getAllComponents()){
+			move(myComponent);
+		}
+	}
+
+	private void move(Component c) {
+		Coordinates previousMovement=c.getPreviousMovement();
+		Coordinates newMovement;
+		double speed = c.<Double>getAttribute(ATTRIBUTE_RESOURCE_BUNDLE.getString("Speed")).getValue();
+		Point2D newPoint;
+		Point2D currentLocation=c.<Point2D>getAttribute(ATTRIBUTE_RESOURCE_BUNDLE.getString("Position")).getValue();
+		double currentX = currentLocation.getX();
+		double currentY = currentLocation.getY();
+		newMovement=new Coordinates(0,0); //null movement (no horizontal or vertical movement)
+		currentTile = myState.getTileGrid().getTileByScreenPosition(currentLocation);
+		if (currentTile==null){
+			return;
+		}
+		if (currentTile.<String>getAttribute("MoveDirection").getValue().equals("")){
+			return;
 			}
-			
-			Point2D currentLocation=c.<Point2D>getAttribute(POSITION).getValue();
-			currentTile = gameData.getState().getTileGrid().getTileByScreenPosition(currentLocation);
-			if (currentTile==null){
-				continue;
-			}
-			mb=new MoveBehavior(c);
-			try {
-				mb.execute(currentTile, gameData.getState().getTileGrid().atMiddleOfTile(currentLocation));
-				Point2D newPosition=mb.getPosition();
-				if (newPosition!=null&&!newPosition.equals(currentLocation)){
-					c.setAttributeValue(POSITION, newPosition);
-				}
-			} catch (FileNotFoundException e) {
-				ErrorDialog fnf = new ErrorDialog();
-				fnf.create("Error", "File not found");
-				break;
+		String DIRECTION = currentTile.<String>getAttribute(ATTRIBUTE_RESOURCE_BUNDLE.getString("MoveDirection")).getValue();
+		if (LEFT.equals(DIRECTION)&&(myState.getTileGrid().atMiddleYOfTile(currentLocation)||(previousMovement.getX()==0&&previousMovement.getY()==0))) {
+				newMovement = new Coordinates(-1, 0);
+
+		} else if (RIGHT.equals(DIRECTION)&&(myState.getTileGrid().atMiddleYOfTile(currentLocation)||(previousMovement.getX()==0&&previousMovement.getY()==0))) {
+				newMovement = new Coordinates(1, 0);
+		} else if (UP.equals(DIRECTION)&&(myState.getTileGrid().atMiddleXOfTile(currentLocation)||(previousMovement.getX()==0&&previousMovement.getY()==0))) {
+				newMovement = new Coordinates(0, -1);
+		} else if (DOWN.equals(DIRECTION)&&(myState.getTileGrid().atMiddleXOfTile(currentLocation)||(previousMovement.getX()==0&&previousMovement.getY()==0))) {
+				newMovement = new Coordinates(0, 1);
+		} else {
+			if (!(previousMovement.getX()==0&&previousMovement.getY()==0)){
+				newMovement=previousMovement;
 			}
 		}
-		return;
+		Coordinates velocity=new Coordinates(newMovement.getX()*speed, newMovement.getY()*speed);
+		newPoint = new Point2D( currentX+velocity.getX(), currentY+velocity.getY());
+		c.setPreviousMovement(newMovement);
+		c.setAttributeValue(ATTRIBUTE_RESOURCE_BUNDLE.getString("Position"), newPoint);		
 	}
 }

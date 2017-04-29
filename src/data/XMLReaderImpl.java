@@ -21,6 +21,7 @@ import backEnd.GameEngine.Engine.Spawning.SpawnQueueInstantiator;
 import backEnd.GameEngine.Engine.Spawning.SpawnQueues;
 import backEnd.GameData.Rules.RulesMap;
 import javafx.geometry.Point2D;
+import resources.constants.StringResourceBundle;
 import backEnd.GameData.State.PlayerStatus;
 
 
@@ -32,6 +33,7 @@ import backEnd.GameData.State.PlayerStatus;
 
 public class XMLReaderImpl implements XMLReader{
 	private XStream xStream;
+	private static final StringResourceBundle strResources = new StringResourceBundle();
 	
 	public XMLReaderImpl(){
 		xStream = createXStream();
@@ -48,9 +50,7 @@ public class XMLReaderImpl implements XMLReader{
 	public GameData loadGameStateData(String filePath, String levelName) throws XMLReadingException, FileNotFoundException
 	{
 
-		TileGrid grid = new TileGridImpl((TileGridInstantiator) xStream.fromXML(new File(filePath+"/" + levelName+"/tilegrid.xml")));
-		ComponentGraph graph = new ComponentGraphImpl((HashMap<Point2D, List<Component>>) xStream.fromXML(new File(filePath+"/" + levelName+"/componentgraph.xml")));
-		
+
 		HashMap<String, SpawnQueueInstantiator> instantiatorMap = (HashMap<String, SpawnQueueInstantiator>) xStream.fromXML(new File(filePath+"/" + levelName+"/spawns.xml"));
 		HashMap<String, SpawnQueues> spawnMap = new HashMap<String, SpawnQueues>();
 		
@@ -59,10 +59,17 @@ public class XMLReaderImpl implements XMLReader{
 			spawnMap.put(x, new SpawnQueues(instantiatorMap.get(x)));
 		}
 		
+		TileGrid grid = new TileGridImpl((TileGridInstantiator) xStream.fromXML(new File(filePath + "/" + levelName + "/" + 
+				strResources.getFromFilePaths("TileGrid_FileName") + ".xml")));
+		ComponentGraph graph = new ComponentGraphImpl((HashMap<Point2D, List<Component>>) xStream.fromXML(
+				new File(filePath+"/" + levelName+"/" + strResources.getFromFilePaths("ComponentGraph_FileName") + ".xml")));
+		
+		
 		StateImpl state = new StateImpl(grid, graph, spawnMap);
 		
-		return new GameData(state, (PlayerStatus) xStream.fromXML(new File(filePath+"/" + levelName+"/playerstatus.xml")),
-				(RulesMap) xStream.fromXML(new File(filePath+"/" + levelName+"/rules.xml")));
+		return new GameData(state, (PlayerStatus) xStream.fromXML(new File(filePath+"/" + levelName+"/" + 
+				strResources.getFromFilePaths("PlayerStatus_FileName") + ".xml")), (RulesMap) xStream.fromXML(new 
+				File(filePath+"/" + levelName+"/" + strResources.getFromFilePaths("Rules_FileName") + ".xml")));
 
 	}
 	
@@ -73,9 +80,9 @@ public class XMLReaderImpl implements XMLReader{
 	public List<Map<String,?>> loadUniversalGameData(String filePath) throws XMLReadingException
 	{
 		@SuppressWarnings("unchecked")
-		Map<String, Component> loadedComponentMap = (Map<String,Component>) loadXML(filePath, "ComponentMap");
+		Map<String, Component> loadedComponentMap = (Map<String,Component>) loadXML(filePath, strResources.getFromFilePaths("ComponentMap_FileName"));
 		@SuppressWarnings("unchecked")
-		Map<String, Tile> loadedTileMap = (Map<String,Tile>) loadXML(filePath, "TileMap");
+		Map<String, Tile> loadedTileMap = (Map<String,Tile>) loadXML(filePath, strResources.getFromFilePaths("TileMap_FileName"));
 		return Arrays.asList(loadedComponentMap,loadedTileMap);
 	}
 
@@ -84,6 +91,7 @@ public class XMLReaderImpl implements XMLReader{
 		try{
 			return xStream.fromXML(xmlFile);
 		} catch (Exception e){
+			e.printStackTrace();
 			throw new XMLReadingException(xmlFile);
 		}
 	}
@@ -91,7 +99,7 @@ public class XMLReaderImpl implements XMLReader{
 	@Override
 	public Map<String,List<String>> loadGamesMap(String filePath) throws XMLReadingException {
 		//TODO: error checking, properties file
-		Map<String, List<String>> gamesMap = (Map<String, List<String>>) loadXML(filePath, "GamesMap");
+		Map<String, List<String>> gamesMap = (Map<String, List<String>>) loadXML(filePath, strResources.getFromFilePaths("GamesMap_FileName"));
 		return gamesMap;
 	}
 

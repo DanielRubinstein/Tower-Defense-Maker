@@ -23,28 +23,29 @@ public interface ComponentGraph extends SerializableObservable{
 	 * @param Tile location
 	 * @return Component at the given location
 	 */
+
 	List<Component> getComponentsByTileCorners(TileCorners tileCorners);
 
 	/**
 	 * Gets the List of all Components in the ComponentGraph
 	 * @return a List of Components
 	 */
-	Collection<Component> getAllComponents();
+	List<Component> getAllComponents();
+
 	
 	/**
 	 * Add a component to the list of components at a given location
-	 * @param newComponent
+	 * @param component
 	 * @param location
 	 * 
-	 */
-		
-	void addComponentToGrid(Component newComponent, Point2D location);
+	 */	
+	void addComponentToGrid(Component component, Point2D location);
 
 	/**
 	 * Remove a component from the grid
-	 * @param toRemove
+	 * @param component
 	 */
-	void removeComponent(Component toRemove);
+	void removeComponent(Component component);
 
 	/**
 	 * Returns unordered list of components that lie within a certain radius from a central Component
@@ -60,7 +61,9 @@ public interface ComponentGraph extends SerializableObservable{
 	 * @param centerComp
 	 * @return List of components at the nearest location
 	 */
+
 	List<Component> getNearestComponents(Component centerComp);
+
 
 	boolean contains(AttributeOwnerReader c);
 

@@ -4,6 +4,7 @@ import java.io.FileNotFoundException;
 import java.util.ResourceBundle;
 import backEnd.Attribute.AttributeData;
 import backEnd.GameData.State.Component;
+import backEnd.GameData.State.ComponentImpl;
 import backEnd.GameData.State.Tile;
 import backEnd.GameEngine.Engine.Coordinates;
 import javafx.geometry.Point2D;

@@ -7,6 +7,7 @@ import java.util.List;
 import backEnd.Attribute.AttributeOwner;
 import backEnd.Attribute.AttributeOwnerReader;
 import backEnd.GameData.State.Component;
+import backEnd.GameData.State.ComponentImpl;
 import backEnd.GameData.State.State;
 import backEnd.GameData.State.Tile;
 import frontEnd.View;
@@ -87,7 +88,7 @@ public class OnGridTileCommandCenter implements CommandCenter, SkeletonObject{
 	@Override
 	public void generate(double x, double y, Stage myStage, Parent myRoot) {
 		Scene myScene = new Scene(myRoot);
-		myScene.getStylesheets().add(stringResourceBundle.getDefaultCSS());
+		myScene.getStylesheets().add(stringResourceBundle.getFromStringConstants("DEFAULT_CSS"));
 		myStage.setScene(myScene);
 		myStage.setTitle("Command Center");
 		myStage.setX(x);

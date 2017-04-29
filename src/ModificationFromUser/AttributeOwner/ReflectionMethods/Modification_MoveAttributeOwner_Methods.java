@@ -4,6 +4,7 @@ import java.util.ResourceBundle;
 
 import backEnd.ModelImpl;
 import backEnd.GameData.State.Component;
+import backEnd.GameData.State.ComponentImpl;
 import backEnd.GameData.State.TileImpl;
 import javafx.geometry.Point2D;
 

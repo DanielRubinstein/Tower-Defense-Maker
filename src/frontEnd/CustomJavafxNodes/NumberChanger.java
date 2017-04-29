@@ -45,10 +45,10 @@ public class NumberChanger implements SkeletonObject{
 	public HBox addIntegerIndicator(){
 		HBox h = new HBox();
 		h.getChildren().add(this.getRoot());
-		Label currentVal = new Label(String.format(stringResourceBundle.getString("SingleIntegerWithParenthesis"), this.getValue().intValue()));
+		Label currentVal = new Label(String.format(stringResourceBundle.getFromStringConstants("SingleIntegerWithParenthesis"), this.getValue().intValue()));
 		this.addListener( (SerializableObservable, oldValue, newValue)->{
 			myRoot.setValue(newValue.intValue());
-			currentVal.setText(String.format(stringResourceBundle.getString("SingleIntegerWithParenthesis"), newValue.intValue()));
+			currentVal.setText(String.format(stringResourceBundle.getFromStringConstants("SingleIntegerWithParenthesis"), newValue.intValue()));
 		});
 		h.getChildren().add(currentVal);
 		return h;
@@ -57,9 +57,9 @@ public class NumberChanger implements SkeletonObject{
 	public HBox addDoubleIndicator(){
 		HBox h = new HBox();
 		h.getChildren().add(this.getRoot());
-		Label currentVal = new Label(String.format(stringResourceBundle.getString("SingleDoubleRoundedToTenthsWithParenthesis"), this.getValue().doubleValue()));
+		Label currentVal = new Label(String.format(stringResourceBundle.getFromStringConstants("SingleDoubleRoundedToTenthsWithParenthesis"), this.getValue().doubleValue()));
 		this.addListener( (SerializableObservable, oldValue, newValue)->{
-			currentVal.setText(String.format(stringResourceBundle.getString("SingleDoubleRoundedToTenthsWithParenthesis"), newValue.doubleValue()));
+			currentVal.setText(String.format(stringResourceBundle.getFromStringConstants("SingleDoubleRoundedToTenthsWithParenthesis"), newValue.doubleValue()));
 		});
 		h.getChildren().add(currentVal);
 		return h;

@@ -3,8 +3,6 @@ package frontEnd.Skeleton.UserTools.Presets;
 import java.util.Map;
 
 import backEnd.Attribute.AttributeOwner;
-import backEnd.GameData.State.Component;
-import backEnd.GameData.State.Tile;
 import frontEnd.View;
 import frontEnd.Skeleton.UserTools.SkeletonObject;
 import javafx.geometry.Side;

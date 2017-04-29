@@ -166,4 +166,5 @@ public class ViewImpl implements View {
 		return myModel.getState().getComponentGraph().contains(c);
 	}
 
+
 }
