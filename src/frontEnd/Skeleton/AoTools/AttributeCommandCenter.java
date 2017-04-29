@@ -1,31 +1,19 @@
 package frontEnd.Skeleton.AoTools;
 
-import java.lang.reflect.Method;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Optional;
 import java.util.ResourceBundle;
 
-import ModificationFromUser.AttributeOwner.Modification_Add_StraightToGrid;
-import ModificationFromUser.AttributeOwner.Modification_Add_ToPalette;
-import backEnd.Attribute.Attribute;
-import backEnd.Attribute.AttributeOwner;
+import backEnd.Attribute.AttributeOwnerReader;
+import backEnd.Attribute.AttributeReader;
 import frontEnd.View;
-import frontEnd.CustomJavafxNodes.SingleFieldPrompt;
 import frontEnd.Skeleton.AoTools.AttributeVisualization.AttributeEditorCreator;
 import frontEnd.Skeleton.AoTools.AttributeVisualization.AttributeViewerCreator;
 import frontEnd.Skeleton.AoTools.AttributeVisualization.AttributeVisualization;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.geometry.HPos;
 import javafx.geometry.Insets;
-import javafx.geometry.Pos;
 import javafx.scene.Node;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Button;
-import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
-import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.ScrollPane.ScrollBarPolicy;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
@@ -46,7 +34,7 @@ public class AttributeCommandCenter{
 	private Label titleLbl;
 	private Stage myHostStage;
 	
-	public AttributeCommandCenter(View view, Stage hostStage , AttributeOwner obj, String title){
+	public AttributeCommandCenter(View view, Stage hostStage , AttributeOwnerReader obj, String title){
 		myView = view;
 		myHostStage = hostStage;
 		authorProperty = view.getBooleanAuthorModeProperty();
@@ -61,7 +49,7 @@ public class AttributeCommandCenter{
 		//titleLbl.setStyle("");
 	}
 	
-	private VBox createAttributeCommandCenter(AttributeOwner obj) {
+	private VBox createAttributeCommandCenter(AttributeOwnerReader obj) {
 		VBox contents = new VBox();
 		
 		contents.getChildren().add(titleLbl);
@@ -74,7 +62,7 @@ public class AttributeCommandCenter{
 		return contents;
 	}
 	
-	private Node createAttributeView(AttributeOwner obj) {
+	private Node createAttributeView(AttributeOwnerReader obj) {
 		ScrollPane sP = new ScrollPane();
 		sP.setHbarPolicy(ScrollBarPolicy.NEVER);
 		sP.setVbarPolicy(ScrollBarPolicy.AS_NEEDED);
@@ -86,7 +74,7 @@ public class AttributeCommandCenter{
 			return contents_Att;
 		}
 		int count = 0;
-		for (Attribute<?> attr : obj.getMyAttributes().values()) {
+		for (AttributeReader<?> attr : obj.getMyAttributes().getAllAttributeReaders()) {
 			
 			Label attLabel = new Label(attr.getName());
 			contents_Att.add(attLabel, 0, count);
@@ -102,13 +90,13 @@ public class AttributeCommandCenter{
 		return sP;
 	}
 
-	private Node createBottomButtons(AttributeOwner obj){
+	private Node createBottomButtons(AttributeOwnerReader obj){
 		AttributeCommandCenterBottomButtons attributeCommandCenterBottomButtons = new AttributeCommandCenterBottomButtons(myView, myHostStage);
 		Reflection.callAllMethods(attributeCommandCenterBottomButtons, obj);
 		return attributeCommandCenterBottomButtons.getRoot();
 	}	
 
-	private Node createAttributeValueViewer(AttributeOwner obj, Attribute<?> attr) {
+	private Node createAttributeValueViewer(AttributeOwnerReader obj, AttributeReader<?> attr) {
 		HBox finalViewer = new HBox();
 		AttributeVisualization attributeVisualization;
 		if (authorProperty.get()) {

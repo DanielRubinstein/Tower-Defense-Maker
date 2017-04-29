@@ -33,4 +33,10 @@ public interface AttributeOwner extends AttributeOwnerReader {
 	 * Set observers
 	 */
 	public void setObserverList(List<SerializableObserver> observers);
+	
+	/**
+	 * @param attrType
+	 * @return Attribute that corresponds to the String attrType
+	 */
+	<T> Attribute<T> getAttribute(String attrName);
 }
