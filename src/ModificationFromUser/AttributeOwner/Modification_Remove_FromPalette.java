@@ -32,9 +32,8 @@ public class Modification_Remove_FromPalette implements ModificationFromUser {
 		switch (model.getMode().getUserMode()) {
 		case "AUTHOR":
 			myBankController = model.getBankController();
-			//TODO: how do we know if it's a tile or component?
-			//myBankController.removeComponent(name);
-			//myBankController.removeTile(name);
+
+			Reflection.callMethod(myBankController, "remove", attrOwn);
 			break;
 			
 		case "PLAYER":

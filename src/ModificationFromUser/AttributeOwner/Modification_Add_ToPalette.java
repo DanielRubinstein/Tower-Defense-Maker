@@ -21,39 +21,36 @@ public class Modification_Add_ToPalette implements ModificationFromUser {
 	private BankController myBankController;
 	private String newName;
 
-	public static final String DESCRIPTION = "Add Preset Component or Tile";	
-	
-	public Modification_Add_ToPalette(String newAttributeOwnerName, AttributeOwner obj){
+	public static final String DESCRIPTION = "Add Preset Component or Tile";
+
+	public Modification_Add_ToPalette(String newAttributeOwnerName, AttributeOwner obj) {
 		this.newAttrOwn = obj;
 		this.newName = newAttributeOwnerName;
 	}
 
-	//FIXME currently the new preset will overwrite an existing preset with the same name, 
-	// based on the implementation of addNewComponent()
 	@Override
 	public void invoke(ModelImpl model) throws Exception {
-		
 		switch (model.getMode().getUserMode()) {
 		case "AUTHOR":
 			AttributeOwner newAttrOwnToAdd;
-			if(model.getGameData().getState().getComponentGraph().contains(newAttrOwn) || model.getGameData().getState().getTileGrid().contains(newAttrOwn)){
+			if (model.getGameData().getState().getComponentGraph().contains(newAttrOwn)
+					|| model.getGameData().getState().getTileGrid().contains(newAttrOwn)) {
 				AttributeOwnerSerializer attributeOwnerSerializer = new AttributeOwnerSerializer();
 				newAttrOwnToAdd = attributeOwnerSerializer.createCopy(newAttrOwn);
 			} else {
 				newAttrOwnToAdd = newAttrOwn;
 			}
 			myBankController = model.getBankController();
-			
-			Modification_Add_ToPalette_Methods methods = new Modification_Add_ToPalette_Methods(myBankController, newName);
-			
+			Modification_Add_ToPalette_Methods methods = new Modification_Add_ToPalette_Methods(myBankController,
+					newName);
+
 			Reflection.callMethod(methods, "add", newAttrOwnToAdd);
 			break;
-			
+
 		case "PLAYER":
 			new ModeException(model.getMode(), DESCRIPTION);
 		}
-		
+
 	}
 
-	
 }
