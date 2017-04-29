@@ -29,16 +29,14 @@ public class DataInputLoader
 	private Map<String, List<String>> gamesMap;
 	private String myLevelName, myGameName;
 	
-	public DataInputLoader()
-	{
+	public DataInputLoader(){
 		 myXMLReader = new XMLReaderImpl();
 		 
 		 generateGamesMap();
 	}
 	
 
-	public DataInputLoader(StartingInput input) throws XMLReadingException
-	{
+	public DataInputLoader(StartingInput input) throws XMLReadingException{
 		this();
 		myGameData = generateGameData(input);
 		myGameName = input.getGameName();
@@ -64,18 +62,15 @@ public class DataInputLoader
 		myGameName = d.getGameName();
 	}
 	
-	public GameData getGameData()
-	{
+	public GameData getGameData(){
 		return myGameData;	
 	}
 	
-	public Map<String, List<String>> getGamesMap()
-	{
+	public Map<String, List<String>> getGamesMap(){
 		return gamesMap;
 	}
 	
-	private GameData generateGameData(String levelName, String dataPath)
-	{
+	private GameData generateGameData(String levelName, String dataPath){
 		try{
 			return myXMLReader.loadGameStateData(dataPath, levelName);
 		}catch(Exception e){
@@ -110,8 +105,7 @@ public class DataInputLoader
 		 }
 	}
 
-	public String getLevelName()
-	{
+	public String getLevelName(){
 		return myLevelName;
 	}
 
