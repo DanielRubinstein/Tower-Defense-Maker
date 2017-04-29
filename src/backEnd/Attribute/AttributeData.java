@@ -105,7 +105,7 @@ public class AttributeData implements SerializableObservable {
 
 	@Override
 	public void clearObservers() {
-		observers.clear();
+		observers = null;
 	}
 
 	@Override

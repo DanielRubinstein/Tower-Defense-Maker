@@ -28,6 +28,11 @@ public class NumericResourceBundle {
 		return 1.0 / getFramesPerSecond();
 	}
 	
+	//Tile constants
+	public Double getPercentTileIsCenter(){
+		return Double.valueOf(RESOURCE_BUNDLE.getString("FramesPerSecond"));
+	}
+	
 	//screen setup constants
 	
 	public Double getWindowHeight(){

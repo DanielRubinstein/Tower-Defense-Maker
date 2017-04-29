@@ -17,7 +17,7 @@ import backEnd.GameEngine.Behaviors.BehaviorFactory;
 import backEnd.GameEngine.Engine.Coordinates;
 import resources.constants.StringResourceBundle;
 
-public class ComponentImpl implements AttributeOwner, SerializableObservable, Component, ComponentReader {
+public class ComponentImpl implements SerializableObservable, Component, ComponentReader {
 	/**
 	 * Any object on the grid is a component.
 	 * 
@@ -176,7 +176,6 @@ public class ComponentImpl implements AttributeOwner, SerializableObservable, Co
 	@Override
 	public <T> void setAttributeValue(String attrName, T newVal) {
 		Attribute<T> attrToSet = myAttributes.<T>get(attrName);
-		System.out.println("---" +attrToSet);
 		attrToSet.setValue(newVal);
 		notifyObservers();
 	}

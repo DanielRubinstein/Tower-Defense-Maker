@@ -131,7 +131,7 @@ public class TileImpl implements Tile, AttributeOwner, SerializableObservable {
 
 	@Override
 	public void clearObservers() {
-		observers.clear();
+		observers = null;
 	}
 
 	@Override

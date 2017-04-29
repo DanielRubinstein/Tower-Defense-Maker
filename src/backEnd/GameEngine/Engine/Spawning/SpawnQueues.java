@@ -110,7 +110,7 @@ public class SpawnQueues implements SerializableObservable{
 
 	@Override
 	public void clearObservers() {
-		observers.clear();
+		observers = null;
 	}
 
 	@Override

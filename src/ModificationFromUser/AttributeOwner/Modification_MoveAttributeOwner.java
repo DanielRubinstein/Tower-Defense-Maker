@@ -12,6 +12,8 @@ public class Modification_MoveAttributeOwner implements ModificationFromUser {
 	private Point2D newLoc;
 	private ModelImpl myModel;
 	
+	//FIXME it seems like this is never used, but if it will be used I'm not sure
+	//if the user should be allowed to move AttributeOwner in Player
 	public Modification_MoveAttributeOwner(AttributeOwner myAO, Point2D newLocation) {
 		this.myAO = myAO;
 		this.newLoc = newLocation;

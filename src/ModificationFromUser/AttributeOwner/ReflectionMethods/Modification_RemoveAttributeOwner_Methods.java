@@ -1,6 +1,7 @@
 package ModificationFromUser.AttributeOwner.ReflectionMethods;
 
 import backEnd.ModelImpl;
+import backEnd.GameData.State.Component;
 import backEnd.GameData.State.ComponentImpl;
 import backEnd.GameData.State.TileImpl;
 
@@ -17,7 +18,7 @@ public class Modification_RemoveAttributeOwner_Methods{
 		throw new Exception(TILE_ERROR);
 	}
 	
-	public void remove(ComponentImpl component){
+	public void remove(Component component){
 		myModel.getState().getComponentGraph().removeComponent(component);
 	}
 

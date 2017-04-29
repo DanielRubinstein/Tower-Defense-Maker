@@ -77,8 +77,6 @@ public class Palette implements SkeletonObject, SerializableObserver{
 		myPresetMapFrontEnd = new HashMap<ImageView, AttributeOwner>();
 	}
 
-	
-
 	private void addPresetToPalette(AttributeOwner preset) {
 		AttributeOwnerVisual attrOwner = new AttributeOwnerVisualImpl(preset);
 		ImageView imageView = attrOwner.getImageView();
@@ -133,7 +131,6 @@ public class Palette implements SkeletonObject, SerializableObserver{
 	}
 
 	private void makePresetDraggable(AttributeOwner preset, ImageView imageView) {
-		
 		imageView.setOnDragDetected(e -> {
 			Dragboard db = imageView.startDragAndDrop(TransferMode.ANY);
 			ClipboardContent content = new ClipboardContent();
@@ -141,14 +138,7 @@ public class Palette implements SkeletonObject, SerializableObserver{
 			db.setContent(content);
 			db.setDragView(imageView.getImage());
 		});
-		Node screenGrid = myView.getScreenGrid();
-		screenGrid.setOnDragOver(e -> e.acceptTransferModes(TransferMode.ANY));
-		screenGrid.setOnDragDropped(e -> {
-			String presetName = e.getDragboard().getString();
-			AttributeOwner presetAO = observedBankController.getPreset(presetName);
-			Point2D pos = new Point2D(e.getX(), e.getY());
-			myView.sendUserModification(new Modification_Add_PaletteToGrid(presetAO, pos));
-		});
+
 	}
 
 	private void createNewPresetButton() {

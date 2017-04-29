@@ -3,9 +3,8 @@ package ModificationFromUser.AttributeOwner;
 import ModificationFromUser.ModificationFromUser;
 import backEnd.ModelImpl;
 import backEnd.Attribute.Attribute;
-
 import backEnd.Attribute.AttributeOwner;
-import backEnd.Attribute.AttributeOwnerReader;
+
 
 public class Modification_EditAttribute<T> implements ModificationFromUser {
 
@@ -24,7 +23,6 @@ public class Modification_EditAttribute<T> implements ModificationFromUser {
 	@Override
 	public void invoke(ModelImpl myModel) throws Exception {
 		myObj.setAttributeValue(myAtt.getName(), myNewValue);
-		myModel.getDataController().saveUniversalGameData();
 		//System.out.println(myAtt.getName());
 	}
 

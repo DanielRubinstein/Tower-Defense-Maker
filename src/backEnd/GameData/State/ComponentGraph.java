@@ -15,36 +15,37 @@ public interface ComponentGraph extends SerializableObservable{
 	 * @param location
 	 * @return Component at the given location
 	 */
-	List<ComponentImpl> getComponentsByScreenPosition(Point2D location);
+	List<Component> getComponentsByScreenPosition(Point2D location);
 
-	Map<Point2D, List<ComponentImpl>> getComponentMap();
+	Map<Point2D, List<Component>> getComponentMap();
 	/**
 	 * Get the list of components at a given Tile location
 	 * @param Tile location
 	 * @return Component at the given location
 	 */
-	List<ComponentImpl> getComponentsByTileCorners(TileCorners tileCorners);
+
+	List<Component> getComponentsByTileCorners(TileCorners tileCorners);
 
 	/**
 	 * Gets the List of all Components in the ComponentGraph
 	 * @return a List of Components
 	 */
-	Collection<ComponentImpl> getAllComponents();
+	List<Component> getAllComponents();
+
 	
 	/**
 	 * Add a component to the list of components at a given location
-	 * @param newComponent
+	 * @param component
 	 * @param location
 	 * 
-	 */
-		
-	void addComponentToGrid(ComponentImpl newComponent, Point2D location);
+	 */	
+	void addComponentToGrid(Component component, Point2D location);
 
 	/**
 	 * Remove a component from the grid
-	 * @param toRemove
+	 * @param component
 	 */
-	void removeComponent(ComponentImpl toRemove);
+	void removeComponent(Component component);
 
 	/**
 	 * Returns unordered list of components that lie within a certain radius from a central Component
@@ -52,7 +53,7 @@ public interface ComponentGraph extends SerializableObservable{
 	 * @param d
 	 * @return Unordered list of Components 
 	 */
-	List<ComponentImpl> getComponentsWithinRadius(ComponentImpl centerComp, double d);
+	List<Component> getComponentsWithinRadius(Component centerComp, double d);
 
 	/**
 	 * Returns list of components that lie at the nearest location (although if two locations are equidistant from the component,
@@ -60,7 +61,9 @@ public interface ComponentGraph extends SerializableObservable{
 	 * @param centerComp
 	 * @return List of components at the nearest location
 	 */
-	List<ComponentImpl> getNearestComponents(ComponentImpl centerComp);
+
+	List<Component> getNearestComponents(Component centerComp);
+
 
 	boolean contains(AttributeOwnerReader c);
 

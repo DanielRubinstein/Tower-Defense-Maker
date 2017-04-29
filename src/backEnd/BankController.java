@@ -2,19 +2,14 @@ package backEnd;
 
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import javax.swing.JOptionPane;
 import backEnd.Mode.Mode;
-import data.DataController;
-import data.DataControllerReader;
 import resources.constants.StringResourceBundle;
-import backEnd.Attribute.AttributeData;
 import backEnd.Attribute.AttributeOwner;
-import backEnd.GameData.State.AccessPermissions;
-import backEnd.GameData.State.AccessPermissionsImpl;
+import backEnd.GameData.State.Component;
 import backEnd.GameData.State.ComponentImpl;
 import backEnd.GameData.State.SerializableObserver;
 import backEnd.GameData.State.Tile;
@@ -28,21 +23,23 @@ import backEnd.GameData.State.TileImpl;
 
 public class BankController implements BankControllerReader
 {
-	private static final String DUPLICATE_NAME_ERROR = "Cannot Add Duplicate Name";
 	private static final StringResourceBundle strResources = new StringResourceBundle();
 	private Map<String, Tile> tileBank;
-	private Map<String, ComponentImpl> componentBank;
+	private Map<String, Component> componentBank;
 	private Map<String, Tile> accessibleTileBank;
-	private Map<String, ComponentImpl> accessibleComponentBank;
+	private Map<String, Component> accessibleComponentBank;
 	private Mode myMode;
 	private List<SerializableObserver> observers;
-	private DataControllerReader dataController;
 	
-	public BankController(Mode myMode, DataControllerReader dataController) {
-		this.tileBank = dataController.loadTileMap();
-		this.componentBank = dataController.loadComponentMap();
+	public BankController(Mode myMode)
+	{
+		this(myMode, new HashMap<String, Tile>(), new HashMap<String, Component>());
+	}
+
+	public BankController(Mode myMode, Map<String, Tile> tileBank, Map<String, Component> componentBank) {
+		this.tileBank = tileBank;
+		this.componentBank = componentBank;
 		this.myMode = myMode;
-		this.dataController = dataController;
 		this.observers = new ArrayList<SerializableObserver>();
 		accessibleComponentBank = new HashMap<>();
 		accessibleTileBank = new HashMap<>();
@@ -50,14 +47,14 @@ public class BankController implements BankControllerReader
 	}
 	
 	@Override
-	public String getComponentName(ComponentImpl component){
+	public String getComponentName(Component component){
 		return findKeyFromValue(componentBank, component);
 	}
 	
 	private void createTemplatesForTesting(){
 		try{
 			this.tileBank = new HashMap<String, Tile>();
-			this.componentBank = new HashMap<String, ComponentImpl>();
+			this.componentBank = new HashMap<String, Component>();
 			Tile newTile = new TileImpl();
 			newTile.setAttributeValue("ImageFile", "resources/images/Tiles/Blue.png");
 			newTile.setAttributeValue("MoveDirection", "Down");
@@ -78,22 +75,32 @@ public class BankController implements BankControllerReader
 			newTile4.setAttributeValue("MoveDirection", "Left");
 			addNewTile("Yellow Left Tile", newTile4);
 
-			ComponentImpl testingBloon = new ComponentImpl();
+			Component testerSpawnedBloon = new ComponentImpl();
+			testerSpawnedBloon.setAttributeValue("ImageFile", "resources/images/Components/blue_bloon.png");
+			testerSpawnedBloon.setAttributeValue("Speed", 1d);
+			testerSpawnedBloon.setAttributeValue("Health", 20);
+			testerSpawnedBloon.setAttributeValue("Type", "Enemy");
+			
+
+			Component testingBloon = new ComponentImpl();
 			testingBloon.setAttributeValue("ImageFile", "resources/images/Components/rainbow_bloon.png");
-			testingBloon.setAttributeValue("Speed", 1d);
+			testingBloon.setAttributeValue("Speed", 0.1);
 			testingBloon.setAttributeValue("Health", 20);
 			testingBloon.setAttributeValue("Type", "Enemy");
+			testingBloon.setAttributeValue("SpawnOnDeath", true);
+			testingBloon.setAttributeValue("SpawnOnDeathObject", testerSpawnedBloon);
 			addNewComponent("Enemy", testingBloon);
 
-			ComponentImpl testingTurret = new ComponentImpl();
+			Component testingTurret = new ComponentImpl();
 			testingTurret.setAttributeValue("ImageFile", "resources/images/Components/zombie.png");
 			testingTurret.setAttributeValue("Health", 10);
 			testingTurret.setAttributeValue("Type", "Tower");
-			testingTurret.setAttributeValue("Velocity", 1.0);
+			testingTurret.setAttributeValue("Velocity", 5.0);
 			testingTurret.setAttributeValue("Speed", 1.0);
 			testingTurret.setAttributeValue("FireDamage", 10);
 			testingTurret.setAttributeValue("FireRate", 1000.0);
 			testingTurret.setAttributeValue("ExplosionRadius", 40.0);
+			testingTurret.setAttributeValue("FireType", "SingleTarget");
 			testingTurret.setAttributeValue("FireRadius", 200.0);
 			testingTurret.setAttributeValue("FireImage", "resources/images/Components/purple_bloon.png");
 			addNewComponent("Tower", testingTurret);
@@ -113,8 +120,8 @@ public class BankController implements BankControllerReader
 		}
 	}
 
-	public void removeTile(String name) {
-		tileBank.remove(name);
+	public void remove(Tile tile) {
+		tileBank.remove(tile);
 		refreshAccessibleTileMap();
 		notifyObservers();
 	}
@@ -135,7 +142,7 @@ public class BankController implements BankControllerReader
 		}
 	}
 
-	public Map<String, ComponentImpl> getAccessibleComponentMap() {
+	public Map<String, Component> getAccessibleComponentMap() {
 		refreshAccessibleComponentMap();
 		return accessibleComponentBank;
 	}
@@ -151,7 +158,7 @@ public class BankController implements BankControllerReader
 		}
 	}
 
-	public Map<String, ComponentImpl> getComponentMap() {
+	public Map<String, Component> getComponentMap() {
 		return componentBank;
 	}
 
@@ -159,7 +166,7 @@ public class BankController implements BankControllerReader
 		return tileBank;
 	}
 
-	public void addNewComponent(String name, ComponentImpl component) {
+	public void addNewComponent(String name, Component component) {
 		if (tileBank.containsKey(name)) {
 			JOptionPane.showMessageDialog(null, strResources.getFromErrorMessages("Duplicate_Name_Error"));
 		} else {
@@ -169,8 +176,8 @@ public class BankController implements BankControllerReader
 		}
 	}
 
-	public void removeComponent(String name) {
-		componentBank.remove(name);
+	public void remove(Component component) {
+		componentBank.remove(component);
 		refreshAccessibleComponentMap();
 		notifyObservers();
 	}
@@ -178,8 +185,8 @@ public class BankController implements BankControllerReader
 	public String getAOName(AttributeOwner preset) {
 		if (preset instanceof Tile) {
 			return findKeyFromValue(tileBank, (Tile) preset);
-		} else if (preset instanceof ComponentImpl) {
-			return findKeyFromValue(componentBank, (ComponentImpl) preset);
+		} else if (preset instanceof Component) {
+			return findKeyFromValue(componentBank, (Component) preset);
 		}
 		return "";
 	}
@@ -203,8 +210,16 @@ public class BankController implements BankControllerReader
 		}
 	}
 	
-	public ComponentImpl getComponent(String componentName){
-		return componentBank.get(componentName);
+	public Component getComponent(String componentName){
+		if (componentBank.containsKey(componentName)){
+			return componentBank.get(componentName);
+		}
+		if (componentName == null){
+			return null;
+		}
+		else{
+			throw new RuntimeException(strResources.getFromErrorMessages("Component_Not_Found"));
+		}
 	}
 	
 	public void addObserver(SerializableObserver o){
@@ -215,10 +230,5 @@ public class BankController implements BankControllerReader
 		for(SerializableObserver o : observers){
 			o.update(null, null);
 		}
-		saveXML();
-	}
-
-	private void saveXML() {
-		dataController.saveUniversalGameData();
 	}
 }

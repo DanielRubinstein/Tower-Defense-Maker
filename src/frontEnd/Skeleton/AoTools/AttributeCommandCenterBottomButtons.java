@@ -10,7 +10,7 @@ import ModificationFromUser.AttributeOwner.Modification_PurchaseComponent;
 import ModificationFromUser.AttributeOwner.Modification_RemoveAttributeOwner;
 import ModificationFromUser.AttributeOwner.Modification_UpgradeComponent;
 import backEnd.Attribute.AttributeOwner;
-import backEnd.GameData.State.ComponentImpl;
+import backEnd.GameData.State.Component;
 import frontEnd.View;
 import frontEnd.CustomJavafxNodes.SingleFieldPrompt;
 import frontEnd.Skeleton.UserTools.SkeletonObject;
@@ -40,7 +40,7 @@ public class AttributeCommandCenterBottomButtons implements SkeletonObject{
 		myRoot.setAlignment(Pos.BOTTOM_RIGHT);
 	}
 	
-	public void addRemoveButton(ComponentImpl c) {
+	public void addRemoveButton(Component c) {
 		if(myView.isComponentOnGrid(c)){
 			Button submit = new Button("Remove Now");
 			submit.setOnAction(e -> {
@@ -51,7 +51,7 @@ public class AttributeCommandCenterBottomButtons implements SkeletonObject{
 		}
 	}
 	
-	public void addSubmitButton(ComponentImpl obj) {
+	public void addSubmitButton(Component obj) {
 		// as is this option is not available when creating a preset
 		if(myView.getBankController().getAccessibleComponentMap().containsValue(obj)){
 			Button submit = new Button("Add Now");
@@ -99,7 +99,7 @@ public class AttributeCommandCenterBottomButtons implements SkeletonObject{
 				}
 				if (result.get() == ButtonType.OK){
 					myView.sendUserModification(new Modification_PurchaseComponent(cost));
-					myView.sendUserModification(new Modification_UpgradeComponent((ComponentImpl) obj));
+					myView.sendUserModification(new Modification_UpgradeComponent((Component) obj));
 				}
 				myHostStage.close();
 			});

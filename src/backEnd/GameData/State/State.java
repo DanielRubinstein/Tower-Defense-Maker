@@ -33,7 +33,7 @@ public interface State {
 	
 	int getGridHeight();
 
-	Collection<ComponentImpl> getComponentsByTilePosition(Point2D value);
+	Collection<Component> getComponentsByTilePosition(Point2D value);
 
 	Map<String, SpawnQueues> getSpawnQueues();
 

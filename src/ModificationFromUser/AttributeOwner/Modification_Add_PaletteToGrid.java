@@ -5,7 +5,10 @@ import ModificationFromUser.AttributeOwner.ReflectionMethods.Modification_Add_To
 import backEnd.ModelImpl;
 import backEnd.Attribute.AttributeOwner;
 import backEnd.Attribute.AttributeOwnerSerializer;
+import backEnd.GameData.State.Tile;
+import backEnd.Mode.ModeException;
 import javafx.geometry.Point2D;
+import resources.constants.StringResourceBundle;
 import util.reflection.Reflection;
 
 /**
@@ -29,7 +32,7 @@ public class Modification_Add_PaletteToGrid implements ModificationFromUser {
 	@Override
 	public void invoke(ModelImpl model) throws Exception {
 		myModel = model;
-		 
+
 		AttributeOwnerSerializer attributeOwnerSerializer = new AttributeOwnerSerializer();
 		AttributeOwner cleanAO = attributeOwnerSerializer.createCopy(newAttrOwn);
 		cleanAO.setAttributeValue("Position", location);
