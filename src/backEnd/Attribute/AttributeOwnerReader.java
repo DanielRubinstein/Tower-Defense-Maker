@@ -15,4 +15,6 @@ public interface AttributeOwnerReader {
 	<T> AttributeReader<T> getAttributeReader(String attrName);
 	
 	void addObserver(SerializableObserver o);
+	
+	boolean contains(String attName);
 }

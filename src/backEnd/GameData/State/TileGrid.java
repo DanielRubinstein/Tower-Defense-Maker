@@ -3,6 +3,7 @@ package backEnd.GameData.State;
 import java.util.Collection;
 import java.util.List;
 
+import backEnd.Attribute.AttributeOwner;
 import backEnd.Attribute.AttributeOwnerReader;
 import javafx.geometry.Point2D;
 
@@ -55,5 +56,7 @@ public interface TileGrid extends SerializableObservable{
 	boolean atMiddleXOfTile(Point2D currentLocation);
 
 	boolean atMiddleYOfTile(Point2D currentLocation);
+	
+	Collection<AttributeOwner> getAllAttributeOwners();
 
 }
