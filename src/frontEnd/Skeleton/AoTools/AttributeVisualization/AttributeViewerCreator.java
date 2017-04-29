@@ -2,6 +2,8 @@ package frontEnd.Skeleton.AoTools.AttributeVisualization;
 
 import backEnd.Attribute.Attribute;
 import backEnd.Attribute.AttributeOwner;
+import backEnd.Attribute.AttributeOwnerReader;
+import backEnd.Attribute.AttributeReader;
 import backEnd.GameData.State.Component;
 import frontEnd.View;
 import javafx.geometry.Point2D;
@@ -13,11 +15,11 @@ import javafx.scene.layout.HBox;
 
 public class AttributeViewerCreator implements AttributeVisualization{
 	private View myView;
-	private AttributeOwner myOwner;
-	private Attribute<?> myAttr;
+	private AttributeOwnerReader myOwner;
+	private AttributeReader<?> myAttr;
 	public static final String SAVED_IMAGES_DIRECTORY = "./src/resources/images";
 
-	public AttributeViewerCreator(View view, AttributeOwner obj, Attribute<?> attr) {
+	public AttributeViewerCreator(View view, AttributeOwnerReader obj, AttributeReader<?> attr) {
 		myView = view;
 		myOwner = obj;
 		myAttr = attr;

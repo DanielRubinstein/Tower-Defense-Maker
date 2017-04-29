@@ -73,8 +73,7 @@ public class SpawnEngine implements Engine {
 		//System.out.println(this.getClass().getName() + ": Should add component from spawn queue");
 		ComponentBuilder componentBuilder = new ComponentBuilder(component);
 		Component spawnable = componentBuilder.getComponent();
-		Object positionObj = spawnTile.getMyAttributes().get("Position");
-		Attribute<Point2D> spawnPositionAttribute = (Attribute<Point2D>) positionObj;
+		Attribute<Point2D> spawnPositionAttribute = spawnTile.getAttribute("Position");
 		Point2D tilePosition = spawnPositionAttribute.getValue();
 		Point2D spawnPosition = new Point2D(tilePosition.getX(), tilePosition.getY());
 		System.out.println(this.getClass().getName() + ": Spawn Position: " + spawnPosition.getX() + " | " + spawnPosition.getY());

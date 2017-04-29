@@ -6,7 +6,7 @@ public interface AttributeOwnerReader {
 	/**
 	 * @return List of Attributes
 	 */
-	AttributeData getMyAttributes();
+	//AttributeData getMyAttributes();
 	
 	/**
 	 * @param attrType

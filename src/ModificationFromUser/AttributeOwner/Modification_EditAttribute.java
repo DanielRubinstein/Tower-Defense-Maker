@@ -4,6 +4,8 @@ import ModificationFromUser.ModificationFromUser;
 import backEnd.ModelImpl;
 import backEnd.Attribute.Attribute;
 import backEnd.Attribute.AttributeOwner;
+import backEnd.Attribute.AttributeOwnerReader;
+import backEnd.Attribute.AttributeReader;
 
 
 public class Modification_EditAttribute<T> implements ModificationFromUser {
@@ -14,9 +16,9 @@ public class Modification_EditAttribute<T> implements ModificationFromUser {
 
 	// FIXME in the future the parameter will be AttributeOwnerReader and this
 	// class will get the modifiable AttributeOwner using IDs
-	public Modification_EditAttribute(AttributeOwner myOwner, Attribute<T> att, T newValue) {
+	public Modification_EditAttribute(AttributeOwnerReader myOwner, AttributeReader<?> myAttr, T newValue) {
 		myObj = myOwner;
-		myAtt = att;
+		myAtt = myAttr;
 		myNewValue = newValue;
 	}
 
