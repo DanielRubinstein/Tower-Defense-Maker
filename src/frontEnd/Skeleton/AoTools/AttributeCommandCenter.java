@@ -1,7 +1,6 @@
 package frontEnd.Skeleton.AoTools;
 
 import java.util.ResourceBundle;
-
 import backEnd.Attribute.AttributeOwnerReader;
 import backEnd.Attribute.AttributeReader;
 import frontEnd.View;

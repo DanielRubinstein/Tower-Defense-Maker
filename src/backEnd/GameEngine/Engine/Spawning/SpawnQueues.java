@@ -2,10 +2,8 @@ package backEnd.GameEngine.Engine.Spawning;
 
 import java.util.ArrayList;
 import java.util.List;
-
 import backEnd.GameData.State.SerializableObservable;
 import backEnd.GameData.State.SerializableObserver;
-import backEnd.GameData.State.State;
 
 /**
  * SpawnQueue object that is held in tiles to determine what needs to be spawned next
@@ -19,16 +17,31 @@ public class SpawnQueues implements SerializableObservable{
 	private double myTimeLastQueueSpawned;
 	private int myCurrentSpawn;
 	private double myGameTime;
-	private List<SerializableObserver> observers;
+	private List<SerializableObserver> observers = new ArrayList<SerializableObserver>();
 	/**
 	 * Initializes blank lists to spawn from
 	 */
 	public SpawnQueues() {
 		myFrequencySpawnQueue = new ArrayList<SpawnDataImpl>();
 		mySingleSpawnQueue	 = new ArrayList<SpawnDataImpl>();
-		observers = new ArrayList<SerializableObserver>();
 	}
 	
+	public SpawnQueues(SpawnQueueInstantiator i)
+	{
+
+			myFrequencySpawnQueue = i.getFrequencyQueue();
+			mySingleSpawnQueue = i.getSpawnQueue();
+			myTimeLastQueueSpawned = i.getLastSpawnTime();
+			myCurrentSpawn = i.getCurrentSpawn();
+			myGameTime = i.getGameTime();		
+	}
+	
+	public SpawnQueueInstantiator getInstantiator()
+	{
+		return new SpawnQueueInstantiator(myFrequencySpawnQueue, mySingleSpawnQueue, myTimeLastQueueSpawned, myCurrentSpawn, myGameTime);
+	}
+
+
 	/**
 	 * 
 	 * @return frequencyQueue

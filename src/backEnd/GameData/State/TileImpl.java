@@ -30,9 +30,7 @@ public class TileImpl implements Tile, AttributeOwner, SerializableObservable {
 	private final static ResourceBundle attributeResources = ResourceBundle.getBundle(DEFAULT_ATTRIBUTES_PATH);
 	private AccessPermissions myAccessPerm;
 	private AttributeData myAttrData;
-	
-	@XStreamOmitField
-	private List<SerializableObserver> observers = new ArrayList<SerializableObserver>();
+	private List<SerializableObserver> observers = new ArrayList<SerializableObserver>();;
 	
 	public TileImpl() throws FileNotFoundException{
 		this(new AccessPermissionsImpl(), new Point2D(0,0));
@@ -53,9 +51,9 @@ public class TileImpl implements Tile, AttributeOwner, SerializableObservable {
 			Attribute<?> myAttribute = attrFact.getAttribute(key);
 			addAttribute(key, myAttribute);
 		}
-		
 		this.setAttributeValue("Position", position);
-	}
+		
+		}
 	
 	@Override
 	public AccessPermissions getAccessPermissions() {
@@ -125,7 +123,7 @@ public class TileImpl implements Tile, AttributeOwner, SerializableObservable {
 
 	@Override
 	public void setObserverList(List<SerializableObserver> observers) {
-		observers = observers;
+		this.observers = observers;
 		notifyObservers();
 	}
 
@@ -136,7 +134,7 @@ public class TileImpl implements Tile, AttributeOwner, SerializableObservable {
 
 	@Override
 	public void clearObservers() {
-		observers = null;
+		observers = new ArrayList<SerializableObserver>();
 	}
 
 	@Override
