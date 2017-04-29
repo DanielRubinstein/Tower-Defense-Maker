@@ -98,12 +98,6 @@ public class ModeImpl implements ModeReader, Mode{
 	@Override
 	public void setLevelMode(String newLevelMode) {
 		currLevelMode = newLevelMode;
-		for (String gameName : levelProgression.getGameList()){
-			if (levelProgression.getLevelList(gameName).contains(newLevelMode)){
-				currGameMode = gameName;
-				break;
-			}
-		}
 		notifyObservers();
 	}
 

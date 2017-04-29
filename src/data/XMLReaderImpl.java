@@ -20,7 +20,6 @@ import backEnd.GameData.State.TileGridInstantiator;
 import backEnd.GameEngine.Engine.Spawning.SpawnQueueInstantiator;
 import backEnd.GameEngine.Engine.Spawning.SpawnQueues;
 import backEnd.GameData.Rules.RulesMap;
-import javafx.geometry.Point2D;
 import resources.constants.StringResourceBundle;
 import backEnd.GameData.State.PlayerStatus;
 
