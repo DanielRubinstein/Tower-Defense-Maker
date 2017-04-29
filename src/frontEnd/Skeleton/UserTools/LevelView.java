@@ -26,31 +26,33 @@ public class LevelView {
 	private StringResourceBundle stringResourceBundle = new StringResourceBundle();
 	private GridPane myRoot;
 	private Stage myStage;
-	private LevelProgressionControllerEditor myLevels;
+	private LevelProgressionControllerEditor myLevelContr;
 	private Scene myScene;
 	private Node gameEditor;
 	private Node levelEditor;
-	private Node allLevelsEditor;
 	private LevelEditor myLevelEditor;
 	
-	public LevelView(LevelProgressionControllerEditor levels, Stage parentStage)
-	{
+	public LevelView(LevelProgressionControllerEditor levels, Stage parentStage){
 		myRoot = new GridPane();
-		myLevels = levels;
+		myLevelContr = levels;
+		initializeRoot(parentStage);
+		createStructureBoxes();	
+	}
+	private void initializeRoot(Stage parentStage){
 		myStage = new Stage();
 		myStage.initOwner(parentStage);
 		myStage.initModality(Modality.APPLICATION_MODAL);
-		myStage.setOnCloseRequest(e -> levels.saveGamesMap());
-		//myRoot.prefWidthProperty().bind(readOnlyDoubleProperty);
+		myStage.setOnCloseRequest(e -> myLevelContr.saveGamesMap());
 		myRoot.setPadding(new Insets(20, 20, 20, 20));
 		myRoot.setVgap(20);
 		myRoot.setHgap(20);
-		createStructureBoxes();
-
-		
+		myRoot.setPadding(new Insets(20, 20, 20, 20));
+		myRoot.setVgap(20);
+		myRoot.setHgap(20);
 	}
 	
 	public void launch(){
+		
 		myScene = new Scene(myRoot);
 		myScene.getStylesheets().add(stringResourceBundle.getFromStringConstants("DEFAULT_CSS"));
 		myStage.setScene(myScene);
@@ -59,22 +61,20 @@ public class LevelView {
 	
 	public void createStructureBoxes(){
 		Label title = new Label("Game Structure");
-		myRoot.add(title, 1, 0);
+		title.setUnderline(true);
+	
+		myRoot.add(title, 0, 0);
 
-		Label game = new Label("Game");
+		Label game = new Label("Game (click on game to view levels)");
 		myRoot.add(game, 0, 1);
 		VBox gameOutline = createSingleBox(0);
 		VBox levelOutline = createSingleBox(1);
-		VBox allLevelsOutline = createSingleBox(2);
 		
-		populateGame(gameOutline,myLevels.getGameList(),levelOutline);
-		populateAllLevels(allLevelsOutline,myLevels.getFullLevelList());
-		
+		populateGame(gameOutline,myLevelContr.getGameList(),levelOutline);
 		Label levels = new Label("Levels");
 		myRoot.add(levels, 1, 1);
-		Label allLevels = new Label("All Levels");
-		myRoot.add(allLevels, 2, 1);
-		myLevelEditor = new LevelEditor(100,levelOutline,gameOutline,myLevels);
+		
+		myLevelEditor = new LevelEditor(100,levelOutline,gameOutline,myLevelContr);
 		createBottomEditor();
 	}
 	private void populateGame(VBox wrapper,List<String> toAdd,VBox addToBox){
@@ -86,20 +86,13 @@ public class LevelView {
 	}
 	private void populateLevels(String gameName,VBox wrapper){
 		wrapper.getChildren().clear();
-		List<String> levels = myLevels.getLevelList(gameName);
+		List<String> levels = myLevelContr.getLevelList(gameName);
 		for (String str : levels){
 			Button strButton = new Button(str);
 			strButton.setOnAction(e -> myLevelEditor.populateLevelEditor(strButton));
 			wrapper.getChildren().add(strButton);
 		}
 		myLevelEditor.setGameName(gameName);
-	}
-	private void populateAllLevels(VBox wrapper,List<String> toAdd){
-		for (String str : toAdd){
-			Button strButton = new Button(str);
-			strButton.setOnAction(e -> myLevelEditor.populateLevelToAdd(str));
-			wrapper.getChildren().add(strButton);
-		}
 	}
 	public VBox createSingleBox(int col){
 		ScrollPane scroll = new ScrollPane();
@@ -126,8 +119,6 @@ public class LevelView {
 		levelEditor = myLevelEditor.getLevelEditor();
 		myRoot.add(levelEditor, 1, 3);
 		
-		allLevelsEditor = myLevelEditor.getAllLevelsEditor();
-		myRoot.add(allLevelsEditor, 2, 3);
 	}
 
 }
