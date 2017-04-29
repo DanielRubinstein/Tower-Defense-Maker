@@ -17,6 +17,8 @@ import backEnd.GameData.State.Tile;
 import backEnd.GameData.State.TileGrid;
 import backEnd.GameData.State.TileGridImpl;
 import backEnd.GameData.State.TileGridInstantiator;
+import backEnd.GameEngine.Engine.Spawning.SpawnQueueInstantiator;
+import backEnd.GameEngine.Engine.Spawning.SpawnQueues;
 import backEnd.GameData.Rules.RulesMap;
 import javafx.geometry.Point2D;
 import resources.constants.StringResourceBundle;
@@ -48,11 +50,22 @@ public class XMLReaderImpl implements XMLReader{
 	public GameData loadGameStateData(String filePath, String levelName) throws XMLReadingException, FileNotFoundException
 	{
 
+
+		HashMap<String, SpawnQueueInstantiator> instantiatorMap = (HashMap<String, SpawnQueueInstantiator>) xStream.fromXML(new File(filePath+"/" + levelName+"/spawns.xml"));
+		HashMap<String, SpawnQueues> spawnMap = new HashMap<String, SpawnQueues>();
+		
+		for (String x : instantiatorMap.keySet())
+		{
+			spawnMap.put(x, new SpawnQueues(instantiatorMap.get(x)));
+		}
+		
 		TileGrid grid = new TileGridImpl((TileGridInstantiator) xStream.fromXML(new File(filePath + "/" + levelName + "/" + 
 				strResources.getFromFilePaths("TileGrid_FileName") + ".xml")));
-		ComponentGraph graph = new ComponentGraphImpl((HashMap<Point2D, List<Component>>) xStream.fromXML(
+		ComponentGraph graph = new ComponentGraphImpl((List<Component>) xStream.fromXML(
 				new File(filePath+"/" + levelName+"/" + strResources.getFromFilePaths("ComponentGraph_FileName") + ".xml")));
-		StateImpl state = new StateImpl(grid.getNumRowsInGrid(), grid.getNumColsInGrid(), grid, graph);
+		
+		
+		StateImpl state = new StateImpl(grid, graph, spawnMap);
 		
 		return new GameData(state, (PlayerStatus) xStream.fromXML(new File(filePath+"/" + levelName+"/" + 
 				strResources.getFromFilePaths("PlayerStatus_FileName") + ".xml")), (RulesMap) xStream.fromXML(new 

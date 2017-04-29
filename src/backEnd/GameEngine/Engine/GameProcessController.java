@@ -66,6 +66,7 @@ public class GameProcessController {
 		this.run(delay); // TODO: TESTING ONLY
 		//System.out.println(this.getClass().getSimpleName() + " : " + engineStatus + " : " + myGameData.getState().gameIsRunning());
 		if (engineStatus.toString().equals("RUNNING")) {
+			System.out.println(this.getClass().getSimpleName() + " | " + "Step Complete | Time: " + myGameData.getGameTime());
 			myGameData.incrementGameTime(delay);
 			//System.out.println(this.getClass().getSimpleName() + " : " + myGameData.getGameTime() +" incremented by "+ delay);
 		}

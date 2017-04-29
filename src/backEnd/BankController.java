@@ -7,10 +7,12 @@ import java.util.List;
 import java.util.Map;
 import javax.swing.JOptionPane;
 import backEnd.Mode.Mode;
+import data.DataControllerReader;
 import resources.constants.StringResourceBundle;
 import backEnd.Attribute.AttributeOwner;
 import backEnd.GameData.State.Component;
 import backEnd.GameData.State.ComponentImpl;
+import backEnd.GameData.State.SerializableObservable;
 import backEnd.GameData.State.SerializableObserver;
 import backEnd.GameData.State.Tile;
 import backEnd.GameData.State.TileImpl;
@@ -29,17 +31,14 @@ public class BankController implements BankControllerReader
 	private Map<String, Tile> accessibleTileBank;
 	private Map<String, Component> accessibleComponentBank;
 	private Mode myMode;
+	private DataControllerReader dataController;
 	private List<SerializableObserver> observers;
-	
-	public BankController(Mode myMode)
-	{
-		this(myMode, new HashMap<String, Tile>(), new HashMap<String, Component>());
-	}
 
-	public BankController(Mode myMode, Map<String, Tile> tileBank, Map<String, Component> componentBank) {
-		this.tileBank = tileBank;
-		this.componentBank = componentBank;
+	public BankController(Mode myMode, DataControllerReader dataController) {
+		this.tileBank = dataController.loadTileMap();
+		this.componentBank = dataController.loadComponentMap();
 		this.myMode = myMode;
+		this.dataController = dataController;
 		this.observers = new ArrayList<SerializableObserver>();
 		accessibleComponentBank = new HashMap<>();
 		accessibleTileBank = new HashMap<>();
@@ -146,6 +145,11 @@ public class BankController implements BankControllerReader
 		refreshAccessibleComponentMap();
 		return accessibleComponentBank;
 	}
+	
+	public void refreshAccessibleMaps(){
+		refreshAccessibleComponentMap();
+		refreshAccessibleTileMap();
+	}
 
 	private void refreshAccessibleComponentMap() {
 		accessibleComponentBank.clear();
@@ -171,14 +175,12 @@ public class BankController implements BankControllerReader
 			JOptionPane.showMessageDialog(null, strResources.getFromErrorMessages("Duplicate_Name_Error"));
 		} else {
 			componentBank.put(name, component);
-			refreshAccessibleComponentMap();
 			notifyObservers();
 		}
 	}
 
 	public void remove(Component component) {
 		componentBank.remove(component);
-		refreshAccessibleComponentMap();
 		notifyObservers();
 	}
 
@@ -228,7 +230,8 @@ public class BankController implements BankControllerReader
 
 	private void notifyObservers() {
 		for(SerializableObserver o : observers){
-			o.update(null, null);
+			o.update((SerializableObservable) this, null);
 		}
+		dataController.saveUniversalGameData();
 	}
 }

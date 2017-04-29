@@ -14,7 +14,9 @@ import backEnd.Attribute.AttributeData;
 import backEnd.Attribute.AttributeFactoryImpl;
 import backEnd.Attribute.AttributeFactoryReader;
 import backEnd.Attribute.AttributeOwner;
+import backEnd.Attribute.AttributeReader;
 import javafx.geometry.Point2D;
+import resources.constants.StringResourceBundle;
 
 /**
  * This class is the implementation of the Tile Interface that holds the tiles
@@ -26,12 +28,10 @@ import javafx.geometry.Point2D;
 
 public class TileImpl implements Tile, AttributeOwner, SerializableObservable {
 	private final static String DEFAULT_ATTRIBUTES_PATH = "resources/defaultTileAttributes";
-	private final static ResourceBundle attributeResources = ResourceBundle.getBundle(DEFAULT_ATTRIBUTES_PATH);
+	private final static StringResourceBundle strResources = new StringResourceBundle();
 	private AccessPermissions myAccessPerm;
 	private AttributeData myAttrData;
-	
-	@XStreamOmitField
-	private List<SerializableObserver> observers = new ArrayList<SerializableObserver>();
+	private List<SerializableObserver> observers = new ArrayList<SerializableObserver>();;
 	
 	public TileImpl() throws FileNotFoundException{
 		this(new AccessPermissionsImpl(), new Point2D(0,0));
@@ -48,13 +48,13 @@ public class TileImpl implements Tile, AttributeOwner, SerializableObservable {
 		this.myAttrData = new AttributeData(new HashMap<String, Attribute<?>>());
 		AttributeFactoryReader attrFact = new AttributeFactoryImpl();
 		this.myAttrData = new AttributeData(new HashMap<String, Attribute<?>>());
-		for (String key : attributeResources.keySet()) {
+		for (String key : strResources.getKeysFromDefaultTileAttributes()) {
 			Attribute<?> myAttribute = attrFact.getAttribute(key);
 			addAttribute(key, myAttribute);
 		}
-		
 		this.setAttributeValue("Position", position);
-	}
+		
+		}
 	
 	@Override
 	public AccessPermissions getAccessPermissions() {
@@ -74,7 +74,7 @@ public class TileImpl implements Tile, AttributeOwner, SerializableObservable {
 
 	@Override
 	public void addAttribute(String name, Attribute<?> value) {
-		myAttrData.addAttribute(attributeResources.getString(name), value);
+		myAttrData.addAttribute(strResources.getFromAttributeNames(name), value);
 		notifyObservers();
 
 	}
@@ -82,12 +82,17 @@ public class TileImpl implements Tile, AttributeOwner, SerializableObservable {
 	@Override
 	public Attribute<?> getAttribute(String name) {;
 		
-		return myAttrData.get(attributeResources.getString(name));
+		return myAttrData.get(strResources.getFromAttributeNames(name));
+	}
+	
+	@Override
+	public <T> AttributeReader<T> getAttributeReader(String name) {;
+		return myAttrData.get(strResources.getFromAttributeNames(name));
 	}
 
 	@Override
 	public boolean hasAttribute(String name) {
-		return myAttrData.containsAttribute(attributeResources.getString(name));
+		return myAttrData.containsAttribute(strResources.getFromAttributeNames(name));
 	}
 
 	@SuppressWarnings("unchecked")
@@ -99,6 +104,9 @@ public class TileImpl implements Tile, AttributeOwner, SerializableObservable {
 
 	@Override
 	public void addObserver(SerializableObserver obs) {
+		if (observers == null){
+			observers = new ArrayList<SerializableObserver>();
+		}
 		observers.add(obs);
 	}
 
@@ -120,7 +128,7 @@ public class TileImpl implements Tile, AttributeOwner, SerializableObservable {
 
 	@Override
 	public void setObserverList(List<SerializableObserver> observers) {
-		observers = observers;
+		this.observers = observers;
 		notifyObservers();
 	}
 
@@ -131,7 +139,7 @@ public class TileImpl implements Tile, AttributeOwner, SerializableObservable {
 
 	@Override
 	public void clearObservers() {
-		observers = null;
+		observers = new ArrayList<SerializableObserver>();
 	}
 
 	@Override

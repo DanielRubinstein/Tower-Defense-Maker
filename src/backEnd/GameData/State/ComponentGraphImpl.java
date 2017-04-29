@@ -18,36 +18,23 @@ import backEnd.Attribute.AttributeOwnerReader;
  */
 
 public class ComponentGraphImpl implements ComponentGraph {
-	private Map<Point2D, List<Component>> componentMap;
 	private List<Component> myComponents;
 	private List<SerializableObserver> observers;
 	private List<List<SerializableObserver>> compObserverList;
 
 	public ComponentGraphImpl() {
-		this(new HashMap<>());
+		this(new ArrayList<>());
 	}
 
-	public ComponentGraphImpl(HashMap<Point2D, List<Component>> fromXML) {
-		componentMap = fromXML;
+	public ComponentGraphImpl(List<Component> fromXML) {
+		myComponents = fromXML;
 		observers = new ArrayList<SerializableObserver>();
-
-		myComponents = new ArrayList<Component>();
-		for(List<Component> cList : componentMap.values()){
-			for(Component c: cList){
-				myComponents.add(c);
-			}
-		}
 
 	}
 
 
 	public List<Component> getAllComponents() {
 		return myComponents;
-	}
-
-
-	public Map<Point2D, List<Component>> getComponentMap() {
-		return componentMap;
 	}
 	
 
@@ -111,14 +98,7 @@ public class ComponentGraphImpl implements ComponentGraph {
 		return componentsWithinRadius;
 	}
 
-	@Override
-	public List<Component> getNearestComponents(Component centerComp) {
-		List<Point2D> locations = new ArrayList<Point2D>(componentMap.keySet());
-		Point2D centerLoc = centerComp.<Point2D>getAttribute("Position").getValue();
-		SortComponents_Distance sorter = new SortComponents_Distance();
-		List<Point2D> sortedLocations = sorter.nearToFar(centerLoc, locations);
-		return componentMap.get(sortedLocations.get(0));
-	}
+
 	
 
 	@Override
