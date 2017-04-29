@@ -13,6 +13,7 @@ import data.DataControllerReader;
 import resources.constants.StringResourceBundle;
 >>>>>>> 24bb9c3fa1bf8e7df3482775321bbe43dd9b7326
 import backEnd.Attribute.AttributeOwner;
+import backEnd.GameData.State.Component;
 import backEnd.GameData.State.ComponentImpl;
 import backEnd.GameData.State.SerializableObserver;
 import backEnd.GameData.State.Tile;
@@ -27,7 +28,7 @@ public class BankController implements BankControllerReader
 {
 	private static final StringResourceBundle strResources = new StringResourceBundle();
 	private Map<String, Tile> tileBank;
-	private Map<String, ComponentImpl> componentBank;
+	private Map<java.lang.String, Component> componentBank;
 	private Map<String, Tile> accessibleTileBank;
 	private Map<String, ComponentImpl> accessibleComponentBank;
 	private Mode myMode;

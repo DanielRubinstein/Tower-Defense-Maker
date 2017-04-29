@@ -42,8 +42,6 @@ public interface TileGrid extends SerializableObservable{
 
 	Object getMap();
 	
-	boolean atMiddleOfTile(Point2D screenPosition);
-
 	void saveAndClearTileObservers();
 
 	void setTileObservers();
