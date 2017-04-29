@@ -11,6 +11,8 @@ import java.util.MissingResourceException;
 import ModificationFromUser.AttributeOwner.Modification_EditAttribute;
 import backEnd.Attribute.Attribute;
 import backEnd.Attribute.AttributeOwner;
+import backEnd.Attribute.AttributeOwnerReader;
+import backEnd.Attribute.AttributeReader;
 import backEnd.GameData.State.Component;
 import frontEnd.View;
 import frontEnd.CustomJavafxNodes.NumberChanger;
@@ -33,13 +35,13 @@ import javafx.stage.Stage;
 
 public class AttributeEditorCreator implements AttributeVisualization{
 	private View myView;
-	private AttributeOwner myOwner;
-	private Attribute<?> myAttr;
+	private AttributeOwnerReader myOwner;
+	private AttributeReader<?> myAttr;
 	public static final String SAVED_IMAGES_DIRECTORY = "src/resources/images";
 	public static final String CLASS_LOADER_DIRECTORY = "resources/images/";
 	private ToggleSwitch myToggle;
 
-	public AttributeEditorCreator(View view, AttributeOwner obj, Attribute<?> attr){
+	public AttributeEditorCreator(View view, AttributeOwnerReader obj, AttributeReader<?> attr){
 		myView = view;
 		myOwner = obj;
 		myAttr = attr;
@@ -87,8 +89,8 @@ public class AttributeEditorCreator implements AttributeVisualization{
 		sendModification(myToggle.getSwitchedOn().getValue());
 	}
 
-	private void sendModification(Object newValue){
-		myView.sendUserModification(new Modification_EditAttribute((AttributeOwner) myOwner, myAttr, newValue));
+	private <T> void sendModification(T newValue){
+		myView.sendUserModification(new Modification_EditAttribute<T>(myOwner, myAttr.getName(), newValue));
 	}
 
 	@Override
