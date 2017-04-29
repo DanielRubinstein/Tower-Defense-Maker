@@ -106,6 +106,8 @@ public class AttributeOwnerVisualImpl implements SerializableObserver, Attribute
 				if(!newImagePath.equals(myImagePath)){
 					setImage(newImagePath);
 				}
+			} catch (MissingResourceException e){
+				// means we are dealing with something that does not have size
 			}
 			if(!newPosition.equals(myPosition)){
 				setPosition(newPosition);
