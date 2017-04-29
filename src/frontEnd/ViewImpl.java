@@ -96,7 +96,7 @@ public class ViewImpl implements View {
 	}
 
 	@Override
-	public Collection<ComponentImpl> getComponentPresets() {
+	public Collection<Component> getComponentPresets() {
 		return myModel.getBankController().getComponentMap().values();
 	}
 

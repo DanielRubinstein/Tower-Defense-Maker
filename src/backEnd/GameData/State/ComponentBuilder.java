@@ -6,10 +6,10 @@ import com.thoughtworks.xstream.XStream;
 import com.thoughtworks.xstream.io.xml.DomDriver;
 
 public class ComponentBuilder {
-	private ComponentImpl myComponent;
+	private Component myComponent;
 	private XStream xStream;
 	
-	public ComponentBuilder(ComponentImpl component) {
+	public ComponentBuilder(Component component) {
 		myComponent = component;
 		xStream = new XStream(new DomDriver());
 		xStream.alias("ComponentImpl", ComponentImpl.class);

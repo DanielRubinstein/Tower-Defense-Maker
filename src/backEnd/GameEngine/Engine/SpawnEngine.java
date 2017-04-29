@@ -7,6 +7,7 @@ import backEnd.BankController;
 import backEnd.Attribute.Attribute;
 import backEnd.GameData.GameData;
 import backEnd.GameData.State.ComponentImpl;
+import backEnd.GameData.State.Component;
 import backEnd.GameData.State.ComponentBuilder;
 import backEnd.GameData.State.State;
 import backEnd.GameData.State.Tile;
@@ -51,7 +52,7 @@ public class SpawnEngine implements Engine {
 					spawn(myBank.getComponent(component), spawnTile);
 				}
 				// Spawning directly with spawn queue
-				ComponentImpl nextQueueSpawn = myBank.getComponent(currentSpawnQueue.getNextSingleSpawn(gameData.getGameTime()));
+				Component nextQueueSpawn = myBank.getComponent(currentSpawnQueue.getNextSingleSpawn(gameData.getGameTime()));
 				spawn(nextQueueSpawn, spawnTile);
 			}
 		}
@@ -65,7 +66,7 @@ public class SpawnEngine implements Engine {
 	}
 
 	@SuppressWarnings("unchecked")
-	private void spawn(ComponentImpl component, Tile spawnTile) {
+	private void spawn(Component component, Tile spawnTile) {
 		if (component == null) {
 			//System.out.println(this.getClass().getName() + ": No component to add from spawn queue");
 			return;

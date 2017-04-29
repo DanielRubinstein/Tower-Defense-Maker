@@ -229,11 +229,5 @@ public class TileGridImpl implements TileGrid {
 	public void setObservers(List<SerializableObserver> observersave) {
 		observers = observersave;
 	}
-
-	@Override
-	public boolean atMiddleOfTile(Point2D screenPosition) {
-		// TODO Auto-generated method stub
-		return false;
-	}
 	
 }

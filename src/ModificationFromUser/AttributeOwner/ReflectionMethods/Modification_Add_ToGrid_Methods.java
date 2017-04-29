@@ -18,7 +18,7 @@ public class Modification_Add_ToGrid_Methods{
 		this.location = location;
 	}
 	
-	public void add(TileImpl tile){
+	public void add(TileImpl tile) throws ModeException{
 		switch (myModel.getMode().getUserMode()) {
 		case "AUTHOR":
 			myModel.getState().getTileGrid().setTileByScreenPosition(tile,location);

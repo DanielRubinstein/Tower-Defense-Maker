@@ -24,9 +24,9 @@ public class BankController implements BankControllerReader
 {
 	private static final StringResourceBundle strResources = new StringResourceBundle();
 	private Map<String, Tile> tileBank;
-	private Map<java.lang.String, Component> componentBank;
+	private Map<String, Component> componentBank;
 	private Map<String, Tile> accessibleTileBank;
-	private Map<String, ComponentImpl> accessibleComponentBank;
+	private Map<String, Component> accessibleComponentBank;
 	private Mode myMode;
 	private List<SerializableObserver> observers;
 	
@@ -42,7 +42,7 @@ public class BankController implements BankControllerReader
 		this.observers = new ArrayList<SerializableObserver>();
 		accessibleComponentBank = new HashMap<>();
 		accessibleTileBank = new HashMap<>();
-		createTemplatesForTesting();
+		//createTemplatesForTesting();
 	}
 	
 	@Override
@@ -82,7 +82,7 @@ public class BankController implements BankControllerReader
 		}
 	}
 
-	public Map<String, ComponentImpl> getAccessibleComponentMap() {
+	public Map<String, Component> getAccessibleComponentMap() {
 		refreshAccessibleComponentMap();
 		return accessibleComponentBank;
 	}
@@ -98,7 +98,7 @@ public class BankController implements BankControllerReader
 		}
 	}
 
-	public Map<String, ComponentImpl> getComponentMap() {
+	public Map<String, Component> getComponentMap() {
 		return componentBank;
 	}
 
@@ -150,7 +150,7 @@ public class BankController implements BankControllerReader
 		}
 	}
 	
-	public ComponentImpl getComponent(String componentName){
+	public Component getComponent(String componentName){
 		if (componentBank.containsKey(componentName)){
 			return componentBank.get(componentName);
 		}
