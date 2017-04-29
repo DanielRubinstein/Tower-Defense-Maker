@@ -4,7 +4,6 @@
 		<FireImage></FireImage></IMAGE>
 	<BOOLEAN>
 		<BOOLEAN_TEMPLATE></BOOLEAN_TEMPLATE><Traversable></Traversable>
-		<Buildable></Buildable>
 		<GoalTile></GoalTile>
 		<SpawnOnDeath></SpawnOnDeath></BOOLEAN>
 	<DOUBLE>
@@ -21,7 +20,8 @@
 		<Health min="1" max="100" start="1" increment="5"></Health>
 		<MoneyBounty min="0" max="999" start="10" increment="10"></MoneyBounty>
 		<ScoreBounty min="0" max="999" start="10" increment="10"></ScoreBounty><FireDamage min="0" max="200" start="1" increment="2"></FireDamage>
-		<UpgradeCost min="0" max="999" start="10" increment="10"></UpgradeCost></INTEGER><EDITABLESTRING>
+		<UpgradeCost min="0" max="999" start="10" increment="10"></UpgradeCost>
+		<BuildCapacity min="0" max="20" start="1" increment="1"></BuildCapacity></INTEGER><EDITABLESTRING>
 		<EDITABLESTRING_TEMPLATE></EDITABLESTRING_TEMPLATE></EDITABLESTRING>
 	<STRINGLIST>
 		<STRINGLIST_TEMPLATE Options="Comma delineated String Options"></STRINGLIST_TEMPLATE>
