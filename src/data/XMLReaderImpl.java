@@ -78,6 +78,7 @@ public class XMLReaderImpl implements XMLReader{
 		try{
 			return xStream.fromXML(xmlFile);
 		} catch (Exception e){
+			e.printStackTrace();
 			throw new XMLReadingException(xmlFile);
 		}
 	}

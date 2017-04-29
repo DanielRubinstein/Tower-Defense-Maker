@@ -36,6 +36,9 @@ public class EngineFactory {
 		}
 		case "RulesEngine": {
 			return new RulesEngine();
+		}
+		case "BaseCheckerEngine":{
+			return new BaseCheckerEngine();
 		}}
 		return null;
 	}

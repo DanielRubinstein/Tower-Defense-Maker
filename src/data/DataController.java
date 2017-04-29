@@ -45,6 +45,7 @@ public class DataController {
 		}
 		catch (Exception e)
 		{
+			e.printStackTrace();
 			return null;
 		}
 	}

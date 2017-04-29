@@ -1,17 +1,19 @@
 package backEnd;
 
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import javax.swing.JOptionPane;
 import backEnd.Mode.Mode;
-import data.DataControllerReader;
 import resources.constants.StringResourceBundle;
 import backEnd.Attribute.AttributeOwner;
 import backEnd.GameData.State.Component;
+import backEnd.GameData.State.ComponentImpl;
 import backEnd.GameData.State.SerializableObserver;
 import backEnd.GameData.State.Tile;
+import backEnd.GameData.State.TileImpl;
 
 /**
  * 
@@ -47,6 +49,65 @@ public class BankController implements BankControllerReader
 	@Override
 	public String getComponentName(Component component){
 		return findKeyFromValue(componentBank, component);
+	}
+	
+	private void createTemplatesForTesting(){
+		try{
+			this.tileBank = new HashMap<String, Tile>();
+			this.componentBank = new HashMap<String, Component>();
+			Tile newTile = new TileImpl();
+			newTile.setAttributeValue("ImageFile", "resources/images/Tiles/Blue.png");
+			newTile.setAttributeValue("MoveDirection", "Down");
+			addNewTile("Blue Down Tile", newTile);
+
+			Tile newTile2 = new TileImpl();
+			newTile2.setAttributeValue("ImageFile", "resources/images/Tiles/Red.png");
+			newTile2.setAttributeValue("MoveDirection", "Right");
+			addNewTile("Red Right Tile", newTile2);
+
+			Tile newTile3 = new TileImpl();
+			newTile3.setAttributeValue("ImageFile", "resources/images/Tiles/Green.png");
+			newTile3.setAttributeValue("MoveDirection", "Up");
+			addNewTile("Green Up Tile", newTile3);
+
+			Tile newTile4 = new TileImpl();
+			newTile4.setAttributeValue("ImageFile", "resources/images/Tiles/Yellow.png");
+			newTile4.setAttributeValue("MoveDirection", "Left");
+			addNewTile("Yellow Left Tile", newTile4);
+
+			Component testerSpawnedBloon = new ComponentImpl();
+			testerSpawnedBloon.setAttributeValue("ImageFile", "resources/images/Components/blue_bloon.png");
+			testerSpawnedBloon.setAttributeValue("Speed", 1d);
+			testerSpawnedBloon.setAttributeValue("Health", 20);
+			testerSpawnedBloon.setAttributeValue("Type", "Enemy");
+			
+
+			Component testingBloon = new ComponentImpl();
+			testingBloon.setAttributeValue("ImageFile", "resources/images/Components/rainbow_bloon.png");
+			testingBloon.setAttributeValue("Speed", 0.1);
+			testingBloon.setAttributeValue("Health", 20);
+			testingBloon.setAttributeValue("Type", "Enemy");
+			testingBloon.setAttributeValue("SpawnOnDeath", true);
+			testingBloon.setAttributeValue("SpawnOnDeathObject", testerSpawnedBloon);
+			addNewComponent("Enemy", testingBloon);
+
+			Component testingTurret = new ComponentImpl();
+			testingTurret.setAttributeValue("ImageFile", "resources/images/Components/zombie.png");
+			testingTurret.setAttributeValue("Health", 10);
+			testingTurret.setAttributeValue("Type", "Tower");
+			testingTurret.setAttributeValue("Velocity", 5.0);
+			testingTurret.setAttributeValue("Speed", 1.0);
+			testingTurret.setAttributeValue("FireDamage", 10);
+			testingTurret.setAttributeValue("FireRate", 1000.0);
+			testingTurret.setAttributeValue("ExplosionRadius", 40.0);
+			testingTurret.setAttributeValue("FireType", "SingleTarget");
+			testingTurret.setAttributeValue("FireRadius", 200.0);
+			testingTurret.setAttributeValue("FireImage", "resources/images/Components/purple_bloon.png");
+			addNewComponent("Tower", testingTurret);
+
+		} catch (FileNotFoundException e) {
+			System.out.println("No image found");
+		}
 	}
 
 	public void addNewTile(String name, Tile tile) {
