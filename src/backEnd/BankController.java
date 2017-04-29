@@ -8,6 +8,7 @@ import java.util.Map;
 import javax.swing.JOptionPane;
 import backEnd.Mode.Mode;
 import data.DataControllerReader;
+import frontEnd.CustomJavafxNodes.ErrorDialog;
 import resources.constants.StringResourceBundle;
 import backEnd.Attribute.AttributeOwner;
 import backEnd.GameData.State.Component;
@@ -184,6 +185,7 @@ public class BankController implements BankControllerReader
 		notifyObservers();
 	}
 
+	//TODO: get rid of instanceOf
 	public String getAOName(AttributeOwner preset) {
 		if (preset instanceof Tile) {
 			return findKeyFromValue(tileBank, (Tile) preset);
@@ -208,6 +210,8 @@ public class BankController implements BankControllerReader
 		} else if (tileBank.containsKey(presetName)) {
 			return tileBank.get(presetName);
 		} else {
+			new ErrorDialog().create(strResources.getFromErrorMessages("Bank_Error_Header"), 
+					String.format(strResources.getFromErrorMessages("Missing_Preset"), presetName));
 			return null;
 		}
 	}
@@ -220,7 +224,9 @@ public class BankController implements BankControllerReader
 			return null;
 		}
 		else{
-			throw new RuntimeException(strResources.getFromErrorMessages("Component_Not_Found"));
+			new ErrorDialog().create(strResources.getFromErrorMessages("Bank_Error_Header"), 
+					String.format(strResources.getFromErrorMessages("Missing_Preset"), componentName));
+			return null;
 		}
 	}
 	
