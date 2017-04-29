@@ -1,12 +1,9 @@
 package ModificationFromUser.Spawning;
 
-import java.util.Map;
 
 import ModificationFromUser.ModificationFromUser;
 import backEnd.ModelImpl;
-import backEnd.GameData.State.State;
 import backEnd.GameEngine.Engine.Spawning.SpawnDataReader;
-import backEnd.GameEngine.Engine.Spawning.SpawnQueues;
 
 /**
  * Modification to remove spawner from a list

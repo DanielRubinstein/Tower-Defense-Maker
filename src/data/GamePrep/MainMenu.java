@@ -8,6 +8,10 @@ import frontEnd.Facebook.FacebookBrowserImpl;
 import frontEnd.Facebook.FacebookConnector;
 import frontEnd.Facebook.FacebookConnectorImpl;
 import frontEnd.Facebook.FacebookInteractor;
+import frontEnd.Skeleton.UserTools.HelpOptions;
+import javafx.scene.Scene;
+import javafx.scene.web.WebEngine;
+import javafx.scene.web.WebView;
 import javafx.stage.DirectoryChooser;
 import javafx.stage.Modality;
 import frontEnd.CustomJavafxNodes.ButtonMenuImpl;
@@ -33,6 +37,7 @@ public class MainMenu{
 	private ResourceBundle appInfo = ResourceBundle.getBundle(DEFAULT_RESOURCE_BUNDLE);
 	private String appSecret = appInfo.getString("appSecret");
 	private String appID = appInfo.getString("appID");
+	private String helpURL = "";
 	
 	
 	public MainMenu(Consumer<Object> setGameData, Consumer<FacebookInteractor> setFb){
@@ -52,7 +57,8 @@ public class MainMenu{
 
 	private void showPrimaryMenu(Stage stage) {
 		ButtonMenuImpl primaryMenu = new ButtonMenuImpl("Games");
-   	 	primaryMenu.addPrimarySimpleButtonWithHover("Create New Game", () -> new GameMaker(stage, consumerLoadData), "Create A New Game after selecting the size of the screen");
+		primaryMenu.addPrimarySimpleButtonWithHover("Help/Instructions", () -> new HelpOptions(stage), "See the help page");
+   	 	primaryMenu.addSimpleButtonWithHover("Create New Game", () -> new GameMaker(stage, consumerLoadData), "Create A New Game after selecting the size of the screen");
    	 	primaryMenu.addSimpleButtonWithHover("Modify Level", () -> chooseLevel(), "Load a level to edit");
    	 	primaryMenu.addSimpleButtonWithHover("Load Saved Game", () -> chooseSavedGame(), "Continue your progress by loading a user-saved game");
    	 	primaryMenu.addSimpleButtonWithHover("Play Game", () -> new GameChooserWindow(stage, consumerLoadData) , "Play game");
@@ -60,7 +66,6 @@ public class MainMenu{
 		primaryMenu.display(stage);
 	}
 
-	
 	private void chooseLevel()
 	{
 		loadLevel(TEMPLATE_PATH);

@@ -2,10 +2,8 @@ package ModificationFromUser.AttributeOwner;
 
 import ModificationFromUser.ModificationFromUser;
 import backEnd.ModelImpl;
-import backEnd.Attribute.Attribute;
 import backEnd.Attribute.AttributeOwner;
 import backEnd.Attribute.AttributeOwnerReader;
-import backEnd.Attribute.AttributeReader;
 
 
 public class Modification_EditAttribute<T> implements ModificationFromUser {
