@@ -8,6 +8,7 @@ import javafx.geometry.Point2D;
 public class Modification_UpgradeComponent implements ModificationFromUser {
 	private Component toUpgrade;
 	
+	//FIXME should be reader interface in constructor
 	public Modification_UpgradeComponent(Component toUpgrade) {
 		this.toUpgrade = toUpgrade;
 	}

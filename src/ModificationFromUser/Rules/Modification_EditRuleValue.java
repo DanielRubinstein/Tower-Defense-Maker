@@ -2,7 +2,6 @@ package ModificationFromUser.Rules;
 
 import ModificationFromUser.ModificationFromUser;
 import backEnd.ModelImpl;
-import backEnd.GameData.Rules.Rule;
 
 public class Modification_EditRuleValue implements ModificationFromUser{
 

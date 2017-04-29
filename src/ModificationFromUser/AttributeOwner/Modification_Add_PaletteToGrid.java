@@ -19,7 +19,6 @@ import util.reflection.Reflection;
 public class Modification_Add_PaletteToGrid implements ModificationFromUser {
 	private AttributeOwnerReader newAttrOwn;
 	private Point2D location;
-	private ModelImpl myModel;
 
 	public Modification_Add_PaletteToGrid(AttributeOwnerReader preset, Point2D location) {
 		this.newAttrOwn = preset;
@@ -28,8 +27,7 @@ public class Modification_Add_PaletteToGrid implements ModificationFromUser {
 	}
 
 	@Override
-	public void invoke(ModelImpl model) throws Exception {
-		myModel = model;
+	public void invoke(ModelImpl myModel) throws Exception {
 		AttributeOwner attributeOwner = myModel.getAttributeOwner(newAttrOwn);
 		AttributeOwnerSerializer attributeOwnerSerializer = new AttributeOwnerSerializer();
 		AttributeOwner cleanAO = attributeOwnerSerializer.createCopy(attributeOwner);
