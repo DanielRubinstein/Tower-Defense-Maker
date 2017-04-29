@@ -125,7 +125,7 @@ public class XMLWriterImpl implements XMLWriter{
 		String playerStatusXML = xStream.toXML(new PlayerStatus());
 		saveToXML(levelTemplateDataPath+ levelName +"/", strResources.getFromFilePaths("PlayerStatus_FileName"), playerStatusXML);
 		
-		String spawnsXML = xStream.toXML(gameData.getState().getSpawnQueues());
+		String spawnsXML = xStream.toXML(gameData.getState().getSpawnQueueInstantiators());
 		saveToXML(levelTemplateDataPath+ levelName +"/", strResources.getFromFilePaths("Spawns_FileName"), spawnsXML);
 		
 		

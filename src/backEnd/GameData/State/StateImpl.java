@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.ResourceBundle;
 import backEnd.GameEngine.EngineStatus;
+import backEnd.GameEngine.Engine.Spawning.SpawnQueueInstantiator;
 import backEnd.GameEngine.Engine.Spawning.SpawnQueues;
 import javafx.geometry.Point2D;
 import resources.constants.NumericResourceBundle;
@@ -232,6 +233,18 @@ public StateImpl(TileGrid tileGrid, ComponentGraph componentGraph, HashMap<Strin
 	public Map<String, SpawnQueues> getSpawnQueues() {
 		//System.out.println(mySpawnQueues);
 		return mySpawnQueues;
+	}
+	
+	public Map<String, SpawnQueueInstantiator> getSpawnQueueInstantiators()
+	{
+		Map<String, SpawnQueueInstantiator> map = new HashMap<String, SpawnQueueInstantiator>();
+		
+		for (String x : mySpawnQueues.keySet())
+		{
+			map.put(x, mySpawnQueues.get(x).getInstantiator());
+		}
+		
+		return map;
 	}
 	
 	private void notifyObservers() {
