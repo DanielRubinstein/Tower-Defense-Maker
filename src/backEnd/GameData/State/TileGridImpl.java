@@ -41,6 +41,7 @@ public class TileGridImpl implements TileGrid {
 		numRowsInGrid = rowsInGrid;
 		tileGrid = new HashMap<>();
 		tileCenterFactor=Double.valueOf(RESOURCE_BUNDLE.getString("TileCenterFactor"));
+
 	}
 
 	public TileGridImpl(TileGridInstantiator i) {
