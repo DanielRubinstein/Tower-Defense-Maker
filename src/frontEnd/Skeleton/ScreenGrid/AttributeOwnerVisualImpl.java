@@ -1,5 +1,7 @@
 package frontEnd.Skeleton.ScreenGrid;
 
+import java.util.MissingResourceException;
+
 import backEnd.Attribute.AttributeOwnerReader;
 import backEnd.GameData.State.SerializableObservable;
 import backEnd.GameData.State.SerializableObserver;
@@ -23,14 +25,16 @@ public class AttributeOwnerVisualImpl implements SerializableObserver, Attribute
 		myAttr = attr;
 		myAttr.addObserver(this);
 		myImage = new ImageView();
-		setImage(myAttr.getMyAttributes().<String>get(IMAGE_ATTRIBUTE).getValue());
+		setImage(myAttr.<String>getAttributeReader(IMAGE_ATTRIBUTE).getValue());
 		try{
-			Double size = myAttr.getMyAttributes().<Double>get("Size").getValue();
+			Double size = myAttr.<Double>getAttributeReader("Size").getValue();
 			setSize(size);
 		} catch (NullPointerException e){
 			// means we are dealing with something that does not have size
+		}catch (MissingResourceException e){
+			//means we are dealing with something that does not have size
 		}
-		setPosition(myAttr.getMyAttributes().<Point2D>get(POSITION_ATTRIBUTE).getValue());
+		setPosition(myAttr.<Point2D>getAttributeReader(POSITION_ATTRIBUTE).getValue());
 	}
 	
 	private void setSize(Double value) {
@@ -84,10 +88,10 @@ public class AttributeOwnerVisualImpl implements SerializableObserver, Attribute
 	@Override
 	public void update(SerializableObservable o, Object arg) {
 		if(o == myAttr){
-			String newImagePath = myAttr.getMyAttributes().<String>get(IMAGE_ATTRIBUTE).getValue();
-			Point2D newPosition = myAttr.getMyAttributes().<Point2D>get(POSITION_ATTRIBUTE).getValue();
+			String newImagePath = myAttr.<String>getAttributeReader(IMAGE_ATTRIBUTE).getValue();
+			Point2D newPosition = myAttr.<Point2D>getAttributeReader(POSITION_ATTRIBUTE).getValue();
 			try{
-				Double newSize = myAttr.getMyAttributes().<Double>get("Size").getValue();
+				Double newSize = myAttr.<Double>getAttributeReader("Size").getValue();
 				if(!newImagePath.equals(myImagePath)){
 					setImage(newImagePath);
 					setSize(newSize);
@@ -102,6 +106,8 @@ public class AttributeOwnerVisualImpl implements SerializableObserver, Attribute
 				if(!newImagePath.equals(myImagePath)){
 					setImage(newImagePath);
 				}
+			} catch (MissingResourceException e){
+				// means we are dealing with something that does not have size
 			}
 			if(!newPosition.equals(myPosition)){
 				setPosition(newPosition);
@@ -111,7 +117,7 @@ public class AttributeOwnerVisualImpl implements SerializableObserver, Attribute
 
 	@Override
 	public void refreshXY() {
-		setPosition(myAttr.getMyAttributes().<Point2D>get(POSITION_ATTRIBUTE).getValue());
+		setPosition(myAttr.<Point2D>getAttributeReader(POSITION_ATTRIBUTE).getValue());
 	}
 
 	

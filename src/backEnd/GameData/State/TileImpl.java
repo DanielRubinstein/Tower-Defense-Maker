@@ -14,6 +14,7 @@ import backEnd.Attribute.AttributeData;
 import backEnd.Attribute.AttributeFactoryImpl;
 import backEnd.Attribute.AttributeFactoryReader;
 import backEnd.Attribute.AttributeOwner;
+import backEnd.Attribute.AttributeReader;
 import javafx.geometry.Point2D;
 
 /**
@@ -78,8 +79,12 @@ public class TileImpl implements Tile, AttributeOwner, SerializableObservable {
 	}
 
 	@Override
-	public Attribute<?> getAttribute(String name) {;
-		
+	public <T> Attribute<T> getAttribute(String name) {;
+		return myAttrData.get(attributeResources.getString(name));
+	}
+	
+	@Override
+	public <T> AttributeReader<T> getAttributeReader(String name) {;
 		return myAttrData.get(attributeResources.getString(name));
 	}
 
