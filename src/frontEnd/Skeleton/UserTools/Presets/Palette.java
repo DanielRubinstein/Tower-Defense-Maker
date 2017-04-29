@@ -7,6 +7,7 @@ import java.util.Map;
 import java.util.function.Consumer;
 
 import ModificationFromUser.AttributeOwner.Modification_Add_PaletteToGrid;
+import ModificationFromUser.AttributeOwner.Modification_Remove_FromPalette;
 import backEnd.BankController;
 import backEnd.Attribute.AttributeOwner;
 import backEnd.GameData.State.SerializableObservable;
@@ -21,7 +22,10 @@ import javafx.geometry.Bounds;
 import javafx.geometry.Insets;
 import javafx.geometry.Point2D;
 import javafx.scene.Node;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.ContextMenu;
+import javafx.scene.control.MenuItem;
 import javafx.scene.control.Tooltip;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -30,6 +34,7 @@ import javafx.scene.input.Dragboard;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.TransferMode;
 import javafx.scene.layout.TilePane;
+import javafx.stage.Stage;
 import resources.constants.NumericResourceBundle;
 
 /**
@@ -81,9 +86,6 @@ public class Palette implements SkeletonObject, SerializableObserver{
 	private void addPresetToPalette(AttributeOwner preset) {
 		AttributeOwnerVisual attrOwner = new AttributeOwnerVisualImpl(preset);
 		ImageView imageView = attrOwner.getImageView();
-		imageView.setOnMouseClicked(e -> {
-			
-		});
 		setPresetInteractions(preset, imageView);
 		myPresetMapFrontEnd.put(imageView, preset);
 		addPresetImageViewToPalette(imageView);
@@ -94,6 +96,7 @@ public class Palette implements SkeletonObject, SerializableObserver{
 			GenericCommandCenter presetComCenter = new GenericCommandCenter(myView, preset);
 			presetComCenter.launch("Preset", iV.getLayoutX(), iV.getLayoutY());
 		});
+		setRemoveEvent(imageView,preset);
 		makeHoverOverName(preset, imageView);
 		makePresetDraggable(preset, imageView);
 	}
@@ -102,6 +105,22 @@ public class Palette implements SkeletonObject, SerializableObserver{
 		imageView.setOnMouseClicked(mouseEvent -> {
 			if (mouseEvent.getButton().equals(MouseButton.PRIMARY)) {
 				consumer.accept(imageView);
+			}
+		});	
+	}
+	
+	private void setRemoveEvent(Node imageView, AttributeOwner preset){
+		imageView.setOnMouseClicked(mouseEvent -> {
+			
+			if(mouseEvent.getButton().equals(MouseButton.SECONDARY)){
+				ContextMenu removeMenu = new ContextMenu();
+				MenuItem removeItem = new MenuItem("Remove from palette");
+				removeItem.setOnAction(e -> {
+					myView.sendUserModification(new Modification_Remove_FromPalette(preset));
+				});
+				removeMenu.getItems().add(removeItem);
+				removeMenu.setAutoHide(true);
+				removeMenu.show(tile, mouseEvent.getScreenX(), mouseEvent.getScreenY());
 			}
 		});
 	}
@@ -123,10 +142,8 @@ public class Palette implements SkeletonObject, SerializableObserver{
 
 	private void makeHoverOverName(AttributeOwner preset, ImageView imageView) {
 		Tooltip t = new Tooltip(observedBankController.getAOName(preset));
-		Button remove = new Button("Remove");
 		imageView.hoverProperty().addListener((o, oldV, newV) -> {
 			if (newV) {
-				
 				Bounds scenePos = imageView.localToScreen(imageView.getBoundsInLocal());
 				t.show(imageView, scenePos.getMaxX(), scenePos.getMinY());
 				// TODO someone help
@@ -144,7 +161,6 @@ public class Palette implements SkeletonObject, SerializableObserver{
 			db.setContent(content);
 			db.setDragView(imageView.getImage());
 		});
-
 	}
 
 	private void createNewPresetButton() {

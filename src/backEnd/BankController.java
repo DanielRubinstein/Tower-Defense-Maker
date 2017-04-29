@@ -181,7 +181,13 @@ public class BankController implements BankControllerReader
 	}
 
 	public void remove(Component component) {
+		System.out.println(" 1 in here ");
+		try{
 		componentBank.remove(component);
+		}catch (Exception e){
+			e.printStackTrace();
+		}
+		System.out.println("in here ");
 		notifyObservers();
 	}
 
