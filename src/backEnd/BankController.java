@@ -8,6 +8,7 @@ import java.util.Map;
 import javax.swing.JOptionPane;
 import backEnd.Mode.Mode;
 import data.DataControllerReader;
+import frontEnd.CustomJavafxNodes.ErrorDialog;
 import resources.constants.StringResourceBundle;
 import backEnd.Attribute.AttributeOwner;
 import backEnd.GameData.State.Component;
@@ -23,7 +24,7 @@ import backEnd.GameData.State.TileImpl;
  *
  */
 
-public class BankController implements BankControllerReader
+public class BankController implements BankControllerReader, SerializableObservable
 {
 	private static final StringResourceBundle strResources = new StringResourceBundle();
 	private Map<String, Tile> tileBank;
@@ -191,6 +192,7 @@ public class BankController implements BankControllerReader
 		notifyObservers();
 	}
 
+	//TODO: get rid of instanceOf
 	public String getAOName(AttributeOwner preset) {
 		if (preset instanceof Tile) {
 			return findKeyFromValue(tileBank, (Tile) preset);
@@ -215,6 +217,8 @@ public class BankController implements BankControllerReader
 		} else if (tileBank.containsKey(presetName)) {
 			return tileBank.get(presetName);
 		} else {
+			new ErrorDialog().create(strResources.getFromErrorMessages("Bank_Error_Header"), 
+					String.format(strResources.getFromErrorMessages("Missing_Preset"), presetName));
 			return null;
 		}
 	}
@@ -227,7 +231,9 @@ public class BankController implements BankControllerReader
 			return null;
 		}
 		else{
-			throw new RuntimeException(strResources.getFromErrorMessages("Component_Not_Found"));
+			new ErrorDialog().create(strResources.getFromErrorMessages("Bank_Error_Header"), 
+					String.format(strResources.getFromErrorMessages("Missing_Preset"), componentName));
+			return null;
 		}
 	}
 	
@@ -240,5 +246,29 @@ public class BankController implements BankControllerReader
 			o.update((SerializableObservable) this, null);
 		}
 		dataController.saveUniversalGameData();
+	}
+
+	@Override
+	public int compareTo(Object o) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public List<SerializableObserver> getObservers() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void clearObservers() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void setObservers(List<SerializableObserver> observersave) {
+		// TODO Auto-generated method stub
+		
 	}
 }

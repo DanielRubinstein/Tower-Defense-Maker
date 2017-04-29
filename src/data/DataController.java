@@ -6,7 +6,6 @@ import java.util.Map;
 import backEnd.BankController;
 import backEnd.GameData.GameData;
 import backEnd.GameData.State.Component;
-import backEnd.GameData.State.ComponentImpl;
 import backEnd.GameData.State.Tile;
 import resources.constants.StringResourceBundle;
 
@@ -21,7 +20,6 @@ public class DataController implements DataControllerReader{
 	private static final StringResourceBundle strResources = new StringResourceBundle();
 	private static final String UNIV_GAME_DATA_PATH = strResources.getFromFilePaths("Univ_Game_Data_Path");
 	private static final String GAME_STATE_DATA_PATH = strResources.getFromFilePaths("Game_State_Data_Path");
-	private static final String LEVEL_TEMPLATE_DATA_PATH = strResources.getFromFilePaths("Level_Template_Path");
 	
 	private XMLWriter myXMLWriter;
 	private XMLReader myXMLReader;
@@ -67,8 +65,8 @@ public class DataController implements DataControllerReader{
 		myXMLWriter.saveUniversalGameData(bankController, UNIV_GAME_DATA_PATH);
 	}
 	
-	public void saveCurrentGameStateData(GameData gameData, String gameName){
-		myXMLWriter.saveGameStateData(gameData, GAME_STATE_DATA_PATH, gameName);
+	public void saveGame(GameData gameData, String gameName, String levelName) {
+		myXMLWriter.saveGame(gameData, gameName, levelName);
 	}
 
 	public GameData loadGameStateData(String nextLevel) throws XMLReadingException, FileNotFoundException {
@@ -84,8 +82,8 @@ public class DataController implements DataControllerReader{
 		return gamesMap;
 	}
 
-	public void saveLevelTemplate(GameData gameData, String myLevelName)
+	public void saveLevelTemplate(GameData gameData, String gameName, String levelName)
 	{
-		myXMLWriter.saveLevelTemplate(gameData, LEVEL_TEMPLATE_DATA_PATH, myLevelName);
+		myXMLWriter.saveLevelTemplate(gameData, gameName, levelName);
 	}
 }

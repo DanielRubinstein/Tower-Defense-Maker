@@ -31,7 +31,7 @@ public class ProjectileFactory {
 		myComponent = new ComponentImpl();
 		myTower = tower;
 		
-		myComponent.setAttributeValue(ATTRIBUTE_RESOURCES.getFromAttributeNames("Type"), ATTRIBUTE_RESOURCES.getFromAttributeNames("ProjectileType"));
+		myComponent.setAttributeValue(ATTRIBUTE_RESOURCES.getFromAttributeNames("Type"), ATTRIBUTE_RESOURCES.getFromValueNames("ProjectileType"));
 		myComponent.setAttributeValue(ATTRIBUTE_RESOURCES.getFromAttributeNames("ImageFile"), (String) myTower.getAttribute(ATTRIBUTE_RESOURCES.getFromAttributeNames("FireImage")).getValue());
 		myComponent.setAttributeValue(ATTRIBUTE_RESOURCES.getFromAttributeNames("FireType"), (String) myTower.getAttribute(ATTRIBUTE_RESOURCES.getFromAttributeNames("FireType")).getValue());
 		myComponent.setAttributeValue(ATTRIBUTE_RESOURCES.getFromAttributeNames("FireDamage"), (Integer)myTower.getAttribute(ATTRIBUTE_RESOURCES.getFromAttributeNames("FireDamage")).getValue());

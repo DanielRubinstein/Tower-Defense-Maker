@@ -6,6 +6,7 @@ import ModificationFromUser.ModificationFromUser;
 import backEnd.ModelImpl;
 import backEnd.GameData.GameData;
 import backEnd.GameEngine.EngineStatus;
+import backEnd.Mode.ModeImpl;
 import data.GamePrep.DataInputLoader;
 import data.GamePrep.MainMenu;
 import frontEnd.ViewImpl;
@@ -13,6 +14,7 @@ import frontEnd.CustomJavafxNodes.ErrorDialog;
 import frontEnd.Facebook.FacebookConnector;
 import frontEnd.Facebook.FacebookInteractor;
 import javafx.stage.Stage;
+import resources.constants.StringResourceBundle;
 import frontEnd.Skeleton.SplashScreens.SplashScreenData;
 
 public class ControllerImpl implements Controller {
@@ -21,6 +23,7 @@ public class ControllerImpl implements Controller {
 	private FacebookInteractor myFb;
 	private Consumer<Object> setGameData;
 	private EngineStatus myEngineStatus = EngineStatus.PAUSED;
+	private static final StringResourceBundle strResources = new StringResourceBundle();
 
 
 	public void start(Stage stage) {
@@ -57,7 +60,8 @@ public class ControllerImpl implements Controller {
 				GameData initialGameData = loader.getGameData();
 				
 				initialGameData.setEngineStatus(myEngineStatus);
-				myModel = new ModelImpl(initialGameData, myEngineStatus, splashScreenLoader, setGameData);
+				
+				myModel = new ModelImpl(initialGameData, myEngineStatus, splashScreenLoader, setGameData, loader.getGameName(), loader.getLevelName());
 				myView = new ViewImpl(myModel, viewMod,myFb);
 
 			} catch (Exception e) {

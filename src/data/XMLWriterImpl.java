@@ -4,19 +4,13 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import com.thoughtworks.xstream.XStream;
 import com.thoughtworks.xstream.io.xml.DomDriver;
-
 import backEnd.BankController;
-import backEnd.GameData.GameData;
 import backEnd.GameData.GameDataInterface;
 import backEnd.GameData.Rules.Rule;
-import backEnd.GameData.State.ComponentImpl;
 import backEnd.GameData.State.Component;
 import backEnd.GameData.State.ComponentGraph;
 import backEnd.GameData.State.PlayerStatus;
@@ -43,29 +37,14 @@ public class XMLWriterImpl implements XMLWriter{
 		xStream.alias("TileGrid", TileGrid.class);
 	}
 	
-	public void saveGameStateData(GameDataInterface gameData, String filePath, String levelName)
+	public void saveLevelTemplate(GameDataInterface gameData, String gameName, String levelName)
 	{
-		
-		String rulesXML = xStream.toXML(gameData.getRules());
-		
-		saveToXML(filePath + levelName +"/", strResources.getFromFilePaths("Rules_FileName"), rulesXML);
-		
-		gameData.getState().getComponentGraph().saveAndClearObservers();
-		
-		String componentListXML = xStream.toXML(gameData.getState().getComponentGraph().getAllComponents());
-		saveToXML(filePath+ levelName +"/", strResources.getFromFilePaths("ComponentGraph_FileName"), componentListXML);
-		
-		gameData.getState().getComponentGraph().setComponentObservers();
-		
-		String playerStatusXML = xStream.toXML(gameData.getStatus());
-		saveToXML(filePath+ levelName +"/", strResources.getFromFilePaths("PlayerSatus_FileName"), playerStatusXML);
-		
-		gameData.getState().getTileGrid().saveAndClearTileObservers();
-		
-		String tileGridXML = xStream.toXML(gameData.getState().getTileGrid().getInstantiator());
-		saveToXML(filePath + levelName +"/", strResources.getFromFilePaths("TileGrid_FileName"), tileGridXML);
-		
-		gameData.getState().getTileGrid().setTileObservers();
+		save(gameData, "data/games/" + gameName + "/templates/", levelName, new PlayerStatus());
+	}
+	
+	public void saveGame(GameDataInterface gameData, String gameName, String levelName)
+	{
+		save(gameData, "data/games/" + gameName + "/saves/", levelName, gameData.getStatus());
 	}
 	
 	private void saveToXML(String filePath, String fileName, String xmlToWrite) {
@@ -73,7 +52,7 @@ public class XMLWriterImpl implements XMLWriter{
 		try {
 			
 			File folderFile = new File(filePath);
-			folderFile.mkdir();
+			folderFile.mkdirs();
 			
 			File gameFile = new File(filePath + fileName + ".xml");
 			gameFile.createNewFile();
@@ -102,12 +81,11 @@ public class XMLWriterImpl implements XMLWriter{
 		String gamesMapXML = xStream.toXML(gamesMap);
 		saveToXML(filePath, strResources.getFromFilePaths("GamesMap_FileName"), gamesMapXML);
 	}
-
-	@Override
-	public void saveLevelTemplate(GameData gameData, String levelTemplateDataPath, String levelName)
+	
+	private void save(GameDataInterface gameData, String filePath, String levelName, PlayerStatus status)
 	{
 		String rulesXML = xStream.toXML(gameData.getRules());
-		saveToXML(levelTemplateDataPath + levelName +"/", strResources.getFromFilePaths("Rules_FileName"), rulesXML);
+		saveToXML(filePath + levelName +"/", strResources.getFromFilePaths("Rules_FileName"), rulesXML);
 		List<SerializableObservable> so = new ArrayList<SerializableObservable>();
 		for (Component c : gameData.getState().getComponentGraph().getAllComponents()){
 			so.add((SerializableObservable) c);
@@ -119,13 +97,13 @@ public class XMLWriterImpl implements XMLWriter{
 
 		String componentListXML = xStream.toXML(gameData.getState().getComponentGraph().getAllComponents());
 		componentsStripper.giveBackObservers();
-		saveToXML(levelTemplateDataPath+ levelName +"/", strResources.getFromFilePaths("ComponentGraph_FileName"), componentListXML);
+		saveToXML(filePath+ levelName +"/", strResources.getFromFilePaths("ComponentGraph_FileName"), componentListXML);
 		
-		String playerStatusXML = xStream.toXML(new PlayerStatus());
-		saveToXML(levelTemplateDataPath+ levelName +"/", strResources.getFromFilePaths("PlayerStatus_FileName"), playerStatusXML);
+		String playerStatusXML = xStream.toXML(status);
+		saveToXML(filePath+ levelName +"/", strResources.getFromFilePaths("PlayerStatus_FileName"), playerStatusXML);
 		
 		String spawnsXML = xStream.toXML(gameData.getState().getSpawnQueueInstantiators());
-		saveToXML(levelTemplateDataPath+ levelName +"/", strResources.getFromFilePaths("Spawns_FileName"), spawnsXML);
+		saveToXML(filePath+ levelName +"/", strResources.getFromFilePaths("Spawns_FileName"), spawnsXML);
 		
 		
 		
@@ -133,7 +111,7 @@ public class XMLWriterImpl implements XMLWriter{
 		tilesStripper.stripObservers();
 		String tileGridXML = xStream.toXML(gameData.getState().getTileGrid().getInstantiator());
 		tilesStripper.giveBackObservers();
-		saveToXML(levelTemplateDataPath + levelName +"/", strResources.getFromFilePaths("TileGrid_FileName"), tileGridXML);
+		saveToXML(filePath + levelName +"/", strResources.getFromFilePaths("TileGrid_FileName"), tileGridXML);
 	}
 
 	public void saveUniversalGameData(BankController bankController, String filePath){
