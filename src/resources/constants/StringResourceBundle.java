@@ -1,6 +1,5 @@
 package resources.constants;
 
-import java.util.Enumeration;
 import java.util.ResourceBundle;
 import java.util.Set;
 
