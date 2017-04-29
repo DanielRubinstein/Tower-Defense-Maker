@@ -25,10 +25,10 @@ public class Modification_SaveGameState implements ModificationFromUser {
 		switch(myModel.getMode().getUserMode())
 		{
 		case "PLAYER":
-			myModel.getDataController().saveCurrentGameStateData(myModel.getGameData(), myLevelName);
+			myModel.getDataController().saveGame(myModel.getGameData(), myModel.getMode().getGameMode(), myLevelName);
 			break;
 		case "AUTHOR":
-			myModel.getDataController().saveLevelTemplate(myModel.getGameData(), myLevelName);
+			myModel.getDataController().saveLevelTemplate(myModel.getGameData(), myModel.getMode().getGameMode(), myLevelName);
 		}
 	}
 
