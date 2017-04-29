@@ -55,8 +55,11 @@ public class SpawnTabPane implements SkeletonObject {
 				e.consume();
 			}
 		});
+		
+		int index = myRoot.getTabs().size();
+		if (index == 0) index++;
 
-		myRoot.getTabs().add(myRoot.getTabs().size() - 1, newSpawnTab);
+		myRoot.getTabs().add(index - 1, newSpawnTab);
 		myRoot.getSelectionModel().select(newSpawnTab);
 	}
 

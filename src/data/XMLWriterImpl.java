@@ -52,8 +52,8 @@ public class XMLWriterImpl implements XMLWriter{
 		
 		gameData.getState().getComponentGraph().saveAndClearObservers();
 		
-		String componentMapXML = xStream.toXML(gameData.getState().getComponentGraph().getComponentMap());
-		saveToXML(filePath+ levelName +"/", strResources.getFromFilePaths("ComponentGraph_FileName"), componentMapXML);
+		String componentListXML = xStream.toXML(gameData.getState().getComponentGraph().getAllComponents());
+		saveToXML(filePath+ levelName +"/", strResources.getFromFilePaths("ComponentGraph_FileName"), componentListXML);
 		
 		gameData.getState().getComponentGraph().setComponentObservers();
 		
@@ -109,19 +109,26 @@ public class XMLWriterImpl implements XMLWriter{
 	{
 		String rulesXML = xStream.toXML(gameData.getRules());
 		saveToXML(levelTemplateDataPath + levelName +"/", strResources.getFromFilePaths("Rules_FileName"), rulesXML);
-		
 		List<SerializableObservable> so = new ArrayList<SerializableObservable>();
 		for (Component c : gameData.getState().getComponentGraph().getAllComponents()){
 			so.add((SerializableObservable) c);
 		}
+		
+		
 		StripAndSaveObservers componentsStripper = new StripAndSaveObservers(so);
 		componentsStripper.stripObservers();
-		String componentMapXML = xStream.toXML(gameData.getState().getComponentGraph().getComponentMap());
+
+		String componentListXML = xStream.toXML(gameData.getState().getComponentGraph().getAllComponents());
 		componentsStripper.giveBackObservers();
-		saveToXML(levelTemplateDataPath+ levelName +"/", strResources.getFromFilePaths("ComponentMap_FileName"), componentMapXML);
+		saveToXML(levelTemplateDataPath+ levelName +"/", strResources.getFromFilePaths("ComponentGraph_FileName"), componentListXML);
 		
 		String playerStatusXML = xStream.toXML(new PlayerStatus());
 		saveToXML(levelTemplateDataPath+ levelName +"/", strResources.getFromFilePaths("PlayerStatus_FileName"), playerStatusXML);
+		
+		String spawnsXML = xStream.toXML(gameData.getState().getSpawnQueueInstantiators());
+		saveToXML(levelTemplateDataPath+ levelName +"/", strResources.getFromFilePaths("Spawns_FileName"), spawnsXML);
+		
+		
 		
 		StripAndSaveObservers tilesStripper = new StripAndSaveObservers(new ArrayList<SerializableObservable>(gameData.getState().getTileGrid().getAllTiles()));
 		tilesStripper.stripObservers();
@@ -133,11 +140,13 @@ public class XMLWriterImpl implements XMLWriter{
 	public void saveUniversalGameData(BankController bankController, String filePath){
 		Map<String, Component> componentMap = bankController.getComponentMap();
 		
+
 		List<SerializableObservable> so = new ArrayList<SerializableObservable>();
 		for (Component c : componentMap.values()){
 			so.add((SerializableObservable) c);
 		}
 		StripAndSaveObservers componentsStripper = new StripAndSaveObservers(so);
+
 		componentsStripper.stripObservers();
 		String componentMapXML = xStream.toXML(componentMap);
 		componentsStripper.giveBackObservers();

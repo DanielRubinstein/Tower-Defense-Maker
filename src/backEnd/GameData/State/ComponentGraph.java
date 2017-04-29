@@ -17,7 +17,6 @@ public interface ComponentGraph extends SerializableObservable{
 	 */
 	List<Component> getComponentsByScreenPosition(Point2D location);
 
-	Map<Point2D, List<Component>> getComponentMap();
 	/**
 	 * Get the list of components at a given Tile location
 	 * @param Tile location
@@ -55,14 +54,6 @@ public interface ComponentGraph extends SerializableObservable{
 	 */
 	List<Component> getComponentsWithinRadius(Component centerComp, double d);
 
-	/**
-	 * Returns list of components that lie at the nearest location (although if two locations are equidistant from the component,
-	 * it arbitrarily chooses one).
-	 * @param centerComp
-	 * @return List of components at the nearest location
-	 */
-
-	List<Component> getNearestComponents(Component centerComp);
 
 
 	boolean contains(AttributeOwnerReader c);
