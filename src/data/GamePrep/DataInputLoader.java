@@ -22,9 +22,6 @@ import data.XMLReadingException;
  */
 public class DataInputLoader
 {
-	
-	private static final String GAME_STATE_DATA_PATH = "data/SavedGames/";
-	private static final String TEMPLATE_DATA_PATH = "data/LevelTemplates/";
 	private static final String UNIVERSAL_DATA_PATH = "data/UniversalGameData/";
 	
 	private XMLReader myXMLReader;
@@ -39,11 +36,6 @@ public class DataInputLoader
 		 generateGamesMap();
 	}
 	
-	public DataInputLoader(String s) throws XMLReadingException
-	{
-		this();
-		myGameData = generateGameData(s);
-	}
 
 	public DataInputLoader(StartingInput input) throws XMLReadingException
 	{
@@ -56,6 +48,8 @@ public class DataInputLoader
 	public DataInputLoader(File file) throws NoSuchMethodException, SecurityException, InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException {
 		this();
 		myGameData = generateGameData(file.getName(),file.getParent());
+		myLevelName = file.getName();
+		myGameName = file.getParentFile().getParentFile().getName();
 	}
 	
 	public DataInputLoader(Object o) throws NoSuchMethodException, SecurityException, InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException {
@@ -66,7 +60,8 @@ public class DataInputLoader
 		DataInputLoader d = cons.newInstance(o);
 		
 		myGameData = d.getGameData();
-		
+		myLevelName = d.getLevelName();
+		myGameName = d.getGameName();
 	}
 	
 	public GameData getGameData()
@@ -77,11 +72,6 @@ public class DataInputLoader
 	public Map<String, List<String>> getGamesMap()
 	{
 		return gamesMap;
-	}
-	
-	private GameData generateGameData(String levelName)
-	{
-		return generateGameData(levelName, TEMPLATE_DATA_PATH);
 	}
 	
 	private GameData generateGameData(String levelName, String dataPath)
