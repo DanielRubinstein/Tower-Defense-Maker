@@ -1,11 +1,9 @@
 package ModificationFromUser.AttributeOwner;
 
 import ModificationFromUser.ModificationFromUser;
-import ModificationFromUser.AttributeOwner.ReflectionMethods.Modification_Add_ToPalette_Methods;
 import backEnd.BankController;
 import backEnd.ModelImpl;
 import backEnd.Attribute.AttributeOwner;
-import backEnd.Attribute.AttributeOwnerSerializer;
 import backEnd.Mode.ModeException;
 import util.reflection.Reflection;
 
@@ -32,6 +30,7 @@ public class Modification_Remove_FromPalette implements ModificationFromUser {
 		switch (model.getMode().getUserMode()) {
 		case "AUTHOR":
 			myBankController = model.getBankController();
+
 			Reflection.callMethod(myBankController, "remove", attrOwn);
 			break;
 			
