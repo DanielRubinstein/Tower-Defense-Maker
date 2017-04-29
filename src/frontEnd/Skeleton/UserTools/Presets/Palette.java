@@ -111,8 +111,8 @@ public class Palette implements SkeletonObject, SerializableObserver{
 	
 	private void setRemoveEvent(Node imageView, AttributeOwner preset){
 		imageView.setOnMouseClicked(mouseEvent -> {
-			
 			if(mouseEvent.getButton().equals(MouseButton.SECONDARY)){
+				String presetName = observedBankController.getAOName(preset);
 				ContextMenu removeMenu = new ContextMenu();
 				MenuItem removeItem = new MenuItem("Remove from palette");
 				removeItem.setOnAction(e -> {

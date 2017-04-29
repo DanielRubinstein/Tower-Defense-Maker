@@ -121,12 +121,6 @@ public class BankController implements BankControllerReader, SerializableObserva
 		}
 	}
 
-	public void remove(Tile tile) {
-		tileBank.remove(tile);
-		refreshAccessibleTileMap();
-		notifyObservers();
-	}
-
 	public Map<String, Tile> getAccessibleTileMap() {
 		refreshAccessibleTileMap();
 		return accessibleTileBank;
@@ -182,13 +176,14 @@ public class BankController implements BankControllerReader, SerializableObserva
 	}
 
 	public void remove(Component component) {
-		System.out.println(" 1 in here ");
-		try{
-		componentBank.remove(component);
-		}catch (Exception e){
-			e.printStackTrace();
-		}
-		System.out.println("in here ");
+		String removeName = getAOName(component);
+		componentBank.remove(removeName);
+		notifyObservers();
+	}
+	public void remove(Tile tile) {
+		String removeName = getAOName(tile);
+		tileBank.remove(removeName);
+		refreshAccessibleTileMap();
 		notifyObservers();
 	}
 
