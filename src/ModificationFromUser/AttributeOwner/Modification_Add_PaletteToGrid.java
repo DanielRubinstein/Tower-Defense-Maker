@@ -33,17 +33,16 @@ public class Modification_Add_PaletteToGrid implements ModificationFromUser {
 	@Override
 	public void invoke(ModelImpl model) throws Exception {
 		myModel = model;
-		
-		switch (myModel.getMode().getUserMode()){
+
+		switch (myModel.getMode().getUserMode()) {
 		case "AUTHOR":
 			addToGrid();
 			break;
 		case "PLAYER":
 			Tile tile = myModel.getState().getTileGrid().getTileByScreenPosition(location);
-			if ((boolean) tile.getAttribute(strResources.getFromAttributeNames("Buildable")).getValue()){
+			if (tile.<Boolean>getAttribute(strResources.getFromAttributeNames("Buildable")).getValue()) {
 				addToGrid();
-			}
-			else{
+			} else {
 				new ModeException(myModel.getMode(), strResources.getFromErrorMessages("Tile_Not_Buildable"));
 			}
 			break;
@@ -54,7 +53,7 @@ public class Modification_Add_PaletteToGrid implements ModificationFromUser {
 		AttributeOwnerSerializer attributeOwnerSerializer = new AttributeOwnerSerializer();
 		AttributeOwner cleanAO = attributeOwnerSerializer.createCopy(newAttrOwn);
 		cleanAO.setAttributeValue("Position", location);
-		
+
 		Modification_Add_ToGrid_Methods methods = new Modification_Add_ToGrid_Methods(myModel, location);
 		Reflection.callMethod(methods, "add", cleanAO);
 	}

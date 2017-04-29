@@ -2,7 +2,6 @@ package ModificationFromUser;
 
 import java.io.File;
 import backEnd.ModelImpl;
-import data.GamePrep.DataInputLoader;
 import javafx.stage.DirectoryChooser;
 import javafx.stage.Stage;
 
