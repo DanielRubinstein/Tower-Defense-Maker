@@ -4,26 +4,31 @@ import ModificationFromUser.ModificationFromUser;
 import backEnd.ModelImpl;
 import backEnd.Attribute.Attribute;
 import backEnd.Attribute.AttributeOwner;
+import backEnd.Attribute.AttributeOwnerReader;
+import backEnd.Attribute.AttributeReader;
 
 
 public class Modification_EditAttribute<T> implements ModificationFromUser {
 
-	private AttributeOwner myObj;
-	private Attribute<T> myAtt;
+	private AttributeOwnerReader myObj;
+	private String attributeName;
 	private T myNewValue;
 
 	// FIXME in the future the parameter will be AttributeOwnerReader and this
 	// class will get the modifiable AttributeOwner using IDs
-	public Modification_EditAttribute(AttributeOwner myOwner, Attribute<T> att, T newValue) {
+	public Modification_EditAttribute(AttributeOwnerReader myOwner, String attName, T newValue) {
 		myObj = myOwner;
-		myAtt = att;
+		attributeName = attName;
 		myNewValue = newValue;
 	}
 
 	@Override
 	public void invoke(ModelImpl myModel) throws Exception {
-		myObj.setAttributeValue(myAtt.getName(), myNewValue);
+		AttributeOwner attributeOwner = myModel.getAttributeOwner(myObj);
+		attributeOwner.setAttributeValue(attributeName, myNewValue);
+		myModel.getDataController().saveUniversalGameData();
 		//System.out.println(myAtt.getName());
+
 	}
 
 }

@@ -6,13 +6,13 @@ public interface AttributeOwnerReader {
 	/**
 	 * @return List of Attributes
 	 */
-	AttributeData getMyAttributes();
+	AttributeDataReader getMyAttributes();
 	
 	/**
 	 * @param attrType
 	 * @return Attribute that corresponds to the String attrType
 	 */
-	<T> Attribute<T> getAttribute(String attrName);
+	<T> AttributeReader<T> getAttributeReader(String attrName);
 	
 	void addObserver(SerializableObserver o);
 }

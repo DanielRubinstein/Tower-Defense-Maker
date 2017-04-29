@@ -15,7 +15,7 @@ import resources.constants.StringResourceBundle;
  *
  */
 
-public class DataController {
+public class DataController implements DataControllerReader{
 	
 	private static final StringResourceBundle strResources = new StringResourceBundle();
 	private static final String UNIV_GAME_DATA_PATH = strResources.getFromFilePaths("Univ_Game_Data_Path");
