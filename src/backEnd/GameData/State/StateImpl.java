@@ -2,23 +2,13 @@ package backEnd.GameData.State;
 
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collection;
 import java.util.HashMap;
-import java.util.HashSet;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
-import java.util.Queue;
 import java.util.ResourceBundle;
-import java.util.Set;
-import java.util.Stack;
-
-import ModificationFromUser.AttributeOwner.Modification_EditAttribute;
-import backEnd.Coord;
-import backEnd.Attribute.Attribute;
-import backEnd.Attribute.AttributeImpl;
 import backEnd.GameEngine.EngineStatus;
+import backEnd.GameEngine.Engine.Spawning.SpawnQueueInstantiator;
 import backEnd.GameEngine.Engine.Spawning.SpawnQueues;
 import javafx.geometry.Point2D;
 import resources.constants.NumericResourceBundle;
@@ -29,6 +19,7 @@ import resources.constants.NumericResourceBundle;
  *
  */
 public class StateImpl implements State, SerializableObservable {
+	
 	private NumericResourceBundle numericResourceBundle = new NumericResourceBundle();
 	
 	private int numColsInGrid;
@@ -43,41 +34,41 @@ public class StateImpl implements State, SerializableObservable {
 	private Map<String, SpawnQueues> mySpawnQueues;
 	private List<SerializableObserver> observers;
 	
-	public StateImpl(int numColsInGrid, int numRowsInGrid) throws FileNotFoundException {
-		this.numColsInGrid = numColsInGrid;
-		this.numRowsInGrid = numRowsInGrid;
-		initialize(setDefaultTileGrid(numColsInGrid, numRowsInGrid), new ComponentGraphImpl());
-	}
 	
-	public StateImpl(int numRowsInGrid, int numColsInGrid, TileGrid tileGrid, ComponentGraph componentGraph) throws FileNotFoundException {
-		this.numColsInGrid = numColsInGrid;
-		this.numRowsInGrid = numRowsInGrid;
-		initialize(tileGrid, componentGraph);
-	}
 	
-	private void initialize(TileGrid tileGrid, ComponentGraph componentGraph){
+public StateImpl(TileGrid tileGrid, ComponentGraph componentGraph, HashMap<String, SpawnQueues> spawn) throws FileNotFoundException {
+		
+		this.numColsInGrid = tileGrid.getNumColsInGrid();
+		this.numRowsInGrid = tileGrid.getNumRowsInGrid();
+
 		myTileGrid = tileGrid;
 		myComponentGraph = componentGraph;
 		myEngineStatus = EngineStatus.PAUSED;
-		mySpawnQueues = new HashMap<String,SpawnQueues>();
+		mySpawnQueues = spawn;
 		observers = new ArrayList<SerializableObserver>();
 	}
 
+	public StateImpl(int numColsInGrid, int numRowsInGrid) throws FileNotFoundException {
+		this(new TileGridImpl(numColsInGrid, numRowsInGrid), new ComponentGraphImpl(), new HashMap<String, SpawnQueues>());
+		
+		setDefaultTileGrid();
+	}
+	
 
-	private TileGrid setDefaultTileGrid(int cols, int rows) throws FileNotFoundException {
-		TileGrid tileGrid = new TileGridImpl(cols, rows);
-		for (int row = 0; row < rows; row++) {
-			for (int col = 0; col < cols; col++) {
-				Double tileWidth = numericResourceBundle.getScreenGridWidth() / cols;
-				Double tileHeight = numericResourceBundle.getScreenGridHeight() / rows;
+
+	private void setDefaultTileGrid() throws FileNotFoundException {
+		for (int row = 0; row < numRowsInGrid; row++) {
+			for (int col = 0; col < numColsInGrid; col++) {
+				Double tileWidth = numericResourceBundle.getScreenGridWidth() / numColsInGrid;
+				Double tileHeight = numericResourceBundle.getScreenGridHeight() / numRowsInGrid;
 				Point2D pos = new Point2D((col + 0.5) * (tileWidth), (row + 0.5) * (tileHeight));
 				Tile newTile = new TileImpl();
 				newTile.getAttribute("Position").setValue(pos);
 				newTile.getAttribute("ImageFile").setValue(myImageResource.getString("default_tile"));
-				tileGrid.setTileByScreenPosition(newTile, pos);
+				myTileGrid.setTileByScreenPosition(newTile, pos);
 			}
 		}
-		return tileGrid;
+	
 	}
 	
 	public void addAsObserver(SerializableObserver o){
@@ -242,6 +233,18 @@ public class StateImpl implements State, SerializableObservable {
 	public Map<String, SpawnQueues> getSpawnQueues() {
 		//System.out.println(mySpawnQueues);
 		return mySpawnQueues;
+	}
+	
+	public Map<String, SpawnQueueInstantiator> getSpawnQueueInstantiators()
+	{
+		Map<String, SpawnQueueInstantiator> map = new HashMap<String, SpawnQueueInstantiator>();
+		
+		for (String x : mySpawnQueues.keySet())
+		{
+			map.put(x, mySpawnQueues.get(x).getInstantiator());
+		}
+		
+		return map;
 	}
 	
 	private void notifyObservers() {

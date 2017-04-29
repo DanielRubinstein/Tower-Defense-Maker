@@ -32,6 +32,7 @@ public class Modification_Remove_FromPalette implements ModificationFromUser {
 		switch (model.getMode().getUserMode()) {
 		case "AUTHOR":
 			myBankController = model.getBankController();
+
 			Reflection.callMethod(myBankController, "remove", attrOwn);
 			break;
 			
