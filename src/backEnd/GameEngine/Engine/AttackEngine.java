@@ -39,12 +39,12 @@ public class AttackEngine implements Engine {
 		Map<Component, Component> attackersAndTargets=new HashMap<Component, Component>();
 		
 		for (Component attacker : myComponentGraph.getAllComponents()) {
-			if (attacker.getAttribute(STRING_RESOURCES.getFromAttributeNames("Type")).getValue().equals(STRING_RESOURCES.getFromAttributeNames("TowerType"))) {
-				if (masterTime % ((Double) attacker.getAttribute(STRING_RESOURCES.getFromAttributeNames("FireRate")).getValue()/1000) <= stepTime/10) { 
+			if (attacker.getAttribute(STRING_RESOURCES.getFromAttributeNames("Type")).getValue().equals(STRING_RESOURCES.getFromValueNames("TowerType"))) {
+				if (masterTime % ((Double) attacker.getAttribute(STRING_RESOURCES.getFromAttributeNames("FireRate")).getValue()/100) <= stepTime) { 
 					List<Component> targets = myComponentGraph.getComponentsWithinRadius(attacker,
 							(double) attacker.getAttribute(STRING_RESOURCES.getFromAttributeNames("FireRadius")).getValue());
 					for (Component potentialTarget : targets) {
-						if (potentialTarget.getAttribute(STRING_RESOURCES.getFromAttributeNames("Type")).getValue().equals(STRING_RESOURCES.getFromAttributeNames("EnemyType"))) {
+						if (potentialTarget.getAttribute(STRING_RESOURCES.getFromAttributeNames("Type")).getValue().equals(STRING_RESOURCES.getFromValueNames("EnemyType"))) {
 							attackersAndTargets.put(attacker, potentialTarget);
 						}
 					}

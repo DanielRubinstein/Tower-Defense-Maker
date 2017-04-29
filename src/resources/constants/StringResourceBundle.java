@@ -27,6 +27,21 @@ public class StringResourceBundle {
 		return ATTRIBUTE_TYPES_RESOURCE.keySet();
 	}
 	
+	private static final String ATTRIBUTE_VALUES_PATH = "resources.valueNames";
+	private static final ResourceBundle ATTRIBUTE_VALUES_RESOURCE = ResourceBundle.getBundle(ATTRIBUTE_VALUES_PATH);
+	
+	public String getFromValueNames(String str){
+		return ATTRIBUTE_VALUES_RESOURCE.getString(str);
+	}
+	
+	public Set<String> getKeysFromValueNames(){
+		return ATTRIBUTE_VALUES_RESOURCE.keySet();
+	}
+	
+	
+	
+	
+	
 	private static final String ATTRIBUTE_NAMES_PATH = "resources.allAttributeNames";
 	private static final ResourceBundle ATTRIBUTE_NAMES_RESOURCE = ResourceBundle.getBundle(ATTRIBUTE_NAMES_PATH);
 
