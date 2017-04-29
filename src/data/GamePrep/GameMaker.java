@@ -11,6 +11,8 @@ import frontEnd.CustomJavafxNodes.NumberChanger;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.ScrollPane;
+import javafx.scene.control.ScrollPane.ScrollBarPolicy;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
@@ -72,6 +74,9 @@ public class GameMaker {
 		grid.add(title, 0, 0);
 	}
 	private Node makeGameSelection(){
+		ScrollPane scroll = new ScrollPane();
+		scroll.setMaxHeight(150);
+		scroll.setVbarPolicy(ScrollBarPolicy.ALWAYS);
 		VBox wrapper = new VBox();
 		Label title = new Label("Add to already-made game");
 		wrapper.getChildren().add(title);
@@ -81,7 +86,9 @@ public class GameMaker {
 			wrapper.getChildren().add(gameButton);
 		}
 		
-		return wrapper;
+		scroll.setContent(wrapper);
+		
+		return scroll;
 	}
 	private void submitStartingInput(String gameName){
 		StartingInput allValues = new StartingInput();

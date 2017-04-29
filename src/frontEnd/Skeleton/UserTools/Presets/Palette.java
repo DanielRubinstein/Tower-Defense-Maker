@@ -21,6 +21,7 @@ import javafx.geometry.Bounds;
 import javafx.geometry.Insets;
 import javafx.geometry.Point2D;
 import javafx.scene.Node;
+import javafx.scene.control.Button;
 import javafx.scene.control.Tooltip;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -80,6 +81,9 @@ public class Palette implements SkeletonObject, SerializableObserver{
 	private void addPresetToPalette(AttributeOwner preset) {
 		AttributeOwnerVisual attrOwner = new AttributeOwnerVisualImpl(preset);
 		ImageView imageView = attrOwner.getImageView();
+		imageView.setOnMouseClicked(e -> {
+			
+		});
 		setPresetInteractions(preset, imageView);
 		myPresetMapFrontEnd.put(imageView, preset);
 		addPresetImageViewToPalette(imageView);
@@ -119,8 +123,10 @@ public class Palette implements SkeletonObject, SerializableObserver{
 
 	private void makeHoverOverName(AttributeOwner preset, ImageView imageView) {
 		Tooltip t = new Tooltip(observedBankController.getAOName(preset));
+		Button remove = new Button("Remove");
 		imageView.hoverProperty().addListener((o, oldV, newV) -> {
 			if (newV) {
+				
 				Bounds scenePos = imageView.localToScreen(imageView.getBoundsInLocal());
 				t.show(imageView, scenePos.getMaxX(), scenePos.getMinY());
 				// TODO someone help
