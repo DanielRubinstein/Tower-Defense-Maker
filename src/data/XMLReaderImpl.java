@@ -56,7 +56,6 @@ public class XMLReaderImpl implements XMLReader{
 		
 		for (String x : instantiatorMap.keySet())
 		{
-			System.out.println(instantiatorMap.get(x) + " FFF FFFF");
 			spawnMap.put(x, new SpawnQueues(instantiatorMap.get(x)));
 		}
 		
