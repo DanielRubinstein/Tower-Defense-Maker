@@ -113,6 +113,8 @@ public class XMLWriterImpl implements XMLWriter{
 		for (Component c : gameData.getState().getComponentGraph().getAllComponents()){
 			so.add((SerializableObservable) c);
 		}
+		
+		
 		StripAndSaveObservers componentsStripper = new StripAndSaveObservers(so);
 		componentsStripper.stripObservers();
 
@@ -122,6 +124,11 @@ public class XMLWriterImpl implements XMLWriter{
 		
 		String playerStatusXML = xStream.toXML(new PlayerStatus());
 		saveToXML(levelTemplateDataPath+ levelName +"/", strResources.getFromFilePaths("PlayerStatus_FileName"), playerStatusXML);
+		
+		String spawnsXML = xStream.toXML(gameData.getState().getSpawnQueues());
+		saveToXML(levelTemplateDataPath+ levelName +"/", strResources.getFromFilePaths("Spawns_FileName"), spawnsXML);
+		
+		
 		
 		StripAndSaveObservers tilesStripper = new StripAndSaveObservers(new ArrayList<SerializableObservable>(gameData.getState().getTileGrid().getAllTiles()));
 		tilesStripper.stripObservers();
