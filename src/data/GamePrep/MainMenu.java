@@ -53,19 +53,34 @@ public class MainMenu{
 	
 	private void splashScreen(Stage stage) {
    	 	ButtonMenuImpl splash = new ButtonMenuImpl("Welcome");
-   	 	splash.addPrimarySimpleButtonWithHover("START", () -> showPrimaryMenu(stage), "Click to start the game!");
+   	 	splash.addPrimarySimpleButtonWithHover("START", () -> showPrimaryGameMenu(stage), "Click to start the game!");
+   	 	splash.addPrimarySimpleButtonWithHover("Help/Instructions", () -> new HelpOptions(stage), "See the help page");
+   	 	splash.addSimpleButtonWithHover("Connect To Facebook", () -> launchFb(stage), "Log in and connect to Facebook to see high scores, screenshots, post to the official voogasalad_su3ps1ckt34m1337 page");
 		splash.display(stage);
 	}
 
-	private void showPrimaryMenu(Stage stage) {
-		ButtonMenuImpl primaryMenu = new ButtonMenuImpl("Games");
-		primaryMenu.addPrimarySimpleButtonWithHover("Help/Instructions", () -> new HelpOptions(stage), "See the help page");
+	private void showPrimaryGameMenu(Stage stage) {
+		ButtonMenuImpl primaryMenu = new ButtonMenuImpl("Game Menu");
+		primaryMenu.addSimpleButtonWithHover("Create a New Game", () -> showNewGameMenu(stage), "Create a new game from stratch, choose everything!!");
+		primaryMenu.addSimpleButtonWithHover("Select Game", () -> showSelectGameMenu(stage), "Select from already-made games. From here you can load a game, make a level or start from the beginning");
+		
+		
    	 	primaryMenu.addSimpleButtonWithHover("Create New Level", () -> new GameMaker(stage, consumerLoadData), "Create A New Game after selecting the size of the screen");
    	 	primaryMenu.addSimpleButtonWithHover("Modify Level", () -> chooseLevel(), "Load a level to edit");
    	 	primaryMenu.addSimpleButtonWithHover("Load Saved Game", () -> chooseSavedGame(stage), "Continue your progress by loading a user-saved game");
    	 	primaryMenu.addSimpleButtonWithHover("Play Game", () -> new GameChooserWindow(stage, consumerLoadData) , "Play game");
-   	 	primaryMenu.addSimpleButtonWithHover("Connect To Facebook", () -> launchFb(stage), "Log in and connect to Facebook to see high scores, screenshots, post to the official voogasalad_su3ps1ckt34m1337 page");
 		primaryMenu.display(stage);
+	}
+	
+	private void showNewGameMenu(Stage stage){
+		ButtonMenuImpl menu = new ButtonMenuImpl("New Game Menu");
+		
+		
+	}
+	
+	private void showSelectGameMenu(Stage stage){
+		ButtonMenuImpl menu = new ButtonMenuImpl("Select a Game");
+		
 	}
 
 	private void chooseLevel()
