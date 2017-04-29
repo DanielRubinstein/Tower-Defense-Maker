@@ -1,5 +1,7 @@
 package frontEnd.Skeleton.ScreenGrid;
 
+import java.util.MissingResourceException;
+
 import backEnd.Attribute.AttributeOwnerReader;
 import backEnd.GameData.State.SerializableObservable;
 import backEnd.GameData.State.SerializableObserver;
@@ -29,6 +31,8 @@ public class AttributeOwnerVisualImpl implements SerializableObserver, Attribute
 			setSize(size);
 		} catch (NullPointerException e){
 			// means we are dealing with something that does not have size
+		}catch (MissingResourceException e){
+			//means we are dealing with something that does not have size
 		}
 		setPosition(myAttr.<Point2D>getAttributeReader(POSITION_ATTRIBUTE).getValue());
 	}
