@@ -41,7 +41,7 @@ public class DataInputLoader
 	{
 		this();
 		myGameData = generateGameData(input);
-		//myGameName = input.getGameName();
+		myGameName = input.getGameName();
 		myLevelName = "Untitled";
 	}
 	

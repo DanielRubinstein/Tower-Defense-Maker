@@ -39,12 +39,12 @@ public class XMLWriterImpl implements XMLWriter{
 	
 	public void saveLevelTemplate(GameDataInterface gameData, String gameName, String levelName)
 	{
-		save(gameData, "data/" + gameName + "/templates/", levelName, new PlayerStatus());
+		save(gameData, "data/games/" + gameName + "/templates/", levelName, new PlayerStatus());
 	}
 	
 	public void saveGame(GameDataInterface gameData, String gameName, String levelName)
 	{
-		save(gameData, "data/" + gameName + "/saves/", levelName, gameData.getStatus());
+		save(gameData, "data/games/" + gameName + "/saves/", levelName, gameData.getStatus());
 	}
 	
 	private void saveToXML(String filePath, String fileName, String xmlToWrite) {
