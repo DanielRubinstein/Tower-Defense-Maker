@@ -5,6 +5,7 @@ import java.util.List;
 import backEnd.GameData.GameData;
 import backEnd.GameData.State.Component;
 import javafx.geometry.Point2D;
+import resources.constants.StringResourceBundle;
 
 /**
  * governs the behavior of projectiles in the State
@@ -16,33 +17,27 @@ import javafx.geometry.Point2D;
 public class ProjectileEngine implements Engine {
 	private GameData myGameData;
 	private List<Component> toRemove;
+	private StringResourceBundle STRING_RESOURCES = new StringResourceBundle();
 
 	@Override
 	public void gameLoop(GameData gameData, double stepTime) {
 		myGameData = gameData;
 		toRemove = new ArrayList<Component>();
-		for (Component c : myGameData.getState().getComponentGraph().getAllComponents()) {
-			if (((String) c.getAttribute("Type").getValue()).equals("Projectile")) {
-				Point2D newPos = calculateNewPos(c);
-				c.setAttributeValue("Position", newPos);
-				checkProjectileOutOfBounds(c);
-				if (((Double) c.getAttribute("ProjectileTraveled").getValue() + 1.0) >= (Double) c //1.0 is wiggle room
-						.getAttribute(("ProjectileMaxDistance")).getValue()) {
-					// TODO: may have issues when the target is already
-					// destroyed before it gets there
-					// System.out.println("about to perform projectile
-					// actions");
-					performProjectileAction(gameData, (Component) c.getAttribute("ProjectileTarget").getValue(), c);
-					toRemove.add(c);
-
+		for (Component projectile : myGameData.getState().getComponentGraph().getAllComponents()) {
+			if (((String) projectile.getAttribute(STRING_RESOURCES.getFromAttributeNames("Type")).getValue()).equals(STRING_RESOURCES.getFromAttributeNames("ProjectileType"))) {
+				Point2D newPos = calculateNewPos(projectile);
+				projectile.setAttributeValue(STRING_RESOURCES.getFromAttributeNames("Position"), newPos);
+				checkProjectileOutOfBounds(projectile);
+				if (((Double) projectile.getAttribute(STRING_RESOURCES.getFromAttributeNames("ProjectileTraveled")).getValue() + 1.0) >= (Double) projectile //1.0 is wiggle room
+						.getAttribute((STRING_RESOURCES.getFromAttributeNames("ProjectileMaxDistance"))).getValue()) {										 //to account for division error
+					performProjectileAction(gameData, (Component) projectile.getAttribute("ProjectileTarget").getValue(), projectile);
+					toRemove.add(projectile);
 				}
-
 			}
 		}
-		for (Component c : toRemove) {
-			myGameData.getState().getComponentGraph().removeComponent(c);
+		for (Component dead : toRemove) {
+			myGameData.getState().getComponentGraph().removeComponent(dead);
 		}
-
 	}
 
 	private void checkProjectileOutOfBounds(Component projectile){
@@ -55,10 +50,6 @@ public class ProjectileEngine implements Engine {
 		Double curVel = (Double) c.getAttribute(("Velocity")).getValue();
 		Double xVel = curVel;
 		Double yVel = curVel;
-
-		// TODO:
-		// CHRISTIAN make sure the projectiles and targets are getting from the
-		// list that it's looping over
 
 		Point2D curPos = (Point2D) c.getAttribute(("Position")).getValue();
 		Point2D targetPos = (Point2D) c.getAttribute(("ProjectileTargetPosition")).getValue();
@@ -91,22 +82,22 @@ public class ProjectileEngine implements Engine {
 	 */
 	private void performProjectileAction(GameData gameData, Component target, Component projectile) {
 		List<Component> targetList = (ArrayList<Component>) gameData.getState().getComponentGraph()
-
 				.getComponentsWithinRadius(target, (Double) projectile.getAttribute("ExplosionRadius").getValue());
+		if(projectile.getAttribute(STRING_RESOURCES.getFromAttributeNames("FireType")).getValue() == STRING_RESOURCES.getFromAttributeNames("SingleTarget")){
+			targetList.clear();
+		}
 		targetList.add(target);
 
-
 		for (Component toHit : targetList) {
-			// System.out.println("Target looping has begun");
-			if (toHit.getAttribute("Type").getValue().equals("Enemy")) {
-				toHit.setAttributeValue("Health", (Integer) toHit.getAttribute("Health").getValue() - (Integer) projectile.getAttribute("FireDamage").getValue());
-				System.out.println("should have reduced HP to " + toHit.getAttribute("Health").getValue() + " type is " + toHit.getAttribute("Type").getValue());
-				toHit.setAttributeValue("Velocity", ((Double) projectile.getAttribute("SlowFactor").getValue() * (Double) toHit.getAttribute("Speed").getValue()));
+
+			if (toHit.getAttribute(STRING_RESOURCES.getFromAttributeNames("Type")).getValue().equals(STRING_RESOURCES.getFromAttributeNames("EnemyType"))) {
+				//doing damage to target
+				toHit.setAttributeValue(STRING_RESOURCES.getFromAttributeNames("Health"), 
+						(Integer) toHit.getAttribute(STRING_RESOURCES.getFromAttributeNames("Health")).getValue() - (Integer) projectile.getAttribute(STRING_RESOURCES.getFromAttributeNames("FireDamage")).getValue());
+				//slowing target
+				toHit.setAttributeValue(STRING_RESOURCES.getFromAttributeNames("Velocity"), ((Double) projectile.getAttribute(STRING_RESOURCES.getFromAttributeNames("SlowFactor")).getValue()
+						* (Double) toHit.getAttribute(STRING_RESOURCES.getFromAttributeNames("Speed")).getValue()));
 				toRemove.add(projectile);
-				if (projectile.getAttribute("FireType").getValue().equals("SingleTarget")) {
-					break; // if AOE, continue to loop through all targets, else
-							// only affect one target, needs testing
-				}
 			}
 		}
 
