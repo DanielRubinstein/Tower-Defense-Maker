@@ -32,7 +32,6 @@ public class HelpOptions {
 	
 	private void loadHTMLPage(String path){
 		try {
-			
 			WebView browser = new WebView();
 			WebEngine webEngine = browser.getEngine();
 			webEngine.load(new File(path).toURI().toURL().toExternalForm());
