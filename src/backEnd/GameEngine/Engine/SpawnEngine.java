@@ -1,3 +1,4 @@
+
 package backEnd.GameEngine.Engine;
 
 import java.util.Collection;
@@ -64,7 +65,6 @@ public class SpawnEngine implements Engine {
 		}
 	}
 
-	@SuppressWarnings("unchecked")
 	private void spawn(Component component, Tile spawnTile) {
 		if (component == null) {
 			//System.out.println(this.getClass().getName() + ": No component to add from spawn queue");
@@ -76,7 +76,8 @@ public class SpawnEngine implements Engine {
 		Attribute<Point2D> spawnPositionAttribute = spawnTile.getAttribute("Position");
 		Point2D tilePosition = spawnPositionAttribute.getValue();
 		Point2D spawnPosition = new Point2D(tilePosition.getX(), tilePosition.getY());
-		System.out.println(this.getClass().getName() + ": Spawn Position: " + spawnPosition.getX() + " | " + spawnPosition.getY());
+		//System.out.println(this.getClass().getName() + ": Spawn Position: " + spawnPosition.getX() + " | " + spawnPosition.getY());
 		myState.getComponentGraph().addComponentToGrid(spawnable, spawnPosition);
 	}
 }
+
