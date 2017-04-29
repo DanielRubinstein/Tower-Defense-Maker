@@ -1,6 +1,6 @@
 <?xml version="1.0"?><map>
   <entry>
-    <null/>
+    <string>Plant</string>
     <backEnd.GameData.State.ComponentImpl>
       <myAttributes>
         <myAttributes>
@@ -44,7 +44,7 @@
           <entry>
             <string>ImageFile</string>
             <backEnd.Attribute.AttributeImpl>
-              <myValue class="string"></myValue>
+              <myValue class="string">resources/images/Components/plant.png</myValue>
               <myName>ImageFile</myName>
             </backEnd.Attribute.AttributeImpl>
           </entry>
