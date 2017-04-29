@@ -65,7 +65,7 @@ public class XMLReaderImpl implements XMLReader{
 	public GameData loadGameStateData(String filePath, String levelName) throws XMLReadingException, FileNotFoundException
 	{
 
-
+		System.out.println(filePath);
 		HashMap<String, SpawnQueueInstantiator> instantiatorMap = (HashMap<String, SpawnQueueInstantiator>) xStream.fromXML(new File(filePath+"/" + levelName+"/spawns.xml"));
 		HashMap<String, SpawnQueues> spawnMap = new HashMap<String, SpawnQueues>();
 		

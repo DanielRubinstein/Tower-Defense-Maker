@@ -34,10 +34,10 @@ public class SpawnTimelineView implements SkeletonObject, SerializableObserver {
 	private GridPane myRoot;
 	private String mySpawnQueueName;
 	private SpawnQueues mySpawnQueues;
-	private List<Pair<List<SpawnDataImpl>, ScrollPane>> spawnQueueToDropZone;
-	private Map<SpawnDataImpl, List<SpawnDataImpl>> spawnDataToQueue;
+	private List<Pair<List<? extends SpawnDataReader>, ScrollPane>> spawnQueueToDropZone;
+	private Map<SpawnDataReader, List<? extends SpawnDataReader>> spawnDataToQueue;
 	private Map<SpawnDataReader, VisualSpawnEntry> spawnDataToVisual;
-	private Map<SpawnDataImpl, ScrollPane> spawnDataToDropZone;
+	private Map<SpawnDataReader, ScrollPane> spawnDataToDropZone;
 
 	public SpawnTimelineView(View view, ReadOnlyDoubleProperty readOnlyDoubleProperty, String key, SpawnQueues value) {
 		myView = view;
@@ -52,10 +52,27 @@ public class SpawnTimelineView implements SkeletonObject, SerializableObserver {
 		spawnDataToQueue = new HashMap<>();
 		spawnDataToVisual = new HashMap<>();
 		spawnDataToDropZone = new HashMap<>();
-		spawnQueueToDropZone = new ArrayList<Pair<List<SpawnDataImpl>,ScrollPane>>();
+		spawnQueueToDropZone = new ArrayList<Pair<List<? extends SpawnDataReader>,ScrollPane>>();
 		
-		spawnQueueToDropZone.add(new Pair<List<SpawnDataImpl>, ScrollPane>(mySpawnQueues.getSingleSpawnQueue(), singleDropZone("Single Instance Spawns", 0, false)));
-		spawnQueueToDropZone.add(new Pair<List<SpawnDataImpl>, ScrollPane>(mySpawnQueues.getFrequencySpawnQueue(), singleDropZone("Recurring Spawns", 1, true)));
+		List<? extends SpawnDataReader> single = mySpawnQueues.getSingleSpawnQueue();
+		List<? extends SpawnDataReader> frequency = mySpawnQueues.getFrequencySpawnQueue();
+		
+		ScrollPane dropZoneSingle = singleDropZone("Single Instance Spawns", 0, false);
+		ScrollPane dropZoneFrequency = singleDropZone("Recurring Spawns", 1, true);
+		
+		spawnQueueToDropZone.add(new Pair<List<? extends SpawnDataReader>, ScrollPane>(single, dropZoneSingle));
+		spawnQueueToDropZone.add(new Pair<List<? extends SpawnDataReader>, ScrollPane>(frequency, dropZoneFrequency));
+		
+		loadTimelines(single, dropZoneSingle);
+		loadTimelines(frequency, dropZoneFrequency);
+	}
+
+	private void loadTimelines(List<? extends SpawnDataReader> queue, ScrollPane dropZone) {
+		for(SpawnDataReader spawnDataReader : queue){
+			spawnDataToQueue.put(spawnDataReader, queue);
+			spawnDataToDropZone.put(spawnDataReader, dropZone);
+			addSpawn(spawnDataReader, queue, dropZone);
+		}	
 	}
 
 	private void initializeGrid(ReadOnlyDoubleProperty readOnlyDoubleProperty) {
@@ -120,35 +137,35 @@ public class SpawnTimelineView implements SkeletonObject, SerializableObserver {
 	}
 
 	@Override
-	public void update(SerializableObservable so, Object obj) {
-		for(Pair<List<SpawnDataImpl>, ScrollPane> entry : spawnQueueToDropZone){
-			List<SpawnDataImpl> queue = entry.getKey();
-			if(queue.contains(obj)){
-				addSpawn(obj, entry, queue);
+	public void update(SerializableObservable so, Object relevantSpawnData) {
+		for(Pair<List<? extends SpawnDataReader>, ScrollPane> entry : spawnQueueToDropZone){
+			List<? extends SpawnDataReader> queue = entry.getKey();
+			if(queue.contains(relevantSpawnData)){
+				addSpawn(relevantSpawnData, queue, entry.getValue());
 				return;
 			}
 		}
-		removeSpawn(obj);
+		removeSpawn(relevantSpawnData);
 	}
 
 	private void removeSpawn(Object obj) {
-		SpawnDataImpl toRemove_Spawn = getToRemove_Spawn(obj);
+		SpawnDataReader toRemove_Spawn = getToRemove_Spawn(obj);
 		((HBox) spawnDataToVisual.get(toRemove_Spawn).getRoot()).getChildren().clear();
 		spawnDataToDropZone.remove(toRemove_Spawn);
 		spawnDataToVisual.remove(toRemove_Spawn);
 		spawnDataToQueue.remove(toRemove_Spawn);
 	}
 
-	private void addSpawn(Object obj, Pair<List<SpawnDataImpl>, ScrollPane> entry, List<SpawnDataImpl> queue) {
-		SpawnDataImpl toAdd_Spawn = queue.get(queue.indexOf(obj));
+	private void addSpawn(Object obj, List<? extends SpawnDataReader> queue, ScrollPane dropZone) {
+		SpawnDataReader toAdd_Spawn = queue.get(queue.indexOf(obj));
 		spawnDataToQueue.put(toAdd_Spawn, queue);
 		Node toAdd = createVisual(toAdd_Spawn);
-		((VBox) entry.getValue().getContent()).getChildren().add(toAdd);
-		spawnDataToDropZone.put(toAdd_Spawn, entry.getValue());
+		((VBox) dropZone.getContent()).getChildren().add(toAdd);
+		spawnDataToDropZone.put(toAdd_Spawn, dropZone);
 	}
 
-	private SpawnDataImpl getToRemove_Spawn(Object obj) {
-		for(SpawnDataImpl spawnData : spawnDataToQueue.keySet()){
+	private SpawnDataReader getToRemove_Spawn(Object obj) {
+		for(SpawnDataReader spawnData : spawnDataToQueue.keySet()){
 			if (spawnData == obj){
 				return spawnData;
 			}

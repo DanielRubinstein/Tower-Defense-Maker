@@ -59,7 +59,9 @@ public class ModeImpl implements ModeReader, Mode{
 	@Override
 	public void setGameMode(String newGameMode){
 		currGameMode = newGameMode;
-		currLevelMode = strResources.getFromStringConstants("DEFAULT");
+		if (!levelProgression.getLevelList(newGameMode).contains(newGameMode)){
+			currLevelMode = strResources.getFromStringConstants("DEFAULT");
+		}
 		notifyObservers();
 	}
 	
@@ -98,6 +100,7 @@ public class ModeImpl implements ModeReader, Mode{
 	@Override
 	public void setLevelMode(String newLevelMode) {
 		currLevelMode = newLevelMode;
+		
 		notifyObservers();
 	}
 

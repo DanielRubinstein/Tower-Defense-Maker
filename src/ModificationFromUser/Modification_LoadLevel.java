@@ -32,7 +32,6 @@ public class Modification_LoadLevel implements ModificationFromUser
 		case "AUTHOR":
 			chooser.setInitialDirectory(new File("data/games/"+ myModel.getMode().getGameMode() + "/templates/"));
 		}
-		
 	
 		return chooser.showDialog(new Stage());
 	}
