@@ -30,13 +30,12 @@ public class MoveEngine implements Engine{
 		
 	public void gameLoop(GameData gameData, double stepTime) {
 		myState=gameData.getState();
-		for (ComponentImpl myComponent: myState.getComponentGraph().getAllComponents()){
+		for (Component myComponent: myState.getComponentGraph().getAllComponents()){
 			move(myComponent);
 		}
 	}
 
-	
-	private void move(ComponentImpl c) {
+	private void move(Component c) {
 		Coordinates previousMovement=c.getPreviousMovement();
 		Coordinates newMovement;
 		double speed = c.<Double>getAttribute(ATTRIBUTE_RESOURCE_BUNDLE.getString("Speed")).getValue();
@@ -49,6 +48,9 @@ public class MoveEngine implements Engine{
 		if (currentTile==null){
 			return;
 		}
+		if (currentTile.<String>getAttribute("MoveDirection").getValue().equals("")){
+			return;
+			}
 		String DIRECTION = currentTile.<String>getAttribute(ATTRIBUTE_RESOURCE_BUNDLE.getString("MoveDirection")).getValue();
 		if (LEFT.equals(DIRECTION)&&(myState.getTileGrid().atMiddleYOfTile(currentLocation)||(previousMovement.getX()==0&&previousMovement.getY()==0))) {
 				newMovement = new Coordinates(-1, 0);

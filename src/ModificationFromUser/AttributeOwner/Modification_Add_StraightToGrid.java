@@ -48,7 +48,7 @@ public class Modification_Add_StraightToGrid implements ModificationFromUser {
 
 	private void addToGrid() {
 		Modification_Add_ToGrid_Methods methods = new Modification_Add_ToGrid_Methods(myModel, location);
-		Reflection.callMethod(methods, "add", newAttrOwn);
+		Reflection.callMethod(methods, "addAttributeOwnerToGrid", newAttrOwn);
 	}
 
 

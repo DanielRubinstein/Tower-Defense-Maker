@@ -6,20 +6,20 @@ import com.thoughtworks.xstream.XStream;
 import com.thoughtworks.xstream.io.xml.DomDriver;
 
 public class ComponentBuilder {
-	private ComponentImpl myComponent;
+	private Component myComponent;
 	private XStream xStream;
 	
-	public ComponentBuilder(ComponentImpl component) {
+	public ComponentBuilder(Component component) {
 		myComponent = component;
 		xStream = new XStream(new DomDriver());
 		xStream.alias("ComponentImpl", ComponentImpl.class);
 	}
 	
-	public ComponentImpl getComponent() {
+	public Component getComponent() {
 		List<SerializableObserver> oldObservers = myComponent.getAndClearObservers();
 		String serializedAO = xStream.toXML(myComponent);
 		myComponent.setObserverList(oldObservers);
-		return (ComponentImpl) xStream.fromXML(serializedAO);
+		return (Component) xStream.fromXML(serializedAO);
 	}
 	
 }

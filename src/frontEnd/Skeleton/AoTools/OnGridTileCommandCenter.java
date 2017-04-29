@@ -6,6 +6,7 @@ import java.util.List;
 
 import backEnd.Attribute.AttributeOwner;
 import backEnd.Attribute.AttributeOwnerReader;
+import backEnd.GameData.State.Component;
 import backEnd.GameData.State.ComponentImpl;
 import backEnd.GameData.State.State;
 import backEnd.GameData.State.Tile;
@@ -32,7 +33,7 @@ public class OnGridTileCommandCenter implements CommandCenter, SkeletonObject{
 	private View myView;
 	private TabPane tabPane;
 	
-	private Collection<ComponentImpl> myComponents;
+	private Collection<Component> myComponents;
 	private Tile myTile;
 
 
@@ -45,7 +46,7 @@ public class OnGridTileCommandCenter implements CommandCenter, SkeletonObject{
 
 	private Collection<Tab> createComponentTabs(Stage stage) {
 		List<Tab> componentTabs = new ArrayList<Tab>();
-		for (ComponentImpl c : myComponents) {
+		for (Component c : myComponents) {
 			componentTabs.add(createAttributeOwnerTab(c, stage));
 		}
 		return componentTabs;

@@ -4,7 +4,7 @@ import frontEnd.CustomJavafxNodes.ErrorDialog;
 import resources.constants.StringResourceBundle;
 
 @SuppressWarnings("serial")
-public class ModeException{
+public class ModeException extends Exception{
 	
 	private static final StringResourceBundle strResources = new StringResourceBundle();
 	

@@ -1,18 +1,10 @@
 <?xml version="1.0"?><map>
   <entry>
     <string>Plants vs. Zombies</string>
-    <list>
-      <string>filetest</string>
-      <string>loop</string>
-      <string>loopwithWin</string>
-      <string>filetest3</string>
-      <string>filetest3</string>
-    </list>
+    <list/>
   </entry>
   <entry>
     <string>Bloons</string>
-    <list>
-      <string>riley</string>
-    </list>
+    <list/>
   </entry>
 </map>

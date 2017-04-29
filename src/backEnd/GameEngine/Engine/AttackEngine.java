@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.Map;
 
 import backEnd.GameData.GameData;
-import backEnd.GameData.State.ComponentImpl;
+import backEnd.GameData.State.Component;
 import backEnd.GameData.State.ComponentGraph;
 import backEnd.GameData.State.State;
 import frontEnd.CustomJavafxNodes.ErrorDialog;
@@ -22,41 +22,39 @@ import javafx.geometry.Point2D;
 public class AttackEngine implements Engine {
 
 	private double masterTime;
-	private Map<ComponentImpl, Point2D> toAdd;
+	private Map<Component, Point2D> toAdd;
 	private GameData myGameData;
 
 
 	@Override
 	public void gameLoop(GameData gameData, double stepTime) {
 		masterTime = gameData.getGameTime();
-		toAdd = new HashMap<ComponentImpl, Point2D>();
+		toAdd = new HashMap<Component, Point2D>();
 		myGameData=gameData;
 		ComponentGraph myComponentGraph = gameData.getState().getComponentGraph();
-		Map<ComponentImpl, ComponentImpl> attackersAndTargets=new HashMap<ComponentImpl, ComponentImpl>();
+		Map<Component, Component> attackersAndTargets=new HashMap<Component, Component>();
 		
-		for (ComponentImpl attacker : myComponentGraph.getAllComponents()) {
+		for (Component attacker : myComponentGraph.getAllComponents()) {
 			if (attacker.getAttribute("Type").getValue().equals("Tower")) {
 				if (masterTime % ((Double) attacker.getAttribute("FireRate").getValue()/1000) <= stepTime/10) { 
-					System.out.println("tower decided to fire (timing)");
-					List<ComponentImpl> targets = myComponentGraph.getComponentsWithinRadius(attacker,
+					List<Component> targets = myComponentGraph.getComponentsWithinRadius(attacker,
 							(double) attacker.getAttribute("FireRadius").getValue());
-					for (ComponentImpl potentialTarget : targets) {
+					for (Component potentialTarget : targets) {
 						if (potentialTarget.getAttribute("Type").getValue().equals("Enemy")) {
-							System.out.println("Attack engine selected a new target");
 							attackersAndTargets.put(attacker, potentialTarget);
 						}
 					}
 				}
 			}
 		}
-		for (ComponentImpl c: attackersAndTargets.keySet()){
+		for (Component c: attackersAndTargets.keySet()){
 			addProjectileToState(c, attackersAndTargets.get(c));
 		}
 	}
 
 	@SuppressWarnings("unchecked")
-	public void addProjectileToState(ComponentImpl attacker, ComponentImpl target) {
-		ComponentImpl projectile;
+	public void addProjectileToState(Component attacker, Component target) {
+		Component projectile;
 		try {
 			projectile = makeProjectile(attacker);
 		} catch (FileNotFoundException e1) {
@@ -71,7 +69,7 @@ public class AttackEngine implements Engine {
 		Object targetPosObj=target.getAttribute(("Position")).getValue();
 		Point2D targetPos = (Point2D) targetPosObj;
 		projectile.setAttributeValue("Position", bulletPos);
-		projectile.setAttributeValue("ProjectileTargetPosition", new Point2D(targetPos.getX(), targetPos.getY()));
+		projectile.setAttributeValue("ProjectileTargetPosition", targetPos);
 		projectile.setAttributeValue("ProjectileTarget", target);
 		Point2D finalTargetPoint = targetPos.subtract(bulletPos);
 		//TODO: USE .magnitude() method below
@@ -85,9 +83,9 @@ public class AttackEngine implements Engine {
 	 * @throws FileNotFoundException if the selected image files are not found
 	 * 
 	 */
-	private ComponentImpl makeProjectile(ComponentImpl attacker) throws FileNotFoundException {
+	private Component makeProjectile(Component attacker) throws FileNotFoundException {
 		ProjectileFactory bulletFactory = new ProjectileFactory(attacker);
-		ComponentImpl projectile=bulletFactory.getProjectile();
+		Component projectile=bulletFactory.getProjectile();
 		//projectile.setMyType("Projectile");
 		return projectile;
 	}

@@ -18,7 +18,7 @@ public interface ViewReader {
 
 	public Collection<Tile> getTilePresets();
 
-	public Collection<ComponentImpl> getComponentPresets();
+	public Collection<Component> getComponentPresets();
 	
 	public Stage getAppStage();
 	

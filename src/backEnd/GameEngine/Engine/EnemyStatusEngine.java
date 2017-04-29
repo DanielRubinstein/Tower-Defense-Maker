@@ -5,7 +5,8 @@ import java.util.List;
 
 import backEnd.Attribute.Attribute;
 import backEnd.GameData.GameData;
-import backEnd.GameData.State.ComponentImpl;
+import backEnd.GameData.State.Component;
+
 import backEnd.GameEngine.Engine.Status.StatusEffect;
 
 /**
@@ -20,8 +21,8 @@ public class EnemyStatusEngine implements Engine {
 
 	@Override
 	public void gameLoop(GameData gameData, double stepTime) {
-		Collection<ComponentImpl> components = gameData.getState().getComponentGraph().getAllComponents();
-		for (ComponentImpl component : components) {
+		Collection<Component> components = gameData.getState().getComponentGraph().getAllComponents();
+		for (Component component : components) {
 			if (component.getMyType().equals(ENEMY_TYPE)) {
 				updatePoison(stepTime, component);
 				updateSlowed(stepTime, component);
@@ -29,7 +30,7 @@ public class EnemyStatusEngine implements Engine {
 		}
 	}
 
-	private void updatePoison(double stepTime, ComponentImpl component) {
+	private void updatePoison(double stepTime, Component component) {
 		Attribute<StatusEffect> poisoned = component.getAttribute("Poisoned");
 		Attribute<Double> health = component.getAttribute("Health");
 		Double poisonTime = poisoned.getValue().getTime();
@@ -45,7 +46,7 @@ public class EnemyStatusEngine implements Engine {
 		}
 	}
 
-	private void updateSlowed(double stepTime, ComponentImpl component) {
+	private void updateSlowed(double stepTime, Component component) {
 		Attribute<StatusEffect> slowed = component.getAttribute("Slowed");
 		Attribute<Double> currentSpeed = component.getAttribute("CurrentSpeed");
 		Attribute<Double> normalSpeed = component.getAttribute("NormalSpeed");
