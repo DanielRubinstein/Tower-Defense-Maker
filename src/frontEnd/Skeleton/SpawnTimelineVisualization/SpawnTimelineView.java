@@ -54,7 +54,6 @@ public class SpawnTimelineView implements SkeletonObject, SerializableObserver {
 		spawnDataToDropZone = new HashMap<>();
 		spawnQueueToDropZone = new ArrayList<Pair<List<SpawnDataImpl>,ScrollPane>>();
 		
-		
 		spawnQueueToDropZone.add(new Pair<List<SpawnDataImpl>, ScrollPane>(mySpawnQueues.getSingleSpawnQueue(), singleDropZone("Single Instance Spawns", 0, false)));
 		spawnQueueToDropZone.add(new Pair<List<SpawnDataImpl>, ScrollPane>(mySpawnQueues.getFrequencySpawnQueue(), singleDropZone("Recurring Spawns", 1, true)));
 	}
