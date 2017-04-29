@@ -123,4 +123,9 @@ public class SpawnQueues implements SerializableObservable{
 		mySingleSpawnQueue.remove(mySpawnDataToRemove);
 		this.notifyObservers(mySpawnDataToRemove);
 	}
+
+	@Override
+	public int compareTo(Object o) {
+		return Integer.compare(this.hashCode(), o.hashCode());
+	}
 }

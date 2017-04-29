@@ -139,4 +139,9 @@ public class TileImpl implements Tile, AttributeOwner, SerializableObservable {
 		observers = observersave;
 	}
 
+	@Override
+	public int compareTo(Object o) {
+		return Integer.compare(this.hashCode(), o.hashCode());
+	}
+
 }
