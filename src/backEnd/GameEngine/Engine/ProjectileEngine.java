@@ -39,7 +39,6 @@ public class ProjectileEngine implements Engine {
 
 			}
 		}
-		System.out.println("About to remove stuff from graph" );
 		for (Component c : toRemove) {
 			myGameData.getState().getComponentGraph().removeComponent(c);
 		}
