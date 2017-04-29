@@ -23,7 +23,7 @@ import backEnd.GameData.State.TileImpl;
  *
  */
 
-public class BankController implements BankControllerReader
+public class BankController implements BankControllerReader, SerializableObservable
 {
 	private static final StringResourceBundle strResources = new StringResourceBundle();
 	private Map<String, Tile> tileBank;
@@ -234,5 +234,29 @@ public class BankController implements BankControllerReader
 			o.update((SerializableObservable) this, null);
 		}
 		dataController.saveUniversalGameData();
+	}
+
+	@Override
+	public int compareTo(Object o) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public List<SerializableObserver> getObservers() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void clearObservers() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void setObservers(List<SerializableObserver> observersave) {
+		// TODO Auto-generated method stub
+		
 	}
 }
