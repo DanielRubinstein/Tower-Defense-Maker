@@ -44,6 +44,7 @@ public class DataController implements DataControllerReader {
 		}
 		catch (Exception e)
 		{
+			e.printStackTrace();
 			return null;
 		}
 	}

@@ -986,7 +986,7 @@
   </entry>
   <entry>
     <string>j</string>
-    <backEnd.GameData.State.Component>
+    <backEnd.GameData.State.ComponentImpl>
       <myAttributes>
         <myAttributes>
           <entry>
@@ -1303,6 +1303,7 @@
         <levelModePermissions>
           <string>DEFAULT</string>
         </levelModePermissions>
+        <strResources/>
       </myAccessPermissions>
       <observers/>
       <ID>313184702384797</ID>
@@ -1310,6 +1311,6 @@
         <x>0.0</x>
         <y>0.0</y>
       </previousMovement>
-    </backEnd.GameData.State.Component>
+    </backEnd.GameData.State.ComponentImpl>
   </entry>
 </map>
