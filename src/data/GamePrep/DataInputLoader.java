@@ -30,6 +30,7 @@ public class DataInputLoader
 	private XMLReader myXMLReader;
 	private GameData myGameData;
 	private Map<String, List<String>> gamesMap;
+	private String myLevelName, myGameName;
 	
 	public DataInputLoader()
 	{
@@ -48,6 +49,8 @@ public class DataInputLoader
 	{
 		this();
 		myGameData = generateGameData(input);
+		//myGameName = input.getGameName();
+		myLevelName = "Untitled";
 	}
 	
 	public DataInputLoader(File file) throws NoSuchMethodException, SecurityException, InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException {
@@ -106,6 +109,7 @@ public class DataInputLoader
 		GameData gameData = new GameData(state, new PlayerStatus() , new RulesMap());
 		return gameData;
 	}
+	
 	private void generateGamesMap() {
 		try {
 			gamesMap = myXMLReader.loadGamesMap(UNIVERSAL_DATA_PATH);
@@ -118,13 +122,12 @@ public class DataInputLoader
 
 	public String getLevelName()
 	{
-		// TODO Auto-generated method stub
-		return "Fire";
+		return myLevelName;
 	}
 
 	public String getGameName() {
-		// TODO Auto-generated method stub
-		return "Test";
+
+		return myGameName;
 	}
 	
 }

@@ -22,6 +22,8 @@ public class Modification_SaveGameState implements ModificationFromUser {
 	@Override
 	public void invoke(ModelImpl myModel) throws Exception {
 		
+		myModel.getMode().setLevelMode(myLevelName);
+		
 		switch(myModel.getMode().getUserMode())
 		{
 		case "PLAYER":
