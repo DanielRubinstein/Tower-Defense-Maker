@@ -45,7 +45,7 @@ public class TileGridInteractor {
 			if(e.getCode().equals(KeyCode.LEFT)||e.getCode().equals(KeyCode.RIGHT)||e.getCode().equals(KeyCode.DOWN)||e.getCode().equals(KeyCode.UP)){
 				String toSend = e.getCode().toString().charAt(0) + e.getCode().toString().substring(1).toLowerCase();
 				selectedTiles.keySet().forEach(t -> {
-					myView.sendUserModification(new Modification_EditAttribute<String>(t,t.getAttribute("MoveDirection"),toSend));
+					myView.sendUserModification(new Modification_EditAttribute<String>(t,"MoveDirection",toSend));
 				});
 				clearTileSelection();
 			} else if (e.getCode().equals(KeyCode.SPACE)){

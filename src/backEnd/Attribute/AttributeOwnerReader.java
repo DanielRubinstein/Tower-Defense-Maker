@@ -12,7 +12,7 @@ public interface AttributeOwnerReader {
 	 * @param attrType
 	 * @return Attribute that corresponds to the String attrType
 	 */
-	<T> AttributeReader<T> getAttribute(String attrName);
+	<T> AttributeReader<T> getAttributeReader(String attrName);
 	
 	void addObserver(SerializableObserver o);
 }

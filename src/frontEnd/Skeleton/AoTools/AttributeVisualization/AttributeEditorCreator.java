@@ -89,8 +89,8 @@ public class AttributeEditorCreator implements AttributeVisualization{
 		sendModification(myToggle.getSwitchedOn().getValue());
 	}
 
-	private void sendModification(Object newValue){
-		myView.sendUserModification(new Modification_EditAttribute(myOwner, myAttr, newValue));
+	private <T> void sendModification(T newValue){
+		myView.sendUserModification(new Modification_EditAttribute<T>(myOwner, myAttr.getName(), newValue));
 	}
 
 	@Override

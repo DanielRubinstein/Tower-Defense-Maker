@@ -12,6 +12,7 @@ import backEnd.Attribute.AttributeData;
 import backEnd.Attribute.AttributeFactoryImpl;
 import backEnd.Attribute.AttributeFactoryReader;
 import backEnd.Attribute.AttributeOwner;
+import backEnd.Attribute.AttributeReader;
 import backEnd.GameEngine.Behaviors.Behavior;
 import backEnd.GameEngine.Behaviors.BehaviorFactory;
 import backEnd.GameEngine.Engine.Coordinates;
@@ -121,6 +122,14 @@ public class ComponentImpl implements SerializableObservable, Component, Compone
 	 */
 	@Override
 	public <T> Attribute<T> getAttribute(String attributeType) {
+		return myAttributes.get(attributeType);
+	}
+	
+	/* (non-Javadoc)
+	 * @see backEnd.GameData.State.Component#getAttribute(java.lang.String)
+	 */
+	@Override
+	public <T> AttributeReader<T> getAttributeReader(String attributeType) {
 		return myAttributes.get(attributeType);
 	}
 

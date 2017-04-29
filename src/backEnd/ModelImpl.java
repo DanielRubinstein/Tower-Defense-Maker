@@ -3,6 +3,8 @@ package backEnd;
 import java.util.List;
 import java.util.function.Consumer;
 
+import backEnd.Attribute.AttributeOwner;
+import backEnd.Attribute.AttributeOwnerReader;
 import backEnd.GameData.GameData;
 import backEnd.GameData.Rules.RuleReader;
 import backEnd.GameData.State.PlayerStatusModifier;
@@ -114,5 +116,9 @@ public class ModelImpl implements Model{
 	@Override
 	public List<RuleReader> getRulesList() {
 		return myGameData.getRules().getRuleReaderList();
+	}
+
+	public AttributeOwner getAttributeOwner(AttributeOwnerReader attributeOwnerReader) {
+		return (AttributeOwner) attributeOwnerReader;
 	}
 }
