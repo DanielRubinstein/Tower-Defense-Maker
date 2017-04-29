@@ -25,13 +25,13 @@ public class HelpOptions {
 	}
 
 	private void addAllOptions(){
-		allOptions.addSimpleButton("What is Tower Defense?", () -> loadHTMLPage(DEFAULT_TOWER_DEFENSE));
+		allOptions.addPrimarySimpleButtonWithHover("What is Tower Defense?", () -> loadHTMLPage(DEFAULT_TOWER_DEFENSE),"View Instructions");
+		allOptions.addSimpleButtonWithHover("What is Tower Defense?", () -> loadHTMLPage(DEFAULT_TOWER_DEFENSE),"Get a basic overview");
 	}
 	
 	
 	private void loadHTMLPage(String path){
 		try {
-			
 			WebView browser = new WebView();
 			WebEngine webEngine = browser.getEngine();
 			webEngine.load(new File(path).toURI().toURL().toExternalForm());

@@ -5,6 +5,7 @@ import backEnd.Attribute.AttributeOwner;
 import backEnd.Attribute.AttributeOwnerReader;
 import backEnd.Attribute.AttributeReader;
 import backEnd.GameData.State.Component;
+import backEnd.GameData.State.ComponentImpl;
 import frontEnd.View;
 import javafx.geometry.Point2D;
 import javafx.scene.Node;
@@ -84,7 +85,8 @@ public class AttributeViewerCreator implements AttributeVisualization{
 	@Override
 	public Node getCOMPONENT() {
 		try{
-			Component baby = (Component) myAttr.getValue();
+			String baby_str = (String) myAttr.getValue();
+			Component baby = myView.getBankController().getComponent(baby_str);
 			
 			HBox pair = new HBox();
 			
