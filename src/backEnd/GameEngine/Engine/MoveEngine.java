@@ -63,6 +63,7 @@ public class MoveEngine implements Engine{
 				newMovement=previousMovement;
 			}
 		}
+		System.out.println( "***" + newMovement.getY());
 		Coordinates velocity=new Coordinates(newMovement.getX()*speed, newMovement.getY()*speed);
 		newPoint = new Point2D( currentX+velocity.getX(), currentY+velocity.getY());
 		c.setPreviousMovement(newMovement);
