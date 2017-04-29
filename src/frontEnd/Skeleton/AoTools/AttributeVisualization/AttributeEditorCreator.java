@@ -37,8 +37,8 @@ public class AttributeEditorCreator implements AttributeVisualization{
 	private View myView;
 	private AttributeOwnerReader myOwner;
 	private AttributeReader<?> myAttr;
-	public static final String SAVED_IMAGES_DIRECTORY = "src" + File.separator + "resources" + File.separator + "images";
-	public static final String CLASS_LOADER_DIRECTORY = "resources" + File.separator + "images" + File.separator;
+	public static final String SAVED_IMAGES_DIRECTORY = "src/resources/images";
+	public static final String CLASS_LOADER_DIRECTORY = "resources/images/";
 	private ToggleSwitch myToggle;
 
 	public AttributeEditorCreator(View view, AttributeOwnerReader obj, AttributeReader<?> attr){
@@ -111,7 +111,7 @@ public class AttributeEditorCreator implements AttributeVisualization{
 			
 			File selectedFile = imageChooser.showOpenDialog(new Stage());
 			try{
-				String newPath = CLASS_LOADER_DIRECTORY + selectedFile.getParentFile().getName()+ File.separator + selectedFile.getName();
+				String newPath = CLASS_LOADER_DIRECTORY + selectedFile.getParentFile().getName()+ "/" + selectedFile.getName();
 				
 				Image newImage = new Image(getClass().getClassLoader().getResourceAsStream(newPath));
 				imv.setImage(newImage);
