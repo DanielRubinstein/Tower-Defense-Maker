@@ -83,13 +83,16 @@ public class ProjectileEngine implements Engine {
 	private void performProjectileAction(GameData gameData, Component target, Component projectile) {
 		List<Component> targetList = (ArrayList<Component>) gameData.getState().getComponentGraph()
 				.getComponentsWithinRadius(target, (Double) projectile.getAttribute("ExplosionRadius").getValue());
+		targetList.remove(target);
+		System.out.println("ProjectileEngine FireType is " + projectile.getAttribute("FireType").getValue());
 		if(projectile.getAttribute(STRING_RESOURCES.getFromAttributeNames("FireType")).getValue() == STRING_RESOURCES.getFromAttributeNames("SingleTarget")){
 			targetList.clear();
+			System.out.println("TargetList cleared ProjectileEngine");
 		}
 		targetList.add(target);
+		System.out.println("Targetlist size is " + targetList.size());
 
 		for (Component toHit : targetList) {
-
 			if (toHit.getAttribute(STRING_RESOURCES.getFromAttributeNames("Type")).getValue().equals(STRING_RESOURCES.getFromAttributeNames("EnemyType"))) {
 				//doing damage to target
 				toHit.setAttributeValue(STRING_RESOURCES.getFromAttributeNames("Health"), 
@@ -100,6 +103,5 @@ public class ProjectileEngine implements Engine {
 				toRemove.add(projectile);
 			}
 		}
-
 	}
 }

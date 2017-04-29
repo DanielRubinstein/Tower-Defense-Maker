@@ -27,10 +27,10 @@ public class Modification_LoadLevel implements ModificationFromUser
 		switch (myModel.getMode().getUserMode())
 		{
 		case "PLAYER":
-			chooser.setInitialDirectory(new File("./data/SavedGames/"));
+			chooser.setInitialDirectory(new File("data/games/" + myModel.getMode().getGameMode() + "/saves/"));
 			break;
 		case "AUTHOR":
-			chooser.setInitialDirectory(new File("./data/LevelTemplates/"));
+			chooser.setInitialDirectory(new File("data/games/"+ myModel.getMode().getGameMode() + "/templates/"));
 		}
 		
 	

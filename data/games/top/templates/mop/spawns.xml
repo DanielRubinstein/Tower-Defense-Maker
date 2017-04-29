@@ -3,12 +3,7 @@
     <string>Timeline 1</string>
     <backEnd.GameEngine.Engine.Spawning.SpawnQueueInstantiator>
       <myFrequencyQueue/>
-      <mySpawnQueue>
-        <backEnd.GameEngine.Engine.Spawning.SpawnDataImpl>
-          <mySpawnable>Enemy</mySpawnable>
-          <myTime>1.0</myTime>
-        </backEnd.GameEngine.Engine.Spawning.SpawnDataImpl>
-      </mySpawnQueue>
+      <mySpawnQueue/>
       <myTimeLastQueueSpawned>0.0</myTimeLastQueueSpawned>
       <myCurrentSpawn>0</myCurrentSpawn>
       <myGameTime>0.0</myGameTime>

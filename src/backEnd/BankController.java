@@ -51,6 +51,7 @@ public class BankController implements BankControllerReader
 		return findKeyFromValue(componentBank, component);
 	}
 	
+	@Deprecated
 	private void createTemplatesForTesting(){
 		try{
 			this.tileBank = new HashMap<String, Tile>();

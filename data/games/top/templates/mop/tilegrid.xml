@@ -31,6 +31,21 @@
               </backEnd.Attribute.AttributeImpl>
             </entry>
             <entry>
+              <string>BuildCapacity</string>
+              <backEnd.Attribute.AttributeImpl>
+                <myValue class="int">1</myValue>
+                <myParamList class="java.util.Arrays$ArrayList">
+                  <a class="java.lang.Integer-array">
+                    <int>0</int>
+                    <int>20</int>
+                    <int>1</int>
+                    <int>1</int>
+                  </a>
+                </myParamList>
+                <myName>BuildCapacity</myName>
+              </backEnd.Attribute.AttributeImpl>
+            </entry>
+            <entry>
               <string>Position</string>
               <backEnd.Attribute.AttributeImpl>
                 <myValue class="javafx.geometry.Point2D" reference="../../../../../../javafx.geometry.Point2D"/>
@@ -69,13 +84,6 @@
                   </a>
                 </myParamList>
                 <myName>MoveDirection</myName>
-              </backEnd.Attribute.AttributeImpl>
-            </entry>
-            <entry>
-              <string>Buildable</string>
-              <backEnd.Attribute.AttributeImpl>
-                <myValue class="boolean">false</myValue>
-                <myName>Buildable</myName>
               </backEnd.Attribute.AttributeImpl>
             </entry>
           </myAttributes>
@@ -113,6 +121,21 @@
               </backEnd.Attribute.AttributeImpl>
             </entry>
             <entry>
+              <string>BuildCapacity</string>
+              <backEnd.Attribute.AttributeImpl>
+                <myValue class="int">1</myValue>
+                <myParamList class="java.util.Arrays$ArrayList">
+                  <a class="java.lang.Integer-array">
+                    <int>0</int>
+                    <int>20</int>
+                    <int>1</int>
+                    <int>1</int>
+                  </a>
+                </myParamList>
+                <myName>BuildCapacity</myName>
+              </backEnd.Attribute.AttributeImpl>
+            </entry>
+            <entry>
               <string>Position</string>
               <backEnd.Attribute.AttributeImpl>
                 <myValue class="javafx.geometry.Point2D" reference="../../../../../../javafx.geometry.Point2D"/>
@@ -151,13 +174,6 @@
                   </a>
                 </myParamList>
                 <myName>MoveDirection</myName>
-              </backEnd.Attribute.AttributeImpl>
-            </entry>
-            <entry>
-              <string>Buildable</string>
-              <backEnd.Attribute.AttributeImpl>
-                <myValue class="boolean">false</myValue>
-                <myName>Buildable</myName>
               </backEnd.Attribute.AttributeImpl>
             </entry>
           </myAttributes>
@@ -195,6 +211,21 @@
               </backEnd.Attribute.AttributeImpl>
             </entry>
             <entry>
+              <string>BuildCapacity</string>
+              <backEnd.Attribute.AttributeImpl>
+                <myValue class="int">1</myValue>
+                <myParamList class="java.util.Arrays$ArrayList">
+                  <a class="java.lang.Integer-array">
+                    <int>0</int>
+                    <int>20</int>
+                    <int>1</int>
+                    <int>1</int>
+                  </a>
+                </myParamList>
+                <myName>BuildCapacity</myName>
+              </backEnd.Attribute.AttributeImpl>
+            </entry>
+            <entry>
               <string>Position</string>
               <backEnd.Attribute.AttributeImpl>
                 <myValue class="javafx.geometry.Point2D" reference="../../../../../../javafx.geometry.Point2D"/>
@@ -233,13 +264,6 @@
                   </a>
                 </myParamList>
                 <myName>MoveDirection</myName>
-              </backEnd.Attribute.AttributeImpl>
-            </entry>
-            <entry>
-              <string>Buildable</string>
-              <backEnd.Attribute.AttributeImpl>
-                <myValue class="boolean">false</myValue>
-                <myName>Buildable</myName>
               </backEnd.Attribute.AttributeImpl>
             </entry>
           </myAttributes>
@@ -277,6 +301,21 @@
               </backEnd.Attribute.AttributeImpl>
             </entry>
             <entry>
+              <string>BuildCapacity</string>
+              <backEnd.Attribute.AttributeImpl>
+                <myValue class="int">1</myValue>
+                <myParamList class="java.util.Arrays$ArrayList">
+                  <a class="java.lang.Integer-array">
+                    <int>0</int>
+                    <int>20</int>
+                    <int>1</int>
+                    <int>1</int>
+                  </a>
+                </myParamList>
+                <myName>BuildCapacity</myName>
+              </backEnd.Attribute.AttributeImpl>
+            </entry>
+            <entry>
               <string>Position</string>
               <backEnd.Attribute.AttributeImpl>
                 <myValue class="javafx.geometry.Point2D" reference="../../../../../../javafx.geometry.Point2D"/>
@@ -315,13 +354,6 @@
                   </a>
                 </myParamList>
                 <myName>MoveDirection</myName>
-              </backEnd.Attribute.AttributeImpl>
-            </entry>
-            <entry>
-              <string>Buildable</string>
-              <backEnd.Attribute.AttributeImpl>
-                <myValue class="boolean">false</myValue>
-                <myName>Buildable</myName>
               </backEnd.Attribute.AttributeImpl>
             </entry>
           </myAttributes>
@@ -359,6 +391,21 @@
               </backEnd.Attribute.AttributeImpl>
             </entry>
             <entry>
+              <string>BuildCapacity</string>
+              <backEnd.Attribute.AttributeImpl>
+                <myValue class="int">1</myValue>
+                <myParamList class="java.util.Arrays$ArrayList">
+                  <a class="java.lang.Integer-array">
+                    <int>0</int>
+                    <int>20</int>
+                    <int>1</int>
+                    <int>1</int>
+                  </a>
+                </myParamList>
+                <myName>BuildCapacity</myName>
+              </backEnd.Attribute.AttributeImpl>
+            </entry>
+            <entry>
               <string>Position</string>
               <backEnd.Attribute.AttributeImpl>
                 <myValue class="javafx.geometry.Point2D" reference="../../../../../../javafx.geometry.Point2D"/>
@@ -397,13 +444,6 @@
                   </a>
                 </myParamList>
                 <myName>MoveDirection</myName>
-              </backEnd.Attribute.AttributeImpl>
-            </entry>
-            <entry>
-              <string>Buildable</string>
-              <backEnd.Attribute.AttributeImpl>
-                <myValue class="boolean">false</myValue>
-                <myName>Buildable</myName>
               </backEnd.Attribute.AttributeImpl>
             </entry>
           </myAttributes>
@@ -441,6 +481,21 @@
               </backEnd.Attribute.AttributeImpl>
             </entry>
             <entry>
+              <string>BuildCapacity</string>
+              <backEnd.Attribute.AttributeImpl>
+                <myValue class="int">1</myValue>
+                <myParamList class="java.util.Arrays$ArrayList">
+                  <a class="java.lang.Integer-array">
+                    <int>0</int>
+                    <int>20</int>
+                    <int>1</int>
+                    <int>1</int>
+                  </a>
+                </myParamList>
+                <myName>BuildCapacity</myName>
+              </backEnd.Attribute.AttributeImpl>
+            </entry>
+            <entry>
               <string>Position</string>
               <backEnd.Attribute.AttributeImpl>
                 <myValue class="javafx.geometry.Point2D" reference="../../../../../../javafx.geometry.Point2D"/>
@@ -479,13 +534,6 @@
                   </a>
                 </myParamList>
                 <myName>MoveDirection</myName>
-              </backEnd.Attribute.AttributeImpl>
-            </entry>
-            <entry>
-              <string>Buildable</string>
-              <backEnd.Attribute.AttributeImpl>
-                <myValue class="boolean">false</myValue>
-                <myName>Buildable</myName>
               </backEnd.Attribute.AttributeImpl>
             </entry>
           </myAttributes>
@@ -523,6 +571,21 @@
               </backEnd.Attribute.AttributeImpl>
             </entry>
             <entry>
+              <string>BuildCapacity</string>
+              <backEnd.Attribute.AttributeImpl>
+                <myValue class="int">1</myValue>
+                <myParamList class="java.util.Arrays$ArrayList">
+                  <a class="java.lang.Integer-array">
+                    <int>0</int>
+                    <int>20</int>
+                    <int>1</int>
+                    <int>1</int>
+                  </a>
+                </myParamList>
+                <myName>BuildCapacity</myName>
+              </backEnd.Attribute.AttributeImpl>
+            </entry>
+            <entry>
               <string>Position</string>
               <backEnd.Attribute.AttributeImpl>
                 <myValue class="javafx.geometry.Point2D" reference="../../../../../../javafx.geometry.Point2D"/>
@@ -561,13 +624,6 @@
                   </a>
                 </myParamList>
                 <myName>MoveDirection</myName>
-              </backEnd.Attribute.AttributeImpl>
-            </entry>
-            <entry>
-              <string>Buildable</string>
-              <backEnd.Attribute.AttributeImpl>
-                <myValue class="boolean">false</myValue>
-                <myName>Buildable</myName>
               </backEnd.Attribute.AttributeImpl>
             </entry>
           </myAttributes>
@@ -605,6 +661,21 @@
               </backEnd.Attribute.AttributeImpl>
             </entry>
             <entry>
+              <string>BuildCapacity</string>
+              <backEnd.Attribute.AttributeImpl>
+                <myValue class="int">1</myValue>
+                <myParamList class="java.util.Arrays$ArrayList">
+                  <a class="java.lang.Integer-array">
+                    <int>0</int>
+                    <int>20</int>
+                    <int>1</int>
+                    <int>1</int>
+                  </a>
+                </myParamList>
+                <myName>BuildCapacity</myName>
+              </backEnd.Attribute.AttributeImpl>
+            </entry>
+            <entry>
               <string>Position</string>
               <backEnd.Attribute.AttributeImpl>
                 <myValue class="javafx.geometry.Point2D" reference="../../../../../../javafx.geometry.Point2D"/>
@@ -643,13 +714,6 @@
                   </a>
                 </myParamList>
                 <myName>MoveDirection</myName>
-              </backEnd.Attribute.AttributeImpl>
-            </entry>
-            <entry>
-              <string>Buildable</string>
-              <backEnd.Attribute.AttributeImpl>
-                <myValue class="boolean">false</myValue>
-                <myName>Buildable</myName>
               </backEnd.Attribute.AttributeImpl>
             </entry>
           </myAttributes>
@@ -687,6 +751,21 @@
               </backEnd.Attribute.AttributeImpl>
             </entry>
             <entry>
+              <string>BuildCapacity</string>
+              <backEnd.Attribute.AttributeImpl>
+                <myValue class="int">1</myValue>
+                <myParamList class="java.util.Arrays$ArrayList">
+                  <a class="java.lang.Integer-array">
+                    <int>0</int>
+                    <int>20</int>
+                    <int>1</int>
+                    <int>1</int>
+                  </a>
+                </myParamList>
+                <myName>BuildCapacity</myName>
+              </backEnd.Attribute.AttributeImpl>
+            </entry>
+            <entry>
               <string>Position</string>
               <backEnd.Attribute.AttributeImpl>
                 <myValue class="javafx.geometry.Point2D" reference="../../../../../../javafx.geometry.Point2D"/>
@@ -725,13 +804,6 @@
                   </a>
                 </myParamList>
                 <myName>MoveDirection</myName>
-              </backEnd.Attribute.AttributeImpl>
-            </entry>
-            <entry>
-              <string>Buildable</string>
-              <backEnd.Attribute.AttributeImpl>
-                <myValue class="boolean">false</myValue>
-                <myName>Buildable</myName>
               </backEnd.Attribute.AttributeImpl>
             </entry>
           </myAttributes>
@@ -769,6 +841,21 @@
               </backEnd.Attribute.AttributeImpl>
             </entry>
             <entry>
+              <string>BuildCapacity</string>
+              <backEnd.Attribute.AttributeImpl>
+                <myValue class="int">1</myValue>
+                <myParamList class="java.util.Arrays$ArrayList">
+                  <a class="java.lang.Integer-array">
+                    <int>0</int>
+                    <int>20</int>
+                    <int>1</int>
+                    <int>1</int>
+                  </a>
+                </myParamList>
+                <myName>BuildCapacity</myName>
+              </backEnd.Attribute.AttributeImpl>
+            </entry>
+            <entry>
               <string>Position</string>
               <backEnd.Attribute.AttributeImpl>
                 <myValue class="javafx.geometry.Point2D" reference="../../../../../../javafx.geometry.Point2D"/>
@@ -807,13 +894,6 @@
                   </a>
                 </myParamList>
                 <myName>MoveDirection</myName>
-              </backEnd.Attribute.AttributeImpl>
-            </entry>
-            <entry>
-              <string>Buildable</string>
-              <backEnd.Attribute.AttributeImpl>
-                <myValue class="boolean">false</myValue>
-                <myName>Buildable</myName>
               </backEnd.Attribute.AttributeImpl>
             </entry>
           </myAttributes>
@@ -851,6 +931,21 @@
               </backEnd.Attribute.AttributeImpl>
             </entry>
             <entry>
+              <string>BuildCapacity</string>
+              <backEnd.Attribute.AttributeImpl>
+                <myValue class="int">1</myValue>
+                <myParamList class="java.util.Arrays$ArrayList">
+                  <a class="java.lang.Integer-array">
+                    <int>0</int>
+                    <int>20</int>
+                    <int>1</int>
+                    <int>1</int>
+                  </a>
+                </myParamList>
+                <myName>BuildCapacity</myName>
+              </backEnd.Attribute.AttributeImpl>
+            </entry>
+            <entry>
               <string>Position</string>
               <backEnd.Attribute.AttributeImpl>
                 <myValue class="javafx.geometry.Point2D" reference="../../../../../../javafx.geometry.Point2D"/>
@@ -889,13 +984,6 @@
                   </a>
                 </myParamList>
                 <myName>MoveDirection</myName>
-              </backEnd.Attribute.AttributeImpl>
-            </entry>
-            <entry>
-              <string>Buildable</string>
-              <backEnd.Attribute.AttributeImpl>
-                <myValue class="boolean">false</myValue>
-                <myName>Buildable</myName>
               </backEnd.Attribute.AttributeImpl>
             </entry>
           </myAttributes>
@@ -933,6 +1021,21 @@
               </backEnd.Attribute.AttributeImpl>
             </entry>
             <entry>
+              <string>BuildCapacity</string>
+              <backEnd.Attribute.AttributeImpl>
+                <myValue class="int">1</myValue>
+                <myParamList class="java.util.Arrays$ArrayList">
+                  <a class="java.lang.Integer-array">
+                    <int>0</int>
+                    <int>20</int>
+                    <int>1</int>
+                    <int>1</int>
+                  </a>
+                </myParamList>
+                <myName>BuildCapacity</myName>
+              </backEnd.Attribute.AttributeImpl>
+            </entry>
+            <entry>
               <string>Position</string>
               <backEnd.Attribute.AttributeImpl>
                 <myValue class="javafx.geometry.Point2D" reference="../../../../../../javafx.geometry.Point2D"/>
@@ -971,13 +1074,6 @@
                   </a>
                 </myParamList>
                 <myName>MoveDirection</myName>
-              </backEnd.Attribute.AttributeImpl>
-            </entry>
-            <entry>
-              <string>Buildable</string>
-              <backEnd.Attribute.AttributeImpl>
-                <myValue class="boolean">false</myValue>
-                <myName>Buildable</myName>
               </backEnd.Attribute.AttributeImpl>
             </entry>
           </myAttributes>
@@ -1015,6 +1111,21 @@
               </backEnd.Attribute.AttributeImpl>
             </entry>
             <entry>
+              <string>BuildCapacity</string>
+              <backEnd.Attribute.AttributeImpl>
+                <myValue class="int">1</myValue>
+                <myParamList class="java.util.Arrays$ArrayList">
+                  <a class="java.lang.Integer-array">
+                    <int>0</int>
+                    <int>20</int>
+                    <int>1</int>
+                    <int>1</int>
+                  </a>
+                </myParamList>
+                <myName>BuildCapacity</myName>
+              </backEnd.Attribute.AttributeImpl>
+            </entry>
+            <entry>
               <string>Position</string>
               <backEnd.Attribute.AttributeImpl>
                 <myValue class="javafx.geometry.Point2D" reference="../../../../../../javafx.geometry.Point2D"/>
@@ -1053,13 +1164,6 @@
                   </a>
                 </myParamList>
                 <myName>MoveDirection</myName>
-              </backEnd.Attribute.AttributeImpl>
-            </entry>
-            <entry>
-              <string>Buildable</string>
-              <backEnd.Attribute.AttributeImpl>
-                <myValue class="boolean">false</myValue>
-                <myName>Buildable</myName>
               </backEnd.Attribute.AttributeImpl>
             </entry>
           </myAttributes>
@@ -1097,6 +1201,21 @@
               </backEnd.Attribute.AttributeImpl>
             </entry>
             <entry>
+              <string>BuildCapacity</string>
+              <backEnd.Attribute.AttributeImpl>
+                <myValue class="int">1</myValue>
+                <myParamList class="java.util.Arrays$ArrayList">
+                  <a class="java.lang.Integer-array">
+                    <int>0</int>
+                    <int>20</int>
+                    <int>1</int>
+                    <int>1</int>
+                  </a>
+                </myParamList>
+                <myName>BuildCapacity</myName>
+              </backEnd.Attribute.AttributeImpl>
+            </entry>
+            <entry>
               <string>Position</string>
               <backEnd.Attribute.AttributeImpl>
                 <myValue class="javafx.geometry.Point2D" reference="../../../../../../javafx.geometry.Point2D"/>
@@ -1135,13 +1254,6 @@
                   </a>
                 </myParamList>
                 <myName>MoveDirection</myName>
-              </backEnd.Attribute.AttributeImpl>
-            </entry>
-            <entry>
-              <string>Buildable</string>
-              <backEnd.Attribute.AttributeImpl>
-                <myValue class="boolean">false</myValue>
-                <myName>Buildable</myName>
               </backEnd.Attribute.AttributeImpl>
             </entry>
           </myAttributes>
@@ -1179,6 +1291,21 @@
               </backEnd.Attribute.AttributeImpl>
             </entry>
             <entry>
+              <string>BuildCapacity</string>
+              <backEnd.Attribute.AttributeImpl>
+                <myValue class="int">1</myValue>
+                <myParamList class="java.util.Arrays$ArrayList">
+                  <a class="java.lang.Integer-array">
+                    <int>0</int>
+                    <int>20</int>
+                    <int>1</int>
+                    <int>1</int>
+                  </a>
+                </myParamList>
+                <myName>BuildCapacity</myName>
+              </backEnd.Attribute.AttributeImpl>
+            </entry>
+            <entry>
               <string>Position</string>
               <backEnd.Attribute.AttributeImpl>
                 <myValue class="javafx.geometry.Point2D" reference="../../../../../../javafx.geometry.Point2D"/>
@@ -1217,13 +1344,6 @@
                   </a>
                 </myParamList>
                 <myName>MoveDirection</myName>
-              </backEnd.Attribute.AttributeImpl>
-            </entry>
-            <entry>
-              <string>Buildable</string>
-              <backEnd.Attribute.AttributeImpl>
-                <myValue class="boolean">false</myValue>
-                <myName>Buildable</myName>
               </backEnd.Attribute.AttributeImpl>
             </entry>
           </myAttributes>
@@ -1261,6 +1381,21 @@
               </backEnd.Attribute.AttributeImpl>
             </entry>
             <entry>
+              <string>BuildCapacity</string>
+              <backEnd.Attribute.AttributeImpl>
+                <myValue class="int">1</myValue>
+                <myParamList class="java.util.Arrays$ArrayList">
+                  <a class="java.lang.Integer-array">
+                    <int>0</int>
+                    <int>20</int>
+                    <int>1</int>
+                    <int>1</int>
+                  </a>
+                </myParamList>
+                <myName>BuildCapacity</myName>
+              </backEnd.Attribute.AttributeImpl>
+            </entry>
+            <entry>
               <string>Position</string>
               <backEnd.Attribute.AttributeImpl>
                 <myValue class="javafx.geometry.Point2D" reference="../../../../../../javafx.geometry.Point2D"/>
@@ -1299,13 +1434,6 @@
                   </a>
                 </myParamList>
                 <myName>MoveDirection</myName>
-              </backEnd.Attribute.AttributeImpl>
-            </entry>
-            <entry>
-              <string>Buildable</string>
-              <backEnd.Attribute.AttributeImpl>
-                <myValue class="boolean">false</myValue>
-                <myName>Buildable</myName>
               </backEnd.Attribute.AttributeImpl>
             </entry>
           </myAttributes>
@@ -1343,6 +1471,21 @@
               </backEnd.Attribute.AttributeImpl>
             </entry>
             <entry>
+              <string>BuildCapacity</string>
+              <backEnd.Attribute.AttributeImpl>
+                <myValue class="int">1</myValue>
+                <myParamList class="java.util.Arrays$ArrayList">
+                  <a class="java.lang.Integer-array">
+                    <int>0</int>
+                    <int>20</int>
+                    <int>1</int>
+                    <int>1</int>
+                  </a>
+                </myParamList>
+                <myName>BuildCapacity</myName>
+              </backEnd.Attribute.AttributeImpl>
+            </entry>
+            <entry>
               <string>Position</string>
               <backEnd.Attribute.AttributeImpl>
                 <myValue class="javafx.geometry.Point2D" reference="../../../../../../javafx.geometry.Point2D"/>
@@ -1381,13 +1524,6 @@
                   </a>
                 </myParamList>
                 <myName>MoveDirection</myName>
-              </backEnd.Attribute.AttributeImpl>
-            </entry>
-            <entry>
-              <string>Buildable</string>
-              <backEnd.Attribute.AttributeImpl>
-                <myValue class="boolean">false</myValue>
-                <myName>Buildable</myName>
               </backEnd.Attribute.AttributeImpl>
             </entry>
           </myAttributes>
@@ -1425,6 +1561,21 @@
               </backEnd.Attribute.AttributeImpl>
             </entry>
             <entry>
+              <string>BuildCapacity</string>
+              <backEnd.Attribute.AttributeImpl>
+                <myValue class="int">1</myValue>
+                <myParamList class="java.util.Arrays$ArrayList">
+                  <a class="java.lang.Integer-array">
+                    <int>0</int>
+                    <int>20</int>
+                    <int>1</int>
+                    <int>1</int>
+                  </a>
+                </myParamList>
+                <myName>BuildCapacity</myName>
+              </backEnd.Attribute.AttributeImpl>
+            </entry>
+            <entry>
               <string>Position</string>
               <backEnd.Attribute.AttributeImpl>
                 <myValue class="javafx.geometry.Point2D" reference="../../../../../../javafx.geometry.Point2D"/>
@@ -1463,13 +1614,6 @@
                   </a>
                 </myParamList>
                 <myName>MoveDirection</myName>
-              </backEnd.Attribute.AttributeImpl>
-            </entry>
-            <entry>
-              <string>Buildable</string>
-              <backEnd.Attribute.AttributeImpl>
-                <myValue class="boolean">false</myValue>
-                <myName>Buildable</myName>
               </backEnd.Attribute.AttributeImpl>
             </entry>
           </myAttributes>
@@ -1507,6 +1651,21 @@
               </backEnd.Attribute.AttributeImpl>
             </entry>
             <entry>
+              <string>BuildCapacity</string>
+              <backEnd.Attribute.AttributeImpl>
+                <myValue class="int">1</myValue>
+                <myParamList class="java.util.Arrays$ArrayList">
+                  <a class="java.lang.Integer-array">
+                    <int>0</int>
+                    <int>20</int>
+                    <int>1</int>
+                    <int>1</int>
+                  </a>
+                </myParamList>
+                <myName>BuildCapacity</myName>
+              </backEnd.Attribute.AttributeImpl>
+            </entry>
+            <entry>
               <string>Position</string>
               <backEnd.Attribute.AttributeImpl>
                 <myValue class="javafx.geometry.Point2D" reference="../../../../../../javafx.geometry.Point2D"/>
@@ -1545,13 +1704,6 @@
                   </a>
                 </myParamList>
                 <myName>MoveDirection</myName>
-              </backEnd.Attribute.AttributeImpl>
-            </entry>
-            <entry>
-              <string>Buildable</string>
-              <backEnd.Attribute.AttributeImpl>
-                <myValue class="boolean">false</myValue>
-                <myName>Buildable</myName>
               </backEnd.Attribute.AttributeImpl>
             </entry>
           </myAttributes>
@@ -1584,8 +1736,23 @@
             <entry>
               <string>ImageFile</string>
               <backEnd.Attribute.AttributeImpl>
-                <myValue class="string">resources\images\Tiles\Blue.png</myValue>
+                <myValue class="string">resources/images/Tiles/default_tile.png</myValue>
                 <myName>ImageFile</myName>
+              </backEnd.Attribute.AttributeImpl>
+            </entry>
+            <entry>
+              <string>BuildCapacity</string>
+              <backEnd.Attribute.AttributeImpl>
+                <myValue class="int">1</myValue>
+                <myParamList class="java.util.Arrays$ArrayList">
+                  <a class="java.lang.Integer-array">
+                    <int>0</int>
+                    <int>20</int>
+                    <int>1</int>
+                    <int>1</int>
+                  </a>
+                </myParamList>
+                <myName>BuildCapacity</myName>
               </backEnd.Attribute.AttributeImpl>
             </entry>
             <entry>
@@ -1627,13 +1794,6 @@
                   </a>
                 </myParamList>
                 <myName>MoveDirection</myName>
-              </backEnd.Attribute.AttributeImpl>
-            </entry>
-            <entry>
-              <string>Buildable</string>
-              <backEnd.Attribute.AttributeImpl>
-                <myValue class="boolean">false</myValue>
-                <myName>Buildable</myName>
               </backEnd.Attribute.AttributeImpl>
             </entry>
           </myAttributes>
@@ -1671,6 +1831,21 @@
               </backEnd.Attribute.AttributeImpl>
             </entry>
             <entry>
+              <string>BuildCapacity</string>
+              <backEnd.Attribute.AttributeImpl>
+                <myValue class="int">1</myValue>
+                <myParamList class="java.util.Arrays$ArrayList">
+                  <a class="java.lang.Integer-array">
+                    <int>0</int>
+                    <int>20</int>
+                    <int>1</int>
+                    <int>1</int>
+                  </a>
+                </myParamList>
+                <myName>BuildCapacity</myName>
+              </backEnd.Attribute.AttributeImpl>
+            </entry>
+            <entry>
               <string>Position</string>
               <backEnd.Attribute.AttributeImpl>
                 <myValue class="javafx.geometry.Point2D" reference="../../../../../../javafx.geometry.Point2D"/>
@@ -1709,13 +1884,6 @@
                   </a>
                 </myParamList>
                 <myName>MoveDirection</myName>
-              </backEnd.Attribute.AttributeImpl>
-            </entry>
-            <entry>
-              <string>Buildable</string>
-              <backEnd.Attribute.AttributeImpl>
-                <myValue class="boolean">false</myValue>
-                <myName>Buildable</myName>
               </backEnd.Attribute.AttributeImpl>
             </entry>
           </myAttributes>
@@ -1753,6 +1921,21 @@
               </backEnd.Attribute.AttributeImpl>
             </entry>
             <entry>
+              <string>BuildCapacity</string>
+              <backEnd.Attribute.AttributeImpl>
+                <myValue class="int">1</myValue>
+                <myParamList class="java.util.Arrays$ArrayList">
+                  <a class="java.lang.Integer-array">
+                    <int>0</int>
+                    <int>20</int>
+                    <int>1</int>
+                    <int>1</int>
+                  </a>
+                </myParamList>
+                <myName>BuildCapacity</myName>
+              </backEnd.Attribute.AttributeImpl>
+            </entry>
+            <entry>
               <string>Position</string>
               <backEnd.Attribute.AttributeImpl>
                 <myValue class="javafx.geometry.Point2D" reference="../../../../../../javafx.geometry.Point2D"/>
@@ -1791,13 +1974,6 @@
                   </a>
                 </myParamList>
                 <myName>MoveDirection</myName>
-              </backEnd.Attribute.AttributeImpl>
-            </entry>
-            <entry>
-              <string>Buildable</string>
-              <backEnd.Attribute.AttributeImpl>
-                <myValue class="boolean">false</myValue>
-                <myName>Buildable</myName>
               </backEnd.Attribute.AttributeImpl>
             </entry>
           </myAttributes>
@@ -1835,6 +2011,21 @@
               </backEnd.Attribute.AttributeImpl>
             </entry>
             <entry>
+              <string>BuildCapacity</string>
+              <backEnd.Attribute.AttributeImpl>
+                <myValue class="int">1</myValue>
+                <myParamList class="java.util.Arrays$ArrayList">
+                  <a class="java.lang.Integer-array">
+                    <int>0</int>
+                    <int>20</int>
+                    <int>1</int>
+                    <int>1</int>
+                  </a>
+                </myParamList>
+                <myName>BuildCapacity</myName>
+              </backEnd.Attribute.AttributeImpl>
+            </entry>
+            <entry>
               <string>Position</string>
               <backEnd.Attribute.AttributeImpl>
                 <myValue class="javafx.geometry.Point2D" reference="../../../../../../javafx.geometry.Point2D"/>
@@ -1873,13 +2064,6 @@
                   </a>
                 </myParamList>
                 <myName>MoveDirection</myName>
-              </backEnd.Attribute.AttributeImpl>
-            </entry>
-            <entry>
-              <string>Buildable</string>
-              <backEnd.Attribute.AttributeImpl>
-                <myValue class="boolean">false</myValue>
-                <myName>Buildable</myName>
               </backEnd.Attribute.AttributeImpl>
             </entry>
           </myAttributes>
@@ -1917,6 +2101,21 @@
               </backEnd.Attribute.AttributeImpl>
             </entry>
             <entry>
+              <string>BuildCapacity</string>
+              <backEnd.Attribute.AttributeImpl>
+                <myValue class="int">1</myValue>
+                <myParamList class="java.util.Arrays$ArrayList">
+                  <a class="java.lang.Integer-array">
+                    <int>0</int>
+                    <int>20</int>
+                    <int>1</int>
+                    <int>1</int>
+                  </a>
+                </myParamList>
+                <myName>BuildCapacity</myName>
+              </backEnd.Attribute.AttributeImpl>
+            </entry>
+            <entry>
               <string>Position</string>
               <backEnd.Attribute.AttributeImpl>
                 <myValue class="javafx.geometry.Point2D" reference="../../../../../../javafx.geometry.Point2D"/>
@@ -1955,13 +2154,6 @@
                   </a>
                 </myParamList>
                 <myName>MoveDirection</myName>
-              </backEnd.Attribute.AttributeImpl>
-            </entry>
-            <entry>
-              <string>Buildable</string>
-              <backEnd.Attribute.AttributeImpl>
-                <myValue class="boolean">false</myValue>
-                <myName>Buildable</myName>
               </backEnd.Attribute.AttributeImpl>
             </entry>
           </myAttributes>
@@ -1999,6 +2191,21 @@
               </backEnd.Attribute.AttributeImpl>
             </entry>
             <entry>
+              <string>BuildCapacity</string>
+              <backEnd.Attribute.AttributeImpl>
+                <myValue class="int">1</myValue>
+                <myParamList class="java.util.Arrays$ArrayList">
+                  <a class="java.lang.Integer-array">
+                    <int>0</int>
+                    <int>20</int>
+                    <int>1</int>
+                    <int>1</int>
+                  </a>
+                </myParamList>
+                <myName>BuildCapacity</myName>
+              </backEnd.Attribute.AttributeImpl>
+            </entry>
+            <entry>
               <string>Position</string>
               <backEnd.Attribute.AttributeImpl>
                 <myValue class="javafx.geometry.Point2D" reference="../../../../../../javafx.geometry.Point2D"/>
@@ -2037,13 +2244,6 @@
                   </a>
                 </myParamList>
                 <myName>MoveDirection</myName>
-              </backEnd.Attribute.AttributeImpl>
-            </entry>
-            <entry>
-              <string>Buildable</string>
-              <backEnd.Attribute.AttributeImpl>
-                <myValue class="boolean">false</myValue>
-                <myName>Buildable</myName>
               </backEnd.Attribute.AttributeImpl>
             </entry>
           </myAttributes>
@@ -2081,6 +2281,21 @@
               </backEnd.Attribute.AttributeImpl>
             </entry>
             <entry>
+              <string>BuildCapacity</string>
+              <backEnd.Attribute.AttributeImpl>
+                <myValue class="int">1</myValue>
+                <myParamList class="java.util.Arrays$ArrayList">
+                  <a class="java.lang.Integer-array">
+                    <int>0</int>
+                    <int>20</int>
+                    <int>1</int>
+                    <int>1</int>
+                  </a>
+                </myParamList>
+                <myName>BuildCapacity</myName>
+              </backEnd.Attribute.AttributeImpl>
+            </entry>
+            <entry>
               <string>Position</string>
               <backEnd.Attribute.AttributeImpl>
                 <myValue class="javafx.geometry.Point2D" reference="../../../../../../javafx.geometry.Point2D"/>
@@ -2119,13 +2334,6 @@
                   </a>
                 </myParamList>
                 <myName>MoveDirection</myName>
-              </backEnd.Attribute.AttributeImpl>
-            </entry>
-            <entry>
-              <string>Buildable</string>
-              <backEnd.Attribute.AttributeImpl>
-                <myValue class="boolean">false</myValue>
-                <myName>Buildable</myName>
               </backEnd.Attribute.AttributeImpl>
             </entry>
           </myAttributes>
@@ -2163,6 +2371,21 @@
               </backEnd.Attribute.AttributeImpl>
             </entry>
             <entry>
+              <string>BuildCapacity</string>
+              <backEnd.Attribute.AttributeImpl>
+                <myValue class="int">1</myValue>
+                <myParamList class="java.util.Arrays$ArrayList">
+                  <a class="java.lang.Integer-array">
+                    <int>0</int>
+                    <int>20</int>
+                    <int>1</int>
+                    <int>1</int>
+                  </a>
+                </myParamList>
+                <myName>BuildCapacity</myName>
+              </backEnd.Attribute.AttributeImpl>
+            </entry>
+            <entry>
               <string>Position</string>
               <backEnd.Attribute.AttributeImpl>
                 <myValue class="javafx.geometry.Point2D" reference="../../../../../../javafx.geometry.Point2D"/>
@@ -2201,13 +2424,6 @@
                   </a>
                 </myParamList>
                 <myName>MoveDirection</myName>
-              </backEnd.Attribute.AttributeImpl>
-            </entry>
-            <entry>
-              <string>Buildable</string>
-              <backEnd.Attribute.AttributeImpl>
-                <myValue class="boolean">false</myValue>
-                <myName>Buildable</myName>
               </backEnd.Attribute.AttributeImpl>
             </entry>
           </myAttributes>
@@ -2245,6 +2461,21 @@
               </backEnd.Attribute.AttributeImpl>
             </entry>
             <entry>
+              <string>BuildCapacity</string>
+              <backEnd.Attribute.AttributeImpl>
+                <myValue class="int">1</myValue>
+                <myParamList class="java.util.Arrays$ArrayList">
+                  <a class="java.lang.Integer-array">
+                    <int>0</int>
+                    <int>20</int>
+                    <int>1</int>
+                    <int>1</int>
+                  </a>
+                </myParamList>
+                <myName>BuildCapacity</myName>
+              </backEnd.Attribute.AttributeImpl>
+            </entry>
+            <entry>
               <string>Position</string>
               <backEnd.Attribute.AttributeImpl>
                 <myValue class="javafx.geometry.Point2D" reference="../../../../../../javafx.geometry.Point2D"/>
@@ -2283,13 +2514,6 @@
                   </a>
                 </myParamList>
                 <myName>MoveDirection</myName>
-              </backEnd.Attribute.AttributeImpl>
-            </entry>
-            <entry>
-              <string>Buildable</string>
-              <backEnd.Attribute.AttributeImpl>
-                <myValue class="boolean">false</myValue>
-                <myName>Buildable</myName>
               </backEnd.Attribute.AttributeImpl>
             </entry>
           </myAttributes>
@@ -2327,6 +2551,21 @@
               </backEnd.Attribute.AttributeImpl>
             </entry>
             <entry>
+              <string>BuildCapacity</string>
+              <backEnd.Attribute.AttributeImpl>
+                <myValue class="int">1</myValue>
+                <myParamList class="java.util.Arrays$ArrayList">
+                  <a class="java.lang.Integer-array">
+                    <int>0</int>
+                    <int>20</int>
+                    <int>1</int>
+                    <int>1</int>
+                  </a>
+                </myParamList>
+                <myName>BuildCapacity</myName>
+              </backEnd.Attribute.AttributeImpl>
+            </entry>
+            <entry>
               <string>Position</string>
               <backEnd.Attribute.AttributeImpl>
                 <myValue class="javafx.geometry.Point2D" reference="../../../../../../javafx.geometry.Point2D"/>
@@ -2365,13 +2604,6 @@
                   </a>
                 </myParamList>
                 <myName>MoveDirection</myName>
-              </backEnd.Attribute.AttributeImpl>
-            </entry>
-            <entry>
-              <string>Buildable</string>
-              <backEnd.Attribute.AttributeImpl>
-                <myValue class="boolean">false</myValue>
-                <myName>Buildable</myName>
               </backEnd.Attribute.AttributeImpl>
             </entry>
           </myAttributes>
@@ -2409,6 +2641,21 @@
               </backEnd.Attribute.AttributeImpl>
             </entry>
             <entry>
+              <string>BuildCapacity</string>
+              <backEnd.Attribute.AttributeImpl>
+                <myValue class="int">1</myValue>
+                <myParamList class="java.util.Arrays$ArrayList">
+                  <a class="java.lang.Integer-array">
+                    <int>0</int>
+                    <int>20</int>
+                    <int>1</int>
+                    <int>1</int>
+                  </a>
+                </myParamList>
+                <myName>BuildCapacity</myName>
+              </backEnd.Attribute.AttributeImpl>
+            </entry>
+            <entry>
               <string>Position</string>
               <backEnd.Attribute.AttributeImpl>
                 <myValue class="javafx.geometry.Point2D" reference="../../../../../../javafx.geometry.Point2D"/>
@@ -2447,13 +2694,6 @@
                   </a>
                 </myParamList>
                 <myName>MoveDirection</myName>
-              </backEnd.Attribute.AttributeImpl>
-            </entry>
-            <entry>
-              <string>Buildable</string>
-              <backEnd.Attribute.AttributeImpl>
-                <myValue class="boolean">false</myValue>
-                <myName>Buildable</myName>
               </backEnd.Attribute.AttributeImpl>
             </entry>
           </myAttributes>
@@ -2491,6 +2731,21 @@
               </backEnd.Attribute.AttributeImpl>
             </entry>
             <entry>
+              <string>BuildCapacity</string>
+              <backEnd.Attribute.AttributeImpl>
+                <myValue class="int">1</myValue>
+                <myParamList class="java.util.Arrays$ArrayList">
+                  <a class="java.lang.Integer-array">
+                    <int>0</int>
+                    <int>20</int>
+                    <int>1</int>
+                    <int>1</int>
+                  </a>
+                </myParamList>
+                <myName>BuildCapacity</myName>
+              </backEnd.Attribute.AttributeImpl>
+            </entry>
+            <entry>
               <string>Position</string>
               <backEnd.Attribute.AttributeImpl>
                 <myValue class="javafx.geometry.Point2D" reference="../../../../../../javafx.geometry.Point2D"/>
@@ -2529,13 +2784,6 @@
                   </a>
                 </myParamList>
                 <myName>MoveDirection</myName>
-              </backEnd.Attribute.AttributeImpl>
-            </entry>
-            <entry>
-              <string>Buildable</string>
-              <backEnd.Attribute.AttributeImpl>
-                <myValue class="boolean">false</myValue>
-                <myName>Buildable</myName>
               </backEnd.Attribute.AttributeImpl>
             </entry>
           </myAttributes>
@@ -2573,6 +2821,21 @@
               </backEnd.Attribute.AttributeImpl>
             </entry>
             <entry>
+              <string>BuildCapacity</string>
+              <backEnd.Attribute.AttributeImpl>
+                <myValue class="int">1</myValue>
+                <myParamList class="java.util.Arrays$ArrayList">
+                  <a class="java.lang.Integer-array">
+                    <int>0</int>
+                    <int>20</int>
+                    <int>1</int>
+                    <int>1</int>
+                  </a>
+                </myParamList>
+                <myName>BuildCapacity</myName>
+              </backEnd.Attribute.AttributeImpl>
+            </entry>
+            <entry>
               <string>Position</string>
               <backEnd.Attribute.AttributeImpl>
                 <myValue class="javafx.geometry.Point2D" reference="../../../../../../javafx.geometry.Point2D"/>
@@ -2611,13 +2874,6 @@
                   </a>
                 </myParamList>
                 <myName>MoveDirection</myName>
-              </backEnd.Attribute.AttributeImpl>
-            </entry>
-            <entry>
-              <string>Buildable</string>
-              <backEnd.Attribute.AttributeImpl>
-                <myValue class="boolean">false</myValue>
-                <myName>Buildable</myName>
               </backEnd.Attribute.AttributeImpl>
             </entry>
           </myAttributes>
@@ -2655,6 +2911,21 @@
               </backEnd.Attribute.AttributeImpl>
             </entry>
             <entry>
+              <string>BuildCapacity</string>
+              <backEnd.Attribute.AttributeImpl>
+                <myValue class="int">1</myValue>
+                <myParamList class="java.util.Arrays$ArrayList">
+                  <a class="java.lang.Integer-array">
+                    <int>0</int>
+                    <int>20</int>
+                    <int>1</int>
+                    <int>1</int>
+                  </a>
+                </myParamList>
+                <myName>BuildCapacity</myName>
+              </backEnd.Attribute.AttributeImpl>
+            </entry>
+            <entry>
               <string>Position</string>
               <backEnd.Attribute.AttributeImpl>
                 <myValue class="javafx.geometry.Point2D" reference="../../../../../../javafx.geometry.Point2D"/>
@@ -2693,13 +2964,6 @@
                   </a>
                 </myParamList>
                 <myName>MoveDirection</myName>
-              </backEnd.Attribute.AttributeImpl>
-            </entry>
-            <entry>
-              <string>Buildable</string>
-              <backEnd.Attribute.AttributeImpl>
-                <myValue class="boolean">false</myValue>
-                <myName>Buildable</myName>
               </backEnd.Attribute.AttributeImpl>
             </entry>
           </myAttributes>
@@ -2737,6 +3001,21 @@
               </backEnd.Attribute.AttributeImpl>
             </entry>
             <entry>
+              <string>BuildCapacity</string>
+              <backEnd.Attribute.AttributeImpl>
+                <myValue class="int">1</myValue>
+                <myParamList class="java.util.Arrays$ArrayList">
+                  <a class="java.lang.Integer-array">
+                    <int>0</int>
+                    <int>20</int>
+                    <int>1</int>
+                    <int>1</int>
+                  </a>
+                </myParamList>
+                <myName>BuildCapacity</myName>
+              </backEnd.Attribute.AttributeImpl>
+            </entry>
+            <entry>
               <string>Position</string>
               <backEnd.Attribute.AttributeImpl>
                 <myValue class="javafx.geometry.Point2D" reference="../../../../../../javafx.geometry.Point2D"/>
@@ -2775,13 +3054,6 @@
                   </a>
                 </myParamList>
                 <myName>MoveDirection</myName>
-              </backEnd.Attribute.AttributeImpl>
-            </entry>
-            <entry>
-              <string>Buildable</string>
-              <backEnd.Attribute.AttributeImpl>
-                <myValue class="boolean">false</myValue>
-                <myName>Buildable</myName>
               </backEnd.Attribute.AttributeImpl>
             </entry>
           </myAttributes>
@@ -2819,6 +3091,21 @@
               </backEnd.Attribute.AttributeImpl>
             </entry>
             <entry>
+              <string>BuildCapacity</string>
+              <backEnd.Attribute.AttributeImpl>
+                <myValue class="int">1</myValue>
+                <myParamList class="java.util.Arrays$ArrayList">
+                  <a class="java.lang.Integer-array">
+                    <int>0</int>
+                    <int>20</int>
+                    <int>1</int>
+                    <int>1</int>
+                  </a>
+                </myParamList>
+                <myName>BuildCapacity</myName>
+              </backEnd.Attribute.AttributeImpl>
+            </entry>
+            <entry>
               <string>Position</string>
               <backEnd.Attribute.AttributeImpl>
                 <myValue class="javafx.geometry.Point2D" reference="../../../../../../javafx.geometry.Point2D"/>
@@ -2857,13 +3144,6 @@
                   </a>
                 </myParamList>
                 <myName>MoveDirection</myName>
-              </backEnd.Attribute.AttributeImpl>
-            </entry>
-            <entry>
-              <string>Buildable</string>
-              <backEnd.Attribute.AttributeImpl>
-                <myValue class="boolean">false</myValue>
-                <myName>Buildable</myName>
               </backEnd.Attribute.AttributeImpl>
             </entry>
           </myAttributes>
@@ -2901,6 +3181,21 @@
               </backEnd.Attribute.AttributeImpl>
             </entry>
             <entry>
+              <string>BuildCapacity</string>
+              <backEnd.Attribute.AttributeImpl>
+                <myValue class="int">1</myValue>
+                <myParamList class="java.util.Arrays$ArrayList">
+                  <a class="java.lang.Integer-array">
+                    <int>0</int>
+                    <int>20</int>
+                    <int>1</int>
+                    <int>1</int>
+                  </a>
+                </myParamList>
+                <myName>BuildCapacity</myName>
+              </backEnd.Attribute.AttributeImpl>
+            </entry>
+            <entry>
               <string>Position</string>
               <backEnd.Attribute.AttributeImpl>
                 <myValue class="javafx.geometry.Point2D" reference="../../../../../../javafx.geometry.Point2D"/>
@@ -2939,13 +3234,6 @@
                   </a>
                 </myParamList>
                 <myName>MoveDirection</myName>
-              </backEnd.Attribute.AttributeImpl>
-            </entry>
-            <entry>
-              <string>Buildable</string>
-              <backEnd.Attribute.AttributeImpl>
-                <myValue class="boolean">false</myValue>
-                <myName>Buildable</myName>
               </backEnd.Attribute.AttributeImpl>
             </entry>
           </myAttributes>
@@ -2983,6 +3271,21 @@
               </backEnd.Attribute.AttributeImpl>
             </entry>
             <entry>
+              <string>BuildCapacity</string>
+              <backEnd.Attribute.AttributeImpl>
+                <myValue class="int">1</myValue>
+                <myParamList class="java.util.Arrays$ArrayList">
+                  <a class="java.lang.Integer-array">
+                    <int>0</int>
+                    <int>20</int>
+                    <int>1</int>
+                    <int>1</int>
+                  </a>
+                </myParamList>
+                <myName>BuildCapacity</myName>
+              </backEnd.Attribute.AttributeImpl>
+            </entry>
+            <entry>
               <string>Position</string>
               <backEnd.Attribute.AttributeImpl>
                 <myValue class="javafx.geometry.Point2D" reference="../../../../../../javafx.geometry.Point2D"/>
@@ -3021,13 +3324,6 @@
                   </a>
                 </myParamList>
                 <myName>MoveDirection</myName>
-              </backEnd.Attribute.AttributeImpl>
-            </entry>
-            <entry>
-              <string>Buildable</string>
-              <backEnd.Attribute.AttributeImpl>
-                <myValue class="boolean">false</myValue>
-                <myName>Buildable</myName>
               </backEnd.Attribute.AttributeImpl>
             </entry>
           </myAttributes>
@@ -3065,6 +3361,21 @@
               </backEnd.Attribute.AttributeImpl>
             </entry>
             <entry>
+              <string>BuildCapacity</string>
+              <backEnd.Attribute.AttributeImpl>
+                <myValue class="int">1</myValue>
+                <myParamList class="java.util.Arrays$ArrayList">
+                  <a class="java.lang.Integer-array">
+                    <int>0</int>
+                    <int>20</int>
+                    <int>1</int>
+                    <int>1</int>
+                  </a>
+                </myParamList>
+                <myName>BuildCapacity</myName>
+              </backEnd.Attribute.AttributeImpl>
+            </entry>
+            <entry>
               <string>Position</string>
               <backEnd.Attribute.AttributeImpl>
                 <myValue class="javafx.geometry.Point2D" reference="../../../../../../javafx.geometry.Point2D"/>
@@ -3103,13 +3414,6 @@
                   </a>
                 </myParamList>
                 <myName>MoveDirection</myName>
-              </backEnd.Attribute.AttributeImpl>
-            </entry>
-            <entry>
-              <string>Buildable</string>
-              <backEnd.Attribute.AttributeImpl>
-                <myValue class="boolean">false</myValue>
-                <myName>Buildable</myName>
               </backEnd.Attribute.AttributeImpl>
             </entry>
           </myAttributes>
@@ -3147,6 +3451,21 @@
               </backEnd.Attribute.AttributeImpl>
             </entry>
             <entry>
+              <string>BuildCapacity</string>
+              <backEnd.Attribute.AttributeImpl>
+                <myValue class="int">1</myValue>
+                <myParamList class="java.util.Arrays$ArrayList">
+                  <a class="java.lang.Integer-array">
+                    <int>0</int>
+                    <int>20</int>
+                    <int>1</int>
+                    <int>1</int>
+                  </a>
+                </myParamList>
+                <myName>BuildCapacity</myName>
+              </backEnd.Attribute.AttributeImpl>
+            </entry>
+            <entry>
               <string>Position</string>
               <backEnd.Attribute.AttributeImpl>
                 <myValue class="javafx.geometry.Point2D" reference="../../../../../../javafx.geometry.Point2D"/>
@@ -3185,13 +3504,6 @@
                   </a>
                 </myParamList>
                 <myName>MoveDirection</myName>
-              </backEnd.Attribute.AttributeImpl>
-            </entry>
-            <entry>
-              <string>Buildable</string>
-              <backEnd.Attribute.AttributeImpl>
-                <myValue class="boolean">false</myValue>
-                <myName>Buildable</myName>
               </backEnd.Attribute.AttributeImpl>
             </entry>
           </myAttributes>
@@ -3229,6 +3541,21 @@
               </backEnd.Attribute.AttributeImpl>
             </entry>
             <entry>
+              <string>BuildCapacity</string>
+              <backEnd.Attribute.AttributeImpl>
+                <myValue class="int">1</myValue>
+                <myParamList class="java.util.Arrays$ArrayList">
+                  <a class="java.lang.Integer-array">
+                    <int>0</int>
+                    <int>20</int>
+                    <int>1</int>
+                    <int>1</int>
+                  </a>
+                </myParamList>
+                <myName>BuildCapacity</myName>
+              </backEnd.Attribute.AttributeImpl>
+            </entry>
+            <entry>
               <string>Position</string>
               <backEnd.Attribute.AttributeImpl>
                 <myValue class="javafx.geometry.Point2D" reference="../../../../../../javafx.geometry.Point2D"/>
@@ -3267,13 +3594,6 @@
                   </a>
                 </myParamList>
                 <myName>MoveDirection</myName>
-              </backEnd.Attribute.AttributeImpl>
-            </entry>
-            <entry>
-              <string>Buildable</string>
-              <backEnd.Attribute.AttributeImpl>
-                <myValue class="boolean">false</myValue>
-                <myName>Buildable</myName>
               </backEnd.Attribute.AttributeImpl>
             </entry>
           </myAttributes>
@@ -3311,6 +3631,21 @@
               </backEnd.Attribute.AttributeImpl>
             </entry>
             <entry>
+              <string>BuildCapacity</string>
+              <backEnd.Attribute.AttributeImpl>
+                <myValue class="int">1</myValue>
+                <myParamList class="java.util.Arrays$ArrayList">
+                  <a class="java.lang.Integer-array">
+                    <int>0</int>
+                    <int>20</int>
+                    <int>1</int>
+                    <int>1</int>
+                  </a>
+                </myParamList>
+                <myName>BuildCapacity</myName>
+              </backEnd.Attribute.AttributeImpl>
+            </entry>
+            <entry>
               <string>Position</string>
               <backEnd.Attribute.AttributeImpl>
                 <myValue class="javafx.geometry.Point2D" reference="../../../../../../javafx.geometry.Point2D"/>
@@ -3349,13 +3684,6 @@
                   </a>
                 </myParamList>
                 <myName>MoveDirection</myName>
-              </backEnd.Attribute.AttributeImpl>
-            </entry>
-            <entry>
-              <string>Buildable</string>
-              <backEnd.Attribute.AttributeImpl>
-                <myValue class="boolean">false</myValue>
-                <myName>Buildable</myName>
               </backEnd.Attribute.AttributeImpl>
             </entry>
           </myAttributes>
@@ -3393,6 +3721,21 @@
               </backEnd.Attribute.AttributeImpl>
             </entry>
             <entry>
+              <string>BuildCapacity</string>
+              <backEnd.Attribute.AttributeImpl>
+                <myValue class="int">1</myValue>
+                <myParamList class="java.util.Arrays$ArrayList">
+                  <a class="java.lang.Integer-array">
+                    <int>0</int>
+                    <int>20</int>
+                    <int>1</int>
+                    <int>1</int>
+                  </a>
+                </myParamList>
+                <myName>BuildCapacity</myName>
+              </backEnd.Attribute.AttributeImpl>
+            </entry>
+            <entry>
               <string>Position</string>
               <backEnd.Attribute.AttributeImpl>
                 <myValue class="javafx.geometry.Point2D" reference="../../../../../../javafx.geometry.Point2D"/>
@@ -3431,13 +3774,6 @@
                   </a>
                 </myParamList>
                 <myName>MoveDirection</myName>
-              </backEnd.Attribute.AttributeImpl>
-            </entry>
-            <entry>
-              <string>Buildable</string>
-              <backEnd.Attribute.AttributeImpl>
-                <myValue class="boolean">false</myValue>
-                <myName>Buildable</myName>
               </backEnd.Attribute.AttributeImpl>
             </entry>
           </myAttributes>
@@ -3475,6 +3811,21 @@
               </backEnd.Attribute.AttributeImpl>
             </entry>
             <entry>
+              <string>BuildCapacity</string>
+              <backEnd.Attribute.AttributeImpl>
+                <myValue class="int">1</myValue>
+                <myParamList class="java.util.Arrays$ArrayList">
+                  <a class="java.lang.Integer-array">
+                    <int>0</int>
+                    <int>20</int>
+                    <int>1</int>
+                    <int>1</int>
+                  </a>
+                </myParamList>
+                <myName>BuildCapacity</myName>
+              </backEnd.Attribute.AttributeImpl>
+            </entry>
+            <entry>
               <string>Position</string>
               <backEnd.Attribute.AttributeImpl>
                 <myValue class="javafx.geometry.Point2D" reference="../../../../../../javafx.geometry.Point2D"/>
@@ -3513,13 +3864,6 @@
                   </a>
                 </myParamList>
                 <myName>MoveDirection</myName>
-              </backEnd.Attribute.AttributeImpl>
-            </entry>
-            <entry>
-              <string>Buildable</string>
-              <backEnd.Attribute.AttributeImpl>
-                <myValue class="boolean">false</myValue>
-                <myName>Buildable</myName>
               </backEnd.Attribute.AttributeImpl>
             </entry>
           </myAttributes>
@@ -3557,6 +3901,21 @@
               </backEnd.Attribute.AttributeImpl>
             </entry>
             <entry>
+              <string>BuildCapacity</string>
+              <backEnd.Attribute.AttributeImpl>
+                <myValue class="int">1</myValue>
+                <myParamList class="java.util.Arrays$ArrayList">
+                  <a class="java.lang.Integer-array">
+                    <int>0</int>
+                    <int>20</int>
+                    <int>1</int>
+                    <int>1</int>
+                  </a>
+                </myParamList>
+                <myName>BuildCapacity</myName>
+              </backEnd.Attribute.AttributeImpl>
+            </entry>
+            <entry>
               <string>Position</string>
               <backEnd.Attribute.AttributeImpl>
                 <myValue class="javafx.geometry.Point2D" reference="../../../../../../javafx.geometry.Point2D"/>
@@ -3595,13 +3954,6 @@
                   </a>
                 </myParamList>
                 <myName>MoveDirection</myName>
-              </backEnd.Attribute.AttributeImpl>
-            </entry>
-            <entry>
-              <string>Buildable</string>
-              <backEnd.Attribute.AttributeImpl>
-                <myValue class="boolean">false</myValue>
-                <myName>Buildable</myName>
               </backEnd.Attribute.AttributeImpl>
             </entry>
           </myAttributes>
@@ -3639,6 +3991,21 @@
               </backEnd.Attribute.AttributeImpl>
             </entry>
             <entry>
+              <string>BuildCapacity</string>
+              <backEnd.Attribute.AttributeImpl>
+                <myValue class="int">1</myValue>
+                <myParamList class="java.util.Arrays$ArrayList">
+                  <a class="java.lang.Integer-array">
+                    <int>0</int>
+                    <int>20</int>
+                    <int>1</int>
+                    <int>1</int>
+                  </a>
+                </myParamList>
+                <myName>BuildCapacity</myName>
+              </backEnd.Attribute.AttributeImpl>
+            </entry>
+            <entry>
               <string>Position</string>
               <backEnd.Attribute.AttributeImpl>
                 <myValue class="javafx.geometry.Point2D" reference="../../../../../../javafx.geometry.Point2D"/>
@@ -3677,13 +4044,6 @@
                   </a>
                 </myParamList>
                 <myName>MoveDirection</myName>
-              </backEnd.Attribute.AttributeImpl>
-            </entry>
-            <entry>
-              <string>Buildable</string>
-              <backEnd.Attribute.AttributeImpl>
-                <myValue class="boolean">false</myValue>
-                <myName>Buildable</myName>
               </backEnd.Attribute.AttributeImpl>
             </entry>
           </myAttributes>
@@ -3721,6 +4081,21 @@
               </backEnd.Attribute.AttributeImpl>
             </entry>
             <entry>
+              <string>BuildCapacity</string>
+              <backEnd.Attribute.AttributeImpl>
+                <myValue class="int">1</myValue>
+                <myParamList class="java.util.Arrays$ArrayList">
+                  <a class="java.lang.Integer-array">
+                    <int>0</int>
+                    <int>20</int>
+                    <int>1</int>
+                    <int>1</int>
+                  </a>
+                </myParamList>
+                <myName>BuildCapacity</myName>
+              </backEnd.Attribute.AttributeImpl>
+            </entry>
+            <entry>
               <string>Position</string>
               <backEnd.Attribute.AttributeImpl>
                 <myValue class="javafx.geometry.Point2D" reference="../../../../../../javafx.geometry.Point2D"/>
@@ -3759,13 +4134,6 @@
                   </a>
                 </myParamList>
                 <myName>MoveDirection</myName>
-              </backEnd.Attribute.AttributeImpl>
-            </entry>
-            <entry>
-              <string>Buildable</string>
-              <backEnd.Attribute.AttributeImpl>
-                <myValue class="boolean">false</myValue>
-                <myName>Buildable</myName>
               </backEnd.Attribute.AttributeImpl>
             </entry>
           </myAttributes>
@@ -3803,6 +4171,21 @@
               </backEnd.Attribute.AttributeImpl>
             </entry>
             <entry>
+              <string>BuildCapacity</string>
+              <backEnd.Attribute.AttributeImpl>
+                <myValue class="int">1</myValue>
+                <myParamList class="java.util.Arrays$ArrayList">
+                  <a class="java.lang.Integer-array">
+                    <int>0</int>
+                    <int>20</int>
+                    <int>1</int>
+                    <int>1</int>
+                  </a>
+                </myParamList>
+                <myName>BuildCapacity</myName>
+              </backEnd.Attribute.AttributeImpl>
+            </entry>
+            <entry>
               <string>Position</string>
               <backEnd.Attribute.AttributeImpl>
                 <myValue class="javafx.geometry.Point2D" reference="../../../../../../javafx.geometry.Point2D"/>
@@ -3841,13 +4224,6 @@
                   </a>
                 </myParamList>
                 <myName>MoveDirection</myName>
-              </backEnd.Attribute.AttributeImpl>
-            </entry>
-            <entry>
-              <string>Buildable</string>
-              <backEnd.Attribute.AttributeImpl>
-                <myValue class="boolean">false</myValue>
-                <myName>Buildable</myName>
               </backEnd.Attribute.AttributeImpl>
             </entry>
           </myAttributes>
@@ -3885,6 +4261,21 @@
               </backEnd.Attribute.AttributeImpl>
             </entry>
             <entry>
+              <string>BuildCapacity</string>
+              <backEnd.Attribute.AttributeImpl>
+                <myValue class="int">1</myValue>
+                <myParamList class="java.util.Arrays$ArrayList">
+                  <a class="java.lang.Integer-array">
+                    <int>0</int>
+                    <int>20</int>
+                    <int>1</int>
+                    <int>1</int>
+                  </a>
+                </myParamList>
+                <myName>BuildCapacity</myName>
+              </backEnd.Attribute.AttributeImpl>
+            </entry>
+            <entry>
               <string>Position</string>
               <backEnd.Attribute.AttributeImpl>
                 <myValue class="javafx.geometry.Point2D" reference="../../../../../../javafx.geometry.Point2D"/>
@@ -3923,13 +4314,6 @@
                   </a>
                 </myParamList>
                 <myName>MoveDirection</myName>
-              </backEnd.Attribute.AttributeImpl>
-            </entry>
-            <entry>
-              <string>Buildable</string>
-              <backEnd.Attribute.AttributeImpl>
-                <myValue class="boolean">false</myValue>
-                <myName>Buildable</myName>
               </backEnd.Attribute.AttributeImpl>
             </entry>
           </myAttributes>
@@ -3967,6 +4351,21 @@
               </backEnd.Attribute.AttributeImpl>
             </entry>
             <entry>
+              <string>BuildCapacity</string>
+              <backEnd.Attribute.AttributeImpl>
+                <myValue class="int">1</myValue>
+                <myParamList class="java.util.Arrays$ArrayList">
+                  <a class="java.lang.Integer-array">
+                    <int>0</int>
+                    <int>20</int>
+                    <int>1</int>
+                    <int>1</int>
+                  </a>
+                </myParamList>
+                <myName>BuildCapacity</myName>
+              </backEnd.Attribute.AttributeImpl>
+            </entry>
+            <entry>
               <string>Position</string>
               <backEnd.Attribute.AttributeImpl>
                 <myValue class="javafx.geometry.Point2D" reference="../../../../../../javafx.geometry.Point2D"/>
@@ -4005,13 +4404,6 @@
                   </a>
                 </myParamList>
                 <myName>MoveDirection</myName>
-              </backEnd.Attribute.AttributeImpl>
-            </entry>
-            <entry>
-              <string>Buildable</string>
-              <backEnd.Attribute.AttributeImpl>
-                <myValue class="boolean">false</myValue>
-                <myName>Buildable</myName>
               </backEnd.Attribute.AttributeImpl>
             </entry>
           </myAttributes>
@@ -4049,6 +4441,21 @@
               </backEnd.Attribute.AttributeImpl>
             </entry>
             <entry>
+              <string>BuildCapacity</string>
+              <backEnd.Attribute.AttributeImpl>
+                <myValue class="int">1</myValue>
+                <myParamList class="java.util.Arrays$ArrayList">
+                  <a class="java.lang.Integer-array">
+                    <int>0</int>
+                    <int>20</int>
+                    <int>1</int>
+                    <int>1</int>
+                  </a>
+                </myParamList>
+                <myName>BuildCapacity</myName>
+              </backEnd.Attribute.AttributeImpl>
+            </entry>
+            <entry>
               <string>Position</string>
               <backEnd.Attribute.AttributeImpl>
                 <myValue class="javafx.geometry.Point2D" reference="../../../../../../javafx.geometry.Point2D"/>
@@ -4087,13 +4494,6 @@
                   </a>
                 </myParamList>
                 <myName>MoveDirection</myName>
-              </backEnd.Attribute.AttributeImpl>
-            </entry>
-            <entry>
-              <string>Buildable</string>
-              <backEnd.Attribute.AttributeImpl>
-                <myValue class="boolean">false</myValue>
-                <myName>Buildable</myName>
               </backEnd.Attribute.AttributeImpl>
             </entry>
           </myAttributes>
@@ -4131,6 +4531,21 @@
               </backEnd.Attribute.AttributeImpl>
             </entry>
             <entry>
+              <string>BuildCapacity</string>
+              <backEnd.Attribute.AttributeImpl>
+                <myValue class="int">1</myValue>
+                <myParamList class="java.util.Arrays$ArrayList">
+                  <a class="java.lang.Integer-array">
+                    <int>0</int>
+                    <int>20</int>
+                    <int>1</int>
+                    <int>1</int>
+                  </a>
+                </myParamList>
+                <myName>BuildCapacity</myName>
+              </backEnd.Attribute.AttributeImpl>
+            </entry>
+            <entry>
               <string>Position</string>
               <backEnd.Attribute.AttributeImpl>
                 <myValue class="javafx.geometry.Point2D" reference="../../../../../../javafx.geometry.Point2D"/>
@@ -4169,13 +4584,6 @@
                   </a>
                 </myParamList>
                 <myName>MoveDirection</myName>
-              </backEnd.Attribute.AttributeImpl>
-            </entry>
-            <entry>
-              <string>Buildable</string>
-              <backEnd.Attribute.AttributeImpl>
-                <myValue class="boolean">false</myValue>
-                <myName>Buildable</myName>
               </backEnd.Attribute.AttributeImpl>
             </entry>
           </myAttributes>
@@ -4213,6 +4621,21 @@
               </backEnd.Attribute.AttributeImpl>
             </entry>
             <entry>
+              <string>BuildCapacity</string>
+              <backEnd.Attribute.AttributeImpl>
+                <myValue class="int">1</myValue>
+                <myParamList class="java.util.Arrays$ArrayList">
+                  <a class="java.lang.Integer-array">
+                    <int>0</int>
+                    <int>20</int>
+                    <int>1</int>
+                    <int>1</int>
+                  </a>
+                </myParamList>
+                <myName>BuildCapacity</myName>
+              </backEnd.Attribute.AttributeImpl>
+            </entry>
+            <entry>
               <string>Position</string>
               <backEnd.Attribute.AttributeImpl>
                 <myValue class="javafx.geometry.Point2D" reference="../../../../../../javafx.geometry.Point2D"/>
@@ -4251,13 +4674,6 @@
                   </a>
                 </myParamList>
                 <myName>MoveDirection</myName>
-              </backEnd.Attribute.AttributeImpl>
-            </entry>
-            <entry>
-              <string>Buildable</string>
-              <backEnd.Attribute.AttributeImpl>
-                <myValue class="boolean">false</myValue>
-                <myName>Buildable</myName>
               </backEnd.Attribute.AttributeImpl>
             </entry>
           </myAttributes>
@@ -4295,6 +4711,21 @@
               </backEnd.Attribute.AttributeImpl>
             </entry>
             <entry>
+              <string>BuildCapacity</string>
+              <backEnd.Attribute.AttributeImpl>
+                <myValue class="int">1</myValue>
+                <myParamList class="java.util.Arrays$ArrayList">
+                  <a class="java.lang.Integer-array">
+                    <int>0</int>
+                    <int>20</int>
+                    <int>1</int>
+                    <int>1</int>
+                  </a>
+                </myParamList>
+                <myName>BuildCapacity</myName>
+              </backEnd.Attribute.AttributeImpl>
+            </entry>
+            <entry>
               <string>Position</string>
               <backEnd.Attribute.AttributeImpl>
                 <myValue class="javafx.geometry.Point2D" reference="../../../../../../javafx.geometry.Point2D"/>
@@ -4333,13 +4764,6 @@
                   </a>
                 </myParamList>
                 <myName>MoveDirection</myName>
-              </backEnd.Attribute.AttributeImpl>
-            </entry>
-            <entry>
-              <string>Buildable</string>
-              <backEnd.Attribute.AttributeImpl>
-                <myValue class="boolean">false</myValue>
-                <myName>Buildable</myName>
               </backEnd.Attribute.AttributeImpl>
             </entry>
           </myAttributes>
@@ -4377,6 +4801,21 @@
               </backEnd.Attribute.AttributeImpl>
             </entry>
             <entry>
+              <string>BuildCapacity</string>
+              <backEnd.Attribute.AttributeImpl>
+                <myValue class="int">1</myValue>
+                <myParamList class="java.util.Arrays$ArrayList">
+                  <a class="java.lang.Integer-array">
+                    <int>0</int>
+                    <int>20</int>
+                    <int>1</int>
+                    <int>1</int>
+                  </a>
+                </myParamList>
+                <myName>BuildCapacity</myName>
+              </backEnd.Attribute.AttributeImpl>
+            </entry>
+            <entry>
               <string>Position</string>
               <backEnd.Attribute.AttributeImpl>
                 <myValue class="javafx.geometry.Point2D" reference="../../../../../../javafx.geometry.Point2D"/>
@@ -4415,13 +4854,6 @@
                   </a>
                 </myParamList>
                 <myName>MoveDirection</myName>
-              </backEnd.Attribute.AttributeImpl>
-            </entry>
-            <entry>
-              <string>Buildable</string>
-              <backEnd.Attribute.AttributeImpl>
-                <myValue class="boolean">false</myValue>
-                <myName>Buildable</myName>
               </backEnd.Attribute.AttributeImpl>
             </entry>
           </myAttributes>
@@ -4459,6 +4891,21 @@
               </backEnd.Attribute.AttributeImpl>
             </entry>
             <entry>
+              <string>BuildCapacity</string>
+              <backEnd.Attribute.AttributeImpl>
+                <myValue class="int">1</myValue>
+                <myParamList class="java.util.Arrays$ArrayList">
+                  <a class="java.lang.Integer-array">
+                    <int>0</int>
+                    <int>20</int>
+                    <int>1</int>
+                    <int>1</int>
+                  </a>
+                </myParamList>
+                <myName>BuildCapacity</myName>
+              </backEnd.Attribute.AttributeImpl>
+            </entry>
+            <entry>
               <string>Position</string>
               <backEnd.Attribute.AttributeImpl>
                 <myValue class="javafx.geometry.Point2D" reference="../../../../../../javafx.geometry.Point2D"/>
@@ -4497,13 +4944,6 @@
                   </a>
                 </myParamList>
                 <myName>MoveDirection</myName>
-              </backEnd.Attribute.AttributeImpl>
-            </entry>
-            <entry>
-              <string>Buildable</string>
-              <backEnd.Attribute.AttributeImpl>
-                <myValue class="boolean">false</myValue>
-                <myName>Buildable</myName>
               </backEnd.Attribute.AttributeImpl>
             </entry>
           </myAttributes>
@@ -4541,6 +4981,21 @@
               </backEnd.Attribute.AttributeImpl>
             </entry>
             <entry>
+              <string>BuildCapacity</string>
+              <backEnd.Attribute.AttributeImpl>
+                <myValue class="int">1</myValue>
+                <myParamList class="java.util.Arrays$ArrayList">
+                  <a class="java.lang.Integer-array">
+                    <int>0</int>
+                    <int>20</int>
+                    <int>1</int>
+                    <int>1</int>
+                  </a>
+                </myParamList>
+                <myName>BuildCapacity</myName>
+              </backEnd.Attribute.AttributeImpl>
+            </entry>
+            <entry>
               <string>Position</string>
               <backEnd.Attribute.AttributeImpl>
                 <myValue class="javafx.geometry.Point2D" reference="../../../../../../javafx.geometry.Point2D"/>
@@ -4579,13 +5034,6 @@
                   </a>
                 </myParamList>
                 <myName>MoveDirection</myName>
-              </backEnd.Attribute.AttributeImpl>
-            </entry>
-            <entry>
-              <string>Buildable</string>
-              <backEnd.Attribute.AttributeImpl>
-                <myValue class="boolean">false</myValue>
-                <myName>Buildable</myName>
               </backEnd.Attribute.AttributeImpl>
             </entry>
           </myAttributes>
@@ -4623,6 +5071,21 @@
               </backEnd.Attribute.AttributeImpl>
             </entry>
             <entry>
+              <string>BuildCapacity</string>
+              <backEnd.Attribute.AttributeImpl>
+                <myValue class="int">1</myValue>
+                <myParamList class="java.util.Arrays$ArrayList">
+                  <a class="java.lang.Integer-array">
+                    <int>0</int>
+                    <int>20</int>
+                    <int>1</int>
+                    <int>1</int>
+                  </a>
+                </myParamList>
+                <myName>BuildCapacity</myName>
+              </backEnd.Attribute.AttributeImpl>
+            </entry>
+            <entry>
               <string>Position</string>
               <backEnd.Attribute.AttributeImpl>
                 <myValue class="javafx.geometry.Point2D" reference="../../../../../../javafx.geometry.Point2D"/>
@@ -4661,13 +5124,6 @@
                   </a>
                 </myParamList>
                 <myName>MoveDirection</myName>
-              </backEnd.Attribute.AttributeImpl>
-            </entry>
-            <entry>
-              <string>Buildable</string>
-              <backEnd.Attribute.AttributeImpl>
-                <myValue class="boolean">false</myValue>
-                <myName>Buildable</myName>
               </backEnd.Attribute.AttributeImpl>
             </entry>
           </myAttributes>
@@ -4705,6 +5161,21 @@
               </backEnd.Attribute.AttributeImpl>
             </entry>
             <entry>
+              <string>BuildCapacity</string>
+              <backEnd.Attribute.AttributeImpl>
+                <myValue class="int">1</myValue>
+                <myParamList class="java.util.Arrays$ArrayList">
+                  <a class="java.lang.Integer-array">
+                    <int>0</int>
+                    <int>20</int>
+                    <int>1</int>
+                    <int>1</int>
+                  </a>
+                </myParamList>
+                <myName>BuildCapacity</myName>
+              </backEnd.Attribute.AttributeImpl>
+            </entry>
+            <entry>
               <string>Position</string>
               <backEnd.Attribute.AttributeImpl>
                 <myValue class="javafx.geometry.Point2D" reference="../../../../../../javafx.geometry.Point2D"/>
@@ -4743,13 +5214,6 @@
                   </a>
                 </myParamList>
                 <myName>MoveDirection</myName>
-              </backEnd.Attribute.AttributeImpl>
-            </entry>
-            <entry>
-              <string>Buildable</string>
-              <backEnd.Attribute.AttributeImpl>
-                <myValue class="boolean">false</myValue>
-                <myName>Buildable</myName>
               </backEnd.Attribute.AttributeImpl>
             </entry>
           </myAttributes>
@@ -4787,6 +5251,21 @@
               </backEnd.Attribute.AttributeImpl>
             </entry>
             <entry>
+              <string>BuildCapacity</string>
+              <backEnd.Attribute.AttributeImpl>
+                <myValue class="int">1</myValue>
+                <myParamList class="java.util.Arrays$ArrayList">
+                  <a class="java.lang.Integer-array">
+                    <int>0</int>
+                    <int>20</int>
+                    <int>1</int>
+                    <int>1</int>
+                  </a>
+                </myParamList>
+                <myName>BuildCapacity</myName>
+              </backEnd.Attribute.AttributeImpl>
+            </entry>
+            <entry>
               <string>Position</string>
               <backEnd.Attribute.AttributeImpl>
                 <myValue class="javafx.geometry.Point2D" reference="../../../../../../javafx.geometry.Point2D"/>
@@ -4825,13 +5304,6 @@
                   </a>
                 </myParamList>
                 <myName>MoveDirection</myName>
-              </backEnd.Attribute.AttributeImpl>
-            </entry>
-            <entry>
-              <string>Buildable</string>
-              <backEnd.Attribute.AttributeImpl>
-                <myValue class="boolean">false</myValue>
-                <myName>Buildable</myName>
               </backEnd.Attribute.AttributeImpl>
             </entry>
           </myAttributes>
@@ -4869,6 +5341,21 @@
               </backEnd.Attribute.AttributeImpl>
             </entry>
             <entry>
+              <string>BuildCapacity</string>
+              <backEnd.Attribute.AttributeImpl>
+                <myValue class="int">1</myValue>
+                <myParamList class="java.util.Arrays$ArrayList">
+                  <a class="java.lang.Integer-array">
+                    <int>0</int>
+                    <int>20</int>
+                    <int>1</int>
+                    <int>1</int>
+                  </a>
+                </myParamList>
+                <myName>BuildCapacity</myName>
+              </backEnd.Attribute.AttributeImpl>
+            </entry>
+            <entry>
               <string>Position</string>
               <backEnd.Attribute.AttributeImpl>
                 <myValue class="javafx.geometry.Point2D" reference="../../../../../../javafx.geometry.Point2D"/>
@@ -4907,13 +5394,6 @@
                   </a>
                 </myParamList>
                 <myName>MoveDirection</myName>
-              </backEnd.Attribute.AttributeImpl>
-            </entry>
-            <entry>
-              <string>Buildable</string>
-              <backEnd.Attribute.AttributeImpl>
-                <myValue class="boolean">false</myValue>
-                <myName>Buildable</myName>
               </backEnd.Attribute.AttributeImpl>
             </entry>
           </myAttributes>
@@ -4951,6 +5431,21 @@
               </backEnd.Attribute.AttributeImpl>
             </entry>
             <entry>
+              <string>BuildCapacity</string>
+              <backEnd.Attribute.AttributeImpl>
+                <myValue class="int">1</myValue>
+                <myParamList class="java.util.Arrays$ArrayList">
+                  <a class="java.lang.Integer-array">
+                    <int>0</int>
+                    <int>20</int>
+                    <int>1</int>
+                    <int>1</int>
+                  </a>
+                </myParamList>
+                <myName>BuildCapacity</myName>
+              </backEnd.Attribute.AttributeImpl>
+            </entry>
+            <entry>
               <string>Position</string>
               <backEnd.Attribute.AttributeImpl>
                 <myValue class="javafx.geometry.Point2D" reference="../../../../../../javafx.geometry.Point2D"/>
@@ -4989,13 +5484,6 @@
                   </a>
                 </myParamList>
                 <myName>MoveDirection</myName>
-              </backEnd.Attribute.AttributeImpl>
-            </entry>
-            <entry>
-              <string>Buildable</string>
-              <backEnd.Attribute.AttributeImpl>
-                <myValue class="boolean">false</myValue>
-                <myName>Buildable</myName>
               </backEnd.Attribute.AttributeImpl>
             </entry>
           </myAttributes>
@@ -5033,6 +5521,21 @@
               </backEnd.Attribute.AttributeImpl>
             </entry>
             <entry>
+              <string>BuildCapacity</string>
+              <backEnd.Attribute.AttributeImpl>
+                <myValue class="int">1</myValue>
+                <myParamList class="java.util.Arrays$ArrayList">
+                  <a class="java.lang.Integer-array">
+                    <int>0</int>
+                    <int>20</int>
+                    <int>1</int>
+                    <int>1</int>
+                  </a>
+                </myParamList>
+                <myName>BuildCapacity</myName>
+              </backEnd.Attribute.AttributeImpl>
+            </entry>
+            <entry>
               <string>Position</string>
               <backEnd.Attribute.AttributeImpl>
                 <myValue class="javafx.geometry.Point2D" reference="../../../../../../javafx.geometry.Point2D"/>
@@ -5071,13 +5574,6 @@
                   </a>
                 </myParamList>
                 <myName>MoveDirection</myName>
-              </backEnd.Attribute.AttributeImpl>
-            </entry>
-            <entry>
-              <string>Buildable</string>
-              <backEnd.Attribute.AttributeImpl>
-                <myValue class="boolean">false</myValue>
-                <myName>Buildable</myName>
               </backEnd.Attribute.AttributeImpl>
             </entry>
           </myAttributes>
@@ -5115,6 +5611,21 @@
               </backEnd.Attribute.AttributeImpl>
             </entry>
             <entry>
+              <string>BuildCapacity</string>
+              <backEnd.Attribute.AttributeImpl>
+                <myValue class="int">1</myValue>
+                <myParamList class="java.util.Arrays$ArrayList">
+                  <a class="java.lang.Integer-array">
+                    <int>0</int>
+                    <int>20</int>
+                    <int>1</int>
+                    <int>1</int>
+                  </a>
+                </myParamList>
+                <myName>BuildCapacity</myName>
+              </backEnd.Attribute.AttributeImpl>
+            </entry>
+            <entry>
               <string>Position</string>
               <backEnd.Attribute.AttributeImpl>
                 <myValue class="javafx.geometry.Point2D" reference="../../../../../../javafx.geometry.Point2D"/>
@@ -5153,13 +5664,6 @@
                   </a>
                 </myParamList>
                 <myName>MoveDirection</myName>
-              </backEnd.Attribute.AttributeImpl>
-            </entry>
-            <entry>
-              <string>Buildable</string>
-              <backEnd.Attribute.AttributeImpl>
-                <myValue class="boolean">false</myValue>
-                <myName>Buildable</myName>
               </backEnd.Attribute.AttributeImpl>
             </entry>
           </myAttributes>
@@ -5197,6 +5701,21 @@
               </backEnd.Attribute.AttributeImpl>
             </entry>
             <entry>
+              <string>BuildCapacity</string>
+              <backEnd.Attribute.AttributeImpl>
+                <myValue class="int">1</myValue>
+                <myParamList class="java.util.Arrays$ArrayList">
+                  <a class="java.lang.Integer-array">
+                    <int>0</int>
+                    <int>20</int>
+                    <int>1</int>
+                    <int>1</int>
+                  </a>
+                </myParamList>
+                <myName>BuildCapacity</myName>
+              </backEnd.Attribute.AttributeImpl>
+            </entry>
+            <entry>
               <string>Position</string>
               <backEnd.Attribute.AttributeImpl>
                 <myValue class="javafx.geometry.Point2D" reference="../../../../../../javafx.geometry.Point2D"/>
@@ -5235,13 +5754,6 @@
                   </a>
                 </myParamList>
                 <myName>MoveDirection</myName>
-              </backEnd.Attribute.AttributeImpl>
-            </entry>
-            <entry>
-              <string>Buildable</string>
-              <backEnd.Attribute.AttributeImpl>
-                <myValue class="boolean">false</myValue>
-                <myName>Buildable</myName>
               </backEnd.Attribute.AttributeImpl>
             </entry>
           </myAttributes>
@@ -5279,6 +5791,21 @@
               </backEnd.Attribute.AttributeImpl>
             </entry>
             <entry>
+              <string>BuildCapacity</string>
+              <backEnd.Attribute.AttributeImpl>
+                <myValue class="int">1</myValue>
+                <myParamList class="java.util.Arrays$ArrayList">
+                  <a class="java.lang.Integer-array">
+                    <int>0</int>
+                    <int>20</int>
+                    <int>1</int>
+                    <int>1</int>
+                  </a>
+                </myParamList>
+                <myName>BuildCapacity</myName>
+              </backEnd.Attribute.AttributeImpl>
+            </entry>
+            <entry>
               <string>Position</string>
               <backEnd.Attribute.AttributeImpl>
                 <myValue class="javafx.geometry.Point2D" reference="../../../../../../javafx.geometry.Point2D"/>
@@ -5317,13 +5844,6 @@
                   </a>
                 </myParamList>
                 <myName>MoveDirection</myName>
-              </backEnd.Attribute.AttributeImpl>
-            </entry>
-            <entry>
-              <string>Buildable</string>
-              <backEnd.Attribute.AttributeImpl>
-                <myValue class="boolean">false</myValue>
-                <myName>Buildable</myName>
               </backEnd.Attribute.AttributeImpl>
             </entry>
           </myAttributes>
@@ -5361,6 +5881,21 @@
               </backEnd.Attribute.AttributeImpl>
             </entry>
             <entry>
+              <string>BuildCapacity</string>
+              <backEnd.Attribute.AttributeImpl>
+                <myValue class="int">1</myValue>
+                <myParamList class="java.util.Arrays$ArrayList">
+                  <a class="java.lang.Integer-array">
+                    <int>0</int>
+                    <int>20</int>
+                    <int>1</int>
+                    <int>1</int>
+                  </a>
+                </myParamList>
+                <myName>BuildCapacity</myName>
+              </backEnd.Attribute.AttributeImpl>
+            </entry>
+            <entry>
               <string>Position</string>
               <backEnd.Attribute.AttributeImpl>
                 <myValue class="javafx.geometry.Point2D" reference="../../../../../../javafx.geometry.Point2D"/>
@@ -5399,13 +5934,6 @@
                   </a>
                 </myParamList>
                 <myName>MoveDirection</myName>
-              </backEnd.Attribute.AttributeImpl>
-            </entry>
-            <entry>
-              <string>Buildable</string>
-              <backEnd.Attribute.AttributeImpl>
-                <myValue class="boolean">false</myValue>
-                <myName>Buildable</myName>
               </backEnd.Attribute.AttributeImpl>
             </entry>
           </myAttributes>
@@ -5443,6 +5971,21 @@
               </backEnd.Attribute.AttributeImpl>
             </entry>
             <entry>
+              <string>BuildCapacity</string>
+              <backEnd.Attribute.AttributeImpl>
+                <myValue class="int">1</myValue>
+                <myParamList class="java.util.Arrays$ArrayList">
+                  <a class="java.lang.Integer-array">
+                    <int>0</int>
+                    <int>20</int>
+                    <int>1</int>
+                    <int>1</int>
+                  </a>
+                </myParamList>
+                <myName>BuildCapacity</myName>
+              </backEnd.Attribute.AttributeImpl>
+            </entry>
+            <entry>
               <string>Position</string>
               <backEnd.Attribute.AttributeImpl>
                 <myValue class="javafx.geometry.Point2D" reference="../../../../../../javafx.geometry.Point2D"/>
@@ -5481,13 +6024,6 @@
                   </a>
                 </myParamList>
                 <myName>MoveDirection</myName>
-              </backEnd.Attribute.AttributeImpl>
-            </entry>
-            <entry>
-              <string>Buildable</string>
-              <backEnd.Attribute.AttributeImpl>
-                <myValue class="boolean">false</myValue>
-                <myName>Buildable</myName>
               </backEnd.Attribute.AttributeImpl>
             </entry>
           </myAttributes>
@@ -5525,6 +6061,21 @@
               </backEnd.Attribute.AttributeImpl>
             </entry>
             <entry>
+              <string>BuildCapacity</string>
+              <backEnd.Attribute.AttributeImpl>
+                <myValue class="int">1</myValue>
+                <myParamList class="java.util.Arrays$ArrayList">
+                  <a class="java.lang.Integer-array">
+                    <int>0</int>
+                    <int>20</int>
+                    <int>1</int>
+                    <int>1</int>
+                  </a>
+                </myParamList>
+                <myName>BuildCapacity</myName>
+              </backEnd.Attribute.AttributeImpl>
+            </entry>
+            <entry>
               <string>Position</string>
               <backEnd.Attribute.AttributeImpl>
                 <myValue class="javafx.geometry.Point2D" reference="../../../../../../javafx.geometry.Point2D"/>
@@ -5563,13 +6114,6 @@
                   </a>
                 </myParamList>
                 <myName>MoveDirection</myName>
-              </backEnd.Attribute.AttributeImpl>
-            </entry>
-            <entry>
-              <string>Buildable</string>
-              <backEnd.Attribute.AttributeImpl>
-                <myValue class="boolean">false</myValue>
-                <myName>Buildable</myName>
               </backEnd.Attribute.AttributeImpl>
             </entry>
           </myAttributes>
@@ -5607,6 +6151,21 @@
               </backEnd.Attribute.AttributeImpl>
             </entry>
             <entry>
+              <string>BuildCapacity</string>
+              <backEnd.Attribute.AttributeImpl>
+                <myValue class="int">1</myValue>
+                <myParamList class="java.util.Arrays$ArrayList">
+                  <a class="java.lang.Integer-array">
+                    <int>0</int>
+                    <int>20</int>
+                    <int>1</int>
+                    <int>1</int>
+                  </a>
+                </myParamList>
+                <myName>BuildCapacity</myName>
+              </backEnd.Attribute.AttributeImpl>
+            </entry>
+            <entry>
               <string>Position</string>
               <backEnd.Attribute.AttributeImpl>
                 <myValue class="javafx.geometry.Point2D" reference="../../../../../../javafx.geometry.Point2D"/>
@@ -5645,13 +6204,6 @@
                   </a>
                 </myParamList>
                 <myName>MoveDirection</myName>
-              </backEnd.Attribute.AttributeImpl>
-            </entry>
-            <entry>
-              <string>Buildable</string>
-              <backEnd.Attribute.AttributeImpl>
-                <myValue class="boolean">false</myValue>
-                <myName>Buildable</myName>
               </backEnd.Attribute.AttributeImpl>
             </entry>
           </myAttributes>
@@ -5689,6 +6241,21 @@
               </backEnd.Attribute.AttributeImpl>
             </entry>
             <entry>
+              <string>BuildCapacity</string>
+              <backEnd.Attribute.AttributeImpl>
+                <myValue class="int">1</myValue>
+                <myParamList class="java.util.Arrays$ArrayList">
+                  <a class="java.lang.Integer-array">
+                    <int>0</int>
+                    <int>20</int>
+                    <int>1</int>
+                    <int>1</int>
+                  </a>
+                </myParamList>
+                <myName>BuildCapacity</myName>
+              </backEnd.Attribute.AttributeImpl>
+            </entry>
+            <entry>
               <string>Position</string>
               <backEnd.Attribute.AttributeImpl>
                 <myValue class="javafx.geometry.Point2D" reference="../../../../../../javafx.geometry.Point2D"/>
@@ -5727,13 +6294,6 @@
                   </a>
                 </myParamList>
                 <myName>MoveDirection</myName>
-              </backEnd.Attribute.AttributeImpl>
-            </entry>
-            <entry>
-              <string>Buildable</string>
-              <backEnd.Attribute.AttributeImpl>
-                <myValue class="boolean">false</myValue>
-                <myName>Buildable</myName>
               </backEnd.Attribute.AttributeImpl>
             </entry>
           </myAttributes>
@@ -5771,6 +6331,21 @@
               </backEnd.Attribute.AttributeImpl>
             </entry>
             <entry>
+              <string>BuildCapacity</string>
+              <backEnd.Attribute.AttributeImpl>
+                <myValue class="int">1</myValue>
+                <myParamList class="java.util.Arrays$ArrayList">
+                  <a class="java.lang.Integer-array">
+                    <int>0</int>
+                    <int>20</int>
+                    <int>1</int>
+                    <int>1</int>
+                  </a>
+                </myParamList>
+                <myName>BuildCapacity</myName>
+              </backEnd.Attribute.AttributeImpl>
+            </entry>
+            <entry>
               <string>Position</string>
               <backEnd.Attribute.AttributeImpl>
                 <myValue class="javafx.geometry.Point2D" reference="../../../../../../javafx.geometry.Point2D"/>
@@ -5809,13 +6384,6 @@
                   </a>
                 </myParamList>
                 <myName>MoveDirection</myName>
-              </backEnd.Attribute.AttributeImpl>
-            </entry>
-            <entry>
-              <string>Buildable</string>
-              <backEnd.Attribute.AttributeImpl>
-                <myValue class="boolean">false</myValue>
-                <myName>Buildable</myName>
               </backEnd.Attribute.AttributeImpl>
             </entry>
           </myAttributes>
@@ -5853,6 +6421,21 @@
               </backEnd.Attribute.AttributeImpl>
             </entry>
             <entry>
+              <string>BuildCapacity</string>
+              <backEnd.Attribute.AttributeImpl>
+                <myValue class="int">1</myValue>
+                <myParamList class="java.util.Arrays$ArrayList">
+                  <a class="java.lang.Integer-array">
+                    <int>0</int>
+                    <int>20</int>
+                    <int>1</int>
+                    <int>1</int>
+                  </a>
+                </myParamList>
+                <myName>BuildCapacity</myName>
+              </backEnd.Attribute.AttributeImpl>
+            </entry>
+            <entry>
               <string>Position</string>
               <backEnd.Attribute.AttributeImpl>
                 <myValue class="javafx.geometry.Point2D" reference="../../../../../../javafx.geometry.Point2D"/>
@@ -5891,13 +6474,6 @@
                   </a>
                 </myParamList>
                 <myName>MoveDirection</myName>
-              </backEnd.Attribute.AttributeImpl>
-            </entry>
-            <entry>
-              <string>Buildable</string>
-              <backEnd.Attribute.AttributeImpl>
-                <myValue class="boolean">false</myValue>
-                <myName>Buildable</myName>
               </backEnd.Attribute.AttributeImpl>
             </entry>
           </myAttributes>
@@ -5935,6 +6511,21 @@
               </backEnd.Attribute.AttributeImpl>
             </entry>
             <entry>
+              <string>BuildCapacity</string>
+              <backEnd.Attribute.AttributeImpl>
+                <myValue class="int">1</myValue>
+                <myParamList class="java.util.Arrays$ArrayList">
+                  <a class="java.lang.Integer-array">
+                    <int>0</int>
+                    <int>20</int>
+                    <int>1</int>
+                    <int>1</int>
+                  </a>
+                </myParamList>
+                <myName>BuildCapacity</myName>
+              </backEnd.Attribute.AttributeImpl>
+            </entry>
+            <entry>
               <string>Position</string>
               <backEnd.Attribute.AttributeImpl>
                 <myValue class="javafx.geometry.Point2D" reference="../../../../../../javafx.geometry.Point2D"/>
@@ -5973,13 +6564,6 @@
                   </a>
                 </myParamList>
                 <myName>MoveDirection</myName>
-              </backEnd.Attribute.AttributeImpl>
-            </entry>
-            <entry>
-              <string>Buildable</string>
-              <backEnd.Attribute.AttributeImpl>
-                <myValue class="boolean">false</myValue>
-                <myName>Buildable</myName>
               </backEnd.Attribute.AttributeImpl>
             </entry>
           </myAttributes>
@@ -6017,6 +6601,21 @@
               </backEnd.Attribute.AttributeImpl>
             </entry>
             <entry>
+              <string>BuildCapacity</string>
+              <backEnd.Attribute.AttributeImpl>
+                <myValue class="int">1</myValue>
+                <myParamList class="java.util.Arrays$ArrayList">
+                  <a class="java.lang.Integer-array">
+                    <int>0</int>
+                    <int>20</int>
+                    <int>1</int>
+                    <int>1</int>
+                  </a>
+                </myParamList>
+                <myName>BuildCapacity</myName>
+              </backEnd.Attribute.AttributeImpl>
+            </entry>
+            <entry>
               <string>Position</string>
               <backEnd.Attribute.AttributeImpl>
                 <myValue class="javafx.geometry.Point2D" reference="../../../../../../javafx.geometry.Point2D"/>
@@ -6055,13 +6654,6 @@
                   </a>
                 </myParamList>
                 <myName>MoveDirection</myName>
-              </backEnd.Attribute.AttributeImpl>
-            </entry>
-            <entry>
-              <string>Buildable</string>
-              <backEnd.Attribute.AttributeImpl>
-                <myValue class="boolean">false</myValue>
-                <myName>Buildable</myName>
               </backEnd.Attribute.AttributeImpl>
             </entry>
           </myAttributes>
@@ -6099,6 +6691,21 @@
               </backEnd.Attribute.AttributeImpl>
             </entry>
             <entry>
+              <string>BuildCapacity</string>
+              <backEnd.Attribute.AttributeImpl>
+                <myValue class="int">1</myValue>
+                <myParamList class="java.util.Arrays$ArrayList">
+                  <a class="java.lang.Integer-array">
+                    <int>0</int>
+                    <int>20</int>
+                    <int>1</int>
+                    <int>1</int>
+                  </a>
+                </myParamList>
+                <myName>BuildCapacity</myName>
+              </backEnd.Attribute.AttributeImpl>
+            </entry>
+            <entry>
               <string>Position</string>
               <backEnd.Attribute.AttributeImpl>
                 <myValue class="javafx.geometry.Point2D" reference="../../../../../../javafx.geometry.Point2D"/>
@@ -6137,13 +6744,6 @@
                   </a>
                 </myParamList>
                 <myName>MoveDirection</myName>
-              </backEnd.Attribute.AttributeImpl>
-            </entry>
-            <entry>
-              <string>Buildable</string>
-              <backEnd.Attribute.AttributeImpl>
-                <myValue class="boolean">false</myValue>
-                <myName>Buildable</myName>
               </backEnd.Attribute.AttributeImpl>
             </entry>
           </myAttributes>
@@ -6181,6 +6781,21 @@
               </backEnd.Attribute.AttributeImpl>
             </entry>
             <entry>
+              <string>BuildCapacity</string>
+              <backEnd.Attribute.AttributeImpl>
+                <myValue class="int">1</myValue>
+                <myParamList class="java.util.Arrays$ArrayList">
+                  <a class="java.lang.Integer-array">
+                    <int>0</int>
+                    <int>20</int>
+                    <int>1</int>
+                    <int>1</int>
+                  </a>
+                </myParamList>
+                <myName>BuildCapacity</myName>
+              </backEnd.Attribute.AttributeImpl>
+            </entry>
+            <entry>
               <string>Position</string>
               <backEnd.Attribute.AttributeImpl>
                 <myValue class="javafx.geometry.Point2D" reference="../../../../../../javafx.geometry.Point2D"/>
@@ -6219,13 +6834,6 @@
                   </a>
                 </myParamList>
                 <myName>MoveDirection</myName>
-              </backEnd.Attribute.AttributeImpl>
-            </entry>
-            <entry>
-              <string>Buildable</string>
-              <backEnd.Attribute.AttributeImpl>
-                <myValue class="boolean">false</myValue>
-                <myName>Buildable</myName>
               </backEnd.Attribute.AttributeImpl>
             </entry>
           </myAttributes>
@@ -6263,6 +6871,21 @@
               </backEnd.Attribute.AttributeImpl>
             </entry>
             <entry>
+              <string>BuildCapacity</string>
+              <backEnd.Attribute.AttributeImpl>
+                <myValue class="int">1</myValue>
+                <myParamList class="java.util.Arrays$ArrayList">
+                  <a class="java.lang.Integer-array">
+                    <int>0</int>
+                    <int>20</int>
+                    <int>1</int>
+                    <int>1</int>
+                  </a>
+                </myParamList>
+                <myName>BuildCapacity</myName>
+              </backEnd.Attribute.AttributeImpl>
+            </entry>
+            <entry>
               <string>Position</string>
               <backEnd.Attribute.AttributeImpl>
                 <myValue class="javafx.geometry.Point2D" reference="../../../../../../javafx.geometry.Point2D"/>
@@ -6301,13 +6924,6 @@
                   </a>
                 </myParamList>
                 <myName>MoveDirection</myName>
-              </backEnd.Attribute.AttributeImpl>
-            </entry>
-            <entry>
-              <string>Buildable</string>
-              <backEnd.Attribute.AttributeImpl>
-                <myValue class="boolean">false</myValue>
-                <myName>Buildable</myName>
               </backEnd.Attribute.AttributeImpl>
             </entry>
           </myAttributes>
@@ -6345,6 +6961,21 @@
               </backEnd.Attribute.AttributeImpl>
             </entry>
             <entry>
+              <string>BuildCapacity</string>
+              <backEnd.Attribute.AttributeImpl>
+                <myValue class="int">1</myValue>
+                <myParamList class="java.util.Arrays$ArrayList">
+                  <a class="java.lang.Integer-array">
+                    <int>0</int>
+                    <int>20</int>
+                    <int>1</int>
+                    <int>1</int>
+                  </a>
+                </myParamList>
+                <myName>BuildCapacity</myName>
+              </backEnd.Attribute.AttributeImpl>
+            </entry>
+            <entry>
               <string>Position</string>
               <backEnd.Attribute.AttributeImpl>
                 <myValue class="javafx.geometry.Point2D" reference="../../../../../../javafx.geometry.Point2D"/>
@@ -6383,13 +7014,6 @@
                   </a>
                 </myParamList>
                 <myName>MoveDirection</myName>
-              </backEnd.Attribute.AttributeImpl>
-            </entry>
-            <entry>
-              <string>Buildable</string>
-              <backEnd.Attribute.AttributeImpl>
-                <myValue class="boolean">false</myValue>
-                <myName>Buildable</myName>
               </backEnd.Attribute.AttributeImpl>
             </entry>
           </myAttributes>
@@ -6427,6 +7051,21 @@
               </backEnd.Attribute.AttributeImpl>
             </entry>
             <entry>
+              <string>BuildCapacity</string>
+              <backEnd.Attribute.AttributeImpl>
+                <myValue class="int">1</myValue>
+                <myParamList class="java.util.Arrays$ArrayList">
+                  <a class="java.lang.Integer-array">
+                    <int>0</int>
+                    <int>20</int>
+                    <int>1</int>
+                    <int>1</int>
+                  </a>
+                </myParamList>
+                <myName>BuildCapacity</myName>
+              </backEnd.Attribute.AttributeImpl>
+            </entry>
+            <entry>
               <string>Position</string>
               <backEnd.Attribute.AttributeImpl>
                 <myValue class="javafx.geometry.Point2D" reference="../../../../../../javafx.geometry.Point2D"/>
@@ -6465,13 +7104,6 @@
                   </a>
                 </myParamList>
                 <myName>MoveDirection</myName>
-              </backEnd.Attribute.AttributeImpl>
-            </entry>
-            <entry>
-              <string>Buildable</string>
-              <backEnd.Attribute.AttributeImpl>
-                <myValue class="boolean">false</myValue>
-                <myName>Buildable</myName>
               </backEnd.Attribute.AttributeImpl>
             </entry>
           </myAttributes>
@@ -6509,6 +7141,21 @@
               </backEnd.Attribute.AttributeImpl>
             </entry>
             <entry>
+              <string>BuildCapacity</string>
+              <backEnd.Attribute.AttributeImpl>
+                <myValue class="int">1</myValue>
+                <myParamList class="java.util.Arrays$ArrayList">
+                  <a class="java.lang.Integer-array">
+                    <int>0</int>
+                    <int>20</int>
+                    <int>1</int>
+                    <int>1</int>
+                  </a>
+                </myParamList>
+                <myName>BuildCapacity</myName>
+              </backEnd.Attribute.AttributeImpl>
+            </entry>
+            <entry>
               <string>Position</string>
               <backEnd.Attribute.AttributeImpl>
                 <myValue class="javafx.geometry.Point2D" reference="../../../../../../javafx.geometry.Point2D"/>
@@ -6547,13 +7194,6 @@
                   </a>
                 </myParamList>
                 <myName>MoveDirection</myName>
-              </backEnd.Attribute.AttributeImpl>
-            </entry>
-            <entry>
-              <string>Buildable</string>
-              <backEnd.Attribute.AttributeImpl>
-                <myValue class="boolean">false</myValue>
-                <myName>Buildable</myName>
               </backEnd.Attribute.AttributeImpl>
             </entry>
           </myAttributes>
@@ -6591,6 +7231,21 @@
               </backEnd.Attribute.AttributeImpl>
             </entry>
             <entry>
+              <string>BuildCapacity</string>
+              <backEnd.Attribute.AttributeImpl>
+                <myValue class="int">1</myValue>
+                <myParamList class="java.util.Arrays$ArrayList">
+                  <a class="java.lang.Integer-array">
+                    <int>0</int>
+                    <int>20</int>
+                    <int>1</int>
+                    <int>1</int>
+                  </a>
+                </myParamList>
+                <myName>BuildCapacity</myName>
+              </backEnd.Attribute.AttributeImpl>
+            </entry>
+            <entry>
               <string>Position</string>
               <backEnd.Attribute.AttributeImpl>
                 <myValue class="javafx.geometry.Point2D" reference="../../../../../../javafx.geometry.Point2D"/>
@@ -6629,13 +7284,6 @@
                   </a>
                 </myParamList>
                 <myName>MoveDirection</myName>
-              </backEnd.Attribute.AttributeImpl>
-            </entry>
-            <entry>
-              <string>Buildable</string>
-              <backEnd.Attribute.AttributeImpl>
-                <myValue class="boolean">false</myValue>
-                <myName>Buildable</myName>
               </backEnd.Attribute.AttributeImpl>
             </entry>
           </myAttributes>
@@ -6673,6 +7321,21 @@
               </backEnd.Attribute.AttributeImpl>
             </entry>
             <entry>
+              <string>BuildCapacity</string>
+              <backEnd.Attribute.AttributeImpl>
+                <myValue class="int">1</myValue>
+                <myParamList class="java.util.Arrays$ArrayList">
+                  <a class="java.lang.Integer-array">
+                    <int>0</int>
+                    <int>20</int>
+                    <int>1</int>
+                    <int>1</int>
+                  </a>
+                </myParamList>
+                <myName>BuildCapacity</myName>
+              </backEnd.Attribute.AttributeImpl>
+            </entry>
+            <entry>
               <string>Position</string>
               <backEnd.Attribute.AttributeImpl>
                 <myValue class="javafx.geometry.Point2D" reference="../../../../../../javafx.geometry.Point2D"/>
@@ -6711,13 +7374,6 @@
                   </a>
                 </myParamList>
                 <myName>MoveDirection</myName>
-              </backEnd.Attribute.AttributeImpl>
-            </entry>
-            <entry>
-              <string>Buildable</string>
-              <backEnd.Attribute.AttributeImpl>
-                <myValue class="boolean">false</myValue>
-                <myName>Buildable</myName>
               </backEnd.Attribute.AttributeImpl>
             </entry>
           </myAttributes>
@@ -6755,6 +7411,21 @@
               </backEnd.Attribute.AttributeImpl>
             </entry>
             <entry>
+              <string>BuildCapacity</string>
+              <backEnd.Attribute.AttributeImpl>
+                <myValue class="int">1</myValue>
+                <myParamList class="java.util.Arrays$ArrayList">
+                  <a class="java.lang.Integer-array">
+                    <int>0</int>
+                    <int>20</int>
+                    <int>1</int>
+                    <int>1</int>
+                  </a>
+                </myParamList>
+                <myName>BuildCapacity</myName>
+              </backEnd.Attribute.AttributeImpl>
+            </entry>
+            <entry>
               <string>Position</string>
               <backEnd.Attribute.AttributeImpl>
                 <myValue class="javafx.geometry.Point2D" reference="../../../../../../javafx.geometry.Point2D"/>
@@ -6793,13 +7464,6 @@
                   </a>
                 </myParamList>
                 <myName>MoveDirection</myName>
-              </backEnd.Attribute.AttributeImpl>
-            </entry>
-            <entry>
-              <string>Buildable</string>
-              <backEnd.Attribute.AttributeImpl>
-                <myValue class="boolean">false</myValue>
-                <myName>Buildable</myName>
               </backEnd.Attribute.AttributeImpl>
             </entry>
           </myAttributes>
@@ -6837,6 +7501,21 @@
               </backEnd.Attribute.AttributeImpl>
             </entry>
             <entry>
+              <string>BuildCapacity</string>
+              <backEnd.Attribute.AttributeImpl>
+                <myValue class="int">1</myValue>
+                <myParamList class="java.util.Arrays$ArrayList">
+                  <a class="java.lang.Integer-array">
+                    <int>0</int>
+                    <int>20</int>
+                    <int>1</int>
+                    <int>1</int>
+                  </a>
+                </myParamList>
+                <myName>BuildCapacity</myName>
+              </backEnd.Attribute.AttributeImpl>
+            </entry>
+            <entry>
               <string>Position</string>
               <backEnd.Attribute.AttributeImpl>
                 <myValue class="javafx.geometry.Point2D" reference="../../../../../../javafx.geometry.Point2D"/>
@@ -6875,13 +7554,6 @@
                   </a>
                 </myParamList>
                 <myName>MoveDirection</myName>
-              </backEnd.Attribute.AttributeImpl>
-            </entry>
-            <entry>
-              <string>Buildable</string>
-              <backEnd.Attribute.AttributeImpl>
-                <myValue class="boolean">false</myValue>
-                <myName>Buildable</myName>
               </backEnd.Attribute.AttributeImpl>
             </entry>
           </myAttributes>
@@ -6919,6 +7591,21 @@
               </backEnd.Attribute.AttributeImpl>
             </entry>
             <entry>
+              <string>BuildCapacity</string>
+              <backEnd.Attribute.AttributeImpl>
+                <myValue class="int">1</myValue>
+                <myParamList class="java.util.Arrays$ArrayList">
+                  <a class="java.lang.Integer-array">
+                    <int>0</int>
+                    <int>20</int>
+                    <int>1</int>
+                    <int>1</int>
+                  </a>
+                </myParamList>
+                <myName>BuildCapacity</myName>
+              </backEnd.Attribute.AttributeImpl>
+            </entry>
+            <entry>
               <string>Position</string>
               <backEnd.Attribute.AttributeImpl>
                 <myValue class="javafx.geometry.Point2D" reference="../../../../../../javafx.geometry.Point2D"/>
@@ -6957,13 +7644,6 @@
                   </a>
                 </myParamList>
                 <myName>MoveDirection</myName>
-              </backEnd.Attribute.AttributeImpl>
-            </entry>
-            <entry>
-              <string>Buildable</string>
-              <backEnd.Attribute.AttributeImpl>
-                <myValue class="boolean">false</myValue>
-                <myName>Buildable</myName>
               </backEnd.Attribute.AttributeImpl>
             </entry>
           </myAttributes>
@@ -7001,6 +7681,21 @@
               </backEnd.Attribute.AttributeImpl>
             </entry>
             <entry>
+              <string>BuildCapacity</string>
+              <backEnd.Attribute.AttributeImpl>
+                <myValue class="int">1</myValue>
+                <myParamList class="java.util.Arrays$ArrayList">
+                  <a class="java.lang.Integer-array">
+                    <int>0</int>
+                    <int>20</int>
+                    <int>1</int>
+                    <int>1</int>
+                  </a>
+                </myParamList>
+                <myName>BuildCapacity</myName>
+              </backEnd.Attribute.AttributeImpl>
+            </entry>
+            <entry>
               <string>Position</string>
               <backEnd.Attribute.AttributeImpl>
                 <myValue class="javafx.geometry.Point2D" reference="../../../../../../javafx.geometry.Point2D"/>
@@ -7039,13 +7734,6 @@
                   </a>
                 </myParamList>
                 <myName>MoveDirection</myName>
-              </backEnd.Attribute.AttributeImpl>
-            </entry>
-            <entry>
-              <string>Buildable</string>
-              <backEnd.Attribute.AttributeImpl>
-                <myValue class="boolean">false</myValue>
-                <myName>Buildable</myName>
               </backEnd.Attribute.AttributeImpl>
             </entry>
           </myAttributes>
@@ -7083,6 +7771,21 @@
               </backEnd.Attribute.AttributeImpl>
             </entry>
             <entry>
+              <string>BuildCapacity</string>
+              <backEnd.Attribute.AttributeImpl>
+                <myValue class="int">1</myValue>
+                <myParamList class="java.util.Arrays$ArrayList">
+                  <a class="java.lang.Integer-array">
+                    <int>0</int>
+                    <int>20</int>
+                    <int>1</int>
+                    <int>1</int>
+                  </a>
+                </myParamList>
+                <myName>BuildCapacity</myName>
+              </backEnd.Attribute.AttributeImpl>
+            </entry>
+            <entry>
               <string>Position</string>
               <backEnd.Attribute.AttributeImpl>
                 <myValue class="javafx.geometry.Point2D" reference="../../../../../../javafx.geometry.Point2D"/>
@@ -7121,13 +7824,6 @@
                   </a>
                 </myParamList>
                 <myName>MoveDirection</myName>
-              </backEnd.Attribute.AttributeImpl>
-            </entry>
-            <entry>
-              <string>Buildable</string>
-              <backEnd.Attribute.AttributeImpl>
-                <myValue class="boolean">false</myValue>
-                <myName>Buildable</myName>
               </backEnd.Attribute.AttributeImpl>
             </entry>
           </myAttributes>
@@ -7165,6 +7861,21 @@
               </backEnd.Attribute.AttributeImpl>
             </entry>
             <entry>
+              <string>BuildCapacity</string>
+              <backEnd.Attribute.AttributeImpl>
+                <myValue class="int">1</myValue>
+                <myParamList class="java.util.Arrays$ArrayList">
+                  <a class="java.lang.Integer-array">
+                    <int>0</int>
+                    <int>20</int>
+                    <int>1</int>
+                    <int>1</int>
+                  </a>
+                </myParamList>
+                <myName>BuildCapacity</myName>
+              </backEnd.Attribute.AttributeImpl>
+            </entry>
+            <entry>
               <string>Position</string>
               <backEnd.Attribute.AttributeImpl>
                 <myValue class="javafx.geometry.Point2D" reference="../../../../../../javafx.geometry.Point2D"/>
@@ -7203,13 +7914,6 @@
                   </a>
                 </myParamList>
                 <myName>MoveDirection</myName>
-              </backEnd.Attribute.AttributeImpl>
-            </entry>
-            <entry>
-              <string>Buildable</string>
-              <backEnd.Attribute.AttributeImpl>
-                <myValue class="boolean">false</myValue>
-                <myName>Buildable</myName>
               </backEnd.Attribute.AttributeImpl>
             </entry>
           </myAttributes>
@@ -7247,6 +7951,21 @@
               </backEnd.Attribute.AttributeImpl>
             </entry>
             <entry>
+              <string>BuildCapacity</string>
+              <backEnd.Attribute.AttributeImpl>
+                <myValue class="int">1</myValue>
+                <myParamList class="java.util.Arrays$ArrayList">
+                  <a class="java.lang.Integer-array">
+                    <int>0</int>
+                    <int>20</int>
+                    <int>1</int>
+                    <int>1</int>
+                  </a>
+                </myParamList>
+                <myName>BuildCapacity</myName>
+              </backEnd.Attribute.AttributeImpl>
+            </entry>
+            <entry>
               <string>Position</string>
               <backEnd.Attribute.AttributeImpl>
                 <myValue class="javafx.geometry.Point2D" reference="../../../../../../javafx.geometry.Point2D"/>
@@ -7285,13 +8004,6 @@
                   </a>
                 </myParamList>
                 <myName>MoveDirection</myName>
-              </backEnd.Attribute.AttributeImpl>
-            </entry>
-            <entry>
-              <string>Buildable</string>
-              <backEnd.Attribute.AttributeImpl>
-                <myValue class="boolean">false</myValue>
-                <myName>Buildable</myName>
               </backEnd.Attribute.AttributeImpl>
             </entry>
           </myAttributes>
@@ -7329,6 +8041,21 @@
               </backEnd.Attribute.AttributeImpl>
             </entry>
             <entry>
+              <string>BuildCapacity</string>
+              <backEnd.Attribute.AttributeImpl>
+                <myValue class="int">1</myValue>
+                <myParamList class="java.util.Arrays$ArrayList">
+                  <a class="java.lang.Integer-array">
+                    <int>0</int>
+                    <int>20</int>
+                    <int>1</int>
+                    <int>1</int>
+                  </a>
+                </myParamList>
+                <myName>BuildCapacity</myName>
+              </backEnd.Attribute.AttributeImpl>
+            </entry>
+            <entry>
               <string>Position</string>
               <backEnd.Attribute.AttributeImpl>
                 <myValue class="javafx.geometry.Point2D" reference="../../../../../../javafx.geometry.Point2D"/>
@@ -7367,13 +8094,6 @@
                   </a>
                 </myParamList>
                 <myName>MoveDirection</myName>
-              </backEnd.Attribute.AttributeImpl>
-            </entry>
-            <entry>
-              <string>Buildable</string>
-              <backEnd.Attribute.AttributeImpl>
-                <myValue class="boolean">false</myValue>
-                <myName>Buildable</myName>
               </backEnd.Attribute.AttributeImpl>
             </entry>
           </myAttributes>
@@ -7411,6 +8131,21 @@
               </backEnd.Attribute.AttributeImpl>
             </entry>
             <entry>
+              <string>BuildCapacity</string>
+              <backEnd.Attribute.AttributeImpl>
+                <myValue class="int">1</myValue>
+                <myParamList class="java.util.Arrays$ArrayList">
+                  <a class="java.lang.Integer-array">
+                    <int>0</int>
+                    <int>20</int>
+                    <int>1</int>
+                    <int>1</int>
+                  </a>
+                </myParamList>
+                <myName>BuildCapacity</myName>
+              </backEnd.Attribute.AttributeImpl>
+            </entry>
+            <entry>
               <string>Position</string>
               <backEnd.Attribute.AttributeImpl>
                 <myValue class="javafx.geometry.Point2D" reference="../../../../../../javafx.geometry.Point2D"/>
@@ -7449,13 +8184,6 @@
                   </a>
                 </myParamList>
                 <myName>MoveDirection</myName>
-              </backEnd.Attribute.AttributeImpl>
-            </entry>
-            <entry>
-              <string>Buildable</string>
-              <backEnd.Attribute.AttributeImpl>
-                <myValue class="boolean">false</myValue>
-                <myName>Buildable</myName>
               </backEnd.Attribute.AttributeImpl>
             </entry>
           </myAttributes>
@@ -7493,6 +8221,21 @@
               </backEnd.Attribute.AttributeImpl>
             </entry>
             <entry>
+              <string>BuildCapacity</string>
+              <backEnd.Attribute.AttributeImpl>
+                <myValue class="int">1</myValue>
+                <myParamList class="java.util.Arrays$ArrayList">
+                  <a class="java.lang.Integer-array">
+                    <int>0</int>
+                    <int>20</int>
+                    <int>1</int>
+                    <int>1</int>
+                  </a>
+                </myParamList>
+                <myName>BuildCapacity</myName>
+              </backEnd.Attribute.AttributeImpl>
+            </entry>
+            <entry>
               <string>Position</string>
               <backEnd.Attribute.AttributeImpl>
                 <myValue class="javafx.geometry.Point2D" reference="../../../../../../javafx.geometry.Point2D"/>
@@ -7531,13 +8274,6 @@
                   </a>
                 </myParamList>
                 <myName>MoveDirection</myName>
-              </backEnd.Attribute.AttributeImpl>
-            </entry>
-            <entry>
-              <string>Buildable</string>
-              <backEnd.Attribute.AttributeImpl>
-                <myValue class="boolean">false</myValue>
-                <myName>Buildable</myName>
               </backEnd.Attribute.AttributeImpl>
             </entry>
           </myAttributes>
@@ -7575,6 +8311,21 @@
               </backEnd.Attribute.AttributeImpl>
             </entry>
             <entry>
+              <string>BuildCapacity</string>
+              <backEnd.Attribute.AttributeImpl>
+                <myValue class="int">1</myValue>
+                <myParamList class="java.util.Arrays$ArrayList">
+                  <a class="java.lang.Integer-array">
+                    <int>0</int>
+                    <int>20</int>
+                    <int>1</int>
+                    <int>1</int>
+                  </a>
+                </myParamList>
+                <myName>BuildCapacity</myName>
+              </backEnd.Attribute.AttributeImpl>
+            </entry>
+            <entry>
               <string>Position</string>
               <backEnd.Attribute.AttributeImpl>
                 <myValue class="javafx.geometry.Point2D" reference="../../../../../../javafx.geometry.Point2D"/>
@@ -7613,13 +8364,6 @@
                   </a>
                 </myParamList>
                 <myName>MoveDirection</myName>
-              </backEnd.Attribute.AttributeImpl>
-            </entry>
-            <entry>
-              <string>Buildable</string>
-              <backEnd.Attribute.AttributeImpl>
-                <myValue class="boolean">false</myValue>
-                <myName>Buildable</myName>
               </backEnd.Attribute.AttributeImpl>
             </entry>
           </myAttributes>
@@ -7657,6 +8401,21 @@
               </backEnd.Attribute.AttributeImpl>
             </entry>
             <entry>
+              <string>BuildCapacity</string>
+              <backEnd.Attribute.AttributeImpl>
+                <myValue class="int">1</myValue>
+                <myParamList class="java.util.Arrays$ArrayList">
+                  <a class="java.lang.Integer-array">
+                    <int>0</int>
+                    <int>20</int>
+                    <int>1</int>
+                    <int>1</int>
+                  </a>
+                </myParamList>
+                <myName>BuildCapacity</myName>
+              </backEnd.Attribute.AttributeImpl>
+            </entry>
+            <entry>
               <string>Position</string>
               <backEnd.Attribute.AttributeImpl>
                 <myValue class="javafx.geometry.Point2D" reference="../../../../../../javafx.geometry.Point2D"/>
@@ -7695,13 +8454,6 @@
                   </a>
                 </myParamList>
                 <myName>MoveDirection</myName>
-              </backEnd.Attribute.AttributeImpl>
-            </entry>
-            <entry>
-              <string>Buildable</string>
-              <backEnd.Attribute.AttributeImpl>
-                <myValue class="boolean">false</myValue>
-                <myName>Buildable</myName>
               </backEnd.Attribute.AttributeImpl>
             </entry>
           </myAttributes>
@@ -7739,6 +8491,21 @@
               </backEnd.Attribute.AttributeImpl>
             </entry>
             <entry>
+              <string>BuildCapacity</string>
+              <backEnd.Attribute.AttributeImpl>
+                <myValue class="int">1</myValue>
+                <myParamList class="java.util.Arrays$ArrayList">
+                  <a class="java.lang.Integer-array">
+                    <int>0</int>
+                    <int>20</int>
+                    <int>1</int>
+                    <int>1</int>
+                  </a>
+                </myParamList>
+                <myName>BuildCapacity</myName>
+              </backEnd.Attribute.AttributeImpl>
+            </entry>
+            <entry>
               <string>Position</string>
               <backEnd.Attribute.AttributeImpl>
                 <myValue class="javafx.geometry.Point2D" reference="../../../../../../javafx.geometry.Point2D"/>
@@ -7777,13 +8544,6 @@
                   </a>
                 </myParamList>
                 <myName>MoveDirection</myName>
-              </backEnd.Attribute.AttributeImpl>
-            </entry>
-            <entry>
-              <string>Buildable</string>
-              <backEnd.Attribute.AttributeImpl>
-                <myValue class="boolean">false</myValue>
-                <myName>Buildable</myName>
               </backEnd.Attribute.AttributeImpl>
             </entry>
           </myAttributes>
@@ -7821,6 +8581,21 @@
               </backEnd.Attribute.AttributeImpl>
             </entry>
             <entry>
+              <string>BuildCapacity</string>
+              <backEnd.Attribute.AttributeImpl>
+                <myValue class="int">1</myValue>
+                <myParamList class="java.util.Arrays$ArrayList">
+                  <a class="java.lang.Integer-array">
+                    <int>0</int>
+                    <int>20</int>
+                    <int>1</int>
+                    <int>1</int>
+                  </a>
+                </myParamList>
+                <myName>BuildCapacity</myName>
+              </backEnd.Attribute.AttributeImpl>
+            </entry>
+            <entry>
               <string>Position</string>
               <backEnd.Attribute.AttributeImpl>
                 <myValue class="javafx.geometry.Point2D" reference="../../../../../../javafx.geometry.Point2D"/>
@@ -7859,13 +8634,6 @@
                   </a>
                 </myParamList>
                 <myName>MoveDirection</myName>
-              </backEnd.Attribute.AttributeImpl>
-            </entry>
-            <entry>
-              <string>Buildable</string>
-              <backEnd.Attribute.AttributeImpl>
-                <myValue class="boolean">false</myValue>
-                <myName>Buildable</myName>
               </backEnd.Attribute.AttributeImpl>
             </entry>
           </myAttributes>
@@ -7903,6 +8671,21 @@
               </backEnd.Attribute.AttributeImpl>
             </entry>
             <entry>
+              <string>BuildCapacity</string>
+              <backEnd.Attribute.AttributeImpl>
+                <myValue class="int">1</myValue>
+                <myParamList class="java.util.Arrays$ArrayList">
+                  <a class="java.lang.Integer-array">
+                    <int>0</int>
+                    <int>20</int>
+                    <int>1</int>
+                    <int>1</int>
+                  </a>
+                </myParamList>
+                <myName>BuildCapacity</myName>
+              </backEnd.Attribute.AttributeImpl>
+            </entry>
+            <entry>
               <string>Position</string>
               <backEnd.Attribute.AttributeImpl>
                 <myValue class="javafx.geometry.Point2D" reference="../../../../../../javafx.geometry.Point2D"/>
@@ -7941,13 +8724,6 @@
                   </a>
                 </myParamList>
                 <myName>MoveDirection</myName>
-              </backEnd.Attribute.AttributeImpl>
-            </entry>
-            <entry>
-              <string>Buildable</string>
-              <backEnd.Attribute.AttributeImpl>
-                <myValue class="boolean">false</myValue>
-                <myName>Buildable</myName>
               </backEnd.Attribute.AttributeImpl>
             </entry>
           </myAttributes>
@@ -7985,6 +8761,21 @@
               </backEnd.Attribute.AttributeImpl>
             </entry>
             <entry>
+              <string>BuildCapacity</string>
+              <backEnd.Attribute.AttributeImpl>
+                <myValue class="int">1</myValue>
+                <myParamList class="java.util.Arrays$ArrayList">
+                  <a class="java.lang.Integer-array">
+                    <int>0</int>
+                    <int>20</int>
+                    <int>1</int>
+                    <int>1</int>
+                  </a>
+                </myParamList>
+                <myName>BuildCapacity</myName>
+              </backEnd.Attribute.AttributeImpl>
+            </entry>
+            <entry>
               <string>Position</string>
               <backEnd.Attribute.AttributeImpl>
                 <myValue class="javafx.geometry.Point2D" reference="../../../../../../javafx.geometry.Point2D"/>
@@ -8023,13 +8814,6 @@
                   </a>
                 </myParamList>
                 <myName>MoveDirection</myName>
-              </backEnd.Attribute.AttributeImpl>
-            </entry>
-            <entry>
-              <string>Buildable</string>
-              <backEnd.Attribute.AttributeImpl>
-                <myValue class="boolean">false</myValue>
-                <myName>Buildable</myName>
               </backEnd.Attribute.AttributeImpl>
             </entry>
           </myAttributes>
@@ -8067,6 +8851,21 @@
               </backEnd.Attribute.AttributeImpl>
             </entry>
             <entry>
+              <string>BuildCapacity</string>
+              <backEnd.Attribute.AttributeImpl>
+                <myValue class="int">1</myValue>
+                <myParamList class="java.util.Arrays$ArrayList">
+                  <a class="java.lang.Integer-array">
+                    <int>0</int>
+                    <int>20</int>
+                    <int>1</int>
+                    <int>1</int>
+                  </a>
+                </myParamList>
+                <myName>BuildCapacity</myName>
+              </backEnd.Attribute.AttributeImpl>
+            </entry>
+            <entry>
               <string>Position</string>
               <backEnd.Attribute.AttributeImpl>
                 <myValue class="javafx.geometry.Point2D" reference="../../../../../../javafx.geometry.Point2D"/>
@@ -8105,13 +8904,6 @@
                   </a>
                 </myParamList>
                 <myName>MoveDirection</myName>
-              </backEnd.Attribute.AttributeImpl>
-            </entry>
-            <entry>
-              <string>Buildable</string>
-              <backEnd.Attribute.AttributeImpl>
-                <myValue class="boolean">false</myValue>
-                <myName>Buildable</myName>
               </backEnd.Attribute.AttributeImpl>
             </entry>
           </myAttributes>
@@ -8149,6 +8941,21 @@
               </backEnd.Attribute.AttributeImpl>
             </entry>
             <entry>
+              <string>BuildCapacity</string>
+              <backEnd.Attribute.AttributeImpl>
+                <myValue class="int">1</myValue>
+                <myParamList class="java.util.Arrays$ArrayList">
+                  <a class="java.lang.Integer-array">
+                    <int>0</int>
+                    <int>20</int>
+                    <int>1</int>
+                    <int>1</int>
+                  </a>
+                </myParamList>
+                <myName>BuildCapacity</myName>
+              </backEnd.Attribute.AttributeImpl>
+            </entry>
+            <entry>
               <string>Position</string>
               <backEnd.Attribute.AttributeImpl>
                 <myValue class="javafx.geometry.Point2D" reference="../../../../../../javafx.geometry.Point2D"/>
@@ -8187,13 +8994,6 @@
                   </a>
                 </myParamList>
                 <myName>MoveDirection</myName>
-              </backEnd.Attribute.AttributeImpl>
-            </entry>
-            <entry>
-              <string>Buildable</string>
-              <backEnd.Attribute.AttributeImpl>
-                <myValue class="boolean">false</myValue>
-                <myName>Buildable</myName>
               </backEnd.Attribute.AttributeImpl>
             </entry>
           </myAttributes>
