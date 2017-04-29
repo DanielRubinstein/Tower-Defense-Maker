@@ -34,7 +34,9 @@ public class AttackEngine implements Engine {
 		
 		for (Component attacker : myComponentGraph.getAllComponents()) {
 			if (attacker.getAttribute("Type").getValue().equals("Tower")) {
-				if (masterTime % ((Double) attacker.getAttribute("FireRate").getValue()/1000) <= stepTime/10) { 
+				if (masterTime % ((Double) attacker.getAttribute("FireRate").getValue()/1000) <= stepTime) {
+					long timeStarted = System.nanoTime();
+					System.out.println(this.getClass().getSimpleName() + " : Shot started");
 					List<Component> targets = myComponentGraph.getComponentsWithinRadius(attacker,
 							(double) attacker.getAttribute("FireRadius").getValue());
 					for (Component potentialTarget : targets) {
@@ -42,6 +44,7 @@ public class AttackEngine implements Engine {
 							attackersAndTargets.put(attacker, potentialTarget);
 						}
 					}
+					System.out.println(this.getClass().getSimpleName() + ": Time Taken to shoot (Nano): " + (System.nanoTime() - timeStarted));
 				}
 			}
 		}
