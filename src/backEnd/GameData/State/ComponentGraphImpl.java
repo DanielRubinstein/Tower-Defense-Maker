@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Map;
 
 import javafx.geometry.Point2D;
+import backEnd.Attribute.AttributeOwner;
 import backEnd.Attribute.AttributeOwnerReader;
 
 /**
@@ -185,6 +186,15 @@ public class ComponentGraphImpl implements ComponentGraph {
 	public int compareTo(Object o) {
 		// TODO Auto-generated method stub
 		return 0;
+	}
+
+	@Override
+	public Collection<AttributeOwner> getAllAttributeOwners() {
+		Collection<AttributeOwner> myAOs = new ArrayList<AttributeOwner>();
+		for(AttributeOwner ao : myComponents){
+			myAOs.add(ao);
+		}
+		return myAOs;
 	}
 
 }

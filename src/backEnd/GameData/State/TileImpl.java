@@ -152,4 +152,15 @@ public class TileImpl implements Tile, AttributeOwner, SerializableObservable {
 		return Integer.compare(this.hashCode(), o.hashCode());
 	}
 
+	@Override
+	public boolean contains(String attName) {
+		return myAttrData.containsAttribute(attName);
+	}
+
+	@Override
+	public void removeAttribute(String attrName) {
+		myAttrData.remove(attrName);
+		
+	}
+
 }
