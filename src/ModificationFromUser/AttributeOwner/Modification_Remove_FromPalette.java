@@ -4,6 +4,7 @@ import ModificationFromUser.ModificationFromUser;
 import backEnd.BankController;
 import backEnd.ModelImpl;
 import backEnd.Attribute.AttributeOwner;
+import backEnd.Attribute.AttributeOwnerReader;
 import backEnd.Mode.ModeException;
 import util.reflection.Reflection;
 
@@ -15,13 +16,13 @@ import util.reflection.Reflection;
  */
 public class Modification_Remove_FromPalette implements ModificationFromUser {
 
-	private AttributeOwner attrOwn;
+	private AttributeOwnerReader attrOwnReader;
 	private BankController myBankController;
 
 	public static final String DESCRIPTION = "Remove Preset Component or Tile";	
 	
-	public Modification_Remove_FromPalette(AttributeOwner obj){
-		this.attrOwn = obj;
+	public Modification_Remove_FromPalette(AttributeOwnerReader obj){
+		this.attrOwnReader = obj;
 	}
 
 	@Override
@@ -30,7 +31,7 @@ public class Modification_Remove_FromPalette implements ModificationFromUser {
 		switch (model.getMode().getUserMode()) {
 		case "AUTHOR":
 			myBankController = model.getBankController();
-
+			AttributeOwner attrOwn = model.getAttributeOwner(attrOwnReader);
 			Reflection.callMethod(myBankController, "remove", attrOwn);
 			break;
 			

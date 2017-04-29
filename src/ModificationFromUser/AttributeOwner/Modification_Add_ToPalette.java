@@ -5,6 +5,7 @@ import ModificationFromUser.AttributeOwner.ReflectionMethods.Modification_Add_To
 import backEnd.BankController;
 import backEnd.ModelImpl;
 import backEnd.Attribute.AttributeOwner;
+import backEnd.Attribute.AttributeOwnerReader;
 import backEnd.Attribute.AttributeOwnerSerializer;
 import backEnd.Mode.ModeException;
 import util.reflection.Reflection;
@@ -17,14 +18,14 @@ import util.reflection.Reflection;
  */
 public class Modification_Add_ToPalette implements ModificationFromUser {
 
-	private AttributeOwner newAttrOwn;
+	private AttributeOwnerReader newAttrOwnReader;
 	private BankController myBankController;
 	private String newName;
 
 	public static final String DESCRIPTION = "Add Preset Component or Tile";
 
-	public Modification_Add_ToPalette(String newAttributeOwnerName, AttributeOwner obj) {
-		this.newAttrOwn = obj;
+	public Modification_Add_ToPalette(String newAttributeOwnerName, AttributeOwnerReader obj) {
+		this.newAttrOwnReader = obj;
 		this.newName = newAttributeOwnerName;
 	}
 
@@ -32,25 +33,30 @@ public class Modification_Add_ToPalette implements ModificationFromUser {
 	public void invoke(ModelImpl model) throws Exception {
 		switch (model.getMode().getUserMode()) {
 		case "AUTHOR":
-			AttributeOwner newAttrOwnToAdd;
-			if (model.getGameData().getState().getComponentGraph().contains(newAttrOwn)
-					|| model.getGameData().getState().getTileGrid().contains(newAttrOwn)) {
+			AttributeOwner toAdd;
+			AttributeOwner newAttributeOwner = model.getAttributeOwner(newAttrOwnReader);
+			if (stateContains(newAttributeOwner, model)) {
 				AttributeOwnerSerializer attributeOwnerSerializer = new AttributeOwnerSerializer();
-				newAttrOwnToAdd = attributeOwnerSerializer.createCopy(newAttrOwn);
+				toAdd = attributeOwnerSerializer.createCopy(newAttributeOwner);
 			} else {
-				newAttrOwnToAdd = newAttrOwn;
+				toAdd = newAttributeOwner;
 			}
 			myBankController = model.getBankController();
 			Modification_Add_ToPalette_Methods methods = new Modification_Add_ToPalette_Methods(myBankController,
 					newName);
 
-			Reflection.callMethod(methods, "add", newAttrOwnToAdd);
+			Reflection.callMethod(methods, "add", toAdd);
 			break;
 
 		case "PLAYER":
 			new ModeException(model.getMode(), DESCRIPTION);
 		}
 
+	}
+	
+	private boolean stateContains(AttributeOwner myAttrOwn, ModelImpl myModel){
+		return myModel.getGameData().getState().getComponentGraph().contains(myAttrOwn)
+		|| myModel.getGameData().getState().getTileGrid().contains(myAttrOwn);
 	}
 
 }

@@ -183,7 +183,6 @@ public class Palette implements SkeletonObject, SerializableObserver{
 			}
 		}
 		List<ImageView> toRemove = new ArrayList<ImageView>();
-		System.out.println(myPresetMapFrontEnd.entrySet() + " " + myPresetMapBackEnd.entrySet());
 		for (ImageView iv : myPresetMapFrontEnd.keySet()) {
 			if (!myPresetMapBackEnd.containsValue(myPresetMapFrontEnd.get(iv))) {
 				toRemove.add(iv);

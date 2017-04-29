@@ -4,7 +4,6 @@ import java.util.List;
 
 import backEnd.ModelImpl;
 import backEnd.GameData.State.Component;
-import backEnd.GameData.State.ComponentImpl;
 import backEnd.GameData.State.Tile;
 import backEnd.GameData.State.TileCorners;
 import backEnd.GameData.State.TileImpl;

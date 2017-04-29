@@ -1,17 +1,10 @@
 package ModificationFromUser.AttributeOwner;
 
-import java.util.List;
-
 import ModificationFromUser.ModificationFromUser;
 import ModificationFromUser.AttributeOwner.ReflectionMethods.Modification_Add_ToGrid_Methods;
 import backEnd.ModelImpl;
 import backEnd.Attribute.AttributeOwner;
-import backEnd.GameData.State.Component;
-import backEnd.GameData.State.Tile;
-import backEnd.GameData.State.TileCorners;
-import backEnd.Mode.ModeException;
 import javafx.geometry.Point2D;
-import resources.constants.StringResourceBundle;
 import util.reflection.Reflection;
 import backEnd.Attribute.AttributeOwnerReader;
 
@@ -24,8 +17,6 @@ import backEnd.Attribute.AttributeOwnerReader;
 public class Modification_Add_StraightToGrid implements ModificationFromUser {
 	private AttributeOwnerReader newAttrOwn;
 	private Point2D location;
-
-	
 	public Modification_Add_StraightToGrid(AttributeOwnerReader toAdd) {
 		this.newAttrOwn = toAdd;
 	
