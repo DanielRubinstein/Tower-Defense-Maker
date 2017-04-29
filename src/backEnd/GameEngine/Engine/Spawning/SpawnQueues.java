@@ -17,14 +17,13 @@ public class SpawnQueues implements SerializableObservable{
 	private double myTimeLastQueueSpawned;
 	private int myCurrentSpawn;
 	private double myGameTime;
-	private List<SerializableObserver> observers;
+	private List<SerializableObserver> observers = new ArrayList<SerializableObserver>();
 	/**
 	 * Initializes blank lists to spawn from
 	 */
 	public SpawnQueues() {
 		myFrequencySpawnQueue = new ArrayList<SpawnDataImpl>();
 		mySingleSpawnQueue	 = new ArrayList<SpawnDataImpl>();
-		observers = new ArrayList<SerializableObserver>();
 	}
 	
 	public SpawnQueues(SpawnQueueInstantiator i)
@@ -34,9 +33,7 @@ public class SpawnQueues implements SerializableObservable{
 			mySingleSpawnQueue = i.getSpawnQueue();
 			myTimeLastQueueSpawned = i.getLastSpawnTime();
 			myCurrentSpawn = i.getCurrentSpawn();
-			myGameTime = i.getGameTime();
-		
-		
+			myGameTime = i.getGameTime();		
 	}
 	
 	public SpawnQueueInstantiator getInstantiator()

@@ -120,7 +120,7 @@ public class XMLWriterImpl implements XMLWriter{
 
 		String componentListXML = xStream.toXML(gameData.getState().getComponentGraph().getAllComponents());
 		componentsStripper.giveBackObservers();
-		saveToXML(levelTemplateDataPath+ levelName +"/", strResources.getFromFilePaths("ComponentMap_FileName"), componentListXML);
+		saveToXML(levelTemplateDataPath+ levelName +"/", strResources.getFromFilePaths("ComponentGraph_FileName"), componentListXML);
 		
 		String playerStatusXML = xStream.toXML(new PlayerStatus());
 		saveToXML(levelTemplateDataPath+ levelName +"/", strResources.getFromFilePaths("PlayerStatus_FileName"), playerStatusXML);
