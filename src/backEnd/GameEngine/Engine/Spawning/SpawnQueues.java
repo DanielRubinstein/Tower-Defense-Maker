@@ -46,24 +46,16 @@ public class SpawnQueues implements SerializableObservable{
 	 * 
 	 * @return frequencyQueue
 	 */
-	public List<SpawnDataReader> getFrequencySpawnQueue(){
-		List<SpawnDataReader> result = new ArrayList<>();
-		for(SpawnDataReader spawnDataReader : myFrequencySpawnQueue){
-			result.add(spawnDataReader);
-		}
-		return result;
+	public List<? extends SpawnDataReader> getFrequencySpawnQueue(){
+		return myFrequencySpawnQueue; 
 	}
 	
 	/**
 	 * SpawnQueue return
 	 * @return
 	 */
-	public List<SpawnDataReader> getSingleSpawnQueue() {
-		List<SpawnDataReader> result = new ArrayList<>();
-		for(SpawnDataReader spawnDataReader : mySingleSpawnQueue){
-			result.add(spawnDataReader);
-		}
-		return result;
+	public List<? extends SpawnDataReader> getSingleSpawnQueue() {
+		return mySingleSpawnQueue;
 	}
 	
 	/**

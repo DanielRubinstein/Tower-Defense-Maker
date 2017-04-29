@@ -34,8 +34,8 @@ public class SpawnTimelineView implements SkeletonObject, SerializableObserver {
 	private GridPane myRoot;
 	private String mySpawnQueueName;
 	private SpawnQueues mySpawnQueues;
-	private List<Pair<List<SpawnDataReader>, ScrollPane>> spawnQueueToDropZone;
-	private Map<SpawnDataReader, List<SpawnDataReader>> spawnDataToQueue;
+	private List<Pair<List<? extends SpawnDataReader>, ScrollPane>> spawnQueueToDropZone;
+	private Map<SpawnDataReader, List<? extends SpawnDataReader>> spawnDataToQueue;
 	private Map<SpawnDataReader, VisualSpawnEntry> spawnDataToVisual;
 	private Map<SpawnDataReader, ScrollPane> spawnDataToDropZone;
 
@@ -52,22 +52,22 @@ public class SpawnTimelineView implements SkeletonObject, SerializableObserver {
 		spawnDataToQueue = new HashMap<>();
 		spawnDataToVisual = new HashMap<>();
 		spawnDataToDropZone = new HashMap<>();
-		spawnQueueToDropZone = new ArrayList<Pair<List<SpawnDataReader>,ScrollPane>>();
+		spawnQueueToDropZone = new ArrayList<Pair<List<? extends SpawnDataReader>,ScrollPane>>();
 		
-		List<SpawnDataReader> single = mySpawnQueues.getSingleSpawnQueue();
-		List<SpawnDataReader> frequency = mySpawnQueues.getFrequencySpawnQueue();
+		List<? extends SpawnDataReader> single = mySpawnQueues.getSingleSpawnQueue();
+		List<? extends SpawnDataReader> frequency = mySpawnQueues.getFrequencySpawnQueue();
 		
 		ScrollPane dropZoneSingle = singleDropZone("Single Instance Spawns", 0, false);
 		ScrollPane dropZoneFrequency = singleDropZone("Recurring Spawns", 1, true);
 		
-		spawnQueueToDropZone.add(new Pair<List<SpawnDataReader>, ScrollPane>(single, dropZoneSingle));
-		spawnQueueToDropZone.add(new Pair<List<SpawnDataReader>, ScrollPane>(frequency, dropZoneFrequency));
+		spawnQueueToDropZone.add(new Pair<List<? extends SpawnDataReader>, ScrollPane>(single, dropZoneSingle));
+		spawnQueueToDropZone.add(new Pair<List<? extends SpawnDataReader>, ScrollPane>(frequency, dropZoneFrequency));
 		
 		loadTimelines(single, dropZoneSingle);
 		loadTimelines(frequency, dropZoneFrequency);
 	}
 
-	private void loadTimelines(List<SpawnDataReader> queue, ScrollPane dropZone) {
+	private void loadTimelines(List<? extends SpawnDataReader> queue, ScrollPane dropZone) {
 		for(SpawnDataReader spawnDataReader : queue){
 			spawnDataToQueue.put(spawnDataReader, queue);
 			spawnDataToDropZone.put(spawnDataReader, dropZone);
@@ -138,8 +138,8 @@ public class SpawnTimelineView implements SkeletonObject, SerializableObserver {
 
 	@Override
 	public void update(SerializableObservable so, Object relevantSpawnData) {
-		for(Pair<List<SpawnDataReader>, ScrollPane> entry : spawnQueueToDropZone){
-			List<SpawnDataReader> queue = entry.getKey();
+		for(Pair<List<? extends SpawnDataReader>, ScrollPane> entry : spawnQueueToDropZone){
+			List<? extends SpawnDataReader> queue = entry.getKey();
 			if(queue.contains(relevantSpawnData)){
 				addSpawn(relevantSpawnData, queue, entry.getValue());
 				return;
@@ -156,7 +156,7 @@ public class SpawnTimelineView implements SkeletonObject, SerializableObserver {
 		spawnDataToQueue.remove(toRemove_Spawn);
 	}
 
-	private void addSpawn(Object obj, List<SpawnDataReader> queue, ScrollPane dropZone) {
+	private void addSpawn(Object obj, List<? extends SpawnDataReader> queue, ScrollPane dropZone) {
 		SpawnDataReader toAdd_Spawn = queue.get(queue.indexOf(obj));
 		spawnDataToQueue.put(toAdd_Spawn, queue);
 		Node toAdd = createVisual(toAdd_Spawn);
