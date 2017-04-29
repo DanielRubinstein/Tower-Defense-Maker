@@ -66,18 +66,6 @@ public class MainMenu{
 		primaryMenu.display(stage);
 	}
 
-	
-	private void launchHelp() {
-		WebView browser = new WebView();
-		WebEngine webEngine = browser.getEngine();
-		webEngine.load(helpURL);
-		browser.autosize();
-		Stage helpStage = new Stage();
-		Scene scene = new Scene(browser, browser.getPrefWidth(), browser.getPrefHeight());
-		helpStage.setScene(scene);
-		helpStage.show();
-	}
-
 	private void chooseLevel()
 	{
 		loadLevel(TEMPLATE_PATH);
