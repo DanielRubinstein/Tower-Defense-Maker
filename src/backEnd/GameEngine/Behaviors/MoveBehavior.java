@@ -3,6 +3,7 @@ import java.io.FileNotFoundException;
 
 import java.util.ResourceBundle;
 import backEnd.Attribute.AttributeData;
+import backEnd.GameData.State.Component;
 import backEnd.GameData.State.ComponentImpl;
 import backEnd.GameData.State.Tile;
 import backEnd.GameEngine.Engine.Coordinates;
@@ -18,7 +19,7 @@ public class MoveBehavior implements Behavior {
 	public AttributeData myAttributes;
 	private Point2D currentPosition;
 	private Point2D newPoint;
-	private ComponentImpl myComponent;
+	private Component myComponent;
 	private Tile currentTile;
 	private double speed;
 	private double currentX;
@@ -33,7 +34,7 @@ public class MoveBehavior implements Behavior {
 	private final static String DOWN="Down";
 	private final static String RIGHT="Right";
 	private final static String LEFT="Left";
-	public MoveBehavior(ComponentImpl inputComponent) {
+	public MoveBehavior(Component inputComponent) {
 		myComponent = inputComponent;
 		previousMovement = myComponent.getPreviousMovement();
 		speed = myComponent.<Double>getAttribute(myResources.getString("Speed")).getValue();

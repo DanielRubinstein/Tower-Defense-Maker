@@ -7,11 +7,10 @@ import java.util.function.Consumer;
 import ModificationFromUser.*;
 import backEnd.BankController;
 import backEnd.BankControllerReader;
-import backEnd.BankController;
 import backEnd.Model;
 import backEnd.ModelReader;
 import backEnd.GameData.Rules.RuleReader;
-import backEnd.GameData.State.ComponentImpl;
+import backEnd.GameData.State.Component;
 import backEnd.GameData.State.PlayerStatusReader;
 import backEnd.GameData.State.Tile;
 import backEnd.GameEngine.Engine.Spawning.SpawnQueues;
@@ -96,7 +95,7 @@ public class ViewImpl implements View {
 	}
 
 	@Override
-	public Collection<ComponentImpl> getComponentPresets() {
+	public Collection<Component> getComponentPresets() {
 		return myModel.getBankController().getComponentMap().values();
 	}
 
@@ -163,8 +162,9 @@ public class ViewImpl implements View {
 	}
 
 	@Override
-	public boolean isComponentOnGrid(ComponentImpl c) {
+	public boolean isComponentOnGrid(Component c) {
 		return myModel.getState().getComponentGraph().contains(c);
 	}
+
 
 }

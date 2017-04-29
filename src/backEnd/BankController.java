@@ -9,7 +9,7 @@ import backEnd.Mode.Mode;
 import data.DataControllerReader;
 import resources.constants.StringResourceBundle;
 import backEnd.Attribute.AttributeOwner;
-import backEnd.GameData.State.ComponentImpl;
+import backEnd.GameData.State.Component;
 import backEnd.GameData.State.SerializableObserver;
 import backEnd.GameData.State.Tile;
 
@@ -23,18 +23,21 @@ public class BankController implements BankControllerReader
 {
 	private static final StringResourceBundle strResources = new StringResourceBundle();
 	private Map<String, Tile> tileBank;
-	private Map<String, ComponentImpl> componentBank;
+	private Map<String, Component> componentBank;
 	private Map<String, Tile> accessibleTileBank;
-	private Map<String, ComponentImpl> accessibleComponentBank;
+	private Map<String, Component> accessibleComponentBank;
 	private Mode myMode;
 	private List<SerializableObserver> observers;
-	private DataControllerReader dataController;
 	
-	public BankController(Mode myMode, DataControllerReader dataController) {
-		this.tileBank = dataController.loadTileMap();
-		this.componentBank = dataController.loadComponentMap();
+	public BankController(Mode myMode)
+	{
+		this(myMode, new HashMap<String, Tile>(), new HashMap<String, Component>());
+	}
+
+	public BankController(Mode myMode, Map<String, Tile> tileBank, Map<String, Component> componentBank) {
+		this.tileBank = tileBank;
+		this.componentBank = componentBank;
 		this.myMode = myMode;
-		this.dataController = dataController;
 		this.observers = new ArrayList<SerializableObserver>();
 		accessibleComponentBank = new HashMap<>();
 		accessibleTileBank = new HashMap<>();
@@ -42,7 +45,7 @@ public class BankController implements BankControllerReader
 	}
 	
 	@Override
-	public String getComponentName(ComponentImpl component){
+	public String getComponentName(Component component){
 		return findKeyFromValue(componentBank, component);
 	}
 
@@ -78,7 +81,7 @@ public class BankController implements BankControllerReader
 		}
 	}
 
-	public Map<String, ComponentImpl> getAccessibleComponentMap() {
+	public Map<String, Component> getAccessibleComponentMap() {
 		refreshAccessibleComponentMap();
 		return accessibleComponentBank;
 	}
@@ -94,7 +97,7 @@ public class BankController implements BankControllerReader
 		}
 	}
 
-	public Map<String, ComponentImpl> getComponentMap() {
+	public Map<String, Component> getComponentMap() {
 		return componentBank;
 	}
 
@@ -102,7 +105,7 @@ public class BankController implements BankControllerReader
 		return tileBank;
 	}
 
-	public void addNewComponent(String name, ComponentImpl component) {
+	public void addNewComponent(String name, Component component) {
 		if (tileBank.containsKey(name)) {
 			JOptionPane.showMessageDialog(null, strResources.getFromErrorMessages("Duplicate_Name_Error"));
 		} else {
@@ -121,8 +124,8 @@ public class BankController implements BankControllerReader
 	public String getAOName(AttributeOwner preset) {
 		if (preset instanceof Tile) {
 			return findKeyFromValue(tileBank, (Tile) preset);
-		} else if (preset instanceof ComponentImpl) {
-			return findKeyFromValue(componentBank, (ComponentImpl) preset);
+		} else if (preset instanceof Component) {
+			return findKeyFromValue(componentBank, (Component) preset);
 		}
 		return "";
 	}
@@ -146,7 +149,7 @@ public class BankController implements BankControllerReader
 		}
 	}
 	
-	public ComponentImpl getComponent(String componentName){
+	public Component getComponent(String componentName){
 		if (componentBank.containsKey(componentName)){
 			return componentBank.get(componentName);
 		}
@@ -166,10 +169,5 @@ public class BankController implements BankControllerReader
 		for(SerializableObserver o : observers){
 			o.update(null, null);
 		}
-		saveXML();
-	}
-
-	private void saveXML() {
-		dataController.saveUniversalGameData();
 	}
 }

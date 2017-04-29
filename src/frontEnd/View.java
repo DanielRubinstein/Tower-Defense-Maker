@@ -6,10 +6,9 @@ import java.util.Map;
 import ModificationFromUser.ModificationFromUser;
 import backEnd.BankController;
 import backEnd.BankControllerReader;
-import backEnd.BankController;
 import backEnd.Model;
 import backEnd.GameData.Rules.RuleReader;
-import backEnd.GameData.State.ComponentImpl;
+import backEnd.GameData.State.Component;
 import backEnd.GameEngine.Engine.Spawning.SpawnQueues;
 import backEnd.LevelProgression.LevelProgressionControllerEditor;
 import backEnd.LevelProgression.LevelProgressionControllerReader;
@@ -43,6 +42,6 @@ public interface View extends ViewReader{
 
 	BankControllerReader getBankControllerReader();
 
-	public boolean isComponentOnGrid(ComponentImpl c);
+	public boolean isComponentOnGrid(Component c);
 
 }

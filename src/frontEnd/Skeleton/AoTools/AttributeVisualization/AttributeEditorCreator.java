@@ -12,7 +12,6 @@ import ModificationFromUser.AttributeOwner.Modification_EditAttribute;
 import backEnd.Attribute.Attribute;
 import backEnd.Attribute.AttributeOwner;
 import backEnd.GameData.State.Component;
-import backEnd.GameData.State.ComponentImpl;
 import frontEnd.View;
 import frontEnd.CustomJavafxNodes.NumberChanger;
 import frontEnd.CustomJavafxNodes.PositionRequester;
@@ -50,7 +49,7 @@ public class AttributeEditorCreator implements AttributeVisualization{
 		return "get%s";
 	}
 	
-	private HBox createVisualPair(Map<HBox, ComponentImpl> toCompMap, Map<ComponentImpl, HBox> toPairMap, ComponentImpl preset){
+	private HBox createVisualPair(Map<HBox, Component> toCompMap, Map<Component, HBox> toPairMap, Component preset){
 		HBox pair = new HBox();
 		
 		Label name = new Label();
@@ -153,18 +152,18 @@ public class AttributeEditorCreator implements AttributeVisualization{
 
 	@Override
 	public Node getCOMPONENT() {
-		Map<HBox, ComponentImpl> toCompMap = new HashMap<HBox, ComponentImpl>();
-		Map<ComponentImpl, HBox> toPairMap = new HashMap<ComponentImpl, HBox>();
-		Collection<ComponentImpl> presetComponents = myView.getBankController().getComponentMap().values();
+		Map<HBox, Component> toCompMap = new HashMap<HBox, Component>();
+		Map<Component, HBox> toPairMap = new HashMap<Component, HBox>();
+		Collection<Component> presetComponents = myView.getBankController().getComponentMap().values();
 		Collection<HBox> visualPair = new ArrayList<HBox>();
-		for(ComponentImpl preset : presetComponents){
+		for(Component preset : presetComponents){
 			visualPair.add(createVisualPair(toCompMap, toPairMap, preset));
 		}
 		ObservableList<HBox> options = (ObservableList<HBox>) FXCollections.observableArrayList(visualPair);
 		ComboBox<HBox> optionsBox = new ComboBox<HBox>(options);
 		try {
 			// TODO this will work as long as there is an attribute there
-			optionsBox.getSelectionModel().select(toPairMap.get((ComponentImpl) myAttr.getValue()));
+			optionsBox.getSelectionModel().select(toPairMap.get((Component) myAttr.getValue()));
 		} catch (NullPointerException e) {
 			// do nothing
 		}

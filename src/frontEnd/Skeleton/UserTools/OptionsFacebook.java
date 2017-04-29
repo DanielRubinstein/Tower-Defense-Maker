@@ -43,7 +43,7 @@ public class OptionsFacebook implements SkeletonObject {
 			profPic = myFb.getPicture();
 			profPic.setOnMouseClicked(e -> launch());
 			myRoot.getChildren().add(profPic);
-		} catch (Exception e) {
+		} catch (FacebookException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}

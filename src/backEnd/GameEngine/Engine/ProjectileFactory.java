@@ -7,6 +7,7 @@ import backEnd.Attribute.AttributeData;
 import backEnd.Attribute.AttributeFactoryImpl;
 import backEnd.Attribute.AttributeFactoryReader;
 import backEnd.Attribute.AttributeImpl;
+import backEnd.GameData.State.Component;
 import backEnd.GameData.State.ComponentImpl;
 
 /**
@@ -19,10 +20,10 @@ public class ProjectileFactory {
 
 	private AttributeData myAttributeData;
 	private AttributeFactoryReader myAttributeFactory;
-	private ComponentImpl myComponent;
+	private Component myComponent;
 	
 	@SuppressWarnings("unchecked")
-	public ProjectileFactory(ComponentImpl tower) throws FileNotFoundException{
+	public ProjectileFactory(Component attacker) throws FileNotFoundException{
 		myComponent=new ComponentImpl();
 		myAttributeFactory = new AttributeFactoryImpl();
 		AttributeData ad = new AttributeData();
@@ -41,17 +42,17 @@ public class ProjectileFactory {
 		Attribute<String> target = (Attribute<String>) myAttributeFactory.getAttribute(("ProjectileTarget"));
 
 		myType.setValue("Projectile"); //surprisingly, all projectiles are of type Projectile!
-		projectileImage.setValue((String) tower.getAttribute("FireImage").getValue());
-		projectileType.setValue((String) tower.getAttribute("FireType").getValue());
-		projectileHealth.setValue((Integer) tower.getAttribute("Health").getValue());
-		projectileDamage.setValue((Integer) tower.getAttribute("FireDamage").getValue());
+		projectileImage.setValue((String) attacker.getAttribute("FireImage").getValue());
+		projectileType.setValue((String) attacker.getAttribute("FireType").getValue());
+		projectileHealth.setValue((Integer) attacker.getAttribute("Health").getValue());
+		projectileDamage.setValue((Integer) attacker.getAttribute("FireDamage").getValue());
 		projectileMaxDist.setValue(0.0);
 		projectileTraveled.setValue(0.0);
-		projectileVelocity.setValue((Double) tower.getAttribute("Velocity").getValue());
-		explosionSize.setValue((Double) tower.getAttribute("ExplosionRadius").getValue());
-		slowFactor.setValue((Double) tower.getAttribute("SlowFactor").getValue());
-		fireRate.setValue((Double) tower.getAttribute("FireRate").getValue());
-		target.setValue((String) tower.getAttribute("ProjectileTarget").getValue());
+		projectileVelocity.setValue((Double) attacker.getAttribute("Velocity").getValue());
+		explosionSize.setValue((Double) attacker.getAttribute("ExplosionRadius").getValue());
+		slowFactor.setValue((Double) attacker.getAttribute("SlowFactor").getValue());
+		fireRate.setValue((Double) attacker.getAttribute("FireRate").getValue());
+		target.setValue((String) attacker.getAttribute("ProjectileTarget").getValue());
 
 		myComponent.setAttributeValue(("Type"), (String) myType.getValue());
 		myComponent.setAttributeValue(("ImageFile"), (String) projectileImage.getValue());
@@ -73,7 +74,7 @@ public class ProjectileFactory {
 		return myAttributeData;
 	}
 	
-	public ComponentImpl getProjectile(){
+	public Component getProjectile(){
 		return myComponent;
 	}
 }
