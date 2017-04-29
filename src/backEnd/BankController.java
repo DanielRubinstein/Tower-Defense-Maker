@@ -10,7 +10,6 @@ import data.DataControllerReader;
 import resources.constants.StringResourceBundle;
 import backEnd.Attribute.AttributeOwner;
 import backEnd.GameData.State.Component;
-import backEnd.GameData.State.ComponentImpl;
 import backEnd.GameData.State.SerializableObserver;
 import backEnd.GameData.State.Tile;
 
@@ -46,7 +45,7 @@ public class BankController implements BankControllerReader
 	}
 	
 	@Override
-	public String getComponentName(ComponentImpl component){
+	public String getComponentName(Component component){
 		return findKeyFromValue(componentBank, component);
 	}
 
@@ -106,7 +105,7 @@ public class BankController implements BankControllerReader
 		return tileBank;
 	}
 
-	public void addNewComponent(String name, ComponentImpl component) {
+	public void addNewComponent(String name, Component component) {
 		if (tileBank.containsKey(name)) {
 			JOptionPane.showMessageDialog(null, strResources.getFromErrorMessages("Duplicate_Name_Error"));
 		} else {
@@ -125,8 +124,8 @@ public class BankController implements BankControllerReader
 	public String getAOName(AttributeOwner preset) {
 		if (preset instanceof Tile) {
 			return findKeyFromValue(tileBank, (Tile) preset);
-		} else if (preset instanceof ComponentImpl) {
-			return findKeyFromValue(componentBank, (ComponentImpl) preset);
+		} else if (preset instanceof Component) {
+			return findKeyFromValue(componentBank, (Component) preset);
 		}
 		return "";
 	}

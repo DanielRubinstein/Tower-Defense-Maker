@@ -20,8 +20,8 @@ import backEnd.Attribute.AttributeOwnerReader;
  */
 
 public class ComponentGraphImpl implements ComponentGraph {
-	private Map<Point2D, List<ComponentImpl>> componentMap;
-	private List<ComponentImpl> myComponents;
+	private Map<Point2D, List<Component>> componentMap;
+	private List<Component> myComponents;
 	private List<SerializableObserver> observers;
 	private List<List<SerializableObserver>> compObserverList;
 
@@ -29,34 +29,34 @@ public class ComponentGraphImpl implements ComponentGraph {
 		this(new HashMap<>());
 	}
 
-	public ComponentGraphImpl(HashMap<Point2D, List<ComponentImpl>> fromXML) {
+	public ComponentGraphImpl(HashMap<Point2D, List<Component>> fromXML) {
 		componentMap = fromXML;
 		observers = new ArrayList<SerializableObserver>();
-		myComponents = new ArrayList<ComponentImpl>();
+		myComponents = new ArrayList<Component>();
 	}
 
-	public Collection<ComponentImpl> getAllComponents() {
+	public Collection<Component> getAllComponents() {
 
-		myComponents = new ArrayList<ComponentImpl>();
-		for (List<ComponentImpl> list : componentMap.values()) {
+		myComponents = new ArrayList<Component>();
+		for (List<Component> list : componentMap.values()) {
 			myComponents.addAll(list);
 		}
 
 		return myComponents;
 	}
 
-	public Map<Point2D, List<ComponentImpl>> getComponentMap() {
+	public Map<Point2D, List<Component>> getComponentMap() {
 		return componentMap;
 	}
 
 	@Override
-	public List<ComponentImpl> getComponentsByScreenPosition(Point2D screenPosition) {
+	public List<Component> getComponentsByScreenPosition(Point2D screenPosition) {
 		return componentMap.get(screenPosition);
 	}
 
 	@Override
-	public List<ComponentImpl> getComponentsByTileCorners(TileCorners tileCorners) {
-		List<ComponentImpl> componentsOnTile = new ArrayList<ComponentImpl>();
+	public List<Component> getComponentsByTileCorners(TileCorners tileCorners) {
+		List<Component> componentsOnTile = new ArrayList<Component>();
 		for (Point2D componentGridPosition : componentMap.keySet()) {
 			if (componentGridPosition.getX() >= tileCorners.getMinX()
 					&& componentGridPosition.getX() <= tileCorners.getMaxX()
@@ -69,11 +69,11 @@ public class ComponentGraphImpl implements ComponentGraph {
 	}
 
 	@Override
-	public void addComponentToGrid(ComponentImpl newComponent, Point2D screenPosition) {
+	public void addComponentToGrid(Component newComponent, Point2D screenPosition) {
 
-		List<ComponentImpl> currList = componentMap.get(screenPosition);
+		List<Component> currList = componentMap.get(screenPosition);
 		if (currList == null) {
-			currList = new ArrayList<ComponentImpl>();
+			currList = new ArrayList<Component>();
 		}
 		currList.add(newComponent);
 		componentMap.put(screenPosition, currList);
@@ -83,9 +83,9 @@ public class ComponentGraphImpl implements ComponentGraph {
 	}
 
 	@Override
-	public void removeComponent(ComponentImpl toRemove) {
+	public void removeComponent(Component toRemove) {
 		Point2D location = toRemove.<Point2D>getAttribute("Position").getValue();
-		List<ComponentImpl> currList = componentMap.get(location);
+		List<Component> currList = componentMap.get(location);
 		if (currList == null) {
 			return;
 		}
@@ -96,9 +96,9 @@ public class ComponentGraphImpl implements ComponentGraph {
 	}
 
 	@Override
-	public List<ComponentImpl> getComponentsWithinRadius(ComponentImpl centerComp, double radius){
+	public List<Component> getComponentsWithinRadius(Component centerComp, double radius){
 		Point2D centerLoc = centerComp.<Point2D>getAttribute("Position").getValue();
-		ArrayList<ComponentImpl> componentsWithinRadius = new ArrayList<ComponentImpl>();
+		ArrayList<Component> componentsWithinRadius = new ArrayList<Component>();
 		if (componentMap.keySet().size() != 0) {
 			for (Point2D loc : componentMap.keySet()) {
 				double distance = Math.sqrt(Math.pow(centerLoc.getX() - loc.getX(), 2) + Math.pow(centerLoc.getY() - loc.getY(), 2));
@@ -112,7 +112,7 @@ public class ComponentGraphImpl implements ComponentGraph {
 	}
 
 	@Override
-	public List<ComponentImpl> getNearestComponents(ComponentImpl centerComp) {
+	public List<Component> getNearestComponents(Component centerComp) {
 		List<Point2D> locations = new ArrayList<Point2D>(componentMap.keySet());
 		Point2D centerLoc = centerComp.<Point2D>getAttribute("Position").getValue();
 		SortComponents_Distance sorter = new SortComponents_Distance();
@@ -153,16 +153,16 @@ public class ComponentGraphImpl implements ComponentGraph {
 	@Override
 	public void clearComponents()
 	{
-		List<ComponentImpl> list = new ArrayList<ComponentImpl>();
+		List<Component> list = new ArrayList<Component>();
 		for (Point2D x : componentMap.keySet())
 		{
-			for (ComponentImpl y : componentMap.get(x))
+			for (Component y : componentMap.get(x))
 			{
 				list.add(y);
 			}
 		}
 		
-		for (ComponentImpl x : list)
+		for (Component x : list)
 		{
 			removeComponent(x);
 		}
@@ -188,5 +188,6 @@ public class ComponentGraphImpl implements ComponentGraph {
 			o.update(null, obj);
 		}
 	}
+
 
 }

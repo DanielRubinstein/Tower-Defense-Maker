@@ -6,7 +6,6 @@ import java.util.List;
 import backEnd.BankController;
 import backEnd.Attribute.Attribute;
 import backEnd.GameData.GameData;
-import backEnd.GameData.State.ComponentImpl;
 import backEnd.GameData.State.Component;
 import backEnd.GameData.State.ComponentBuilder;
 import backEnd.GameData.State.State;
@@ -73,7 +72,7 @@ public class SpawnEngine implements Engine {
 		}
 		//System.out.println(this.getClass().getName() + ": Should add component from spawn queue");
 		ComponentBuilder componentBuilder = new ComponentBuilder(component);
-		ComponentImpl spawnable = componentBuilder.getComponent();
+		Component spawnable = componentBuilder.getComponent();
 		Object positionObj = spawnTile.getMyAttributes().get("Position");
 		Attribute<Point2D> spawnPositionAttribute = (Attribute<Point2D>) positionObj;
 		Point2D tilePosition = spawnPositionAttribute.getValue();

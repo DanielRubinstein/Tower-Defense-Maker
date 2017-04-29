@@ -64,6 +64,7 @@ public class AttributeOwnerVisualImpl implements SerializableObserver, Attribute
 	}
 	
 	private void setImage(String newImagePath){
+		System.out.println(newImagePath);
 		myImagePath = newImagePath;
 		Image image = new Image(getClass().getClassLoader().getResourceAsStream(newImagePath));
 		myImage.setImage(image);

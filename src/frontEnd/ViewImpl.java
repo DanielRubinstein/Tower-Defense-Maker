@@ -11,7 +11,6 @@ import backEnd.Model;
 import backEnd.ModelReader;
 import backEnd.GameData.Rules.RuleReader;
 import backEnd.GameData.State.Component;
-import backEnd.GameData.State.ComponentImpl;
 import backEnd.GameData.State.PlayerStatusReader;
 import backEnd.GameData.State.Tile;
 import backEnd.GameEngine.Engine.Spawning.SpawnQueues;

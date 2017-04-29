@@ -8,12 +8,8 @@ import java.util.ResourceBundle;
 
 import ModificationFromUser.AttributeOwner.Modification_Add_StraightToGrid;
 import ModificationFromUser.AttributeOwner.Modification_Add_ToPalette;
-import ModificationFromUser.AttributeOwner.Modification_PurchaseComponent;
-import ModificationFromUser.AttributeOwner.Modification_RemoveAttributeOwner;
-import ModificationFromUser.AttributeOwner.Modification_UpgradeComponent;
 import backEnd.Attribute.Attribute;
 import backEnd.Attribute.AttributeOwner;
-import backEnd.GameData.State.ComponentImpl;
 import frontEnd.View;
 import frontEnd.CustomJavafxNodes.SingleFieldPrompt;
 import frontEnd.Skeleton.AoTools.AttributeVisualization.AttributeEditorCreator;

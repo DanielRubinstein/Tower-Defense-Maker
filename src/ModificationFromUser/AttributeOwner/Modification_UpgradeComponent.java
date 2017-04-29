@@ -7,9 +7,9 @@ import backEnd.GameData.State.ComponentImpl;
 import javafx.geometry.Point2D;
 
 public class Modification_UpgradeComponent implements ModificationFromUser {
-	private ComponentImpl toUpgrade;
+	private Component toUpgrade;
 	
-	public Modification_UpgradeComponent(ComponentImpl toUpgrade) {
+	public Modification_UpgradeComponent(Component toUpgrade) {
 		this.toUpgrade = toUpgrade;
 	}
 

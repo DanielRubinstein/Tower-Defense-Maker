@@ -1,6 +1,7 @@
 package ModificationFromUser.AttributeOwner.ReflectionMethods;
 
 import backEnd.ModelImpl;
+import backEnd.GameData.State.Component;
 import backEnd.GameData.State.ComponentImpl;
 import backEnd.GameData.State.TileImpl;
 import backEnd.Mode.ModeException;
@@ -29,7 +30,7 @@ public class Modification_Add_ToGrid_Methods{
 		}
 	}
 	
-	public void add(ComponentImpl component){
+	public void add(Component component){
 		myModel.getState().getComponentGraph().addComponentToGrid(component, location);
 		switch (myModel.getMode().getUserMode()) {
 		case "AUTHOR":

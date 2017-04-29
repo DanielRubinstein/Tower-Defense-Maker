@@ -15,11 +15,11 @@ public class ComponentBuilder {
 		xStream.alias("ComponentImpl", ComponentImpl.class);
 	}
 	
-	public ComponentImpl getComponent() {
+	public Component getComponent() {
 		List<SerializableObserver> oldObservers = myComponent.getAndClearObservers();
 		String serializedAO = xStream.toXML(myComponent);
 		myComponent.setObserverList(oldObservers);
-		return (ComponentImpl) xStream.fromXML(serializedAO);
+		return (Component) xStream.fromXML(serializedAO);
 	}
 	
 }
