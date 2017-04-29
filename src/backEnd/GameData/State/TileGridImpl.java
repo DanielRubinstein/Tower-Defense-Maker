@@ -230,4 +230,9 @@ public class TileGridImpl implements TileGrid {
 		observers = observersave;
 	}
 	
+	@Override
+	public int compareTo(Object o) {
+		return Integer.compare(this.hashCode(), o.hashCode());
+	}
+	
 }
