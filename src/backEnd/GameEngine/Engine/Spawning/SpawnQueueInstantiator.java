@@ -2,6 +2,11 @@ package backEnd.GameEngine.Engine.Spawning;
 
 import java.util.List;
 
+/**
+ * 
+ * @author Juan
+ *
+ */
 public class SpawnQueueInstantiator
 {
 	private List<SpawnDataImpl> myFrequencyQueue;
