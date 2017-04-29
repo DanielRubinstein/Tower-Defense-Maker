@@ -23,7 +23,6 @@ public class Modification_Add_PaletteToGrid implements ModificationFromUser {
 	private AttributeOwnerReader newAttrOwn;
 	private Point2D location;
 	private ModelImpl myModel;
-	private static final StringResourceBundle strResources = new StringResourceBundle();
 
 	public Modification_Add_PaletteToGrid(AttributeOwnerReader preset, Point2D location) {
 		this.newAttrOwn = preset;
@@ -35,27 +34,11 @@ public class Modification_Add_PaletteToGrid implements ModificationFromUser {
 	public void invoke(ModelImpl model) throws Exception {
 		myModel = model;
 
-		switch (myModel.getMode().getUserMode()) {
-		case "AUTHOR":
-			addToGrid();
-			break;
-		case "PLAYER":
-			Tile tile = myModel.getState().getTileGrid().getTileByScreenPosition(location);
-			if (tile.<Boolean>getAttribute(strResources.getFromAttributeNames("Buildable")).getValue()) {
-				addToGrid();
-			} else {
-				new ModeException(myModel.getMode(), strResources.getFromErrorMessages("Tile_Not_Buildable"));
-			}
-			break;
-		}
-	}
-
-	private void addToGrid() {
 		AttributeOwnerSerializer attributeOwnerSerializer = new AttributeOwnerSerializer();
 		AttributeOwner 
 		AttributeOwner cleanAO = attributeOwnerSerializer.createCopy(newAttrOwn);
 		cleanAO.setAttributeValue("Position", location);
-
+		
 		Modification_Add_ToGrid_Methods methods = new Modification_Add_ToGrid_Methods(myModel, location);
 		Reflection.callMethod(methods, "add", cleanAO);
 	}
