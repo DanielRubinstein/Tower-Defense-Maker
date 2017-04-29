@@ -3,7 +3,6 @@ package ModificationFromUser.AttributeOwner;
 import ModificationFromUser.ModificationFromUser;
 import backEnd.ModelImpl;
 import backEnd.GameData.State.Component;
-import backEnd.GameData.State.ComponentImpl;
 import javafx.geometry.Point2D;
 
 public class Modification_UpgradeComponent implements ModificationFromUser {

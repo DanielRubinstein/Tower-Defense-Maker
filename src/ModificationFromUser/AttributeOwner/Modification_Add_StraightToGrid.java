@@ -5,8 +5,6 @@ import ModificationFromUser.AttributeOwner.ReflectionMethods.Modification_Add_To
 import backEnd.ModelImpl;
 import backEnd.Attribute.AttributeOwner;
 import backEnd.GameData.State.Tile;
-import backEnd.GameData.State.TileImpl;
-import backEnd.Mode.ModeException;
 import javafx.geometry.Point2D;
 import resources.constants.StringResourceBundle;
 import util.reflection.Reflection;
@@ -39,7 +37,7 @@ public class Modification_Add_StraightToGrid implements ModificationFromUser {
 			break;
 		case "PLAYER":
 			Tile tile = myModel.getState().getTileGrid().getTileByScreenPosition(location);
-			if ((boolean) tile.getAttribute(strResources.getFromAttributeNames("Buildable")).getValue()){
+			if (tile.<Boolean>getAttribute(strResources.getFromAttributeNames("Buildable")).getValue()){
 				addToGrid();
 			}
 			break;
