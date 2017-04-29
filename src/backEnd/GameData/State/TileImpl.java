@@ -97,6 +97,9 @@ public class TileImpl implements Tile, AttributeOwner, SerializableObservable {
 
 	@Override
 	public void addObserver(SerializableObserver obs) {
+		if (observers == null){
+			observers = new ArrayList<SerializableObserver>();
+		}
 		observers.add(obs);
 	}
 
