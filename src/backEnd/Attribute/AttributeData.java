@@ -18,7 +18,7 @@ import backEnd.GameData.State.SerializableObserver;
  *         as an SerializableObservable.
  */
 
-public class AttributeData implements SerializableObservable {
+public class AttributeData implements SerializableObservable, AttributeDataReader {
 	// only callee can cast
 	// Map<Class<T>, Attribute
 	// private Map<Class<?>,List<Attribute<?>>> myAttributes;
@@ -116,5 +116,24 @@ public class AttributeData implements SerializableObservable {
 	@Override
 	public int compareTo(Object o) {
 		return Integer.compare(this.hashCode(), o.hashCode());
+	}
+
+	@Override
+	public <T> AttributeReader<T> getAttributeReader(String key) {
+		try{
+			AttributeReader<T> myAttr = (AttributeReader<T>) myAttributes.get(key);
+			return myAttr;
+		} catch(ClassCastException e){
+			throw new AttributeTypeException();
+		}
+	}
+
+	@Override
+	public Collection<AttributeReader<?>> getAllAttributeReaders() {
+		Collection<AttributeReader<?>> myAttReaders = new ArrayList<AttributeReader<?>>();
+		for(AttributeReader<?> myAtt : myAttributes.values()){
+			myAttReaders.add(myAtt);
+		}
+		return myAttReaders;
 	}
 }

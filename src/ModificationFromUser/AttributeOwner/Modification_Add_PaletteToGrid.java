@@ -4,6 +4,7 @@ import ModificationFromUser.ModificationFromUser;
 import ModificationFromUser.AttributeOwner.ReflectionMethods.Modification_Add_ToGrid_Methods;
 import backEnd.ModelImpl;
 import backEnd.Attribute.AttributeOwner;
+import backEnd.Attribute.AttributeOwnerReader;
 import backEnd.Attribute.AttributeOwnerSerializer;
 import backEnd.GameData.State.Tile;
 import backEnd.Mode.ModeException;
@@ -19,12 +20,12 @@ import util.reflection.Reflection;
  *
  */
 public class Modification_Add_PaletteToGrid implements ModificationFromUser {
-	private AttributeOwner newAttrOwn;
+	private AttributeOwnerReader newAttrOwn;
 	private Point2D location;
 	private ModelImpl myModel;
 	private static final StringResourceBundle strResources = new StringResourceBundle();
 
-	public Modification_Add_PaletteToGrid(AttributeOwner preset, Point2D location) {
+	public Modification_Add_PaletteToGrid(AttributeOwnerReader preset, Point2D location) {
 		this.newAttrOwn = preset;
 		this.location = location;
 
@@ -51,6 +52,7 @@ public class Modification_Add_PaletteToGrid implements ModificationFromUser {
 
 	private void addToGrid() {
 		AttributeOwnerSerializer attributeOwnerSerializer = new AttributeOwnerSerializer();
+		AttributeOwner 
 		AttributeOwner cleanAO = attributeOwnerSerializer.createCopy(newAttrOwn);
 		cleanAO.setAttributeValue("Position", location);
 
