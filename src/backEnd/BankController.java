@@ -120,8 +120,8 @@ public class BankController implements BankControllerReader
 		}
 	}
 
-	public void removeTile(String name) {
-		tileBank.remove(name);
+	public void remove(Tile tile) {
+		tileBank.remove(tile);
 		refreshAccessibleTileMap();
 		notifyObservers();
 	}
@@ -176,8 +176,8 @@ public class BankController implements BankControllerReader
 		}
 	}
 
-	public void removeComponent(String name) {
-		componentBank.remove(name);
+	public void remove(Component component) {
+		componentBank.remove(component);
 		refreshAccessibleComponentMap();
 		notifyObservers();
 	}
