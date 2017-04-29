@@ -4,11 +4,9 @@ import ModificationFromUser.ModificationFromUser;
 import ModificationFromUser.AttributeOwner.ReflectionMethods.Modification_Add_ToGrid_Methods;
 import backEnd.ModelImpl;
 import backEnd.Attribute.AttributeOwner;
+import backEnd.Attribute.AttributeOwnerReader;
 import backEnd.Attribute.AttributeOwnerSerializer;
-import backEnd.GameData.State.Tile;
-import backEnd.Mode.ModeException;
 import javafx.geometry.Point2D;
-import resources.constants.StringResourceBundle;
 import util.reflection.Reflection;
 
 /**
@@ -19,11 +17,11 @@ import util.reflection.Reflection;
  *
  */
 public class Modification_Add_PaletteToGrid implements ModificationFromUser {
-	private AttributeOwner newAttrOwn;
+	private AttributeOwnerReader newAttrOwn;
 	private Point2D location;
 	private ModelImpl myModel;
 
-	public Modification_Add_PaletteToGrid(AttributeOwner preset, Point2D location) {
+	public Modification_Add_PaletteToGrid(AttributeOwnerReader preset, Point2D location) {
 		this.newAttrOwn = preset;
 		this.location = location;
 
@@ -32,9 +30,9 @@ public class Modification_Add_PaletteToGrid implements ModificationFromUser {
 	@Override
 	public void invoke(ModelImpl model) throws Exception {
 		myModel = model;
-
+		AttributeOwner attributeOwner = myModel.getAttributeOwner(newAttrOwn);
 		AttributeOwnerSerializer attributeOwnerSerializer = new AttributeOwnerSerializer();
-		AttributeOwner cleanAO = attributeOwnerSerializer.createCopy(newAttrOwn);
+		AttributeOwner cleanAO = attributeOwnerSerializer.createCopy(attributeOwner);
 		cleanAO.setAttributeValue("Position", location);
 		
 		Modification_Add_ToGrid_Methods methods = new Modification_Add_ToGrid_Methods(myModel, location);
