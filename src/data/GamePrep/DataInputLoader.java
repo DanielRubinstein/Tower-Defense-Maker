@@ -115,5 +115,16 @@ public class DataInputLoader
 			e.printStackTrace();
 		 }
 	}
+
+	public String getLevelName()
+	{
+		// TODO Auto-generated method stub
+		return "Fire";
+	}
+
+	public String getGameName() {
+		// TODO Auto-generated method stub
+		return "Test";
+	}
 	
 }

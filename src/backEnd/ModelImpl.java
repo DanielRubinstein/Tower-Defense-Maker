@@ -41,12 +41,12 @@ public class ModelImpl implements Model{
 	private Consumer<Object> gameLoader;
 	private static final StringResourceBundle strResource = new StringResourceBundle();;
 	
-	public ModelImpl(GameData gameData, EngineStatus engineStatus, Consumer<SplashScreenData> splashScreenLoader, Consumer<Object> gameLoader) throws XMLReadingException {
+	public ModelImpl(GameData gameData, EngineStatus engineStatus, Consumer<SplashScreenData> splashScreenLoader, Consumer<Object> gameLoader, 
+		String gameName, String levelName) throws XMLReadingException {
 		myDataController = new DataController();
 		myGameData = gameData;
 		this.gameLoader = gameLoader;
-		myMode = new ModeImpl(strResource.getFromStringConstants("AUTHOR"), strResource.getFromStringConstants("DEFAULT"),
-				strResource.getFromStringConstants("DEFAULT"), myLevelProgressionController);
+		myMode = new ModeImpl(strResource.getFromStringConstants("AUTHOR"), gameName, levelName, myLevelProgressionController);
 		myLevelProgressionController = new LevelProgressionControllerImpl(myMode, myDataController, splashScreenLoader, gameLoader);
 		myGameData.setLevelProgressionController(myLevelProgressionController);
 		myEngine = new GameProcessController(myGameData);
