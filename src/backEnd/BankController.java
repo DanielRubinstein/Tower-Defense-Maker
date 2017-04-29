@@ -1,21 +1,18 @@
 package backEnd;
 
-import java.io.FileNotFoundException;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import javax.swing.JOptionPane;
 import backEnd.Mode.Mode;
-import backEnd.Attribute.AttributeData;
+import data.DataControllerReader;
+import resources.constants.StringResourceBundle;
 import backEnd.Attribute.AttributeOwner;
-import backEnd.GameData.State.AccessPermissions;
-import backEnd.GameData.State.AccessPermissionsImpl;
 import backEnd.GameData.State.Component;
+import backEnd.GameData.State.ComponentImpl;
 import backEnd.GameData.State.SerializableObserver;
 import backEnd.GameData.State.Tile;
-import backEnd.GameData.State.TileImpl;
 
 /**
  * 
@@ -25,11 +22,11 @@ import backEnd.GameData.State.TileImpl;
 
 public class BankController implements BankControllerReader
 {
-	private static final String DUPLICATE_NAME_ERROR = "Cannot Add Duplicate Name";
+	private static final StringResourceBundle strResources = new StringResourceBundle();
 	private Map<String, Tile> tileBank;
-	private Map<String, Component> componentBank;
+	private Map<java.lang.String, Component> componentBank;
 	private Map<String, Tile> accessibleTileBank;
-	private Map<String, Component> accessibleComponentBank;
+	private Map<String, ComponentImpl> accessibleComponentBank;
 	private Mode myMode;
 	private List<SerializableObserver> observers;
 	
@@ -49,62 +46,13 @@ public class BankController implements BankControllerReader
 	}
 	
 	@Override
-	public String getComponentName(Component component){
+	public String getComponentName(ComponentImpl component){
 		return findKeyFromValue(componentBank, component);
-	}
-	
-	private void createTemplatesForTesting(){
-		try{
-			this.tileBank = new HashMap<String, Tile>();
-			this.componentBank = new HashMap<String, Component>();
-			Tile newTile = new TileImpl();
-			newTile.setAttributeValue("ImageFile", "resources/images/Tiles/Blue.png");
-			newTile.setAttributeValue("MoveDirection", "Down");
-			addNewTile("Blue Down Tile", newTile);
-
-			Tile newTile2 = new TileImpl();
-			newTile2.setAttributeValue("ImageFile", "resources/images/Tiles/Red.png");
-			newTile2.setAttributeValue("MoveDirection", "Right");
-			addNewTile("Red Right Tile", newTile2);
-
-			Tile newTile3 = new TileImpl();
-			newTile3.setAttributeValue("ImageFile", "resources/images/Tiles/Green.png");
-			newTile3.setAttributeValue("MoveDirection", "Up");
-			addNewTile("Green Up Tile", newTile3);
-
-			Tile newTile4 = new TileImpl();
-			newTile4.setAttributeValue("ImageFile", "resources/images/Tiles/Yellow.png");
-			newTile4.setAttributeValue("MoveDirection", "Left");
-			addNewTile("Yellow Left Tile", newTile4);
-
-			Component testingBloon = new Component();
-			testingBloon.setAttributeValue("ImageFile", "resources/images/Components/rainbow_bloon.png");
-			testingBloon.setAttributeValue("Speed", 1d);
-			testingBloon.setAttributeValue("Health", 20);
-			testingBloon.setAttributeValue("Type", "Enemy");
-			addNewComponent("Enemy", testingBloon);
-
-			Component testingTurret = new Component();
-			testingTurret.setAttributeValue("ImageFile", "resources/images/Components/zombie.png");
-			testingTurret.setAttributeValue("Health", 10);
-			testingTurret.setAttributeValue("Type", "Tower");
-			testingTurret.setAttributeValue("Velocity", 1.0);
-			testingTurret.setAttributeValue("Speed", 1.0);
-			testingTurret.setAttributeValue("FireDamage", 10);
-			testingTurret.setAttributeValue("FireRate", 1000.0);
-			testingTurret.setAttributeValue("ExplosionRadius", 40.0);
-			testingTurret.setAttributeValue("FireRadius", 200.0);
-			testingTurret.setAttributeValue("FireImage", "resources/images/Components/purple_bloon.png");
-			addNewComponent("Tower", testingTurret);
-
-		} catch (FileNotFoundException e) {
-			System.out.println("No image found");
-		}
 	}
 
 	public void addNewTile(String name, Tile tile) {
 		if (tileBank.containsKey(name)) {
-			JOptionPane.showMessageDialog(null, DUPLICATE_NAME_ERROR);
+			JOptionPane.showMessageDialog(null, strResources.getFromErrorMessages("Duplicate_Name_Error"));
 		} else {
 			tileBank.put(name, tile);
 			refreshAccessibleTileMap();
@@ -134,7 +82,7 @@ public class BankController implements BankControllerReader
 		}
 	}
 
-	public Map<String, Component> getAccessibleComponentMap() {
+	public Map<String, ComponentImpl> getAccessibleComponentMap() {
 		refreshAccessibleComponentMap();
 		return accessibleComponentBank;
 	}
@@ -150,7 +98,7 @@ public class BankController implements BankControllerReader
 		}
 	}
 
-	public Map<String, Component> getComponentMap() {
+	public Map<String, ComponentImpl> getComponentMap() {
 		return componentBank;
 	}
 
@@ -158,9 +106,9 @@ public class BankController implements BankControllerReader
 		return tileBank;
 	}
 
-	public void addNewComponent(String name, Component component) {
+	public void addNewComponent(String name, ComponentImpl component) {
 		if (tileBank.containsKey(name)) {
-			JOptionPane.showMessageDialog(null, DUPLICATE_NAME_ERROR);
+			JOptionPane.showMessageDialog(null, strResources.getFromErrorMessages("Duplicate_Name_Error"));
 		} else {
 			componentBank.put(name, component);
 			refreshAccessibleComponentMap();
@@ -177,8 +125,8 @@ public class BankController implements BankControllerReader
 	public String getAOName(AttributeOwner preset) {
 		if (preset instanceof Tile) {
 			return findKeyFromValue(tileBank, (Tile) preset);
-		} else if (preset instanceof Component) {
-			return findKeyFromValue(componentBank, (Component) preset);
+		} else if (preset instanceof ComponentImpl) {
+			return findKeyFromValue(componentBank, (ComponentImpl) preset);
 		}
 		return "";
 	}
@@ -189,7 +137,7 @@ public class BankController implements BankControllerReader
 				return entry.getKey();
 			}
 		}
-		return "No name found";
+		return strResources.getFromErrorMessages("No_Name_Found");
 	}
 
 	public AttributeOwner getPreset(String presetName) {
@@ -202,8 +150,16 @@ public class BankController implements BankControllerReader
 		}
 	}
 	
-	public Component getComponent(String componentName){
-		return componentBank.get(componentName);
+	public ComponentImpl getComponent(String componentName){
+		if (componentBank.containsKey(componentName)){
+			return componentBank.get(componentName);
+		}
+		if (componentName == null){
+			return null;
+		}
+		else{
+			throw new RuntimeException(strResources.getFromErrorMessages("Component_Not_Found"));
+		}
 	}
 	
 	public void addObserver(SerializableObserver o){

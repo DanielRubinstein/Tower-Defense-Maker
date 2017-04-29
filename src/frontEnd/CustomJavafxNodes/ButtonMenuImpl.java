@@ -25,7 +25,7 @@ public class ButtonMenuImpl implements ButtonMenu {
 	public ButtonMenuImpl(String text){
 		initializeGrid();
 		myButtonRoot = new VBox();
-		description = new Label(stringResourceBundle.getString("SelectAnOption"));
+		description = new Label(stringResourceBundle.getFromStringConstants("SelectAnOption"));
 		description.setWrapText(true);
 		setText(text);
 	}
@@ -65,7 +65,7 @@ public class ButtonMenuImpl implements ButtonMenu {
 			if(newVal){
 				description.setText(hoverText);
 			} else {
-				description.setText(stringResourceBundle.getString("SelectAnOption"));
+				description.setText(stringResourceBundle.getFromStringConstants("SelectAnOption"));
 			}
 		});
 		addButton(newButton);
@@ -128,10 +128,10 @@ public class ButtonMenuImpl implements ButtonMenu {
 		myGrid.add(titleLbl, 0, 0, 2, 1);
 		myGrid.add(myButtonRoot, 0, 1);
 		myGrid.add(description, 1, 1);
-		myGrid.add(new Label(stringResourceBundle.getString("TEAMNAME")), 0, 2, 2, 1);
+		myGrid.add(new Label(stringResourceBundle.getFromStringConstants("TEAMNAME")), 0, 2, 2, 1);
 		//myButtonRoot.setAlignment(Pos.CENTER);
    	 	myScene = new Scene(myGrid);
-   	 	myScene.getStylesheets().add(stringResourceBundle.getString("DEFAULT_CSS"));
+   	 	myScene.getStylesheets().add(stringResourceBundle.getFromStringConstants("DEFAULT_CSS"));
 		description.setMaxWidth(200d);
 	}
 

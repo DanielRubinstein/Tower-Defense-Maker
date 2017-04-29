@@ -1,11 +1,13 @@
 package backEnd.Attribute;
 
+import resources.constants.StringResourceBundle;
+
 public class AttributeTypeException extends RuntimeException{
 	
-	private static final String ERROR_MESSAGE = "Incorrect type T used to access Attribute";
+	private static final StringResourceBundle strResources = new StringResourceBundle();
 	
 	AttributeTypeException(){
-		super(ERROR_MESSAGE);
+		super(strResources.getFromErrorMessages("Incorrect_Type_T"));
 	}
 
 }

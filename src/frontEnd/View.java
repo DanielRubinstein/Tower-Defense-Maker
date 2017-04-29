@@ -9,6 +9,7 @@ import backEnd.BankControllerReader;
 import backEnd.Model;
 import backEnd.GameData.Rules.RuleReader;
 import backEnd.GameData.State.Component;
+import backEnd.GameData.State.ComponentImpl;
 import backEnd.GameEngine.Engine.Spawning.SpawnQueues;
 import backEnd.LevelProgression.LevelProgressionControllerEditor;
 import backEnd.LevelProgression.LevelProgressionControllerReader;

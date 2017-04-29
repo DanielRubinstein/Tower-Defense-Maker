@@ -3,34 +3,32 @@ package backEnd.GameData.State;
 import java.util.ArrayList;
 import java.util.List;
 
+import resources.constants.StringResourceBundle;
+
 public class AccessPermissionsImpl implements AccessPermissions {
 
 	private ArrayList<String> userModePermissions;
 	private ArrayList<String> gameModePermissions;
 	private ArrayList<String> levelModePermissions;
+	private StringResourceBundle strResources;
 	
 	public AccessPermissionsImpl(){
-		this.userModePermissions = new ArrayList<String>();
-		this.userModePermissions.add("AUTHOR");
-		this.userModePermissions.add("PLAYER"); // TODO figure this out
-		this.gameModePermissions = new ArrayList<String>();
-		this.gameModePermissions.add("DEFAULT");
-		this.levelModePermissions = new ArrayList<String>();
-		this.levelModePermissions.add("DEFAULT");
+		this(new ArrayList<String>(), new ArrayList<String>(), new ArrayList<String>());
 	}
 	
 	public AccessPermissionsImpl(List<String> gameModePermissions, List<String> userModePermissions, List<String> levelModePermissions){
+		strResources = new StringResourceBundle();
 		this.userModePermissions = new ArrayList<String>(userModePermissions);
-		if (!this.userModePermissions.contains("AUTHOR")) {
-			this.userModePermissions.add("AUTHOR");
+		if (!this.userModePermissions.contains(strResources.getFromStringConstants("AUTHOR"))) {
+			this.userModePermissions.add(strResources.getFromStringConstants("AUTHOR"));
 		}
 		this.gameModePermissions = new ArrayList<String>(gameModePermissions);
-		if (!this.gameModePermissions.contains("DEFAULT")) {
-			this.gameModePermissions.add("DEFAULT");
+		if (!this.gameModePermissions.contains(strResources.getFromStringConstants("DEFAULT"))) {
+			this.gameModePermissions.add(strResources.getFromStringConstants("DEFAULT"));
 		}
 		this.levelModePermissions = new ArrayList<String>(levelModePermissions);
-		if (!this.levelModePermissions.contains("DEFAULT")) {
-			this.levelModePermissions.add("DEFAULT");
+		if (!this.levelModePermissions.contains(strResources.getFromStringConstants("DEFAULT"))) {
+			this.levelModePermissions.add(strResources.getFromStringConstants("DEFAULT"));
 		}
 	}
 
@@ -66,7 +64,7 @@ public class AccessPermissionsImpl implements AccessPermissions {
 
 	@Override
 	public boolean permitsAccess(String userMode, String gameMode, String levelMode) {
-		if (userMode.equals("AUTHOR")){
+		if (userMode.equals(strResources.getFromStringConstants("AUTHOR"))){
 			return true;
 		}
 		return (userModePermissions.contains(userMode) & gameModePermissions.contains(gameMode) & levelModePermissions.contains(levelMode));

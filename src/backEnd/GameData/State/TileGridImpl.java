@@ -5,8 +5,11 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.ResourceBundle;
+
 import backEnd.Attribute.AttributeOwnerReader;
 import javafx.geometry.Point2D;
+import resources.constants.NumericResourceBundle;
 
 /**
  * This is the Grid class that contains the Tile Grid and all of the relevant
@@ -26,7 +29,10 @@ public class TileGridImpl implements TileGrid {
 	private List<Tile> tileList;
 	private double tileWidth;
 	private double tileHeight;
+	private double tileCenterFactor; //ratio of the tile that we consider part of the center of the tile
 	private List<List<SerializableObserver>> tileObserverList;
+	private static final String BUNDLE_NAME = "resources.constants.numericResourceBundle";
+	private static final ResourceBundle RESOURCE_BUNDLE = ResourceBundle.getBundle(BUNDLE_NAME);
 
 	public TileGridImpl(int colsInGrid, int rowsInGrid) {
 
@@ -34,6 +40,7 @@ public class TileGridImpl implements TileGrid {
 		numColsInGrid = colsInGrid;
 		numRowsInGrid = rowsInGrid;
 		tileGrid = new HashMap<>();
+		tileCenterFactor=Double.valueOf(RESOURCE_BUNDLE.getString("TileCenterFactor"));
 	}
 
 	public TileGridImpl(TileGridInstantiator i) {
@@ -41,6 +48,7 @@ public class TileGridImpl implements TileGrid {
 		numColsInGrid = i.getNumCols();
 		numRowsInGrid = i.getNumRows();
 		tileGrid = i.getTileGrid();
+		tileCenterFactor=Double.valueOf(RESOURCE_BUNDLE.getString("TileCenterFactor"));
 	}
 
 	public TileGridInstantiator getInstantiator() {
@@ -52,71 +60,48 @@ public class TileGridImpl implements TileGrid {
 		this.tileWidth = tileWidth;
 		this.tileHeight = tileHeight;
 	}
-/*
- * These middle of tile methods need a lot of refactoring; I'm on it. 
- * Just wanted to push now to get functionality working.
- */
-	
-	public boolean atMiddleXOfTile(Point2D screenPosition){
-		 Tile left = getTileByScreenPosition(
-		 new Point2D(screenPosition.getX() - tileWidth / 2.1,
-		 screenPosition.getY()));
-		 Tile right = getTileByScreenPosition(
-		 new Point2D(screenPosition.getX() + tileWidth / 2.1,
-		 screenPosition.getY()));
-		 Tile thisTile = getTileByScreenPosition(screenPosition);
-		 return (left.equals(thisTile) && thisTile.equals(right));
-	}
-	
-	public boolean atMiddleYOfTile(Point2D screenPosition){
-		 Tile bottom = getTileByScreenPosition(
-		 new Point2D(screenPosition.getX(), screenPosition.getY() - tileHeight
-		 / 2.1));
-		 Tile top = getTileByScreenPosition(
-		 new Point2D(screenPosition.getX(), screenPosition.getY() + tileHeight
-		 / 2.1));
-		 Tile thisTile = getTileByScreenPosition(screenPosition);
-		 return (bottom.equals(thisTile) && thisTile.equals(top));
-	}
 
-	public boolean atMiddleOfTile(Point2D screenPosition) {
-		 Tile bottom = getTileByScreenPosition(
-		 new Point2D(screenPosition.getX(), screenPosition.getY() - tileHeight
-		 / 2.1));
-		 Tile top = getTileByScreenPosition(
-		 new Point2D(screenPosition.getX(), screenPosition.getY() + tileHeight
-		 / 2.1));
-		 Tile left = getTileByScreenPosition(
-		 new Point2D(screenPosition.getX() - tileWidth / 2.1,
-		 screenPosition.getY()));
-		 Tile right = getTileByScreenPosition(
-		 new Point2D(screenPosition.getX() + tileWidth / 2.1,
-		 screenPosition.getY()));
-		 Tile thisTile = getTileByScreenPosition(screenPosition);
-		 return ((bottom.equals(thisTile) && thisTile.equals(top)) &&
-		 (left.equals(thisTile) && thisTile.equals(right)));
-		// Almost got cancer and died from reading the above
-//		Tile thisTile = getTileByScreenPosition(screenPosition);
-//		Point2D xyTilePosition = thisTile.<Point2D> getAttribute("Position").getValue();
-//		Point2D position = new Point2D((int) (xyTilePosition.getX() / tileWidth),
-//				(int) (xyTilePosition.getY() / tileHeight));
-//		double midMagicNumLmao = (.1 / 2.1);// TODO fix this (it is the percent
-//											// of the tile considered the
-//											// middle)
-//		double topMiddle = (position.getY() + (1 - midMagicNumLmao) / 2) * tileHeight; 
-//			// Top as in higher visually
-//		double bottomMiddle = (position.getY() + (1 + midMagicNumLmao) / 2) * tileHeight; 
-//			// Bottom as in lower visually
-//		double leftMiddle = (position.getX() + (1 - midMagicNumLmao) / 2) * tileWidth;
-//		double rightMiddle = (position.getX() + (1 + midMagicNumLmao) / 2) * tileWidth;
-//		double xPos = screenPosition.getX();
-//		double yPos = screenPosition.getY();
-//		boolean middleTopBottom = topMiddle < yPos && yPos < bottomMiddle;
-//		boolean middleLeftRight = leftMiddle < xPos && xPos < rightMiddle;
-//		return middleTopBottom || middleLeftRight;
-		 
-		 //Salas: not only this code almost gave me cancer, it also doesn't work. Sad!
+	/*
+	 * These middle of tile methods need a lot of refactoring; I'm on it. 
+	 * Just wanted to push now to get functionality working.
+	 */
+	
+	
+	private Tile generateLeftTile(Point2D screenPosition){
+		return getTileByScreenPosition(
+				 new Point2D(screenPosition.getX() - tileWidth * tileCenterFactor,
+				 screenPosition.getY()));
 	}
+	
+	private Tile generateRightTile(Point2D screenPosition){
+		return getTileByScreenPosition(
+				 new Point2D(screenPosition.getX() + tileWidth * tileCenterFactor,
+				 screenPosition.getY()));
+	}
+	
+	private Tile generateTopTile(Point2D screenPosition){
+		return getTileByScreenPosition(
+				 new Point2D(screenPosition.getX(),
+				 screenPosition.getY() - tileHeight * tileCenterFactor));
+	}
+	
+	private Tile generateBottomTile(Point2D screenPosition){
+		return getTileByScreenPosition(
+				 new Point2D(screenPosition.getX(),
+				 screenPosition.getY() + tileHeight * tileCenterFactor));
+	}
+	
+	
+	
+		public boolean atMiddleXOfTile(Point2D screenPosition){
+			 return (generateLeftTile(screenPosition).equals(getTileByScreenPosition(screenPosition)) && getTileByScreenPosition(screenPosition).equals(generateRightTile(screenPosition)));
+		}
+		
+		
+		public boolean atMiddleYOfTile(Point2D screenPosition){
+			 return (generateBottomTile(screenPosition).equals(getTileByScreenPosition(screenPosition)) && getTileByScreenPosition(screenPosition).equals(generateTopTile(screenPosition)));
+		}
+
 
 	@Override
 	public Tile getTileByScreenPosition(Point2D screenPosition) {
@@ -244,9 +229,11 @@ public class TileGridImpl implements TileGrid {
 	public void setObservers(List<SerializableObserver> observersave) {
 		observers = observersave;
 	}
-	
+
 	@Override
-	public int compareTo(Object o) {
-		return Integer.compare(this.hashCode(), o.hashCode());
+	public boolean atMiddleOfTile(Point2D screenPosition) {
+		// TODO Auto-generated method stub
+		return false;
 	}
+	
 }

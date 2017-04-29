@@ -52,7 +52,7 @@ public class LevelView {
 	
 	public void launch(){
 		myScene = new Scene(myRoot);
-		myScene.getStylesheets().add(stringResourceBundle.getDefaultCSS());
+		myScene.getStylesheets().add(stringResourceBundle.getFromStringConstants("DEFAULT_CSS"));
 		myStage.setScene(myScene);
 		myStage.show();
 	}
