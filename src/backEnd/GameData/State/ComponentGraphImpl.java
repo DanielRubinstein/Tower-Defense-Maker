@@ -41,7 +41,7 @@ public class ComponentGraphImpl implements ComponentGraph {
 	}
 
 
-	public Collection<Component> getAllComponents() {
+	public List<Component> getAllComponents() {
 		return myComponents;
 	}
 
@@ -200,13 +200,11 @@ public class ComponentGraphImpl implements ComponentGraph {
 			o.update(null, obj);
 		}
 	}
-	
-	/*
+
 	@Override
 	public int compareTo(Object o) {
-		return Integer.compare(this.hashCode(), o.hashCode());
+		// TODO Auto-generated method stub
+		return 0;
 	}
-	*/
-
 
 }
