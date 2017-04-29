@@ -131,8 +131,8 @@ public class TileGridVisual implements SerializableObserver, SkeletonObject{
 	}
 	
 	public ImageView addArrowToVisual(Tile tile){
-		String moveDirection = tile.getMyAttributes().<String>get("MoveDirection").getValue();
-		Point2D screenPosition = tile.getMyAttributes().<Point2D>get("Position").getValue();
+		String moveDirection = tile.<String>getAttribute("MoveDirection").getValue();
+		Point2D screenPosition = tile.<Point2D>getAttribute("Position").getValue();
 		Point2D gridPosition = this.getGridPosition(screenPosition);
 		if (moveDirection == null || moveDirection.equals("")){
 			return null;

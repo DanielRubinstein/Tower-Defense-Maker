@@ -3,6 +3,8 @@ package backEnd;
 import java.util.List;
 import java.util.function.Consumer;
 
+import backEnd.Attribute.AttributeOwner;
+import backEnd.Attribute.AttributeOwnerReader;
 import backEnd.GameData.GameData;
 import backEnd.GameData.Rules.RuleReader;
 import backEnd.GameData.State.PlayerStatusModifier;
@@ -16,6 +18,7 @@ import backEnd.Mode.Mode;
 import backEnd.Mode.ModeImpl;
 import backEnd.Mode.ModeReader;
 import data.DataController;
+import data.DataControllerReader;
 import data.XMLReadingException;
 import frontEnd.Skeleton.SplashScreens.SplashScreenData;
 import javafx.beans.property.SimpleStringProperty;
@@ -50,8 +53,10 @@ public class ModelImpl implements Model{
 		myLevelProgressionController = new LevelProgressionControllerImpl(myMode, myDataController, splashScreenLoader, gameLoader);
 		myGameData.setLevelProgressionController(myLevelProgressionController);
 		myEngine = new GameProcessController(myGameData);
-		myBankController = new BankController(myMode, myDataController.loadTileMap(), myDataController.loadComponentMap());
+		myBankController = new BankController(myMode, (DataControllerReader) myDataController);
 		myGameData.setBankController(myBankController);
+		myDataController.setBankController(myBankController);
+
 	}
 
 	public Consumer<Object> getGameLoader()
@@ -114,5 +119,9 @@ public class ModelImpl implements Model{
 	@Override
 	public List<RuleReader> getRulesList() {
 		return myGameData.getRules().getRuleReaderList();
+	}
+
+	public AttributeOwner getAttributeOwner(AttributeOwnerReader attributeOwnerReader) {
+		return (AttributeOwner) attributeOwnerReader;
 	}
 }
