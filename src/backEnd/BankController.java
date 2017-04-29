@@ -12,6 +12,7 @@ import resources.constants.StringResourceBundle;
 import backEnd.Attribute.AttributeOwner;
 import backEnd.GameData.State.Component;
 import backEnd.GameData.State.ComponentImpl;
+import backEnd.GameData.State.SerializableObservable;
 import backEnd.GameData.State.SerializableObserver;
 import backEnd.GameData.State.Tile;
 import backEnd.GameData.State.TileImpl;
@@ -144,6 +145,11 @@ public class BankController implements BankControllerReader
 		refreshAccessibleComponentMap();
 		return accessibleComponentBank;
 	}
+	
+	public void refreshAccessibleMaps(){
+		refreshAccessibleComponentMap();
+		refreshAccessibleTileMap();
+	}
 
 	private void refreshAccessibleComponentMap() {
 		accessibleComponentBank.clear();
@@ -169,14 +175,12 @@ public class BankController implements BankControllerReader
 			JOptionPane.showMessageDialog(null, strResources.getFromErrorMessages("Duplicate_Name_Error"));
 		} else {
 			componentBank.put(name, component);
-			refreshAccessibleComponentMap();
 			notifyObservers();
 		}
 	}
 
 	public void remove(Component component) {
 		componentBank.remove(component);
-		refreshAccessibleComponentMap();
 		notifyObservers();
 	}
 
@@ -226,7 +230,7 @@ public class BankController implements BankControllerReader
 
 	private void notifyObservers() {
 		for(SerializableObserver o : observers){
-			o.update(null, null);
+			o.update((SerializableObservable) this, null);
 		}
 		dataController.saveUniversalGameData();
 	}
