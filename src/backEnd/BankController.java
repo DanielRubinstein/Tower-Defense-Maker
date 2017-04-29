@@ -2,19 +2,14 @@ package backEnd;
 
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import javax.swing.JOptionPane;
 import backEnd.Mode.Mode;
-import data.DataController;
 import data.DataControllerReader;
 import resources.constants.StringResourceBundle;
-import backEnd.Attribute.AttributeData;
 import backEnd.Attribute.AttributeOwner;
-import backEnd.GameData.State.AccessPermissions;
-import backEnd.GameData.State.AccessPermissionsImpl;
 import backEnd.GameData.State.ComponentImpl;
 import backEnd.GameData.State.SerializableObserver;
 import backEnd.GameData.State.Tile;
@@ -28,7 +23,6 @@ import backEnd.GameData.State.TileImpl;
 
 public class BankController implements BankControllerReader
 {
-	private static final String DUPLICATE_NAME_ERROR = "Cannot Add Duplicate Name";
 	private static final StringResourceBundle strResources = new StringResourceBundle();
 	private Map<String, Tile> tileBank;
 	private Map<String, ComponentImpl> componentBank;
@@ -214,7 +208,15 @@ public class BankController implements BankControllerReader
 	}
 	
 	public ComponentImpl getComponent(String componentName){
-		return componentBank.get(componentName);
+		if (componentBank.containsKey(componentName)){
+			return componentBank.get(componentName);
+		}
+		if (componentName == null){
+			return null;
+		}
+		else{
+			throw new RuntimeException(strResources.getFromErrorMessages("Component_Not_Found"));
+		}
 	}
 	
 	public void addObserver(SerializableObserver o){
