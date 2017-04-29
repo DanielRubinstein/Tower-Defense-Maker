@@ -7,6 +7,7 @@ import backEnd.Attribute.AttributeData;
 import backEnd.Attribute.AttributeFactoryImpl;
 import backEnd.Attribute.AttributeFactoryReader;
 import backEnd.Attribute.AttributeImpl;
+import backEnd.GameData.State.Component;
 import backEnd.GameData.State.ComponentImpl;
 
 /**
@@ -20,10 +21,11 @@ public class ProjectileFactory {
 
 	private AttributeData myAttributeData;
 	private AttributeFactoryReader myAttributeFactory;
-	private ComponentImpl myComponent;
+	private Component myComponent;
 	
 	@SuppressWarnings("unchecked")
-	public ProjectileFactory(ComponentImpl tower) throws FileNotFoundException{
+
+	public ProjectileFactory(Component tower) throws FileNotFoundException{
 		myComponent = new ComponentImpl();
 		
 		myComponent.setAttributeValue("Type", "Projectile");
@@ -39,7 +41,8 @@ public class ProjectileFactory {
 		myComponent.setAttributeValue("ProjectileTarget", (ComponentImpl)tower.getAttribute("ProjectileTarget").getValue());	
 	}
 	
-	public ComponentImpl getProjectile(){
+	public Component getProjectile(){
 		return myComponent;
 	}
 }
+

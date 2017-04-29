@@ -17,6 +17,7 @@ import backEnd.GameData.GameData;
 import backEnd.GameData.GameDataInterface;
 import backEnd.GameData.Rules.Rule;
 import backEnd.GameData.State.ComponentImpl;
+import backEnd.GameData.State.Component;
 import backEnd.GameData.State.ComponentGraph;
 import backEnd.GameData.State.PlayerStatus;
 import backEnd.GameData.State.SerializableObservable;
@@ -124,7 +125,7 @@ public class XMLWriterImpl implements XMLWriter{
 	}
 
 	public void saveUniversalGameData(BankController bankController, String filePath){
-		Map<String, ComponentImpl> componentMap = bankController.getComponentMap();
+		Map<String, Component> componentMap = bankController.getComponentMap();
 		
 		StripAndSaveObservers componentsStripper = new StripAndSaveObservers(new ArrayList<SerializableObservable>(componentMap.values()));
 		componentsStripper.stripObservers();

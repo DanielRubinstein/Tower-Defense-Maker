@@ -1,15 +1,9 @@
 package backEnd.GameEngine.Engine;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
-import java.util.ResourceBundle;
-
 import backEnd.GameData.GameData;
-import backEnd.GameData.State.ComponentImpl;
-import backEnd.GameData.State.State;
-import backEnd.GameData.State.Tile;
+import backEnd.GameData.State.Component;
 import javafx.geometry.Point2D;
 
 /**
@@ -21,14 +15,13 @@ import javafx.geometry.Point2D;
  */
 public class ProjectileEngine implements Engine {
 	private GameData myGameData;
-	private List<ComponentImpl> toRemove;
+	private List<Component> toRemove;
 
 	@Override
 	public void gameLoop(GameData gameData, double stepTime) {
 		myGameData = gameData;
-
-		toRemove = new ArrayList<ComponentImpl>();
-		for (ComponentImpl c : myGameData.getState().getComponentGraph().getAllComponents()) {
+		toRemove = new ArrayList<Component>();
+		for (Component c : myGameData.getState().getComponentGraph().getAllComponents()) {
 			if (((String) c.getAttribute("Type").getValue()).equals("Projectile")) {
 				Point2D newPos = calculateNewPos(c);
 				c.setAttributeValue("Position", newPos);
@@ -39,27 +32,27 @@ public class ProjectileEngine implements Engine {
 					// destroyed before it gets there
 					// System.out.println("about to perform projectile
 					// actions");
-					performProjectileAction(gameData, (ComponentImpl) c.getAttribute("ProjectileTarget").getValue(), c);
+					performProjectileAction(gameData, (Component) c.getAttribute("ProjectileTarget").getValue(), c);
 					toRemove.add(c);
+
 				}
 
 			}
 		}
-
 		System.out.println("About to remove stuff from graph" );
-		for (ComponentImpl c : toRemove) {
+		for (Component c : toRemove) {
 			myGameData.getState().getComponentGraph().removeComponent(c);
 		}
 
 	}
 
-	private void checkProjectileOutOfBounds(ComponentImpl projectile){
+	private void checkProjectileOutOfBounds(Component projectile){
 		if (myGameData.getState().getTileGrid().getTileByScreenPosition((Point2D) projectile.getAttribute("Position").getValue())==null){
 			toRemove.add(projectile);
 			}
 	}
 	
-	private Point2D calculateNewPos(ComponentImpl c) {
+	private Point2D calculateNewPos(Component c) {
 		Double curVel = (Double) c.getAttribute(("Velocity")).getValue();
 		Double xVel = curVel;
 		Double yVel = curVel;
@@ -97,23 +90,24 @@ public class ProjectileEngine implements Engine {
 	 * @param target
 	 *            the object of the projectile's action (usually an enemy)
 	 */
-	private void performProjectileAction(GameData gameData, ComponentImpl target, ComponentImpl projectile) {
+	private void performProjectileAction(GameData gameData, Component target, Component projectile) {
+		List<Component> targetList = (ArrayList<Component>) gameData.getState().getComponentGraph()
 
-
-		List<ComponentImpl> targetList = (ArrayList<ComponentImpl>) gameData.getState().getComponentGraph()
 				.getComponentsWithinRadius(target, (Double) projectile.getAttribute("ExplosionRadius").getValue());
-		if(projectile.getAttribute("FireType").getValue().equals("SingleTarget")){ 
-			targetList.clear(); //only want the target to be affected if not an AOE tower
-		}
 		targetList.add(target);
 
-		for (ComponentImpl toHit : targetList) {
+
+		for (Component toHit : targetList) {
 			// System.out.println("Target looping has begun");
 			if (toHit.getAttribute("Type").getValue().equals("Enemy")) {
 				toHit.setAttributeValue("Health", (Integer) toHit.getAttribute("Health").getValue() - (Integer) projectile.getAttribute("FireDamage").getValue());
-				//System.out.println("should have reduced HP to " + toHit.getAttribute("Health").getValue() + " type is " + toHit.getAttribute("Type").getValue());
+				System.out.println("should have reduced HP to " + toHit.getAttribute("Health").getValue() + " type is " + toHit.getAttribute("Type").getValue());
 				toHit.setAttributeValue("Velocity", ((Double) projectile.getAttribute("SlowFactor").getValue() * (Double) toHit.getAttribute("Speed").getValue()));
 				toRemove.add(projectile);
+				if (projectile.getAttribute("FireType").getValue().equals("SingleTarget")) {
+					break; // if AOE, continue to loop through all targets, else
+							// only affect one target, needs testing
+				}
 			}
 		}
 

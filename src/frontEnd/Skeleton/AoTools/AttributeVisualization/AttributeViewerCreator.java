@@ -2,7 +2,7 @@ package frontEnd.Skeleton.AoTools.AttributeVisualization;
 
 import backEnd.Attribute.Attribute;
 import backEnd.Attribute.AttributeOwner;
-import backEnd.GameData.State.ComponentImpl;
+import backEnd.GameData.State.Component;
 import frontEnd.View;
 import javafx.geometry.Point2D;
 import javafx.scene.Node;
@@ -82,7 +82,7 @@ public class AttributeViewerCreator implements AttributeVisualization{
 	@Override
 	public Node getCOMPONENT() {
 		try{
-			ComponentImpl baby = (ComponentImpl) myAttr.getValue();
+			Component baby = (Component) myAttr.getValue();
 			
 			HBox pair = new HBox();
 			

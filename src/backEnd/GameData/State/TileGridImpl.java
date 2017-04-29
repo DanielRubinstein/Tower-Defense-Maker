@@ -93,7 +93,6 @@ public class TileGridImpl implements TileGrid {
 	
 	
 	
-		
 		public boolean atMiddleXOfTile(Point2D screenPosition){
 			 return (generateLeftTile(screenPosition).equals(getTileByScreenPosition(screenPosition)) && getTileByScreenPosition(screenPosition).equals(generateRightTile(screenPosition)));
 		}
@@ -231,8 +230,4 @@ public class TileGridImpl implements TileGrid {
 		observers = observersave;
 	}
 	
-	@Override
-	public int compareTo(Object o) {
-		return Integer.compare(this.hashCode(), o.hashCode());
-	}
 }
