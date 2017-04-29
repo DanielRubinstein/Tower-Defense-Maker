@@ -176,6 +176,7 @@ public class Palette implements SkeletonObject, SerializableObserver{
 	}
 
 	private void updatePalette() {
+		observedBankController.refreshAccessibleMaps();
 		for (AttributeOwner preset : myPresetMapBackEnd.values()) {
 			if (!myPresetMapFrontEnd.containsValue(preset)) {
 				addPresetToPalette(preset);

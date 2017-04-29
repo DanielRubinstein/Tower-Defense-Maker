@@ -41,7 +41,7 @@ public class Modification_EditAccessPermissions implements ModificationFromUser{
 				myAccessPermissions.removeLevelAccessPermission(mode);
 			}
 		}
-		
+		myModel.getDataController().saveUniversalGameData();
 		
 	}
 }

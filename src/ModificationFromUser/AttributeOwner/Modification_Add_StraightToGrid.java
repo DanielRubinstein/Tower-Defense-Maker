@@ -6,6 +6,7 @@ import backEnd.ModelImpl;
 import backEnd.Attribute.AttributeOwner;
 import javafx.geometry.Point2D;
 import util.reflection.Reflection;
+import backEnd.Attribute.AttributeOwnerReader;
 
 /**
  * Used for adding a new attribute owner to the grid. New attribute owner is passed as parameter in constructor
@@ -14,17 +15,18 @@ import util.reflection.Reflection;
  *
  */
 public class Modification_Add_StraightToGrid implements ModificationFromUser {
-	private AttributeOwner newAttrOwn;
+	private AttributeOwnerReader newAttrOwn;
 	private Point2D location;
-	
-	public Modification_Add_StraightToGrid(AttributeOwner toAdd) {
+	public Modification_Add_StraightToGrid(AttributeOwnerReader toAdd) {
 		this.newAttrOwn = toAdd;
-		this.location = toAdd.<Point2D>getAttribute("Position").getValue();
+	
 
 	}
 
 	@Override
 	public void invoke(ModelImpl myModel) throws Exception {
+		AttributeOwner attributeOwner = myModel.getAttributeOwner(newAttrOwn);
+		this.location = attributeOwner.<Point2D>getAttribute("Position").getValue();
 		Modification_Add_ToGrid_Methods methods = new Modification_Add_ToGrid_Methods(myModel, location);
 		Reflection.callMethod(methods, "addAttributeOwnerToGrid", newAttrOwn);
 	}

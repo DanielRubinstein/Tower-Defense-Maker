@@ -18,10 +18,11 @@ public class Modification_UpgradeComponent implements ModificationFromUser {
 		String upgradePreset = (String) toUpgrade.getAttribute("Upgrade").getValue();
 		Point2D loc = (Point2D) toUpgrade.getAttribute("Position").getValue();
 		Component toAdd = myModel.getBankController().getComponent(upgradePreset);
-		Modification_Add_PaletteToGrid addMod = new Modification_Add_PaletteToGrid(toAdd, loc);
-		addMod.invoke(myModel);
 		Modification_RemoveAttributeOwner removeMod = new Modification_RemoveAttributeOwner(toUpgrade);
 		removeMod.invoke(myModel);
+		Modification_Add_PaletteToGrid addMod = new Modification_Add_PaletteToGrid(toAdd, loc);
+		addMod.invoke(myModel);
+		
 	}
 
 }
