@@ -25,8 +25,8 @@ public class MenuSplash {
 	
 	public MenuSplash(Stage stage, Consumer<ButtonMenuImpl> startConsumer, Consumer<FacebookInteractor> setFb) {
 		splash = new ButtonMenuImpl("Welcome");
-   	 	splash.addPrimarySimpleButtonWithHover("START", () -> startConsumer.accept(splash) , "Click to start the game!");
-   	 	splash.addPrimarySimpleButtonWithHover("Help/Instructions", () -> new HelpOptions(stage), "See the help page");
+   	 	splash.addSimpleButtonWithHover("START", () -> startConsumer.accept(splash) , "Click to start the game!");
+   	 	splash.addSimpleButtonWithHover("Help/Instructions", () -> new HelpOptions(stage), "See the help page");
    	 	splash.addSimpleButtonWithHover("Connect To Facebook", () -> launchFb(stage), "Log in and connect to Facebook to see high scores, screenshots, post to the official voogasalad_su3ps1ckt34m1337 page");
 		myStage = stage;
 		mySetFB = setFb;
@@ -43,7 +43,7 @@ public class MenuSplash {
 		FacebookBrowser fbBrowser = new FacebookBrowserImpl(appID);
 		FacebookConnector fb = new FacebookConnectorImpl(appID,appSecret);
 		ButtonMenuImpl myLoginButton = new ButtonMenuImpl("Login!");
-		myLoginButton.addPrimarySimpleButtonWithHover("Login", () -> {
+		myLoginButton.addSimpleButtonWithHover("Login", () -> {
 			fbBrowser.launchPage();
 			fbBrowser.onDialogClose(e -> {
 				String accessToken = fbBrowser.getAccessToken();
