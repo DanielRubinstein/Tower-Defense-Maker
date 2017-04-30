@@ -1,0 +1,68 @@
+<?xml version="1.0"?><backEnd.GameData.State.PlayerStatus>
+  <myStatusItems>
+    <entry>
+      <string>Money</string>
+      <javafx.beans.property.ReadOnlyDoubleWrapper>
+        <value>210.0</value>
+        <valid>true</valid>
+        <name></name>
+        <readOnlyProperty>
+          <helper class="com.sun.javafx.binding.ExpressionHelper$SingleChange">
+            <observable class="javafx.beans.property.ReadOnlyDoubleWrapper$ReadOnlyPropertyImpl" reference="../.."/>
+            <listener class="null"/>
+            <currentValue class="double">210.0</currentValue>
+          </helper>
+          <outer-class reference="../.."/>
+        </readOnlyProperty>
+      </javafx.beans.property.ReadOnlyDoubleWrapper>
+    </entry>
+    <entry>
+      <string>Score</string>
+      <javafx.beans.property.ReadOnlyDoubleWrapper>
+        <value>189.0</value>
+        <valid>true</valid>
+        <name></name>
+        <readOnlyProperty>
+          <helper class="com.sun.javafx.binding.ExpressionHelper$SingleChange">
+            <observable class="javafx.beans.property.ReadOnlyDoubleWrapper$ReadOnlyPropertyImpl" reference="../.."/>
+            <listener class="null"/>
+            <currentValue class="double">189.0</currentValue>
+          </helper>
+          <outer-class reference="../.."/>
+        </readOnlyProperty>
+      </javafx.beans.property.ReadOnlyDoubleWrapper>
+    </entry>
+    <entry>
+      <string>Health</string>
+      <javafx.beans.property.ReadOnlyDoubleWrapper>
+        <value>-10.0</value>
+        <valid>true</valid>
+        <name></name>
+        <readOnlyProperty>
+          <helper class="com.sun.javafx.binding.ExpressionHelper$SingleChange">
+            <observable class="javafx.beans.property.ReadOnlyDoubleWrapper$ReadOnlyPropertyImpl" reference="../.."/>
+            <listener class="null"/>
+            <currentValue class="double">-10.0</currentValue>
+          </helper>
+          <outer-class reference="../.."/>
+        </readOnlyProperty>
+      </javafx.beans.property.ReadOnlyDoubleWrapper>
+    </entry>
+    <entry>
+      <string>KillCount</string>
+      <javafx.beans.property.ReadOnlyDoubleWrapper>
+        <value>21.0</value>
+        <valid>true</valid>
+        <name></name>
+        <readOnlyProperty>
+          <helper class="com.sun.javafx.binding.ExpressionHelper$SingleChange">
+            <observable class="javafx.beans.property.ReadOnlyDoubleWrapper$ReadOnlyPropertyImpl" reference="../.."/>
+            <listener class="null"/>
+            <currentValue class="double">21.0</currentValue>
+          </helper>
+          <outer-class reference="../.."/>
+        </readOnlyProperty>
+      </javafx.beans.property.ReadOnlyDoubleWrapper>
+    </entry>
+  </myStatusItems>
+</backEnd.GameData.State.PlayerStatus>
