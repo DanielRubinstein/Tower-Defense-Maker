@@ -1,14 +1,13 @@
 <?xml version="1.0"?><map>
   <entry>
-    <string>aasdf</string>
-    <list/>
-  </entry>
-  <entry>
     <string>MiguelTestGame</string>
-    <list/>
+    <list>
+      <string>level1</string>
+      <string>level2</string>
+    </list>
   </entry>
   <entry>
-    <string>asdf</string>
+    <string>HeyLmaoGame</string>
     <list/>
   </entry>
 </map>
