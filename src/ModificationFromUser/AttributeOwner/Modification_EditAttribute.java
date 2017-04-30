@@ -1,7 +1,7 @@
 package ModificationFromUser.AttributeOwner;
 
 import ModificationFromUser.ModificationFromUser;
-import backEnd.ModelImpl;
+import backEnd.Model;
 import backEnd.Attribute.AttributeOwner;
 import backEnd.Attribute.AttributeOwnerReader;
 
@@ -21,12 +21,10 @@ public class Modification_EditAttribute<T> implements ModificationFromUser {
 	}
 
 	@Override
-	public void invoke(ModelImpl myModel) throws Exception {
+	public void invoke(Model myModel) throws Exception {
 		AttributeOwner attributeOwner = myModel.getAttributeOwner(myObj);
 		attributeOwner.setAttributeValue(attributeName, myNewValue);
 		myModel.getDataController().saveUniversalGameData();
-		//System.out.println(myAtt.getName());
-
 	}
 
 }

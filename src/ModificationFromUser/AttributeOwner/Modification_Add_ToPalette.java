@@ -2,11 +2,12 @@ package ModificationFromUser.AttributeOwner;
 
 import ModificationFromUser.ModificationFromUser;
 import ModificationFromUser.AttributeOwner.ReflectionMethods.Modification_Add_ToPalette_Methods;
-import backEnd.BankController;
+import backEnd.Model;
 import backEnd.ModelImpl;
 import backEnd.Attribute.AttributeOwner;
 import backEnd.Attribute.AttributeOwnerReader;
 import backEnd.Attribute.AttributeOwnerSerializer;
+import backEnd.Bank.BankController;
 import backEnd.Mode.ModeException;
 import util.reflection.Reflection;
 
@@ -30,7 +31,7 @@ public class Modification_Add_ToPalette implements ModificationFromUser {
 	}
 
 	@Override
-	public void invoke(ModelImpl model) throws Exception {
+	public void invoke(Model model) throws Exception {
 		switch (model.getMode().getUserMode()) {
 		case "AUTHOR":
 			AttributeOwner toAdd;
@@ -54,7 +55,7 @@ public class Modification_Add_ToPalette implements ModificationFromUser {
 
 	}
 	
-	private boolean stateContains(AttributeOwner myAttrOwn, ModelImpl myModel){
+	private boolean stateContains(AttributeOwner myAttrOwn, Model myModel){
 		return myModel.getGameData().getState().getComponentGraph().contains(myAttrOwn)
 		|| myModel.getGameData().getState().getTileGrid().contains(myAttrOwn);
 	}

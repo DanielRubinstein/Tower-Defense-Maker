@@ -1,5 +1,6 @@
 package frontEnd.Skeleton.UserTools.Presets;
 
+import java.util.Collection;
 import java.util.Map;
 
 import backEnd.Attribute.AttributeOwner;
@@ -32,12 +33,12 @@ public class PalettePane implements SkeletonObject {
 		Tab tab = new Tab(string);
 		tab.setClosable(false);
 		
-		Map<String, ? extends AttributeOwner> presets = null;
+		Collection<? extends AttributeOwner> presets = null;
 		
 		if (string.equals("Tiles")){
-			presets = myView.getBankController().getAccessibleTileMap();
+			presets = myView.getBankControllerReader().getAccessibleTilePresets();
 		} else if (string.equals("Components")){
-			presets = myView.getBankController().getAccessibleComponentMap();
+			presets = myView.getBankControllerReader().getAccessibleComponentPresets();
 		}
 		
 		Palette singlePalette = new Palette(myView, presets);

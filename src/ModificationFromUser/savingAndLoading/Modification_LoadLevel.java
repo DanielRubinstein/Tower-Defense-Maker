@@ -1,6 +1,9 @@
-package ModificationFromUser;
+package ModificationFromUser.savingAndLoading;
 
 import java.io.File;
+
+import ModificationFromUser.ModificationFromUser;
+import backEnd.Model;
 import backEnd.ModelImpl;
 import javafx.stage.DirectoryChooser;
 import javafx.stage.Stage;
@@ -15,12 +18,17 @@ public class Modification_LoadLevel implements ModificationFromUser
 {
 
 	@Override
-	public void invoke(ModelImpl myModel) throws Exception
+	public void invoke(Model myModel) throws Exception
 	{
-			myModel.getGameLoader().accept(load(myModel));
+		File fileToLoad = load(myModel);
+		if(fileToLoad != null){
+			myModel.getGameLoader().accept(fileToLoad);
+		} else {
+			// do nothing
+		}
 	}
 	
-	private File load(ModelImpl myModel)
+	private File load(Model myModel)
 	{
 		DirectoryChooser chooser = new DirectoryChooser();
 		
@@ -34,6 +42,8 @@ public class Modification_LoadLevel implements ModificationFromUser
 		}
 	
 		return chooser.showDialog(new Stage());
+		
+		
 	}
 
 }

@@ -1,5 +1,7 @@
 package frontEnd.CustomJavafxNodes;
 
+import java.util.function.Consumer;
+
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
@@ -29,6 +31,7 @@ public class ButtonMenuImpl implements ButtonMenu {
 		description.setWrapText(true);
 		setText(text);
 	}
+	
 	public GridPane getGridPane(){
 		return myGrid;
 	}
@@ -43,6 +46,7 @@ public class ButtonMenuImpl implements ButtonMenu {
 	    myGrid.setHgap(10);
 	    myGrid.setVgap(10);
 	    myGrid.setPadding(new Insets(10));
+	    myGrid.setMinWidth(400);
 	}
 
 
@@ -95,8 +99,8 @@ public class ButtonMenuImpl implements ButtonMenu {
 		myButtonRoot.getChildren().add(n);
 	}
 	
-	public void addBackButton(Runnable event) {
-		this.addSimpleButton("Go Back", event);
+	public void addBackButton(ButtonMenuImpl previousMenu, Stage stage) {		
+		this.addSimpleButton("Go Back", () -> previousMenu.display(stage) );
 		
 	}
 	
@@ -112,8 +116,7 @@ public class ButtonMenuImpl implements ButtonMenu {
 	public void display(Stage stage){
 		if(myScene == null){
 			create();
-		}
-		
+		}		
 		stage.setScene(myScene);
 		stage.show();
 	}
@@ -122,6 +125,7 @@ public class ButtonMenuImpl implements ButtonMenu {
 	private void create() {
 		
 		setSpacing(200d);
+		myButtonRoot.setMinWidth(250d);
 		
 		myGrid.add(titleLbl, 0, 0, 2, 1);
 		myGrid.add(myButtonRoot, 0, 1);

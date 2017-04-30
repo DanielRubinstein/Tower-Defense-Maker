@@ -37,6 +37,9 @@ public class LevelEditor {
 		gameEditor = new GridPane();
 		Button removeGame = new Button("Remove Game");
 		TextField addText = new TextField();
+		removeGame.setOnAction(e -> {
+			myContr.removeGame(addText.getText());
+		});
 		Button addGame = new Button("Add Game");
 		addGame.setOnAction(e -> {
 			myContr.addNewGame(addText.getText());

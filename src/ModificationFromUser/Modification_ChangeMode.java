@@ -1,12 +1,13 @@
 package ModificationFromUser;
 
-import backEnd.ModelImpl;
+import backEnd.Model;
 
 public class Modification_ChangeMode implements ModificationFromUser {
 
 	@Override
-	public void invoke(ModelImpl myModel) {
+	public void invoke(Model myModel) {
 		myModel.getMode().toggleUserMode();	
+		//myModel.getBankController().refreshAccessibleMaps();
 	}
 	
 	

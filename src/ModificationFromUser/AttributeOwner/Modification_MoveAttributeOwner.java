@@ -2,7 +2,7 @@ package ModificationFromUser.AttributeOwner;
 
 import ModificationFromUser.ModificationFromUser;
 import ModificationFromUser.AttributeOwner.ReflectionMethods.Modification_MoveAttributeOwner_Methods;
-import backEnd.ModelImpl;
+import backEnd.Model;
 import backEnd.Attribute.AttributeOwner;
 import backEnd.Attribute.AttributeOwnerReader;
 import javafx.geometry.Point2D;
@@ -20,7 +20,7 @@ public class Modification_MoveAttributeOwner implements ModificationFromUser {
 	}
 
 	@Override
-	public void invoke(ModelImpl myModel) throws Exception {
+	public void invoke(Model myModel) throws Exception {
 		AttributeOwner myAO = myModel.getAttributeOwner(myAOReader);
 		Modification_MoveAttributeOwner_Methods methods = new Modification_MoveAttributeOwner_Methods(myModel, newLoc);
 		Reflection.callMethod(methods, "move", myAO);

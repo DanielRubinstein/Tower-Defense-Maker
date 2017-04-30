@@ -1,6 +1,5 @@
 package frontEnd.Skeleton.AoTools;
 
-import backEnd.Attribute.AttributeOwner;
 import backEnd.Attribute.AttributeOwnerReader;
 import frontEnd.View;
 import javafx.scene.Parent;
@@ -13,11 +12,11 @@ public class GenericCommandCenter implements CommandCenter{
 	private StringResourceBundle stringResourceBundle = new StringResourceBundle();
 	private View myView;
 	private VBox myRoot;
-	private AttributeOwner obje;
+	private AttributeOwnerReader obje;
 	
 	public GenericCommandCenter(View view, AttributeOwnerReader obj){
 		myView = view;
-		obje = (AttributeOwner) obj;
+		obje = obj;
 	}
 	
 	public void generate(double x, double y, Stage myStage, Parent myRoot) {

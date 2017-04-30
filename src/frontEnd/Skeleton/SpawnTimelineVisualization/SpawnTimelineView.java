@@ -93,7 +93,7 @@ public class SpawnTimelineView implements SkeletonObject, SerializableObserver {
 	private void setDragCondition(ScrollPane dropZone, boolean repeating) {
 		dropZone.setOnDragDropped(e -> {
 			String presetName = e.getDragboard().getString();
-			if(myView.getBankController().getPreset(presetName) instanceof TileImpl){
+			if(myView.getBankControllerReader().getPreset(presetName) instanceof TileImpl){
 				// FIXME avoid instance of
 				// TODO show error to user
 				return;

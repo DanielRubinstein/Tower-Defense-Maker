@@ -9,8 +9,6 @@ import java.util.Map;
 import java.util.MissingResourceException;
 
 import ModificationFromUser.AttributeOwner.Modification_EditAttribute;
-import backEnd.Attribute.Attribute;
-import backEnd.Attribute.AttributeOwner;
 import backEnd.Attribute.AttributeOwnerReader;
 import backEnd.Attribute.AttributeReader;
 import backEnd.GameData.State.Component;
@@ -55,7 +53,7 @@ public class AttributeEditorCreator implements AttributeVisualization{
 		HBox pair = new HBox();
 		
 		Label name = new Label();
-		name.setText(myView.getBankController().getAOName(preset));
+		name.setText(myView.getBankControllerReader().getPresetName(preset));
 		pair.getChildren().add(name);
 		
 		String presetImagePath = preset.<String>getAttribute("ImageFile").getValue();
@@ -156,7 +154,7 @@ public class AttributeEditorCreator implements AttributeVisualization{
 	public Node getCOMPONENT() {
 		Map<HBox, Component> toCompMap = new HashMap<HBox, Component>();
 		Map<Component, HBox> toPairMap = new HashMap<Component, HBox>();
-		Collection<Component> presetComponents = myView.getBankController().getComponentMap().values();
+		Collection<Component> presetComponents = myView.getBankControllerReader().getAccessibleComponentPresets();
 		Collection<HBox> visualPair = new ArrayList<HBox>();
 		for(Component preset : presetComponents){
 			visualPair.add(createVisualPair(toCompMap, toPairMap, preset));
@@ -174,7 +172,7 @@ public class AttributeEditorCreator implements AttributeVisualization{
 		}
 		optionsBox.valueProperty().addListener((o, oldValue, newValue) -> {
 			// where the actual modification gets sent
-			String componentName = myView.getBankControllerReader().getComponentName(toCompMap.get(newValue));
+			String componentName = myView.getBankControllerReader().getPresetName(toCompMap.get(newValue));
 			sendModification(componentName);
 		});
 		return optionsBox;

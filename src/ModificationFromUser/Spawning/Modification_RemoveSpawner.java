@@ -2,7 +2,7 @@ package ModificationFromUser.Spawning;
 
 
 import ModificationFromUser.ModificationFromUser;
-import backEnd.ModelImpl;
+import backEnd.Model;
 import backEnd.GameEngine.Engine.Spawning.SpawnDataReader;
 
 /**
@@ -27,7 +27,7 @@ public class Modification_RemoveSpawner implements ModificationFromUser{
 	}
 	
 	@Override
-	public void invoke(ModelImpl myModel) throws Exception {
+	public void invoke(Model myModel) throws Exception {
 		myModel.getState().getSpawnQueues().get(mySpawnQueueName).remove(mySpawnDataToRemove);
 	}
 }

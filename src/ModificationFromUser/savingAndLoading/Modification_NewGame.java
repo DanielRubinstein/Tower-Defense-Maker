@@ -1,6 +1,7 @@
-package ModificationFromUser;
+package ModificationFromUser.savingAndLoading;
 
-import backEnd.ModelImpl;
+import ModificationFromUser.ModificationFromUser;
+import backEnd.Model;
 
 public class Modification_NewGame implements ModificationFromUser {
 	
@@ -10,7 +11,7 @@ public class Modification_NewGame implements ModificationFromUser {
 	
 	
 	@Override
-	public void invoke(ModelImpl myModel) throws Exception {
+	public void invoke(Model myModel) throws Exception {
 		System.out.println("Make a new game");
 	}
 
