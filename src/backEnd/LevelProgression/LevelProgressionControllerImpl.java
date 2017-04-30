@@ -166,8 +166,7 @@ public class LevelProgressionControllerImpl implements LevelProgressionControlle
 			if (!gamesMap.containsKey(myMode.getGameMode()))
 			{
 				gamesMap.put(myMode.getGameMode(), new ArrayList<String>());
-			}
-						
+			}			
 			saveGamesMap();
 			
 		} catch (XMLReadingException e) {
@@ -181,7 +180,7 @@ public class LevelProgressionControllerImpl implements LevelProgressionControlle
 	{
 		if (getNextLevel() == null)
 		{
-			splashScreenLoader.accept(new SplashScreenData("you won the game!", SplashScreenType.GAME_WON, null));
+			splashScreenLoader.accept(new SplashScreenData("you won the game!", SplashScreenType.GAME_WON, () -> System.exit(0)));
 		}
 		else gameLoader.accept(getNextLevel());
 	}
