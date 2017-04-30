@@ -12,7 +12,7 @@
         <entry>
           <string>ImageFile</string>
           <backEnd.Attribute.AttributeImpl>
-            <myValue class="string">resources/images/Components/zombie.png</myValue>
+            <myValue class="string">resources/images/Components/rainbow_bloon.png</myValue>
             <myName>ImageFile</myName>
           </backEnd.Attribute.AttributeImpl>
         </entry>
@@ -79,7 +79,7 @@
         <entry>
           <string>FireImage</string>
           <backEnd.Attribute.AttributeImpl>
-            <myValue class="string">resources/images/Components/purple_bloon.png</myValue>
+            <myValue class="string"></myValue>
             <myName>FireImage</myName>
           </backEnd.Attribute.AttributeImpl>
         </entry>
@@ -137,6 +137,7 @@
         <entry>
           <string>SpawnOnDeathObject</string>
           <backEnd.Attribute.AttributeImpl>
+            <myValue class="string">Tower</myValue>
             <myName>SpawnOnDeathObject</myName>
           </backEnd.Attribute.AttributeImpl>
         </entry>
@@ -203,7 +204,7 @@
         <entry>
           <string>Health</string>
           <backEnd.Attribute.AttributeImpl>
-            <myValue class="int">10</myValue>
+            <myValue class="int">20</myValue>
             <myParamList class="java.util.Arrays$ArrayList">
               <a class="java.lang.Integer-array">
                 <int>1</int>
@@ -219,8 +220,8 @@
           <string>Position</string>
           <backEnd.Attribute.AttributeImpl>
             <myValue class="javafx.geometry.Point2D">
-              <x>533.0</x>
-              <y>259.0</y>
+              <x>226.0</x>
+              <y>255.0</y>
               <hash>0</hash>
             </myValue>
             <myName>Position</myName>
@@ -229,7 +230,7 @@
         <entry>
           <string>FireRate</string>
           <backEnd.Attribute.AttributeImpl>
-            <myValue class="double">1000.0</myValue>
+            <myValue class="double">20.0</myValue>
             <myParamList class="java.util.Arrays$ArrayList">
               <a class="java.lang.Double-array">
                 <double>0.0</double>
@@ -244,7 +245,7 @@
         <entry>
           <string>Velocity</string>
           <backEnd.Attribute.AttributeImpl>
-            <myValue class="double">10.0</myValue>
+            <myValue class="double">1.0</myValue>
             <myParamList class="java.util.Arrays$ArrayList">
               <a class="java.lang.Double-array">
                 <double>0.0</double>
@@ -259,7 +260,7 @@
         <entry>
           <string>FireDamage</string>
           <backEnd.Attribute.AttributeImpl>
-            <myValue class="int">10</myValue>
+            <myValue class="int">1</myValue>
             <myParamList class="java.util.Arrays$ArrayList">
               <a class="java.lang.Integer-array">
                 <int>0</int>
@@ -287,7 +288,7 @@
         <entry>
           <string>Type</string>
           <backEnd.Attribute.AttributeImpl>
-            <myValue class="string">Tower</myValue>
+            <myValue class="string">Enemy</myValue>
             <myParamList class="java.util.Arrays$ArrayList">
               <a class="string-array">
                 <string>Tower</string>
@@ -333,7 +334,7 @@
         <entry>
           <string>ScoreBounty</string>
           <backEnd.Attribute.AttributeImpl>
-            <myValue class="int">10</myValue>
+            <myValue class="int">9</myValue>
             <myParamList class="java.util.Arrays$ArrayList">
               <a class="java.lang.Integer-array">
                 <int>0</int>
@@ -348,7 +349,7 @@
         <entry>
           <string>FireRadius</string>
           <backEnd.Attribute.AttributeImpl>
-            <myValue class="double">200.0</myValue>
+            <myValue class="double">10.0</myValue>
             <myParamList class="java.util.Arrays$ArrayList">
               <a class="java.lang.Double-array">
                 <double>10.0</double>
@@ -363,7 +364,7 @@
         <entry>
           <string>ExplosionRadius</string>
           <backEnd.Attribute.AttributeImpl>
-            <myValue class="double">40.0</myValue>
+            <myValue class="double">0.0</myValue>
             <myParamList class="java.util.Arrays$ArrayList">
               <a class="java.lang.Double-array">
                 <double>0.0</double>
@@ -392,10 +393,10 @@
       <strResources/>
     </myAccessPermissions>
     <observers/>
-    <ID>313184705722629</ID>
+    <ID>313184702384797</ID>
     <previousMovement>
       <x>0.0</x>
-      <y>0.0</y>
+      <y>1.0</y>
     </previousMovement>
   </backEnd.GameData.State.ComponentImpl>
 </list>

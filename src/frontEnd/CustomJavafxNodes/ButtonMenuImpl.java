@@ -12,8 +12,8 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
-import resources.constants.NumericResourceBundle;
 import resources.constants.StringResourceBundle;
+import resources.constants.numeric.NumericResourceBundle;
 
 public class ButtonMenuImpl implements ButtonMenu {
 	private StringResourceBundle stringResourceBundle = new StringResourceBundle();
@@ -46,7 +46,7 @@ public class ButtonMenuImpl implements ButtonMenu {
 	    myGrid.setHgap(10);
 	    myGrid.setVgap(10);
 	    myGrid.setPadding(new Insets(10));
-	    myGrid.setMinWidth(numericResourceBundle.getButtonMenuWidth());
+	    myGrid.setMinWidth(numericResourceBundle.getFromSizing("ButtonWidth"));
 	}
 
 
@@ -131,7 +131,7 @@ public class ButtonMenuImpl implements ButtonMenu {
 		//myButtonRoot.setAlignment(Pos.CENTER);
    	 	myScene = new Scene(myGrid);
    	 	myScene.getStylesheets().add(stringResourceBundle.getFromStringConstants("DEFAULT_CSS"));
-		description.setMaxWidth(200d);
+		description.setMaxWidth(numericResourceBundle.getFromSizing("DescriptionTextBoxWidth"));
 	}
 
 

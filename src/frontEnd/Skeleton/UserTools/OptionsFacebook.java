@@ -1,13 +1,12 @@
 package frontEnd.Skeleton.UserTools;
 
-import frontEnd.View;
+import com.restfb.exception.FacebookException;
+
 import frontEnd.ViewReader;
 import frontEnd.CustomJavafxNodes.ActionButton;
 import frontEnd.CustomJavafxNodes.ButtonMenuImpl;
 import frontEnd.CustomJavafxNodes.ErrorDialog;
-import frontEnd.Facebook.FacebookConnector;
 import frontEnd.Facebook.FacebookInteractor;
-import com.restfb.exception.FacebookException;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.Scene;
@@ -24,16 +23,14 @@ public class OptionsFacebook implements SkeletonObject {
 
 	private ViewReader myView;
 	private HBox myRoot;
-	private Stage myParentStage;
 	private Stage myStage;
 	private ButtonMenuImpl myMenu;
 	private FacebookInteractor myFb;
 	private ImageView profPic;
 	
-	public OptionsFacebook(ViewReader view,Stage parentStage){
+	public OptionsFacebook(ViewReader view){
 		myView = view;
 		myRoot = new HBox();
-		myParentStage = parentStage;
 		setUp();
 	}
 	
@@ -58,7 +55,7 @@ public class OptionsFacebook implements SkeletonObject {
 	}
 	private void launch(){
 		myStage = new Stage();
-		myStage.initOwner(myParentStage);
+		myStage.initOwner(myView.getMainWindow());
 		myStage.initModality(Modality.APPLICATION_MODAL);
 
 		myMenu = new ButtonMenuImpl("Interact With Facebook");
