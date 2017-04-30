@@ -21,15 +21,7 @@ public class BottomRootImpl implements BottomRoot{
 		initializeBar(view);
 		initializeCorner(view);
 	}
-	/**
-	 * 
-	 * @param width
-	 * @param height
-	 */
-	public void setDimensions(double width, double height){
-		//myRoot.setPrefHeight(height);		
-		myOptions.setSideDimensions(width, height);
-	}
+
 	private void initializeBar(View view){
 		myBottomBar = new BottomBarImpl(view);
 		HBox.setHgrow(myBottomBar.getRoot(), Priority.ALWAYS);
