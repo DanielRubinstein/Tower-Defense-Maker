@@ -10,8 +10,10 @@ import ModificationFromUser.AttributeOwner.Modification_PurchaseComponent;
 import ModificationFromUser.AttributeOwner.Modification_RemoveAttributeOwner;
 import ModificationFromUser.AttributeOwner.Modification_UpgradeComponent;
 import backEnd.Attribute.AttributeOwner;
+import backEnd.Attribute.AttributeOwnerReader;
 import backEnd.GameData.State.Component;
 import frontEnd.View;
+import frontEnd.CustomJavafxNodes.ErrorDialog;
 import frontEnd.CustomJavafxNodes.SingleFieldPrompt;
 import frontEnd.Skeleton.UserTools.SkeletonObject;
 import javafx.geometry.Pos;
@@ -68,16 +70,25 @@ public class AttributeCommandCenterBottomButtons implements SkeletonObject{
 		myRoot.getChildren().add(accessPermissionsViewer.getRoot());
 	}
 	
-	public void createAddToPresetButton(AttributeOwner obj) {
-		if(!(myView.getBankControllerReader().getAccessibleComponentPresets().contains(obj) || myView.getBankControllerReader().getAccessibleTilePresets().contains(obj))){
+	public void createAddToPresetButton(AttributeOwnerReader obj) {
+		if(!(myView.getBankControllerReader().getAccessibleComponentPresets().contains(obj) 
+				|| myView.getBankControllerReader().getAccessibleTilePresets().contains(obj))){
 			List<String> dialogTitles = Arrays.asList("Preset Creation Utility", "Please Input a Name for your new preset");
 			String promptLabel = "New preset name:";
 			String promptText = "";
 			SingleFieldPrompt myNameDialog = new SingleFieldPrompt(dialogTitles, promptLabel, promptText);
 			Button preset = new Button("Save a copy to preset palette");
 			preset.setOnAction((e) -> {
-				myView.sendUserModification(new Modification_Add_ToPalette(myNameDialog.getUserInputString(), obj));
-				myHostStage.close();
+				if(!(obj.<String>getAttributeReader("ImageFile").getValue().equals(""))){
+					myView.sendUserModification(new Modification_Add_ToPalette(myNameDialog.getUserInputString(), obj));
+					myHostStage.close();
+				} else {
+					Alert alert = new Alert(AlertType.WARNING);
+					alert.setTitle("Error Saving Preset");
+					alert.setHeaderText("You must select an image to save a Preset");
+					alert.setContentText("Please select an image");
+					alert.showAndWait();
+				}
 			});
 			
 			myRoot.getChildren().add(preset);

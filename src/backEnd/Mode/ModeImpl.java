@@ -115,7 +115,7 @@ public class ModeImpl implements ModeReader, Mode{
 	}
 	
 	private void notifyObservers() {
-		System.out.println("Notifying Observers within ModeImpl (i.e. resetting Palette)");
+		System.out.println("Notifying Observers within ModeImpl " + observers);
 		for(SerializableObserver o : observers){
 			o.update(null, null);
 		}

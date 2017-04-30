@@ -26,7 +26,7 @@ import backEnd.GameData.State.TileImpl;
  *
  */
 
-public class BankControllerImpl implements SerializableObservable, BankController
+public class BankControllerImpl implements SerializableObservable, BankController, SerializableObserver
 {
 	private static final StringResourceBundle strResources = new StringResourceBundle();
 	private Map<String, Tile> tileBank;
@@ -41,6 +41,7 @@ public class BankControllerImpl implements SerializableObservable, BankControlle
 		this.tileBank = dataController.loadTileMap();
 		this.componentBank = dataController.loadComponentMap();
 		this.myMode = myMode;
+		myMode.addObserver(this);
 		this.dataController = dataController;
 		this.observers = new ArrayList<SerializableObserver>();
 		accessibleComponentBank = new HashMap<>();
@@ -187,6 +188,8 @@ public class BankControllerImpl implements SerializableObservable, BankControlle
 		for (String x : componentBank.keySet()) {
 			if (componentBank.get(x).getAccessPermissions().permitsAccess(myMode.getUserMode(), myMode.getGameMode(),
 					myMode.getLevelMode())) {
+				//System.out.println(this.getClass().getSimpleName() + ": accessible component - " + x);
+				//System.out.println(myMode.getUserMode() + " " + myMode.getGameMode());
 				accessibleComponentBank.put(x, componentBank.get(x));
 			}
 		}
@@ -286,5 +289,11 @@ public class BankControllerImpl implements SerializableObservable, BankControlle
 	@Override
 	public Collection<Component> getAccessibleComponentPresets() {
 		return this.getAccessibleComponentMap().values();
+	}
+
+	@Override
+	public void update(SerializableObservable so, Object obj) {
+		refreshAccessibleMaps();
+		notifyObservers();
 	}
 }

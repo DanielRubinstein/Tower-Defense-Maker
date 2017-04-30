@@ -12,10 +12,10 @@ import frontEnd.CustomJavafxNodes.SingleFieldPrompt;
 // Author Mode: save current GameData to a new Level folder or overwrite an existing one
 
 public enum Modification_SaveGameState implements ModificationFromUser {
-	TEMPLATE ((model, newName) -> {
+	SAVEDGAME ((model, newName) -> {
 		model.getDataController().saveGame(model.getGameData(), model.getMode().getGameMode(), newName);
 		}),
-	SAVEDGAME ((model, newName) -> {
+	TEMPLATE ((model, newName) -> {
 		model.getDataController().saveLevelTemplate(model.getGameData(), model.getMode().getGameMode(), newName);
 		});
 
@@ -44,7 +44,8 @@ public enum Modification_SaveGameState implements ModificationFromUser {
 		String promptLabel = "Name:";
 		String promptText = "";
 		SingleFieldPrompt myDialog = new SingleFieldPrompt(dialogTitles, promptLabel, promptText);
-		return myDialog.getUserInputString();
+		String name = myDialog.getUserInputString();
+		return name;
 	}
 
 }

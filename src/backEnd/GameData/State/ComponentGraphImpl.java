@@ -46,7 +46,7 @@ public class ComponentGraphImpl implements ComponentGraph {
 	public List<Component> getComponentsByScreenPosition(Point2D screenPosition) {
 		List<Component> atLocation = new ArrayList<Component>();
 		for(Component c : myComponents){
-			if(c.getAttribute("Position").getValue() == screenPosition){
+			if(c.getAttribute("Position").getValue().equals(screenPosition)){
 				atLocation.add(c);
 			}
 		}
@@ -60,7 +60,7 @@ public class ComponentGraphImpl implements ComponentGraph {
 		List<Component> componentsOnTile = new ArrayList<Component>();
 		
 		for(Component c : myComponents){
-			Point2D loc = (Point2D)c.getAttribute("Position").getValue();
+			Point2D loc = c.<Point2D>getAttribute("Position").getValue();
 			if (loc.getX() >= tileCorners.getMinX()
 					&& loc.getX() <= tileCorners.getMaxX()
 					&& loc.getY() > tileCorners.getMinY()
@@ -74,6 +74,7 @@ public class ComponentGraphImpl implements ComponentGraph {
 
 	@Override
 	public void addComponentToGrid(Component newComponent, Point2D screenPosition) {
+		//System.out.println(this.getClass().getSimpleName() + ": adding component @ " + screenPosition);
 		myComponents.add(newComponent);
 		newComponent.setAttributeValue("Position", screenPosition);
 		notifyObservers(newComponent);
