@@ -18,7 +18,7 @@ public class BaseCheckerEngine implements Engine {
 		for (Component c : myState.getComponentGraph().getAllComponents()) {
 			Point2D currentLocation = c.<Point2D>getAttribute("Position").getValue();
 			currentTile = gameData.getState().getTileGrid().getTileByScreenPosition(currentLocation);
-			if ((Boolean) currentTile.getAttribute("GoalTile").getValue()) {
+			if (currentTile != null && ((Boolean) currentTile.getAttribute("GoalTile").getValue())) {
 				gameData.getStatus().decrementStatusItem("Health", 1);
 				c.setAttributeValue("Health", 0);
 			}
