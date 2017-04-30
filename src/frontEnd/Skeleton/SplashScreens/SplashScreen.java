@@ -3,6 +3,7 @@ package frontEnd.Skeleton.SplashScreens;
 import javafx.event.Event;
 import javafx.event.EventHandler;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.text.Text;
@@ -22,7 +23,10 @@ public class SplashScreen
 		
 
 		
-		myBP.setBottom(new Label(data.getMessageBody()));
+		myBP.setCenter(new Label(data.getMessageBody()));
+		Button nextLevel = new Button("Next Level");
+		//nextLevel.setOnMouseClicked((Event) -> ;
+		//myBP.getChildren().add(new);
 		
 		
 		myScene = new Scene(myBP);
