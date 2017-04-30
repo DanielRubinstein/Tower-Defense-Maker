@@ -230,9 +230,7 @@ public class TileGridImpl implements TileGrid {
 		return tileGroups;
 	}
 	
-	
-	@Override
-	public void buildTileGroups() {
+	private void buildTileGroups() {
 		tileGroups = new ArrayList<Set<Tile>>();
 		Tile[][] tileGridThing = new Tile[numColsInGrid][numRowsInGrid];
 		for(Point2D point2d : tileGrid.keySet()){
