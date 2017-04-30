@@ -17,7 +17,12 @@ public class Modification_LoadLevel implements ModificationFromUser
 	@Override
 	public void invoke(ModelImpl myModel) throws Exception
 	{
-			myModel.getGameLoader().accept(load(myModel));
+		File fileToLoad = load(myModel);
+		if(fileToLoad != null){
+			myModel.getGameLoader().accept(fileToLoad);
+		} else {
+			// do nothing
+		}
 	}
 	
 	private File load(ModelImpl myModel)
@@ -34,6 +39,8 @@ public class Modification_LoadLevel implements ModificationFromUser
 		}
 	
 		return chooser.showDialog(new Stage());
+		
+		
 	}
 
 }

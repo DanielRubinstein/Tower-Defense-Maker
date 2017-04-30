@@ -53,7 +53,7 @@ public class XMLWriterImpl implements XMLWriter{
 			
 			File folderFile = new File(filePath);
 			folderFile.mkdirs();
-			System.out.println(filePath);
+			//System.out.println(filePath);
 			File gameFile = new File(filePath + fileName + ".xml");
 			gameFile.createNewFile();
 		    fos = new FileOutputStream(gameFile, false);

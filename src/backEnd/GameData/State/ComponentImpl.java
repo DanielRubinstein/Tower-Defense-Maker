@@ -197,7 +197,7 @@ public class ComponentImpl implements SerializableObservable, Component, Compone
 	 */
 	@Override
 	public void addObserver(SerializableObserver obs) {
-		System.out.println(observers);
+		//System.out.println(observers);
 		observers.add(obs);
 	}
 
