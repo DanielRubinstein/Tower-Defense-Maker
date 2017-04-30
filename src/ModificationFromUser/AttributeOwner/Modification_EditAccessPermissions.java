@@ -17,6 +17,7 @@ public class Modification_EditAccessPermissions implements ModificationFromUser{
 
 	@Override
 	public void invoke(Model myModel) throws Exception {
+		System.out.println(this.getClass().getSimpleName() + ": " + mode + " " + permits);
 		if (myModel.getMode().getAllUserModes().contains(mode)){
 			if (permits){
 				myAccessPermissions.addUserAccessPermission(mode);

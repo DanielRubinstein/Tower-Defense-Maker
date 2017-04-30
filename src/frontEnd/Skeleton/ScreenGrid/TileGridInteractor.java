@@ -102,10 +102,12 @@ public class TileGridInteractor {
 		arrowSet.clear();
 	}
 	
-	void forEachSelectedTile(Consumer<? super Tile> method){
+	public void forEachSelectedTile(Consumer<? super Tile> method){
 		selectedTiles.keySet().forEach(method);
 		clearTileSelection();
 	}
+	
+	
 	
 	
 }

@@ -141,8 +141,8 @@ public class TileGridVisual implements SerializableObserver, SkeletonObject{
 		ImageView imageView = new ImageView(newImage);
 
 		myRoot.add(imageView, (int) gridPosition.getX(), (int) gridPosition.getY());
-		imageView.setFitWidth(30);
-		imageView.setFitHeight(30);
+		imageView.setFitWidth(tileWidth / 2);
+		imageView.setFitHeight(tileHeight / 2);
 		return imageView;
 	}
 	
