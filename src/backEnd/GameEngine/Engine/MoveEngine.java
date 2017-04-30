@@ -6,7 +6,6 @@ import backEnd.GameData.State.*;
 /**
  * Performs movement behaviors for all movable components
  * @author Daniel
- * @author Christian Martindale
  *
  */
 public class MoveEngine implements Engine{
