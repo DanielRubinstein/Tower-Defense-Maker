@@ -9,6 +9,7 @@ import frontEnd.Facebook.FacebookBrowserImpl;
 import frontEnd.Facebook.FacebookConnector;
 import frontEnd.Facebook.FacebookConnectorImpl;
 import frontEnd.Facebook.FacebookInteractor;
+import frontEnd.Skeleton.UserTools.HelpOptions;
 import frontEnd.Skeleton.UserTools.HelpOptionsImpl;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
@@ -26,7 +27,10 @@ public class MenuSplash {
 	public MenuSplash(Stage stage, Consumer<ButtonMenuImpl> startConsumer, Consumer<FacebookInteractor> setFb) {
 		splash = new ButtonMenuImpl("Welcome");
    	 	splash.addSimpleButtonWithHover("START", () -> startConsumer.accept(splash) , "Click to start the game!");
-   	 	splash.addSimpleButtonWithHover("Help/Instructions", () -> new HelpOptionsImpl(stage), "See the help page");
+   	 	splash.addSimpleButtonWithHover("Help/Instructions", () -> {
+   	 		HelpOptions help = new HelpOptionsImpl();
+   	 		help.display(myStage);
+   	 	}, "See the help page");
    	 	splash.addSimpleButtonWithHover("Connect To Facebook", () -> launchFb(stage), "Log in and connect to Facebook to see high scores, screenshots, post to the official voogasalad_su3ps1ckt34m1337 page");
 		myStage = stage;
 		mySetFB = setFb;

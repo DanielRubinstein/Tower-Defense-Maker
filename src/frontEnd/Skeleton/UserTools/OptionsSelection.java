@@ -30,10 +30,10 @@ import javafx.scene.layout.Priority;
 import javafx.scene.layout.TilePane;
 import javafx.scene.layout.VBox;
 import javafx.util.Duration;
+import resources.constants.numeric.ScreenConstants;
 
 public class OptionsSelection implements SkeletonObject{
 
-	private static final String SETTINGS_IMAGE = "resources/images/Tools/Settings.jpg";
 	private static final String PAUSE_IMAGE = "resources/images/Tools/pause.jpg";
 	private static final String FASTFWD_IMAGE = "resources/images/Tools/fastfwd.jpg";
 	private static final String PLAY_IMAGE = "resources/images/Tools/play.jpg";
@@ -45,6 +45,7 @@ public class OptionsSelection implements SkeletonObject{
 	private List<Button> myButtons;
 	private View myView;
 	private Map<Button, Tooltip> myButtonsAndTooltips;
+	private ScreenConstants screenResources = new ScreenConstants();
 	
 	public OptionsSelection(View view) {
 		myView = view;
@@ -52,7 +53,7 @@ public class OptionsSelection implements SkeletonObject{
 		myTiles = new TilePane(Orientation.HORIZONTAL,0, 0);
 		mySettings= new SettingsViewImpl(view);
 		myRoot.getChildren().add(myTiles);
-		
+		setDimensions();
 	}
 	public Node getRoot(){
 		
@@ -61,13 +62,16 @@ public class OptionsSelection implements SkeletonObject{
 	public void setAlignment(Pos position,Priority priority){
 		myTiles.setAlignment(Pos.TOP_RIGHT);
 	}
-	public void setSize(double width, double height){
+	private void setDimensions(){
+		double width = screenResources.getSideWidth();
+		double height = screenResources.getBottomHeight()/4;
 		myTiles.setPrefWidth(width);
 		myRoot.setPrefWidth(width);
 		myRoot.setPrefHeight(height);
 		myRoot.setMaxHeight(height);
 		setUpOptions(width,height); //TODO hard coded
 	}
+
 	private void setUpOptions(double totalWidth,double totalHeight){
 		myButtons = new ArrayList<Button>();
 		addButtons(totalWidth/5);

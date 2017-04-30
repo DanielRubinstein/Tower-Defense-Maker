@@ -20,25 +20,30 @@ import resources.constants.numeric.ScreenConstants;
  *
  */
 public class HelpOptionsImpl implements HelpOptions {
-	private static final String DEFAULT_TOWER_DEFENSE = "src/resources/html/tower_defense.htm";
-	private static final String DEFAULT_HELP = "src/resources/html/help.html";
-	private ScreenConstants screenResources = new ScreenConstants();
 	private StringResourceBundle strResources = new StringResourceBundle();
+	private String DEFAULT_TOWER_DEFENSE = strResources.getFromHelp("DefineTowerDefenseHTML");
+	private String DEFAULT_HELP = strResources.getFromHelp("HelpHTML");
 	
 	private ButtonMenu allOptions;
 	
-	public HelpOptionsImpl(Stage myParentStage){
-		allOptions = new ButtonMenuImpl("Help");
+	public HelpOptionsImpl(){
+		allOptions = new ButtonMenuImpl(strResources.getFromHelp("Help"));
 		addAllOptions();
+	}
+	
+	@Override
+	public void display(Stage parentStage){
 		Stage myStage = new Stage();
-		myStage.initOwner(myParentStage);
+		myStage.initOwner(parentStage);
 		myStage.initModality(Modality.APPLICATION_MODAL);
 		allOptions.display(myStage);
 	}
 
 	private void addAllOptions(){
-		allOptions.addSimpleButtonWithHover("Help/Instructions", () -> loadHTMLPage(DEFAULT_HELP),"View Instructions");
-		allOptions.addSimpleButtonWithHover("What is Tower Defense?", () -> loadHTMLPage(DEFAULT_TOWER_DEFENSE),"Get a basic overview");
+		allOptions.addSimpleButtonWithHover(strResources.getFromHelp("Tutorial"), 
+				() -> loadHTMLPage(DEFAULT_HELP),strResources.getFromHelp("TutorialHover"));
+		allOptions.addSimpleButtonWithHover(strResources.getFromHelp("DefineTowerDefense"), 
+				() -> loadHTMLPage(DEFAULT_TOWER_DEFENSE),strResources.getFromHelp("DefineTowerDefenseHover"));
 	}
 	
 	
