@@ -1,7 +1,5 @@
 package frontEnd.CustomJavafxNodes;
 
-import java.util.function.Consumer;
-
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
@@ -14,10 +12,12 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
+import resources.constants.NumericResourceBundle;
 import resources.constants.StringResourceBundle;
 
 public class ButtonMenuImpl implements ButtonMenu {
 	private StringResourceBundle stringResourceBundle = new StringResourceBundle();
+	private NumericResourceBundle numericResourceBundle = new NumericResourceBundle();
 	private GridPane myGrid;
 	private VBox myButtonRoot;
 	private Scene myScene;
@@ -46,7 +46,7 @@ public class ButtonMenuImpl implements ButtonMenu {
 	    myGrid.setHgap(10);
 	    myGrid.setVgap(10);
 	    myGrid.setPadding(new Insets(10));
-	    myGrid.setMinWidth(400);
+	    myGrid.setMinWidth(numericResourceBundle.getButtonMenuWidth());
 	}
 
 
@@ -106,9 +106,7 @@ public class ButtonMenuImpl implements ButtonMenu {
 	
 
 	private void setSpacing(Double size1){
-		
 		double spacing = myButtonRoot.getChildren().size()==0 ? 50 : size1 / (myButtonRoot.getChildren().size()*2);
-		
 		myButtonRoot.setSpacing(spacing);
 	}
 	
@@ -123,7 +121,6 @@ public class ButtonMenuImpl implements ButtonMenu {
 
 
 	private void create() {
-		
 		setSpacing(200d);
 		myButtonRoot.setMinWidth(250d);
 		
@@ -146,7 +143,6 @@ public class ButtonMenuImpl implements ButtonMenu {
 			}
 		});
 		addButtonWithHover(b, hoverText);
-		
 	}
 	
 }
