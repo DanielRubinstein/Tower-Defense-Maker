@@ -67,7 +67,7 @@ public class AttackEngine implements Engine {
 	private List<Component> getTargetList(Component attacker) {
 		String targetType;// = //attacker.<String>getAttribute("TargetSelector").getValue();
 		TileGrid tileGrid = myGameData.getState().getTileGrid();
-		targetType = "WithinGroup";
+		targetType = "Radius";
 		if(targetType.equals("WithinGroup")){
 			if(!tileGroupsInitialized){
 				myTileGroups = myGameData.getState().getTileGrid().getTileGroups();
