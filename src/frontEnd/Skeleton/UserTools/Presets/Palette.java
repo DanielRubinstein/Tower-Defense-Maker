@@ -125,7 +125,7 @@ public class Palette implements SkeletonObject, SerializableObserver{
 			});
 			removeMenu.getItems().add(removeItem);
 			removeMenu.setAutoHide(true);
-			removeMenu.show(tile, m.getX(), m.getY());
+			removeMenu.show(tile, m.getScreenX(), m.getScreenY());
 		};
 		
 	}
