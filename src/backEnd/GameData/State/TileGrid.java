@@ -2,6 +2,7 @@ package backEnd.GameData.State;
 
 import java.util.Collection;
 import java.util.List;
+import java.util.Set;
 
 import backEnd.Attribute.AttributeOwner;
 import backEnd.Attribute.AttributeOwnerReader;
@@ -56,5 +57,7 @@ public interface TileGrid extends SerializableObservableGen<Tile>, Comparable{
 	Collection<AttributeOwner> getAllAttributeOwners();
 
 	void buildTileGroups();
+
+	List<Set<Tile>> getTileGroups();
 
 }

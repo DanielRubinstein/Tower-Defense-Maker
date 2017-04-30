@@ -12,7 +12,6 @@ import java.util.Set;
 import backEnd.Attribute.AttributeOwner;
 import backEnd.Attribute.AttributeOwnerReader;
 import javafx.geometry.Point2D;
-import resources.constants.NumericResourceBundle;
 
 /**
  * This is the Grid class that contains the Tile Grid and all of the relevant
@@ -29,12 +28,12 @@ public class TileGridImpl implements TileGrid {
 	private int numColsInGrid;
 	private int numRowsInGrid;
 	private Map<Point2D, Tile> tileGrid;
-	private List<Tile> tileList;
+	//private List<Tile> tileList;
 	private List<Set<Tile>> tileGroups;
 	private double tileWidth;
 	private double tileHeight;
 	private double tileCenterFactor; //ratio of the tile that we consider part of the center of the tile
-	private List<List<SerializableObserver>> tileObserverList;
+	//private List<List<SerializableObserver>> tileObserverList;
 	private static final String BUNDLE_NAME = "resources.constants.numericResourceBundle";
 	private static final ResourceBundle RESOURCE_BUNDLE = ResourceBundle.getBundle(BUNDLE_NAME);
 
@@ -224,6 +223,13 @@ public class TileGridImpl implements TileGrid {
 		}
 		return myAOs;
 	}
+	
+	@Override
+	public List<Set<Tile>> getTileGroups(){
+		buildTileGroups();
+		return tileGroups;
+	}
+	
 	
 	@Override
 	public void buildTileGroups() {
