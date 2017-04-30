@@ -15,7 +15,7 @@ public class StripAndSaveObservers {
 	
 	@SuppressWarnings("unchecked")
 	public <T> StripAndSaveObservers(List<SerializableObservable> observables){
-		//Collections.sort(observables);
+		Collections.sort(observables);
 		this.myObservables =  observables;
 	}
 	
