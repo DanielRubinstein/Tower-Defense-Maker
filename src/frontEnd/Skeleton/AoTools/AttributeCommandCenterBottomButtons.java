@@ -69,7 +69,8 @@ public class AttributeCommandCenterBottomButtons implements SkeletonObject{
 	}
 	
 	public void createAddToPresetButton(AttributeOwner obj) {
-		if(!(myView.getBankControllerReader().getAccessibleComponentPresets().contains(obj) || myView.getBankControllerReader().getAccessibleTilePresets().contains(obj))){
+		if(!(myView.getBankControllerReader().getAccessibleComponentPresets().contains(obj) 
+				|| myView.getBankControllerReader().getAccessibleTilePresets().contains(obj))){
 			List<String> dialogTitles = Arrays.asList("Preset Creation Utility", "Please Input a Name for your new preset");
 			String promptLabel = "New preset name:";
 			String promptText = "";
