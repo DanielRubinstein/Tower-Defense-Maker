@@ -50,7 +50,7 @@ public class OptionsSelection implements SkeletonObject{
 		myView = view;
 		myRoot = new VBox();
 		myTiles = new TilePane(Orientation.HORIZONTAL,0, 0);
-		mySettings= new SettingsViewImpl(view, myView.getAppStage());
+		mySettings= new SettingsViewImpl(view);
 		myRoot.getChildren().add(myTiles);
 		
 	}
