@@ -16,7 +16,7 @@ public interface BankControllerReader {
 	
 	Collection<Component> getAccessibleComponentPresets();
 	
-	public String getPresetName(AttributeOwner preset);
+	public String getPresetName(AttributeOwnerReader preset);
 	
 	/**
 	 * This one should get changed to ComponentReader

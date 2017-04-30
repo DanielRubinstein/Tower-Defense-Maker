@@ -10,7 +10,7 @@ import java.util.ResourceBundle;
 import backEnd.Attribute.AttributeOwner;
 import backEnd.Attribute.AttributeOwnerReader;
 import javafx.geometry.Point2D;
-import resources.constants.NumericResourceBundle;
+import resources.constants.numeric.NumericResourceBundle;
 
 /**
  * This is the Grid class that contains the Tile Grid and all of the relevant
