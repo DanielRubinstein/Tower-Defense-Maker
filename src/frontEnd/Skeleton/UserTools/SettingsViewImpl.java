@@ -5,14 +5,11 @@ import ModificationFromUser.savingAndLoading.Modification_LoadLevel;
 import ModificationFromUser.savingAndLoading.Modification_NewGame;
 import ModificationFromUser.savingAndLoading.Modification_SaveGameState;
 import frontEnd.View;
-import frontEnd.CustomJavafxNodes.ActionButton;
 import frontEnd.CustomJavafxNodes.ButtonMenuImpl;
 import frontEnd.CustomJavafxNodes.ToggleSwitch;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.geometry.Bounds;
-import javafx.scene.Node;
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
 import javafx.scene.control.SplitPane;
 import javafx.scene.control.Tooltip;
 import javafx.scene.layout.HBox;
@@ -31,9 +28,9 @@ public class SettingsViewImpl implements SettingsView{
 	private Stage myParentStage;
 	private Stage myStage;
 	
-	public SettingsViewImpl(View view, Stage parentStage) {
+	public SettingsViewImpl(View view) {
 		myView = view;
-		myParentStage = parentStage;
+		//myParentStage = parentStage;
 		authorProperty = myView.getBooleanAuthorModeProperty();
 		addButtons();
 	}
@@ -41,7 +38,7 @@ public class SettingsViewImpl implements SettingsView{
 	public void launchSettings(){
 		// http://stackoverflow.com/questions/29514248/javafx-how-to-focus-on-one-stage
 		myStage = new Stage();
-		myStage.initOwner(myParentStage);
+		myStage.initOwner(myView.getMainWindow());
 		myStage.initModality(Modality.APPLICATION_MODAL);
 		myMenu.display(myStage);
 	}
