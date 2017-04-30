@@ -63,7 +63,7 @@ public class SettingsViewImpl implements SettingsView{
 	}
 
 	private void helpButtons() {
-		myMenu.addSimpleButtonWithHover("Help", () -> new HelpOptions(myStage), "Get Help");
+		myMenu.addSimpleButtonWithHover("Help", () -> new HelpOptionsImpl(myStage), "Get Help");
 	}
 
 	private void modeToggleButtons() {

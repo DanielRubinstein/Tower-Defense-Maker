@@ -171,15 +171,29 @@ public class StringResourceBundle {
 		return FILE_PATHS_RESOURCE.keySet();
 	}
 	
+	public String getGameFileLocation(String game){
+		return FILE_PATHS_RESOURCE.getString("All_Games_Path")+game+"/";
+	}
 	///////////////////////////////////////////////////////////////////////////
 	// Toggle
 	///////////////////////////////////////////////////////////////////////////
 
-	private static final String TOGGLE_PATH = "resources.css.toggle";
-	private static final ResourceBundle TOGGLE_RESOURCE = ResourceBundle.getBundle(TOGGLE_PATH);
+	private static final String CUSTOM_CSS_PATH = "resources.css.customCSS";
+	private static final ResourceBundle CUSTOM_CSS_RESOURCE = ResourceBundle.getBundle(CUSTOM_CSS_PATH);
 	
 	public String getFromToggle(String string) {
-		return TOGGLE_RESOURCE.getString(string);
+		return CUSTOM_CSS_RESOURCE.getString(string);
+
+	}
+	///////////////////////////////////////////////////////////////////////////
+	// Help
+	///////////////////////////////////////////////////////////////////////////
+	
+	private static final String HELP_PATH = "resources.help";
+	private static final ResourceBundle HELP_RESOURCE = ResourceBundle.getBundle(HELP_PATH);
+	
+	public String getFromHelp(String string) {
+		return HELP_RESOURCE.getString(string);
 	}
 	
 	///////////////////////////////////////////////////////////////////////////

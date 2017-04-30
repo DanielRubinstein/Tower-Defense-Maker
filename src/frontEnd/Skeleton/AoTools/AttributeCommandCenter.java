@@ -55,7 +55,7 @@ public class AttributeCommandCenter{
 		contents.getChildren().add(createAttributeView(obj));
 		contents.getChildren().add(createBottomButtons(obj));
 		
-		contents.setPadding(new Insets(STANDARD_SPACING, STANDARD_SPACING, STANDARD_SPACING, STANDARD_SPACING));
+		contents.setPadding(new Insets(STANDARD_SPACING));
 		contents.setSpacing(STANDARD_SPACING);
 		// contents.setAlignment(Pos.TOP_CENTER);
 		return contents;
