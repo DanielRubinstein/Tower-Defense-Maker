@@ -1,0 +1,12 @@
+<?xml version="1.0"?><map>
+  <entry>
+    <string>Timeline 1</string>
+    <backEnd.GameEngine.Engine.Spawning.SpawnQueueInstantiator>
+      <myFrequencyQueue/>
+      <mySpawnQueue/>
+      <myTimeLastQueueSpawned>0.0</myTimeLastQueueSpawned>
+      <myCurrentSpawn>0</myCurrentSpawn>
+      <myGameTime>135.44999999999993</myGameTime>
+    </backEnd.GameEngine.Engine.Spawning.SpawnQueueInstantiator>
+  </entry>
+</map>

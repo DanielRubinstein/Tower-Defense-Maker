@@ -8,7 +8,8 @@ import java.util.List;
 import java.util.Map;
 import com.thoughtworks.xstream.XStream;
 import com.thoughtworks.xstream.io.xml.DomDriver;
-import backEnd.BankController;
+
+import backEnd.Bank.BankController;
 import backEnd.GameData.GameDataInterface;
 import backEnd.GameData.Rules.Rule;
 import backEnd.GameData.State.Component;
@@ -53,7 +54,7 @@ public class XMLWriterImpl implements XMLWriter{
 			
 			File folderFile = new File(filePath);
 			folderFile.mkdirs();
-			
+			//System.out.println(filePath);
 			File gameFile = new File(filePath + fileName + ".xml");
 			gameFile.createNewFile();
 		    fos = new FileOutputStream(gameFile, false);

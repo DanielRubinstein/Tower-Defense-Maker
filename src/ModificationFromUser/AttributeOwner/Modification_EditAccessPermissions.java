@@ -1,7 +1,7 @@
 package ModificationFromUser.AttributeOwner;
 
 import ModificationFromUser.ModificationFromUser;
-import backEnd.ModelImpl;
+import backEnd.Model;
 import backEnd.GameData.State.AccessPermissions;
 
 public class Modification_EditAccessPermissions implements ModificationFromUser{
@@ -16,7 +16,8 @@ public class Modification_EditAccessPermissions implements ModificationFromUser{
 	}
 
 	@Override
-	public void invoke(ModelImpl myModel) throws Exception {
+	public void invoke(Model myModel) throws Exception {
+		System.out.println(this.getClass().getSimpleName() + ": " + mode + " " + permits);
 		if (myModel.getMode().getAllUserModes().contains(mode)){
 			if (permits){
 				myAccessPermissions.addUserAccessPermission(mode);

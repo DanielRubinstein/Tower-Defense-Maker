@@ -2,6 +2,7 @@ package ModificationFromUser.AttributeOwner.ReflectionMethods;
 
 import java.util.List;
 
+import backEnd.Model;
 import backEnd.ModelImpl;
 import backEnd.GameData.State.Component;
 import backEnd.GameData.State.Tile;
@@ -13,13 +14,13 @@ import resources.constants.StringResourceBundle;
 
 public class Modification_Add_ToGrid_Methods{
 	private Point2D location;
-	private ModelImpl myModel;
+	private Model myModel;
 	public static final String DESCRIPTION_TILE = "Replace Tile";
 	public static final String DESCRIPTION_COMPONENT = "Add Component";
 	public static final String DESCRIPTION_ERROR = "Not a recognized Attribute Owner";
 	private static final StringResourceBundle strResources = new StringResourceBundle();
 
-	public Modification_Add_ToGrid_Methods(ModelImpl model, Point2D location) {
+	public Modification_Add_ToGrid_Methods(Model model, Point2D location) {
 		this.myModel = model;
 		this.location = location;
 	}

@@ -5,7 +5,6 @@ import java.util.List;
 import backEnd.Attribute.Attribute;
 import backEnd.Attribute.AttributeData;
 import backEnd.Attribute.AttributeOwner;
-import backEnd.GameEngine.Behaviors.Behavior;
 import backEnd.GameEngine.Engine.Coordinates;
 
 public interface Component extends AttributeOwner{

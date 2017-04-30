@@ -23,6 +23,7 @@ public class TileCorners {
 		maxX = tilePosition.getX() + tileWidth / 2;
 		minY = tilePosition.getY() - tileHeight / 2;
 		maxY = tilePosition.getY() + tileHeight / 2;
+		//System.out.println(minX + " " + minY + " " + maxX + " " + maxY);
 	}
 
 	public double getMinX() {

@@ -2,12 +2,22 @@ package data;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.ResourceBundle;
+import java.util.Set;
+
 import com.thoughtworks.xstream.XStream;
 import com.thoughtworks.xstream.io.xml.DomDriver;
+
+import backEnd.Attribute.AttributeFactory;
+import backEnd.Attribute.AttributeFactoryImpl;
+import backEnd.Attribute.AttributeOwner;
+import backEnd.Attribute.AttributeReader;
 import backEnd.GameData.GameData;
 import backEnd.GameData.State.Component;
 import backEnd.GameData.State.ComponentGraph;
@@ -33,6 +43,12 @@ import backEnd.GameData.State.PlayerStatus;
 public class XMLReaderImpl implements XMLReader{
 	private XStream xStream;
 	private static final StringResourceBundle strResources = new StringResourceBundle();
+	private final static String DEFAULT_COMPONENT_ATTRS = "resources/defaultComponentAttributes";
+	private final static ResourceBundle defaultComponentAttributesResources = ResourceBundle.getBundle(DEFAULT_COMPONENT_ATTRS);
+	private Set<String> defaultComponentAttributes = defaultComponentAttributesResources.keySet();
+	private final static String DEFAULT_TILE_ATTRS = "resources/defaultTileAttributes";
+	private final static ResourceBundle defaultTileAttributesResources = ResourceBundle.getBundle(DEFAULT_TILE_ATTRS);
+	private Set<String> defaultTileAttributes = defaultTileAttributesResources.keySet();
 	
 	public XMLReaderImpl(){
 		xStream = createXStream();
@@ -49,7 +65,7 @@ public class XMLReaderImpl implements XMLReader{
 	public GameData loadGameStateData(String filePath, String levelName) throws XMLReadingException, FileNotFoundException
 	{
 
-		System.out.println(filePath);
+		//System.out.println(filePath);
 		HashMap<String, SpawnQueueInstantiator> instantiatorMap = (HashMap<String, SpawnQueueInstantiator>) xStream.fromXML(new File(filePath+"/" + levelName+"/spawns.xml"));
 		HashMap<String, SpawnQueues> spawnMap = new HashMap<String, SpawnQueues>();
 		
@@ -62,7 +78,11 @@ public class XMLReaderImpl implements XMLReader{
 				strResources.getFromFilePaths("TileGrid_FileName") + ".xml")));
 		ComponentGraph graph = new ComponentGraphImpl((List<Component>) xStream.fromXML(
 				new File(filePath+"/" + levelName+"/" + strResources.getFromFilePaths("ComponentGraph_FileName") + ".xml")));
-		
+		//Loop through component graph and tile grid and check each component and tile's attributes
+		//if it has an attribute that no longer exists, delete it
+		//if it does not have an attribute that now exists, add it with default value
+		makeAttributeOwnersCompatible(graph.getAllAttributeOwners(), defaultComponentAttributes);
+		makeAttributeOwnersCompatible(grid.getAllAttributeOwners(), defaultTileAttributes);
 		
 		StateImpl state = new StateImpl(grid, graph, spawnMap);
 		
@@ -70,6 +90,24 @@ public class XMLReaderImpl implements XMLReader{
 				strResources.getFromFilePaths("PlayerStatus_FileName") + ".xml")), (RulesMap) xStream.fromXML(new 
 				File(filePath+"/" + levelName+"/" + strResources.getFromFilePaths("Rules_FileName") + ".xml")));
 
+	}
+
+	private void makeAttributeOwnersCompatible(Collection<AttributeOwner> myAttrOwners, Set<String> defaultAttrNames) throws FileNotFoundException {
+		AttributeFactory myAF = new AttributeFactoryImpl();
+		for(AttributeOwner ao : myAttrOwners){
+			//add missing attributes to tiles
+			for(String attName : defaultAttrNames){
+				if(!ao.contains(attName)){
+					ao.addAttribute(attName, myAF.getAttribute(attName));
+				}
+			}
+			//remove extra attributes from
+			for(AttributeReader<?> att : ao.getMyAttributes().getAllAttributeReaders()){
+				if(!defaultAttrNames.contains(att.getName())){
+					ao.removeAttribute(att.getName());
+				}
+			}
+		}
 	}
 	
 	/* (non-Javadoc)
@@ -82,7 +120,38 @@ public class XMLReaderImpl implements XMLReader{
 		Map<String, Component> loadedComponentMap = (Map<String,Component>) loadXML(filePath, strResources.getFromFilePaths("ComponentMap_FileName"));
 		@SuppressWarnings("unchecked")
 		Map<String, Tile> loadedTileMap = (Map<String,Tile>) loadXML(filePath, strResources.getFromFilePaths("TileMap_FileName"));
+		//Loop through component graph and tile grid and check each component and tile's attributes
+		//if it has an attribute that no longer exists, delete it
+		//if it does not have an attribute that now exists, add it with default value
+		try {
+			makeAttributeOwnersCompatible(getAttributeOwnerCollectionComponents(loadedComponentMap.values()), defaultComponentAttributes);
+		} catch (FileNotFoundException e) {
+			throw new XMLReadingException();
+		}
+		try {
+			makeAttributeOwnersCompatible(getAttributeOwnerCollectionTiles(loadedTileMap.values()), defaultTileAttributes);
+		} catch (FileNotFoundException e) {
+			throw new XMLReadingException();
+		}
+		
+		
 		return Arrays.asList(loadedComponentMap,loadedTileMap);
+	}
+	
+	private Collection<AttributeOwner> getAttributeOwnerCollectionComponents(Collection<Component> myComps){
+		Collection<AttributeOwner> myAOs = new ArrayList<AttributeOwner>();
+		for(AttributeOwner ao : myComps){
+			myAOs.add(ao);
+		}
+		return myAOs;
+	}
+	
+	private Collection<AttributeOwner> getAttributeOwnerCollectionTiles(Collection<Tile> myTiles){
+		Collection<AttributeOwner> myAOs = new ArrayList<AttributeOwner>();
+		for(AttributeOwner ao : myTiles){
+			myAOs.add(ao);
+		}
+		return myAOs;
 	}
 
 	private Object loadXML(String filePath, String fileName) throws XMLReadingException {

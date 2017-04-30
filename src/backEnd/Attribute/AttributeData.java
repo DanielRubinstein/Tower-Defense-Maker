@@ -136,4 +136,8 @@ public class AttributeData implements SerializableObservable, AttributeDataReade
 		}
 		return myAttReaders;
 	}
+	
+	public void remove(String attrName){
+		myAttributes.remove(attrName);
+	}
 }

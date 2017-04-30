@@ -1,6 +1,6 @@
 package ModificationFromUser.AttributeOwner.ReflectionMethods;
 
-import backEnd.BankController;
+import backEnd.Bank.BankController;
 import backEnd.GameData.State.Component;
 import backEnd.GameData.State.TileImpl;
 

@@ -50,7 +50,7 @@ public class AttributeCommandCenter{
 	
 	private VBox createAttributeCommandCenter(AttributeOwnerReader obj) {
 		VBox contents = new VBox();
-		
+
 		contents.getChildren().add(titleLbl);
 		contents.getChildren().add(createAttributeView(obj));
 		contents.getChildren().add(createBottomButtons(obj));

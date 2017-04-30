@@ -1,37 +1,43 @@
 package frontEnd;
 
-import java.util.Collection;
-
+import backEnd.Bank.BankControllerReader;
 import backEnd.GameData.State.*;
 import backEnd.LevelProgression.LevelProgressionControllerReader;
+import backEnd.Mode.ModeReader;
 import frontEnd.Facebook.FacebookInteractor;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.stage.Stage;
 
+/**
+ * This interface defines the View, determines how Front End should be controlled and how the Front End
+ * and Model interact. This interface has less permissions and is at the highest level of the View hierarchy.
+ * @author Tim, Miguel
+ *
+ */
 public interface ViewReader {
 
 	// play, pause, fast forward
 	public SimpleStringProperty getRunStatus();
 	
 	public SimpleBooleanProperty getBooleanAuthorModeProperty();
-
-	public Collection<Tile> getTilePresets();
-
-	public Collection<Component> getComponentPresets();
 	
 	public Stage getAppStage();
 	
 	public void reportError(Exception e);
 	
-	LevelProgressionControllerReader getLevelProgressionController();
+	public LevelProgressionControllerReader getLevelProgressionController();
 	
-	PlayerStatusReader getPlayerStatus();
+	public PlayerStatusReader getPlayerStatus();
 
-	SimpleStringProperty getStringGameModeProperty();
+	public SimpleStringProperty getStringGameModeProperty();
 
-	SimpleStringProperty getStringLevelModeProperty();
+	public SimpleStringProperty getStringLevelModeProperty();
 
-	FacebookInteractor getFb();
+	public FacebookInteractor getFb();
+	
+	public ModeReader getModeReader();
+	
+	public BankControllerReader getBankControllerReader();
 	
 }

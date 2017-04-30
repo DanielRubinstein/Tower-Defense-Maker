@@ -1,16 +1,20 @@
 package backEnd;
 
+import java.util.function.Consumer;
+
+import backEnd.Bank.BankController;
+import backEnd.GameData.GameData;
 import backEnd.GameData.State.PlayerStatusModifier;
-import backEnd.GameData.State.State;
 import backEnd.GameEngine.Engine.GameProcessController;
-import backEnd.Mode.ModeReader;
+import backEnd.Mode.Mode;
+import data.DataController;
 
 /**
  * Interface to define methods that the front end needs.
  * @author Tim
  *
  */
-public interface Model extends ModelReader{
+public interface Model extends ModelReader, ModelSecurity{
 	
 	/**
 	 * 
@@ -19,8 +23,15 @@ public interface Model extends ModelReader{
 	GameProcessController getGameProcessController();
 	
 	PlayerStatusModifier getModifiablePlayerStatus();
-	
-	
-	
+
+	GameData getGameData();
+
+	DataController getDataController();
+
+	Mode getMode();
+
+	Consumer<Object> getGameLoader();
+
+	BankController getBankController();
 
 }

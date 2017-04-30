@@ -13,8 +13,6 @@ import backEnd.Attribute.AttributeFactoryImpl;
 import backEnd.Attribute.AttributeFactoryReader;
 import backEnd.Attribute.AttributeOwner;
 import backEnd.Attribute.AttributeReader;
-import backEnd.GameEngine.Behaviors.Behavior;
-import backEnd.GameEngine.Behaviors.BehaviorFactory;
 import backEnd.GameEngine.Engine.Coordinates;
 import resources.constants.StringResourceBundle;
 
@@ -24,10 +22,10 @@ public class ComponentImpl implements SerializableObservable, Component, Compone
 	 * 
 	 * @author Daniel
 	 */
+	//TODO: do we need this behavior thing still? the file is empty
 	private static final StringResourceBundle strResources = new StringResourceBundle();
 
 	private AttributeData myAttributes;
-	private Map<String, Object> myBehaviors; //JUAN: remove this
 	private AccessPermissions myAccessPermissions;
 	private String myType;
 	private List<SerializableObserver> observers;
@@ -58,9 +56,7 @@ public class ComponentImpl implements SerializableObservable, Component, Compone
 		System.out.println(ID + "   ");
 		//System.out.println("creating component " + this);
 		myAttributes = attributes;
-		myBehaviors = new HashMap<>();
 		AttributeFactoryReader attributeFactory = new AttributeFactoryImpl();
-
 		for (String key : strResources.getKeysFromDefaultComponentAttributes()) {
 			Attribute<?> myAttribute = attributeFactory.getAttribute(key);
 			addAttribute(key, myAttribute);
@@ -81,6 +77,9 @@ public class ComponentImpl implements SerializableObservable, Component, Compone
 	}
 
 
+	/* (non-Javadoc)
+	 * @see backEnd.GameData.State.Component#getAttribute(java.lang.String)
+	 */
 	@Override
 	public <T> Attribute<T> getAttribute(String attributeType) {
 		return myAttributes.get(attributeType);
@@ -158,7 +157,7 @@ public class ComponentImpl implements SerializableObservable, Component, Compone
 	 */
 	@Override
 	public void addObserver(SerializableObserver obs) {
-		System.out.println(observers);
+		//System.out.println(observers);
 		observers.add(obs);
 	}
 
@@ -245,6 +244,19 @@ public class ComponentImpl implements SerializableObservable, Component, Compone
 	@Override
 	public int compareTo(Object o) {
 		return Integer.compare(this.hashCode(), o.hashCode());
+	}
+
+
+	@Override
+	public void removeAttribute(String attrName) {
+		myAttributes.remove(attrName);
+		
+	}
+
+
+	@Override
+	public boolean contains(String attName) {
+		return myAttributes.containsAttribute(attName);
 	}
 	
 }

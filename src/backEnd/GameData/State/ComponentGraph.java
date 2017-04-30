@@ -4,10 +4,11 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 
+import backEnd.Attribute.AttributeOwner;
 import backEnd.Attribute.AttributeOwnerReader;
 import javafx.geometry.Point2D;
 
-public interface ComponentGraph extends SerializableObservable{
+public interface ComponentGraph extends SerializableObservableGen<Component>{
 
 
 	/**
@@ -63,5 +64,7 @@ public interface ComponentGraph extends SerializableObservable{
 	void clearComponents();
 
 	void setComponentObservers();
+	
+	Collection<AttributeOwner> getAllAttributeOwners();
 
 }

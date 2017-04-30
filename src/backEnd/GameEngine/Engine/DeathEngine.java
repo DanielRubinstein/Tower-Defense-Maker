@@ -11,7 +11,6 @@ import backEnd.GameData.State.ComponentImpl;
 import backEnd.GameData.State.Component;
 import backEnd.GameData.State.ComponentGraph;
 import backEnd.GameData.State.ComponentGraphImpl;
-import backEnd.GameEngine.Behaviors.DeathBehavior;
 import javafx.geometry.Point2D;
 
 /**

@@ -12,10 +12,12 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
+import resources.constants.NumericResourceBundle;
 import resources.constants.StringResourceBundle;
 
 public class ButtonMenuImpl implements ButtonMenu {
 	private StringResourceBundle stringResourceBundle = new StringResourceBundle();
+	private NumericResourceBundle numericResourceBundle = new NumericResourceBundle();
 	private GridPane myGrid;
 	private VBox myButtonRoot;
 	private Scene myScene;
@@ -29,6 +31,7 @@ public class ButtonMenuImpl implements ButtonMenu {
 		description.setWrapText(true);
 		setText(text);
 	}
+	
 	public GridPane getGridPane(){
 		return myGrid;
 	}
@@ -43,6 +46,7 @@ public class ButtonMenuImpl implements ButtonMenu {
 	    myGrid.setHgap(10);
 	    myGrid.setVgap(10);
 	    myGrid.setPadding(new Insets(10));
+	    myGrid.setMinWidth(numericResourceBundle.getButtonMenuWidth());
 	}
 
 
@@ -95,16 +99,14 @@ public class ButtonMenuImpl implements ButtonMenu {
 		myButtonRoot.getChildren().add(n);
 	}
 	
-	public void addBackButton(Runnable event) {
-		this.addSimpleButton("Go Back", event);
+	public void addBackButton(ButtonMenuImpl previousMenu, Stage stage) {		
+		this.addSimpleButton("Go Back", () -> previousMenu.display(stage) );
 		
 	}
 	
 
 	private void setSpacing(Double size1){
-		
 		double spacing = myButtonRoot.getChildren().size()==0 ? 50 : size1 / (myButtonRoot.getChildren().size()*2);
-		
 		myButtonRoot.setSpacing(spacing);
 	}
 	
@@ -112,16 +114,15 @@ public class ButtonMenuImpl implements ButtonMenu {
 	public void display(Stage stage){
 		if(myScene == null){
 			create();
-		}
-		
+		}		
 		stage.setScene(myScene);
 		stage.show();
 	}
 
 
 	private void create() {
-		
 		setSpacing(200d);
+		myButtonRoot.setMinWidth(250d);
 		
 		myGrid.add(titleLbl, 0, 0, 2, 1);
 		myGrid.add(myButtonRoot, 0, 1);
@@ -142,7 +143,6 @@ public class ButtonMenuImpl implements ButtonMenu {
 			}
 		});
 		addButtonWithHover(b, hoverText);
-		
 	}
 	
 }

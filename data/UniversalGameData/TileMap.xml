@@ -39,17 +39,6 @@
             </backEnd.Attribute.AttributeImpl>
           </entry>
           <entry>
-            <string>Position</string>
-            <backEnd.Attribute.AttributeImpl>
-              <myValue class="javafx.geometry.Point2D">
-                <x>409.5</x>
-                <y>263.24999999999994</y>
-                <hash>254395974</hash>
-              </myValue>
-              <myName>Position</myName>
-            </backEnd.Attribute.AttributeImpl>
-          </entry>
-          <entry>
             <string>SpawnTimeline</string>
             <backEnd.Attribute.AttributeImpl>
               <myValue class="string"></myValue>
@@ -59,6 +48,17 @@
                 </a>
               </myParamList>
               <myName>SpawnTimeline</myName>
+            </backEnd.Attribute.AttributeImpl>
+          </entry>
+          <entry>
+            <string>Position</string>
+            <backEnd.Attribute.AttributeImpl>
+              <myValue class="javafx.geometry.Point2D">
+                <x>0.0</x>
+                <y>0.0</y>
+                <hash>0</hash>
+              </myValue>
+              <myName>Position</myName>
             </backEnd.Attribute.AttributeImpl>
           </entry>
           <entry>

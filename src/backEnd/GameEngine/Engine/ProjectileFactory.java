@@ -41,7 +41,7 @@ public class ProjectileFactory {
 		myComponent.setAttributeValue(ATTRIBUTE_RESOURCES.getFromAttributeNames("ExplosionRadius"), (Double)myTower.getAttribute(ATTRIBUTE_RESOURCES.getFromAttributeNames("ExplosionRadius")).getValue());
 		myComponent.setAttributeValue(ATTRIBUTE_RESOURCES.getFromAttributeNames("SlowFactor"), (Double)myTower.getAttribute(ATTRIBUTE_RESOURCES.getFromAttributeNames("SlowFactor")).getValue());
 		myComponent.setAttributeValue(ATTRIBUTE_RESOURCES.getFromAttributeNames("FireRate"), (Double)myTower.getAttribute(ATTRIBUTE_RESOURCES.getFromAttributeNames("FireRate")).getValue());
-		myComponent.setAttributeValue(ATTRIBUTE_RESOURCES.getFromAttributeNames("ProjectileTarget"), (ComponentImpl)myTower.getAttribute(ATTRIBUTE_RESOURCES.getFromAttributeNames("ProjectileTarget")).getValue());
+		myComponent.setAttributeValue(ATTRIBUTE_RESOURCES.getFromAttributeNames("ProjectileTarget"), (String)myTower.getAttribute(ATTRIBUTE_RESOURCES.getFromAttributeNames("ProjectileTarget")).getValue());
 		return myComponent;
 	}
 }

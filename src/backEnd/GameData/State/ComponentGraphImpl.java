@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Map;
 
 import javafx.geometry.Point2D;
+import backEnd.Attribute.AttributeOwner;
 import backEnd.Attribute.AttributeOwnerReader;
 
 /**
@@ -20,6 +21,7 @@ import backEnd.Attribute.AttributeOwnerReader;
 public class ComponentGraphImpl implements ComponentGraph {
 	private List<Component> myComponents;
 	private List<SerializableObserver> observers;
+	private List<SerializableObserverGen<Component>> observersGen;
 	private List<List<SerializableObserver>> compObserverList;
 
 	public ComponentGraphImpl() {
@@ -29,6 +31,7 @@ public class ComponentGraphImpl implements ComponentGraph {
 	public ComponentGraphImpl(List<Component> fromXML) {
 		myComponents = fromXML;
 		observers = new ArrayList<SerializableObserver>();
+		observersGen = new ArrayList<>();
 
 	}
 
@@ -43,7 +46,7 @@ public class ComponentGraphImpl implements ComponentGraph {
 	public List<Component> getComponentsByScreenPosition(Point2D screenPosition) {
 		List<Component> atLocation = new ArrayList<Component>();
 		for(Component c : myComponents){
-			if(c.getAttribute("Position").getValue() == screenPosition){
+			if(c.getAttribute("Position").getValue().equals(screenPosition)){
 				atLocation.add(c);
 			}
 		}
@@ -57,7 +60,7 @@ public class ComponentGraphImpl implements ComponentGraph {
 		List<Component> componentsOnTile = new ArrayList<Component>();
 		
 		for(Component c : myComponents){
-			Point2D loc = (Point2D)c.getAttribute("Position").getValue();
+			Point2D loc = c.<Point2D>getAttribute("Position").getValue();
 			if (loc.getX() >= tileCorners.getMinX()
 					&& loc.getX() <= tileCorners.getMaxX()
 					&& loc.getY() > tileCorners.getMinY()
@@ -71,6 +74,7 @@ public class ComponentGraphImpl implements ComponentGraph {
 
 	@Override
 	public void addComponentToGrid(Component newComponent, Point2D screenPosition) {
+		//System.out.println(this.getClass().getSimpleName() + ": adding component @ " + screenPosition);
 		myComponents.add(newComponent);
 		newComponent.setAttributeValue("Position", screenPosition);
 		notifyObservers(newComponent);
@@ -175,8 +179,11 @@ public class ComponentGraphImpl implements ComponentGraph {
 		observers = observersave;
 	}
 	
-	private void notifyObservers(Object obj){
+	private void notifyObservers(Component obj){
 		for (SerializableObserver o : observers){
+			o.update(null, obj);
+		}
+		for (SerializableObserverGen<Component> o : observersGen){
 			o.update(null, obj);
 		}
 	}
@@ -185,6 +192,21 @@ public class ComponentGraphImpl implements ComponentGraph {
 	public int compareTo(Object o) {
 		// TODO Auto-generated method stub
 		return 0;
+	}
+
+	@Override
+	public Collection<AttributeOwner> getAllAttributeOwners() {
+		Collection<AttributeOwner> myAOs = new ArrayList<AttributeOwner>();
+		for(AttributeOwner ao : myComponents){
+			myAOs.add(ao);
+		}
+		return myAOs;
+	}
+
+	@Override
+	public void addObserver(SerializableObserverGen<Component> o) {
+		observersGen.add(o);
+		
 	}
 
 }

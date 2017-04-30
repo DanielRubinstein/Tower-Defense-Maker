@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.ResourceBundle;
 
+import backEnd.Attribute.AttributeOwner;
 import backEnd.Attribute.AttributeOwnerReader;
 import javafx.geometry.Point2D;
 import resources.constants.NumericResourceBundle;
@@ -174,24 +175,6 @@ public class TileGridImpl implements TileGrid {
 			o.update(null, arg);
 		}
 	}
-	
-	
-	public void saveAndClearTileObservers()
-	{
-		tileObserverList = new ArrayList<List<SerializableObserver>>();
-		
-		for (int i = 0; i < getAllTiles().size(); i++)
-		{
-			tileObserverList.add(tileList.get(i).getAndClearObservers());
-		}
-
-	}
-
-	public void setTileObservers() {
-		for (int i = 0; i < tileList.size(); i++) {
-			tileList.get(i).setObserverList(tileObserverList.get(i));
-		}
-	}
 
 	@Override
 	public boolean contains(AttributeOwnerReader newAttrOwn) {
@@ -234,6 +217,15 @@ public class TileGridImpl implements TileGrid {
 	@Override
 	public int compareTo(Object o) {
 		return Integer.compare(this.hashCode(), o.hashCode());
+	}
+	
+	@Override
+	public Collection<AttributeOwner> getAllAttributeOwners() {
+		Collection<AttributeOwner> myAOs = new ArrayList<AttributeOwner>();
+		for(AttributeOwner ao : tileGrid.values()){
+			myAOs.add(ao);
+		}
+		return myAOs;
 	}
 	
 }
