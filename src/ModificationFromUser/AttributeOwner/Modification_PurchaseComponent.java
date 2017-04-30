@@ -5,18 +5,18 @@ import backEnd.ModelImpl;
 import frontEnd.CustomJavafxNodes.ErrorDialog;
 
 public class Modification_PurchaseComponent implements ModificationFromUser{
-	private int pointChange;
+	private int cost;
 	
-	public Modification_PurchaseComponent(int pointChange){
-		this.pointChange = pointChange;
+	public Modification_PurchaseComponent(int cost){
+		this.cost = cost;
 	}
 
 	@Override
 	public void invoke(ModelImpl myModel) throws Exception {
-		if (myModel.getPlayerStatusReader().getProperty("Money").getValue() + pointChange < 0){
+		if (myModel.getPlayerStatusReader().getProperty("Money").getValue() - cost < 0){
 			new ErrorDialog().create("Not Enough Money", "You don't have enough money to purchase this component");
 		}
-		myModel.getGameData().getStatus().decrementStatusItem("Money", pointChange);
+		myModel.getGameData().getStatus().decrementStatusItem("Money", cost);
 	}
 
 }
