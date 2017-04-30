@@ -16,6 +16,8 @@ import frontEnd.Facebook.FacebookInteractor;
 import frontEnd.Skeleton.UserTools.HelpOptions;
 import javafx.scene.Node;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
@@ -128,7 +130,12 @@ public class MainMenu{
 			return new File(current,name).isDirectory();
 		}));
 		if(directories.isEmpty()){
-			System.out.println("No "+ type + " games in here!");
+			Alert alert = new Alert(AlertType.WARNING);
+			alert.setTitle("No files found");
+			alert.setHeaderText("There are no " + type + " files here");
+			alert.setContentText("Please select a different option");
+
+			alert.showAndWait();
 		} else {
 			ButtonMenuImpl levelMenu = new ButtonMenuImpl("Pick a Level!");
 			for(String levelName: directories){
