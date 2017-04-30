@@ -17,7 +17,6 @@ public class StripAndSaveObservers {
 	public <T> StripAndSaveObservers(List<SerializableObservable> observables){
 		//Collections.sort(observables);
 		this.myObservables =  observables;
-		
 	}
 	
 	public void stripObservers(){

@@ -42,7 +42,6 @@ public class ComponentGraphImpl implements ComponentGraph {
 	
 
 	@Override
-
 	public List<Component> getComponentsByScreenPosition(Point2D screenPosition) {
 		List<Component> atLocation = new ArrayList<Component>();
 		for(Component c : myComponents){
@@ -101,9 +100,6 @@ public class ComponentGraphImpl implements ComponentGraph {
 		componentsWithinRadius.remove(centerComp);//don't add yourself
 		return componentsWithinRadius;
 	}
-
-
-	
 
 	@Override
 	public void addObserver(SerializableObserver o) {
@@ -206,6 +202,16 @@ public class ComponentGraphImpl implements ComponentGraph {
 	@Override
 	public void addObserver(SerializableObserverGen<Component> o) {
 		observersGen.add(o);
+	}
+
+	@Override
+	public List<SerializableObserverGen<Component>> getObserversGen() {
+		return observersGen;
+	}
+
+	@Override
+	public void setObserversGen(List<SerializableObserverGen<Component>> observersave) {
+		observersGen = observersave;
 		
 	}
 
