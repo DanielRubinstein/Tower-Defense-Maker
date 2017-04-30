@@ -48,13 +48,16 @@ public class SpawnEngine implements Engine {
 			SpawnQueues currentSpawnQueue = gameData.getState().getSpawnQueues().get(spawnQueueNameObj);
 			if (currentSpawnQueue != null) {
 				// Spawning with frequencies
-				//System.out.println(this.getClass().getName() + ": FrequencyQueue: " + currentSpawnQueue.getFrequencyQueue().size());
+				//System.out.println(this.getClass().getName() + ": FrequencyQueue: " + currentSpawnQueue.getFrequencySpawnQueue().size());
 				for (String component : currentSpawnQueue.getNextFrequencySpawn(gameData.getGameTime(), stepTime)) {
 					spawn(myBank.getComponent(component), spawnTile);
 				}
 				// Spawning directly with spawn queue
-				Component nextQueueSpawn = myBank.getComponent(currentSpawnQueue.getNextSingleSpawn(gameData.getGameTime()));
-				spawn(nextQueueSpawn, spawnTile);
+				String componentSingleSpawnName = currentSpawnQueue.getNextSingleSpawn(gameData.getGameTime());
+				if(componentSingleSpawnName != null){
+					Component nextQueueSpawn = myBank.getComponent(componentSingleSpawnName);
+					spawn(nextQueueSpawn, spawnTile);
+				}
 			}
 		}
 		updateSpawnTimelines(gameData.getGameTime());
