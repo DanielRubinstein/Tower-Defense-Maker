@@ -25,12 +25,12 @@ public enum Modification_SaveGameState implements ModificationFromUser {
 	
 	Modification_SaveGameState(BiConsumer<Model, String> consumer){
 		myConsumer = consumer;
-		myLevelName = getSaveGameName();
 	}
 	
 	
 	@Override
 	public void invoke(Model myModel) throws Exception {
+		myLevelName = getSaveGameName();
 		if(myLevelName == null){
 			return;
 		}
