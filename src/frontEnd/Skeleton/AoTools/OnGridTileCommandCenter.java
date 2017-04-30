@@ -28,7 +28,7 @@ import resources.constants.StringResourceBundle;
  *
  */
 public class OnGridTileCommandCenter implements CommandCenter, SkeletonObject{
-	private StringResourceBundle stringResourceBundle = new StringResourceBundle();
+	private StringResourceBundle strResources = new StringResourceBundle();
 	private Stage myStage;
 	private View myView;
 	private TabPane tabPane;
@@ -47,15 +47,15 @@ public class OnGridTileCommandCenter implements CommandCenter, SkeletonObject{
 	private Collection<Tab> createComponentTabs(Stage stage) {
 		List<Tab> componentTabs = new ArrayList<Tab>();
 		for (Component c : myComponents) {
-			componentTabs.add(createAttributeOwnerTab(c, stage));
+			componentTabs.add(createAttributeOwnerTab(c, stage,strResources.getFromStringConstants("CommandCenterComponent")));
 		}
 		return componentTabs;
 	}
 
 	
 	
-	private Tab createAttributeOwnerTab(AttributeOwnerReader obj, Stage stage) {
-		AttributeCommandCenter aCC = new AttributeCommandCenter(myView, stage, (AttributeOwner) obj, "On-Screen Object");
+	private Tab createAttributeOwnerTab(AttributeOwnerReader obj, Stage stage, String title) {
+		AttributeCommandCenter aCC = new AttributeCommandCenter(myView, stage, (AttributeOwner) obj, title);
 		String fuckedUpName = obj.toString();
 		fuckedUpName = fuckedUpName.substring(fuckedUpName.lastIndexOf('.') + 1, fuckedUpName.length());
 		return createSingleTab(fuckedUpName, aCC.get());
@@ -79,8 +79,9 @@ public class OnGridTileCommandCenter implements CommandCenter, SkeletonObject{
 	@Override
 	public void launch(String title, double x, double y) {
 		myStage = new Stage();
+		myStage.setTitle(title);
 		tabPane.getTabs().clear();
-		tabPane.getTabs().add(createAttributeOwnerTab(myTile, myStage));
+		tabPane.getTabs().add(createAttributeOwnerTab(myTile, myStage,title));
 		tabPane.getTabs().addAll(createComponentTabs(myStage));
 		generate(x,y, myStage, tabPane);
 	}
@@ -88,9 +89,8 @@ public class OnGridTileCommandCenter implements CommandCenter, SkeletonObject{
 	@Override
 	public void generate(double x, double y, Stage myStage, Parent myRoot) {
 		Scene myScene = new Scene(myRoot);
-		myScene.getStylesheets().add(stringResourceBundle.getFromStringConstants("DEFAULT_CSS"));
+		myScene.getStylesheets().add(strResources.getFromStringConstants("DEFAULT_CSS"));
 		myStage.setScene(myScene);
-		myStage.setTitle("Command Center");
 		myStage.setX(x);
 		myStage.setY(y);
 		myStage.show();

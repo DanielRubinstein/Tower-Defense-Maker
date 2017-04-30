@@ -17,11 +17,13 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.Pane;
+import resources.constants.NumericResourceBundle;
+import resources.constants.StringResourceBundle;
 
 /**
  * This class implemented the interaction involved with TileGridVisual.
  * Specifically, it dictates when happens when the user clicks on the grid, a tile, etc.
- * @author Tim
+ * @author Tim, Miguel
  *
  */
 public class TileGridInteractor {
@@ -31,6 +33,10 @@ public class TileGridInteractor {
 	private View myView;
 	private TileGridVisual myTileGridVisual;
 	private State myState;
+	
+	private StringResourceBundle strResources = new StringResourceBundle();
+	private NumericResourceBundle numResourceBundle = new NumericResourceBundle();
+	
 	
 	public TileGridInteractor(View view,TileGridVisual visual, State state){
 		myTileGridVisual = visual;
@@ -55,7 +61,7 @@ public class TileGridInteractor {
 			if(isAMoveDirection(e)){
 				String toSend = e.getCode().toString().charAt(0) + e.getCode().toString().substring(1).toLowerCase();
 				selectedTiles.keySet().forEach(t -> {
-					myView.sendUserModification(new Modification_EditAttribute<String>(t,"MoveDirection",toSend));
+					myView.sendUserModification(new Modification_EditAttribute<String>(t,strResources.getFromAttributeNames("MoveDirection"),toSend));
 				});
 				clearTileSelection();
 			} else if (e.getCode().equals(KeyCode.SPACE)){
@@ -89,15 +95,15 @@ public class TileGridInteractor {
 			myTileGridVisual.getRoot().requestFocus();
 			if(e.getClickCount()==2){
 				OnGridTileCommandCenter tileInteractor = new OnGridTileCommandCenter(myView, t, myState);
-				tileInteractor.launch("On-Screen Tile" ,e.getScreenX(), e.getScreenY());
+				tileInteractor.launch(strResources.getFromStringConstants("CommandCenterTile") ,e.getScreenX(), e.getScreenY());
 			}else if(e.isControlDown() && myView.getBooleanAuthorModeProperty().get()){
 				addToTileSelection(n,t);
 			}else{
 				clearTileSelection();
 			}
 		});
-
 	}
+	
 	private void addToTileSelection(Node n, Tile t){
 		selectedTiles.put(t, n);
 		ColorAdjust color = new ColorAdjust();
@@ -135,8 +141,5 @@ public class TileGridInteractor {
 		selectedTiles.keySet().forEach(method);
 		clearTileSelection();
 	}
-	
-	
-	
-	
+
 }

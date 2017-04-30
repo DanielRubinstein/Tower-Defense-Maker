@@ -39,8 +39,8 @@ public class GameMaker {
 	
 	public GameMaker(Stage stage, Consumer<Object> gameDataConsumer, String name) {
 		gameName = name;
-		allSelections = new ButtonMenuImpl("Pick the starting values!");
-		allSelections.addNode(new Label("Game Name: " + name));
+		allSelections = new ButtonMenuImpl(strResources.getFromStringConstants("StartingInput"));
+		allSelections.addNode(new Label(strResources.getFromStringConstants("GameName") + name));
 		onSubmit = gameDataConsumer;
 		setInputFields();
 		myStage = stage;
@@ -56,23 +56,24 @@ public class GameMaker {
 	}
 
 	private void setInputFields() {
-		myTilesWide = setInputSliderFields("Number Tiles Wide",1,10,40);
-		myTilesHigh = setInputSliderFields("Number Tiles High",1,10,40);
+		myTilesWide = setInputSliderFields(strResources.getFromStringConstants("TilesWide"),1,10,40);
+		myTilesHigh = setInputSliderFields(strResources.getFromStringConstants("TilesHigh"),1,10,40);
 		setSubmit();
 	}
 	private void setSubmit() {
-		allSelections.addPrimarySimpleButtonWithHover("Submit", () ->  {
+		allSelections.addPrimarySimpleButtonWithHover(strResources.getFromStringConstants("Submit"), () ->  {
 			StartingInput allValues = createStartingInput();
 			makeDirectory();
 			onSubmit.accept(allValues);
 			myStage.close();
-		}, "Submit these values to continue");
+		}, strResources.getFromStringConstants("SubmitHover"));
 	}
 
 	private void makeDirectory() {
-		String base = "data/games/" + gameName + "/";
-		File newTemplatesDirectory = new File(base + "templates/");
-		File newSavesDirectory = new File(base + "saves/");
+		String templateFormat = strResources.getFromFilePaths("Template_Path_Format");
+		String savesFormat = strResources.getFromFilePaths("Save_Path_Format");
+		File newTemplatesDirectory = new File(String.format(templateFormat, gameName));
+		File newSavesDirectory = new File(String.format(savesFormat, gameName));
 		newTemplatesDirectory.mkdirs();
 		newSavesDirectory.mkdirs();
 	}

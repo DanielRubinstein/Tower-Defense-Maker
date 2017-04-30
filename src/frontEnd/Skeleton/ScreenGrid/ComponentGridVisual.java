@@ -5,16 +5,18 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
+import ModificationFromUser.AttributeOwner.Modification_Add_PaletteToGrid;
 import backEnd.Attribute.AttributeOwner;
 import backEnd.GameData.State.Component;
 import backEnd.GameData.State.ComponentGraph;
 import backEnd.GameData.State.SerializableObservableGen;
 import backEnd.GameData.State.SerializableObserverGen;
 import backEnd.GameData.State.State;
+import backEnd.GameData.State.Tile;
 import frontEnd.View;
 import frontEnd.Skeleton.AoTools.GenericCommandCenter;
-import frontEnd.Skeleton.UserTools.SkeletonObject;
 import javafx.geometry.Bounds;
+import javafx.geometry.Point2D;
 import javafx.scene.Group;
 import javafx.scene.Node;
 import javafx.scene.control.Tooltip;
@@ -26,7 +28,7 @@ import resources.constants.StringResourceBundle;
  * @author Tim
  *
  */
-public class ComponentGridVisual implements SkeletonObject, SerializableObserverGen<Component> {
+public class ComponentGridVisual extends GridVisualBase<Component> implements SerializableObserverGen<Component> {
 	
 	private ComponentGraph observedComponentGraph;
 	private Set<Component> myComponents;
@@ -67,8 +69,9 @@ public class ComponentGridVisual implements SkeletonObject, SerializableObserver
 			}
 		});
 	}
-
-	private void updateCorrespondingGrid(Component arg) {
+	
+	@Override
+	protected void updateGrid(Component arg) {
 		if (!myComponents.contains(arg)) {
 			addComponentToGrid(arg);
 		}
@@ -121,6 +124,10 @@ public class ComponentGridVisual implements SkeletonObject, SerializableObserver
 			}
 		});
 	}
+	@Override
+	public void addPreset(Component presetAO, Point2D pos){
+		myView.sendUserModification(new Modification_Add_PaletteToGrid(presetAO, pos));
+	}
 
 	@Override
 	public Node getRoot(){
@@ -129,7 +136,7 @@ public class ComponentGridVisual implements SkeletonObject, SerializableObserver
 
 	@Override
 	public void update(SerializableObservableGen<Component> object, Component obj) {
-		updateCorrespondingGrid(obj);
+		updateGrid(obj);
 	}
 
 }

@@ -139,4 +139,8 @@ public class StringResourceBundle {
 		return FILE_PATHS_RESOURCE.keySet();
 	}
 	
+	public String getGameFileLocation(String game){
+		return FILE_PATHS_RESOURCE.getString("All_Games_Path")+game+"/";
+	}
+	
 }
