@@ -1,8 +1,12 @@
 package frontEnd.Skeleton.UserTools;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import backEnd.LevelProgression.LevelProgressionControllerEditor;
+import frontEnd.CustomJavafxNodes.ListDragDrop;
+import javafx.collections.FXCollections;
 import javafx.geometry.Insets;
 import javafx.scene.Node;
 import javafx.scene.Scene;
@@ -68,7 +72,8 @@ public class LevelView {
 		Label game = new Label("Game (click on game to view levels)");
 		myRoot.add(game, 0, 1);
 		VBox gameOutline = createSingleBox(0);
-		VBox levelOutline = createSingleBox(1);
+		VBox levelOutline = null;
+		populateLevels("",null);
 		
 		populateGame(gameOutline,myLevelContr.getGameList(),levelOutline);
 		Label levels = new Label("Levels");
@@ -85,14 +90,20 @@ public class LevelView {
 		}
 	}
 	private void populateLevels(String gameName,VBox wrapper){
-		wrapper.getChildren().clear();
-		List<String> levels = myLevelContr.getLevelList(gameName);
-		for (String str : levels){
-			Button strButton = new Button(str);
-			strButton.setOnAction(e -> myLevelEditor.populateLevelEditor(strButton));
-			wrapper.getChildren().add(strButton);
-		}
-		myLevelEditor.setGameName(gameName);
+		
+
+		//List<String> levels = myLevelContr.getLevelList(gameName);
+		String[] test2 = {"test1","tsttt,","test2", "test 3","test54"};
+		List<String> testList = Arrays.asList(test2);
+		ListDragDrop<String> test = new ListDragDrop<String>(FXCollections.observableArrayList(testList));
+		//myLevelEditor
+		myRoot.add(test.getRoot(), 1, 2);
+		//for (String str : levels){
+		//	Button strButton = new Button(str);
+			//strButton.setOnAction(e -> myLevelEditor.populateLevelEditor(strButton));
+			//wrapper.getChildren().add(strButton);
+		//}
+		//myLevelEditor.setGameName(gameName);
 	}
 	public VBox createSingleBox(int col){
 		ScrollPane scroll = new ScrollPane();

@@ -1,5 +1,6 @@
 package frontEnd.Skeleton.ScreenGrid;
 
+import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 
 import ModificationFromUser.AttributeOwner.Modification_Add_PaletteToGrid;
@@ -14,6 +15,8 @@ import javafx.geometry.Point2D;
 import javafx.scene.Group;
 import javafx.scene.Node;
 import javafx.scene.input.TransferMode;
+import util.reflection.Reflection;
+import util.reflection.ReflectionException;
 
 /**
  * This class is used to represent the actual game, such as the Tiles and
@@ -27,9 +30,10 @@ public class ScreenGrid implements SkeletonObject {
 
 	private TileGridVisual myTileGrid;
 	private Group myRoot;
-	private ComponentGridVisual myComponentGraph;
+	private ComponentGridVisual myComponentGrid;
 	private View myView;
 	private ScreenHoverVisual myHover;
+	private GridAdder myAdder;
 
 	/**
 	 * Constructs a new ScreenGrid object given the view and state. State contains
@@ -43,9 +47,10 @@ public class ScreenGrid implements SkeletonObject {
 	 */
 	public ScreenGrid(View view, State state, double screenGridWidth, double screenGridHeight) {
 		myTileGrid = new TileGridVisual(view,state,screenGridWidth,screenGridHeight);
-		myComponentGraph = new ComponentGridVisual(view,state);
+		myComponentGrid = new ComponentGridVisual(view,state);
 		myView = view;
 		myHover = new ScreenHoverVisual(myView.getBooleanAuthorModeProperty());
+		myAdder = new GridAdder(myTileGrid, myComponentGrid);
 		addGridToRoot();
 		addGraphToRoot();
 		setDrag();
@@ -53,6 +58,7 @@ public class ScreenGrid implements SkeletonObject {
 	
 	private void setDrag(){
 		BankControllerReader bank = myView.getBankControllerReader();
+		String methodName = "addToGrid";
 		myRoot.setOnMouseMoved(e -> myHover.displayLocation(e));
 		
 		myRoot.setOnDragOver(e -> e.acceptTransferModes(TransferMode.ANY));
@@ -60,11 +66,14 @@ public class ScreenGrid implements SkeletonObject {
 			String presetName = e.getDragboard().getString();
 			AttributeOwnerReader presetAO = bank.getPreset(presetName);
 			Point2D pos = new Point2D(e.getX(), e.getY());
-			for(Class<?> i : presetAO.getClass().getInterfaces()){
-				
-			}
-			if(presetAO instanceof TileImpl){
-				myTileGrid.addPreset((Tile) presetAO,pos);
+			for(Class<?> inter : presetAO.getClass().getInterfaces()){
+				try {
+					Method toCall = myAdder.getClass().getDeclaredMethod(methodName, inter, Point2D.class);
+					toCall.invoke(myAdder, presetAO, pos);
+					break;
+				} catch (Exception e1) {
+					continue;
+				}
 			}
 			myView.sendUserModification(new Modification_Add_PaletteToGrid(presetAO, pos));
 		});
@@ -79,7 +88,7 @@ public class ScreenGrid implements SkeletonObject {
 		myRoot.getChildren().add(myHover.getRoot());
 	}
 	private void addGraphToRoot(){
-		myRoot.getChildren().add(myComponentGraph.getRoot());
+		myRoot.getChildren().add(myComponentGrid.getRoot());
 	}
 	
 	public Node getRoot() {
