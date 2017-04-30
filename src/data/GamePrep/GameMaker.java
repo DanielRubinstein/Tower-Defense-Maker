@@ -61,7 +61,7 @@ public class GameMaker {
 		setSubmit();
 	}
 	private void setSubmit() {
-		allSelections.addPrimarySimpleButtonWithHover("Submit", () ->  {
+		allSelections.addSimpleButtonWithHover("Submit", () ->  {
 			StartingInput allValues = createStartingInput();
 			makeDirectory();
 			onSubmit.accept(allValues);
