@@ -809,7 +809,7 @@
           <entry>
             <string>SpawnOnDeath</string>
             <backEnd.Attribute.AttributeImpl>
-              <myValue class="boolean">false</myValue>
+              <myValue class="boolean">true</myValue>
               <myName>SpawnOnDeath</myName>
             </backEnd.Attribute.AttributeImpl>
           </entry>
@@ -941,7 +941,7 @@
           <entry>
             <string>SpawnOnDeathObject</string>
             <backEnd.Attribute.AttributeImpl>
-              <myValue class="string">Tower</myValue>
+              <myValue class="string">Riley</myValue>
               <myName>SpawnOnDeathObject</myName>
             </backEnd.Attribute.AttributeImpl>
           </entry>
@@ -2230,8 +2230,8 @@
             <string>Position</string>
             <backEnd.Attribute.AttributeImpl>
               <myValue class="javafx.geometry.Point2D">
-                <x>362.0</x>
-                <y>303.0</y>
+                <x>360.0</x>
+                <y>272.0</y>
                 <hash>0</hash>
               </myValue>
               <myName>Position</myName>
