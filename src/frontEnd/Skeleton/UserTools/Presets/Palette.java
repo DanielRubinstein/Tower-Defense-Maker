@@ -5,6 +5,7 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.function.BiConsumer;
 import java.util.function.Consumer;
 
 import ModificationFromUser.AttributeOwner.Modification_Add_PaletteToGrid;
@@ -34,6 +35,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.ClipboardContent;
 import javafx.scene.input.Dragboard;
 import javafx.scene.input.MouseButton;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.input.TransferMode;
 import javafx.scene.layout.TilePane;
 import javafx.stage.Stage;
@@ -97,34 +99,34 @@ public class Palette implements SkeletonObject, SerializableObserver{
 		setClickEvent(imageView, (iV) -> {
 			GenericCommandCenter presetComCenter = new GenericCommandCenter(myView, preset);
 			presetComCenter.launch("Preset", iV.getLayoutX(), iV.getLayoutY());
-		});
-		setRemoveEvent(imageView,preset);
+		},setRemoveEvent(imageView,preset),preset);
+		//setRemoveEvent(imageView,preset);
 		makeHoverOverName(preset, imageView);
 		makePresetDraggable(preset, imageView);
 	}
 
-	private void setClickEvent(Node imageView, Consumer<Node> consumer) {
+	private void setClickEvent(Node imageView, Consumer<Node> consumer, BiConsumer<AttributeOwner, MouseEvent> c, AttributeOwner aO) {
 		imageView.setOnMouseClicked(mouseEvent -> {
 			if (mouseEvent.getButton().equals(MouseButton.PRIMARY)) {
 				consumer.accept(imageView);
+			} else if (mouseEvent.getButton().equals(MouseButton.SECONDARY)){
+				c.accept(aO, mouseEvent);
 			}
 		});	
 	}
 	
-	private void setRemoveEvent(Node imageView, AttributeOwner preset){
-		imageView.setOnMouseClicked(mouseEvent -> {
-			if(mouseEvent.getButton().equals(MouseButton.SECONDARY)){
-				String presetName = observedBankController.getPresetName(preset);
-				ContextMenu removeMenu = new ContextMenu();
-				MenuItem removeItem = new MenuItem("Remove from palette");
-				removeItem.setOnAction(e -> {
-					myView.sendUserModification(new Modification_Remove_FromPalette(preset));
-				});
-				removeMenu.getItems().add(removeItem);
-				removeMenu.setAutoHide(true);
-				removeMenu.show(tile, mouseEvent.getScreenX(), mouseEvent.getScreenY());
-			}
-		});
+	private BiConsumer<AttributeOwner, MouseEvent> setRemoveEvent(Node imageView, AttributeOwner preset){
+		return(a, m) -> {
+			ContextMenu removeMenu = new ContextMenu();
+			MenuItem removeItem = new MenuItem("Remove from palette");
+			removeItem.setOnAction(e -> {
+				myView.sendUserModification(new Modification_Remove_FromPalette(preset));
+			});
+			removeMenu.getItems().add(removeItem);
+			removeMenu.setAutoHide(true);
+			removeMenu.show(tile, m.getScreenX(), m.getScreenY());
+		};
+		
 	}
 
 	private void addPresetImageViewToPalette(ImageView imageView) {
@@ -166,7 +168,8 @@ public class Palette implements SkeletonObject, SerializableObserver{
 	}
 
 	private void createNewPresetButton() {
-		PresetCreationButton presetCreationButton = new PresetCreationButton(myView, myType, (imagePath) -> createImageView(imagePath), (node, consumer) -> setClickEvent(node, consumer) );
+		PresetCreationButton presetCreationButton = new PresetCreationButton(myView, myType, 
+				(imagePath) -> createImageView(imagePath), (node, consumer) -> setClickEvent(node, consumer,null,null) );
 		tile.getChildren().add(0, presetCreationButton.getRoot());
 		presetCreationButton.disableInPlayerMode((inPlayerMode) -> {
 			if(inPlayerMode){
