@@ -13,6 +13,8 @@ import javafx.stage.Stage;
 
 public class HelpOptions {
 	private static final String DEFAULT_TOWER_DEFENSE = "src/resources/html/tower_defense.htm";
+	private static final String DEFAULT_HELP = "src/resources/html/help.html";
+	
 	private ButtonMenu allOptions;
 	
 	public HelpOptions(Stage myParentStage){
@@ -25,7 +27,7 @@ public class HelpOptions {
 	}
 
 	private void addAllOptions(){
-		allOptions.addPrimarySimpleButtonWithHover("What is Tower Defense?", () -> loadHTMLPage(DEFAULT_TOWER_DEFENSE),"View Instructions");
+		allOptions.addPrimarySimpleButtonWithHover("Help/Instructions", () -> loadHTMLPage(DEFAULT_HELP),"View Instructions");
 		allOptions.addSimpleButtonWithHover("What is Tower Defense?", () -> loadHTMLPage(DEFAULT_TOWER_DEFENSE),"Get a basic overview");
 	}
 	
