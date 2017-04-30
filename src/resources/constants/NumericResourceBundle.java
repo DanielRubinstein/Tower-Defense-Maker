@@ -34,25 +34,27 @@ public class NumericResourceBundle {
 	}
 	
 	//screen setup constants
-	
+	private static final String SCREEN_CONSTANTS_PATH = "resources.screen";
+	private static final ResourceBundle SCREEN_CONSTANTS_RESOURCE = ResourceBundle.getBundle(SCREEN_CONSTANTS_PATH);
+
 	public Double getWindowHeight(){
-		return Double.valueOf(RESOURCE_BUNDLE.getString("WindowHeight"));
+		return Double.valueOf(SCREEN_CONSTANTS_RESOURCE.getString("WindowHeight"));
 	}
 	
 	public Double getWindowWidth(){
-		return Double.valueOf(RESOURCE_BUNDLE.getString("WindowWidth"));
+		return Double.valueOf(SCREEN_CONSTANTS_RESOURCE.getString("WindowWidth"));
 	}
 	
 	public Double getScreenPadding(){
-		return Double.valueOf(RESOURCE_BUNDLE.getString("ScreenGridPadding"));
+		return Double.valueOf(SCREEN_CONSTANTS_RESOURCE.getString("ScreenGridPadding"));
 	}
 	
 	private Double getScreenGridHeightFactor(){
-		return Double.valueOf(RESOURCE_BUNDLE.getString("ScreenGridHeightFactor"));
+		return Double.valueOf(SCREEN_CONSTANTS_RESOURCE.getString("ScreenGridHeightFactor"));
 	}
 	
 	private Double getScreenGridWidthFactor(){
-		return Double.valueOf(RESOURCE_BUNDLE.getString("ScreenGridWidthFactor"));
+		return Double.valueOf(SCREEN_CONSTANTS_RESOURCE.getString("ScreenGridWidthFactor"));
 	}
 	
 	private Double getBottomHeightFactor(){
@@ -66,7 +68,14 @@ public class NumericResourceBundle {
 	public Double getScreenGridWidth(){
 		return getWindowWidth() * getScreenGridWidthFactor() - getScreenPadding();
 	}
+	public Double getButtonMenuWidth(){
+		return getWindowWidth() * buttonWidthFactor();
+	}
 	
+	private Double buttonWidthFactor() {
+		return Double.valueOf(SCREEN_CONSTANTS_RESOURCE.getString("ButtonMenuWidthFactor"));
+	}
+
 	public Double getScreenGridHeight(){
 		return getWindowHeight() * getScreenGridHeightFactor() - getScreenPadding();
 	}
@@ -80,6 +89,6 @@ public class NumericResourceBundle {
 	}
 	
 	public Double getPresetSizeInPalette(){
-		return Double.valueOf(RESOURCE_BUNDLE.getString("PresetSizeInPalette"));
+		return Double.valueOf(SCREEN_CONSTANTS_RESOURCE.getString("PresetSizeInPalette"));
 	}
 }

@@ -9,6 +9,12 @@ import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.stage.Stage;
 
+/**
+ * This interface defines the View, determines how Front End should be controlled and how the Front End
+ * and Model interact. This interface has less permissions and is at the highest level of the View hierarchy.
+ * @author Tim, Miguel
+ *
+ */
 public interface ViewReader {
 
 	// play, pause, fast forward
@@ -20,18 +26,18 @@ public interface ViewReader {
 	
 	public void reportError(Exception e);
 	
-	LevelProgressionControllerReader getLevelProgressionController();
+	public LevelProgressionControllerReader getLevelProgressionController();
 	
-	PlayerStatusReader getPlayerStatus();
+	public PlayerStatusReader getPlayerStatus();
 
-	SimpleStringProperty getStringGameModeProperty();
+	public SimpleStringProperty getStringGameModeProperty();
 
-	SimpleStringProperty getStringLevelModeProperty();
+	public SimpleStringProperty getStringLevelModeProperty();
 
-	FacebookInteractor getFb();
+	public FacebookInteractor getFb();
 	
 	public ModeReader getModeReader();
 	
-	BankControllerReader getBankControllerReader();
+	public BankControllerReader getBankControllerReader();
 	
 }

@@ -21,6 +21,7 @@ import backEnd.Attribute.AttributeOwnerReader;
 public class ComponentGraphImpl implements ComponentGraph {
 	private List<Component> myComponents;
 	private List<SerializableObserver> observers;
+	private List<SerializableObserverGen<Component>> observersGen;
 	private List<List<SerializableObserver>> compObserverList;
 
 	public ComponentGraphImpl() {
@@ -30,6 +31,7 @@ public class ComponentGraphImpl implements ComponentGraph {
 	public ComponentGraphImpl(List<Component> fromXML) {
 		myComponents = fromXML;
 		observers = new ArrayList<SerializableObserver>();
+		observersGen = new ArrayList<>();
 
 	}
 
@@ -177,8 +179,11 @@ public class ComponentGraphImpl implements ComponentGraph {
 		observers = observersave;
 	}
 	
-	private void notifyObservers(Object obj){
+	private void notifyObservers(Component obj){
 		for (SerializableObserver o : observers){
+			o.update(null, obj);
+		}
+		for (SerializableObserverGen<Component> o : observersGen){
 			o.update(null, obj);
 		}
 	}
@@ -196,6 +201,12 @@ public class ComponentGraphImpl implements ComponentGraph {
 			myAOs.add(ao);
 		}
 		return myAOs;
+	}
+
+	@Override
+	public void addObserver(SerializableObserverGen<Component> o) {
+		observersGen.add(o);
+		
 	}
 
 }

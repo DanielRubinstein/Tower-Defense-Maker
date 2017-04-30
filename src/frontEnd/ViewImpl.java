@@ -23,6 +23,11 @@ import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.stage.Stage;
 
+/**
+ * Class that initializes the UI and serves as a connector betweel the Model and the Front End
+ * @author Tim, Miguel
+ *
+ */
 public class ViewImpl implements View {
 	private ModelReader myModel;
 	private Consumer<ModificationFromUser> myModConsumer;
@@ -123,8 +128,7 @@ public class ViewImpl implements View {
 		return myMode;
 	}
 
-	public void setSplashScreen(SplashScreenData data)
-	{
+	public void setSplashScreen(SplashScreenData data){
 		System.out.println("View Line 158");
 		sendUserModification(Modification_GameRemote.PAUSE); 
 		SplashScreen splashScreen = new SplashScreen(data);

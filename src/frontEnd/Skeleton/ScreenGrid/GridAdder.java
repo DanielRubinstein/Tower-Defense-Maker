@@ -37,8 +37,9 @@ public class GridAdder {
 	 * @param position
 	 */
 	public void addToGrid(Component component, Point2D position){
-		
-		
+		//currently, adding a component to the grid is handled through the modification to user,
+		//but this method is kept open in case we add a new feature that requires the ComponentGrid to be used.
+		return;	
 	}
 	
 	

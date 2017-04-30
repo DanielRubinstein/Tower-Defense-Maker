@@ -4,27 +4,38 @@ import java.util.Collection;
 import java.util.Map;
 
 import ModificationFromUser.ModificationFromUser;
-import backEnd.Model;
-import backEnd.Bank.BankControllerImpl;
-import backEnd.Bank.BankControllerReader;
 import backEnd.GameData.Rules.RuleReader;
 import backEnd.GameData.State.Component;
 import backEnd.GameEngine.Engine.Spawning.SpawnQueues;
 import backEnd.LevelProgression.LevelProgressionControllerEditor;
-import backEnd.LevelProgression.LevelProgressionControllerReader;
-import backEnd.Mode.ModeReader;
-import frontEnd.Facebook.FacebookConnector;
-import frontEnd.Facebook.FacebookInteractor;
-import javafx.scene.Node;
-import javafx.scene.shape.Rectangle;
 
+/**
+ * Interface that defines how the Front End should be controlled and how the Front End
+ * and Model interact.
+ * @author Tim, Miguel
+ *
+ */
 public interface View extends ViewReader{
 	
+	/**
+	 * Sends this invokable and ensures that it performs its task.
+	 * This is how the front end interacts and affects the back end.
+	 * @param mod
+	 */
 	public void sendUserModification(ModificationFromUser mod);
 	
+	/**
+	 * Gets the SpawnQueues that exist in the back end. 
+	 * These SpawnQueues define which components spawn and when.
+	 * @return Map from String of the name of the SpawnQueue to the actual SpawnQueue
+	 */
 	public Map<String, SpawnQueues> getSpawnQueues();
 	
-	LevelProgressionControllerEditor getLevelProgressionController();
+	/**
+	 * Gets the LevelProgressionController, which controls all levels and their order.
+	 * @return 
+	 */
+	public LevelProgressionControllerEditor getLevelProgressionController();
 	
 	public Collection<RuleReader> getRules();
 
