@@ -2,7 +2,7 @@ package ModificationFromUser.AttributeOwner;
 
 import ModificationFromUser.ModificationFromUser;
 import ModificationFromUser.AttributeOwner.ReflectionMethods.Modification_RemoveAttributeOwner_Methods;
-import backEnd.ModelImpl;
+import backEnd.Model;
 import backEnd.Attribute.AttributeOwner;
 import backEnd.Attribute.AttributeOwnerReader;
 import util.reflection.Reflection;
@@ -18,7 +18,7 @@ public class Modification_RemoveAttributeOwner implements ModificationFromUser {
 	}
 
 	@Override
-	public void invoke(ModelImpl myModel) throws Exception {
+	public void invoke(Model myModel) throws Exception {
 		AttributeOwner toRemove = myModel.getAttributeOwner(toRemoveReader);
 		Modification_RemoveAttributeOwner_Methods methods = new Modification_RemoveAttributeOwner_Methods(myModel);
 		Reflection.callMethod(methods, "remove", toRemove);

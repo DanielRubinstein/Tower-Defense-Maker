@@ -3,12 +3,9 @@ package ModificationFromUser.savingAndLoading;
 import java.util.Arrays;
 import java.util.List;
 import java.util.function.BiConsumer;
-import java.util.function.Consumer;
 
 import ModificationFromUser.ModificationFromUser;
-import backEnd.ModelImpl;
-import backEnd.GameEngine.Engine.GameProcessController;
-import data.DataController;
+import backEnd.Model;
 import frontEnd.CustomJavafxNodes.SingleFieldPrompt;
 
 // Player Mode: save current GameData to a new GameState folder within a given Level folder
@@ -23,9 +20,9 @@ public enum Modification_SaveGameState implements ModificationFromUser {
 		});
 
 	private String myLevelName;
-	private BiConsumer<ModelImpl, String> myConsumer;
+	private BiConsumer<Model, String> myConsumer;
 	
-	Modification_SaveGameState(BiConsumer<ModelImpl, String> consumer){
+	Modification_SaveGameState(BiConsumer<Model, String> consumer){
 		myConsumer = consumer;
 		myLevelName = getSaveGameName();
 		
@@ -34,7 +31,7 @@ public enum Modification_SaveGameState implements ModificationFromUser {
 	
 	
 	@Override
-	public void invoke(ModelImpl myModel) throws Exception {
+	public void invoke(Model myModel) throws Exception {
 		if(myLevelName == null){
 			return;
 		}

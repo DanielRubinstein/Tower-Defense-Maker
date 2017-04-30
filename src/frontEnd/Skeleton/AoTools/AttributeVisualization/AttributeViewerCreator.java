@@ -86,14 +86,14 @@ public class AttributeViewerCreator implements AttributeVisualization{
 	public Node getCOMPONENT() {
 		try{
 			String baby_str = (String) myAttr.getValue();
-			Component baby = myView.getBankController().getComponent(baby_str);
+			Component baby = myView.getBankControllerReader().getComponent(baby_str);
 			
 			HBox pair = new HBox();
 			
 			String babyImagePath =  baby.<String>getAttribute("ImageFile").getValue();
 			ImageView imv = createImageView(babyImagePath);
 			Label name = new Label();
-			name.setText(myView.getBankController().getAOName(baby));
+			name.setText(baby_str);
 			pair.getChildren().add(name);
 			pair.getChildren().add(imv);
 			return pair;

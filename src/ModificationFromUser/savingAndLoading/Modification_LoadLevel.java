@@ -3,6 +3,7 @@ package ModificationFromUser.savingAndLoading;
 import java.io.File;
 
 import ModificationFromUser.ModificationFromUser;
+import backEnd.Model;
 import backEnd.ModelImpl;
 import javafx.stage.DirectoryChooser;
 import javafx.stage.Stage;
@@ -17,7 +18,7 @@ public class Modification_LoadLevel implements ModificationFromUser
 {
 
 	@Override
-	public void invoke(ModelImpl myModel) throws Exception
+	public void invoke(Model myModel) throws Exception
 	{
 		File fileToLoad = load(myModel);
 		if(fileToLoad != null){
@@ -27,7 +28,7 @@ public class Modification_LoadLevel implements ModificationFromUser
 		}
 	}
 	
-	private File load(ModelImpl myModel)
+	private File load(Model myModel)
 	{
 		DirectoryChooser chooser = new DirectoryChooser();
 		

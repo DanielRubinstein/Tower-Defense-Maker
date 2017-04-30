@@ -1,9 +1,9 @@
 package frontEnd;
 
-import java.util.Collection;
-
+import backEnd.Bank.BankControllerReader;
 import backEnd.GameData.State.*;
 import backEnd.LevelProgression.LevelProgressionControllerReader;
+import backEnd.Mode.ModeReader;
 import frontEnd.Facebook.FacebookInteractor;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleStringProperty;
@@ -15,10 +15,6 @@ public interface ViewReader {
 	public SimpleStringProperty getRunStatus();
 	
 	public SimpleBooleanProperty getBooleanAuthorModeProperty();
-
-	public Collection<Tile> getTilePresets();
-
-	public Collection<Component> getComponentPresets();
 	
 	public Stage getAppStage();
 	
@@ -33,5 +29,9 @@ public interface ViewReader {
 	SimpleStringProperty getStringLevelModeProperty();
 
 	FacebookInteractor getFb();
+	
+	public ModeReader getModeReader();
+	
+	BankControllerReader getBankControllerReader();
 	
 }
