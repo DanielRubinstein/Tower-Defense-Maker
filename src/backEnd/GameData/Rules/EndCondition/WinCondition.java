@@ -15,7 +15,7 @@ public abstract class WinCondition extends Rule {
 	protected void winGame(GameData myGameData) {
 		LevelProgressionControllerEditor myLPC = myGameData.getLevelProgressionController();
 
-		myLPC.initiateSplashScreen(new SplashScreenData("You won the level!\nPress any key to continue to the next level", SplashScreenType.LEVEL_WON, () -> myLPC.loadNextLevel()));
+		myLPC.initiateSplashScreen(new SplashScreenData("You won the level!\nPress any key to continue", SplashScreenType.LEVEL_WON, () -> myLPC.loadNextLevel()));
 	}
 
 }

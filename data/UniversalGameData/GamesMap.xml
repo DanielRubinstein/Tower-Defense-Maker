@@ -8,6 +8,8 @@
   </entry>
   <entry>
     <string>HeyLmaoGame</string>
-    <list/>
+    <list>
+      <string>level1</string>
+    </list>
   </entry>
 </map>

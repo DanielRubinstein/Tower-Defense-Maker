@@ -123,7 +123,6 @@ public class ViewImpl implements View {
 	 * @param data
 	 */
 	public void setSplashScreen(SplashScreenData data){
-		System.out.println("View Line 158");
 		sendUserModification(Modification_GameRemote.PAUSE); 
 		SplashScreen splashScreen = new SplashScreen(data);
 		splashScreen.display(appStage);

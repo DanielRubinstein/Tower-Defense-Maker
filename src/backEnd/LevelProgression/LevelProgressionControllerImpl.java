@@ -108,7 +108,7 @@ public class LevelProgressionControllerImpl implements LevelProgressionControlle
 		String nextLevel = null;
 		for (int i = 0; i < levelPathsList.size(); i++){
 			if (levelPathsList.get(i).equals(myMode.getLevelMode())){
-				nextLevel = levelPathsList.get(++i);
+				if (levelPathsList.size() > i + 1) nextLevel = levelPathsList.get(++i);
 				break;
 			}
 		}
