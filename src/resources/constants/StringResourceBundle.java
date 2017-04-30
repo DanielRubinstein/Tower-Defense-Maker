@@ -171,10 +171,9 @@ public class StringResourceBundle {
 		return FILE_PATHS_RESOURCE.keySet();
 	}
 	
-<<<<<<< HEAD
 	public String getGameFileLocation(String game){
 		return FILE_PATHS_RESOURCE.getString("All_Games_Path")+game+"/";
-=======
+	}
 	///////////////////////////////////////////////////////////////////////////
 	// Toggle
 	///////////////////////////////////////////////////////////////////////////
@@ -184,7 +183,7 @@ public class StringResourceBundle {
 	
 	public String getFromToggle(String string) {
 		return TOGGLE_RESOURCE.getString(string);
->>>>>>> master
+
 	}
 	
 }
