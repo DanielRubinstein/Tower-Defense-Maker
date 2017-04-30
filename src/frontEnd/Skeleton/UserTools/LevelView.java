@@ -71,8 +71,8 @@ public class LevelView {
 		VBox gameOutline = createSingleBox(0);
 		VBox levelOutline = null;
 		populateLevels("");
-		Node gameEditor = createGameEditor(gameOutline);
-		myRoot.add(gameEditor, 0, 3);
+		//Node gameEditor = createGameEditor(gameOutline);
+		//myRoot.add(gameEditor, 0, 3);
 		populateGame(gameOutline,myLevelContr.getGameList(),levelOutline);
 		Label levels = new Label("Levels (drag to move around)");
 		myRoot.add(levels, 1, 1);
@@ -90,10 +90,15 @@ public class LevelView {
 	}
 	
 	private void populateLevels(String gameName){
-		String[] test2 = {"test1","tsttt,","test2", "test 3","test54"};
-		List<String> testList = Arrays.asList(test2);
-		ListDragDrop<String> test = new ListDragDrop<String>(FXCollections.observableArrayList(testList));
-		
+		List<String> gameLevels = myLevelContr.getLevelList(gameName);
+
+		ListDragDrop<String> test = new ListDragDrop<String>(FXCollections.observableArrayList(gameLevels));
+		//test.
+		test.changedListProperty().addListener((o, oldV, newV) -> {
+			List<String> orderedLevels = test.getList();
+			myLevelContr.setLevelList(gameName, orderedLevels);
+			test.acceptChange();
+		});
 		myRoot.add(test.getRoot(), 1, 2);
 	}
 	
@@ -114,26 +119,5 @@ public class LevelView {
 		return wrapper;
 	}
 	
-	private Node createGameEditor(Pane gameWrapper){
-		GridPane gameEdit = new GridPane();
-		Button removeGame = new Button("Remove Game");
-		TextField addText = new TextField();
-		removeGame.setOnAction(e -> {
-			myLevelContr.removeGame(addText.getText());
-			//gameWrapper.getChildren().remove
-		});
-		Button addGame = new Button("Add Game");
-		addGame.setOnAction(e -> {
-			myLevelContr.addNewGame(addText.getText());
-		});
-		HBox removeBox = new HBox();
-		removeBox.getChildren().addAll(removeGame,currentGameLabel);
-		HBox addBox = new HBox();
-		addBox.getChildren().addAll(addGame,addText);
-		
-		gameEdit.add(removeBox, 0, 0);
-		gameEdit.add(addBox, 0, 1);
-		return gameEdit;
-	}
 
 }

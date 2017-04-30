@@ -3,6 +3,7 @@ package frontEnd.CustomJavafxNodes;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 import frontEnd.Skeleton.UserTools.SkeletonObject;
 import javafx.beans.InvalidationListener;
@@ -39,6 +40,9 @@ public class ListDragDrop<T> implements SkeletonObject, ObservableValue<T> {
 	}
 	public BooleanProperty changedListProperty(){
 		return changedListProperty;
+	}
+	public List<T> getList() {
+		return myContents.getItems().stream().collect(Collectors.toList());
 	}
 	public void acceptChange(){
 		changedListProperty.set(false);
@@ -143,6 +147,7 @@ public class ListDragDrop<T> implements SkeletonObject, ObservableValue<T> {
 		// TODO Auto-generated method stub
 		return null;
 	}
+
 
 
 }

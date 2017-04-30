@@ -1,14 +1,9 @@
 package frontEnd.Skeleton.ScreenGrid;
 
-import frontEnd.View;
 import frontEnd.Skeleton.UserTools.SkeletonObject;
 import javafx.beans.property.BooleanProperty;
-import javafx.beans.value.ObservableValue;
-import javafx.geometry.Bounds;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
-import javafx.scene.control.SplitPane;
-import javafx.scene.control.Tooltip;
 import javafx.scene.input.MouseEvent;
 import resources.constants.StringResourceBundle;
 
