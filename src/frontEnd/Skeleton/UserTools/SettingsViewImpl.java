@@ -5,12 +5,14 @@ import ModificationFromUser.Modification_LoadLevel;
 import ModificationFromUser.Modification_NewGame;
 import ModificationFromUser.Modification_SaveGameState;
 import frontEnd.View;
+import frontEnd.CustomJavafxNodes.ActionButton;
 import frontEnd.CustomJavafxNodes.ButtonMenuImpl;
 import frontEnd.CustomJavafxNodes.ToggleSwitch;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.geometry.Bounds;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.SplitPane;
 import javafx.scene.control.Tooltip;
 import javafx.scene.layout.HBox;
@@ -53,7 +55,16 @@ public class SettingsViewImpl implements SettingsView{
 	 */
 	private void addButtons(){
 		myMenu = new ButtonMenuImpl("Settings");
-		myMenu.addSimpleButtonWithHover("Save", () -> myView.sendUserModification(new Modification_SaveGameState()), "Save your current game in the Saved Games folder");
+		ActionButton button = new ActionButton("Save level template", () -> myView.sendUserModification(new Modification_SaveGameState()));
+		myView.getBooleanAuthorModeProperty().addListener((o,oldV, newV) -> {
+			if(newV){
+				button.setText("Save level template");
+			} else {
+				button.setText("Save current progress");
+			}
+		});
+		
+		myMenu.addButton(button);
 		
 		myMenu.addSimpleButtonWithHover("Load", () -> 
 		{

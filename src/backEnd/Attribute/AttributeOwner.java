@@ -15,6 +15,8 @@ public interface AttributeOwner extends AttributeOwnerReader {
 	 * @param newAttr
 	 */
 	void addAttribute(String attrName, Attribute<?> newAttr);
+	
+	void removeAttribute(String attrName);
 
 	/**
 	 * @return AccessPermissions

@@ -285,5 +285,18 @@ public class ComponentImpl implements SerializableObservable, Component, Compone
 	public int compareTo(Object o) {
 		return Integer.compare(this.hashCode(), o.hashCode());
 	}
+
+
+	@Override
+	public void removeAttribute(String attrName) {
+		myAttributes.remove(attrName);
+		
+	}
+
+
+	@Override
+	public boolean contains(String attName) {
+		return myAttributes.containsAttribute(attName);
+	}
 	
 }

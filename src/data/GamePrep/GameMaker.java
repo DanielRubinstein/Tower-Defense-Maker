@@ -34,10 +34,13 @@ public class GameMaker {
 	private NumberChanger myTilesHigh;
 	private Consumer<Object> onSubmit;
 	private Stage myStage;
+	private String gameName;
 	private static final StringResourceBundle strResources = new StringResourceBundle();
 	
-	public GameMaker(Stage stage, Consumer<Object> gameDataConsumer) {
-		allSelections = new ButtonMenuImpl("Starting Values!");
+	public GameMaker(Stage stage, Consumer<Object> gameDataConsumer, String name) {
+		gameName = name;
+		allSelections = new ButtonMenuImpl("Pick the starting values!");
+		allSelections.addNode(new Label("Game Name: " + name));
 		onSubmit = gameDataConsumer;
 		setInputFields();
 		myStage = stage;
@@ -47,65 +50,17 @@ public class GameMaker {
 	private void setInputFields() {
 		myTilesWide = setInputSliderFields("Number Tiles Wide",1,10,40);
 		myTilesHigh = setInputSliderFields("Number Tiles High",1,10,40);
-		
-		newGameOrLevel();
-
+		setSubmit();
 	}
-	private void newGameOrLevel() {
-		GridPane bothOptions = new GridPane();
-		
-
-		makeNewGame(bothOptions);
-		
-		Label or = new Label("OR      ");
-		bothOptions.add(or, 1, 0);
-		
-		bothOptions.add(makeGameSelection(), 2, 1);
-		
-		allSelections.addNode(bothOptions);
-	}
-	private void makeNewGame(GridPane grid){
-		TextField gameName= new TextField();
-		Button submitGame = new Button("Create New Game");
-		submitGame.setOnAction(e -> submitStartingInput(gameName.getText()));	
-		Label title = new Label("Make new game");
-		grid.add(gameName, 0, 1);
-		grid.add(submitGame, 0, 2);
-		grid.add(title, 0, 0);
-	}
-	private Node makeGameSelection(){
-		ScrollPane scroll = new ScrollPane();
-		scroll.setMaxHeight(150);
-		scroll.setVbarPolicy(ScrollBarPolicy.ALWAYS);
-		VBox wrapper = new VBox();
-		Label title = new Label("Add to already-made game");
-		wrapper.getChildren().add(title);
-		for(String game: getFullLevelList()){
-			Button gameButton = new Button(game);
-			gameButton.setOnAction(e -> submitStartingInput(game));
-			wrapper.getChildren().add(gameButton);
-		}
-		
-		scroll.setContent(wrapper);
-		
-		return scroll;
-	}
-	private void submitStartingInput(String gameName){
-		StartingInput allValues = new StartingInput();
-		allValues.setTilesWide(myTilesWide.getValue().intValue());
-		allValues.setTilesHigh(myTilesHigh.getValue().intValue());
-		allValues.setGameName(gameName);
-		onSubmit.accept(allValues);
-		myStage.close();
-	}
-	
-	private List<String> getFullLevelList(){
-		File file = new File(strResources.getFromFilePaths("All_Games_Path"));
-		String[] directories = file.list( (File current, String name) -> {
-			return new File(current,name).isDirectory();
-		});
-		
-		return Arrays.asList(directories);
+	private void setSubmit() {
+		allSelections.addPrimarySimpleButtonWithHover("Submit", () ->  {
+			StartingInput allValues = new StartingInput();
+			allValues.setTilesWide(myTilesWide.getValue().intValue());
+			allValues.setTilesHigh(myTilesHigh.getValue().intValue());
+			allValues.setGameName(gameName);
+			onSubmit.accept(allValues);
+			myStage.close();
+		}, "Submit these values to continue");
 	}
 
 	private NumberChanger setInputSliderFields(String text, Integer min, Integer start, Integer max){
