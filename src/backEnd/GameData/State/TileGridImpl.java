@@ -222,7 +222,7 @@ public class TileGridImpl implements TileGrid {
 	@Override
 	public Collection<AttributeOwner> getAllAttributeOwners() {
 		Collection<AttributeOwner> myAOs = new ArrayList<AttributeOwner>();
-		for(AttributeOwner ao : tileList){
+		for(AttributeOwner ao : tileGrid.values()){
 			myAOs.add(ao);
 		}
 		return myAOs;
