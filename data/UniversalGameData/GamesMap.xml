@@ -1,9 +1,13 @@
 <?xml version="1.0"?><map>
   <entry>
-    <string>aasdf</string>
-    <list/>
+    <string>MiguelTestGame</string>
+    <list>
+      <string>level1</string>
+      <string>level2</string>
+    </list>
   </entry>
   <entry>
+<<<<<<< HEAD
     <string>asdfs</string>
     <list/>
   </entry>
@@ -30,6 +34,12 @@
   <entry>
     <string>asdf</string>
     <list/>
+=======
+    <string>HeyLmaoGame</string>
+    <list>
+      <string>level1</string>
+    </list>
+>>>>>>> master
   </entry>
   <entry>
     <string>saf</string>

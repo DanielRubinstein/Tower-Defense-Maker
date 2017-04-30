@@ -1,22 +1,12 @@
 package data.GamePrep;
 
 import java.io.File;
-import java.io.FilenameFilter;
-import java.util.Arrays;
-import java.util.List;
 import java.util.function.Consumer;
 
 import frontEnd.CustomJavafxNodes.ButtonMenuImpl;
 import frontEnd.CustomJavafxNodes.NumberChanger;
-import javafx.scene.Node;
-import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.control.ScrollPane;
-import javafx.scene.control.ScrollPane.ScrollBarPolicy;
-import javafx.scene.control.TextField;
-import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
-import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import resources.constants.StringResourceBundle;
 
@@ -61,7 +51,7 @@ public class GameMaker {
 		setSubmit();
 	}
 	private void setSubmit() {
-		allSelections.addPrimarySimpleButtonWithHover(strResources.getFromStringConstants("Submit"), () ->  {
+		allSelections.addSimpleButtonWithHover(strResources.getFromStringConstants("Submit"), () ->  {
 			StartingInput allValues = createStartingInput();
 			makeDirectory();
 			onSubmit.accept(allValues);

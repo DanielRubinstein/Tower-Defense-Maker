@@ -13,6 +13,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 import resources.constants.StringResourceBundle;
+import resources.constants.numeric.NumericResourceBundle;
 
 /**
  * 
@@ -21,6 +22,8 @@ import resources.constants.StringResourceBundle;
  */
 public class DoubleFieldPrompt {
 	private StringResourceBundle stringResourceBundle = new StringResourceBundle();
+	private NumericResourceBundle numericResourceBundle = new NumericResourceBundle();
+	private Double standardSpacing = numericResourceBundle.getFromSizing("StandardSpacing");
 	
 	private List<String> myDialogTitles;
 	private List<String> myPromptText;
@@ -50,9 +53,9 @@ public class DoubleFieldPrompt {
 
 		// Create the username and password labels and fields.
 		GridPane grid = new GridPane();
-		grid.setHgap(10);
-		grid.setVgap(10);
-		grid.setPadding(new Insets(20, 150, 10, 10));
+		grid.setHgap(standardSpacing);
+		grid.setVgap(standardSpacing);
+		grid.setPadding(new Insets(standardSpacing));
 
 		TextField text1 = new TextField();
 		text1.setPromptText(myPromptText.get(0));

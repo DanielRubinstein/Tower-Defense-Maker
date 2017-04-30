@@ -22,6 +22,7 @@ import frontEnd.Skeleton.SplashScreens.SplashScreenData;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.stage.Stage;
+import javafx.stage.Window;
 
 /**
  * Class that initializes the UI and serves as a connector betweel the Model and the Front End
@@ -32,10 +33,8 @@ public class ViewImpl implements View {
 	private ModelReader myModel;
 	private Consumer<ModificationFromUser> myModConsumer;
 	private SkeletonImpl mySkeleton; 
-	private SimpleBooleanProperty authorProperty;
 	private Stage appStage;
 	private FacebookInteractor myFB;
-	private ModeReader myMode;
 
 	public ViewImpl(ModelReader model, Consumer<ModificationFromUser> inputConsumer, FacebookInteractor fb) {
 		myFB=fb;
@@ -49,8 +48,6 @@ public class ViewImpl implements View {
 	private void init(ModelReader model, Consumer<ModificationFromUser> inputConsumer){
 		myModel = model;
 		myModConsumer = inputConsumer;
-		myMode = model.getModeReader();
-		authorProperty = myMode.getAuthorBooleanProperty();
 		mySkeleton = new SkeletonImpl();
 		mySkeleton.init(this, myModel);
 		appStage = new Stage();
@@ -64,17 +61,17 @@ public class ViewImpl implements View {
 
 	@Override
 	public SimpleBooleanProperty getBooleanAuthorModeProperty() {
-		return this.authorProperty;
+		return myModel.getModeReader().getAuthorBooleanProperty();
 	}
 	
 	@Override
 	public SimpleStringProperty getStringGameModeProperty() {
-		return myMode.getGameStringProperty();
+		return myModel.getModeReader().getGameStringProperty();
 	}
 	
 	@Override
 	public SimpleStringProperty getStringLevelModeProperty() {
-		return myMode.getLevelStringProperty();
+		return myModel.getModeReader().getLevelStringProperty();
 	}
 
 	@Override
@@ -85,11 +82,6 @@ public class ViewImpl implements View {
 	@Override
 	public SimpleStringProperty getRunStatus() {
 		return myModel.getEngineStatus();
-	}
-
-	@Override
-	public Stage getAppStage() {
-		return appStage;
 	}
 
 	@Override
@@ -122,14 +114,15 @@ public class ViewImpl implements View {
 	public Map<String, SpawnQueues> getSpawnQueues() {
 		return myModel.getState().getSpawnQueues();
 	}
-	
-	@Override
-	public ModeReader getModeReader(){
-		return myMode;
-	}
 
+	/** 
+	 * Sets the splash screen in an end-level sceanario
+	 * 
+	 * IN DEVELOPMENT
+	 * 
+	 * @param data
+	 */
 	public void setSplashScreen(SplashScreenData data){
-		System.out.println("View Line 158");
 		sendUserModification(Modification_GameRemote.PAUSE); 
 		SplashScreen splashScreen = new SplashScreen(data);
 		splashScreen.display(appStage);
@@ -140,5 +133,16 @@ public class ViewImpl implements View {
 		return myModel.getState().getComponentGraph().contains(c);
 	}
 
+	@Override
+	public Window getMainWindow() {
+		return appStage;
+	}
+
+	/** Closes the main application window. Cannot be undone!
+	 * 
+	 */
+	public void closeMainWindow(){
+		appStage.close();
+	}
 
 }

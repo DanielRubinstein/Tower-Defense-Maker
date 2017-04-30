@@ -27,7 +27,7 @@ public class HelpOptions {
 	}
 
 	private void addAllOptions(){
-		allOptions.addPrimarySimpleButtonWithHover("Help/Instructions", () -> loadHTMLPage(DEFAULT_HELP),"View Instructions");
+		allOptions.addSimpleButtonWithHover("Help/Instructions", () -> loadHTMLPage(DEFAULT_HELP),"View Instructions");
 		allOptions.addSimpleButtonWithHover("What is Tower Defense?", () -> loadHTMLPage(DEFAULT_TOWER_DEFENSE),"Get a basic overview");
 	}
 	

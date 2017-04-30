@@ -1,13 +1,6 @@
 package backEnd.GameEngine.Engine;
 
-import java.util.ResourceBundle;
-
-import util.reflection.Reflection;
-
 public class EngineFactory {
-
-	private final static String RESOURCES_PATH = "resources/engineNames";
-	private final static ResourceBundle myResources = ResourceBundle.getBundle(RESOURCES_PATH);
 
 	public Engine getEngine(String string){
 		//			
@@ -16,6 +9,8 @@ public class EngineFactory {
 		//		String basePath = fullName.substring(0, fullName.length() - simpleName.length());
 		//		System.out.println(basePath);
 		//      return (Engine) Reflection.createInstance(string);
+		
+		// TODO !!!!
 		
 		switch(string)
 		{

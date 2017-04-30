@@ -54,7 +54,9 @@ public class ControllerImpl implements Controller {
 		setGameData = o ->
 		{
 			try {
-				if (myView != null) myView.getAppStage().close();
+				if (myView != null){
+					myView.closeMainWindow();
+				}
 				DataInputLoader loader = new DataInputLoader(o);
 				GameData initialGameData = loader.getGameData();
 				
@@ -74,7 +76,7 @@ public class ControllerImpl implements Controller {
 		MenuController myMenu = new MenuController(setGameData, (FacebookInteractor f) -> setFb(f));
 		myMenu.showMenus(stage);
 	}
-	public void setFb(FacebookInteractor fb){
+	private void setFb(FacebookInteractor fb){
 		myFb=fb;
 	}
 	
