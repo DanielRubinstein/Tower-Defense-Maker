@@ -12,6 +12,7 @@ import ModificationFromUser.AttributeOwner.Modification_UpgradeComponent;
 import backEnd.Attribute.AttributeOwner;
 import backEnd.GameData.State.Component;
 import frontEnd.View;
+import frontEnd.CustomJavafxNodes.ErrorDialog;
 import frontEnd.CustomJavafxNodes.SingleFieldPrompt;
 import frontEnd.Skeleton.UserTools.SkeletonObject;
 import javafx.geometry.Pos;
