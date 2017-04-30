@@ -175,24 +175,6 @@ public class TileGridImpl implements TileGrid {
 			o.update(null, arg);
 		}
 	}
-	
-	
-	public void saveAndClearTileObservers()
-	{
-		tileObserverList = new ArrayList<List<SerializableObserver>>();
-		
-		for (int i = 0; i < getAllTiles().size(); i++)
-		{
-			tileObserverList.add(tileList.get(i).getAndClearObservers());
-		}
-
-	}
-
-	public void setTileObservers() {
-		for (int i = 0; i < tileList.size(); i++) {
-			tileList.get(i).setObserverList(tileObserverList.get(i));
-		}
-	}
 
 	@Override
 	public boolean contains(AttributeOwnerReader newAttrOwn) {
