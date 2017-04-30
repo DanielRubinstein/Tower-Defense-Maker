@@ -24,7 +24,6 @@ public class Modification_AddSpawnQueue implements ModificationFromUser {
 	 */
 	public Modification_AddSpawnQueue(String spawnQueueName) {
 		mySpawnQueueName = spawnQueueName;
-		System.out.println(this.getClass().getSimpleName() + ": " + spawnQueueName);
 	}
 
 	@Override
@@ -33,7 +32,7 @@ public class Modification_AddSpawnQueue implements ModificationFromUser {
 		if (!spawnQueues.containsKey(mySpawnQueueName)) {
 			spawnQueues.put(mySpawnQueueName, new SpawnQueues());
 		} else {
-			System.out.println("ERROR: NON-UNIQUE SPAWN QUEUE ID");
+			throw new Exception("Non-unique spawn timeline name");
 		}
 	}
 

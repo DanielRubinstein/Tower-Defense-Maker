@@ -12,6 +12,8 @@ import backEnd.GameData.State.PlayerStatusReader;
 import backEnd.GameData.State.State;
 import backEnd.GameEngine.EngineStatus;
 import backEnd.GameEngine.Engine.GameProcessController;
+import backEnd.GameEngine.Engine.Spawning.SpawnData;
+import backEnd.GameEngine.Engine.Spawning.SpawnDataReader;
 import backEnd.LevelProgression.LevelProgressionControllerEditor;
 import backEnd.LevelProgression.LevelProgressionControllerImpl;
 import backEnd.Mode.Mode;
@@ -123,5 +125,9 @@ public class ModelImpl implements Model{
 
 	public AttributeOwner getAttributeOwner(AttributeOwnerReader attributeOwnerReader) {
 		return (AttributeOwner) attributeOwnerReader;
+	}
+
+	public SpawnData getSpawnData(SpawnDataReader mySpawnDataReader) {
+		return (SpawnData) mySpawnDataReader;
 	}
 }

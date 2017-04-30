@@ -25,8 +25,6 @@ public class Modification_EditAttribute<T> implements ModificationFromUser {
 		AttributeOwner attributeOwner = myModel.getAttributeOwner(myObj);
 		attributeOwner.setAttributeValue(attributeName, myNewValue);
 		myModel.getDataController().saveUniversalGameData();
-		//System.out.println(myAtt.getName());
-
 	}
 
 }

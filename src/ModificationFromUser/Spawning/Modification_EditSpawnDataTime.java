@@ -7,18 +7,19 @@ import backEnd.GameEngine.Engine.Spawning.SpawnDataReader;
 
 public class Modification_EditSpawnDataTime implements ModificationFromUser{
 
-	private SpawnData mySpawnData;
+	private SpawnDataReader mySpawnDataReader;
 	private double myNewTime;
 	
 	
 	public Modification_EditSpawnDataTime(SpawnDataReader spawnData, double newValue) {
-		mySpawnData = (SpawnData) spawnData;
+		mySpawnDataReader = spawnData;
 		myNewTime = newValue;
 	}
 
 
 	@Override
 	public void invoke(ModelImpl myModel) throws Exception {
+		SpawnData mySpawnData = myModel.getSpawnData(mySpawnDataReader);
 		mySpawnData.setTime(myNewTime);
 	}
 }
