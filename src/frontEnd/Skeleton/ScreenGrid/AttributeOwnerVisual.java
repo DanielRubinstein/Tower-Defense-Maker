@@ -10,10 +10,22 @@ import javafx.scene.image.ImageView;
  */
 public interface AttributeOwnerVisual {
 
+	/**
+	 * Gets the associated ImageView to be displayed on Screen.
+	 * @return
+	 */
 	ImageView getImageView();
 
+	/**
+	 * 
+	 * @param o
+	 * @param arg
+	 */
 	void update(SerializableObservable o, Object arg);
 
+	/**
+	 * 
+	 */
 	void refreshXY();
 
 }

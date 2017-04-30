@@ -10,6 +10,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.SplitPane;
 import javafx.scene.control.Tooltip;
 import javafx.scene.input.MouseEvent;
+import resources.constants.StringResourceBundle;
 
 /**
  * This class displays relevant information to be display in the ScreenGrid when the mouse hovers
@@ -21,6 +22,7 @@ import javafx.scene.input.MouseEvent;
 public class ScreenHoverVisual implements SkeletonObject{
 
 	private Label myRoot;
+	private StringResourceBundle stringResourceBundle = new StringResourceBundle();
 	
 	/**
 	 * Initializes this class with the View. By default, this is only displayed in author mode.
@@ -35,7 +37,7 @@ public class ScreenHoverVisual implements SkeletonObject{
 	 * @param e
 	 */
 	public void displayLocation(MouseEvent e){
-		String format = "(%.0f, %.0f)";
+		String format = stringResourceBundle.getFromStringConstants("Position");
 		myRoot.setText(String.format(format, e.getSceneX(),e.getY()));
 		
 	}

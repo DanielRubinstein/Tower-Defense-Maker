@@ -77,6 +77,7 @@ public class LevelView {
 		Label levels = new Label("Levels (drag to move around)");
 		myRoot.add(levels, 1, 1);
 	}
+	
 	private void populateGame(VBox wrapper,List<String> toAdd,VBox addToBox){
 		for (String str : toAdd){
 			Button strButton = new Button(str);
