@@ -42,8 +42,13 @@ public class LevelEditor {
 		});
 		Button addGame = new Button("Add Game");
 		addGame.setOnAction(e -> {
-			myContr.addNewGame(addText.getText());
-			addNew(addText.getText(),gamesView);
+			String x = addText.getText();
+			if (!x.equals(""))
+			{
+				System.out.println("POP");
+				myContr.addNewGame(x);
+				addNew(addText.getText(),gamesView);
+			}
 		});
 		HBox removeBox = new HBox();
 		removeBox.getChildren().addAll(removeGame,currentGameLabel);

@@ -1,30 +1,27 @@
 package frontEnd.Skeleton.UserTools;
 
-import java.util.Arrays;
 import java.util.List;
 
 import backEnd.LevelProgression.LevelProgressionControllerEditor;
 import frontEnd.CustomJavafxNodes.ListDragDrop;
 import javafx.collections.FXCollections;
+import javafx.event.EventHandler;
 import javafx.geometry.Insets;
-import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
-import javafx.scene.control.TextField;
 import javafx.scene.control.ScrollPane.ScrollBarPolicy;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.GridPane;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import javafx.stage.WindowEvent;
 import resources.constants.StringResourceBundle;
 
 
@@ -58,6 +55,11 @@ public class LevelView {
 		myScene.getStylesheets().add(stringResourceBundle.getFromStringConstants("DEFAULT_CSS"));
 		myStage.setScene(myScene);
 		myStage.show();
+		myStage.setOnCloseRequest(new EventHandler<WindowEvent>() {
+	          public void handle(WindowEvent we) {
+	        	  myLevelContr.saveGamesMap();
+	          }
+		});
 	}
 	
 	private void createStructureBoxes(){
@@ -70,9 +72,10 @@ public class LevelView {
 
 		VBox gameOutline = createSingleBox(0);
 		VBox levelOutline = null;
-		populateLevels("");
+		//populateLevels("");
 		//Node gameEditor = createGameEditor(gameOutline);
 		//myRoot.add(gameEditor, 0, 3);
+
 		populateGame(gameOutline,myLevelContr.getGameList(),levelOutline);
 		Label levels = new Label("Levels (drag to move around)");
 		myRoot.add(levels, 1, 1);
@@ -91,14 +94,14 @@ public class LevelView {
 	
 	private void populateLevels(String gameName){
 		List<String> gameLevels = myLevelContr.getLevelList(gameName);
-
+		
 		ListDragDrop<String> test = new ListDragDrop<String>(FXCollections.observableArrayList(gameLevels));
-		//test.
 		test.changedListProperty().addListener((o, oldV, newV) -> {
 			List<String> orderedLevels = test.getList();
 			myLevelContr.setLevelList(gameName, orderedLevels);
 			test.acceptChange();
 		});
+
 		myRoot.add(test.getRoot(), 1, 2);
 	}
 	
