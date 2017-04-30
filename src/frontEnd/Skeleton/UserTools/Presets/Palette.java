@@ -81,8 +81,8 @@ public class Palette implements SkeletonObject, SerializableObserver{
 	private void initializeMaps(Collection<? extends AttributeOwner> presets) {
 		observedBankController = myView.getBankControllerReader();
 		observedBankController.addObserver(this);
-		observedMode = myView.getModeReader();
-		observedMode.addObserver(this);
+		//observedMode = myView.getModeReader();
+		//observedMode.addObserver(this);
 		myPresets = presets;
 		myPresetMapFrontEnd = new HashMap<ImageView, AttributeOwner>();
 	}
@@ -99,7 +99,7 @@ public class Palette implements SkeletonObject, SerializableObserver{
 		setClickEvent(imageView, (iV) -> {
 			GenericCommandCenter presetComCenter = new GenericCommandCenter(myView, preset);
 			presetComCenter.launch("Preset", iV.getLayoutX(), iV.getLayoutY());
-		},setRemoveEvent(imageView,preset),preset);
+		},setRemoveEvent(imageView),preset);
 		//setRemoveEvent(imageView,preset);
 		makeHoverOverName(preset, imageView);
 		makePresetDraggable(preset, imageView);
@@ -115,12 +115,12 @@ public class Palette implements SkeletonObject, SerializableObserver{
 		});	
 	}
 	
-	private BiConsumer<AttributeOwner, MouseEvent> setRemoveEvent(Node imageView, AttributeOwner preset){
+	private BiConsumer<AttributeOwner, MouseEvent> setRemoveEvent(Node imageView){
 		return(a, m) -> {
 			ContextMenu removeMenu = new ContextMenu();
 			MenuItem removeItem = new MenuItem("Remove from palette");
 			removeItem.setOnAction(e -> {
-				myView.sendUserModification(new Modification_Remove_FromPalette(preset));
+				myView.sendUserModification(new Modification_Remove_FromPalette(a));
 			});
 			removeMenu.getItems().add(removeItem);
 			removeMenu.setAutoHide(true);

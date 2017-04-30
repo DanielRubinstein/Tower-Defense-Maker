@@ -67,6 +67,9 @@ public class AccessPermissionsImpl implements AccessPermissions {
 		if (userMode.equals(strResources.getFromStringConstants("AUTHOR"))){
 			return true;
 		}
+		if(userMode.equals(strResources.getFromStringConstants("PLAYER"))){
+			return true; // FIXME needs LevelProgressionController
+		}
 		return (userModePermissions.contains(userMode) & gameModePermissions.contains(gameMode) & levelModePermissions.contains(levelMode));
 	}
 

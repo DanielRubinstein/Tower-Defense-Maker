@@ -2,7 +2,7 @@ package backEnd.Mode;
 
 import java.util.List;
 
-public interface Mode {
+public interface Mode extends ModeReader {
 
 	/**
 	 * Choose User Mode
