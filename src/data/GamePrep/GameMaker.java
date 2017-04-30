@@ -62,13 +62,27 @@ public class GameMaker {
 	}
 	private void setSubmit() {
 		allSelections.addPrimarySimpleButtonWithHover("Submit", () ->  {
-			StartingInput allValues = new StartingInput();
-			allValues.setTilesWide(myTilesWide.getValue().intValue());
-			allValues.setTilesHigh(myTilesHigh.getValue().intValue());
-			allValues.setGameName(gameName);
+			StartingInput allValues = createStartingInput();
+			makeDirectory();
 			onSubmit.accept(allValues);
 			myStage.close();
 		}, "Submit these values to continue");
+	}
+
+	private void makeDirectory() {
+		String base = "data/games/" + gameName + "/";
+		File newTemplatesDirectory = new File(base + "templates/");
+		File newSavesDirectory = new File(base + "saves/");
+		newTemplatesDirectory.mkdirs();
+		newSavesDirectory.mkdirs();
+	}
+
+	private StartingInput createStartingInput() {
+		StartingInput allValues = new StartingInput();
+		allValues.setTilesWide(myTilesWide.getValue().intValue());
+		allValues.setTilesHigh(myTilesHigh.getValue().intValue());
+		allValues.setGameName(gameName);
+		return allValues;
 	}
 
 	private NumberChanger setInputSliderFields(String text, Integer min, Integer start, Integer max){
