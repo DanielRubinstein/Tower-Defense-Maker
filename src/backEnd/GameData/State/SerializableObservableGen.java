@@ -2,13 +2,14 @@ package backEnd.GameData.State;
 
 import java.util.List;
 
-public interface SerializableObservableGen<T> extends SerializableObservable{
+public interface SerializableObservableGen<T>{
 
 	void addObserver(SerializableObserverGen<T> o);
-
-	List<SerializableObserver> getObservers();
+	
+	List<SerializableObserverGen<T>> getObserversGen();
 
 	void clearObservers();
+	
+	void setObserversGen(List<SerializableObserverGen<T>> observersave);
 
-	void setObservers(List<SerializableObserver> observersave);
 }

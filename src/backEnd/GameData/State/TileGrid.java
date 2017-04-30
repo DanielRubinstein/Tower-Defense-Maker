@@ -12,7 +12,7 @@ import javafx.geometry.Point2D;
  * @author Riley Nisbet, Christian Martindale
  *
  */
-public interface TileGrid extends SerializableObservable{
+public interface TileGrid extends SerializableObservableGen<Tile>, Comparable{
 	
 	void setTileByScreenPosition(Tile newTile, Point2D position);
 
@@ -54,5 +54,7 @@ public interface TileGrid extends SerializableObservable{
 	boolean atMiddleYOfTile(Point2D currentLocation);
 	
 	Collection<AttributeOwner> getAllAttributeOwners();
+
+	void buildTileGroups();
 
 }

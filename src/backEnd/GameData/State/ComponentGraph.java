@@ -8,7 +8,7 @@ import backEnd.Attribute.AttributeOwner;
 import backEnd.Attribute.AttributeOwnerReader;
 import javafx.geometry.Point2D;
 
-public interface ComponentGraph extends SerializableObservableGen<Component>{
+public interface ComponentGraph extends SerializableObservableGen<Component>, Comparable{
 
 
 	/**

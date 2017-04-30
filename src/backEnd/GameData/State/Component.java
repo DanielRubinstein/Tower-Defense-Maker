@@ -5,7 +5,6 @@ import java.util.List;
 import backEnd.Attribute.Attribute;
 import backEnd.Attribute.AttributeData;
 import backEnd.Attribute.AttributeOwner;
-import backEnd.GameEngine.Behaviors.Behavior;
 import backEnd.GameEngine.Engine.Coordinates;
 
 public interface Component extends AttributeOwner{
@@ -13,15 +12,6 @@ public interface Component extends AttributeOwner{
 	long printID();
 
 	AccessPermissions getAccessPermissions();
-
-	/**
-	 * When the engines call behaviors (for the behavior to be executed), it
-	 * does so in Component via this method.
-	 * 
-	 * @param behaviorType
-	 * @return
-	 */
-	Behavior getBehavior(String behaviorType);
 
 	<T> Attribute<T> getAttribute(String attributeType);
 
