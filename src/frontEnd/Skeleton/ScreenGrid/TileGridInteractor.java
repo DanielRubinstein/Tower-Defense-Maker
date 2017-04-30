@@ -17,7 +17,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.Pane;
-import resources.constants.NumericResourceBundle;
+import resources.constants.numeric.NumericResourceBundle;
 import resources.constants.StringResourceBundle;
 
 /**
