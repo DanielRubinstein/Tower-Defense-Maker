@@ -1,5 +1,8 @@
 package frontEnd.Skeleton.UserTools;
 
-public interface HelpOptions {
+
+public interface HelpOptions extends PopUp{
+
+
 
 }

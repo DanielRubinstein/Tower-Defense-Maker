@@ -8,11 +8,6 @@ package frontEnd.Skeleton.UserTools;
  */
 public interface OptionsCorner extends SkeletonObject{
 	
-	 /**
-	  * Sets the height and width to the given parameters
-	  * @param height
-	  * @param width
-	  */
-	public void setSideDimensions(double width, double height);
+
 	
 }

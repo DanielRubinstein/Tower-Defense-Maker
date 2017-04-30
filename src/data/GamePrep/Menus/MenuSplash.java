@@ -8,6 +8,7 @@ import frontEnd.Facebook.FacebookBrowserImpl;
 import frontEnd.Facebook.FacebookConnector;
 import frontEnd.Facebook.FacebookConnectorImpl;
 import frontEnd.Facebook.FacebookInteractor;
+import frontEnd.Skeleton.UserTools.HelpOptions;
 import frontEnd.Skeleton.UserTools.HelpOptionsImpl;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
@@ -25,7 +26,10 @@ public class MenuSplash {
 	public MenuSplash(Stage stage, Consumer<ButtonMenuImpl> startConsumer, Consumer<FacebookInteractor> setFb) {
 		splash = new ButtonMenuImpl(stringResourceBundle.getFromStringConstants("Welcome"));
    	 	splash.addSimpleButtonWithHover(stringResourceBundle.getFromStringConstants("Start"), () -> startConsumer.accept(splash) , stringResourceBundle.getFromMenuText("StartHover"));
-   	 	splash.addSimpleButtonWithHover(stringResourceBundle.getFromMenuText("Help"), () -> new HelpOptionsImpl(stage), stringResourceBundle.getFromMenuText("HelpHover"));
+   	 	splash.addSimpleButtonWithHover(stringResourceBundle.getFromMenuText("Help"), () -> {
+   	 		HelpOptions help = new HelpOptionsImpl();
+   	 		help.display(myStage);
+   	 	}, stringResourceBundle.getFromMenuText("HelpHover"));
    	 	splash.addSimpleButtonWithHover(stringResourceBundle.getFromMenuText("FBconnect"), () -> launchFb(stage), stringResourceBundle.getFromMenuText("FBconnectHover"));
 		myStage = stage;
 		mySetFB = setFb;

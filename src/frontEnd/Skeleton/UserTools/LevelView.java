@@ -24,7 +24,11 @@ import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 import resources.constants.StringResourceBundle;
 
-
+/**
+ * This class allows the user to view and edit levels for a game.
+ * @author Tim
+ *
+ */
 public class LevelView {
 	private StringResourceBundle stringResourceBundle = new StringResourceBundle();
 	private GridPane myRoot;
@@ -72,9 +76,6 @@ public class LevelView {
 
 		VBox gameOutline = createSingleBox(0);
 		VBox levelOutline = null;
-		//populateLevels("");
-		//Node gameEditor = createGameEditor(gameOutline);
-		//myRoot.add(gameEditor, 0, 3);
 
 		populateGame(gameOutline,myLevelContr.getGameList(),levelOutline);
 		Label levels = new Label("Levels (drag to move around)");
