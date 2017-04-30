@@ -5,6 +5,11 @@ import java.util.List;
 import java.util.Map;
 
 import frontEnd.Skeleton.UserTools.SkeletonObject;
+import javafx.beans.InvalidationListener;
+import javafx.beans.property.BooleanProperty;
+import javafx.beans.property.SimpleBooleanProperty;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.ObservableList;
 import javafx.scene.Node;
 import javafx.scene.control.ContentDisplay;
@@ -16,50 +21,30 @@ import javafx.scene.control.SplitPane;
 import javafx.scene.input.ClipboardContent;
 import javafx.scene.input.Dragboard;
 import javafx.scene.input.TransferMode;
-import javafx.scene.layout.VBox;
-import javafx.scene.text.Text;
 
-public class ListDragDrop<T> implements SkeletonObject {
+public class ListDragDrop<T> implements SkeletonObject, ObservableValue<T> {
 
 	private ListView<T> myContents;
 	private ScrollPane myRoot;
+	private BooleanProperty changedListProperty;
 	
 	public ListDragDrop(ObservableList<T> toAdd){
+		changedListProperty = new SimpleBooleanProperty();
 		myContents = new ListView<T>(toAdd);
 		myContents.setItems(toAdd);
 		myContents.setCellFactory(e -> new TCell(myContents));
-
-
-		VBox myBox = new VBox();
-		toAdd.forEach(e -> {
-			SplitPane wrapper = new SplitPane();
-			Text wrap = new Text(e.toString());
-			//wrapper.getItems().add(e);
-			myBox.getChildren().add(wrap);
-			wrap.setOnDragDetected(f -> {
-				Dragboard dragboard = wrap.startDragAndDrop(TransferMode.ANY);
-                ClipboardContent content = new ClipboardContent();
-                content.putString(wrap.getText());
-                dragboard.setContent(content);
-			});
-			wrap.setOnDragOver(f -> {
-				f.acceptTransferModes(TransferMode.ANY);
-			});
-			
-			wrap.setOnDragDropped(f -> {
-				f.consume();
-			});
-		});
-		
-		
 		myRoot = new ScrollPane();
 		myRoot.setContent(myContents);
 		myRoot.setVbarPolicy(ScrollBarPolicy.ALWAYS);
 	}
+	public BooleanProperty changedListProperty(){
+		return changedListProperty;
+	}
+	public void acceptChange(){
+		changedListProperty.set(false);
+	}
 	
 
-	
-	
 	@Override
 	public Node getRoot() {
 		return myRoot;
@@ -85,7 +70,6 @@ public class ListDragDrop<T> implements SkeletonObject {
 				if(myData==null) return;
 				Dragboard dragboard = startDragAndDrop(TransferMode.ANY);
                 ClipboardContent content = new ClipboardContent();
-                
                 content.putString(myData.toString());
                 dragboard.setContent(content);
 			});
@@ -96,7 +80,6 @@ public class ListDragDrop<T> implements SkeletonObject {
 
 			});
 			this.setOnDragDropped(e -> {
-				
 				Dragboard board = e.getDragboard();
 				if(board.hasString()){
 					String draggedString = board.getString();
@@ -106,16 +89,15 @@ public class ListDragDrop<T> implements SkeletonObject {
 					T temp = draggedItem;
 					myContents.getItems().set(draggedIndex, myData);
 					myContents.getItems().set(myIndex, temp);
+					changedListProperty.set(true);
 				}
 				e.consume();
-	
 			});
 			
 		}
 		@Override 
 		protected void updateItem(T item, boolean empty){
 			super.updateItem(item, empty);
-			System.out.println( " my update item " + item + "  " + empty);
 		     if (empty || item == null) {
 		         setText(null);
 		         setGraphic(null);
@@ -127,5 +109,40 @@ public class ListDragDrop<T> implements SkeletonObject {
 		     }
 		}
 	}
+
+	@Override
+	public void addListener(InvalidationListener listener) {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+	@Override
+	public void removeListener(InvalidationListener listener) {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+	@Override
+	public void addListener(ChangeListener<? super T> listener) {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+	@Override
+	public void removeListener(ChangeListener<? super T> listener) {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+	@Override
+	public T getValue() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 
 }
