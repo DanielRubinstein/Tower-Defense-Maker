@@ -1,11 +1,12 @@
 package frontEnd.Skeleton.UserTools;
 
 import frontEnd.View;
-import frontEnd.Skeleton.ScreenGrid.ScreenGrid;
 import frontEnd.Skeleton.UserTools.Presets.PalettePane;
 import javafx.scene.Node;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
+import resources.constants.NumericResourceBundle;
+import resources.constants.StringResourceBundle;
 /**
  * This class represents the main rectangular chunk of the bottomRoot. This will support relevant information to the user,
  * and this can be supplement in the future by various extensions (social center perhaps).
@@ -15,21 +16,32 @@ import javafx.scene.layout.Priority;
 public class BottomBarImpl implements BottomBar{
 	
 	private HBox myRoot;
+	private NumericResourceBundle numResources = new NumericResourceBundle();
+	private StringResourceBundle strResources = new StringResourceBundle();
 	
 	public BottomBarImpl(View view){
 		myRoot = new HBox();
+		setDimensions();
+		setContents(view);
+	}
+	
+	private void setContents(View view){
 		PalettePane pp = new PalettePane(view);
 		myRoot.getChildren().add(pp.getRoot());
 		HBox.setHgrow(pp.getRoot(), Priority.ALWAYS);
 		myRoot.setStyle("-fx-border-color: rgb(252.0, 240.0, 237.0);");
 	}
 	
+	@Override
 	public Node getRoot(){
 		return myRoot;
 	}
-	public void setHeight(double height){
+	
+	private void setDimensions(){
+		double height = numResources.getBottomHeight();
 		myRoot.setPrefHeight(height);
 		myRoot.setMaxHeight(height);
 	}
+
 
 }

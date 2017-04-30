@@ -28,7 +28,6 @@ public class BottomRootImpl implements BottomRoot{
 	 */
 	public void setDimensions(double width, double height){
 		//myRoot.setPrefHeight(height);		
-		myBottomBar.setHeight(height);
 		myOptions.setSideDimensions(width, height);
 	}
 	private void initializeBar(View view){
