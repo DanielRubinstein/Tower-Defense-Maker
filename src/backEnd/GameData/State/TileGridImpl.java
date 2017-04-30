@@ -22,7 +22,7 @@ import resources.constants.NumericResourceBundle;
 
 public class TileGridImpl implements TileGrid {
 	
-	private List<SerializableObserver> observers;
+	private List<SerializableObserverGen<Tile>> observers;
 
 	private int numColsInGrid;
 	private int numRowsInGrid;
@@ -37,7 +37,7 @@ public class TileGridImpl implements TileGrid {
 
 	public TileGridImpl(int colsInGrid, int rowsInGrid) {
 
-		observers = new ArrayList<SerializableObserver>();
+		observers = new ArrayList<SerializableObserverGen<Tile>>();
 		numColsInGrid = colsInGrid;
 		numRowsInGrid = rowsInGrid;
 		tileGrid = new HashMap<>();
@@ -46,7 +46,7 @@ public class TileGridImpl implements TileGrid {
 	}
 
 	public TileGridImpl(TileGridInstantiator i) {
-		observers = new ArrayList<SerializableObserver>();
+		observers = new ArrayList<SerializableObserverGen<Tile>>();
 		numColsInGrid = i.getNumCols();
 		numRowsInGrid = i.getNumRows();
 		tileGrid = i.getTileGrid();
@@ -161,17 +161,9 @@ public class TileGridImpl implements TileGrid {
 	public double getTileHeight() {
 		return this.tileHeight;
 	}
-
-	@Override
-	public void addObserver(SerializableObserver o) {
-		observers.add(o);
-	}
-	private void notifyObservers(){
-		notifyObservers(null);
-	}
 	
-	private void notifyObservers(Object arg){
-		for (SerializableObserver o : observers){
+	private void notifyObservers(Tile arg){
+		for (SerializableObserverGen<Tile> o : observers){
 			o.update(null, arg);
 		}
 	}
@@ -190,17 +182,15 @@ public class TileGridImpl implements TileGrid {
 	@Override
 	public void setNumCols(int numColsInGrid) {
 		this.numColsInGrid = numColsInGrid;
-		notifyObservers();
 	}
 
 	@Override
 	public void setNumRows(int numRowsInGrid) {
 		this.numRowsInGrid = numRowsInGrid;
-		notifyObservers();
 	}
 
 	@Override
-	public List<SerializableObserver> getObservers() {
+	public List<SerializableObserverGen<Tile>> getObserversGen() {
 		return observers;
 	}
 
@@ -210,8 +200,12 @@ public class TileGridImpl implements TileGrid {
 	}
 
 	@Override
-	public void setObservers(List<SerializableObserver> observersave) {
+	public void setObserversGen(List<SerializableObserverGen<Tile>> observersave) {
 		observers = observersave;
+	}
+	@Override
+	public void addObserver(SerializableObserverGen<Tile> o) {
+		observers.add(o);
 	}
 	
 	@Override

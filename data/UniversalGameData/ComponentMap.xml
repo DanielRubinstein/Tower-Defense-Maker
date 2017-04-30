@@ -342,7 +342,7 @@
     </backEnd.GameData.State.ComponentImpl>
   </entry>
   <entry>
-  <string>Plant</string>
+    <string>Plant</string>
     <backEnd.GameData.State.ComponentImpl>
       <myAttributes>
         <myAttributes>
