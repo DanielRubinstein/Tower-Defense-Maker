@@ -103,21 +103,22 @@ public class SettingsViewImpl implements SettingsView{
 	private void saveButtons() {
 		HBox bothButtons = new HBox();
 		Button button1 = new Button("Save level template");
-		button1.setOnAction(e ->
-		{
+		button1.setOnAction(e -> {
 			myView.sendUserModification(Modification_SaveGameState.TEMPLATE);
 		});
 		Button button2 = new Button("Save current progress");
-		button2.setOnAction(e -> myView.sendUserModification(Modification_SaveGameState.SAVEDGAME));
+		button2.setOnAction(e -> {
+			myView.sendUserModification(Modification_SaveGameState.SAVEDGAME);
+		});
 		
-		button2.disableProperty().bind(authorProperty.not());
+		button1.disableProperty().bind(authorProperty.not());
 		
 		SplitPane wrapper1 = new SplitPane(button2);
 		Tooltip t = new Tooltip("Only possible in Author mode");
 		SplitPane wrapper2 = new SplitPane(button1);
 		wrapper2.setTooltip(t);
 		wrapper2.hoverProperty().addListener((a,b,c)->{
-			if(wrapper2.isHover()&&button2.isDisabled()){
+			if(wrapper2.isHover()&&button1.isDisabled()){
 				Bounds scenePos= wrapper2.localToScreen(wrapper2.getBoundsInLocal());
 				t.show(wrapper2, scenePos.getMaxX(), scenePos.getMinY()-scenePos.getHeight());
 			}else{
