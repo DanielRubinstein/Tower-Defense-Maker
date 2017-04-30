@@ -4,13 +4,13 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.ResourceBundle;
 
 import backEnd.GameData.GameData;
 import backEnd.GameData.State.ComponentImpl;
 import backEnd.GameData.State.Component;
 import backEnd.GameData.State.ComponentGraph;
 import backEnd.GameData.State.ComponentGraphImpl;
-import backEnd.GameEngine.Behaviors.DeathBehavior;
 import javafx.geometry.Point2D;
 
 /**
@@ -22,24 +22,23 @@ import javafx.geometry.Point2D;
  */
 
 public class DeathEngine implements Engine {
-	private DeathBehavior DB;
+	private final String ATTRIBUTE_BUNDLE_NAME = "resources.allAttributeNames";
+	private final ResourceBundle ATTRIBUTE_RESOURCE_BUNDLE = ResourceBundle.getBundle(ATTRIBUTE_BUNDLE_NAME);
 	public void gameLoop(GameData gameData, double stepTime) {
-		DB = new DeathBehavior();
 		List<Component> toRemove=new ArrayList<Component>();
 		Map<Component, Point2D> toAdd=new HashMap<Component, Point2D>();
-		for (Component struct : gameData.getState().getComponentGraph().getAllComponents()) {
-			DB.execute(struct);
-			if (DB.isDead()) {
-				toRemove.add(struct);
+		for (Component myComponent : gameData.getState().getComponentGraph().getAllComponents()) {
+			if (isDead(myComponent)) {
+				toRemove.add(myComponent);
 				gameData.getStatus().incrementStatusItem("KillCount", 1);
-				gameData.getStatus().incrementStatusItem("Money", (Integer)struct.getAttribute("MoneyBounty").getValue());
-				gameData.getStatus().incrementStatusItem("Score", (Integer)struct.getAttribute("ScoreBounty").getValue());
+				gameData.getStatus().incrementStatusItem("Money", myComponent.<Integer>getAttribute("MoneyBounty").getValue());
+				gameData.getStatus().incrementStatusItem("Score", myComponent.<Integer>getAttribute("ScoreBounty").getValue());
 
-				if (DB.spawnsOnDeath()) {
-					Object currentLocation = struct.getMyAttributes().get("Position").getValue();
-					Component newComponent=DB.getNewComponent();
-					newComponent.setAttributeValue("Position", (Point2D) currentLocation);
-					toAdd.put(DB.getNewComponent(), (Point2D) currentLocation);
+				if (spawnsOnDeath(myComponent)) {
+					Point2D currentLocation = myComponent.<Point2D>getAttribute(ATTRIBUTE_RESOURCE_BUNDLE.getString("Position")).getValue();
+					Component newComponent=getNewComponent(myComponent);
+					newComponent.setAttributeValue(ATTRIBUTE_RESOURCE_BUNDLE.getString("Position"), currentLocation);
+					toAdd.put(getNewComponent(myComponent), currentLocation);
 				}
 			}
 
@@ -51,4 +50,18 @@ public class DeathEngine implements Engine {
 			gameData.getState().getComponentGraph().addComponentToGrid(c, toAdd.get(c));
 		}
 	}
+	
+
+	public boolean spawnsOnDeath(Component c){
+		return c.<Boolean>getAttribute(ATTRIBUTE_RESOURCE_BUNDLE.getString("SpawnOnDeath")).getValue();
+	}
+	
+	public boolean isDead(Component c){
+		return (c.<Integer>getAttribute(ATTRIBUTE_RESOURCE_BUNDLE.getString("Health")).getValue() <=0);
+	}
+	
+	public Component getNewComponent(Component c){
+		return c.<Component>getAttribute(ATTRIBUTE_RESOURCE_BUNDLE.getString("SpawnOnDeathObject")).getValue();
+	}
+
 }
