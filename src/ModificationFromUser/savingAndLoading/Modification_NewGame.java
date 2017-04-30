@@ -1,5 +1,6 @@
-package ModificationFromUser;
+package ModificationFromUser.savingAndLoading;
 
+import ModificationFromUser.ModificationFromUser;
 import backEnd.ModelImpl;
 
 public class Modification_NewGame implements ModificationFromUser {
