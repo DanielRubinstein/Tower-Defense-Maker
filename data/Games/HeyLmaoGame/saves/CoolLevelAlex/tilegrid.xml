@@ -836,11 +836,7 @@
             <entry>
               <string>ImageFile</string>
               <backEnd.Attribute.AttributeImpl>
-<<<<<<< HEAD:data/Games/HeyLmaoGame/templates/CoolLevelAlex/tilegrid.xml
                 <myValue class="string">resources/images/Tiles/default_tile.png</myValue>
-=======
-                <myValue class="string">resources/images/Tiles/Blue.png</myValue>
->>>>>>> origin/master:data/Games/MiguelTestGame/saves/TestCircle/tilegrid.xml
                 <myName>ImageFile</myName>
               </backEnd.Attribute.AttributeImpl>
             </entry>
@@ -888,11 +884,7 @@
             <entry>
               <string>MoveDirection</string>
               <backEnd.Attribute.AttributeImpl>
-<<<<<<< HEAD:data/Games/HeyLmaoGame/templates/CoolLevelAlex/tilegrid.xml
                 <myValue class="string"></myValue>
-=======
-                <myValue class="string">Down</myValue>
->>>>>>> origin/master:data/Games/MiguelTestGame/saves/TestCircle/tilegrid.xml
                 <myParamList class="java.util.Arrays$ArrayList">
                   <a class="string-array">
                     <string>Up</string>
@@ -1024,11 +1016,7 @@
             <entry>
               <string>ImageFile</string>
               <backEnd.Attribute.AttributeImpl>
-<<<<<<< HEAD:data/Games/HeyLmaoGame/templates/CoolLevelAlex/tilegrid.xml
-                <myValue class="string">resources/images/Tiles/default_tile.png</myValue>
-=======
-                <myValue class="string">resources/images/Tiles/Blue.png</myValue>
->>>>>>> origin/master:data/Games/MiguelTestGame/saves/TestCircle/tilegrid.xml
+                <myValue class="string">resources/images/Tiles/Red.png</myValue>
                 <myName>ImageFile</myName>
               </backEnd.Attribute.AttributeImpl>
             </entry>
@@ -1050,15 +1038,11 @@
             <entry>
               <string>Position</string>
               <backEnd.Attribute.AttributeImpl>
-<<<<<<< HEAD:data/Games/HeyLmaoGame/templates/CoolLevelAlex/tilegrid.xml
-                <myValue class="javafx.geometry.Point2D" reference="../../../../../../javafx.geometry.Point2D"/>
-=======
                 <myValue class="javafx.geometry.Point2D">
                   <x>220.5</x>
                   <y>141.74999999999997</y>
                   <hash>224932422</hash>
                 </myValue>
->>>>>>> origin/master:data/Games/MiguelTestGame/saves/TestCircle/tilegrid.xml
                 <myName>Position</myName>
               </backEnd.Attribute.AttributeImpl>
             </entry>
@@ -1084,11 +1068,7 @@
             <entry>
               <string>MoveDirection</string>
               <backEnd.Attribute.AttributeImpl>
-<<<<<<< HEAD:data/Games/HeyLmaoGame/templates/CoolLevelAlex/tilegrid.xml
-                <myValue class="string"></myValue>
-=======
-                <myValue class="string">Down</myValue>
->>>>>>> origin/master:data/Games/MiguelTestGame/saves/TestCircle/tilegrid.xml
+                <myValue class="string">Right</myValue>
                 <myParamList class="java.util.Arrays$ArrayList">
                   <a class="string-array">
                     <string>Up</string>
@@ -1130,11 +1110,7 @@
             <entry>
               <string>ImageFile</string>
               <backEnd.Attribute.AttributeImpl>
-<<<<<<< HEAD:data/Games/HeyLmaoGame/templates/CoolLevelAlex/tilegrid.xml
                 <myValue class="string">resources/images/Tiles/Red.png</myValue>
-=======
-                <myValue class="string">resources/images/Tiles/Blue.png</myValue>
->>>>>>> origin/master:data/Games/MiguelTestGame/saves/TestCircle/tilegrid.xml
                 <myName>ImageFile</myName>
               </backEnd.Attribute.AttributeImpl>
             </entry>
@@ -1186,11 +1162,7 @@
             <entry>
               <string>MoveDirection</string>
               <backEnd.Attribute.AttributeImpl>
-<<<<<<< HEAD:data/Games/HeyLmaoGame/templates/CoolLevelAlex/tilegrid.xml
                 <myValue class="string">Right</myValue>
-=======
-                <myValue class="string">Down</myValue>
->>>>>>> origin/master:data/Games/MiguelTestGame/saves/TestCircle/tilegrid.xml
                 <myParamList class="java.util.Arrays$ArrayList">
                   <a class="string-array">
                     <string>Up</string>
@@ -1232,7 +1204,7 @@
             <entry>
               <string>ImageFile</string>
               <backEnd.Attribute.AttributeImpl>
-                <myValue class="string">resources/images/Tiles/default_tile.png</myValue>
+                <myValue class="string">resources/images/Tiles/Red.png</myValue>
                 <myName>ImageFile</myName>
               </backEnd.Attribute.AttributeImpl>
             </entry>
@@ -1254,7 +1226,11 @@
             <entry>
               <string>Position</string>
               <backEnd.Attribute.AttributeImpl>
-                <myValue class="javafx.geometry.Point2D" reference="../../../../../../javafx.geometry.Point2D"/>
+                <myValue class="javafx.geometry.Point2D">
+                  <x>157.5</x>
+                  <y>141.74999999999997</y>
+                  <hash>208933446</hash>
+                </myValue>
                 <myName>Position</myName>
               </backEnd.Attribute.AttributeImpl>
             </entry>
@@ -1280,7 +1256,7 @@
             <entry>
               <string>MoveDirection</string>
               <backEnd.Attribute.AttributeImpl>
-                <myValue class="string"></myValue>
+                <myValue class="string">Right</myValue>
                 <myParamList class="java.util.Arrays$ArrayList">
                   <a class="string-array">
                     <string>Up</string>
@@ -1322,11 +1298,7 @@
             <entry>
               <string>ImageFile</string>
               <backEnd.Attribute.AttributeImpl>
-<<<<<<< HEAD:data/Games/HeyLmaoGame/templates/CoolLevelAlex/tilegrid.xml
                 <myValue class="string">resources/images/Tiles/default_tile.png</myValue>
-=======
-                <myValue class="string">resources/images/Tiles/Blue.png</myValue>
->>>>>>> origin/master:data/Games/MiguelTestGame/saves/TestCircle/tilegrid.xml
                 <myName>ImageFile</myName>
               </backEnd.Attribute.AttributeImpl>
             </entry>
@@ -1374,11 +1346,7 @@
             <entry>
               <string>MoveDirection</string>
               <backEnd.Attribute.AttributeImpl>
-<<<<<<< HEAD:data/Games/HeyLmaoGame/templates/CoolLevelAlex/tilegrid.xml
                 <myValue class="string"></myValue>
-=======
-                <myValue class="string">Down</myValue>
->>>>>>> origin/master:data/Games/MiguelTestGame/saves/TestCircle/tilegrid.xml
                 <myParamList class="java.util.Arrays$ArrayList">
                   <a class="string-array">
                     <string>Up</string>
@@ -1870,105 +1838,7 @@
             <entry>
               <string>ImageFile</string>
               <backEnd.Attribute.AttributeImpl>
-                <myValue class="string">resources/images/Tiles/Red.png</myValue>
-                <myName>ImageFile</myName>
-              </backEnd.Attribute.AttributeImpl>
-            </entry>
-            <entry>
-              <string>BuildCapacity</string>
-              <backEnd.Attribute.AttributeImpl>
-                <myValue class="int">1</myValue>
-                <myParamList class="java.util.Arrays$ArrayList">
-                  <a class="java.lang.Integer-array">
-                    <int>0</int>
-                    <int>20</int>
-                    <int>1</int>
-                    <int>1</int>
-                  </a>
-                </myParamList>
-                <myName>BuildCapacity</myName>
-              </backEnd.Attribute.AttributeImpl>
-            </entry>
-            <entry>
-              <string>Position</string>
-              <backEnd.Attribute.AttributeImpl>
-                <myValue class="javafx.geometry.Point2D">
-                  <x>220.5</x>
-                  <y>303.74999999999994</y>
-                  <hash>226063942</hash>
-                </myValue>
-                <myName>Position</myName>
-              </backEnd.Attribute.AttributeImpl>
-            </entry>
-            <entry>
-              <string>SpawnTimeline</string>
-              <backEnd.Attribute.AttributeImpl>
-                <myValue class="string"></myValue>
-                <myParamList class="java.util.Arrays$ArrayList">
-                  <a class="string-array">
-                    <string>Timeline 1</string>
-                  </a>
-                </myParamList>
-                <myName>SpawnTimeline</myName>
-              </backEnd.Attribute.AttributeImpl>
-            </entry>
-            <entry>
-              <string>GoalTile</string>
-              <backEnd.Attribute.AttributeImpl>
-                <myValue class="boolean">false</myValue>
-                <myName>GoalTile</myName>
-              </backEnd.Attribute.AttributeImpl>
-            </entry>
-            <entry>
-              <string>MoveDirection</string>
-              <backEnd.Attribute.AttributeImpl>
-                <myValue class="string">Right</myValue>
-                <myParamList class="java.util.Arrays$ArrayList">
-                  <a class="string-array">
-                    <string>Up</string>
-                    <string>Down</string>
-                    <string>Left</string>
-                    <string>Right</string>
-                  </a>
-                </myParamList>
-                <myName>MoveDirection</myName>
-              </backEnd.Attribute.AttributeImpl>
-            </entry>
-          </myAttributes>
-          <observers/>
-        </myAttrData>
-        <observers/>
-      </backEnd.GameData.State.TileImpl>
-    </entry>
-    <entry>
-      <javafx.geometry.Point2D>
-        <x>535.5</x>
-        <y>263.24999999999994</y>
-        <hash>268902982</hash>
-      </javafx.geometry.Point2D>
-      <backEnd.GameData.State.TileImpl>
-        <myAccessPerm class="backEnd.GameData.State.AccessPermissionsImpl">
-          <userModePermissions>
-            <string>AUTHOR</string>
-          </userModePermissions>
-          <gameModePermissions>
-            <string>DEFAULT</string>
-          </gameModePermissions>
-          <levelModePermissions>
-            <string>DEFAULT</string>
-          </levelModePermissions>
-          <strResources/>
-        </myAccessPerm>
-        <myAttrData>
-          <myAttributes>
-            <entry>
-              <string>ImageFile</string>
-              <backEnd.Attribute.AttributeImpl>
-<<<<<<< HEAD:data/Games/HeyLmaoGame/templates/CoolLevelAlex/tilegrid.xml
-                <myValue class="string">resources/images/Tiles/Red.png</myValue>
-=======
                 <myValue class="string">resources/images/Tiles/default_tile.png</myValue>
->>>>>>> origin/master:data/Games/MiguelTestGame/saves/TestCircle/tilegrid.xml
                 <myName>ImageFile</myName>
               </backEnd.Attribute.AttributeImpl>
             </entry>
@@ -2016,11 +1886,101 @@
             <entry>
               <string>MoveDirection</string>
               <backEnd.Attribute.AttributeImpl>
-<<<<<<< HEAD:data/Games/HeyLmaoGame/templates/CoolLevelAlex/tilegrid.xml
-                <myValue class="string">Right</myValue>
-=======
                 <myValue class="string"></myValue>
->>>>>>> origin/master:data/Games/MiguelTestGame/saves/TestCircle/tilegrid.xml
+                <myParamList class="java.util.Arrays$ArrayList">
+                  <a class="string-array">
+                    <string>Up</string>
+                    <string>Down</string>
+                    <string>Left</string>
+                    <string>Right</string>
+                  </a>
+                </myParamList>
+                <myName>MoveDirection</myName>
+              </backEnd.Attribute.AttributeImpl>
+            </entry>
+          </myAttributes>
+          <observers/>
+        </myAttrData>
+        <observers/>
+      </backEnd.GameData.State.TileImpl>
+    </entry>
+    <entry>
+      <javafx.geometry.Point2D>
+        <x>535.5</x>
+        <y>263.24999999999994</y>
+        <hash>268902982</hash>
+      </javafx.geometry.Point2D>
+      <backEnd.GameData.State.TileImpl>
+        <myAccessPerm class="backEnd.GameData.State.AccessPermissionsImpl">
+          <userModePermissions>
+            <string>AUTHOR</string>
+          </userModePermissions>
+          <gameModePermissions>
+            <string>DEFAULT</string>
+          </gameModePermissions>
+          <levelModePermissions>
+            <string>DEFAULT</string>
+          </levelModePermissions>
+          <strResources/>
+        </myAccessPerm>
+        <myAttrData>
+          <myAttributes>
+            <entry>
+              <string>ImageFile</string>
+              <backEnd.Attribute.AttributeImpl>
+                <myValue class="string">resources/images/Tiles/Red.png</myValue>
+                <myName>ImageFile</myName>
+              </backEnd.Attribute.AttributeImpl>
+            </entry>
+            <entry>
+              <string>BuildCapacity</string>
+              <backEnd.Attribute.AttributeImpl>
+                <myValue class="int">1</myValue>
+                <myParamList class="java.util.Arrays$ArrayList">
+                  <a class="java.lang.Integer-array">
+                    <int>0</int>
+                    <int>20</int>
+                    <int>1</int>
+                    <int>1</int>
+                  </a>
+                </myParamList>
+                <myName>BuildCapacity</myName>
+              </backEnd.Attribute.AttributeImpl>
+            </entry>
+            <entry>
+              <string>Position</string>
+              <backEnd.Attribute.AttributeImpl>
+                <myValue class="javafx.geometry.Point2D">
+                  <x>535.5</x>
+                  <y>263.24999999999994</y>
+                  <hash>268902982</hash>
+                </myValue>
+                <myName>Position</myName>
+              </backEnd.Attribute.AttributeImpl>
+            </entry>
+            <entry>
+              <string>SpawnTimeline</string>
+              <backEnd.Attribute.AttributeImpl>
+                <myValue class="string"></myValue>
+                <myParamList class="java.util.Arrays$ArrayList">
+                  <a class="string-array">
+                    <string>Timeline 1</string>
+                  </a>
+                </myParamList>
+                <myName>SpawnTimeline</myName>
+              </backEnd.Attribute.AttributeImpl>
+            </entry>
+            <entry>
+              <string>GoalTile</string>
+              <backEnd.Attribute.AttributeImpl>
+                <myValue class="boolean">false</myValue>
+                <myName>GoalTile</myName>
+              </backEnd.Attribute.AttributeImpl>
+            </entry>
+            <entry>
+              <string>MoveDirection</string>
+              <backEnd.Attribute.AttributeImpl>
+                <myValue class="string">Right</myValue>
                 <myParamList class="java.util.Arrays$ArrayList">
                   <a class="string-array">
                     <string>Up</string>
@@ -3322,7 +3282,7 @@
             <entry>
               <string>ImageFile</string>
               <backEnd.Attribute.AttributeImpl>
-                <myValue class="string">resources/images/Tiles/default_tile.png</myValue>
+                <myValue class="string">resources/images/Tiles/Red.png</myValue>
                 <myName>ImageFile</myName>
               </backEnd.Attribute.AttributeImpl>
             </entry>
@@ -3344,14 +3304,18 @@
             <entry>
               <string>Position</string>
               <backEnd.Attribute.AttributeImpl>
-                <myValue class="javafx.geometry.Point2D" reference="../../../../../../javafx.geometry.Point2D"/>
+                <myValue class="javafx.geometry.Point2D">
+                  <x>31.5</x>
+                  <y>141.74999999999997</y>
+                  <hash>135406150</hash>
+                </myValue>
                 <myName>Position</myName>
               </backEnd.Attribute.AttributeImpl>
             </entry>
             <entry>
               <string>SpawnTimeline</string>
               <backEnd.Attribute.AttributeImpl>
-                <myValue class="string"></myValue>
+                <myValue class="string">Timeline 1</myValue>
                 <myParamList class="java.util.Arrays$ArrayList">
                   <a class="string-array">
                     <string>Timeline 1</string>
@@ -3370,7 +3334,7 @@
             <entry>
               <string>MoveDirection</string>
               <backEnd.Attribute.AttributeImpl>
-                <myValue class="string"></myValue>
+                <myValue class="string">Right</myValue>
                 <myParamList class="java.util.Arrays$ArrayList">
                   <a class="string-array">
                     <string>Up</string>
@@ -3502,11 +3466,7 @@
             <entry>
               <string>ImageFile</string>
               <backEnd.Attribute.AttributeImpl>
-<<<<<<< HEAD:data/Games/HeyLmaoGame/templates/CoolLevelAlex/tilegrid.xml
                 <myValue class="string">resources/images/Tiles/Red.png</myValue>
-=======
-                <myValue class="string">resources/images/Tiles/default_tile.png</myValue>
->>>>>>> origin/master:data/Games/MiguelTestGame/saves/TestCircle/tilegrid.xml
                 <myName>ImageFile</myName>
               </backEnd.Attribute.AttributeImpl>
             </entry>
@@ -3528,7 +3488,11 @@
             <entry>
               <string>Position</string>
               <backEnd.Attribute.AttributeImpl>
-                <myValue class="javafx.geometry.Point2D" reference="../../../../../../javafx.geometry.Point2D"/>
+                <myValue class="javafx.geometry.Point2D">
+                  <x>94.5</x>
+                  <y>344.24999999999994</y>
+                  <hash>185728582</hash>
+                </myValue>
                 <myName>Position</myName>
               </backEnd.Attribute.AttributeImpl>
             </entry>
@@ -3554,11 +3518,7 @@
             <entry>
               <string>MoveDirection</string>
               <backEnd.Attribute.AttributeImpl>
-<<<<<<< HEAD:data/Games/HeyLmaoGame/templates/CoolLevelAlex/tilegrid.xml
                 <myValue class="string">Right</myValue>
-=======
-                <myValue class="string"></myValue>
->>>>>>> origin/master:data/Games/MiguelTestGame/saves/TestCircle/tilegrid.xml
                 <myParamList class="java.util.Arrays$ArrayList">
                   <a class="string-array">
                     <string>Up</string>
@@ -3780,7 +3740,7 @@
             <entry>
               <string>ImageFile</string>
               <backEnd.Attribute.AttributeImpl>
-                <myValue class="string">resources/images/Tiles/Yellow.png</myValue>
+                <myValue class="string">resources/images/Tiles/Red.png</myValue>
                 <myName>ImageFile</myName>
               </backEnd.Attribute.AttributeImpl>
             </entry>
@@ -3800,6 +3760,17 @@
               </backEnd.Attribute.AttributeImpl>
             </entry>
             <entry>
+              <string>Position</string>
+              <backEnd.Attribute.AttributeImpl>
+                <myValue class="javafx.geometry.Point2D">
+                  <x>409.5</x>
+                  <y>141.74999999999997</y>
+                  <hash>253442630</hash>
+                </myValue>
+                <myName>Position</myName>
+              </backEnd.Attribute.AttributeImpl>
+            </entry>
+            <entry>
               <string>SpawnTimeline</string>
               <backEnd.Attribute.AttributeImpl>
                 <myValue class="string"></myValue>
@@ -3812,17 +3783,6 @@
               </backEnd.Attribute.AttributeImpl>
             </entry>
             <entry>
-              <string>Position</string>
-              <backEnd.Attribute.AttributeImpl>
-                <myValue class="javafx.geometry.Point2D">
-                  <x>409.5</x>
-                  <y>141.74999999999997</y>
-                  <hash>253442630</hash>
-                </myValue>
-                <myName>Position</myName>
-              </backEnd.Attribute.AttributeImpl>
-            </entry>
-            <entry>
               <string>GoalTile</string>
               <backEnd.Attribute.AttributeImpl>
                 <myValue class="boolean">false</myValue>
@@ -3832,7 +3792,7 @@
             <entry>
               <string>MoveDirection</string>
               <backEnd.Attribute.AttributeImpl>
-                <myValue class="string">Left</myValue>
+                <myValue class="string">Right</myValue>
                 <myParamList class="java.util.Arrays$ArrayList">
                   <a class="string-array">
                     <string>Up</string>
@@ -3874,11 +3834,7 @@
             <entry>
               <string>ImageFile</string>
               <backEnd.Attribute.AttributeImpl>
-<<<<<<< HEAD:data/Games/HeyLmaoGame/templates/CoolLevelAlex/tilegrid.xml
                 <myValue class="string">resources/images/Tiles/Red.png</myValue>
-=======
-                <myValue class="string">resources/images/Tiles/default_tile.png</myValue>
->>>>>>> origin/master:data/Games/MiguelTestGame/saves/TestCircle/tilegrid.xml
                 <myName>ImageFile</myName>
               </backEnd.Attribute.AttributeImpl>
             </entry>
@@ -3900,7 +3856,11 @@
             <entry>
               <string>Position</string>
               <backEnd.Attribute.AttributeImpl>
-                <myValue class="javafx.geometry.Point2D" reference="../../../../../../javafx.geometry.Point2D"/>
+                <myValue class="javafx.geometry.Point2D">
+                  <x>31.5</x>
+                  <y>344.24999999999994</y>
+                  <hash>136715846</hash>
+                </myValue>
                 <myName>Position</myName>
               </backEnd.Attribute.AttributeImpl>
             </entry>
@@ -3926,11 +3886,7 @@
             <entry>
               <string>MoveDirection</string>
               <backEnd.Attribute.AttributeImpl>
-<<<<<<< HEAD:data/Games/HeyLmaoGame/templates/CoolLevelAlex/tilegrid.xml
                 <myValue class="string">Right</myValue>
-=======
-                <myValue class="string"></myValue>
->>>>>>> origin/master:data/Games/MiguelTestGame/saves/TestCircle/tilegrid.xml
                 <myParamList class="java.util.Arrays$ArrayList">
                   <a class="string-array">
                     <string>Up</string>
@@ -3972,7 +3928,7 @@
             <entry>
               <string>ImageFile</string>
               <backEnd.Attribute.AttributeImpl>
-                <myValue class="string">resources/images/Tiles/default_tile.png</myValue>
+                <myValue class="string">resources/images/Tiles/Red.png</myValue>
                 <myName>ImageFile</myName>
               </backEnd.Attribute.AttributeImpl>
             </entry>
@@ -3994,7 +3950,11 @@
             <entry>
               <string>Position</string>
               <backEnd.Attribute.AttributeImpl>
-                <myValue class="javafx.geometry.Point2D" reference="../../../../../../javafx.geometry.Point2D"/>
+                <myValue class="javafx.geometry.Point2D">
+                  <x>283.5</x>
+                  <y>141.74999999999997</y>
+                  <hash>237443654</hash>
+                </myValue>
                 <myName>Position</myName>
               </backEnd.Attribute.AttributeImpl>
             </entry>
@@ -4020,7 +3980,7 @@
             <entry>
               <string>MoveDirection</string>
               <backEnd.Attribute.AttributeImpl>
-                <myValue class="string"></myValue>
+                <myValue class="string">Right</myValue>
                 <myParamList class="java.util.Arrays$ArrayList">
                   <a class="string-array">
                     <string>Up</string>
@@ -4692,11 +4652,7 @@
             <entry>
               <string>ImageFile</string>
               <backEnd.Attribute.AttributeImpl>
-<<<<<<< HEAD:data/Games/HeyLmaoGame/templates/CoolLevelAlex/tilegrid.xml
                 <myValue class="string">resources/images/Tiles/default_tile.png</myValue>
-=======
-                <myValue class="string">resources/images/Tiles/Red.png</myValue>
->>>>>>> origin/master:data/Games/MiguelTestGame/saves/TestCircle/tilegrid.xml
                 <myName>ImageFile</myName>
               </backEnd.Attribute.AttributeImpl>
             </entry>
@@ -4744,11 +4700,7 @@
             <entry>
               <string>MoveDirection</string>
               <backEnd.Attribute.AttributeImpl>
-<<<<<<< HEAD:data/Games/HeyLmaoGame/templates/CoolLevelAlex/tilegrid.xml
                 <myValue class="string"></myValue>
-=======
-                <myValue class="string">Right</myValue>
->>>>>>> origin/master:data/Games/MiguelTestGame/saves/TestCircle/tilegrid.xml
                 <myParamList class="java.util.Arrays$ArrayList">
                   <a class="string-array">
                     <string>Up</string>
@@ -4970,7 +4922,7 @@
             <entry>
               <string>ImageFile</string>
               <backEnd.Attribute.AttributeImpl>
-                <myValue class="string">resources/images/Tiles/default_tile.png</myValue>
+                <myValue class="string">resources/images/Tiles/Red.png</myValue>
                 <myName>ImageFile</myName>
               </backEnd.Attribute.AttributeImpl>
             </entry>
@@ -4992,7 +4944,11 @@
             <entry>
               <string>Position</string>
               <backEnd.Attribute.AttributeImpl>
-                <myValue class="javafx.geometry.Point2D" reference="../../../../../../javafx.geometry.Point2D"/>
+                <myValue class="javafx.geometry.Point2D">
+                  <x>409.5</x>
+                  <y>263.24999999999994</y>
+                  <hash>254395974</hash>
+                </myValue>
                 <myName>Position</myName>
               </backEnd.Attribute.AttributeImpl>
             </entry>
@@ -5018,7 +4974,7 @@
             <entry>
               <string>MoveDirection</string>
               <backEnd.Attribute.AttributeImpl>
-                <myValue class="string"></myValue>
+                <myValue class="string">Right</myValue>
                 <myParamList class="java.util.Arrays$ArrayList">
                   <a class="string-array">
                     <string>Up</string>
@@ -5150,11 +5106,7 @@
             <entry>
               <string>ImageFile</string>
               <backEnd.Attribute.AttributeImpl>
-<<<<<<< HEAD:data/Games/HeyLmaoGame/templates/CoolLevelAlex/tilegrid.xml
                 <myValue class="string">resources/images/Tiles/Red.png</myValue>
-=======
-                <myValue class="string">resources/images/Tiles/default_tile.png</myValue>
->>>>>>> origin/master:data/Games/MiguelTestGame/saves/TestCircle/tilegrid.xml
                 <myName>ImageFile</myName>
               </backEnd.Attribute.AttributeImpl>
             </entry>
@@ -5176,15 +5128,11 @@
             <entry>
               <string>Position</string>
               <backEnd.Attribute.AttributeImpl>
-<<<<<<< HEAD:data/Games/HeyLmaoGame/templates/CoolLevelAlex/tilegrid.xml
                 <myValue class="javafx.geometry.Point2D">
                   <x>283.5</x>
                   <y>263.24999999999994</y>
                   <hash>238396998</hash>
                 </myValue>
-=======
-                <myValue class="javafx.geometry.Point2D" reference="../../../../../../javafx.geometry.Point2D"/>
->>>>>>> origin/master:data/Games/MiguelTestGame/saves/TestCircle/tilegrid.xml
                 <myName>Position</myName>
               </backEnd.Attribute.AttributeImpl>
             </entry>
@@ -5210,11 +5158,7 @@
             <entry>
               <string>MoveDirection</string>
               <backEnd.Attribute.AttributeImpl>
-<<<<<<< HEAD:data/Games/HeyLmaoGame/templates/CoolLevelAlex/tilegrid.xml
                 <myValue class="string">Right</myValue>
-=======
-                <myValue class="string"></myValue>
->>>>>>> origin/master:data/Games/MiguelTestGame/saves/TestCircle/tilegrid.xml
                 <myParamList class="java.util.Arrays$ArrayList">
                   <a class="string-array">
                     <string>Up</string>
@@ -5886,7 +5830,7 @@
             <entry>
               <string>ImageFile</string>
               <backEnd.Attribute.AttributeImpl>
-                <myValue class="string">resources/images/Tiles/Red.png</myValue>
+                <myValue class="string">resources/images/Tiles/default_tile.png</myValue>
                 <myName>ImageFile</myName>
               </backEnd.Attribute.AttributeImpl>
             </entry>
@@ -5908,11 +5852,7 @@
             <entry>
               <string>Position</string>
               <backEnd.Attribute.AttributeImpl>
-                <myValue class="javafx.geometry.Point2D">
-                  <x>283.5</x>
-                  <y>303.74999999999994</y>
-                  <hash>238575174</hash>
-                </myValue>
+                <myValue class="javafx.geometry.Point2D" reference="../../../../../../javafx.geometry.Point2D"/>
                 <myName>Position</myName>
               </backEnd.Attribute.AttributeImpl>
             </entry>
@@ -5938,7 +5878,7 @@
             <entry>
               <string>MoveDirection</string>
               <backEnd.Attribute.AttributeImpl>
-                <myValue class="string">Right</myValue>
+                <myValue class="string"></myValue>
                 <myParamList class="java.util.Arrays$ArrayList">
                   <a class="string-array">
                     <string>Up</string>
@@ -6700,7 +6640,7 @@
             <entry>
               <string>ImageFile</string>
               <backEnd.Attribute.AttributeImpl>
-                <myValue class="string">resources/images/Tiles/default_tile.png</myValue>
+                <myValue class="string">resources/images/Tiles/Red.png</myValue>
                 <myName>ImageFile</myName>
               </backEnd.Attribute.AttributeImpl>
             </entry>
@@ -6722,7 +6662,11 @@
             <entry>
               <string>Position</string>
               <backEnd.Attribute.AttributeImpl>
-                <myValue class="javafx.geometry.Point2D" reference="../../../../../../javafx.geometry.Point2D"/>
+                <myValue class="javafx.geometry.Point2D">
+                  <x>94.5</x>
+                  <y>141.74999999999997</y>
+                  <hash>184418886</hash>
+                </myValue>
                 <myName>Position</myName>
               </backEnd.Attribute.AttributeImpl>
             </entry>
@@ -6748,7 +6692,7 @@
             <entry>
               <string>MoveDirection</string>
               <backEnd.Attribute.AttributeImpl>
-                <myValue class="string"></myValue>
+                <myValue class="string">Right</myValue>
                 <myParamList class="java.util.Arrays$ArrayList">
                   <a class="string-array">
                     <string>Up</string>
@@ -6970,7 +6914,7 @@
             <entry>
               <string>ImageFile</string>
               <backEnd.Attribute.AttributeImpl>
-                <myValue class="string">resources/images/Tiles/default_tile.png</myValue>
+                <myValue class="string">resources/images/Tiles/Red.png</myValue>
                 <myName>ImageFile</myName>
               </backEnd.Attribute.AttributeImpl>
             </entry>
@@ -6992,7 +6936,11 @@
             <entry>
               <string>Position</string>
               <backEnd.Attribute.AttributeImpl>
-                <myValue class="javafx.geometry.Point2D" reference="../../../../../../javafx.geometry.Point2D"/>
+                <myValue class="javafx.geometry.Point2D">
+                  <x>535.5</x>
+                  <y>141.74999999999997</y>
+                  <hash>267937350</hash>
+                </myValue>
                 <myName>Position</myName>
               </backEnd.Attribute.AttributeImpl>
             </entry>
@@ -7011,14 +6959,14 @@
             <entry>
               <string>GoalTile</string>
               <backEnd.Attribute.AttributeImpl>
-                <myValue class="boolean">false</myValue>
+                <myValue class="boolean">true</myValue>
                 <myName>GoalTile</myName>
               </backEnd.Attribute.AttributeImpl>
             </entry>
             <entry>
               <string>MoveDirection</string>
               <backEnd.Attribute.AttributeImpl>
-                <myValue class="string"></myValue>
+                <myValue class="string">Right</myValue>
                 <myParamList class="java.util.Arrays$ArrayList">
                   <a class="string-array">
                     <string>Up</string>
@@ -7428,11 +7376,7 @@
             <entry>
               <string>ImageFile</string>
               <backEnd.Attribute.AttributeImpl>
-<<<<<<< HEAD:data/Games/HeyLmaoGame/templates/CoolLevelAlex/tilegrid.xml
                 <myValue class="string">resources/images/Tiles/Red.png</myValue>
-=======
-                <myValue class="string">resources/images/Tiles/default_tile.png</myValue>
->>>>>>> origin/master:data/Games/MiguelTestGame/saves/TestCircle/tilegrid.xml
                 <myName>ImageFile</myName>
               </backEnd.Attribute.AttributeImpl>
             </entry>
@@ -7454,15 +7398,11 @@
             <entry>
               <string>Position</string>
               <backEnd.Attribute.AttributeImpl>
-<<<<<<< HEAD:data/Games/HeyLmaoGame/templates/CoolLevelAlex/tilegrid.xml
                 <myValue class="javafx.geometry.Point2D">
                   <x>157.5</x>
                   <y>263.24999999999994</y>
                   <hash>209903174</hash>
                 </myValue>
-=======
-                <myValue class="javafx.geometry.Point2D" reference="../../../../../../javafx.geometry.Point2D"/>
->>>>>>> origin/master:data/Games/MiguelTestGame/saves/TestCircle/tilegrid.xml
                 <myName>Position</myName>
               </backEnd.Attribute.AttributeImpl>
             </entry>
@@ -7488,11 +7428,7 @@
             <entry>
               <string>MoveDirection</string>
               <backEnd.Attribute.AttributeImpl>
-<<<<<<< HEAD:data/Games/HeyLmaoGame/templates/CoolLevelAlex/tilegrid.xml
                 <myValue class="string">Right</myValue>
-=======
-                <myValue class="string"></myValue>
->>>>>>> origin/master:data/Games/MiguelTestGame/saves/TestCircle/tilegrid.xml
                 <myParamList class="java.util.Arrays$ArrayList">
                   <a class="string-array">
                     <string>Up</string>
@@ -7804,7 +7740,7 @@
             <entry>
               <string>ImageFile</string>
               <backEnd.Attribute.AttributeImpl>
-                <myValue class="string">resources/images/Tiles/Yellow.png</myValue>
+                <myValue class="string">resources/images/Tiles/Red.png</myValue>
                 <myName>ImageFile</myName>
               </backEnd.Attribute.AttributeImpl>
             </entry>
@@ -7824,6 +7760,17 @@
               </backEnd.Attribute.AttributeImpl>
             </entry>
             <entry>
+              <string>Position</string>
+              <backEnd.Attribute.AttributeImpl>
+                <myValue class="javafx.geometry.Point2D">
+                  <x>472.5</x>
+                  <y>141.74999999999997</y>
+                  <hash>261433926</hash>
+                </myValue>
+                <myName>Position</myName>
+              </backEnd.Attribute.AttributeImpl>
+            </entry>
+            <entry>
               <string>SpawnTimeline</string>
               <backEnd.Attribute.AttributeImpl>
                 <myValue class="string"></myValue>
@@ -7836,17 +7783,6 @@
               </backEnd.Attribute.AttributeImpl>
             </entry>
             <entry>
-              <string>Position</string>
-              <backEnd.Attribute.AttributeImpl>
-                <myValue class="javafx.geometry.Point2D">
-                  <x>472.5</x>
-                  <y>141.74999999999997</y>
-                  <hash>261433926</hash>
-                </myValue>
-                <myName>Position</myName>
-              </backEnd.Attribute.AttributeImpl>
-            </entry>
-            <entry>
               <string>GoalTile</string>
               <backEnd.Attribute.AttributeImpl>
                 <myValue class="boolean">false</myValue>
@@ -7856,7 +7792,7 @@
             <entry>
               <string>MoveDirection</string>
               <backEnd.Attribute.AttributeImpl>
-                <myValue class="string">Left</myValue>
+                <myValue class="string">Right</myValue>
                 <myParamList class="java.util.Arrays$ArrayList">
                   <a class="string-array">
                     <string>Up</string>
@@ -7898,7 +7834,7 @@
             <entry>
               <string>ImageFile</string>
               <backEnd.Attribute.AttributeImpl>
-                <myValue class="string">resources/images/Tiles/Green.png</myValue>
+                <myValue class="string">resources/images/Tiles/default_tile.png</myValue>
                 <myName>ImageFile</myName>
               </backEnd.Attribute.AttributeImpl>
             </entry>
@@ -7920,11 +7856,7 @@
             <entry>
               <string>Position</string>
               <backEnd.Attribute.AttributeImpl>
-                <myValue class="javafx.geometry.Point2D">
-                  <x>472.5</x>
-                  <y>222.74999999999997</y>
-                  <hash>262097478</hash>
-                </myValue>
+                <myValue class="javafx.geometry.Point2D" reference="../../../../../../javafx.geometry.Point2D"/>
                 <myName>Position</myName>
               </backEnd.Attribute.AttributeImpl>
             </entry>
@@ -7950,7 +7882,7 @@
             <entry>
               <string>MoveDirection</string>
               <backEnd.Attribute.AttributeImpl>
-                <myValue class="string">Up</myValue>
+                <myValue class="string"></myValue>
                 <myParamList class="java.util.Arrays$ArrayList">
                   <a class="string-array">
                     <string>Up</string>
@@ -7992,7 +7924,7 @@
             <entry>
               <string>ImageFile</string>
               <backEnd.Attribute.AttributeImpl>
-                <myValue class="string">resources/images/Tiles/Green.png</myValue>
+                <myValue class="string">resources/images/Tiles/default_tile.png</myValue>
                 <myName>ImageFile</myName>
               </backEnd.Attribute.AttributeImpl>
             </entry>
@@ -8014,11 +7946,7 @@
             <entry>
               <string>Position</string>
               <backEnd.Attribute.AttributeImpl>
-                <myValue class="javafx.geometry.Point2D">
-                  <x>472.5</x>
-                  <y>182.24999999999997</y>
-                  <hash>261773894</hash>
-                </myValue>
+                <myValue class="javafx.geometry.Point2D" reference="../../../../../../javafx.geometry.Point2D"/>
                 <myName>Position</myName>
               </backEnd.Attribute.AttributeImpl>
             </entry>
@@ -8044,7 +7972,7 @@
             <entry>
               <string>MoveDirection</string>
               <backEnd.Attribute.AttributeImpl>
-                <myValue class="string">Up</myValue>
+                <myValue class="string"></myValue>
                 <myParamList class="java.util.Arrays$ArrayList">
                   <a class="string-array">
                     <string>Up</string>
@@ -8266,7 +8194,7 @@
             <entry>
               <string>ImageFile</string>
               <backEnd.Attribute.AttributeImpl>
-                <myValue class="string">resources/images/Tiles/Green.png</myValue>
+                <myValue class="string">resources/images/Tiles/default_tile.png</myValue>
                 <myName>ImageFile</myName>
               </backEnd.Attribute.AttributeImpl>
             </entry>
@@ -8288,11 +8216,7 @@
             <entry>
               <string>Position</string>
               <backEnd.Attribute.AttributeImpl>
-                <myValue class="javafx.geometry.Point2D">
-                  <x>472.5</x>
-                  <y>303.74999999999994</y>
-                  <hash>262565446</hash>
-                </myValue>
+                <myValue class="javafx.geometry.Point2D" reference="../../../../../../javafx.geometry.Point2D"/>
                 <myName>Position</myName>
               </backEnd.Attribute.AttributeImpl>
             </entry>
@@ -8318,7 +8242,7 @@
             <entry>
               <string>MoveDirection</string>
               <backEnd.Attribute.AttributeImpl>
-                <myValue class="string">Up</myValue>
+                <myValue class="string"></myValue>
                 <myParamList class="java.util.Arrays$ArrayList">
                   <a class="string-array">
                     <string>Up</string>
@@ -8360,7 +8284,7 @@
             <entry>
               <string>ImageFile</string>
               <backEnd.Attribute.AttributeImpl>
-                <myValue class="string">resources/images/Tiles/Green.png</myValue>
+                <myValue class="string">resources/images/Tiles/Red.png</myValue>
                 <myName>ImageFile</myName>
               </backEnd.Attribute.AttributeImpl>
             </entry>
@@ -8412,7 +8336,7 @@
             <entry>
               <string>MoveDirection</string>
               <backEnd.Attribute.AttributeImpl>
-                <myValue class="string">Up</myValue>
+                <myValue class="string">Right</myValue>
                 <myParamList class="java.util.Arrays$ArrayList">
                   <a class="string-array">
                     <string>Up</string>
@@ -8454,7 +8378,7 @@
             <entry>
               <string>ImageFile</string>
               <backEnd.Attribute.AttributeImpl>
-                <myValue class="string">resources/images/Tiles/default_tile.png</myValue>
+                <myValue class="string">resources/images/Tiles/Red.png</myValue>
                 <myName>ImageFile</myName>
               </backEnd.Attribute.AttributeImpl>
             </entry>
@@ -8476,7 +8400,11 @@
             <entry>
               <string>Position</string>
               <backEnd.Attribute.AttributeImpl>
-                <myValue class="javafx.geometry.Point2D" reference="../../../../../../javafx.geometry.Point2D"/>
+                <myValue class="javafx.geometry.Point2D">
+                  <x>346.5</x>
+                  <y>141.74999999999997</y>
+                  <hash>245434950</hash>
+                </myValue>
                 <myName>Position</myName>
               </backEnd.Attribute.AttributeImpl>
             </entry>
@@ -8502,7 +8430,7 @@
             <entry>
               <string>MoveDirection</string>
               <backEnd.Attribute.AttributeImpl>
-                <myValue class="string"></myValue>
+                <myValue class="string">Right</myValue>
                 <myParamList class="java.util.Arrays$ArrayList">
                   <a class="string-array">
                     <string>Up</string>
@@ -8544,11 +8472,7 @@
             <entry>
               <string>ImageFile</string>
               <backEnd.Attribute.AttributeImpl>
-<<<<<<< HEAD:data/Games/HeyLmaoGame/templates/CoolLevelAlex/tilegrid.xml
                 <myValue class="string">resources/images/Tiles/Red.png</myValue>
-=======
-                <myValue class="string">resources/images/Tiles/default_tile.png</myValue>
->>>>>>> origin/master:data/Games/MiguelTestGame/saves/TestCircle/tilegrid.xml
                 <myName>ImageFile</myName>
               </backEnd.Attribute.AttributeImpl>
             </entry>
@@ -8570,7 +8494,11 @@
             <entry>
               <string>Position</string>
               <backEnd.Attribute.AttributeImpl>
-                <myValue class="javafx.geometry.Point2D" reference="../../../../../../javafx.geometry.Point2D"/>
+                <myValue class="javafx.geometry.Point2D">
+                  <x>346.5</x>
+                  <y>263.24999999999994</y>
+                  <hash>246404678</hash>
+                </myValue>
                 <myName>Position</myName>
               </backEnd.Attribute.AttributeImpl>
             </entry>
@@ -8596,11 +8524,7 @@
             <entry>
               <string>MoveDirection</string>
               <backEnd.Attribute.AttributeImpl>
-<<<<<<< HEAD:data/Games/HeyLmaoGame/templates/CoolLevelAlex/tilegrid.xml
                 <myValue class="string">Right</myValue>
-=======
-                <myValue class="string"></myValue>
->>>>>>> origin/master:data/Games/MiguelTestGame/saves/TestCircle/tilegrid.xml
                 <myParamList class="java.util.Arrays$ArrayList">
                   <a class="string-array">
                     <string>Up</string>
@@ -9092,11 +9016,7 @@
             <entry>
               <string>ImageFile</string>
               <backEnd.Attribute.AttributeImpl>
-<<<<<<< HEAD:data/Games/HeyLmaoGame/templates/CoolLevelAlex/tilegrid.xml
                 <myValue class="string">resources/images/Tiles/default_tile.png</myValue>
-=======
-                <myValue class="string">resources/images/Tiles/Red.png</myValue>
->>>>>>> origin/master:data/Games/MiguelTestGame/saves/TestCircle/tilegrid.xml
                 <myName>ImageFile</myName>
               </backEnd.Attribute.AttributeImpl>
             </entry>
@@ -9144,11 +9064,7 @@
             <entry>
               <string>MoveDirection</string>
               <backEnd.Attribute.AttributeImpl>
-<<<<<<< HEAD:data/Games/HeyLmaoGame/templates/CoolLevelAlex/tilegrid.xml
                 <myValue class="string"></myValue>
-=======
-                <myValue class="string">Right</myValue>
->>>>>>> origin/master:data/Games/MiguelTestGame/saves/TestCircle/tilegrid.xml
                 <myParamList class="java.util.Arrays$ArrayList">
                   <a class="string-array">
                     <string>Up</string>
