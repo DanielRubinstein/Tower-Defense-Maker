@@ -17,9 +17,7 @@ public interface ButtonMenu {
 	public void display(Stage stage);
 	
 	public void addPrimarySimpleButtonWithHover(String title, Runnable event, String hoverText);
-	
-	public void addBackButton(Runnable event);
-	
+
 	public void addButtonWithHover(Button newButton, String hoverText);
 	
 	public void addSimpleButtonWithHover(String text, Runnable event, String hoverText);

@@ -5,14 +5,12 @@ import java.util.Map;
 import java.util.function.Consumer;
 
 import ModificationFromUser.*;
-import backEnd.BankController;
-import backEnd.BankControllerReader;
-import backEnd.Model;
 import backEnd.ModelReader;
+import backEnd.Bank.BankControllerImpl;
+import backEnd.Bank.BankControllerReader;
 import backEnd.GameData.Rules.RuleReader;
 import backEnd.GameData.State.Component;
 import backEnd.GameData.State.PlayerStatusReader;
-import backEnd.GameData.State.Tile;
 import backEnd.GameEngine.Engine.Spawning.SpawnQueues;
 import backEnd.LevelProgression.LevelProgressionControllerEditor;
 import backEnd.Mode.ModeReader;
@@ -23,9 +21,13 @@ import frontEnd.Skeleton.SplashScreens.SplashScreen;
 import frontEnd.Skeleton.SplashScreens.SplashScreenData;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleStringProperty;
-import javafx.scene.Node;
 import javafx.stage.Stage;
 
+/**
+ * Class that initializes the UI and serves as a connector betweel the Model and the Front End
+ * @author Tim, Miguel
+ *
+ */
 public class ViewImpl implements View {
 	private ModelReader myModel;
 	private Consumer<ModificationFromUser> myModConsumer;
@@ -35,7 +37,7 @@ public class ViewImpl implements View {
 	private FacebookInteractor myFB;
 	private ModeReader myMode;
 
-	public ViewImpl(Model model, Consumer<ModificationFromUser> inputConsumer, FacebookInteractor fb) {
+	public ViewImpl(ModelReader model, Consumer<ModificationFromUser> inputConsumer, FacebookInteractor fb) {
 		myFB=fb;
 		init(model, inputConsumer);
 	}
@@ -55,13 +57,9 @@ public class ViewImpl implements View {
 		mySkeleton.display(appStage);
 	}
 
+	@Override
 	public FacebookInteractor getFb(){
 		return myFB;
-	}
-
-	@Override
-	public Node getScreenGrid() {
-		return mySkeleton.getScreenGrid();
 	}
 
 	@Override
@@ -90,42 +88,18 @@ public class ViewImpl implements View {
 	}
 
 	@Override
-	public Collection<Tile> getTilePresets() {
-		return myModel.getBankController().getTileMap().values();
-	}
-
-	@Override
-	public Collection<Component> getComponentPresets() {
-		return myModel.getBankController().getComponentMap().values();
-	}
-
-	@Override
 	public Stage getAppStage() {
 		return appStage;
 	}
 
 	@Override
-	public void viewRules() {
-		// TODO Auto-generated method stub
-	}
-
-	@Override
-	public void editRules() {
-		// TODO Auto-generated method stub
-	}
-	@Override
 	public Collection<RuleReader> getRules(){
 		return myModel.getRulesList();
-	}
-
-	@Override
-	public BankController getBankController() {
-		return myModel.getBankController();
 	}
 	
 	@Override
 	public BankControllerReader getBankControllerReader(){
-		return (BankControllerReader) myModel.getBankController();
+		return myModel.getBankControllerReader();
 	}
 
 	@Override
@@ -149,12 +123,12 @@ public class ViewImpl implements View {
 		return myModel.getState().getSpawnQueues();
 	}
 	
+	@Override
 	public ModeReader getModeReader(){
 		return myMode;
 	}
 
-	public void setSplashScreen(SplashScreenData data)
-	{
+	public void setSplashScreen(SplashScreenData data){
 		System.out.println("View Line 158");
 		sendUserModification(Modification_GameRemote.PAUSE); 
 		SplashScreen splashScreen = new SplashScreen(data);

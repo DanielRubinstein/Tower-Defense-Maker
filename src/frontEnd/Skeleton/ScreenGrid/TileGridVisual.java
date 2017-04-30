@@ -6,13 +6,11 @@ import java.util.Map;
 import java.util.function.Consumer;
 
 import ModificationFromUser.AttributeOwner.Modification_Add_PaletteToGrid;
-import backEnd.Attribute.AttributeOwner;
-import backEnd.GameData.State.SerializableObservable;
-import backEnd.GameData.State.SerializableObserver;
+import backEnd.GameData.State.SerializableObservableGen;
+import backEnd.GameData.State.SerializableObserverGen;
 import backEnd.GameData.State.State;
 import backEnd.GameData.State.Tile;
 import backEnd.GameData.State.TileGrid;
-import backEnd.GameData.State.TileImpl;
 import frontEnd.View;
 import frontEnd.Skeleton.UserTools.SkeletonObject;
 import javafx.geometry.Point2D;
@@ -21,7 +19,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
 
-public class TileGridVisual implements SerializableObserver, SkeletonObject{
+public class TileGridVisual implements SerializableObserverGen<Tile>, SkeletonObject{
 
 	private GridPane myRoot;
 	private Map<Point2D, Tile> myTiles;
@@ -36,7 +34,6 @@ public class TileGridVisual implements SerializableObserver, SkeletonObject{
 	private View myView;
 	private State myState;
 	private TileGridInteractor myInteractor;
-
 	
 	public static final String ARROW_LOADER_DIRECTORY = "resources" + File.separator + "images" + File.separator + "Arrows" + File.separator;
 	
@@ -113,22 +110,7 @@ public class TileGridVisual implements SerializableObserver, SkeletonObject{
 		return new Point2D(column, row);
 	}
 	
-	@Override
-	public void update(SerializableObservable so, Object obj) {
-		if(obj != null){
-			updateCorrespondingGrid((TileImpl)obj);
-		} else {
-			adjustSize();
-			int counter = 0;
-			for (Tile x : myTiles.values()){
-				counter++;
-				System.out.println("test10000" + counter);
-				AttributeOwnerVisual attrOwner = new AttributeOwnerVisualImpl(x);
-				ImageView tileView = attrOwner.getImageView();
-				organizeImageView(tileView);
-			}
-		}
-	}
+	
 	
 	public ImageView addArrowToVisual(Tile tile){
 		String moveDirection = tile.<String>getAttribute("MoveDirection").getValue();
@@ -141,8 +123,8 @@ public class TileGridVisual implements SerializableObserver, SkeletonObject{
 		ImageView imageView = new ImageView(newImage);
 
 		myRoot.add(imageView, (int) gridPosition.getX(), (int) gridPosition.getY());
-		imageView.setFitWidth(30);
-		imageView.setFitHeight(30);
+		imageView.setFitWidth(tileWidth / 2);
+		imageView.setFitHeight(tileHeight / 2);
 		return imageView;
 	}
 	
@@ -160,5 +142,13 @@ public class TileGridVisual implements SerializableObserver, SkeletonObject{
 			myView.sendUserModification(new Modification_Add_PaletteToGrid(presetAO, e.<Point2D>getAttribute("Position").getValue()));
 		});
 		myView.sendUserModification(new Modification_Add_PaletteToGrid(presetAO, pos));
+	}
+	
+
+
+	@Override
+	public void update(SerializableObservableGen<Tile> object, Tile obj) {
+		updateCorrespondingGrid(obj);
+		
 	}
 }

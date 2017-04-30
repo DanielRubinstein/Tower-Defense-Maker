@@ -62,7 +62,7 @@ public class SpawnQueues implements SerializableObservable{
 	 * @return the next component in the spawn Queue if enough time has passed
 	 */
 	public String getNextSingleSpawn(double gameTime) {
-		//System.out.println(this.getClass().getSimpleName() + ": " + myCurrentSpawn + " | " + mySpawnQueue.size() + " | " + gameTime + " | " + myTimeLastQueueSpawned + " | " + mySpawnQueue.get(myCurrentSpawn).getTime());
+		//System.out.println(this.getClass().getSimpleName() + ": " + myCurrentSpawn + " | " + mySingleSpawnQueue.size() + " | " + gameTime + " | " + myTimeLastQueueSpawned + " | " + mySingleSpawnQueue.get(myCurrentSpawn).getTime());
 		if(myCurrentSpawn >= mySingleSpawnQueue.size() || gameTime - myTimeLastQueueSpawned < mySingleSpawnQueue.get(myCurrentSpawn).getTime()){
 			return null;
 		}

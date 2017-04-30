@@ -2,7 +2,7 @@ package ModificationFromUser;
 
 import java.util.function.Consumer;
 
-import backEnd.ModelImpl;
+import backEnd.Model;
 import backEnd.GameEngine.Engine.GameProcessController;
 
 public enum Modification_GameRemote implements ModificationFromUser {
@@ -36,7 +36,7 @@ public enum Modification_GameRemote implements ModificationFromUser {
 	}
 
 	@Override
-	public void invoke(ModelImpl myModel) throws Exception {
+	public void invoke(Model myModel) throws Exception {
 		myConsumer.accept(myModel.getGameProcessController());
 		
 
