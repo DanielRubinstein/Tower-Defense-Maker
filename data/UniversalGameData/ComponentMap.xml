@@ -143,6 +143,19 @@
             </backEnd.Attribute.AttributeImpl>
           </entry>
           <entry>
+            <string>TargetSelector</string>
+            <backEnd.Attribute.AttributeImpl>
+              <myValue class="string"></myValue>
+              <myParamList class="java.util.Arrays$ArrayList">
+                <a class="string-array">
+                  <string>Radius</string>
+                  <string>Group</string>
+                </a>
+              </myParamList>
+              <myName>TargetSelector</myName>
+            </backEnd.Attribute.AttributeImpl>
+          </entry>
+          <entry>
             <string>SlowFactor</string>
             <backEnd.Attribute.AttributeImpl>
               <myValue class="double">0.0</myValue>
@@ -541,6 +554,19 @@
             <string>SpawnOnDeathObject</string>
             <backEnd.Attribute.AttributeImpl>
               <myName>SpawnOnDeathObject</myName>
+            </backEnd.Attribute.AttributeImpl>
+          </entry>
+          <entry>
+            <string>TargetSelector</string>
+            <backEnd.Attribute.AttributeImpl>
+              <myValue class="string"></myValue>
+              <myParamList class="java.util.Arrays$ArrayList">
+                <a class="string-array">
+                  <string>Radius</string>
+                  <string>Group</string>
+                </a>
+              </myParamList>
+              <myName>TargetSelector</myName>
             </backEnd.Attribute.AttributeImpl>
           </entry>
           <entry>
@@ -946,6 +972,19 @@
             </backEnd.Attribute.AttributeImpl>
           </entry>
           <entry>
+            <string>TargetSelector</string>
+            <backEnd.Attribute.AttributeImpl>
+              <myValue class="string"></myValue>
+              <myParamList class="java.util.Arrays$ArrayList">
+                <a class="string-array">
+                  <string>Radius</string>
+                  <string>Group</string>
+                </a>
+              </myParamList>
+              <myName>TargetSelector</myName>
+            </backEnd.Attribute.AttributeImpl>
+          </entry>
+          <entry>
             <string>SlowFactor</string>
             <backEnd.Attribute.AttributeImpl>
               <myValue class="double">0.0</myValue>
@@ -1348,6 +1387,19 @@
             </backEnd.Attribute.AttributeImpl>
           </entry>
           <entry>
+            <string>TargetSelector</string>
+            <backEnd.Attribute.AttributeImpl>
+              <myValue class="string"></myValue>
+              <myParamList class="java.util.Arrays$ArrayList">
+                <a class="string-array">
+                  <string>Radius</string>
+                  <string>Group</string>
+                </a>
+              </myParamList>
+              <myName>TargetSelector</myName>
+            </backEnd.Attribute.AttributeImpl>
+          </entry>
+          <entry>
             <string>SlowFactor</string>
             <backEnd.Attribute.AttributeImpl>
               <myValue class="double">0.0</myValue>
@@ -1466,7 +1518,7 @@
           <entry>
             <string>FireDamage</string>
             <backEnd.Attribute.AttributeImpl>
-              <myValue class="int">10</myValue>
+              <myValue class="int">12</myValue>
               <myParamList class="java.util.Arrays$ArrayList">
                 <a class="java.lang.Integer-array">
                   <int>0</int>
@@ -1748,6 +1800,19 @@
             <backEnd.Attribute.AttributeImpl>
               <myValue class="string">Tower</myValue>
               <myName>SpawnOnDeathObject</myName>
+            </backEnd.Attribute.AttributeImpl>
+          </entry>
+          <entry>
+            <string>TargetSelector</string>
+            <backEnd.Attribute.AttributeImpl>
+              <myValue class="string"></myValue>
+              <myParamList class="java.util.Arrays$ArrayList">
+                <a class="string-array">
+                  <string>Radius</string>
+                  <string>Group</string>
+                </a>
+              </myParamList>
+              <myName>TargetSelector</myName>
             </backEnd.Attribute.AttributeImpl>
           </entry>
           <entry>
@@ -2149,6 +2214,19 @@
             <string>SpawnOnDeathObject</string>
             <backEnd.Attribute.AttributeImpl>
               <myName>SpawnOnDeathObject</myName>
+            </backEnd.Attribute.AttributeImpl>
+          </entry>
+          <entry>
+            <string>TargetSelector</string>
+            <backEnd.Attribute.AttributeImpl>
+              <myValue class="string"></myValue>
+              <myParamList class="java.util.Arrays$ArrayList">
+                <a class="string-array">
+                  <string>Radius</string>
+                  <string>Group</string>
+                </a>
+              </myParamList>
+              <myName>TargetSelector</myName>
             </backEnd.Attribute.AttributeImpl>
           </entry>
           <entry>

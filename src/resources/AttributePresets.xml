@@ -33,7 +33,8 @@
 		<MoveDirection options="Up,Down,Left,Right"></MoveDirection>
 		<Type options="Tower, Projectile, Enemy"></Type>
 		<FireType options="SingleTarget, AOE"></FireType>
-		<SpawnTimeline options="Timeline 1"></SpawnTimeline></STRINGLIST>
+		<SpawnTimeline options="Timeline 1"></SpawnTimeline>
+		<TargetSelector options="Radius,Group"></TargetSelector></STRINGLIST>
 	<POSITION>
 		<POSITION_TEMPLATE></POSITION_TEMPLATE>
 		<ProjectileTargetPosition></ProjectileTargetPosition></POSITION>
