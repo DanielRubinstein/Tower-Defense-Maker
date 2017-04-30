@@ -1,27 +1,20 @@
 package frontEnd.Skeleton.ScreenGrid;
 
-import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 
 import ModificationFromUser.AttributeOwner.Modification_Add_PaletteToGrid;
 import backEnd.Attribute.AttributeOwnerReader;
 import backEnd.Bank.BankControllerReader;
 import backEnd.GameData.State.State;
-import backEnd.GameData.State.Tile;
-import backEnd.GameData.State.TileImpl;
 import frontEnd.View;
 import frontEnd.Skeleton.UserTools.SkeletonObject;
 import javafx.geometry.Point2D;
 import javafx.scene.Group;
 import javafx.scene.Node;
 import javafx.scene.input.TransferMode;
-import util.reflection.Reflection;
-import util.reflection.ReflectionException;
 
 /**
- * This class is used to represent the actual game, such as the Tiles and
- * Components.
- * 
+ * This class is used to represent the actual game, such as the Tiles and Components.
  * @author Tim
  *
  */
@@ -56,6 +49,10 @@ public class ScreenGrid implements SkeletonObject {
 		setDrag();
 	}
 	
+	/**
+	 * Sets what happens when something is dragged over the root or when the mouse moves. 
+	 * Uses reflection to find the appropriate method to call in GridAdder.
+	 */
 	private void setDrag(){
 		BankControllerReader bank = myView.getBankControllerReader();
 		String methodName = "addToGrid";
@@ -87,6 +84,7 @@ public class ScreenGrid implements SkeletonObject {
 		visualTileGrid.toBack();
 		myRoot.getChildren().add(myHover.getRoot());
 	}
+	
 	private void addGraphToRoot(){
 		myRoot.getChildren().add(myComponentGrid.getRoot());
 	}

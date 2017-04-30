@@ -37,6 +37,10 @@ public class TileGridInteractor {
 		selectedTiles = new HashMap<>();
 		myView = view;
 		myState = state;
+		setBooleanBehavior();
+	}
+	
+	private void setBooleanBehavior(){
 		myView.getBooleanAuthorModeProperty().addListener((o, oldV, newV) ->{
 			if(!newV){
 				clearTileSelection();
@@ -72,6 +76,14 @@ public class TileGridInteractor {
 				|| e.getCode().equals(KeyCode.UP);
 	}
 	
+	/**
+	 * Sets the interaction for Tiles. Specifically, this determines what happens when a Tile is clicked on.
+	 * If the Tile is double clicked, its CommandCenter is launched. If it is clicked while the Control Key is
+	 * pushed down, it is "selected". Multiple tiles can be selected, and if one presses an arrow key, this changes
+	 * the MoveDirection for all of them. If one adds a Preset Tile to one of this, this changes all of them.
+	 * @param n Node representing the Tile visually on screen.
+	 * @param t Tile that will be interacted with.
+	 */
 	public void setTileInteraction(Node n, Tile t) {
 		n.setOnMouseClicked(e ->{
 			myTileGridVisual.getRoot().requestFocus();
@@ -115,6 +127,10 @@ public class TileGridInteractor {
 		arrowSet.clear();
 	}
 	
+	/**
+	 * Performs the Consumer on every Tile. 
+	 * @param method
+	 */
 	public void forEachSelectedTile(Consumer<? super Tile> method){
 		selectedTiles.keySet().forEach(method);
 		clearTileSelection();
