@@ -58,7 +58,7 @@ public class SkeletonImpl implements Skeleton{
 		myAuthProp.addListener((o, oldV, newV) -> chooseCenter());
 		
 		userTools = new UserTools(view);
-		userTools.setBottomAndSideDimensions(myScreenConstants.getSideWidth(),myScreenConstants.getBottomHeight());
+		//userTools.setBottomAndSideDimensions(myScreenConstants.getSideWidth(),myScreenConstants.getBottomHeight());
 		myRoot.setRight(userTools.getSidePane());
 		myRoot.setBottom(userTools.getBottomPane());
 	}

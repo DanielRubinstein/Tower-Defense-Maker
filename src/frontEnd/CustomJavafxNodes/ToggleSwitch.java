@@ -6,6 +6,7 @@ import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
+import resources.constants.StringResourceBundle;
 
 /*
  * 
@@ -14,6 +15,7 @@ import javafx.scene.layout.HBox;
  * https://gist.github.com/TheItachiUchiha/12e40a6f3af6e1eb6f75#file-toggleswitch-L9
  */
 public class ToggleSwitch {
+	private StringResourceBundle stringResourceBundle = new StringResourceBundle();
 	private HBox toggle;
 	private Label label;
 	private Button button;
@@ -53,11 +55,11 @@ public class ToggleSwitch {
 	private void bringCorrespondingOptionToFront(String title1, String title2, Boolean newValue) {
 		if (newValue) {
 			label.setText(title2);
-			toggle.setStyle("-fx-background-color: green;");
+			toggle.setStyle(stringResourceBundle.getFromToggle("toggleOnBackground"));
 			label.toFront();
 		} else {
 			label.setText(title1);
-			toggle.setStyle("-fx-background-color: grey;");
+			toggle.setStyle(stringResourceBundle.getFromToggle("toggleOffBackground"));
 			button.toFront();
 		}
 	}
@@ -83,7 +85,7 @@ public class ToggleSwitch {
 		toggle.setMinWidth(80);
 		//toggle.setMaxWidth(80);
 		label.setAlignment(Pos.CENTER);
-		toggle.setStyle("-fx-background-color: grey; -fx-text-fill:black; -fx-background-radius: 4;");
+		toggle.setStyle(stringResourceBundle.getFromToggle("toggleCSS"));
 		toggle.setAlignment(Pos.CENTER_LEFT);
 	}
 

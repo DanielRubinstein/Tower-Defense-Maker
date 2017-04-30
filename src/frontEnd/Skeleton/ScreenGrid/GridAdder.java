@@ -1,5 +1,6 @@
 package frontEnd.Skeleton.ScreenGrid;
 
+import ModificationFromUser.AttributeOwner.Modification_Add_PaletteToGrid;
 import backEnd.GameData.State.Component;
 import backEnd.GameData.State.Tile;
 import javafx.geometry.Point2D;
@@ -12,12 +13,12 @@ import javafx.geometry.Point2D;
  */
 public class GridAdder {
 	
-	private TileGridVisual myTileGrid;
-	private ComponentGridVisual myComponentGrid;
+	private GridVisual<Tile> myTileGrid;
+	private GridVisual<Component> myComponentGrid;
 	
-	public GridAdder(TileGridVisual tileGrid, ComponentGridVisual componentGrid){
-		myTileGrid = tileGrid;
-		myComponentGrid = componentGrid;
+	public GridAdder(GridVisual<Tile> myTileGrid2, GridVisual<Component> myComponentGrid2){
+		myTileGrid = myTileGrid2;
+		myComponentGrid = myComponentGrid2;
 			
 	}
 	
@@ -28,8 +29,6 @@ public class GridAdder {
 	 */
 	public void addToGrid(Tile tile, Point2D position){
 		myTileGrid.addPreset(tile, position);
-		
-		
 	}
 	/**
 	 * Adds a Component to the ComponentGridVisual
@@ -37,9 +36,7 @@ public class GridAdder {
 	 * @param position
 	 */
 	public void addToGrid(Component component, Point2D position){
-		//currently, adding a component to the grid is handled through the modification to user,
-		//but this method is kept open in case we add a new feature that requires the ComponentGrid to be used.
-		return;	
+		myComponentGrid.addPreset(component, position);
 	}
 	
 	

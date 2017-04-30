@@ -18,11 +18,13 @@ import resources.constants.numeric.NumericResourceBundle;
 public class ButtonMenuImpl implements ButtonMenu {
 	private StringResourceBundle stringResourceBundle = new StringResourceBundle();
 	private NumericResourceBundle numericResourceBundle = new NumericResourceBundle();
+	private Double standardSpacing = numericResourceBundle.getFromSizing("StandardSpacing");
 	private GridPane myGrid;
 	private VBox myButtonRoot;
 	private Scene myScene;
 	private Label titleLbl;
 	private Label description;
+	private Boolean displayHoverDescription = false;
 	
 	public ButtonMenuImpl(String text){
 		initializeGrid();
@@ -43,16 +45,16 @@ public class ButtonMenuImpl implements ButtonMenu {
 
 	private void initializeGrid() {
 		myGrid = new GridPane();
-	    myGrid.setHgap(10);
-	    myGrid.setVgap(10);
-	    myGrid.setPadding(new Insets(10));
+	    myGrid.setHgap(standardSpacing);
+	    myGrid.setVgap(standardSpacing);
+	    myGrid.setPadding(new Insets(standardSpacing));
 	    myGrid.setMinWidth(numericResourceBundle.getFromSizing("ButtonWidth"));
 	}
 
 
 	private void setText(String text){
 		titleLbl = new Label(text);
-		titleLbl.setFont(Font.font(32));
+		titleLbl.setFont(Font.font(numericResourceBundle.getFromSizing("TitleFontSize")));
 		titleLbl.setUnderline(true);
 		//titleLbl.setStyle("");
 	}
@@ -63,6 +65,7 @@ public class ButtonMenuImpl implements ButtonMenu {
 	}
 	
 	public void addButtonWithHover(Button newButton, String hoverText){
+		displayHoverDescription = true;
 		newButton.hoverProperty().addListener((event, oldVal, newVal) -> {
 			if(newVal){
 				description.setText(hoverText);
@@ -81,6 +84,11 @@ public class ButtonMenuImpl implements ButtonMenu {
 	
 	@Override
 	public void addButton(Button newButton){
+		newButton.setOnKeyPressed(key -> {
+			if(key.getCode().equals(KeyCode.ENTER)){
+				newButton.getOnAction().handle(null);
+			}
+		});
 		myButtonRoot.getChildren().add(newButton);
 	}
 	
@@ -100,16 +108,9 @@ public class ButtonMenuImpl implements ButtonMenu {
 	}
 	
 	public void addBackButton(ButtonMenuImpl previousMenu, Stage stage) {		
-		this.addSimpleButton("Go Back", () -> previousMenu.display(stage) );
+		this.addSimpleButton("Go Back", () -> previousMenu.display(stage) );	
+	}
 		
-	}
-	
-
-	private void setSpacing(Double size1){
-		double spacing = myButtonRoot.getChildren().size()==0 ? 50 : size1 / (myButtonRoot.getChildren().size()*2);
-		myButtonRoot.setSpacing(spacing);
-	}
-	
 	
 	public void display(Stage stage){
 		if(myScene == null){
@@ -121,28 +122,18 @@ public class ButtonMenuImpl implements ButtonMenu {
 
 
 	private void create() {
-		setSpacing(200d);
-		myButtonRoot.setMinWidth(250d);
+		myButtonRoot.setSpacing(standardSpacing);
+		myButtonRoot.setMinWidth(numericResourceBundle.getFromSizing("MinButtonMenuButtonWidth"));
 		
 		myGrid.add(titleLbl, 0, 0, 2, 1);
 		myGrid.add(myButtonRoot, 0, 1);
-		myGrid.add(description, 1, 1);
+		if(displayHoverDescription){
+			myGrid.add(description, 1, 1);
+		}
 		myGrid.add(new Label(stringResourceBundle.getFromStringConstants("TEAMNAME")), 0, 2, 2, 1);
 		//myButtonRoot.setAlignment(Pos.CENTER);
    	 	myScene = new Scene(myGrid);
    	 	myScene.getStylesheets().add(stringResourceBundle.getFromStringConstants("DEFAULT_CSS"));
 		description.setMaxWidth(numericResourceBundle.getFromSizing("DescriptionTextBoxWidth"));
 	}
-
-
-	public void addPrimarySimpleButtonWithHover(String title, Runnable event, String hoverText) {
-		ActionButton b = new ActionButton(title, event);
-		b.setOnKeyPressed(key -> {
-			if(key.getCode().equals(KeyCode.ENTER)){
-				event.run();
-			}
-		});
-		addButtonWithHover(b, hoverText);
-	}
-	
 }

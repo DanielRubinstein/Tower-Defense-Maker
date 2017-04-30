@@ -22,17 +22,5 @@ public class UserTools {
 		return this.bottomRoot.getRoot();
 	}
 
-	/**
-	 * Sets the width of the side and height of the bottom
-	 * @param width of the side pane
-	 * @param height of the bottom pane
-	 */
-	public void setBottomAndSideDimensions(double width, double height){
-		this.bottomRoot.setDimensions(width, height);
-		this.sideBar.setWidth(width);
-		
-	}
-
-
 
 }
