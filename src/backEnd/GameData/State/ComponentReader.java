@@ -1,7 +1,6 @@
 package backEnd.GameData.State;
 
 import backEnd.Attribute.AttributeData;
-import backEnd.GameEngine.Behaviors.Behavior;
 
 public interface ComponentReader {
 
@@ -18,11 +17,7 @@ public interface ComponentReader {
 	/* (non-Javadoc)
 	 * @see backEnd.GameData.State.Component#getBehavior(java.lang.String)
 	 */
-	Behavior getBehavior(String behaviorType);
 
-	/* (non-Javadoc)
-	 * @see backEnd.GameData.State.Component#getMyAttributes()
-	 */
 	AttributeData getMyAttributes();
 
 	/* (non-Javadoc)

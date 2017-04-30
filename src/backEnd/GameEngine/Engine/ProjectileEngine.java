@@ -97,7 +97,7 @@ public class ProjectileEngine implements Engine {
 				//doing damage to target
 				toHit.setAttributeValue(STRING_RESOURCES.getFromAttributeNames("Health"), 
 						(Integer) toHit.getAttribute(STRING_RESOURCES.getFromAttributeNames("Health")).getValue() - (Integer) projectile.getAttribute(STRING_RESOURCES.getFromAttributeNames("FireDamage")).getValue());
-				//slowing target
+				//slowing target (needs refactoring)
 				toHit.setAttributeValue(STRING_RESOURCES.getFromAttributeNames("Velocity"), ((Double) projectile.getAttribute(STRING_RESOURCES.getFromAttributeNames("SlowFactor")).getValue()
 						* (Double) toHit.getAttribute(STRING_RESOURCES.getFromAttributeNames("Speed")).getValue()));
 				toRemove.add(projectile);
@@ -105,3 +105,4 @@ public class ProjectileEngine implements Engine {
 		}
 	}
 }
+

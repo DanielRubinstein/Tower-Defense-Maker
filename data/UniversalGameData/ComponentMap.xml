@@ -320,7 +320,6 @@
         </myAttributes>
         <observers/>
       </myAttributes>
-      <myBehaviors/>
       <myAccessPermissions class="backEnd.GameData.State.AccessPermissionsImpl">
         <userModePermissions>
           <string>AUTHOR</string>
@@ -662,7 +661,6 @@
         </myAttributes>
         <observers/>
       </myAttributes>
-      <myBehaviors/>
       <myAccessPermissions class="backEnd.GameData.State.AccessPermissionsImpl">
         <userModePermissions>
           <string>AUTHOR</string>
@@ -1005,7 +1003,6 @@
         </myAttributes>
         <observers/>
       </myAttributes>
-      <myBehaviors/>
       <myAccessPermissions class="backEnd.GameData.State.AccessPermissionsImpl">
         <userModePermissions>
           <string>AUTHOR</string>
@@ -1348,7 +1345,6 @@
         </myAttributes>
         <observers/>
       </myAttributes>
-      <myBehaviors/>
       <myAccessPermissions class="backEnd.GameData.State.AccessPermissionsImpl">
         <userModePermissions>
           <string>AUTHOR</string>
@@ -1692,7 +1688,6 @@
         </myAttributes>
         <observers/>
       </myAttributes>
-      <myBehaviors/>
       <myAccessPermissions class="backEnd.GameData.State.AccessPermissionsImpl">
         <userModePermissions>
           <string>AUTHOR</string>
@@ -2034,7 +2029,6 @@
         </myAttributes>
         <observers/>
       </myAttributes>
-      <myBehaviors/>
       <myAccessPermissions class="backEnd.GameData.State.AccessPermissionsImpl">
         <userModePermissions>
           <string>AUTHOR</string>
