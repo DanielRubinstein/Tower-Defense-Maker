@@ -182,4 +182,14 @@ public class StringResourceBundle {
 		return TOGGLE_RESOURCE.getString(string);
 	}
 	
+	///////////////////////////////////////////////////////////////////////////
+	// Menu Text
+	///////////////////////////////////////////////////////////////////////////
+	
+	private static final String MENU_PATH = "resources.menuText";
+	private static final ResourceBundle MENU_RESOURCE = ResourceBundle.getBundle(MENU_PATH);
+	
+	public String getFromMenuText(String string) {
+		return MENU_RESOURCE.getString(string);
+	}
 }
