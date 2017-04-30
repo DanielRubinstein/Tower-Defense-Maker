@@ -46,6 +46,7 @@ public class ButtonMenuImpl implements ButtonMenu {
 	    myGrid.setHgap(10);
 	    myGrid.setVgap(10);
 	    myGrid.setPadding(new Insets(10));
+	    myGrid.setMinWidth(400);
 	}
 
 
@@ -124,6 +125,7 @@ public class ButtonMenuImpl implements ButtonMenu {
 	private void create() {
 		
 		setSpacing(200d);
+		myButtonRoot.setMinWidth(250d);
 		
 		myGrid.add(titleLbl, 0, 0, 2, 1);
 		myGrid.add(myButtonRoot, 0, 1);

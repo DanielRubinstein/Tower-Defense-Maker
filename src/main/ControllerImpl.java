@@ -8,7 +8,7 @@ import backEnd.GameData.GameData;
 import backEnd.GameEngine.EngineStatus;
 import backEnd.Mode.ModeImpl;
 import data.GamePrep.DataInputLoader;
-import data.GamePrep.MainMenu;
+import data.GamePrep.Menus.MenuController;
 import frontEnd.ViewImpl;
 import frontEnd.CustomJavafxNodes.ErrorDialog;
 import frontEnd.Facebook.FacebookConnector;
@@ -71,7 +71,7 @@ public class ControllerImpl implements Controller {
 			
 		};
 					
-		MainMenu myMenu = new MainMenu(setGameData, (FacebookInteractor f) -> setFb(f));
+		MenuController myMenu = new MenuController(setGameData, (FacebookInteractor f) -> setFb(f));
 		myMenu.showMenus(stage);
 	}
 	public void setFb(FacebookInteractor fb){
