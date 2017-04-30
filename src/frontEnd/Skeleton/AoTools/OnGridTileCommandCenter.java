@@ -51,14 +51,12 @@ public class OnGridTileCommandCenter implements CommandCenter, SkeletonObject{
 		}
 		return componentTabs;
 	}
-
-	
 	
 	private Tab createAttributeOwnerTab(AttributeOwnerReader obj, Stage stage, String title) {
 		AttributeCommandCenter aCC = new AttributeCommandCenter(myView, stage, (AttributeOwner) obj, title);
-		String fuckedUpName = obj.toString();
-		fuckedUpName = fuckedUpName.substring(fuckedUpName.lastIndexOf('.') + 1, fuckedUpName.length());
-		return createSingleTab(fuckedUpName, aCC.get());
+		String weirdName = obj.toString();
+		weirdName = weirdName.substring(weirdName.lastIndexOf('.') + 1, weirdName.length());
+		return createSingleTab(weirdName, aCC.get());
 	}
 	
 	private Tab createSingleTab(String name, Node contents) {
