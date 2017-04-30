@@ -1,12 +1,17 @@
 package backEnd.GameEngine.Engine;
 
 import java.io.FileNotFoundException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
+
 import backEnd.GameData.GameData;
 import backEnd.GameData.State.Component;
 import backEnd.GameData.State.ComponentGraph;
+import backEnd.GameData.State.Tile;
+import backEnd.GameData.State.TileGrid;
 import frontEnd.CustomJavafxNodes.ErrorDialog;
 import javafx.geometry.Point2D;
 import resources.constants.StringResourceBundle;
@@ -23,10 +28,13 @@ public class AttackEngine implements Engine {
 	private GameData myGameData;
 	private ProjectileFactory myProjectileFactory;
 	private StringResourceBundle STRING_RESOURCES = new StringResourceBundle();
+	private boolean tileGroupsInitialized;
+	private List<Set<Tile>> myTileGroups;
+	private ComponentGraph myComponentGraph;
 
 	@Override
 	public void gameLoop(GameData gameData, double stepTime) {
-		myGameData=gameData;
+		myGameData = gameData;
 		masterTime = gameData.getGameTime();
 		try {
 			myProjectileFactory = new ProjectileFactory();
@@ -35,14 +43,13 @@ public class AttackEngine implements Engine {
 			fnf.create("Error", "File Not Found");
 		}
 		
-		ComponentGraph myComponentGraph = gameData.getState().getComponentGraph();
+		myComponentGraph = gameData.getState().getComponentGraph();
 		Map<Component, Component> attackersAndTargets=new HashMap<Component, Component>();
 		
 		for (Component attacker : myComponentGraph.getAllComponents()) {
 			if (attacker.getAttribute(STRING_RESOURCES.getFromAttributeNames("Type")).getValue().equals(STRING_RESOURCES.getFromValueNames("TowerType"))) {
-				if (masterTime % ((Double) attacker.getAttribute(STRING_RESOURCES.getFromAttributeNames("FireRate")).getValue()/100) <= stepTime) { 
-					List<Component> targets = myComponentGraph.getComponentsWithinRadius(attacker,
-							(double) attacker.getAttribute(STRING_RESOURCES.getFromAttributeNames("FireRadius")).getValue());
+				if (masterTime % ((Double) attacker.getAttribute(STRING_RESOURCES.getFromAttributeNames("FireRate")).getValue()/1000) <= stepTime) { 
+					List<Component> targets = getTargetList(attacker);
 					for (Component potentialTarget : targets) {
 						if (potentialTarget.getAttribute(STRING_RESOURCES.getFromAttributeNames("Type")).getValue().equals(STRING_RESOURCES.getFromValueNames("EnemyType"))) {
 							attackersAndTargets.put(attacker, potentialTarget);
@@ -56,6 +63,43 @@ public class AttackEngine implements Engine {
 		}
 	}
 
+	/**
+	 * Gets target list based on tower attack variable
+	 * @param attacker
+	 * @return
+	 */
+	private List<Component> getTargetList(Component attacker) {
+		String targetType;// = //attacker.<String>getAttribute("TargetSelector").getValue();
+		TileGrid tileGrid = myGameData.getState().getTileGrid();
+		targetType = "Radius";
+		if(targetType.equals("Group")){
+			if(!tileGroupsInitialized){
+				myTileGroups = myGameData.getState().getTileGrid().getTileGroups();
+				tileGroupsInitialized = true;
+			}
+			for(Set<Tile> tempSet : myTileGroups){
+				if(tempSet.contains(tileGrid.getTileByScreenPosition(attacker.<Point2D>getAttribute("Position").getValue()))){
+					List<Component> targets = new ArrayList<Component>();
+					List<Component> potentialTargets = myComponentGraph.getAllComponents();
+					for (Component component : potentialTargets) {
+						if (tempSet.contains(tileGrid.getTileByScreenPosition(component.<Point2D>getAttribute("Position").getValue()))) {
+							targets.add(component);
+						}
+					}
+					return targets;
+				}
+			}
+			System.out.println(this.getClass().getSimpleName() + ": Tile not found");
+			return null;
+		} else if (targetType.equals("Radius")) {
+			return myComponentGraph.getComponentsWithinRadius(attacker,(double) attacker.getAttribute(STRING_RESOURCES.getFromAttributeNames("FireRadius")).getValue());
+		} else {
+			System.out.println(this.getClass().getSimpleName() + ": " + "Target Selection Was Blank possible problem");
+			return myComponentGraph.getComponentsWithinRadius(attacker,(double) attacker.getAttribute(STRING_RESOURCES.getFromAttributeNames("FireRadius")).getValue());
+		}
+		
+	}
+	
 	/**
 	 * Creates a projectile, sets its target, and adds it to ComponentGraph in State
 	 * @param attacker the tower Component generating a projectile

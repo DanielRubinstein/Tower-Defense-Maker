@@ -5,7 +5,7 @@ import frontEnd.Skeleton.UserTools.Presets.PalettePane;
 import javafx.scene.Node;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
-import resources.constants.NumericResourceBundle;
+import resources.constants.numeric.ScreenConstants;
 import resources.constants.StringResourceBundle;
 /**
  * This class represents the main rectangular chunk of the bottomRoot. This will support relevant information to the user,
@@ -16,7 +16,7 @@ import resources.constants.StringResourceBundle;
 public class BottomBarImpl implements BottomBar{
 	
 	private HBox myRoot;
-	private NumericResourceBundle numResources = new NumericResourceBundle();
+	private ScreenConstants screenResources = new ScreenConstants();
 	private StringResourceBundle strResources = new StringResourceBundle();
 	
 	public BottomBarImpl(View view){
@@ -29,7 +29,7 @@ public class BottomBarImpl implements BottomBar{
 		PalettePane pp = new PalettePane(view);
 		myRoot.getChildren().add(pp.getRoot());
 		HBox.setHgrow(pp.getRoot(), Priority.ALWAYS);
-		myRoot.setStyle("-fx-border-color: rgb(252.0, 240.0, 237.0);");
+		myRoot.setStyle(strResources.getFromToggle("bottomBarBorder"));
 	}
 	
 	@Override
@@ -38,7 +38,7 @@ public class BottomBarImpl implements BottomBar{
 	}
 	
 	private void setDimensions(){
-		double height = numResources.getBottomHeight();
+		double height = screenResources.getBottomHeight();
 		myRoot.setPrefHeight(height);
 		myRoot.setMaxHeight(height);
 	}
