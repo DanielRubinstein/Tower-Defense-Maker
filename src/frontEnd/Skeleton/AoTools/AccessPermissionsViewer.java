@@ -76,7 +76,7 @@ public class AccessPermissionsViewer implements SkeletonObject {
 			
 			
 			if(category.equals("Level")){
-				for(String game : myModeController.getOptions("Game")){
+				for(String game : myModeController.getGameList()){
 					VBox subsubsubBody = new VBox();
 					Label gameLbl = new Label(game);
 					subsubsubBody.getChildren().add(gameLbl);
@@ -85,8 +85,8 @@ public class AccessPermissionsViewer implements SkeletonObject {
 					subsubBody.getChildren().add(subsubsubBody);
 				}
 			} else {
-				List<String> opts = myModeController.getOptions(category);
-				addCheckBoxes(subsubBody, opts);
+				//List<String> opts = myModeController.getOptions(category);
+				//addCheckBoxes(subsubBody, opts);
 			}
 			
 			scrollPane.setContent(subsubBody);

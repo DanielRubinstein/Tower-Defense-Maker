@@ -9,15 +9,15 @@ public interface LevelProgressionControllerReader {
 	List<String> getGameList();
 
 	List<String> getLevelList(String gameName);
-	
-	List<String> getFullLevelList();
-	
+		
 	Mode getMode();
 	
 	String getNextLevel();
 	
 	List<String> getModeCategories();
 	
-	List<String> getOptions(String category);
-
+	boolean contains(String mode);
+	
+	List<String> getCurrentLevelList();
+	
 }

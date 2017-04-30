@@ -1,22 +1,9 @@
 <?xml version="1.0"?><map>
   <entry>
-    <string>ff</string>
-    <list/>
-  </entry>
-  <entry>
-    <string>asf</string>
-    <list/>
-  </entry>
-  <entry>
-    <string>Plants vs. Zombies</string>
-    <list/>
-  </entry>
-  <entry>
-    <string>Bloons</string>
-    <list/>
-  </entry>
-  <entry>
-    <string>asfsdf</string>
-    <list/>
+    <string>test game</string>
+    <list>
+      <string>first leeevel</string>
+      <string>second</string>
+    </list>
   </entry>
 </map>

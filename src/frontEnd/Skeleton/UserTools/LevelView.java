@@ -6,6 +6,7 @@ import java.util.List;
 import backEnd.LevelProgression.LevelProgressionControllerEditor;
 import frontEnd.CustomJavafxNodes.ListDragDrop;
 import javafx.collections.FXCollections;
+import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.scene.Node;
 import javafx.scene.Scene;
@@ -25,6 +26,7 @@ import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import javafx.stage.WindowEvent;
 import resources.constants.StringResourceBundle;
 
 
@@ -58,6 +60,11 @@ public class LevelView {
 		myScene.getStylesheets().add(stringResourceBundle.getFromStringConstants("DEFAULT_CSS"));
 		myStage.setScene(myScene);
 		myStage.show();
+		myStage.setOnCloseRequest(new EventHandler<WindowEvent>() {
+	          public void handle(WindowEvent we) {
+	        	  myLevelContr.saveGamesMap();
+	          }
+		});
 	}
 	
 	private void createStructureBoxes(){
@@ -70,7 +77,7 @@ public class LevelView {
 
 		VBox gameOutline = createSingleBox(0);
 		VBox levelOutline = null;
-		populateLevels("");
+
 		Node gameEditor = createGameEditor(gameOutline);
 		myRoot.add(gameEditor, 0, 3);
 		populateGame(gameOutline,myLevelContr.getGameList(),levelOutline);
@@ -89,9 +96,8 @@ public class LevelView {
 	}
 	
 	private void populateLevels(String gameName){
-		String[] test2 = {"test1","tsttt,","test2", "test 3","test54"};
-		List<String> testList = Arrays.asList(test2);
-		ListDragDrop<String> test = new ListDragDrop<String>(FXCollections.observableArrayList(testList));
+		
+		ListDragDrop<String> test = new ListDragDrop<String>(FXCollections.observableArrayList(myLevelContr.getLevelList(gameName)));
 		
 		myRoot.add(test.getRoot(), 1, 2);
 	}
@@ -119,7 +125,7 @@ public class LevelView {
 		TextField addText = new TextField();
 		removeGame.setOnAction(e -> {
 			myLevelContr.removeGame(addText.getText());
-			//gameWrapper.getChildren().remove
+			System.out.println("kkkkk " + addText.getText());
 		});
 		Button addGame = new Button("Add Game");
 		addGame.setOnAction(e -> {

@@ -10,7 +10,7 @@ public interface LevelProgressionControllerEditor extends LevelProgressionContro
 
 	void addNewGame(String gameName);
 
-	void addLevelToGame(String gameName, String level);
+	//void addLevelToGame(String gameName, String level);
 
 	void removeGame(String gameName);
 
@@ -20,6 +20,8 @@ public interface LevelProgressionControllerEditor extends LevelProgressionContro
 
 	void initiateSplashScreen(SplashScreenData splashScreenData);
 
-	void loadNextGame();
+	void loadNextLevel();
 
+	void addLevelToCurrentGame(String newName);
+	
 }

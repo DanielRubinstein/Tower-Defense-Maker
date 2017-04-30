@@ -21,7 +21,7 @@ public abstract class WinCondition extends Rule {
 		LevelProgressionControllerEditor myLPC = myGameData.getLevelProgressionController();
 		System.out.println("kill count reached");
 		//load splash screen and action to occur after splash screen
-		myLPC.initiateSplashScreen(new SplashScreenData("You won the level!\nPress any key to continue to the next level", SplashScreenType.LEVEL_WON, () -> myLPC.loadNextGame()));
+		myLPC.initiateSplashScreen(new SplashScreenData("You won the level!\nPress any key to continue to the next level", SplashScreenType.LEVEL_WON, () -> myLPC.loadNextLevel()));
 		System.out.println("kill count reached 2");
 	}
 
