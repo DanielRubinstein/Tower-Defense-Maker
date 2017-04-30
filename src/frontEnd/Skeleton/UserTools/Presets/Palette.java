@@ -1,6 +1,7 @@
 package frontEnd.Skeleton.UserTools.Presets;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -9,8 +10,9 @@ import java.util.function.Consumer;
 
 import ModificationFromUser.AttributeOwner.Modification_Add_PaletteToGrid;
 import ModificationFromUser.AttributeOwner.Modification_Remove_FromPalette;
-import backEnd.BankController;
 import backEnd.Attribute.AttributeOwner;
+import backEnd.Bank.BankControllerImpl;
+import backEnd.Bank.BankControllerReader;
 import backEnd.GameData.State.SerializableObservable;
 import backEnd.GameData.State.SerializableObserver;
 import backEnd.Mode.ModeReader;
@@ -19,7 +21,6 @@ import frontEnd.Skeleton.AoTools.GenericCommandCenter;
 import frontEnd.Skeleton.ScreenGrid.AttributeOwnerVisual;
 import frontEnd.Skeleton.ScreenGrid.AttributeOwnerVisualImpl;
 import frontEnd.Skeleton.UserTools.SkeletonObject;
-import javafx.event.EventHandler;
 import javafx.geometry.Bounds;
 import javafx.geometry.Insets;
 import javafx.geometry.Point2D;
@@ -52,17 +53,17 @@ public class Palette implements SkeletonObject, SerializableObserver{
 	
 	private View myView;
 	private TilePane tile;
-	private Map<String, ? extends AttributeOwner> myPresetMapBackEnd;
+	private Collection<? extends AttributeOwner> myPresets;
 	private Map<ImageView, AttributeOwner> myPresetMapFrontEnd;
 	private String myType;
-	private BankController observedBankController;
+	private BankControllerReader observedBankController;
 	private ModeReader observedMode;
 	
-	public Palette(View view, Map<String, ? extends AttributeOwner> presetMap) {
+	public Palette(View view, Collection<? extends AttributeOwner> presets) {
 		myView = view;
-		initializeMaps(presetMap);
+		initializeMaps(presets);
 		initializePane();
-		for (AttributeOwner preset : myPresetMapBackEnd.values()) {
+		for (AttributeOwner preset : presets) {
 			addPresetToPalette(preset);
 		}
 		extractStringType();
@@ -77,12 +78,12 @@ public class Palette implements SkeletonObject, SerializableObserver{
 		}
 	}
 
-	private void initializeMaps(Map<String, ? extends AttributeOwner> presetMap) {
-		observedBankController = myView.getBankController();
+	private void initializeMaps(Collection<? extends AttributeOwner> presets) {
+		observedBankController = myView.getBankControllerReader();
 		observedBankController.addObserver(this);
 		observedMode = myView.getModeReader();
 		observedMode.addObserver(this);
-		myPresetMapBackEnd = presetMap;
+		myPresets = presets;
 		myPresetMapFrontEnd = new HashMap<ImageView, AttributeOwner>();
 	}
 
@@ -144,7 +145,7 @@ public class Palette implements SkeletonObject, SerializableObserver{
 	}
 
 	private void makeHoverOverName(AttributeOwner preset, ImageView imageView) {
-		Tooltip t = new Tooltip(observedBankController.getAOName(preset));
+		Tooltip t = new Tooltip(observedBankController.getPresetName(preset));
 		imageView.hoverProperty().addListener((o, oldV, newV) -> {
 			if (newV) {
 				Bounds scenePos = imageView.localToScreen(imageView.getBoundsInLocal());
@@ -160,7 +161,7 @@ public class Palette implements SkeletonObject, SerializableObserver{
 		imageView.setOnDragDetected(e -> {
 			Dragboard db = imageView.startDragAndDrop(TransferMode.ANY);
 			ClipboardContent content = new ClipboardContent();
-			content.putString(observedBankController.getAOName(preset));
+			content.putString(observedBankController.getPresetName(preset));
 			db.setContent(content);
 			db.setDragView(imageView.getImage());
 		});
@@ -202,15 +203,14 @@ public class Palette implements SkeletonObject, SerializableObserver{
 	}
 
 	private void updatePalette() {
-		observedBankController.refreshAccessibleMaps();
-		for (AttributeOwner preset : myPresetMapBackEnd.values()) {
+		for (AttributeOwner preset : myPresets) {
 			if (!myPresetMapFrontEnd.containsValue(preset)) {
 				addPresetToPalette(preset);
 			}
 		}
 		List<ImageView> toRemove = new ArrayList<ImageView>();
 		for (ImageView iv : myPresetMapFrontEnd.keySet()) {
-			if (!myPresetMapBackEnd.containsValue(myPresetMapFrontEnd.get(iv))) {
+			if (!myPresets.contains(myPresetMapFrontEnd.get(iv))) {
 				toRemove.add(iv);
 			}
 		}

@@ -4,7 +4,7 @@ import java.util.Arrays;
 
 import ModificationFromUser.Spawning.Modification_EditSpawnDataTime;
 import ModificationFromUser.Spawning.Modification_RemoveSpawner;
-import backEnd.Attribute.AttributeOwner;
+import backEnd.Attribute.AttributeOwnerReader;
 import backEnd.GameEngine.Engine.Spawning.SpawnDataReader;
 import frontEnd.View;
 import frontEnd.CustomJavafxNodes.SingleFieldPrompt;
@@ -17,7 +17,6 @@ import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.Separator;
-import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 
@@ -32,15 +31,13 @@ public class VisualSpawnEntry implements SkeletonObject {
 		addToDropZone(spawnData , false);
 	}
 	
-	
-	
 	private void addToDropZone(SpawnDataReader spawnData,  boolean repeating) {
 		mySpawnBox = new HBox();
 		
 		String presetName = spawnData.getPresetName();
 		Double time = spawnData.getTime();
 		
-		AttributeOwner presetComponent = myView.getBankController().getPreset(presetName);
+		AttributeOwnerReader presetComponent = myView.getBankControllerReader().getPreset(presetName);
 		AttributeOwnerVisual presetVisual = new AttributeOwnerVisualImpl(presetComponent);
 		ImageView spawnImage = presetVisual.getImageView();
 		spawnImage.setFitHeight(30);

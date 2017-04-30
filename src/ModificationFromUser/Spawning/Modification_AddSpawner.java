@@ -1,7 +1,7 @@
 package ModificationFromUser.Spawning;
 
 import ModificationFromUser.ModificationFromUser;
-import backEnd.ModelImpl;
+import backEnd.Model;
 import backEnd.GameEngine.Engine.Spawning.SpawnDataImpl;
 /**
  * To Add a spawner to the specified spawnQueue
@@ -28,7 +28,7 @@ public class Modification_AddSpawner implements ModificationFromUser{
 	}
 	
 	@Override
-	public void invoke(ModelImpl myModel) throws Exception {
+	public void invoke(Model myModel) throws Exception {
 		myModel.getState().getSpawnQueues().get(mySpawnQueueName).add(mySpawnData, isFrequencySpawn);
 	}
 

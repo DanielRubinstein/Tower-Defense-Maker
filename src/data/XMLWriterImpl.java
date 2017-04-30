@@ -8,7 +8,8 @@ import java.util.List;
 import java.util.Map;
 import com.thoughtworks.xstream.XStream;
 import com.thoughtworks.xstream.io.xml.DomDriver;
-import backEnd.BankController;
+
+import backEnd.Bank.BankController;
 import backEnd.GameData.GameDataInterface;
 import backEnd.GameData.Rules.Rule;
 import backEnd.GameData.State.Component;

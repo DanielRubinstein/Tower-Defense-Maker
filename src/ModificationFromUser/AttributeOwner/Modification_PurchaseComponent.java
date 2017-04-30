@@ -1,7 +1,7 @@
 package ModificationFromUser.AttributeOwner;
 
 import ModificationFromUser.ModificationFromUser;
-import backEnd.ModelImpl;
+import backEnd.Model;
 
 public class Modification_PurchaseComponent implements ModificationFromUser{
 	private int pointChange;
@@ -11,7 +11,7 @@ public class Modification_PurchaseComponent implements ModificationFromUser{
 	}
 
 	@Override
-	public void invoke(ModelImpl myModel) throws Exception {
+	public void invoke(Model myModel) throws Exception {
 		myModel.getGameData().getStatus().decrementStatusItem("Money", pointChange);
 	}
 

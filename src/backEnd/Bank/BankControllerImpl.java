@@ -1,7 +1,8 @@
-package backEnd;
+package backEnd.Bank;
 
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -11,6 +12,7 @@ import data.DataControllerReader;
 import frontEnd.CustomJavafxNodes.ErrorDialog;
 import resources.constants.StringResourceBundle;
 import backEnd.Attribute.AttributeOwner;
+import backEnd.Attribute.AttributeOwnerReader;
 import backEnd.GameData.State.Component;
 import backEnd.GameData.State.ComponentImpl;
 import backEnd.GameData.State.SerializableObservable;
@@ -24,7 +26,7 @@ import backEnd.GameData.State.TileImpl;
  *
  */
 
-public class BankController implements BankControllerReader, SerializableObservable
+public class BankControllerImpl implements SerializableObservable, BankController
 {
 	private static final StringResourceBundle strResources = new StringResourceBundle();
 	private Map<String, Tile> tileBank;
@@ -35,7 +37,7 @@ public class BankController implements BankControllerReader, SerializableObserva
 	private DataControllerReader dataController;
 	private List<SerializableObserver> observers;
 
-	public BankController(Mode myMode, DataControllerReader dataController) {
+	public BankControllerImpl(Mode myMode, DataControllerReader dataController) {
 		this.tileBank = dataController.loadTileMap();
 		this.componentBank = dataController.loadComponentMap();
 		this.myMode = myMode;
@@ -44,11 +46,6 @@ public class BankController implements BankControllerReader, SerializableObserva
 		accessibleComponentBank = new HashMap<>();
 		accessibleTileBank = new HashMap<>();
 		//createTemplatesForTesting();
-	}
-	
-	@Override
-	public String getComponentName(Component component){
-		return findKeyFromValue(componentBank, component);
 	}
 	
 	@Deprecated
@@ -110,62 +107,8 @@ public class BankController implements BankControllerReader, SerializableObserva
 			System.out.println("No image found");
 		}
 	}
-
-	public void addNewTile(String name, Tile tile) {
-		if (tileBank.containsKey(name)) {
-			JOptionPane.showMessageDialog(null, strResources.getFromErrorMessages("Duplicate_Name_Error"));
-		} else {
-			tileBank.put(name, tile);
-			refreshAccessibleTileMap();
-			notifyObservers();
-		}
-	}
-
-	public Map<String, Tile> getAccessibleTileMap() {
-		refreshAccessibleTileMap();
-		return accessibleTileBank;
-	}
-
-	private void refreshAccessibleTileMap() {
-		accessibleTileBank.clear();
-
-		for (String x : tileBank.keySet()) {
-			if (tileBank.get(x).getAccessPermissions().permitsAccess(myMode.getUserMode(), myMode.getGameMode(),
-					myMode.getLevelMode())) {
-				accessibleTileBank.put(x, tileBank.get(x));
-			}
-		}
-	}
-
-	public Map<String, Component> getAccessibleComponentMap() {
-		refreshAccessibleComponentMap();
-		return accessibleComponentBank;
-	}
 	
-	public void refreshAccessibleMaps(){
-		refreshAccessibleComponentMap();
-		refreshAccessibleTileMap();
-	}
-
-	private void refreshAccessibleComponentMap() {
-		accessibleComponentBank.clear();
-
-		for (String x : componentBank.keySet()) {
-			if (componentBank.get(x).getAccessPermissions().permitsAccess(myMode.getUserMode(), myMode.getGameMode(),
-					myMode.getLevelMode())) {
-				accessibleComponentBank.put(x, componentBank.get(x));
-			}
-		}
-	}
-
-	public Map<String, Component> getComponentMap() {
-		return componentBank;
-	}
-
-	public Map<String, Tile> getTileMap() {
-		return tileBank;
-	}
-
+	@Override
 	public void addNewComponent(String name, Component component) {
 		if (tileBank.containsKey(name)) {
 			JOptionPane.showMessageDialog(null, strResources.getFromErrorMessages("Duplicate_Name_Error"));
@@ -175,20 +118,96 @@ public class BankController implements BankControllerReader, SerializableObserva
 		}
 	}
 
+	@Override
+	public void addNewTile(String name, Tile tile) {
+		if (tileBank.containsKey(name)) {
+			JOptionPane.showMessageDialog(null, strResources.getFromErrorMessages("Duplicate_Name_Error"));
+		} else {
+			tileBank.put(name, tile);
+			refreshAccessibleTileMap();
+			notifyObservers();
+		}
+	}
+	
+	@Override
 	public void remove(Component component) {
-		String removeName = getAOName(component);
+		String removeName = getPresetName(component);
 		componentBank.remove(removeName);
+		refreshAccessibleComponentMap();
 		notifyObservers();
 	}
+	@Override
 	public void remove(Tile tile) {
-		String removeName = getAOName(tile);
+		String removeName = getPresetName(tile);
 		tileBank.remove(removeName);
 		refreshAccessibleTileMap();
 		notifyObservers();
 	}
+	
+	@Override
+	public Map<String, Component> getComponentMap() {
+		return componentBank;
+	}
 
+	@Override
+	public Map<String, Tile> getTileMap() {
+		return tileBank;
+	}
+	
+	@Override
+	public Map<String, Component> getAccessibleComponentMap() {
+		refreshAccessibleComponentMap();
+		return accessibleComponentBank;
+	}
+	
+	@Override
+	public Map<String, Tile> getAccessibleTileMap() {
+		refreshAccessibleTileMap();
+		return accessibleTileBank;
+	}
+	
+	@Override
+	public void refreshAccessibleMaps(){
+		refreshAccessibleComponentMap();
+		refreshAccessibleTileMap();
+	}
+
+	private void refreshAccessibleTileMap() {
+		accessibleTileBank.clear();
+		for (String x : tileBank.keySet()) {
+			if (tileBank.get(x).getAccessPermissions().permitsAccess(myMode.getUserMode(), myMode.getGameMode(),
+					myMode.getLevelMode())) {
+				accessibleTileBank.put(x, tileBank.get(x));
+			}
+		}
+	}
+
+	private void refreshAccessibleComponentMap() {
+		accessibleComponentBank.clear();
+		for (String x : componentBank.keySet()) {
+			if (componentBank.get(x).getAccessPermissions().permitsAccess(myMode.getUserMode(), myMode.getGameMode(),
+					myMode.getLevelMode())) {
+				accessibleComponentBank.put(x, componentBank.get(x));
+			}
+		}
+	}
+
+	@Override
+	public AttributeOwnerReader getPreset(String presetName) {
+		if (componentBank.containsKey(presetName)) {
+			return componentBank.get(presetName);
+		} else if (tileBank.containsKey(presetName)) {
+			return tileBank.get(presetName);
+		} else {
+			new ErrorDialog().create(strResources.getFromErrorMessages("Bank_Error_Header"), 
+					String.format(strResources.getFromErrorMessages("Missing_Preset"), presetName));
+			return null;
+		}
+	}
+	
 	//TODO: get rid of instanceOf
-	public String getAOName(AttributeOwner preset) {
+	@Override
+	public String getPresetName(AttributeOwner preset) {
 		if (preset instanceof Tile) {
 			return findKeyFromValue(tileBank, (Tile) preset);
 		} else if (preset instanceof Component) {
@@ -206,18 +225,9 @@ public class BankController implements BankControllerReader, SerializableObserva
 		return strResources.getFromErrorMessages("No_Name_Found");
 	}
 
-	public AttributeOwner getPreset(String presetName) {
-		if (componentBank.containsKey(presetName)) {
-			return componentBank.get(presetName);
-		} else if (tileBank.containsKey(presetName)) {
-			return tileBank.get(presetName);
-		} else {
-			new ErrorDialog().create(strResources.getFromErrorMessages("Bank_Error_Header"), 
-					String.format(strResources.getFromErrorMessages("Missing_Preset"), presetName));
-			return null;
-		}
-	}
 	
+	
+	@Override
 	public Component getComponent(String componentName){
 		if (componentBank.containsKey(componentName)){
 			return componentBank.get(componentName);
@@ -232,6 +242,7 @@ public class BankController implements BankControllerReader, SerializableObserva
 		}
 	}
 	
+	@Override
 	public void addObserver(SerializableObserver o){
 		observers.add(o);
 	}
@@ -265,5 +276,15 @@ public class BankController implements BankControllerReader, SerializableObserva
 	public void setObservers(List<SerializableObserver> observersave) {
 		// TODO Auto-generated method stub
 		
+	}
+
+	@Override
+	public Collection<Tile> getAccessibleTilePresets() {
+		return this.getAccessibleTileMap().values();
+	}
+
+	@Override
+	public Collection<Component> getAccessibleComponentPresets() {
+		return this.getAccessibleComponentMap().values();
 	}
 }

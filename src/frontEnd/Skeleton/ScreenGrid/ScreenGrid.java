@@ -4,8 +4,8 @@ import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 
 import ModificationFromUser.AttributeOwner.Modification_Add_PaletteToGrid;
-import backEnd.BankController;
-import backEnd.Attribute.AttributeOwner;
+import backEnd.Attribute.AttributeOwnerReader;
+import backEnd.Bank.BankControllerReader;
 import backEnd.GameData.State.State;
 import backEnd.GameData.State.Tile;
 import backEnd.GameData.State.TileImpl;
@@ -57,14 +57,14 @@ public class ScreenGrid implements SkeletonObject {
 	}
 	
 	private void setDrag(){
-		BankController bank = myView.getBankController();
+		BankControllerReader bank = myView.getBankControllerReader();
 		String methodName = "addToGrid";
 		myRoot.setOnMouseMoved(e -> myHover.displayLocation(e));
 		
 		myRoot.setOnDragOver(e -> e.acceptTransferModes(TransferMode.ANY));
 		myRoot.setOnDragDropped(e -> {
 			String presetName = e.getDragboard().getString();
-			AttributeOwner presetAO = bank.getPreset(presetName);
+			AttributeOwnerReader presetAO = bank.getPreset(presetName);
 			Point2D pos = new Point2D(e.getX(), e.getY());
 			for(Class<?> inter : presetAO.getClass().getInterfaces()){
 				try {

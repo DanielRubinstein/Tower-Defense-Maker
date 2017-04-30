@@ -85,7 +85,7 @@ public class ProjectileEngine implements Engine {
 				.getComponentsWithinRadius(target, (Double) projectile.getAttribute("ExplosionRadius").getValue());
 		targetList.remove(target);
 		System.out.println("ProjectileEngine FireType is " + projectile.getAttribute("FireType").getValue());
-		if(projectile.getAttribute(STRING_RESOURCES.getFromAttributeNames("FireType")).getValue().equals(STRING_RESOURCES.getFromAttributeNames("SingleTarget"))){
+		if(projectile.getAttribute(STRING_RESOURCES.getFromAttributeNames("FireType")).getValue().equals(STRING_RESOURCES.getFromValueNames("SingleTarget"))){
 			targetList.clear();
 			System.out.println("TargetList cleared ProjectileEngine");
 		}

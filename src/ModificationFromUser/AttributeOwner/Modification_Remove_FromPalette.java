@@ -1,10 +1,10 @@
 package ModificationFromUser.AttributeOwner;
 
 import ModificationFromUser.ModificationFromUser;
-import backEnd.BankController;
-import backEnd.ModelImpl;
+import backEnd.Model;
 import backEnd.Attribute.AttributeOwner;
 import backEnd.Attribute.AttributeOwnerReader;
+import backEnd.Bank.BankController;
 import backEnd.Mode.ModeException;
 import util.reflection.Reflection;
 
@@ -26,7 +26,7 @@ public class Modification_Remove_FromPalette implements ModificationFromUser {
 	}
 
 	@Override
-	public void invoke(ModelImpl model) throws Exception {
+	public void invoke(Model model) throws Exception {
 		
 		switch (model.getMode().getUserMode()) {
 		case "AUTHOR":

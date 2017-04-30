@@ -53,7 +53,7 @@ public class AttributeCommandCenterBottomButtons implements SkeletonObject{
 	
 	public void addSubmitButton(Component obj) {
 		// as is this option is not available when creating a preset
-		if(myView.getBankController().getAccessibleComponentMap().containsValue(obj)){
+		if(myView.getBankControllerReader().getAccessibleComponentPresets().contains(obj)){
 			Button submit = new Button("Add Now");
 			submit.setOnAction(e -> {
 				myView.sendUserModification(new Modification_Add_StraightToGrid(obj));
@@ -69,7 +69,7 @@ public class AttributeCommandCenterBottomButtons implements SkeletonObject{
 	}
 	
 	public void createAddToPresetButton(AttributeOwner obj) {
-		if(!(myView.getComponentPresets().contains(obj) || myView.getTilePresets().contains(obj))){
+		if(!(myView.getBankControllerReader().getAccessibleComponentPresets().contains(obj) || myView.getBankControllerReader().getAccessibleTilePresets().contains(obj))){
 			List<String> dialogTitles = Arrays.asList("Preset Creation Utility", "Please Input a Name for your new preset");
 			String promptLabel = "New preset name:";
 			String promptText = "";
