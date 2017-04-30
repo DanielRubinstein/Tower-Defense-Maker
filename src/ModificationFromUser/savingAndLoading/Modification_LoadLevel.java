@@ -1,6 +1,8 @@
-package ModificationFromUser;
+package ModificationFromUser.savingAndLoading;
 
 import java.io.File;
+
+import ModificationFromUser.ModificationFromUser;
 import backEnd.ModelImpl;
 import javafx.stage.DirectoryChooser;
 import javafx.stage.Stage;
