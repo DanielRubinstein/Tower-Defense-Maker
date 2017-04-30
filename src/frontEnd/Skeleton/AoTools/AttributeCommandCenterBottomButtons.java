@@ -88,6 +88,7 @@ public class AttributeCommandCenterBottomButtons implements SkeletonObject{
 					alert.setHeaderText("You must select an image to save a Preset");
 					alert.setContentText("Please select an image");
 					alert.showAndWait();
+					e.consume();
 				}
 			});
 			

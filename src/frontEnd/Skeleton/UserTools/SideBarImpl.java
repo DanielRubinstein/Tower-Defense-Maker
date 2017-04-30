@@ -14,7 +14,7 @@ public class SideBarImpl implements SideBar{
 	
 	
 	//takes ViewEditor for now
-	public SideBarImpl(ViewReader view){
+	public SideBarImpl(View view){
 		myRoot = new VBox();
 		//myRoot.setBackground(new Background (new BackgroundFill(Color.CHOCOLATE, CornerRadii.EMPTY, Insets.EMPTY)));
 		myRoot.getStyleClass().add("side-bar");
@@ -22,13 +22,13 @@ public class SideBarImpl implements SideBar{
 		addModeIndicator(view);
 	}
 	
-	private void createStatusView(ViewReader view) {
+	private void createStatusView(View view) {
 		myStatusView = new StatusView(view);
 		myRoot.getChildren().add(myStatusView.getRoot());
 		setFacebookOptions(view);
 	}
 	private void setFacebookOptions(ViewReader view){
-		OptionsFacebook facebookOptions = new OptionsFacebook(view,view.getAppStage());
+		OptionsFacebook facebookOptions = new OptionsFacebook(view);
 		facebookOptions.setAlignment(Pos.TOP_LEFT,Priority.ALWAYS);
 		myRoot.getChildren().add(facebookOptions.getRoot());
 	}

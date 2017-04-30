@@ -3,6 +3,7 @@ package frontEnd.CustomJavafxNodes;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 import frontEnd.Skeleton.UserTools.SkeletonObject;
 import javafx.beans.InvalidationListener;
@@ -17,7 +18,6 @@ import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.ScrollPane.ScrollBarPolicy;
-import javafx.scene.control.SplitPane;
 import javafx.scene.input.ClipboardContent;
 import javafx.scene.input.Dragboard;
 import javafx.scene.input.TransferMode;
@@ -39,6 +39,9 @@ public class ListDragDrop<T> implements SkeletonObject, ObservableValue<T> {
 	}
 	public BooleanProperty changedListProperty(){
 		return changedListProperty;
+	}
+	public List<T> getList() {
+		return myContents.getItems().stream().collect(Collectors.toList());
 	}
 	public void acceptChange(){
 		changedListProperty.set(false);
@@ -143,6 +146,7 @@ public class ListDragDrop<T> implements SkeletonObject, ObservableValue<T> {
 		// TODO Auto-generated method stub
 		return null;
 	}
+
 
 
 }

@@ -108,7 +108,7 @@ public class LevelProgressionControllerImpl implements LevelProgressionControlle
 		String nextLevel = null;
 		for (int i = 0; i < levelPathsList.size(); i++){
 			if (levelPathsList.get(i).equals(myMode.getLevelMode())){
-				nextLevel = levelPathsList.get(++i);
+				if (levelPathsList.size() > i + 1) nextLevel = levelPathsList.get(++i);
 				break;
 			}
 		}
@@ -167,6 +167,7 @@ public class LevelProgressionControllerImpl implements LevelProgressionControlle
 			{
 				gamesMap.put(myMode.getGameMode(), new ArrayList<String>());
 			}			
+			
 			saveGamesMap();
 			
 		} catch (XMLReadingException e) {
@@ -182,7 +183,7 @@ public class LevelProgressionControllerImpl implements LevelProgressionControlle
 		{
 			splashScreenLoader.accept(new SplashScreenData("you won the game!", SplashScreenType.GAME_WON, () -> System.exit(0)));
 		}
-		else gameLoader.accept(getNextLevel());
+		else gameLoader.accept(new File("data/games/" + myMode.getGameMode() + "/templates/" + getNextLevel()));
 	}
 
 	@Override

@@ -3,14 +3,16 @@ package backEnd.GameData.State;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.ResourceBundle;
+import java.util.Set;
 
 import backEnd.Attribute.AttributeOwner;
 import backEnd.Attribute.AttributeOwnerReader;
 import javafx.geometry.Point2D;
-import resources.constants.NumericResourceBundle;
+import resources.constants.numeric.NumericResourceBundle;
 
 /**
  * This is the Grid class that contains the Tile Grid and all of the relevant
@@ -27,13 +29,13 @@ public class TileGridImpl implements TileGrid {
 	private int numColsInGrid;
 	private int numRowsInGrid;
 	private Map<Point2D, Tile> tileGrid;
-	private List<Tile> tileList;
+	//private List<Tile> tileList;
+	private List<Set<Tile>> tileGroups;
 	private double tileWidth;
 	private double tileHeight;
 	private double tileCenterFactor; //ratio of the tile that we consider part of the center of the tile
-	private List<List<SerializableObserver>> tileObserverList;
-	private static final String BUNDLE_NAME = "resources.constants.numericResourceBundle";
-	private static final ResourceBundle RESOURCE_BUNDLE = ResourceBundle.getBundle(BUNDLE_NAME);
+	//private List<List<SerializableObserver>> tileObserverList;
+	private static final NumericResourceBundle NUMERIC_RESOURCE_BUNDLE = new NumericResourceBundle();
 
 	public TileGridImpl(int colsInGrid, int rowsInGrid) {
 
@@ -41,7 +43,7 @@ public class TileGridImpl implements TileGrid {
 		numColsInGrid = colsInGrid;
 		numRowsInGrid = rowsInGrid;
 		tileGrid = new HashMap<>();
-		tileCenterFactor=Double.valueOf(RESOURCE_BUNDLE.getString("TileCenterFactor"));
+		tileCenterFactor=Double.valueOf(NUMERIC_RESOURCE_BUNDLE.getFromSizing("TileCenterFactor"));
 
 	}
 
@@ -50,7 +52,7 @@ public class TileGridImpl implements TileGrid {
 		numColsInGrid = i.getNumCols();
 		numRowsInGrid = i.getNumRows();
 		tileGrid = i.getTileGrid();
-		tileCenterFactor=Double.valueOf(RESOURCE_BUNDLE.getString("TileCenterFactor"));
+		tileCenterFactor=Double.valueOf(NUMERIC_RESOURCE_BUNDLE.getFromSizing("TileCenterFactor"));
 	}
 
 	public TileGridInstantiator getInstantiator() {
@@ -220,6 +222,75 @@ public class TileGridImpl implements TileGrid {
 			myAOs.add(ao);
 		}
 		return myAOs;
+	}
+	
+	@Override
+	public List<Set<Tile>> getTileGroups(){
+		buildTileGroups();
+		return tileGroups;
+	}
+	
+	
+	@Override
+	public void buildTileGroups() {
+		tileGroups = new ArrayList<Set<Tile>>();
+		Tile[][] tileGridThing = new Tile[numColsInGrid][numRowsInGrid];
+		for(Point2D point2d : tileGrid.keySet()){
+			int rowEq = (int)(point2d.getX() / getTileWidth());
+			int colEq = (int)(point2d.getY() / getTileHeight());
+			if(tileGridThing[colEq][rowEq] != null || rowEq < 0 || colEq < 0 || rowEq >= getNumRowsInGrid() || colEq >= getNumColsInGrid()){
+				System.out.println(this.getClass().getSimpleName() + ": Error Thing");
+				return;
+			}
+			tileGridThing[colEq][rowEq] = tileGrid.get(point2d);
+		}
+		for (int i = 0; i < numRowsInGrid; i++) {
+			for (int j = 0; j < numColsInGrid; j++) {
+				if (tileGridThing[j][i] == null) {
+					System.out.println(this.getClass().getSimpleName() + ": Error stuff");
+					continue;
+				}
+				Set<Tile> tempSet = new HashSet<Tile>();
+				tempSet.add(tileGridThing[j][i]);
+				tileGroups.add(tempSet);
+			}
+		}
+		for (int j = 0; j < numColsInGrid; j++) {
+			for (int i = 0; i < numRowsInGrid; i++) {
+				Tile tempTile = tileGridThing[j][i];
+				String moveDir = tempTile.<String>getAttribute("MoveDirection").getValue();
+				if(moveDir.equals("Up") && j > 0){
+					joinSets(tempTile, tileGridThing[j-1][i]);
+				} else if (moveDir.equals("Down") && j < numRowsInGrid-1) {
+					joinSets(tempTile, tileGridThing[j+1][i]);					
+				} else if (moveDir.equals("Left") && i > 0) {
+					joinSets(tempTile, tileGridThing[j][i-1]);
+				} else if (moveDir.equals("Right") && i < numColsInGrid-1) {
+					joinSets(tempTile, tileGridThing[j][i+1]);					
+				} else {
+					//System.out.println(this.getClass().getSimpleName() + ": No move direction");
+				}
+			}
+		}
+	}
+	
+	private void joinSets(Tile tile1, Tile tile2) {
+		int tileSet1 = -1;
+		int tileSet2 = -1;
+		for (int i = 0; i < tileGroups.size(); i++) {
+			Set<Tile> tempSet = tileGroups.get(i);
+			if (tempSet.contains(tile1)) {
+				tileSet1 = i;
+			}
+			if (tempSet.contains(tile2)) {
+				tileSet2 = i;
+			}
+		}
+		if (tileSet1 == -1 || tileSet2 == -1 || tileSet1 == tileSet2) {
+			return;
+		}
+		tileGroups.get(tileSet1).addAll(tileGroups.get(tileSet2));
+		tileGroups.remove(tileSet2);
 	}
 	
 }
