@@ -15,6 +15,7 @@ import javafx.scene.Node;
 import javafx.scene.effect.ColorAdjust;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.Pane;
 
 /**
@@ -36,13 +37,18 @@ public class TileGridInteractor {
 		selectedTiles = new HashMap<>();
 		myView = view;
 		myState = state;
+		myView.getBooleanAuthorModeProperty().addListener((o, oldV, newV) ->{
+			if(!newV){
+				clearTileSelection();
+			}
+		});
 	}
 	
 	public void setTileGridInteraction(Pane p){
 		p.setFocusTraversable(true);
 		p.requestFocus();
 		p.setOnKeyPressed(e -> {	
-			if(e.getCode().equals(KeyCode.LEFT)||e.getCode().equals(KeyCode.RIGHT)||e.getCode().equals(KeyCode.DOWN)||e.getCode().equals(KeyCode.UP)){
+			if(isAMoveDirection(e)){
 				String toSend = e.getCode().toString().charAt(0) + e.getCode().toString().substring(1).toLowerCase();
 				selectedTiles.keySet().forEach(t -> {
 					myView.sendUserModification(new Modification_EditAttribute<String>(t,"MoveDirection",toSend));
@@ -58,6 +64,13 @@ public class TileGridInteractor {
 			}
 		});
 	}
+
+	private boolean isAMoveDirection(KeyEvent e) {
+		return e.getCode().equals(KeyCode.LEFT)
+				|| e.getCode().equals(KeyCode.RIGHT)
+				|| e.getCode().equals(KeyCode.DOWN)
+				|| e.getCode().equals(KeyCode.UP);
+	}
 	
 	public void setTileInteraction(Node n, Tile t) {
 		n.setOnMouseClicked(e ->{
@@ -65,7 +78,7 @@ public class TileGridInteractor {
 			if(e.getClickCount()==2){
 				OnGridTileCommandCenter tileInteractor = new OnGridTileCommandCenter(myView, t, myState);
 				tileInteractor.launch("On-Screen Tile" ,e.getScreenX(), e.getScreenY());
-			}else if(e.isControlDown()){
+			}else if(e.isControlDown() && myView.getBooleanAuthorModeProperty().get()){
 				addToTileSelection(n,t);
 			}else{
 				clearTileSelection();

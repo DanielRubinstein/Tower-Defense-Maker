@@ -98,7 +98,8 @@ public class Palette implements SkeletonObject, SerializableObserver{
 	private void setPresetInteractions(AttributeOwner preset, ImageView imageView) {
 		setClickEvent(imageView, (iV) -> {
 			GenericCommandCenter presetComCenter = new GenericCommandCenter(myView, preset);
-			presetComCenter.launch("Preset", iV.getLayoutX(), iV.getLayoutY());
+			
+			presetComCenter.launch("Preset", iV.getBoundsInParent().getMinX(), iV.getBoundsInParent().getMinY());
 		},setRemoveEvent(imageView),preset);
 		//setRemoveEvent(imageView,preset);
 		makeHoverOverName(preset, imageView);

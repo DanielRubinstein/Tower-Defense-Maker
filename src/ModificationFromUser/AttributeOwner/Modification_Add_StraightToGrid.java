@@ -28,7 +28,7 @@ public class Modification_Add_StraightToGrid implements ModificationFromUser {
 		AttributeOwner attributeOwner = myModel.getAttributeOwner(newAttrOwn);
 		this.location = attributeOwner.<Point2D>getAttribute("Position").getValue();
 		Modification_Add_ToGrid_Methods methods = new Modification_Add_ToGrid_Methods(myModel, location);
-		Reflection.callMethod(methods, "addAttributeOwnerToGrid", newAttrOwn);
+		Reflection.callMethod(methods, "add", newAttrOwn);
 	}
 
 }
