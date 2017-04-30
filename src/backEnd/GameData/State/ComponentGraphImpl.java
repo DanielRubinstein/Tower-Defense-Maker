@@ -102,12 +102,6 @@ public class ComponentGraphImpl implements ComponentGraph {
 	}
 
 	@Override
-	public void addObserver(SerializableObserver o) {
-		observers.add(o);
-
-	}
-
-	@Override
 	public boolean contains(AttributeOwnerReader c) {
 		return myComponents.contains(c);
 	}
@@ -160,21 +154,12 @@ public class ComponentGraphImpl implements ComponentGraph {
 		}
 		*/
 
-	@Override
-	public List<SerializableObserver> getObservers() {
-		return observers;
-	}
 
 	@Override
 	public void clearObservers() {
 		observers.clear();
 	}
 
-	@Override
-	public void setObservers(List<SerializableObserver> observersave) {
-		observers = observersave;
-	}
-	
 	private void notifyObservers(Component obj){
 		for (SerializableObserver o : observers){
 			o.update(null, obj);
@@ -186,8 +171,7 @@ public class ComponentGraphImpl implements ComponentGraph {
 
 	@Override
 	public int compareTo(Object o) {
-		// TODO Auto-generated method stub
-		return 0;
+		return Integer.compare(this.hashCode(), o.hashCode());
 	}
 
 	@Override

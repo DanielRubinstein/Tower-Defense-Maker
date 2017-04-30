@@ -6,15 +6,11 @@ import java.util.Map;
 import java.util.function.Consumer;
 
 import ModificationFromUser.AttributeOwner.Modification_Add_PaletteToGrid;
-import backEnd.Attribute.AttributeOwner;
-import backEnd.GameData.State.SerializableObservable;
 import backEnd.GameData.State.SerializableObservableGen;
-import backEnd.GameData.State.SerializableObserver;
 import backEnd.GameData.State.SerializableObserverGen;
 import backEnd.GameData.State.State;
 import backEnd.GameData.State.Tile;
 import backEnd.GameData.State.TileGrid;
-import backEnd.GameData.State.TileImpl;
 import frontEnd.View;
 import frontEnd.Skeleton.UserTools.SkeletonObject;
 import javafx.geometry.Point2D;
@@ -38,7 +34,6 @@ public class TileGridVisual implements SerializableObserverGen<Tile>, SkeletonOb
 	private View myView;
 	private State myState;
 	private TileGridInteractor myInteractor;
-
 	
 	public static final String ARROW_LOADER_DIRECTORY = "resources" + File.separator + "images" + File.separator + "Arrows" + File.separator;
 	
