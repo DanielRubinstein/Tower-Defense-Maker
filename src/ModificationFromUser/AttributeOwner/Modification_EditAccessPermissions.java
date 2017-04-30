@@ -34,7 +34,7 @@ public class Modification_EditAccessPermissions implements ModificationFromUser{
 				myAccessPermissions.removeGameAccessPermission(mode);
 			}
 		}
-		else if (myModel.getLevelProgressionController().getFullLevelList().contains(mode)){
+		else if (myModel.getLevelProgressionController().contains(mode)){
 			if (permits){
 				myAccessPermissions.addLevelAccessPermission(mode);
 			}

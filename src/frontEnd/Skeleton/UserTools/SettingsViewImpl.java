@@ -106,7 +106,10 @@ public class SettingsViewImpl implements SettingsView{
 	private void saveButtons() {
 		HBox bothButtons = new HBox();
 		Button button1 = new Button("Save level template");
-		button1.setOnAction(e -> myView.sendUserModification(Modification_SaveGameState.TEMPLATE));
+		button1.setOnAction(e ->
+		{
+			myView.sendUserModification(Modification_SaveGameState.TEMPLATE);
+		});
 		Button button2 = new Button("Save current progress");
 		button2.setOnAction(e -> myView.sendUserModification(Modification_SaveGameState.SAVEDGAME));
 		

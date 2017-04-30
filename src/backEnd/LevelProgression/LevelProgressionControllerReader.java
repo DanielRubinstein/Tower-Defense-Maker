@@ -9,8 +9,8 @@ public interface LevelProgressionControllerReader {
 	List<String> getGameList();
 
 	List<String> getLevelList(String gameName);
-	
-	List<String> getFullLevelList();
+		
+	List<String> getOptions(String category);
 	
 	Mode getMode();
 	
@@ -18,6 +18,8 @@ public interface LevelProgressionControllerReader {
 	
 	List<String> getModeCategories();
 	
-	List<String> getOptions(String category);
-
+	boolean contains(String mode);
+	
+	List<String> getCurrentLevelList();
+	
 }

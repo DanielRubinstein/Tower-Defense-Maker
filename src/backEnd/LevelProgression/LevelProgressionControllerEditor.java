@@ -20,6 +20,8 @@ public interface LevelProgressionControllerEditor extends LevelProgressionContro
 
 	void initiateSplashScreen(SplashScreenData splashScreenData);
 
-	void loadNextGame();
+	void loadNextLevel();
 
+	void addLevelToCurrentGame(String newName);
+	
 }
