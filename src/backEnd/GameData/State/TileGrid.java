@@ -43,10 +43,6 @@ public interface TileGrid extends SerializableObservable{
 
 	Object getMap();
 	
-	void saveAndClearTileObservers();
-
-	void setTileObservers();
-	
 	TileGridInstantiator getInstantiator();
 
 	void setNumCols(int numColsInGrid);

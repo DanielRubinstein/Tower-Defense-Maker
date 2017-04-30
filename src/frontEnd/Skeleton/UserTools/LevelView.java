@@ -1,20 +1,26 @@
 package frontEnd.Skeleton.UserTools;
 
+import java.util.Arrays;
 import java.util.List;
 
 import backEnd.LevelProgression.LevelProgressionControllerEditor;
+import frontEnd.CustomJavafxNodes.ListDragDrop;
+import javafx.collections.FXCollections;
 import javafx.geometry.Insets;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
+import javafx.scene.control.TextField;
 import javafx.scene.control.ScrollPane.ScrollBarPolicy;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.stage.Modality;
@@ -28,12 +34,11 @@ public class LevelView {
 	private Stage myStage;
 	private LevelProgressionControllerEditor myLevelContr;
 	private Scene myScene;
-	private Node gameEditor;
-	private Node levelEditor;
-	private LevelEditor myLevelEditor;
+	private Label currentGameLabel;
 	
 	public LevelView(LevelProgressionControllerEditor levels, Stage parentStage){
 		myRoot = new GridPane();
+		currentGameLabel = new Label("No game selected");
 		myLevelContr = levels;
 		initializeRoot(parentStage);
 		createStructureBoxes();	
@@ -46,55 +51,52 @@ public class LevelView {
 		myRoot.setPadding(new Insets(20, 20, 20, 20));
 		myRoot.setVgap(20);
 		myRoot.setHgap(20);
-		myRoot.setPadding(new Insets(20, 20, 20, 20));
-		myRoot.setVgap(20);
-		myRoot.setHgap(20);
 	}
 	
 	public void launch(){
-		
 		myScene = new Scene(myRoot);
 		myScene.getStylesheets().add(stringResourceBundle.getFromStringConstants("DEFAULT_CSS"));
 		myStage.setScene(myScene);
 		myStage.show();
 	}
 	
-	public void createStructureBoxes(){
+	private void createStructureBoxes(){
 		Label title = new Label("Game Structure");
 		title.setUnderline(true);
-	
 		myRoot.add(title, 0, 0);
 
 		Label game = new Label("Game (click on game to view levels)");
 		myRoot.add(game, 0, 1);
+
 		VBox gameOutline = createSingleBox(0);
-		VBox levelOutline = createSingleBox(1);
-		
+		VBox levelOutline = null;
+		populateLevels("");
+		Node gameEditor = createGameEditor(gameOutline);
+		myRoot.add(gameEditor, 0, 3);
 		populateGame(gameOutline,myLevelContr.getGameList(),levelOutline);
-		Label levels = new Label("Levels");
+		Label levels = new Label("Levels (drag to move around)");
 		myRoot.add(levels, 1, 1);
-		
-		myLevelEditor = new LevelEditor(100,levelOutline,gameOutline,myLevelContr);
-		createBottomEditor();
 	}
 	private void populateGame(VBox wrapper,List<String> toAdd,VBox addToBox){
 		for (String str : toAdd){
 			Button strButton = new Button(str);
-			strButton.setOnAction(e -> populateLevels(str,addToBox));
+			strButton.setOnAction(e -> {
+				populateLevels(str);
+				currentGameLabel.setText(str);
+			});
 			wrapper.getChildren().add(strButton);
 		}
 	}
-	private void populateLevels(String gameName,VBox wrapper){
-		wrapper.getChildren().clear();
-		List<String> levels = myLevelContr.getLevelList(gameName);
-		for (String str : levels){
-			Button strButton = new Button(str);
-			strButton.setOnAction(e -> myLevelEditor.populateLevelEditor(strButton));
-			wrapper.getChildren().add(strButton);
-		}
-		myLevelEditor.setGameName(gameName);
+	
+	private void populateLevels(String gameName){
+		String[] test2 = {"test1","tsttt,","test2", "test 3","test54"};
+		List<String> testList = Arrays.asList(test2);
+		ListDragDrop<String> test = new ListDragDrop<String>(FXCollections.observableArrayList(testList));
+		
+		myRoot.add(test.getRoot(), 1, 2);
 	}
-	public VBox createSingleBox(int col){
+	
+	private VBox createSingleBox(int col){
 		ScrollPane scroll = new ScrollPane();
 		scroll.setHbarPolicy(ScrollBarPolicy.AS_NEEDED);
 		scroll.setVbarPolicy(ScrollBarPolicy.AS_NEEDED);
@@ -110,15 +112,27 @@ public class LevelView {
 		myRoot.add(scroll, col, 2);
 		return wrapper;
 	}
-
 	
-	private void createBottomEditor(){
-		gameEditor = myLevelEditor.getGameEditor();
-		myRoot.add(gameEditor, 0, 3);
+	private Node createGameEditor(Pane gameWrapper){
+		GridPane gameEdit = new GridPane();
+		Button removeGame = new Button("Remove Game");
+		TextField addText = new TextField();
+		removeGame.setOnAction(e -> {
+			myLevelContr.removeGame(addText.getText());
+			//gameWrapper.getChildren().remove
+		});
+		Button addGame = new Button("Add Game");
+		addGame.setOnAction(e -> {
+			myLevelContr.addNewGame(addText.getText());
+		});
+		HBox removeBox = new HBox();
+		removeBox.getChildren().addAll(removeGame,currentGameLabel);
+		HBox addBox = new HBox();
+		addBox.getChildren().addAll(addGame,addText);
 		
-		levelEditor = myLevelEditor.getLevelEditor();
-		myRoot.add(levelEditor, 1, 3);
-		
+		gameEdit.add(removeBox, 0, 0);
+		gameEdit.add(addBox, 0, 1);
+		return gameEdit;
 	}
 
 }

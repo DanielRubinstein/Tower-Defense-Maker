@@ -1,7 +1,7 @@
 package ModificationFromUser.Rules;
 
 import ModificationFromUser.ModificationFromUser;
-import backEnd.ModelImpl;
+import backEnd.Model;
 
 public class Modification_ToggleRule implements ModificationFromUser {
 	
@@ -12,7 +12,7 @@ public class Modification_ToggleRule implements ModificationFromUser {
 	}
 
 	@Override
-	public void invoke(ModelImpl myModel) throws Exception {
+	public void invoke(Model myModel) throws Exception {
 		myModel.getGameData().getRules().get(ruleName).toggle();
 
 	}

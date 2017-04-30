@@ -30,15 +30,18 @@ public class SkeletonImpl implements Skeleton{
 	private AuthorScreenGrid myTimelineTabPane;
 
 	/**
-	 * Constructs a new SkeletonImpl object using view and model, which are used to get important information about the State.
-	 * @param view
-	 * @param model
+	 * Constructs a new SkeletonImpl object.
 	 */
 	public SkeletonImpl(){
 		myRoot = new BorderPane();
 		align(numericResourceBundle.getWindowWidth(),numericResourceBundle.getWindowHeight());
 	}
 	
+	/**
+	 * Initializes the relevant aspects of this class using view and model.
+	 * @param view
+	 * @param model
+	 */
 	public void init(View view, ModelReader model){
 		State state = model.getState();
 		myAuthProp = view.getBooleanAuthorModeProperty();
@@ -46,8 +49,6 @@ public class SkeletonImpl implements Skeleton{
 		myTimelineTabPane = new AuthorScreenGrid(view, myScreenGrid);
 		chooseCenter();
 		myAuthProp.addListener((o, oldV, newV) -> chooseCenter());
-		
-		//myRoot.setCenter(myScreenGrid.getRoot());
 		
 		userTools = new UserTools(view);
 		userTools.setBottomAndSideDimensions(numericResourceBundle.getSideWidth(),numericResourceBundle.getBottomHeight());
@@ -79,8 +80,5 @@ public class SkeletonImpl implements Skeleton{
 		myRoot.setMinHeight(size2);
    	 	myScene = new Scene(myRoot, size1, size2);
    	 	myScene.getStylesheets().add(stringResourceBundle.getFromStringConstants("DEFAULT_CSS"));
-	}
-	public Node getScreenGrid(){
-		return myScreenGrid.getRoot();
 	}
 }

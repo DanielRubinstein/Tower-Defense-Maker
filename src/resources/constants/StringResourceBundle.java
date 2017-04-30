@@ -39,9 +39,6 @@ public class StringResourceBundle {
 	}
 	
 	
-	
-	
-	
 	private static final String ATTRIBUTE_NAMES_PATH = "resources.allAttributeNames";
 	private static final ResourceBundle ATTRIBUTE_NAMES_RESOURCE = ResourceBundle.getBundle(ATTRIBUTE_NAMES_PATH);
 

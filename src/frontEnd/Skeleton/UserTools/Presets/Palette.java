@@ -1,15 +1,18 @@
 package frontEnd.Skeleton.UserTools.Presets;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.function.BiConsumer;
 import java.util.function.Consumer;
 
 import ModificationFromUser.AttributeOwner.Modification_Add_PaletteToGrid;
 import ModificationFromUser.AttributeOwner.Modification_Remove_FromPalette;
-import backEnd.BankController;
 import backEnd.Attribute.AttributeOwner;
+import backEnd.Bank.BankControllerImpl;
+import backEnd.Bank.BankControllerReader;
 import backEnd.GameData.State.SerializableObservable;
 import backEnd.GameData.State.SerializableObserver;
 import backEnd.Mode.ModeReader;
@@ -32,6 +35,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.ClipboardContent;
 import javafx.scene.input.Dragboard;
 import javafx.scene.input.MouseButton;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.input.TransferMode;
 import javafx.scene.layout.TilePane;
 import javafx.stage.Stage;
@@ -49,17 +53,17 @@ public class Palette implements SkeletonObject, SerializableObserver{
 	
 	private View myView;
 	private TilePane tile;
-	private Map<String, ? extends AttributeOwner> myPresetMapBackEnd;
+	private Collection<? extends AttributeOwner> myPresets;
 	private Map<ImageView, AttributeOwner> myPresetMapFrontEnd;
 	private String myType;
-	private BankController observedBankController;
+	private BankControllerReader observedBankController;
 	private ModeReader observedMode;
 	
-	public Palette(View view, Map<String, ? extends AttributeOwner> presetMap) {
+	public Palette(View view, Collection<? extends AttributeOwner> presets) {
 		myView = view;
-		initializeMaps(presetMap);
+		initializeMaps(presets);
 		initializePane();
-		for (AttributeOwner preset : myPresetMapBackEnd.values()) {
+		for (AttributeOwner preset : presets) {
 			addPresetToPalette(preset);
 		}
 		extractStringType();
@@ -74,12 +78,12 @@ public class Palette implements SkeletonObject, SerializableObserver{
 		}
 	}
 
-	private void initializeMaps(Map<String, ? extends AttributeOwner> presetMap) {
-		observedBankController = myView.getBankController();
+	private void initializeMaps(Collection<? extends AttributeOwner> presets) {
+		observedBankController = myView.getBankControllerReader();
 		observedBankController.addObserver(this);
-		observedMode = myView.getModeReader();
-		observedMode.addObserver(this);
-		myPresetMapBackEnd = presetMap;
+		//observedMode = myView.getModeReader();
+		//observedMode.addObserver(this);
+		myPresets = presets;
 		myPresetMapFrontEnd = new HashMap<ImageView, AttributeOwner>();
 	}
 
@@ -94,35 +98,36 @@ public class Palette implements SkeletonObject, SerializableObserver{
 	private void setPresetInteractions(AttributeOwner preset, ImageView imageView) {
 		setClickEvent(imageView, (iV) -> {
 			GenericCommandCenter presetComCenter = new GenericCommandCenter(myView, preset);
-			presetComCenter.launch("Preset", iV.getLayoutX(), iV.getLayoutY());
-		});
-		setRemoveEvent(imageView,preset);
+			
+			presetComCenter.launch("Preset", iV.getBoundsInParent().getMinX(), iV.getBoundsInParent().getMinY());
+		},setRemoveEvent(imageView),preset);
+		//setRemoveEvent(imageView,preset);
 		makeHoverOverName(preset, imageView);
 		makePresetDraggable(preset, imageView);
 	}
 
-	private void setClickEvent(Node imageView, Consumer<Node> consumer) {
+	private void setClickEvent(Node imageView, Consumer<Node> consumer, BiConsumer<AttributeOwner, MouseEvent> c, AttributeOwner aO) {
 		imageView.setOnMouseClicked(mouseEvent -> {
 			if (mouseEvent.getButton().equals(MouseButton.PRIMARY)) {
 				consumer.accept(imageView);
+			} else if (mouseEvent.getButton().equals(MouseButton.SECONDARY)){
+				c.accept(aO, mouseEvent);
 			}
 		});	
 	}
 	
-	private void setRemoveEvent(Node imageView, AttributeOwner preset){
-		imageView.setOnMouseClicked(mouseEvent -> {
-			if(mouseEvent.getButton().equals(MouseButton.SECONDARY)){
-				String presetName = observedBankController.getAOName(preset);
-				ContextMenu removeMenu = new ContextMenu();
-				MenuItem removeItem = new MenuItem("Remove from palette");
-				removeItem.setOnAction(e -> {
-					myView.sendUserModification(new Modification_Remove_FromPalette(preset));
-				});
-				removeMenu.getItems().add(removeItem);
-				removeMenu.setAutoHide(true);
-				removeMenu.show(tile, mouseEvent.getScreenX(), mouseEvent.getScreenY());
-			}
-		});
+	private BiConsumer<AttributeOwner, MouseEvent> setRemoveEvent(Node imageView){
+		return(a, m) -> {
+			ContextMenu removeMenu = new ContextMenu();
+			MenuItem removeItem = new MenuItem("Remove from palette");
+			removeItem.setOnAction(e -> {
+				myView.sendUserModification(new Modification_Remove_FromPalette(a));
+			});
+			removeMenu.getItems().add(removeItem);
+			removeMenu.setAutoHide(true);
+			removeMenu.show(tile, m.getScreenX(), m.getScreenY());
+		};
+		
 	}
 
 	private void addPresetImageViewToPalette(ImageView imageView) {
@@ -141,7 +146,7 @@ public class Palette implements SkeletonObject, SerializableObserver{
 	}
 
 	private void makeHoverOverName(AttributeOwner preset, ImageView imageView) {
-		Tooltip t = new Tooltip(observedBankController.getAOName(preset));
+		Tooltip t = new Tooltip(observedBankController.getPresetName(preset));
 		imageView.hoverProperty().addListener((o, oldV, newV) -> {
 			if (newV) {
 				Bounds scenePos = imageView.localToScreen(imageView.getBoundsInLocal());
@@ -157,14 +162,15 @@ public class Palette implements SkeletonObject, SerializableObserver{
 		imageView.setOnDragDetected(e -> {
 			Dragboard db = imageView.startDragAndDrop(TransferMode.ANY);
 			ClipboardContent content = new ClipboardContent();
-			content.putString(observedBankController.getAOName(preset));
+			content.putString(observedBankController.getPresetName(preset));
 			db.setContent(content);
 			db.setDragView(imageView.getImage());
 		});
 	}
 
 	private void createNewPresetButton() {
-		PresetCreationButton presetCreationButton = new PresetCreationButton(myView, myType, (imagePath) -> createImageView(imagePath), (node, consumer) -> setClickEvent(node, consumer) );
+		PresetCreationButton presetCreationButton = new PresetCreationButton(myView, myType, 
+				(imagePath) -> createImageView(imagePath), (node, consumer) -> setClickEvent(node, consumer,null,null) );
 		tile.getChildren().add(0, presetCreationButton.getRoot());
 		presetCreationButton.disableInPlayerMode((inPlayerMode) -> {
 			if(inPlayerMode){
@@ -198,15 +204,14 @@ public class Palette implements SkeletonObject, SerializableObserver{
 	}
 
 	private void updatePalette() {
-		observedBankController.refreshAccessibleMaps();
-		for (AttributeOwner preset : myPresetMapBackEnd.values()) {
+		for (AttributeOwner preset : myPresets) {
 			if (!myPresetMapFrontEnd.containsValue(preset)) {
 				addPresetToPalette(preset);
 			}
 		}
 		List<ImageView> toRemove = new ArrayList<ImageView>();
 		for (ImageView iv : myPresetMapFrontEnd.keySet()) {
-			if (!myPresetMapBackEnd.containsValue(myPresetMapFrontEnd.get(iv))) {
+			if (!myPresets.contains(myPresetMapFrontEnd.get(iv))) {
 				toRemove.add(iv);
 			}
 		}

@@ -3,7 +3,7 @@ package ModificationFromUser.Spawning;
 import java.util.Map;
 
 import ModificationFromUser.ModificationFromUser;
-import backEnd.ModelImpl;
+import backEnd.Model;
 import backEnd.GameEngine.Engine.Spawning.SpawnQueues;
 
 /**
@@ -24,16 +24,15 @@ public class Modification_AddSpawnQueue implements ModificationFromUser {
 	 */
 	public Modification_AddSpawnQueue(String spawnQueueName) {
 		mySpawnQueueName = spawnQueueName;
-		System.out.println(this.getClass().getSimpleName() + ": " + spawnQueueName);
 	}
 
 	@Override
-	public void invoke(ModelImpl myModel) throws Exception {
+	public void invoke(Model myModel) throws Exception {
 		Map<String, SpawnQueues> spawnQueues = myModel.getState().getSpawnQueues();
 		if (!spawnQueues.containsKey(mySpawnQueueName)) {
 			spawnQueues.put(mySpawnQueueName, new SpawnQueues());
 		} else {
-			System.out.println("ERROR: NON-UNIQUE SPAWN QUEUE ID");
+			throw new Exception("Non-unique spawn timeline name");
 		}
 	}
 
