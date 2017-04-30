@@ -18,6 +18,7 @@ import javafx.scene.Node;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
+import resources.constants.StringResourceBundle;
 
 public class TileGridVisual implements SerializableObserverGen<Tile>, SkeletonObject{
 
@@ -36,6 +37,7 @@ public class TileGridVisual implements SerializableObserverGen<Tile>, SkeletonOb
 	private TileGridInteractor myInteractor;
 	
 	public static final String ARROW_LOADER_DIRECTORY = "resources" + File.separator + "images" + File.separator + "Arrows" + File.separator;
+	private StringResourceBundle stringResourceBundle = new StringResourceBundle();
 	
 	public TileGridVisual(View view, State state, double sceneWidth, double sceneHeight){
 		myView = view;
@@ -79,14 +81,15 @@ public class TileGridVisual implements SerializableObserverGen<Tile>, SkeletonOb
 		tileView.fitWidthProperty().bind(myRoot.widthProperty().divide(numberOfTileCols));
 		tileView.fitHeightProperty().bind(myRoot.heightProperty().divide(numberOfTileRows));
 	}
+	
 	private void updateTilesOnGrid() {
 		for(Tile tile : observedTileGrid.getAllTiles()){
-			addTileToGrid(tile, tile.<Point2D>getAttribute("Position").getValue());
+			addTileToGrid(tile, tile.<Point2D>getAttribute(stringResourceBundle.getFromAttributeNames("Position")).getValue());
 		}
 	}
+	
 	private void updateCorrespondingGrid(Tile tile) {
-		
-		addTileToGrid(tile, tile.<Point2D>getAttribute("Position").getValue());
+		addTileToGrid(tile, tile.<Point2D>getAttribute(stringResourceBundle.getFromAttributeNames("Position")).getValue());
 	}
 	
 	private void addTileToGrid(Tile t, Point2D pos) {
@@ -109,8 +112,6 @@ public class TileGridVisual implements SerializableObserverGen<Tile>, SkeletonOb
 		int row = (int) Math.floor(screenPosition.getY() / tileHeight);
 		return new Point2D(column, row);
 	}
-	
-	
 	
 	public ImageView addArrowToVisual(Tile tile){
 		String moveDirection = tile.<String>getAttribute("MoveDirection").getValue();
@@ -143,8 +144,6 @@ public class TileGridVisual implements SerializableObserverGen<Tile>, SkeletonOb
 		});
 		myView.sendUserModification(new Modification_Add_PaletteToGrid(presetAO, pos));
 	}
-	
-
 
 	@Override
 	public void update(SerializableObservableGen<Tile> object, Tile obj) {
