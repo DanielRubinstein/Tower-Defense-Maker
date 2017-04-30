@@ -80,6 +80,7 @@ public class LevelProgressionControllerImpl implements LevelProgressionControlle
 	@Override
 	public void setLevelList(String gameName, List<String> levelList){
 		gamesMap.put(gameName, levelList);
+		saveGamesMap();
 	}
 	
 	
@@ -144,7 +145,7 @@ public class LevelProgressionControllerImpl implements LevelProgressionControlle
 				strResources.getFromStringConstants("Game"), strResources.getFromStringConstants("Level"));
 	}
 
-/*
+
 	@Override
 	public List<String> getOptions(String category) {
 		switch(category){
@@ -152,13 +153,12 @@ public class LevelProgressionControllerImpl implements LevelProgressionControlle
 			return myMode.getAllUserModes();
 		case "Game":
 			return this.getGameList();
-		case "Level":
-			return this.getFullLevelList();
+		
 		default:
 			return null;
 		}
 	}
-*/
+
 
 	private void setGamesMap() {
 		try {

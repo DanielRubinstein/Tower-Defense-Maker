@@ -10,6 +10,8 @@ public interface LevelProgressionControllerReader {
 
 	List<String> getLevelList(String gameName);
 		
+	List<String> getOptions(String category);
+	
 	Mode getMode();
 	
 	String getNextLevel();

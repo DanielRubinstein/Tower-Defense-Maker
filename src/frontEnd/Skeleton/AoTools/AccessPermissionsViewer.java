@@ -85,8 +85,8 @@ public class AccessPermissionsViewer implements SkeletonObject {
 					subsubBody.getChildren().add(subsubsubBody);
 				}
 			} else {
-				//List<String> opts = myModeController.getOptions(category);
-				//addCheckBoxes(subsubBody, opts);
+				List<String> opts = myModeController.getOptions(category);
+				addCheckBoxes(subsubBody, opts);
 			}
 			
 			scrollPane.setContent(subsubBody);

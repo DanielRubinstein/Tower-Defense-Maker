@@ -10,7 +10,7 @@ public interface LevelProgressionControllerEditor extends LevelProgressionContro
 
 	void addNewGame(String gameName);
 
-	//void addLevelToGame(String gameName, String level);
+	void addLevelToGame(String gameName, String level);
 
 	void removeGame(String gameName);
 
