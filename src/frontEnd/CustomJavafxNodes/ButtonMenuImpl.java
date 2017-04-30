@@ -1,5 +1,7 @@
 package frontEnd.CustomJavafxNodes;
 
+import java.util.function.Consumer;
+
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
@@ -29,6 +31,7 @@ public class ButtonMenuImpl implements ButtonMenu {
 		description.setWrapText(true);
 		setText(text);
 	}
+	
 	public GridPane getGridPane(){
 		return myGrid;
 	}
@@ -95,8 +98,8 @@ public class ButtonMenuImpl implements ButtonMenu {
 		myButtonRoot.getChildren().add(n);
 	}
 	
-	public void addBackButton(Runnable event) {
-		this.addSimpleButton("Go Back", event);
+	public void addBackButton(ButtonMenuImpl previousMenu, Stage stage) {		
+		this.addSimpleButton("Go Back", () -> previousMenu.display(stage) );
 		
 	}
 	
@@ -112,8 +115,7 @@ public class ButtonMenuImpl implements ButtonMenu {
 	public void display(Stage stage){
 		if(myScene == null){
 			create();
-		}
-		
+		}		
 		stage.setScene(myScene);
 		stage.show();
 	}

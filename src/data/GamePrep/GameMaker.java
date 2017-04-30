@@ -44,6 +44,14 @@ public class GameMaker {
 		onSubmit = gameDataConsumer;
 		setInputFields();
 		myStage = stage;
+	}
+	
+	public GameMaker(Stage stage, Consumer<Object> gameDataConsumer, String name, ButtonMenuImpl previousMenu){
+		this(stage, gameDataConsumer, name);
+		allSelections.addBackButton(previousMenu, stage);
+	}
+	
+	public void display(){
 		allSelections.display(myStage);
 	}
 

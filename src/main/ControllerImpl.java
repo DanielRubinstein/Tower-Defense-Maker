@@ -55,7 +55,6 @@ public class ControllerImpl implements Controller {
 		{
 			try {
 				if (myView != null) myView.getAppStage().close();
-				System.out.println(o);
 				DataInputLoader loader = new DataInputLoader(o);
 				GameData initialGameData = loader.getGameData();
 				

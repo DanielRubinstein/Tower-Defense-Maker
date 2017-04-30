@@ -65,23 +65,25 @@ public class MainMenu{
 	
 	private void splashScreen(Stage stage) {
    	 	ButtonMenuImpl splash = new ButtonMenuImpl("Welcome");
-   	 	splash.addPrimarySimpleButtonWithHover("START", () -> showPrimaryGameMenu(stage), "Click to start the game!");
+   	 	splash.addPrimarySimpleButtonWithHover("START", () -> showPrimaryGameMenu(splash, stage), "Click to start the game!");
    	 	splash.addPrimarySimpleButtonWithHover("Help/Instructions", () -> new HelpOptions(stage), "See the help page");
    	 	splash.addSimpleButtonWithHover("Connect To Facebook", () -> launchFb(stage), "Log in and connect to Facebook to see high scores, screenshots, post to the official voogasalad_su3ps1ckt34m1337 page");
 		splash.display(stage);
 	}
 
-	private void showPrimaryGameMenu(Stage stage) {
+	private void showPrimaryGameMenu(ButtonMenuImpl previousMenu, Stage stage) {
 		ButtonMenuImpl primaryMenu = new ButtonMenuImpl("Game Menu");
-		primaryMenu.addSimpleButtonWithHover("Create a New Game", () -> showNewGameMenu(stage), "Create a new game from stratch, choose everything!!");
-		primaryMenu.addSimpleButtonWithHover("Select Game", () -> showSelectGameMenu(stage), "Select from already-made games. From here you can load a game, make a level or start from the beginning");
+		primaryMenu.addSimpleButtonWithHover("Create a New Game", () -> showNewGameMenu(primaryMenu, stage), "Create a new game from stratch, choose everything!!");
+		primaryMenu.addSimpleButtonWithHover("Select Game", () -> showSelectGameMenu(primaryMenu, stage), "Select from already-made games. From here you can load a game, make a level or start from the beginning");
+		primaryMenu.addBackButton(previousMenu, stage);
 		primaryMenu.display(stage);
 	}
 	
-	private void showNewGameMenu(Stage stage){
+	private void showNewGameMenu(ButtonMenuImpl previousMenu, Stage stage){
 		String newGameName = getNewGameName();
 		if(newGameName != null){
-			new GameMaker(stage, consumerLoadData, newGameName); // FIXME
+			GameMaker gameMaker = new GameMaker(stage, consumerLoadData, newGameName, previousMenu);
+			gameMaker.display();
 		}
 	}
 	
@@ -93,7 +95,7 @@ public class MainMenu{
 		return myDialog.getUserInputString();
 	}
 	
-	private void showSelectGameMenu(Stage stage){
+	private void showSelectGameMenu(ButtonMenuImpl previousMenu, Stage stage){
 		File file = new File(strResources.getFromFilePaths("All_Games_Path"));
 		String[] directories = file.list( (File current, String name) -> {
 			return new File(current,name).isDirectory();
@@ -102,24 +104,28 @@ public class MainMenu{
 		ButtonMenuImpl primaryMenu = new ButtonMenuImpl("Select a Game");
 		
 		for(String game : directories){
-			primaryMenu.addSimpleButton(game, () -> showGameMenu(stage, game));
+			primaryMenu.addSimpleButton(game, () -> showGameMenu(previousMenu, stage, game));
 		}
 		primaryMenu.display(stage);
 		
 	}
 		
-	private void showGameMenu(Stage stage, String game) {
+	private void showGameMenu(ButtonMenuImpl previousMenu, Stage stage, String game) {
 		ButtonMenuImpl primaryMenu = new ButtonMenuImpl("Select a Game");
 		primaryMenu.addNode(new Label("Game Name: " + game));
-		primaryMenu.addSimpleButtonWithHover("Create New Level", () -> new GameMaker(stage, consumerLoadData, game), "Create a new level for this game");
-		primaryMenu.addSimpleButtonWithHover("Play Level", () -> chooseLevel(stage, "templates" , game), "Play from the first level");
-		primaryMenu.addSimpleButtonWithHover("Edit Level", () -> chooseLevel(stage, "templates" , game), "Load a level to edit");
-   	 	primaryMenu.addSimpleButtonWithHover("Load Saved Game", () -> chooseLevel(stage, "saves" , game), "Continue your progress by loading a user-saved game");
+		primaryMenu.addSimpleButtonWithHover("Create New Level", () -> {
+			GameMaker gameMaker = new GameMaker(stage, consumerLoadData, game);
+			gameMaker.display();
+		}, "Create a new level for this game");
+		primaryMenu.addSimpleButtonWithHover("Play Level", () -> chooseLevel(primaryMenu, stage, "templates" , game), "Play from the first level");
+		primaryMenu.addSimpleButtonWithHover("Edit Level", () -> chooseLevel(primaryMenu, stage, "templates" , game), "Load a level to edit");
+   	 	primaryMenu.addSimpleButtonWithHover("Load Saved Game", () -> chooseLevel(primaryMenu, stage, "saves" , game), "Continue your progress by loading a user-saved game");
+   	 	primaryMenu.addBackButton(previousMenu, stage);
    	 	primaryMenu.display(stage);
 	}
 
 
-	private void chooseLevel(Stage stage,String type , String game)
+	private void chooseLevel(ButtonMenuImpl previousMenu, Stage stage,String type , String game)
 	{
 		String folder = "data/games/" + game + "/" + type + "/";
 		
@@ -144,6 +150,7 @@ public class MainMenu{
 					stage.close();
 				});
 			}
+			levelMenu.addBackButton(previousMenu, stage);
 			levelMenu.display(stage);
 		}
 	}
