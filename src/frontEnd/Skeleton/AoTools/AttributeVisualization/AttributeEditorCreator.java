@@ -9,8 +9,6 @@ import java.util.Map;
 import java.util.MissingResourceException;
 
 import ModificationFromUser.AttributeOwner.Modification_EditAttribute;
-import backEnd.Attribute.Attribute;
-import backEnd.Attribute.AttributeOwner;
 import backEnd.Attribute.AttributeOwnerReader;
 import backEnd.Attribute.AttributeReader;
 import backEnd.GameData.State.Component;
