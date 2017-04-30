@@ -13,7 +13,7 @@ import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.util.Duration;
-import resources.constants.NumericResourceBundle;
+import resources.constants.numeric.NumericResourceBundle;
 
 public class GameProcessController {
 

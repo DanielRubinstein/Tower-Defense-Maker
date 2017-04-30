@@ -111,17 +111,18 @@ public class BankControllerImpl implements SerializableObservable, BankControlle
 	
 	@Override
 	public void addNewComponent(String name, Component component) {
-		if (tileBank.containsKey(name)) {
+		if (componentBank.containsKey(name) || tileBank.containsKey(name)) {
 			JOptionPane.showMessageDialog(null, strResources.getFromErrorMessages("Duplicate_Name_Error"));
 		} else {
 			componentBank.put(name, component);
+			refreshAccessibleComponentMap();
 			notifyObservers();
 		}
 	}
 
 	@Override
 	public void addNewTile(String name, Tile tile) {
-		if (tileBank.containsKey(name)) {
+		if (componentBank.containsKey(name) || tileBank.containsKey(name)) {
 			JOptionPane.showMessageDialog(null, strResources.getFromErrorMessages("Duplicate_Name_Error"));
 		} else {
 			tileBank.put(name, tile);
@@ -210,7 +211,7 @@ public class BankControllerImpl implements SerializableObservable, BankControlle
 	
 	//TODO: get rid of instanceOf
 	@Override
-	public String getPresetName(AttributeOwner preset) {
+	public String getPresetName(AttributeOwnerReader preset) {
 		if (preset instanceof Tile) {
 			return findKeyFromValue(tileBank, (Tile) preset);
 		} else if (preset instanceof Component) {

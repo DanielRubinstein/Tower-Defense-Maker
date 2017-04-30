@@ -17,6 +17,7 @@ public enum Modification_SaveGameState implements ModificationFromUser {
 		}),
 	TEMPLATE ((model, newName) -> {
 		model.getDataController().saveLevelTemplate(model.getGameData(), model.getMode().getGameMode(), newName);
+		model.getLevelProgressionController().addLevelToCurrentGame(newName);
 		});
 
 	private String myLevelName;
@@ -24,14 +25,12 @@ public enum Modification_SaveGameState implements ModificationFromUser {
 	
 	Modification_SaveGameState(BiConsumer<Model, String> consumer){
 		myConsumer = consumer;
-		myLevelName = getSaveGameName();
-		
-		
 	}
 	
 	
 	@Override
 	public void invoke(Model myModel) throws Exception {
+		myLevelName = getSaveGameName();
 		if(myLevelName == null){
 			return;
 		}

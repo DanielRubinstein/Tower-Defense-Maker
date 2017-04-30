@@ -11,8 +11,9 @@ import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
-import resources.constants.NumericResourceBundle;
 import resources.constants.StringResourceBundle;
+import resources.constants.numeric.NumericResourceBundle;
+import resources.constants.numeric.ScreenConstants;
 
 /**
  * This class is an implementation of Skeleton and contains all components of the UI.
@@ -20,7 +21,7 @@ import resources.constants.StringResourceBundle;
  *
  */
 public class SkeletonImpl implements Skeleton{
-	private NumericResourceBundle numericResourceBundle = new NumericResourceBundle();
+	private ScreenConstants myScreenConstants;
 	private StringResourceBundle stringResourceBundle = new StringResourceBundle();
 	private BorderPane myRoot;
 	private Scene myScene;
@@ -34,7 +35,13 @@ public class SkeletonImpl implements Skeleton{
 	 */
 	public SkeletonImpl(){
 		myRoot = new BorderPane();
-		align(numericResourceBundle.getWindowWidth(),numericResourceBundle.getWindowHeight());
+		setupScreenConstants();
+		align(myScreenConstants.getWindowWidth(),myScreenConstants.getWindowHeight());
+	}
+	
+	private void setupScreenConstants(){
+		NumericResourceBundle numericResourceBundle = new NumericResourceBundle();
+		myScreenConstants = numericResourceBundle.getScreenConstants();
 	}
 	
 	/**
@@ -45,13 +52,13 @@ public class SkeletonImpl implements Skeleton{
 	public void init(View view, ModelReader model){
 		State state = model.getState();
 		myAuthProp = view.getBooleanAuthorModeProperty();
-		myScreenGrid = new ScreenGrid(view, state, numericResourceBundle.getScreenGridWidth(), numericResourceBundle.getScreenGridHeight());
+		myScreenGrid = new ScreenGrid(view, state, myScreenConstants.getScreenGridWidth(), myScreenConstants.getScreenGridHeight());
 		myTimelineTabPane = new AuthorScreenGrid(view, myScreenGrid);
 		chooseCenter();
 		myAuthProp.addListener((o, oldV, newV) -> chooseCenter());
 		
 		userTools = new UserTools(view);
-		userTools.setBottomAndSideDimensions(numericResourceBundle.getSideWidth(),numericResourceBundle.getBottomHeight());
+		//userTools.setBottomAndSideDimensions(myScreenConstants.getSideWidth(),myScreenConstants.getBottomHeight());
 		myRoot.setRight(userTools.getSidePane());
 		myRoot.setBottom(userTools.getBottomPane());
 	}
@@ -70,8 +77,8 @@ public class SkeletonImpl implements Skeleton{
 	 */
 	public void display(Stage stage) {
 		stage.setScene(myScene);
-		stage.setMinWidth(numericResourceBundle.getWindowWidth());
-		stage.setMinHeight(numericResourceBundle.getWindowHeight());
+		stage.setMinWidth(myScreenConstants.getWindowWidth());
+		stage.setMinHeight(myScreenConstants.getWindowHeight());
 		stage.show();
 	}
 	

@@ -12,14 +12,14 @@ import backEnd.GameData.State.State;
 import backEnd.GameData.State.Tile;
 import backEnd.GameData.State.TileGrid;
 import frontEnd.View;
-import frontEnd.Skeleton.UserTools.SkeletonObject;
 import javafx.geometry.Point2D;
 import javafx.scene.Node;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
+import resources.constants.StringResourceBundle;
 
-public class TileGridVisual implements SerializableObserverGen<Tile>, SkeletonObject{
+public class TileGridVisual extends GridVisualBase<Tile> implements SerializableObserverGen<Tile>{
 
 	private GridPane myRoot;
 	private Map<Point2D, Tile> myTiles;
@@ -29,13 +29,11 @@ public class TileGridVisual implements SerializableObserverGen<Tile>, SkeletonOb
 	private int numberOfTileRows;
 	private double tileWidth;
 	private double tileHeight;
-	private double myWidth;
-	private double myHeight;
 	private View myView;
-	private State myState;
 	private TileGridInteractor myInteractor;
 	
 	public static final String ARROW_LOADER_DIRECTORY = "resources" + File.separator + "images" + File.separator + "Arrows" + File.separator;
+	private StringResourceBundle stringResourceBundle = new StringResourceBundle();
 	
 	public TileGridVisual(View view, State state, double sceneWidth, double sceneHeight){
 		myView = view;
@@ -43,17 +41,14 @@ public class TileGridVisual implements SerializableObserverGen<Tile>, SkeletonOb
 		myTiles = new HashMap<>();
 		myTileImages = new HashMap<>();
 		myInteractor = new TileGridInteractor(view,this,state);
-		myState = state;
-		myWidth = sceneWidth;
-		myHeight = sceneHeight;
-		observedTileGrid = myState.getTileGrid();
+		observedTileGrid = state.getTileGrid();
 		observedTileGrid.addObserver(this);
-		initializeGrid();
-		adjustSize();
+		initializeGrid(sceneWidth, sceneHeight);
+		adjustSize(sceneWidth, sceneHeight);
 		updateTilesOnGrid();
 	}
 	
-	private void initializeGrid() {
+	private void initializeGrid(double myWidth, double myHeight) {
 		myRoot = new GridPane();
 		myRoot.setMinWidth(numberOfTileCols);
 		myRoot.setMinHeight(numberOfTileRows);
@@ -64,7 +59,7 @@ public class TileGridVisual implements SerializableObserverGen<Tile>, SkeletonOb
 		myInteractor.setTileGridInteraction(myRoot);
 	}
 	
-	private void adjustSize(){
+	private void adjustSize(double myWidth, double myHeight){
 		numberOfTileCols = observedTileGrid.getNumColsInGrid();
 		numberOfTileRows = observedTileGrid.getNumRowsInGrid();
 		tileWidth = myWidth / numberOfTileCols;
@@ -79,14 +74,16 @@ public class TileGridVisual implements SerializableObserverGen<Tile>, SkeletonOb
 		tileView.fitWidthProperty().bind(myRoot.widthProperty().divide(numberOfTileCols));
 		tileView.fitHeightProperty().bind(myRoot.heightProperty().divide(numberOfTileRows));
 	}
+	
 	private void updateTilesOnGrid() {
 		for(Tile tile : observedTileGrid.getAllTiles()){
-			addTileToGrid(tile, tile.<Point2D>getAttribute("Position").getValue());
+			addTileToGrid(tile, tile.<Point2D>getAttribute(stringResourceBundle.getFromAttributeNames("Position")).getValue());
 		}
 	}
-	private void updateCorrespondingGrid(Tile tile) {
-		
-		addTileToGrid(tile, tile.<Point2D>getAttribute("Position").getValue());
+	
+	@Override
+	protected void updateGrid(Tile tile) {
+		addTileToGrid(tile, tile.<Point2D>getAttribute(stringResourceBundle.getFromAttributeNames("Position")).getValue());
 	}
 	
 	private void addTileToGrid(Tile t, Point2D pos) {
@@ -110,11 +107,9 @@ public class TileGridVisual implements SerializableObserverGen<Tile>, SkeletonOb
 		return new Point2D(column, row);
 	}
 	
-	
-	
 	public ImageView addArrowToVisual(Tile tile){
-		String moveDirection = tile.<String>getAttribute("MoveDirection").getValue();
-		Point2D screenPosition = tile.<Point2D>getAttribute("Position").getValue();
+		String moveDirection = tile.<String>getAttribute(stringResourceBundle.getFromAttributeNames("MoveDirection")).getValue();
+		Point2D screenPosition = tile.<Point2D>getAttribute(stringResourceBundle.getFromAttributeNames("Position")).getValue();
 		Point2D gridPosition = this.getGridPosition(screenPosition);
 		if (moveDirection == null || moveDirection.equals("")){
 			return null;
@@ -137,18 +132,17 @@ public class TileGridVisual implements SerializableObserverGen<Tile>, SkeletonOb
 		return myRoot;
 	}
 
+	@Override
 	public void addPreset(Tile presetAO, Point2D pos) {
 		myInteractor.forEachSelectedTile(e -> {
-			myView.sendUserModification(new Modification_Add_PaletteToGrid(presetAO, e.<Point2D>getAttribute("Position").getValue()));
+			myView.sendUserModification(new Modification_Add_PaletteToGrid(presetAO, e.<Point2D>getAttribute(stringResourceBundle.getFromAttributeNames("Position")).getValue()));
 		});
 		myView.sendUserModification(new Modification_Add_PaletteToGrid(presetAO, pos));
 	}
-	
-
 
 	@Override
 	public void update(SerializableObservableGen<Tile> object, Tile obj) {
-		updateCorrespondingGrid(obj);
+		updateGrid(obj);
 		
 	}
 }

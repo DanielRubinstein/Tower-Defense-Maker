@@ -5,14 +5,11 @@ import ModificationFromUser.savingAndLoading.Modification_LoadLevel;
 import ModificationFromUser.savingAndLoading.Modification_NewGame;
 import ModificationFromUser.savingAndLoading.Modification_SaveGameState;
 import frontEnd.View;
-import frontEnd.CustomJavafxNodes.ActionButton;
 import frontEnd.CustomJavafxNodes.ButtonMenuImpl;
 import frontEnd.CustomJavafxNodes.ToggleSwitch;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.geometry.Bounds;
-import javafx.scene.Node;
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
 import javafx.scene.control.SplitPane;
 import javafx.scene.control.Tooltip;
 import javafx.scene.layout.HBox;
@@ -31,9 +28,9 @@ public class SettingsViewImpl implements SettingsView{
 	private Stage myParentStage;
 	private Stage myStage;
 	
-	public SettingsViewImpl(View view, Stage parentStage) {
+	public SettingsViewImpl(View view) {
 		myView = view;
-		myParentStage = parentStage;
+		//myParentStage = parentStage;
 		authorProperty = myView.getBooleanAuthorModeProperty();
 		addButtons();
 	}
@@ -41,7 +38,7 @@ public class SettingsViewImpl implements SettingsView{
 	public void launchSettings(){
 		// http://stackoverflow.com/questions/29514248/javafx-how-to-focus-on-one-stage
 		myStage = new Stage();
-		myStage.initOwner(myParentStage);
+		myStage.initOwner(myView.getMainWindow());
 		myStage.initModality(Modality.APPLICATION_MODAL);
 		myMenu.display(myStage);
 	}
@@ -66,7 +63,7 @@ public class SettingsViewImpl implements SettingsView{
 	}
 
 	private void helpButtons() {
-		myMenu.addSimpleButtonWithHover("Help", () -> new HelpOptions(myStage), "Get Help");
+		myMenu.addSimpleButtonWithHover("Help", () -> new HelpOptionsImpl(myStage), "Get Help");
 	}
 
 	private void modeToggleButtons() {
@@ -106,18 +103,22 @@ public class SettingsViewImpl implements SettingsView{
 	private void saveButtons() {
 		HBox bothButtons = new HBox();
 		Button button1 = new Button("Save level template");
-		button1.setOnAction(e -> myView.sendUserModification(Modification_SaveGameState.TEMPLATE));
+		button1.setOnAction(e -> {
+			myView.sendUserModification(Modification_SaveGameState.TEMPLATE);
+		});
 		Button button2 = new Button("Save current progress");
-		button2.setOnAction(e -> myView.sendUserModification(Modification_SaveGameState.SAVEDGAME));
+		button2.setOnAction(e -> {
+			myView.sendUserModification(Modification_SaveGameState.SAVEDGAME);
+		});
 		
-		button2.disableProperty().bind(authorProperty.not());
+		button1.disableProperty().bind(authorProperty.not());
 		
 		SplitPane wrapper1 = new SplitPane(button2);
 		Tooltip t = new Tooltip("Only possible in Author mode");
 		SplitPane wrapper2 = new SplitPane(button1);
 		wrapper2.setTooltip(t);
 		wrapper2.hoverProperty().addListener((a,b,c)->{
-			if(wrapper2.isHover()&&button2.isDisabled()){
+			if(wrapper2.isHover()&&button1.isDisabled()){
 				Bounds scenePos= wrapper2.localToScreen(wrapper2.getBoundsInLocal());
 				t.show(wrapper2, scenePos.getMaxX(), scenePos.getMinY()-scenePos.getHeight());
 			}else{

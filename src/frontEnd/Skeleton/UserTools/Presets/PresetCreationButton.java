@@ -1,16 +1,15 @@
 package frontEnd.Skeleton.UserTools.Presets;
 
-import java.util.function.BiConsumer;
 import java.util.function.Consumer;
-import java.util.function.Function;
 
 import backEnd.Attribute.AttributeOwner;
 import frontEnd.View;
 import frontEnd.Skeleton.AoTools.GenericCommandCenter;
 import frontEnd.Skeleton.UserTools.SkeletonObject;
 import javafx.scene.Node;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import resources.constants.NumericResourceBundle;
+import resources.constants.numeric.NumericResourceBundle;
 import util.reflection.Reflection;
 
 public class PresetCreationButton implements SkeletonObject {
@@ -19,17 +18,17 @@ public class PresetCreationButton implements SkeletonObject {
 	private View myView;
 	private ImageView myRoot;
 	
-	public PresetCreationButton(View view, String myType, Function<String, ImageView> imageCreator, BiConsumer<Node, Consumer<Node>> clickEventSetter){
-		myRoot = imageCreator.apply(PLUS_IMAGE);
-		myRoot.setFitWidth(numericResourceBundle.getPresetSizeInPalette());
-		myRoot.setFitHeight(numericResourceBundle.getPresetSizeInPalette());
+	public PresetCreationButton(View view, String myType){
+		myRoot = createImageView(PLUS_IMAGE);
+		Double palettePresetSize = numericResourceBundle.getFromSizing("PalettePresetSize");
+		myRoot.setFitHeight(palettePresetSize);
+		myRoot.setFitWidth(palettePresetSize);
 		myView = view;
-		clickEventSetter.accept(myRoot, (iV) -> {
+		myRoot.setOnMouseClicked(e -> {
 			AttributeOwner newAO = (AttributeOwner) Reflection.createInstance(myType);
 			GenericCommandCenter presetCreation = new GenericCommandCenter(myView, newAO);
-			presetCreation.launch("Design a new preset", 0d, 0d);			
-		});
-		
+			presetCreation.launch("Design a new preset", 0d, 0d);
+		});		
 	}
 	
 	public void disableInPlayerMode(Consumer<Boolean> disableConsumer) {
@@ -39,6 +38,11 @@ public class PresetCreationButton implements SkeletonObject {
 		});
 	}
 	
+	private ImageView createImageView(String myImagePath) {
+		Image image = new Image(getClass().getClassLoader().getResourceAsStream(myImagePath));
+		ImageView imageView = new ImageView(image);
+		return imageView;
+	}
 
 	@Override
 	public Node getRoot() {

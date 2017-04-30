@@ -11,7 +11,7 @@ import backEnd.GameEngine.EngineStatus;
 import backEnd.GameEngine.Engine.Spawning.SpawnQueueInstantiator;
 import backEnd.GameEngine.Engine.Spawning.SpawnQueues;
 import javafx.geometry.Point2D;
-import resources.constants.NumericResourceBundle;
+import resources.constants.numeric.NumericResourceBundle;
 
 /**
  * 
@@ -59,8 +59,8 @@ public StateImpl(TileGrid tileGrid, ComponentGraph componentGraph, HashMap<Strin
 	private void setDefaultTileGrid() throws FileNotFoundException {
 		for (int row = 0; row < numRowsInGrid; row++) {
 			for (int col = 0; col < numColsInGrid; col++) {
-				Double tileWidth = numericResourceBundle.getScreenGridWidth() / numColsInGrid;
-				Double tileHeight = numericResourceBundle.getScreenGridHeight() / numRowsInGrid;
+				Double tileWidth = numericResourceBundle.getScreenConstants().getScreenGridWidth() / numColsInGrid;
+				Double tileHeight = numericResourceBundle.getScreenConstants().getScreenGridHeight() / numRowsInGrid;
 				Point2D pos = new Point2D((col + 0.5) * (tileWidth), (row + 0.5) * (tileHeight));
 				Tile newTile = new TileImpl();
 				newTile.getAttribute("Position").setValue(pos);

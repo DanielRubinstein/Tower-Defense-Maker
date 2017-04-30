@@ -1,35 +1,34 @@
 package frontEnd.Skeleton.ScreenGrid;
 
-import java.lang.reflect.Method;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
+import ModificationFromUser.AttributeOwner.Modification_Add_PaletteToGrid;
 import backEnd.Attribute.AttributeOwner;
 import backEnd.GameData.State.Component;
 import backEnd.GameData.State.ComponentGraph;
-import backEnd.GameData.State.SerializableObservable;
 import backEnd.GameData.State.SerializableObservableGen;
-import backEnd.GameData.State.SerializableObserver;
 import backEnd.GameData.State.SerializableObserverGen;
 import backEnd.GameData.State.State;
+import backEnd.GameData.State.Tile;
 import frontEnd.View;
 import frontEnd.Skeleton.AoTools.GenericCommandCenter;
-import frontEnd.Skeleton.UserTools.SkeletonObject;
 import javafx.geometry.Bounds;
+import javafx.geometry.Point2D;
 import javafx.scene.Group;
 import javafx.scene.Node;
 import javafx.scene.control.Tooltip;
 import javafx.scene.image.ImageView;
-import util.reflection.Reflection;
+import resources.constants.StringResourceBundle;
 
 /**
- * This class represents all the components on the grid.
+ * This class represents all the components on the grid and how they should be displayed visually.
  * @author Tim
  *
  */
-public class ComponentGridVisual implements SkeletonObject, SerializableObserverGen<Component> {
+public class ComponentGridVisual extends GridVisualBase<Component> implements SerializableObserverGen<Component> {
 	
 	private ComponentGraph observedComponentGraph;
 	private Set<Component> myComponents;
@@ -38,6 +37,15 @@ public class ComponentGridVisual implements SkeletonObject, SerializableObserver
 	private View myView;
 	private Group myRoot;
 	
+	private StringResourceBundle stringResourceBundle = new StringResourceBundle();
+	private String hoverAttributeDisplay = stringResourceBundle.getFromAttributeNames("UpgradeCost");
+	
+	/**
+	 * Creates a new instance of this class using View and State. State allows this class to know which Components
+	 * exist in the backend.
+	 * @param view
+	 * @param state
+	 */
 	public ComponentGridVisual(View view, State state){
 		myRoot = new Group();
 		myView = view;
@@ -61,15 +69,15 @@ public class ComponentGridVisual implements SkeletonObject, SerializableObserver
 			}
 		});
 	}
-
-	private void updateCorrespondingGrid(Component arg) {
+	
+	@Override
+	protected void updateGrid(Component arg) {
 		if (!myComponents.contains(arg)) {
 			addComponentToGrid(arg);
 		}
 		if(!observedComponentGraph.getAllComponents().contains(arg)){
 			removeComponentFromGrid(arg);
 		}
-		
 	}
 
 	private void updateComponentsOnGrid() {
@@ -104,12 +112,11 @@ public class ComponentGridVisual implements SkeletonObject, SerializableObserver
 	}
 	
 	private void addHover(ImageView n,Component c){
-		String format = "(Upgrade Cost: %d)";
+		String format = hoverAttributeDisplay +stringResourceBundle.getFromStringConstants("SingleIntegerWithColon");
 		Tooltip hover = new Tooltip();
-		
 		n.hoverProperty().addListener((o, oldV, newV) -> {
 			if (newV) {
-				hover.setText(String.format(format,c.getAttribute("UpgradeCost").getValue()));
+				hover.setText(String.format(format,c.getAttribute(hoverAttributeDisplay).getValue()));
 				Bounds scenePos = n.localToScreen(n.getBoundsInLocal());
 				hover.show(n, scenePos.getMaxX(), scenePos.getMinY());
 			} else {
@@ -117,8 +124,10 @@ public class ComponentGridVisual implements SkeletonObject, SerializableObserver
 			}
 		});
 	}
-
-
+	@Override
+	public void addPreset(Component presetAO, Point2D pos){
+		myView.sendUserModification(new Modification_Add_PaletteToGrid(presetAO, pos));
+	}
 
 	@Override
 	public Node getRoot(){
@@ -127,8 +136,7 @@ public class ComponentGridVisual implements SkeletonObject, SerializableObserver
 
 	@Override
 	public void update(SerializableObservableGen<Component> object, Component obj) {
-		updateCorrespondingGrid(obj);
-		
+		updateGrid(obj);
 	}
 
 }

@@ -4,15 +4,16 @@ import java.io.File;
 import java.io.FilenameFilter;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.function.Consumer;
-
 import backEnd.LevelProgression.LevelProgressionControllerEditor;
 import backEnd.Mode.Mode;
 import data.DataController;
 import data.XMLReadingException;
 import frontEnd.Skeleton.SplashScreens.SplashScreenData;
+import frontEnd.Skeleton.SplashScreens.SplashScreenType;
 import resources.constants.StringResourceBundle;
 
 /**
@@ -43,32 +44,18 @@ public class LevelProgressionControllerImpl implements LevelProgressionControlle
 	
 	public void initiateSplashScreen(SplashScreenData data)
 	{
-		System.out.println("LPC line 46");
 		splashScreenLoader.accept(data);
-		System.out.println("LPC line 48");
 	}
 	
 	@Override
 	public List<String> getGameList(){
+		
 		return new ArrayList<String>(gamesMap.keySet());
 	}
-	
-	
+
 	@Override
 	public List<String> getLevelList(String gameName)
 	{	
-		List<String> toRemove = new ArrayList<String>();
-		
-		//check to see if a level still exists as a template
-		for (String level : gamesMap.get(gameName))
-		{
-			if (!getFullLevelList().contains(level))
-			{
-				toRemove.add(level);
-			}
-		}
-		gamesMap.get(gameName).removeAll(toRemove);
-		
 		return gamesMap.get(gameName);
 	}
 	
@@ -77,9 +64,8 @@ public class LevelProgressionControllerImpl implements LevelProgressionControlle
 		myDataController.saveGamesMap(gamesMap);
 	}
 	
-	@Override
-	public List<String> getFullLevelList(){
-		File file = new File(strResources.getFromFilePaths("Level_Template_Path"));
+	public List<String> getDirLevelList(String gameName){
+		File file = new File("data/" + gameName + "/templates/");
 		String[] directories = file.list(new FilenameFilter() {
 		  @Override
 		  public boolean accept(File current, String name) {
@@ -87,10 +73,6 @@ public class LevelProgressionControllerImpl implements LevelProgressionControlle
 		  }
 		});
 		
-		/*List<String> allLevels = new ArrayList<String>();
-		for (List<String> levels : gamesMap.values()){
-			allLevels.addAll(levels);
-		}*/
 		return Arrays.asList(directories);
 	}
 	
@@ -98,12 +80,21 @@ public class LevelProgressionControllerImpl implements LevelProgressionControlle
 	@Override
 	public void setLevelList(String gameName, List<String> levelList){
 		gamesMap.put(gameName, levelList);
+		saveGamesMap();
 	}
 	
 	
 	@Override
 	public void addNewGame(String gameName){
 		gamesMap.put(gameName, new ArrayList<String>());
+		
+		File file = new File("data/games/" + gameName + "/templates/");
+		file.mkdirs();
+		
+		file = new File("data/games/" + gameName + "/saves");
+		file.mkdirs();
+		
+		saveGamesMap();
 	}
 	
 	@Override
@@ -117,18 +108,19 @@ public class LevelProgressionControllerImpl implements LevelProgressionControlle
 		String nextLevel = null;
 		for (int i = 0; i < levelPathsList.size(); i++){
 			if (levelPathsList.get(i).equals(myMode.getLevelMode())){
-				nextLevel = levelPathsList.get(++i);
+				if (levelPathsList.size() > i + 1) nextLevel = levelPathsList.get(++i);
 				break;
 			}
 		}
 		return nextLevel;
 	}
 	
-	@Override
+	//@Override
 	public void addLevelToGame(String gameName, String level){
 		List<String> levelPathsList = gamesMap.get(gameName);
-		levelPathsList.add(level);
+		if (!levelPathsList.contains(level)) levelPathsList.add(level);
 		gamesMap.put(gameName, levelPathsList);
+		saveGamesMap();
 	}
 	
 	@Override
@@ -161,17 +153,23 @@ public class LevelProgressionControllerImpl implements LevelProgressionControlle
 			return myMode.getAllUserModes();
 		case "Game":
 			return this.getGameList();
-		case "Level":
-			return this.getFullLevelList();
+		
 		default:
 			return null;
 		}
 	}
-	
+
 
 	private void setGamesMap() {
 		try {
 			this.gamesMap = myDataController.loadGamesMapData();
+			if (!gamesMap.containsKey(myMode.getGameMode()))
+			{
+				gamesMap.put(myMode.getGameMode(), new ArrayList<String>());
+			}			
+			
+			saveGamesMap();
+			
 		} catch (XMLReadingException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -179,10 +177,39 @@ public class LevelProgressionControllerImpl implements LevelProgressionControlle
 	}
 
 	@Override
-	public void loadNextGame()
+	public void loadNextLevel()
 	{
-		System.out.println("LPC line 183");
-		gameLoader.accept("Spider");
-		System.out.println("LPC line 185");
+		if (getNextLevel() == null)
+		{
+			splashScreenLoader.accept(new SplashScreenData("you won the game!", SplashScreenType.GAME_WON, () -> System.exit(0)));
+		}
+		else gameLoader.accept(new File("data/games/" + myMode.getGameMode() + "/templates/" + getNextLevel()));
+	}
+
+	@Override
+	public boolean contains(String mode)
+	{
+		if (getGameList().contains(mode)) return true;
+		else
+		{
+			for (String gameName : getGameList())
+			{
+				if (gamesMap.get(gameName).contains(mode)) return true;
+			}
+		}
+		
+		return false;
+	}
+
+	@Override
+	public List<String> getCurrentLevelList()
+	{
+		return gamesMap.get(myMode.getGameMode());
+	}
+
+	@Override
+	public void addLevelToCurrentGame(String newName)
+	{
+		gamesMap.get(myMode.getGameMode()).add(newName);
 	}
 }
