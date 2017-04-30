@@ -5,6 +5,9 @@ import java.util.function.Consumer;
 
 import backEnd.Attribute.AttributeOwner;
 import backEnd.Attribute.AttributeOwnerReader;
+import backEnd.Bank.BankController;
+import backEnd.Bank.BankControllerImpl;
+import backEnd.Bank.BankControllerReader;
 import backEnd.GameData.GameData;
 import backEnd.GameData.Rules.RuleReader;
 import backEnd.GameData.State.PlayerStatusModifier;
@@ -38,11 +41,10 @@ import resources.constants.StringResourceBundle;
 public class ModelImpl implements Model{
 	private GameData myGameData;
 	private Mode myMode;
-	private BankController myBankController;
+	private BankControllerImpl myBankController;
 	private DataController myDataController;
 	private GameProcessController myEngine;
 	private LevelProgressionControllerImpl myLevelProgressionController;
-	private EngineStatus myEngineStatus;
 	private Consumer<Object> gameLoader;
 	private static final StringResourceBundle strResource = new StringResourceBundle();;
 	
@@ -55,39 +57,45 @@ public class ModelImpl implements Model{
 		myLevelProgressionController = new LevelProgressionControllerImpl(myMode, myDataController, splashScreenLoader, gameLoader);
 		myGameData.setLevelProgressionController(myLevelProgressionController);
 		myEngine = new GameProcessController(myGameData);
-		myBankController = new BankController(myMode, (DataControllerReader) myDataController);
+		myBankController = new BankControllerImpl(myMode, (DataControllerReader) myDataController);
 		myGameData.setBankController(myBankController);
 		myDataController.setBankController(myBankController);
 
 	}
 
+	@Override
 	public Consumer<Object> getGameLoader()
 	{
 		return gameLoader;
 	}
 	
+	@Override
 	public State getState()
 	{
 		return myGameData.getState();
 	}
 	
+	@Override
 	public ModeReader getModeReader(){
 		return (ModeReader) myMode;
 	}
 	
+	@Override
 	public Mode getMode(){
 		return this.myMode;
 	}
 	
 	@Override
-	public BankController getBankController(){
+	public BankControllerReader getBankControllerReader(){
 		return this.myBankController;
 	}
 
+	@Override
 	public DataController getDataController(){
 		return myDataController;
 	}
 	
+	@Override
 	public GameData getGameData(){
 		return myGameData;
 	}
@@ -98,6 +106,7 @@ public class ModelImpl implements Model{
 
 	}
 	
+	@Override
 	public SimpleStringProperty getEngineStatus(){
 		return myEngine.getEngineStatus();
 	}
@@ -111,9 +120,8 @@ public class ModelImpl implements Model{
 	public PlayerStatusModifier getModifiablePlayerStatus() {
 		return myGameData.getModifiablePlayerStatus();
 	}
-
-	
 		
+	@Override
 	public LevelProgressionControllerEditor getLevelProgressionController() {
 		return  myLevelProgressionController;
 	}
@@ -122,12 +130,26 @@ public class ModelImpl implements Model{
 	public List<RuleReader> getRulesList() {
 		return myGameData.getRules().getRuleReaderList();
 	}
+	
+	@Override
+	public BankController getBankController() {
+		return myBankController;
+	}
 
+	
+	///////////////////////////////////////////////////////////////////////////////
+	// Security Methods
+	///////////////////////////////////////////////////////////////////////////////
+	
+	@Override
 	public AttributeOwner getAttributeOwner(AttributeOwnerReader attributeOwnerReader) {
 		return (AttributeOwner) attributeOwnerReader;
 	}
 
+	@Override
 	public SpawnData getSpawnData(SpawnDataReader mySpawnDataReader) {
 		return (SpawnData) mySpawnDataReader;
 	}
+
+	
 }

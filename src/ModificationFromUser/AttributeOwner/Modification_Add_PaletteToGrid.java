@@ -2,7 +2,7 @@ package ModificationFromUser.AttributeOwner;
 
 import ModificationFromUser.ModificationFromUser;
 import ModificationFromUser.AttributeOwner.ReflectionMethods.Modification_Add_ToGrid_Methods;
-import backEnd.ModelImpl;
+import backEnd.Model;
 import backEnd.Attribute.AttributeOwner;
 import backEnd.Attribute.AttributeOwnerReader;
 import backEnd.Attribute.AttributeOwnerSerializer;
@@ -27,7 +27,7 @@ public class Modification_Add_PaletteToGrid implements ModificationFromUser {
 	}
 
 	@Override
-	public void invoke(ModelImpl myModel) throws Exception {
+	public void invoke(Model myModel) throws Exception {
 		AttributeOwner attributeOwner = myModel.getAttributeOwner(newAttrOwn);
 		AttributeOwnerSerializer attributeOwnerSerializer = new AttributeOwnerSerializer();
 		AttributeOwner cleanAO = attributeOwnerSerializer.createCopy(attributeOwner);

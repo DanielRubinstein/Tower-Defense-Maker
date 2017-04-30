@@ -4,8 +4,9 @@ package backEnd.GameEngine.Engine;
 import java.util.Collection;
 import java.util.List;
 
-import backEnd.BankController;
 import backEnd.Attribute.Attribute;
+import backEnd.Bank.BankControllerImpl;
+import backEnd.Bank.BankControllerReader;
 import backEnd.GameData.GameData;
 import backEnd.GameData.State.Component;
 import backEnd.GameData.State.ComponentBuilder;
@@ -28,7 +29,7 @@ public class SpawnEngine implements Engine {
 
 	private boolean gamePaused = true;
 	private State myState;
-	private BankController myBank;
+	private BankControllerReader myBank;
 
 	// TODO Add logic in pausing the game and starting again... Fucked up the
 	// timeline
@@ -43,8 +44,8 @@ public class SpawnEngine implements Engine {
 		}
 		Collection<Tile> tileList = gameData.getState().getTileGrid().getAllTiles();
 		for (Tile spawnTile : tileList) {
-			Object spawnQueueNameObj = spawnTile.getAttribute("SpawnTimeline").getValue();
-			SpawnQueues currentSpawnQueue = gameData.getState().getSpawnQueues().get((String) spawnQueueNameObj);
+			String spawnQueueNameObj = spawnTile.<String>getAttribute("SpawnTimeline").getValue();
+			SpawnQueues currentSpawnQueue = gameData.getState().getSpawnQueues().get(spawnQueueNameObj);
 			if (currentSpawnQueue != null) {
 				// Spawning with frequencies
 				//System.out.println(this.getClass().getName() + ": FrequencyQueue: " + currentSpawnQueue.getFrequencyQueue().size());

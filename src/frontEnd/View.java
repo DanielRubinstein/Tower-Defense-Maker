@@ -4,9 +4,9 @@ import java.util.Collection;
 import java.util.Map;
 
 import ModificationFromUser.ModificationFromUser;
-import backEnd.BankController;
-import backEnd.BankControllerReader;
 import backEnd.Model;
+import backEnd.Bank.BankControllerImpl;
+import backEnd.Bank.BankControllerReader;
 import backEnd.GameData.Rules.RuleReader;
 import backEnd.GameData.State.Component;
 import backEnd.GameEngine.Engine.Spawning.SpawnQueues;
@@ -19,28 +19,14 @@ import javafx.scene.Node;
 import javafx.scene.shape.Rectangle;
 
 public interface View extends ViewReader{
-
-	public void viewRules();
-
-	public void editRules();
 	
 	public void sendUserModification(ModificationFromUser mod);
-
-	public BankController getBankController();
-	
-	public Node getScreenGrid();
-	
-	public FacebookInteractor getFb();
 	
 	public Map<String, SpawnQueues> getSpawnQueues();
-	
-	public ModeReader getModeReader();
 	
 	LevelProgressionControllerEditor getLevelProgressionController();
 	
 	public Collection<RuleReader> getRules();
-
-	BankControllerReader getBankControllerReader();
 
 	public boolean isComponentOnGrid(Component c);
 

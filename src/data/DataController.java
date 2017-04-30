@@ -3,7 +3,8 @@ package data;
 import java.io.FileNotFoundException;
 import java.util.List;
 import java.util.Map;
-import backEnd.BankController;
+
+import backEnd.Bank.BankController;
 import backEnd.GameData.GameData;
 import backEnd.GameData.State.Component;
 import backEnd.GameData.State.Tile;
