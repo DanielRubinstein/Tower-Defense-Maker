@@ -24,13 +24,10 @@ public class ComponentImpl implements SerializableObservable, Component, Compone
 	 * 
 	 * @author Daniel
 	 */
-	//TODO: do we need this behavior thing still? the file is empty
-	private final static String BEHAVIOR_PATH = "resources/behaviorNames";
-	private final static ResourceBundle behaviorResources = ResourceBundle.getBundle(BEHAVIOR_PATH);
 	private static final StringResourceBundle strResources = new StringResourceBundle();
 
 	private AttributeData myAttributes;
-	private Map<String, Behavior> myBehaviors;
+	private Map<String, Object> myBehaviors; //JUAN: remove this
 	private AccessPermissions myAccessPermissions;
 	private String myType;
 	private List<SerializableObserver> observers;
@@ -63,17 +60,6 @@ public class ComponentImpl implements SerializableObservable, Component, Compone
 		myAttributes = attributes;
 		myBehaviors = new HashMap<>();
 		AttributeFactoryReader attributeFactory = new AttributeFactoryImpl();
-		BehaviorFactory bf = new BehaviorFactory(this); // add a real component
-		for (String key : behaviorResources.keySet()) {
-			String value = behaviorResources.getString(key);
-			Attribute<?> myAttribute = attributeFactory.getAttribute(key); // FIXME THIS- HOW
-																// DOES OUR
-																// FACTORY
-																// GENERATE
-																// ATTRIBUTES?
-			myAttributes.addAttribute(key, myAttribute);
-			myBehaviors.put(key, bf.getBehavior(key));
-		}
 
 		for (String key : strResources.getKeysFromDefaultComponentAttributes()) {
 			Attribute<?> myAttribute = attributeFactory.getAttribute(key);
@@ -94,32 +80,7 @@ public class ComponentImpl implements SerializableObservable, Component, Compone
 		return myAccessPermissions;
 	}
 
-	/*
-	 
-	
-	public void setupBehaviorObserving() {
-		for (String b : myBehaviors.keySet()) {
-			Behavior currentBehavior = myBehaviors.get(b);
-			myAttributes.addObserver(currentBehavior);
-		}
 
-	}
-	*/
-
-	/* (non-Javadoc)
-	 * @see backEnd.GameData.State.Component#getBehavior(java.lang.String)
-	 */
-	/* (non-Javadoc)
-	 * @see backEnd.GameData.State.ComponentReader#getBehavior(java.lang.String)
-	 */
-	@Override
-	public Behavior getBehavior(String behaviorType) {
-		return myBehaviors.get(behaviorType);
-	}
-
-	/* (non-Javadoc)
-	 * @see backEnd.GameData.State.Component#getAttribute(java.lang.String)
-	 */
 	@Override
 	public <T> Attribute<T> getAttribute(String attributeType) {
 		return myAttributes.get(attributeType);

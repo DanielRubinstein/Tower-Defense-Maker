@@ -14,15 +14,6 @@ public interface Component extends AttributeOwner{
 
 	AccessPermissions getAccessPermissions();
 
-	/**
-	 * When the engines call behaviors (for the behavior to be executed), it
-	 * does so in Component via this method.
-	 * 
-	 * @param behaviorType
-	 * @return
-	 */
-	Behavior getBehavior(String behaviorType);
-
 	<T> Attribute<T> getAttribute(String attributeType);
 
 	AttributeData getMyAttributes();
