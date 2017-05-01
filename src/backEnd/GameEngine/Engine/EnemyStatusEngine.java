@@ -57,7 +57,7 @@ public class EnemyStatusEngine implements Engine {
 			if (slowTime - stepTime < 0) { // If slow should only do partial
 				component.setAttributeValue(STRING_RESOURCES.getFromAttributeNames("SlowTime"), new Double(0));
 				component.setAttributeValue(STRING_RESOURCES.getFromAttributeNames("SlowFactor"), new Double(0));
-				component.setAttributeValue(STRING_RESOURCES.getFromAttributeNames("CurrentSpeed"), new Double(normalSpeed));
+				//component.setAttributeValue(STRING_RESOURCES.getFromAttributeNames("CurrentSpeed"), new Double(normalSpeed));
 				//currentSpeed.setValue(new Double(normalSpeed.getValue().doubleValue()));
 			} else { // Full slow tick
 				component.setAttributeValue(STRING_RESOURCES.getFromAttributeNames("SlowTime"), slowTime - stepTime);
