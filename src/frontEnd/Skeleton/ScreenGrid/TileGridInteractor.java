@@ -12,7 +12,6 @@ import backEnd.GameData.State.Tile;
 import frontEnd.View;
 import frontEnd.Skeleton.AoTools.OnGridTileCommandCenter;
 import javafx.scene.Node;
-import javafx.scene.effect.ColorAdjust;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
@@ -26,7 +25,7 @@ import resources.constants.StringResourceBundle;
  * @author Tim, Miguel
  *
  */
-public class TileGridInteractor {
+public class TileGridInteractor implements GridInteractor<Tile> {
 
 	private Map<Tile,Node> selectedTiles;
 	private Collection<ImageView> arrowSet;
@@ -35,7 +34,6 @@ public class TileGridInteractor {
 	private State myState;
 	
 	private StringResourceBundle strResources = new StringResourceBundle();
-	private NumericResourceBundle numResourceBundle = new NumericResourceBundle();
 	
 	
 	public TileGridInteractor(View view,TileGridVisual visual, State state){
@@ -49,12 +47,16 @@ public class TileGridInteractor {
 	private void setBooleanBehavior(){
 		myView.getBooleanAuthorModeProperty().addListener((o, oldV, newV) ->{
 			if(!newV){
-				clearTileSelection();
+				clearSelection();
 			}
 		});
 	}
 	
-	public void setTileGridInteraction(Pane p){
+	/* (non-Javadoc)
+	 * @see frontEnd.Skeleton.ScreenGrid.GridInteractor#setGridInteraction(javafx.scene.layout.Pane)
+	 */
+	@Override
+	public void setGridInteraction(Pane p){
 		p.setFocusTraversable(true);
 		p.requestFocus();
 		p.setOnKeyPressed(e -> {	
@@ -63,7 +65,7 @@ public class TileGridInteractor {
 				selectedTiles.keySet().forEach(t -> {
 					myView.sendUserModification(new Modification_EditAttribute<String>(t,strResources.getFromAttributeNames("MoveDirection"),toSend));
 				});
-				clearTileSelection();
+				clearSelection();
 			} else if (e.getCode().equals(KeyCode.SPACE)){
 				showArrowsOnTiles();
 			}
@@ -82,15 +84,11 @@ public class TileGridInteractor {
 				|| e.getCode().equals(KeyCode.UP);
 	}
 	
-	/**
-	 * Sets the interaction for Tiles. Specifically, this determines what happens when a Tile is clicked on.
-	 * If the Tile is double clicked, its CommandCenter is launched. If it is clicked while the Control Key is
-	 * pushed down, it is "selected". Multiple tiles can be selected, and if one presses an arrow key, this changes
-	 * the MoveDirection for all of them. If one adds a Preset Tile to one of this, this changes all of them.
-	 * @param n Node representing the Tile visually on screen.
-	 * @param t Tile that will be interacted with.
+	/* (non-Javadoc)
+	 * @see frontEnd.Skeleton.ScreenGrid.GridInteractor#setInteraction(javafx.scene.Node, Tile)
 	 */
-	public void setTileInteraction(Node n, Tile t) {
+	@Override
+	public void setInteraction(Node n, Tile t) {
 		n.setOnMouseClicked(e ->{
 			myTileGridVisual.getRoot().requestFocus();
 			if(e.getClickCount()==2){
@@ -99,32 +97,33 @@ public class TileGridInteractor {
 			}else if(e.isControlDown() && myView.getBooleanAuthorModeProperty().get()){
 				addToTileSelection(n,t);
 			}else{
-				clearTileSelection();
+				clearSelection();
 			}
 		});
 	}
 	
 	private void addToTileSelection(Node n, Tile t){
 		selectedTiles.put(t, n);
-		ColorAdjust color = new ColorAdjust();
-		color.setBrightness(0.4);
-		color.setContrast(-0.5);
-		n.setEffect(color);
+		n.setStyle(strResources.getFromCustomCSS("SelectedEffect"));
 	}
 
 	private void showArrowsOnTiles() {
 		if(arrowSet != null && !arrowSet.isEmpty()) return;
 		arrowSet = new ArrayList<ImageView>();
-		myTileGridVisual.forEachTile(e -> {
+		myTileGridVisual.forEach(e -> {
 			ImageView imageView = myTileGridVisual.addArrowToVisual(e);
 			if(imageView!=null){
 				arrowSet.add(imageView);
 			}
 		});
-		
 	}
-	public void clearTileSelection() {
-		selectedTiles.values().forEach(f -> f.setEffect(null));
+	
+	/* (non-Javadoc)
+	 * @see frontEnd.Skeleton.ScreenGrid.GridInteractor#clearSelection()
+	 */
+	@Override
+	public void clearSelection() {
+		selectedTiles.values().forEach(f -> f.setStyle(""));
 		selectedTiles.clear();
 	}
 	
@@ -133,13 +132,13 @@ public class TileGridInteractor {
 		arrowSet.clear();
 	}
 	
-	/**
-	 * Performs the Consumer on every Tile. 
-	 * @param method
+	/* (non-Javadoc)
+	 * @see frontEnd.Skeleton.ScreenGrid.GridInteractor#forEachSelected(java.util.function.Consumer)
 	 */
-	public void forEachSelectedTile(Consumer<? super Tile> method){
+	@Override
+	public void forEachSelected(Consumer<? super Tile> method){
 		selectedTiles.keySet().forEach(method);
-		clearTileSelection();
+		clearSelection();
 	}
 
 }
