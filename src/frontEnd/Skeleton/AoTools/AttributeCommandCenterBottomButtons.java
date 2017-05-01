@@ -70,7 +70,9 @@ public class AttributeCommandCenterBottomButtons implements SkeletonObject{
 	
 	public void createAccessPermissionButton(AttributeOwnerReader attributeOwnerReader) {
 		AccessPermissionsViewer accessPermissionsViewer = new AccessPermissionsViewer(myHostStage, myView, attributeOwnerReader.getAccessPermissionsReader());
+		accessPermissionsViewer.disabledProperty().bind(myView.getBooleanAuthorModeProperty().not());
 		myRoot.getChildren().add(accessPermissionsViewer.getRoot());
+		
 	}
 	
 	public void createAddToPresetButton(AttributeOwnerReader obj) {

@@ -7,7 +7,9 @@ import backEnd.GameData.State.AccessPermissionsReader;
 import backEnd.LevelProgression.LevelProgressionControllerReader;
 import frontEnd.View;
 import frontEnd.CustomJavafxNodes.ActionButton;
+import frontEnd.CustomJavafxNodes.RestrictedPermissions;
 import frontEnd.Skeleton.UserTools.SkeletonObject;
+import javafx.beans.property.BooleanProperty;
 import javafx.geometry.Insets;
 import javafx.scene.Node;
 import javafx.scene.Scene;
@@ -24,7 +26,7 @@ import javafx.stage.Stage;
 import resources.constants.StringResourceBundle;
 import resources.constants.numeric.NumericResourceBundle;
 
-public class AccessPermissionsViewer implements SkeletonObject {
+public class AccessPermissionsViewer implements SkeletonObject, RestrictedPermissions {
 	private StringResourceBundle stringResourceBundle = new StringResourceBundle();
 	private NumericResourceBundle numericResourceBundle = new NumericResourceBundle();
 	
@@ -41,6 +43,7 @@ public class AccessPermissionsViewer implements SkeletonObject {
 		myView = view;
 		myModeController = myView.getLevelProgressionController();
 		myAccessPermissions = accessPermissionsReader;
+		myRoot = new VBox();
 		createIgnition();
 	}
 
@@ -52,7 +55,6 @@ public class AccessPermissionsViewer implements SkeletonObject {
 	}
 
 	private void loadViewer() {
-		myRoot = new VBox();
 		myRoot.getChildren().add(createTitle());
 		myRoot.getChildren().add(createBody());
 		myRoot.setSpacing(numericResourceBundle.getFromSizing("StandardSpacing"));
@@ -144,6 +146,11 @@ public class AccessPermissionsViewer implements SkeletonObject {
 
 	public Node getRoot() {
 		return ignition;
+	}
+
+	@Override
+	public BooleanProperty disabledProperty() {
+		return myRoot.disableProperty();
 	}
 
 }
