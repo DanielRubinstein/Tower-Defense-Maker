@@ -21,18 +21,6 @@ public interface Component extends AttributeOwner{
 
 	void addAttribute(String attrType, Attribute<?> newAttr);
 
-	/**
-	 * 
-	 * @param type the type of this Component, i.e. Tower or Enemy
-	 */
-	void setMyType(String type);
-
-	/**
-	 * 
-	 * @return the type of this Component, i.e. Tower or Enemy
-	 */
-	String getMyType();
-
 	<T> void setAttributeValue(String attrName, T newVal);
 
 	void addObserver(SerializableObserver obs);

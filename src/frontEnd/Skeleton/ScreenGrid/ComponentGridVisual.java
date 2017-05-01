@@ -72,25 +72,29 @@ public class ComponentGridVisual extends GridVisualBase<Component> implements Se
 	
 	@Override
 	protected void updateGrid(Component arg) {
+		checkAddition(arg);
+		checkRemoval(arg);
+	}
+
+	private void checkAddition(Component arg) {
 		if (!myComponents.contains(arg)) {
 			addComponentToGrid(arg);
-		}
-		if(!observedComponentGraph.getAllComponents().contains(arg)){
-			removeComponentFromGrid(arg);
 		}
 	}
 
 	private void updateComponentsOnGrid() {
 		for (Component c : observedComponentGraph.getAllComponents()) {
-			if (!myComponents.contains(c)) {
-				addComponentToGrid(c);
-			}
+			checkAddition(c);
 		}
 		Set<Component> myComponentsCopy=new HashSet<>(myComponents);
 		for(Component c : myComponentsCopy){
-			if(!observedComponentGraph.getAllComponents().contains(c)){
-				removeComponentFromGrid(c);
-			}
+			checkRemoval(c);
+		}
+	}
+
+	private void checkRemoval(Component c) {
+		if(!observedComponentGraph.getAllComponents().contains(c)){
+			removeComponentFromGrid(c);
 		}
 	}
 	

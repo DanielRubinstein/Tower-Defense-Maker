@@ -89,24 +89,24 @@ public class AttributeCommandCenter{
 		return sP;
 	}
 
-	private Node createBottomButtons(AttributeOwnerReader obj){
+	private Node createBottomButtons(AttributeOwnerReader attributeOwnerReader){
 		AttributeCommandCenterBottomButtons attributeCommandCenterBottomButtons = new AttributeCommandCenterBottomButtons(myView, myHostStage);
-		Reflection.callAllMethods(attributeCommandCenterBottomButtons, obj);
+		Reflection.callAllMethods(attributeCommandCenterBottomButtons, attributeOwnerReader);
 		return attributeCommandCenterBottomButtons.getRoot();
 	}	
 
-	private Node createAttributeValueViewer(AttributeOwnerReader obj, AttributeReader<?> attr) {
+	private Node createAttributeValueViewer(AttributeOwnerReader attributeOwnerReader, AttributeReader<?> attributeReader) {
 		HBox finalViewer = new HBox();
 		AttributeVisualization attributeVisualization;
 		if (authorProperty.get()) {
 			// Author Mode
-			attributeVisualization = new AttributeEditorCreator(myView, obj, attr);
+			attributeVisualization = new AttributeEditorCreator(myView, attributeOwnerReader, attributeReader);
 		} else {
 			// Player Mode
-			attributeVisualization = new AttributeViewerCreator(myView, obj, attr);
+			attributeVisualization = new AttributeViewerCreator(myView, attributeReader);
 		}
 		String methodNameFormat = attributeVisualization.getMethodNameFormat();
-		Node right = (Node) Reflection.callMethod(attributeVisualization, String.format(methodNameFormat, myAttrNameResources.getString(attr.getName())));			
+		Node right = (Node) Reflection.callMethod(attributeVisualization, String.format(methodNameFormat, myAttrNameResources.getString(attributeReader.getName())));			
 		
 		try {
 			finalViewer.getChildren().add(right);
