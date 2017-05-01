@@ -1,6 +1,7 @@
 package frontEnd.Skeleton.SplashScreens;
 
 import backEnd.GameData.State.PlayerStatusReader;
+import frontEnd.Skeleton.UserTools.StatusView;
 import javafx.event.Event;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
@@ -22,6 +23,8 @@ public abstract class SplashScreenImpl implements SplashScreen {
 	private Scene myScene;
 	private EventHandler restartLevel;
 	private Button restartLevelButton;
+	private StatusView myStatusView;
+	
 
 	public SplashScreenImpl(EventHandler restartLevel) {
 		this.restartLevel = restartLevel;
@@ -60,7 +63,8 @@ public abstract class SplashScreenImpl implements SplashScreen {
 
 	@Override
 	public void setStatusDisplayValues(PlayerStatusReader playerStatus) {
-		// TODO Auto-generated method stub
+		this.myStatusView = new StatusView(playerStatus);
+		myBP.setRight(myStatusView.getRoot());
 		
 	}
 
