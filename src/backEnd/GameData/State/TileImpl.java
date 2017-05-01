@@ -42,9 +42,9 @@ public class TileImpl implements Tile, AttributeOwner, SerializableObservable {
 		this(new AccessPermissionsImpl(userModeAccessPermissions, gameModeAccessPermissions, levelModeAccessPermissions), position);
 	}
 	
-	public TileImpl(AccessPermissions aP,Point2D position )  throws FileNotFoundException {
+	public TileImpl(AccessPermissions accessPermissions,Point2D position )  throws FileNotFoundException {
 		//System.out.println("executing Constructor for TileImpl");
-		this.myAccessPerm = aP;
+		this.myAccessPerm = accessPermissions;
 		this.myAttrData = new AttributeData(new HashMap<String, Attribute<?>>());
 		AttributeFactoryReader attrFact = new AttributeFactoryImpl();
 		this.myAttrData = new AttributeData(new HashMap<String, Attribute<?>>());
@@ -161,6 +161,11 @@ public class TileImpl implements Tile, AttributeOwner, SerializableObservable {
 	public void removeAttribute(String attrName) {
 		myAttrData.remove(attrName);
 		
+	}
+
+	@Override
+	public AccessPermissionsReader getAccessPermissionsReader() {
+		return this.getAccessPermissionsReader();
 	}
 
 }
