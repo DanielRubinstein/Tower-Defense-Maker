@@ -9,6 +9,7 @@ import javafx.event.EventHandler;
 import javafx.geometry.HPos;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
+import javafx.geometry.VPos;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -40,6 +41,7 @@ public abstract class SplashScreenImpl implements SplashScreen {
 		myScene.getStylesheets().add(stringResourceBundle.getFromStringConstants("DEFAULT_CSS"));
 		addNode(buttonBox, 0, 3);
 		buttonBox.setAlignment(Pos.CENTER);
+		buttonBox.setPadding(new Insets(Double.parseDouble(getResource("ButtonBoxPadding"))));
 		myGP.setAlignment(Pos.CENTER);
 
 	}
@@ -87,6 +89,7 @@ public abstract class SplashScreenImpl implements SplashScreen {
 
 	private void addNode(Node toAdd, int col, int row) {
 		GridPane.setHalignment(toAdd, HPos.CENTER);
+		GridPane.setValignment(toAdd, VPos.CENTER);
 		myGP.add(toAdd, col, row);
 	}
 
