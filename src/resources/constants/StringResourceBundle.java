@@ -36,6 +36,21 @@ public class StringResourceBundle {
 	}
 	
 	///////////////////////////////////////////////////////////////////////////
+	// Attribute Categories
+	///////////////////////////////////////////////////////////////////////////
+	
+	private static final String ATTRIBUTE_CATEGORIES_PATH = "resources.attributeCategories";
+	private static final ResourceBundle ATTRIBUTE_CATEGORIES_RESOURCE = ResourceBundle.getBundle(ATTRIBUTE_CATEGORIES_PATH);
+	
+	public String getFromAttributeCategories(String str){
+		return ATTRIBUTE_CATEGORIES_RESOURCE.getString(str);
+	}
+	
+	public Set<String> getKeysFromAttributeCategories(){
+		return ATTRIBUTE_CATEGORIES_RESOURCE.keySet();
+	}
+	
+	///////////////////////////////////////////////////////////////////////////
 	// Value Names FIXME what does this mean?
 	///////////////////////////////////////////////////////////////////////////
 	
