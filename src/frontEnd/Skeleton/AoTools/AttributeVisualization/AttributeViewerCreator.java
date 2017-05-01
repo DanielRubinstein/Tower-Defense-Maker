@@ -4,6 +4,7 @@ import backEnd.Attribute.AttributeReader;
 import backEnd.GameData.State.Component;
 import frontEnd.View;
 import javafx.geometry.Point2D;
+import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
@@ -92,6 +93,7 @@ public class AttributeViewerCreator implements AttributeVisualization{
 			name.setText(baby_str);
 			pair.getChildren().add(name);
 			pair.getChildren().add(imv);
+			pair.setAlignment(Pos.CENTER_LEFT);
 			return pair;
 		} catch (NullPointerException e){
 			return new Label(STRING_RESOURCE_BUNDLE.getFromStringConstants("NoneSelected"));

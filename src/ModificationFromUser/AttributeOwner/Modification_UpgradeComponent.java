@@ -2,27 +2,42 @@ package ModificationFromUser.AttributeOwner;
 
 import ModificationFromUser.ModificationFromUser;
 import backEnd.Model;
+import backEnd.ModelImpl;
+import backEnd.Attribute.AttributeOwner;
+import backEnd.Attribute.AttributeOwnerReader;
 import backEnd.GameData.State.Component;
+import frontEnd.CustomJavafxNodes.ErrorDialog;
 import javafx.geometry.Point2D;
 
-public class Modification_UpgradeComponent implements ModificationFromUser {
-	private Component toUpgrade;
+public class Modification_UpgradeComponent implements ModificationFromUser{
+	private Integer myCost;
+	private Component myComponentToUpgrade;
 	
-	//FIXME should be reader interface in constructor
-	public Modification_UpgradeComponent(Component toUpgrade) {
-		this.toUpgrade = toUpgrade;
+	public Modification_UpgradeComponent(Integer cost, Component component){
+		this.myCost = cost;
+		this.myComponentToUpgrade = component;
+		
 	}
 
 	@Override
 	public void invoke(Model myModel) throws Exception {
-		String upgradePreset = (String) toUpgrade.getAttribute("Upgrade").getValue();
-		Point2D loc = (Point2D) toUpgrade.getAttribute("Position").getValue();
-		Component toAdd = myModel.getBankControllerReader().getComponent(upgradePreset);
-		Modification_RemoveAttributeOwner removeMod = new Modification_RemoveAttributeOwner(toUpgrade);
+		if (myModel.getPlayerStatusReader().getProperty("Money").getValue() - myCost < 0){
+			new ErrorDialog().create("Not Enough Money", "You don't have enough money to purchase this component");
+			return;
+		}	
+		
+		Point2D position = myComponentToUpgrade.<Point2D>getAttribute("Position").getValue();
+		
+		String presetNameOfUpgrade = myComponentToUpgrade.<String>getAttribute("Upgrade").getValue();
+		Component toAdd = myModel.getBankControllerReader().getComponent(presetNameOfUpgrade);
+		
+		Modification_RemoveAttributeOwner removeMod = new Modification_RemoveAttributeOwner(myComponentToUpgrade);
 		removeMod.invoke(myModel);
-		Modification_Add_PaletteToGrid addMod = new Modification_Add_PaletteToGrid(toAdd, loc);
+		
+		Modification_Add_PaletteToGrid addMod = new Modification_Add_PaletteToGrid(toAdd, position);
 		addMod.invoke(myModel);
 		
+		myModel.getGameData().getStatus().decrementStatusItem("Money", myCost);
 	}
 
 }

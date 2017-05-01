@@ -1,5 +1,7 @@
 package frontEnd.Skeleton.SplashScreens;
 
+import java.util.ResourceBundle;
+
 import backEnd.GameData.State.PlayerStatusReader;
 import frontEnd.Skeleton.UserTools.StatusView;
 import javafx.event.Event;
@@ -7,6 +9,8 @@ import javafx.event.EventHandler;
 import javafx.geometry.HPos;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
+import javafx.geometry.VPos;
+import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -27,44 +31,45 @@ public abstract class SplashScreenImpl implements SplashScreen {
 	private EventHandler restartLevel;
 	private Button restartLevelButton;
 	private HBox myStatusView = new HBox();
-	
+	private final static String SPLASH_PATH = "resources/splashScreen";
+	private final static ResourceBundle myResources = ResourceBundle.getBundle(SPLASH_PATH);
 
 	public SplashScreenImpl(EventHandler restartLevel) {
 		this.restartLevel = restartLevel;
 		myGP = new GridPane();
 		myScene = new Scene(myGP);
 		myScene.getStylesheets().add(stringResourceBundle.getFromStringConstants("DEFAULT_CSS"));
-		myGP.add(buttonBox, 0, 3);
-		GridPane.setHalignment(buttonBox, HPos.CENTER);
+		addNode(buttonBox, 0, 3);
 		buttonBox.setAlignment(Pos.CENTER);
+		buttonBox.setPadding(new Insets(Double.parseDouble(getResource("ButtonBoxPadding"))));
 		myGP.setAlignment(Pos.CENTER);
-		
+
 	}
-	
+
 	@Override
-	public void addRestartLevelButton(){
-		Button restartLevelButton = new Button("Restart Level");
+	public void addRestartLevelButton() {
+		Button restartLevelButton = new Button(getResource("RestartLevelButtonText"));
 		restartLevelButton.setOnMouseClicked(restartLevel);
 		addButton(restartLevelButton);
-		
+
 	}
-	
-	
 
 	protected void addButton(Button toAdd) {
 		buttonBox.getChildren().add(toAdd);
 	}
-	
-	protected void setImage(Image image){
+
+	protected void setImage(Image image) {
 		ImageView myImage = new ImageView(image);
-		GridPane.setHalignment(myImage, HPos.CENTER);
-		myGP.add(myImage, 0, 1);
+		addNode(myImage, 0, 1);
 	}
-	
-	protected void setMessage(String message){
+
+	protected String getResource(String key) {
+		return myResources.getString(key);
+	}
+
+	protected void setMessage(String message) {
 		Label myMessage = new Label(message);
-		GridPane.setHalignment(myMessage, HPos.CENTER);
-		myGP.add(myMessage, 0, 2);
+		addNode(myMessage, 0, 2);
 	}
 
 	@Override
@@ -78,10 +83,14 @@ public abstract class SplashScreenImpl implements SplashScreen {
 		StatusView statusContents = new StatusView(playerStatus);
 		myStatusView.getChildren().add(statusContents.getRoot());
 		myStatusView.setAlignment(Pos.CENTER);
-		GridPane.setHalignment(myStatusView, HPos.CENTER);
-		myGP.add(myStatusView, 0, 0);
-		
-		
+		addNode(myStatusView, 0, 0);
+
+	}
+
+	private void addNode(Node toAdd, int col, int row) {
+		GridPane.setHalignment(toAdd, HPos.CENTER);
+		GridPane.setValignment(toAdd, VPos.CENTER);
+		myGP.add(toAdd, col, row);
 	}
 
 }

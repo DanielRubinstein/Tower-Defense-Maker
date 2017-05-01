@@ -1,5 +1,7 @@
 package frontEnd.CustomJavafxNodes;
 
+import java.util.function.Function;
+
 import frontEnd.Skeleton.UserTools.SkeletonObject;
 import javafx.beans.value.ChangeListener;
 import javafx.scene.Node;
@@ -10,7 +12,7 @@ import resources.constants.StringResourceBundle;
 
 public class NumberChanger implements SkeletonObject{
 	private StringResourceBundle stringResourceBundle = new StringResourceBundle();
-	Slider myRoot;
+	private Slider myRoot;
 	
 	/**
 	 * Initializes the numberChanger with the given parameters
@@ -42,28 +44,27 @@ public class NumberChanger implements SkeletonObject{
 		return myRoot.getValue();
 	}
 	
-	public HBox addIntegerIndicator(){
+	private HBox create(String labelFormat, Function<Number, ? extends Number> toProperNumber){
 		HBox h = new HBox();
 		h.getChildren().add(this.getRoot());
-		Label currentVal = new Label(String.format(stringResourceBundle.getFromStringConstants("SingleIntegerWithParenthesis"), this.getValue().intValue()));
+		Label currentVal = new Label(String.format(labelFormat, toProperNumber.apply(this.getValue())));
 		this.addListener( (SerializableObservable, oldValue, newValue)->{
-			myRoot.setValue(newValue.intValue());
-			currentVal.setText(String.format(stringResourceBundle.getFromStringConstants("SingleIntegerWithParenthesis"), newValue.intValue()));
+			myRoot.setValue(toProperNumber.apply(newValue).doubleValue());
+			currentVal.setText(String.format(labelFormat, toProperNumber.apply(newValue)));
 		});
 		h.getChildren().add(currentVal);
 		return h;
 	}
 	
+	
+	public HBox addIntegerIndicator(){
+		Function<Number, Integer> toInteger = (num) -> num.intValue();
+		return create(stringResourceBundle.getFromStringConstants("SingleIntegerWithParenthesis"), toInteger);
+	}
+	
 	public HBox addDoubleIndicator(){
-		HBox h = new HBox();
-		h.getChildren().add(this.getRoot());
-		Label currentVal = new Label(String.format(stringResourceBundle.getFromStringConstants("SingleDoubleRoundedToTenthsWithParenthesis"), this.getValue().doubleValue()));
-		this.addListener( (SerializableObservable, oldValue, newValue)->{
-			myRoot.setValue(newValue.doubleValue());
-			currentVal.setText(String.format(stringResourceBundle.getFromStringConstants("SingleDoubleRoundedToTenthsWithParenthesis"), newValue.doubleValue()));
-		});
-		h.getChildren().add(currentVal);
-		return h;
+		Function<Number, Double> toDouble = (num) -> num.doubleValue();
+		return create(stringResourceBundle.getFromStringConstants("SingleDoubleRoundedToTenthsWithParenthesis"), toDouble);
 	}
 
 
