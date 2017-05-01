@@ -106,10 +106,7 @@ public class TileGridInteractor {
 	
 	private void addToTileSelection(Node n, Tile t){
 		selectedTiles.put(t, n);
-		ColorAdjust color = new ColorAdjust();
-		color.setBrightness(0.4);
-		color.setContrast(-0.5);
-		n.setEffect(color);
+		n.setStyle(strResources.getFromCustomCSS("SelectedEffect"));
 	}
 
 	private void showArrowsOnTiles() {
@@ -124,7 +121,7 @@ public class TileGridInteractor {
 		
 	}
 	public void clearTileSelection() {
-		selectedTiles.values().forEach(f -> f.setEffect(null));
+		selectedTiles.values().forEach(f -> f.setStyle(""));
 		selectedTiles.clear();
 	}
 	
