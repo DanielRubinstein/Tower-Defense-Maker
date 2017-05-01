@@ -28,6 +28,8 @@ public class AttributeOwnerVisualImpl implements SerializableObserver, Attribute
 	private final String IMAGE_ATTRIBUTE = stringResourceBundle.getFromAttributeNames("ImageFile");
 	private final String POSITION_ATTRIBUTE = stringResourceBundle.getFromAttributeNames("Position");
 	private final String SIZE_ATTRIBUTE = stringResourceBundle.getFromAttributeNames("Size");
+	private final String POISON_TIME_ATTRIBUTE = stringResourceBundle.getFromAttributeNames("PoisionTime");
+	
 	private AttributeOwnerReader myAttr;
 	
 	public AttributeOwnerVisualImpl(AttributeOwnerReader attr){
@@ -44,8 +46,16 @@ public class AttributeOwnerVisualImpl implements SerializableObserver, Attribute
 			//means we are dealing with something that does not have size
 		}
 		setPosition(myAttr.<Point2D>getAttributeReader(POSITION_ATTRIBUTE).getValue());
+		setPoisionEffect(myAttr.<Double>getAttributeReader(POISON_TIME_ATTRIBUTE).getValue());
 	}
 	
+	private void setPoisionEffect(Double poisonTime) {
+		if(poisonTime>0){
+			myImage.setStyle(stringResourceBundle.getFromCustomCSS("SelectedEffect"));
+		}
+		
+	}
+
 	private void setSize(Double value) {
 		mySize = value;
 		myImage.setPreserveRatio(true);
