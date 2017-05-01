@@ -1,10 +1,18 @@
 <?xml version="1.0"?><map>
   <entry>
+    <string>kk</string>
+    <list/>
+  </entry>
+  <entry>
     <string>MiguelTestGame</string>
     <list>
       <string>level2</string>
       <string>level1</string>
     </list>
+  </entry>
+  <entry>
+    <string>aasdf</string>
+    <list/>
   </entry>
   <entry>
     <string>df</string>

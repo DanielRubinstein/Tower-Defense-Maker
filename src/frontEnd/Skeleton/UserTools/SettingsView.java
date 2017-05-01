@@ -5,10 +5,10 @@ package frontEnd.Skeleton.UserTools;
  * @author Tim
  *
  */
-public interface SettingsView {
+public interface SettingsView extends PopUp{
 
 	/**
 	 * Launches the settings in a new stage.
 	 */
-	public void launchSettings();
+	//public void launchSettings();
 }

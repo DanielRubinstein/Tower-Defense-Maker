@@ -15,44 +15,36 @@ import javafx.scene.control.Tooltip;
 import javafx.scene.layout.HBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import resources.constants.StringResourceBundle;
 
 /**
  * This class represents the screen that the user sees when the settings button is pressed
- * @author Tim
+ * @author Tim, Miguel Anderson
  *
  */
-public class SettingsViewImpl implements SettingsView{
+public class SettingsViewImpl implements SettingsView, PopUp{
 	private SimpleBooleanProperty authorProperty;
+	private StringResourceBundle strResources = new StringResourceBundle();
 	private View myView;
 	private ButtonMenuImpl myMenu;
-	private Stage myParentStage;
 	private Stage myStage;
 	
 	public SettingsViewImpl(View view) {
 		myView = view;
-		//myParentStage = parentStage;
 		authorProperty = myView.getBooleanAuthorModeProperty();
 		addButtons();
 	}
-	
-	public void launchSettings(){
-		// http://stackoverflow.com/questions/29514248/javafx-how-to-focus-on-one-stage
-		myStage = new Stage();
+
+	@Override
+	public void displayOnStage(Stage stage) {
+		myStage = stage;
 		myStage.initOwner(myView.getMainWindow());
 		myStage.initModality(Modality.APPLICATION_MODAL);
-		myMenu.display(myStage);
+		myMenu.display(stage);
 	}
-	/*
-	 * Buttons to add:
-	 * New
-	 * Load
-	 * Save
-	 * Rules
-	 * Author/Player toggle
-	 */
+
 	private void addButtons(){
-		myMenu = new ButtonMenuImpl("Settings");
-		
+		myMenu = new ButtonMenuImpl(strResources.getFromStringConstants("Settings"));
 		saveButtons();
 		loadButtons();
 		newGameButtons();
@@ -63,53 +55,54 @@ public class SettingsViewImpl implements SettingsView{
 	}
 
 	private void helpButtons() {
-		myMenu.addSimpleButtonWithHover("Help", () -> {
+		myMenu.addSimpleButtonWithHover(strResources.getFromHelp("Help"), () -> {
 			HelpOptions help = new HelpOptionsImpl();
-			help.display(myStage);
-		}, "Get Help");
+			help.displayOnStage(new Stage());
+		}, strResources.getFromHelp("HelpHover"));
 	}
 
 	private void modeToggleButtons() {
 		Runnable changeMode = () -> myView.sendUserModification(new Modification_ChangeMode());
-		ToggleSwitch modeToggle = new ToggleSwitch("Player", "Author", myView.getBooleanAuthorModeProperty(), changeMode);
+		ToggleSwitch modeToggle = new ToggleSwitch(strResources.getFromStringConstants("PLAYER"), 
+				strResources.getFromStringConstants("AUTHOR"), myView.getBooleanAuthorModeProperty(), changeMode);
 		myMenu.addNode(modeToggle.getRoot());
 	}
 
 	private void gameStructureButtons() {
-		myMenu.addSimpleButtonWithHover("Game Structure", () -> {
-			LevelView gameStructure = new LevelView(myView.getLevelProgressionController(), myStage);
-			gameStructure.launch();
-		}, "See Structure");
+		myMenu.addSimpleButtonWithHover(strResources.getFromStringConstants("GameStructure"), () -> {
+			LevelView gameStructure = new LevelView(myView.getLevelProgressionController());
+			gameStructure.displayOnStage(null);
+		}, strResources.getFromStringConstants("GameStructureHover"));
 	}
 
 	private void rulesButtons() {
-		myMenu.addSimpleButtonWithHover("Rules", () -> {
+		myMenu.addSimpleButtonWithHover(strResources.getFromStringConstants("Rules"), () -> {
 			RulesView myRules = new RulesView(myView,myStage);
 			myRules.launch();
-		}, "Click to view/edit rules");
+		}, strResources.getFromStringConstants("RulesHover"));
 	}
 
 	private void newGameButtons() {
-		myMenu.addSimpleButtonWithHover("New Game", () -> {
+		myMenu.addSimpleButtonWithHover(strResources.getFromStringConstants("NewGame"), () -> {
 			close();
 			myView.sendUserModification(new Modification_NewGame());
-			}, "Create a new game from scratch");
+			}, strResources.getFromStringConstants("NewGameHover"));
 	}
 
 	private void loadButtons() {
-		myMenu.addSimpleButtonWithHover("Load", () -> {
+		myMenu.addSimpleButtonWithHover(strResources.getFromStringConstants("LoadGame"), () -> {
 			close();
 			myView.sendUserModification(new Modification_LoadLevel()); 
-		}, "Load a saved game from the Saved Games folder");
+		}, strResources.getFromStringConstants("LoadGameHover"));
 	}
 
 	private void saveButtons() {
 		HBox bothButtons = new HBox();
-		Button button1 = new Button("Save level template");
+		Button button1 = new Button(strResources.getFromStringConstants("SaveTemplate"));
 		button1.setOnAction(e -> {
 			myView.sendUserModification(Modification_SaveGameState.TEMPLATE);
 		});
-		Button button2 = new Button("Save current progress");
+		Button button2 = new Button(strResources.getFromStringConstants("SaveProgress"));
 		button2.setOnAction(e -> {
 			myView.sendUserModification(Modification_SaveGameState.SAVEDGAME);
 		});
@@ -117,7 +110,7 @@ public class SettingsViewImpl implements SettingsView{
 		button1.disableProperty().bind(authorProperty.not());
 		
 		SplitPane wrapper1 = new SplitPane(button2);
-		Tooltip t = new Tooltip("Only possible in Author mode");
+		Tooltip t = new Tooltip(strResources.getFromStringConstants("OnlyAuthorMode"));
 		SplitPane wrapper2 = new SplitPane(button1);
 		wrapper2.setTooltip(t);
 		wrapper2.hoverProperty().addListener((a,b,c)->{
@@ -133,13 +126,8 @@ public class SettingsViewImpl implements SettingsView{
 		myMenu.addNode(bothButtons);
 	}
 
-
-	private void close()
-	{
-		if (myParentStage!= null) myParentStage.close();
+	private void close(){
 		myStage.close();
 	}
-
-	
 
 }
