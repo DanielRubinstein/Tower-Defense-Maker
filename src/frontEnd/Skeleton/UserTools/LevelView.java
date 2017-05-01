@@ -79,15 +79,15 @@ public class LevelView implements PopUp{
 	private void populateLevels(String gameName){
 		List<String> gameLevels = myLevelContr.getLevelList(gameName);
 		
-		ListDragDrop<String> test = new ListDragDropImpl<String>(FXCollections.observableArrayList(gameLevels));
-		test.changedListProperty().addListener((o, oldV, newV) -> {
+		ListDragDrop<String> levelDrop = new ListDragDropImpl<String>(FXCollections.observableArrayList(gameLevels));
+		levelDrop.changedListProperty().addListener((o, oldV, newV) -> {
 			if(newV){
-				List<String> orderedLevels = test.getList();
+				List<String> orderedLevels = levelDrop.getList();
 				myLevelContr.setLevelList(gameName, orderedLevels);
-				test.acceptChange();
+				levelDrop.acceptChange();
 			}
 		});
-		myRoot.add(test.getRoot(), 1, 2);
+		myRoot.add(levelDrop.getRoot(), 1, 2);
 	}
 	
 	private VBox createSingleBox(int col){

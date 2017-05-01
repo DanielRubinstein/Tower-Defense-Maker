@@ -5,6 +5,7 @@ import java.net.MalformedURLException;
 
 import frontEnd.CustomJavafxNodes.ButtonMenu;
 import frontEnd.CustomJavafxNodes.ButtonMenuImpl;
+import frontEnd.CustomJavafxNodes.ErrorDialog;
 import javafx.scene.Scene;
 import javafx.scene.web.WebEngine;
 import javafx.scene.web.WebView;
@@ -54,8 +55,8 @@ public class HelpOptionsImpl implements HelpOptions {
 			dialog.setScene(scene);
 			dialog.show();
 		} catch (MalformedURLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			ErrorDialog eD = new ErrorDialog();
+			eD.create(strResources.getFromErrorMessages("URL_Exception"), e.getMessage());
 		}
 
 		
