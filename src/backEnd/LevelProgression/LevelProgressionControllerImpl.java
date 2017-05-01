@@ -8,11 +8,15 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.function.Consumer;
+
+import backEnd.GameData.State.PlayerStatusReader;
 import backEnd.LevelProgression.LevelProgressionControllerEditor;
 import backEnd.Mode.Mode;
 import data.DataController;
 import data.XMLReadingException;
 import frontEnd.Skeleton.SplashScreens.SplashScreenData;
+import frontEnd.Skeleton.SplashScreens.SplashScreenFactory;
+import frontEnd.Skeleton.SplashScreens.SplashScreenReader;
 import frontEnd.Skeleton.SplashScreens.SplashScreenType;
 import resources.constants.StringResourceBundle;
 
@@ -27,24 +31,27 @@ public class LevelProgressionControllerImpl implements LevelProgressionControlle
 	private Map<String,List<String>> gamesMap; //String gameName -> List of Level names
 	private DataController myDataController;
 	private Mode myMode;
-	private Consumer<SplashScreenData> splashScreenLoader;
+	private Consumer<SplashScreenReader> splashScreenLoader;
 	private Consumer<Object> gameLoader;
+	private SplashScreenFactory mySplashFactory;
 	private static final StringResourceBundle strResources = new StringResourceBundle();
 	
-	public LevelProgressionControllerImpl(Mode mode, DataController dataController, Consumer<SplashScreenData> splashScreenLoader,
+	public LevelProgressionControllerImpl(Mode mode, DataController dataController, Consumer<SplashScreenReader> splashScreenLoader,
 			Consumer<Object> gameLoader)
 	{
 		this.myMode = mode;
 		this.myDataController = dataController;
 		this.splashScreenLoader = splashScreenLoader;
 		this.gameLoader = gameLoader;
+		this.mySplashFactory = new SplashScreenFactory(this);
 		
 		setGamesMap();
 	}
 	
-	public void initiateSplashScreen(SplashScreenData data)
+	public void initiateSplashScreen(SplashScreenType type, PlayerStatusReader playerStatus)
 	{
-		splashScreenLoader.accept(data);
+		SplashScreenReader splashScreen = mySplashFactory.get(type, myMode.getUserMode(), playerStatus);
+		splashScreenLoader.accept(splashScreen);
 	}
 	
 	@Override
@@ -179,11 +186,11 @@ public class LevelProgressionControllerImpl implements LevelProgressionControlle
 	@Override
 	public void loadNextLevel()
 	{
-		if (getNextLevel() == null)
-		{
-			splashScreenLoader.accept(new SplashScreenData("you won the game!", SplashScreenType.GAME_WON, () -> System.exit(0)));
-		}
-		else gameLoader.accept(new File("data/games/" + myMode.getGameMode() + "/templates/" + getNextLevel()));
+		gameLoader.accept(new File("data/games/" + myMode.getGameMode() + "/templates/" + getNextLevel()));
+	}
+	
+	public void reloadLevel(){
+		gameLoader.accept(new File("data/games/" + myMode.getGameMode() + "/templates/" + myMode.getLevelMode()));
 	}
 
 	@Override
@@ -211,5 +218,18 @@ public class LevelProgressionControllerImpl implements LevelProgressionControlle
 	public void addLevelToCurrentGame(String newName)
 	{
 		gamesMap.get(myMode.getGameMode()).add(newName);
+	}
+
+	@Override
+	public boolean existsNextLevel() {
+		System.out.println(getNextLevel() != null);
+		return getNextLevel() != null;
+	}
+
+	@Override
+	public void loadFirstLevel() {
+		String firstLevel = gamesMap.get(myMode.getGameMode()).get(0);
+		gameLoader.accept(new File("data/games/" + myMode.getGameMode() + "/templates/" + firstLevel));
+		
 	}
 }
