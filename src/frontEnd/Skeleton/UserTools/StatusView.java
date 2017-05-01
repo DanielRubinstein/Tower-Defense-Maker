@@ -22,22 +22,30 @@ public class StatusView {
 	private VBox valuesBox;
 	private HBox globalBox;
 	private ScrollPane myScrollPane;
+	private PlayerStatusReader myStatus;
 	private StringResourceBundle strResources = new StringResourceBundle();
 	
 	public StatusView(View view){
 		myView = view;
+		this.myStatus = myView.getPlayerStatus();
+		initializeContent();
+	}
+	
+	public StatusView(PlayerStatusReader myStatus){
+		this.myStatus = myStatus;
+		initializeContent();
+	}
+	
+	private void initializeContent(){
+		
 		namesBox=new VBox();
 		valuesBox=new VBox();
 		globalBox=new HBox();
 		myScrollPane=new ScrollPane();
-		initializeContent();
-	}
-	private void initializeContent(){
-		PlayerStatusReader playerStatus = myView.getPlayerStatus();
-		Collection<String> statusItems = playerStatus.getPropertyNames();
+		Collection<String> statusItems = myStatus.getPropertyNames();
 		
         for (String str : statusItems){
-        	setInteraction(str, playerStatus);
+        	setInteraction(str, myStatus);
         }
         organizeDisplay();
 	}
