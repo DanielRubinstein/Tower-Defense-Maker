@@ -3,7 +3,6 @@ package backEnd.GameData.Rules.EndCondition;
 import backEnd.GameData.GameData;
 import backEnd.GameData.Rules.Rule;
 import backEnd.LevelProgression.LevelProgressionControllerEditor;
-import frontEnd.Skeleton.SplashScreens.SplashScreenData;
 import frontEnd.Skeleton.SplashScreens.SplashScreenType;
 
 public abstract class WinCondition extends Rule {
@@ -14,8 +13,12 @@ public abstract class WinCondition extends Rule {
 
 	protected void winGame(GameData myGameData) {
 		LevelProgressionControllerEditor myLPC = myGameData.getLevelProgressionController();
+		if (myLPC.existsNextLevel()) {
+			myLPC.initiateSplashScreen(SplashScreenType.LEVEL_WON, myGameData.getReadOnlyPlayerStatus());
+		} else {
+			myLPC.initiateSplashScreen(SplashScreenType.GAME_WON, myGameData.getReadOnlyPlayerStatus());
+		}
 
-		myLPC.initiateSplashScreen(new SplashScreenData("You won the level!\nPress any key to continue", SplashScreenType.LEVEL_WON, () -> myLPC.loadNextLevel()));
 	}
 
 }
