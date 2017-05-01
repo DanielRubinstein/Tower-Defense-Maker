@@ -15,12 +15,14 @@ import backEnd.Attribute.AttributeOwnerReader;
 import backEnd.Attribute.AttributeReader;
 import backEnd.GameData.State.Component;
 import frontEnd.View;
+import frontEnd.CustomJavafxNodes.ActionButton;
 import frontEnd.CustomJavafxNodes.NumberChanger;
 import frontEnd.CustomJavafxNodes.PositionRequester;
 import frontEnd.CustomJavafxNodes.ToggleSwitch;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.geometry.Point2D;
+import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
@@ -66,6 +68,7 @@ public class AttributeEditorCreator implements AttributeVisualization{
 		pair.getChildren().add(imv);
 		
 		pair.setStyle(STRING_RESOURCE_BUNDLE.getFromCustomCSS("darkBackground"));
+		pair.setAlignment(Pos.CENTER_LEFT);
 		
 		toCompMap.put(pair, preset);
 		toPairMap.put(preset, pair);
@@ -105,35 +108,40 @@ public class AttributeEditorCreator implements AttributeVisualization{
 		imv.setImage(image);
 		imv.setPreserveRatio(true);
 		
-		Button b = new Button(STRING_RESOURCE_BUNDLE.getFromStringConstants("ChangeImage"));
-		b.setOnAction(e -> {
-			FileChooser imageChooser = new FileChooser();
-			imageChooser.setTitle(STRING_RESOURCE_BUNDLE.getFromStringConstants("SelectImage"));
-			imageChooser.getExtensionFilters().add(new ExtensionFilter("Image Files","*.png", "*.jpg", "*.gif")); // TODO string in resource file?
-			imageChooser.setInitialDirectory(new File(SAVED_IMAGES_DIRECTORY));
-			
-			File selectedFile = imageChooser.showOpenDialog(new Stage());
-			if(selectedFile == null){
-				return;
-			}
-			String newImagePathRelative = getRelativePathToImageDirectory(selectedFile);
-			Image newImage = new Image(getClass().getClassLoader().getResourceAsStream(newImagePathRelative));
-			imv.setImage(newImage);
-			sendModification(newImagePathRelative);
+		Button b = new ActionButton(STRING_RESOURCE_BUNDLE.getFromStringConstants("ChangeImage"), () -> {
+			promptUserForNewImageAndSendModification(imv);
 		});
+		bindHeights(imv, b);
 		
-		
+		both.getChildren().add(imv);
+		both.getChildren().add(b);		
+		both.setSpacing(NUMERIC_RESOURCE_BUNDLE.getFromSizing("StandardSpacing"));
+		return both;
+	}
+
+	private void bindHeights(ImageView imv, Button b) {
 		// To bind the heights without the sizing screwing up
 		b.setPrefHeight(NUMERIC_RESOURCE_BUNDLE.getFromSizing("ImageHeight"));
 		imv.setFitHeight(b.getPrefHeight());
 		b.heightProperty().addListener((o , oldV, newV) -> {
 			imv.setFitHeight(newV.doubleValue());
 		});
+	}
+
+	private void promptUserForNewImageAndSendModification(ImageView imv) {
+		FileChooser imageChooser = new FileChooser();
+		imageChooser.setTitle(STRING_RESOURCE_BUNDLE.getFromStringConstants("SelectImage"));
+		imageChooser.getExtensionFilters().add(new ExtensionFilter("Image Files","*.png", "*.jpg", "*.gif")); // TODO string in resource file?
+		imageChooser.setInitialDirectory(new File(SAVED_IMAGES_DIRECTORY));
 		
-		both.getChildren().add(imv);
-		both.getChildren().add(b);		
-		both.setSpacing(NUMERIC_RESOURCE_BUNDLE.getFromSizing("StandardSpacing"));
-		return both;
+		File selectedFile = imageChooser.showOpenDialog(new Stage());
+		if(selectedFile == null){
+			return;
+		}
+		String newImagePathRelative = getRelativePathToImageDirectory(selectedFile);
+		Image newImage = new Image(getClass().getClassLoader().getResourceAsStream(newImagePathRelative));
+		imv.setImage(newImage);
+		sendModification(newImagePathRelative);
 	}
 
 	private String getRelativePathToImageDirectory(File selectedFile) {
@@ -146,32 +154,11 @@ public class AttributeEditorCreator implements AttributeVisualization{
 	}
 
 	@Override
-	public Node getDOUBLE() {
-		Node n;
-		List<Double> paramList = (List<Double>) myAttributeReader.getEditParameters();
-		Double curValue = (Double) myAttributeReader.getValue();
-		NumberChanger numChanger = new NumberChanger(paramList.get(0), paramList.get(1), curValue,
-				paramList.get(3));
-		n = numChanger.addDoubleIndicator();
-		numChanger.addListener((o, oldValue, newValue)  -> {
-			sendModification(newValue);
-		});
-		return n;
-	}
-
-	@Override
 	public Node getCOMPONENT() {
 		Map<HBox, Component> toCompMap = new HashMap<HBox, Component>();
 		Map<Component, HBox> toPairMap = new HashMap<Component, HBox>();
-		Collection<Component> presetComponents = myView.getBankControllerReader().getAccessibleComponentPresets();
-		Collection<HBox> visualPair = new ArrayList<HBox>();
-		for(Component preset : presetComponents){
-			visualPair.add(createVisualPair(toCompMap, toPairMap, preset));
-		}
-		ObservableList<HBox> options = (ObservableList<HBox>) FXCollections.observableArrayList(visualPair);
-		ComboBox<HBox> optionsBox = new ComboBox<HBox>(options);
+		ComboBox<HBox> optionsBox = createComboBox(toCompMap, toPairMap);
 		optionsBox.valueProperty().addListener((o, oldValue, newValue) -> {
-			// where the actual modification gets sent
 			String componentName = myView.getBankControllerReader().getPresetName(toCompMap.get(newValue));
 			sendModification(componentName);
 		});
@@ -184,6 +171,17 @@ public class AttributeEditorCreator implements AttributeVisualization{
 			// do nothing
 		}
 		
+		return optionsBox;
+	}
+
+	private ComboBox<HBox> createComboBox(Map<HBox, Component> toCompMap, Map<Component, HBox> toPairMap) {
+		Collection<HBox> visualPair = new ArrayList<HBox>();
+		Collection<Component> presetComponents = myView.getBankControllerReader().getAccessibleComponentPresets();
+		for(Component preset : presetComponents){
+			visualPair.add(createVisualPair(toCompMap, toPairMap, preset));
+		}
+		ObservableList<HBox> options = (ObservableList<HBox>) FXCollections.observableArrayList(visualPair);
+		ComboBox<HBox> optionsBox = new ComboBox<HBox>(options);
 		return optionsBox;
 	}
 
@@ -207,16 +205,24 @@ public class AttributeEditorCreator implements AttributeVisualization{
 
 	@Override
 	public Node getINTEGER() {
-		Node n;
-		List<Integer> paramList = (List<Integer>) myAttributeReader.getEditParameters();
-		Integer curValue = (Integer) myAttributeReader.getValue();
-		NumberChanger numChanger = new NumberChanger(paramList.get(0).doubleValue(), paramList.get(1).doubleValue(), 
-				curValue, paramList.get(3).doubleValue());
-		n = numChanger.addIntegerIndicator();
+		return this.createNumberChanger().addIntegerIndicator();
+	}
+	
+	private <T extends Number> NumberChanger createNumberChanger(){
+		List<T> paramList = (List<T>) myAttributeReader.getEditParameters();
+		T currentValue = (T) myAttributeReader.getValue();
+		NumberChanger numChanger = new NumberChanger(paramList.get(0), paramList.get(1), currentValue,
+				paramList.get(3));
 		numChanger.addListener((o, oldValue, newValue)  -> {
-			sendModification(newValue.intValue());
+			sendModification(newValue);
 		});
-		return n;
+		return numChanger;
+		
+	}
+	
+	@Override
+	public Node getDOUBLE() {
+		return this.createNumberChanger().addDoubleIndicator();
 	}
 
 	@Override
@@ -231,13 +237,11 @@ public class AttributeEditorCreator implements AttributeVisualization{
 		ObservableList<String> options = (ObservableList<String>) FXCollections.observableArrayList(editParameters);
 		ComboBox<String> optionsBox = new ComboBox<String>(options);
 		try {
-			// TODO this will work as long as there is an attribute there
 			optionsBox.getSelectionModel().select((String) myAttributeReader.getValue());
 		} catch (NullPointerException e) {
 			// do nothing
 		}
 		optionsBox.valueProperty().addListener((o, oldValue, newValue) -> {
-			// where the actual modification gets sent
 			sendModification(newValue);
 		});
 		return optionsBox;

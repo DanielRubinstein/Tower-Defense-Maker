@@ -46,15 +46,15 @@ public class OnGridTileCommandCenter implements CommandCenter, SkeletonObject{
 
 	private Collection<Tab> createComponentTabs(Stage stage) {
 		List<Tab> componentTabs = new ArrayList<Tab>();
-		for (Component c : myComponents) {
-			componentTabs.add(createAttributeOwnerTab(c, stage,strResources.getFromStringConstants("CommandCenterComponent")));
+		for (Component component : myComponents) {
+			componentTabs.add(createAttributeOwnerTab(component, stage,strResources.getFromStringConstants("CommandCenterComponent")));
 		}
 		return componentTabs;
 	}
 	
-	private Tab createAttributeOwnerTab(AttributeOwnerReader obj, Stage stage, String title) {
-		AttributeCommandCenter aCC = new AttributeCommandCenter(myView, stage, (AttributeOwner) obj, title);
-		String weirdName = obj.toString();
+	private Tab createAttributeOwnerTab(AttributeOwnerReader attributeOwnerReader, Stage stage, String title) {
+		AttributeCommandCenter aCC = new AttributeCommandCenter(myView, stage, attributeOwnerReader, title);
+		String weirdName = attributeOwnerReader.toString();
 		weirdName = weirdName.substring(weirdName.lastIndexOf('.') + 1, weirdName.length());
 		return createSingleTab(weirdName, aCC.get());
 	}
