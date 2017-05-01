@@ -38,6 +38,7 @@ public class ProjectileEngine implements Engine {
 	private String PROJECTILE_TARGET = ATTRIBUTE_RESOURCES.getFromAttributeNames("ProjectileTarget");
 	private String PROJECTILE_TYPE = ATTRIBUTE_RESOURCES.getFromValueNames("ProjectileType");
 	private String ENEMY_TYPE = ATTRIBUTE_RESOURCES.getFromValueNames("EnemyType");
+	private String TOWER_TYPE = ATTRIBUTE_RESOURCES.getFromValueNames("TowerType");
 	private String SINGLE_TARGET = ATTRIBUTE_RESOURCES.getFromValueNames("SingleTarget");
 	
 	
@@ -114,7 +115,7 @@ public class ProjectileEngine implements Engine {
 		targetList.add(target);
 
 		for (Component toHit : targetList) {
-			if (toHit.<String>getAttribute(TYPE).getValue().equals(ENEMY_TYPE)) {
+			if ((target.getAttribute(TYPE).getValue().equals(toHit.getAttribute(TYPE).getValue()))) {
 				//doing damage to target
 				toHit.setAttributeValue(HEALTH, toHit.<Integer>getAttribute(HEALTH).getValue() - 
 						projectile.<Integer>getAttribute(FIRE_DAMAGE).getValue());
