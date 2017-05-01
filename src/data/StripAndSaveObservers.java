@@ -19,9 +19,9 @@ public class StripAndSaveObservers {
 	
 	public void stripObservers(){
 		strippedObservers = new ArrayList<List<SerializableObserver>>();
-		for (SerializableObservable o : myObservables){
-			strippedObservers.add(o.getObservers());
-			o.clearObservers();
+		for (int i = 0; i < myObservables.size(); i++){
+			strippedObservers.add(myObservables.get(i).getObservers());
+			myObservables.get(i).clearObservers();
 		}
 	}
 	
