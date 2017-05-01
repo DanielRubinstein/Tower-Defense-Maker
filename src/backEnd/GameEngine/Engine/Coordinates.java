@@ -6,6 +6,12 @@ package backEnd.GameEngine.Engine;
 public class Coordinates {
 	private double x;
 	private double y;
+	
+	public Coordinates(){ //by default: set everything to 0
+		x=0;
+		y=0;
+	}
+	
 	public Coordinates(double myX, double myY){
 		x=myX;
 		y=myY;

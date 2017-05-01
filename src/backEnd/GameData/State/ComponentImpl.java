@@ -37,7 +37,7 @@ public class ComponentImpl implements SerializableObservable, Component, Compone
 	
 	public ComponentImpl(AttributeData attributes, AccessPermissions accessPermissions) throws FileNotFoundException {
 		observers = new ArrayList<SerializableObserver>();
-		previousMovement=previousMovement.getNullMovement();
+		previousMovement=new Coordinates();
 		ID = System.nanoTime();
 		myAttributes = attributes;
 		AttributeFactoryReader attributeFactory = new AttributeFactoryImpl();
@@ -152,5 +152,11 @@ public class ComponentImpl implements SerializableObservable, Component, Compone
 	@Override
 	public boolean contains(String attName) {
 		return myAttributes.containsAttribute(attName);
+	}
+
+
+	@Override
+	public AccessPermissionsReader getAccessPermissionsReader() {
+		return this.myAccessPermissions;
 	}	
 }

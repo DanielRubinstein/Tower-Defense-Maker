@@ -18,6 +18,7 @@ import resources.constants.StringResourceBundle;
  *
  */
 
+
 public class DeathEngine implements Engine {
 	private StringResourceBundle STRING_RESOURCES = new StringResourceBundle();
 	private BankControllerImpl myBank;
@@ -28,9 +29,9 @@ public class DeathEngine implements Engine {
 		for (Component myComponent : gameData.getState().getComponentGraph().getAllComponents()) {
 			if (isDead(myComponent)) {
 				toRemove.add(myComponent);
-				gameData.getStatus().incrementStatusItem("KillCount", 1);
-				gameData.getStatus().incrementStatusItem("Money", myComponent.<Integer>getAttribute(STRING_RESOURCES.getFromAttributeNames("MoneyBounty")).getValue());
-				gameData.getStatus().incrementStatusItem("Score", myComponent.<Integer>getAttribute(STRING_RESOURCES.getFromAttributeNames("ScoreBounty")).getValue());
+				gameData.getStatus().incrementStatusItem(STRING_RESOURCES.getFromStringConstants("KillCount"), 1);
+				gameData.getStatus().incrementStatusItem(STRING_RESOURCES.getFromStringConstants("Money"), myComponent.<Integer>getAttribute(STRING_RESOURCES.getFromAttributeNames("MoneyBounty")).getValue());
+				gameData.getStatus().incrementStatusItem(STRING_RESOURCES.getFromStringConstants("Score"), myComponent.<Integer>getAttribute(STRING_RESOURCES.getFromAttributeNames("ScoreBounty")).getValue());
 				if (spawnsOnDeath(myComponent)) {
 					Point2D currentLocation = myComponent.<Point2D>getAttribute(STRING_RESOURCES.getFromAttributeNames("Position")).getValue();
 					Component newComponent=getNewComponent(myComponent);

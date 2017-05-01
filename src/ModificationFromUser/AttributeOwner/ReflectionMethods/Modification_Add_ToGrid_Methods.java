@@ -20,7 +20,7 @@ public class Modification_Add_ToGrid_Methods{
 	public static final String DESCRIPTION_COMPONENT = "Add Component";
 	public static final String DESCRIPTION_ERROR = "Not a recognized Attribute Owner";
 	private static final StringResourceBundle strResources = new StringResourceBundle();
-	private Coordinates myCoordinates;
+	private Coordinates myCoordinates=new Coordinates();
 
 	public Modification_Add_ToGrid_Methods(Model model, Point2D location) {
 		this.myModel = model;

@@ -2,13 +2,8 @@ package backEnd.GameData.State;
 
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
-import java.util.ResourceBundle;
-
-import com.thoughtworks.xstream.annotations.XStreamOmitField;
-
 import backEnd.Attribute.Attribute;
 import backEnd.Attribute.AttributeData;
 import backEnd.Attribute.AttributeFactoryImpl;
@@ -27,7 +22,6 @@ import resources.constants.StringResourceBundle;
  */
 
 public class TileImpl implements Tile, AttributeOwner, SerializableObservable {
-	private final static String DEFAULT_ATTRIBUTES_PATH = "resources/defaultTileAttributes";
 	private final static StringResourceBundle strResources = new StringResourceBundle();
 	private AccessPermissions myAccessPerm;
 	private AttributeData myAttrData;
@@ -42,9 +36,8 @@ public class TileImpl implements Tile, AttributeOwner, SerializableObservable {
 		this(new AccessPermissionsImpl(userModeAccessPermissions, gameModeAccessPermissions, levelModeAccessPermissions), position);
 	}
 	
-	public TileImpl(AccessPermissions aP,Point2D position )  throws FileNotFoundException {
-		//System.out.println("executing Constructor for TileImpl");
-		this.myAccessPerm = aP;
+	public TileImpl(AccessPermissions accessPermissions,Point2D position )  throws FileNotFoundException {
+		this.myAccessPerm = accessPermissions;
 		this.myAttrData = new AttributeData(new HashMap<String, Attribute<?>>());
 		AttributeFactoryReader attrFact = new AttributeFactoryImpl();
 		this.myAttrData = new AttributeData(new HashMap<String, Attribute<?>>());
@@ -52,7 +45,7 @@ public class TileImpl implements Tile, AttributeOwner, SerializableObservable {
 			Attribute<?> myAttribute = attrFact.getAttribute(key);
 			addAttribute(key, myAttribute);
 		}
-		this.setAttributeValue("Position", position);
+		this.setAttributeValue(strResources.getFromAttributeNames("Position"), position);
 		
 		}
 	
@@ -79,9 +72,9 @@ public class TileImpl implements Tile, AttributeOwner, SerializableObservable {
 
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public Attribute<?> getAttribute(String name) {;
-		
 		return myAttrData.get(strResources.getFromAttributeNames(name));
 	}
 	
@@ -95,7 +88,6 @@ public class TileImpl implements Tile, AttributeOwner, SerializableObservable {
 		return myAttrData.containsAttribute(strResources.getFromAttributeNames(name));
 	}
 
-	@SuppressWarnings("unchecked")
 	@Override
 	public <T> void setAttributeValue(String attrName, T newVal) {
 		myAttrData.<T>get(attrName).setValue(newVal);
@@ -161,6 +153,11 @@ public class TileImpl implements Tile, AttributeOwner, SerializableObservable {
 	public void removeAttribute(String attrName) {
 		myAttrData.remove(attrName);
 		
+	}
+
+	@Override
+	public AccessPermissionsReader getAccessPermissionsReader() {
+		return this.getAccessPermissionsReader();
 	}
 
 }

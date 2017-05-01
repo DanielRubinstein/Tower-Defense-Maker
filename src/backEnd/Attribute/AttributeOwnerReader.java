@@ -1,5 +1,6 @@
 package backEnd.Attribute;
 
+import backEnd.GameData.State.AccessPermissionsReader;
 import backEnd.GameData.State.SerializableObserver;
 
 public interface AttributeOwnerReader {
@@ -17,4 +18,6 @@ public interface AttributeOwnerReader {
 	void addObserver(SerializableObserver o);
 	
 	boolean contains(String attName);
+	
+	AccessPermissionsReader getAccessPermissionsReader();
 }

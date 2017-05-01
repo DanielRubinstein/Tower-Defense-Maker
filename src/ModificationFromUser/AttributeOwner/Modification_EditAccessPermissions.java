@@ -3,21 +3,23 @@ package ModificationFromUser.AttributeOwner;
 import ModificationFromUser.ModificationFromUser;
 import backEnd.Model;
 import backEnd.GameData.State.AccessPermissions;
+import backEnd.GameData.State.AccessPermissionsReader;
 
 public class Modification_EditAccessPermissions implements ModificationFromUser{
 	private AccessPermissions myAccessPermissions;
 	private boolean permits;
 	private String mode;
 	
-	public Modification_EditAccessPermissions(AccessPermissions accessPermissions, boolean permits, String mode) {
-		this.myAccessPermissions = accessPermissions;
+	public Modification_EditAccessPermissions(AccessPermissionsReader myAccessPermissions2, boolean permits, String mode) {
+		// TODO fix casting issue
+		this.myAccessPermissions = (AccessPermissions) myAccessPermissions2;
 		this.permits = permits;
 		this.mode = mode;
 	}
 
 	@Override
 	public void invoke(Model myModel) throws Exception {
-		System.out.println(this.getClass().getSimpleName() + ": " + mode + " " + permits);
+		//System.out.println(this.getClass().getSimpleName() + ": " + mode + " " + permits);
 		if (myModel.getMode().getAllUserModes().contains(mode)){
 			if (permits){
 				myAccessPermissions.addUserAccessPermission(mode);

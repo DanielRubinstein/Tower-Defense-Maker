@@ -1,9 +1,7 @@
 package backEnd.GameData.State;
 
 import backEnd.Attribute.AttributeData;
-import backEnd.Attribute.AttributeImpl;
 import backEnd.Attribute.AttributeOwner;
-import javafx.geometry.Point2D;
 
 
 /**
