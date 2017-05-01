@@ -20,9 +20,11 @@ import data.XMLReadingException;
  * @author Juan
  *
  */
+import resources.constants.StringResourceBundle;
 public class DataInputLoader
 {
-	private static final String UNIVERSAL_DATA_PATH = "data/UniversalGameData/";
+	private static final StringResourceBundle STRING_RESOURCE_BUNDLE = new StringResourceBundle();
+	private static final String UNIVERSAL_DATA_PATH = STRING_RESOURCE_BUNDLE.getFromFilePaths("Univ_Game_Data_Path");
 	
 	private XMLReader myXMLReader;
 	private GameData myGameData;
@@ -40,7 +42,7 @@ public class DataInputLoader
 		this();
 		myGameData = generateGameData(input);
 		myGameName = input.getGameName();
-		myLevelName = "Untitled";
+		myLevelName = STRING_RESOURCE_BUNDLE.getFromStringConstants("DefaultLevelName");
 	}
 	
 	public DataInputLoader(File file) throws NoSuchMethodException, SecurityException, InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException {

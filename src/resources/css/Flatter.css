@@ -170,7 +170,7 @@
 }
 .scroll-pane {
    -fx-background-color: -dark;
-   -fx-border-color: -flatter-red;
+   /*-fx-border-color: -flatter-red;*/
 }
 
 

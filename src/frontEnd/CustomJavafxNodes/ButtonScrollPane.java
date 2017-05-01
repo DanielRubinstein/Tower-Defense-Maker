@@ -6,7 +6,13 @@ import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.ScrollPane.ScrollBarPolicy;
+import javafx.scene.layout.Border;
+import javafx.scene.layout.BorderStroke;
+import javafx.scene.layout.BorderStrokeStyle;
+import javafx.scene.layout.BorderWidths;
+import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
 import resources.constants.numeric.NumericResourceBundle;
 
 public class ButtonScrollPane implements SkeletonObject {
@@ -22,6 +28,8 @@ public class ButtonScrollPane implements SkeletonObject {
 		myRoot.setMaxHeight(numericResourceBundle.getFromSizing("MaxMenuContentHeight"));
 		myInnerRoot = new VBox();
 		myInnerRoot.setSpacing(numericResourceBundle.getFromSizing("StandardSpacing"));
+		myRoot.setBorder(new Border(new BorderStroke(Color.ORANGE, 
+	            BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderWidths.DEFAULT)));
 		myRoot.setContent(myInnerRoot);
 	}
 	
