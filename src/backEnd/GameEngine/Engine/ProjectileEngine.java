@@ -11,7 +11,6 @@ import resources.constants.StringResourceBundle;
  * governs the behavior of projectiles in the State
  * 
  * @author Christian Martindale
- * @author Daniel
  *
  */
 public class ProjectileEngine implements Engine {
@@ -35,7 +34,7 @@ public class ProjectileEngine implements Engine {
 				}
 			}
 		}
-		for (Component dead : toRemove) {
+		for (Component dead : toRemove) {//avoid ConcurrentMod
 			myGameData.getState().getComponentGraph().removeComponent(dead);
 		}
 	}
@@ -84,13 +83,10 @@ public class ProjectileEngine implements Engine {
 		List<Component> targetList = (ArrayList<Component>) gameData.getState().getComponentGraph()
 				.getComponentsWithinRadius(target, (Double) projectile.getAttribute("ExplosionRadius").getValue());
 		targetList.remove(target);
-		System.out.println("ProjectileEngine FireType is " + projectile.getAttribute("FireType").getValue());
 		if(projectile.getAttribute(STRING_RESOURCES.getFromAttributeNames("FireType")).getValue().equals(STRING_RESOURCES.getFromValueNames("SingleTarget"))){
 			targetList.clear();
-			System.out.println("TargetList cleared ProjectileEngine");
 		}
 		targetList.add(target);
-		System.out.println("Targetlist size is " + targetList.size());
 
 		for (Component toHit : targetList) {
 			if (toHit.getAttribute(STRING_RESOURCES.getFromAttributeNames("Type")).getValue().equals(STRING_RESOURCES.getFromValueNames("EnemyType"))) {
