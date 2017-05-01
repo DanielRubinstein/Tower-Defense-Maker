@@ -93,10 +93,13 @@ public class ProjectileEngine implements Engine {
 				//doing damage to target
 				toHit.setAttributeValue(STRING_RESOURCES.getFromAttributeNames("Health"), 
 						toHit.<Integer>getAttribute(STRING_RESOURCES.getFromAttributeNames("Health")).getValue() - projectile.<Integer>getAttribute(STRING_RESOURCES.getFromAttributeNames("FireDamage")).getValue());
-				//slowing target (needs refactoring)
-				toHit.setAttributeValue(STRING_RESOURCES.getFromAttributeNames("Speed"), projectile.<Double>getAttribute(STRING_RESOURCES.getFromAttributeNames("SlowFactor")).getValue()
-						* toHit.<Double>getAttribute(STRING_RESOURCES.getFromAttributeNames("Speed")).getValue());
+				//slowing target
+				if(projectile.<Double>getAttribute(STRING_RESOURCES.getFromAttributeNames("SlowTime")).getValue() > toHit.<Double>getAttribute(STRING_RESOURCES.getFromAttributeNames("SlowTime")).getValue()){
+					toHit.setAttributeValue(STRING_RESOURCES.getFromAttributeNames("Speed"), projectile.<Double>getAttribute(STRING_RESOURCES.getFromAttributeNames("SlowFactor")).getValue()
+						* toHit.<Double>getAttribute(STRING_RESOURCES.getFromAttributeNames("MaxSpeed")).getValue());
+				}
 				//poisoning target
+
 				toHit.setAttributeValue(STRING_RESOURCES.getFromAttributeNames("PoisonTime"), projectile.<Double>getAttribute(STRING_RESOURCES.getFromAttributeNames("PoisonTime")).getValue());
 				toHit.setAttributeValue(STRING_RESOURCES.getFromAttributeNames("PoisonFactor"), projectile.<Double>getAttribute(STRING_RESOURCES.getFromAttributeNames("PoisonFactor")).getValue());
 				toRemove.add(projectile);

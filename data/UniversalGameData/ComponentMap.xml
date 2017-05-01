@@ -1354,7 +1354,7 @@
           <entry>
             <string>SlowTime</string>
             <backEnd.Attribute.AttributeImpl>
-              <myValue class="double">0.0</myValue>
+              <myValue class="double">1.0344827586206897</myValue>
               <myParamList class="java.util.Arrays$ArrayList">
                 <a class="java.lang.Double-array">
                   <double>0.0</double>
@@ -1403,7 +1403,7 @@
           <entry>
             <string>SlowFactor</string>
             <backEnd.Attribute.AttributeImpl>
-              <myValue class="double">0.0</myValue>
+              <myValue class="double">0.19827586206896552</myValue>
               <myParamList class="java.util.Arrays$ArrayList">
                 <a class="java.lang.Double-array">
                   <double>0.0</double>
@@ -1489,7 +1489,7 @@
           <entry>
             <string>FireRate</string>
             <backEnd.Attribute.AttributeImpl>
-              <myValue class="double">36.206896551724135</myValue>
+              <myValue class="double">200.0</myValue>
               <myParamList class="java.util.Arrays$ArrayList">
                 <a class="java.lang.Double-array">
                   <double>0.0</double>
