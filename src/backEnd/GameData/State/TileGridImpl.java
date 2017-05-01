@@ -6,12 +6,12 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
-import java.util.ResourceBundle;
 import java.util.Set;
 
 import backEnd.Attribute.AttributeOwner;
 import backEnd.Attribute.AttributeOwnerReader;
 import javafx.geometry.Point2D;
+import resources.constants.StringResourceBundle;
 import resources.constants.numeric.NumericResourceBundle;
 
 /**
@@ -29,13 +29,13 @@ public class TileGridImpl implements TileGrid {
 	private int numColsInGrid;
 	private int numRowsInGrid;
 	private Map<Point2D, Tile> tileGrid;
-	//private List<Tile> tileList;
 	private List<Set<Tile>> tileGroups;
 	private double tileWidth;
 	private double tileHeight;
 	private double tileCenterFactor; //ratio of the tile that we consider part of the center of the tile
-	//private List<List<SerializableObserver>> tileObserverList;
 	private static final NumericResourceBundle NUMERIC_RESOURCE_BUNDLE = new NumericResourceBundle();
+	private StringResourceBundle STRING_RESOURCES = new StringResourceBundle();
+
 
 	public TileGridImpl(int colsInGrid, int rowsInGrid) {
 
@@ -65,11 +65,6 @@ public class TileGridImpl implements TileGrid {
 		this.tileHeight = tileHeight;
 	}
 
-	/*
-	 * These middle of tile methods need a lot of refactoring; I'm on it. 
-	 * Just wanted to push now to get functionality working.
-	 */
-	
 	
 	private Tile generateLeftTile(Point2D screenPosition){
 		return getTileByScreenPosition(
@@ -116,7 +111,7 @@ public class TileGridImpl implements TileGrid {
 	public void setTileByScreenPosition(Tile newTile, Point2D posOfNewTile) {
 		if(tileHeight != 0.0 && tileWidth != 0.0){
 			posOfNewTile = this.getSnapPosition(posOfNewTile);
-			newTile.getAttribute("Position").setValue(posOfNewTile);
+			newTile.getAttribute(STRING_RESOURCES.getFromAttributeNames("Position")).setValue(posOfNewTile);
 		}
 		Boolean initialization = false;
 		if (!tileGrid.containsKey(posOfNewTile)) {
@@ -136,7 +131,7 @@ public class TileGridImpl implements TileGrid {
 	private Point2D getSnapPosition(Point2D screenPosition) {
 		int column = (int) Math.floor(screenPosition.getX() / tileWidth);
 		int row = (int) Math.floor(screenPosition.getY() / tileHeight);
-		return new Point2D((column + 0.5) * (tileWidth), (row + 0.5) * (tileHeight));
+		return new Point2D((column + 0.5) * (tileWidth), (row + 0.5) * (tileHeight)); //0.5 to center tile (0=left, 1=right, 0.5=middle)
 	}
 	
 
@@ -257,16 +252,15 @@ public class TileGridImpl implements TileGrid {
 			for (int i = 0; i < numRowsInGrid; i++) {
 				Tile tempTile = tileGridThing[j][i];
 				String moveDir = tempTile.<String>getAttribute("MoveDirection").getValue();
-				if(moveDir.equals("Up") && j > 0){
+				if(moveDir.equals(STRING_RESOURCES.getFromStringConstants("Up")) && j > 0){
 					joinSets(tempTile, tileGridThing[j-1][i]);
-				} else if (moveDir.equals("Down") && j < numRowsInGrid-1) {
+				} else if (moveDir.equals(STRING_RESOURCES.getFromStringConstants("Down")) && j < numRowsInGrid-1) {
 					joinSets(tempTile, tileGridThing[j+1][i]);					
-				} else if (moveDir.equals("Left") && i > 0) {
+				} else if (moveDir.equals(STRING_RESOURCES.getFromStringConstants("Left")) && i > 0) {
 					joinSets(tempTile, tileGridThing[j][i-1]);
-				} else if (moveDir.equals("Right") && i < numColsInGrid-1) {
+				} else if (moveDir.equals(STRING_RESOURCES.getFromStringConstants("Right")) && i < numColsInGrid-1) {
 					joinSets(tempTile, tileGridThing[j][i+1]);					
 				} else {
-					//System.out.println(this.getClass().getSimpleName() + ": No move direction");
 				}
 			}
 		}

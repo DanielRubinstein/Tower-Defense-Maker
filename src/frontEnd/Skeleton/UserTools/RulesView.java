@@ -18,27 +18,28 @@ import javafx.scene.layout.HBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import resources.constants.StringResourceBundle;
+import resources.constants.numeric.NumericResourceBundle;
+import resources.constants.numeric.ScreenConstants;
 
-public class RulesView {
+public class RulesView implements PopUp{
 	private StringResourceBundle stringResourceBundle = new StringResourceBundle();
+	private NumericResourceBundle numResourceBundle = new NumericResourceBundle();
 	private GridPane myRoot;
 	private View myView;
-	private Stage myStage;
 	private BooleanProperty canEdit;
 	public RulesView(View view, Stage parentStage){
 		myRoot = new GridPane();
 		myView = view;
 		canEdit = view.getBooleanAuthorModeProperty();
-		myStage = new Stage();
-		myStage.initOwner(parentStage);
-		myStage.initModality(Modality.APPLICATION_MODAL);
-		myRoot.setPadding(new Insets(20, 20, 20, 20));
-		myRoot.setVgap(20);
-		myRoot.setHgap(20);
 		setupView();
 	}
 	
-	public void launch(){
+	@Override
+	public void displayOnStage(Stage stage){
+		Stage myStage = stage;
+		myStage.initOwner(myView.getMainWindow());
+		myStage.initModality(Modality.APPLICATION_MODAL);
+		myRoot.setPadding(new Insets(numResourceBundle.getFromSizing("StandardSpacing")));
 		Scene scene = new Scene(myRoot);
 		scene.getStylesheets().add(stringResourceBundle.getFromStringConstants("DEFAULT_CSS"));
 		myStage.setScene(scene);
@@ -46,15 +47,15 @@ public class RulesView {
 	}
 	
 	private void setupView(){
-		setupTitle("Rules",0);
-		setupTitle("Enabled",1);
-		setupTitle("Value",2);
+		setupTitle(stringResourceBundle.getFromStringConstants("Rules"),0);
+		setupTitle(stringResourceBundle.getFromStringConstants("Enabled"),1);
+		setupTitle(stringResourceBundle.getFromStringConstants("Value"),2);
 		Collection<RuleReader> myRules = myView.getRules();
 		int rowIndex = 2;
 		for(RuleReader rule : myRules){
 			Label ruleText = new Label(rule.getDisplayString());
 			
-			CheckBox ruleEnabled = new CheckBox("Enabled");
+			CheckBox ruleEnabled = new CheckBox(stringResourceBundle.getFromStringConstants("Enabled"));
 			ruleEnabled.setSelected(rule.isEnabled());
 			ruleEnabled.setOnAction(e -> {
 				myView.sendUserModification(new Modification_ToggleRule(rule.getKeyName()));
@@ -86,10 +87,5 @@ public class RulesView {
 		Label exampleTitle = new Label(title);
 		exampleTitle.setUnderline(true);
 		myRoot.add(exampleTitle, col, 1);
-	}
-	
-	
-	
-	
-	
+	}	
 }

@@ -6,8 +6,8 @@ import frontEnd.View;
 import frontEnd.Skeleton.ScreenGrid.ScreenGrid;
 import frontEnd.Skeleton.SpawnTimelineVisualization.AuthorScreenGrid;
 import frontEnd.Skeleton.UserTools.UserTools;
+import frontEnd.Skeleton.UserTools.UserToolsImpl;
 import javafx.beans.property.SimpleBooleanProperty;
-import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
@@ -57,7 +57,7 @@ public class SkeletonImpl implements Skeleton{
 		chooseCenter();
 		myAuthProp.addListener((o, oldV, newV) -> chooseCenter());
 		
-		userTools = new UserTools(view);
+		userTools = new UserToolsImpl(view);
 		myRoot.setRight(userTools.getSidePane());
 		myRoot.setBottom(userTools.getBottomPane());
 	}

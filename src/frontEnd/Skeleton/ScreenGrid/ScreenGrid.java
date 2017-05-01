@@ -2,7 +2,6 @@ package frontEnd.Skeleton.ScreenGrid;
 
 import java.lang.reflect.Method;
 
-import ModificationFromUser.AttributeOwner.Modification_Add_PaletteToGrid;
 import backEnd.Attribute.AttributeOwnerReader;
 import backEnd.Bank.BankControllerReader;
 import backEnd.GameData.State.Component;

@@ -1,5 +1,6 @@
 package data.GamePrep;
 
+
 public class StartingInput {
 	private int numberOfTileCols;
 	private int numberOfTileRows;

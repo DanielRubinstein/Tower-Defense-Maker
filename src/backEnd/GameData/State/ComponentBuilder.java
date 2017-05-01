@@ -8,11 +8,11 @@ import com.thoughtworks.xstream.io.xml.DomDriver;
 public class ComponentBuilder {
 	private Component myComponent;
 	private XStream xStream;
-	
+	private final String COMPONENT_IMPL="ComponentImpl";
 	public ComponentBuilder(Component component) {
 		myComponent = component;
 		xStream = new XStream(new DomDriver());
-		xStream.alias("ComponentImpl", ComponentImpl.class);
+		xStream.alias(COMPONENT_IMPL, ComponentImpl.class);
 	}
 	
 	public Component getComponent() {

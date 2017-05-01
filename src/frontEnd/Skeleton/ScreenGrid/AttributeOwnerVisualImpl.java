@@ -13,7 +13,7 @@ import resources.constants.StringResourceBundle;
 /**
  * This class is the frontEnd counterpart of AttributeOwner, basically anything that has attributes (like 
  * Components or Tiles). This is what gets displayed for that AttributeOwner.
- * @author Tim
+ * @author Tim, Miguel
  *
  */
 public class AttributeOwnerVisualImpl implements SerializableObserver, AttributeOwnerVisual{
@@ -26,11 +26,20 @@ public class AttributeOwnerVisualImpl implements SerializableObserver, Attribute
 	private final String IMAGE_ATTRIBUTE = stringResourceBundle.getFromAttributeNames("ImageFile");
 	private final String POSITION_ATTRIBUTE = stringResourceBundle.getFromAttributeNames("Position");
 	private final String SIZE_ATTRIBUTE = stringResourceBundle.getFromAttributeNames("Size");
+	private final String POISON_TIME_ATTRIBUTE = stringResourceBundle.getFromAttributeNames("PoisonTime");
+	private final String SLOW_TIME_ATTRIBUTE = stringResourceBundle.getFromAttributeNames("SlowTime");
+	
+	
 	private AttributeOwnerReader myAttributeOwnerReader;
 	
 	public AttributeOwnerVisualImpl(AttributeOwnerReader attr){
 		myAttributeOwnerReader = attr;
 		myAttributeOwnerReader.addObserver(this);
+		initializeImage();
+		
+	}
+
+	private void initializeImage() {
 		myImage = new ImageView();
 		setImage(myAttributeOwnerReader.<String>getAttributeReader(IMAGE_ATTRIBUTE).getValue());
 		try{
@@ -41,9 +50,10 @@ public class AttributeOwnerVisualImpl implements SerializableObserver, Attribute
 		} catch (MissingResourceException e){
 			//means we are dealing with something that does not have size
 		}
+
 		setPosition(myAttributeOwnerReader.<Point2D>getAttributeReader(POSITION_ATTRIBUTE).getValue());
 	}
-	
+
 	private void setSize(Double value) {
 		mySize = value;
 		myImage.setPreserveRatio(true);
@@ -97,6 +107,35 @@ public class AttributeOwnerVisualImpl implements SerializableObserver, Attribute
 				setPosition(newPosition);
 			}
 		}
+		setEffects();
+	}
+
+	private void setEffects() {
+		if(!setSlowDownEffect() && !setPoisonEffect()){
+			myImage.setStyle("");
+		}
+		
+	}
+	private boolean setDoubleEffect(String AttributeName,String styleName){
+		try{
+			double effectTime = myAttributeOwnerReader.<Double>getAttributeReader(AttributeName).getValue();
+			if(effectTime>0){
+				myImage.setStyle(stringResourceBundle.getFromCustomCSS(styleName));
+				return true;
+			}
+		}catch(NullPointerException e){
+			//no slowtime attribute
+		}
+		return false;
+	}
+	
+
+	private boolean setSlowDownEffect() {
+		return setDoubleEffect(SLOW_TIME_ATTRIBUTE,"SlowEffect");
+	}
+
+	private boolean setPoisonEffect() {
+		return setDoubleEffect(POISON_TIME_ATTRIBUTE,"PoisonEffect");
 	}
 
 	@Override
