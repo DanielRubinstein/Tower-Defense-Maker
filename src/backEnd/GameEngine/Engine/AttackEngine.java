@@ -47,7 +47,10 @@ public class AttackEngine implements Engine {
 		Map<Component, Component> attackersAndTargets=new HashMap<Component, Component>();
 		
 		for (Component attacker : myComponentGraph.getAllComponents()) {
-			if (attacker.getAttribute(STRING_RESOURCES.getFromAttributeNames("Type")).getValue().equals(STRING_RESOURCES.getFromValueNames("TowerType"))) {
+			boolean isTower      = attacker.getAttribute(STRING_RESOURCES.getFromAttributeNames("Type")).getValue().equals(STRING_RESOURCES.getFromValueNames("TowerType"));
+			boolean isEnemy 	 = attacker.getAttribute(STRING_RESOURCES.getFromAttributeNames("Type")).getValue().equals(STRING_RESOURCES.getFromValueNames("EnemyType"));
+			boolean isProjectile = attacker.getAttribute(STRING_RESOURCES.getFromAttributeNames("Type")).getValue().equals(STRING_RESOURCES.getFromValueNames("ProjectileType"));
+			if (isTower) {
 				if (masterTime % ((Double) attacker.getAttribute(STRING_RESOURCES.getFromAttributeNames("FireRate")).getValue()/1000) <= stepTime) { 
 					List<Component> targets = getTargetList(attacker);
 					for (Component potentialTarget : targets) {
@@ -69,9 +72,9 @@ public class AttackEngine implements Engine {
 	 * @return
 	 */
 	private List<Component> getTargetList(Component attacker) {
-		String targetType;// = //attacker.<String>getAttribute("TargetSelector").getValue();
+		String targetType = attacker.<String>getAttribute("TargetSelector").getValue();
 		TileGrid tileGrid = myGameData.getState().getTileGrid();
-		targetType = "Radius";
+		//targetType = "Radius";
 		if(targetType.equals("Group")){
 			if(!tileGroupsInitialized){
 				myTileGroups = myGameData.getState().getTileGrid().getTileGroups();
