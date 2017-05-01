@@ -23,6 +23,7 @@ import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.stage.Stage;
 import javafx.stage.Window;
+import resources.constants.StringResourceBundle;
 
 /**
  * Class that initializes the UI and serves as a connector betweel the Model and the Front End
@@ -35,6 +36,7 @@ public class ViewImpl implements View {
 	private SkeletonImpl mySkeleton; 
 	private Stage appStage;
 	private FacebookInteractor myFB;
+	private StringResourceBundle strResources = new StringResourceBundle();
 
 	public ViewImpl(ModelReader model, Consumer<ModificationFromUser> inputConsumer, FacebookInteractor fb) {
 		myFB=fb;
@@ -97,7 +99,7 @@ public class ViewImpl implements View {
 	@Override
 	public void reportError(Exception e) {
 		ErrorDialog fnf = new ErrorDialog();
-		fnf.create("Error", e.getMessage());
+		fnf.create(strResources.getFromErrorMessages("Default_Error"), e.getMessage());
 	}
 
 	@Override

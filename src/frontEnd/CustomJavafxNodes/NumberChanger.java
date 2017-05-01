@@ -59,6 +59,7 @@ public class NumberChanger implements SkeletonObject{
 		h.getChildren().add(this.getRoot());
 		Label currentVal = new Label(String.format(stringResourceBundle.getFromStringConstants("SingleDoubleRoundedToTenthsWithParenthesis"), this.getValue().doubleValue()));
 		this.addListener( (SerializableObservable, oldValue, newValue)->{
+			myRoot.setValue(newValue.doubleValue());
 			currentVal.setText(String.format(stringResourceBundle.getFromStringConstants("SingleDoubleRoundedToTenthsWithParenthesis"), newValue.doubleValue()));
 		});
 		h.getChildren().add(currentVal);

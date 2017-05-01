@@ -43,8 +43,8 @@ public class OptionsFacebook implements SkeletonObject {
 			profPic.setOnMouseClicked(e -> launch());
 			myRoot.getChildren().add(profPic);
 		} catch (FacebookException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			ErrorDialog eD = new ErrorDialog();
+			eD.create(strResources.getFromErrorMessages("Facebook_Error"), e.getMessage());
 		}
 	}
 
@@ -80,7 +80,7 @@ public class OptionsFacebook implements SkeletonObject {
 				myFb.shareToWall(message);
 			} catch (FacebookException e1) {
 				ErrorDialog eD = new ErrorDialog();
-				eD.create("Facebook Error", e1.getMessage());
+				eD.create(strResources.getFromErrorMessages("Facebook_Error"), e1.getMessage());
 			}
 			shareStage.close();
 		});
