@@ -170,20 +170,20 @@ public class AttributeEditorCreator implements AttributeVisualization{
 		}
 		ObservableList<HBox> options = (ObservableList<HBox>) FXCollections.observableArrayList(visualPair);
 		ComboBox<HBox> optionsBox = new ComboBox<HBox>(options);
-		try {
-			// TODO this will work as long as there is an attribute there
-			optionsBox.getSelectionModel().select(toPairMap.get((String) myAttributeReader.getValue()));
-
-			//optionsBox.getSelectionModel().select(toPairMap.get((Component) myAttr.getValue()));
-
-		} catch (NullPointerException e) {
-			// do nothing
-		}
 		optionsBox.valueProperty().addListener((o, oldValue, newValue) -> {
 			// where the actual modification gets sent
 			String componentName = myView.getBankControllerReader().getPresetName(toCompMap.get(newValue));
 			sendModification(componentName);
 		});
+		
+		try {
+			String currentValue = (String) myAttributeReader.getValue();
+			Component currentComponent = myView.getBankControllerReader().getComponent(currentValue);
+			optionsBox.getSelectionModel().select(toPairMap.get(currentComponent));
+		} catch (NullPointerException e) {
+			// do nothing
+		}
+		
 		return optionsBox;
 	}
 
@@ -201,7 +201,7 @@ public class AttributeEditorCreator implements AttributeVisualization{
 			});
 			return b;
 		} catch (NullPointerException | MissingResourceException e ){
-			return new Label("NoneSet");
+			return new Label(STRING_RESOURCE_BUNDLE.getFromStringConstants("NoneSelected"));
 		}
 	}
 

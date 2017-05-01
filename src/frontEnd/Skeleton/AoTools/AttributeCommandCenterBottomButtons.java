@@ -59,7 +59,7 @@ public class AttributeCommandCenterBottomButtons implements SkeletonObject{
 	public void addSubmitButton(Component component) {
 		// as is this option is not available when creating a preset
 		if(myView.getBankControllerReader().getAccessibleComponentPresets().contains(component)){
-			Button submit = new Button(STRING_RESOURCE_BUNDLE.getFromStringConstants("Add"));
+			Button submit = new Button(STRING_RESOURCE_BUNDLE.getFromStringConstants("AddNow"));
 			submit.setOnAction(e -> {
 				myView.sendUserModification(new Modification_Add_StraightToGrid(component));
 				myHostStage.close();
