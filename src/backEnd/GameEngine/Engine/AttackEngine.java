@@ -19,7 +19,6 @@ import resources.constants.StringResourceBundle;
 /**
  * Deals with firing projectiles from towers at targets
  * @author Christian Martindale
- * @author Daniel
  */
 
 public class AttackEngine implements Engine {
@@ -40,7 +39,7 @@ public class AttackEngine implements Engine {
 			myProjectileFactory = new ProjectileFactory();
 		} catch (FileNotFoundException e) {
 			ErrorDialog fnf = new ErrorDialog();
-			fnf.create("Error", "File Not Found");
+			fnf.create("Error", "Image File Not Found");
 		}
 		
 		myComponentGraph = gameData.getState().getComponentGraph();
@@ -55,6 +54,7 @@ public class AttackEngine implements Engine {
 					List<Component> targets = getTargetList(attacker);
 					for (Component potentialTarget : targets) {
 						if (potentialTarget.getAttribute(STRING_RESOURCES.getFromAttributeNames("Type")).getValue().equals(STRING_RESOURCES.getFromValueNames("EnemyType"))) {
+							System.out.println("added an enemy to targetsList in AttackEngine");
 							attackersAndTargets.put(attacker, potentialTarget);
 						}
 					}
@@ -97,7 +97,6 @@ public class AttackEngine implements Engine {
 		} else if (targetType.equals("Radius")) {
 			return myComponentGraph.getComponentsWithinRadius(attacker,(double) attacker.getAttribute(STRING_RESOURCES.getFromAttributeNames("FireRadius")).getValue());
 		} else {
-			System.out.println(this.getClass().getSimpleName() + ": " + "Target Selection Was Blank possible problem");
 			return myComponentGraph.getComponentsWithinRadius(attacker,(double) attacker.getAttribute(STRING_RESOURCES.getFromAttributeNames("FireRadius")).getValue());
 		}
 		

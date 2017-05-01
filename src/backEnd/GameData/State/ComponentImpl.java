@@ -44,7 +44,7 @@ public class ComponentImpl implements SerializableObservable, Component, Compone
 		observers = new ArrayList<SerializableObserver>();
 		previousMovement=new Coordinates(0,0);
 		ID = System.nanoTime();
-		System.out.println(ID + "   ");
+		//System.out.println(ID + "   ");
 		//System.out.println("creating component " + this);
 		myAttributes = attributes;
 		AttributeFactoryReader attributeFactory = new AttributeFactoryImpl();
