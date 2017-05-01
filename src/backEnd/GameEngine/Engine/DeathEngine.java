@@ -26,6 +26,8 @@ public class DeathEngine implements Engine {
 	private final String ATTRIBUTE_BUNDLE_NAME = "resources.allAttributeNames";
 	private final ResourceBundle ATTRIBUTE_RESOURCE_BUNDLE = ResourceBundle.getBundle(ATTRIBUTE_BUNDLE_NAME);
 	private BankControllerImpl myBank;
+	
+	
 	public void gameLoop(GameData gameData, double stepTime) {
 		List<Component> toRemove=new ArrayList<Component>();
 		Map<Component, Point2D> toAdd=new HashMap<Component, Point2D>();

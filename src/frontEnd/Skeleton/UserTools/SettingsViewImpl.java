@@ -78,7 +78,7 @@ public class SettingsViewImpl implements SettingsView, PopUp{
 	private void rulesButtons() {
 		myMenu.addSimpleButtonWithHover(strResources.getFromStringConstants("Rules"), () -> {
 			RulesView myRules = new RulesView(myView,myStage);
-			myRules.launch();
+			myRules.displayOnStage(new Stage());
 		}, strResources.getFromStringConstants("RulesHover"));
 	}
 
