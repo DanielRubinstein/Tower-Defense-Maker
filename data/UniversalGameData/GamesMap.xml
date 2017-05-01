@@ -30,7 +30,9 @@
   </entry>
   <entry>
     <string>testGameWin</string>
-    <list/>
+    <list>
+      <string>level2</string>
+    </list>
   </entry>
   <entry>
     <string>testSplash</string>

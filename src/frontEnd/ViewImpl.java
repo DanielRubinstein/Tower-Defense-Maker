@@ -19,7 +19,6 @@ import frontEnd.Facebook.FacebookInteractor;
 import frontEnd.Skeleton.SkeletonImpl;
 import frontEnd.Skeleton.SplashScreens.SplashScreenImpl;
 import frontEnd.Skeleton.SplashScreens.SplashScreenReader;
-import frontEnd.Skeleton.SplashScreens.SplashScreenData;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.stage.Stage;

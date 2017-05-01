@@ -24,8 +24,10 @@ import javafx.scene.control.ButtonType;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
+import resources.constants.numeric.NumericResourceBundle;
 
 public class AttributeCommandCenterBottomButtons implements SkeletonObject{
+	private static final NumericResourceBundle NUMERIC_RESOURCE_BUNDLE = new NumericResourceBundle();
 	private HBox myRoot;
 	private View myView;
 	private Stage myHostStage;
@@ -38,35 +40,35 @@ public class AttributeCommandCenterBottomButtons implements SkeletonObject{
 
 	private void initializeRoot() {
 		myRoot = new HBox();
-		myRoot.setSpacing(10d);
+		myRoot.setSpacing(NUMERIC_RESOURCE_BUNDLE.getFromSizing("StandardSpacing"));
 		myRoot.setAlignment(Pos.BOTTOM_RIGHT);
 	}
 	
-	public void addRemoveButton(Component c) {
-		if(myView.isComponentOnGrid(c)){
+	public void addRemoveButton(Component component) {
+		if(myView.isComponentOnGrid(component)){
 			Button submit = new Button("Remove Now");
 			submit.setOnAction(e -> {
-				myView.sendUserModification(new Modification_RemoveAttributeOwner(c));
+				myView.sendUserModification(new Modification_RemoveAttributeOwner(component));
 				myHostStage.close();
 			});
 			myRoot.getChildren().add(submit);
 		}
 	}
 	
-	public void addSubmitButton(Component obj) {
+	public void addSubmitButton(Component component) {
 		// as is this option is not available when creating a preset
-		if(myView.getBankControllerReader().getAccessibleComponentPresets().contains(obj)){
+		if(myView.getBankControllerReader().getAccessibleComponentPresets().contains(component)){
 			Button submit = new Button("Add Now");
 			submit.setOnAction(e -> {
-				myView.sendUserModification(new Modification_Add_StraightToGrid(obj));
+				myView.sendUserModification(new Modification_Add_StraightToGrid(component));
 				myHostStage.close();
 			});
 			myRoot.getChildren().add(submit);
 		}
 	}
 	
-	public void createAccessPermissionButton(AttributeOwner obj) {
-		AccessPermissionsViewer accessPermissionsViewer = new AccessPermissionsViewer(myHostStage, myView, obj.getAccessPermissions());
+	public void createAccessPermissionButton(AttributeOwnerReader attributeOwnerReader) {
+		AccessPermissionsViewer accessPermissionsViewer = new AccessPermissionsViewer(myHostStage, myView, attributeOwnerReader.getAccessPermissionsReader());
 		myRoot.getChildren().add(accessPermissionsViewer.getRoot());
 	}
 	

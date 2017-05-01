@@ -1,9 +1,6 @@
 package backEnd.GameData.State;
 
-import java.util.List;
-
-
-public interface AccessPermissions {
+public interface AccessPermissions extends AccessPermissionsReader {
 
 	/**
 	 * Add a GameMode to access permission list
@@ -30,13 +27,5 @@ public interface AccessPermissions {
 	 * @return boolean whether or not the GameMode has access
 	 */
 	boolean permitsAccess(String userMode, String gameMode, String levelMode);
-	
-	boolean permitsAccess(String mode);
-	
-	List<String> getGameModeList();
-	
-	List<String> getUserModeList();
-
-	List<String> getLevelModeList();
 
 }

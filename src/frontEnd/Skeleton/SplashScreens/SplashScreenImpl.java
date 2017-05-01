@@ -1,8 +1,10 @@
 package frontEnd.Skeleton.SplashScreens;
 
 import backEnd.GameData.State.PlayerStatusReader;
+import frontEnd.Skeleton.UserTools.StatusView;
 import javafx.event.Event;
 import javafx.event.EventHandler;
+import javafx.geometry.HPos;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -11,25 +13,31 @@ import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import resources.constants.StringResourceBundle;
 
 public abstract class SplashScreenImpl implements SplashScreen {
 	private StringResourceBundle stringResourceBundle = new StringResourceBundle();
-	private BorderPane myBP;
+	private GridPane myGP;
 	private HBox buttonBox = new HBox();
 	private Scene myScene;
 	private EventHandler restartLevel;
 	private Button restartLevelButton;
+	private HBox myStatusView = new HBox();
+	
 
 	public SplashScreenImpl(EventHandler restartLevel) {
 		this.restartLevel = restartLevel;
-		myBP = new BorderPane();
-		myScene = new Scene(myBP);
+		myGP = new GridPane();
+		myScene = new Scene(myGP);
 		myScene.getStylesheets().add(stringResourceBundle.getFromStringConstants("DEFAULT_CSS"));
-		BorderPane.setAlignment(buttonBox, Pos.CENTER);
-		myBP.setBottom(buttonBox);
+		myGP.add(buttonBox, 0, 3);
+		GridPane.setHalignment(buttonBox, HPos.CENTER);
+		buttonBox.setAlignment(Pos.CENTER);
+		myGP.setAlignment(Pos.CENTER);
 		
 	}
 	
@@ -49,7 +57,14 @@ public abstract class SplashScreenImpl implements SplashScreen {
 	
 	protected void setImage(Image image){
 		ImageView myImage = new ImageView(image);
-		myBP.setCenter(myImage);
+		GridPane.setHalignment(myImage, HPos.CENTER);
+		myGP.add(myImage, 0, 1);
+	}
+	
+	protected void setMessage(String message){
+		Label myMessage = new Label(message);
+		GridPane.setHalignment(myMessage, HPos.CENTER);
+		myGP.add(myMessage, 0, 2);
 	}
 
 	@Override
@@ -60,7 +75,12 @@ public abstract class SplashScreenImpl implements SplashScreen {
 
 	@Override
 	public void setStatusDisplayValues(PlayerStatusReader playerStatus) {
-		// TODO Auto-generated method stub
+		StatusView statusContents = new StatusView(playerStatus);
+		myStatusView.getChildren().add(statusContents.getRoot());
+		myStatusView.setAlignment(Pos.CENTER);
+		GridPane.setHalignment(myStatusView, HPos.CENTER);
+		myGP.add(myStatusView, 0, 0);
+		
 		
 	}
 
