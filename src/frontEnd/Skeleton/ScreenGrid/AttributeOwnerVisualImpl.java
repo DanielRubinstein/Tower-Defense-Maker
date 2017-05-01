@@ -5,9 +5,7 @@ import java.util.MissingResourceException;
 import backEnd.Attribute.AttributeOwnerReader;
 import backEnd.GameData.State.SerializableObservable;
 import backEnd.GameData.State.SerializableObserver;
-import javafx.geometry.Bounds;
 import javafx.geometry.Point2D;
-import javafx.scene.control.Tooltip;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import resources.constants.StringResourceBundle;
@@ -15,7 +13,7 @@ import resources.constants.StringResourceBundle;
 /**
  * This class is the frontEnd counterpart of AttributeOwner, basically anything that has attributes (like 
  * Components or Tiles). This is what gets displayed for that AttributeOwner.
- * @author Tim
+ * @author Tim, Miguel
  *
  */
 public class AttributeOwnerVisualImpl implements SerializableObserver, AttributeOwnerVisual{
@@ -28,11 +26,20 @@ public class AttributeOwnerVisualImpl implements SerializableObserver, Attribute
 	private final String IMAGE_ATTRIBUTE = stringResourceBundle.getFromAttributeNames("ImageFile");
 	private final String POSITION_ATTRIBUTE = stringResourceBundle.getFromAttributeNames("Position");
 	private final String SIZE_ATTRIBUTE = stringResourceBundle.getFromAttributeNames("Size");
+	private final String POISON_TIME_ATTRIBUTE = stringResourceBundle.getFromAttributeNames("PoisonTime");
+	private final String SLOW_TIME_ATTRIBUTE = stringResourceBundle.getFromAttributeNames("SlowTime");
+	
+	
 	private AttributeOwnerReader myAttr;
 	
 	public AttributeOwnerVisualImpl(AttributeOwnerReader attr){
 		myAttr = attr;
 		myAttr.addObserver(this);
+		initializeImage();
+		
+	}
+
+	private void initializeImage() {
 		myImage = new ImageView();
 		setImage(myAttr.<String>getAttributeReader(IMAGE_ATTRIBUTE).getValue());
 		try{
@@ -44,8 +51,9 @@ public class AttributeOwnerVisualImpl implements SerializableObserver, Attribute
 			//means we are dealing with something that does not have size
 		}
 		setPosition(myAttr.<Point2D>getAttributeReader(POSITION_ATTRIBUTE).getValue());
+		
 	}
-	
+
 	private void setSize(Double value) {
 		mySize = value;
 		myImage.setPreserveRatio(true);
@@ -83,8 +91,7 @@ public class AttributeOwnerVisualImpl implements SerializableObserver, Attribute
 					setImage(newImagePath);
 					setSize(newSize);
 					setPosition(myPosition);
-				}
-				if(!newSize.equals(mySize)){
+				} else if(!newSize.equals(mySize)){
 					setSize(newSize);
 					setPosition(myPosition);
 				}
@@ -100,6 +107,35 @@ public class AttributeOwnerVisualImpl implements SerializableObserver, Attribute
 				setPosition(newPosition);
 			}
 		}
+		setEffects();
+	}
+
+	private void setEffects() {
+		if(!setSlowDownEffect() && !setPoisonEffect()){
+			myImage.setStyle("");
+		}
+		
+	}
+	private boolean setDoubleEffect(String AttributeName,String styleName){
+		try{
+			double effectTime = myAttr.<Double>getAttributeReader(AttributeName).getValue();
+			if(effectTime>0){
+				myImage.setStyle(stringResourceBundle.getFromCustomCSS(styleName));
+				return true;
+			}
+		}catch(NullPointerException e){
+			//no slowtime attribute
+		}
+		return false;
+	}
+	
+
+	private boolean setSlowDownEffect() {
+		return setDoubleEffect(SLOW_TIME_ATTRIBUTE,"SlowEffect");
+	}
+
+	private boolean setPoisonEffect() {
+		return setDoubleEffect(POISON_TIME_ATTRIBUTE,"PoisonEffect");
 	}
 
 	@Override

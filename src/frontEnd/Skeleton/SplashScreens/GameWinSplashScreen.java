@@ -8,11 +8,11 @@ import javafx.scene.image.Image;
 public class GameWinSplashScreen extends SplashScreenImpl {
 	public GameWinSplashScreen(EventHandler restartLevel, EventHandler restartGame){
 		super(restartLevel);
-		Button restartGameButton = new Button("Restart Game");
+		Button restartGameButton = new Button(getResource("RestartGameButtonText"));
 		restartGameButton.setOnMouseClicked(restartGame);
 		addButton(restartGameButton);
-		setMessage("You won the Game!");
-		setImage(new Image("resources/images/splashscreens/win.png"));
+		setMessage(getResource("GameWinMessage"));
+		setImage(new Image(getResource("GameWinImagePath")));
 	}
 
 }

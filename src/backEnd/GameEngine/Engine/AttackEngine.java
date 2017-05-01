@@ -30,6 +30,16 @@ public class AttackEngine implements Engine {
 	private boolean tileGroupsInitialized;
 	private List<Set<Tile>> myTileGroups;
 	private ComponentGraph myComponentGraph;
+	private String TYPE       	   = STRING_RESOURCES.getFromAttributeNames("Type");
+	private String TOWER_TYPE 	   = STRING_RESOURCES.getFromValueNames("TowerType");
+	private String ENEMY_TYPE 	   = STRING_RESOURCES.getFromValueNames("EnemyType");
+	private String FIRE_RATE  	   = STRING_RESOURCES.getFromAttributeNames("FireRate");
+	private String POSITION  	   = STRING_RESOURCES.getFromAttributeNames("Position");
+	private String TARGET_SELECTOR = STRING_RESOURCES.getFromAttributeNames("TargetSelector");
+	private String SLOW_TIME	   = STRING_RESOURCES.getFromAttributeNames("SlowTime");
+	private String SLOW_FACTOR	   = STRING_RESOURCES.getFromAttributeNames("SlowFactor");
+	private String MAX_SPEED	   = STRING_RESOURCES.getFromAttributeNames("MaxSpeed");
+	private String SPEED		   = STRING_RESOURCES.getFromAttributeNames("Speed");
 
 	@Override
 	public void gameLoop(GameData gameData, double stepTime) {
@@ -46,15 +56,15 @@ public class AttackEngine implements Engine {
 		Map<Component, Component> attackersAndTargets=new HashMap<Component, Component>();
 		
 		for (Component attacker : myComponentGraph.getAllComponents()) {
-			boolean isTower      = attacker.getAttribute(STRING_RESOURCES.getFromAttributeNames("Type")).getValue().equals(STRING_RESOURCES.getFromValueNames("TowerType"));
-			boolean isEnemy 	 = attacker.getAttribute(STRING_RESOURCES.getFromAttributeNames("Type")).getValue().equals(STRING_RESOURCES.getFromValueNames("EnemyType"));
-			boolean isProjectile = attacker.getAttribute(STRING_RESOURCES.getFromAttributeNames("Type")).getValue().equals(STRING_RESOURCES.getFromValueNames("ProjectileType"));
-			if (isTower) {
-				if (masterTime % ((Double) attacker.getAttribute(STRING_RESOURCES.getFromAttributeNames("FireRate")).getValue()/1000) <= stepTime) { 
+			boolean isTower      = attacker.getAttribute(TYPE).getValue().equals(TOWER_TYPE);
+			boolean isEnemy 	 = attacker.getAttribute(TYPE).getValue().equals(ENEMY_TYPE);
+			if (isTower || isEnemy) {
+				if (masterTime % (attacker.<Double>getAttribute(FIRE_RATE).getValue()/100) <= stepTime) { 
 					List<Component> targets = getTargetList(attacker);
 					for (Component potentialTarget : targets) {
-						if (potentialTarget.getAttribute(STRING_RESOURCES.getFromAttributeNames("Type")).getValue().equals(STRING_RESOURCES.getFromValueNames("EnemyType"))) {
-							System.out.println("added an enemy to targetsList in AttackEngine");
+
+						if ((potentialTarget.getAttribute(TYPE).getValue().equals(ENEMY_TYPE) && isTower) || 
+							(potentialTarget.getAttribute(TYPE).getValue().equals(TOWER_TYPE) && isEnemy)) {
 							attackersAndTargets.put(attacker, potentialTarget);
 						}
 					}
@@ -72,10 +82,33 @@ public class AttackEngine implements Engine {
 	 * @return
 	 */
 	private List<Component> getTargetList(Component attacker) {
-		String targetType = attacker.<String>getAttribute("TargetSelector").getValue();
+		String targetType = attacker.<String>getAttribute(TARGET_SELECTOR).getValue();
 		TileGrid tileGrid = myGameData.getState().getTileGrid();
 		//targetType = "Radius";
-		if(targetType.equals("Group")){
+		if (attacker.<String>getAttribute(TYPE).getValue().equals(ENEMY_TYPE)) {
+			List<Component> targets = new ArrayList<Component>();
+			List<Component> potentialTargets = myComponentGraph.getAllComponents();
+			for (Component component : potentialTargets) {
+				if (tileGrid.getTileByScreenPosition(attacker.<Point2D>getAttribute(POSITION).getValue()) == 
+					tileGrid.getTileByScreenPosition(component.<Point2D>getAttribute(POSITION).getValue()) &&
+					component.<String>getAttribute(TYPE).getValue().equals(TOWER_TYPE)) {
+					targets.add(component);
+				}
+			}
+			if (targets.isEmpty()) {
+				System.out.println(this.getClass().getSimpleName() + ": No targets");
+				if (attacker.<Double>getAttribute(SLOW_TIME).getValue() > 0){
+					attacker.setAttributeValue(SPEED, attacker.<Double>getAttribute(MAX_SPEED).getValue() * attacker.<Double>getAttribute(SLOW_FACTOR).getValue());
+				} else {
+					System.out.println(this.getClass().getSimpleName() + ": Setting speed maybe lol");
+					attacker.setAttributeValue(SPEED, attacker.<Double>getAttribute(MAX_SPEED).getValue());
+				}
+			} else {
+				System.out.println(this.getClass().getSimpleName() + ": Some targets");
+				attacker.setAttributeValue(SPEED, new Double(0));
+			}
+			return targets;
+		} else if(targetType.equals("Group")){
 			if(!tileGroupsInitialized){
 				myTileGroups = myGameData.getState().getTileGrid().getTileGroups();
 				tileGroupsInitialized = true;
@@ -107,7 +140,6 @@ public class AttackEngine implements Engine {
 	 * @param attacker the tower Component generating a projectile
 	 * @param target the enemy Component the projectile will be fired at
 	 */
-	@SuppressWarnings("unchecked")
 	public void addProjectileToState(Component attacker, Component target) {
 		Component projectile;
 		try {

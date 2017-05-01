@@ -9,7 +9,7 @@ import javafx.scene.layout.VBox;
 import resources.constants.StringResourceBundle;
 import resources.constants.numeric.ScreenConstants;
 
-public class SideBarImpl implements SideBar{
+public class SideBarImpl implements SkeletonObject{
 	
 	private VBox myRoot;
 	private ScreenConstants screenResources = new ScreenConstants();

@@ -7,11 +7,12 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
-import ModificationFromUser.Modification_ChangeMode;
+import com.sun.xml.internal.ws.dump.LoggingDumpTube.Position;
+
 import ModificationFromUser.Modification_GameRemote;
-import backEnd.GameEngine.Engine.GameProcessController;
 import frontEnd.View;
 import frontEnd.CustomJavafxNodes.ActionButton;
+import frontEnd.CustomJavafxNodes.ErrorDialog;
 import frontEnd.CustomJavafxNodes.ToggleSwitch;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
@@ -25,21 +26,17 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Tooltip;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.TilePane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import javafx.util.Duration;
+import resources.constants.StringResourceBundle;
+import resources.constants.numeric.NumericResourceBundle;
 import resources.constants.numeric.ScreenConstants;
 
 public class OptionsSelection implements SkeletonObject{
 
-	private static final String PAUSE_IMAGE = "resources/images/Tools/pause.jpg";
-	private static final String FASTFWD_IMAGE = "resources/images/Tools/fastfwd.jpg";
-	private static final String PLAY_IMAGE = "resources/images/Tools/play.jpg";
-	private static final String NEXT_LEVEL_IMAGE = "resources/images/Tools/nextlevel.png";
-	private static final String RESTART_IMAGE = "resources/images/Tools/restart.png";
 	private VBox myRoot;
 	private TilePane myTiles;
 	private SettingsView mySettings;
@@ -47,11 +44,18 @@ public class OptionsSelection implements SkeletonObject{
 	private View myView;
 	private Map<Button, Tooltip> myButtonsAndTooltips;
 	private ScreenConstants screenResources = new ScreenConstants();
+	private StringResourceBundle strResources = new StringResourceBundle();
+	private NumericResourceBundle numResources = new NumericResourceBundle();
+	
+	private static final double BUTTON_SIZE_FACTOR = 0.25;
+	private String PAUSE_IMAGE = strResources.getFromImageText("pause");
+	private String PLAY_IMAGE = strResources.getFromImageText("play");
+	private String RESTART_IMAGE = strResources.getFromImageText("restart");
 	
 	public OptionsSelection(View view) {
 		myView = view;
 		myRoot = new VBox();
-		myTiles = new TilePane(Orientation.HORIZONTAL,0, 0);
+		myTiles = new TilePane(Orientation.HORIZONTAL,0, numResources.getFromSizing("StandardSpacing"));
 		mySettings= new SettingsViewImpl(view);
 		myRoot.getChildren().add(myTiles);
 		setDimensions();
@@ -61,7 +65,7 @@ public class OptionsSelection implements SkeletonObject{
 		return myRoot;
 	}
 	public void setAlignment(Pos position,Priority priority){
-		myTiles.setAlignment(Pos.TOP_RIGHT);
+		myTiles.setAlignment(position);
 	}
 	private void setDimensions(){
 		double width = screenResources.getSideWidth();
@@ -70,12 +74,12 @@ public class OptionsSelection implements SkeletonObject{
 		myRoot.setPrefWidth(width);
 		myRoot.setPrefHeight(height);
 		myRoot.setMaxHeight(height);
-		setUpOptions(width,height); //TODO hard coded
+		setUpOptions(width,height); 
 	}
 
 	private void setUpOptions(double totalWidth,double totalHeight){
 		myButtons = new ArrayList<Button>();
-		addButtons(totalWidth/5);
+		addButtons(totalWidth * BUTTON_SIZE_FACTOR);
 		myTiles.setPrefColumns(myButtons.size());
 		myTiles.getChildren().addAll(myButtons);
 		addSettingsButton();
@@ -83,15 +87,15 @@ public class OptionsSelection implements SkeletonObject{
 	
 	private void addSettingsButton() {
 		ActionButton settings = new ActionButton("Settings", e -> mySettings.displayOnStage(new Stage()));
+		settings.setAlignment(Pos.CENTER);
 		myRoot.getChildren().add(settings);
+		settings.setAlignment(Pos.CENTER);
 	}
 	private void addButtons(double size){
 		myButtonsAndTooltips=new LinkedHashMap<Button, Tooltip>();
 		myButtonsAndTooltips.put(createImageButton(PLAY_IMAGE, e-> myView.sendUserModification(Modification_GameRemote.PLAY) ,size), new Tooltip("Play game"));
 		myButtonsAndTooltips.put(createImageButton(PAUSE_IMAGE, e-> myView.sendUserModification(Modification_GameRemote.PAUSE) ,size), new Tooltip("Pause game"));
-		myButtonsAndTooltips.put(createImageButton(FASTFWD_IMAGE, e-> myView.sendUserModification(Modification_GameRemote.FASTFORWARD) ,size), new Tooltip("Fast-forward game"));
 		myButtonsAndTooltips.put(createImageButton(RESTART_IMAGE, e-> myView.sendUserModification(Modification_GameRemote.RESTART) ,size), new Tooltip("Restart level"));
-		myButtonsAndTooltips.put(createImageButton(NEXT_LEVEL_IMAGE, e-> myView.sendUserModification(Modification_GameRemote.NEXTLEVEL) ,size), new Tooltip("Go to next level"));
 		
 		for (Button b: myButtonsAndTooltips.keySet()){
 			modifyTooltipStartTiming(myButtonsAndTooltips.get(b));
@@ -114,7 +118,8 @@ public class OptionsSelection implements SkeletonObject{
 	        objTimer.getKeyFrames().clear();
 	        objTimer.getKeyFrames().add(new KeyFrame(new Duration(250)));
 	    } catch (Exception e) {
-	        e.printStackTrace();
+			ErrorDialog eD = new ErrorDialog();
+			eD.create(strResources.getFromErrorMessages("Default_Error"), e.getMessage());
 	    }
 	}
 	

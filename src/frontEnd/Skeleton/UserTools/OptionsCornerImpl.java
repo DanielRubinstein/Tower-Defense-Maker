@@ -38,7 +38,7 @@ public class OptionsCornerImpl implements OptionsCorner{
 
 	private void setUserOptions(View view){
 		userOptions = new OptionsSelection(view);
-		userOptions.setAlignment(Pos.TOP_LEFT,Priority.ALWAYS);
+		userOptions.setAlignment(Pos.TOP_CENTER,Priority.ALWAYS);
 		myRoot.getChildren().add(userOptions.getRoot());
 	}
 	

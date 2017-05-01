@@ -7,22 +7,25 @@ package backEnd.GameEngine.Engine.Spawning;
  */
 public class SpawnDataImpl implements Comparable<SpawnDataImpl>, SpawnData{
 
-	String mySpawnable;
-	double myTime;
+	private String mySpawnable;
+	private double myTime;
 	
 	public SpawnDataImpl(String component, double time) {
 		mySpawnable = component;
 		myTime = time;
 	}
 	
+	@Override
 	public String getPresetName() {
 		return mySpawnable;
 	}
 	
+	@Override
 	public double getTime() {
 		return myTime;
 	}
 	
+	@Override
 	public void setTime(Double myNewTime) {
 		this.myTime = myNewTime;
 	}
