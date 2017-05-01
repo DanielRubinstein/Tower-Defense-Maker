@@ -40,6 +40,9 @@ public class ProjectileFactory {
 		myComponent.setAttributeValue(ATTRIBUTE_RESOURCES.getFromAttributeNames("ProjectileTraveled"), 0.0);
 		myComponent.setAttributeValue(ATTRIBUTE_RESOURCES.getFromAttributeNames("ExplosionRadius"), (Double)myTower.getAttribute(ATTRIBUTE_RESOURCES.getFromAttributeNames("ExplosionRadius")).getValue());
 		myComponent.setAttributeValue(ATTRIBUTE_RESOURCES.getFromAttributeNames("SlowFactor"), (Double)myTower.getAttribute(ATTRIBUTE_RESOURCES.getFromAttributeNames("SlowFactor")).getValue());
+		myComponent.setAttributeValue(ATTRIBUTE_RESOURCES.getFromAttributeNames("SlowTime"), (Double)myTower.getAttribute(ATTRIBUTE_RESOURCES.getFromAttributeNames("SlowTime")).getValue());
+		myComponent.setAttributeValue(ATTRIBUTE_RESOURCES.getFromAttributeNames("PoisonFactor"), (Double)myTower.getAttribute(ATTRIBUTE_RESOURCES.getFromAttributeNames("PoisonFactor")).getValue());
+		myComponent.setAttributeValue(ATTRIBUTE_RESOURCES.getFromAttributeNames("PoisonTime"), (Double)myTower.getAttribute(ATTRIBUTE_RESOURCES.getFromAttributeNames("PoisonTime")).getValue());
 		myComponent.setAttributeValue(ATTRIBUTE_RESOURCES.getFromAttributeNames("FireRate"), (Double)myTower.getAttribute(ATTRIBUTE_RESOURCES.getFromAttributeNames("FireRate")).getValue());
 		myComponent.setAttributeValue(ATTRIBUTE_RESOURCES.getFromAttributeNames("ProjectileTarget"), (String)myTower.getAttribute(ATTRIBUTE_RESOURCES.getFromAttributeNames("ProjectileTarget")).getValue());
 		return myComponent;

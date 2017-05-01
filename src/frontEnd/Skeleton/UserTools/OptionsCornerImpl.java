@@ -18,24 +18,30 @@ import resources.constants.numeric.ScreenConstants;
  */
 public class OptionsCornerImpl implements OptionsCorner{
 
-	private VBox myRoot;
-	private OptionsSelection userOptions;
 	private ScreenConstants screenResources = new ScreenConstants();
 	private NumericResourceBundle numResources = new NumericResourceBundle();
 	private StringResourceBundle strResources = new StringResourceBundle();
+	private VBox myRoot;
+	private OptionsSelection userOptions;
 	
 	public OptionsCornerImpl(View view) {
 		myRoot = new VBox();
 		setDimensions();
 		setUserOptions(view);
 		setModeToggle(view);
-		myRoot.setSpacing(numResources.getFromSizing("StandardSpacing"));
 	}
 
 	private void setDimensions() {
 		myRoot.setPrefSize(screenResources.getSideWidth(), screenResources.getBottomHeight());
+		myRoot.setSpacing(numResources.getFromSizing("StandardSpacing"));
 	}
 
+	private void setUserOptions(View view){
+		userOptions = new OptionsSelection(view);
+		userOptions.setAlignment(Pos.TOP_LEFT,Priority.ALWAYS);
+		myRoot.getChildren().add(userOptions.getRoot());
+	}
+	
 	private void setModeToggle(View view) {
 		Runnable changeMode = () -> view.sendUserModification(new Modification_ChangeMode());
 		ToggleSwitch modeToggle = new ToggleSwitch(strResources.getFromStringConstants("PLAYER"), 
@@ -47,9 +53,5 @@ public class OptionsCornerImpl implements OptionsCorner{
 		return myRoot;
 	}
 
-	private void setUserOptions(View view){
-		userOptions = new OptionsSelection(view);
-		userOptions.setAlignment(Pos.TOP_LEFT,Priority.ALWAYS);
-		myRoot.getChildren().add(userOptions.getRoot());
-	}
+
 }

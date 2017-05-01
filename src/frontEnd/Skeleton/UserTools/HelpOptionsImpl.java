@@ -11,7 +11,6 @@ import javafx.scene.web.WebView;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import resources.constants.StringResourceBundle;
-import resources.constants.numeric.ScreenConstants;
 
 /**
  * This class displays the HelpOptions available the user. These include ways to view HTML files to learn 
@@ -32,11 +31,8 @@ public class HelpOptionsImpl implements HelpOptions {
 	}
 	
 	@Override
-	public void display(Stage parentStage){
-		Stage myStage = new Stage();
-		myStage.initOwner(parentStage);
-		myStage.initModality(Modality.APPLICATION_MODAL);
-		allOptions.display(myStage);
+	public void displayOnStage(Stage stage){
+		allOptions.display(stage);
 	}
 
 	private void addAllOptions(){
