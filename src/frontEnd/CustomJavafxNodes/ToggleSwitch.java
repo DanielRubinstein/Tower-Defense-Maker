@@ -55,11 +55,11 @@ public class ToggleSwitch {
 	private void bringCorrespondingOptionToFront(String title1, String title2, Boolean newValue) {
 		if (newValue) {
 			label.setText(title2);
-			toggle.setStyle(stringResourceBundle.getFromToggle("toggleOnBackground"));
+			toggle.setStyle(stringResourceBundle.getFromCustomCSS("toggleOnBackground"));
 			label.toFront();
 		} else {
 			label.setText(title1);
-			toggle.setStyle(stringResourceBundle.getFromToggle("toggleOffBackground"));
+			toggle.setStyle(stringResourceBundle.getFromCustomCSS("toggleOffBackground"));
 			button.toFront();
 		}
 	}
@@ -85,7 +85,7 @@ public class ToggleSwitch {
 		toggle.setMinWidth(80);
 		//toggle.setMaxWidth(80);
 		label.setAlignment(Pos.CENTER);
-		toggle.setStyle(stringResourceBundle.getFromToggle("toggleCSS"));
+		toggle.setStyle(stringResourceBundle.getFromCustomCSS("toggleCSS"));
 		toggle.setAlignment(Pos.CENTER_LEFT);
 	}
 

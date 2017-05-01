@@ -2,7 +2,7 @@ package frontEnd.Skeleton.UserTools;
 
 import javafx.scene.Node;
 /**
- * An interface to define anything that is part of the skeleton and being portrayed on screen. This includes all
+ * An interface to define anything that is part of the skeleton and being portrayed on screen.
  * @author Tim
  *
  */
