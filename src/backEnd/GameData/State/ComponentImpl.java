@@ -27,7 +27,6 @@ public class ComponentImpl implements SerializableObservable, Component, Compone
 
 	private AttributeData myAttributes;
 	private AccessPermissions myAccessPermissions;
-	private String myType;
 	private List<SerializableObserver> observers;
 	private long ID;
 	private Coordinates previousMovement;
@@ -120,24 +119,6 @@ public class ComponentImpl implements SerializableObservable, Component, Compone
 		myAttributes.addAttribute(attrType, newAttr);
 	}
 
-	/* (non-Javadoc)
-	 * @see backEnd.GameData.State.Component#setMyType(java.lang.String)
-	 */
-	@Override
-	public void setMyType(String type) {
-		myType = type;
-	}
-
-	/* (non-Javadoc)
-	 * @see backEnd.GameData.State.Component#getMyType()
-	 */
-	/* (non-Javadoc)
-	 * @see backEnd.GameData.State.ComponentReader#getMyType()
-	 */
-	@Override
-	public String getMyType() {
-		return myType;
-	}
 
 	/* (non-Javadoc)
 	 * @see backEnd.GameData.State.Component#setAttributeValue(java.lang.String, T)

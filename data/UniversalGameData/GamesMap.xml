@@ -1,5 +1,9 @@
 <?xml version="1.0"?><map>
   <entry>
+    <string>kk</string>
+    <list/>
+  </entry>
+  <entry>
     <string>MiguelTestGame</string>
     <list>
       <string>level2</string>
@@ -7,9 +11,28 @@
     </list>
   </entry>
   <entry>
+    <string>aasdf</string>
+    <list/>
+  </entry>
+  <entry>
     <string>HeyLmaoGame</string>
     <list>
       <string>level1</string>
     </list>
+  </entry>
+  <entry>
+    <string>testGameWin</string>
+    <list/>
+  </entry>
+  <entry>
+    <string>testSplash</string>
+    <list>
+      <string>level1</string>
+      <string>level1</string>
+    </list>
+  </entry>
+  <entry>
+    <string>testLevelLoss</string>
+    <list/>
   </entry>
 </map>

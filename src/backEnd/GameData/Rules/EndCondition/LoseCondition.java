@@ -16,9 +16,7 @@ public abstract class LoseCondition extends Rule{
 
 	protected void loseGame(GameData myGameData){
 		LevelProgressionControllerEditor myLPC = myGameData.getLevelProgressionController();
-		myLPC.initiateSplashScreen(new SplashScreenData("You lost the level!\nPress any key to continue to restart the game", 
-				SplashScreenType.LEVEL_LOST, () -> System.out.println("loading first level")));
-		//() -> myLPC.loadFirstLevel()
+		myLPC.initiateSplashScreen(SplashScreenType.LEVEL_LOST, myGameData.getReadOnlyPlayerStatus());
 	}
 
 }

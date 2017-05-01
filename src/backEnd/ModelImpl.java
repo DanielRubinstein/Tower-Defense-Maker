@@ -26,6 +26,7 @@ import data.DataController;
 import data.DataControllerReader;
 import data.XMLReadingException;
 import frontEnd.Skeleton.SplashScreens.SplashScreenData;
+import frontEnd.Skeleton.SplashScreens.SplashScreenReader;
 import javafx.beans.property.SimpleStringProperty;
 import resources.constants.StringResourceBundle;
 
@@ -48,7 +49,7 @@ public class ModelImpl implements Model{
 	private Consumer<Object> gameLoader;
 	private static final StringResourceBundle strResource = new StringResourceBundle();;
 	
-	public ModelImpl(GameData gameData, EngineStatus engineStatus, Consumer<SplashScreenData> splashScreenLoader, Consumer<Object> gameLoader, 
+	public ModelImpl(GameData gameData, EngineStatus engineStatus, Consumer<SplashScreenReader> splashScreenLoader, Consumer<Object> gameLoader, 
 		String gameName, String levelName) throws XMLReadingException {
 		myDataController = new DataController();
 		myGameData = gameData;

@@ -2,7 +2,9 @@ package backEnd.LevelProgression;
 
 import java.util.List;
 
-import frontEnd.Skeleton.SplashScreens.SplashScreenData;
+import backEnd.GameData.State.PlayerStatusReader;
+import frontEnd.Skeleton.SplashScreens.SplashScreenReader;
+import frontEnd.Skeleton.SplashScreens.SplashScreenType;
 
 public interface LevelProgressionControllerEditor extends LevelProgressionControllerReader{
 
@@ -18,10 +20,16 @@ public interface LevelProgressionControllerEditor extends LevelProgressionContro
 
 	void saveGamesMap();
 
-	void initiateSplashScreen(SplashScreenData splashScreenData);
+	void initiateSplashScreen(SplashScreenType type, PlayerStatusReader playerStatus);
 
 	void loadNextLevel();
 
 	void addLevelToCurrentGame(String newName);
+	
+	boolean existsNextLevel();
+	
+	void reloadLevel();
+	
+	void loadFirstLevel();
 	
 }
