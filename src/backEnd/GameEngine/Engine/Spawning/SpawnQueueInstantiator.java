@@ -7,43 +7,26 @@ import java.util.List;
  * @author Juan
  *
  */
-public class SpawnQueueInstantiator
-{
-	private List<SpawnDataImpl> myFrequencyQueue;
+public class SpawnQueueInstantiator {
 	private List<SpawnDataImpl> mySpawnQueue;
 	private double myTimeLastQueueSpawned;
 	private int myCurrentSpawn;
-	private double myGameTime;
-	
-	public SpawnQueueInstantiator(List<SpawnDataImpl> myFrequencyQueue, List<SpawnDataImpl> mySpawnQueue, double myTimeLastQueueSpawned, int myCurrentSpawn,
-			double myGameTime)
-	{
-		this.myFrequencyQueue = myFrequencyQueue;
-		this.mySpawnQueue = mySpawnQueue;
+
+	public SpawnQueueInstantiator(List<SpawnDataImpl> spawnQueue, double myTimeLastQueueSpawned, int myCurrentSpawn) {
+		this.mySpawnQueue = spawnQueue;
 		this.myTimeLastQueueSpawned = myTimeLastQueueSpawned;
 		this.myCurrentSpawn = myCurrentSpawn;
-		this.myGameTime = myGameTime;
 	}
-	
-	public List<SpawnDataImpl> getFrequencyQueue()
-	{
-		return myFrequencyQueue;
-	}
-	public List<SpawnDataImpl> getSpawnQueue()
-	{
+
+	public List<SpawnDataImpl> getSpawnQueue() {
 		return mySpawnQueue;
 	}
-	
-	public double getLastSpawnTime()
-	{
+
+	public double getLastSpawnTime() {
 		return myTimeLastQueueSpawned;
 	}
-	public int getCurrentSpawn()
-	{
+
+	public int getCurrentSpawn() {
 		return myCurrentSpawn;
-	}
-	public double getGameTime()
-	{
-		return myGameTime;
 	}
 }

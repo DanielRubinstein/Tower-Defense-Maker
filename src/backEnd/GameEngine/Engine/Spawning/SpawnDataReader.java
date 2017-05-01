@@ -4,6 +4,10 @@ public interface SpawnDataReader {
 	
 	public String getPresetName();
 	
-	public double getTime();
+	public double getFrequency();
+
+	public double getDelay();
+
+	int getSpawns();
 	
 }
