@@ -181,7 +181,7 @@ public class StringResourceBundle {
 	private static final String CUSTOM_CSS_PATH = "resources.css.customCSS";
 	private static final ResourceBundle CUSTOM_CSS_RESOURCE = ResourceBundle.getBundle(CUSTOM_CSS_PATH);
 	
-	public String getFromToggle(String string) {
+	public String getFromCustomCSS(String string) {
 		return CUSTOM_CSS_RESOURCE.getString(string);
 
 	}

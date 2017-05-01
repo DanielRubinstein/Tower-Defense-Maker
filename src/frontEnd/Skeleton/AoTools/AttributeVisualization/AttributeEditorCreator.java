@@ -1,6 +1,8 @@
 package frontEnd.Skeleton.AoTools.AttributeVisualization;
 
 import java.io.File;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
@@ -29,14 +31,16 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.stage.FileChooser;
 import javafx.stage.FileChooser.ExtensionFilter;
+import resources.constants.StringResourceBundle;
+import sun.security.util.Length;
 import javafx.stage.Stage;
 
 public class AttributeEditorCreator implements AttributeVisualization{
 	private View myView;
 	private AttributeOwnerReader myOwner;
 	private AttributeReader<?> myAttr;
-	public static final String SAVED_IMAGES_DIRECTORY = "src/resources/images";
-	public static final String CLASS_LOADER_DIRECTORY = "resources/images/";
+	private static final StringResourceBundle STRING_RESOURCE_BUNDLE = new StringResourceBundle();
+	private static final String SAVED_IMAGES_DIRECTORY = STRING_RESOURCE_BUNDLE.getFromFilePaths("Images_Path");
 	private ToggleSwitch myToggle;
 
 	public AttributeEditorCreator(View view, AttributeOwnerReader obj, AttributeReader<?> attr){
@@ -56,11 +60,11 @@ public class AttributeEditorCreator implements AttributeVisualization{
 		name.setText(myView.getBankControllerReader().getPresetName(preset));
 		pair.getChildren().add(name);
 		
-		String presetImagePath = preset.<String>getAttribute("ImageFile").getValue();
+		String presetImagePath = preset.<String>getAttribute(STRING_RESOURCE_BUNDLE.getFromAttributeNames("ImageFile")).getValue();
 		ImageView imv = createImageView(presetImagePath);
 		pair.getChildren().add(imv);
 		
-		pair.setStyle("-fx-background-color: black");
+		pair.setStyle(STRING_RESOURCE_BUNDLE.getFromCustomCSS("darkBackground"));
 		
 		toCompMap.put(pair, preset);
 		toPairMap.put(preset, pair);
@@ -100,26 +104,21 @@ public class AttributeEditorCreator implements AttributeVisualization{
 		imv.setImage(image);
 		imv.setPreserveRatio(true);
 		
-		Button b = new Button("Change Image");
+		Button b = new Button(STRING_RESOURCE_BUNDLE.getFromStringConstants("ChangeImage"));
 		b.setOnAction(e -> {
 			FileChooser imageChooser = new FileChooser();
-			imageChooser.setTitle("Select Image");
+			imageChooser.setTitle(STRING_RESOURCE_BUNDLE.getFromStringConstants("SelectImage"));
 			imageChooser.getExtensionFilters().add(new ExtensionFilter("Image Files","*.png", "*.jpg", "*.gif"));
 			imageChooser.setInitialDirectory(new File(SAVED_IMAGES_DIRECTORY));
 			
 			File selectedFile = imageChooser.showOpenDialog(new Stage());
-			try{
-				String newPath = CLASS_LOADER_DIRECTORY + selectedFile.getParentFile().getName()+ "/" + selectedFile.getName();
-				
-				Image newImage = new Image(getClass().getClassLoader().getResourceAsStream(newPath));
-				imv.setImage(newImage);
-				sendModification(newPath);
-				
+			if(selectedFile == null){
+				return;
 			}
-			catch (NullPointerException exception){
-				System.out.println("Did not select an image- SAD!");
-			}
-
+			String newImagePathRelative = getRelativePathToImageDirectory(selectedFile);
+			Image newImage = new Image(getClass().getClassLoader().getResourceAsStream(newImagePathRelative));
+			imv.setImage(newImage);
+			sendModification(newImagePathRelative);
 		});
 		
 		
@@ -134,6 +133,15 @@ public class AttributeEditorCreator implements AttributeVisualization{
 		both.getChildren().add(b);		
 		both.setSpacing(20);
 		return both;
+	}
+
+	private String getRelativePathToImageDirectory(File selectedFile) {
+		Path imageDirectory = Paths.get(SAVED_IMAGES_DIRECTORY).toAbsolutePath(); 
+		Path newImagePath = Paths.get(selectedFile.getPath()).toAbsolutePath();
+		File newImageFile = new File(SAVED_IMAGES_DIRECTORY + File.separator + imageDirectory.relativize(newImagePath).toString());
+		String sourceFolderPath = STRING_RESOURCE_BUNDLE.getFromFilePaths("Source_Path");
+		String newImagePathRelative = newImageFile.getPath().substring(newImageFile.getPath().indexOf(sourceFolderPath) + sourceFolderPath.length());
+		return newImagePathRelative;
 	}
 
 	@Override
