@@ -1,10 +1,7 @@
 package frontEnd.Skeleton.AoTools;
 
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.ResourceBundle;
-import java.util.Set;
 
 import backEnd.Attribute.AttributeOwnerReader;
 import backEnd.Attribute.AttributeReader;
@@ -104,7 +101,7 @@ public class AttributeCommandCenter{
 		sP.setHbarPolicy(ScrollBarPolicy.NEVER);
 		sP.setVbarPolicy(ScrollBarPolicy.AS_NEEDED);
 		sP.setPadding(new Insets(STANDARD_SPACING));
-		sP.setMaxHeight(400);
+		sP.setMaxHeight(NUMERIC_RESOURCE_BUNDLE.getFromSizing("MaxMenuContentHeight"));
 		
 		GridPane contents_Att = new GridPane();
 		
