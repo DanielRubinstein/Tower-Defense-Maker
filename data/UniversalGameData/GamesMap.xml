@@ -12,4 +12,19 @@
       <string>level1</string>
     </list>
   </entry>
+  <entry>
+    <string>testGameWin</string>
+    <list/>
+  </entry>
+  <entry>
+    <string>testSplash</string>
+    <list>
+      <string>level1</string>
+      <string>level1</string>
+    </list>
+  </entry>
+  <entry>
+    <string>testLevelLoss</string>
+    <list/>
+  </entry>
 </map>
