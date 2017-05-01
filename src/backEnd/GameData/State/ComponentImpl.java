@@ -22,7 +22,6 @@ public class ComponentImpl implements SerializableObservable, Component, Compone
 	 * 
 	 * @author Daniel
 	 */
-	//TODO: do we need this behavior thing still? the file is empty
 	private static final StringResourceBundle strResources = new StringResourceBundle();
 
 	private AttributeData myAttributes;
@@ -36,13 +35,6 @@ public class ComponentImpl implements SerializableObservable, Component, Compone
 		this(new AttributeData(),new AccessPermissionsImpl());
 	}
 	
-
-	/* (non-Javadoc)
-	 * @see backEnd.GameData.State.Component#printID()
-	 */
-	/* (non-Javadoc)
-	 * @see backEnd.GameData.State.ComponentReader#printID()
-	 */
 	@Override
 	public long printID(){
 		return ID;

@@ -46,7 +46,6 @@ public class GameData implements GameDataInterface{
 	
 	/**
 	 * copies info from newGameData and puts it in current GameData
-	 * 
 	 * @param newGameData
 	 */
 	public void updateGameData(GameData newGameData){
@@ -85,12 +84,6 @@ public class GameData implements GameDataInterface{
 	public double getGameTime() {
 		return myGameTime;
 	}
-	/*
-	public void printRules(){
-		for(Rule x: myRules.getMapWithKeyNames().values()){
-			x.printRule();
-		}
-	}*/
 	
 	public void setLevelProgressionController(LevelProgressionControllerEditor myLPC){
 		this.myLPC = myLPC;
