@@ -8,4 +8,6 @@ public interface SpawnData extends SpawnDataReader{
 
 	void setSpawns(int mySpawns);
 
+	void setRecentSpawn(boolean recentSpawn);
+
 }

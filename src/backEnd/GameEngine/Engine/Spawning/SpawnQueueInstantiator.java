@@ -5,25 +5,20 @@ import java.util.List;
 /**
  * 
  * @author Juan
+ * @author Alex
  *
  */
 public class SpawnQueueInstantiator {
 	private List<SpawnDataImpl> mySpawnQueue;
-	private double myTimeLastQueueSpawned;
 	private int myCurrentSpawn;
 
-	public SpawnQueueInstantiator(List<SpawnDataImpl> spawnQueue, double myTimeLastQueueSpawned, int myCurrentSpawn) {
+	public SpawnQueueInstantiator(List<SpawnDataImpl> spawnQueue, int currentSpawn) {
 		this.mySpawnQueue = spawnQueue;
-		this.myTimeLastQueueSpawned = myTimeLastQueueSpawned;
-		this.myCurrentSpawn = myCurrentSpawn;
+		this.myCurrentSpawn = currentSpawn;
 	}
 
 	public List<SpawnDataImpl> getSpawnQueue() {
 		return mySpawnQueue;
-	}
-
-	public double getLastSpawnTime() {
-		return myTimeLastQueueSpawned;
 	}
 
 	public int getCurrentSpawn() {

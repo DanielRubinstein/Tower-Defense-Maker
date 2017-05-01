@@ -9,23 +9,24 @@ package backEnd.GameEngine.Engine.Spawning;
  */
 public class SpawnDataImpl implements SpawnData {
 
-	String mySpawnable;
-	double myFrequency;
-	double myDelay;
-	int mySpawns;
+	private String mySpawnable;
+	private double myFrequency;
+	private double myDelay;
+	private int mySpawns;
+	private boolean recentSpawn;
 
 	public SpawnDataImpl(String component, double frequency, double delay, int spawns) {
-			mySpawnable = component;
-			myFrequency = frequency;
-			myDelay     = delay;
-			mySpawns    = spawns;
-		}
+		mySpawnable = component;
+		myFrequency = frequency;
+		myDelay = delay;
+		mySpawns = spawns;
+	}
 
 	@Override
 	public String getPresetName() {
 		return mySpawnable;
 	}
-	
+
 	@Override
 	public double getFrequency() {
 		return myFrequency;
@@ -54,6 +55,16 @@ public class SpawnDataImpl implements SpawnData {
 	@Override
 	public void setSpawns(int mySpawns) {
 		this.mySpawns = mySpawns;
+	}
+
+	@Override
+	public boolean isRecentSpawn() {
+		return recentSpawn;
+	}
+
+	@Override
+	public void setRecentSpawn(boolean recentSpawn) {
+		this.recentSpawn = recentSpawn;
 	}
 
 }
