@@ -44,7 +44,7 @@ public class AccessPermissionsImpl implements AccessPermissions {
 	
 	@Override
 	public void addLevelAccessPermission(String levelMode) {
-		gameModePermissions.add(levelMode);
+		levelModePermissions.add(levelMode);
 	}
 	
 	@Override
@@ -59,16 +59,16 @@ public class AccessPermissionsImpl implements AccessPermissions {
 	
 	@Override
 	public void removeLevelAccessPermission(String levelMode) {
-		gameModePermissions.remove(levelMode);
+		levelModePermissions.remove(levelMode);
 	}
 
 	@Override
-	public boolean permitsAccess(String userMode, String gameMode, String levelMode) {
+	public boolean permitsAccess(String userMode, String gameMode, String levelMode) {		
 		if (userMode.equals(strResources.getFromStringConstants("AUTHOR"))){
 			return true;
 		}
 		if(userMode.equals(strResources.getFromStringConstants("PLAYER"))){
-			return true; // FIXME needs LevelProgressionController
+			//return true; // FIXME needs LevelProgressionController
 		}
 		return (userModePermissions.contains(userMode) & gameModePermissions.contains(gameMode) & levelModePermissions.contains(levelMode));
 	}

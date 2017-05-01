@@ -56,8 +56,6 @@ public interface TileGrid extends SerializableObservableGen<Tile>, Comparable{
 	
 	Collection<AttributeOwner> getAllAttributeOwners();
 
-	void buildTileGroups();
-
 	List<Set<Tile>> getTileGroups();
 
 }

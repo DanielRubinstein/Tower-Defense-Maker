@@ -5,7 +5,9 @@ import java.lang.reflect.Method;
 import ModificationFromUser.AttributeOwner.Modification_Add_PaletteToGrid;
 import backEnd.Attribute.AttributeOwnerReader;
 import backEnd.Bank.BankControllerReader;
+import backEnd.GameData.State.Component;
 import backEnd.GameData.State.State;
+import backEnd.GameData.State.Tile;
 import frontEnd.View;
 import frontEnd.Skeleton.UserTools.SkeletonObject;
 import javafx.geometry.Point2D;
@@ -21,9 +23,9 @@ import javafx.scene.input.TransferMode;
 
 public class ScreenGrid implements SkeletonObject {
 
-	private TileGridVisual myTileGrid;
+	private GridVisual<Tile> myTileGrid;
 	private Group myRoot;
-	private ComponentGridVisual myComponentGrid;
+	private GridVisual<Component> myComponentGrid;
 	private View myView;
 	private ScreenHoverVisual myHover;
 	private GridAdder myAdder;
@@ -72,7 +74,6 @@ public class ScreenGrid implements SkeletonObject {
 					continue;
 				}
 			}
-			myView.sendUserModification(new Modification_Add_PaletteToGrid(presetAO, pos));
 		});
 	}
 

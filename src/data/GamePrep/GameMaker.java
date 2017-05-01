@@ -1,24 +1,15 @@
 package data.GamePrep;
 
 import java.io.File;
-import java.io.FilenameFilter;
-import java.util.Arrays;
-import java.util.List;
 import java.util.function.Consumer;
 
 import frontEnd.CustomJavafxNodes.ButtonMenuImpl;
 import frontEnd.CustomJavafxNodes.NumberChanger;
-import javafx.scene.Node;
-import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.control.ScrollPane;
-import javafx.scene.control.ScrollPane.ScrollBarPolicy;
-import javafx.scene.control.TextField;
-import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
-import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import resources.constants.StringResourceBundle;
+import resources.constants.numeric.NumericResourceBundle;
 
 /**
  * If the user decides to create a game, this class is instantiated and offers a
@@ -36,11 +27,12 @@ public class GameMaker {
 	private Stage myStage;
 	private String gameName;
 	private static final StringResourceBundle strResources = new StringResourceBundle();
+	private static final NumericResourceBundle numResources = new NumericResourceBundle();
 	
 	public GameMaker(Stage stage, Consumer<Object> gameDataConsumer, String name) {
 		gameName = name;
-		allSelections = new ButtonMenuImpl("Pick the starting values!");
-		allSelections.addNode(new Label("Game Name: " + name));
+		allSelections = new ButtonMenuImpl(strResources.getFromStringConstants("StartingInput"));
+		allSelections.addNode(new Label(strResources.getFromStringConstants("GameName") + name));
 		onSubmit = gameDataConsumer;
 		setInputFields();
 		myStage = stage;
@@ -56,23 +48,28 @@ public class GameMaker {
 	}
 
 	private void setInputFields() {
-		myTilesWide = setInputSliderFields("Number Tiles Wide",1,10,40);
-		myTilesHigh = setInputSliderFields("Number Tiles High",1,10,40);
+		Integer min = numResources.getFromSizing("MinTileInDimension").intValue();
+		Integer def = numResources.getFromSizing("DefaultTileInDimension").intValue();
+		Integer max = numResources.getFromSizing("MaxTileInDimension").intValue();
+		
+		myTilesWide = setInputSliderFields(strResources.getFromStringConstants("TilesWide"),min,def,max);
+		myTilesHigh = setInputSliderFields(strResources.getFromStringConstants("TilesHigh"),min,def,max);
 		setSubmit();
 	}
 	private void setSubmit() {
-		allSelections.addPrimarySimpleButtonWithHover("Submit", () ->  {
+		allSelections.addSimpleButtonWithHover(strResources.getFromStringConstants("Submit"), () ->  {
 			StartingInput allValues = createStartingInput();
 			makeDirectory();
 			onSubmit.accept(allValues);
 			myStage.close();
-		}, "Submit these values to continue");
+		}, strResources.getFromStringConstants("SubmitHover"));
 	}
 
 	private void makeDirectory() {
-		String base = "data/games/" + gameName + "/";
-		File newTemplatesDirectory = new File(base + "templates/");
-		File newSavesDirectory = new File(base + "saves/");
+		String templateFormat = strResources.getFromFilePaths("Template_Path_Format");
+		String savesFormat = strResources.getFromFilePaths("Save_Path_Format");
+		File newTemplatesDirectory = new File(String.format(templateFormat, gameName));
+		File newSavesDirectory = new File(String.format(savesFormat, gameName));
 		newTemplatesDirectory.mkdirs();
 		newSavesDirectory.mkdirs();
 	}

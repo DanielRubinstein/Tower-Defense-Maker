@@ -8,7 +8,11 @@ public interface ButtonMenu {
 
 	public void addSimpleButton(String text, Runnable event);
 	
+	public void addSimpleButtonWithHover(String text, Runnable event, String hoverText);
+	
 	public void addButton(Button newButton);
+	
+	public void addButtonWithHover(Button newButton, String hoverText);
 	
 	public void addButtonRow(String rowTitle, Button... buttons);
 	
@@ -16,9 +20,4 @@ public interface ButtonMenu {
 	
 	public void display(Stage stage);
 	
-	public void addPrimarySimpleButtonWithHover(String title, Runnable event, String hoverText);
-
-	public void addButtonWithHover(Button newButton, String hoverText);
-	
-	public void addSimpleButtonWithHover(String text, Runnable event, String hoverText);
 }

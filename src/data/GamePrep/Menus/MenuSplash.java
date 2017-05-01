@@ -1,6 +1,5 @@
 package data.GamePrep.Menus;
 
-import java.util.ResourceBundle;
 import java.util.function.Consumer;
 
 import frontEnd.CustomJavafxNodes.ButtonMenuImpl;
@@ -10,24 +9,28 @@ import frontEnd.Facebook.FacebookConnector;
 import frontEnd.Facebook.FacebookConnectorImpl;
 import frontEnd.Facebook.FacebookInteractor;
 import frontEnd.Skeleton.UserTools.HelpOptions;
+import frontEnd.Skeleton.UserTools.HelpOptionsImpl;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import resources.constants.StringResourceBundle;
 
 public class MenuSplash {
-	private static final String DEFAULT_RESOURCE_BUNDLE = "resources/facebook";
-	private ResourceBundle appInfo = ResourceBundle.getBundle(DEFAULT_RESOURCE_BUNDLE);
-	private String appSecret = appInfo.getString("appSecret");
-	private String appID = appInfo.getString("appID");
+	private StringResourceBundle stringResourceBundle = new StringResourceBundle();
+	private String appSecret = stringResourceBundle.getFromFacebook("appSecret");
+	private String appID = stringResourceBundle.getFromFacebook("appID");
 	private ButtonMenuImpl splash;
 	private Stage myStage;
 	private Consumer<FacebookInteractor> mySetFB;
 
 	
 	public MenuSplash(Stage stage, Consumer<ButtonMenuImpl> startConsumer, Consumer<FacebookInteractor> setFb) {
-		splash = new ButtonMenuImpl("Welcome");
-   	 	splash.addPrimarySimpleButtonWithHover("START", () -> startConsumer.accept(splash) , "Click to start the game!");
-   	 	splash.addPrimarySimpleButtonWithHover("Help/Instructions", () -> new HelpOptions(stage), "See the help page");
-   	 	splash.addSimpleButtonWithHover("Connect To Facebook", () -> launchFb(stage), "Log in and connect to Facebook to see high scores, screenshots, post to the official voogasalad_su3ps1ckt34m1337 page");
+		splash = new ButtonMenuImpl(stringResourceBundle.getFromStringConstants("Welcome"));
+   	 	splash.addSimpleButtonWithHover(stringResourceBundle.getFromStringConstants("Start"), () -> startConsumer.accept(splash) , stringResourceBundle.getFromMenuText("StartHover"));
+   	 	splash.addSimpleButtonWithHover(stringResourceBundle.getFromMenuText("Help"), () -> {
+   	 		HelpOptions help = new HelpOptionsImpl();
+   	 		help.display(myStage);
+   	 	}, stringResourceBundle.getFromMenuText("HelpHover"));
+   	 	splash.addSimpleButtonWithHover(stringResourceBundle.getFromMenuText("FBconnect"), () -> launchFb(stage), stringResourceBundle.getFromMenuText("FBconnectHover"));
 		myStage = stage;
 		mySetFB = setFb;
 	}
@@ -42,8 +45,8 @@ public class MenuSplash {
 		loginStage.initModality(Modality.APPLICATION_MODAL);
 		FacebookBrowser fbBrowser = new FacebookBrowserImpl(appID);
 		FacebookConnector fb = new FacebookConnectorImpl(appID,appSecret);
-		ButtonMenuImpl myLoginButton = new ButtonMenuImpl("Login!");
-		myLoginButton.addPrimarySimpleButtonWithHover("Login", () -> {
+		ButtonMenuImpl myLoginButton = new ButtonMenuImpl(stringResourceBundle.getFromStringConstants("Login"));
+		myLoginButton.addSimpleButtonWithHover(stringResourceBundle.getFromStringConstants("Login"), () -> {
 			fbBrowser.launchPage();
 			fbBrowser.onDialogClose(e -> {
 				String accessToken = fbBrowser.getAccessToken();
@@ -52,7 +55,7 @@ public class MenuSplash {
 				mySetFB.accept(fbInter);
 				loginStage.close();
 			});
-		}, "Click to launch facebook");
+		}, stringResourceBundle.getFromMenuText("FBconnectHover"));
 		myLoginButton.display(loginStage);
 	}
 }
