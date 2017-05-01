@@ -1,7 +1,9 @@
 package data.GamePrep.Menus;
 
 import java.io.File;
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collection;
 import java.util.List;
 import java.util.function.Consumer;
 
@@ -20,30 +22,30 @@ public class MenuSelectedGame {
 	private ButtonMenuImpl primaryMenu;
 	private Stage myStage;
 	private Consumer<Object> myConsumerLoadData;
-	
-	public MenuSelectedGame(ButtonMenuImpl previousMenu, Stage stage, Consumer<Object> consumerLoadData){
+
+	public MenuSelectedGame(ButtonMenuImpl previousMenu, Stage stage, Consumer<Object> consumerLoadData) {
 		myStage = stage;
 		myConsumerLoadData = consumerLoadData;
 		File file = new File(strResources.getFromFilePaths("All_Games_Path"));
-		String[] directories = file.list( (File current, String name) -> {
-			return new File(current,name).isDirectory();
+		String[] directories = file.list((File current, String name) -> {
+			return new File(current, name).isDirectory();
 		});
-		
+
 		primaryMenu = new ButtonMenuImpl("Select a Game");
-				
+
 		ButtonScrollPane buttonScrollPane = new ButtonScrollPane();
-		for(String gameName: directories){
-			buttonScrollPane.add(new ActionButton(gameName,() -> showGameMenu(primaryMenu, stage, gameName)));
+		for (String gameName : directories) {
+			buttonScrollPane.add(new ActionButton(gameName, () -> showGameMenu(primaryMenu, stage, gameName)));
 		}
 		primaryMenu.addNode(buttonScrollPane.getRoot());
 		primaryMenu.addBackButton(previousMenu, stage);
-		
+
 	}
 
 	public void display() {
 		primaryMenu.display(myStage);
 	}
-	
+
 	private void showGameMenu(ButtonMenuImpl previousMenu, Stage stage, String game) {
 		ButtonMenuImpl primaryMenu = new ButtonMenuImpl("Select a Game");
 		primaryMenu.addNode(new Label("Game Name: " + game));
@@ -51,24 +53,24 @@ public class MenuSelectedGame {
 			GameMaker gameMaker = new GameMaker(stage, myConsumerLoadData, game);
 			gameMaker.display();
 		}, "Create a new level for this game");
-		primaryMenu.addSimpleButtonWithHover("Play Level", () -> chooseLevel(primaryMenu, stage, "templates" , game), "Play from the first level");
-		primaryMenu.addSimpleButtonWithHover("Edit Level", () -> chooseLevel(primaryMenu, stage, "templates" , game), "Load a level to edit");
-   	 	primaryMenu.addSimpleButtonWithHover("Load Saved Game", () -> chooseLevel(primaryMenu, stage, "saves" , game), "Continue your progress by loading a user-saved game");
-   	 	primaryMenu.addBackButton(previousMenu, stage);
-   	 	primaryMenu.display(stage);
+		primaryMenu.addSimpleButtonWithHover("Play Level", () -> chooseLevel(primaryMenu, stage, "templates", game),
+				"Play from the first level");
+		primaryMenu.addSimpleButtonWithHover("Edit Level", () -> chooseLevel(primaryMenu, stage, "templates", game),
+				"Load a level to edit");
+		primaryMenu.addSimpleButtonWithHover("Load Saved Game", () -> chooseLevel(primaryMenu, stage, "saves", game),
+				"Continue your progress by loading a user-saved game");
+		primaryMenu.addBackButton(previousMenu, stage);
+		primaryMenu.display(stage);
 	}
-	
-	private void chooseLevel(ButtonMenuImpl previousMenu, Stage stage,String type , String game)
-	{
+
+	private void chooseLevel(ButtonMenuImpl previousMenu, Stage stage, String type, String game) {
 		String folder = "data/games/" + game + "/" + type + "/";
-		
+
 		File file = new File(folder);
 		file.mkdir();
-		
-		List<String> directories = Arrays.asList(file.list( (File current, String name) -> {
-			return new File(current,name).isDirectory();
-		}));
-		if(directories.isEmpty()){
+
+		Collection<String> directories = getValidGameDirectories(file);
+		if (directories.isEmpty()) {
 			Alert alert = new Alert(AlertType.WARNING);
 			alert.setTitle("No files found");
 			alert.setHeaderText("There are no " + type + " files here");
@@ -78,7 +80,7 @@ public class MenuSelectedGame {
 		} else {
 			ButtonMenuImpl levelMenu = new ButtonMenuImpl("Pick a Level!");
 			ButtonScrollPane buttonScrollPane = new ButtonScrollPane();
-			for(String levelName: directories){
+			for (String levelName : directories) {
 				buttonScrollPane.add(new ActionButton(levelName, () -> {
 					myConsumerLoadData.accept(new File(folder + levelName));
 					stage.close();
@@ -90,5 +92,44 @@ public class MenuSelectedGame {
 		}
 	}
 
+	/**
+	 * http://stackoverflow.com/questions/1844688/read-all-files-in-a-folder
+	 * 
+	 * @param folder
+	 */
+	private Collection<String> getValidGameDirectories(final File folder) {
+		Collection<String> validGameDirectories = new ArrayList<>();
+		for (final File fileEntry : folder.listFiles()) {
+			if (fileEntry.isDirectory() && isValidGameFolder(fileEntry.getPath())) {
+				validGameDirectories.add(fileEntry.getName());
+			}
+		}
+		return validGameDirectories;
+	}
+
+	private boolean isValidGameFolder(String string) {
+		List<String> necessaryFilePaths = getNecessaryFilePaths(string);
+		for (String necessaryFilePath : necessaryFilePaths) {
+			File file = new File(necessaryFilePath);
+			if (!file.exists()) {
+				return false;
+			}
+		}
+		return true;
+	}
+
+	private List<String> getNecessaryFilePaths(String string) {
+		List<String> necessaryFilePaths = new ArrayList<>();
+		List<String> necessaryFileNames = Arrays.asList(strResources.getFromFilePaths("TileGrid_FileName"),
+				strResources.getFromFilePaths("ComponentGraph_FileName"),
+				strResources.getFromFilePaths("PlayerStatus_FileName"), strResources.getFromFilePaths("Rules_FileName"),
+				strResources.getFromFilePaths("Spawns_FileName"));
+
+		for (String necessaryFileName : necessaryFileNames) {
+			necessaryFilePaths
+					.add(string + File.separator +  necessaryFileName + strResources.getFromStringConstants("GAME_FILE_EXTENSION"));
+		}
+		return necessaryFilePaths;
+	}
 
 }
