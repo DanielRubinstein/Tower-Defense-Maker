@@ -1,6 +1,6 @@
 package backEnd.GameEngine.Engine;
-import java.util.ResourceBundle;
 import javafx.geometry.Point2D;
+import resources.constants.StringResourceBundle;
 import backEnd.GameData.GameData;
 import backEnd.GameData.State.*;
 /**
@@ -11,14 +11,12 @@ import backEnd.GameData.State.*;
 public class MoveEngine implements Engine{
 	private State myState;
 	private Tile currentTile;
-	private final String BUNDLE_NAME = "resources.constants.stringResourceBundle";
-	private final ResourceBundle RESOURCE_BUNDLE = ResourceBundle.getBundle(BUNDLE_NAME);
-	private final String ATTRIBUTE_BUNDLE_NAME = "resources.allAttributeNames";
-	private final ResourceBundle ATTRIBUTE_RESOURCE_BUNDLE = ResourceBundle.getBundle(ATTRIBUTE_BUNDLE_NAME);
-	private final String DOWN=RESOURCE_BUNDLE.getString("Down");
-	private final String UP=RESOURCE_BUNDLE.getString("Up");
-	private final String LEFT=RESOURCE_BUNDLE.getString("Left");
-	private final String RIGHT=RESOURCE_BUNDLE.getString("Right");
+	private StringResourceBundle STRING_RESOURCES = new StringResourceBundle();
+	
+	private final String DOWN=STRING_RESOURCES.getFromStringConstants("Down");
+	private final String UP=STRING_RESOURCES.getFromStringConstants("Up");
+	private final String LEFT=STRING_RESOURCES.getFromStringConstants("Left");
+	private final String RIGHT=STRING_RESOURCES.getFromStringConstants("Right");
 
 	/**
 	 * 
@@ -33,13 +31,14 @@ public class MoveEngine implements Engine{
 			move(myComponent);
 		}
 	}
+	
 
 	private void move(Component c) {
 		Coordinates previousMovement=c.getPreviousMovement();
 		Coordinates newMovement;
-		double speed = c.<Double>getAttribute(ATTRIBUTE_RESOURCE_BUNDLE.getString("Speed")).getValue();
+		double speed = c.<Double>getAttribute(STRING_RESOURCES.getFromAttributeNames("Speed")).getValue();
 		Point2D newPoint;
-		Point2D currentLocation=c.<Point2D>getAttribute(ATTRIBUTE_RESOURCE_BUNDLE.getString("Position")).getValue();
+		Point2D currentLocation=c.<Point2D>getAttribute(STRING_RESOURCES.getFromAttributeNames("Position")).getValue();
 		double currentX = currentLocation.getX();
 		double currentY = currentLocation.getY();
 		newMovement=new Coordinates(0,0); //null movement (no horizontal or vertical movement)
@@ -47,10 +46,10 @@ public class MoveEngine implements Engine{
 		if (currentTile==null){
 			return;
 		}
-		if (currentTile.<String>getAttribute("MoveDirection").getValue().equals("")){
+		if ((currentTile.<String>getAttribute((STRING_RESOURCES.getFromAttributeNames("MoveDirection"))).getValue().equals(""))){
 			return;
-			}
-		String DIRECTION = currentTile.<String>getAttribute(ATTRIBUTE_RESOURCE_BUNDLE.getString("MoveDirection")).getValue();
+		}
+		String DIRECTION = currentTile.<String>getAttribute(STRING_RESOURCES.getFromAttributeNames("MoveDirection")).getValue();
 		if (LEFT.equals(DIRECTION)&&(myState.getTileGrid().atMiddleYOfTile(currentLocation)||(previousMovement.getX()==0&&previousMovement.getY()==0))) {
 				newMovement = new Coordinates(-1, 0);
 
@@ -68,6 +67,6 @@ public class MoveEngine implements Engine{
 		Coordinates velocity=new Coordinates(newMovement.getX()*speed, newMovement.getY()*speed);
 		newPoint = new Point2D( currentX+velocity.getX(), currentY+velocity.getY());
 		c.setPreviousMovement(newMovement);
-		c.setAttributeValue(ATTRIBUTE_RESOURCE_BUNDLE.getString("Position"), newPoint);		
+		c.setAttributeValue(STRING_RESOURCES.getFromAttributeNames("Position"), newPoint);		
 	}
 }

@@ -29,7 +29,7 @@ public class BottomBarImpl implements BottomBar{
 		PalettePane pp = new PalettePane(view);
 		myRoot.getChildren().add(pp.getRoot());
 		HBox.setHgrow(pp.getRoot(), Priority.ALWAYS);
-		myRoot.setStyle(strResources.getFromToggle("bottomBarBorder"));
+		myRoot.setStyle(strResources.getFromCustomCSS("bottomBarBorder"));
 	}
 	
 	@Override

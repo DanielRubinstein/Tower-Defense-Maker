@@ -36,6 +36,21 @@ public class StringResourceBundle {
 	}
 	
 	///////////////////////////////////////////////////////////////////////////
+	// Attribute Categories
+	///////////////////////////////////////////////////////////////////////////
+	
+	private static final String ATTRIBUTE_CATEGORIES_PATH = "resources.attributeCategories";
+	private static final ResourceBundle ATTRIBUTE_CATEGORIES_RESOURCE = ResourceBundle.getBundle(ATTRIBUTE_CATEGORIES_PATH);
+	
+	public String getFromAttributeCategories(String str){
+		return ATTRIBUTE_CATEGORIES_RESOURCE.getString(str);
+	}
+	
+	public Set<String> getKeysFromAttributeCategories(){
+		return ATTRIBUTE_CATEGORIES_RESOURCE.keySet();
+	}
+	
+	///////////////////////////////////////////////////////////////////////////
 	// Value Names FIXME what does this mean?
 	///////////////////////////////////////////////////////////////////////////
 	
@@ -181,7 +196,7 @@ public class StringResourceBundle {
 	private static final String CUSTOM_CSS_PATH = "resources.css.customCSS";
 	private static final ResourceBundle CUSTOM_CSS_RESOURCE = ResourceBundle.getBundle(CUSTOM_CSS_PATH);
 	
-	public String getFromToggle(String string) {
+	public String getFromCustomCSS(String string) {
 		return CUSTOM_CSS_RESOURCE.getString(string);
 
 	}
@@ -196,4 +211,14 @@ public class StringResourceBundle {
 		return HELP_RESOURCE.getString(string);
 	}
 	
+	///////////////////////////////////////////////////////////////////////////
+	// Menu Text
+	///////////////////////////////////////////////////////////////////////////
+	
+	private static final String MENU_PATH = "resources.menuText";
+	private static final ResourceBundle MENU_RESOURCE = ResourceBundle.getBundle(MENU_PATH);
+	
+	public String getFromMenuText(String string) {
+		return MENU_RESOURCE.getString(string);
+	}
 }

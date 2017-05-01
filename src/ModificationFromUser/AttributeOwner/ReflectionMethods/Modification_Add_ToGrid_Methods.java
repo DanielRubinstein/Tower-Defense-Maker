@@ -8,6 +8,7 @@ import backEnd.GameData.State.Component;
 import backEnd.GameData.State.Tile;
 import backEnd.GameData.State.TileCorners;
 import backEnd.GameData.State.TileImpl;
+import backEnd.GameEngine.Engine.Coordinates;
 import backEnd.Mode.ModeException;
 import javafx.geometry.Point2D;
 import resources.constants.StringResourceBundle;
@@ -19,6 +20,7 @@ public class Modification_Add_ToGrid_Methods{
 	public static final String DESCRIPTION_COMPONENT = "Add Component";
 	public static final String DESCRIPTION_ERROR = "Not a recognized Attribute Owner";
 	private static final StringResourceBundle strResources = new StringResourceBundle();
+	private Coordinates myCoordinates;
 
 	public Modification_Add_ToGrid_Methods(Model model, Point2D location) {
 		this.myModel = model;
@@ -59,6 +61,7 @@ public class Modification_Add_ToGrid_Methods{
 	}
 	
 	private void addComponentToGrid(Component component){
+		component.setPreviousMovement(myCoordinates.getNullMovement()); //components should not have any pre-existing movement
 		myModel.getState().getComponentGraph().addComponentToGrid(component, location);
 	}
 }

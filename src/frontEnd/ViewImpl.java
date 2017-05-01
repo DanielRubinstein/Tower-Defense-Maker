@@ -17,8 +17,8 @@ import backEnd.Mode.ModeReader;
 import frontEnd.CustomJavafxNodes.ErrorDialog;
 import frontEnd.Facebook.FacebookInteractor;
 import frontEnd.Skeleton.SkeletonImpl;
-import frontEnd.Skeleton.SplashScreens.SplashScreen;
-import frontEnd.Skeleton.SplashScreens.SplashScreenData;
+import frontEnd.Skeleton.SplashScreens.SplashScreenImpl;
+import frontEnd.Skeleton.SplashScreens.SplashScreenReader;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.stage.Stage;
@@ -122,9 +122,8 @@ public class ViewImpl implements View {
 	 * 
 	 * @param data
 	 */
-	public void setSplashScreen(SplashScreenData data){
+	public void setSplashScreen(SplashScreenReader splashScreen){
 		sendUserModification(Modification_GameRemote.PAUSE); 
-		SplashScreen splashScreen = new SplashScreen(data);
 		splashScreen.display(appStage);
 	}
 

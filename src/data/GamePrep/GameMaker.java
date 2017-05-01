@@ -9,6 +9,7 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
 import resources.constants.StringResourceBundle;
+import resources.constants.numeric.NumericResourceBundle;
 
 /**
  * If the user decides to create a game, this class is instantiated and offers a
@@ -26,6 +27,7 @@ public class GameMaker {
 	private Stage myStage;
 	private String gameName;
 	private static final StringResourceBundle strResources = new StringResourceBundle();
+	private static final NumericResourceBundle numResources = new NumericResourceBundle();
 	
 	public GameMaker(Stage stage, Consumer<Object> gameDataConsumer, String name) {
 		gameName = name;
@@ -46,8 +48,12 @@ public class GameMaker {
 	}
 
 	private void setInputFields() {
-		myTilesWide = setInputSliderFields(strResources.getFromStringConstants("TilesWide"),1,10,40);
-		myTilesHigh = setInputSliderFields(strResources.getFromStringConstants("TilesHigh"),1,10,40);
+		Integer min = numResources.getFromSizing("MinTileInDimension").intValue();
+		Integer def = numResources.getFromSizing("DefaultTileInDimension").intValue();
+		Integer max = numResources.getFromSizing("MaxTileInDimension").intValue();
+		
+		myTilesWide = setInputSliderFields(strResources.getFromStringConstants("TilesWide"),min,def,max);
+		myTilesHigh = setInputSliderFields(strResources.getFromStringConstants("TilesHigh"),min,def,max);
 		setSubmit();
 	}
 	private void setSubmit() {

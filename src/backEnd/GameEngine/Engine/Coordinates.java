@@ -22,4 +22,8 @@ public class Coordinates {
 	public Coordinates getMovementAngleCoordinates(Coordinates oldCoordinates){
 		return new Coordinates((this.getX()+oldCoordinates.getX())/Math.sqrt(2),(this.getY()+oldCoordinates.getY())/Math.sqrt(2)) ;
 	}
+	
+	public Coordinates getNullMovement(){
+		return new Coordinates(0,0);
+	}
 }

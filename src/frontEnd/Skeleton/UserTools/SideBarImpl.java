@@ -6,24 +6,29 @@ import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
+import resources.constants.StringResourceBundle;
+import resources.constants.numeric.ScreenConstants;
 
 public class SideBarImpl implements SideBar{
 	
 	private VBox myRoot;
-	private StatusView myStatusView;
+	private ScreenConstants screenResources = new ScreenConstants();
+	private StringResourceBundle strResources = new StringResourceBundle();
 	
-	
-	//takes ViewEditor for now
 	public SideBarImpl(View view){
-		myRoot = new VBox();
-		//myRoot.setBackground(new Background (new BackgroundFill(Color.CHOCOLATE, CornerRadii.EMPTY, Insets.EMPTY)));
-		myRoot.getStyleClass().add("side-bar");
+		initializeRoot();
 		createStatusView(view);
 		addModeIndicator(view);
 	}
 	
+	private void initializeRoot() {
+		myRoot = new VBox();
+		myRoot.getStyleClass().add(strResources.getFromCustomCSS("SideBar"));
+		myRoot.setPrefWidth(screenResources.getSideWidth());
+	}
+
 	private void createStatusView(View view) {
-		myStatusView = new StatusView(view);
+		StatusView myStatusView = new StatusView(view);
 		myRoot.getChildren().add(myStatusView.getRoot());
 		setFacebookOptions(view);
 	}
@@ -36,14 +41,6 @@ public class SideBarImpl implements SideBar{
 
 	public Node getRoot(){
 		return myRoot;
-	}
-
-	public void setWidth(double in) {
-		myRoot.setPrefWidth(in);
-		myRoot.setMinWidth(in+20);
-		//myRoot.setMaxWidth(in);
-		//myStatusView.setWidth(in);
-
 	}
 	
 	private void addModeIndicator(ViewReader view) {
