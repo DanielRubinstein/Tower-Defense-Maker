@@ -12,7 +12,7 @@ import javafx.scene.layout.Priority;
  */
 public class BottomRootImpl implements BottomRoot{
 
-	private BottomBar myBottomBar;
+	private SkeletonObject myBottomBar;
 	private OptionsCorner myOptions;
 	private HBox myRoot;
 	
@@ -23,7 +23,7 @@ public class BottomRootImpl implements BottomRoot{
 	}
 
 	private void initializeBar(View view){
-		myBottomBar = new BottomBarImpl(view);
+		myBottomBar = new BottomBar(view);
 		HBox.setHgrow(myBottomBar.getRoot(), Priority.ALWAYS);
 		myRoot.getChildren().add(myBottomBar.getRoot());
 	}

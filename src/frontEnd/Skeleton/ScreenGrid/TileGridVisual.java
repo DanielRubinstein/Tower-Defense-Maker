@@ -1,6 +1,5 @@
 package frontEnd.Skeleton.ScreenGrid;
 
-import java.io.File;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.function.Consumer;
@@ -30,10 +29,11 @@ public class TileGridVisual extends GridVisualBase<Tile> implements Serializable
 	private double tileWidth;
 	private double tileHeight;
 	private View myView;
-	private TileGridInteractor myInteractor;
+	private GridInteractor<Tile> myInteractor;
 	
-	public static final String ARROW_LOADER_DIRECTORY = "resources" + File.separator + "images" + File.separator + "Arrows" + File.separator;
 	private StringResourceBundle stringResourceBundle = new StringResourceBundle();
+	public String ARROW_LOADER_DIRECTORY = stringResourceBundle.getFromImageText("arrows");
+	
 	
 	public TileGridVisual(View view, State state, double sceneWidth, double sceneHeight){
 		myView = view;
@@ -56,7 +56,7 @@ public class TileGridVisual extends GridVisualBase<Tile> implements Serializable
 		myRoot.setPrefHeight(myHeight);
 		myRoot.setFocusTraversable(true);
 		myRoot.requestFocus();
-		myInteractor.setTileGridInteraction(myRoot);
+		myInteractor.setGridInteraction(myRoot);
 	}
 	
 	private void adjustSize(double myWidth, double myHeight){
@@ -77,7 +77,7 @@ public class TileGridVisual extends GridVisualBase<Tile> implements Serializable
 	
 	private void updateTilesOnGrid() {
 		for(Tile tile : observedTileGrid.getAllTiles()){
-			addTileToGrid(tile, tile.<Point2D>getAttribute(stringResourceBundle.getFromAttributeNames("Position")).getValue());
+			updateGrid(tile);
 		}
 	}
 	
@@ -90,7 +90,7 @@ public class TileGridVisual extends GridVisualBase<Tile> implements Serializable
 		AttributeOwnerVisual attrOwner = new AttributeOwnerVisualImpl(t);
 		ImageView tileView = attrOwner.getImageView();
 		organizeImageView(tileView);
-		myInteractor.setTileInteraction(tileView,  t);
+		myInteractor.setInteraction(tileView,  t);
 		if(myTiles.containsKey(pos) && !myTiles.get(pos).equals(t)){
 			myRoot.getChildren().remove(myTileImages.get(myTiles.get(pos)));
 			myTileImages.remove(myTiles.get(pos));
@@ -123,7 +123,7 @@ public class TileGridVisual extends GridVisualBase<Tile> implements Serializable
 		return imageView;
 	}
 	
-	void forEachTile(Consumer<? super Tile> method){
+	public void forEach(Consumer<? super Tile> method){
 		myTileImages.keySet().forEach(method);
 	}
 
@@ -134,7 +134,7 @@ public class TileGridVisual extends GridVisualBase<Tile> implements Serializable
 
 	@Override
 	public void addPreset(Tile presetAO, Point2D pos) {
-		myInteractor.forEachSelectedTile(e -> {
+		myInteractor.forEachSelected(e -> {
 			myView.sendUserModification(new Modification_Add_PaletteToGrid(presetAO, e.<Point2D>getAttribute(stringResourceBundle.getFromAttributeNames("Position")).getValue()));
 		});
 		myView.sendUserModification(new Modification_Add_PaletteToGrid(presetAO, pos));
@@ -143,6 +143,5 @@ public class TileGridVisual extends GridVisualBase<Tile> implements Serializable
 	@Override
 	public void update(SerializableObservableGen<Tile> object, Tile obj) {
 		updateGrid(obj);
-		
 	}
 }

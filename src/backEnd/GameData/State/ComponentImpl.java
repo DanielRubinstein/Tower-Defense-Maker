@@ -29,7 +29,6 @@ public class ComponentImpl implements SerializableObservable, Component, Compone
 		this(new AttributeData(),new AccessPermissionsImpl());
 	}
 	
-
 	@Override
 	public long printID(){
 		return ID;

@@ -22,6 +22,8 @@ import resources.constants.StringResourceBundle;
 public class DeathEngine implements Engine {
 	private StringResourceBundle STRING_RESOURCES = new StringResourceBundle();
 	private BankControllerImpl myBank;
+	
+	
 	public void gameLoop(GameData gameData, double stepTime) {
 		List<Component> toRemove=new ArrayList<Component>();
 		Map<Component, Point2D> toAdd=new HashMap<Component, Point2D>();

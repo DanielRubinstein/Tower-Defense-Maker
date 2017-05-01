@@ -9,11 +9,11 @@ public class LevelLossSplashScreen extends SplashScreenImpl {
 
 	public LevelLossSplashScreen(EventHandler restartLevel, EventHandler restartGame) {
 		super(restartLevel);
-		Button restartGameButton = new Button("Restart Game");
+		Button restartGameButton = new Button(getResource("RestartGameButtonText"));
 		restartGameButton.setOnMouseClicked(restartGame);
 		addButton(restartGameButton);
-		
-		setImage(new Image("resources/images/splashscreens/lose.png"));
+		setMessage(getResource("LevelLossMessage"));
+		setImage(new Image(getResource("LevelLossImagePath")));
 	}
 
 }
