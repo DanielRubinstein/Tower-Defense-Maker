@@ -65,7 +65,7 @@ public class AttributeCommandCenter{
 	
 	private Node createAttributeView(AttributeOwnerReader attributeOwnerReader) {
 		if(attributeOwnerReader.getMyAttributes()==null){
-			return new Label("No Attributes!");
+			return new Label(STRING_RESOURCE_BUNDLE.getFromStringConstants("NoAttribute"));
 		}
 		
 		List<String> attributeCategories = createAttributeCategoryList(attributeOwnerReader);
@@ -147,7 +147,7 @@ public class AttributeCommandCenter{
 		try {
 			finalViewer.getChildren().add(right);
 		} catch (NullPointerException e) {
-			right = new Label("No Attribute Value Stored");
+			right = new Label(STRING_RESOURCE_BUNDLE.getFromStringConstants("NoAttribute"));
 			finalViewer.getChildren().add(right);
 		}
 		return finalViewer;

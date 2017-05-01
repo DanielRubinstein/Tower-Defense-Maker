@@ -4,16 +4,14 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
+import ModificationFromUser.ModificationFromUser;
 import ModificationFromUser.AttributeOwner.Modification_Add_StraightToGrid;
 import ModificationFromUser.AttributeOwner.Modification_Add_ToPalette;
-import ModificationFromUser.AttributeOwner.Modification_PurchaseComponent;
 import ModificationFromUser.AttributeOwner.Modification_RemoveAttributeOwner;
 import ModificationFromUser.AttributeOwner.Modification_UpgradeComponent;
-import backEnd.Attribute.AttributeOwner;
 import backEnd.Attribute.AttributeOwnerReader;
 import backEnd.GameData.State.Component;
 import frontEnd.View;
-import frontEnd.CustomJavafxNodes.ErrorDialog;
 import frontEnd.CustomJavafxNodes.SingleFieldPrompt;
 import frontEnd.Skeleton.UserTools.SkeletonObject;
 import javafx.geometry.Pos;
@@ -24,10 +22,13 @@ import javafx.scene.control.ButtonType;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
+import resources.constants.StringResourceBundle;
 import resources.constants.numeric.NumericResourceBundle;
+import util.reflection.Reflection;
 
 public class AttributeCommandCenterBottomButtons implements SkeletonObject{
 	private static final NumericResourceBundle NUMERIC_RESOURCE_BUNDLE = new NumericResourceBundle();
+	private static final StringResourceBundle STRING_RESOURCE_BUNDLE = new StringResourceBundle();
 	private HBox myRoot;
 	private View myView;
 	private Stage myHostStage;
@@ -46,7 +47,7 @@ public class AttributeCommandCenterBottomButtons implements SkeletonObject{
 	
 	public void addRemoveButton(Component component) {
 		if(myView.isComponentOnGrid(component)){
-			Button submit = new Button("Remove Now");
+			Button submit = new Button(STRING_RESOURCE_BUNDLE.getFromStringConstants("Remove"));
 			submit.setOnAction(e -> {
 				myView.sendUserModification(new Modification_RemoveAttributeOwner(component));
 				myHostStage.close();
@@ -58,7 +59,7 @@ public class AttributeCommandCenterBottomButtons implements SkeletonObject{
 	public void addSubmitButton(Component component) {
 		// as is this option is not available when creating a preset
 		if(myView.getBankControllerReader().getAccessibleComponentPresets().contains(component)){
-			Button submit = new Button("Add Now");
+			Button submit = new Button(STRING_RESOURCE_BUNDLE.getFromStringConstants("Add"));
 			submit.setOnAction(e -> {
 				myView.sendUserModification(new Modification_Add_StraightToGrid(component));
 				myHostStage.close();
@@ -98,10 +99,10 @@ public class AttributeCommandCenterBottomButtons implements SkeletonObject{
 		}
 	}
 	
-	public void createUpgradeButton(AttributeOwner obj){
+	public void createUpgradeButton(AttributeOwnerReader attributeOwnerReader){
 		if(!myView.getBooleanAuthorModeProperty().get()){
 			Button upgrade = new Button("Upgrade Component");
-			int cost = (int) obj.getAttribute("UpgradeCost").getValue();
+			Integer cost = attributeOwnerReader.<Integer>getAttributeReader("UpgradeCost").getValue();
 			upgrade.setOnAction((e) -> {
 				Alert alert = new Alert(AlertType.CONFIRMATION);
 				alert.setTitle("Buy Confirmation");
@@ -112,13 +113,16 @@ public class AttributeCommandCenterBottomButtons implements SkeletonObject{
 					alert.close();
 				}
 				if (result.get() == ButtonType.OK){
-					myView.sendUserModification(new Modification_PurchaseComponent(cost));
-					myView.sendUserModification(new Modification_UpgradeComponent((Component) obj));
+					findUpgradeModification(cost, attributeOwnerReader);
 				}
 				myHostStage.close();
 			});
 			myRoot.getChildren().add(upgrade);
 		}
+	}
+
+	private void findUpgradeModification(Integer cost, AttributeOwnerReader attributeOwnerReader) {
+		myView.sendUserModification((ModificationFromUser) Reflection.createInstance(Modification_UpgradeComponent.class.getName(), cost, attributeOwnerReader));
 	}
 
 	@Override
