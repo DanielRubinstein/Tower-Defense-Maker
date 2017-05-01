@@ -118,7 +118,7 @@ public class XMLWriterImpl implements XMLWriter{
 	public void saveUniversalGameData(BankController bankController, String filePath){
 		Map<String, Component> componentMap = bankController.getComponentMap();
 		
-
+		
 		List<SerializableObservable> so = new ArrayList<SerializableObservable>();
 		for (Component c : componentMap.values()){
 			so.add((SerializableObservable) c);
