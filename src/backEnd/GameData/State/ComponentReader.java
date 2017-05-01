@@ -19,12 +19,7 @@ public interface ComponentReader {
 	 */
 
 	AttributeData getMyAttributes();
-
-	/* (non-Javadoc)
-	 * @see backEnd.GameData.State.Component#getMyType()
-	 */
-	String getMyType();
-
+	
 	/* (non-Javadoc)
 	 * @see backEnd.GameData.State.Component#addObserver(backEnd.GameData.State.SerializableObserver)
 	 */

@@ -25,7 +25,7 @@ public class EnemyStatusEngine implements Engine {
 	public void gameLoop(GameData gameData, double stepTime) {
 		Collection<Component> components = gameData.getState().getComponentGraph().getAllComponents();
 		for (Component component : components) {
-			if (component.getMyType().equals(ENEMY_TYPE)) {
+			if (component.<String>getAttribute(STRING_RESOURCES.getFromAttributeNames("Type")).getValue().equals(STRING_RESOURCES.getFromValueNames("EnemyType"))) {
 				updatePoison(stepTime, component);
 				updateSlowed(stepTime, component);
 			}
@@ -33,40 +33,34 @@ public class EnemyStatusEngine implements Engine {
 	}
 
 	private void updatePoison(double stepTime, Component component) {
-		Attribute<StatusEffect> poisoned = component.getAttribute(STRING_RESOURCES.getFromAttributeNames("PoisonTime"));
-		Attribute<Double> health = component.getAttribute(STRING_RESOURCES.getFromAttributeNames("Health"));
-		Double poisonTime = poisoned.getValue().getTime();
+		double poisonTime = component.<Double>getAttribute(STRING_RESOURCES.getFromAttributeNames("PoisonTime")).getValue();
+		double poisonFactor = component.<Double>getAttribute(STRING_RESOURCES.getFromAttributeNames("PoisonFactor")).getValue();
+		double health = component.<Double>getAttribute(STRING_RESOURCES.getFromAttributeNames("Health")).getValue();
+		
 		if (poisonTime > 0) {
 			if (poisonTime - stepTime < 0) { // If poison should only do partial
-												// tick
-				component.setAttributeValue(STRING_RESOURCES.getFromAttributeNames("Poison"), new StatusEffect(new Double(0), new Double(0)));
-				//poisoned.setValue(new StatusEffect(new Double(0), new Double(0)));
-				component.setAttributeValue(STRING_RESOURCES.getFromAttributeNames("Health"), health.getValue() - poisoned.getValue().getFactor() * poisonTime);
-				//health.setValue(health.getValue() - poisoned.getValue().getFactor() * poisonTime);
+				component.setAttributeValue(STRING_RESOURCES.getFromAttributeNames("Health"), health - poisonFactor * poisonTime);
+				component.setAttributeValue(STRING_RESOURCES.getFromAttributeNames("PoisonTime"), new Double(0));
+				component.setAttributeValue(STRING_RESOURCES.getFromAttributeNames("PoisonFactor"), new Double(0));
 			} else { // Full poison tick
-				
-				poisoned.getValue().setTime(poisonTime - stepTime); //TODO FIX THIS, SETTIME NOT OBSERVABLE
-				component.setAttributeValue(STRING_RESOURCES.getFromAttributeNames("Health"), health.getValue() - poisoned.getValue().getFactor() * stepTime);
-				//health.setValue(health.getValue() - poisoned.getValue().getFactor() * stepTime);
+				component.setAttributeValue(STRING_RESOURCES.getFromAttributeNames("Health"), health - poisonFactor * stepTime);
+				component.setAttributeValue(STRING_RESOURCES.getFromAttributeNames("PoisonTime"), poisonTime - stepTime);
 			}
 		}
 	}
 
 	private void updateSlowed(double stepTime, Component component) {
-		Attribute<StatusEffect> slowed = component.getAttribute("SlowTime");
-		Attribute<Double> currentSpeed = component.getAttribute("CurrentSpeed");
-		Attribute<Double> normalSpeed = component.getAttribute("NormalSpeed");
+		double slowTime = component.<Double>getAttribute("SlowTime").getValue();
+		double normalSpeed = component.<Double>getAttribute("NormalSpeed").getValue();
 
-		Double poisonTime = slowed.getValue().getTime();
-		if (poisonTime > 0) {
-			if (poisonTime - stepTime < 0) { // If slow should only do partial
-												// tick
-				component.setAttributeValue(STRING_RESOURCES.getFromAttributeNames("SlowTime"), new StatusEffect(new Double(0), new Double(0)));
-				//slowed.setValue(new StatusEffect(new Double(0), new Double(0)));
-				component.setAttributeValue(STRING_RESOURCES.getFromAttributeNames("CurrentSpeed"), new Double(normalSpeed.getValue().doubleValue()));
+		if (slowTime > 0) {
+			if (slowTime - stepTime < 0) { // If slow should only do partial
+				component.setAttributeValue(STRING_RESOURCES.getFromAttributeNames("SlowTime"), new Double(0));
+				component.setAttributeValue(STRING_RESOURCES.getFromAttributeNames("SlowFactor"), new Double(0));
+				component.setAttributeValue(STRING_RESOURCES.getFromAttributeNames("CurrentSpeed"), new Double(normalSpeed));
 				//currentSpeed.setValue(new Double(normalSpeed.getValue().doubleValue()));
 			} else { // Full slow tick
-				slowed.getValue().setTime(poisonTime - stepTime);
+				component.setAttributeValue(STRING_RESOURCES.getFromAttributeNames("SlowTime"), slowTime - stepTime);
 			}
 		}
 	}
