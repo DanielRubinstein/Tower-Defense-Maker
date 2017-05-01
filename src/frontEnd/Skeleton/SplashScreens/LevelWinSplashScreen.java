@@ -12,7 +12,6 @@ public class LevelWinSplashScreen extends SplashScreenImpl{
 		continueButton.setOnMouseClicked(continueToNextLevel);
 		addButton(continueButton);
 		setMessage(getResource("LevelWinMessage"));
-		System.out.println(getResource("LevelWinImagePath"));
 		setImage(new Image(getResource("LevelWinImagePath")));
 	}
 
