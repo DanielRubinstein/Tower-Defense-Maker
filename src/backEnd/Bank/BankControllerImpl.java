@@ -175,24 +175,25 @@ public class BankControllerImpl implements SerializableObservable, BankControlle
 	}
 
 	private void refreshAccessibleTileMap() {
-		accessibleTileBank.clear();
-		for (String x : tileBank.keySet()) {
-			if (tileBank.get(x).getAccessPermissions().permitsAccess(myMode.getUserMode(), myMode.getGameMode(),
-					myMode.getLevelMode())) {
-				accessibleTileBank.put(x, tileBank.get(x));
-			}
-		}
+		refreshAccessibleAttributeOwnerMap(tileBank, accessibleTileBank);
 	}
 
 	private void refreshAccessibleComponentMap() {
-		accessibleComponentBank.clear();
-		for (String x : componentBank.keySet()) {
-			if (componentBank.get(x).getAccessPermissions().permitsAccess(myMode.getUserMode(), myMode.getGameMode(),
-					myMode.getLevelMode())) {
-				//System.out.println(this.getClass().getSimpleName() + ": accessible component - " + x);
-				//System.out.println(myMode.getUserMode() + " " + myMode.getGameMode());
-				accessibleComponentBank.put(x, componentBank.get(x));
-			}
+		refreshAccessibleAttributeOwnerMap(componentBank, accessibleComponentBank);
+	}
+	
+	private <T extends AttributeOwner> void refreshAccessibleAttributeOwnerMap(Map<String, T> mainMap, Map<String, T> accessibleMap){
+		accessibleMap.clear();
+		for(String presetName : mainMap.keySet()){
+			checkIfAccessibleAndAdd(presetName, mainMap.get(presetName), accessibleMap);
+		}
+	}
+	
+	private <T extends AttributeOwner> void checkIfAccessibleAndAdd(String presetName, T preset, Map<String, T> presetAccessibleMap){
+		if(preset.getAccessPermissions().permitsAccess(myMode.getUserMode(), 
+														myMode.getGameMode(),
+														myMode.getLevelMode())){
+			presetAccessibleMap.put(presetName, preset);
 		}
 	}
 

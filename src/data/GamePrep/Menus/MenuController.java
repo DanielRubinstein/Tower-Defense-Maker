@@ -9,17 +9,19 @@ import frontEnd.CustomJavafxNodes.ButtonMenuImpl;
 import frontEnd.CustomJavafxNodes.SingleFieldPrompt;
 import frontEnd.Facebook.FacebookInteractor;
 import javafx.stage.Stage;
+import resources.constants.StringResourceBundle;
 
 /**
  * The main menu which allows the use to
  * 	1) Create a new game (via GameMaker)
  *  2) Open a Game Template
  *  3) Load a saved game
- * @author Miguel Anderson, Juan Philippe
+ * @author Miguel Anderson
  *
  */
 
 public class MenuController{
+	private StringResourceBundle stringResourceBundle = new StringResourceBundle();
 	private Consumer<Object> consumerLoadData;
 	private Consumer<FacebookInteractor> setFb;
 	
@@ -38,14 +40,14 @@ public class MenuController{
 	}
 
 	private void showPrimaryGameMenu(ButtonMenuImpl previousMenu, Stage stage) {
-		ButtonMenuImpl primaryMenu = new ButtonMenuImpl("Game Menu");
-		primaryMenu.addSimpleButtonWithHover("Create a New Game", () -> {
+		ButtonMenuImpl primaryMenu = new ButtonMenuImpl(stringResourceBundle.getFromMenuText("GameMenuTitle"));
+		primaryMenu.addSimpleButtonWithHover(stringResourceBundle.getFromMenuText("CreateButton"), () -> {
 			showNewGameMenu(primaryMenu, stage);
-		}, "Create a new game from stratch, choose everything!!");
-		primaryMenu.addSimpleButtonWithHover("Select Game", () -> {
+		}, stringResourceBundle.getFromMenuText("CreateButtonHover"));
+		primaryMenu.addSimpleButtonWithHover(stringResourceBundle.getFromMenuText("SelectButton"), () -> {
 			MenuSelectedGame menuSelectedGame = new MenuSelectedGame(primaryMenu, stage, consumerLoadData);
 			menuSelectedGame.display();
-		}, "Select from already-made games. From here you can load a game, make a level or start from the beginning");
+		}, stringResourceBundle.getFromMenuText("SelectButtonHover"));
 		primaryMenu.addBackButton(previousMenu, stage);
 		primaryMenu.display(stage);
 	}
@@ -59,8 +61,9 @@ public class MenuController{
 	}
 	
 	private String getNewGameName() {
-		List<String> dialogTitles = Arrays.asList("Welcome!", "Please Input a Name for your new game");
-		String promptLabel = "Name:";
+		List<String> dialogTitles = Arrays.asList(stringResourceBundle.getFromStringConstants("Welcome")
+				, stringResourceBundle.getFromMenuText("InputName"));
+		String promptLabel = stringResourceBundle.getFromMenuText("NamePrefix");
 		String promptText = "";
 		SingleFieldPrompt myDialog = new SingleFieldPrompt(dialogTitles, promptLabel, promptText);
 		return myDialog.getUserInputString();

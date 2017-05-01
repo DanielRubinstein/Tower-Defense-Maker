@@ -11,6 +11,7 @@
     </list>
   </entry>
   <entry>
+<<<<<<< HEAD
     <string>aasdf</string>
     <list/>
   </entry>
@@ -19,33 +20,26 @@
     <list/>
   </entry>
   <entry>
+=======
+>>>>>>> 418457fd7dacfd6f362ec18fc8d8f66482b17079
     <string>HeyLmaoGame</string>
     <list>
       <string>level1</string>
     </list>
   </entry>
   <entry>
-    <string>adfsdf</string>
+    <string>testGameWin</string>
     <list/>
   </entry>
   <entry>
-    <string>f</string>
-    <list/>
+    <string>testSplash</string>
+    <list>
+      <string>level1</string>
+      <string>level1</string>
+    </list>
   </entry>
   <entry>
-    <string>h</string>
-    <list/>
-  </entry>
-  <entry>
-    <string>saf</string>
-    <list/>
-  </entry>
-  <entry>
-    <string>saff</string>
-    <list/>
-  </entry>
-  <entry>
-    <string>asdfsd</string>
+    <string>testLevelLoss</string>
     <list/>
   </entry>
 </map>
