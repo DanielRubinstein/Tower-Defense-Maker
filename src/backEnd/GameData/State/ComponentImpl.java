@@ -239,5 +239,11 @@ public class ComponentImpl implements SerializableObservable, Component, Compone
 	public boolean contains(String attName) {
 		return myAttributes.containsAttribute(attName);
 	}
+
+
+	@Override
+	public AccessPermissionsReader getAccessPermissionsReader() {
+		return this.myAccessPermissions;
+	}
 	
 }

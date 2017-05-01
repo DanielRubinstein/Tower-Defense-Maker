@@ -3,7 +3,7 @@ package frontEnd.Skeleton.AoTools;
 import java.util.List;
 
 import ModificationFromUser.AttributeOwner.Modification_EditAccessPermissions;
-import backEnd.GameData.State.AccessPermissions;
+import backEnd.GameData.State.AccessPermissionsReader;
 import backEnd.LevelProgression.LevelProgressionControllerReader;
 import frontEnd.View;
 import frontEnd.CustomJavafxNodes.ActionButton;
@@ -22,23 +22,25 @@ import javafx.scene.text.Font;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import resources.constants.StringResourceBundle;
+import resources.constants.numeric.NumericResourceBundle;
 
 public class AccessPermissionsViewer implements SkeletonObject {
 	private StringResourceBundle stringResourceBundle = new StringResourceBundle();
+	private NumericResourceBundle numericResourceBundle = new NumericResourceBundle();
 	
 	private Stage myHostStage;
 	private View myView;
-	private AccessPermissions myAccessPermissions;
+	private AccessPermissionsReader myAccessPermissions;
 	private Stage myStage;
 	private Button ignition;
 	private VBox myRoot;
 	private LevelProgressionControllerReader myModeController;
 
-	public AccessPermissionsViewer(Stage hostStage, View view, AccessPermissions accessPermissions) {
+	public AccessPermissionsViewer(Stage hostStage, View view, AccessPermissionsReader accessPermissionsReader) {
 		myHostStage = hostStage;
 		myView = view;
 		myModeController = myView.getLevelProgressionController();
-		myAccessPermissions = accessPermissions;
+		myAccessPermissions = accessPermissionsReader;
 		createIgnition();
 	}
 
@@ -53,8 +55,8 @@ public class AccessPermissionsViewer implements SkeletonObject {
 		myRoot = new VBox();
 		myRoot.getChildren().add(createTitle());
 		myRoot.getChildren().add(createBody());
-		myRoot.setSpacing(20);
-		myRoot.setPadding(new Insets(10,10,10,10));
+		myRoot.setSpacing(numericResourceBundle.getFromSizing("StandardSpacing"));
+		myRoot.setPadding(new Insets(numericResourceBundle.getFromSizing("StandardSpacing")));
 	}
 
 	private HBox createBody() {
@@ -63,14 +65,14 @@ public class AccessPermissionsViewer implements SkeletonObject {
 		for (String category : modeCategories) {
 			VBox subBody = new VBox();
 			Label titleLbl = new Label(category);
-			titleLbl.setFont(Font.font(24));
+			titleLbl.setFont(Font.font(numericResourceBundle.getFromSizing("TitleFontSize")));
 			titleLbl.setUnderline(true);
 			subBody.getChildren().add(titleLbl);
 			
 			ScrollPane scrollPane = new ScrollPane();
 			scrollPane.setHbarPolicy(ScrollBarPolicy.NEVER);
 			scrollPane.setVbarPolicy(ScrollBarPolicy.AS_NEEDED);
-			scrollPane.setMaxHeight(300);
+			scrollPane.setMaxHeight(numericResourceBundle.getFromSizing("MaxMenuContentHeight"));
 			
 			VBox subsubBody = new VBox();
 			
@@ -102,7 +104,7 @@ public class AccessPermissionsViewer implements SkeletonObject {
 		if(opts == null) return;
 		for (String option : opts) {
 			CheckBox cB = new CheckBox(option);
-			if (!myView.getBooleanAuthorModeProperty().get() || option.equals("AUTHOR") || option.equals("DEFAULT")) {
+			if (!myView.getBooleanAuthorModeProperty().get() || option.equals(stringResourceBundle.getFromStringConstants("AUTHOR")) || option.equals(stringResourceBundle.getFromStringConstants("DEFAULT"))) {
 				cB.disableProperty().set(true);
 			}
 
@@ -120,12 +122,12 @@ public class AccessPermissionsViewer implements SkeletonObject {
 	private void indentInVBox(Node n){
 		// Add offset to left side to indent from title
 		// from http://docs.oracle.com/javafx/2/layout/LayoutSampleCSS.java.html
-		VBox.setMargin(n, new Insets(0, 0, 0, 12));
+		VBox.setMargin(n, new Insets(0, 0, 0, numericResourceBundle.getFromSizing("StandardSpacing")));
 	}
 
 	private Label createTitle() {
 		Label titleLbl = new Label(stringResourceBundle.getFromStringConstants("AccessPermissions"));
-		titleLbl.setFont(Font.font(32));
+		titleLbl.setFont(Font.font(numericResourceBundle.getFromSizing("TitleFontSize")));
 		titleLbl.setUnderline(true);
 		return titleLbl;
 	}
