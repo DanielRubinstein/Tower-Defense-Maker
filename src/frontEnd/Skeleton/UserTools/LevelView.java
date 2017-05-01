@@ -3,7 +3,8 @@ package frontEnd.Skeleton.UserTools;
 import java.util.List;
 
 import backEnd.LevelProgression.LevelProgressionControllerEditor;
-import frontEnd.CustomJavafxNodes.ListDragDrop;
+import frontEnd.CustomJavafxNodes.DragDrop.ListDragDrop;
+import frontEnd.CustomJavafxNodes.DragDrop.ListDragDropImpl;
 import javafx.collections.FXCollections;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
@@ -78,7 +79,7 @@ public class LevelView implements PopUp{
 	private void populateLevels(String gameName){
 		List<String> gameLevels = myLevelContr.getLevelList(gameName);
 		
-		ListDragDrop<String> test = new ListDragDrop<String>(FXCollections.observableArrayList(gameLevels));
+		ListDragDrop<String> test = new ListDragDropImpl<String>(FXCollections.observableArrayList(gameLevels));
 		test.changedListProperty().addListener((o, oldV, newV) -> {
 			if(newV){
 				List<String> orderedLevels = test.getList();

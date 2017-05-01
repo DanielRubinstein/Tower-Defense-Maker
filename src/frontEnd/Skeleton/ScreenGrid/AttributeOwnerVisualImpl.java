@@ -35,6 +35,11 @@ public class AttributeOwnerVisualImpl implements SerializableObserver, Attribute
 	public AttributeOwnerVisualImpl(AttributeOwnerReader attr){
 		myAttr = attr;
 		myAttr.addObserver(this);
+		initializeImage();
+		
+	}
+
+	private void initializeImage() {
 		myImage = new ImageView();
 		setImage(myAttr.<String>getAttributeReader(IMAGE_ATTRIBUTE).getValue());
 		try{
@@ -46,6 +51,7 @@ public class AttributeOwnerVisualImpl implements SerializableObserver, Attribute
 			//means we are dealing with something that does not have size
 		}
 		setPosition(myAttr.<Point2D>getAttributeReader(POSITION_ATTRIBUTE).getValue());
+		
 	}
 
 	private void setSize(Double value) {
@@ -135,7 +141,6 @@ public class AttributeOwnerVisualImpl implements SerializableObserver, Attribute
 			//no poison attribute
 		}
 		return false;
-		
 	}
 
 	@Override
