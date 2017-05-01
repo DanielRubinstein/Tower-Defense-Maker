@@ -8,11 +8,12 @@ public class LevelWinSplashScreen extends SplashScreenImpl{
 	
 	public LevelWinSplashScreen(EventHandler restartLevel, EventHandler continueToNextLevel){
 		super(restartLevel);
-		Button continueButton = new Button("Continue to Next Level");
+		Button continueButton = new Button(getResource("NextLevelButtonText"));
 		continueButton.setOnMouseClicked(continueToNextLevel);
 		addButton(continueButton);
-		
-		setImage(new Image("resources/images/splashscreens/youwin.png"));
+		setMessage(getResource("LevelWinMessage"));
+		System.out.println(getResource("LevelWinImagePath"));
+		setImage(new Image(getResource("LevelWinImagePath")));
 	}
 
 }

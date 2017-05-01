@@ -1,5 +1,7 @@
 package frontEnd.Skeleton.SplashScreens;
 
+import java.util.ResourceBundle;
+
 import backEnd.GameData.State.PlayerStatusReader;
 import frontEnd.Skeleton.UserTools.StatusView;
 import javafx.event.Event;
@@ -27,6 +29,8 @@ public abstract class SplashScreenImpl implements SplashScreen {
 	private EventHandler restartLevel;
 	private Button restartLevelButton;
 	private HBox myStatusView = new HBox();
+	private final static String SPLASH_PATH = "resources/splashScreen";
+	private final static ResourceBundle myResources = ResourceBundle.getBundle(SPLASH_PATH);
 	
 
 	public SplashScreenImpl(EventHandler restartLevel) {
@@ -43,7 +47,7 @@ public abstract class SplashScreenImpl implements SplashScreen {
 	
 	@Override
 	public void addRestartLevelButton(){
-		Button restartLevelButton = new Button("Restart Level");
+		Button restartLevelButton = new Button(getResource("RestartLevelButtonText"));
 		restartLevelButton.setOnMouseClicked(restartLevel);
 		addButton(restartLevelButton);
 		
@@ -59,6 +63,10 @@ public abstract class SplashScreenImpl implements SplashScreen {
 		ImageView myImage = new ImageView(image);
 		GridPane.setHalignment(myImage, HPos.CENTER);
 		myGP.add(myImage, 0, 1);
+	}
+	
+	protected String getResource(String key){
+		return myResources.getString(key);
 	}
 	
 	protected void setMessage(String message){
