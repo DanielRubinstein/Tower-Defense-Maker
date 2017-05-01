@@ -971,6 +971,19 @@
             </backEnd.Attribute.AttributeImpl>
           </entry>
           <entry>
+            <string>TargetSelector</string>
+            <backEnd.Attribute.AttributeImpl>
+              <myValue class="string"></myValue>
+              <myParamList class="java.util.Arrays$ArrayList">
+                <a class="string-array">
+                  <string>Radius</string>
+                  <string>Group</string>
+                </a>
+              </myParamList>
+              <myName>TargetSelector</myName>
+            </backEnd.Attribute.AttributeImpl>
+          </entry>
+          <entry>
             <string>SlowFactor</string>
             <backEnd.Attribute.AttributeImpl>
               <myValue class="double">0.0</myValue>

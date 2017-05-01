@@ -14,7 +14,6 @@ import backEnd.LevelProgression.LevelProgressionControllerEditor;
 import backEnd.Mode.Mode;
 import data.DataController;
 import data.XMLReadingException;
-import frontEnd.Skeleton.SplashScreens.SplashScreenData;
 import frontEnd.Skeleton.SplashScreens.SplashScreenFactory;
 import frontEnd.Skeleton.SplashScreens.SplashScreenReader;
 import frontEnd.Skeleton.SplashScreens.SplashScreenType;

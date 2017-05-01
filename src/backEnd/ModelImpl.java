@@ -25,7 +25,6 @@ import backEnd.Mode.ModeReader;
 import data.DataController;
 import data.DataControllerReader;
 import data.XMLReadingException;
-import frontEnd.Skeleton.SplashScreens.SplashScreenData;
 import frontEnd.Skeleton.SplashScreens.SplashScreenReader;
 import javafx.beans.property.SimpleStringProperty;
 import resources.constants.StringResourceBundle;
