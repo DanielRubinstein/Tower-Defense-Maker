@@ -69,6 +69,10 @@ public class ListDragDropImpl<T> implements SkeletonObject, ListDragDropChanger<
 		changedListProperty.set(true);
 		
 	}
+	@Override
+	public BooleanProperty disabledProperty() {
+		return myContents.disableProperty();
+	}
 
 
 }

@@ -1,7 +1,6 @@
 package backEnd.GameData;
 
 import backEnd.Bank.BankControllerImpl;
-import backEnd.GameData.Rules.Rule;
 import backEnd.GameData.Rules.RulesMap;
 import backEnd.GameData.State.PlayerStatus;
 import backEnd.GameData.State.PlayerStatusModifier;
@@ -10,7 +9,6 @@ import backEnd.GameData.State.State;
 import backEnd.GameData.State.StateImpl;
 import backEnd.GameEngine.EngineStatus;
 import backEnd.LevelProgression.LevelProgressionControllerEditor;
-import backEnd.LevelProgression.LevelProgressionControllerReader;
 
 public class GameData implements GameDataInterface{
 	private StateImpl myState;
@@ -84,7 +82,7 @@ public class GameData implements GameDataInterface{
 	public double getGameTime() {
 		return myGameTime;
 	}
-	
+
 	public void setLevelProgressionController(LevelProgressionControllerEditor myLPC){
 		this.myLPC = myLPC;
 		

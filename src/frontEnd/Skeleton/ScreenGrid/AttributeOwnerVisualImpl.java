@@ -30,28 +30,28 @@ public class AttributeOwnerVisualImpl implements SerializableObserver, Attribute
 	private final String SLOW_TIME_ATTRIBUTE = stringResourceBundle.getFromAttributeNames("SlowTime");
 	
 	
-	private AttributeOwnerReader myAttr;
+	private AttributeOwnerReader myAttributeOwnerReader;
 	
 	public AttributeOwnerVisualImpl(AttributeOwnerReader attr){
-		myAttr = attr;
-		myAttr.addObserver(this);
+		myAttributeOwnerReader = attr;
+		myAttributeOwnerReader.addObserver(this);
 		initializeImage();
 		
 	}
 
 	private void initializeImage() {
 		myImage = new ImageView();
-		setImage(myAttr.<String>getAttributeReader(IMAGE_ATTRIBUTE).getValue());
+		setImage(myAttributeOwnerReader.<String>getAttributeReader(IMAGE_ATTRIBUTE).getValue());
 		try{
-			Double size = myAttr.<Double>getAttributeReader(SIZE_ATTRIBUTE).getValue();
+			Double size = myAttributeOwnerReader.<Double>getAttributeReader(SIZE_ATTRIBUTE).getValue();
 			setSize(size);
 		} catch (NullPointerException e){
 			// means we are dealing with something that does not have size
-		}catch (MissingResourceException e){
+		} catch (MissingResourceException e){
 			//means we are dealing with something that does not have size
 		}
-		setPosition(myAttr.<Point2D>getAttributeReader(POSITION_ATTRIBUTE).getValue());
-		
+
+		setPosition(myAttributeOwnerReader.<Point2D>getAttributeReader(POSITION_ATTRIBUTE).getValue());
 	}
 
 	private void setSize(Double value) {
@@ -82,11 +82,11 @@ public class AttributeOwnerVisualImpl implements SerializableObserver, Attribute
 	
 	@Override
 	public void update(SerializableObservable o, Object arg) {
-		if(o == myAttr){
-			String newImagePath = myAttr.<String>getAttributeReader(IMAGE_ATTRIBUTE).getValue();
-			Point2D newPosition = myAttr.<Point2D>getAttributeReader(POSITION_ATTRIBUTE).getValue();
+		if(o == myAttributeOwnerReader){
+			String newImagePath = myAttributeOwnerReader.<String>getAttributeReader(IMAGE_ATTRIBUTE).getValue();
+			Point2D newPosition = myAttributeOwnerReader.<Point2D>getAttributeReader(POSITION_ATTRIBUTE).getValue();
 			try{
-				Double newSize = myAttr.<Double>getAttributeReader(SIZE_ATTRIBUTE).getValue();
+				Double newSize = myAttributeOwnerReader.<Double>getAttributeReader(SIZE_ATTRIBUTE).getValue();
 				if(!newImagePath.equals(myImagePath)){
 					setImage(newImagePath);
 					setSize(newSize);
@@ -118,7 +118,7 @@ public class AttributeOwnerVisualImpl implements SerializableObserver, Attribute
 	}
 	private boolean setDoubleEffect(String AttributeName,String styleName){
 		try{
-			double effectTime = myAttr.<Double>getAttributeReader(AttributeName).getValue();
+			double effectTime = myAttributeOwnerReader.<Double>getAttributeReader(AttributeName).getValue();
 			if(effectTime>0){
 				myImage.setStyle(stringResourceBundle.getFromCustomCSS(styleName));
 				return true;
@@ -140,7 +140,7 @@ public class AttributeOwnerVisualImpl implements SerializableObserver, Attribute
 
 	@Override
 	public void refreshXY() {
-		setPosition(myAttr.<Point2D>getAttributeReader(POSITION_ATTRIBUTE).getValue());
+		setPosition(myAttributeOwnerReader.<Point2D>getAttributeReader(POSITION_ATTRIBUTE).getValue());
 	}
 
 	

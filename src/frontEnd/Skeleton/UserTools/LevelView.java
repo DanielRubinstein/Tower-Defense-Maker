@@ -3,6 +3,7 @@ package frontEnd.Skeleton.UserTools;
 import java.util.List;
 
 import backEnd.LevelProgression.LevelProgressionControllerEditor;
+import frontEnd.View;
 import frontEnd.CustomJavafxNodes.DragDrop.ListDragDrop;
 import frontEnd.CustomJavafxNodes.DragDrop.ListDragDropImpl;
 import javafx.collections.FXCollections;
@@ -29,10 +30,12 @@ public class LevelView implements PopUp{
 	private StringResourceBundle strResources = new StringResourceBundle();
 	private NumericResourceBundle numResources = new NumericResourceBundle();
 	private GridPane myRoot;
+	private View myView;
 	private LevelProgressionControllerEditor myLevelContr;
 	
-	public LevelView(LevelProgressionControllerEditor levels){
+	public LevelView(View view, LevelProgressionControllerEditor levels){
 		myRoot = new GridPane();
+		myView = view;
 		myLevelContr = levels;
 		initializeRoot();
 		createStructureBoxes();	
@@ -80,6 +83,7 @@ public class LevelView implements PopUp{
 		List<String> gameLevels = myLevelContr.getLevelList(gameName);
 		
 		ListDragDrop<String> levelDrop = new ListDragDropImpl<String>(FXCollections.observableArrayList(gameLevels));
+		levelDrop.disabledProperty().bind(myView.getBooleanAuthorModeProperty().not());
 		levelDrop.changedListProperty().addListener((o, oldV, newV) -> {
 			if(newV){
 				List<String> orderedLevels = levelDrop.getList();

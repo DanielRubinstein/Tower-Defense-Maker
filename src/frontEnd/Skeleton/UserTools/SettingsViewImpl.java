@@ -70,7 +70,7 @@ public class SettingsViewImpl implements SettingsView, PopUp{
 
 	private void gameStructureButtons() {
 		myMenu.addSimpleButtonWithHover(strResources.getFromStringConstants("GameStructure"), () -> {
-			LevelView gameStructure = new LevelView(myView.getLevelProgressionController());
+			LevelView gameStructure = new LevelView(myView, myView.getLevelProgressionController());
 			gameStructure.displayOnStage(null);
 		}, strResources.getFromStringConstants("GameStructureHover"));
 	}

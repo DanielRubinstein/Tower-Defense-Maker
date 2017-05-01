@@ -11,6 +11,7 @@ import backEnd.GameEngine.EngineStatus;
 import backEnd.GameEngine.Engine.Spawning.SpawnQueueInstantiator;
 import backEnd.GameEngine.Engine.Spawning.SpawnQueues;
 import javafx.geometry.Point2D;
+import resources.constants.StringResourceBundle;
 import resources.constants.numeric.NumericResourceBundle;
 
 /**
@@ -26,8 +27,8 @@ public class StateImpl implements State, SerializableObservable {
 	private int numRowsInGrid;
 	private TileGrid myTileGrid;
 	private ComponentGraph myComponentGraph;
-	private final static String RESOURCES_PATH = "resources/defaultTileAttributes";
-	private final static ResourceBundle myResources = ResourceBundle.getBundle(RESOURCES_PATH);
+	private StringResourceBundle STRING_RESOURCES = new StringResourceBundle();
+
 	private final static String IMAGEPATH_RESOURCES_PATH = "resources/images";
 	private final static ResourceBundle myImageResource = ResourceBundle.getBundle(IMAGEPATH_RESOURCES_PATH);
 	private EngineStatus myEngineStatus;
@@ -61,10 +62,10 @@ public StateImpl(TileGrid tileGrid, ComponentGraph componentGraph, HashMap<Strin
 			for (int col = 0; col < numColsInGrid; col++) {
 				Double tileWidth = numericResourceBundle.getScreenConstants().getScreenGridWidth() / numColsInGrid;
 				Double tileHeight = numericResourceBundle.getScreenConstants().getScreenGridHeight() / numRowsInGrid;
-				Point2D pos = new Point2D((col + 0.5) * (tileWidth), (row + 0.5) * (tileHeight));
+				Point2D pos = new Point2D((col + 0.5) * (tileWidth), (row + 0.5) * (tileHeight)); //0.5: to set at center
 				Tile newTile = new TileImpl();
-				newTile.getAttribute("Position").setValue(pos);
-				newTile.getAttribute("ImageFile").setValue(myImageResource.getString("default_tile"));
+				newTile.getAttribute(STRING_RESOURCES.getFromAttributeNames("Position")).setValue(pos);
+				newTile.getAttribute(STRING_RESOURCES.getFromAttributeNames("ImageFile")).setValue(myImageResource.getString("default_tile"));
 				myTileGrid.setTileByScreenPosition(newTile, pos);
 			}
 		}
@@ -99,7 +100,7 @@ public StateImpl(TileGrid tileGrid, ComponentGraph componentGraph, HashMap<Strin
 		myComponentGraph.clearComponents();
 		
 		for(Component component : componentGraph.getAllComponents()){
-			Point2D pos = component.<Point2D>getAttribute("Position").getValue();
+			Point2D pos = component.<Point2D>getAttribute(STRING_RESOURCES.getFromAttributeNames("Position")).getValue();
 			myComponentGraph.addComponentToGrid(component, pos);
 		}
 	}
@@ -110,98 +111,16 @@ public StateImpl(TileGrid tileGrid, ComponentGraph componentGraph, HashMap<Strin
 		myTileGrid.setNumRows(tileGrid.getNumRowsInGrid());
 
 		for(Tile tile : tileGrid.getAllTiles()){
-			Point2D pos = tile.<Point2D>getAttribute("Position").getValue();
+			Point2D pos = tile.<Point2D>getAttribute(STRING_RESOURCES.getFromAttributeNames("Position")).getValue();
 			myTileGrid.setTileByScreenPosition(tile, pos);
 		}
 	}
 
-	/*
-	@SuppressWarnings({ "unused", "unchecked" })
-	private void formShortestPath(){
-		Map<Tile, Coord> startTiles = findStartTiles();
-		
-		for(Tile current : startTiles.keySet()){
-			Queue <Coord> path = new LinkedList<Coord>();
-			Set<Coord> visitedTiles = new HashSet<Coord>();
-			path.add(startTiles.get(current));
-			visitedTiles.add(startTiles.get(current));
-			Coord finalPath = null;
-			while(!path.isEmpty()){
-				Coord cur = path.remove();
-				ArrayList<Coord> adjacentTiles = getAdjacents(cur);
-				adjacentTiles.removeAll(visitedTiles); 
-				path.addAll(adjacentTiles);
-				if((boolean) stateGrid.getTileByCoord(cur.getXCoord(), cur.getYCoord()).getAttribute(myResources.getString("GoalTile")).getValue() == true){
-					finalPath = cur;
-					break; //DONE
-				}
-			}
-			if(finalPath == null){
-				//No good path found smh lmao
-			}
-			Coord pathStep = finalPath;
-			Stack<Coord> pathStack = new Stack<Coord>();
-			while(pathStep != null){
-				pathStack.add(pathStep);
-				pathStep = pathStep.getLastCoord();
-			}
-			Coord currentPathCoords = null;
-			Coord nextPathCoords = null;
-			while(!(pathStack.size()==1)){
-				currentPathCoords = nextPathCoords;
-				nextPathCoords = pathStack.pop();
-				if(currentPathCoords == null){continue;}
-				Tile currentPathTile = stateGrid.getTileByCoord(currentPathCoords.getXCoord(),currentPathCoords.getYCoord());
-				String pathDirection = null;
-
-				if(currentPathCoords.getXCoord()-nextPathCoords.getXCoord()!=-1){
-					pathDirection = "Right";
-				}
-				if(currentPathCoords.getXCoord()-nextPathCoords.getXCoord()!= 1){
-					pathDirection = "Left";
-				}
-				if(currentPathCoords.getYCoord()-nextPathCoords.getYCoord()!=-1){
-					pathDirection = "Down";
-				}
-				if(currentPathCoords.getYCoord()-nextPathCoords.getYCoord()!= 1){
-					pathDirection = "Up";
-				}
-				((AttributeImpl<String>) currentPathTile.getAttribute("MoveDirection")).setValue(pathDirection);
-			}
-		}
-	}
-	*/
-	/*
-	private ArrayList<Coord> getAdjacents(Coord current) {
-		ArrayList<Coord> adjacents = new ArrayList<Coord>();
-		if(isTraversable(current.getXCoord()+1, current.getYCoord()  )){
-			adjacents.add(new Coord(current.getXCoord()+1, current.getYCoord(), current));
-		}
-		if(isTraversable(current.getXCoord()-1, current.getYCoord()  )){
-			adjacents.add(new Coord(current.getXCoord()-1, current.getYCoord(), current));
-		}
-		if(isTraversable(current.getXCoord()  , current.getYCoord()+1)){
-			adjacents.add(new Coord(current.getXCoord(), current.getYCoord()+1, current));
-		}
-		if(isTraversable(current.getXCoord()  , current.getYCoord()-1)){
-			adjacents.add(new Coord(current.getXCoord(), current.getYCoord()-1, current));
-		}
-		return adjacents;
-	}
-	*/
 
 	public EngineStatus getEngineStatus()
 	{
 		return myEngineStatus;
 	}
-	
-	/*
-	@Override
-	public void calculateShortestPath() {
-		// TODO Auto-generated method stub
-
-	}
-	*/
 	
 	@Override
 	public int getGridWidth() {
@@ -214,7 +133,7 @@ public StateImpl(TileGrid tileGrid, ComponentGraph componentGraph, HashMap<Strin
 	}
 	
 	public boolean gameIsRunning(){
-		return myEngineStatus.toString().equals("RUNNING");
+		return myEngineStatus.toString().equals(STRING_RESOURCES.getFromStringConstants("RUNNING"));
 	}
 
 	@Override
@@ -231,7 +150,6 @@ public StateImpl(TileGrid tileGrid, ComponentGraph componentGraph, HashMap<Strin
 
 	@Override
 	public Map<String, SpawnQueues> getSpawnQueues() {
-		//System.out.println(mySpawnQueues);
 		return mySpawnQueues;
 	}
 	

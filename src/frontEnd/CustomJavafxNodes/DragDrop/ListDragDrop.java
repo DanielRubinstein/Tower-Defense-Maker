@@ -2,10 +2,11 @@ package frontEnd.CustomJavafxNodes.DragDrop;
 
 import java.util.List;
 
+import frontEnd.CustomJavafxNodes.RestrictedPermissions;
 import javafx.beans.property.BooleanProperty;
 import javafx.scene.Node;
 
-public interface ListDragDrop<T> {
+public interface ListDragDrop<T> extends RestrictedPermissions{
 
 	/**
 	 * Property that determines whether or not the underlying List has changed in some way. To accept this change

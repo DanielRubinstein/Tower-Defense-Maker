@@ -2,11 +2,9 @@ package backEnd.GameData.State;
 
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
-
 import javafx.geometry.Point2D;
+import resources.constants.StringResourceBundle;
 import backEnd.Attribute.AttributeOwner;
 import backEnd.Attribute.AttributeOwnerReader;
 
@@ -23,6 +21,8 @@ public class ComponentGraphImpl implements ComponentGraph {
 	private List<SerializableObserver> observers;
 	private List<SerializableObserverGen<Component>> observersGen;
 	private List<List<SerializableObserver>> compObserverList;
+	private StringResourceBundle STRING_RESOURCES = new StringResourceBundle();
+
 
 	public ComponentGraphImpl() {
 		this(new ArrayList<>());
@@ -45,7 +45,7 @@ public class ComponentGraphImpl implements ComponentGraph {
 	public List<Component> getComponentsByScreenPosition(Point2D screenPosition) {
 		List<Component> atLocation = new ArrayList<Component>();
 		for(Component c : myComponents){
-			if(c.getAttribute("Position").getValue().equals(screenPosition)){
+			if(c.getAttribute(STRING_RESOURCES.getFromAttributeNames("Position")).getValue().equals(screenPosition)){
 				atLocation.add(c);
 			}
 		}
@@ -59,7 +59,7 @@ public class ComponentGraphImpl implements ComponentGraph {
 		List<Component> componentsOnTile = new ArrayList<Component>();
 		
 		for(Component c : myComponents){
-			Point2D loc = c.<Point2D>getAttribute("Position").getValue();
+			Point2D loc = c.<Point2D>getAttribute(STRING_RESOURCES.getFromAttributeNames("Position")).getValue();
 			if (loc.getX() >= tileCorners.getMinX()
 					&& loc.getX() <= tileCorners.getMaxX()
 					&& loc.getY() > tileCorners.getMinY()
@@ -73,25 +73,23 @@ public class ComponentGraphImpl implements ComponentGraph {
 
 	@Override
 	public void addComponentToGrid(Component newComponent, Point2D screenPosition) {
-		//System.out.println(this.getClass().getSimpleName() + ": adding component @ " + screenPosition);
 		myComponents.add(newComponent);
-		newComponent.setAttributeValue("Position", screenPosition);
+		newComponent.setAttributeValue(STRING_RESOURCES.getFromAttributeNames("Position"), screenPosition);
 		notifyObservers(newComponent);
 	}
 
 	@Override
 	public void removeComponent(Component toRemove) {
-
 		myComponents.remove(toRemove);
 		notifyObservers(toRemove);
 	}
 
 	@Override
 	public List<Component> getComponentsWithinRadius(Component centerComp, double radius){
-		Point2D centerLoc = centerComp.<Point2D>getAttribute("Position").getValue();
+		Point2D centerLoc = centerComp.<Point2D>getAttribute(STRING_RESOURCES.getFromAttributeNames("Position")).getValue();
 		ArrayList<Component> componentsWithinRadius = new ArrayList<Component>();
 		for(Component c : myComponents){
-			Point2D myLoc = (Point2D)c.getAttribute("Position").getValue();
+			Point2D myLoc = c.<Point2D>getAttribute(STRING_RESOURCES.getFromAttributeNames("Position")).getValue();
 			double distance = Math.sqrt(Math.pow(centerLoc.getX() - myLoc.getX(), 2) + Math.pow(centerLoc.getY() - myLoc.getY(), 2));
 			if (distance < radius) {
 				componentsWithinRadius.add(c);	
@@ -132,28 +130,6 @@ public class ComponentGraphImpl implements ComponentGraph {
 		}
 		
 	}
-		
-		/*
-		List<Component> list = new ArrayList<Component>();
-=======
-	public void clearComponents()
-	{
-		List<Component> list = new ArrayList<Component>();
->>>>>>> e3a90c7bea5a70fc706eccc4827d6644d4758c7a
-		for (Point2D x : componentMap.keySet())
-		{
-			for (Component y : componentMap.get(x))
-			{
-				list.add(y);
-			}
-		}
-		
-		for (Component x : list)
-		{
-			removeComponent(x);
-		}
-		*/
-
 
 	@Override
 	public void clearObservers() {

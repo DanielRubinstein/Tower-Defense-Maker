@@ -9,21 +9,21 @@ public class TileCorners {
 	private double minY;
 	private double maxY;
 	
-	/*
-	public TileCorners(Point2D tileGridPosition, double tileWidth, double tileHeight){
-		minX = Math.floor(tileGridPosition.getX() * tileWidth);
-		maxX = Math.floor(tileGridPosition.getX() * tileWidth) + tileWidth;
-		minY = Math.floor(tileGridPosition.getY() * tileHeight);
-		maxY = Math.floor(tileGridPosition.getY() * tileHeight) + tileHeight;
-	}
-	*/
+	/**
+	 * Tile corners are used in determining a component's movement.
+	 * 
+	 * @author Daniel
+	 * @param tilePosition
+	 * @param tileWidth
+	 * @param tileHeight
+	 */
+
 	
 	public TileCorners(Point2D tilePosition, double tileWidth, double tileHeight){
 		minX = tilePosition.getX() - tileWidth / 2;
 		maxX = tilePosition.getX() + tileWidth / 2;
 		minY = tilePosition.getY() - tileHeight / 2;
 		maxY = tilePosition.getY() + tileHeight / 2;
-		//System.out.println(minX + " " + minY + " " + maxX + " " + maxY);
 	}
 
 	public double getMinX() {

@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Map;
 
 import backEnd.Attribute.AttributeOwner;
+import backEnd.Attribute.AttributeOwnerReader;
 import backEnd.Bank.BankControllerReader;
 import backEnd.GameData.State.SerializableObservable;
 import backEnd.GameData.State.SerializableObserver;
@@ -32,18 +33,18 @@ public class Palette implements SkeletonObject, SerializableObserver{
 	
 	private View myView;
 	private TilePane tile;
-	private Collection<? extends AttributeOwner> myPresets;
-	private Map<ImageView, AttributeOwner> myPresetMapFrontEnd;
+	private Collection<? extends AttributeOwnerReader> myPresets;
+	private Map<ImageView, AttributeOwnerReader> myPresetMapFrontEnd;
 	private String myType;
 	private BankControllerReader observedBankController;
 	private PaletteItemCreator myPaletteItemCreator;
 	
-	public Palette(View view, Collection<? extends AttributeOwner> presets) {
+	public Palette(View view, Collection<? extends AttributeOwnerReader> presets) {
 		myView = view;
 		initializeMaps(presets);
 		initializePane();
 		myPaletteItemCreator = new PaletteItemCreator(myView, observedBankController);
-		for (AttributeOwner preset : presets) {
+		for (AttributeOwnerReader preset : presets) {
 			addPresetToPalette(preset);
 		}
 		extractStringType();
@@ -52,20 +53,20 @@ public class Palette implements SkeletonObject, SerializableObserver{
 	}
 
 	private void extractStringType() {
-		for(AttributeOwner attributeOwner : myPresetMapFrontEnd.values()){
+		for(AttributeOwnerReader attributeOwner : myPresetMapFrontEnd.values()){
 			myType = attributeOwner.getClass().getName();
 			break;
 		}
 	}
 
-	private void initializeMaps(Collection<? extends AttributeOwner> presets) {
+	private void initializeMaps(Collection<? extends AttributeOwnerReader> presets) {
 		observedBankController = myView.getBankControllerReader();
 		observedBankController.addObserver(this);
 		myPresets = presets;
-		myPresetMapFrontEnd = new HashMap<ImageView, AttributeOwner>();
+		myPresetMapFrontEnd = new HashMap<ImageView, AttributeOwnerReader>();
 	}
 
-	private void addPresetToPalette(AttributeOwner preset) {
+	private void addPresetToPalette(AttributeOwnerReader preset) {
 		AttributeOwnerVisual attrOwner = new AttributeOwnerVisualImpl(preset);
 		ImageView imageView = attrOwner.getImageView();
 		myPaletteItemCreator.create(preset, imageView);
@@ -103,8 +104,8 @@ public class Palette implements SkeletonObject, SerializableObserver{
 
 	private void initializePane() {
 		tile = new TilePane();
-		tile.setPadding(new Insets(15, 15, 15, 15));
-		tile.setHgap(15);
+		tile.setPadding(new Insets(numericResourceBundle.getFromSizing("StandardSpacing")));
+		tile.setHgap(numericResourceBundle.getFromSizing("StandardSpacing"));
 	}
 
 	@Override
@@ -118,7 +119,7 @@ public class Palette implements SkeletonObject, SerializableObserver{
 	}
 
 	private void updatePalette() {
-		for (AttributeOwner preset : myPresets) {
+		for (AttributeOwnerReader preset : myPresets) {
 			if (!myPresetMapFrontEnd.containsValue(preset)) {
 				addPresetToPalette(preset);
 			}
