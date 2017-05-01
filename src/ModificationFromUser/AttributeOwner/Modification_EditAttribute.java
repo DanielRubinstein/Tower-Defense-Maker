@@ -12,8 +12,6 @@ public class Modification_EditAttribute<T> implements ModificationFromUser {
 	private String attributeName;
 	private T myNewValue;
 
-	// FIXME in the future the parameter will be AttributeOwnerReader and this
-	// class will get the modifiable AttributeOwner using IDs
 	public Modification_EditAttribute(AttributeOwnerReader myOwner, String attName, T newValue) {
 		myObj = myOwner;
 		attributeName = attName;

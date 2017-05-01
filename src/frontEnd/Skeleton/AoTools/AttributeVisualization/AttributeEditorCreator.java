@@ -205,7 +205,7 @@ public class AttributeEditorCreator implements AttributeVisualization{
 
 	@Override
 	public Node getINTEGER() {
-		return this.createNumberChanger().addIntegerIndicator();
+		return this.<Integer>createNumberChanger().addIntegerIndicator();
 	}
 	
 	private <T extends Number> NumberChanger createNumberChanger(){
@@ -222,7 +222,7 @@ public class AttributeEditorCreator implements AttributeVisualization{
 	
 	@Override
 	public Node getDOUBLE() {
-		return this.createNumberChanger().addDoubleIndicator();
+		return this.<Double>createNumberChanger().addDoubleIndicator();
 	}
 
 	@Override
