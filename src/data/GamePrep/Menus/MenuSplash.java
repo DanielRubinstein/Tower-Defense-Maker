@@ -28,7 +28,7 @@ public class MenuSplash {
    	 	splash.addSimpleButtonWithHover(stringResourceBundle.getFromStringConstants("Start"), () -> startConsumer.accept(splash) , stringResourceBundle.getFromMenuText("StartHover"));
    	 	splash.addSimpleButtonWithHover(stringResourceBundle.getFromMenuText("Help"), () -> {
    	 		HelpOptions help = new HelpOptionsImpl();
-   	 		help.display(myStage);
+   	 		help.displayOnStage(myStage);
    	 	}, stringResourceBundle.getFromMenuText("HelpHover"));
    	 	splash.addSimpleButtonWithHover(stringResourceBundle.getFromMenuText("FBconnect"), () -> launchFb(stage), stringResourceBundle.getFromMenuText("FBconnectHover"));
 		myStage = stage;

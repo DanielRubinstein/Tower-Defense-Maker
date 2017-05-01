@@ -29,6 +29,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.TilePane;
 import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
 import javafx.util.Duration;
 import resources.constants.numeric.ScreenConstants;
 
@@ -81,7 +82,7 @@ public class OptionsSelection implements SkeletonObject{
 	}
 	
 	private void addSettingsButton() {
-		ActionButton settings = new ActionButton("Settings", e -> mySettings.launchSettings());
+		ActionButton settings = new ActionButton("Settings", e -> mySettings.displayOnStage(new Stage()));
 		myRoot.getChildren().add(settings);
 	}
 	private void addButtons(double size){

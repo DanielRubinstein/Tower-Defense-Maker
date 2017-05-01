@@ -1,6 +1,8 @@
 package frontEnd.Skeleton.AoTools.AttributeVisualization;
 
 import java.io.File;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
@@ -30,23 +32,26 @@ import javafx.scene.layout.HBox;
 import javafx.stage.FileChooser;
 import javafx.stage.FileChooser.ExtensionFilter;
 import javafx.stage.Stage;
+import resources.constants.StringResourceBundle;
+import resources.constants.numeric.NumericResourceBundle;
 
 public class AttributeEditorCreator implements AttributeVisualization{
 	private View myView;
-	private AttributeOwnerReader myOwner;
-	private AttributeReader<?> myAttr;
-	public static final String SAVED_IMAGES_DIRECTORY = "src/resources/images";
-	public static final String CLASS_LOADER_DIRECTORY = "resources/images/";
+	private AttributeOwnerReader myAttributeOwnerReader;
+	private AttributeReader<?> myAttributeReader;
+	private static final StringResourceBundle STRING_RESOURCE_BUNDLE = new StringResourceBundle();
+	private static final String SAVED_IMAGES_DIRECTORY = STRING_RESOURCE_BUNDLE.getFromFilePaths("Images_Path");
+	private static final NumericResourceBundle NUMERIC_RESOURCE_BUNDLE = new NumericResourceBundle();
 	private ToggleSwitch myToggle;
 
 	public AttributeEditorCreator(View view, AttributeOwnerReader obj, AttributeReader<?> attr){
 		myView = view;
-		myOwner = obj;
-		myAttr = attr;
+		myAttributeOwnerReader = obj;
+		myAttributeReader = attr;
 	}
 	
 	public String getMethodNameFormat() {
-		return "get%s";
+		return STRING_RESOURCE_BUNDLE.getFromStringConstants("AttributeMethod");
 	}
 	
 	private HBox createVisualPair(Map<HBox, Component> toCompMap, Map<Component, HBox> toPairMap, Component preset){
@@ -56,11 +61,11 @@ public class AttributeEditorCreator implements AttributeVisualization{
 		name.setText(myView.getBankControllerReader().getPresetName(preset));
 		pair.getChildren().add(name);
 		
-		String presetImagePath = preset.<String>getAttribute("ImageFile").getValue();
+		String presetImagePath = preset.<String>getAttribute(STRING_RESOURCE_BUNDLE.getFromAttributeNames("ImageFile")).getValue();
 		ImageView imv = createImageView(presetImagePath);
 		pair.getChildren().add(imv);
 		
-		pair.setStyle("-fx-background-color: black");
+		pair.setStyle(STRING_RESOURCE_BUNDLE.getFromCustomCSS("darkBackground"));
 		
 		toCompMap.put(pair, preset);
 		toPairMap.put(preset, pair);
@@ -72,15 +77,15 @@ public class AttributeEditorCreator implements AttributeVisualization{
 		ImageView imv = new ImageView();
 		imv.setImage(image);
 		imv.setPreserveRatio(true);
-		imv.setFitHeight(100);
+		imv.setFitHeight(NUMERIC_RESOURCE_BUNDLE.getFromSizing("ImageHeight"));
 		return imv;
 	}
 
 	private List<String> getStringListOptions() {
-		if(myAttr.getName().equals("SpawnTimeline")){
+		if(myAttributeReader.getName().equals(STRING_RESOURCE_BUNDLE.getFromAttributeNames("SpawnTimeline"))){
 			return new ArrayList<String>(myView.getSpawnQueues().keySet());
 		}
-		return (List<String>) myAttr.getEditParameters();
+		return (List<String>) myAttributeReader.getEditParameters();
 	}
 	
 	private void triggerBooleanUpdate() {
@@ -88,43 +93,38 @@ public class AttributeEditorCreator implements AttributeVisualization{
 	}
 
 	private <T> void sendModification(T newValue){
-		myView.sendUserModification(new Modification_EditAttribute<T>(myOwner, myAttr.getName(), newValue));
+		myView.sendUserModification(new Modification_EditAttribute<T>(myAttributeOwnerReader, myAttributeReader.getName(), newValue));
 	}
 
 	@Override
 	public Node getIMAGE() {
 		HBox both = new HBox();
-		String imagePath = (String) myAttr.getValue();
+		String imagePath = (String) myAttributeReader.getValue();
 		Image image = new Image(getClass().getClassLoader().getResourceAsStream(imagePath));
 		ImageView imv = new ImageView();
 		imv.setImage(image);
 		imv.setPreserveRatio(true);
 		
-		Button b = new Button("Change Image");
+		Button b = new Button(STRING_RESOURCE_BUNDLE.getFromStringConstants("ChangeImage"));
 		b.setOnAction(e -> {
 			FileChooser imageChooser = new FileChooser();
-			imageChooser.setTitle("Select Image");
-			imageChooser.getExtensionFilters().add(new ExtensionFilter("Image Files","*.png", "*.jpg", "*.gif"));
+			imageChooser.setTitle(STRING_RESOURCE_BUNDLE.getFromStringConstants("SelectImage"));
+			imageChooser.getExtensionFilters().add(new ExtensionFilter("Image Files","*.png", "*.jpg", "*.gif")); // TODO string in resource file?
 			imageChooser.setInitialDirectory(new File(SAVED_IMAGES_DIRECTORY));
 			
 			File selectedFile = imageChooser.showOpenDialog(new Stage());
-			try{
-				String newPath = CLASS_LOADER_DIRECTORY + selectedFile.getParentFile().getName()+ "/" + selectedFile.getName();
-				
-				Image newImage = new Image(getClass().getClassLoader().getResourceAsStream(newPath));
-				imv.setImage(newImage);
-				sendModification(newPath);
-				
+			if(selectedFile == null){
+				return;
 			}
-			catch (NullPointerException exception){
-				System.out.println("Did not select an image- SAD!");
-			}
-
+			String newImagePathRelative = getRelativePathToImageDirectory(selectedFile);
+			Image newImage = new Image(getClass().getClassLoader().getResourceAsStream(newImagePathRelative));
+			imv.setImage(newImage);
+			sendModification(newImagePathRelative);
 		});
 		
 		
 		// To bind the heights without the sizing screwing up
-		b.setPrefHeight(70);
+		b.setPrefHeight(NUMERIC_RESOURCE_BUNDLE.getFromSizing("ImageHeight"));
 		imv.setFitHeight(b.getPrefHeight());
 		b.heightProperty().addListener((o , oldV, newV) -> {
 			imv.setFitHeight(newV.doubleValue());
@@ -132,15 +132,24 @@ public class AttributeEditorCreator implements AttributeVisualization{
 		
 		both.getChildren().add(imv);
 		both.getChildren().add(b);		
-		both.setSpacing(20);
+		both.setSpacing(NUMERIC_RESOURCE_BUNDLE.getFromSizing("StandardSpacing"));
 		return both;
+	}
+
+	private String getRelativePathToImageDirectory(File selectedFile) {
+		Path imageDirectory = Paths.get(SAVED_IMAGES_DIRECTORY).toAbsolutePath(); 
+		Path newImagePath = Paths.get(selectedFile.getPath()).toAbsolutePath();
+		File newImageFile = new File(SAVED_IMAGES_DIRECTORY + File.separator + imageDirectory.relativize(newImagePath).toString());
+		String sourceFolderPath = STRING_RESOURCE_BUNDLE.getFromFilePaths("Source_Path");
+		String newImagePathRelative = newImageFile.getPath().substring(newImageFile.getPath().indexOf(sourceFolderPath) + sourceFolderPath.length());
+		return newImagePathRelative;
 	}
 
 	@Override
 	public Node getDOUBLE() {
 		Node n;
-		List<Double> paramList = (List<Double>) myAttr.getEditParameters();
-		Double curValue = (Double) myAttr.getValue();
+		List<Double> paramList = (List<Double>) myAttributeReader.getEditParameters();
+		Double curValue = (Double) myAttributeReader.getValue();
 		NumberChanger numChanger = new NumberChanger(paramList.get(0), paramList.get(1), curValue,
 				paramList.get(3));
 		n = numChanger.addDoubleIndicator();
@@ -163,7 +172,7 @@ public class AttributeEditorCreator implements AttributeVisualization{
 		ComboBox<HBox> optionsBox = new ComboBox<HBox>(options);
 		try {
 			// TODO this will work as long as there is an attribute there
-			optionsBox.getSelectionModel().select(toPairMap.get((String) myAttr.getValue()));
+			optionsBox.getSelectionModel().select(toPairMap.get((String) myAttributeReader.getValue()));
 
 			//optionsBox.getSelectionModel().select(toPairMap.get((Component) myAttr.getValue()));
 
@@ -180,9 +189,9 @@ public class AttributeEditorCreator implements AttributeVisualization{
 
 	@Override
 	public Node getPOSITION() {
-		String stringFormatter = "(%.0f, %.0f)";
+		String stringFormatter = STRING_RESOURCE_BUNDLE.getFromStringConstants("Position");
 		try{
-			Point2D pos = (Point2D) myAttr.getValue();
+			Point2D pos = (Point2D) myAttributeReader.getValue();
 			Button b = new Button(String.format(stringFormatter, pos.getX(), pos.getY()));
 			b.setOnAction(e -> {
 				PositionRequester positionRequester = new PositionRequester();
@@ -199,8 +208,8 @@ public class AttributeEditorCreator implements AttributeVisualization{
 	@Override
 	public Node getINTEGER() {
 		Node n;
-		List<Integer> paramList = (List<Integer>) myAttr.getEditParameters();
-		Integer curValue = (Integer) myAttr.getValue();
+		List<Integer> paramList = (List<Integer>) myAttributeReader.getEditParameters();
+		Integer curValue = (Integer) myAttributeReader.getValue();
 		NumberChanger numChanger = new NumberChanger(paramList.get(0).doubleValue(), paramList.get(1).doubleValue(), 
 				curValue, paramList.get(3).doubleValue());
 		n = numChanger.addIntegerIndicator();
@@ -212,7 +221,7 @@ public class AttributeEditorCreator implements AttributeVisualization{
 
 	@Override
 	public Node getBOOLEAN() {
-		myToggle = new ToggleSwitch("Off", "On", (Boolean) myAttr.getValue(), () -> triggerBooleanUpdate());
+		myToggle = new ToggleSwitch(STRING_RESOURCE_BUNDLE.getFromStringConstants("Off"), STRING_RESOURCE_BUNDLE.getFromStringConstants("On"), (Boolean) myAttributeReader.getValue(), () -> triggerBooleanUpdate());
 		return myToggle.getRoot();
 	}
 
@@ -223,7 +232,7 @@ public class AttributeEditorCreator implements AttributeVisualization{
 		ComboBox<String> optionsBox = new ComboBox<String>(options);
 		try {
 			// TODO this will work as long as there is an attribute there
-			optionsBox.getSelectionModel().select((String) myAttr.getValue());
+			optionsBox.getSelectionModel().select((String) myAttributeReader.getValue());
 		} catch (NullPointerException e) {
 			// do nothing
 		}
@@ -238,8 +247,8 @@ public class AttributeEditorCreator implements AttributeVisualization{
 	public Node getEDITABLESTRING() {
 		HBox editor = new HBox();
 		
-		TextField textField = new TextField((String) myAttr.getValue());
-		Button submit = new Button("Submit");
+		TextField textField = new TextField((String) myAttributeReader.getValue());
+		Button submit = new Button(STRING_RESOURCE_BUNDLE.getFromStringConstants("Submit"));
 		submit.setOnAction((e) -> {
 			sendModification(textField.getText());
 		});

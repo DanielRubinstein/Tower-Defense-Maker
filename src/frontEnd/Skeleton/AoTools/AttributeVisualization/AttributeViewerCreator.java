@@ -1,11 +1,7 @@
 package frontEnd.Skeleton.AoTools.AttributeVisualization;
 
-import backEnd.Attribute.Attribute;
-import backEnd.Attribute.AttributeOwner;
-import backEnd.Attribute.AttributeOwnerReader;
 import backEnd.Attribute.AttributeReader;
 import backEnd.GameData.State.Component;
-import backEnd.GameData.State.ComponentImpl;
 import frontEnd.View;
 import javafx.geometry.Point2D;
 import javafx.scene.Node;
@@ -13,22 +9,22 @@ import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
+import resources.constants.StringResourceBundle;
 
 public class AttributeViewerCreator implements AttributeVisualization{
 	private View myView;
-	private AttributeOwnerReader myOwner;
 	private AttributeReader<?> myAttr;
-	public static final String SAVED_IMAGES_DIRECTORY = "./src/resources/images";
+	private static final StringResourceBundle STRING_RESOURCE_BUNDLE = new StringResourceBundle();
+	public static final String SAVED_IMAGES_DIRECTORY = STRING_RESOURCE_BUNDLE.getFromFilePaths("Images_Path");
 
-	public AttributeViewerCreator(View view, AttributeOwnerReader obj, AttributeReader<?> attr) {
+	public AttributeViewerCreator(View view, AttributeReader<?> attr) {
 		myView = view;
-		myOwner = obj;
 		myAttr = attr;
 	}
 	
 	@Override
 	public String getMethodNameFormat() {
-		return "get%s";
+		return STRING_RESOURCE_BUNDLE.getFromStringConstants("AttributeMethod");
 	}
 	
 	@Override
@@ -48,7 +44,7 @@ public class AttributeViewerCreator implements AttributeVisualization{
 
 	@Override
 	public Node getPOSITION() {
-		String stringFormatter = "(%.0f, %.0f)";
+		String stringFormatter = STRING_RESOURCE_BUNDLE.getFromStringConstants("Position");
 		Point2D pos = (Point2D) myAttr.getValue();
 		return new Label(String.format(stringFormatter, pos.getX(), pos.getY()));
 	}
@@ -90,7 +86,7 @@ public class AttributeViewerCreator implements AttributeVisualization{
 			
 			HBox pair = new HBox();
 			
-			String babyImagePath =  baby.<String>getAttribute("ImageFile").getValue();
+			String babyImagePath =  baby.<String>getAttribute(STRING_RESOURCE_BUNDLE.getFromAttributeNames("ImageFile")).getValue();
 			ImageView imv = createImageView(babyImagePath);
 			Label name = new Label();
 			name.setText(baby_str);
@@ -98,7 +94,7 @@ public class AttributeViewerCreator implements AttributeVisualization{
 			pair.getChildren().add(imv);
 			return pair;
 		} catch (NullPointerException e){
-			return new Label("None Selected");
+			return new Label(STRING_RESOURCE_BUNDLE.getFromStringConstants("NoneSelected"));
 		}
 	}
 

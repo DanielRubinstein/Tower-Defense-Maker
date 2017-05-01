@@ -49,7 +49,7 @@ public class ScreenConstants {
 	}
 
 	public Double getSideWidth() {
-		return getSideWidthFactor() * getWindowWidth();
+		return getSideWidthFactor() * getWindowWidth()+20;
 	}
 
 }

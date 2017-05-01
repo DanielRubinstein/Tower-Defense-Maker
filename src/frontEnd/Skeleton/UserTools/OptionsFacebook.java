@@ -18,6 +18,7 @@ import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import resources.constants.StringResourceBundle;
 
 public class OptionsFacebook implements SkeletonObject {
 
@@ -27,6 +28,7 @@ public class OptionsFacebook implements SkeletonObject {
 	private ButtonMenuImpl myMenu;
 	private FacebookInteractor myFb;
 	private ImageView profPic;
+	private StringResourceBundle strResources = new StringResourceBundle();
 	
 	public OptionsFacebook(ViewReader view){
 		myView = view;
@@ -49,23 +51,21 @@ public class OptionsFacebook implements SkeletonObject {
 	private void setUp(){
 		if(myView.getFb()!=null){
 			getPicture();
-			ActionButton b = new ActionButton("FB Opts", () -> launch());
+			ActionButton b = new ActionButton(strResources.getFromStringConstants("FacebookOptions"), () -> launch());
 			myRoot.getChildren().add(b);
 		}
 	}
+	
 	private void launch(){
 		myStage = new Stage();
 		myStage.initOwner(myView.getMainWindow());
 		myStage.initModality(Modality.APPLICATION_MODAL);
-
-		myMenu = new ButtonMenuImpl("Interact With Facebook");
+		myMenu = new ButtonMenuImpl(strResources.getFromStringConstants("InteractFacebook"));
 		
-		myMenu.addSimpleButtonWithHover("Share",() -> share(myStage), "Click to share onto the official voogasalad_sup3rs1ckt34m1337 page");
-		
+		myMenu.addSimpleButtonWithHover(strResources.getFromStringConstants("SimpleFacebookShare"),
+				() -> share(myStage), strResources.getFromStringConstants("LongFacebookShare"));
 		myMenu.display(myStage);
 	}
-	
-	
 
 	private void share(Stage parStage) {
 		Stage shareStage = new Stage();
