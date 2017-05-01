@@ -15,7 +15,6 @@ import frontEnd.Facebook.FacebookConnector;
 import frontEnd.Facebook.FacebookInteractor;
 import javafx.stage.Stage;
 import resources.constants.StringResourceBundle;
-import frontEnd.Skeleton.SplashScreens.SplashScreenData;
 import frontEnd.Skeleton.SplashScreens.SplashScreenReader;
 
 public class ControllerImpl implements Controller {

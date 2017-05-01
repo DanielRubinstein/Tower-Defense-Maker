@@ -3,7 +3,6 @@ package backEnd.GameData.Rules.EndCondition;
 import backEnd.GameData.GameData;
 import backEnd.GameData.Rules.Rule;
 import backEnd.LevelProgression.LevelProgressionControllerEditor;
-import frontEnd.Skeleton.SplashScreens.SplashScreenData;
 import frontEnd.Skeleton.SplashScreens.SplashScreenType;
 
 public abstract class LoseCondition extends Rule{
