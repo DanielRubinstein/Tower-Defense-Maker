@@ -87,7 +87,6 @@ public class LevelView implements PopUp{
 				test.acceptChange();
 			}
 		});
-
 		myRoot.add(test.getRoot(), 1, 2);
 	}
 	

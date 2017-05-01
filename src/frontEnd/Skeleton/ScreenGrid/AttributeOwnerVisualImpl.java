@@ -116,12 +116,11 @@ public class AttributeOwnerVisualImpl implements SerializableObserver, Attribute
 		}
 		
 	}
-
-	private boolean setSlowDownEffect() {
+	private boolean setDoubleEffect(String AttributeName,String styleName){
 		try{
-			double slowTime = myAttr.<Double>getAttributeReader(SLOW_TIME_ATTRIBUTE).getValue();
-			if(slowTime>0){
-				myImage.setStyle(stringResourceBundle.getFromCustomCSS("SlowEffect"));
+			double effectTime = myAttr.<Double>getAttributeReader(AttributeName).getValue();
+			if(effectTime>0){
+				myImage.setStyle(stringResourceBundle.getFromCustomCSS(styleName));
 				return true;
 			}
 		}catch(NullPointerException e){
@@ -129,18 +128,14 @@ public class AttributeOwnerVisualImpl implements SerializableObserver, Attribute
 		}
 		return false;
 	}
+	
+
+	private boolean setSlowDownEffect() {
+		return setDoubleEffect(SLOW_TIME_ATTRIBUTE,"SlowEffect");
+	}
 
 	private boolean setPoisonEffect() {
-		try{
-			double poisonTime = myAttr.<Double>getAttributeReader(POISON_TIME_ATTRIBUTE).getValue();
-			if(poisonTime>0){
-				myImage.setStyle(stringResourceBundle.getFromCustomCSS("PoisonEffect"));
-				return true;
-			}
-		}catch(NullPointerException e){
-			//no poison attribute
-		}
-		return false;
+		return setDoubleEffect(POISON_TIME_ATTRIBUTE,"PoisonEffect");
 	}
 
 	@Override

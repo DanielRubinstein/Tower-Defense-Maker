@@ -206,4 +206,15 @@ public class StringResourceBundle {
 	public String getFromMenuText(String string) {
 		return MENU_RESOURCE.getString(string);
 	}
+	
+	///////////////////////////////////////////////////////////////////////////
+	// Images
+	///////////////////////////////////////////////////////////////////////////
+	
+	private static final String IMAGE_PATH = "resources.images";
+	private static final ResourceBundle IMAGE_RESOURCE = ResourceBundle.getBundle(IMAGE_PATH);
+	
+	public String getFromImageText(String string) {
+		return IMAGE_RESOURCE.getString(string);
+	}
 }

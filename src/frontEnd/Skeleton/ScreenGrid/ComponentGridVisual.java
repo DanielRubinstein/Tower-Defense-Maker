@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
+import java.util.function.Consumer;
 
 import ModificationFromUser.AttributeOwner.Modification_Add_PaletteToGrid;
 import backEnd.Attribute.AttributeOwner;
@@ -12,7 +13,6 @@ import backEnd.GameData.State.ComponentGraph;
 import backEnd.GameData.State.SerializableObservableGen;
 import backEnd.GameData.State.SerializableObserverGen;
 import backEnd.GameData.State.State;
-import backEnd.GameData.State.Tile;
 import frontEnd.View;
 import frontEnd.Skeleton.AoTools.GenericCommandCenter;
 import javafx.geometry.Bounds;
@@ -31,9 +31,7 @@ import resources.constants.StringResourceBundle;
 public class ComponentGridVisual extends GridVisualBase<Component> implements SerializableObserverGen<Component> {
 	
 	private ComponentGraph observedComponentGraph;
-	private Set<Component> myComponents;
 	private Map<Component, ImageView> myComponentImages;
-	private State myState;
 	private View myView;
 	private Group myRoot;
 	
@@ -49,14 +47,12 @@ public class ComponentGridVisual extends GridVisualBase<Component> implements Se
 	public ComponentGridVisual(View view, State state){
 		myRoot = new Group();
 		myView = view;
-		myState = state;
-		observedComponentGraph = myState.getComponentGraph();
+		observedComponentGraph = state.getComponentGraph();
 		observedComponentGraph.addObserver(this);
 		placeComponents();
 	}
 	
 	private void placeComponents() {
-		myComponents = new HashSet<>();
 		myComponentImages = new HashMap<>();
 		updateComponentsOnGrid();
 	}
@@ -77,7 +73,7 @@ public class ComponentGridVisual extends GridVisualBase<Component> implements Se
 	}
 
 	private void checkAddition(Component arg) {
-		if (!myComponents.contains(arg)) {
+		if (!myComponentImages.keySet().contains(arg)) {
 			addComponentToGrid(arg);
 		}
 	}
@@ -86,7 +82,7 @@ public class ComponentGridVisual extends GridVisualBase<Component> implements Se
 		for (Component c : observedComponentGraph.getAllComponents()) {
 			checkAddition(c);
 		}
-		Set<Component> myComponentsCopy=new HashSet<>(myComponents);
+		Set<Component> myComponentsCopy=new HashSet<>(myComponentImages.keySet());
 		for(Component c : myComponentsCopy){
 			checkRemoval(c);
 		}
@@ -99,7 +95,6 @@ public class ComponentGridVisual extends GridVisualBase<Component> implements Se
 	}
 	
 	private void removeComponentFromGrid(Component c){
-		myComponents.remove(c);
 		myRoot.getChildren().remove(myComponentImages.get(c));
 		myComponentImages.remove(c);
 	}
@@ -109,7 +104,6 @@ public class ComponentGridVisual extends GridVisualBase<Component> implements Se
 		frontAttr.refreshXY();
 		ImageView frontImage = frontAttr.getImageView();
 		addHover(frontImage,c);
-		myComponents.add(c);
 		myComponentImages.put(c, frontImage);
 		myRoot.getChildren().add(frontImage);
 		setCommandInteraction(frontImage, c);
@@ -141,6 +135,11 @@ public class ComponentGridVisual extends GridVisualBase<Component> implements Se
 	@Override
 	public void update(SerializableObservableGen<Component> object, Component obj) {
 		updateGrid(obj);
+	}
+
+	@Override
+	public void forEach(Consumer<? super Component> method) {
+		myComponentImages.keySet().forEach(method);
 	}
 
 }

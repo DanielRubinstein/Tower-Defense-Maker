@@ -7,9 +7,7 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
-import ModificationFromUser.Modification_ChangeMode;
 import ModificationFromUser.Modification_GameRemote;
-import backEnd.GameEngine.Engine.GameProcessController;
 import frontEnd.View;
 import frontEnd.CustomJavafxNodes.ActionButton;
 import frontEnd.CustomJavafxNodes.ToggleSwitch;
