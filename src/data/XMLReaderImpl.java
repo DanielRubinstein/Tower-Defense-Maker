@@ -95,13 +95,13 @@ public class XMLReaderImpl implements XMLReader{
 	private void makeAttributeOwnersCompatible(Collection<AttributeOwner> myAttrOwners, Set<String> defaultAttrNames) throws FileNotFoundException {
 		AttributeFactory myAF = new AttributeFactoryImpl();
 		for(AttributeOwner ao : myAttrOwners){
-			//add missing attributes to tiles
+			//add missing attributes
 			for(String attName : defaultAttrNames){
 				if(!ao.contains(attName)){
 					ao.addAttribute(attName, myAF.getAttribute(attName));
 				}
 			}
-			//remove extra attributes from
+			//remove extra attributes
 			for(AttributeReader<?> att : ao.getMyAttributes().getAllAttributeReaders()){
 				if(!defaultAttrNames.contains(att.getName())){
 					ao.removeAttribute(att.getName());
