@@ -287,7 +287,7 @@
         <entry>
           <string>FireDamage</string>
           <backEnd.Attribute.AttributeImpl>
-            <myValue class="int">0</myValue>
+            <myValue class="int">53</myValue>
             <myParamList class="java.util.Arrays$ArrayList">
               <a class="java.lang.Integer-array">
                 <int>0</int>
