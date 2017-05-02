@@ -98,6 +98,7 @@ public class AttackEngine implements Engine {
 			if (targets.isEmpty()) {
 				System.out.println(this.getClass().getSimpleName() + ": No targets");
 				if (attacker.<Double>getAttribute(SLOW_TIME).getValue() > 0){
+					System.out.println(this.getClass().getSimpleName() + ": Slowed");
 					attacker.setAttributeValue(SPEED, attacker.<Double>getAttribute(MAX_SPEED).getValue() * attacker.<Double>getAttribute(SLOW_FACTOR).getValue());
 				} else {
 					System.out.println(this.getClass().getSimpleName() + ": Setting speed maybe lol");
