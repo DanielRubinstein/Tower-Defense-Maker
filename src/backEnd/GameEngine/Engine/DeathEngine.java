@@ -32,6 +32,9 @@ public class DeathEngine implements Engine {
 			if (isDead(myComponent)) {
 				toRemove.add(myComponent);
 				gameData.getStatus().incrementStatusItem(STRING_RESOURCES.getFromStringConstants("KillCount"), 1);
+				if(myComponent.<Boolean>getAttribute(STRING_RESOURCES.getFromAttributeNames("IsBoss")).getValue() == true){
+					gameData.getStatus().incrementStatusItem(STRING_RESOURCES.getFromStringConstants("BossKillCount"), 1);
+				}
 				gameData.getStatus().incrementStatusItem(STRING_RESOURCES.getFromStringConstants("Money"), myComponent.<Integer>getAttribute(STRING_RESOURCES.getFromAttributeNames("MoneyBounty")).getValue());
 				gameData.getStatus().incrementStatusItem(STRING_RESOURCES.getFromStringConstants("Score"), myComponent.<Integer>getAttribute(STRING_RESOURCES.getFromAttributeNames("ScoreBounty")).getValue());
 				if (spawnsOnDeath(myComponent)) {
