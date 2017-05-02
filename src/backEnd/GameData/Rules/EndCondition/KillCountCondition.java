@@ -16,7 +16,7 @@ public class KillCountCondition extends WinCondition {
 
 	@Override
 	public void invoke(GameData myGameData) {
-		if (myGameData.getModifiablePlayerStatus().getStatusItemValue("KillCount") >= getVal() && this.isEnabled()) {
+		if (myGameData.getModifiablePlayerStatus().getStatusItemValue(KEY_NAME) >= getVal() && this.isEnabled()) {
 			winGame(myGameData);
 		}
 
