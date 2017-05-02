@@ -15,6 +15,12 @@
     <list/>
   </entry>
   <entry>
+    <string>testSaveToTemplate</string>
+    <list>
+      <string>level1</string>
+    </list>
+  </entry>
+  <entry>
     <string>hello there</string>
     <list/>
   </entry>
