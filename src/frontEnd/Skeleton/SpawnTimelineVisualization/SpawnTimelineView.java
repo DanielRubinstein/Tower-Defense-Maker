@@ -46,7 +46,7 @@ public class SpawnTimelineView implements SkeletonObject, SerializableObserver {
 		mySpawnQueues.addObserver(this);
 		spawnDataToVisual = new HashMap<>();
 		queue = mySpawnQueues.getSingleSpawnQueue();
-		dropZone = singleDropZone("Spawns");
+		dropZone = singleDropZone("Spawns (Freq, Delay, Iterations)");
 		loadTimelines(queue, dropZone);
 	}
 
