@@ -1,6 +1,5 @@
 package frontEnd.Skeleton.SpawnTimelineVisualization;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
@@ -10,12 +9,10 @@ import ModificationFromUser.Spawning.Modification_AddSpawner;
 import backEnd.GameData.State.SerializableObservable;
 import backEnd.GameData.State.SerializableObserver;
 import backEnd.GameData.State.TileImpl;
-import backEnd.GameEngine.Engine.Spawning.SpawnDataImpl;
 import backEnd.GameEngine.Engine.Spawning.SpawnDataReader;
 import backEnd.GameEngine.Engine.Spawning.SpawnQueues;
 import frontEnd.View;
 import frontEnd.CustomJavafxNodes.MultiFieldPrompt;
-import frontEnd.CustomJavafxNodes.SingleFieldPrompt;
 import frontEnd.Skeleton.UserTools.SkeletonObject;
 import javafx.beans.property.ReadOnlyDoubleProperty;
 import javafx.geometry.Insets;
@@ -24,11 +21,9 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.ScrollPane.ScrollBarPolicy;
 import javafx.scene.input.TransferMode;
-import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
-import javafx.util.Pair;
 
 public class SpawnTimelineView implements SkeletonObject, SerializableObserver {
 	private View myView;
@@ -50,11 +45,8 @@ public class SpawnTimelineView implements SkeletonObject, SerializableObserver {
 		mySpawnQueues = value;
 		mySpawnQueues.addObserver(this);
 		spawnDataToVisual = new HashMap<>();
-
 		queue = mySpawnQueues.getSingleSpawnQueue();
-
 		dropZone = singleDropZone("Spawns");
-		
 		loadTimelines(queue, dropZone);
 	}
 

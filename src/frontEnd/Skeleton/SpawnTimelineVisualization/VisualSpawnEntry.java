@@ -4,14 +4,12 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import ModificationFromUser.Spawning.Modification_AddSpawner;
 import ModificationFromUser.Spawning.Modification_EditSpawnData;
 import ModificationFromUser.Spawning.Modification_RemoveSpawner;
 import backEnd.Attribute.AttributeOwnerReader;
 import backEnd.GameEngine.Engine.Spawning.SpawnDataReader;
 import frontEnd.View;
 import frontEnd.CustomJavafxNodes.MultiFieldPrompt;
-import frontEnd.CustomJavafxNodes.SingleFieldPrompt;
 import frontEnd.Skeleton.ScreenGrid.AttributeOwnerVisual;
 import frontEnd.Skeleton.ScreenGrid.AttributeOwnerVisualImpl;
 import frontEnd.Skeleton.UserTools.SkeletonObject;
@@ -21,7 +19,6 @@ import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.Separator;
-import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 
@@ -57,9 +54,7 @@ public class VisualSpawnEntry implements SkeletonObject {
 		for(Number number : spawnDataNumbers){
 			Label valueText = new Label(number.toString());
 			valueText.setOnMouseClicked(e -> {
-				
 				MultiFieldPrompt multiFieldPrompt = new MultiFieldPrompt(3, Arrays.asList("Add Spawn", "Please input values for your new spawn item"),  Arrays.asList("0.0", "0.0", "0"), Arrays.asList("Frequency", "Delay", "Spawns"));
-				
 				List<String> userInput = multiFieldPrompt.create();
 				if(userInput == null){
 					return;
@@ -67,9 +62,7 @@ public class VisualSpawnEntry implements SkeletonObject {
 				myView.sendUserModification(
 						new Modification_EditSpawnData(spawnData, Double.parseDouble(userInput.get(0)), Double.parseDouble(userInput.get(1)),Integer.parseInt(userInput.get(2))));
 				
-				for(int i = 0 ; i < myLabels.size() ; i++){
-					myLabels.get(i).setText(userInput.get(i));
-				}
+				updateValueLabels(userInput);
 			});
 			myLabels.add(valueText);
 			mySpawnBox.getChildren().add(valueText);
@@ -90,6 +83,12 @@ public class VisualSpawnEntry implements SkeletonObject {
 		mySpawnBox.getChildren().add(remove);
 		mySpawnBox.setAlignment(Pos.CENTER);
 		mySpawnBox.setSpacing(10);
+	}
+
+	private void updateValueLabels(List<String> userInput) {
+		for(int i = 0 ; i < myLabels.size() ; i++){
+			myLabels.get(i).setText(userInput.get(i));
+		}
 	}
 
 
