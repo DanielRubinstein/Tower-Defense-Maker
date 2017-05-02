@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.ResourceBundle;
 
+import backEnd.GameData.Rules.EndCondition.BossDefeatedCondition;
 import backEnd.GameData.Rules.EndCondition.HealthLoseCondition;
 import backEnd.GameData.Rules.EndCondition.KillCountCondition;
 import backEnd.GameData.Rules.EndCondition.ScoreWinCondition;
@@ -38,11 +39,13 @@ public class RulesMap {
 		Rule timeRule = new TimeEndCondition();
 		Rule scoreRule = new ScoreWinCondition();
 		Rule killCountRule = new KillCountCondition();
+		Rule bossKillCountRule = new BossDefeatedCondition();
 		
 		myRules.put(healthRule.getKeyName(), healthRule);
 		myRules.put(timeRule.getKeyName(), timeRule);
 		myRules.put(scoreRule.getKeyName(), scoreRule);
 		myRules.put(killCountRule.getKeyName(), killCountRule);
+		myRules.put(bossKillCountRule.getKeyName(), bossKillCountRule);
 	}
 	
 	public List<RuleReader> getRuleReaderList(){

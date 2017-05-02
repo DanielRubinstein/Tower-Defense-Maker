@@ -19,6 +19,7 @@ public class ProjectileEngine implements Engine {
 	
 	private StringResourceBundle ATTRIBUTE_RESOURCES = new StringResourceBundle();
 	
+	//for code readability in the actual methods. Stack Overflow says I can't minimize this. Sorry.
 	private String TYPE = ATTRIBUTE_RESOURCES.getFromAttributeNames("Type");
 	private String POSITION = ATTRIBUTE_RESOURCES.getFromAttributeNames("Position");
 	private String HEALTH = ATTRIBUTE_RESOURCES.getFromAttributeNames("Health");
@@ -37,8 +38,6 @@ public class ProjectileEngine implements Engine {
 	private String POISON_TIME = ATTRIBUTE_RESOURCES.getFromAttributeNames("PoisonTime");
 	private String PROJECTILE_TARGET = ATTRIBUTE_RESOURCES.getFromAttributeNames("ProjectileTarget");
 	private String PROJECTILE_TYPE = ATTRIBUTE_RESOURCES.getFromValueNames("ProjectileType");
-	private String ENEMY_TYPE = ATTRIBUTE_RESOURCES.getFromValueNames("EnemyType");
-	private String TOWER_TYPE = ATTRIBUTE_RESOURCES.getFromValueNames("TowerType");
 	private String SINGLE_TARGET = ATTRIBUTE_RESOURCES.getFromValueNames("SingleTarget");
 	
 	
@@ -116,15 +115,14 @@ public class ProjectileEngine implements Engine {
 
 		for (Component toHit : targetList) {
 			if ((target.getAttribute(TYPE).getValue().equals(toHit.getAttribute(TYPE).getValue()))) {
-				//doing damage to target
+
 				toHit.setAttributeValue(HEALTH, toHit.<Integer>getAttribute(HEALTH).getValue() - 
 						projectile.<Integer>getAttribute(FIRE_DAMAGE).getValue());
-				//slowing target
+
 				if(projectile.<Double>getAttribute(SLOW_TIME).getValue() > toHit.<Double>getAttribute(SLOW_TIME).getValue()){
 					toHit.setAttributeValue(SPEED, projectile.<Double>getAttribute(SLOW_FACTOR).getValue()
 						* toHit.<Double>getAttribute(MAX_SPEED).getValue());
 				}
-				//poisoning target
 				toHit.setAttributeValue(POISON_TIME, projectile.<Double>getAttribute(POISON_TIME).getValue());
 				toHit.setAttributeValue(POISON_FACTOR, projectile.<Double>getAttribute(POISON_FACTOR).getValue());
 				toRemove.add(projectile);
