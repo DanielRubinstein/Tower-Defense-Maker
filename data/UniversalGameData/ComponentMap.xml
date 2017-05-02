@@ -1029,7 +1029,7 @@
           <entry>
             <string>MaxSpeed</string>
             <backEnd.Attribute.AttributeImpl>
-              <myValue class="double">0.0</myValue>
+              <myValue class="double">1.0344827586206895</myValue>
               <myParamList class="java.util.Arrays$ArrayList">
                 <a class="java.lang.Double-array">
                   <double>0.0</double>
@@ -1429,7 +1429,7 @@
           <entry>
             <string>Speed</string>
             <backEnd.Attribute.AttributeImpl>
-              <myValue class="double">0.275</myValue>
+              <myValue class="double">0.0</myValue>
               <myParamList class="java.util.Arrays$ArrayList">
                 <a class="java.lang.Double-array">
                   <double>0.0</double>

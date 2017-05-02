@@ -5,6 +5,7 @@ import backEnd.GameData.State.PlayerStatus;
 import javafx.geometry.Point2D;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import backEnd.GameData.State.Component;
 
@@ -18,7 +19,8 @@ public class ComponentGraphCleaner {
 	}
 	
 	public void stripNonsavingComponents(){
-		for(Component myComp : graph.getAllComponents()){
+		List<Component> currentComponents = new ArrayList<Component>(graph.getAllComponents());
+		for(Component myComp : currentComponents){
 			if(!myComp.<Boolean>getAttribute("SaveToTemplate").getValue()){
 				removedComponents.add(myComp);
 				graph.removeComponent(myComp);

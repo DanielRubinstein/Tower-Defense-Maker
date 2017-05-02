@@ -25,7 +25,8 @@
 		<INTEGER_TEMPLATE min="0" max="0" start="1" increment="0"></INTEGER_TEMPLATE>
 		<Health min="1" max="100" start="1" increment="5"></Health>
 		<MoneyBounty min="0" max="999" start="10" increment="10"></MoneyBounty>
-		<ScoreBounty min="0" max="999" start="10" increment="10"></ScoreBounty><FireDamage min="0" max="200" start="1" increment="2"></FireDamage>
+		<ScoreBounty min="0" max="999" start="10" increment="10"></ScoreBounty>
+		<FireDamage min="0" max="200" start="1" increment="2"></FireDamage>
 		<UpgradeCost min="0" max="999" start="10" increment="10"></UpgradeCost>
 		<BuildCapacity min="0" max="20" start="1" increment="1"></BuildCapacity></INTEGER><EDITABLESTRING>
 		<EDITABLESTRING_TEMPLATE></EDITABLESTRING_TEMPLATE></EDITABLESTRING>
