@@ -157,7 +157,7 @@ public class TileImpl implements Tile, AttributeOwner, SerializableObservable {
 
 	@Override
 	public AccessPermissionsReader getAccessPermissionsReader() {
-		return this.getAccessPermissionsReader();
+		return this.myAccessPerm;
 	}
 
 }
