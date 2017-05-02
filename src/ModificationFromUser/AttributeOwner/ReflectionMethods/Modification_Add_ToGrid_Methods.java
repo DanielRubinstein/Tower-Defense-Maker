@@ -51,6 +51,7 @@ public class Modification_Add_ToGrid_Methods{
 			List<Component> compList = myModel.getState().getComponentGraph().getComponentsByTileCorners(new TileCorners(location, tileWidth, tileHeight));
 			if (compList.size() < tile.<Integer>getAttribute(strResources.getFromAttributeNames("BuildCapacity")).getValue()){
 				addComponentToGrid(component);
+				component.setAttributeValue("SaveToTemplate", false);
 			}
 			else{
 				new ModeException(myModel.getMode(), String.format(strResources.getFromErrorMessages("Tile_Not_Buildable"), 

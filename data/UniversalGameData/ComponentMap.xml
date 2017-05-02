@@ -1407,7 +1407,7 @@
           <entry>
             <string>SaveToTemplate</string>
             <backEnd.Attribute.AttributeImpl>
-              <myValue class="boolean">false</myValue>
+              <myValue class="boolean">true</myValue>
               <myName>SaveToTemplate</myName>
             </backEnd.Attribute.AttributeImpl>
           </entry>
@@ -1641,9 +1641,11 @@
         </userModePermissions>
         <gameModePermissions>
           <string>DEFAULT</string>
+          <string>testSaveToTemplate</string>
         </gameModePermissions>
         <levelModePermissions>
           <string>DEFAULT</string>
+          <string>level1</string>
         </levelModePermissions>
         <strResources/>
       </myAccessPermissions>
