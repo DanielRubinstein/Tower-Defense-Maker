@@ -26,12 +26,6 @@ public enum Modification_GameRemote implements ModificationFromUser {
 	}), FASTFORWARD(engine -> {
 		System.out.println("FASTFORWARD");
 		// engine.fastforward();
-	}), RESTART(engine -> {
-		System.out.println("RESTART LEVEL");
-		// engine.play();
-	}), NEXTLEVEL(engine -> {
-		System.out.println("NEXT LEVEL");
-		// engine.play();
 	});
 
 	private Consumer<GameProcessController> myConsumer;
