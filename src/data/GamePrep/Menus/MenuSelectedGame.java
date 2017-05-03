@@ -5,8 +5,12 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
+import java.util.Map;
 import java.util.function.Consumer;
 
+import data.XMLReader;
+import data.XMLReaderImpl;
+import data.XMLReadingException;
 import data.GamePrep.GameMaker;
 import frontEnd.CustomJavafxNodes.ActionButton;
 import frontEnd.CustomJavafxNodes.ButtonMenuImpl;
@@ -53,14 +57,28 @@ public class MenuSelectedGame {
 			GameMaker gameMaker = new GameMaker(stage, myConsumerLoadData, game);
 			gameMaker.display();
 		}, "Create a new level for this game");
-		primaryMenu.addSimpleButtonWithHover("Play Level", () -> chooseLevel(primaryMenu, stage, "templates", game),
-				"Play from the first level");
-		primaryMenu.addSimpleButtonWithHover("Edit Level", () -> chooseLevel(primaryMenu, stage, "templates", game),
+		primaryMenu.addSimpleButtonWithHover("Choose Level", () -> chooseLevel(primaryMenu, stage, "templates", game),
 				"Load a level to edit");
+		primaryMenu.addSimpleButtonWithHover("Play Game from Start", () -> playFromStart(game),
+				"Play from the first level");
 		primaryMenu.addSimpleButtonWithHover("Load Saved Game", () -> chooseLevel(primaryMenu, stage, "saves", game),
 				"Continue your progress by loading a user-saved game");
 		primaryMenu.addBackButton(previousMenu, stage);
 		primaryMenu.display(stage);
+	}
+
+	private void playFromStart(String game)
+	{
+		XMLReader reader = new XMLReaderImpl();
+		
+		try {
+			Map<String, List<String>> map = (Map<String, List<String>>) reader.loadGamesMap("data/UniversalGameData/");
+			myConsumerLoadData.accept(new File("data/games/" + game + "/templates/", map.get(game).get(0)));
+		} catch (XMLReadingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
 	}
 
 	private void chooseLevel(ButtonMenuImpl previousMenu, Stage stage, String type, String game) {
