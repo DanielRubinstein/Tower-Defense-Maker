@@ -58,28 +58,8 @@ public class Modification_Add_ToGrid_Methods {
 			addComponentToGrid(component);
 			break;
 		case "PLAYER":
-			int price = (int) component.getAttribute(strResources.getFromAttributeNames("Price")).getValue();
-			int money = (int) myModel.getPlayerStatusReader().getProperty("Money").get();
-			if(price > money){
-				new ErrorDialog().create(strResources.getFromErrorMessages("Not_Enough_Money_Header"), 
-						String.format(strResources.getFromErrorMessages("Not_Enough_Money_Header"), price));
-			}
-			else{
-				Alert alert = new Alert(AlertType.CONFIRMATION);
-				alert.setTitle(strResources.getFromStringConstants("StoreBuyConfirmation"));
-				String priceFormat = strResources.getFromStringConstants("StorePurchaseFormat");
-				alert.setHeaderText(String.format(priceFormat, price));
-				alert.setContentText(strResources.getFromStringConstants("StoreQuestion"));
-				Optional<ButtonType> result = alert.showAndWait();
-				if (result.get() == ButtonType.OK || result.get() == ButtonType.CANCEL) {
-					alert.close();
-				}
-				if (result.get() == ButtonType.OK) {
-					if (checkBuildCapacity(component)) {
-						addComponentToGrid(component);
-						myModel.getModifiablePlayerStatus().decrementStatusItem("Money", price);
-					}
-				}
+			if (checkBuildCapacity(component)) {
+				addComponentToGrid(component);
 			}
 			break;
 		}

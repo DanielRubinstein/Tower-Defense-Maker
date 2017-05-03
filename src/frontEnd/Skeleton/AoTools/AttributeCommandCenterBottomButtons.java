@@ -175,7 +175,7 @@ public class AttributeCommandCenterBottomButtons implements SkeletonObject {
 		Alert alert = new Alert(AlertType.CONFIRMATION);
 		alert.setTitle("Save Confirmation");
 		alert.setHeaderText("Saving New Preset Without Type");
-		alert.setContentText("Are you sure you want to save this Component or Tile without a Type? This means it won't be able to interact with anything on the screen");
+		alert.setContentText("Are you sure you want to save this Component without a Type? This means it won't be able to interact with anything on the screen");
 		Optional<ButtonType> result = alert.showAndWait();
 		if (result.get() == ButtonType.OK || result.get() == ButtonType.CANCEL) {
 			alert.close();
