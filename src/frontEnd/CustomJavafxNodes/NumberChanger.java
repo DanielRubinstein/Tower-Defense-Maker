@@ -2,7 +2,7 @@ package frontEnd.CustomJavafxNodes;
 
 import java.util.function.Function;
 
-import frontEnd.Skeleton.UserTools.SkeletonObject;
+import frontEnd.Skeleton.SkeletonObject;
 import javafx.beans.value.ChangeListener;
 import javafx.scene.Node;
 import javafx.scene.control.Label;

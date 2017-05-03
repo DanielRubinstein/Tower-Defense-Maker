@@ -14,7 +14,7 @@ import util.reflection.Reflection;
 /**
  * Used when user creates a new preset component
  * 
- * @author Derek
+ * @author Derek, Miguel Anderson
  *
  */
 public class Modification_Add_ToPalette implements ModificationFromUser {

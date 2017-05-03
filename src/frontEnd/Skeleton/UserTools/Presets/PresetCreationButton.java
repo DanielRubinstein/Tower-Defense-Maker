@@ -4,13 +4,20 @@ import java.util.function.Consumer;
 
 import backEnd.Attribute.AttributeOwner;
 import frontEnd.View;
+import frontEnd.Skeleton.SkeletonObject;
 import frontEnd.Skeleton.AoTools.GenericCommandCenter;
-import frontEnd.Skeleton.UserTools.SkeletonObject;
 import javafx.scene.Node;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import resources.constants.numeric.NumericResourceBundle;
 import util.reflection.Reflection;
+
+/**
+ * This class creates the plus button that creates a new preset to place on the grid or the palette
+ * 
+ * @author Miguel Anderson
+ *
+ */
 
 public class PresetCreationButton implements SkeletonObject {
 	private NumericResourceBundle numericResourceBundle = new NumericResourceBundle();
