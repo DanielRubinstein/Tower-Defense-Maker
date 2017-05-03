@@ -1,15 +1,21 @@
 package ModificationFromUser.AttributeOwner.ReflectionMethods;
 
 import java.util.List;
+import java.util.Optional;
 
 import backEnd.Model;
+import backEnd.Attribute.AttributeOwnerReader;
 import backEnd.GameData.State.Component;
 import backEnd.GameData.State.Tile;
 import backEnd.GameData.State.TileCorners;
 import backEnd.GameData.State.TileImpl;
 import backEnd.GameEngine.Engine.Coordinates;
 import backEnd.Mode.ModeException;
+import frontEnd.CustomJavafxNodes.ErrorDialog;
 import javafx.geometry.Point2D;
+import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
+import javafx.scene.control.Alert.AlertType;
 import resources.constants.StringResourceBundle;
 
 /**
@@ -52,22 +58,49 @@ public class Modification_Add_ToGrid_Methods {
 			addComponentToGrid(component);
 			break;
 		case "PLAYER":
-			Tile tile = myModel.getState().getTileGrid().getTileByScreenPosition(location);
-			double tileWidth = myModel.getState().getTileGrid().getTileWidth();
-			double tileHeight = myModel.getState().getTileGrid().getTileHeight();
-			List<Component> compList = myModel.getState().getComponentGraph()
-					.getComponentsByTileCorners(new TileCorners(location, tileWidth, tileHeight));
-			if (compList.size() < tile.<Integer>getAttribute(strResources.getFromAttributeNames("BuildCapacity"))
-					.getValue()) {
-				addComponentToGrid(component);
-				component.setAttributeValue("SaveToTemplate", false);
+			int price = (int) component.getAttribute(strResources.getFromAttributeNames("Price")).getValue();
+			int money = (int) myModel.getPlayerStatusReader().getProperty("Money").get();
+			if(price > money){
+				new ErrorDialog().create(strResources.getFromErrorMessages("Not_Enough_Money_Header"), 
+						String.format(strResources.getFromErrorMessages("Not_Enough_Money_Header"), price));
 			}
 			else{
-				new ModeException(myModel.getMode(), String.format(strResources.getFromErrorMessages("Tile_Not_Buildable"), 
-						tile.<Integer>getAttribute(strResources.getFromAttributeNames("BuildCapacity")).getValue()));
+				Alert alert = new Alert(AlertType.CONFIRMATION);
+				alert.setTitle(strResources.getFromStringConstants("StoreBuyConfirmation"));
+				String priceFormat = strResources.getFromStringConstants("StorePurchaseFormat");
+				alert.setHeaderText(String.format(priceFormat, price));
+				alert.setContentText(strResources.getFromStringConstants("StoreQuestion"));
+				Optional<ButtonType> result = alert.showAndWait();
+				if (result.get() == ButtonType.OK || result.get() == ButtonType.CANCEL) {
+					alert.close();
+				}
+				if (result.get() == ButtonType.OK) {
+					if (checkBuildCapacity(component)) {
+						addComponentToGrid(component);
+						myModel.getModifiablePlayerStatus().decrementStatusItem("Money", price);
+					}
+				}
 			}
 			break;
 		}
+	}
+
+	private boolean checkBuildCapacity(Component component) {
+		Tile tile = myModel.getState().getTileGrid().getTileByScreenPosition(location);
+		double tileWidth = myModel.getState().getTileGrid().getTileWidth();
+		double tileHeight = myModel.getState().getTileGrid().getTileHeight();
+		List<Component> compList = myModel.getState().getComponentGraph()
+				.getComponentsByTileCorners(new TileCorners(location, tileWidth, tileHeight));
+		if (compList.size() < tile.<Integer>getAttribute(strResources.getFromAttributeNames("BuildCapacity"))
+				.getValue()) {
+			component.setAttributeValue("SaveToTemplate", false);
+			return true;
+		}
+		else{
+			new ModeException(myModel.getMode(), String.format(strResources.getFromErrorMessages("Tile_Not_Buildable"), 
+					tile.<Integer>getAttribute(strResources.getFromAttributeNames("BuildCapacity")).getValue()));
+		}
+		return false;
 	}
 
 	private void addComponentToGrid(Component component) {
