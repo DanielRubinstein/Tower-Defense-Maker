@@ -84,7 +84,6 @@ public class AttackEngine implements Engine {
 	private List<Component> getTargetList(Component attacker) {
 		String targetType = attacker.<String>getAttribute(TARGET_SELECTOR).getValue();
 		TileGrid tileGrid = myGameData.getState().getTileGrid();
-		//targetType = "Radius";
 		if (attacker.<String>getAttribute(TYPE).getValue().equals(ENEMY_TYPE)) {
 			List<Component> targets = new ArrayList<Component>();
 			List<Component> potentialTargets = myComponentGraph.getAllComponents();
