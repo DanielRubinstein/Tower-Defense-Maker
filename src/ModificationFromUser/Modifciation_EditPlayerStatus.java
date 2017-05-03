@@ -13,6 +13,7 @@ public class Modifciation_EditPlayerStatus implements ModificationFromUser {
 	
 	@Override
 	public void invoke(Model myModel) throws Exception {
+		myModel.getModifiablePlayerStatus().setStatusItemStartingValue(myPlayerStatusKey, myNewValue);
 		myModel.getModifiablePlayerStatus().setStatusItemValue(myPlayerStatusKey, myNewValue);
 	}
 

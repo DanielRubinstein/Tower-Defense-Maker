@@ -40,7 +40,7 @@ public class XMLWriterImpl implements XMLWriter{
 	
 	public void saveLevelTemplate(GameDataInterface gameData, String gameName, String levelName)
 	{
-		saveTemplate(gameData, "data/games/" + gameName + "/templates/", levelName, new PlayerStatus());
+		saveTemplate(gameData, "data/games/" + gameName + "/templates/", levelName, new PlayerStatus(gameData.getStartingStatus()));
 	}
 	
 	public void saveGame(GameDataInterface gameData, String gameName, String levelName)
@@ -86,7 +86,7 @@ public class XMLWriterImpl implements XMLWriter{
 	private void saveTemplate(GameDataInterface gameData, String filePath, String levelName, PlayerStatus status){
 		ComponentGraphCleaner compGraphCleaner = new ComponentGraphCleaner(gameData.getState().getComponentGraph());
 		compGraphCleaner.stripNonsavingComponents();
-		save(gameData, filePath, levelName, new PlayerStatus());
+		save(gameData, filePath, levelName, status);
 		compGraphCleaner.addBackNonsavingComponents();
 		
 	}

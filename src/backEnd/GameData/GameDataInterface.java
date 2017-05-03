@@ -10,6 +10,7 @@ import backEnd.GameData.Rules.RulesMap;
 import backEnd.GameData.State.PlayerStatusModifier;
 import backEnd.GameData.State.PlayerStatusReader;
 import backEnd.GameData.State.State;
+import javafx.beans.property.ReadOnlyDoubleWrapper;
 
 public interface GameDataInterface {
 	
@@ -22,6 +23,8 @@ public interface GameDataInterface {
 	public PlayerStatusReader getReadOnlyPlayerStatus();
 
 	public PlayerStatus getStatus();
+	
+	public Map<String, ReadOnlyDoubleWrapper> getStartingStatus();
 	
 	
 }
