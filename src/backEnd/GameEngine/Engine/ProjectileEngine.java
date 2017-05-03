@@ -1,6 +1,7 @@
 package backEnd.GameEngine.Engine;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import backEnd.GameData.GameData;
 import backEnd.GameData.State.Component;
@@ -112,6 +113,7 @@ public class ProjectileEngine implements Engine {
 			targetList.clear();
 		}
 		targetList.add(target);
+		System.out.println("targetList size is " + targetList.size());
 
 		for (Component toHit : targetList) {
 			if ((target.getAttribute(TYPE).getValue().equals(toHit.getAttribute(TYPE).getValue()))) {

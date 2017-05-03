@@ -1,3 +1,18 @@
 <?xml version="1.0"?><map>
-
+  <entry>
+    <string>hello there</string>
+    <list/>
+  </entry>
+  <entry>
+    <string>ChristianTest</string>
+    <list/>
+  </entry>
+  <entry>
+    <string>Christian</string>
+    <list/>
+  </entry>
+  <entry>
+    <string>Miguel</string>
+    <list/>
+  </entry>
 </map>
