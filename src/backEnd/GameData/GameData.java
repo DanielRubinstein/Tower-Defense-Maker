@@ -1,5 +1,7 @@
 package backEnd.GameData;
 
+import java.util.Map;
+
 import backEnd.Bank.BankControllerImpl;
 import backEnd.GameData.Rules.RulesMap;
 import backEnd.GameData.State.PlayerStatus;
@@ -9,6 +11,7 @@ import backEnd.GameData.State.State;
 import backEnd.GameData.State.StateImpl;
 import backEnd.GameEngine.EngineStatus;
 import backEnd.LevelProgression.LevelProgressionControllerEditor;
+import javafx.beans.property.ReadOnlyDoubleWrapper;
 
 public class GameData implements GameDataInterface{
 	private StateImpl myState;
@@ -98,6 +101,10 @@ public class GameData implements GameDataInterface{
 	
 	public BankControllerImpl getBankController() {
 		return myBankController;
+	}
+	
+	public Map<String, ReadOnlyDoubleWrapper> getStartingStatus(){
+		return myPlayerStatus.getStartingMap();
 	}
 
 }

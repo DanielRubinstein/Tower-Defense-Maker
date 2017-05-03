@@ -89,7 +89,6 @@ public class XMLReaderImpl implements XMLReader{
 		return new GameData(state, (PlayerStatus) xStream.fromXML(new File(filePath+"/" + levelName+"/" + 
 				strResources.getFromFilePaths("PlayerStatus_FileName") + ".xml")), (RulesMap) xStream.fromXML(new 
 				File(filePath+"/" + levelName+"/" + strResources.getFromFilePaths("Rules_FileName") + ".xml")));
-
 	}
 
 	private void makeAttributeOwnersCompatible(Collection<AttributeOwner> myAttrOwners, Set<String> defaultAttrNames) throws FileNotFoundException {

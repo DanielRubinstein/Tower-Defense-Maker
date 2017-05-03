@@ -1,5 +1,7 @@
 package backEnd.GameData.Rules;
 
+import java.util.ResourceBundle;
+
 import backEnd.GameData.GameData;
 import backEnd.LevelProgression.LevelProgressionControllerImpl;
 
@@ -11,6 +13,9 @@ public abstract class Rule implements RuleReader{
 	private boolean enabled = false;
 	private String myKeyName;
 	private String myDisplayString;
+//TODO @Derek- refactoring
+//	private final static String RULES_PATH = "resources/rules";
+//	private final static ResourceBundle myRulesResources = ResourceBundle.getBundle(RULES_PATH);
 
 	public Rule(double val, double minVal, double maxVal, String keyName, String displayString) {
 		this.myVal = val;
@@ -69,5 +74,7 @@ public abstract class Rule implements RuleReader{
 	}
 	
 	public abstract void invoke(GameData myGameData);
+	
+
 
 }

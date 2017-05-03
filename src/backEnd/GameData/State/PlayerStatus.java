@@ -18,11 +18,20 @@ public class PlayerStatus implements PlayerStatusModifier {
 	private final static String PLAYER_STATUS_ITEMS_PATH = "resources/playerStatusItems";
 	private final static ResourceBundle myPlayerStatusItemsResources = ResourceBundle.getBundle(PLAYER_STATUS_ITEMS_PATH);
 	private Map<String, ReadOnlyDoubleWrapper> myStatusItems = new HashMap<String, ReadOnlyDoubleWrapper>();
+	private Map<String, ReadOnlyDoubleWrapper> myStatusStartingValues = new HashMap<String, ReadOnlyDoubleWrapper>();
 
 	public PlayerStatus() {
 		for(String item : myPlayerStatusItemsResources.keySet()){
 			double defaultVal = Double.parseDouble(myPlayerStatusItemsResources.getString(item));
 			myStatusItems.put(item, new ReadOnlyDoubleWrapper(defaultVal));
+			myStatusStartingValues.put(item, new ReadOnlyDoubleWrapper(defaultVal));
+		}
+	}
+	
+	public PlayerStatus(Map<String, ReadOnlyDoubleWrapper> startingMap){
+		for(String item : startingMap.keySet()){
+			myStatusItems.put(item, new ReadOnlyDoubleWrapper(startingMap.get(item).getValue()));
+			myStatusStartingValues.put(item, new ReadOnlyDoubleWrapper(startingMap.get(item).getValue()));
 		}
 	}
 
@@ -65,4 +74,16 @@ public class PlayerStatus implements PlayerStatusModifier {
 		
 	}
 
+	@Override
+	public void setStatusItemStartingValue(String itemKey, double newVal) {
+		myStatusStartingValues.get(itemKey).set(newVal);
+		
+	}
+
+	@Override
+	public Map<String, ReadOnlyDoubleWrapper> getStartingMap() {
+		return myStatusStartingValues;
+	}
+
+	
 }
