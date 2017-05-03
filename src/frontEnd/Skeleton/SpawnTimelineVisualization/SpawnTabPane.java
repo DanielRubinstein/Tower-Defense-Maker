@@ -53,7 +53,7 @@ public class SpawnTabPane implements SkeletonObject {
 		Tab newSpawnTab = new Tab(key);
 		newSpawnTab.setContent(spawnTimelineView.getRoot());
 		newSpawnTab.setOnCloseRequest(e -> {
-			if (checkWithUser(newSpawnTab)) {
+			if (checkWithUser()) {
 				takenIDs.remove(Integer.parseInt(key.substring(key.indexOf(' ')+1)));
 				myView.sendUserModification(new Modification_RemoveSpawnQueue(key));
 			} else {
@@ -93,7 +93,7 @@ public class SpawnTabPane implements SkeletonObject {
 	 * @param tab
 	 * @return
 	 */
-	private boolean checkWithUser(Tab tab) {
+	private boolean checkWithUser() {
 		Alert alert = new Alert(AlertType.CONFIRMATION);
 		alert.setTitle("Close Confirmation");
 		alert.setHeaderText("Delete Spawn Timeline");
