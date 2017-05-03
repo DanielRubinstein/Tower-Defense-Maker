@@ -8,6 +8,7 @@
           <myFrequency>2.0</myFrequency>
           <myDelay>5.0</myDelay>
           <mySpawns>10</mySpawns>
+          <startingSpawns>10</startingSpawns>
           <recentSpawn>false</recentSpawn>
         </backEnd.GameEngine.Engine.Spawning.SpawnDataImpl>
       </mySpawnQueue>

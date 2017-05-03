@@ -1,5 +1,13 @@
 <?xml version="1.0"?><map>
   <entry>
+    <string>hi</string>
+    <list/>
+  </entry>
+  <entry>
+    <string>SimpleGame</string>
+    <list/>
+  </entry>
+  <entry>
     <string>Christian</string>
     <list>
       <string>Christian1</string>
@@ -24,6 +32,14 @@
       <string>BeachScene</string>
       <string>Port Royal</string>
     </list>
+  </entry>
+  <entry>
+    <string>l</string>
+    <list/>
+  </entry>
+  <entry>
+    <string>NewGame</string>
+    <list/>
   </entry>
   <entry>
     <string>Riley</string>

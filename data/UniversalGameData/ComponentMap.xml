@@ -665,7 +665,7 @@
           <entry>
             <string>Health</string>
             <backEnd.Attribute.AttributeImpl>
-              <myValue class="int">1</myValue>
+              <myValue class="int">24</myValue>
               <myParamList class="java.util.Arrays$ArrayList">
                 <a class="java.lang.Integer-array">
                   <int>1</int>
