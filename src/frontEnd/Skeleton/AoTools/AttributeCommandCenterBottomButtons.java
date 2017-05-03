@@ -105,7 +105,7 @@ public class AttributeCommandCenterBottomButtons implements SkeletonObject {
 							myView.sendUserModification(new Modification_Add_ToPalette(nameForNewPreset, obj));
 							myHostStage.close();
 						}
-					} catch (NullPointerException e){
+					} catch (NullPointerException err){
 						myView.sendUserModification(new Modification_Add_ToPalette(nameForNewPreset, obj));
 						myHostStage.close();
 					}					
