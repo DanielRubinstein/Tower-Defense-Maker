@@ -35,8 +35,17 @@ public class SpawnTabPane implements SkeletonObject {
 
 	private void addPresetQueues() {
 		for (Map.Entry<String, SpawnQueues> entry : mySpawnQueues.entrySet()) {
+			extractTimelineIndex(entry.getKey());
 			createNewTimelineTab(entry.getKey(), entry.getValue());
 		}
+	}
+
+	private void extractTimelineIndex(String key) {
+		Integer index = Integer.parseInt(key.substring(key.indexOf(' ')+1));
+		if(takenIDs == null){
+			takenIDs = new ArrayList<Integer>();
+		}
+		takenIDs.add(index);
 	}
 
 	private void createNewTimelineTab(String key, SpawnQueues value) {
@@ -72,6 +81,7 @@ public class SpawnTabPane implements SkeletonObject {
 
 	private void createNewTimelineTab() {
 		Integer tabID = nextTimelineIndex();
+		System.out.println(tabID);
 		String tabName = "Timeline " + tabID;
 		myView.sendUserModification(new Modification_AddSpawnQueue(tabName));
 		createNewTimelineTab(tabName, mySpawnQueues.get(tabName));
