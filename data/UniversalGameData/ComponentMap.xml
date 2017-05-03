@@ -122,6 +122,13 @@
             </backEnd.Attribute.AttributeImpl>
           </entry>
           <entry>
+            <string>IsBoss</string>
+            <backEnd.Attribute.AttributeImpl>
+              <myValue class="boolean">false</myValue>
+              <myName>IsBoss</myName>
+            </backEnd.Attribute.AttributeImpl>
+          </entry>
+          <entry>
             <string>PoisonTime</string>
             <backEnd.Attribute.AttributeImpl>
               <myValue class="double">0.0</myValue>
@@ -153,6 +160,13 @@
                 </a>
               </myParamList>
               <myName>TargetSelector</myName>
+            </backEnd.Attribute.AttributeImpl>
+          </entry>
+          <entry>
+            <string>SaveToTemplate</string>
+            <backEnd.Attribute.AttributeImpl>
+              <myValue class="boolean">false</myValue>
+              <myName>SaveToTemplate</myName>
             </backEnd.Attribute.AttributeImpl>
           </entry>
           <entry>
@@ -328,21 +342,6 @@
             <string>ProjectileTarget</string>
             <backEnd.Attribute.AttributeImpl>
               <myName>ProjectileTarget</myName>
-            </backEnd.Attribute.AttributeImpl>
-          </entry>
-          <entry>
-            <string>ColorIndex</string>
-            <backEnd.Attribute.AttributeImpl>
-              <myValue class="int">6</myValue>
-              <myParamList class="java.util.Arrays$ArrayList">
-                <a class="java.lang.Integer-array">
-                  <int>4</int>
-                  <int>18</int>
-                  <int>6</int>
-                  <int>2</int>
-                </a>
-              </myParamList>
-              <myName>ColorIndex</myName>
             </backEnd.Attribute.AttributeImpl>
           </entry>
           <entry>
@@ -536,6 +535,13 @@
             </backEnd.Attribute.AttributeImpl>
           </entry>
           <entry>
+            <string>IsBoss</string>
+            <backEnd.Attribute.AttributeImpl>
+              <myValue class="boolean">false</myValue>
+              <myName>IsBoss</myName>
+            </backEnd.Attribute.AttributeImpl>
+          </entry>
+          <entry>
             <string>PoisonTime</string>
             <backEnd.Attribute.AttributeImpl>
               <myValue class="double">0.0</myValue>
@@ -567,6 +573,13 @@
                 </a>
               </myParamList>
               <myName>TargetSelector</myName>
+            </backEnd.Attribute.AttributeImpl>
+          </entry>
+          <entry>
+            <string>SaveToTemplate</string>
+            <backEnd.Attribute.AttributeImpl>
+              <myValue class="boolean">false</myValue>
+              <myName>SaveToTemplate</myName>
             </backEnd.Attribute.AttributeImpl>
           </entry>
           <entry>
@@ -742,21 +755,6 @@
             <string>ProjectileTarget</string>
             <backEnd.Attribute.AttributeImpl>
               <myName>ProjectileTarget</myName>
-            </backEnd.Attribute.AttributeImpl>
-          </entry>
-          <entry>
-            <string>ColorIndex</string>
-            <backEnd.Attribute.AttributeImpl>
-              <myValue class="int">6</myValue>
-              <myParamList class="java.util.Arrays$ArrayList">
-                <a class="java.lang.Integer-array">
-                  <int>4</int>
-                  <int>18</int>
-                  <int>6</int>
-                  <int>2</int>
-                </a>
-              </myParamList>
-              <myName>ColorIndex</myName>
             </backEnd.Attribute.AttributeImpl>
           </entry>
           <entry>
@@ -950,6 +948,13 @@
             </backEnd.Attribute.AttributeImpl>
           </entry>
           <entry>
+            <string>IsBoss</string>
+            <backEnd.Attribute.AttributeImpl>
+              <myValue class="boolean">false</myValue>
+              <myName>IsBoss</myName>
+            </backEnd.Attribute.AttributeImpl>
+          </entry>
+          <entry>
             <string>PoisonTime</string>
             <backEnd.Attribute.AttributeImpl>
               <myValue class="double">0.0</myValue>
@@ -982,6 +987,13 @@
                 </a>
               </myParamList>
               <myName>TargetSelector</myName>
+            </backEnd.Attribute.AttributeImpl>
+          </entry>
+          <entry>
+            <string>SaveToTemplate</string>
+            <backEnd.Attribute.AttributeImpl>
+              <myValue class="boolean">false</myValue>
+              <myName>SaveToTemplate</myName>
             </backEnd.Attribute.AttributeImpl>
           </entry>
           <entry>
@@ -1157,21 +1169,6 @@
             <string>ProjectileTarget</string>
             <backEnd.Attribute.AttributeImpl>
               <myName>ProjectileTarget</myName>
-            </backEnd.Attribute.AttributeImpl>
-          </entry>
-          <entry>
-            <string>ColorIndex</string>
-            <backEnd.Attribute.AttributeImpl>
-              <myValue class="int">6</myValue>
-              <myParamList class="java.util.Arrays$ArrayList">
-                <a class="java.lang.Integer-array">
-                  <int>4</int>
-                  <int>18</int>
-                  <int>6</int>
-                  <int>2</int>
-                </a>
-              </myParamList>
-              <myName>ColorIndex</myName>
             </backEnd.Attribute.AttributeImpl>
           </entry>
           <entry>
@@ -1367,6 +1364,13 @@
             </backEnd.Attribute.AttributeImpl>
           </entry>
           <entry>
+            <string>IsBoss</string>
+            <backEnd.Attribute.AttributeImpl>
+              <myValue class="boolean">false</myValue>
+              <myName>IsBoss</myName>
+            </backEnd.Attribute.AttributeImpl>
+          </entry>
+          <entry>
             <string>PoisonTime</string>
             <backEnd.Attribute.AttributeImpl>
               <myValue class="double">0.0</myValue>
@@ -1401,6 +1405,13 @@
             </backEnd.Attribute.AttributeImpl>
           </entry>
           <entry>
+            <string>SaveToTemplate</string>
+            <backEnd.Attribute.AttributeImpl>
+              <myValue class="boolean">true</myValue>
+              <myName>SaveToTemplate</myName>
+            </backEnd.Attribute.AttributeImpl>
+          </entry>
+          <entry>
             <string>SlowFactor</string>
             <backEnd.Attribute.AttributeImpl>
               <myValue class="double">0.19827586206896552</myValue>
@@ -1418,7 +1429,7 @@
           <entry>
             <string>Speed</string>
             <backEnd.Attribute.AttributeImpl>
-              <myValue class="double">0.275</myValue>
+              <myValue class="double">0.0</myValue>
               <myParamList class="java.util.Arrays$ArrayList">
                 <a class="java.lang.Double-array">
                   <double>0.0</double>
@@ -1576,21 +1587,6 @@
             </backEnd.Attribute.AttributeImpl>
           </entry>
           <entry>
-            <string>ColorIndex</string>
-            <backEnd.Attribute.AttributeImpl>
-              <myValue class="int">6</myValue>
-              <myParamList class="java.util.Arrays$ArrayList">
-                <a class="java.lang.Integer-array">
-                  <int>4</int>
-                  <int>18</int>
-                  <int>6</int>
-                  <int>2</int>
-                </a>
-              </myParamList>
-              <myName>ColorIndex</myName>
-            </backEnd.Attribute.AttributeImpl>
-          </entry>
-          <entry>
             <string>ScoreBounty</string>
             <backEnd.Attribute.AttributeImpl>
               <myValue class="int">10</myValue>
@@ -1645,9 +1641,11 @@
         </userModePermissions>
         <gameModePermissions>
           <string>DEFAULT</string>
+          <string>testSaveToTemplate</string>
         </gameModePermissions>
         <levelModePermissions>
           <string>DEFAULT</string>
+          <string>level1</string>
         </levelModePermissions>
         <strResources/>
       </myAccessPermissions>
@@ -1782,6 +1780,13 @@
             </backEnd.Attribute.AttributeImpl>
           </entry>
           <entry>
+            <string>IsBoss</string>
+            <backEnd.Attribute.AttributeImpl>
+              <myValue class="boolean">false</myValue>
+              <myName>IsBoss</myName>
+            </backEnd.Attribute.AttributeImpl>
+          </entry>
+          <entry>
             <string>PoisonTime</string>
             <backEnd.Attribute.AttributeImpl>
               <myValue class="double">0.0</myValue>
@@ -1814,6 +1819,13 @@
                 </a>
               </myParamList>
               <myName>TargetSelector</myName>
+            </backEnd.Attribute.AttributeImpl>
+          </entry>
+          <entry>
+            <string>SaveToTemplate</string>
+            <backEnd.Attribute.AttributeImpl>
+              <myValue class="boolean">false</myValue>
+              <myName>SaveToTemplate</myName>
             </backEnd.Attribute.AttributeImpl>
           </entry>
           <entry>
@@ -1989,21 +2001,6 @@
             <string>ProjectileTarget</string>
             <backEnd.Attribute.AttributeImpl>
               <myName>ProjectileTarget</myName>
-            </backEnd.Attribute.AttributeImpl>
-          </entry>
-          <entry>
-            <string>ColorIndex</string>
-            <backEnd.Attribute.AttributeImpl>
-              <myValue class="int">6</myValue>
-              <myParamList class="java.util.Arrays$ArrayList">
-                <a class="java.lang.Integer-array">
-                  <int>4</int>
-                  <int>18</int>
-                  <int>6</int>
-                  <int>2</int>
-                </a>
-              </myParamList>
-              <myName>ColorIndex</myName>
             </backEnd.Attribute.AttributeImpl>
           </entry>
           <entry>
@@ -2197,6 +2194,13 @@
             </backEnd.Attribute.AttributeImpl>
           </entry>
           <entry>
+            <string>IsBoss</string>
+            <backEnd.Attribute.AttributeImpl>
+              <myValue class="boolean">false</myValue>
+              <myName>IsBoss</myName>
+            </backEnd.Attribute.AttributeImpl>
+          </entry>
+          <entry>
             <string>PoisonTime</string>
             <backEnd.Attribute.AttributeImpl>
               <myValue class="double">0.0</myValue>
@@ -2228,6 +2232,13 @@
                 </a>
               </myParamList>
               <myName>TargetSelector</myName>
+            </backEnd.Attribute.AttributeImpl>
+          </entry>
+          <entry>
+            <string>SaveToTemplate</string>
+            <backEnd.Attribute.AttributeImpl>
+              <myValue class="boolean">false</myValue>
+              <myName>SaveToTemplate</myName>
             </backEnd.Attribute.AttributeImpl>
           </entry>
           <entry>
@@ -2403,21 +2414,6 @@
             <string>ProjectileTarget</string>
             <backEnd.Attribute.AttributeImpl>
               <myName>ProjectileTarget</myName>
-            </backEnd.Attribute.AttributeImpl>
-          </entry>
-          <entry>
-            <string>ColorIndex</string>
-            <backEnd.Attribute.AttributeImpl>
-              <myValue class="int">6</myValue>
-              <myParamList class="java.util.Arrays$ArrayList">
-                <a class="java.lang.Integer-array">
-                  <int>4</int>
-                  <int>18</int>
-                  <int>6</int>
-                  <int>2</int>
-                </a>
-              </myParamList>
-              <myName>ColorIndex</myName>
             </backEnd.Attribute.AttributeImpl>
           </entry>
           <entry>

@@ -40,7 +40,7 @@ public class XMLWriterImpl implements XMLWriter{
 	
 	public void saveLevelTemplate(GameDataInterface gameData, String gameName, String levelName)
 	{
-		save(gameData, "data/games/" + gameName + "/templates/", levelName, new PlayerStatus());
+		saveTemplate(gameData, "data/games/" + gameName + "/templates/", levelName, new PlayerStatus());
 	}
 	
 	public void saveGame(GameDataInterface gameData, String gameName, String levelName)
@@ -83,6 +83,14 @@ public class XMLWriterImpl implements XMLWriter{
 		saveToXML(filePath, strResources.getFromFilePaths("GamesMap_FileName"), gamesMapXML);
 	}
 	
+	private void saveTemplate(GameDataInterface gameData, String filePath, String levelName, PlayerStatus status){
+		ComponentGraphCleaner compGraphCleaner = new ComponentGraphCleaner(gameData.getState().getComponentGraph());
+		compGraphCleaner.stripNonsavingComponents();
+		save(gameData, filePath, levelName, new PlayerStatus());
+		compGraphCleaner.addBackNonsavingComponents();
+		
+	}
+	
 	private void save(GameDataInterface gameData, String filePath, String levelName, PlayerStatus status)
 	{
 		String rulesXML = xStream.toXML(gameData.getRules());
@@ -91,6 +99,7 @@ public class XMLWriterImpl implements XMLWriter{
 		for (Component c : gameData.getState().getComponentGraph().getAllComponents()){
 			so.add((SerializableObservable) c);
 		}
+		
 		
 		
 		StripAndSaveObservers componentsStripper = new StripAndSaveObservers(so);

@@ -17,6 +17,14 @@
       </javafx.beans.property.ReadOnlyDoubleWrapper>
     </entry>
     <entry>
+      <string>BossKillCount</string>
+      <javafx.beans.property.ReadOnlyDoubleWrapper>
+        <value>0.0</value>
+        <valid>true</valid>
+        <name></name>
+      </javafx.beans.property.ReadOnlyDoubleWrapper>
+    </entry>
+    <entry>
       <string>Health</string>
       <javafx.beans.property.ReadOnlyDoubleWrapper>
         <value>0.0</value>

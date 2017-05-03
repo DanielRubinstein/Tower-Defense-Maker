@@ -8,7 +8,7 @@ import backEnd.GameData.State.Component;
 import backEnd.GameData.State.State;
 import backEnd.GameData.State.Tile;
 import frontEnd.View;
-import frontEnd.Skeleton.UserTools.SkeletonObject;
+import frontEnd.Skeleton.SkeletonObject;
 import javafx.geometry.Point2D;
 import javafx.scene.Group;
 import javafx.scene.Node;

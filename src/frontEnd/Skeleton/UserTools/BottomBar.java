@@ -1,6 +1,7 @@
 package frontEnd.Skeleton.UserTools;
 
 import frontEnd.View;
+import frontEnd.Skeleton.SkeletonObject;
 import frontEnd.Skeleton.UserTools.Presets.PalettePane;
 import javafx.scene.Node;
 import javafx.scene.layout.HBox;

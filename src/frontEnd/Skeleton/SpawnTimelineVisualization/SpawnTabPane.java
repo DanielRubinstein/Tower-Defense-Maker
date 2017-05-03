@@ -9,7 +9,7 @@ import ModificationFromUser.Spawning.Modification_AddSpawnQueue;
 import ModificationFromUser.Spawning.Modification_RemoveSpawnQueue;
 import backEnd.GameEngine.Engine.Spawning.SpawnQueues;
 import frontEnd.View;
-import frontEnd.Skeleton.UserTools.SkeletonObject;
+import frontEnd.Skeleton.SkeletonObject;
 import javafx.scene.Node;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;

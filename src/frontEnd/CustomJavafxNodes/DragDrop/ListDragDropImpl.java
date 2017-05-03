@@ -3,7 +3,7 @@ package frontEnd.CustomJavafxNodes.DragDrop;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import frontEnd.Skeleton.UserTools.SkeletonObject;
+import frontEnd.Skeleton.SkeletonObject;
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.collections.ObservableList;

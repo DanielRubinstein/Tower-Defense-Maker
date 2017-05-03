@@ -11,7 +11,7 @@ import backEnd.Attribute.AttributeOwnerReader;
 /**
  * Used for adding a new attribute owner to the grid. New attribute owner is passed as parameter in constructor
  * 
- * @author Derek
+ * @author Derek, Miguel Anderson
  *
  */
 public class Modification_Add_StraightToGrid implements ModificationFromUser {

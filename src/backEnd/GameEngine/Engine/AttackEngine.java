@@ -96,16 +96,13 @@ public class AttackEngine implements Engine {
 				}
 			}
 			if (targets.isEmpty()) {
-				System.out.println(this.getClass().getSimpleName() + ": No targets");
 				if (attacker.<Double>getAttribute(SLOW_TIME).getValue() > 0){
 					System.out.println(this.getClass().getSimpleName() + ": Slowed");
 					attacker.setAttributeValue(SPEED, attacker.<Double>getAttribute(MAX_SPEED).getValue() * attacker.<Double>getAttribute(SLOW_FACTOR).getValue());
 				} else {
-					System.out.println(this.getClass().getSimpleName() + ": Setting speed maybe lol");
 					attacker.setAttributeValue(SPEED, attacker.<Double>getAttribute(MAX_SPEED).getValue());
 				}
 			} else {
-				System.out.println(this.getClass().getSimpleName() + ": Some targets");
 				attacker.setAttributeValue(SPEED, new Double(0));
 			}
 			return targets;
@@ -126,7 +123,6 @@ public class AttackEngine implements Engine {
 					return targets;
 				}
 			}
-			System.out.println(this.getClass().getSimpleName() + ": Tile not found");
 			return null;
 		} else if (targetType.equals("Radius")) {
 			return myComponentGraph.getComponentsWithinRadius(attacker,(double) attacker.getAttribute(STRING_RESOURCES.getFromAttributeNames("FireRadius")).getValue());

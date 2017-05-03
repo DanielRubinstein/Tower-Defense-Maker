@@ -2,6 +2,7 @@ package frontEnd.Skeleton.UserTools;
 
 import frontEnd.View;
 import frontEnd.ViewReader;
+import frontEnd.Skeleton.SkeletonObject;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.layout.Priority;

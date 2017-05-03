@@ -23,12 +23,23 @@
       </backEnd.GameData.Rules.EndCondition.HealthLoseCondition>
     </entry>
     <entry>
-      <string>KillCount</string>
-      <backEnd.GameData.Rules.EndCondition.KillCountCondition>
-        <myVal>1.0</myVal>
+      <string>BossKillCount</string>
+      <backEnd.GameData.Rules.EndCondition.BossDefeatedCondition>
+        <myVal>0.0</myVal>
         <minVal>0.0</minVal>
         <maxVal>100.0</maxVal>
-        <enabled>true</enabled>
+        <enabled>false</enabled>
+        <myKeyName>BossKillCount</myKeyName>
+        <myDisplayString>Bosses Slain</myDisplayString>
+      </backEnd.GameData.Rules.EndCondition.BossDefeatedCondition>
+    </entry>
+    <entry>
+      <string>KillCount</string>
+      <backEnd.GameData.Rules.EndCondition.KillCountCondition>
+        <myVal>0.0</myVal>
+        <minVal>0.0</minVal>
+        <maxVal>100.0</maxVal>
+        <enabled>false</enabled>
         <myKeyName>KillCount</myKeyName>
         <myDisplayString>Kill count to win the level</myDisplayString>
       </backEnd.GameData.Rules.EndCondition.KillCountCondition>

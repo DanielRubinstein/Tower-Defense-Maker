@@ -1,17 +1,14 @@
 package backEnd.GameEngine.Engine;
 
+/**
+ * Constructs Engines for use in GameProcessController
+ * @author Alex Salas
+ * 
+ */
 public class EngineFactory {
 
 	public Engine getEngine(String string){
-		//			
-		//		String simpleName = Engine.class.getSimpleName();
-		//		String fullName = Engine.class.getName();
-		//		String basePath = fullName.substring(0, fullName.length() - simpleName.length());
-		//		System.out.println(basePath);
-		//      return (Engine) Reflection.createInstance(string);
-		
-		// TODO !!!!
-		
+
 		switch(string)
 		{
 		case "SpawnEngine": {

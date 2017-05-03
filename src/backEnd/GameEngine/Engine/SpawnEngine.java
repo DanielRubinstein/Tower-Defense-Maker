@@ -20,8 +20,8 @@ import backEnd.GameEngine.Engine.Spawning.SpawnQueues;
 import javafx.geometry.Point2D;
 
 /**
- * 
- * @author GameEngine team (Alex, Christian, Daniel)
+ * Deals with spawning Components in State
+ * @author Alex Salas
  */
 public class SpawnEngine implements Engine {
 
