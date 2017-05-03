@@ -1109,8 +1109,8 @@
             <string>Position</string>
             <backEnd.Attribute.AttributeImpl>
               <myValue class="javafx.geometry.Point2D">
-                <x>378.88406658739757</x>
-                <y>259.3793103448281</y>
+                <x>270.0</x>
+                <y>301.0</y>
                 <hash>0</hash>
               </myValue>
               <myName>Position</myName>
