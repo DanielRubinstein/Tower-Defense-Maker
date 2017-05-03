@@ -230,8 +230,12 @@ public class AttributeEditorCreator implements AttributeVisualization {
 		T currentValue = (T) myAttributeReader.getValue();
 		NumberChanger numChanger = new NumberChanger(paramList.get(0), paramList.get(1), currentValue,
 				paramList.get(3));
-		numChanger.addListener((o, oldValue, newValue) -> {
-			sendModification(newValue);
+		numChanger.addListener((o, oldValue, newValue)  -> {
+			if(Integer.class.equals(currentValue.getClass())){
+				sendModification((int) Math.round((double)newValue));
+			}else{
+				sendModification(newValue);
+			}
 		});
 		return numChanger;
 

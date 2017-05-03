@@ -833,7 +833,7 @@
           <entry>
             <string>SpawnOnDeath</string>
             <backEnd.Attribute.AttributeImpl>
-              <myValue class="boolean">true</myValue>
+              <myValue class="boolean">false</myValue>
               <myName>SpawnOnDeath</myName>
             </backEnd.Attribute.AttributeImpl>
           </entry>
@@ -1307,7 +1307,7 @@
           <entry>
             <string>Size</string>
             <backEnd.Attribute.AttributeImpl>
-              <myValue class="double">35.0</myValue>
+              <myValue class="double">46.0344827586207</myValue>
               <myParamList class="java.util.Arrays$ArrayList">
                 <a class="java.lang.Double-array">
                   <double>20.0</double>
@@ -1642,6 +1642,7 @@
         <gameModePermissions>
           <string>DEFAULT</string>
           <string>testSaveToTemplate</string>
+          <string>testGameWin</string>
         </gameModePermissions>
         <levelModePermissions>
           <string>DEFAULT</string>
