@@ -5,7 +5,9 @@
 	<BOOLEAN>
 		<BOOLEAN_TEMPLATE></BOOLEAN_TEMPLATE><Traversable></Traversable>
 		<GoalTile></GoalTile>
-		<SpawnOnDeath></SpawnOnDeath></BOOLEAN>
+		<SpawnOnDeath></SpawnOnDeath>
+		<IsBoss></IsBoss>
+		<SaveToTemplate></SaveToTemplate></BOOLEAN>
 	<DOUBLE>
 		<DOUBLE_TEMPLATE min="0.0" max="0.0" start="0.0" increment="0.0"></DOUBLE_TEMPLATE><Speed min="0.0" max="1.1" start="0.8" increment="0.1"></Speed>
 		<Velocity min="0.0" max="10.0" start="2.0" increment="1.0"></Velocity><FireRadius min="10.0" max="200.0" start="10.0" increment="2.0"></FireRadius>
@@ -23,10 +25,11 @@
 		<INTEGER_TEMPLATE min="0" max="0" start="1" increment="0"></INTEGER_TEMPLATE>
 		<Health min="1" max="100" start="1" increment="5"></Health>
 		<MoneyBounty min="0" max="999" start="10" increment="10"></MoneyBounty>
-		<ScoreBounty min="0" max="999" start="10" increment="10"></ScoreBounty><FireDamage min="0" max="200" start="1" increment="2"></FireDamage>
+		<ScoreBounty min="0" max="999" start="10" increment="10"></ScoreBounty>
+		<FireDamage min="0" max="200" start="1" increment="2"></FireDamage>
 		<UpgradeCost min="0" max="999" start="10" increment="10"></UpgradeCost>
 		<BuildCapacity min="0" max="20" start="1" increment="1"></BuildCapacity>
-		<ColorIndex min="4" max="18" start="6" increment="2"></ColorIndex></INTEGER><EDITABLESTRING>
+		<Price min="0" max="990" start="10" increment="5"></Price></INTEGER><EDITABLESTRING>
 		<EDITABLESTRING_TEMPLATE></EDITABLESTRING_TEMPLATE></EDITABLESTRING>
 	<STRINGLIST>
 		<STRINGLIST_TEMPLATE Options="Comma delineated String Options"></STRINGLIST_TEMPLATE>

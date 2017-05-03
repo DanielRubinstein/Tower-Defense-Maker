@@ -22,18 +22,23 @@ import resources.constants.StringResourceBundle;
 public class DeathEngine implements Engine {
 	private StringResourceBundle STRING_RESOURCES = new StringResourceBundle();
 	private BankControllerImpl myBank;
+	private List<Component> toRemove;
+	private Map<Component, Point2D> toAdd;
+	private GameData myGameData;
 	
 	
 	public void gameLoop(GameData gameData, double stepTime) {
-		List<Component> toRemove=new ArrayList<Component>();
-		Map<Component, Point2D> toAdd=new HashMap<Component, Point2D>();
-		myBank=gameData.getBankController();
+		toRemove =new ArrayList<Component>();
+		myGameData=gameData;
+		toAdd= new HashMap<Component, Point2D>();
+		myBank=myGameData.getBankController();
 		for (Component myComponent : gameData.getState().getComponentGraph().getAllComponents()) {
 			if (isDead(myComponent)) {
 				toRemove.add(myComponent);
-				gameData.getStatus().incrementStatusItem(STRING_RESOURCES.getFromStringConstants("KillCount"), 1);
-				gameData.getStatus().incrementStatusItem(STRING_RESOURCES.getFromStringConstants("Money"), myComponent.<Integer>getAttribute(STRING_RESOURCES.getFromAttributeNames("MoneyBounty")).getValue());
-				gameData.getStatus().incrementStatusItem(STRING_RESOURCES.getFromStringConstants("Score"), myComponent.<Integer>getAttribute(STRING_RESOURCES.getFromAttributeNames("ScoreBounty")).getValue());
+				if(myComponent.<Boolean>getAttribute(STRING_RESOURCES.getFromAttributeNames("IsBoss")).getValue() == true){
+					gameData.getStatus().incrementStatusItem(STRING_RESOURCES.getFromStringConstants("BossKillCount"), 1);
+				}
+				incrementCounters(myComponent);
 				if (spawnsOnDeath(myComponent)) {
 					Point2D currentLocation = myComponent.<Point2D>getAttribute(STRING_RESOURCES.getFromAttributeNames("Position")).getValue();
 					Component newComponent=getNewComponent(myComponent);
@@ -62,6 +67,14 @@ public class DeathEngine implements Engine {
 	
 	public Component getNewComponent(Component c){
 		return myBank.getComponent(c.<String>getAttribute(STRING_RESOURCES.getFromAttributeNames("SpawnOnDeathObject")).getValue());
+	}
+	
+	public void incrementCounters(Component myComponent){
+		if (myComponent.getAttribute(STRING_RESOURCES.getFromAttributeNames("Type")).getValue().equals(STRING_RESOURCES.getFromStringConstants("Enemy"))){
+			myGameData.getStatus().incrementStatusItem(STRING_RESOURCES.getFromStringConstants("Money"), myComponent.<Integer>getAttribute(STRING_RESOURCES.getFromAttributeNames("MoneyBounty")).getValue());
+			myGameData.getStatus().incrementStatusItem(STRING_RESOURCES.getFromStringConstants("Score"), myComponent.<Integer>getAttribute(STRING_RESOURCES.getFromAttributeNames("ScoreBounty")).getValue());
+			myGameData.getStatus().incrementStatusItem(STRING_RESOURCES.getFromStringConstants("KillCount"), 1);
+		}
 	}
 
 }

@@ -3,6 +3,7 @@ package backEnd;
 import java.util.List;
 import java.util.function.Consumer;
 
+import ModificationFromUser.Modification_ChangeMode;
 import backEnd.Attribute.AttributeOwner;
 import backEnd.Attribute.AttributeOwnerReader;
 import backEnd.Bank.BankController;
@@ -53,14 +54,13 @@ public class ModelImpl implements Model{
 		myDataController = new DataController();
 		myGameData = gameData;
 		this.gameLoader = gameLoader;
-		myMode = new ModeImpl(strResource.getFromStringConstants("AUTHOR"), gameName, levelName, myLevelProgressionController);
+		myMode = new ModeImpl(strResource.getFromStringConstants("PLAYER"), gameName, levelName, myLevelProgressionController);
 		myLevelProgressionController = new LevelProgressionControllerImpl(myMode, myDataController, splashScreenLoader, gameLoader);
 		myGameData.setLevelProgressionController(myLevelProgressionController);
 		myEngine = new GameProcessController(myGameData);
 		myBankController = new BankControllerImpl(myMode, (DataControllerReader) myDataController);
 		myGameData.setBankController(myBankController);
 		myDataController.setBankController(myBankController);
-
 	}
 
 	@Override

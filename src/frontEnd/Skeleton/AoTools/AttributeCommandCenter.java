@@ -27,7 +27,15 @@ import resources.constants.StringResourceBundle;
 import resources.constants.numeric.NumericResourceBundle;
 import util.reflection.Reflection;
 
-public class AttributeCommandCenter{	
+/**
+ * This class is what creates the popup when an attribute or tile is clicked. It
+ * allows the user to see and, if in author mode, can edit attribute values.
+ * 
+ * @author Miguel Anderson
+ *
+ */
+
+public class AttributeCommandCenter {
 	private static final NumericResourceBundle NUMERIC_RESOURCE_BUNDLE = new NumericResourceBundle();
 	private Double STANDARD_SPACING = NUMERIC_RESOURCE_BUNDLE.getFromSizing("StandardSpacing");
 	private static final StringResourceBundle STRING_RESOURCE_BUNDLE = new StringResourceBundle();
@@ -36,48 +44,48 @@ public class AttributeCommandCenter{
 	private SimpleBooleanProperty authorProperty;
 	private Label titleLbl;
 	private Stage myHostStage;
-	
-	public AttributeCommandCenter(View view, Stage hostStage , AttributeOwnerReader attributeOwnerReader, String title){
+
+	public AttributeCommandCenter(View view, Stage hostStage, AttributeOwnerReader attributeOwnerReader, String title) {
 		myView = view;
 		myHostStage = hostStage;
 		authorProperty = view.getBooleanAuthorModeProperty();
 		setText(title);
 		myRoot = createAttributeCommandCenter(attributeOwnerReader);
 	}
-	
-	private void setText(String text){
+
+	private void setText(String text) {
 		titleLbl = new Label(text);
 		titleLbl.setFont(Font.font(NUMERIC_RESOURCE_BUNDLE.getFromSizing("TitleFontSize")));
 		titleLbl.setUnderline(true);
 	}
-	
+
 	private VBox createAttributeCommandCenter(AttributeOwnerReader attributeOwnerReader) {
 		VBox contents = new VBox();
 
 		contents.getChildren().add(titleLbl);
 		contents.getChildren().add(createAttributeView(attributeOwnerReader));
 		contents.getChildren().add(createBottomButtons(attributeOwnerReader));
-		
+
 		contents.setPadding(new Insets(STANDARD_SPACING));
 		contents.setSpacing(STANDARD_SPACING);
 		return contents;
 	}
-	
+
 	private Node createAttributeView(AttributeOwnerReader attributeOwnerReader) {
-		if(attributeOwnerReader.getMyAttributes()==null){
+		if (attributeOwnerReader.getMyAttributes() == null) {
 			return new Label(STRING_RESOURCE_BUNDLE.getFromStringConstants("NoAttribute"));
 		}
-		
+
 		List<String> attributeCategories = createAttributeCategoryList(attributeOwnerReader);
 		TabPane attributeTabPane = new TabPane();
-		for(String attributeCategory : attributeCategories){
+		for (String attributeCategory : attributeCategories) {
 			Node sP = createAttributeCategoryView(attributeCategory, attributeOwnerReader);
 			Tab tab = new Tab(attributeCategory);
 			tab.setClosable(false);
 			tab.setContent(sP);
 			attributeTabPane.getTabs().add(tab);
 		}
-		
+
 		return attributeTabPane;
 	}
 
@@ -85,10 +93,10 @@ public class AttributeCommandCenter{
 		List<String> categories = new ArrayList<>();
 		for (AttributeReader<?> attributeReader : attributeOwnerReader.getMyAttributes().getAllAttributeReaders()) {
 			String category = STRING_RESOURCE_BUNDLE.getFromAttributeCategories(attributeReader.getName());
-			if(!categories.contains(category)){
-				if(category.equals(STRING_RESOURCE_BUNDLE.getFromStringConstants("PrimaryCategory"))){
+			if (!categories.contains(category)) {
+				if (category.equals(STRING_RESOURCE_BUNDLE.getFromStringConstants("PrimaryCategory"))) {
 					categories.add(0, category);
-				} else if (!category.equals(STRING_RESOURCE_BUNDLE.getFromStringConstants("HiddenCategory"))){
+				} else if (!category.equals(STRING_RESOURCE_BUNDLE.getFromStringConstants("HiddenCategory"))) {
 					categories.add(category);
 				}
 			}
@@ -102,36 +110,38 @@ public class AttributeCommandCenter{
 		sP.setVbarPolicy(ScrollBarPolicy.AS_NEEDED);
 		sP.setPadding(new Insets(STANDARD_SPACING));
 		sP.setMaxHeight(NUMERIC_RESOURCE_BUNDLE.getFromSizing("MaxMenuContentHeight"));
-		
+
 		GridPane contents_Att = new GridPane();
-		
+
 		int count = 0;
 		for (AttributeReader<?> attributeReader : attributeOwnerReader.getMyAttributes().getAllAttributeReaders()) {
 			String category = STRING_RESOURCE_BUNDLE.getFromAttributeCategories(attributeReader.getName());
-			if(!category.equals(attributeCategory)){
+			if (!category.equals(attributeCategory)) {
 				continue;
 			}
 			Label attLabel = new Label(attributeReader.getName());
 			contents_Att.add(attLabel, 0, count);
 			GridPane.setHalignment(attLabel, HPos.RIGHT);
 			Node n = createAttributeValueViewer(attributeOwnerReader, attributeReader);
-			//GridPane.setHalignment(n, HPos.CENTER);
+			// GridPane.setHalignment(n, HPos.CENTER);
 			contents_Att.add(n, 1, count);
 			count++;
 		}
 		contents_Att.setVgap(STANDARD_SPACING);
-		contents_Att.setHgap(STANDARD_SPACING);		
+		contents_Att.setHgap(STANDARD_SPACING);
 		sP.setContent(contents_Att);
 		return sP;
 	}
 
-	private Node createBottomButtons(AttributeOwnerReader attributeOwnerReader){
-		AttributeCommandCenterBottomButtons attributeCommandCenterBottomButtons = new AttributeCommandCenterBottomButtons(myView, myHostStage);
+	private Node createBottomButtons(AttributeOwnerReader attributeOwnerReader) {
+		AttributeCommandCenterBottomButtons attributeCommandCenterBottomButtons = new AttributeCommandCenterBottomButtons(
+				myView, myHostStage);
 		Reflection.callAllMethods(attributeCommandCenterBottomButtons, attributeOwnerReader);
 		return attributeCommandCenterBottomButtons.getRoot();
-	}	
+	}
 
-	private Node createAttributeValueViewer(AttributeOwnerReader attributeOwnerReader, AttributeReader<?> attributeReader) {
+	private Node createAttributeValueViewer(AttributeOwnerReader attributeOwnerReader,
+			AttributeReader<?> attributeReader) {
 		HBox finalViewer = new HBox();
 		AttributeVisualization attributeVisualization;
 		if (authorProperty.get()) {
@@ -142,8 +152,9 @@ public class AttributeCommandCenter{
 			attributeVisualization = new AttributeViewerCreator(myView, attributeReader);
 		}
 		String methodNameFormat = attributeVisualization.getMethodNameFormat();
-		Node right = (Node) Reflection.callMethod(attributeVisualization, String.format(methodNameFormat, STRING_RESOURCE_BUNDLE.getFromAttributeTypes(attributeReader.getName())));			
-		
+		Node right = (Node) Reflection.callMethod(attributeVisualization, String.format(methodNameFormat,
+				STRING_RESOURCE_BUNDLE.getFromAttributeTypes(attributeReader.getName())));
+
 		try {
 			finalViewer.getChildren().add(right);
 		} catch (NullPointerException e) {

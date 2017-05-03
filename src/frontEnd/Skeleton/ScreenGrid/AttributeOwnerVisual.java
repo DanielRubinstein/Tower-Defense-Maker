@@ -1,6 +1,6 @@
 package frontEnd.Skeleton.ScreenGrid;
 
-import backEnd.GameData.State.SerializableObservable;
+import backEnd.GameData.State.SerializableObserver;
 import javafx.scene.image.ImageView;
 /**
  * Interface that defines the front end counterpart of AttributeOwners.
@@ -8,20 +8,13 @@ import javafx.scene.image.ImageView;
  * @author Tim
  *
  */
-public interface AttributeOwnerVisual {
+public interface AttributeOwnerVisual extends SerializableObserver{
 
 	/**
 	 * Gets the associated ImageView to be displayed on Screen.
 	 * @return
 	 */
 	ImageView getImageView();
-
-	/**
-	 * 
-	 * @param o
-	 * @param arg
-	 */
-	void update(SerializableObservable o, Object arg);
 
 	/**
 	 * 

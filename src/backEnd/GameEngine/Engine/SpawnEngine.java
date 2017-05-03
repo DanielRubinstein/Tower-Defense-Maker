@@ -2,7 +2,11 @@
 package backEnd.GameEngine.Engine;
 
 import java.util.Collection;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+
+import org.omg.CosNaming.NamingContextExtPackage.StringNameHelper;
 
 import backEnd.Attribute.Attribute;
 import backEnd.Bank.BankControllerImpl;
@@ -16,8 +20,8 @@ import backEnd.GameEngine.Engine.Spawning.SpawnQueues;
 import javafx.geometry.Point2D;
 
 /**
- * 
- * @author GameEngine team (Alex, Christian, Daniel)
+ * Deals with spawning Components in State
+ * @author Alex Salas
  */
 public class SpawnEngine implements Engine {
 
@@ -42,21 +46,19 @@ public class SpawnEngine implements Engine {
 		if (gamePaused) {
 			return;
 		}
+		Map<String, SpawnQueues> spawnQueues = gameData.getState().getSpawnQueues();
+		Map<String, List<String>> toSpawnMap = new HashMap<String, List<String>>();
+		for(String key : spawnQueues.keySet()){
+			List<String> toSpawn = spawnQueues.get(key).getNextSpawns(gameData.getGameTime(), stepTime);
+			toSpawnMap.put(key, toSpawn);
+		}
 		Collection<Tile> tileList = gameData.getState().getTileGrid().getAllTiles();
 		for (Tile spawnTile : tileList) {
-			String spawnQueueNameObj = spawnTile.<String>getAttribute("SpawnTimeline").getValue();
-			SpawnQueues currentSpawnQueue = gameData.getState().getSpawnQueues().get(spawnQueueNameObj);
-			if (currentSpawnQueue != null) {
-				// Spawning with frequencies
-				//System.out.println(this.getClass().getName() + ": FrequencyQueue: " + currentSpawnQueue.getFrequencySpawnQueue().size());
-				for (String component : currentSpawnQueue.getNextFrequencySpawn(gameData.getGameTime(), stepTime)) {
+			String spawnQueueName = spawnTile.<String>getAttribute("SpawnTimeline").getValue();
+			List<String> spawnList = toSpawnMap.get(spawnQueueName);
+			if (spawnList != null) {
+				for (String component : spawnList) {
 					spawn(myBank.getComponent(component), spawnTile);
-				}
-				// Spawning directly with spawn queue
-				String componentSingleSpawnName = currentSpawnQueue.getNextSingleSpawn(gameData.getGameTime());
-				if(componentSingleSpawnName != null){
-					Component nextQueueSpawn = myBank.getComponent(componentSingleSpawnName);
-					spawn(nextQueueSpawn, spawnTile);
 				}
 			}
 		}
@@ -65,7 +67,7 @@ public class SpawnEngine implements Engine {
 
 	private void updateSpawnTimelines(double gameTime) {
 		for(SpawnQueues spawnQueue : myState.getSpawnQueues().values()){
-			spawnQueue.update(gameTime);
+			spawnQueue.update();
 		}
 	}
 

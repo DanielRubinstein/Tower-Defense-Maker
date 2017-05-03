@@ -72,6 +72,7 @@ public class XMLReaderImpl implements XMLReader{
 		for (String x : instantiatorMap.keySet())
 		{
 			spawnMap.put(x, new SpawnQueues(instantiatorMap.get(x)));
+			spawnMap.get(x).setInitialSpawnIterations();
 		}
 		
 		TileGrid grid = new TileGridImpl((TileGridInstantiator) xStream.fromXML(new File(filePath + "/" + levelName + "/" + 
@@ -89,19 +90,18 @@ public class XMLReaderImpl implements XMLReader{
 		return new GameData(state, (PlayerStatus) xStream.fromXML(new File(filePath+"/" + levelName+"/" + 
 				strResources.getFromFilePaths("PlayerStatus_FileName") + ".xml")), (RulesMap) xStream.fromXML(new 
 				File(filePath+"/" + levelName+"/" + strResources.getFromFilePaths("Rules_FileName") + ".xml")));
-
 	}
 
 	private void makeAttributeOwnersCompatible(Collection<AttributeOwner> myAttrOwners, Set<String> defaultAttrNames) throws FileNotFoundException {
 		AttributeFactory myAF = new AttributeFactoryImpl();
 		for(AttributeOwner ao : myAttrOwners){
-			//add missing attributes to tiles
+			//add missing attributes
 			for(String attName : defaultAttrNames){
 				if(!ao.contains(attName)){
 					ao.addAttribute(attName, myAF.getAttribute(attName));
 				}
 			}
-			//remove extra attributes from
+			//remove extra attributes
 			for(AttributeReader<?> att : ao.getMyAttributes().getAllAttributeReaders()){
 				if(!defaultAttrNames.contains(att.getName())){
 					ao.removeAttribute(att.getName());

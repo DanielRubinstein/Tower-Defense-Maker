@@ -2,8 +2,14 @@ package backEnd.GameEngine.Engine.Spawning;
 
 public interface SpawnDataReader {
 	
-	public String getPresetName();
+	String getPresetName();
 	
-	public double getTime();
+	double getFrequency();
+
+	double getDelay();
+
+	int getSpawns();
+
+	boolean isRecentSpawn();
 	
 }

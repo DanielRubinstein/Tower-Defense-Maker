@@ -1,38 +1,78 @@
 package backEnd.GameEngine.Engine.Spawning;
 
 /**
- * Container class for Components to spawn with the time/frequency to spawn them at
+ * Container class for Components to spawn with the time/frequency to spawn them
+ * at
+ * 
  * @author Alex
  *
  */
-public class SpawnDataImpl implements Comparable<SpawnDataImpl>, SpawnData{
+public class SpawnDataImpl implements SpawnData {
 
 	private String mySpawnable;
-	private double myTime;
-	
-	public SpawnDataImpl(String component, double time) {
+	private double myFrequency;
+	private double myDelay;
+	private int mySpawns;
+	private int startingSpawns;
+	private boolean recentSpawn;
+
+	public SpawnDataImpl(String component, double frequency, double delay, int spawns) {
 		mySpawnable = component;
-		myTime = time;
+		myFrequency = frequency;
+		myDelay = delay;
+		mySpawns = spawns;
+		startingSpawns = spawns;
 	}
-	
+
 	@Override
 	public String getPresetName() {
 		return mySpawnable;
 	}
-	
+
 	@Override
-	public double getTime() {
-		return myTime;
+	public double getFrequency() {
+		return myFrequency;
 	}
-	
+
 	@Override
-	public void setTime(Double myNewTime) {
-		this.myTime = myNewTime;
+	public void setFrequency(double myFrequency) {
+		this.myFrequency = myFrequency;
 	}
-	
+
 	@Override
-	public int compareTo(SpawnDataImpl o) {
-		return (int)(this.getTime()-o.getTime());
+	public double getDelay() {
+		return myDelay;
+	}
+
+	@Override
+	public void setDelay(double myDelay) {
+		this.myDelay = myDelay;
+	}
+
+	@Override
+	public int getSpawns() {
+		return mySpawns;
+	}
+
+	@Override
+	public void setSpawns(int mySpawns) {
+		this.mySpawns = mySpawns;
+	}
+
+	@Override
+	public boolean isRecentSpawn() {
+		return recentSpawn;
+	}
+
+	@Override
+	public void setRecentSpawn(boolean recentSpawn) {
+		this.recentSpawn = recentSpawn;
+	}
+
+	@Override
+	public void setStartingIterations() {
+		mySpawns = startingSpawns;
+		
 	}
 
 }

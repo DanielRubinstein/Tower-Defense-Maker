@@ -1,16 +1,24 @@
 package frontEnd.Skeleton.UserTools.Presets;
 
 import java.util.Collection;
-import java.util.Map;
 
 import backEnd.Attribute.AttributeOwner;
 import frontEnd.View;
-import frontEnd.Skeleton.UserTools.SkeletonObject;
+import frontEnd.Skeleton.SkeletonObject;
 import javafx.geometry.Side;
 import javafx.scene.Node;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
+
+/**
+ * This class holds the two palettes (one for components and one for tiles)
+ * 
+ * It grabs the presets from Bank Controller.
+ * 
+ * @author Miguel Anderson
+ *
+ */
 
 public class PalettePane implements SkeletonObject {
 	private View myView;
@@ -41,7 +49,7 @@ public class PalettePane implements SkeletonObject {
 			presets = myView.getBankControllerReader().getAccessibleComponentPresets();
 		}
 		
-		Palette singlePalette = new Palette(myView, presets);
+		Palette singlePalette = new Palette(myView, presets, string);
 		ScrollPane scrollPane = new ScrollPane();
 		scrollPane.setContent(singlePalette.getRoot());
 		tab.setContent(scrollPane);

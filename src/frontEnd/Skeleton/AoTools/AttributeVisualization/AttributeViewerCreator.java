@@ -12,6 +12,14 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import resources.constants.StringResourceBundle;
 
+/**
+ * This class serves to give the node of the visualization of the attribute in a
+ * read-only format
+ * 
+ * @author Miguel Anderson
+ *
+ */
+
 public class AttributeViewerCreator implements AttributeVisualization{
 	private View myView;
 	private AttributeReader<?> myAttr;

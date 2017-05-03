@@ -2,9 +2,6 @@ package ModificationFromUser.AttributeOwner;
 
 import ModificationFromUser.ModificationFromUser;
 import backEnd.Model;
-import backEnd.ModelImpl;
-import backEnd.Attribute.AttributeOwner;
-import backEnd.Attribute.AttributeOwnerReader;
 import backEnd.GameData.State.Component;
 import frontEnd.CustomJavafxNodes.ErrorDialog;
 import javafx.geometry.Point2D;
@@ -21,7 +18,8 @@ public class Modification_UpgradeComponent implements ModificationFromUser{
 
 	@Override
 	public void invoke(Model myModel) throws Exception {
-		if (myModel.getPlayerStatusReader().getProperty("Money").getValue() - myCost < 0){
+		Double money = myModel.getPlayerStatusReader().getProperty("Money").getValue();
+		if (money < myCost){
 			new ErrorDialog().create("Not Enough Money", "You don't have enough money to purchase this component");
 			return;
 		}	

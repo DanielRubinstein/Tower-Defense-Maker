@@ -7,6 +7,7 @@ import java.util.Set;
 import java.util.function.Consumer;
 
 import ModificationFromUser.AttributeOwner.Modification_Add_PaletteToGrid;
+import ModificationFromUser.AttributeOwner.Modification_PurchaseComponent;
 import backEnd.Attribute.AttributeOwner;
 import backEnd.GameData.State.Component;
 import backEnd.GameData.State.ComponentGraph;
@@ -124,7 +125,7 @@ public class ComponentGridVisual extends GridVisualBase<Component> implements Se
 	}
 	@Override
 	public void addPreset(Component presetAO, Point2D pos){
-		myView.sendUserModification(new Modification_Add_PaletteToGrid(presetAO, pos));
+		myView.sendUserModification(new Modification_PurchaseComponent(presetAO, pos));
 	}
 
 	@Override

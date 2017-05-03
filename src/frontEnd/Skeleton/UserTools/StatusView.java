@@ -89,7 +89,7 @@ public class StatusView {
         globalBox.setStyle(strResources.getFromCustomCSS("StatusView"));
         globalBox.getChildren().add(0, namesBox);
         globalBox.getChildren().add(1, valuesBox);
-        myScrollPane.setMinHeight(150);
+        myScrollPane.setMinHeight(200);
         myScrollPane.setVbarPolicy(ScrollBarPolicy.NEVER);
         myScrollPane.setContent(globalBox);
 	}

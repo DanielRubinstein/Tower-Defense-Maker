@@ -10,10 +10,12 @@ import java.util.Map;
 import com.sun.xml.internal.ws.dump.LoggingDumpTube.Position;
 
 import ModificationFromUser.Modification_GameRemote;
+import ModificationFromUser.savingAndLoading.Modification_RestartLevel;
 import frontEnd.View;
 import frontEnd.CustomJavafxNodes.ActionButton;
 import frontEnd.CustomJavafxNodes.ErrorDialog;
 import frontEnd.CustomJavafxNodes.ToggleSwitch;
+import frontEnd.Skeleton.SkeletonObject;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.event.ActionEvent;
@@ -95,7 +97,7 @@ public class OptionsSelection implements SkeletonObject{
 		myButtonsAndTooltips=new LinkedHashMap<Button, Tooltip>();
 		myButtonsAndTooltips.put(createImageButton(PLAY_IMAGE, e-> myView.sendUserModification(Modification_GameRemote.PLAY) ,size), new Tooltip("Play game"));
 		myButtonsAndTooltips.put(createImageButton(PAUSE_IMAGE, e-> myView.sendUserModification(Modification_GameRemote.PAUSE) ,size), new Tooltip("Pause game"));
-		myButtonsAndTooltips.put(createImageButton(RESTART_IMAGE, e-> myView.sendUserModification(Modification_GameRemote.RESTART) ,size), new Tooltip("Restart level"));
+		myButtonsAndTooltips.put(createImageButton(RESTART_IMAGE, e-> myView.sendUserModification(new Modification_RestartLevel()) ,size), new Tooltip("Restart level"));
 		
 		for (Button b: myButtonsAndTooltips.keySet()){
 			modifyTooltipStartTiming(myButtonsAndTooltips.get(b));

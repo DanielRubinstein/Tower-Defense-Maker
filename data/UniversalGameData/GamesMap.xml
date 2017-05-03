@@ -1,52 +1,34 @@
 <?xml version="1.0"?><map>
   <entry>
-    <string>kk</string>
-    <list/>
-  </entry>
-  <entry>
-    <string></string>
-    <list/>
-  </entry>
-  <entry>
-    <string>TimGame</string>
-    <list/>
-  </entry>
-  <entry>
-    <string>MiguelTestGame</string>
+    <string>Christian</string>
     <list>
-      <string>level1</string>
-      <string>level2</string>
+      <string>Christian1</string>
+      <string>Christian2</string>
     </list>
   </entry>
   <entry>
-    <string>aasdf</string>
-    <list/>
-  </entry>
-  <entry>
-    <string>HeyLmaoGame</string>
+    <string>newPlayerStatusXML</string>r
     <list>
       <string>level1</string>
     </list>
   </entry>
   <entry>
-    <string>adfsdf</string>
-    <list/>
-  </entry>
-  <entry>
-    <string>testGameWin</string>
+    <string>Juan</string>
     <list>
-      <string>level2</string>
-    </list>
-  </entry>
-  <entry>
-    <string>testSplash</string>
-    <list>
-      <string>level1</string>
       <string>level1</string>
     </list>
   </entry>
   <entry>
-    <string>testLevelLoss</string>
-    <list/>
+    <string>Miguel&apos;s Game</string>
+    <list>
+      <string>BeachScene</string>
+    </list>
+  </entry>
+  <entry>
+    <string>Riley</string>
+    <list>
+      <string>Level 1</string>
+      <string>Level 2</string>
+    </list>
   </entry>
 </map>

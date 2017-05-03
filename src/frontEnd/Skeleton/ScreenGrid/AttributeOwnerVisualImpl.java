@@ -4,7 +4,6 @@ import java.util.MissingResourceException;
 
 import backEnd.Attribute.AttributeOwnerReader;
 import backEnd.GameData.State.SerializableObservable;
-import backEnd.GameData.State.SerializableObserver;
 import javafx.geometry.Point2D;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -16,7 +15,7 @@ import resources.constants.StringResourceBundle;
  * @author Tim, Miguel
  *
  */
-public class AttributeOwnerVisualImpl implements SerializableObserver, AttributeOwnerVisual{
+public class AttributeOwnerVisualImpl implements AttributeOwnerVisual{
 
 	private ImageView myImage;
 	private String myImagePath;
@@ -71,7 +70,7 @@ public class AttributeOwnerVisualImpl implements SerializableObserver, Attribute
 	
 	private void setImage(String newImagePath){
 		myImagePath = newImagePath;
-		Image image = new Image(getClass().getClassLoader().getResourceAsStream(newImagePath));
+		Image image = new Image(getClass().getClassLoader().getResourceAsStream(myImagePath));
 		myImage.setImage(image);
 	}
 

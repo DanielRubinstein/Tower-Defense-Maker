@@ -9,6 +9,7 @@ import frontEnd.Skeleton.UserTools.UserTools;
 import frontEnd.Skeleton.UserTools.UserToolsImpl;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 import resources.constants.StringResourceBundle;
@@ -75,6 +76,7 @@ public class SkeletonImpl implements Skeleton{
 	 * @see frontEnd.Skeleton.Skeleton#display(javafx.stage.Stage)
 	 */
 	public void display(Stage stage) {
+		stage.getIcons().add(new Image(stringResourceBundle.getFromStringConstants("LOGO")));
 		stage.setScene(myScene);
 		stage.setMinWidth(myScreenConstants.getWindowWidth());
 		stage.setMinHeight(myScreenConstants.getWindowHeight());

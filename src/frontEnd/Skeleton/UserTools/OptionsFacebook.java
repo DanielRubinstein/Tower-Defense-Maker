@@ -7,6 +7,7 @@ import frontEnd.CustomJavafxNodes.ActionButton;
 import frontEnd.CustomJavafxNodes.ButtonMenuImpl;
 import frontEnd.CustomJavafxNodes.ErrorDialog;
 import frontEnd.Facebook.FacebookInteractor;
+import frontEnd.Skeleton.SkeletonObject;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.Scene;

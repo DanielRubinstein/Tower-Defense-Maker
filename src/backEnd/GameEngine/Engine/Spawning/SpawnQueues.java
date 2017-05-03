@@ -6,108 +6,94 @@ import backEnd.GameData.State.SerializableObservable;
 import backEnd.GameData.State.SerializableObserver;
 
 /**
- * SpawnQueue object that is held in tiles to determine what needs to be spawned next
+ * SpawnQueue object that is held in tiles to determine what needs to be spawned
+ * next
+ * 
  * @author Alex
  *
  */
-public class SpawnQueues implements SerializableObservable{
-	
-	private List<SpawnDataImpl> myFrequencySpawnQueue;
-	private List<SpawnDataImpl> mySingleSpawnQueue;
-	private double myTimeLastQueueSpawned;
+public class SpawnQueues implements SerializableObservable {
+
+	private List<SpawnDataImpl> mySpawnQueue;
 	private int myCurrentSpawn;
-	private double myGameTime;
 	private List<SerializableObserver> observers = new ArrayList<SerializableObserver>();
+
 	/**
 	 * Initializes blank lists to spawn from
 	 */
 	public SpawnQueues() {
-		myFrequencySpawnQueue = new ArrayList<SpawnDataImpl>();
-		mySingleSpawnQueue	 = new ArrayList<SpawnDataImpl>();
-	}
-	
-	public SpawnQueues(SpawnQueueInstantiator i)
-	{
-
-			myFrequencySpawnQueue = i.getFrequencyQueue();
-			mySingleSpawnQueue = i.getSpawnQueue();
-			myTimeLastQueueSpawned = i.getLastSpawnTime();
-			myCurrentSpawn = i.getCurrentSpawn();
-			myGameTime = i.getGameTime();		
-	}
-	
-	public SpawnQueueInstantiator getInstantiator()
-	{
-		return new SpawnQueueInstantiator(myFrequencySpawnQueue, mySingleSpawnQueue, myTimeLastQueueSpawned, myCurrentSpawn, myGameTime);
+		mySpawnQueue = new ArrayList<SpawnDataImpl>();
 	}
 
+	public SpawnQueues(SpawnQueueInstantiator i) {
 
-	/**
-	 * 
-	 * @return frequencyQueue
-	 */
-	public List<? extends SpawnDataReader> getFrequencySpawnQueue(){
-		return myFrequencySpawnQueue; 
+		mySpawnQueue = i.getSpawnQueue();
+		myCurrentSpawn = i.getCurrentSpawn();
 	}
-	
+
+	public SpawnQueueInstantiator getInstantiator() {
+		return new SpawnQueueInstantiator(mySpawnQueue, myCurrentSpawn);
+	}
+
 	/**
 	 * SpawnQueue return
+	 * 
 	 * @return
 	 */
 	public List<? extends SpawnDataReader> getSingleSpawnQueue() {
-		return mySingleSpawnQueue;
+		return mySpawnQueue;
 	}
-	
-	/**
-	 * @return the next component in the spawn Queue if enough time has passed
-	 */
-	public String getNextSingleSpawn(double gameTime) {
-		//System.out.println(this.getClass().getSimpleName() + ": " + myCurrentSpawn + " | " + mySingleSpawnQueue.size() + " | " + gameTime + " | " + myTimeLastQueueSpawned + " | " + mySingleSpawnQueue.get(myCurrentSpawn).getTime());
-		if(myCurrentSpawn >= mySingleSpawnQueue.size() || gameTime - myTimeLastQueueSpawned < mySingleSpawnQueue.get(myCurrentSpawn).getTime()){
-			return null;
-		}
-		return mySingleSpawnQueue.get(myCurrentSpawn).getPresetName();
-	}
-	
-	/**
-	 * 
-	 * @param timePassed
-	 * @return
-	 */
-	public List<String> getNextFrequencySpawn(double gameTime, double gameStep){
+
+	public List<String> getNextSpawns(double gameTime, double gameStep) {
 		List<String> spawnList = new ArrayList<String>();
-		for (int i = 0; i < myFrequencySpawnQueue.size(); i++) {
-			SpawnDataImpl spawnData = myFrequencySpawnQueue.get(i);
-			double frequency = spawnData.getTime();
-			double modFreq = gameTime % frequency;
-			//System.out.println(this.getClass().getSimpleName() + " " + (gameStep > modFreq) + " : " + modFreq + " : " + gameTime + " : " + frequency);
-			if(gameStep > modFreq){
-				spawnList.add(myFrequencySpawnQueue.get(i).getPresetName());
+		for (int i = 0; i < mySpawnQueue.size(); i++) {
+			SpawnData currentSpawnData = mySpawnQueue.get(i);
+			//System.out.println(this.getClass().getSimpleName() + ": Delay: " + currentSpawnData.getDelay() + " | Frequency: " + currentSpawnData.getFrequency() + " | Spawns left: " + currentSpawnData.getSpawns());
+			double frequency = currentSpawnData.getFrequency();
+			double modFreq = (gameTime - currentSpawnData.getDelay()) % frequency;
+			if(gameTime < currentSpawnData.getDelay() || currentSpawnData.getSpawns() <= 0 || gameStep <= modFreq){
+				//System.out.println(this.getClass().getSimpleName() + ": Not spawning");
+				continue;
 			}
-		}		
+			spawnList.add(mySpawnQueue.get(i).getPresetName());
+			currentSpawnData.setRecentSpawn(true);
+		}
 		return spawnList;
 	}
 
-	public void update(double gameTime) {
-		myGameTime = gameTime;
-		if(myCurrentSpawn >= mySingleSpawnQueue.size() || myGameTime - myTimeLastQueueSpawned < mySingleSpawnQueue.get(myCurrentSpawn).getTime()){} else {
-			myTimeLastQueueSpawned = myGameTime;
-			myCurrentSpawn++;
+	public void update() {
+		for (int i = 0; i < mySpawnQueue.size(); i++) {
+			SpawnData currentSpawnData = mySpawnQueue.get(i);
+			if(currentSpawnData.isRecentSpawn()){
+				currentSpawnData.setRecentSpawn(false);
+				currentSpawnData.setSpawns(currentSpawnData.getSpawns() - 1);
+				//System.out.println(this.getClass().getSimpleName() + ": Spawns: " + currentSpawnData.getSpawns());
+				if(currentSpawnData.getSpawns() == 0){
+					//TODO remove? Or no?
+				}
+			}
 		}
 	}
 
-	public void add(SpawnDataImpl mySpawnData, boolean isFrequencySpawn) {
-		if(isFrequencySpawn){
-			myFrequencySpawnQueue.add(mySpawnData);
-		} else{
-			mySingleSpawnQueue.add(mySpawnData);
-		}
+	public void add(SpawnDataImpl mySpawnData) {
+		mySpawnQueue.add(mySpawnData);
 		notifyObservers(mySpawnData);
 	}
 
+	public void remove(SpawnDataReader mySpawnDataToRemove) {
+		mySpawnQueue.remove(mySpawnDataToRemove);
+		this.notifyObservers(mySpawnDataToRemove);
+	}
+	
 	private void notifyObservers(Object obj) {
-		for (SerializableObserver o : observers){
+		for (SerializableObserver o : observers) {
 			o.update(this, obj);
+		}
+	}
+	
+	public void setInitialSpawnIterations(){
+		for(SpawnDataImpl spawn : mySpawnQueue){
+			spawn.setStartingIterations();
 		}
 	}
 
@@ -129,12 +115,6 @@ public class SpawnQueues implements SerializableObservable{
 	@Override
 	public void setObservers(List<SerializableObserver> observersave) {
 		observers = observersave;
-	}
-
-	public void remove(SpawnDataReader mySpawnDataToRemove) {
-		myFrequencySpawnQueue.remove(mySpawnDataToRemove);
-		mySingleSpawnQueue.remove(mySpawnDataToRemove);
-		this.notifyObservers(mySpawnDataToRemove);
 	}
 
 	@Override

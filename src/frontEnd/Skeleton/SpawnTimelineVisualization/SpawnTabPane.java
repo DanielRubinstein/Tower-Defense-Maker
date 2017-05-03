@@ -9,7 +9,7 @@ import ModificationFromUser.Spawning.Modification_AddSpawnQueue;
 import ModificationFromUser.Spawning.Modification_RemoveSpawnQueue;
 import backEnd.GameEngine.Engine.Spawning.SpawnQueues;
 import frontEnd.View;
-import frontEnd.Skeleton.UserTools.SkeletonObject;
+import frontEnd.Skeleton.SkeletonObject;
 import javafx.scene.Node;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
@@ -24,10 +24,6 @@ public class SpawnTabPane implements SkeletonObject {
 	private Map<String, SpawnQueues> mySpawnQueues;
 
 	public SpawnTabPane(View view) {
-
-		// TODO there has to be some observation of the backend. When the
-		// spawnqueue changes, the front end must be notified so it can update.
-
 		myView = view;
 		myRoot = new TabPane();
 		mySpawnQueues = myView.getSpawnQueues();
@@ -39,8 +35,17 @@ public class SpawnTabPane implements SkeletonObject {
 
 	private void addPresetQueues() {
 		for (Map.Entry<String, SpawnQueues> entry : mySpawnQueues.entrySet()) {
+			extractTimelineIndex(entry.getKey());
 			createNewTimelineTab(entry.getKey(), entry.getValue());
 		}
+	}
+
+	private void extractTimelineIndex(String key) {
+		Integer index = Integer.parseInt(key.substring(key.indexOf(' ')+1));
+		if(takenIDs == null){
+			takenIDs = new ArrayList<Integer>();
+		}
+		takenIDs.add(index);
 	}
 
 	private void createNewTimelineTab(String key, SpawnQueues value) {
@@ -48,7 +53,7 @@ public class SpawnTabPane implements SkeletonObject {
 		Tab newSpawnTab = new Tab(key);
 		newSpawnTab.setContent(spawnTimelineView.getRoot());
 		newSpawnTab.setOnCloseRequest(e -> {
-			if (checkWithUser(newSpawnTab)) {
+			if (checkWithUser()) {
 				takenIDs.remove(Integer.parseInt(key.substring(key.indexOf(' ')+1)));
 				myView.sendUserModification(new Modification_RemoveSpawnQueue(key));
 			} else {
@@ -76,6 +81,7 @@ public class SpawnTabPane implements SkeletonObject {
 
 	private void createNewTimelineTab() {
 		Integer tabID = nextTimelineIndex();
+		System.out.println(tabID);
 		String tabName = "Timeline " + tabID;
 		myView.sendUserModification(new Modification_AddSpawnQueue(tabName));
 		createNewTimelineTab(tabName, mySpawnQueues.get(tabName));
@@ -87,7 +93,7 @@ public class SpawnTabPane implements SkeletonObject {
 	 * @param tab
 	 * @return
 	 */
-	private boolean checkWithUser(Tab tab) {
+	private boolean checkWithUser() {
 		Alert alert = new Alert(AlertType.CONFIRMATION);
 		alert.setTitle("Close Confirmation");
 		alert.setHeaderText("Delete Spawn Timeline");
