@@ -1,6 +1,6 @@
 package frontEnd.Skeleton.ScreenGrid;
 
-import frontEnd.Skeleton.UserTools.SkeletonObject;
+import frontEnd.Skeleton.SkeletonObject;
 import javafx.beans.property.BooleanProperty;
 import javafx.scene.Node;
 import javafx.scene.control.Label;

@@ -10,9 +10,9 @@ public interface CommandCenter {
 	 * @param x
 	 * @param y
 	 */
-	void launch(String title, double x, double y);
+	public void launch(String title, double x, double y);
 	
 	
-	void generate(double x, double y, Stage myStage, Parent myRoot);
+	public void generate(double x, double y, Stage myStage, Parent myRoot);
 
 }

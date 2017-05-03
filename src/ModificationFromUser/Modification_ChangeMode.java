@@ -7,9 +7,5 @@ public class Modification_ChangeMode implements ModificationFromUser {
 	@Override
 	public void invoke(Model myModel) {
 		myModel.getMode().toggleUserMode();	
-		//myModel.getBankController().refreshAccessibleMaps();
 	}
-	
-	
-
 }

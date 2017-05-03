@@ -13,7 +13,7 @@ import util.reflection.Reflection;
  * Used for adding a preset attribute owner to the grid. Preset attribute owner
  * is passed as parameter in constructor
  * 
- * @author Derek
+ * @author Derek, Miguel Anderson
  *
  */
 public class Modification_Add_PaletteToGrid implements ModificationFromUser {
