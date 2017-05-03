@@ -60,9 +60,10 @@ public class Modification_Add_ToGrid_Methods {
 			if (compList.size() < tile.<Integer>getAttribute(strResources.getFromAttributeNames("BuildCapacity"))
 					.getValue()) {
 				addComponentToGrid(component);
-			} else {
-				new ModeException(myModel.getMode(), String.format(
-						strResources.getFromErrorMessages("Tile_Not_Buildable"),
+				component.setAttributeValue("SaveToTemplate", false);
+			}
+			else{
+				new ModeException(myModel.getMode(), String.format(strResources.getFromErrorMessages("Tile_Not_Buildable"), 
 						tile.<Integer>getAttribute(strResources.getFromAttributeNames("BuildCapacity")).getValue()));
 			}
 			break;

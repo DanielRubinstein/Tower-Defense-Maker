@@ -7316,7 +7316,7 @@
             <entry>
               <string>ImageFile</string>
               <backEnd.Attribute.AttributeImpl>
-                <myValue class="string">resources/images/Tiles/default_tile.png</myValue>
+                <myValue class="string">resources/images/Tiles/Yellow.png</myValue>
                 <myName>ImageFile</myName>
               </backEnd.Attribute.AttributeImpl>
             </entry>
@@ -7336,13 +7336,6 @@
               </backEnd.Attribute.AttributeImpl>
             </entry>
             <entry>
-              <string>Position</string>
-              <backEnd.Attribute.AttributeImpl>
-                <myValue class="javafx.geometry.Point2D" reference="../../../../../../javafx.geometry.Point2D"/>
-                <myName>Position</myName>
-              </backEnd.Attribute.AttributeImpl>
-            </entry>
-            <entry>
               <string>SpawnTimeline</string>
               <backEnd.Attribute.AttributeImpl>
                 <myValue class="string"></myValue>
@@ -7355,6 +7348,17 @@
               </backEnd.Attribute.AttributeImpl>
             </entry>
             <entry>
+              <string>Position</string>
+              <backEnd.Attribute.AttributeImpl>
+                <myValue class="javafx.geometry.Point2D">
+                  <x>157.5</x>
+                  <y>263.24999999999994</y>
+                  <hash>209903174</hash>
+                </myValue>
+                <myName>Position</myName>
+              </backEnd.Attribute.AttributeImpl>
+            </entry>
+            <entry>
               <string>GoalTile</string>
               <backEnd.Attribute.AttributeImpl>
                 <myValue class="boolean">false</myValue>
@@ -7364,7 +7368,7 @@
             <entry>
               <string>MoveDirection</string>
               <backEnd.Attribute.AttributeImpl>
-                <myValue class="string"></myValue>
+                <myValue class="string">Left</myValue>
                 <myParamList class="java.util.Arrays$ArrayList">
                   <a class="string-array">
                     <string>Up</string>
