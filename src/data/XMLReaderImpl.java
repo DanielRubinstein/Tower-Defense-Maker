@@ -72,6 +72,7 @@ public class XMLReaderImpl implements XMLReader{
 		for (String x : instantiatorMap.keySet())
 		{
 			spawnMap.put(x, new SpawnQueues(instantiatorMap.get(x)));
+			spawnMap.get(x).setInitialSpawnIterations();
 		}
 		
 		TileGrid grid = new TileGridImpl((TileGridInstantiator) xStream.fromXML(new File(filePath + "/" + levelName + "/" + 

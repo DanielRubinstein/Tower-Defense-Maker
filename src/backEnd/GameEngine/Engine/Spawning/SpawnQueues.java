@@ -90,6 +90,12 @@ public class SpawnQueues implements SerializableObservable {
 			o.update(this, obj);
 		}
 	}
+	
+	public void setInitialSpawnIterations(){
+		for(SpawnDataImpl spawn : mySpawnQueue){
+			spawn.setStartingIterations();
+		}
+	}
 
 	@Override
 	public void addObserver(SerializableObserver o) {
