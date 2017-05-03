@@ -29,6 +29,7 @@ public class TileGridInteractor implements GridInteractor<Tile> {
 
 	private Map<Tile,Node> selectedTiles;
 	private Collection<ImageView> arrowSet;
+	private Collection<ImageView> timelineIndicatorSet;
 	private View myView;
 	private TileGridVisual myTileGridVisual;
 	private State myState;
@@ -67,14 +68,32 @@ public class TileGridInteractor implements GridInteractor<Tile> {
 				});
 				clearSelection();
 			} else if (e.getCode().equals(KeyCode.SPACE)){
+				showTimelineIndicator();
 				showArrowsOnTiles();
 			}
 		});
 		p.setOnKeyReleased(e -> {
 			if(e.getCode().equals(KeyCode.SPACE)){
+				hideTimelineIndicator(p);
 				hideArrowsOnTiles(p);
 			}
 		});
+	}
+
+	private void showTimelineIndicator() {
+		if(timelineIndicatorSet != null && !timelineIndicatorSet.isEmpty()) return;
+		timelineIndicatorSet = new ArrayList<ImageView>();
+		myTileGridVisual.forEach(e -> {
+			ImageView imageView = myTileGridVisual.addTimelineIndicatorToVisual(e);
+			if(imageView!=null){
+				timelineIndicatorSet.add(imageView);
+			}
+		});
+	}
+
+	private void hideTimelineIndicator(Pane p) {
+		p.getChildren().removeAll(timelineIndicatorSet);
+		timelineIndicatorSet.clear();
 	}
 
 	private boolean isAMoveDirection(KeyEvent e) {
