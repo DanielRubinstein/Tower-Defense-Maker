@@ -48,11 +48,11 @@ public class SpawnQueues implements SerializableObservable {
 		List<String> spawnList = new ArrayList<String>();
 		for (int i = 0; i < mySpawnQueue.size(); i++) {
 			SpawnData currentSpawnData = mySpawnQueue.get(i);
-			System.out.println(this.getClass().getSimpleName() + ": Delay: " + currentSpawnData.getDelay() + " | Frequency: " + currentSpawnData.getFrequency() + " | Spawns left: " + currentSpawnData.getSpawns());
+			//System.out.println(this.getClass().getSimpleName() + ": Delay: " + currentSpawnData.getDelay() + " | Frequency: " + currentSpawnData.getFrequency() + " | Spawns left: " + currentSpawnData.getSpawns());
 			double frequency = currentSpawnData.getFrequency();
 			double modFreq = (gameTime - currentSpawnData.getDelay()) % frequency;
 			if(gameTime < currentSpawnData.getDelay() || currentSpawnData.getSpawns() <= 0 || gameStep <= modFreq){
-				System.out.println(this.getClass().getSimpleName() + ": Not spawning");
+				//System.out.println(this.getClass().getSimpleName() + ": Not spawning");
 				continue;
 			}
 			spawnList.add(mySpawnQueue.get(i).getPresetName());
@@ -67,7 +67,7 @@ public class SpawnQueues implements SerializableObservable {
 			if(currentSpawnData.isRecentSpawn()){
 				currentSpawnData.setRecentSpawn(false);
 				currentSpawnData.setSpawns(currentSpawnData.getSpawns() - 1);
-				System.out.println(this.getClass().getSimpleName() + ": Spawns: " + currentSpawnData.getSpawns());
+				//System.out.println(this.getClass().getSimpleName() + ": Spawns: " + currentSpawnData.getSpawns());
 				if(currentSpawnData.getSpawns() == 0){
 					//TODO remove? Or no?
 				}
