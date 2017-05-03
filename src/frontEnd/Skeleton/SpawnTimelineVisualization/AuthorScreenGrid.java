@@ -1,8 +1,8 @@
 package frontEnd.Skeleton.SpawnTimelineVisualization;
 
 import frontEnd.View;
+import frontEnd.Skeleton.SkeletonObject;
 import frontEnd.Skeleton.ScreenGrid.ScreenGrid;
-import frontEnd.Skeleton.UserTools.SkeletonObject;
 import javafx.scene.Node;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;

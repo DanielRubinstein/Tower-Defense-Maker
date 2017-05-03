@@ -8,7 +8,7 @@ import backEnd.LevelProgression.LevelProgressionControllerReader;
 import frontEnd.View;
 import frontEnd.CustomJavafxNodes.ActionButton;
 import frontEnd.CustomJavafxNodes.RestrictedPermissions;
-import frontEnd.Skeleton.UserTools.SkeletonObject;
+import frontEnd.Skeleton.SkeletonObject;
 import javafx.beans.property.BooleanProperty;
 import javafx.geometry.Insets;
 import javafx.scene.Node;

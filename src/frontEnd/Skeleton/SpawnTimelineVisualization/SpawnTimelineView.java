@@ -15,7 +15,7 @@ import backEnd.GameEngine.Engine.Spawning.SpawnDataReader;
 import backEnd.GameEngine.Engine.Spawning.SpawnQueues;
 import frontEnd.View;
 import frontEnd.CustomJavafxNodes.SingleFieldPrompt;
-import frontEnd.Skeleton.UserTools.SkeletonObject;
+import frontEnd.Skeleton.SkeletonObject;
 import javafx.beans.property.ReadOnlyDoubleProperty;
 import javafx.geometry.Insets;
 import javafx.scene.Node;

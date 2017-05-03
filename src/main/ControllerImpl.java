@@ -6,12 +6,10 @@ import ModificationFromUser.ModificationFromUser;
 import backEnd.ModelImpl;
 import backEnd.GameData.GameData;
 import backEnd.GameEngine.EngineStatus;
-import backEnd.Mode.ModeImpl;
 import data.GamePrep.DataInputLoader;
 import data.GamePrep.Menus.MenuController;
 import frontEnd.ViewImpl;
 import frontEnd.CustomJavafxNodes.ErrorDialog;
-import frontEnd.Facebook.FacebookConnector;
 import frontEnd.Facebook.FacebookInteractor;
 import javafx.stage.Stage;
 import resources.constants.StringResourceBundle;
@@ -37,7 +35,7 @@ public class ControllerImpl implements Controller {
 				(ModificationFromUser m) -> {
 					try {
 						executeInteraction(m);
-//						System.out.println("In Controller - Modification from fE to bE executed");
+						//System.out.println("In Controller - Modification from fE to bE executed");
 					} catch (Exception e) {
 						e.printStackTrace();
 						ErrorDialog errDia = new ErrorDialog();
@@ -51,13 +49,13 @@ public class ControllerImpl implements Controller {
 					}
 				};
 
-		setGameData = o ->
+		setGameData = inputGameObject ->
 		{
 			try {
 				if (myView != null){
 					myView.closeMainWindow();
 				}
-				DataInputLoader loader = new DataInputLoader(o);
+				DataInputLoader loader = new DataInputLoader(inputGameObject);
 				GameData initialGameData = loader.getGameData();
 				
 				initialGameData.setEngineStatus(myEngineStatus);
@@ -76,6 +74,7 @@ public class ControllerImpl implements Controller {
 		MenuController myMenu = new MenuController(setGameData, (FacebookInteractor f) -> setFb(f));
 		myMenu.showMenus(stage);
 	}
+	
 	private void setFb(FacebookInteractor fb){
 		myFb=fb;
 	}

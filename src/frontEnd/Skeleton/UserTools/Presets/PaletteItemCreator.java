@@ -3,10 +3,7 @@ package frontEnd.Skeleton.UserTools.Presets;
 import java.util.function.BiConsumer;
 import java.util.function.Consumer;
 
-import com.restfb.types.Group;
-
 import ModificationFromUser.AttributeOwner.Modification_Remove_FromPalette;
-import backEnd.Attribute.AttributeOwner;
 import backEnd.Attribute.AttributeOwnerReader;
 import backEnd.Bank.BankControllerReader;
 import frontEnd.View;
@@ -23,10 +20,18 @@ import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.input.TransferMode;
 
+/**
+ * This class creates the clickable, disable-able, draggable and customizable
+ * preset images in the preset palette.
+ * 
+ * @author Miguel Anderson
+ *
+ */
+
 public class PaletteItemCreator {
 	private View myView;
 	private BankControllerReader observedBankController;
-	
+
 	public PaletteItemCreator(View view, BankControllerReader bankControllerReader) {
 		myView = view;
 		observedBankController = bankControllerReader;
@@ -36,23 +41,24 @@ public class PaletteItemCreator {
 		setClickEvent(imageView, (iV) -> {
 			GenericCommandCenter presetComCenter = new GenericCommandCenter(myView, preset);
 			presetComCenter.launch("Preset", iV.getBoundsInParent().getMinX(), iV.getBoundsInParent().getMinY());
-		},setRemoveEvent(imageView),preset);
+		}, setRemoveEvent(imageView), preset);
 		makeHoverOverName(preset, imageView);
 		makePresetDraggable(preset, imageView);
 	}
 
-	private void setClickEvent(Node imageView, Consumer<Node> consumer, BiConsumer<AttributeOwnerReader, MouseEvent> c, AttributeOwnerReader aO) {
+	private void setClickEvent(Node imageView, Consumer<Node> consumer, BiConsumer<AttributeOwnerReader, MouseEvent> c,
+			AttributeOwnerReader aO) {
 		imageView.setOnMouseClicked(mouseEvent -> {
 			if (mouseEvent.getButton().equals(MouseButton.PRIMARY)) {
 				consumer.accept(imageView);
-			} else if (mouseEvent.getButton().equals(MouseButton.SECONDARY)){
+			} else if (mouseEvent.getButton().equals(MouseButton.SECONDARY)) {
 				c.accept(aO, mouseEvent);
 			}
-		});	
+		});
 	}
-	
-	private BiConsumer<AttributeOwnerReader, MouseEvent> setRemoveEvent(Node imageView){
-		return(a, m) -> {
+
+	private BiConsumer<AttributeOwnerReader, MouseEvent> setRemoveEvent(Node imageView) {
+		return (a, m) -> {
 			ContextMenu removeMenu = new ContextMenu();
 			MenuItem removeItem = new MenuItem("Remove from palette");
 			removeItem.setOnAction(e -> {
@@ -62,9 +68,9 @@ public class PaletteItemCreator {
 			removeMenu.setAutoHide(true);
 			removeMenu.show(imageView, m.getScreenX(), m.getScreenY());
 		};
-		
+
 	}
-	
+
 	private void makeHoverOverName(AttributeOwnerReader preset, ImageView imageView) {
 		Tooltip t = new Tooltip(observedBankController.getPresetName(preset));
 		imageView.hoverProperty().addListener((o, oldV, newV) -> {

@@ -1,4 +1,4 @@
-package frontEnd.Skeleton.UserTools;
+package frontEnd.Skeleton;
 
 import javafx.scene.Node;
 /**
@@ -9,7 +9,7 @@ import javafx.scene.Node;
 public interface SkeletonObject {
 
 	/**
-	 * Gets the Node of what is to portrayed on screen
+	 * Offers the node that can be added to other nodes and displayed on the screen
 	 * @return
 	 */
 	public Node getRoot();

@@ -1,6 +1,7 @@
 package frontEnd.Skeleton.UserTools;
 
 import frontEnd.ViewReader;
+import frontEnd.Skeleton.SkeletonObject;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.scene.Node;

@@ -14,6 +14,7 @@ import frontEnd.View;
 import frontEnd.CustomJavafxNodes.ActionButton;
 import frontEnd.CustomJavafxNodes.ErrorDialog;
 import frontEnd.CustomJavafxNodes.ToggleSwitch;
+import frontEnd.Skeleton.SkeletonObject;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.event.ActionEvent;
