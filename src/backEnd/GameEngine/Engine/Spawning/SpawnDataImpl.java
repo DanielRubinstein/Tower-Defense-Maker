@@ -13,6 +13,7 @@ public class SpawnDataImpl implements SpawnData {
 	private double myFrequency;
 	private double myDelay;
 	private int mySpawns;
+	private int startingSpawns;
 	private boolean recentSpawn;
 
 	public SpawnDataImpl(String component, double frequency, double delay, int spawns) {
@@ -20,6 +21,7 @@ public class SpawnDataImpl implements SpawnData {
 		myFrequency = frequency;
 		myDelay = delay;
 		mySpawns = spawns;
+		startingSpawns = spawns;
 	}
 
 	@Override
@@ -65,6 +67,12 @@ public class SpawnDataImpl implements SpawnData {
 	@Override
 	public void setRecentSpawn(boolean recentSpawn) {
 		this.recentSpawn = recentSpawn;
+	}
+
+	@Override
+	public void setStartingIterations() {
+		mySpawns = startingSpawns;
+		
 	}
 
 }
