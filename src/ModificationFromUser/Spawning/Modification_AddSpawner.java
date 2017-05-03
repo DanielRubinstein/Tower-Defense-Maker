@@ -12,6 +12,7 @@ public class Modification_AddSpawner implements ModificationFromUser{
 
 	private String mySpawnQueueName;
 	private SpawnDataImpl mySpawnData;
+	private String compName;
 	
 	/**
 	 * 
@@ -22,11 +23,13 @@ public class Modification_AddSpawner implements ModificationFromUser{
 	public Modification_AddSpawner(String spawnQueueName, String component, double frequency, double delay, int spawns) {
 		mySpawnQueueName = spawnQueueName;
 		mySpawnData = new SpawnDataImpl(component, frequency, delay, spawns);
+		this.compName = component;
 	}
 	
 	@Override
 	public void invoke(Model myModel) throws Exception {
 		myModel.getState().getSpawnQueues().get(mySpawnQueueName).add(mySpawnData);
+		myModel.getBankControllerReader().getComponent(compName).setAttributeValue("SaveToTemplate", false);
 	}
 
 }
