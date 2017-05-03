@@ -6,8 +6,23 @@
         <backEnd.GameEngine.Engine.Spawning.SpawnDataImpl>
           <mySpawnable>rn_Goomba</mySpawnable>
           <myFrequency>4.0</myFrequency>
-          <myDelay>2.0</myDelay>
-          <mySpawns>14</mySpawns>
+          <myDelay>3.0</myDelay>
+          <mySpawns>20</mySpawns>
+          <recentSpawn>false</recentSpawn>
+        </backEnd.GameEngine.Engine.Spawning.SpawnDataImpl>
+      </mySpawnQueue>
+      <myCurrentSpawn>0</myCurrentSpawn>
+    </backEnd.GameEngine.Engine.Spawning.SpawnQueueInstantiator>
+  </entry>
+  <entry>
+    <string>Timeline 4</string>
+    <backEnd.GameEngine.Engine.Spawning.SpawnQueueInstantiator>
+      <mySpawnQueue>
+        <backEnd.GameEngine.Engine.Spawning.SpawnDataImpl>
+          <mySpawnable>rn_Gold Goomba</mySpawnable>
+          <myFrequency>6.0</myFrequency>
+          <myDelay>5.0</myDelay>
+          <mySpawns>10</mySpawns>
           <recentSpawn>false</recentSpawn>
         </backEnd.GameEngine.Engine.Spawning.SpawnDataImpl>
       </mySpawnQueue>
@@ -20,9 +35,9 @@
       <mySpawnQueue>
         <backEnd.GameEngine.Engine.Spawning.SpawnDataImpl>
           <mySpawnable>rn_Goomba</mySpawnable>
-          <myFrequency>3.0</myFrequency>
+          <myFrequency>4.0</myFrequency>
           <myDelay>0.0</myDelay>
-          <mySpawns>14</mySpawns>
+          <mySpawns>20</mySpawns>
           <recentSpawn>false</recentSpawn>
         </backEnd.GameEngine.Engine.Spawning.SpawnDataImpl>
       </mySpawnQueue>

@@ -17,7 +17,7 @@
         <myVal>0.0</myVal>
         <minVal>0.0</minVal>
         <maxVal>100.0</maxVal>
-        <enabled>false</enabled>
+        <enabled>true</enabled>
         <myKeyName>Health</myKeyName>
         <myDisplayString>Health value to lose the level</myDisplayString>
       </backEnd.GameData.Rules.EndCondition.HealthLoseCondition>
@@ -36,10 +36,10 @@
     <entry>
       <string>KillCount</string>
       <backEnd.GameData.Rules.EndCondition.KillCountCondition>
-        <myVal>0.0</myVal>
+        <myVal>15.0</myVal>
         <minVal>0.0</minVal>
         <maxVal>100.0</maxVal>
-        <enabled>false</enabled>
+        <enabled>true</enabled>
         <myKeyName>KillCount</myKeyName>
         <myDisplayString>Kill count to win the level</myDisplayString>
       </backEnd.GameData.Rules.EndCondition.KillCountCondition>

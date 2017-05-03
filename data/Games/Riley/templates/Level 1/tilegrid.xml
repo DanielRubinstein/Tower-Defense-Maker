@@ -1187,7 +1187,7 @@
             <entry>
               <string>SpawnTimeline</string>
               <backEnd.Attribute.AttributeImpl>
-                <myValue class="string"></myValue>
+                <myValue class="string">Timeline 4</myValue>
                 <myParamList class="java.util.Arrays$ArrayList">
                   <a class="string-array">
                     <string>Timeline 1</string>
@@ -2609,7 +2609,7 @@
             <entry>
               <string>GoalTile</string>
               <backEnd.Attribute.AttributeImpl>
-                <myValue class="boolean">false</myValue>
+                <myValue class="boolean">true</myValue>
                 <myName>GoalTile</myName>
               </backEnd.Attribute.AttributeImpl>
             </entry>
@@ -2797,7 +2797,7 @@
             <entry>
               <string>GoalTile</string>
               <backEnd.Attribute.AttributeImpl>
-                <myValue class="boolean">false</myValue>
+                <myValue class="boolean">true</myValue>
                 <myName>GoalTile</myName>
               </backEnd.Attribute.AttributeImpl>
             </entry>
@@ -4865,7 +4865,7 @@
             <entry>
               <string>GoalTile</string>
               <backEnd.Attribute.AttributeImpl>
-                <myValue class="boolean">false</myValue>
+                <myValue class="boolean">true</myValue>
                 <myName>GoalTile</myName>
               </backEnd.Attribute.AttributeImpl>
             </entry>
@@ -5899,7 +5899,7 @@
             <entry>
               <string>GoalTile</string>
               <backEnd.Attribute.AttributeImpl>
-                <myValue class="boolean">false</myValue>
+                <myValue class="boolean">true</myValue>
                 <myName>GoalTile</myName>
               </backEnd.Attribute.AttributeImpl>
             </entry>
@@ -5993,7 +5993,7 @@
             <entry>
               <string>GoalTile</string>
               <backEnd.Attribute.AttributeImpl>
-                <myValue class="boolean">false</myValue>
+                <myValue class="boolean">true</myValue>
                 <myName>GoalTile</myName>
               </backEnd.Attribute.AttributeImpl>
             </entry>
@@ -8531,7 +8531,7 @@
             <entry>
               <string>GoalTile</string>
               <backEnd.Attribute.AttributeImpl>
-                <myValue class="boolean">false</myValue>
+                <myValue class="boolean">true</myValue>
                 <myName>GoalTile</myName>
               </backEnd.Attribute.AttributeImpl>
             </entry>
@@ -12103,7 +12103,7 @@
             <entry>
               <string>GoalTile</string>
               <backEnd.Attribute.AttributeImpl>
-                <myValue class="boolean">false</myValue>
+                <myValue class="boolean">true</myValue>
                 <myName>GoalTile</myName>
               </backEnd.Attribute.AttributeImpl>
             </entry>
@@ -12291,7 +12291,7 @@
             <entry>
               <string>GoalTile</string>
               <backEnd.Attribute.AttributeImpl>
-                <myValue class="boolean">false</myValue>
+                <myValue class="boolean">true</myValue>
                 <myName>GoalTile</myName>
               </backEnd.Attribute.AttributeImpl>
             </entry>
