@@ -1,9 +1,0 @@
-<?xml version="1.0"?><map>
-  <entry>
-    <string>Timeline 1</string>
-    <backEnd.GameEngine.Engine.Spawning.SpawnQueueInstantiator>
-      <mySpawnQueue/>
-      <myCurrentSpawn>0</myCurrentSpawn>
-    </backEnd.GameEngine.Engine.Spawning.SpawnQueueInstantiator>
-  </entry>
-</map>
