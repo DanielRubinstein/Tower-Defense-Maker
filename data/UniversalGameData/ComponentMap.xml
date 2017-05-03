@@ -645,7 +645,7 @@
           <entry>
             <string>Health</string>
             <backEnd.Attribute.AttributeImpl>
-              <myValue class="int">1</myValue>
+              <myValue class="int">0</myValue>
               <myParamList class="java.util.Arrays$ArrayList">
                 <a class="java.lang.Integer-array">
                   <int>1</int>
@@ -661,8 +661,8 @@
             <string>Position</string>
             <backEnd.Attribute.AttributeImpl>
               <myValue class="javafx.geometry.Point2D">
-                <x>0.0</x>
-                <y>0.0</y>
+                <x>418.90820451843257</x>
+                <y>182.24999999999997</y>
                 <hash>0</hash>
               </myValue>
               <myName>Position</myName>
@@ -820,7 +820,7 @@
       <observers/>
       <ID>21941054769200</ID>
       <previousMovement>
-        <x>0.0</x>
+        <x>1.0</x>
         <y>0.0</y>
       </previousMovement>
     </backEnd.GameData.State.ComponentImpl>
@@ -1501,7 +1501,7 @@
           <entry>
             <string>FireRate</string>
             <backEnd.Attribute.AttributeImpl>
-              <myValue class="double">200.0</myValue>
+              <myValue class="double">101.72413793103448</myValue>
               <myParamList class="java.util.Arrays$ArrayList">
                 <a class="java.lang.Double-array">
                   <double>0.0</double>
@@ -1531,7 +1531,7 @@
           <entry>
             <string>FireDamage</string>
             <backEnd.Attribute.AttributeImpl>
-              <myValue class="int">0</myValue>
+              <myValue class="int">8</myValue>
               <myParamList class="java.util.Arrays$ArrayList">
                 <a class="java.lang.Integer-array">
                   <int>0</int>
