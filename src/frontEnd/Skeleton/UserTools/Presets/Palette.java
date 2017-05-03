@@ -43,7 +43,7 @@ public class Palette implements SkeletonObject, SerializableObserver {
 	private BankControllerReader observedBankController;
 	private PaletteItemCreator myPaletteItemCreator;
 
-	public Palette(View view, Collection<? extends AttributeOwnerReader> presets) {
+	public Palette(View view, Collection<? extends AttributeOwnerReader> presets, String type) {
 		myView = view;
 		initializeMaps(presets);
 		initializePane();
@@ -51,7 +51,8 @@ public class Palette implements SkeletonObject, SerializableObserver {
 		for (AttributeOwnerReader preset : presets) {
 			addPresetToPalette(preset);
 		}
-		extractStringType();
+		myType = type;
+		//extractStringType();
 		createNewPresetButton();
 
 	}
