@@ -340,6 +340,21 @@
             </backEnd.Attribute.AttributeImpl>
           </entry>
           <entry>
+            <string>Price</string>
+            <backEnd.Attribute.AttributeImpl>
+              <myValue class="int">10</myValue>
+              <myParamList class="java.util.Arrays$ArrayList">
+                <a class="java.lang.Integer-array">
+                  <int>0</int>
+                  <int>990</int>
+                  <int>10</int>
+                  <int>5</int>
+                </a>
+              </myParamList>
+              <myName>Price</myName>
+            </backEnd.Attribute.AttributeImpl>
+          </entry>
+          <entry>
             <string>ProjectileTarget</string>
             <backEnd.Attribute.AttributeImpl>
               <myName>ProjectileTarget</myName>
@@ -757,6 +772,21 @@
             </backEnd.Attribute.AttributeImpl>
           </entry>
           <entry>
+            <string>Price</string>
+            <backEnd.Attribute.AttributeImpl>
+              <myValue class="int">10</myValue>
+              <myParamList class="java.util.Arrays$ArrayList">
+                <a class="java.lang.Integer-array">
+                  <int>0</int>
+                  <int>990</int>
+                  <int>10</int>
+                  <int>5</int>
+                </a>
+              </myParamList>
+              <myName>Price</myName>
+            </backEnd.Attribute.AttributeImpl>
+          </entry>
+          <entry>
             <string>ProjectileTarget</string>
             <backEnd.Attribute.AttributeImpl>
               <myName>ProjectileTarget</myName>
@@ -1167,6 +1197,21 @@
                 <hash>0</hash>
               </myValue>
               <myName>ProjectileTargetPosition</myName>
+            </backEnd.Attribute.AttributeImpl>
+          </entry>
+          <entry>
+            <string>Price</string>
+            <backEnd.Attribute.AttributeImpl>
+              <myValue class="int">10</myValue>
+              <myParamList class="java.util.Arrays$ArrayList">
+                <a class="java.lang.Integer-array">
+                  <int>0</int>
+                  <int>990</int>
+                  <int>10</int>
+                  <int>5</int>
+                </a>
+              </myParamList>
+              <myName>Price</myName>
             </backEnd.Attribute.AttributeImpl>
           </entry>
           <entry>
@@ -1585,6 +1630,21 @@
             </backEnd.Attribute.AttributeImpl>
           </entry>
           <entry>
+            <string>Price</string>
+            <backEnd.Attribute.AttributeImpl>
+              <myValue class="int">10</myValue>
+              <myParamList class="java.util.Arrays$ArrayList">
+                <a class="java.lang.Integer-array">
+                  <int>0</int>
+                  <int>990</int>
+                  <int>10</int>
+                  <int>5</int>
+                </a>
+              </myParamList>
+              <myName>Price</myName>
+            </backEnd.Attribute.AttributeImpl>
+          </entry>
+          <entry>
             <string>ProjectileTarget</string>
             <backEnd.Attribute.AttributeImpl>
               <myName>ProjectileTarget</myName>
@@ -1997,6 +2057,21 @@
                 <hash>0</hash>
               </myValue>
               <myName>ProjectileTargetPosition</myName>
+            </backEnd.Attribute.AttributeImpl>
+          </entry>
+          <entry>
+            <string>Price</string>
+            <backEnd.Attribute.AttributeImpl>
+              <myValue class="int">10</myValue>
+              <myParamList class="java.util.Arrays$ArrayList">
+                <a class="java.lang.Integer-array">
+                  <int>0</int>
+                  <int>990</int>
+                  <int>10</int>
+                  <int>5</int>
+                </a>
+              </myParamList>
+              <myName>Price</myName>
             </backEnd.Attribute.AttributeImpl>
           </entry>
           <entry>
@@ -2418,6 +2493,21 @@
             </backEnd.Attribute.AttributeImpl>
           </entry>
           <entry>
+            <string>Price</string>
+            <backEnd.Attribute.AttributeImpl>
+              <myValue class="int">10</myValue>
+              <myParamList class="java.util.Arrays$ArrayList">
+                <a class="java.lang.Integer-array">
+                  <int>0</int>
+                  <int>990</int>
+                  <int>10</int>
+                  <int>5</int>
+                </a>
+              </myParamList>
+              <myName>Price</myName>
+            </backEnd.Attribute.AttributeImpl>
+          </entry>
+          <entry>
             <string>ProjectileTarget</string>
             <backEnd.Attribute.AttributeImpl>
               <myName>ProjectileTarget</myName>
@@ -2828,6 +2918,21 @@
                 <hash>0</hash>
               </myValue>
               <myName>ProjectileTargetPosition</myName>
+            </backEnd.Attribute.AttributeImpl>
+          </entry>
+          <entry>
+            <string>Price</string>
+            <backEnd.Attribute.AttributeImpl>
+              <myValue class="int">10</myValue>
+              <myParamList class="java.util.Arrays$ArrayList">
+                <a class="java.lang.Integer-array">
+                  <int>0</int>
+                  <int>990</int>
+                  <int>10</int>
+                  <int>5</int>
+                </a>
+              </myParamList>
+              <myName>Price</myName>
             </backEnd.Attribute.AttributeImpl>
           </entry>
           <entry>
@@ -3244,6 +3349,21 @@
             </backEnd.Attribute.AttributeImpl>
           </entry>
           <entry>
+            <string>Price</string>
+            <backEnd.Attribute.AttributeImpl>
+              <myValue class="int">10</myValue>
+              <myParamList class="java.util.Arrays$ArrayList">
+                <a class="java.lang.Integer-array">
+                  <int>0</int>
+                  <int>990</int>
+                  <int>10</int>
+                  <int>5</int>
+                </a>
+              </myParamList>
+              <myName>Price</myName>
+            </backEnd.Attribute.AttributeImpl>
+          </entry>
+          <entry>
             <string>ProjectileTarget</string>
             <backEnd.Attribute.AttributeImpl>
               <myName>ProjectileTarget</myName>
@@ -3657,6 +3777,21 @@
                 <hash>0</hash>
               </myValue>
               <myName>ProjectileTargetPosition</myName>
+            </backEnd.Attribute.AttributeImpl>
+          </entry>
+          <entry>
+            <string>Price</string>
+            <backEnd.Attribute.AttributeImpl>
+              <myValue class="int">10</myValue>
+              <myParamList class="java.util.Arrays$ArrayList">
+                <a class="java.lang.Integer-array">
+                  <int>0</int>
+                  <int>990</int>
+                  <int>10</int>
+                  <int>5</int>
+                </a>
+              </myParamList>
+              <myName>Price</myName>
             </backEnd.Attribute.AttributeImpl>
           </entry>
           <entry>
