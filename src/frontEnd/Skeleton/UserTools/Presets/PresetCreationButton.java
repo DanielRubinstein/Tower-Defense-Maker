@@ -47,6 +47,7 @@ public class PresetCreationButton implements SkeletonObject {
 						break;
 					case "Tiles":
 						newAO = new TileImpl();
+						break;
 					default:
 						break;
 					}
