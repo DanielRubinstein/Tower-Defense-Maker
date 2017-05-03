@@ -37,13 +37,15 @@ public class PresetCreationButton implements SkeletonObject {
 			presetCreation.launch("Design a new preset", 0d, 0d);
 		});		
 	}
-	
+	/*
 	public void disableInPlayerMode(Consumer<Boolean> disableConsumer) {
 		myRoot.disableProperty().bind(myView.getBooleanAuthorModeProperty().not());
+		System.out.println("button disable bound");
 		myRoot.disableProperty().addListener((a, b, c) -> {
 			disableConsumer.accept(c);
 		});
 	}
+	*/
 	
 	private ImageView createImageView(String myImagePath) {
 		Image image = new Image(getClass().getClassLoader().getResourceAsStream(myImagePath));
