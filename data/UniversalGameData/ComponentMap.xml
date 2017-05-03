@@ -852,7 +852,7 @@
         </gameModePermissions>
         <levelModePermissions>
           <string>DEFAULT</string>
-          <string>Level 1</string>
+          <string>Level 2</string>
         </levelModePermissions>
         <strResources/>
       </myAccessPermissions>
@@ -1713,7 +1713,7 @@
         </gameModePermissions>
         <levelModePermissions>
           <string>DEFAULT</string>
-          <string>Level 1</string>
+          <string>Level 2</string>
         </levelModePermissions>
         <strResources/>
       </myAccessPermissions>
@@ -1974,8 +1974,8 @@
             <string>Position</string>
             <backEnd.Attribute.AttributeImpl>
               <myValue class="javafx.geometry.Point2D">
-                <x>0.0</x>
-                <y>0.0</y>
+                <x>403.05862068966445</x>
+                <y>251.31034482759634</y>
                 <hash>0</hash>
               </myValue>
               <myName>Position</myName>
@@ -2149,7 +2149,7 @@
       <ID>89501653554720</ID>
       <previousMovement>
         <x>0.0</x>
-        <y>0.0</y>
+        <y>-1.0</y>
       </previousMovement>
     </backEnd.GameData.State.ComponentImpl>
   </entry>
