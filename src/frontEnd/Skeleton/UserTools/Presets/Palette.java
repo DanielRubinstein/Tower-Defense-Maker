@@ -96,11 +96,13 @@ public class Palette implements SkeletonObject, SerializableObserver {
 
 	private void createNewPresetButton() {
 		PresetCreationButton presetCreationButton = new PresetCreationButton(myView, myType);
-		tile.getChildren().add(0, presetCreationButton.getRoot());
+		if(myView.getBooleanAuthorModeProperty().get()){
+			tile.getChildren().add(0, presetCreationButton.getRoot());
+		}
 		presetCreationButton.disableInPlayerMode((inPlayerMode) -> {
-			if (inPlayerMode) {
+			if (inPlayerMode && tile.getChildren().contains(presetCreationButton)) {
 				tile.getChildren().remove(presetCreationButton.getRoot());
-			} else {
+			} else if (!inPlayerMode && !tile.getChildren().contains(presetCreationButton)) {
 				tile.getChildren().add(0, presetCreationButton.getRoot());
 			}
 		});
