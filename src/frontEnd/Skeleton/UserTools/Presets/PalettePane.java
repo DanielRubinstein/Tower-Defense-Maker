@@ -51,6 +51,7 @@ public class PalettePane implements SkeletonObject {
 		
 		Palette singlePalette = new Palette(myView, presets, string);
 		ScrollPane scrollPane = new ScrollPane();
+		scrollPane.setFitToWidth(true);
 		scrollPane.setContent(singlePalette.getRoot());
 		tab.setContent(scrollPane);
 		return tab;
