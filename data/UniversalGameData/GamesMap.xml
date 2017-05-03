@@ -17,6 +17,9 @@
   </entry>
   <entry>
     <string>Riley</string>
-    <list/>
+    <list>
+      <string>Level 1</string>
+      <string>Level 2</string>
+    </list>
   </entry>
 </map>

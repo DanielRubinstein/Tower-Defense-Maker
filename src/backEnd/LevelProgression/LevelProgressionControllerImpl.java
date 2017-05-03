@@ -60,6 +60,7 @@ public class LevelProgressionControllerImpl
 
 	@Override
 	public List<String> getLevelList(String gameName) {
+		System.out.println(gamesMap);
 		return gamesMap.get(gameName);
 	}
 
