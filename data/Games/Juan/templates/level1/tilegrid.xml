@@ -26,7 +26,7 @@
             <entry>
               <string>ImageFile</string>
               <backEnd.Attribute.AttributeImpl>
-                <myValue class="string">\resources\images\Tiles\grass.jpg</myValue>
+                <myValue class="string">resources/images/Tiles/default_tile.png</myValue>
                 <myName>ImageFile</myName>
               </backEnd.Attribute.AttributeImpl>
             </entry>
@@ -48,11 +48,7 @@
             <entry>
               <string>Position</string>
               <backEnd.Attribute.AttributeImpl>
-                <myValue class="javafx.geometry.Point2D">
-                  <x>157.5</x>
-                  <y>20.249999999999996</y>
-                  <hash>205949510</hash>
-                </myValue>
+                <myValue class="javafx.geometry.Point2D" reference="../../../../../../javafx.geometry.Point2D"/>
                 <myName>Position</myName>
               </backEnd.Attribute.AttributeImpl>
             </entry>
@@ -120,7 +116,7 @@
             <entry>
               <string>ImageFile</string>
               <backEnd.Attribute.AttributeImpl>
-                <myValue class="string">\resources\images\Tiles\grass.jpg</myValue>
+                <myValue class="string">resources/images/Tiles/default_tile.png</myValue>
                 <myName>ImageFile</myName>
               </backEnd.Attribute.AttributeImpl>
             </entry>
@@ -142,11 +138,7 @@
             <entry>
               <string>Position</string>
               <backEnd.Attribute.AttributeImpl>
-                <myValue class="javafx.geometry.Point2D">
-                  <x>598.5</x>
-                  <y>303.74999999999994</y>
-                  <hash>273076806</hash>
-                </myValue>
+                <myValue class="javafx.geometry.Point2D" reference="../../../../../../javafx.geometry.Point2D"/>
                 <myName>Position</myName>
               </backEnd.Attribute.AttributeImpl>
             </entry>
@@ -214,7 +206,7 @@
             <entry>
               <string>ImageFile</string>
               <backEnd.Attribute.AttributeImpl>
-                <myValue class="string">\resources\images\Tiles\grass.jpg</myValue>
+                <myValue class="string">resources/images/Tiles/default_tile.png</myValue>
                 <myName>ImageFile</myName>
               </backEnd.Attribute.AttributeImpl>
             </entry>
@@ -236,11 +228,7 @@
             <entry>
               <string>Position</string>
               <backEnd.Attribute.AttributeImpl>
-                <myValue class="javafx.geometry.Point2D">
-                  <x>598.5</x>
-                  <y>263.24999999999994</y>
-                  <hash>272915014</hash>
-                </myValue>
+                <myValue class="javafx.geometry.Point2D" reference="../../../../../../javafx.geometry.Point2D"/>
                 <myName>Position</myName>
               </backEnd.Attribute.AttributeImpl>
             </entry>
@@ -308,7 +296,7 @@
             <entry>
               <string>ImageFile</string>
               <backEnd.Attribute.AttributeImpl>
-                <myValue class="string">\resources\images\Tiles\grass.jpg</myValue>
+                <myValue class="string">resources/images/Tiles/default_tile.png</myValue>
                 <myName>ImageFile</myName>
               </backEnd.Attribute.AttributeImpl>
             </entry>
@@ -330,11 +318,7 @@
             <entry>
               <string>Position</string>
               <backEnd.Attribute.AttributeImpl>
-                <myValue class="javafx.geometry.Point2D">
-                  <x>598.5</x>
-                  <y>384.74999999999994</y>
-                  <hash>273400390</hash>
-                </myValue>
+                <myValue class="javafx.geometry.Point2D" reference="../../../../../../javafx.geometry.Point2D"/>
                 <myName>Position</myName>
               </backEnd.Attribute.AttributeImpl>
             </entry>
@@ -402,7 +386,7 @@
             <entry>
               <string>ImageFile</string>
               <backEnd.Attribute.AttributeImpl>
-                <myValue class="string">\resources\images\Tiles\grass.jpg</myValue>
+                <myValue class="string">resources/images/Tiles/default_tile.png</myValue>
                 <myName>ImageFile</myName>
               </backEnd.Attribute.AttributeImpl>
             </entry>
@@ -424,11 +408,7 @@
             <entry>
               <string>Position</string>
               <backEnd.Attribute.AttributeImpl>
-                <myValue class="javafx.geometry.Point2D">
-                  <x>598.5</x>
-                  <y>344.24999999999994</y>
-                  <hash>273238598</hash>
-                </myValue>
+                <myValue class="javafx.geometry.Point2D" reference="../../../../../../javafx.geometry.Point2D"/>
                 <myName>Position</myName>
               </backEnd.Attribute.AttributeImpl>
             </entry>
@@ -496,7 +476,7 @@
             <entry>
               <string>ImageFile</string>
               <backEnd.Attribute.AttributeImpl>
-                <myValue class="string">\resources\images\Tiles\grass.jpg</myValue>
+                <myValue class="string">resources/images/Tiles/default_tile.png</myValue>
                 <myName>ImageFile</myName>
               </backEnd.Attribute.AttributeImpl>
             </entry>
@@ -518,11 +498,7 @@
             <entry>
               <string>Position</string>
               <backEnd.Attribute.AttributeImpl>
-                <myValue class="javafx.geometry.Point2D">
-                  <x>220.5</x>
-                  <y>60.749999999999986</y>
-                  <hash>223660613</hash>
-                </myValue>
+                <myValue class="javafx.geometry.Point2D" reference="../../../../../../javafx.geometry.Point2D"/>
                 <myName>Position</myName>
               </backEnd.Attribute.AttributeImpl>
             </entry>
@@ -590,7 +566,7 @@
             <entry>
               <string>ImageFile</string>
               <backEnd.Attribute.AttributeImpl>
-                <myValue class="string">\resources\images\Tiles\grass.jpg</myValue>
+                <myValue class="string">resources/images/Tiles/default_tile.png</myValue>
                 <myName>ImageFile</myName>
               </backEnd.Attribute.AttributeImpl>
             </entry>
@@ -612,11 +588,7 @@
             <entry>
               <string>Position</string>
               <backEnd.Attribute.AttributeImpl>
-                <myValue class="javafx.geometry.Point2D">
-                  <x>220.5</x>
-                  <y>101.24999999999999</y>
-                  <hash>224385606</hash>
-                </myValue>
+                <myValue class="javafx.geometry.Point2D" reference="../../../../../../javafx.geometry.Point2D"/>
                 <myName>Position</myName>
               </backEnd.Attribute.AttributeImpl>
             </entry>
@@ -684,7 +656,7 @@
             <entry>
               <string>ImageFile</string>
               <backEnd.Attribute.AttributeImpl>
-                <myValue class="string">\resources\images\Tiles\grass.jpg</myValue>
+                <myValue class="string">resources/images/Tiles/default_tile.png</myValue>
                 <myName>ImageFile</myName>
               </backEnd.Attribute.AttributeImpl>
             </entry>
@@ -706,11 +678,7 @@
             <entry>
               <string>Position</string>
               <backEnd.Attribute.AttributeImpl>
-                <myValue class="javafx.geometry.Point2D">
-                  <x>472.5</x>
-                  <y>20.249999999999996</y>
-                  <hash>258449990</hash>
-                </myValue>
+                <myValue class="javafx.geometry.Point2D" reference="../../../../../../javafx.geometry.Point2D"/>
                 <myName>Position</myName>
               </backEnd.Attribute.AttributeImpl>
             </entry>
@@ -778,7 +746,7 @@
             <entry>
               <string>ImageFile</string>
               <backEnd.Attribute.AttributeImpl>
-                <myValue class="string">\resources\images\Tiles\grass.jpg</myValue>
+                <myValue class="string">resources/images/Tiles/default_tile.png</myValue>
                 <myName>ImageFile</myName>
               </backEnd.Attribute.AttributeImpl>
             </entry>
@@ -800,11 +768,7 @@
             <entry>
               <string>Position</string>
               <backEnd.Attribute.AttributeImpl>
-                <myValue class="javafx.geometry.Point2D">
-                  <x>157.5</x>
-                  <y>60.749999999999986</y>
-                  <hash>207661637</hash>
-                </myValue>
+                <myValue class="javafx.geometry.Point2D" reference="../../../../../../javafx.geometry.Point2D"/>
                 <myName>Position</myName>
               </backEnd.Attribute.AttributeImpl>
             </entry>
@@ -872,7 +836,7 @@
             <entry>
               <string>ImageFile</string>
               <backEnd.Attribute.AttributeImpl>
-                <myValue class="string">\resources\images\Tiles\grass.jpg</myValue>
+                <myValue class="string">resources/images/Tiles/default_tile.png</myValue>
                 <myName>ImageFile</myName>
               </backEnd.Attribute.AttributeImpl>
             </entry>
@@ -894,11 +858,7 @@
             <entry>
               <string>Position</string>
               <backEnd.Attribute.AttributeImpl>
-                <myValue class="javafx.geometry.Point2D">
-                  <x>220.5</x>
-                  <y>182.24999999999997</y>
-                  <hash>225256006</hash>
-                </myValue>
+                <myValue class="javafx.geometry.Point2D" reference="../../../../../../javafx.geometry.Point2D"/>
                 <myName>Position</myName>
               </backEnd.Attribute.AttributeImpl>
             </entry>
@@ -966,7 +926,7 @@
             <entry>
               <string>ImageFile</string>
               <backEnd.Attribute.AttributeImpl>
-                <myValue class="string">\resources\images\Tiles\grass.jpg</myValue>
+                <myValue class="string">resources/images/Tiles/default_tile.png</myValue>
                 <myName>ImageFile</myName>
               </backEnd.Attribute.AttributeImpl>
             </entry>
@@ -988,11 +948,7 @@
             <entry>
               <string>Position</string>
               <backEnd.Attribute.AttributeImpl>
-                <myValue class="javafx.geometry.Point2D">
-                  <x>157.5</x>
-                  <y>101.24999999999999</y>
-                  <hash>208386630</hash>
-                </myValue>
+                <myValue class="javafx.geometry.Point2D" reference="../../../../../../javafx.geometry.Point2D"/>
                 <myName>Position</myName>
               </backEnd.Attribute.AttributeImpl>
             </entry>
@@ -1060,7 +1016,7 @@
             <entry>
               <string>ImageFile</string>
               <backEnd.Attribute.AttributeImpl>
-                <myValue class="string">\resources\images\Tiles\grass.jpg</myValue>
+                <myValue class="string">resources/images/Tiles/default_tile.png</myValue>
                 <myName>ImageFile</myName>
               </backEnd.Attribute.AttributeImpl>
             </entry>
@@ -1082,11 +1038,7 @@
             <entry>
               <string>Position</string>
               <backEnd.Attribute.AttributeImpl>
-                <myValue class="javafx.geometry.Point2D">
-                  <x>220.5</x>
-                  <y>141.74999999999997</y>
-                  <hash>224932422</hash>
-                </myValue>
+                <myValue class="javafx.geometry.Point2D" reference="../../../../../../javafx.geometry.Point2D"/>
                 <myName>Position</myName>
               </backEnd.Attribute.AttributeImpl>
             </entry>
@@ -1154,7 +1106,7 @@
             <entry>
               <string>ImageFile</string>
               <backEnd.Attribute.AttributeImpl>
-                <myValue class="string">\resources\images\Tiles\grass.jpg</myValue>
+                <myValue class="string">resources/images/Tiles/default_tile.png</myValue>
                 <myName>ImageFile</myName>
               </backEnd.Attribute.AttributeImpl>
             </entry>
@@ -1176,11 +1128,7 @@
             <entry>
               <string>Position</string>
               <backEnd.Attribute.AttributeImpl>
-                <myValue class="javafx.geometry.Point2D">
-                  <x>220.5</x>
-                  <y>263.24999999999994</y>
-                  <hash>225902150</hash>
-                </myValue>
+                <myValue class="javafx.geometry.Point2D" reference="../../../../../../javafx.geometry.Point2D"/>
                 <myName>Position</myName>
               </backEnd.Attribute.AttributeImpl>
             </entry>
@@ -1248,7 +1196,7 @@
             <entry>
               <string>ImageFile</string>
               <backEnd.Attribute.AttributeImpl>
-                <myValue class="string">\resources\images\Tiles\grass.jpg</myValue>
+                <myValue class="string">resources/images/Tiles/default_tile.png</myValue>
                 <myName>ImageFile</myName>
               </backEnd.Attribute.AttributeImpl>
             </entry>
@@ -1270,11 +1218,7 @@
             <entry>
               <string>Position</string>
               <backEnd.Attribute.AttributeImpl>
-                <myValue class="javafx.geometry.Point2D">
-                  <x>157.5</x>
-                  <y>141.74999999999997</y>
-                  <hash>208933446</hash>
-                </myValue>
+                <myValue class="javafx.geometry.Point2D" reference="../../../../../../javafx.geometry.Point2D"/>
                 <myName>Position</myName>
               </backEnd.Attribute.AttributeImpl>
             </entry>
@@ -1342,7 +1286,7 @@
             <entry>
               <string>ImageFile</string>
               <backEnd.Attribute.AttributeImpl>
-                <myValue class="string">\resources\images\Tiles\grass.jpg</myValue>
+                <myValue class="string">resources/images/Tiles/default_tile.png</myValue>
                 <myName>ImageFile</myName>
               </backEnd.Attribute.AttributeImpl>
             </entry>
@@ -1364,11 +1308,7 @@
             <entry>
               <string>Position</string>
               <backEnd.Attribute.AttributeImpl>
-                <myValue class="javafx.geometry.Point2D">
-                  <x>220.5</x>
-                  <y>222.74999999999997</y>
-                  <hash>225595974</hash>
-                </myValue>
+                <myValue class="javafx.geometry.Point2D" reference="../../../../../../javafx.geometry.Point2D"/>
                 <myName>Position</myName>
               </backEnd.Attribute.AttributeImpl>
             </entry>
@@ -1436,7 +1376,7 @@
             <entry>
               <string>ImageFile</string>
               <backEnd.Attribute.AttributeImpl>
-                <myValue class="string">\resources\images\Tiles\grass.jpg</myValue>
+                <myValue class="string">resources/images/Tiles/default_tile.png</myValue>
                 <myName>ImageFile</myName>
               </backEnd.Attribute.AttributeImpl>
             </entry>
@@ -1458,11 +1398,7 @@
             <entry>
               <string>Position</string>
               <backEnd.Attribute.AttributeImpl>
-                <myValue class="javafx.geometry.Point2D">
-                  <x>346.5</x>
-                  <y>20.249999999999996</y>
-                  <hash>242451014</hash>
-                </myValue>
+                <myValue class="javafx.geometry.Point2D" reference="../../../../../../javafx.geometry.Point2D"/>
                 <myName>Position</myName>
               </backEnd.Attribute.AttributeImpl>
             </entry>
@@ -1530,7 +1466,7 @@
             <entry>
               <string>ImageFile</string>
               <backEnd.Attribute.AttributeImpl>
-                <myValue class="string">\resources\images\Tiles\grass.jpg</myValue>
+                <myValue class="string">resources/images/Tiles/default_tile.png</myValue>
                 <myName>ImageFile</myName>
               </backEnd.Attribute.AttributeImpl>
             </entry>
@@ -1552,11 +1488,7 @@
             <entry>
               <string>Position</string>
               <backEnd.Attribute.AttributeImpl>
-                <myValue class="javafx.geometry.Point2D">
-                  <x>157.5</x>
-                  <y>222.74999999999997</y>
-                  <hash>209596998</hash>
-                </myValue>
+                <myValue class="javafx.geometry.Point2D" reference="../../../../../../javafx.geometry.Point2D"/>
                 <myName>Position</myName>
               </backEnd.Attribute.AttributeImpl>
             </entry>
@@ -1624,7 +1556,7 @@
             <entry>
               <string>ImageFile</string>
               <backEnd.Attribute.AttributeImpl>
-                <myValue class="string">\resources\images\Tiles\grass.jpg</myValue>
+                <myValue class="string">resources/images/Tiles/default_tile.png</myValue>
                 <myName>ImageFile</myName>
               </backEnd.Attribute.AttributeImpl>
             </entry>
@@ -1646,11 +1578,7 @@
             <entry>
               <string>Position</string>
               <backEnd.Attribute.AttributeImpl>
-                <myValue class="javafx.geometry.Point2D">
-                  <x>220.5</x>
-                  <y>384.74999999999994</y>
-                  <hash>226387526</hash>
-                </myValue>
+                <myValue class="javafx.geometry.Point2D" reference="../../../../../../javafx.geometry.Point2D"/>
                 <myName>Position</myName>
               </backEnd.Attribute.AttributeImpl>
             </entry>
@@ -1718,7 +1646,7 @@
             <entry>
               <string>ImageFile</string>
               <backEnd.Attribute.AttributeImpl>
-                <myValue class="string">\resources\images\Tiles\grass.jpg</myValue>
+                <myValue class="string">resources/images/Tiles/default_tile.png</myValue>
                 <myName>ImageFile</myName>
               </backEnd.Attribute.AttributeImpl>
             </entry>
@@ -1740,11 +1668,7 @@
             <entry>
               <string>Position</string>
               <backEnd.Attribute.AttributeImpl>
-                <myValue class="javafx.geometry.Point2D">
-                  <x>220.5</x>
-                  <y>344.24999999999994</y>
-                  <hash>226225734</hash>
-                </myValue>
+                <myValue class="javafx.geometry.Point2D" reference="../../../../../../javafx.geometry.Point2D"/>
                 <myName>Position</myName>
               </backEnd.Attribute.AttributeImpl>
             </entry>
@@ -1812,7 +1736,7 @@
             <entry>
               <string>ImageFile</string>
               <backEnd.Attribute.AttributeImpl>
-                <myValue class="string">\resources\images\Tiles\grass.jpg</myValue>
+                <myValue class="string">resources/images/Tiles/default_tile.png</myValue>
                 <myName>ImageFile</myName>
               </backEnd.Attribute.AttributeImpl>
             </entry>
@@ -1834,11 +1758,7 @@
             <entry>
               <string>Position</string>
               <backEnd.Attribute.AttributeImpl>
-                <myValue class="javafx.geometry.Point2D">
-                  <x>157.5</x>
-                  <y>182.24999999999997</y>
-                  <hash>209257030</hash>
-                </myValue>
+                <myValue class="javafx.geometry.Point2D" reference="../../../../../../javafx.geometry.Point2D"/>
                 <myName>Position</myName>
               </backEnd.Attribute.AttributeImpl>
             </entry>
@@ -1906,7 +1826,7 @@
             <entry>
               <string>ImageFile</string>
               <backEnd.Attribute.AttributeImpl>
-                <myValue class="string">\resources\images\Tiles\grass.jpg</myValue>
+                <myValue class="string">resources/images/Tiles/default_tile.png</myValue>
                 <myName>ImageFile</myName>
               </backEnd.Attribute.AttributeImpl>
             </entry>
@@ -1928,11 +1848,7 @@
             <entry>
               <string>Position</string>
               <backEnd.Attribute.AttributeImpl>
-                <myValue class="javafx.geometry.Point2D">
-                  <x>220.5</x>
-                  <y>303.74999999999994</y>
-                  <hash>226063942</hash>
-                </myValue>
+                <myValue class="javafx.geometry.Point2D" reference="../../../../../../javafx.geometry.Point2D"/>
                 <myName>Position</myName>
               </backEnd.Attribute.AttributeImpl>
             </entry>
@@ -2000,7 +1916,7 @@
             <entry>
               <string>ImageFile</string>
               <backEnd.Attribute.AttributeImpl>
-                <myValue class="string">\resources\images\Tiles\grass.jpg</myValue>
+                <myValue class="string">resources/images/Tiles/default_tile.png</myValue>
                 <myName>ImageFile</myName>
               </backEnd.Attribute.AttributeImpl>
             </entry>
@@ -2022,11 +1938,7 @@
             <entry>
               <string>Position</string>
               <backEnd.Attribute.AttributeImpl>
-                <myValue class="javafx.geometry.Point2D">
-                  <x>535.5</x>
-                  <y>263.24999999999994</y>
-                  <hash>268902982</hash>
-                </myValue>
+                <myValue class="javafx.geometry.Point2D" reference="../../../../../../javafx.geometry.Point2D"/>
                 <myName>Position</myName>
               </backEnd.Attribute.AttributeImpl>
             </entry>
@@ -2094,7 +2006,7 @@
             <entry>
               <string>ImageFile</string>
               <backEnd.Attribute.AttributeImpl>
-                <myValue class="string">\resources\images\Tiles\grass.jpg</myValue>
+                <myValue class="string">resources/images/Tiles/default_tile.png</myValue>
                 <myName>ImageFile</myName>
               </backEnd.Attribute.AttributeImpl>
             </entry>
@@ -2116,11 +2028,7 @@
             <entry>
               <string>Position</string>
               <backEnd.Attribute.AttributeImpl>
-                <myValue class="javafx.geometry.Point2D">
-                  <x>409.5</x>
-                  <y>60.749999999999986</y>
-                  <hash>252170821</hash>
-                </myValue>
+                <myValue class="javafx.geometry.Point2D" reference="../../../../../../javafx.geometry.Point2D"/>
                 <myName>Position</myName>
               </backEnd.Attribute.AttributeImpl>
             </entry>
@@ -2188,7 +2096,7 @@
             <entry>
               <string>ImageFile</string>
               <backEnd.Attribute.AttributeImpl>
-                <myValue class="string">\resources\images\Tiles\grass.jpg</myValue>
+                <myValue class="string">resources/images/Tiles/default_tile.png</myValue>
                 <myName>ImageFile</myName>
               </backEnd.Attribute.AttributeImpl>
             </entry>
@@ -2210,11 +2118,7 @@
             <entry>
               <string>Position</string>
               <backEnd.Attribute.AttributeImpl>
-                <myValue class="javafx.geometry.Point2D">
-                  <x>535.5</x>
-                  <y>222.74999999999997</y>
-                  <hash>268600902</hash>
-                </myValue>
+                <myValue class="javafx.geometry.Point2D" reference="../../../../../../javafx.geometry.Point2D"/>
                 <myName>Position</myName>
               </backEnd.Attribute.AttributeImpl>
             </entry>
@@ -2282,7 +2186,7 @@
             <entry>
               <string>ImageFile</string>
               <backEnd.Attribute.AttributeImpl>
-                <myValue class="string">\resources\images\Tiles\grass.jpg</myValue>
+                <myValue class="string">resources/images/Tiles/default_tile.png</myValue>
                 <myName>ImageFile</myName>
               </backEnd.Attribute.AttributeImpl>
             </entry>
@@ -2304,11 +2208,7 @@
             <entry>
               <string>Position</string>
               <backEnd.Attribute.AttributeImpl>
-                <myValue class="javafx.geometry.Point2D">
-                  <x>94.5</x>
-                  <y>182.24999999999997</y>
-                  <hash>184758854</hash>
-                </myValue>
+                <myValue class="javafx.geometry.Point2D" reference="../../../../../../javafx.geometry.Point2D"/>
                 <myName>Position</myName>
               </backEnd.Attribute.AttributeImpl>
             </entry>
@@ -2376,7 +2276,7 @@
             <entry>
               <string>ImageFile</string>
               <backEnd.Attribute.AttributeImpl>
-                <myValue class="string">\resources\images\Tiles\grass.jpg</myValue>
+                <myValue class="string">resources/images/Tiles/default_tile.png</myValue>
                 <myName>ImageFile</myName>
               </backEnd.Attribute.AttributeImpl>
             </entry>
@@ -2398,11 +2298,7 @@
             <entry>
               <string>Position</string>
               <backEnd.Attribute.AttributeImpl>
-                <myValue class="javafx.geometry.Point2D">
-                  <x>535.5</x>
-                  <y>384.74999999999994</y>
-                  <hash>269404742</hash>
-                </myValue>
+                <myValue class="javafx.geometry.Point2D" reference="../../../../../../javafx.geometry.Point2D"/>
                 <myName>Position</myName>
               </backEnd.Attribute.AttributeImpl>
             </entry>
@@ -2470,7 +2366,7 @@
             <entry>
               <string>ImageFile</string>
               <backEnd.Attribute.AttributeImpl>
-                <myValue class="string">\resources\images\Tiles\grass.jpg</myValue>
+                <myValue class="string">resources/images/Tiles/default_tile.png</myValue>
                 <myName>ImageFile</myName>
               </backEnd.Attribute.AttributeImpl>
             </entry>
@@ -2492,11 +2388,7 @@
             <entry>
               <string>Position</string>
               <backEnd.Attribute.AttributeImpl>
-                <myValue class="javafx.geometry.Point2D">
-                  <x>94.5</x>
-                  <y>303.74999999999994</y>
-                  <hash>185550406</hash>
-                </myValue>
+                <myValue class="javafx.geometry.Point2D" reference="../../../../../../javafx.geometry.Point2D"/>
                 <myName>Position</myName>
               </backEnd.Attribute.AttributeImpl>
             </entry>
@@ -2564,7 +2456,7 @@
             <entry>
               <string>ImageFile</string>
               <backEnd.Attribute.AttributeImpl>
-                <myValue class="string">\resources\images\Tiles\grass.jpg</myValue>
+                <myValue class="string">resources/images/Tiles/default_tile.png</myValue>
                 <myName>ImageFile</myName>
               </backEnd.Attribute.AttributeImpl>
             </entry>
@@ -2586,11 +2478,7 @@
             <entry>
               <string>Position</string>
               <backEnd.Attribute.AttributeImpl>
-                <myValue class="javafx.geometry.Point2D">
-                  <x>94.5</x>
-                  <y>263.24999999999994</y>
-                  <hash>185388614</hash>
-                </myValue>
+                <myValue class="javafx.geometry.Point2D" reference="../../../../../../javafx.geometry.Point2D"/>
                 <myName>Position</myName>
               </backEnd.Attribute.AttributeImpl>
             </entry>
@@ -2658,7 +2546,7 @@
             <entry>
               <string>ImageFile</string>
               <backEnd.Attribute.AttributeImpl>
-                <myValue class="string">\resources\images\Tiles\grass.jpg</myValue>
+                <myValue class="string">resources/images/Tiles/default_tile.png</myValue>
                 <myName>ImageFile</myName>
               </backEnd.Attribute.AttributeImpl>
             </entry>
@@ -2680,11 +2568,7 @@
             <entry>
               <string>Position</string>
               <backEnd.Attribute.AttributeImpl>
-                <myValue class="javafx.geometry.Point2D">
-                  <x>535.5</x>
-                  <y>344.24999999999994</y>
-                  <hash>269242950</hash>
-                </myValue>
+                <myValue class="javafx.geometry.Point2D" reference="../../../../../../javafx.geometry.Point2D"/>
                 <myName>Position</myName>
               </backEnd.Attribute.AttributeImpl>
             </entry>
@@ -2752,7 +2636,7 @@
             <entry>
               <string>ImageFile</string>
               <backEnd.Attribute.AttributeImpl>
-                <myValue class="string">\resources\images\Tiles\grass.jpg</myValue>
+                <myValue class="string">resources/images/Tiles/default_tile.png</myValue>
                 <myName>ImageFile</myName>
               </backEnd.Attribute.AttributeImpl>
             </entry>
@@ -2774,11 +2658,7 @@
             <entry>
               <string>Position</string>
               <backEnd.Attribute.AttributeImpl>
-                <myValue class="javafx.geometry.Point2D">
-                  <x>598.5</x>
-                  <y>20.249999999999996</y>
-                  <hash>268965446</hash>
-                </myValue>
+                <myValue class="javafx.geometry.Point2D" reference="../../../../../../javafx.geometry.Point2D"/>
                 <myName>Position</myName>
               </backEnd.Attribute.AttributeImpl>
             </entry>
@@ -2846,7 +2726,7 @@
             <entry>
               <string>ImageFile</string>
               <backEnd.Attribute.AttributeImpl>
-                <myValue class="string">\resources\images\Tiles\grass.jpg</myValue>
+                <myValue class="string">resources/images/Tiles/default_tile.png</myValue>
                 <myName>ImageFile</myName>
               </backEnd.Attribute.AttributeImpl>
             </entry>
@@ -2868,11 +2748,7 @@
             <entry>
               <string>Position</string>
               <backEnd.Attribute.AttributeImpl>
-                <myValue class="javafx.geometry.Point2D">
-                  <x>94.5</x>
-                  <y>222.74999999999997</y>
-                  <hash>185082438</hash>
-                </myValue>
+                <myValue class="javafx.geometry.Point2D" reference="../../../../../../javafx.geometry.Point2D"/>
                 <myName>Position</myName>
               </backEnd.Attribute.AttributeImpl>
             </entry>
@@ -2940,7 +2816,7 @@
             <entry>
               <string>ImageFile</string>
               <backEnd.Attribute.AttributeImpl>
-                <myValue class="string">\resources\images\Tiles\grass.jpg</myValue>
+                <myValue class="string">resources/images/Tiles/default_tile.png</myValue>
                 <myName>ImageFile</myName>
               </backEnd.Attribute.AttributeImpl>
             </entry>
@@ -2962,11 +2838,7 @@
             <entry>
               <string>Position</string>
               <backEnd.Attribute.AttributeImpl>
-                <myValue class="javafx.geometry.Point2D">
-                  <x>31.5</x>
-                  <y>101.24999999999999</y>
-                  <hash>134859334</hash>
-                </myValue>
+                <myValue class="javafx.geometry.Point2D" reference="../../../../../../javafx.geometry.Point2D"/>
                 <myName>Position</myName>
               </backEnd.Attribute.AttributeImpl>
             </entry>
@@ -3034,7 +2906,7 @@
             <entry>
               <string>ImageFile</string>
               <backEnd.Attribute.AttributeImpl>
-                <myValue class="string">\resources\images\Tiles\grass.jpg</myValue>
+                <myValue class="string">resources/images/Tiles/default_tile.png</myValue>
                 <myName>ImageFile</myName>
               </backEnd.Attribute.AttributeImpl>
             </entry>
@@ -3056,11 +2928,7 @@
             <entry>
               <string>Position</string>
               <backEnd.Attribute.AttributeImpl>
-                <myValue class="javafx.geometry.Point2D">
-                  <x>535.5</x>
-                  <y>303.74999999999994</y>
-                  <hash>269081158</hash>
-                </myValue>
+                <myValue class="javafx.geometry.Point2D" reference="../../../../../../javafx.geometry.Point2D"/>
                 <myName>Position</myName>
               </backEnd.Attribute.AttributeImpl>
             </entry>
@@ -3128,7 +2996,7 @@
             <entry>
               <string>ImageFile</string>
               <backEnd.Attribute.AttributeImpl>
-                <myValue class="string">\resources\images\Tiles\grass.jpg</myValue>
+                <myValue class="string">resources/images/Tiles/default_tile.png</myValue>
                 <myName>ImageFile</myName>
               </backEnd.Attribute.AttributeImpl>
             </entry>
@@ -3150,11 +3018,7 @@
             <entry>
               <string>Position</string>
               <backEnd.Attribute.AttributeImpl>
-                <myValue class="javafx.geometry.Point2D">
-                  <x>31.5</x>
-                  <y>182.24999999999997</y>
-                  <hash>135746118</hash>
-                </myValue>
+                <myValue class="javafx.geometry.Point2D" reference="../../../../../../javafx.geometry.Point2D"/>
                 <myName>Position</myName>
               </backEnd.Attribute.AttributeImpl>
             </entry>
@@ -3222,7 +3086,7 @@
             <entry>
               <string>ImageFile</string>
               <backEnd.Attribute.AttributeImpl>
-                <myValue class="string">\resources\images\Tiles\grass.jpg</myValue>
+                <myValue class="string">resources/images/Tiles/default_tile.png</myValue>
                 <myName>ImageFile</myName>
               </backEnd.Attribute.AttributeImpl>
             </entry>
@@ -3244,11 +3108,7 @@
             <entry>
               <string>Position</string>
               <backEnd.Attribute.AttributeImpl>
-                <myValue class="javafx.geometry.Point2D">
-                  <x>94.5</x>
-                  <y>384.74999999999994</y>
-                  <hash>185890374</hash>
-                </myValue>
+                <myValue class="javafx.geometry.Point2D" reference="../../../../../../javafx.geometry.Point2D"/>
                 <myName>Position</myName>
               </backEnd.Attribute.AttributeImpl>
             </entry>
@@ -3316,7 +3176,7 @@
             <entry>
               <string>ImageFile</string>
               <backEnd.Attribute.AttributeImpl>
-                <myValue class="string">\resources\images\Tiles\grass.jpg</myValue>
+                <myValue class="string">resources/images/Tiles/default_tile.png</myValue>
                 <myName>ImageFile</myName>
               </backEnd.Attribute.AttributeImpl>
             </entry>
@@ -3338,11 +3198,7 @@
             <entry>
               <string>Position</string>
               <backEnd.Attribute.AttributeImpl>
-                <myValue class="javafx.geometry.Point2D">
-                  <x>409.5</x>
-                  <y>101.24999999999999</y>
-                  <hash>252879430</hash>
-                </myValue>
+                <myValue class="javafx.geometry.Point2D" reference="../../../../../../javafx.geometry.Point2D"/>
                 <myName>Position</myName>
               </backEnd.Attribute.AttributeImpl>
             </entry>
@@ -3410,7 +3266,7 @@
             <entry>
               <string>ImageFile</string>
               <backEnd.Attribute.AttributeImpl>
-                <myValue class="string">\resources\images\Tiles\grass.jpg</myValue>
+                <myValue class="string">resources/images/Tiles/default_tile.png</myValue>
                 <myName>ImageFile</myName>
               </backEnd.Attribute.AttributeImpl>
             </entry>
@@ -3432,11 +3288,7 @@
             <entry>
               <string>Position</string>
               <backEnd.Attribute.AttributeImpl>
-                <myValue class="javafx.geometry.Point2D">
-                  <x>31.5</x>
-                  <y>141.74999999999997</y>
-                  <hash>135406150</hash>
-                </myValue>
+                <myValue class="javafx.geometry.Point2D" reference="../../../../../../javafx.geometry.Point2D"/>
                 <myName>Position</myName>
               </backEnd.Attribute.AttributeImpl>
             </entry>
@@ -3504,7 +3356,7 @@
             <entry>
               <string>ImageFile</string>
               <backEnd.Attribute.AttributeImpl>
-                <myValue class="string">\resources\images\Tiles\grass.jpg</myValue>
+                <myValue class="string">resources/images/Tiles/default_tile.png</myValue>
                 <myName>ImageFile</myName>
               </backEnd.Attribute.AttributeImpl>
             </entry>
@@ -3526,11 +3378,7 @@
             <entry>
               <string>Position</string>
               <backEnd.Attribute.AttributeImpl>
-                <myValue class="javafx.geometry.Point2D">
-                  <x>283.5</x>
-                  <y>60.749999999999986</y>
-                  <hash>236171845</hash>
-                </myValue>
+                <myValue class="javafx.geometry.Point2D" reference="../../../../../../javafx.geometry.Point2D"/>
                 <myName>Position</myName>
               </backEnd.Attribute.AttributeImpl>
             </entry>
@@ -3598,7 +3446,7 @@
             <entry>
               <string>ImageFile</string>
               <backEnd.Attribute.AttributeImpl>
-                <myValue class="string">\resources\images\Tiles\grass.jpg</myValue>
+                <myValue class="string">resources/images/Tiles/default_tile.png</myValue>
                 <myName>ImageFile</myName>
               </backEnd.Attribute.AttributeImpl>
             </entry>
@@ -3620,11 +3468,7 @@
             <entry>
               <string>Position</string>
               <backEnd.Attribute.AttributeImpl>
-                <myValue class="javafx.geometry.Point2D">
-                  <x>94.5</x>
-                  <y>344.24999999999994</y>
-                  <hash>185728582</hash>
-                </myValue>
+                <myValue class="javafx.geometry.Point2D" reference="../../../../../../javafx.geometry.Point2D"/>
                 <myName>Position</myName>
               </backEnd.Attribute.AttributeImpl>
             </entry>
@@ -3692,7 +3536,7 @@
             <entry>
               <string>ImageFile</string>
               <backEnd.Attribute.AttributeImpl>
-                <myValue class="string">\resources\images\Tiles\grass.jpg</myValue>
+                <myValue class="string">resources/images/Tiles/default_tile.png</myValue>
                 <myName>ImageFile</myName>
               </backEnd.Attribute.AttributeImpl>
             </entry>
@@ -3714,11 +3558,7 @@
             <entry>
               <string>Position</string>
               <backEnd.Attribute.AttributeImpl>
-                <myValue class="javafx.geometry.Point2D">
-                  <x>283.5</x>
-                  <y>101.24999999999999</y>
-                  <hash>236880454</hash>
-                </myValue>
+                <myValue class="javafx.geometry.Point2D" reference="../../../../../../javafx.geometry.Point2D"/>
                 <myName>Position</myName>
               </backEnd.Attribute.AttributeImpl>
             </entry>
@@ -3786,7 +3626,7 @@
             <entry>
               <string>ImageFile</string>
               <backEnd.Attribute.AttributeImpl>
-                <myValue class="string">\resources\images\Tiles\grass.jpg</myValue>
+                <myValue class="string">resources/images/Tiles/default_tile.png</myValue>
                 <myName>ImageFile</myName>
               </backEnd.Attribute.AttributeImpl>
             </entry>
@@ -3808,11 +3648,7 @@
             <entry>
               <string>Position</string>
               <backEnd.Attribute.AttributeImpl>
-                <myValue class="javafx.geometry.Point2D">
-                  <x>31.5</x>
-                  <y>222.74999999999997</y>
-                  <hash>136069702</hash>
-                </myValue>
+                <myValue class="javafx.geometry.Point2D" reference="../../../../../../javafx.geometry.Point2D"/>
                 <myName>Position</myName>
               </backEnd.Attribute.AttributeImpl>
             </entry>
@@ -3880,7 +3716,7 @@
             <entry>
               <string>ImageFile</string>
               <backEnd.Attribute.AttributeImpl>
-                <myValue class="string">\resources\images\Tiles\grass.jpg</myValue>
+                <myValue class="string">resources/images/Tiles/default_tile.png</myValue>
                 <myName>ImageFile</myName>
               </backEnd.Attribute.AttributeImpl>
             </entry>
@@ -3902,11 +3738,7 @@
             <entry>
               <string>Position</string>
               <backEnd.Attribute.AttributeImpl>
-                <myValue class="javafx.geometry.Point2D">
-                  <x>409.5</x>
-                  <y>141.74999999999997</y>
-                  <hash>253442630</hash>
-                </myValue>
+                <myValue class="javafx.geometry.Point2D" reference="../../../../../../javafx.geometry.Point2D"/>
                 <myName>Position</myName>
               </backEnd.Attribute.AttributeImpl>
             </entry>
@@ -3974,7 +3806,7 @@
             <entry>
               <string>ImageFile</string>
               <backEnd.Attribute.AttributeImpl>
-                <myValue class="string">\resources\images\Tiles\grass.jpg</myValue>
+                <myValue class="string">resources/images/Tiles/default_tile.png</myValue>
                 <myName>ImageFile</myName>
               </backEnd.Attribute.AttributeImpl>
             </entry>
@@ -3996,11 +3828,7 @@
             <entry>
               <string>Position</string>
               <backEnd.Attribute.AttributeImpl>
-                <myValue class="javafx.geometry.Point2D">
-                  <x>31.5</x>
-                  <y>344.24999999999994</y>
-                  <hash>136715846</hash>
-                </myValue>
+                <myValue class="javafx.geometry.Point2D" reference="../../../../../../javafx.geometry.Point2D"/>
                 <myName>Position</myName>
               </backEnd.Attribute.AttributeImpl>
             </entry>
@@ -4068,7 +3896,7 @@
             <entry>
               <string>ImageFile</string>
               <backEnd.Attribute.AttributeImpl>
-                <myValue class="string">\resources\images\Tiles\grass.jpg</myValue>
+                <myValue class="string">resources/images/Tiles/default_tile.png</myValue>
                 <myName>ImageFile</myName>
               </backEnd.Attribute.AttributeImpl>
             </entry>
@@ -4090,11 +3918,7 @@
             <entry>
               <string>Position</string>
               <backEnd.Attribute.AttributeImpl>
-                <myValue class="javafx.geometry.Point2D">
-                  <x>283.5</x>
-                  <y>141.74999999999997</y>
-                  <hash>237443654</hash>
-                </myValue>
+                <myValue class="javafx.geometry.Point2D" reference="../../../../../../javafx.geometry.Point2D"/>
                 <myName>Position</myName>
               </backEnd.Attribute.AttributeImpl>
             </entry>
@@ -4162,7 +3986,7 @@
             <entry>
               <string>ImageFile</string>
               <backEnd.Attribute.AttributeImpl>
-                <myValue class="string">\resources\images\Tiles\grass.jpg</myValue>
+                <myValue class="string">resources/images/Tiles/default_tile.png</myValue>
                 <myName>ImageFile</myName>
               </backEnd.Attribute.AttributeImpl>
             </entry>
@@ -4184,11 +4008,7 @@
             <entry>
               <string>Position</string>
               <backEnd.Attribute.AttributeImpl>
-                <myValue class="javafx.geometry.Point2D">
-                  <x>409.5</x>
-                  <y>222.74999999999997</y>
-                  <hash>254106182</hash>
-                </myValue>
+                <myValue class="javafx.geometry.Point2D" reference="../../../../../../javafx.geometry.Point2D"/>
                 <myName>Position</myName>
               </backEnd.Attribute.AttributeImpl>
             </entry>
@@ -4256,7 +4076,7 @@
             <entry>
               <string>ImageFile</string>
               <backEnd.Attribute.AttributeImpl>
-                <myValue class="string">\resources\images\Tiles\grass.jpg</myValue>
+                <myValue class="string">resources/images/Tiles/default_tile.png</myValue>
                 <myName>ImageFile</myName>
               </backEnd.Attribute.AttributeImpl>
             </entry>
@@ -4278,11 +4098,7 @@
             <entry>
               <string>Position</string>
               <backEnd.Attribute.AttributeImpl>
-                <myValue class="javafx.geometry.Point2D">
-                  <x>31.5</x>
-                  <y>303.74999999999994</y>
-                  <hash>136537670</hash>
-                </myValue>
+                <myValue class="javafx.geometry.Point2D" reference="../../../../../../javafx.geometry.Point2D"/>
                 <myName>Position</myName>
               </backEnd.Attribute.AttributeImpl>
             </entry>
@@ -4350,7 +4166,7 @@
             <entry>
               <string>ImageFile</string>
               <backEnd.Attribute.AttributeImpl>
-                <myValue class="string">\resources\images\Tiles\grass.jpg</myValue>
+                <myValue class="string">resources/images/Tiles/default_tile.png</myValue>
                 <myName>ImageFile</myName>
               </backEnd.Attribute.AttributeImpl>
             </entry>
@@ -4372,11 +4188,7 @@
             <entry>
               <string>Position</string>
               <backEnd.Attribute.AttributeImpl>
-                <myValue class="javafx.geometry.Point2D">
-                  <x>409.5</x>
-                  <y>182.24999999999997</y>
-                  <hash>253766214</hash>
-                </myValue>
+                <myValue class="javafx.geometry.Point2D" reference="../../../../../../javafx.geometry.Point2D"/>
                 <myName>Position</myName>
               </backEnd.Attribute.AttributeImpl>
             </entry>
@@ -4444,7 +4256,7 @@
             <entry>
               <string>ImageFile</string>
               <backEnd.Attribute.AttributeImpl>
-                <myValue class="string">\resources\images\Tiles\grass.jpg</myValue>
+                <myValue class="string">resources/images/Tiles/default_tile.png</myValue>
                 <myName>ImageFile</myName>
               </backEnd.Attribute.AttributeImpl>
             </entry>
@@ -4466,11 +4278,7 @@
             <entry>
               <string>Position</string>
               <backEnd.Attribute.AttributeImpl>
-                <myValue class="javafx.geometry.Point2D">
-                  <x>31.5</x>
-                  <y>263.24999999999994</y>
-                  <hash>136375878</hash>
-                </myValue>
+                <myValue class="javafx.geometry.Point2D" reference="../../../../../../javafx.geometry.Point2D"/>
                 <myName>Position</myName>
               </backEnd.Attribute.AttributeImpl>
             </entry>
@@ -4538,7 +4346,7 @@
             <entry>
               <string>ImageFile</string>
               <backEnd.Attribute.AttributeImpl>
-                <myValue class="string">\resources\images\Tiles\grass.jpg</myValue>
+                <myValue class="string">resources/images/Tiles/default_tile.png</myValue>
                 <myName>ImageFile</myName>
               </backEnd.Attribute.AttributeImpl>
             </entry>
@@ -4560,11 +4368,7 @@
             <entry>
               <string>Position</string>
               <backEnd.Attribute.AttributeImpl>
-                <myValue class="javafx.geometry.Point2D">
-                  <x>598.5</x>
-                  <y>60.749999999999986</y>
-                  <hash>270677573</hash>
-                </myValue>
+                <myValue class="javafx.geometry.Point2D" reference="../../../../../../javafx.geometry.Point2D"/>
                 <myName>Position</myName>
               </backEnd.Attribute.AttributeImpl>
             </entry>
@@ -4632,7 +4436,7 @@
             <entry>
               <string>ImageFile</string>
               <backEnd.Attribute.AttributeImpl>
-                <myValue class="string">\resources\images\Tiles\grass.jpg</myValue>
+                <myValue class="string">resources/images/Tiles/default_tile.png</myValue>
                 <myName>ImageFile</myName>
               </backEnd.Attribute.AttributeImpl>
             </entry>
@@ -4654,11 +4458,7 @@
             <entry>
               <string>Position</string>
               <backEnd.Attribute.AttributeImpl>
-                <myValue class="javafx.geometry.Point2D">
-                  <x>409.5</x>
-                  <y>344.24999999999994</y>
-                  <hash>254735942</hash>
-                </myValue>
+                <myValue class="javafx.geometry.Point2D" reference="../../../../../../javafx.geometry.Point2D"/>
                 <myName>Position</myName>
               </backEnd.Attribute.AttributeImpl>
             </entry>
@@ -4726,7 +4526,7 @@
             <entry>
               <string>ImageFile</string>
               <backEnd.Attribute.AttributeImpl>
-                <myValue class="string">\resources\images\Tiles\grass.jpg</myValue>
+                <myValue class="string">resources/images/Tiles/default_tile.png</myValue>
                 <myName>ImageFile</myName>
               </backEnd.Attribute.AttributeImpl>
             </entry>
@@ -4748,11 +4548,7 @@
             <entry>
               <string>Position</string>
               <backEnd.Attribute.AttributeImpl>
-                <myValue class="javafx.geometry.Point2D">
-                  <x>283.5</x>
-                  <y>182.24999999999997</y>
-                  <hash>237767238</hash>
-                </myValue>
+                <myValue class="javafx.geometry.Point2D" reference="../../../../../../javafx.geometry.Point2D"/>
                 <myName>Position</myName>
               </backEnd.Attribute.AttributeImpl>
             </entry>
@@ -4820,7 +4616,7 @@
             <entry>
               <string>ImageFile</string>
               <backEnd.Attribute.AttributeImpl>
-                <myValue class="string">\resources\images\Tiles\grass.jpg</myValue>
+                <myValue class="string">resources/images/Tiles/default_tile.png</myValue>
                 <myName>ImageFile</myName>
               </backEnd.Attribute.AttributeImpl>
             </entry>
@@ -4842,11 +4638,7 @@
             <entry>
               <string>Position</string>
               <backEnd.Attribute.AttributeImpl>
-                <myValue class="javafx.geometry.Point2D">
-                  <x>409.5</x>
-                  <y>303.74999999999994</y>
-                  <hash>254574150</hash>
-                </myValue>
+                <myValue class="javafx.geometry.Point2D" reference="../../../../../../javafx.geometry.Point2D"/>
                 <myName>Position</myName>
               </backEnd.Attribute.AttributeImpl>
             </entry>
@@ -4914,7 +4706,7 @@
             <entry>
               <string>ImageFile</string>
               <backEnd.Attribute.AttributeImpl>
-                <myValue class="string">\resources\images\Tiles\grass.jpg</myValue>
+                <myValue class="string">resources/images/Tiles/default_tile.png</myValue>
                 <myName>ImageFile</myName>
               </backEnd.Attribute.AttributeImpl>
             </entry>
@@ -4936,11 +4728,7 @@
             <entry>
               <string>Position</string>
               <backEnd.Attribute.AttributeImpl>
-                <myValue class="javafx.geometry.Point2D">
-                  <x>598.5</x>
-                  <y>101.24999999999999</y>
-                  <hash>271386182</hash>
-                </myValue>
+                <myValue class="javafx.geometry.Point2D" reference="../../../../../../javafx.geometry.Point2D"/>
                 <myName>Position</myName>
               </backEnd.Attribute.AttributeImpl>
             </entry>
@@ -5008,7 +4796,7 @@
             <entry>
               <string>ImageFile</string>
               <backEnd.Attribute.AttributeImpl>
-                <myValue class="string">\resources\images\Tiles\grass.jpg</myValue>
+                <myValue class="string">resources/images/Tiles/default_tile.png</myValue>
                 <myName>ImageFile</myName>
               </backEnd.Attribute.AttributeImpl>
             </entry>
@@ -5030,11 +4818,7 @@
             <entry>
               <string>Position</string>
               <backEnd.Attribute.AttributeImpl>
-                <myValue class="javafx.geometry.Point2D">
-                  <x>31.5</x>
-                  <y>384.74999999999994</y>
-                  <hash>136877638</hash>
-                </myValue>
+                <myValue class="javafx.geometry.Point2D" reference="../../../../../../javafx.geometry.Point2D"/>
                 <myName>Position</myName>
               </backEnd.Attribute.AttributeImpl>
             </entry>
@@ -5102,7 +4886,7 @@
             <entry>
               <string>ImageFile</string>
               <backEnd.Attribute.AttributeImpl>
-                <myValue class="string">\resources\images\Tiles\grass.jpg</myValue>
+                <myValue class="string">resources/images/Tiles/default_tile.png</myValue>
                 <myName>ImageFile</myName>
               </backEnd.Attribute.AttributeImpl>
             </entry>
@@ -5124,11 +4908,7 @@
             <entry>
               <string>Position</string>
               <backEnd.Attribute.AttributeImpl>
-                <myValue class="javafx.geometry.Point2D">
-                  <x>409.5</x>
-                  <y>263.24999999999994</y>
-                  <hash>254395974</hash>
-                </myValue>
+                <myValue class="javafx.geometry.Point2D" reference="../../../../../../javafx.geometry.Point2D"/>
                 <myName>Position</myName>
               </backEnd.Attribute.AttributeImpl>
             </entry>
@@ -5196,7 +4976,7 @@
             <entry>
               <string>ImageFile</string>
               <backEnd.Attribute.AttributeImpl>
-                <myValue class="string">\resources\images\Tiles\grass.jpg</myValue>
+                <myValue class="string">resources/images/Tiles/default_tile.png</myValue>
                 <myName>ImageFile</myName>
               </backEnd.Attribute.AttributeImpl>
             </entry>
@@ -5218,11 +4998,7 @@
             <entry>
               <string>Position</string>
               <backEnd.Attribute.AttributeImpl>
-                <myValue class="javafx.geometry.Point2D">
-                  <x>598.5</x>
-                  <y>141.74999999999997</y>
-                  <hash>271949382</hash>
-                </myValue>
+                <myValue class="javafx.geometry.Point2D" reference="../../../../../../javafx.geometry.Point2D"/>
                 <myName>Position</myName>
               </backEnd.Attribute.AttributeImpl>
             </entry>
@@ -5290,7 +5066,7 @@
             <entry>
               <string>ImageFile</string>
               <backEnd.Attribute.AttributeImpl>
-                <myValue class="string">\resources\images\Tiles\grass.jpg</myValue>
+                <myValue class="string">resources/images/Tiles/default_tile.png</myValue>
                 <myName>ImageFile</myName>
               </backEnd.Attribute.AttributeImpl>
             </entry>
@@ -5312,11 +5088,7 @@
             <entry>
               <string>Position</string>
               <backEnd.Attribute.AttributeImpl>
-                <myValue class="javafx.geometry.Point2D">
-                  <x>283.5</x>
-                  <y>263.24999999999994</y>
-                  <hash>238396998</hash>
-                </myValue>
+                <myValue class="javafx.geometry.Point2D" reference="../../../../../../javafx.geometry.Point2D"/>
                 <myName>Position</myName>
               </backEnd.Attribute.AttributeImpl>
             </entry>
@@ -5384,7 +5156,7 @@
             <entry>
               <string>ImageFile</string>
               <backEnd.Attribute.AttributeImpl>
-                <myValue class="string">\resources\images\Tiles\grass.jpg</myValue>
+                <myValue class="string">resources/images/Tiles/default_tile.png</myValue>
                 <myName>ImageFile</myName>
               </backEnd.Attribute.AttributeImpl>
             </entry>
@@ -5406,11 +5178,7 @@
             <entry>
               <string>Position</string>
               <backEnd.Attribute.AttributeImpl>
-                <myValue class="javafx.geometry.Point2D">
-                  <x>283.5</x>
-                  <y>222.74999999999997</y>
-                  <hash>238107206</hash>
-                </myValue>
+                <myValue class="javafx.geometry.Point2D" reference="../../../../../../javafx.geometry.Point2D"/>
                 <myName>Position</myName>
               </backEnd.Attribute.AttributeImpl>
             </entry>
@@ -5478,7 +5246,7 @@
             <entry>
               <string>ImageFile</string>
               <backEnd.Attribute.AttributeImpl>
-                <myValue class="string">\resources\images\Tiles\grass.jpg</myValue>
+                <myValue class="string">resources/images/Tiles/default_tile.png</myValue>
                 <myName>ImageFile</myName>
               </backEnd.Attribute.AttributeImpl>
             </entry>
@@ -5500,11 +5268,7 @@
             <entry>
               <string>Position</string>
               <backEnd.Attribute.AttributeImpl>
-                <myValue class="javafx.geometry.Point2D">
-                  <x>409.5</x>
-                  <y>384.74999999999994</y>
-                  <hash>254897734</hash>
-                </myValue>
+                <myValue class="javafx.geometry.Point2D" reference="../../../../../../javafx.geometry.Point2D"/>
                 <myName>Position</myName>
               </backEnd.Attribute.AttributeImpl>
             </entry>
@@ -5572,7 +5336,7 @@
             <entry>
               <string>ImageFile</string>
               <backEnd.Attribute.AttributeImpl>
-                <myValue class="string">\resources\images\Tiles\grass.jpg</myValue>
+                <myValue class="string">resources/images/Tiles/default_tile.png</myValue>
                 <myName>ImageFile</myName>
               </backEnd.Attribute.AttributeImpl>
             </entry>
@@ -5594,11 +5358,7 @@
             <entry>
               <string>Position</string>
               <backEnd.Attribute.AttributeImpl>
-                <myValue class="javafx.geometry.Point2D">
-                  <x>598.5</x>
-                  <y>222.74999999999997</y>
-                  <hash>272612934</hash>
-                </myValue>
+                <myValue class="javafx.geometry.Point2D" reference="../../../../../../javafx.geometry.Point2D"/>
                 <myName>Position</myName>
               </backEnd.Attribute.AttributeImpl>
             </entry>
@@ -5666,7 +5426,7 @@
             <entry>
               <string>ImageFile</string>
               <backEnd.Attribute.AttributeImpl>
-                <myValue class="string">\resources\images\Tiles\grass.jpg</myValue>
+                <myValue class="string">resources/images/Tiles/default_tile.png</myValue>
                 <myName>ImageFile</myName>
               </backEnd.Attribute.AttributeImpl>
             </entry>
@@ -5688,11 +5448,7 @@
             <entry>
               <string>Position</string>
               <backEnd.Attribute.AttributeImpl>
-                <myValue class="javafx.geometry.Point2D">
-                  <x>283.5</x>
-                  <y>384.74999999999994</y>
-                  <hash>238898758</hash>
-                </myValue>
+                <myValue class="javafx.geometry.Point2D" reference="../../../../../../javafx.geometry.Point2D"/>
                 <myName>Position</myName>
               </backEnd.Attribute.AttributeImpl>
             </entry>
@@ -5760,7 +5516,7 @@
             <entry>
               <string>ImageFile</string>
               <backEnd.Attribute.AttributeImpl>
-                <myValue class="string">\resources\images\Tiles\grass.jpg</myValue>
+                <myValue class="string">resources/images/Tiles/default_tile.png</myValue>
                 <myName>ImageFile</myName>
               </backEnd.Attribute.AttributeImpl>
             </entry>
@@ -5782,11 +5538,7 @@
             <entry>
               <string>Position</string>
               <backEnd.Attribute.AttributeImpl>
-                <myValue class="javafx.geometry.Point2D">
-                  <x>220.5</x>
-                  <y>20.249999999999996</y>
-                  <hash>221948486</hash>
-                </myValue>
+                <myValue class="javafx.geometry.Point2D" reference="../../../../../../javafx.geometry.Point2D"/>
                 <myName>Position</myName>
               </backEnd.Attribute.AttributeImpl>
             </entry>
@@ -5854,7 +5606,7 @@
             <entry>
               <string>ImageFile</string>
               <backEnd.Attribute.AttributeImpl>
-                <myValue class="string">\resources\images\Tiles\grass.jpg</myValue>
+                <myValue class="string">resources/images/Tiles/default_tile.png</myValue>
                 <myName>ImageFile</myName>
               </backEnd.Attribute.AttributeImpl>
             </entry>
@@ -5876,11 +5628,7 @@
             <entry>
               <string>Position</string>
               <backEnd.Attribute.AttributeImpl>
-                <myValue class="javafx.geometry.Point2D">
-                  <x>598.5</x>
-                  <y>182.24999999999997</y>
-                  <hash>272272966</hash>
-                </myValue>
+                <myValue class="javafx.geometry.Point2D" reference="../../../../../../javafx.geometry.Point2D"/>
                 <myName>Position</myName>
               </backEnd.Attribute.AttributeImpl>
             </entry>
@@ -5948,7 +5696,7 @@
             <entry>
               <string>ImageFile</string>
               <backEnd.Attribute.AttributeImpl>
-                <myValue class="string">\resources\images\Tiles\grass.jpg</myValue>
+                <myValue class="string">resources/images/Tiles/default_tile.png</myValue>
                 <myName>ImageFile</myName>
               </backEnd.Attribute.AttributeImpl>
             </entry>
@@ -5970,11 +5718,7 @@
             <entry>
               <string>Position</string>
               <backEnd.Attribute.AttributeImpl>
-                <myValue class="javafx.geometry.Point2D">
-                  <x>283.5</x>
-                  <y>344.24999999999994</y>
-                  <hash>238736966</hash>
-                </myValue>
+                <myValue class="javafx.geometry.Point2D" reference="../../../../../../javafx.geometry.Point2D"/>
                 <myName>Position</myName>
               </backEnd.Attribute.AttributeImpl>
             </entry>
@@ -6042,7 +5786,7 @@
             <entry>
               <string>ImageFile</string>
               <backEnd.Attribute.AttributeImpl>
-                <myValue class="string">\resources\images\Tiles\grass.jpg</myValue>
+                <myValue class="string">resources/images/Tiles/default_tile.png</myValue>
                 <myName>ImageFile</myName>
               </backEnd.Attribute.AttributeImpl>
             </entry>
@@ -6064,11 +5808,7 @@
             <entry>
               <string>Position</string>
               <backEnd.Attribute.AttributeImpl>
-                <myValue class="javafx.geometry.Point2D">
-                  <x>283.5</x>
-                  <y>303.74999999999994</y>
-                  <hash>238575174</hash>
-                </myValue>
+                <myValue class="javafx.geometry.Point2D" reference="../../../../../../javafx.geometry.Point2D"/>
                 <myName>Position</myName>
               </backEnd.Attribute.AttributeImpl>
             </entry>
@@ -6136,7 +5876,7 @@
             <entry>
               <string>ImageFile</string>
               <backEnd.Attribute.AttributeImpl>
-                <myValue class="string">\resources\images\Tiles\grass.jpg</myValue>
+                <myValue class="string">resources/images/Tiles/default_tile.png</myValue>
                 <myName>ImageFile</myName>
               </backEnd.Attribute.AttributeImpl>
             </entry>
@@ -6158,11 +5898,7 @@
             <entry>
               <string>Position</string>
               <backEnd.Attribute.AttributeImpl>
-                <myValue class="javafx.geometry.Point2D">
-                  <x>535.5</x>
-                  <y>20.249999999999996</y>
-                  <hash>264969798</hash>
-                </myValue>
+                <myValue class="javafx.geometry.Point2D" reference="../../../../../../javafx.geometry.Point2D"/>
                 <myName>Position</myName>
               </backEnd.Attribute.AttributeImpl>
             </entry>
@@ -6230,7 +5966,7 @@
             <entry>
               <string>ImageFile</string>
               <backEnd.Attribute.AttributeImpl>
-                <myValue class="string">\resources\images\Tiles\grass.jpg</myValue>
+                <myValue class="string">resources/images/Tiles/default_tile.png</myValue>
                 <myName>ImageFile</myName>
               </backEnd.Attribute.AttributeImpl>
             </entry>
@@ -6252,11 +5988,7 @@
             <entry>
               <string>Position</string>
               <backEnd.Attribute.AttributeImpl>
-                <myValue class="javafx.geometry.Point2D">
-                  <x>94.5</x>
-                  <y>20.249999999999996</y>
-                  <hash>181451334</hash>
-                </myValue>
+                <myValue class="javafx.geometry.Point2D" reference="../../../../../../javafx.geometry.Point2D"/>
                 <myName>Position</myName>
               </backEnd.Attribute.AttributeImpl>
             </entry>
@@ -6324,7 +6056,7 @@
             <entry>
               <string>ImageFile</string>
               <backEnd.Attribute.AttributeImpl>
-                <myValue class="string">\resources\images\Tiles\grass.jpg</myValue>
+                <myValue class="string">resources/images/Tiles/default_tile.png</myValue>
                 <myName>ImageFile</myName>
               </backEnd.Attribute.AttributeImpl>
             </entry>
@@ -6346,11 +6078,7 @@
             <entry>
               <string>Position</string>
               <backEnd.Attribute.AttributeImpl>
-                <myValue class="javafx.geometry.Point2D">
-                  <x>535.5</x>
-                  <y>60.749999999999986</y>
-                  <hash>266681925</hash>
-                </myValue>
+                <myValue class="javafx.geometry.Point2D" reference="../../../../../../javafx.geometry.Point2D"/>
                 <myName>Position</myName>
               </backEnd.Attribute.AttributeImpl>
             </entry>
@@ -6418,7 +6146,7 @@
             <entry>
               <string>ImageFile</string>
               <backEnd.Attribute.AttributeImpl>
-                <myValue class="string">\resources\images\Tiles\grass.jpg</myValue>
+                <myValue class="string">resources/images/Tiles/default_tile.png</myValue>
                 <myName>ImageFile</myName>
               </backEnd.Attribute.AttributeImpl>
             </entry>
@@ -6440,11 +6168,7 @@
             <entry>
               <string>Position</string>
               <backEnd.Attribute.AttributeImpl>
-                <myValue class="javafx.geometry.Point2D">
-                  <x>31.5</x>
-                  <y>20.249999999999996</y>
-                  <hash>132438598</hash>
-                </myValue>
+                <myValue class="javafx.geometry.Point2D" reference="../../../../../../javafx.geometry.Point2D"/>
                 <myName>Position</myName>
               </backEnd.Attribute.AttributeImpl>
             </entry>
@@ -6512,7 +6236,7 @@
             <entry>
               <string>ImageFile</string>
               <backEnd.Attribute.AttributeImpl>
-                <myValue class="string">\resources\images\Tiles\grass.jpg</myValue>
+                <myValue class="string">resources/images/Tiles/default_tile.png</myValue>
                 <myName>ImageFile</myName>
               </backEnd.Attribute.AttributeImpl>
             </entry>
@@ -6534,11 +6258,7 @@
             <entry>
               <string>Position</string>
               <backEnd.Attribute.AttributeImpl>
-                <myValue class="javafx.geometry.Point2D">
-                  <x>409.5</x>
-                  <y>20.249999999999996</y>
-                  <hash>250458694</hash>
-                </myValue>
+                <myValue class="javafx.geometry.Point2D" reference="../../../../../../javafx.geometry.Point2D"/>
                 <myName>Position</myName>
               </backEnd.Attribute.AttributeImpl>
             </entry>
@@ -6606,7 +6326,7 @@
             <entry>
               <string>ImageFile</string>
               <backEnd.Attribute.AttributeImpl>
-                <myValue class="string">\resources\images\Tiles\grass.jpg</myValue>
+                <myValue class="string">resources/images/Tiles/default_tile.png</myValue>
                 <myName>ImageFile</myName>
               </backEnd.Attribute.AttributeImpl>
             </entry>
@@ -6628,11 +6348,7 @@
             <entry>
               <string>Position</string>
               <backEnd.Attribute.AttributeImpl>
-                <myValue class="javafx.geometry.Point2D">
-                  <x>94.5</x>
-                  <y>60.749999999999986</y>
-                  <hash>183163461</hash>
-                </myValue>
+                <myValue class="javafx.geometry.Point2D" reference="../../../../../../javafx.geometry.Point2D"/>
                 <myName>Position</myName>
               </backEnd.Attribute.AttributeImpl>
             </entry>
@@ -6700,7 +6416,7 @@
             <entry>
               <string>ImageFile</string>
               <backEnd.Attribute.AttributeImpl>
-                <myValue class="string">\resources\images\Tiles\grass.jpg</myValue>
+                <myValue class="string">resources/images/Tiles/default_tile.png</myValue>
                 <myName>ImageFile</myName>
               </backEnd.Attribute.AttributeImpl>
             </entry>
@@ -6722,11 +6438,7 @@
             <entry>
               <string>Position</string>
               <backEnd.Attribute.AttributeImpl>
-                <myValue class="javafx.geometry.Point2D">
-                  <x>94.5</x>
-                  <y>101.24999999999999</y>
-                  <hash>183872070</hash>
-                </myValue>
+                <myValue class="javafx.geometry.Point2D" reference="../../../../../../javafx.geometry.Point2D"/>
                 <myName>Position</myName>
               </backEnd.Attribute.AttributeImpl>
             </entry>
@@ -6794,7 +6506,7 @@
             <entry>
               <string>ImageFile</string>
               <backEnd.Attribute.AttributeImpl>
-                <myValue class="string">\resources\images\Tiles\grass.jpg</myValue>
+                <myValue class="string">resources/images/Tiles/default_tile.png</myValue>
                 <myName>ImageFile</myName>
               </backEnd.Attribute.AttributeImpl>
             </entry>
@@ -6816,11 +6528,7 @@
             <entry>
               <string>Position</string>
               <backEnd.Attribute.AttributeImpl>
-                <myValue class="javafx.geometry.Point2D">
-                  <x>535.5</x>
-                  <y>101.24999999999999</y>
-                  <hash>267390534</hash>
-                </myValue>
+                <myValue class="javafx.geometry.Point2D" reference="../../../../../../javafx.geometry.Point2D"/>
                 <myName>Position</myName>
               </backEnd.Attribute.AttributeImpl>
             </entry>
@@ -6888,7 +6596,7 @@
             <entry>
               <string>ImageFile</string>
               <backEnd.Attribute.AttributeImpl>
-                <myValue class="string">\resources\images\Tiles\grass.jpg</myValue>
+                <myValue class="string">resources/images/Tiles/default_tile.png</myValue>
                 <myName>ImageFile</myName>
               </backEnd.Attribute.AttributeImpl>
             </entry>
@@ -6910,11 +6618,7 @@
             <entry>
               <string>Position</string>
               <backEnd.Attribute.AttributeImpl>
-                <myValue class="javafx.geometry.Point2D">
-                  <x>94.5</x>
-                  <y>141.74999999999997</y>
-                  <hash>184418886</hash>
-                </myValue>
+                <myValue class="javafx.geometry.Point2D" reference="../../../../../../javafx.geometry.Point2D"/>
                 <myName>Position</myName>
               </backEnd.Attribute.AttributeImpl>
             </entry>
@@ -6982,7 +6686,7 @@
             <entry>
               <string>ImageFile</string>
               <backEnd.Attribute.AttributeImpl>
-                <myValue class="string">\resources\images\Tiles\grass.jpg</myValue>
+                <myValue class="string">resources/images/Tiles/default_tile.png</myValue>
                 <myName>ImageFile</myName>
               </backEnd.Attribute.AttributeImpl>
             </entry>
@@ -7004,11 +6708,7 @@
             <entry>
               <string>Position</string>
               <backEnd.Attribute.AttributeImpl>
-                <myValue class="javafx.geometry.Point2D">
-                  <x>31.5</x>
-                  <y>60.749999999999986</y>
-                  <hash>134150725</hash>
-                </myValue>
+                <myValue class="javafx.geometry.Point2D" reference="../../../../../../javafx.geometry.Point2D"/>
                 <myName>Position</myName>
               </backEnd.Attribute.AttributeImpl>
             </entry>
@@ -7076,7 +6776,7 @@
             <entry>
               <string>ImageFile</string>
               <backEnd.Attribute.AttributeImpl>
-                <myValue class="string">\resources\images\Tiles\grass.jpg</myValue>
+                <myValue class="string">resources/images/Tiles/default_tile.png</myValue>
                 <myName>ImageFile</myName>
               </backEnd.Attribute.AttributeImpl>
             </entry>
@@ -7098,11 +6798,7 @@
             <entry>
               <string>Position</string>
               <backEnd.Attribute.AttributeImpl>
-                <myValue class="javafx.geometry.Point2D">
-                  <x>535.5</x>
-                  <y>182.24999999999997</y>
-                  <hash>268277318</hash>
-                </myValue>
+                <myValue class="javafx.geometry.Point2D" reference="../../../../../../javafx.geometry.Point2D"/>
                 <myName>Position</myName>
               </backEnd.Attribute.AttributeImpl>
             </entry>
@@ -7170,7 +6866,7 @@
             <entry>
               <string>ImageFile</string>
               <backEnd.Attribute.AttributeImpl>
-                <myValue class="string">\resources\images\Tiles\grass.jpg</myValue>
+                <myValue class="string">resources/images/Tiles/default_tile.png</myValue>
                 <myName>ImageFile</myName>
               </backEnd.Attribute.AttributeImpl>
             </entry>
@@ -7192,11 +6888,7 @@
             <entry>
               <string>Position</string>
               <backEnd.Attribute.AttributeImpl>
-                <myValue class="javafx.geometry.Point2D">
-                  <x>535.5</x>
-                  <y>141.74999999999997</y>
-                  <hash>267937350</hash>
-                </myValue>
+                <myValue class="javafx.geometry.Point2D" reference="../../../../../../javafx.geometry.Point2D"/>
                 <myName>Position</myName>
               </backEnd.Attribute.AttributeImpl>
             </entry>
@@ -7264,7 +6956,7 @@
             <entry>
               <string>ImageFile</string>
               <backEnd.Attribute.AttributeImpl>
-                <myValue class="string">\resources\images\Tiles\grass.jpg</myValue>
+                <myValue class="string">resources/images/Tiles/default_tile.png</myValue>
                 <myName>ImageFile</myName>
               </backEnd.Attribute.AttributeImpl>
             </entry>
@@ -7286,11 +6978,7 @@
             <entry>
               <string>Position</string>
               <backEnd.Attribute.AttributeImpl>
-                <myValue class="javafx.geometry.Point2D">
-                  <x>283.5</x>
-                  <y>20.249999999999996</y>
-                  <hash>234459718</hash>
-                </myValue>
+                <myValue class="javafx.geometry.Point2D" reference="../../../../../../javafx.geometry.Point2D"/>
                 <myName>Position</myName>
               </backEnd.Attribute.AttributeImpl>
             </entry>
@@ -7358,7 +7046,7 @@
             <entry>
               <string>ImageFile</string>
               <backEnd.Attribute.AttributeImpl>
-                <myValue class="string">\resources\images\Tiles\grass.jpg</myValue>
+                <myValue class="string">resources/images/Tiles/default_tile.png</myValue>
                 <myName>ImageFile</myName>
               </backEnd.Attribute.AttributeImpl>
             </entry>
@@ -7380,11 +7068,7 @@
             <entry>
               <string>Position</string>
               <backEnd.Attribute.AttributeImpl>
-                <myValue class="javafx.geometry.Point2D">
-                  <x>157.5</x>
-                  <y>344.24999999999994</y>
-                  <hash>210226758</hash>
-                </myValue>
+                <myValue class="javafx.geometry.Point2D" reference="../../../../../../javafx.geometry.Point2D"/>
                 <myName>Position</myName>
               </backEnd.Attribute.AttributeImpl>
             </entry>
@@ -7452,7 +7136,7 @@
             <entry>
               <string>ImageFile</string>
               <backEnd.Attribute.AttributeImpl>
-                <myValue class="string">\resources\images\Tiles\grass.jpg</myValue>
+                <myValue class="string">resources/images/Tiles/default_tile.png</myValue>
                 <myName>ImageFile</myName>
               </backEnd.Attribute.AttributeImpl>
             </entry>
@@ -7474,11 +7158,7 @@
             <entry>
               <string>Position</string>
               <backEnd.Attribute.AttributeImpl>
-                <myValue class="javafx.geometry.Point2D">
-                  <x>157.5</x>
-                  <y>303.74999999999994</y>
-                  <hash>210064966</hash>
-                </myValue>
+                <myValue class="javafx.geometry.Point2D" reference="../../../../../../javafx.geometry.Point2D"/>
                 <myName>Position</myName>
               </backEnd.Attribute.AttributeImpl>
             </entry>
@@ -7546,7 +7226,7 @@
             <entry>
               <string>ImageFile</string>
               <backEnd.Attribute.AttributeImpl>
-                <myValue class="string">\resources\images\Tiles\grass.jpg</myValue>
+                <myValue class="string">resources/images/Tiles/default_tile.png</myValue>
                 <myName>ImageFile</myName>
               </backEnd.Attribute.AttributeImpl>
             </entry>
@@ -7568,11 +7248,7 @@
             <entry>
               <string>Position</string>
               <backEnd.Attribute.AttributeImpl>
-                <myValue class="javafx.geometry.Point2D">
-                  <x>472.5</x>
-                  <y>60.749999999999986</y>
-                  <hash>260162117</hash>
-                </myValue>
+                <myValue class="javafx.geometry.Point2D" reference="../../../../../../javafx.geometry.Point2D"/>
                 <myName>Position</myName>
               </backEnd.Attribute.AttributeImpl>
             </entry>
@@ -7640,7 +7316,7 @@
             <entry>
               <string>ImageFile</string>
               <backEnd.Attribute.AttributeImpl>
-                <myValue class="string">\resources\images\Tiles\grass.jpg</myValue>
+                <myValue class="string">resources/images/Tiles/default_tile.png</myValue>
                 <myName>ImageFile</myName>
               </backEnd.Attribute.AttributeImpl>
             </entry>
@@ -7662,11 +7338,7 @@
             <entry>
               <string>Position</string>
               <backEnd.Attribute.AttributeImpl>
-                <myValue class="javafx.geometry.Point2D">
-                  <x>157.5</x>
-                  <y>263.24999999999994</y>
-                  <hash>209903174</hash>
-                </myValue>
+                <myValue class="javafx.geometry.Point2D" reference="../../../../../../javafx.geometry.Point2D"/>
                 <myName>Position</myName>
               </backEnd.Attribute.AttributeImpl>
             </entry>
@@ -7734,7 +7406,7 @@
             <entry>
               <string>ImageFile</string>
               <backEnd.Attribute.AttributeImpl>
-                <myValue class="string">\resources\images\Tiles\grass.jpg</myValue>
+                <myValue class="string">resources/images/Tiles/default_tile.png</myValue>
                 <myName>ImageFile</myName>
               </backEnd.Attribute.AttributeImpl>
             </entry>
@@ -7756,11 +7428,7 @@
             <entry>
               <string>Position</string>
               <backEnd.Attribute.AttributeImpl>
-                <myValue class="javafx.geometry.Point2D">
-                  <x>346.5</x>
-                  <y>60.749999999999986</y>
-                  <hash>244163141</hash>
-                </myValue>
+                <myValue class="javafx.geometry.Point2D" reference="../../../../../../javafx.geometry.Point2D"/>
                 <myName>Position</myName>
               </backEnd.Attribute.AttributeImpl>
             </entry>
@@ -7828,7 +7496,7 @@
             <entry>
               <string>ImageFile</string>
               <backEnd.Attribute.AttributeImpl>
-                <myValue class="string">\resources\images\Tiles\grass.jpg</myValue>
+                <myValue class="string">resources/images/Tiles/default_tile.png</myValue>
                 <myName>ImageFile</myName>
               </backEnd.Attribute.AttributeImpl>
             </entry>
@@ -7850,11 +7518,7 @@
             <entry>
               <string>Position</string>
               <backEnd.Attribute.AttributeImpl>
-                <myValue class="javafx.geometry.Point2D">
-                  <x>472.5</x>
-                  <y>101.24999999999999</y>
-                  <hash>260887110</hash>
-                </myValue>
+                <myValue class="javafx.geometry.Point2D" reference="../../../../../../javafx.geometry.Point2D"/>
                 <myName>Position</myName>
               </backEnd.Attribute.AttributeImpl>
             </entry>
@@ -7922,7 +7586,7 @@
             <entry>
               <string>ImageFile</string>
               <backEnd.Attribute.AttributeImpl>
-                <myValue class="string">\resources\images\Tiles\grass.jpg</myValue>
+                <myValue class="string">resources/images/Tiles/default_tile.png</myValue>
                 <myName>ImageFile</myName>
               </backEnd.Attribute.AttributeImpl>
             </entry>
@@ -7944,11 +7608,7 @@
             <entry>
               <string>Position</string>
               <backEnd.Attribute.AttributeImpl>
-                <myValue class="javafx.geometry.Point2D">
-                  <x>157.5</x>
-                  <y>384.74999999999994</y>
-                  <hash>210388550</hash>
-                </myValue>
+                <myValue class="javafx.geometry.Point2D" reference="../../../../../../javafx.geometry.Point2D"/>
                 <myName>Position</myName>
               </backEnd.Attribute.AttributeImpl>
             </entry>
@@ -8016,7 +7676,7 @@
             <entry>
               <string>ImageFile</string>
               <backEnd.Attribute.AttributeImpl>
-                <myValue class="string">\resources\images\Tiles\grass.jpg</myValue>
+                <myValue class="string">resources/images/Tiles/default_tile.png</myValue>
                 <myName>ImageFile</myName>
               </backEnd.Attribute.AttributeImpl>
             </entry>
@@ -8038,11 +7698,7 @@
             <entry>
               <string>Position</string>
               <backEnd.Attribute.AttributeImpl>
-                <myValue class="javafx.geometry.Point2D">
-                  <x>472.5</x>
-                  <y>141.74999999999997</y>
-                  <hash>261433926</hash>
-                </myValue>
+                <myValue class="javafx.geometry.Point2D" reference="../../../../../../javafx.geometry.Point2D"/>
                 <myName>Position</myName>
               </backEnd.Attribute.AttributeImpl>
             </entry>
@@ -8110,7 +7766,7 @@
             <entry>
               <string>ImageFile</string>
               <backEnd.Attribute.AttributeImpl>
-                <myValue class="string">\resources\images\Tiles\grass.jpg</myValue>
+                <myValue class="string">resources/images/Tiles/default_tile.png</myValue>
                 <myName>ImageFile</myName>
               </backEnd.Attribute.AttributeImpl>
             </entry>
@@ -8132,11 +7788,7 @@
             <entry>
               <string>Position</string>
               <backEnd.Attribute.AttributeImpl>
-                <myValue class="javafx.geometry.Point2D">
-                  <x>472.5</x>
-                  <y>222.74999999999997</y>
-                  <hash>262097478</hash>
-                </myValue>
+                <myValue class="javafx.geometry.Point2D" reference="../../../../../../javafx.geometry.Point2D"/>
                 <myName>Position</myName>
               </backEnd.Attribute.AttributeImpl>
             </entry>
@@ -8204,7 +7856,7 @@
             <entry>
               <string>ImageFile</string>
               <backEnd.Attribute.AttributeImpl>
-                <myValue class="string">\resources\images\Tiles\grass.jpg</myValue>
+                <myValue class="string">resources/images/Tiles/default_tile.png</myValue>
                 <myName>ImageFile</myName>
               </backEnd.Attribute.AttributeImpl>
             </entry>
@@ -8226,11 +7878,7 @@
             <entry>
               <string>Position</string>
               <backEnd.Attribute.AttributeImpl>
-                <myValue class="javafx.geometry.Point2D">
-                  <x>472.5</x>
-                  <y>182.24999999999997</y>
-                  <hash>261773894</hash>
-                </myValue>
+                <myValue class="javafx.geometry.Point2D" reference="../../../../../../javafx.geometry.Point2D"/>
                 <myName>Position</myName>
               </backEnd.Attribute.AttributeImpl>
             </entry>
@@ -8298,7 +7946,7 @@
             <entry>
               <string>ImageFile</string>
               <backEnd.Attribute.AttributeImpl>
-                <myValue class="string">\resources\images\Tiles\grass.jpg</myValue>
+                <myValue class="string">resources/images/Tiles/default_tile.png</myValue>
                 <myName>ImageFile</myName>
               </backEnd.Attribute.AttributeImpl>
             </entry>
@@ -8320,11 +7968,7 @@
             <entry>
               <string>Position</string>
               <backEnd.Attribute.AttributeImpl>
-                <myValue class="javafx.geometry.Point2D">
-                  <x>346.5</x>
-                  <y>101.24999999999999</y>
-                  <hash>244888134</hash>
-                </myValue>
+                <myValue class="javafx.geometry.Point2D" reference="../../../../../../javafx.geometry.Point2D"/>
                 <myName>Position</myName>
               </backEnd.Attribute.AttributeImpl>
             </entry>
@@ -8392,7 +8036,7 @@
             <entry>
               <string>ImageFile</string>
               <backEnd.Attribute.AttributeImpl>
-                <myValue class="string">\resources\images\Tiles\grass.jpg</myValue>
+                <myValue class="string">resources/images/Tiles/default_tile.png</myValue>
                 <myName>ImageFile</myName>
               </backEnd.Attribute.AttributeImpl>
             </entry>
@@ -8414,11 +8058,7 @@
             <entry>
               <string>Position</string>
               <backEnd.Attribute.AttributeImpl>
-                <myValue class="javafx.geometry.Point2D">
-                  <x>346.5</x>
-                  <y>182.24999999999997</y>
-                  <hash>245774918</hash>
-                </myValue>
+                <myValue class="javafx.geometry.Point2D" reference="../../../../../../javafx.geometry.Point2D"/>
                 <myName>Position</myName>
               </backEnd.Attribute.AttributeImpl>
             </entry>
@@ -8486,7 +8126,7 @@
             <entry>
               <string>ImageFile</string>
               <backEnd.Attribute.AttributeImpl>
-                <myValue class="string">\resources\images\Tiles\grass.jpg</myValue>
+                <myValue class="string">resources/images/Tiles/default_tile.png</myValue>
                 <myName>ImageFile</myName>
               </backEnd.Attribute.AttributeImpl>
             </entry>
@@ -8508,11 +8148,7 @@
             <entry>
               <string>Position</string>
               <backEnd.Attribute.AttributeImpl>
-                <myValue class="javafx.geometry.Point2D">
-                  <x>472.5</x>
-                  <y>303.74999999999994</y>
-                  <hash>262565446</hash>
-                </myValue>
+                <myValue class="javafx.geometry.Point2D" reference="../../../../../../javafx.geometry.Point2D"/>
                 <myName>Position</myName>
               </backEnd.Attribute.AttributeImpl>
             </entry>
@@ -8580,7 +8216,7 @@
             <entry>
               <string>ImageFile</string>
               <backEnd.Attribute.AttributeImpl>
-                <myValue class="string">\resources\images\Tiles\grass.jpg</myValue>
+                <myValue class="string">resources/images/Tiles/default_tile.png</myValue>
                 <myName>ImageFile</myName>
               </backEnd.Attribute.AttributeImpl>
             </entry>
@@ -8602,11 +8238,7 @@
             <entry>
               <string>Position</string>
               <backEnd.Attribute.AttributeImpl>
-                <myValue class="javafx.geometry.Point2D">
-                  <x>472.5</x>
-                  <y>263.24999999999994</y>
-                  <hash>262403654</hash>
-                </myValue>
+                <myValue class="javafx.geometry.Point2D" reference="../../../../../../javafx.geometry.Point2D"/>
                 <myName>Position</myName>
               </backEnd.Attribute.AttributeImpl>
             </entry>
@@ -8674,7 +8306,7 @@
             <entry>
               <string>ImageFile</string>
               <backEnd.Attribute.AttributeImpl>
-                <myValue class="string">\resources\images\Tiles\grass.jpg</myValue>
+                <myValue class="string">resources/images/Tiles/default_tile.png</myValue>
                 <myName>ImageFile</myName>
               </backEnd.Attribute.AttributeImpl>
             </entry>
@@ -8696,11 +8328,7 @@
             <entry>
               <string>Position</string>
               <backEnd.Attribute.AttributeImpl>
-                <myValue class="javafx.geometry.Point2D">
-                  <x>346.5</x>
-                  <y>141.74999999999997</y>
-                  <hash>245434950</hash>
-                </myValue>
+                <myValue class="javafx.geometry.Point2D" reference="../../../../../../javafx.geometry.Point2D"/>
                 <myName>Position</myName>
               </backEnd.Attribute.AttributeImpl>
             </entry>
@@ -8768,7 +8396,7 @@
             <entry>
               <string>ImageFile</string>
               <backEnd.Attribute.AttributeImpl>
-                <myValue class="string">\resources\images\Tiles\grass.jpg</myValue>
+                <myValue class="string">resources/images/Tiles/default_tile.png</myValue>
                 <myName>ImageFile</myName>
               </backEnd.Attribute.AttributeImpl>
             </entry>
@@ -8790,11 +8418,7 @@
             <entry>
               <string>Position</string>
               <backEnd.Attribute.AttributeImpl>
-                <myValue class="javafx.geometry.Point2D">
-                  <x>346.5</x>
-                  <y>263.24999999999994</y>
-                  <hash>246404678</hash>
-                </myValue>
+                <myValue class="javafx.geometry.Point2D" reference="../../../../../../javafx.geometry.Point2D"/>
                 <myName>Position</myName>
               </backEnd.Attribute.AttributeImpl>
             </entry>
@@ -8862,7 +8486,7 @@
             <entry>
               <string>ImageFile</string>
               <backEnd.Attribute.AttributeImpl>
-                <myValue class="string">\resources\images\Tiles\grass.jpg</myValue>
+                <myValue class="string">resources/images/Tiles/default_tile.png</myValue>
                 <myName>ImageFile</myName>
               </backEnd.Attribute.AttributeImpl>
             </entry>
@@ -8884,11 +8508,7 @@
             <entry>
               <string>Position</string>
               <backEnd.Attribute.AttributeImpl>
-                <myValue class="javafx.geometry.Point2D">
-                  <x>346.5</x>
-                  <y>222.74999999999997</y>
-                  <hash>246098502</hash>
-                </myValue>
+                <myValue class="javafx.geometry.Point2D" reference="../../../../../../javafx.geometry.Point2D"/>
                 <myName>Position</myName>
               </backEnd.Attribute.AttributeImpl>
             </entry>
@@ -8956,7 +8576,7 @@
             <entry>
               <string>ImageFile</string>
               <backEnd.Attribute.AttributeImpl>
-                <myValue class="string">\resources\images\Tiles\grass.jpg</myValue>
+                <myValue class="string">resources/images/Tiles/default_tile.png</myValue>
                 <myName>ImageFile</myName>
               </backEnd.Attribute.AttributeImpl>
             </entry>
@@ -8978,11 +8598,7 @@
             <entry>
               <string>Position</string>
               <backEnd.Attribute.AttributeImpl>
-                <myValue class="javafx.geometry.Point2D">
-                  <x>472.5</x>
-                  <y>384.74999999999994</y>
-                  <hash>262905414</hash>
-                </myValue>
+                <myValue class="javafx.geometry.Point2D" reference="../../../../../../javafx.geometry.Point2D"/>
                 <myName>Position</myName>
               </backEnd.Attribute.AttributeImpl>
             </entry>
@@ -9050,7 +8666,7 @@
             <entry>
               <string>ImageFile</string>
               <backEnd.Attribute.AttributeImpl>
-                <myValue class="string">\resources\images\Tiles\grass.jpg</myValue>
+                <myValue class="string">resources/images/Tiles/default_tile.png</myValue>
                 <myName>ImageFile</myName>
               </backEnd.Attribute.AttributeImpl>
             </entry>
@@ -9072,11 +8688,7 @@
             <entry>
               <string>Position</string>
               <backEnd.Attribute.AttributeImpl>
-                <myValue class="javafx.geometry.Point2D">
-                  <x>472.5</x>
-                  <y>344.24999999999994</y>
-                  <hash>262727238</hash>
-                </myValue>
+                <myValue class="javafx.geometry.Point2D" reference="../../../../../../javafx.geometry.Point2D"/>
                 <myName>Position</myName>
               </backEnd.Attribute.AttributeImpl>
             </entry>
@@ -9144,7 +8756,7 @@
             <entry>
               <string>ImageFile</string>
               <backEnd.Attribute.AttributeImpl>
-                <myValue class="string">\resources\images\Tiles\grass.jpg</myValue>
+                <myValue class="string">resources/images/Tiles/default_tile.png</myValue>
                 <myName>ImageFile</myName>
               </backEnd.Attribute.AttributeImpl>
             </entry>
@@ -9166,11 +8778,7 @@
             <entry>
               <string>Position</string>
               <backEnd.Attribute.AttributeImpl>
-                <myValue class="javafx.geometry.Point2D">
-                  <x>346.5</x>
-                  <y>384.74999999999994</y>
-                  <hash>246906438</hash>
-                </myValue>
+                <myValue class="javafx.geometry.Point2D" reference="../../../../../../javafx.geometry.Point2D"/>
                 <myName>Position</myName>
               </backEnd.Attribute.AttributeImpl>
             </entry>
@@ -9238,7 +8846,7 @@
             <entry>
               <string>ImageFile</string>
               <backEnd.Attribute.AttributeImpl>
-                <myValue class="string">\resources\images\Tiles\grass.jpg</myValue>
+                <myValue class="string">resources/images/Tiles/default_tile.png</myValue>
                 <myName>ImageFile</myName>
               </backEnd.Attribute.AttributeImpl>
             </entry>
@@ -9260,11 +8868,7 @@
             <entry>
               <string>Position</string>
               <backEnd.Attribute.AttributeImpl>
-                <myValue class="javafx.geometry.Point2D">
-                  <x>346.5</x>
-                  <y>344.24999999999994</y>
-                  <hash>246728262</hash>
-                </myValue>
+                <myValue class="javafx.geometry.Point2D" reference="../../../../../../javafx.geometry.Point2D"/>
                 <myName>Position</myName>
               </backEnd.Attribute.AttributeImpl>
             </entry>
@@ -9332,7 +8936,7 @@
             <entry>
               <string>ImageFile</string>
               <backEnd.Attribute.AttributeImpl>
-                <myValue class="string">\resources\images\Tiles\grass.jpg</myValue>
+                <myValue class="string">resources/images/Tiles/default_tile.png</myValue>
                 <myName>ImageFile</myName>
               </backEnd.Attribute.AttributeImpl>
             </entry>
@@ -9354,11 +8958,7 @@
             <entry>
               <string>Position</string>
               <backEnd.Attribute.AttributeImpl>
-                <myValue class="javafx.geometry.Point2D">
-                  <x>346.5</x>
-                  <y>303.74999999999994</y>
-                  <hash>246566470</hash>
-                </myValue>
+                <myValue class="javafx.geometry.Point2D" reference="../../../../../../javafx.geometry.Point2D"/>
                 <myName>Position</myName>
               </backEnd.Attribute.AttributeImpl>
             </entry>

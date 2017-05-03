@@ -68,8 +68,9 @@ public class LevelProgressionControllerImpl
 		myDataController.saveGamesMap(gamesMap);
 	}
 
-	public List<String> getDirLevelList(String gameName) {
-		File file = new File("data/" + gameName + "/templates/");
+	public List<String> getDirList(String filePath) {
+		File file = new File(filePath);
+		System.out.println(filePath);
 		String[] directories = file.list(new FilenameFilter() {
 			@Override
 			public boolean accept(File current, String name) {
@@ -168,7 +169,11 @@ public class LevelProgressionControllerImpl
 			if (!gamesMap.containsKey(myMode.getGameMode())) {
 				gamesMap.put(myMode.getGameMode(), new ArrayList<String>());
 			}
-
+			
+			gamesMap = new HashMap<String, List<String>>();
+			
+			updateFromFileSystem();
+			
 			saveGamesMap();
 
 		} catch (XMLReadingException e) {
@@ -177,9 +182,38 @@ public class LevelProgressionControllerImpl
 		}
 	}
 
+	private void updateFromFileSystem()
+	{
+		updateGames();
+		updateLevels();
+	}
+
+	private void updateLevels()
+	{
+		for (String game : gamesMap.keySet())
+		{
+			for (String level : getDirList(generateTemplatePath(game, "")))
+			{
+				if (!gamesMap.get(game).contains(level)) gamesMap.get(game).add(level);
+			}
+		}
+	}
+
+	private void updateGames()
+	{
+		for (String game : getDirList("data/games/"))
+		{
+			if (!gamesMap.containsKey(game)) gamesMap.put(game, new ArrayList<String>());
+		}
+	}
+
 	@Override
 	public void loadNextLevel() {
-		gameLoader.accept(new File("data/games/" + myMode.getGameMode() + "/templates/" + getNextLevel()));
+		gameLoader.accept(new File(generateTemplatePath(myMode.getGameMode(), getNextLevel())));
+	}
+
+	private String generateTemplatePath(String game, String level) {
+		return "data/games/" + game + "/templates/" + level;
 	}
 
 	public void reloadLevel() {
@@ -215,14 +249,13 @@ public class LevelProgressionControllerImpl
 
 	@Override
 	public boolean existsNextLevel() {
-		System.out.println(getNextLevel() != null);
 		return getNextLevel() != null;
 	}
 
 	@Override
 	public void loadFirstLevel() {
 		String firstLevel = gamesMap.get(myMode.getGameMode()).get(0);
-		gameLoader.accept(new File("data/games/" + myMode.getGameMode() + "/templates/" + firstLevel));
+		gameLoader.accept(new File(generateTemplatePath(myMode.getGameMode(), firstLevel)));
 
 	}
 
