@@ -1,8 +1,12 @@
 package frontEnd.Skeleton.UserTools.Presets;
 
+import java.io.FileNotFoundException;
 import java.util.function.Consumer;
 
 import backEnd.Attribute.AttributeOwner;
+import backEnd.GameData.State.Component;
+import backEnd.GameData.State.ComponentImpl;
+import backEnd.GameData.State.TileImpl;
 import frontEnd.View;
 import frontEnd.Skeleton.SkeletonObject;
 import frontEnd.Skeleton.AoTools.GenericCommandCenter;
@@ -32,18 +36,39 @@ public class PresetCreationButton implements SkeletonObject {
 		myRoot.setFitWidth(palettePresetSize);
 		myView = view;
 		myRoot.setOnMouseClicked(e -> {
-			AttributeOwner newAO = (AttributeOwner) Reflection.createInstance(myType);
+			AttributeOwner newAO = null;
+			try{
+				newAO = (AttributeOwner) Reflection.createInstance(myType);
+			} catch (Exception err){
+				try{
+					switch (myType) {
+					case "Components":
+						newAO = new ComponentImpl();
+						break;
+					case "Tiles":
+						newAO = new TileImpl();
+						break;
+					default:
+						break;
+					}
+				} catch (FileNotFoundException err2){
+					return;
+				}
+			
+			}
 			GenericCommandCenter presetCreation = new GenericCommandCenter(myView, newAO);
 			presetCreation.launch("Design a new preset", 0d, 0d);
 		});		
 	}
-	
+	/*
 	public void disableInPlayerMode(Consumer<Boolean> disableConsumer) {
 		myRoot.disableProperty().bind(myView.getBooleanAuthorModeProperty().not());
+		System.out.println("button disable bound");
 		myRoot.disableProperty().addListener((a, b, c) -> {
 			disableConsumer.accept(c);
 		});
 	}
+	*/
 	
 	private ImageView createImageView(String myImagePath) {
 		Image image = new Image(getClass().getClassLoader().getResourceAsStream(myImagePath));

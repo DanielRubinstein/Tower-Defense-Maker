@@ -59,7 +59,7 @@ public class MenuSelectedGame {
 		}, "Create a new level for this game");
 		primaryMenu.addSimpleButtonWithHover("Choose Level", () -> chooseLevel(primaryMenu, stage, "templates", game),
 				"Load a level to edit");
-		primaryMenu.addSimpleButtonWithHover("Play Game from Start", () -> playFromStart(game),
+		primaryMenu.addSimpleButtonWithHover("Play Game from Start", () -> playFromStart(stage, game),
 				"Play from the first level");
 		primaryMenu.addSimpleButtonWithHover("Load Saved Game", () -> chooseLevel(primaryMenu, stage, "saves", game),
 				"Continue your progress by loading a user-saved game");
@@ -67,13 +67,14 @@ public class MenuSelectedGame {
 		primaryMenu.display(stage);
 	}
 
-	private void playFromStart(String game)
+	private void playFromStart(Stage stage, String game)
 	{
 		XMLReader reader = new XMLReaderImpl();
 		
 		try {
 			Map<String, List<String>> map = (Map<String, List<String>>) reader.loadGamesMap("data/UniversalGameData/");
 			myConsumerLoadData.accept(new File("data/games/" + game + "/templates/", map.get(game).get(0)));
+			stage.close();
 		} catch (XMLReadingException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

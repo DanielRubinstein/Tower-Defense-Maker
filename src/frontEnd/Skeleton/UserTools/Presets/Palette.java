@@ -43,7 +43,7 @@ public class Palette implements SkeletonObject, SerializableObserver {
 	private BankControllerReader observedBankController;
 	private PaletteItemCreator myPaletteItemCreator;
 
-	public Palette(View view, Collection<? extends AttributeOwnerReader> presets) {
+	public Palette(View view, Collection<? extends AttributeOwnerReader> presets, String type) {
 		myView = view;
 		initializeMaps(presets);
 		initializePane();
@@ -51,7 +51,8 @@ public class Palette implements SkeletonObject, SerializableObserver {
 		for (AttributeOwnerReader preset : presets) {
 			addPresetToPalette(preset);
 		}
-		extractStringType();
+		myType = type;
+		//extractStringType();
 		createNewPresetButton();
 
 	}
@@ -96,14 +97,28 @@ public class Palette implements SkeletonObject, SerializableObserver {
 
 	private void createNewPresetButton() {
 		PresetCreationButton presetCreationButton = new PresetCreationButton(myView, myType);
-		tile.getChildren().add(0, presetCreationButton.getRoot());
-		presetCreationButton.disableInPlayerMode((inPlayerMode) -> {
-			if (inPlayerMode) {
+		//System.out.println("button made " + myView.getBooleanAuthorModeProperty().get());
+		if(myView.getBooleanAuthorModeProperty().get()){
+			tile.getChildren().add(0, presetCreationButton.getRoot());
+		}
+		myView.getBooleanAuthorModeProperty().addListener((o, oldV, newV) -> {
+			Boolean inPlayerMode = !newV;
+			if (inPlayerMode && tile.getChildren().contains(presetCreationButton.getRoot())) {
 				tile.getChildren().remove(presetCreationButton.getRoot());
-			} else {
+			} else if (!inPlayerMode && !tile.getChildren().contains(presetCreationButton.getRoot())) {
 				tile.getChildren().add(0, presetCreationButton.getRoot());
 			}
 		});
+		
+		/*
+		presetCreationButton.disableInPlayerMode((inPlayerMode) -> {
+			if (inPlayerMode && tile.getChildren().contains(presetCreationButton)) {
+				tile.getChildren().remove(presetCreationButton.getRoot());
+			} else if (!inPlayerMode && !tile.getChildren().contains(presetCreationButton)) {
+				tile.getChildren().add(0, presetCreationButton.getRoot());
+			}
+		});
+		*/
 	}
 
 	private void initializePane() {
