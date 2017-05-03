@@ -98,16 +98,17 @@ public class AttributeCommandCenterBottomButtons implements SkeletonObject {
 				String nameForNewPreset = myNameDialog.getUserInputString();
 				if (nameForNewPreset != null && !(obj.<String>getAttributeReader(STRING_RESOURCE_BUNDLE.getFromAttributeNames("ImageFile"))
 						.getValue().equals(""))) {
-					
-					String type = obj.<String>getAttributeReader(STRING_RESOURCE_BUNDLE.getFromAttributeNames("Type")).getValue();
-					
-					Boolean hasType = !(type.equals("") || type == null);  
-					
-					if(hasType || (!hasType && checkWithUser())){
+					try{
+						String type = obj.<String>getAttributeReader(STRING_RESOURCE_BUNDLE.getFromAttributeNames("Type")).getValue();
+						Boolean hasType = !(type.equals("") || type == null);
+						if(hasType || (!hasType && checkWithUser())){
+							myView.sendUserModification(new Modification_Add_ToPalette(nameForNewPreset, obj));
+							myHostStage.close();
+						}
+					} catch (NullPointerException e){
 						myView.sendUserModification(new Modification_Add_ToPalette(nameForNewPreset, obj));
 						myHostStage.close();
-					}
-					
+					}					
 				} else {
 					Alert alert = new Alert(AlertType.WARNING);
 					alert.setTitle(STRING_RESOURCE_BUNDLE.getFromStringConstants("PresetSavingError"));
