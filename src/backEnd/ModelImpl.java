@@ -53,7 +53,7 @@ public class ModelImpl implements Model{
 		myDataController = new DataController();
 		myGameData = gameData;
 		this.gameLoader = gameLoader;
-		myMode = new ModeImpl(strResource.getFromStringConstants("AUTHOR"), gameName, levelName, myLevelProgressionController);
+		myMode = new ModeImpl(strResource.getFromStringConstants("PLAYER"), gameName, levelName, myLevelProgressionController);
 		myLevelProgressionController = new LevelProgressionControllerImpl(myMode, myDataController, splashScreenLoader, gameLoader);
 		myGameData.setLevelProgressionController(myLevelProgressionController);
 		myEngine = new GameProcessController(myGameData);
