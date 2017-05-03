@@ -54,7 +54,7 @@ public class VisualSpawnEntry implements SkeletonObject {
 		for(Number number : spawnDataNumbers){
 			Label valueText = new Label(number.toString());
 			valueText.setOnMouseClicked(e -> {
-				MultiFieldPrompt multiFieldPrompt = new MultiFieldPrompt(3, Arrays.asList("Add Spawn", "Please input values for your new spawn item"),  Arrays.asList("0.0", "0.0", "0"), Arrays.asList("Frequency", "Delay", "Spawns"));
+				MultiFieldPrompt multiFieldPrompt = new MultiFieldPrompt(3, Arrays.asList("Add Spawn", "Please input values for your new spawn item"),  Arrays.asList("0.0", "0.0", "0"), Arrays.asList("Frequency", "Delay", "Iterations"));
 				List<String> userInput = multiFieldPrompt.create();
 				if(userInput == null){
 					return;
