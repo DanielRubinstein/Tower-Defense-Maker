@@ -167,9 +167,13 @@ public class AttributeEditorCreator implements AttributeVisualization {
 		String sourceFolderPath = STRING_RESOURCE_BUNDLE.getFromFilePaths("Source_Path");
 		String newImagePathRelative = newImageFile.getPath()
 				.substring(newImageFile.getPath().indexOf(sourceFolderPath) + sourceFolderPath.length());
-		if(newImagePathRelative.charAt(0) == '/'){
-			return newImagePathRelative.substring(1);
+		//System.out.println(newImagePathRelative);
+		newImagePathRelative = newImagePathRelative.replace("\\", "/");
+		//System.out.println(newImagePathRelative);
+		if(newImagePathRelative.startsWith("/")){
+			newImagePathRelative = newImagePathRelative.substring(1);
 		}
+		//System.out.println(newImagePathRelative);
 		return newImagePathRelative;
 	}
 

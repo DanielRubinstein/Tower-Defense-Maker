@@ -68,11 +68,13 @@ public class DataInputLoader
 		return myGameData;	
 	}
 	
-	public Map<String, List<String>> getGamesMap(){
+	public Map<String, List<String>> getGamesMap()
+	{
 		return gamesMap;
 	}
 	
-	private GameData generateGameData(String levelName, String dataPath){
+	private GameData generateGameData(String levelName, String dataPath
+			){
 		try{
 			return myXMLReader.loadGameStateData(dataPath, levelName);
 		}catch(Exception e){
@@ -82,7 +84,8 @@ public class DataInputLoader
 		}
 	}
 
-	private GameData generateGameData(StartingInput startInp) throws XMLReadingException{
+	private GameData generateGameData(StartingInput startInp) throws XMLReadingException
+	{
 		try{
 			return createGameData(startInp);
 		}catch(Exception e){
