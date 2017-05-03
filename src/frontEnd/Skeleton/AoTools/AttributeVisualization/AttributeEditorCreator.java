@@ -154,6 +154,7 @@ public class AttributeEditorCreator implements AttributeVisualization {
 			return;
 		}
 		String newImagePathRelative = getRelativePathToImageDirectory(selectedFile);
+		System.out.println(newImagePathRelative);
 		Image newImage = new Image(getClass().getClassLoader().getResourceAsStream(newImagePathRelative));
 		imv.setImage(newImage);
 		sendModification(newImagePathRelative);
@@ -167,6 +168,9 @@ public class AttributeEditorCreator implements AttributeVisualization {
 		String sourceFolderPath = STRING_RESOURCE_BUNDLE.getFromFilePaths("Source_Path");
 		String newImagePathRelative = newImageFile.getPath()
 				.substring(newImageFile.getPath().indexOf(sourceFolderPath) + sourceFolderPath.length());
+		if(newImagePathRelative.charAt(0) == '/'){
+			return newImagePathRelative.substring(1);
+		}
 		return newImagePathRelative;
 	}
 

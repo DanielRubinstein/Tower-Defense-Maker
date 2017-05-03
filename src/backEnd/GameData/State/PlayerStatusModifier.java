@@ -1,6 +1,9 @@
 package backEnd.GameData.State;
 
 import java.util.Collection;
+import java.util.Map;
+
+import javafx.beans.property.ReadOnlyDoubleWrapper;
 
 /**
  * Modifier interface for back end
@@ -39,6 +42,10 @@ public interface PlayerStatusModifier extends PlayerStatusReader{
 	Collection<String> getKeySet();
 	
 	void setStatusItemValue(String itemKey, double newVal);
+	
+	void setStatusItemStartingValue(String itemKey, double newVal);
+	
+	 Map<String, ReadOnlyDoubleWrapper> getStartingMap();
 	
 
 }

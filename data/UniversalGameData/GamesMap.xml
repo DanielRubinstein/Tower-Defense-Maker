@@ -1,5 +1,6 @@
 <?xml version="1.0"?><map>
   <entry>
+
     <string>hello there</string>
     <list/>
   </entry>
@@ -13,6 +14,7 @@
   </entry>
   <entry>
     <string>Miguel</string>
+    <string>Riley</string>
     <list/>
   </entry>
 </map>

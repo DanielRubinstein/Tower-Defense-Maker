@@ -1,6 +1,10 @@
 package backEnd.GameEngine.Engine;
 import javafx.geometry.Point2D;
 import resources.constants.StringResourceBundle;
+
+import java.util.ArrayList;
+import java.util.List;
+
 import backEnd.GameData.GameData;
 import backEnd.GameData.State.*;
 /**
@@ -26,7 +30,8 @@ public class MoveEngine implements Engine{
 		
 	public void gameLoop(GameData gameData, double stepTime) {
 		myState=gameData.getState();
-		for (Component myComponent: myState.getComponentGraph().getAllComponents()){
+		List<Component> myComponentList=new ArrayList<>(myState.getComponentGraph().getAllComponents());
+		for (Component myComponent: myComponentList){
 			move(myComponent);
 		}
 	}
@@ -41,6 +46,7 @@ public class MoveEngine implements Engine{
 		newMovement = new Coordinates();
 		currentTile = myState.getTileGrid().getTileByScreenPosition(currentLocation);
 		if (currentTile == null) {
+			myState.getComponentGraph().removeComponent(c);
 			return;
 		}
 		if ((currentTile.<String>getAttribute((STRING_RESOURCES.getFromAttributeNames("MoveDirection"))).getValue()

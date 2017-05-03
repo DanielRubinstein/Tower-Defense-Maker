@@ -8,6 +8,7 @@ import data.GamePrep.GameMaker;
 import frontEnd.CustomJavafxNodes.ButtonMenuImpl;
 import frontEnd.CustomJavafxNodes.SingleFieldPrompt;
 import frontEnd.Facebook.FacebookInteractor;
+import javafx.scene.image.Image;
 import javafx.stage.Stage;
 import resources.constants.StringResourceBundle;
 
@@ -35,6 +36,7 @@ public class MenuController{
 	}
 	
 	private void splashScreen(Stage stage) {
+		stage.getIcons().add(new Image(stringResourceBundle.getFromStringConstants("LOGO")));
 		MenuSplash menuSplash = new MenuSplash(stage, (buttonMenu) -> showPrimaryGameMenu(buttonMenu, stage), setFb);
 		menuSplash.display();
 	}
