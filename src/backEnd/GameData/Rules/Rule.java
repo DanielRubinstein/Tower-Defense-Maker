@@ -13,8 +13,9 @@ public abstract class Rule implements RuleReader{
 	private boolean enabled = false;
 	private String myKeyName;
 	private String myDisplayString;
-	private final static String RULES_PATH = "resources/rules";
-	private final static ResourceBundle myRulesResources = ResourceBundle.getBundle(RULES_PATH);
+//TODO @Derek- refactoring
+//	private final static String RULES_PATH = "resources/rules";
+//	private final static ResourceBundle myRulesResources = ResourceBundle.getBundle(RULES_PATH);
 
 	public Rule(double val, double minVal, double maxVal, String keyName, String displayString) {
 		this.myVal = val;
