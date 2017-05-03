@@ -2734,7 +2734,7 @@
           <entry>
             <string>TargetSelector</string>
             <backEnd.Attribute.AttributeImpl>
-              <myValue class="string"></myValue>
+              <myValue class="string">Group</myValue>
               <myParamList class="java.util.Arrays$ArrayList">
                 <a class="string-array">
                   <string>Radius</string>
@@ -2814,7 +2814,7 @@
           <entry>
             <string>Health</string>
             <backEnd.Attribute.AttributeImpl>
-              <myValue class="int">0</myValue>
+              <myValue class="int">10</myValue>
               <myParamList class="java.util.Arrays$ArrayList">
                 <a class="java.lang.Integer-array">
                   <int>1</int>
@@ -3258,8 +3258,8 @@
             <string>Position</string>
             <backEnd.Attribute.AttributeImpl>
               <myValue class="javafx.geometry.Point2D">
-                <x>378.88406658739757</x>
-                <y>259.3793103448281</y>
+                <x>406.73103448276044</x>
+                <y>142.0</y>
                 <hash>0</hash>
               </myValue>
               <myName>Position</myName>
