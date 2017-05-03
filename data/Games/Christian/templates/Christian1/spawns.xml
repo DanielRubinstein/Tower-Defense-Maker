@@ -1,0 +1,17 @@
+<?xml version="1.0"?><map>
+  <entry>
+    <string>Timeline 1</string>
+    <backEnd.GameEngine.Engine.Spawning.SpawnQueueInstantiator>
+      <mySpawnQueue>
+        <backEnd.GameEngine.Engine.Spawning.SpawnDataImpl>
+          <mySpawnable>Enemy</mySpawnable>
+          <myFrequency>1.0</myFrequency>
+          <myDelay>2.0</myDelay>
+          <mySpawns>5</mySpawns>
+          <recentSpawn>false</recentSpawn>
+        </backEnd.GameEngine.Engine.Spawning.SpawnDataImpl>
+      </mySpawnQueue>
+      <myCurrentSpawn>0</myCurrentSpawn>
+    </backEnd.GameEngine.Engine.Spawning.SpawnQueueInstantiator>
+  </entry>
+</map>

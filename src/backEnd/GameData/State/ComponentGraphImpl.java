@@ -2,6 +2,7 @@ package backEnd.GameData.State;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 import javafx.geometry.Point2D;
 import resources.constants.StringResourceBundle;
@@ -96,6 +97,7 @@ public class ComponentGraphImpl implements ComponentGraph {
 			}
 		}
 		componentsWithinRadius.remove(centerComp);//don't add yourself
+		Collections.reverse(componentsWithinRadius);
 		return componentsWithinRadius;
 	}
 

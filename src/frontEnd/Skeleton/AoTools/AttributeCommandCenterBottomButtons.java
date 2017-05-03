@@ -95,15 +95,23 @@ public class AttributeCommandCenterBottomButtons implements SkeletonObject {
 			SingleFieldPrompt myNameDialog = new SingleFieldPrompt(dialogTitles, promptLabel, promptText);
 			Button preset = new Button(STRING_RESOURCE_BUNDLE.getFromStringConstants("PresetSaveDesc"));
 			preset.setOnAction((e) -> {
-				if (!(obj.<String>getAttributeReader(STRING_RESOURCE_BUNDLE.getFromAttributeNames("ImageFile"))
+				String nameForNewPreset = myNameDialog.getUserInputString();
+				if (nameForNewPreset != null && !(obj.<String>getAttributeReader(STRING_RESOURCE_BUNDLE.getFromAttributeNames("ImageFile"))
 						.getValue().equals(""))) {
-					myView.sendUserModification(new Modification_Add_ToPalette(myNameDialog.getUserInputString(), obj));
+					myView.sendUserModification(new Modification_Add_ToPalette(nameForNewPreset, obj));
 					myHostStage.close();
 				} else {
 					Alert alert = new Alert(AlertType.WARNING);
 					alert.setTitle(STRING_RESOURCE_BUNDLE.getFromStringConstants("PresetSavingError"));
-					alert.setHeaderText(STRING_RESOURCE_BUNDLE.getFromStringConstants("PresetSavingErrorDesc"));
-					alert.setContentText(STRING_RESOURCE_BUNDLE.getFromStringConstants("PresetPickImage"));
+					
+					if (nameForNewPreset == null){
+						alert.setHeaderText(STRING_RESOURCE_BUNDLE.getFromStringConstants("PresetSavingErrorDesc_Name"));
+						alert.setContentText(STRING_RESOURCE_BUNDLE.getFromStringConstants("PresetPickName"));
+					} else if ((obj.<String>getAttributeReader(STRING_RESOURCE_BUNDLE.getFromAttributeNames("ImageFile"))
+							.getValue().equals(""))){
+						alert.setHeaderText(STRING_RESOURCE_BUNDLE.getFromStringConstants("PresetSavingErrorDesc_Image"));
+						alert.setContentText(STRING_RESOURCE_BUNDLE.getFromStringConstants("PresetPickImage"));
+					}
 					alert.showAndWait();
 					e.consume();
 				}
