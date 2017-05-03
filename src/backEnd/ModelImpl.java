@@ -3,6 +3,7 @@ package backEnd;
 import java.util.List;
 import java.util.function.Consumer;
 
+import ModificationFromUser.Modification_ChangeMode;
 import backEnd.Attribute.AttributeOwner;
 import backEnd.Attribute.AttributeOwnerReader;
 import backEnd.Bank.BankController;
@@ -60,7 +61,7 @@ public class ModelImpl implements Model{
 		myBankController = new BankControllerImpl(myMode, (DataControllerReader) myDataController);
 		myGameData.setBankController(myBankController);
 		myDataController.setBankController(myBankController);
-
+		new Modification_ChangeMode().invoke(this);
 	}
 
 	@Override
