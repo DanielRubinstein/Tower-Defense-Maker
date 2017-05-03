@@ -130,10 +130,10 @@ public class AttributeCommandCenterBottomButtons implements SkeletonObject {
 		}
 	}
 
-	public void createUpgradeButton(AttributeOwnerReader attributeOwnerReader) {
+	public void createUpgradeButton(Component component) {
 		if (!myView.getBooleanAuthorModeProperty().get()) {
 			Button upgrade = new Button(STRING_RESOURCE_BUNDLE.getFromStringConstants("UpgradeComponentTitle"));
-			Integer cost = attributeOwnerReader
+			Integer cost = component
 					.<Integer>getAttributeReader(STRING_RESOURCE_BUNDLE.getFromAttributeNames("UpgradeCost"))
 					.getValue();
 			upgrade.setOnAction((e) -> {
@@ -147,7 +147,7 @@ public class AttributeCommandCenterBottomButtons implements SkeletonObject {
 					alert.close();
 				}
 				if (result.get() == ButtonType.OK) {
-					findUpgradeModification(cost, attributeOwnerReader);
+					findUpgradeModification(cost, component);
 				}
 				myHostStage.close();
 			});
