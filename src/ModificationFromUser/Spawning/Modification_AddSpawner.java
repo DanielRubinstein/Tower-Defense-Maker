@@ -12,24 +12,21 @@ public class Modification_AddSpawner implements ModificationFromUser{
 
 	private String mySpawnQueueName;
 	private SpawnDataImpl mySpawnData;
-	private boolean isFrequencySpawn;
 	
 	/**
 	 * 
 	 * @param spawnQueueName	Name of Queue as a string
 	 * @param component			Which component to remove		
 	 * @param value				Time of component to remove
-	 * @param frequencySpawn 	What list to remove from
 	 */
-	public Modification_AddSpawner(String spawnQueueName, String component, double value, boolean frequencySpawn) {
+	public Modification_AddSpawner(String spawnQueueName, String component, double frequency, double delay, int spawns) {
 		mySpawnQueueName = spawnQueueName;
-		mySpawnData = new SpawnDataImpl(component, value);
-		isFrequencySpawn = frequencySpawn;
+		mySpawnData = new SpawnDataImpl(component, frequency, delay, spawns);
 	}
 	
 	@Override
 	public void invoke(Model myModel) throws Exception {
-		myModel.getState().getSpawnQueues().get(mySpawnQueueName).add(mySpawnData, isFrequencySpawn);
+		myModel.getState().getSpawnQueues().get(mySpawnQueueName).add(mySpawnData);
 	}
 
 }

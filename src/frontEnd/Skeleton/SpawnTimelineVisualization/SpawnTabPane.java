@@ -24,10 +24,6 @@ public class SpawnTabPane implements SkeletonObject {
 	private Map<String, SpawnQueues> mySpawnQueues;
 
 	public SpawnTabPane(View view) {
-
-		// TODO there has to be some observation of the backend. When the
-		// spawnqueue changes, the front end must be notified so it can update.
-
 		myView = view;
 		myRoot = new TabPane();
 		mySpawnQueues = myView.getSpawnQueues();

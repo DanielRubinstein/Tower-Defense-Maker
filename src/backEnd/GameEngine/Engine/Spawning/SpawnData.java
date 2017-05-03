@@ -1,7 +1,13 @@
 package backEnd.GameEngine.Engine.Spawning;
 
 public interface SpawnData extends SpawnDataReader{
-	
-	public void setTime(Double in);
+
+	void setFrequency(double myFrequency);
+
+	void setDelay(double myDelay);
+
+	void setSpawns(int mySpawns);
+
+	void setRecentSpawn(boolean recentSpawn);
 
 }
