@@ -6,6 +6,7 @@ import backEnd.GameData.GameData;
 import backEnd.GameData.State.Component;
 import javafx.geometry.Point2D;
 import resources.constants.StringResourceBundle;
+import resources.constants.numeric.NumericResourceBundle;
 
 /**
  * governs the behavior of projectiles in the State
@@ -18,6 +19,7 @@ public class ProjectileEngine implements Engine {
 	private List<Component> toRemove;
 	
 	private StringResourceBundle ATTRIBUTE_RESOURCES = new StringResourceBundle();
+	private NumericResourceBundle NUMERIC_RESOURCES=new NumericResourceBundle();
 	
 	//for code readability in the actual methods. Stack Overflow says I can't minimize this. Sorry.
 	private String TYPE = ATTRIBUTE_RESOURCES.getFromAttributeNames("Type");
@@ -117,7 +119,7 @@ public class ProjectileEngine implements Engine {
 			if ((target.getAttribute(TYPE).getValue().equals(toHit.getAttribute(TYPE).getValue()))) {
 				toHit.setAttributeValue(HEALTH, toHit.<Integer>getAttribute(HEALTH).getValue() - 
 						projectile.<Integer>getAttribute(FIRE_DAMAGE).getValue());
-				target.setAttributeValue("Size", (target.<Double>getAttribute("Size").getValue())-5.0);
+				target.setAttributeValue("Size", (target.<Double>getAttribute("Size").getValue())*NUMERIC_RESOURCES.getFromSizing("ComponentReductionFactor"));
 				if(projectile.<Double>getAttribute(SLOW_TIME).getValue() > toHit.<Double>getAttribute(SLOW_TIME).getValue()){
 					toHit.setAttributeValue(SPEED, projectile.<Double>getAttribute(SLOW_FACTOR).getValue()
 						* toHit.<Double>getAttribute(MAX_SPEED).getValue());
