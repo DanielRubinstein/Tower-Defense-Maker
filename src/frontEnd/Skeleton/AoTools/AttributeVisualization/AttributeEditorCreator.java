@@ -154,6 +154,7 @@ public class AttributeEditorCreator implements AttributeVisualization {
 			return;
 		}
 		String newImagePathRelative = getRelativePathToImageDirectory(selectedFile);
+		System.out.println(newImagePathRelative);
 		Image newImage = new Image(getClass().getClassLoader().getResourceAsStream(newImagePathRelative));
 		imv.setImage(newImage);
 		sendModification(newImagePathRelative);
