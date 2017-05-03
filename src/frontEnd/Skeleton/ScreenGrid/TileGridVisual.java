@@ -144,4 +144,20 @@ public class TileGridVisual extends GridVisualBase<Tile> implements Serializable
 	public void update(SerializableObservableGen<Tile> object, Tile obj) {
 		updateGrid(obj);
 	}
+
+	public ImageView addTimelineIndicatorToVisual(Tile tile) {
+		String spawnTimeline = tile.<String>getAttribute(stringResourceBundle.getFromAttributeNames("SpawnTimeline")).getValue();
+		Point2D screenPosition = tile.<Point2D>getAttribute(stringResourceBundle.getFromAttributeNames("Position")).getValue();
+		Point2D gridPosition = this.getGridPosition(screenPosition);
+		if (spawnTimeline == null || spawnTimeline.equals("")){
+			return null;
+		}
+		Image newImage = new Image(getClass().getClassLoader().getResourceAsStream(stringResourceBundle.getFromImageText("SpawnTimelineIndicator")));
+		ImageView imageView = new ImageView(newImage);
+
+		myRoot.add(imageView, (int) gridPosition.getX(), (int) gridPosition.getY());
+		imageView.setFitWidth(tileWidth / 2);
+		imageView.setFitHeight(tileHeight / 2);
+		return imageView;
+	}
 }
