@@ -4797,7 +4797,7 @@
           <entry>
             <string>Size</string>
             <backEnd.Attribute.AttributeImpl>
-              <myValue class="double">41.206896551724135</myValue>
+              <myValue class="double">37.758620689655174</myValue>
               <myParamList class="java.util.Arrays$ArrayList">
                 <a class="java.lang.Double-array">
                   <double>20.0</double>
