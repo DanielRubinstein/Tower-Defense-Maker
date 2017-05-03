@@ -60,6 +60,7 @@ public class LevelProgressionControllerImpl
 
 	@Override
 	public List<String> getLevelList(String gameName) {
+		System.out.println(gamesMap);
 		return gamesMap.get(gameName);
 	}
 
@@ -209,6 +210,7 @@ public class LevelProgressionControllerImpl
 	@Override
 	public void loadNextLevel() {
 		gameLoader.accept(new File(generateTemplatePath(myMode.getGameMode(), getNextLevel())));
+		myMode.setUserMode(strResources.getFromStringConstants("PLAYER"));
 	}
 
 	private String generateTemplatePath(String game, String level) {
@@ -255,7 +257,7 @@ public class LevelProgressionControllerImpl
 	public void loadFirstLevel() {
 		String firstLevel = gamesMap.get(myMode.getGameMode()).get(0);
 		gameLoader.accept(new File(generateTemplatePath(myMode.getGameMode(), firstLevel)));
-
+		myMode.setUserMode(strResources.getFromStringConstants("PLAYER"));
 	}
 
 }
