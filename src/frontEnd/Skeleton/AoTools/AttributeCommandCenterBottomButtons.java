@@ -98,8 +98,16 @@ public class AttributeCommandCenterBottomButtons implements SkeletonObject {
 				String nameForNewPreset = myNameDialog.getUserInputString();
 				if (nameForNewPreset != null && !(obj.<String>getAttributeReader(STRING_RESOURCE_BUNDLE.getFromAttributeNames("ImageFile"))
 						.getValue().equals(""))) {
-					myView.sendUserModification(new Modification_Add_ToPalette(nameForNewPreset, obj));
-					myHostStage.close();
+					
+					String type = obj.<String>getAttributeReader(STRING_RESOURCE_BUNDLE.getFromAttributeNames("Type")).getValue();
+					
+					Boolean hasType = !(type.equals("") || type == null);  
+					
+					if(hasType || (!hasType && checkWithUser())){
+						myView.sendUserModification(new Modification_Add_ToPalette(nameForNewPreset, obj));
+						myHostStage.close();
+					}
+					
 				} else {
 					Alert alert = new Alert(AlertType.WARNING);
 					alert.setTitle(STRING_RESOURCE_BUNDLE.getFromStringConstants("PresetSavingError"));
@@ -154,6 +162,24 @@ public class AttributeCommandCenterBottomButtons implements SkeletonObject {
 	@Override
 	public Node getRoot() {
 		return myRoot;
+	}
+	
+	/**
+	 * http://stackoverflow.com/questions/31540500/alert-box-for-when-user-attempts-to-close-application-using-setoncloserequest-in
+	 * 
+	 * @param tab
+	 * @return
+	 */
+	private boolean checkWithUser() {
+		Alert alert = new Alert(AlertType.CONFIRMATION);
+		alert.setTitle("Save Confirmation");
+		alert.setHeaderText("Saving New Preset Without Type");
+		alert.setContentText("Are you sure you want to save this Component or Tile without a Type? This means it won't be able to interact with anything on the screen");
+		Optional<ButtonType> result = alert.showAndWait();
+		if (result.get() == ButtonType.OK || result.get() == ButtonType.CANCEL) {
+			alert.close();
+		}
+		return result.get() == ButtonType.OK;
 	}
 
 }
