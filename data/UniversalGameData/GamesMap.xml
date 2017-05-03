@@ -22,6 +22,7 @@
     <string>Miguel&apos;s Game</string>
     <list>
       <string>BeachScene</string>
+      <string>Port Royal</string>
     </list>
   </entry>
   <entry>
@@ -30,5 +31,9 @@
       <string>Level 1</string>
       <string>Level 2</string>
     </list>
+  </entry>
+  <entry>
+    <string>ji</string>
+    <list/>
   </entry>
 </map>
