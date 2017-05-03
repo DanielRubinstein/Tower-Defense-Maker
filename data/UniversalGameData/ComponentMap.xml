@@ -833,7 +833,7 @@
           <entry>
             <string>SpawnOnDeath</string>
             <backEnd.Attribute.AttributeImpl>
-              <myValue class="boolean">false</myValue>
+              <myValue class="boolean">true</myValue>
               <myName>SpawnOnDeath</myName>
             </backEnd.Attribute.AttributeImpl>
           </entry>
@@ -877,7 +877,7 @@
           <entry>
             <string>UpgradeCost</string>
             <backEnd.Attribute.AttributeImpl>
-              <myValue class="int">10</myValue>
+              <myValue class="int">251</myValue>
               <myParamList class="java.util.Arrays$ArrayList">
                 <a class="java.lang.Integer-array">
                   <int>0</int>
@@ -914,6 +914,7 @@
           <entry>
             <string>Upgrade</string>
             <backEnd.Attribute.AttributeImpl>
+              <myValue class="string">Tower</myValue>
               <myName>Upgrade</myName>
             </backEnd.Attribute.AttributeImpl>
           </entry>
@@ -972,7 +973,7 @@
           <entry>
             <string>SpawnOnDeathObject</string>
             <backEnd.Attribute.AttributeImpl>
-              <myValue class="string">Plant</myValue>
+              <myValue class="string">alex</myValue>
               <myName>SpawnOnDeathObject</myName>
             </backEnd.Attribute.AttributeImpl>
           </entry>
