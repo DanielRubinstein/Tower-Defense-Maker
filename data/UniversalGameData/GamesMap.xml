@@ -1,22 +1,28 @@
 <?xml version="1.0"?><map>
   <entry>
-    <string>hello there</string>
-    <list/>
-  </entry>
-  <entry>
-    <string>ChristianTest</string>
-    <list/>
-  </entry>
-  <entry>
     <string>Christian</string>
-    <list/>
+    <list>
+      <string>Christian1</string>
+      <string>Christian2</string>
+    </list>
   </entry>
   <entry>
     <string>newPlayerStatusXML</string>
-    <list/>
+    <list>
+      <string>level1</string>
+    </list>
+  </entry>
+  <entry>
+    <string>Juan</string>
+    <list>
+      <string>level1</string>
+    </list>
   </entry>
   <entry>
     <string>Riley</string>
-    <list/>
+    <list>
+      <string>Level 1</string>
+      <string>Level 2</string>
+    </list>
   </entry>
 </map>
