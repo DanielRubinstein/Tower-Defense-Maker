@@ -28,7 +28,8 @@
 		<ScoreBounty min="0" max="999" start="10" increment="10"></ScoreBounty>
 		<FireDamage min="0" max="200" start="1" increment="2"></FireDamage>
 		<UpgradeCost min="0" max="999" start="10" increment="10"></UpgradeCost>
-		<BuildCapacity min="0" max="20" start="1" increment="1"></BuildCapacity></INTEGER><EDITABLESTRING>
+		<BuildCapacity min="0" max="20" start="1" increment="1"></BuildCapacity>
+		<Price min="0" max="990" start="10" increment="5"></Price></INTEGER><EDITABLESTRING>
 		<EDITABLESTRING_TEMPLATE></EDITABLESTRING_TEMPLATE></EDITABLESTRING>
 	<STRINGLIST>
 		<STRINGLIST_TEMPLATE Options="Comma delineated String Options"></STRINGLIST_TEMPLATE>
