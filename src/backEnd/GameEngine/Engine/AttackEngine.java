@@ -84,14 +84,16 @@ public class AttackEngine implements Engine {
 	private List<Component> getTargetList(Component attacker) {
 		String targetType = attacker.<String>getAttribute(TARGET_SELECTOR).getValue();
 		TileGrid tileGrid = myGameData.getState().getTileGrid();
-		if (attacker.<String>getAttribute(TYPE).getValue().equals(ENEMY_TYPE)) {
+		if (targetType.equals("Melee")) {
 			List<Component> targets = new ArrayList<Component>();
 			List<Component> potentialTargets = myComponentGraph.getAllComponents();
 			for (Component component : potentialTargets) {
-				if (tileGrid.getTileByScreenPosition(attacker.<Point2D>getAttribute(POSITION).getValue()) == 
-					tileGrid.getTileByScreenPosition(component.<Point2D>getAttribute(POSITION).getValue()) &&
-					component.<String>getAttribute(TYPE).getValue().equals(TOWER_TYPE)) {
-					targets.add(component);
+				if (tileGrid.getTileByScreenPosition(attacker .<Point2D>getAttribute(POSITION).getValue()) == 
+					tileGrid.getTileByScreenPosition(component.<Point2D>getAttribute(POSITION).getValue())) {
+					if (component.<String>getAttribute(TYPE).getValue().equals(TOWER_TYPE) && attacker.<String>getAttribute(TYPE).getValue().equals(ENEMY_TYPE) 
+					 || component.<String>getAttribute(TYPE).getValue().equals(ENEMY_TYPE) && attacker.<String>getAttribute(TYPE).getValue().equals(TOWER_TYPE)) {
+						targets.add(component);
+					}
 				}
 			}
 			if (targets.isEmpty()) {
@@ -121,11 +123,12 @@ public class AttackEngine implements Engine {
 					return targets;
 				}
 			}
+			
 			return null;
 		} else if (targetType.equals("Radius")) {
 			return myComponentGraph.getComponentsWithinRadius(attacker,(double) attacker.getAttribute(STRING_RESOURCES.getFromAttributeNames("FireRadius")).getValue());
 		} else {
-			return myComponentGraph.getComponentsWithinRadius(attacker,(double) attacker.getAttribute(STRING_RESOURCES.getFromAttributeNames("FireRadius")).getValue());
+			return new ArrayList<Component>();
 		}
 		
 	}

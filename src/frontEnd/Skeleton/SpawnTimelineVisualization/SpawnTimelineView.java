@@ -46,7 +46,7 @@ public class SpawnTimelineView implements SkeletonObject, SerializableObserver {
 		mySpawnQueues.addObserver(this);
 		spawnDataToVisual = new HashMap<>();
 		queue = mySpawnQueues.getSingleSpawnQueue();
-		dropZone = singleDropZone("Spawns (Frequency, Delay, Iterations)");
+		dropZone = singleDropZone("Spawns (Interval, Delay, Iterations)");
 		loadTimelines(queue, dropZone);
 	}
 
@@ -79,7 +79,7 @@ public class SpawnTimelineView implements SkeletonObject, SerializableObserver {
 				// TODO show error to user
 				return;
 			}
-			MultiFieldPrompt multiFieldPrompt = new MultiFieldPrompt(3, Arrays.asList("Add Spawn", "Please input values for your new spawn item"),  Arrays.asList("0.0", "0.0", "0"), Arrays.asList("Frequency", "Delay", "Iterations"));
+			MultiFieldPrompt multiFieldPrompt = new MultiFieldPrompt(3, Arrays.asList("Add Spawn", "Please input values for your new spawn item"),  Arrays.asList("0.0", "0.0", "0"), Arrays.asList("Interval", "Delay", "Iterations"));
 			
 			List<String> userInput = multiFieldPrompt.create();
 			myView.sendUserModification(

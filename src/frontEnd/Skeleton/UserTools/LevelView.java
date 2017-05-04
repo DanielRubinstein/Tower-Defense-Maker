@@ -99,6 +99,7 @@ public class LevelView implements PopUp{
 		scroll.setHbarPolicy(ScrollBarPolicy.AS_NEEDED);
 		scroll.setVbarPolicy(ScrollBarPolicy.AS_NEEDED);
 		VBox wrapper = new VBox();
+		wrapper.setSpacing(numResources.getFromSizing("StandardSpacing"));
 		ColumnConstraints column1 = new ColumnConstraints();
 		column1.setPercentWidth(50);
 		myRoot.getColumnConstraints().add(column1);
