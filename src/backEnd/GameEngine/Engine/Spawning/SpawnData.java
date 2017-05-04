@@ -11,5 +11,7 @@ public interface SpawnData extends SpawnDataReader{
 	void setRecentSpawn(boolean recentSpawn);
 	
 	void setStartingIterations();
+	
+	void setStartingSpawns(int spawns);
 
 }
