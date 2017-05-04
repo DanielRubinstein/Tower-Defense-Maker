@@ -142,15 +142,8 @@ public class AttributeEditorCreator implements AttributeVisualization {
 	private void promptUserForNewImageAndSendModification(ImageView imv) {
 		FileChooser imageChooser = new FileChooser();
 		imageChooser.setTitle(STRING_RESOURCE_BUNDLE.getFromStringConstants("SelectImage"));
-<<<<<<< HEAD
-		imageChooser.getExtensionFilters().add(new ExtensionFilter("Image Files", "*.png", "*.jpg", "*.gif","*.jpeg")); // TODO
-																												// string
-																												// in
-																												// resource
-																												// file?
-=======
+
 		imageChooser.getExtensionFilters().add(new ExtensionFilter("Image Files", "*.png", "*.jpg", "*.gif", "*.jpeg"));
->>>>>>> master
 		imageChooser.setInitialDirectory(new File(SAVED_IMAGES_DIRECTORY));
 
 		File selectedFile = imageChooser.showOpenDialog(new Stage());

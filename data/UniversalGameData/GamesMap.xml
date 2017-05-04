@@ -36,7 +36,6 @@
     <list/>
   </entry>
   <entry>
-    <string>Christian</string>
     <string>newPlayerStatusXML</string>
     <list>
       <string>level1</string>
@@ -58,18 +57,9 @@
     </list>
   </entry>
   <entry>
-    <string>nonsq</string>
-    <list/>
-  </entry>
-  <entry>
-    <string>Derek</string>
-    <list>
-      <string>level1</string>
-    </list>
-  </entry>
-  <entry>
     <string>Tim</string>
     <list>
+      <string>Mountain</string>
       <string>testcolor</string>
       <string>testcolors</string>
       <string>testgame</string>
@@ -80,6 +70,12 @@
       <string>Tim5</string>
       <string>tim6</string>
       <string>timelines</string>
+    </list>
+  </entry>
+  <entry>
+    <string>Derek</string>
+    <list>
+      <string>level1</string>
     </list>
   </entry>
   <entry>
