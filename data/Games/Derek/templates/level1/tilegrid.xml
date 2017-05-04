@@ -11715,7 +11715,7 @@
             <entry>
               <string>SpawnTimeline</string>
               <backEnd.Attribute.AttributeImpl>
-                <myValue class="string"></myValue>
+                <myValue class="string">Timeline 2</myValue>
                 <myParamList class="java.util.Arrays$ArrayList">
                   <a class="string-array">
                     <string>Timeline 1</string>

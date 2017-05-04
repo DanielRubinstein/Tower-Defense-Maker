@@ -3,7 +3,7 @@
     <entry>
       <string>Money</string>
       <javafx.beans.property.ReadOnlyDoubleWrapper>
-        <value>100.0</value>
+        <value>300.0</value>
         <valid>true</valid>
         <name></name>
       </javafx.beans.property.ReadOnlyDoubleWrapper>
@@ -27,7 +27,7 @@
     <entry>
       <string>Health</string>
       <javafx.beans.property.ReadOnlyDoubleWrapper>
-        <value>100.0</value>
+        <value>10.0</value>
         <valid>true</valid>
         <name></name>
       </javafx.beans.property.ReadOnlyDoubleWrapper>
@@ -45,7 +45,7 @@
     <entry>
       <string>Money</string>
       <javafx.beans.property.ReadOnlyDoubleWrapper>
-        <value>100.0</value>
+        <value>300.0</value>
         <valid>true</valid>
         <name></name>
       </javafx.beans.property.ReadOnlyDoubleWrapper>
@@ -69,7 +69,7 @@
     <entry>
       <string>Health</string>
       <javafx.beans.property.ReadOnlyDoubleWrapper>
-        <value>100.0</value>
+        <value>10.0</value>
         <valid>true</valid>
         <name></name>
       </javafx.beans.property.ReadOnlyDoubleWrapper>

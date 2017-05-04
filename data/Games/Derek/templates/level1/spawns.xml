@@ -5,10 +5,10 @@
       <mySpawnQueue>
         <backEnd.GameEngine.Engine.Spawning.SpawnDataImpl>
           <mySpawnable>dh_enemyheli</mySpawnable>
-          <myFrequency>5.0</myFrequency>
-          <myDelay>6.0</myDelay>
-          <mySpawns>18</mySpawns>
-          <startingSpawns>20</startingSpawns>
+          <myFrequency>1.0</myFrequency>
+          <myDelay>2.0</myDelay>
+          <mySpawns>30</mySpawns>
+          <startingSpawns>30</startingSpawns>
           <recentSpawn>false</recentSpawn>
         </backEnd.GameEngine.Engine.Spawning.SpawnDataImpl>
       </mySpawnQueue>
