@@ -1,0 +1,42 @@
+<?xml version="1.0"?><map>
+  <entry>
+    <string>Timeline 1</string>
+    <backEnd.GameEngine.Engine.Spawning.SpawnQueueInstantiator>
+      <mySpawnQueue>
+        <backEnd.GameEngine.Engine.Spawning.SpawnDataImpl>
+          <mySpawnable>dpr_mediumAlien</mySpawnable>
+          <myFrequency>3.0</myFrequency>
+          <myDelay>2.0</myDelay>
+          <mySpawns>3</mySpawns>
+          <startingSpawns>3</startingSpawns>
+          <recentSpawn>false</recentSpawn>
+        </backEnd.GameEngine.Engine.Spawning.SpawnDataImpl>
+        <backEnd.GameEngine.Engine.Spawning.SpawnDataImpl>
+          <mySpawnable>dpr_zombie_sun</mySpawnable>
+          <myFrequency>5.0</myFrequency>
+          <myDelay>9.0</myDelay>
+          <mySpawns>1</mySpawns>
+          <startingSpawns>1</startingSpawns>
+          <recentSpawn>false</recentSpawn>
+        </backEnd.GameEngine.Engine.Spawning.SpawnDataImpl>
+      </mySpawnQueue>
+      <myCurrentSpawn>0</myCurrentSpawn>
+    </backEnd.GameEngine.Engine.Spawning.SpawnQueueInstantiator>
+  </entry>
+  <entry>
+    <string>Timeline 2</string>
+    <backEnd.GameEngine.Engine.Spawning.SpawnQueueInstantiator>
+      <mySpawnQueue>
+        <backEnd.GameEngine.Engine.Spawning.SpawnDataImpl>
+          <mySpawnable>dpr_kimjongun</mySpawnable>
+          <myFrequency>1.0</myFrequency>
+          <myDelay>21.0</myDelay>
+          <mySpawns>0</mySpawns>
+          <startingSpawns>0</startingSpawns>
+          <recentSpawn>false</recentSpawn>
+        </backEnd.GameEngine.Engine.Spawning.SpawnDataImpl>
+      </mySpawnQueue>
+      <myCurrentSpawn>0</myCurrentSpawn>
+    </backEnd.GameEngine.Engine.Spawning.SpawnQueueInstantiator>
+  </entry>
+</map>

@@ -21,6 +21,14 @@
     </list>
   </entry>
   <entry>
+    <string>Daniel</string>
+    <list>
+      <string>Space Salad</string>
+      <string>Space Sald</string>
+      <string>SpaceSalad</string>
+    </list>
+  </entry>
+  <entry>
     <string>Juan</string>
     <list>
       <string>level1</string>
@@ -38,9 +46,5 @@
       <string>Level 1</string>
       <string>Level 2</string>
     </list>
-  </entry>
-  <entry>
-    <string>Template</string>
-    <list/>
   </entry>
 </map>
