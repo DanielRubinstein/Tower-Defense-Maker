@@ -41,6 +41,7 @@ public class MoveEngine implements Engine{
 		Coordinates previousMovement = c.getPreviousMovement();
 		Coordinates newMovement;
 		double speed = c.<Double>getAttribute(STRING_RESOURCES.getFromAttributeNames("Speed")).getValue();
+		System.out.println(" ^^^ new speed " +speed);
 		Point2D currentLocation = c.<Point2D>getAttribute(STRING_RESOURCES.getFromAttributeNames("Position"))
 				.getValue();
 		newMovement = new Coordinates();

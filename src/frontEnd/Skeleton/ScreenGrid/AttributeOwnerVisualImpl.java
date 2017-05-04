@@ -119,7 +119,9 @@ public class AttributeOwnerVisualImpl implements AttributeOwnerVisual{
 		try{
 			double effectTime = myAttributeOwnerReader.<Double>getAttributeReader(AttributeName).getValue();
 			if(effectTime>0){
+				//System.out.println("EFFECT " + styleName + "   "  +AttributeName);
 				myImage.setStyle(stringResourceBundle.getFromCustomCSS(styleName));
+				//System.out.println(myImage.getStyle());
 				return true;
 			}
 		}catch(NullPointerException e){
