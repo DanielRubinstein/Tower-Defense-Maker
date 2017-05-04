@@ -31,7 +31,11 @@ public class EngineFactory {
 		}
 		case "BaseCheckerEngine":{
 			return new BaseCheckerEngine();
-		}}
+		}
+		case "EnemyStatusEngine":{
+			return new EnemyStatusEngine();
+		}
+		}
 		return null;
 	}
 }
