@@ -7,8 +7,8 @@
           <mySpawnable>dh_enemyheli</mySpawnable>
           <myFrequency>5.0</myFrequency>
           <myDelay>6.0</myDelay>
-          <mySpawns>19</mySpawns>
-          <startingSpawns>19</startingSpawns>
+          <mySpawns>20</mySpawns>
+          <startingSpawns>20</startingSpawns>
           <recentSpawn>false</recentSpawn>
         </backEnd.GameEngine.Engine.Spawning.SpawnDataImpl>
       </mySpawnQueue>

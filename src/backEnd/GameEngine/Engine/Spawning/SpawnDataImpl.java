@@ -57,7 +57,6 @@ public class SpawnDataImpl implements SpawnData {
 	@Override
 	public void setSpawns(int mySpawns) {
 		this.mySpawns = mySpawns;
-		this.startingSpawns = mySpawns;
 	}
 	
 	@Override 

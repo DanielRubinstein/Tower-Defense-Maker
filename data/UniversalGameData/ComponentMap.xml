@@ -666,7 +666,7 @@
           <entry>
             <string>Health</string>
             <backEnd.Attribute.AttributeImpl>
-              <myValue class="int">1</myValue>
+              <myValue class="int">100</myValue>
               <myParamList class="java.util.Arrays$ArrayList">
                 <a class="java.lang.Integer-array">
                   <int>1</int>
@@ -4811,7 +4811,7 @@
           <entry>
             <string>FireImage</string>
             <backEnd.Attribute.AttributeImpl>
-              <myValue class="string"></myValue>
+              <myValue class="string">resources/images/Components/dh_enemymissile.png</myValue>
               <myName>FireImage</myName>
             </backEnd.Attribute.AttributeImpl>
           </entry>
@@ -4876,7 +4876,7 @@
           <entry>
             <string>TargetSelector</string>
             <backEnd.Attribute.AttributeImpl>
-              <myValue class="string"></myValue>
+              <myValue class="string">Radius</myValue>
               <myParamList class="java.util.Arrays$ArrayList">
                 <a class="string-array">
                   <string>Radius</string>
@@ -4989,7 +4989,7 @@
           <entry>
             <string>FireRate</string>
             <backEnd.Attribute.AttributeImpl>
-              <myValue class="double">20.0</myValue>
+              <myValue class="double">511.37931034482756</myValue>
               <myParamList class="java.util.Arrays$ArrayList">
                 <a class="java.lang.Double-array">
                   <double>0.0</double>
@@ -5004,7 +5004,7 @@
           <entry>
             <string>Velocity</string>
             <backEnd.Attribute.AttributeImpl>
-              <myValue class="double">2.0</myValue>
+              <myValue class="double">1.6551724137931034</myValue>
               <myParamList class="java.util.Arrays$ArrayList">
                 <a class="java.lang.Double-array">
                   <double>0.0</double>
@@ -5034,7 +5034,7 @@
           <entry>
             <string>FireType</string>
             <backEnd.Attribute.AttributeImpl>
-              <myValue class="string"></myValue>
+              <myValue class="string">SingleTarget</myValue>
               <myParamList class="java.util.Arrays$ArrayList">
                 <a class="string-array">
                   <string>SingleTarget</string>
@@ -5108,7 +5108,7 @@
           <entry>
             <string>FireRadius</string>
             <backEnd.Attribute.AttributeImpl>
-              <myValue class="double">10.0</myValue>
+              <myValue class="double">340.60344827586204</myValue>
               <myParamList class="java.util.Arrays$ArrayList">
                 <a class="java.lang.Double-array">
                   <double>10.0</double>
