@@ -247,8 +247,8 @@
           <string>Position</string>
           <backEnd.Attribute.AttributeImpl>
             <myValue class="javafx.geometry.Point2D">
-              <x>407.0</x>
-              <y>132.0</y>
+              <x>147.0</x>
+              <y>275.0</y>
               <hash>0</hash>
             </myValue>
             <myName>Position</myName>
@@ -257,7 +257,7 @@
         <entry>
           <string>FireRate</string>
           <backEnd.Attribute.AttributeImpl>
-            <myValue class="double">155.17241379310346</myValue>
+            <myValue class="double">120.6896551724138</myValue>
             <myParamList class="java.util.Arrays$ArrayList">
               <a class="java.lang.Double-array">
                 <double>0.0</double>
@@ -272,7 +272,7 @@
         <entry>
           <string>Velocity</string>
           <backEnd.Attribute.AttributeImpl>
-            <myValue class="double">3.3620689655172415</myValue>
+            <myValue class="double">3.706896551724138</myValue>
             <myParamList class="java.util.Arrays$ArrayList">
               <a class="java.lang.Double-array">
                 <double>0.0</double>
@@ -287,7 +287,7 @@
         <entry>
           <string>FireDamage</string>
           <backEnd.Attribute.AttributeImpl>
-            <myValue class="int">32</myValue>
+            <myValue class="int">18</myValue>
             <myParamList class="java.util.Arrays$ArrayList">
               <a class="java.lang.Integer-array">
                 <int>0</int>
