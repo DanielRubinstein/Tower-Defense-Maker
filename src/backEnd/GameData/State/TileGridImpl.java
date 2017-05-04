@@ -229,8 +229,11 @@ public class TileGridImpl implements TileGrid {
 		tileGroups = new ArrayList<Set<Tile>>();
 		Tile[][] tileGridThing = new Tile[numColsInGrid][numRowsInGrid];
 		for(Point2D point2d : tileGrid.keySet()){
-			int rowEq = (int)(point2d.getX() / getTileWidth());
-			int colEq = (int)(point2d.getY() / getTileHeight());
+			//System.out.println(this.getClass().getSimpleName() + ": Point: " + point2d);
+			int colEq = (int)(point2d.getX() / getTileWidth());
+			int rowEq = (int)(point2d.getY() / getTileHeight());
+			//System.out.println(this.getClass().getSimpleName() + ": Width: " + getTileWidth() + ", Height: " + getTileHeight());
+			//System.out.println(this.getClass().getSimpleName() + ": R,C: " + rowEq + ", " + colEq);
 			if(tileGridThing[colEq][rowEq] != null || rowEq < 0 || colEq < 0 || rowEq >= getNumRowsInGrid() || colEq >= getNumColsInGrid()){
 				System.out.println(this.getClass().getSimpleName() + ": Error Thing");
 				return;
@@ -252,14 +255,14 @@ public class TileGridImpl implements TileGrid {
 			for (int i = 0; i < numRowsInGrid; i++) {
 				Tile tempTile = tileGridThing[j][i];
 				String moveDir = tempTile.<String>getAttribute("MoveDirection").getValue();
-				if(moveDir.equals(STRING_RESOURCES.getFromStringConstants("Up")) && j > 0){
-					joinSets(tempTile, tileGridThing[j-1][i]);
-				} else if (moveDir.equals(STRING_RESOURCES.getFromStringConstants("Down")) && j < numRowsInGrid-1) {
-					joinSets(tempTile, tileGridThing[j+1][i]);					
-				} else if (moveDir.equals(STRING_RESOURCES.getFromStringConstants("Left")) && i > 0) {
+				if(moveDir.equals(STRING_RESOURCES.getFromStringConstants("Up")) && i > 0){
 					joinSets(tempTile, tileGridThing[j][i-1]);
-				} else if (moveDir.equals(STRING_RESOURCES.getFromStringConstants("Right")) && i < numColsInGrid-1) {
+				} else if (moveDir.equals(STRING_RESOURCES.getFromStringConstants("Down")) && i < numRowsInGrid-1) {
 					joinSets(tempTile, tileGridThing[j][i+1]);					
+				} else if (moveDir.equals(STRING_RESOURCES.getFromStringConstants("Left")) && j > 0) {
+					joinSets(tempTile, tileGridThing[j-1][i]);
+				} else if (moveDir.equals(STRING_RESOURCES.getFromStringConstants("Right")) && j < numColsInGrid-1) {
+					joinSets(tempTile, tileGridThing[j+1][i]);					
 				} else {
 				}
 			}

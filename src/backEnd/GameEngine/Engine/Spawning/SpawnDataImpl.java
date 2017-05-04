@@ -58,6 +58,11 @@ public class SpawnDataImpl implements SpawnData {
 	public void setSpawns(int mySpawns) {
 		this.mySpawns = mySpawns;
 	}
+	
+	@Override 
+	public void setStartingSpawns(int spawns){
+		this.startingSpawns = spawns;
+	}
 
 	@Override
 	public boolean isRecentSpawn() {

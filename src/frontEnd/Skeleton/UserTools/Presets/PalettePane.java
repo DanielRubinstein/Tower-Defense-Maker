@@ -49,8 +49,9 @@ public class PalettePane implements SkeletonObject {
 			presets = myView.getBankControllerReader().getAccessibleComponentPresets();
 		}
 		
-		Palette singlePalette = new Palette(myView, presets);
+		Palette singlePalette = new Palette(myView, presets, string);
 		ScrollPane scrollPane = new ScrollPane();
+		scrollPane.setFitToWidth(true);
 		scrollPane.setContent(singlePalette.getRoot());
 		tab.setContent(scrollPane);
 		return tab;
