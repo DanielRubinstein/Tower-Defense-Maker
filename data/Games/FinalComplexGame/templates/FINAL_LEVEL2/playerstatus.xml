@@ -27,7 +27,7 @@
     <entry>
       <string>Health</string>
       <javafx.beans.property.ReadOnlyDoubleWrapper>
-        <value>10.0</value>
+        <value>8.0</value>
         <valid>true</valid>
         <name></name>
       </javafx.beans.property.ReadOnlyDoubleWrapper>
@@ -69,7 +69,7 @@
     <entry>
       <string>Health</string>
       <javafx.beans.property.ReadOnlyDoubleWrapper>
-        <value>10.0</value>
+        <value>8.0</value>
         <valid>true</valid>
         <name></name>
       </javafx.beans.property.ReadOnlyDoubleWrapper>

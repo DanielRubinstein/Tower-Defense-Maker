@@ -36,10 +36,10 @@
     <entry>
       <string>KillCount</string>
       <backEnd.GameData.Rules.EndCondition.KillCountCondition>
-        <myVal>20.0</myVal>
+        <myVal>0.0</myVal>
         <minVal>0.0</minVal>
         <maxVal>100.0</maxVal>
-        <enabled>true</enabled>
+        <enabled>false</enabled>
         <myKeyName>KillCount</myKeyName>
         <myDisplayString>Kill count to win the level</myDisplayString>
       </backEnd.GameData.Rules.EndCondition.KillCountCondition>
@@ -47,10 +47,10 @@
     <entry>
       <string>Time</string>
       <backEnd.GameData.Rules.EndCondition.TimeEndCondition>
-        <myVal>100.0</myVal>
+        <myVal>98.0</myVal>
         <minVal>10.0</minVal>
         <maxVal>1000.0</maxVal>
-        <enabled>false</enabled>
+        <enabled>true</enabled>
         <myKeyName>Time</myKeyName>
         <myDisplayString>Time to win the level</myDisplayString>
       </backEnd.GameData.Rules.EndCondition.TimeEndCondition>
