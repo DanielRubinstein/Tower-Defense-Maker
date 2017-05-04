@@ -25,7 +25,7 @@ import util.reflection.Reflection;
 
 public class PresetCreationButton implements SkeletonObject {
 	private NumericResourceBundle numericResourceBundle = new NumericResourceBundle();
-	private static final String PLUS_IMAGE = "resources/images/Tools/plus.jpg";
+	private static final String PLUS_IMAGE = "resources/images/Tools/plus.png";
 	private View myView;
 	private ImageView myRoot;
 	

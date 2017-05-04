@@ -115,7 +115,6 @@ public class ProjectileEngine implements Engine {
 			targetList.clear();
 		}
 		targetList.add(target);
-		System.out.println("targetList size is " + targetList.size());
 
 		for (Component toHit : targetList) {
 			if ((target.getAttribute(TYPE).getValue().equals(toHit.getAttribute(TYPE).getValue()))) {
