@@ -63,22 +63,24 @@ public class StatusView {
 	
 	private void clickInteraction(Label value, String str){
     	value.setOnMouseClicked(e -> {
-    		SingleFieldPrompt newPrompt = new SingleFieldPrompt(
-					Arrays.asList(strResources.getFromStringConstants("EditingWindow"), 
-							String.format(strResources.getFromStringConstants("StringInputFormat"),str)), 
-					strResources.getFromStringConstants("NewValue"),
-					value.getText());
-    		Double newValue = null;
-    		try{
-    			newValue = newPrompt.getUserInputDouble();
-    		} catch (NumberFormatException err){
-    			myView.reportError(err);
+    		if(myView.getBooleanAuthorModeProperty().get()){
+	    		SingleFieldPrompt newPrompt = new SingleFieldPrompt(
+						Arrays.asList(strResources.getFromStringConstants("EditingWindow"), 
+								String.format(strResources.getFromStringConstants("StringInputFormat"),str)), 
+						strResources.getFromStringConstants("NewValue"),
+						value.getText());
+	    		Double newValue = null;
+	    		try{
+	    			newValue = newPrompt.getUserInputDouble();
+	    		} catch (NumberFormatException err){
+	    			myView.reportError(err);
+	    		}
+				if(newValue == null){
+					return;
+				}
+				myView.sendUserModification(new Modifciation_EditPlayerStatus(str, newValue));
+				value.setText(Double.toString(newValue));
     		}
-			if(newValue == null){
-				return;
-			}
-			myView.sendUserModification(new Modifciation_EditPlayerStatus(str, newValue));
-			value.setText(Double.toString(newValue));
     	});
 	}
 	
