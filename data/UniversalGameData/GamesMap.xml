@@ -23,7 +23,8 @@
   <entry>
     <string>FinalComplexGame</string>
     <list>
-      <string>level2_FINAL</string>
+      <string>FINAL_LEVEL2</string>
+      <string>Level3</string>
       <string>v2.0</string>
     </list>
   </entry>
