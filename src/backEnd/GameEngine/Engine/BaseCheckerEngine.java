@@ -12,7 +12,6 @@ public class BaseCheckerEngine implements Engine {
 	private State myState;
 	private Tile currentTile;
 	private StringResourceBundle STRING_RESOURCES = new StringResourceBundle();
-	
 
 	@Override
 	public void gameLoop(GameData gameData, double stepTime) {
@@ -26,5 +25,4 @@ public class BaseCheckerEngine implements Engine {
 			}
 		}
 	}
-
 }
