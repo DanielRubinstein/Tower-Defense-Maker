@@ -1,37 +1,5 @@
 <?xml version="1.0"?><map>
   <entry>
-    <string>to41Mountain</string>
-    <list/>
-  </entry>
-  <entry>
-    <string>ggg</string>
-    <list/>
-  </entry>
-  <entry>
-    <string>vfff</string>
-    <list/>
-  </entry>
-  <entry>
-    <string>asfsd</string>
-    <list/>
-  </entry>
-  <entry>
-    <string>asdfsdf</string>
-    <list/>
-  </entry>
-  <entry>
-    <string>asdfsd</string>
-    <list/>
-  </entry>
-  <entry>
-    <string>to41</string>
-    <list/>
-  </entry>
-  <entry>
-    <string>asf</string>
-    <list/>
-  </entry>
-  <entry>
     <string>newPlayerStatusXML</string>
     <list>
       <string>level1</string>
@@ -72,6 +40,14 @@
     <string>Derek</string>
     <list>
       <string>level1</string>
+    </list>
+  </entry>
+  <entry>
+    <string>Daniel</string>
+    <list>
+      <string>Space Salad</string>
+      <string>Space Sald</string>
+      <string>SpaceSalad</string>
     </list>
   </entry>
   <entry>
