@@ -124,6 +124,7 @@ public class ProjectileEngine implements Engine {
 				if(projectile.<Double>getAttribute(SLOW_TIME).getValue() > toHit.<Double>getAttribute(SLOW_TIME).getValue()){
 					toHit.setAttributeValue(SPEED, projectile.<Double>getAttribute(SLOW_FACTOR).getValue()
 						* toHit.<Double>getAttribute(MAX_SPEED).getValue());
+					toHit.setAttributeValue(SLOW_TIME, projectile.<Double>getAttribute(SLOW_TIME).getValue());
 				}
 				toHit.setAttributeValue(POISON_TIME, projectile.<Double>getAttribute(POISON_TIME).getValue());
 				toHit.setAttributeValue(POISON_FACTOR, projectile.<Double>getAttribute(POISON_FACTOR).getValue());
