@@ -3,7 +3,7 @@
     <entry>
       <string>Score</string>
       <backEnd.GameData.Rules.EndCondition.ScoreWinCondition>
-        <myVal>275.0</myVal>
+        <myVal>180.0</myVal>
         <minVal>0.0</minVal>
         <maxVal>1000.0</maxVal>
         <enabled>true</enabled>

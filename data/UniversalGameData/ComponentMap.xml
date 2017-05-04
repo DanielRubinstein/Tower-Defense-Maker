@@ -692,7 +692,7 @@
           <entry>
             <string>FireRate</string>
             <backEnd.Attribute.AttributeImpl>
-              <myValue class="double">28.620689655172406</myValue>
+              <myValue class="double">114.82758620689654</myValue>
               <myParamList class="java.util.Arrays$ArrayList">
                 <a class="java.lang.Double-array">
                   <double>0.0</double>
@@ -4918,7 +4918,7 @@
           <entry>
             <string>Speed</string>
             <backEnd.Attribute.AttributeImpl>
-              <myValue class="double">0.0</myValue>
+              <myValue class="double">1.1</myValue>
               <myParamList class="java.util.Arrays$ArrayList">
                 <a class="java.lang.Double-array">
                   <double>0.0</double>
@@ -4989,7 +4989,7 @@
           <entry>
             <string>FireRate</string>
             <backEnd.Attribute.AttributeImpl>
-              <myValue class="double">123.44827586206895</myValue>
+              <myValue class="double">71.72413793103446</myValue>
               <myParamList class="java.util.Arrays$ArrayList">
                 <a class="java.lang.Double-array">
                   <double>0.0</double>
@@ -5350,7 +5350,7 @@
           <entry>
             <string>Speed</string>
             <backEnd.Attribute.AttributeImpl>
-              <myValue class="double">0.8</myValue>
+              <myValue class="double">1.1</myValue>
               <myParamList class="java.util.Arrays$ArrayList">
                 <a class="java.lang.Double-array">
                   <double>0.0</double>
@@ -5395,7 +5395,7 @@
           <entry>
             <string>Health</string>
             <backEnd.Attribute.AttributeImpl>
-              <myValue class="int">5</myValue>
+              <myValue class="int">16</myValue>
               <myParamList class="java.util.Arrays$ArrayList">
                 <a class="java.lang.Integer-array">
                   <int>1</int>
