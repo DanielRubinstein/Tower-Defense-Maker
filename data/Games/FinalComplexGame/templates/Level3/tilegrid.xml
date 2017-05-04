@@ -172,7 +172,7 @@
             <entry>
               <string>MoveDirection</string>
               <backEnd.Attribute.AttributeImpl>
-                <myValue class="string"></myValue>
+                <myValue class="string">Left</myValue>
                 <myParamList class="java.util.Arrays$ArrayList">
                   <a class="string-array">
                     <string>Up</string>
@@ -266,7 +266,7 @@
             <entry>
               <string>MoveDirection</string>
               <backEnd.Attribute.AttributeImpl>
-                <myValue class="string"></myValue>
+                <myValue class="string">Up</myValue>
                 <myParamList class="java.util.Arrays$ArrayList">
                   <a class="string-array">
                     <string>Up</string>
@@ -544,7 +544,7 @@
             <entry>
               <string>MoveDirection</string>
               <backEnd.Attribute.AttributeImpl>
-                <myValue class="string"></myValue>
+                <myValue class="string">Left</myValue>
                 <myParamList class="java.util.Arrays$ArrayList">
                   <a class="string-array">
                     <string>Up</string>
@@ -638,7 +638,7 @@
             <entry>
               <string>MoveDirection</string>
               <backEnd.Attribute.AttributeImpl>
-                <myValue class="string"></myValue>
+                <myValue class="string">Up</myValue>
                 <myParamList class="java.util.Arrays$ArrayList">
                   <a class="string-array">
                     <string>Up</string>
@@ -826,7 +826,7 @@
             <entry>
               <string>MoveDirection</string>
               <backEnd.Attribute.AttributeImpl>
-                <myValue class="string"></myValue>
+                <myValue class="string">Right</myValue>
                 <myParamList class="java.util.Arrays$ArrayList">
                   <a class="string-array">
                     <string>Up</string>
@@ -1100,7 +1100,7 @@
             <entry>
               <string>MoveDirection</string>
               <backEnd.Attribute.AttributeImpl>
-                <myValue class="string"></myValue>
+                <myValue class="string">Left</myValue>
                 <myParamList class="java.util.Arrays$ArrayList">
                   <a class="string-array">
                     <string>Up</string>
@@ -1194,7 +1194,7 @@
             <entry>
               <string>MoveDirection</string>
               <backEnd.Attribute.AttributeImpl>
-                <myValue class="string"></myValue>
+                <myValue class="string">Up</myValue>
                 <myParamList class="java.util.Arrays$ArrayList">
                   <a class="string-array">
                     <string>Up</string>
@@ -1562,7 +1562,7 @@
             <entry>
               <string>MoveDirection</string>
               <backEnd.Attribute.AttributeImpl>
-                <myValue class="string"></myValue>
+                <myValue class="string">Left</myValue>
                 <myParamList class="java.util.Arrays$ArrayList">
                   <a class="string-array">
                     <string>Up</string>
@@ -1746,7 +1746,7 @@
             <entry>
               <string>MoveDirection</string>
               <backEnd.Attribute.AttributeImpl>
-                <myValue class="string"></myValue>
+                <myValue class="string">Up</myValue>
                 <myParamList class="java.util.Arrays$ArrayList">
                   <a class="string-array">
                     <string>Up</string>
@@ -2020,7 +2020,7 @@
             <entry>
               <string>MoveDirection</string>
               <backEnd.Attribute.AttributeImpl>
-                <myValue class="string"></myValue>
+                <myValue class="string">Right</myValue>
                 <myParamList class="java.util.Arrays$ArrayList">
                   <a class="string-array">
                     <string>Up</string>
@@ -2114,7 +2114,7 @@
             <entry>
               <string>MoveDirection</string>
               <backEnd.Attribute.AttributeImpl>
-                <myValue class="string"></myValue>
+                <myValue class="string">Left</myValue>
                 <myParamList class="java.util.Arrays$ArrayList">
                   <a class="string-array">
                     <string>Up</string>
@@ -2392,7 +2392,7 @@
             <entry>
               <string>MoveDirection</string>
               <backEnd.Attribute.AttributeImpl>
-                <myValue class="string"></myValue>
+                <myValue class="string">Left</myValue>
                 <myParamList class="java.util.Arrays$ArrayList">
                   <a class="string-array">
                     <string>Up</string>
@@ -2576,7 +2576,7 @@
             <entry>
               <string>MoveDirection</string>
               <backEnd.Attribute.AttributeImpl>
-                <myValue class="string"></myValue>
+                <myValue class="string">Up</myValue>
                 <myParamList class="java.util.Arrays$ArrayList">
                   <a class="string-array">
                     <string>Up</string>
@@ -2670,7 +2670,7 @@
             <entry>
               <string>MoveDirection</string>
               <backEnd.Attribute.AttributeImpl>
-                <myValue class="string"></myValue>
+                <myValue class="string">Up</myValue>
                 <myParamList class="java.util.Arrays$ArrayList">
                   <a class="string-array">
                     <string>Up</string>
@@ -2764,7 +2764,7 @@
             <entry>
               <string>MoveDirection</string>
               <backEnd.Attribute.AttributeImpl>
-                <myValue class="string"></myValue>
+                <myValue class="string">Right</myValue>
                 <myParamList class="java.util.Arrays$ArrayList">
                   <a class="string-array">
                     <string>Up</string>
@@ -2858,7 +2858,7 @@
             <entry>
               <string>MoveDirection</string>
               <backEnd.Attribute.AttributeImpl>
-                <myValue class="string"></myValue>
+                <myValue class="string">Up</myValue>
                 <myParamList class="java.util.Arrays$ArrayList">
                   <a class="string-array">
                     <string>Up</string>
@@ -2952,7 +2952,7 @@
             <entry>
               <string>MoveDirection</string>
               <backEnd.Attribute.AttributeImpl>
-                <myValue class="string"></myValue>
+                <myValue class="string">Down</myValue>
                 <myParamList class="java.util.Arrays$ArrayList">
                   <a class="string-array">
                     <string>Up</string>
@@ -3316,7 +3316,7 @@
             <entry>
               <string>MoveDirection</string>
               <backEnd.Attribute.AttributeImpl>
-                <myValue class="string"></myValue>
+                <myValue class="string">Right</myValue>
                 <myParamList class="java.util.Arrays$ArrayList">
                   <a class="string-array">
                     <string>Up</string>
@@ -3403,14 +3403,14 @@
             <entry>
               <string>GoalTile</string>
               <backEnd.Attribute.AttributeImpl>
-                <myValue class="boolean">false</myValue>
+                <myValue class="boolean">true</myValue>
                 <myName>GoalTile</myName>
               </backEnd.Attribute.AttributeImpl>
             </entry>
             <entry>
               <string>MoveDirection</string>
               <backEnd.Attribute.AttributeImpl>
-                <myValue class="string"></myValue>
+                <myValue class="string">Left</myValue>
                 <myParamList class="java.util.Arrays$ArrayList">
                   <a class="string-array">
                     <string>Up</string>
@@ -3598,7 +3598,7 @@
             <entry>
               <string>MoveDirection</string>
               <backEnd.Attribute.AttributeImpl>
-                <myValue class="string"></myValue>
+                <myValue class="string">Down</myValue>
                 <myParamList class="java.util.Arrays$ArrayList">
                   <a class="string-array">
                     <string>Up</string>
@@ -3692,7 +3692,7 @@
             <entry>
               <string>MoveDirection</string>
               <backEnd.Attribute.AttributeImpl>
-                <myValue class="string"></myValue>
+                <myValue class="string">Left</myValue>
                 <myParamList class="java.util.Arrays$ArrayList">
                   <a class="string-array">
                     <string>Up</string>
@@ -3970,7 +3970,7 @@
             <entry>
               <string>MoveDirection</string>
               <backEnd.Attribute.AttributeImpl>
-                <myValue class="string"></myValue>
+                <myValue class="string">Left</myValue>
                 <myParamList class="java.util.Arrays$ArrayList">
                   <a class="string-array">
                     <string>Up</string>
@@ -4064,7 +4064,7 @@
             <entry>
               <string>MoveDirection</string>
               <backEnd.Attribute.AttributeImpl>
-                <myValue class="string"></myValue>
+                <myValue class="string">Left</myValue>
                 <myParamList class="java.util.Arrays$ArrayList">
                   <a class="string-array">
                     <string>Up</string>
@@ -4158,7 +4158,7 @@
             <entry>
               <string>MoveDirection</string>
               <backEnd.Attribute.AttributeImpl>
-                <myValue class="string"></myValue>
+                <myValue class="string">Up</myValue>
                 <myParamList class="java.util.Arrays$ArrayList">
                   <a class="string-array">
                     <string>Up</string>
@@ -4252,7 +4252,7 @@
             <entry>
               <string>MoveDirection</string>
               <backEnd.Attribute.AttributeImpl>
-                <myValue class="string"></myValue>
+                <myValue class="string">Right</myValue>
                 <myParamList class="java.util.Arrays$ArrayList">
                   <a class="string-array">
                     <string>Up</string>
@@ -4436,7 +4436,7 @@
             <entry>
               <string>MoveDirection</string>
               <backEnd.Attribute.AttributeImpl>
-                <myValue class="string"></myValue>
+                <myValue class="string">Right</myValue>
                 <myParamList class="java.util.Arrays$ArrayList">
                   <a class="string-array">
                     <string>Up</string>
@@ -4530,7 +4530,7 @@
             <entry>
               <string>MoveDirection</string>
               <backEnd.Attribute.AttributeImpl>
-                <myValue class="string"></myValue>
+                <myValue class="string">Left</myValue>
                 <myParamList class="java.util.Arrays$ArrayList">
                   <a class="string-array">
                     <string>Up</string>
@@ -4812,7 +4812,7 @@
             <entry>
               <string>MoveDirection</string>
               <backEnd.Attribute.AttributeImpl>
-                <myValue class="string"></myValue>
+                <myValue class="string">Up</myValue>
                 <myParamList class="java.util.Arrays$ArrayList">
                   <a class="string-array">
                     <string>Up</string>
@@ -4906,7 +4906,7 @@
             <entry>
               <string>MoveDirection</string>
               <backEnd.Attribute.AttributeImpl>
-                <myValue class="string"></myValue>
+                <myValue class="string">Right</myValue>
                 <myParamList class="java.util.Arrays$ArrayList">
                   <a class="string-array">
                     <string>Up</string>
@@ -5094,7 +5094,7 @@
             <entry>
               <string>MoveDirection</string>
               <backEnd.Attribute.AttributeImpl>
-                <myValue class="string"></myValue>
+                <myValue class="string">Left</myValue>
                 <myParamList class="java.util.Arrays$ArrayList">
                   <a class="string-array">
                     <string>Up</string>
@@ -5278,7 +5278,7 @@
             <entry>
               <string>MoveDirection</string>
               <backEnd.Attribute.AttributeImpl>
-                <myValue class="string"></myValue>
+                <myValue class="string">Right</myValue>
                 <myParamList class="java.util.Arrays$ArrayList">
                   <a class="string-array">
                     <string>Up</string>
@@ -5372,7 +5372,7 @@
             <entry>
               <string>MoveDirection</string>
               <backEnd.Attribute.AttributeImpl>
-                <myValue class="string"></myValue>
+                <myValue class="string">Down</myValue>
                 <myParamList class="java.util.Arrays$ArrayList">
                   <a class="string-array">
                     <string>Up</string>
@@ -5466,7 +5466,7 @@
             <entry>
               <string>MoveDirection</string>
               <backEnd.Attribute.AttributeImpl>
-                <myValue class="string"></myValue>
+                <myValue class="string">Left</myValue>
                 <myParamList class="java.util.Arrays$ArrayList">
                   <a class="string-array">
                     <string>Up</string>
@@ -5740,7 +5740,7 @@
             <entry>
               <string>MoveDirection</string>
               <backEnd.Attribute.AttributeImpl>
-                <myValue class="string"></myValue>
+                <myValue class="string">Right</myValue>
                 <myParamList class="java.util.Arrays$ArrayList">
                   <a class="string-array">
                     <string>Up</string>
@@ -6194,7 +6194,7 @@
             <entry>
               <string>MoveDirection</string>
               <backEnd.Attribute.AttributeImpl>
-                <myValue class="string"></myValue>
+                <myValue class="string">Right</myValue>
                 <myParamList class="java.util.Arrays$ArrayList">
                   <a class="string-array">
                     <string>Up</string>
@@ -6288,7 +6288,7 @@
             <entry>
               <string>MoveDirection</string>
               <backEnd.Attribute.AttributeImpl>
-                <myValue class="string"></myValue>
+                <myValue class="string">Right</myValue>
                 <myParamList class="java.util.Arrays$ArrayList">
                   <a class="string-array">
                     <string>Up</string>
@@ -6930,7 +6930,7 @@
             <entry>
               <string>MoveDirection</string>
               <backEnd.Attribute.AttributeImpl>
-                <myValue class="string"></myValue>
+                <myValue class="string">Down</myValue>
                 <myParamList class="java.util.Arrays$ArrayList">
                   <a class="string-array">
                     <string>Up</string>
@@ -7185,7 +7185,7 @@
             <entry>
               <string>SpawnTimeline</string>
               <backEnd.Attribute.AttributeImpl>
-                <myValue class="string"></myValue>
+                <myValue class="string">Timeline 1</myValue>
                 <myParamList class="java.util.Arrays$ArrayList">
                   <a class="string-array">
                     <string>Timeline 1</string>
@@ -7204,7 +7204,7 @@
             <entry>
               <string>MoveDirection</string>
               <backEnd.Attribute.AttributeImpl>
-                <myValue class="string"></myValue>
+                <myValue class="string">Right</myValue>
                 <myParamList class="java.util.Arrays$ArrayList">
                   <a class="string-array">
                     <string>Up</string>
@@ -7658,7 +7658,7 @@
             <entry>
               <string>MoveDirection</string>
               <backEnd.Attribute.AttributeImpl>
-                <myValue class="string"></myValue>
+                <myValue class="string">Up</myValue>
                 <myParamList class="java.util.Arrays$ArrayList">
                   <a class="string-array">
                     <string>Up</string>
@@ -8120,7 +8120,7 @@
             <entry>
               <string>MoveDirection</string>
               <backEnd.Attribute.AttributeImpl>
-                <myValue class="string"></myValue>
+                <myValue class="string">Right</myValue>
                 <myParamList class="java.util.Arrays$ArrayList">
                   <a class="string-array">
                     <string>Up</string>
@@ -8214,7 +8214,7 @@
             <entry>
               <string>MoveDirection</string>
               <backEnd.Attribute.AttributeImpl>
-                <myValue class="string"></myValue>
+                <myValue class="string">Left</myValue>
                 <myParamList class="java.util.Arrays$ArrayList">
                   <a class="string-array">
                     <string>Up</string>
@@ -8492,7 +8492,7 @@
             <entry>
               <string>MoveDirection</string>
               <backEnd.Attribute.AttributeImpl>
-                <myValue class="string"></myValue>
+                <myValue class="string">Down</myValue>
                 <myParamList class="java.util.Arrays$ArrayList">
                   <a class="string-array">
                     <string>Up</string>
@@ -8680,7 +8680,7 @@
             <entry>
               <string>MoveDirection</string>
               <backEnd.Attribute.AttributeImpl>
-                <myValue class="string"></myValue>
+                <myValue class="string">Right</myValue>
                 <myParamList class="java.util.Arrays$ArrayList">
                   <a class="string-array">
                     <string>Up</string>
@@ -8774,7 +8774,7 @@
             <entry>
               <string>MoveDirection</string>
               <backEnd.Attribute.AttributeImpl>
-                <myValue class="string"></myValue>
+                <myValue class="string">Down</myValue>
                 <myParamList class="java.util.Arrays$ArrayList">
                   <a class="string-array">
                     <string>Up</string>
@@ -9698,7 +9698,7 @@
             <entry>
               <string>MoveDirection</string>
               <backEnd.Attribute.AttributeImpl>
-                <myValue class="string"></myValue>
+                <myValue class="string">Right</myValue>
                 <myParamList class="java.util.Arrays$ArrayList">
                   <a class="string-array">
                     <string>Up</string>
@@ -9792,7 +9792,7 @@
             <entry>
               <string>MoveDirection</string>
               <backEnd.Attribute.AttributeImpl>
-                <myValue class="string"></myValue>
+                <myValue class="string">Up</myValue>
                 <myParamList class="java.util.Arrays$ArrayList">
                   <a class="string-array">
                     <string>Up</string>
@@ -9886,7 +9886,7 @@
             <entry>
               <string>MoveDirection</string>
               <backEnd.Attribute.AttributeImpl>
-                <myValue class="string"></myValue>
+                <myValue class="string">Left</myValue>
                 <myParamList class="java.util.Arrays$ArrayList">
                   <a class="string-array">
                     <string>Up</string>
@@ -10074,7 +10074,7 @@
             <entry>
               <string>MoveDirection</string>
               <backEnd.Attribute.AttributeImpl>
-                <myValue class="string"></myValue>
+                <myValue class="string">Down</myValue>
                 <myParamList class="java.util.Arrays$ArrayList">
                   <a class="string-array">
                     <string>Up</string>
@@ -10168,7 +10168,7 @@
             <entry>
               <string>MoveDirection</string>
               <backEnd.Attribute.AttributeImpl>
-                <myValue class="string"></myValue>
+                <myValue class="string">Right</myValue>
                 <myParamList class="java.util.Arrays$ArrayList">
                   <a class="string-array">
                     <string>Up</string>
@@ -10262,7 +10262,7 @@
             <entry>
               <string>MoveDirection</string>
               <backEnd.Attribute.AttributeImpl>
-                <myValue class="string"></myValue>
+                <myValue class="string">Up</myValue>
                 <myParamList class="java.util.Arrays$ArrayList">
                   <a class="string-array">
                     <string>Up</string>
@@ -10450,7 +10450,7 @@
             <entry>
               <string>MoveDirection</string>
               <backEnd.Attribute.AttributeImpl>
-                <myValue class="string"></myValue>
+                <myValue class="string">Left</myValue>
                 <myParamList class="java.util.Arrays$ArrayList">
                   <a class="string-array">
                     <string>Up</string>
@@ -10634,7 +10634,7 @@
             <entry>
               <string>MoveDirection</string>
               <backEnd.Attribute.AttributeImpl>
-                <myValue class="string"></myValue>
+                <myValue class="string">Left</myValue>
                 <myParamList class="java.util.Arrays$ArrayList">
                   <a class="string-array">
                     <string>Up</string>
@@ -10818,7 +10818,7 @@
             <entry>
               <string>MoveDirection</string>
               <backEnd.Attribute.AttributeImpl>
-                <myValue class="string"></myValue>
+                <myValue class="string">Right</myValue>
                 <myParamList class="java.util.Arrays$ArrayList">
                   <a class="string-array">
                     <string>Up</string>
@@ -11280,7 +11280,7 @@
             <entry>
               <string>MoveDirection</string>
               <backEnd.Attribute.AttributeImpl>
-                <myValue class="string"></myValue>
+                <myValue class="string">Down</myValue>
                 <myParamList class="java.util.Arrays$ArrayList">
                   <a class="string-array">
                     <string>Up</string>
@@ -11742,7 +11742,7 @@
             <entry>
               <string>MoveDirection</string>
               <backEnd.Attribute.AttributeImpl>
-                <myValue class="string"></myValue>
+                <myValue class="string">Up</myValue>
                 <myParamList class="java.util.Arrays$ArrayList">
                   <a class="string-array">
                     <string>Up</string>
@@ -12016,7 +12016,7 @@
             <entry>
               <string>MoveDirection</string>
               <backEnd.Attribute.AttributeImpl>
-                <myValue class="string"></myValue>
+                <myValue class="string">Up</myValue>
                 <myParamList class="java.util.Arrays$ArrayList">
                   <a class="string-array">
                     <string>Up</string>
@@ -12110,7 +12110,7 @@
             <entry>
               <string>MoveDirection</string>
               <backEnd.Attribute.AttributeImpl>
-                <myValue class="string"></myValue>
+                <myValue class="string">Right</myValue>
                 <myParamList class="java.util.Arrays$ArrayList">
                   <a class="string-array">
                     <string>Up</string>
@@ -12204,7 +12204,7 @@
             <entry>
               <string>MoveDirection</string>
               <backEnd.Attribute.AttributeImpl>
-                <myValue class="string"></myValue>
+                <myValue class="string">Left</myValue>
                 <myParamList class="java.util.Arrays$ArrayList">
                   <a class="string-array">
                     <string>Up</string>
@@ -12298,7 +12298,7 @@
             <entry>
               <string>MoveDirection</string>
               <backEnd.Attribute.AttributeImpl>
-                <myValue class="string"></myValue>
+                <myValue class="string">Right</myValue>
                 <myParamList class="java.util.Arrays$ArrayList">
                   <a class="string-array">
                     <string>Up</string>
@@ -12392,7 +12392,7 @@
             <entry>
               <string>MoveDirection</string>
               <backEnd.Attribute.AttributeImpl>
-                <myValue class="string"></myValue>
+                <myValue class="string">Left</myValue>
                 <myParamList class="java.util.Arrays$ArrayList">
                   <a class="string-array">
                     <string>Up</string>
@@ -12670,7 +12670,7 @@
             <entry>
               <string>MoveDirection</string>
               <backEnd.Attribute.AttributeImpl>
-                <myValue class="string"></myValue>
+                <myValue class="string">Left</myValue>
                 <myParamList class="java.util.Arrays$ArrayList">
                   <a class="string-array">
                     <string>Up</string>
@@ -12764,7 +12764,7 @@
             <entry>
               <string>MoveDirection</string>
               <backEnd.Attribute.AttributeImpl>
-                <myValue class="string"></myValue>
+                <myValue class="string">Right</myValue>
                 <myParamList class="java.util.Arrays$ArrayList">
                   <a class="string-array">
                     <string>Up</string>
@@ -12948,7 +12948,7 @@
             <entry>
               <string>MoveDirection</string>
               <backEnd.Attribute.AttributeImpl>
-                <myValue class="string"></myValue>
+                <myValue class="string">Right</myValue>
                 <myParamList class="java.util.Arrays$ArrayList">
                   <a class="string-array">
                     <string>Up</string>
@@ -13042,7 +13042,7 @@
             <entry>
               <string>MoveDirection</string>
               <backEnd.Attribute.AttributeImpl>
-                <myValue class="string"></myValue>
+                <myValue class="string">Right</myValue>
                 <myParamList class="java.util.Arrays$ArrayList">
                   <a class="string-array">
                     <string>Up</string>
@@ -13230,7 +13230,7 @@
             <entry>
               <string>MoveDirection</string>
               <backEnd.Attribute.AttributeImpl>
-                <myValue class="string"></myValue>
+                <myValue class="string">Down</myValue>
                 <myParamList class="java.util.Arrays$ArrayList">
                   <a class="string-array">
                     <string>Up</string>
@@ -13324,7 +13324,7 @@
             <entry>
               <string>MoveDirection</string>
               <backEnd.Attribute.AttributeImpl>
-                <myValue class="string"></myValue>
+                <myValue class="string">Right</myValue>
                 <myParamList class="java.util.Arrays$ArrayList">
                   <a class="string-array">
                     <string>Up</string>
@@ -13418,7 +13418,7 @@
             <entry>
               <string>MoveDirection</string>
               <backEnd.Attribute.AttributeImpl>
-                <myValue class="string"></myValue>
+                <myValue class="string">Left</myValue>
                 <myParamList class="java.util.Arrays$ArrayList">
                   <a class="string-array">
                     <string>Up</string>
@@ -13602,7 +13602,7 @@
             <entry>
               <string>MoveDirection</string>
               <backEnd.Attribute.AttributeImpl>
-                <myValue class="string"></myValue>
+                <myValue class="string">Up</myValue>
                 <myParamList class="java.util.Arrays$ArrayList">
                   <a class="string-array">
                     <string>Up</string>
@@ -13978,7 +13978,7 @@
             <entry>
               <string>MoveDirection</string>
               <backEnd.Attribute.AttributeImpl>
-                <myValue class="string"></myValue>
+                <myValue class="string">Up</myValue>
                 <myParamList class="java.util.Arrays$ArrayList">
                   <a class="string-array">
                     <string>Up</string>
@@ -14346,7 +14346,7 @@
             <entry>
               <string>MoveDirection</string>
               <backEnd.Attribute.AttributeImpl>
-                <myValue class="string"></myValue>
+                <myValue class="string">Up</myValue>
                 <myParamList class="java.util.Arrays$ArrayList">
                   <a class="string-array">
                     <string>Up</string>
@@ -14530,7 +14530,7 @@
             <entry>
               <string>MoveDirection</string>
               <backEnd.Attribute.AttributeImpl>
-                <myValue class="string"></myValue>
+                <myValue class="string">Right</myValue>
                 <myParamList class="java.util.Arrays$ArrayList">
                   <a class="string-array">
                     <string>Up</string>
@@ -14624,7 +14624,7 @@
             <entry>
               <string>MoveDirection</string>
               <backEnd.Attribute.AttributeImpl>
-                <myValue class="string"></myValue>
+                <myValue class="string">Left</myValue>
                 <myParamList class="java.util.Arrays$ArrayList">
                   <a class="string-array">
                     <string>Up</string>
@@ -14718,7 +14718,7 @@
             <entry>
               <string>MoveDirection</string>
               <backEnd.Attribute.AttributeImpl>
-                <myValue class="string"></myValue>
+                <myValue class="string">Up</myValue>
                 <myParamList class="java.util.Arrays$ArrayList">
                   <a class="string-array">
                     <string>Up</string>
@@ -14996,7 +14996,7 @@
             <entry>
               <string>MoveDirection</string>
               <backEnd.Attribute.AttributeImpl>
-                <myValue class="string"></myValue>
+                <myValue class="string">Left</myValue>
                 <myParamList class="java.util.Arrays$ArrayList">
                   <a class="string-array">
                     <string>Up</string>
@@ -15184,7 +15184,7 @@
             <entry>
               <string>MoveDirection</string>
               <backEnd.Attribute.AttributeImpl>
-                <myValue class="string"></myValue>
+                <myValue class="string">Down</myValue>
                 <myParamList class="java.util.Arrays$ArrayList">
                   <a class="string-array">
                     <string>Up</string>
@@ -15368,7 +15368,7 @@
             <entry>
               <string>MoveDirection</string>
               <backEnd.Attribute.AttributeImpl>
-                <myValue class="string"></myValue>
+                <myValue class="string">Up</myValue>
                 <myParamList class="java.util.Arrays$ArrayList">
                   <a class="string-array">
                     <string>Up</string>
@@ -15462,7 +15462,7 @@
             <entry>
               <string>MoveDirection</string>
               <backEnd.Attribute.AttributeImpl>
-                <myValue class="string"></myValue>
+                <myValue class="string">Right</myValue>
                 <myParamList class="java.util.Arrays$ArrayList">
                   <a class="string-array">
                     <string>Up</string>
@@ -15838,7 +15838,7 @@
             <entry>
               <string>MoveDirection</string>
               <backEnd.Attribute.AttributeImpl>
-                <myValue class="string"></myValue>
+                <myValue class="string">Right</myValue>
                 <myParamList class="java.util.Arrays$ArrayList">
                   <a class="string-array">
                     <string>Up</string>
@@ -16112,7 +16112,7 @@
             <entry>
               <string>MoveDirection</string>
               <backEnd.Attribute.AttributeImpl>
-                <myValue class="string"></myValue>
+                <myValue class="string">Down</myValue>
                 <myParamList class="java.util.Arrays$ArrayList">
                   <a class="string-array">
                     <string>Up</string>
@@ -16296,7 +16296,7 @@
             <entry>
               <string>MoveDirection</string>
               <backEnd.Attribute.AttributeImpl>
-                <myValue class="string"></myValue>
+                <myValue class="string">Left</myValue>
                 <myParamList class="java.util.Arrays$ArrayList">
                   <a class="string-array">
                     <string>Up</string>
@@ -16390,7 +16390,7 @@
             <entry>
               <string>MoveDirection</string>
               <backEnd.Attribute.AttributeImpl>
-                <myValue class="string"></myValue>
+                <myValue class="string">Right</myValue>
                 <myParamList class="java.util.Arrays$ArrayList">
                   <a class="string-array">
                     <string>Up</string>
@@ -16484,7 +16484,7 @@
             <entry>
               <string>MoveDirection</string>
               <backEnd.Attribute.AttributeImpl>
-                <myValue class="string"></myValue>
+                <myValue class="string">Right</myValue>
                 <myParamList class="java.util.Arrays$ArrayList">
                   <a class="string-array">
                     <string>Up</string>
@@ -16578,7 +16578,7 @@
             <entry>
               <string>MoveDirection</string>
               <backEnd.Attribute.AttributeImpl>
-                <myValue class="string"></myValue>
+                <myValue class="string">Up</myValue>
                 <myParamList class="java.util.Arrays$ArrayList">
                   <a class="string-array">
                     <string>Up</string>
@@ -16860,7 +16860,7 @@
             <entry>
               <string>MoveDirection</string>
               <backEnd.Attribute.AttributeImpl>
-                <myValue class="string"></myValue>
+                <myValue class="string">Left</myValue>
                 <myParamList class="java.util.Arrays$ArrayList">
                   <a class="string-array">
                     <string>Up</string>
@@ -17322,7 +17322,7 @@
             <entry>
               <string>MoveDirection</string>
               <backEnd.Attribute.AttributeImpl>
-                <myValue class="string"></myValue>
+                <myValue class="string">Left</myValue>
                 <myParamList class="java.util.Arrays$ArrayList">
                   <a class="string-array">
                     <string>Up</string>
@@ -17416,7 +17416,7 @@
             <entry>
               <string>MoveDirection</string>
               <backEnd.Attribute.AttributeImpl>
-                <myValue class="string"></myValue>
+                <myValue class="string">Right</myValue>
                 <myParamList class="java.util.Arrays$ArrayList">
                   <a class="string-array">
                     <string>Up</string>
@@ -17780,7 +17780,7 @@
             <entry>
               <string>MoveDirection</string>
               <backEnd.Attribute.AttributeImpl>
-                <myValue class="string"></myValue>
+                <myValue class="string">Right</myValue>
                 <myParamList class="java.util.Arrays$ArrayList">
                   <a class="string-array">
                     <string>Up</string>
@@ -17964,7 +17964,7 @@
             <entry>
               <string>MoveDirection</string>
               <backEnd.Attribute.AttributeImpl>
-                <myValue class="string"></myValue>
+                <myValue class="string">Down</myValue>
                 <myParamList class="java.util.Arrays$ArrayList">
                   <a class="string-array">
                     <string>Up</string>
@@ -18058,7 +18058,7 @@
             <entry>
               <string>MoveDirection</string>
               <backEnd.Attribute.AttributeImpl>
-                <myValue class="string"></myValue>
+                <myValue class="string">Right</myValue>
                 <myParamList class="java.util.Arrays$ArrayList">
                   <a class="string-array">
                     <string>Up</string>
@@ -18426,7 +18426,7 @@
             <entry>
               <string>MoveDirection</string>
               <backEnd.Attribute.AttributeImpl>
-                <myValue class="string"></myValue>
+                <myValue class="string">Down</myValue>
                 <myParamList class="java.util.Arrays$ArrayList">
                   <a class="string-array">
                     <string>Up</string>
@@ -18520,7 +18520,7 @@
             <entry>
               <string>MoveDirection</string>
               <backEnd.Attribute.AttributeImpl>
-                <myValue class="string"></myValue>
+                <myValue class="string">Left</myValue>
                 <myParamList class="java.util.Arrays$ArrayList">
                   <a class="string-array">
                     <string>Up</string>
@@ -18614,7 +18614,7 @@
             <entry>
               <string>MoveDirection</string>
               <backEnd.Attribute.AttributeImpl>
-                <myValue class="string"></myValue>
+                <myValue class="string">Left</myValue>
                 <myParamList class="java.util.Arrays$ArrayList">
                   <a class="string-array">
                     <string>Up</string>
@@ -18892,7 +18892,7 @@
             <entry>
               <string>MoveDirection</string>
               <backEnd.Attribute.AttributeImpl>
-                <myValue class="string"></myValue>
+                <myValue class="string">Right</myValue>
                 <myParamList class="java.util.Arrays$ArrayList">
                   <a class="string-array">
                     <string>Up</string>
@@ -19076,7 +19076,7 @@
             <entry>
               <string>MoveDirection</string>
               <backEnd.Attribute.AttributeImpl>
-                <myValue class="string"></myValue>
+                <myValue class="string">Up</myValue>
                 <myParamList class="java.util.Arrays$ArrayList">
                   <a class="string-array">
                     <string>Up</string>
@@ -19260,7 +19260,7 @@
             <entry>
               <string>MoveDirection</string>
               <backEnd.Attribute.AttributeImpl>
-                <myValue class="string"></myValue>
+                <myValue class="string">Left</myValue>
                 <myParamList class="java.util.Arrays$ArrayList">
                   <a class="string-array">
                     <string>Up</string>
@@ -19906,7 +19906,7 @@
             <entry>
               <string>MoveDirection</string>
               <backEnd.Attribute.AttributeImpl>
-                <myValue class="string"></myValue>
+                <myValue class="string">Right</myValue>
                 <myParamList class="java.util.Arrays$ArrayList">
                   <a class="string-array">
                     <string>Up</string>
@@ -20928,7 +20928,7 @@
             <entry>
               <string>MoveDirection</string>
               <backEnd.Attribute.AttributeImpl>
-                <myValue class="string"></myValue>
+                <myValue class="string">Right</myValue>
                 <myParamList class="java.util.Arrays$ArrayList">
                   <a class="string-array">
                     <string>Up</string>
@@ -21574,7 +21574,7 @@
             <entry>
               <string>MoveDirection</string>
               <backEnd.Attribute.AttributeImpl>
-                <myValue class="string"></myValue>
+                <myValue class="string">Left</myValue>
                 <myParamList class="java.util.Arrays$ArrayList">
                   <a class="string-array">
                     <string>Up</string>
@@ -21942,7 +21942,7 @@
             <entry>
               <string>MoveDirection</string>
               <backEnd.Attribute.AttributeImpl>
-                <myValue class="string"></myValue>
+                <myValue class="string">Down</myValue>
                 <myParamList class="java.util.Arrays$ArrayList">
                   <a class="string-array">
                     <string>Up</string>
