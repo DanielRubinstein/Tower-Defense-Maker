@@ -36,7 +36,7 @@
     <entry>
       <string>KillCount</string>
       <backEnd.GameData.Rules.EndCondition.KillCountCondition>
-        <myVal>15.0</myVal>
+        <myVal>18.0</myVal>
         <minVal>0.0</minVal>
         <maxVal>100.0</maxVal>
         <enabled>true</enabled>
