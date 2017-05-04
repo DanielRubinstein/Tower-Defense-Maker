@@ -5,10 +5,42 @@
       <mySpawnQueue>
         <backEnd.GameEngine.Engine.Spawning.SpawnDataImpl>
           <mySpawnable>mra_Boat</mySpawnable>
-          <myFrequency>2.0</myFrequency>
-          <myDelay>5.0</myDelay>
+          <myFrequency>5.0</myFrequency>
+          <myDelay>2.0</myDelay>
           <mySpawns>10</mySpawns>
           <startingSpawns>10</startingSpawns>
+          <recentSpawn>false</recentSpawn>
+        </backEnd.GameEngine.Engine.Spawning.SpawnDataImpl>
+        <backEnd.GameEngine.Engine.Spawning.SpawnDataImpl>
+          <mySpawnable>mra_Boat</mySpawnable>
+          <myFrequency>3.0</myFrequency>
+          <myDelay>10.0</myDelay>
+          <mySpawns>20</mySpawns>
+          <startingSpawns>20</startingSpawns>
+          <recentSpawn>false</recentSpawn>
+        </backEnd.GameEngine.Engine.Spawning.SpawnDataImpl>
+      </mySpawnQueue>
+      <myCurrentSpawn>0</myCurrentSpawn>
+    </backEnd.GameEngine.Engine.Spawning.SpawnQueueInstantiator>
+  </entry>
+  <entry>
+    <string>Timeline 2</string>
+    <backEnd.GameEngine.Engine.Spawning.SpawnQueueInstantiator>
+      <mySpawnQueue>
+        <backEnd.GameEngine.Engine.Spawning.SpawnDataImpl>
+          <mySpawnable>mra_Gold</mySpawnable>
+          <myFrequency>3.0</myFrequency>
+          <myDelay>20.0</myDelay>
+          <mySpawns>10</mySpawns>
+          <startingSpawns>10</startingSpawns>
+          <recentSpawn>false</recentSpawn>
+        </backEnd.GameEngine.Engine.Spawning.SpawnDataImpl>
+        <backEnd.GameEngine.Engine.Spawning.SpawnDataImpl>
+          <mySpawnable>mra_Gold</mySpawnable>
+          <myFrequency>1.0</myFrequency>
+          <myDelay>25.0</myDelay>
+          <mySpawns>15</mySpawns>
+          <startingSpawns>15</startingSpawns>
           <recentSpawn>false</recentSpawn>
         </backEnd.GameEngine.Engine.Spawning.SpawnDataImpl>
       </mySpawnQueue>

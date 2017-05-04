@@ -1,7 +1,9 @@
 <?xml version="1.0"?><map>
   <entry>
     <string>hi</string>
-    <list/>
+    <list>
+      <string>tem</string>
+    </list>
   </entry>
   <entry>
     <string>SimpleGame</string>
@@ -31,6 +33,7 @@
     <list>
       <string>BeachScene</string>
       <string>Port Royal</string>
+      <string>Port Royal v2</string>
     </list>
   </entry>
   <entry>
