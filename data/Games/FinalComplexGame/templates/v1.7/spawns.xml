@@ -1,0 +1,34 @@
+<?xml version="1.0"?><map>
+  <entry>
+    <string>Timeline 1</string>
+    <backEnd.GameEngine.Engine.Spawning.SpawnQueueInstantiator>
+      <mySpawnQueue>
+        <backEnd.GameEngine.Engine.Spawning.SpawnDataImpl>
+          <mySpawnable>wobuffet_enemy</mySpawnable>
+          <myFrequency>4.0</myFrequency>
+          <myDelay>2.0</myDelay>
+          <mySpawns>10</mySpawns>
+          <startingSpawns>10</startingSpawns>
+          <recentSpawn>false</recentSpawn>
+        </backEnd.GameEngine.Engine.Spawning.SpawnDataImpl>
+      </mySpawnQueue>
+      <myCurrentSpawn>0</myCurrentSpawn>
+    </backEnd.GameEngine.Engine.Spawning.SpawnQueueInstantiator>
+  </entry>
+  <entry>
+    <string>Timeline 2</string>
+    <backEnd.GameEngine.Engine.Spawning.SpawnQueueInstantiator>
+      <mySpawnQueue>
+        <backEnd.GameEngine.Engine.Spawning.SpawnDataImpl>
+          <mySpawnable>squirtle_enemy</mySpawnable>
+          <myFrequency>6.0</myFrequency>
+          <myDelay>20.0</myDelay>
+          <mySpawns>10</mySpawns>
+          <startingSpawns>10</startingSpawns>
+          <recentSpawn>false</recentSpawn>
+        </backEnd.GameEngine.Engine.Spawning.SpawnDataImpl>
+      </mySpawnQueue>
+      <myCurrentSpawn>0</myCurrentSpawn>
+    </backEnd.GameEngine.Engine.Spawning.SpawnQueueInstantiator>
+  </entry>
+</map>

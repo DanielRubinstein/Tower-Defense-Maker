@@ -116,7 +116,7 @@
           <entry>
             <string>BuildCapacity</string>
             <backEnd.Attribute.AttributeImpl>
-              <myValue class="int">1</myValue>
+              <myValue class="int">0</myValue>
               <myParamList class="java.util.Arrays$ArrayList">
                 <a class="java.lang.Integer-array">
                   <int>0</int>
@@ -746,7 +746,7 @@
           <entry>
             <string>BuildCapacity</string>
             <backEnd.Attribute.AttributeImpl>
-              <myValue class="int">0</myValue>
+              <myValue class="int">1</myValue>
               <myParamList class="java.util.Arrays$ArrayList">
                 <a class="java.lang.Integer-array">
                   <int>0</int>
