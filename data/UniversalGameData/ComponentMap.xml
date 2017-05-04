@@ -1974,8 +1974,8 @@
             <string>Position</string>
             <backEnd.Attribute.AttributeImpl>
               <myValue class="javafx.geometry.Point2D">
-                <x>453.62586206897777</x>
-                <y>259.42931034483354</y>
+                <x>431.93620689655654</x>
+                <y>259.12327586207397</y>
                 <hash>0</hash>
               </myValue>
               <myName>Position</myName>
@@ -2148,8 +2148,8 @@
       <observers/>
       <ID>89501653554720</ID>
       <previousMovement>
-        <x>0.0</x>
-        <y>-1.0</y>
+        <x>-1.0</x>
+        <y>0.0</y>
       </previousMovement>
     </backEnd.GameData.State.ComponentImpl>
   </entry>
