@@ -92,9 +92,17 @@ public class TileGridImpl implements TileGrid {
 	
 	
 	
-		public boolean atMiddleXOfTile(Point2D screenPosition){
+	public boolean atMiddleXOfTile(Point2D screenPosition)
+	{
+		try
+		{
 			 return (generateLeftTile(screenPosition).equals(getTileByScreenPosition(screenPosition)) && getTileByScreenPosition(screenPosition).equals(generateRightTile(screenPosition)));
 		}
+		catch (NullPointerException e)
+		{
+				return false;
+		}
+	}
 		
 		
 		public boolean atMiddleYOfTile(Point2D screenPosition){
