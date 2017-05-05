@@ -36,7 +36,7 @@ public class EnemyStatusEngine implements Engine {
 	private void updatePoison(double stepTime, Component component) {
 		double poisonTime = component.<Double>getAttribute(STRING_RESOURCES.getFromAttributeNames("PoisonTime")).getValue();
 		double poisonFactor = component.<Double>getAttribute(STRING_RESOURCES.getFromAttributeNames("PoisonFactor")).getValue();
-		double health = component.<Double>getAttribute(STRING_RESOURCES.getFromAttributeNames("Health")).getValue();
+		int health = component.<Integer>getAttribute(STRING_RESOURCES.getFromAttributeNames("Health")).getValue();
 		
 		if (poisonTime > 0) {
 			if (poisonTime - stepTime < 0) { // If poison should only do partial
@@ -59,9 +59,10 @@ public class EnemyStatusEngine implements Engine {
 	 */
 	private void updateSlowed(double stepTime, Component component) {
 		double slowTime = component.<Double>getAttribute("SlowTime").getValue();
-		double normalSpeed = component.<Double>getAttribute("NormalSpeed").getValue();
-
+		double normalSpeed = component.<Double>getAttribute("Speed").getValue();
+		System.out.println(" slow time " +slowTime);
 		if (slowTime > 0) {
+			System.out.println(" **** updating slowed");
 			if (slowTime - stepTime < 0) { // If slow should only do partial
 				component.setAttributeValue(STRING_RESOURCES.getFromAttributeNames("SlowTime"), new Double(0));
 				component.setAttributeValue(STRING_RESOURCES.getFromAttributeNames("SlowFactor"), new Double(0));

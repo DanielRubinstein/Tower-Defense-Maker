@@ -26,5 +26,6 @@ public class Modification_EditSpawnData implements ModificationFromUser{
 		mySpawnData.setDelay(myNewDelay);
 		mySpawnData.setFrequency(myNewFrequency);
 		mySpawnData.setSpawns(myNewSpawns);
+		mySpawnData.setStartingSpawns(myNewSpawns);
 	}
 }

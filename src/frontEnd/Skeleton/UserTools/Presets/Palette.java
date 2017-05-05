@@ -126,7 +126,6 @@ public class Palette implements SkeletonObject, SerializableObserver {
 		tile.setPadding(new Insets(numericResourceBundle.getFromSizing("StandardSpacing")));
 		tile.setHgap(numericResourceBundle.getFromSizing("StandardSpacing"));
 		tile.setVgap(numericResourceBundle.getFromSizing("StandardSpacing"));
-		//tile.setMinWidth(numericResourceBundle.getScreenConstants().getScreenGridWidth());
 	}
 
 	@Override

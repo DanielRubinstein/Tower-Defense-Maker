@@ -115,16 +115,16 @@ public class ProjectileEngine implements Engine {
 			targetList.clear();
 		}
 		targetList.add(target);
-		System.out.println("targetList size is " + targetList.size());
 
 		for (Component toHit : targetList) {
 			if ((target.getAttribute(TYPE).getValue().equals(toHit.getAttribute(TYPE).getValue()))) {
 				toHit.setAttributeValue(HEALTH, toHit.<Integer>getAttribute(HEALTH).getValue() - 
 						projectile.<Integer>getAttribute(FIRE_DAMAGE).getValue());
-				target.setAttributeValue("Size", (target.<Double>getAttribute("Size").getValue())*NUMERIC_RESOURCES.getFromSizing("ComponentReductionFactor"));
+					target.setAttributeValue("Size", (target.<Double>getAttribute("Size").getValue())*NUMERIC_RESOURCES.getFromSizing("ComponentReductionFactor"));
 				if(projectile.<Double>getAttribute(SLOW_TIME).getValue() > toHit.<Double>getAttribute(SLOW_TIME).getValue()){
 					toHit.setAttributeValue(SPEED, projectile.<Double>getAttribute(SLOW_FACTOR).getValue()
 						* toHit.<Double>getAttribute(MAX_SPEED).getValue());
+					toHit.setAttributeValue(SLOW_TIME, projectile.<Double>getAttribute(SLOW_TIME).getValue());
 				}
 				toHit.setAttributeValue(POISON_TIME, projectile.<Double>getAttribute(POISON_TIME).getValue());
 				toHit.setAttributeValue(POISON_FACTOR, projectile.<Double>getAttribute(POISON_FACTOR).getValue());

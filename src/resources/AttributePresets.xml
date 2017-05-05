@@ -9,21 +9,21 @@
 		<IsBoss></IsBoss>
 		<SaveToTemplate></SaveToTemplate></BOOLEAN>
 	<DOUBLE>
-		<DOUBLE_TEMPLATE min="0.0" max="0.0" start="0.0" increment="0.0"></DOUBLE_TEMPLATE><Speed min="0.0" max="1.1" start="0.8" increment="0.1"></Speed>
-		<Velocity min="0.0" max="10.0" start="2.0" increment="1.0"></Velocity><FireRadius min="10.0" max="200.0" start="10.0" increment="2.0"></FireRadius>
+		<DOUBLE_TEMPLATE min="0.0" max="0.0" start="0.0" increment="0.0"></DOUBLE_TEMPLATE><Speed min="0.0" max="1.1" start="0.0" increment="0.1"></Speed>
+		<Velocity min="0.0" max="10.0" start="2.0" increment="1.0"></Velocity><FireRadius min="10.0" max="600.0" start="10.0" increment="2.0"></FireRadius>
 		<ExplosionRadius min="0.0" max="200.0" start="0.0" increment="2.0"></ExplosionRadius>
 		<ProjectileMaxDistance min="0.0" max="200.0" start="50.0" increment="2.0"></ProjectileMaxDistance>
 		<ProjectileTraveled min="0.0" max="400.0" start="0.0" increment="4.0"></ProjectileTraveled>
 		<SlowFactor min="0.0" max="1.0" start="0.0" increment="0.01"></SlowFactor>
 		<FireRate min="0.0" max="1000.0" start="20.0" increment="10.0"></FireRate>
-		<Size min="20.0" max="100.0" start="35.0" increment="1.0"></Size>
+		<Size min="30.0" max="100.0" start="35.0" increment="1.0"></Size>
 		<SlowTime min="0.0" max="10.0" start="0.0" increment="0.5"></SlowTime>
-		<PoisonTime min="0.0" max="10.0" start="2.0" increment="1.0"></PoisonTime>
+		<PoisonTime min="0.0" max="10.0" start="0.0" increment="1.0"></PoisonTime>
 		<PoisonFactor min="0.0" max="1.0" start="0.0" increment=".01"></PoisonFactor>
-		<MaxSpeed min="0.0" max="10.0" start="0.0" increment="0.5"></MaxSpeed></DOUBLE>
+		<MaxSpeed min="0.0" max="5.0" start="0.0" increment="0.5"></MaxSpeed></DOUBLE>
 	<INTEGER>
 		<INTEGER_TEMPLATE min="0" max="0" start="1" increment="0"></INTEGER_TEMPLATE>
-		<Health min="1" max="100" start="1" increment="5"></Health>
+		<Health min="50" max="500" start="50" increment="5"></Health>
 		<MoneyBounty min="0" max="999" start="10" increment="10"></MoneyBounty>
 		<ScoreBounty min="0" max="999" start="10" increment="10"></ScoreBounty>
 		<FireDamage min="0" max="200" start="1" increment="2"></FireDamage>
@@ -37,7 +37,7 @@
 		<Type options="Tower, Projectile, Enemy"></Type>
 		<FireType options="SingleTarget, AOE"></FireType>
 		<SpawnTimeline options="Timeline 1"></SpawnTimeline>
-		<TargetSelector options="Radius,Group"></TargetSelector></STRINGLIST>
+		<TargetSelector options="Radius,Group,Melee"></TargetSelector></STRINGLIST>
 	<POSITION>
 		<POSITION_TEMPLATE></POSITION_TEMPLATE>
 		<ProjectileTargetPosition></ProjectileTargetPosition></POSITION>
