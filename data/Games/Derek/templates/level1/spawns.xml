@@ -1,0 +1,18 @@
+<?xml version="1.0"?><map>
+  <entry>
+    <string>Timeline 1</string>
+    <backEnd.GameEngine.Engine.Spawning.SpawnQueueInstantiator>
+      <mySpawnQueue>
+        <backEnd.GameEngine.Engine.Spawning.SpawnDataImpl>
+          <mySpawnable>dh_enemyheli</mySpawnable>
+          <myFrequency>5.0</myFrequency>
+          <myDelay>6.0</myDelay>
+          <mySpawns>18</mySpawns>
+          <startingSpawns>20</startingSpawns>
+          <recentSpawn>false</recentSpawn>
+        </backEnd.GameEngine.Engine.Spawning.SpawnDataImpl>
+      </mySpawnQueue>
+      <myCurrentSpawn>0</myCurrentSpawn>
+    </backEnd.GameEngine.Engine.Spawning.SpawnQueueInstantiator>
+  </entry>
+</map>
