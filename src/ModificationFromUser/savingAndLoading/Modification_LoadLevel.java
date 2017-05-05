@@ -19,6 +19,7 @@ public class Modification_LoadLevel implements ModificationFromUser
 	@Override
 	public void invoke(Model myModel) throws Exception
 	{
+		myModel.getGameProcessController().pause();
 		File fileToLoad = load(myModel);
 		if(fileToLoad != null){
 			myModel.getGameLoader().accept(fileToLoad);
