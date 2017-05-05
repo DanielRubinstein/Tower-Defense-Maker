@@ -81,7 +81,7 @@ public class SpawnTabPane implements SkeletonObject {
 
 	private void createNewTimelineTab() {
 		Integer tabID = nextTimelineIndex();
-		System.out.println(tabID);
+		//System.out.println(tabID);
 		String tabName = "Timeline " + tabID;
 		myView.sendUserModification(new Modification_AddSpawnQueue(tabName));
 		createNewTimelineTab(tabName, mySpawnQueues.get(tabName));

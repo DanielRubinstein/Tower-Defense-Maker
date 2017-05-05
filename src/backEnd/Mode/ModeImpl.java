@@ -72,7 +72,7 @@ public class ModeImpl implements ModeReader, Mode{
 	
 	@Override
 	public void toggleUserMode(){
-		System.out.println("MODE CHANGE");
+		//System.out.println("MODE CHANGE");
 		if(currUserMode.equals(strResources.getFromStringConstants("AUTHOR"))){
 			currUserMode = strResources.getFromStringConstants("PLAYER");
 		} else if (currUserMode.equals(strResources.getFromStringConstants("PLAYER"))){
@@ -115,7 +115,7 @@ public class ModeImpl implements ModeReader, Mode{
 	}
 	
 	private void notifyObservers() {
-		System.out.println("Notifying Observers within ModeImpl " + observers);
+		//System.out.println("Notifying Observers within ModeImpl " + observers);
 		for(SerializableObserver o : observers){
 			o.update(null, null);
 		}

@@ -31,7 +31,7 @@ public class Modification_RemoveSpawnQueue implements ModificationFromUser{
 		if (spawnQueues.containsKey(mySpawnQueueName)) {
 			spawnQueues.remove(mySpawnQueueName);
 		} else {
-			System.out.println("ERROR: SPAWN QUEUE ID NOT THERE TO REMOVE");
+			throw new Exception("Spawn Timeline To Be Removed Not Found");
 		}
 	}
 
