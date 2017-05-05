@@ -57,7 +57,7 @@ public class SpawnDataImpl implements SpawnData {
 	@Override
 	public void setSpawns(int mySpawns) {
 		this.mySpawns = mySpawns;
-		this.startingSpawns = mySpawns;
+	
 	}
 
 	@Override
@@ -74,6 +74,12 @@ public class SpawnDataImpl implements SpawnData {
 	public void setStartingIterations() {
 		mySpawns = startingSpawns;
 		
+	}
+
+	@Override
+	public void setStartingSpawns(int spawns) {
+		// TODO Auto-generated method stub
+		this.startingSpawns = spawns;
 	}
 
 }
