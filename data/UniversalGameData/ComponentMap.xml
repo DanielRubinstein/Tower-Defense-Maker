@@ -412,12 +412,15 @@
       <myAccessPermissions class="backEnd.GameData.State.AccessPermissionsImpl">
         <userModePermissions>
           <string>AUTHOR</string>
+          <string>PLAYER</string>
         </userModePermissions>
         <gameModePermissions>
           <string>DEFAULT</string>
+          <string>Daniel</string>
         </gameModePermissions>
         <levelModePermissions>
           <string>DEFAULT</string>
+          <string>Space Salad</string>
         </levelModePermissions>
         <strResources/>
       </myAccessPermissions>
