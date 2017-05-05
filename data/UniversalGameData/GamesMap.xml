@@ -1,5 +1,15 @@
 <?xml version="1.0"?><map>
   <entry>
+    <string>c</string>
+    <list/>
+  </entry>
+  <entry>
+    <string>derektest</string>
+    <list>
+      <string>level1</string>
+    </list>
+  </entry>
+  <entry>
     <string>newPlayerStatusXML</string>
     <list>
       <string>level1</string>
