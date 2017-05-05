@@ -120,7 +120,9 @@ public class ProjectileEngine implements Engine {
 			if ((target.getAttribute(TYPE).getValue().equals(toHit.getAttribute(TYPE).getValue()))) {
 				toHit.setAttributeValue(HEALTH, toHit.<Integer>getAttribute(HEALTH).getValue() - 
 						projectile.<Integer>getAttribute(FIRE_DAMAGE).getValue());
+
 				//target.setAttributeValue("Size", (target.<Double>getAttribute("Size").getValue())*NUMERIC_RESOURCES.getFromSizing("ComponentReductionFactor"));
+
 				if(projectile.<Double>getAttribute(SLOW_TIME).getValue() > toHit.<Double>getAttribute(SLOW_TIME).getValue()){
 					toHit.setAttributeValue(SPEED, projectile.<Double>getAttribute(SLOW_FACTOR).getValue()
 						* toHit.<Double>getAttribute(MAX_SPEED).getValue());

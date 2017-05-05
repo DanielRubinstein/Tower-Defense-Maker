@@ -54,7 +54,7 @@ public class GameProcessController {
 		engineStatus = EngineStatus.RUNNING;
 		engineStatusProperty.set(engineStatus.toString());
 		animation.play();
-		System.out.println(this.getClass().getSimpleName() + ": GAME STARTED");
+		//System.out.println(this.getClass().getSimpleName() + ": GAME STARTED");
 	}
 
 	/**
@@ -89,6 +89,6 @@ public class GameProcessController {
 		animation.pause();
 		engineStatus = EngineStatus.PAUSED;
 		engineStatusProperty.set(engineStatus.toString());
-		System.out.println(this.getClass().getSimpleName() + ": GAME PAUSED");
+		//System.out.println(this.getClass().getSimpleName() + ": GAME PAUSED");
 	}
 }
