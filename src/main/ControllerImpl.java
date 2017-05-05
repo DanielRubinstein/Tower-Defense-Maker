@@ -36,14 +36,21 @@ public class ControllerImpl implements Controller {
 					try {
 						executeInteraction(m);
 						//System.out.println("In Controller - Modification from fE to bE executed");
+					} catch (ConcurrentModificationException e){
+						// do nothing
+						// this occurs a lot because of the way we save
+						// we have not found an issue with it though
 					} catch (Exception e) {
-						//e.printStackTrace();
 						ErrorDialog errDia = new ErrorDialog();
 						String eMessage = "";
 						if(e.getMessage() != null){
 							eMessage = e.getMessage();
 						} else {
-							eMessage = e.getCause().getMessage();
+							try{
+								eMessage = e.getCause().getMessage();
+							} catch (NullPointerException nullE){
+								eMessage = e.toString();
+							}	
 						}
 						errDia.create("InGame Error", eMessage);
 					}
