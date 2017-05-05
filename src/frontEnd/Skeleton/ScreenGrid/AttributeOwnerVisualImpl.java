@@ -70,6 +70,7 @@ public class AttributeOwnerVisualImpl implements AttributeOwnerVisual{
 	
 	private void setImage(String newImagePath){
 		myImagePath = newImagePath;
+		System.out.println(newImagePath);
 		Image image = new Image(getClass().getClassLoader().getResourceAsStream(myImagePath));
 		myImage.setImage(image);
 	}
