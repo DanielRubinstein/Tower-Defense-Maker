@@ -1,15 +1,5 @@
 <?xml version="1.0"?><map>
   <entry>
-    <string>hi</string>
-    <list>
-      <string>tem</string>
-    </list>
-  </entry>
-  <entry>
-    <string>SimpleGame</string>
-    <list/>
-  </entry>
-  <entry>
     <string>Christian</string>
     <list>
       <string>Christian1</string>
@@ -33,16 +23,7 @@
     <list>
       <string>BeachScene</string>
       <string>Port Royal</string>
-      <string>Port Royal v2</string>
     </list>
-  </entry>
-  <entry>
-    <string>l</string>
-    <list/>
-  </entry>
-  <entry>
-    <string>NewGame</string>
-    <list/>
   </entry>
   <entry>
     <string>Riley</string>
@@ -50,9 +31,5 @@
       <string>Level 1</string>
       <string>Level 2</string>
     </list>
-  </entry>
-  <entry>
-    <string>ji</string>
-    <list/>
   </entry>
 </map>
