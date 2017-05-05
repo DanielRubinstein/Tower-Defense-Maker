@@ -40,13 +40,7 @@ public class AttributeOwnerVisualImpl implements AttributeOwnerVisual{
 
 	private void initializeImage() {
 		myImage = new ImageView();
-		try{
-			setImage(myAttributeOwnerReader.<String>getAttributeReader(IMAGE_ATTRIBUTE).getValue());
-			setPosition(myAttributeOwnerReader.<Point2D>getAttributeReader(POSITION_ATTRIBUTE).getValue());
-
-		}catch (NullPointerException e){
-			
-		}
+		setImage(myAttributeOwnerReader.<String>getAttributeReader(IMAGE_ATTRIBUTE).getValue());
 		try{
 			Double size = myAttributeOwnerReader.<Double>getAttributeReader(SIZE_ATTRIBUTE).getValue();
 			setSize(size);
@@ -55,6 +49,8 @@ public class AttributeOwnerVisualImpl implements AttributeOwnerVisual{
 		} catch (MissingResourceException e){
 			//means we are dealing with something that does not have size
 		}
+		setPosition(myAttributeOwnerReader.<Point2D>getAttributeReader(POSITION_ATTRIBUTE).getValue());
+
 
 	}
 
