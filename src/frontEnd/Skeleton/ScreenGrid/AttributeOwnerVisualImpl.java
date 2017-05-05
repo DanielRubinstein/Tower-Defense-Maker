@@ -49,8 +49,9 @@ public class AttributeOwnerVisualImpl implements AttributeOwnerVisual{
 		} catch (MissingResourceException e){
 			//means we are dealing with something that does not have size
 		}
-
 		setPosition(myAttributeOwnerReader.<Point2D>getAttributeReader(POSITION_ATTRIBUTE).getValue());
+
+
 	}
 
 	private void setSize(Double value) {
