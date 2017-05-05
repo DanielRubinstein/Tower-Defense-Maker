@@ -41,9 +41,9 @@ Hour estimate: a butt load
 
 ## Outside Resources
 
-[Stack Overflow](https://stackoverflow.com/)
-[Java Tutorial](https://www.tutorialspoint.com/java/)
-[Java Docs](https://docs.oracle.com/javase/8/docs/)
+1. [Stack Overflow](https://stackoverflow.com/)
+2. [Java Tutorial](https://www.tutorialspoint.com/java/)
+3. [Java Docs](https://docs.oracle.com/javase/8/docs/)
 
 files used to start the project (the class(es) containing main)
 files used to test the project
