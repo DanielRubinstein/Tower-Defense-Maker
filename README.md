@@ -16,9 +16,9 @@
 
 ## Numbers
 
-This project began: 03/23/2017
-This project finished: 05/07/2017
-Hour estimate: a butt load
+* This project began: 03/23/2017
+* This project finished: 05/07/2017
+* Hour estimate: a butt load
 
 ## Roles
 
@@ -45,10 +45,30 @@ Hour estimate: a butt load
 2. [Java Tutorial](https://www.tutorialspoint.com/java/)
 3. [Java Docs](https://docs.oracle.com/javase/8/docs/)
 
-files used to start the project (the class(es) containing main)
-files used to test the project
-any data or resource files required by the project (including format of non-standard files)
-any information about using the program (i.e., command-line/applet arguments, key inputs, interesting example data files, or easter eggs)
+## Files
+
+* To start: The class Main.java can be run to launch the program.
+* To test: There are several sample games created and tested by the developers
+* Required files: no files or programs required outside the program itself. The file format for saved games is .xml
+
+## Useful Information
+
+any information about using the program 
+
+(i.e., command-line/applet arguments, key inputs, interesting example data files, or easter eggs)
+
+## Known Issues
+
 any known bugs, crashes, or problems with the project's functionality
+
+## Extra Features
+
 any extra features included in the project
+
+## Assignment Impressions
+
 your impressions of the assignment to help improve it in the future
+
+
+
+
