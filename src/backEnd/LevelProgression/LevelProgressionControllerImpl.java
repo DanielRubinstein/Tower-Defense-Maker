@@ -60,7 +60,7 @@ public class LevelProgressionControllerImpl
 
 	@Override
 	public List<String> getLevelList(String gameName) {
-		System.out.println(gamesMap);
+		//System.out.println(gamesMap);
 		return gamesMap.get(gameName);
 	}
 
@@ -70,7 +70,7 @@ public class LevelProgressionControllerImpl
 
 	public List<String> getDirList(String filePath) {
 		File file = new File(filePath);
-		System.out.println(filePath);
+		//System.out.println(filePath);
 		String[] directories = file.list(new FilenameFilter() {
 			@Override
 			public boolean accept(File current, String name) {
@@ -124,7 +124,7 @@ public class LevelProgressionControllerImpl
 		List<String> levelPathsList = gamesMap.get(gameName);
 		if (!levelPathsList.contains(level))
 			levelPathsList.add(level);
-		System.out.println("adding level");
+		//System.out.println("adding level");
 		gamesMap.put(gameName, levelPathsList);
 		saveGamesMap();
 	}

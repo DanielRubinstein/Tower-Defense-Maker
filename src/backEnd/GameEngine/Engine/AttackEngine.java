@@ -108,8 +108,13 @@ public class AttackEngine implements Engine {
 			return targets;
 		} else if(targetType.equals("Group")){
 			if(!tileGroupsInitialized){
-				myTileGroups = myGameData.getState().getTileGrid().getTileGroups();
-				tileGroupsInitialized = true;
+				try {
+					myTileGroups = myGameData.getState().getTileGrid().getTileGroups();
+					tileGroupsInitialized = true;
+				} catch (Exception e) {
+					//System.out.println("Error producing Tile Group");
+					return new ArrayList<Component>();
+				}
 			}
 			for(Set<Tile> tempSet : myTileGroups){
 				if(tempSet.contains(tileGrid.getTileByScreenPosition(attacker.<Point2D>getAttribute("Position").getValue()))){
@@ -126,7 +131,7 @@ public class AttackEngine implements Engine {
 			
 			return null;
 		} else if (targetType.equals("Radius")) {
-			return myComponentGraph.getComponentsWithinRadius(attacker,(double) attacker.getAttribute(STRING_RESOURCES.getFromAttributeNames("FireRadius")).getValue());
+			return myComponentGraph.getComponentsWithinRadius(attacker, attacker.<Double>getAttribute(STRING_RESOURCES.getFromAttributeNames("FireRadius")).getValue());
 		} else {
 			return new ArrayList<Component>();
 		}

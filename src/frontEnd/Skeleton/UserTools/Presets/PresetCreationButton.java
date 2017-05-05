@@ -63,7 +63,7 @@ public class PresetCreationButton implements SkeletonObject {
 	/*
 	public void disableInPlayerMode(Consumer<Boolean> disableConsumer) {
 		myRoot.disableProperty().bind(myView.getBooleanAuthorModeProperty().not());
-		System.out.println("button disable bound");
+		//System.out.println("button disable bound");
 		myRoot.disableProperty().addListener((a, b, c) -> {
 			disableConsumer.accept(c);
 		});

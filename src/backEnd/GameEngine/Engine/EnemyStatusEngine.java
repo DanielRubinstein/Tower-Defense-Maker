@@ -60,9 +60,9 @@ public class EnemyStatusEngine implements Engine {
 	private void updateSlowed(double stepTime, Component component) {
 		double slowTime = component.<Double>getAttribute("SlowTime").getValue();
 		double normalSpeed = component.<Double>getAttribute("Speed").getValue();
-		System.out.println(" slow time " +slowTime);
+		//System.out.println(" slow time " +slowTime);
 		if (slowTime > 0) {
-			System.out.println(" **** updating slowed");
+			//System.out.println(" **** updating slowed");
 			if (slowTime - stepTime < 0) { // If slow should only do partial
 				component.setAttributeValue(STRING_RESOURCES.getFromAttributeNames("SlowTime"), new Double(0));
 				component.setAttributeValue(STRING_RESOURCES.getFromAttributeNames("SlowFactor"), new Double(0));
