@@ -1,5 +1,25 @@
 <?xml version="1.0"?><map>
   <entry>
+    <string>SimpleDemo</string>
+    <list>
+      <string>WizardOfOz</string>
+    </list>
+  </entry>
+  <entry>
+    <string>newPlayerStatusXML</string>
+    <list>
+      <string>level1</string>
+    </list>
+  </entry>
+  <entry>
+     <string>FinalComplexGame</string>
+    <list>
+     <string>FINAL_LEVEL2</string>
+     <string>level3_pickthisone</string>
+     <string>v2.0</string>
+    </list>
+  </entry>
+  <entry>
     <string>cam_PvZ_Final</string>
     <list>
       <string>cam_PvZ_1.4</string>
