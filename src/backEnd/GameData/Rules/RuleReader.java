@@ -14,6 +14,7 @@ public interface RuleReader {
 
 	public String getDisplayString();
 	
+	@Deprecated
 	public void printRule();
 
 }

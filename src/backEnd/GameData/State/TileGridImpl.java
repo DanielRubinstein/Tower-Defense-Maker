@@ -228,12 +228,12 @@ public class TileGridImpl implements TileGrid {
 	}
 	
 	@Override
-	public List<Set<Tile>> getTileGroups(){
+	public List<Set<Tile>> getTileGroups() throws Exception{
 		buildTileGroups();
 		return tileGroups;
 	}
 	
-	private void buildTileGroups() {
+	private void buildTileGroups() throws Exception {
 		tileGroups = new ArrayList<Set<Tile>>();
 		Tile[][] tileGridThing = new Tile[numColsInGrid][numRowsInGrid];
 		for(Point2D point2d : tileGrid.keySet()){
@@ -243,16 +243,14 @@ public class TileGridImpl implements TileGrid {
 			//System.out.println(this.getClass().getSimpleName() + ": Width: " + getTileWidth() + ", Height: " + getTileHeight());
 			//System.out.println(this.getClass().getSimpleName() + ": R,C: " + rowEq + ", " + colEq);
 			if(tileGridThing[colEq][rowEq] != null || rowEq < 0 || colEq < 0 || rowEq >= getNumRowsInGrid() || colEq >= getNumColsInGrid()){
-				System.out.println(this.getClass().getSimpleName() + ": Error Thing");
-				return;
+				throw new Exception("Error Building Tile Groups");
 			}
 			tileGridThing[colEq][rowEq] = tileGrid.get(point2d);
 		}
 		for (int i = 0; i < numRowsInGrid; i++) {
 			for (int j = 0; j < numColsInGrid; j++) {
 				if (tileGridThing[j][i] == null) {
-					System.out.println(this.getClass().getSimpleName() + ": Error stuff");
-					continue;
+					throw new Exception("Error Building Tile Groups");
 				}
 				Set<Tile> tempSet = new HashSet<Tile>();
 				tempSet.add(tileGridThing[j][i]);

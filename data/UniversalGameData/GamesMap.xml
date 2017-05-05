@@ -8,6 +8,14 @@
     <list/>
   </entry>
   <entry>
+    <string>ComplexGameDemo</string>
+    <list>
+      <string>Level 1</string>
+      <string>Level 2</string>
+      <string>Level 3</string>
+    </list>
+  </entry>
+  <entry>
     <string>vfff</string>
     <list/>
   </entry>
@@ -20,6 +28,14 @@
     <list/>
   </entry>
   <entry>
+    <string>Daniel</string>
+    <list>
+      <string>Space Salad</string>
+      <string>Space Sald</string>
+      <string>SpaceSalad</string>
+    </list>
+  </entry>
+  <entry>
     <string>asdfsd</string>
     <list/>
   </entry>
@@ -28,14 +44,14 @@
     <list/>
   </entry>
   <entry>
-    <string>asf</string>
-    <list/>
+    <string>SimpleGameDemo</string>
+    <list>
+      <string>WizardOfOz</string>
+    </list>
   </entry>
   <entry>
-    <string>newPlayerStatusXML</string>
-    <list>
-      <string>level1</string>
-    </list>
+    <string>asf</string>
+    <list/>
   </entry>
   <entry>
     <string>cam_PvZ_Final</string>
@@ -83,7 +99,7 @@
   <entry>
     <string>Miguel&apos;s Game</string>
     <list>
-      <string>BeachScene</string>
+      <string>Port Royal</string>
     </list>
   </entry>
   <entry>

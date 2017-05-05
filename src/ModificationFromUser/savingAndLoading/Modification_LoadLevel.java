@@ -4,7 +4,6 @@ import java.io.File;
 
 import ModificationFromUser.ModificationFromUser;
 import backEnd.Model;
-import backEnd.ModelImpl;
 import javafx.stage.DirectoryChooser;
 import javafx.stage.Stage;
 
@@ -31,16 +30,17 @@ public class Modification_LoadLevel implements ModificationFromUser
 	private File load(Model myModel)
 	{
 		DirectoryChooser chooser = new DirectoryChooser();
-		
+		/*
 		switch (myModel.getMode().getUserMode())
 		{
 		case "PLAYER":
-			chooser.setInitialDirectory(new File("data/games/" + myModel.getMode().getGameMode() + "/saves/"));
+			chooser.setInitialDirectory(new File("data/Games/" + myModel.getMode().getGameMode() + "/saves/"));
 			break;
 		case "AUTHOR":
-			chooser.setInitialDirectory(new File("data/games/"+ myModel.getMode().getGameMode() + "/templates/"));
+			chooser.setInitialDirectory(new File("data/Games/"+ myModel.getMode().getGameMode() + "/templates/"));
 		}
-	
+		*/
+		chooser.setInitialDirectory(new File("data/Games/"+ myModel.getMode().getGameMode()));
 		return chooser.showDialog(new Stage());
 		
 		

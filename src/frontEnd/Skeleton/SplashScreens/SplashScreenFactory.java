@@ -20,9 +20,9 @@ public class SplashScreenFactory {
 	}
 	
 	public SplashScreenReader get(SplashScreenType type, String mode, PlayerStatusReader playerStatus){
-		System.out.println(type.toString());
+		//System.out.println(type.toString());
 		SplashScreen mySS = splashMap.get(type);
-		System.out.println(type.toString());
+		//System.out.println(type.toString());
 		if(mode.equalsIgnoreCase("Author")){
 			mySS.addRestartLevelButton();
 		}
