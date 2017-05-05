@@ -1,11 +1,5 @@
 <?xml version="1.0"?><map>
   <entry>
-    <string>newPlayerStatusXML</string>
-    <list>
-      <string>level1</string>
-    </list>
-  </entry>
-  <entry>
     <string>cam_PvZ_Final</string>
     <list>
       <string>cam_PvZ_1.4</string>
@@ -54,12 +48,6 @@
     <string>Juan</string>
     <list>
       <string>level1</string>
-    </list>
-  </entry>
-  <entry>
-    <string>Miguel&apos;s Game</string>
-    <list>
-      <string>BeachScene</string>
     </list>
   </entry>
   <entry>
