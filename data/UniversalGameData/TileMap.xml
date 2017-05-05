@@ -450,6 +450,96 @@
     </backEnd.GameData.State.TileImpl>
   </entry>
   <entry>
+    <string>mra_Grass</string>
+    <backEnd.GameData.State.TileImpl>
+      <myAccessPerm class="backEnd.GameData.State.AccessPermissionsImpl">
+        <userModePermissions>
+          <string>AUTHOR</string>
+        </userModePermissions>
+        <gameModePermissions>
+          <string>DEFAULT</string>
+        </gameModePermissions>
+        <levelModePermissions>
+          <string>DEFAULT</string>
+        </levelModePermissions>
+        <strResources/>
+      </myAccessPerm>
+      <myAttrData>
+        <myAttributes>
+          <entry>
+            <string>ImageFile</string>
+            <backEnd.Attribute.AttributeImpl>
+              <myValue class="string">resources/images/Tiles/mra_Grass.png</myValue>
+              <myName>ImageFile</myName>
+            </backEnd.Attribute.AttributeImpl>
+          </entry>
+          <entry>
+            <string>BuildCapacity</string>
+            <backEnd.Attribute.AttributeImpl>
+              <myValue class="int">1</myValue>
+              <myParamList class="java.util.Arrays$ArrayList">
+                <a class="java.lang.Integer-array">
+                  <int>0</int>
+                  <int>20</int>
+                  <int>1</int>
+                  <int>1</int>
+                </a>
+              </myParamList>
+              <myName>BuildCapacity</myName>
+            </backEnd.Attribute.AttributeImpl>
+          </entry>
+          <entry>
+            <string>Position</string>
+            <backEnd.Attribute.AttributeImpl>
+              <myValue class="javafx.geometry.Point2D">
+                <x>0.0</x>
+                <y>0.0</y>
+                <hash>0</hash>
+              </myValue>
+              <myName>Position</myName>
+            </backEnd.Attribute.AttributeImpl>
+          </entry>
+          <entry>
+            <string>SpawnTimeline</string>
+            <backEnd.Attribute.AttributeImpl>
+              <myValue class="string"></myValue>
+              <myParamList class="java.util.Arrays$ArrayList">
+                <a class="string-array">
+                  <string>Timeline 1</string>
+                </a>
+              </myParamList>
+              <myName>SpawnTimeline</myName>
+            </backEnd.Attribute.AttributeImpl>
+          </entry>
+          <entry>
+            <string>GoalTile</string>
+            <backEnd.Attribute.AttributeImpl>
+              <myValue class="boolean">false</myValue>
+              <myName>GoalTile</myName>
+            </backEnd.Attribute.AttributeImpl>
+          </entry>
+          <entry>
+            <string>MoveDirection</string>
+            <backEnd.Attribute.AttributeImpl>
+              <myValue class="string"></myValue>
+              <myParamList class="java.util.Arrays$ArrayList">
+                <a class="string-array">
+                  <string>Up</string>
+                  <string>Down</string>
+                  <string>Left</string>
+                  <string>Right</string>
+                </a>
+              </myParamList>
+              <myName>MoveDirection</myName>
+            </backEnd.Attribute.AttributeImpl>
+          </entry>
+        </myAttributes>
+        <observers/>
+      </myAttrData>
+      <observers/>
+    </backEnd.GameData.State.TileImpl>
+  </entry>
+  <entry>
     <string>dpr_empty</string>
     <backEnd.GameData.State.TileImpl>
       <myAccessPerm class="backEnd.GameData.State.AccessPermissionsImpl">
@@ -810,6 +900,96 @@
     </backEnd.GameData.State.TileImpl>
   </entry>
   <entry>
+    <string>mra_SuperSickHome</string>
+    <backEnd.GameData.State.TileImpl>
+      <myAccessPerm class="backEnd.GameData.State.AccessPermissionsImpl">
+        <userModePermissions>
+          <string>AUTHOR</string>
+        </userModePermissions>
+        <gameModePermissions>
+          <string>DEFAULT</string>
+        </gameModePermissions>
+        <levelModePermissions>
+          <string>DEFAULT</string>
+        </levelModePermissions>
+        <strResources/>
+      </myAccessPerm>
+      <myAttrData>
+        <myAttributes>
+          <entry>
+            <string>ImageFile</string>
+            <backEnd.Attribute.AttributeImpl>
+              <myValue class="string">resources/images/Tools/logo.png</myValue>
+              <myName>ImageFile</myName>
+            </backEnd.Attribute.AttributeImpl>
+          </entry>
+          <entry>
+            <string>BuildCapacity</string>
+            <backEnd.Attribute.AttributeImpl>
+              <myValue class="int">1</myValue>
+              <myParamList class="java.util.Arrays$ArrayList">
+                <a class="java.lang.Integer-array">
+                  <int>0</int>
+                  <int>20</int>
+                  <int>1</int>
+                  <int>1</int>
+                </a>
+              </myParamList>
+              <myName>BuildCapacity</myName>
+            </backEnd.Attribute.AttributeImpl>
+          </entry>
+          <entry>
+            <string>Position</string>
+            <backEnd.Attribute.AttributeImpl>
+              <myValue class="javafx.geometry.Point2D">
+                <x>0.0</x>
+                <y>0.0</y>
+                <hash>0</hash>
+              </myValue>
+              <myName>Position</myName>
+            </backEnd.Attribute.AttributeImpl>
+          </entry>
+          <entry>
+            <string>SpawnTimeline</string>
+            <backEnd.Attribute.AttributeImpl>
+              <myValue class="string"></myValue>
+              <myParamList class="java.util.Arrays$ArrayList">
+                <a class="string-array">
+                  <string>Timeline 1</string>
+                </a>
+              </myParamList>
+              <myName>SpawnTimeline</myName>
+            </backEnd.Attribute.AttributeImpl>
+          </entry>
+          <entry>
+            <string>GoalTile</string>
+            <backEnd.Attribute.AttributeImpl>
+              <myValue class="boolean">false</myValue>
+              <myName>GoalTile</myName>
+            </backEnd.Attribute.AttributeImpl>
+          </entry>
+          <entry>
+            <string>MoveDirection</string>
+            <backEnd.Attribute.AttributeImpl>
+              <myValue class="string"></myValue>
+              <myParamList class="java.util.Arrays$ArrayList">
+                <a class="string-array">
+                  <string>Up</string>
+                  <string>Down</string>
+                  <string>Left</string>
+                  <string>Right</string>
+                </a>
+              </myParamList>
+              <myName>MoveDirection</myName>
+            </backEnd.Attribute.AttributeImpl>
+          </entry>
+        </myAttributes>
+        <observers/>
+      </myAttrData>
+      <observers/>
+    </backEnd.GameData.State.TileImpl>
+  </entry>
+  <entry>
     <string>dpr_right</string>
     <backEnd.GameData.State.TileImpl>
       <myAccessPerm class="backEnd.GameData.State.AccessPermissionsImpl">
@@ -882,6 +1062,96 @@
             <string>MoveDirection</string>
             <backEnd.Attribute.AttributeImpl>
               <myValue class="string">Right</myValue>
+              <myParamList class="java.util.Arrays$ArrayList">
+                <a class="string-array">
+                  <string>Up</string>
+                  <string>Down</string>
+                  <string>Left</string>
+                  <string>Right</string>
+                </a>
+              </myParamList>
+              <myName>MoveDirection</myName>
+            </backEnd.Attribute.AttributeImpl>
+          </entry>
+        </myAttributes>
+        <observers/>
+      </myAttrData>
+      <observers/>
+    </backEnd.GameData.State.TileImpl>
+  </entry>
+  <entry>
+    <string>mra_sand</string>
+    <backEnd.GameData.State.TileImpl>
+      <myAccessPerm class="backEnd.GameData.State.AccessPermissionsImpl">
+        <userModePermissions>
+          <string>AUTHOR</string>
+        </userModePermissions>
+        <gameModePermissions>
+          <string>DEFAULT</string>
+        </gameModePermissions>
+        <levelModePermissions>
+          <string>DEFAULT</string>
+        </levelModePermissions>
+        <strResources/>
+      </myAccessPerm>
+      <myAttrData>
+        <myAttributes>
+          <entry>
+            <string>ImageFile</string>
+            <backEnd.Attribute.AttributeImpl>
+              <myValue class="string">resources/images/Tiles/mra_Sand.jpg</myValue>
+              <myName>ImageFile</myName>
+            </backEnd.Attribute.AttributeImpl>
+          </entry>
+          <entry>
+            <string>BuildCapacity</string>
+            <backEnd.Attribute.AttributeImpl>
+              <myValue class="int">0</myValue>
+              <myParamList class="java.util.Arrays$ArrayList">
+                <a class="java.lang.Integer-array">
+                  <int>0</int>
+                  <int>20</int>
+                  <int>1</int>
+                  <int>1</int>
+                </a>
+              </myParamList>
+              <myName>BuildCapacity</myName>
+            </backEnd.Attribute.AttributeImpl>
+          </entry>
+          <entry>
+            <string>Position</string>
+            <backEnd.Attribute.AttributeImpl>
+              <myValue class="javafx.geometry.Point2D">
+                <x>0.0</x>
+                <y>0.0</y>
+                <hash>0</hash>
+              </myValue>
+              <myName>Position</myName>
+            </backEnd.Attribute.AttributeImpl>
+          </entry>
+          <entry>
+            <string>SpawnTimeline</string>
+            <backEnd.Attribute.AttributeImpl>
+              <myValue class="string"></myValue>
+              <myParamList class="java.util.Arrays$ArrayList">
+                <a class="string-array">
+                  <string>Timeline 1</string>
+                </a>
+              </myParamList>
+              <myName>SpawnTimeline</myName>
+            </backEnd.Attribute.AttributeImpl>
+          </entry>
+          <entry>
+            <string>GoalTile</string>
+            <backEnd.Attribute.AttributeImpl>
+              <myValue class="boolean">false</myValue>
+              <myName>GoalTile</myName>
+            </backEnd.Attribute.AttributeImpl>
+          </entry>
+          <entry>
+            <string>MoveDirection</string>
+            <backEnd.Attribute.AttributeImpl>
+              <myValue class="string"></myValue>
               <myParamList class="java.util.Arrays$ArrayList">
                 <a class="string-array">
                   <string>Up</string>
@@ -1332,6 +1602,96 @@
             <string>MoveDirection</string>
             <backEnd.Attribute.AttributeImpl>
               <myValue class="string">Left</myValue>
+              <myParamList class="java.util.Arrays$ArrayList">
+                <a class="string-array">
+                  <string>Up</string>
+                  <string>Down</string>
+                  <string>Left</string>
+                  <string>Right</string>
+                </a>
+              </myParamList>
+              <myName>MoveDirection</myName>
+            </backEnd.Attribute.AttributeImpl>
+          </entry>
+        </myAttributes>
+        <observers/>
+      </myAttrData>
+      <observers/>
+    </backEnd.GameData.State.TileImpl>
+  </entry>
+  <entry>
+    <string>mra_sea</string>
+    <backEnd.GameData.State.TileImpl>
+      <myAccessPerm class="backEnd.GameData.State.AccessPermissionsImpl">
+        <userModePermissions>
+          <string>AUTHOR</string>
+        </userModePermissions>
+        <gameModePermissions>
+          <string>DEFAULT</string>
+        </gameModePermissions>
+        <levelModePermissions>
+          <string>DEFAULT</string>
+        </levelModePermissions>
+        <strResources/>
+      </myAccessPerm>
+      <myAttrData>
+        <myAttributes>
+          <entry>
+            <string>ImageFile</string>
+            <backEnd.Attribute.AttributeImpl>
+              <myValue class="string">resources/images/Tiles/mra21_Water.png</myValue>
+              <myName>ImageFile</myName>
+            </backEnd.Attribute.AttributeImpl>
+          </entry>
+          <entry>
+            <string>BuildCapacity</string>
+            <backEnd.Attribute.AttributeImpl>
+              <myValue class="int">0</myValue>
+              <myParamList class="java.util.Arrays$ArrayList">
+                <a class="java.lang.Integer-array">
+                  <int>0</int>
+                  <int>20</int>
+                  <int>1</int>
+                  <int>1</int>
+                </a>
+              </myParamList>
+              <myName>BuildCapacity</myName>
+            </backEnd.Attribute.AttributeImpl>
+          </entry>
+          <entry>
+            <string>Position</string>
+            <backEnd.Attribute.AttributeImpl>
+              <myValue class="javafx.geometry.Point2D">
+                <x>0.0</x>
+                <y>0.0</y>
+                <hash>0</hash>
+              </myValue>
+              <myName>Position</myName>
+            </backEnd.Attribute.AttributeImpl>
+          </entry>
+          <entry>
+            <string>SpawnTimeline</string>
+            <backEnd.Attribute.AttributeImpl>
+              <myValue class="string"></myValue>
+              <myParamList class="java.util.Arrays$ArrayList">
+                <a class="string-array">
+                  <string>Timeline 1</string>
+                </a>
+              </myParamList>
+              <myName>SpawnTimeline</myName>
+            </backEnd.Attribute.AttributeImpl>
+          </entry>
+          <entry>
+            <string>GoalTile</string>
+            <backEnd.Attribute.AttributeImpl>
+              <myValue class="boolean">false</myValue>
+              <myName>GoalTile</myName>
+            </backEnd.Attribute.AttributeImpl>
+          </entry>
+          <entry>
+            <string>MoveDirection</string>
+            <backEnd.Attribute.AttributeImpl>
+              <myValue class="string"></myValue>
               <myParamList class="java.util.Arrays$ArrayList">
                 <a class="string-array">
                   <string>Up</string>
