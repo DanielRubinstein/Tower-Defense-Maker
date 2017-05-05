@@ -1714,7 +1714,7 @@
         <levelModePermissions>
           <string>DEFAULT</string>
           <string>Level3</string>
-          <string>level3_pickthisone</string>
+          <string>Level 3</string>
         </levelModePermissions>
         <strResources/>
       </myAccessPermissions>
@@ -4729,7 +4729,7 @@
         <levelModePermissions>
           <string>DEFAULT</string>
           <string>v1.1</string>
-          <string>v2.0</string>
+          <string>Level 1</string>
           <string>level2_FINAL</string>
         </levelModePermissions>
         <strResources/>
@@ -7744,7 +7744,7 @@
         </gameModePermissions>
         <levelModePermissions>
           <string>DEFAULT</string>
-          <string>FINAL_LEVEL2</string>
+          <string>Level 2</string>
         </levelModePermissions>
         <strResources/>
       </myAccessPermissions>
@@ -11619,8 +11619,8 @@
           <string>DEFAULT</string>
           <string>v1.3</string>
           <string>level2_FINAL</string>
-          <string>v2.0</string>
-          <string>FINAL_LEVEL2</string>
+          <string>Level 1</string>
+          <string>Level 2</string>
         </levelModePermissions>
         <strResources/>
       </myAccessPermissions>
@@ -13767,8 +13767,8 @@
         <levelModePermissions>
           <string>DEFAULT</string>
           <string>level2_FINAL</string>
-          <string>v2.0</string>
-          <string>FINAL_LEVEL2</string>
+          <string>Level 1</string>
+          <string>Level 2</string>
         </levelModePermissions>
         <strResources/>
       </myAccessPermissions>
@@ -14628,7 +14628,7 @@
         </gameModePermissions>
         <levelModePermissions>
           <string>DEFAULT</string>
-          <string>FINAL_LEVEL2</string>
+          <string>Level 2</string>
         </levelModePermissions>
         <strResources/>
       </myAccessPermissions>
@@ -18923,7 +18923,7 @@
         <levelModePermissions>
           <string>DEFAULT</string>
           <string>Level3</string>
-          <string>level3_pickthisone</string>
+          <string>Level 3</string>
         </levelModePermissions>
         <strResources/>
       </myAccessPermissions>
