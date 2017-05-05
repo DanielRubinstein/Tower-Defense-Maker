@@ -37,7 +37,7 @@ public class ControllerImpl implements Controller {
 						executeInteraction(m);
 						//System.out.println("In Controller - Modification from fE to bE executed");
 					} catch (Exception e) {
-						e.printStackTrace();
+						//e.printStackTrace();
 						ErrorDialog errDia = new ErrorDialog();
 						String eMessage = "";
 						if(e.getMessage() != null){
@@ -66,7 +66,7 @@ public class ControllerImpl implements Controller {
 			} catch (Exception e) {
 				ErrorDialog errDia = new ErrorDialog();
 				errDia.create("Cannot Load Game", e.getMessage());
-				e.printStackTrace();
+				//e.printStackTrace();
 			} 
 			
 		};

@@ -16,15 +16,15 @@ import backEnd.GameEngine.Engine.GameProcessController;
 
 public enum Modification_GameRemote implements ModificationFromUser {
 	PLAY(engine -> {
-		System.out.println("Invokable to PLAY GAME");
+		//System.out.println("Invokable to PLAY GAME");
 		engine.playAnimation();
 	}), PAUSE(engine -> {
 		if (!engine.getEngineStatus().get().equals("PAUSED")) {
-			System.out.println("Invokable to PAUSE GAME");
+			//System.out.println("Invokable to PAUSE GAME");
 			engine.pause();
 		}
 	}), FASTFORWARD(engine -> {
-		System.out.println("FASTFORWARD");
+		//System.out.println("FASTFORWARD");
 		// engine.fastforward();
 	});
 
