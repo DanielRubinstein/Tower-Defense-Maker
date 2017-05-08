@@ -2,6 +2,10 @@ package backEnd.GameData.Rules.EndCondition;
 
 import backEnd.GameData.GameData;
 
+/**
+ * @author Derek
+ *
+ */
 public class TimeEndCondition extends WinCondition{
 	
 	private static final double DEFAULT_TIME = 100;

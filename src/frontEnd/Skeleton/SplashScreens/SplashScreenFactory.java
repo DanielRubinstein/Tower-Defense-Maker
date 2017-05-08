@@ -8,6 +8,10 @@ import backEnd.LevelProgression.LevelProgressionControllerEditor;
 import backEnd.LevelProgression.LevelProgressionControllerReader;
 import javafx.event.Event;
 
+/**
+ * @author Derek
+ *
+ */
 public class SplashScreenFactory {
 	
 	private Map<SplashScreenType, SplashScreen> splashMap = new HashMap<SplashScreenType, SplashScreen>();

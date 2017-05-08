@@ -23,6 +23,10 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import resources.constants.StringResourceBundle;
 
+/**
+ * @author Derek
+ *
+ */
 public abstract class SplashScreenImpl implements SplashScreen {
 	private StringResourceBundle stringResourceBundle = new StringResourceBundle();
 	private GridPane myGP;

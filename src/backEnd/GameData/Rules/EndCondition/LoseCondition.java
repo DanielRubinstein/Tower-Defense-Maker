@@ -5,6 +5,10 @@ import backEnd.GameData.Rules.Rule;
 import backEnd.LevelProgression.LevelProgressionControllerEditor;
 import frontEnd.Skeleton.SplashScreens.SplashScreenType;
 
+/**
+ * @author Derek
+ *
+ */
 public abstract class LoseCondition extends Rule{
 	
 	

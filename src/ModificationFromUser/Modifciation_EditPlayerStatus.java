@@ -2,6 +2,10 @@ package ModificationFromUser;
 
 import backEnd.Model;
 
+/**
+ * @author Derek
+ *
+ */
 public class Modifciation_EditPlayerStatus implements ModificationFromUser {
 	private String myPlayerStatusKey;
 	private Double myNewValue;

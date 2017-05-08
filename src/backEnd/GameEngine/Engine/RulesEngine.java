@@ -4,6 +4,10 @@ import backEnd.GameData.GameData;
 import backEnd.GameData.Rules.Rule;
 import backEnd.LevelProgression.LevelProgressionControllerImpl;
 
+/**
+ * @author Derek
+ *
+ */
 public class RulesEngine implements Engine
 {
 	

@@ -8,6 +8,10 @@ import backEnd.Attribute.AttributeOwnerReader;
 import javafx.geometry.Point2D;
 import util.reflection.Reflection;
 
+/**
+ * @author Derek
+ *
+ */
 public class Modification_MoveAttributeOwner implements ModificationFromUser {
 	private AttributeOwnerReader myAOReader;
 	private Point2D newLoc;
