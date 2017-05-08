@@ -5,6 +5,10 @@ import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 
+/**
+ * @author Derek
+ *
+ */
 public class GameWinSplashScreen extends SplashScreenImpl {
 	public GameWinSplashScreen(EventHandler restartLevel, EventHandler restartGame){
 		super(restartLevel);

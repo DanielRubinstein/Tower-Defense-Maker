@@ -2,6 +2,10 @@ package backEnd.GameData.Rules.EndCondition;
 
 import backEnd.GameData.GameData;
 
+/**
+ * @author Derek
+ *
+ */
 public class KillCountCondition extends WinCondition {
 
 	private static final double DEFAULT_KILL_COUNT = 0;

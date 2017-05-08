@@ -1,5 +1,9 @@
 package backEnd.GameData.Rules;
 
+/**
+ * @author Derek
+ *
+ */
 public interface RuleReader {
 
 	public double getVal();

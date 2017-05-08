@@ -5,6 +5,10 @@ import java.util.ResourceBundle;
 import backEnd.GameData.GameData;
 import backEnd.LevelProgression.LevelProgressionControllerImpl;
 
+/**
+ * @author Derek
+ *
+ */
 public abstract class Rule implements RuleReader{
 
 	private double myVal;

@@ -2,6 +2,10 @@ package backEnd.GameData.Rules.EndCondition;
 
 import backEnd.GameData.GameData;
 
+/**
+ * @author Derek
+ *
+ */
 public class HealthLoseCondition extends LoseCondition {
 
 	private static final double DEFAULT_HEALTH = 0;

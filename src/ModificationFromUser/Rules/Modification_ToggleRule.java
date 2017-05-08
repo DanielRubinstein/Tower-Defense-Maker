@@ -3,6 +3,10 @@ package ModificationFromUser.Rules;
 import ModificationFromUser.ModificationFromUser;
 import backEnd.Model;
 
+/**
+ * @author Derek
+ *
+ */
 public class Modification_ToggleRule implements ModificationFromUser {
 	
 	String ruleName;

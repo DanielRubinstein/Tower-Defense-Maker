@@ -6,6 +6,11 @@ import backEnd.Attribute.AttributeOwner;
 import backEnd.Attribute.AttributeOwnerReader;
 
 
+/**
+ * @author Derek
+ *
+ * @param <T>
+ */
 public class Modification_EditAttribute<T> implements ModificationFromUser {
 
 	private AttributeOwnerReader myObj;

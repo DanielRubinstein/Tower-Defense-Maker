@@ -9,7 +9,7 @@ import backEnd.Mode.ModeException;
 import util.reflection.Reflection;
 
 /**
- * Used when user creates a new preset component
+ * 
  * 
  * @author Derek
  *
