@@ -1,7 +1,5 @@
 # Sup3rS1ckT34m1337
-# VoogaSalad Project, CS 308, Spring 2017
-
-> This is the link to the assignment: [VOOGASalad](http://www.cs.duke.edu/courses/compsci308/current/assign/04_voogasalad/)
+# Tower Defense Maker, CS 308, Spring 2017
 
 
 ## Names
@@ -51,23 +49,7 @@
 * To test: There are several sample games created and tested by the developers
 * Required files: no files or programs required outside the program itself. The file format for saved games is .xml
 
-## Useful Information
 
-any information about using the program 
-
-(i.e., command-line/applet arguments, key inputs, interesting example data files, or easter eggs)
-
-## Known Issues
-
-any known bugs, crashes, or problems with the project's functionality
-
-## Extra Features
-
-any extra features included in the project
-
-## Assignment Impressions
-
-your impressions of the assignment to help improve it in the future
 
 
 
